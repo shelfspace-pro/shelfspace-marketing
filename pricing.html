@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pricing — ShelfSpace</title>
+<meta name="description" content="ShelfSpace pilot program pricing. Currently enrolling a limited number of retailers and vendors in select regions.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+  .pricing-section { background: var(--white); }
+  .pricing-container { max-width: 900px; margin: 0 auto; }
+
+  .pricing-card {
+    background: var(--white); border: 2px solid var(--green-accent);
+    border-radius: 20px; padding: 56px 48px; text-align: center;
+    max-width: 560px; margin: 0 auto 64px;
+    position: relative; overflow: hidden;
+    box-shadow: 0 8px 40px rgba(27,67,50,0.08);
+  }
+  .pricing-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+    background: linear-gradient(90deg, var(--green-accent), var(--green-mid), var(--green-deep));
+  }
+  .pricing-badge {
+    display: inline-flex; padding: 6px 16px; border-radius: 100px;
+    background: var(--green-ghost); border: 1px solid rgba(149,213,178,0.4);
+    font-size: 12px; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--green-dark); margin-bottom: 24px;
+  }
+  .pricing-card h3 {
+    font-size: 28px; font-weight: 700; color: var(--green-deep);
+    letter-spacing: -0.8px; margin-bottom: 12px;
+  }
+  .pricing-card > p {
+    font-size: 16px; line-height: 1.7; color: var(--slate-500); margin-bottom: 32px;
+  }
+  .pricing-card .btn-primary { width: 100%; justify-content: center; }
+
+  .pricing-includes { max-width: 560px; margin: 0 auto; }
+  .pricing-includes h3 {
+    font-size: 20px; font-weight: 700; color: var(--green-deep);
+    text-align: center; margin-bottom: 32px;
+  }
+  .pricing-includes-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .pricing-include-item {
+    display: flex; align-items: flex-start; gap: 12px;
+    padding: 16px; background: var(--slate-50); border-radius: 12px;
+    border: 1px solid var(--slate-100);
+  }
+  .pricing-include-item svg { flex-shrink: 0; margin-top: 2px; }
+  .pricing-include-item div h4 { font-size: 14px; font-weight: 700; color: var(--green-deep); margin-bottom: 2px; }
+  .pricing-include-item div p { font-size: 13px; color: var(--slate-500); line-height: 1.5; }
+
+  /* FAQ */
+  .faq-section { background: var(--slate-50); border-top: 1px solid var(--slate-100); }
+  .faq-header { text-align: center; max-width: 500px; margin: 0 auto 56px; }
+  .faq-header .section-desc { margin: 0 auto; }
+  .faq-container { max-width: 680px; margin: 0 auto; }
+  .faq-item { border-bottom: 1px solid var(--slate-200); }
+  .faq-question {
+    width: 100%; display: flex; justify-content: space-between; align-items: center;
+    padding: 24px 0; background: none; border: none; cursor: pointer;
+    font-family: var(--font-display); font-size: 16px; font-weight: 600;
+    color: var(--green-deep); text-align: left;
+  }
+  .faq-question svg { flex-shrink: 0; transition: transform 0.3s; color: var(--slate-400); }
+  .faq-question.open svg { transform: rotate(45deg); }
+  .faq-answer {
+    max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.4s ease;
+  }
+  .faq-answer.open { max-height: 300px; padding-bottom: 24px; }
+  .faq-answer p { font-size: 15px; line-height: 1.7; color: var(--slate-500); }
+
+  @media (max-width: 600px) {
+    .pricing-card { padding: 40px 28px; }
+    .pricing-includes-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="/" class="nav-logo">
+    <div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+    <span class="nav-logo-text">ShelfSpace</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="/how-it-works">How It Works</a></li>
+    <li><a href="/pricing" class="active">Pricing</a></li>
+    <li><a href="/about">About</a></li>
+    <li><a href="https://ourshelf.space" class="nav-cta">Launch App <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a></li>
+  </ul>
+  <div class="nav-hamburger"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="section-label">Pricing</div>
+  <h1 class="section-title">Join the pilot program</h1>
+  <p class="section-desc">Currently enrolling a limited number of retailers and vendors in select regions.</p>
+</div>
+
+<!-- PRICING -->
+<section class="pricing-section">
+  <div class="pricing-container">
+    <div class="pricing-card reveal">
+      <div class="pricing-badge">Pilot Program</div>
+      <h3>Let's talk about your business</h3>
+      <p>We work with each retailer and vendor individually to structure a deal that makes sense for both sides. Platform fees are a small percentage of settled sales — you only pay when the system is working for you.</p>
+      <a href="/contact" class="btn-primary">
+        Schedule a Call
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+
+    <div class="pricing-includes reveal">
+      <h3>Everything included</h3>
+      <div class="pricing-includes-grid">
+        <div class="pricing-include-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          <div><h4>Settlement Engine</h4><p>Automated weekly settlements with 10-phase calculation</p></div>
+        </div>
+        <div class="pricing-include-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          <div><h4>Check 21 Payments</h4><p>Bank-compliant digital checks, mobile-deposit ready</p></div>
+        </div>
+        <div class="pricing-include-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          <div><h4>Portal Access</h4><p>24/7 dashboards for retailers and vendors</p></div>
+        </div>
+        <div class="pricing-include-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          <div><h4>Settlement Reports</h4><p>Five-page PDF reports with full audit trail</p></div>
+        </div>
+        <div class="pricing-include-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          <div><h4>Inventory Intelligence</h4><p>JIT velocity tracking, restock alerts, aging analysis</p></div>
+        </div>
+        <div class="pricing-include-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          <div><h4>Dispute Resolution</h4><p>Neutral mediation with data-driven resolution</p></div>
+        </div>
+        <div class="pricing-include-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          <div><h4>Contract Management</h4><p>Standardized SBT agreements for all partnerships</p></div>
+        </div>
+        <div class="pricing-include-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          <div><h4>Data Export</h4><p>CSV downloads of all historical sales and inventory data</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section">
+  <div class="faq-header">
+    <div class="section-label reveal">FAQ</div>
+    <h2 class="section-title reveal">Common questions</h2>
+  </div>
+  <div class="faq-container">
+    <div class="faq-item reveal">
+      <button class="faq-question" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')">
+        How does ShelfSpace make money?
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      </button>
+      <div class="faq-answer"><p>ShelfSpace charges a small platform fee as a percentage of settled sales, split between the retailer and vendor. You only pay when the system is actively settling transactions — if nothing sells, you pay nothing.</p></div>
+    </div>
+    <div class="faq-item reveal">
+      <button class="faq-question" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')">
+        Do I need to change my POS or operations?
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      </button>
+      <div class="faq-answer"><p>No. Inventory flows through your supply chain just like standard wholesale. Product is delivered, manifested in METRC, and received into your POS using your existing protocols. ShelfSpace integrates into the background — the only thing that changes is the efficiency of your capital.</p></div>
+    </div>
+    <div class="faq-item reveal">
+      <button class="faq-question" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')">
+        How do vendors get paid?
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      </button>
+      <div class="faq-answer"><p>Every week, ShelfSpace generates a Check 21 compliant check for each vendor based on confirmed sales. Vendors download the check from their portal, print it on any standard printer, and deposit via mobile banking or bank teller. Payments are weekly — no more Net 30 or Net Never.</p></div>
+    </div>
+    <div class="faq-item reveal">
+      <button class="faq-question" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')">
+        What POS systems do you integrate with?
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      </button>
+      <div class="faq-answer"><p>We currently integrate with Dutchie and Flowhub via CSV exports. We pull weekly sales, inventory, returns, and discount data directly from your POS reports. Additional integrations are on our roadmap.</p></div>
+    </div>
+    <div class="faq-item reveal">
+      <button class="faq-question" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')">
+        Which states is ShelfSpace available in?
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      </button>
+      <div class="faq-answer"><p>We're currently running our pilot program in Massachusetts. Each state is its own ecosystem within the platform. We plan to expand to additional states based on pilot results and demand.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-content">
+    <div class="section-label reveal">Get Started</div>
+    <h2 class="section-title reveal">Want to join the pilot?</h2>
+    <p class="section-desc reveal">Reach out and we'll walk you through everything.</p>
+    <div class="cta-actions reveal">
+      <a href="/contact" class="btn-primary">Start Today <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="/" class="nav-logo"><div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><span class="nav-logo-text">ShelfSpace</span></a>
+      <p>The operating system for cannabis consignment.</p>
+    </div>
+    <div class="footer-col"><h4>Platform</h4><ul><li><a href="/how-it-works">How It Works</a></li><li><a href="/pricing">Pricing</a></li><li><a href="/about">About</a></li></ul></div>
+    <div class="footer-col"><h4>Access</h4><ul><li><a href="https://ourshelf.space">Launch App</a></li><li><a href="/contact">Contact</a></li></ul></div>
+    <div class="footer-col"><h4>Company</h4><ul><li><a href="mailto:chris@shelfspace.pro">Email</a></li><li><a href="mailto:support@shelfspace.pro">Support</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><p>&copy; 2026 ShelfSpace Technologies Inc.</p><div class="footer-bottom-links"><a href="#">Privacy</a><a href="#">Terms</a></div></div>
+</footer>
+
+<script>
+  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 20);
+  window.addEventListener('scroll', () => document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 20));
+  const observer = new IntersectionObserver(entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }), { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
