@@ -50,10 +50,23 @@
   @keyframes pulse-glow { 0%, 100% { opacity: 0.4; } 50% { opacity: 0.8; } }
   @keyframes ticker-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
-  .reveal { animation: fadeUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) both; }
-  .reveal-delay-1 { animation-delay: 0.1s; }
-  .reveal-delay-2 { animation-delay: 0.2s; }
-  .reveal-delay-3 { animation-delay: 0.3s; }
+  /* Scroll-triggered reveals */
+  .reveal {
+    opacity: 0; transform: translateY(40px);
+    transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .reveal.is-visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.15s; }
+  .reveal-delay-2 { transition-delay: 0.3s; }
+  .reveal-delay-3 { transition-delay: 0.45s; }
+  /* Card scale on reveal */
+  .how-card.reveal, .referee-card.reveal, .results-card.reveal {
+    transform: translateY(40px) scale(0.97);
+  }
+  .how-card.reveal.is-visible, .referee-card.reveal.is-visible, .results-card.reveal.is-visible {
+    transform: translateY(0) scale(1);
+  }
 
   /* ─── NAV ─── */
   nav {
@@ -67,6 +80,11 @@
     transition: all 0.3s ease;
   }
   nav.scrolled { box-shadow: 0 1px 24px rgba(27, 67, 50, 0.08); }
+  .nav-progress {
+    position: absolute; bottom: 0; left: 0; height: 2px; width: 100%;
+    background: linear-gradient(90deg, var(--green-accent), var(--green-mid));
+    transform: scaleX(var(--scroll-progress, 0)); transform-origin: left;
+  }
 
   .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--green-deep); }
   .nav-logo-icon { width: 32px; height: 32px; background: var(--green-deep); border-radius: 8px; display: flex; align-items: center; justify-content: center; }
@@ -99,6 +117,7 @@
   .hero-bg-gradient { position: absolute; top: -30%; right: -20%; width: 900px; height: 900px; background: radial-gradient(circle, rgba(149, 213, 178, 0.2) 0%, rgba(149, 213, 178, 0) 70%); animation: float 8s ease-in-out infinite; }
   .hero-bg-gradient-2 { position: absolute; bottom: -20%; left: -15%; width: 700px; height: 700px; background: radial-gradient(circle, rgba(27, 67, 50, 0.06) 0%, rgba(27, 67, 50, 0) 70%); animation: float 10s ease-in-out infinite; animation-delay: -3s; }
   .hero-grid-lines { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 1200px; height: 100%; opacity: 0.035; background-image: linear-gradient(var(--green-deep) 1px, transparent 1px), linear-gradient(90deg, var(--green-deep) 1px, transparent 1px); background-size: 80px 80px; }
+  .hero-parallax-layer { position: absolute; top: 0; left: 0; right: 0; bottom: 0; will-change: transform; }
 
   .hero-content { position: relative; z-index: 2; max-width: 840px; text-align: center; }
 
@@ -181,6 +200,15 @@
   .sbt-visual-center .label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--green-accent); margin-bottom: 4px; }
   .sbt-visual-center .value { font-family: var(--font-mono); font-size: 24px; font-weight: 700; color: var(--white); }
   .sbt-visual-center .desc { font-size: 12px; color: rgba(255,255,255,0.5); margin-top: 4px; }
+  .sbt-visual-row-reveal {
+    opacity: 0; transform: translateY(20px);
+    transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .sbt-visual.is-visible .sbt-visual-row-reveal { opacity: 1; transform: translateY(0); }
+  .sbt-visual.is-visible .sbt-visual-row-reveal:nth-child(1) { transition-delay: 0.2s; }
+  .sbt-visual.is-visible .sbt-visual-row-reveal:nth-child(2) { transition-delay: 0.5s; }
+  .sbt-visual.is-visible .sbt-visual-row-reveal:nth-child(3) { transition-delay: 0.8s; }
 
   /* ─── SECTION SHARED ─── */
   section { padding: 120px 48px; }
@@ -211,7 +239,7 @@
 
   /* ─── REFEREE SECTION ─── */
   .referee-section { background: var(--green-deep); position: relative; overflow: hidden; }
-  .referee-section::before { content: ''; position: absolute; top: -200px; right: -200px; width: 600px; height: 600px; background: radial-gradient(circle, rgba(149,213,178,0.08), transparent 70%); }
+  .referee-section::before { content: ''; position: absolute; top: -200px; right: -200px; width: 600px; height: 600px; background: radial-gradient(circle, rgba(149,213,178,0.08), transparent 70%); transform: translateY(var(--parallax-y, 0)); will-change: transform; }
   .referee-header { text-align: center; max-width: 600px; margin: 0 auto 64px; position: relative; }
   .referee-header .section-label { color: var(--green-accent); }
   .referee-header .section-title { color: var(--white); }
@@ -271,7 +299,7 @@
 
   /* ─── CTA ─── */
   .cta-section { background: var(--white); text-align: center; position: relative; overflow: hidden; }
-  .cta-section::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 800px; height: 800px; background: radial-gradient(circle, rgba(149,213,178,0.15), transparent 70%); }
+  .cta-section::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) translateY(var(--parallax-y, 0)); width: 800px; height: 800px; background: radial-gradient(circle, rgba(149,213,178,0.15), transparent 70%); will-change: transform; }
   .cta-content { position: relative; z-index: 2; max-width: 640px; margin: 0 auto; }
   .cta-content .section-desc { margin: 0 auto 40px; max-width: 480px; }
   .cta-actions { display: flex; justify-content: center; gap: 16px; margin-bottom: 32px; }
@@ -314,7 +342,19 @@
   @media (max-width: 600px) {
     .footer-top { grid-template-columns: 1fr; }
   }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .reveal, .how-card.reveal, .referee-card.reveal, .results-card.reveal {
+      opacity: 1; transform: none; transition: none;
+    }
+    .sbt-visual-row-reveal { opacity: 1; transform: none; transition: none; }
+    .hero-pill, .hero h1, .hero-sub, .hero-actions,
+    .hero-bg-gradient, .hero-bg-gradient-2 { animation: none; }
+    .nav-progress { display: none; }
+  }
 </style>
+<noscript><style>.reveal,.sbt-visual-row-reveal{opacity:1;transform:none;transition:none;}</style></noscript>
 </head>
 <body>
 
@@ -335,14 +375,21 @@
   <div class="nav-hamburger" onclick="document.querySelector('.nav-links').classList.toggle('mobile-open')">
     <span></span><span></span><span></span>
   </div>
+  <div class="nav-progress"></div>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
   <div class="hero-bg">
-    <div class="hero-bg-gradient"></div>
-    <div class="hero-bg-gradient-2"></div>
-    <div class="hero-grid-lines"></div>
+    <div class="hero-parallax-layer" data-speed="0.3">
+      <div class="hero-bg-gradient"></div>
+    </div>
+    <div class="hero-parallax-layer" data-speed="0.15">
+      <div class="hero-bg-gradient-2"></div>
+    </div>
+    <div class="hero-parallax-layer" data-speed="0.5">
+      <div class="hero-grid-lines"></div>
+    </div>
   </div>
   <div class="hero-content">
     <div class="hero-pill">
@@ -400,7 +447,7 @@
       <p class="section-desc">Customers purchase items just like any other product. They browse the menu, make their selection, and complete the transaction with zero friction. These SKUs are indistinguishable from wholesale inventory, ensuring a consistent workflow for your staff and a standard experience for your customers.</p>
     </div>
     <div class="sbt-visual reveal reveal-delay-1">
-      <div class="sbt-visual-row">
+      <div class="sbt-visual-row sbt-visual-row-reveal">
         <div class="sbt-visual-entity">
           <div class="label">Retailer</div>
           <div class="name">Sells Product</div>
@@ -411,12 +458,12 @@
           <div class="name">Buys at POS</div>
         </div>
       </div>
-      <div class="sbt-visual-center">
+      <div class="sbt-visual-center sbt-visual-row-reveal">
         <div class="label">ShelfSpace Settles</div>
         <div class="value">50 / 50</div>
         <div class="desc">Profit split paid weekly</div>
       </div>
-      <div class="sbt-visual-row">
+      <div class="sbt-visual-row sbt-visual-row-reveal">
         <div class="sbt-visual-entity">
           <div class="label">Vendor</div>
           <div class="name">Gets Paid Weekly</div>
@@ -670,7 +717,118 @@
   </div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-  const nav = document.getElementById('nav');
-  window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 20); });
-  document.querySelectorAll('a[href^="
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+<script>
+(function() {
+  'use strict';
+
+  var nav = document.getElementById('nav');
+  var navProgress = document.querySelector('.nav-progress');
+  var heroContent = document.querySelector('.hero-content');
+  var hero = document.querySelector('.hero');
+  var parallaxLayers = document.querySelectorAll('.hero-parallax-layer');
+  var parallaxSections = [
+    document.querySelector('.referee-section'),
+    document.querySelector('.cta-section')
+  ];
+
+  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var isMobile = window.innerWidth < 900;
+  var ticking = false;
+
+  /* ── Scroll-Triggered Reveals ── */
+  var revealObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.reveal').forEach(function(el) {
+    revealObserver.observe(el);
+  });
+
+  /* ── Smooth scroll for anchor links ── */
+  document.querySelectorAll('a[href^="#"]').forEach(function(a) {
+    a.addEventListener('click', function(e) {
+      var target = document.querySelector(a.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  });
+
+  /* ── Unified Scroll Controller ── */
+  function onScroll() {
+    var scrollY = window.scrollY;
+    var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+
+    /* Nav scroll class */
+    nav.classList.toggle('scrolled', scrollY > 20);
+
+    /* Nav progress bar */
+    var progress = docHeight > 0 ? scrollY / docHeight : 0;
+    navProgress.style.setProperty('--scroll-progress', progress);
+
+    /* Skip parallax for reduced motion or mobile */
+    if (prefersReduced || isMobile) return;
+
+    /* Hero parallax layers */
+    var heroH = hero.offsetHeight;
+    if (scrollY < heroH) {
+      parallaxLayers.forEach(function(layer) {
+        var speed = parseFloat(layer.dataset.speed) || 0;
+        layer.style.transform = 'translateY(' + (scrollY * speed) + 'px)';
+      });
+
+      /* Hero content fade + drift */
+      var fade = 1 - (scrollY / (heroH * 0.6));
+      if (fade < 0) fade = 0;
+      heroContent.style.opacity = fade;
+      heroContent.style.transform = 'translateY(' + (scrollY * 0.15) + 'px)';
+    }
+
+    /* Section decorative parallax */
+    var wh = window.innerHeight;
+    parallaxSections.forEach(function(section) {
+      if (!section) return;
+      var rect = section.getBoundingClientRect();
+      if (rect.bottom < 0 || rect.top > wh) return;
+      var center = rect.top + rect.height / 2 - wh / 2;
+      section.style.setProperty('--parallax-y', (center * 0.08) + 'px');
+    });
+  }
+
+  window.addEventListener('scroll', function() {
+    if (!ticking) {
+      requestAnimationFrame(function() {
+        onScroll();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, { passive: true });
+
+  /* Initial call */
+  onScroll();
+
+  /* Update mobile flag on resize */
+  window.addEventListener('resize', function() {
+    isMobile = window.innerWidth < 900;
+    if (isMobile) {
+      /* Reset parallax transforms on mobile */
+      parallaxLayers.forEach(function(layer) { layer.style.transform = ''; });
+      heroContent.style.opacity = '';
+      heroContent.style.transform = '';
+      parallaxSections.forEach(function(section) {
+        if (section) section.style.setProperty('--parallax-y', '0px');
+      });
+    }
+  });
+})();
+</script>
+</body>
+</html>
