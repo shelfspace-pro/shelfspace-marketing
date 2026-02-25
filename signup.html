@@ -291,6 +291,13 @@
 
       if (!res.ok) {
         const data = await res.json().catch(() => null);
+        if (data?.code === 'EMAIL_EXISTS') {
+          errorEl.innerHTML = 'A user with that email already exists. <a href="https://ourshelf.space" style="color:var(--green-mid);font-weight:600;text-decoration:none;">Log in instead &rarr;</a>';
+          errorEl.style.display = 'block';
+          btn.disabled = false;
+          btn.innerHTML = 'Create Account <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>';
+          return;
+        }
         throw new Error(data?.message || 'Something went wrong. Please try again.');
       }
 
