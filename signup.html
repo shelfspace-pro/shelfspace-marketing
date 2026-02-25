@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sign Up — ShelfSpace</title>
+<meta name="description" content="Create your ShelfSpace account. Get started with scan-based trading for your cannabis business.">
+<link rel="canonical" href="https://shelfspace.pro/signup">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://shelfspace.pro/signup">
+<meta property="og:title" content="Sign Up — ShelfSpace">
+<meta property="og:description" content="Create your ShelfSpace account. Get started with scan-based trading for your cannabis business.">
+<meta property="og:image" content="https://shelfspace.pro/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Sign Up — ShelfSpace">
+<meta name="twitter:description" content="Create your ShelfSpace account. Get started with scan-based trading for your cannabis business.">
+<meta name="twitter:image" content="https://shelfspace.pro/og-image.png">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+  .signup-section { background: var(--white); }
+  .signup-container { max-width: 520px; margin: 0 auto; }
+
+  .signup-card {
+    background: var(--white); border: 1px solid var(--slate-200);
+    border-radius: 16px; padding: 40px;
+    box-shadow: 0 8px 40px rgba(27,67,50,0.06);
+  }
+  .signup-card h3 { font-size: 20px; font-weight: 700; color: var(--green-deep); margin-bottom: 8px; }
+  .signup-card > p { font-size: 15px; color: var(--slate-500); line-height: 1.6; margin-bottom: 28px; }
+
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .form-group { margin-bottom: 20px; }
+  .form-group label {
+    display: block; font-size: 13px; font-weight: 600;
+    color: var(--green-deep); margin-bottom: 6px;
+  }
+  .form-group input,
+  .form-group select {
+    width: 100%; padding: 12px 16px; border: 1px solid var(--slate-200);
+    border-radius: 10px; font-size: 15px; font-family: var(--font-display);
+    color: var(--slate-800); background: var(--white);
+    transition: border-color 0.2s, box-shadow 0.2s;
+    -webkit-appearance: none; appearance: none;
+  }
+  .form-group input::placeholder { color: var(--slate-400); }
+  .form-group input:focus,
+  .form-group select:focus {
+    outline: none; border-color: var(--green-mid);
+    box-shadow: 0 0 0 3px rgba(64,145,108,0.1);
+  }
+  .form-group select {
+    background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+    padding-right: 40px;
+    cursor: pointer;
+  }
+  .form-group select option[value=""] { color: var(--slate-400); }
+
+  .signup-card .btn-primary {
+    width: 100%; justify-content: center; margin-top: 4px;
+  }
+  .signup-card .btn-primary:disabled {
+    opacity: 0.6; cursor: not-allowed; transform: none;
+    box-shadow: 0 4px 16px rgba(27,67,50,0.15);
+  }
+
+  .form-error {
+    display: none; margin-top: 16px; padding: 12px 16px;
+    background: #fef2f2; border: 1px solid #fecaca; border-radius: 10px;
+    font-size: 14px; color: #991b1b; line-height: 1.5;
+  }
+  .form-success {
+    display: none; text-align: center; padding: 24px 0;
+  }
+  .form-success svg { color: var(--green-mid); margin-bottom: 12px; }
+  .form-success h3 { font-size: 20px; font-weight: 700; color: var(--green-deep); margin-bottom: 8px; }
+  .form-success p { font-size: 15px; color: var(--slate-500); line-height: 1.6; }
+
+  .login-link {
+    text-align: center; margin-top: 24px; font-size: 14px; color: var(--slate-500);
+  }
+  .login-link a {
+    color: var(--green-mid); text-decoration: none; font-weight: 600; transition: color 0.2s;
+  }
+  .login-link a:hover { color: var(--green-deep); }
+
+  @media (max-width: 600px) {
+    .form-row { grid-template-columns: 1fr; }
+    .signup-card { padding: 28px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="/" class="nav-logo">
+    <div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div>
+    <span class="nav-logo-text">ShelfSpace</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="/how-it-works">How It Works</a></li>
+    <li><a href="/pricing">Pricing</a></li>
+    <li><a href="/about">About</a></li>
+    <li><a href="https://ourshelf.space">Login</a></li>
+    <li><a href="/signup" class="nav-cta">Sign Up <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a></li>
+  </ul>
+  <div class="nav-hamburger"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="section-label">Get Started</div>
+  <h1 class="section-title">Create your account</h1>
+  <p class="section-desc">Join ShelfSpace and start using scan-based trading for your business.</p>
+</div>
+
+<!-- SIGNUP FORM -->
+<section class="signup-section">
+  <div class="signup-container">
+    <div class="signup-card reveal">
+      <form id="signupForm">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="firstName">First Name</label>
+            <input type="text" id="firstName" name="firstName" placeholder="Jane" required>
+          </div>
+          <div class="form-group">
+            <label for="lastName">Last Name</label>
+            <input type="text" id="lastName" name="lastName" placeholder="Doe" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="jane@example.com" required>
+        </div>
+
+        <div class="form-group">
+          <label for="businessName">Business Name</label>
+          <input type="text" id="businessName" name="businessName" placeholder="Your business name" required>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="businessType">Business Type</label>
+            <select id="businessType" name="businessType" required>
+              <option value="" disabled selected>Select type</option>
+              <option value="Retailer">Retailer</option>
+              <option value="Vendor">Vendor</option>
+              <option value="Both">Both</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="state">State</label>
+            <input type="text" id="state" name="state" placeholder="e.g. Colorado" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" placeholder="Min. 8 characters" minlength="8" required>
+        </div>
+
+        <button type="submit" class="btn-primary" id="submitBtn">
+          Create Account
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </button>
+
+        <div class="form-error" id="formError"></div>
+      </form>
+
+      <div class="form-success" id="formSuccess">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        <h3>Account created</h3>
+        <p>You're all set. <a href="https://ourshelf.space" style="color: var(--green-mid); font-weight: 600; text-decoration: none;">Log in to get started.</a></p>
+      </div>
+    </div>
+
+    <p class="login-link">Already have an account? <a href="https://ourshelf.space">Log in</a></p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="/" class="nav-logo"><div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div><span class="nav-logo-text">ShelfSpace</span></a>
+      <p>The operating system for cannabis consignment.</p>
+    </div>
+    <div class="footer-col"><h4>Platform</h4><ul><li><a href="/how-it-works">How It Works</a></li><li><a href="/pricing">Pricing</a></li><li><a href="/about">About</a></li></ul></div>
+    <div class="footer-col"><h4>Access</h4><ul><li><a href="https://ourshelf.space">Login</a></li><li><a href="/signup">Sign Up</a></li><li><a href="/contact">Contact</a></li></ul></div>
+    <div class="footer-col"><h4>Company</h4><ul><li><a href="mailto:chris@shelfspace.pro">Email</a></li><li><a href="mailto:support@shelfspace.pro">Support</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><p>&copy; 2026 ShelfSpace Technologies Inc.</p><div class="footer-bottom-links"><a href="#">Privacy</a><a href="#">Terms</a></div></div>
+</footer>
+
+<script>
+  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 20);
+  window.addEventListener('scroll', () => document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 20));
+
+  document.getElementById('signupForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = document.getElementById('submitBtn');
+    const errorEl = document.getElementById('formError');
+    errorEl.style.display = 'none';
+    btn.disabled = true;
+    btn.innerHTML = 'Creating account\u2026';
+
+    const body = {
+      firstName: document.getElementById('firstName').value.trim(),
+      lastName: document.getElementById('lastName').value.trim(),
+      email: document.getElementById('email').value.trim(),
+      businessName: document.getElementById('businessName').value.trim(),
+      businessType: document.getElementById('businessType').value,
+      state: document.getElementById('state').value.trim(),
+      password: document.getElementById('password').value,
+    };
+
+    try {
+      const res = await fetch('https://ourshelf.space/api/public/signup', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+      });
+
+      if (!res.ok) {
+        const data = await res.json().catch(() => null);
+        throw new Error(data?.message || 'Something went wrong. Please try again.');
+      }
+
+      document.getElementById('signupForm').style.display = 'none';
+      document.getElementById('formSuccess').style.display = 'block';
+    } catch (err) {
+      errorEl.textContent = err.message;
+      errorEl.style.display = 'block';
+      btn.disabled = false;
+      btn.innerHTML = 'Create Account <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>';
+    }
+  });
+</script>
+</body>
+</html>
