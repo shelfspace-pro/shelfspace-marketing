@@ -52,10 +52,10 @@
   .verify-step { text-align: center; }
   .verify-step .cf-turnstile { display: flex; justify-content: center; }
 
-  .calendar-step { display: none; }
-  .calendar-step iframe {
-    width: 100%; border: none; border-radius: 12px; min-height: 600px;
-  }
+  .calendar-step { display: none; text-align: center; padding: 24px 0 0; }
+  .calendar-step .verified-icon { color: var(--green-mid); margin-bottom: 12px; }
+  .calendar-step p { font-size: 15px; color: var(--slate-500); line-height: 1.6; margin-bottom: 24px; }
+  .calendar-step .btn-primary { width: 100%; justify-content: center; }
 
   @media (max-width: 900px) {
     .contact-container { grid-template-columns: 1fr; gap: 48px; max-width: 520px; }
@@ -134,8 +134,13 @@
 
       <!-- Step 2: Calendar booking -->
       <div class="calendar-step" id="calendarStep">
-        <h3>Pick a Time</h3>
-        <iframe id="calendarEmbed" src="" title="Schedule a call with ShelfSpace" loading="lazy"></iframe>
+        <svg class="verified-icon" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        <h3>You're verified</h3>
+        <p>Click below to pick a time on our calendar.</p>
+        <a href="https://calendar.app.google/wfarAnHbE17jadJWA" target="_blank" rel="noopener" class="btn-primary">
+          Book a Call
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
       </div>
     </div>
   </div>
@@ -159,14 +164,9 @@
   document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 20);
   window.addEventListener('scroll', () => document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 20));
 
-  // Replace with your Google Calendar Appointment Scheduling URL
-  var CALENDAR_URL = 'https://calendar.app.google/wfarAnHbE17jadJWA';
-
   function onTurnstileSuccess(token) {
     document.getElementById('verifyStep').style.display = 'none';
-    var calendarStep = document.getElementById('calendarStep');
-    calendarStep.style.display = 'block';
-    document.getElementById('calendarEmbed').src = CALENDAR_URL;
+    document.getElementById('calendarStep').style.display = 'block';
   }
 </script>
 </body>
