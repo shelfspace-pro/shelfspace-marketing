@@ -301,6 +301,16 @@
         throw new Error(data?.message || 'Something went wrong. Please try again.');
       }
 
+      const data = await res.json();
+
+      // Auto-login: redirect to magic link if available
+      if (data.login_url) {
+        btn.innerHTML = 'Logging you in\u2026';
+        window.location.href = data.login_url;
+        return;
+      }
+
+      // Fallback: show success screen if no login URL
       document.getElementById('signupForm').style.display = 'none';
       document.getElementById('formSuccess').style.display = 'block';
     } catch (err) {
