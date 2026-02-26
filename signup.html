@@ -20,6 +20,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 <style>
   .page-hero { padding-bottom: 40px; }
   .signup-section { background: var(--white); padding-top: 60px; }
@@ -89,6 +90,8 @@
     color: var(--green-mid); text-decoration: none; font-weight: 600; transition: color 0.2s;
   }
   .login-link a:hover { color: var(--green-deep); }
+
+  .turnstile-wrapper { display: flex; justify-content: center; }
 
   @media (max-width: 600px) {
     .form-row { grid-template-columns: 1fr; }
@@ -227,7 +230,11 @@
           </label>
         </div>
 
-        <button type="submit" class="btn-primary" id="submitBtn">
+        <div class="form-group turnstile-wrapper">
+          <div class="cf-turnstile" data-sitekey="0x4AAAAAACiEpqqSU9lohNi-" data-callback="onTurnstileSuccess" data-expired-callback="onTurnstileExpired"></div>
+        </div>
+
+        <button type="submit" class="btn-primary" id="submitBtn" disabled>
           Create Account
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
         </button>
@@ -264,8 +271,21 @@
   document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 20);
   window.addEventListener('scroll', () => document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 20));
 
+  var turnstileToken = null;
+
+  function onTurnstileSuccess(token) {
+    turnstileToken = token;
+    document.getElementById('submitBtn').disabled = false;
+  }
+
+  function onTurnstileExpired() {
+    turnstileToken = null;
+    document.getElementById('submitBtn').disabled = true;
+  }
+
   document.getElementById('signupForm').addEventListener('submit', async (e) => {
     e.preventDefault();
+    if (!turnstileToken) return;
     const btn = document.getElementById('submitBtn');
     const errorEl = document.getElementById('formError');
     errorEl.style.display = 'none';
@@ -280,6 +300,7 @@
       businessType: document.getElementById('businessType').value,
       state: document.getElementById('state').value.trim(),
       password: document.getElementById('password').value,
+      'cf-turnstile-response': turnstileToken,
     };
 
     try {
@@ -316,7 +337,9 @@
     } catch (err) {
       errorEl.textContent = err.message;
       errorEl.style.display = 'block';
-      btn.disabled = false;
+      turnstile.reset();
+      turnstileToken = null;
+      btn.disabled = true;
       btn.innerHTML = 'Create Account <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>';
     }
   });
