@@ -93,6 +93,17 @@
 
   .turnstile-wrapper { display: flex; justify-content: center; }
 
+  .pw-requirements {
+    margin-top: 8px; padding: 0; list-style: none;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 4px 16px;
+  }
+  .pw-requirements li {
+    font-size: 12px; color: var(--slate-400); display: flex; align-items: center; gap: 6px;
+    transition: color 0.2s;
+  }
+  .pw-requirements li.met { color: var(--green-mid); }
+  .pw-requirements li .check-icon { flex-shrink: 0; width: 14px; height: 14px; }
+
   @media (max-width: 600px) {
     .form-row { grid-template-columns: 1fr; }
     .signup-card { padding: 28px 20px; }
@@ -220,7 +231,14 @@
 
         <div class="form-group">
           <label for="password">Create Your Password</label>
-          <input type="password" id="password" name="password" placeholder="Min. 8 characters" minlength="8" required>
+          <input type="password" id="password" name="password" placeholder="Enter a strong password" minlength="8" required>
+          <ul class="pw-requirements" id="pwRequirements">
+            <li id="pwLen"><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> 8+ characters</li>
+            <li id="pwUpper"><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Uppercase letter</li>
+            <li id="pwLower"><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Lowercase letter</li>
+            <li id="pwNum"><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Number</li>
+            <li id="pwSpecial"><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Special character</li>
+          </ul>
         </div>
 
         <div class="form-group" style="margin-bottom:24px;">
@@ -272,20 +290,49 @@
   window.addEventListener('scroll', () => document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 20));
 
   var turnstileToken = null;
+  var passwordValid = false;
+
+  // Password strength validation
+  var pwRules = [
+    { id: 'pwLen',     test: function(p) { return p.length >= 8; } },
+    { id: 'pwUpper',   test: function(p) { return /[A-Z]/.test(p); } },
+    { id: 'pwLower',   test: function(p) { return /[a-z]/.test(p); } },
+    { id: 'pwNum',     test: function(p) { return /[0-9]/.test(p); } },
+    { id: 'pwSpecial', test: function(p) { return /[^A-Za-z0-9]/.test(p); } },
+  ];
+
+  function checkPassword() {
+    var pw = document.getElementById('password').value;
+    var allMet = true;
+    pwRules.forEach(function(rule) {
+      var el = document.getElementById(rule.id);
+      var met = rule.test(pw);
+      el.classList.toggle('met', met);
+      if (!met) allMet = false;
+    });
+    passwordValid = allMet;
+    updateSubmitBtn();
+  }
+
+  function updateSubmitBtn() {
+    document.getElementById('submitBtn').disabled = !(turnstileToken && passwordValid);
+  }
+
+  document.getElementById('password').addEventListener('input', checkPassword);
 
   function onTurnstileSuccess(token) {
     turnstileToken = token;
-    document.getElementById('submitBtn').disabled = false;
+    updateSubmitBtn();
   }
 
   function onTurnstileExpired() {
     turnstileToken = null;
-    document.getElementById('submitBtn').disabled = true;
+    updateSubmitBtn();
   }
 
   document.getElementById('signupForm').addEventListener('submit', async (e) => {
     e.preventDefault();
-    if (!turnstileToken) return;
+    if (!turnstileToken || !passwordValid) return;
     const btn = document.getElementById('submitBtn');
     const errorEl = document.getElementById('formError');
     errorEl.style.display = 'none';
@@ -339,7 +386,7 @@
       errorEl.style.display = 'block';
       turnstile.reset();
       turnstileToken = null;
-      btn.disabled = true;
+      updateSubmitBtn();
       btn.innerHTML = 'Create Account <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>';
     }
   });
