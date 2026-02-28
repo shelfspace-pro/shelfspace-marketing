@@ -138,12 +138,19 @@
 
   @keyframes spin { to { transform: rotate(360deg); } }
 
+  .login-link { grid-column: -2 / -1; }
   @media (max-width: 900px) {
     .signup-container { grid-template-columns: 1fr; max-width: 520px; }
+    .signup-sidebar { order: 2; }
+    .signup-card { order: 1; }
+    .login-link { order: 3; grid-column: auto; }
   }
   @media (max-width: 600px) {
     .form-row { grid-template-columns: 1fr; }
     .signup-card { padding: 28px 20px; }
+  }
+  @media (max-width: 400px) {
+    .pw-requirements { grid-template-columns: 1fr; }
   }
 </style>
 </head>
