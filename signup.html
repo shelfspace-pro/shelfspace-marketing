@@ -24,7 +24,39 @@
 <style>
   .page-hero { padding-bottom: 40px; }
   .signup-section { background: var(--white); padding-top: 60px; }
-  .signup-container { max-width: 520px; margin: 0 auto; }
+  .signup-container {
+    max-width: 960px; margin: 0 auto; padding: 0 24px;
+    display: grid; grid-template-columns: 1fr 520px; gap: 48px; align-items: start;
+  }
+
+  /* Value-prop sidebar */
+  .signup-sidebar {
+    padding-top: 12px;
+  }
+  .signup-sidebar h3 {
+    font-size: 20px; font-weight: 700; color: var(--green-deep); margin-bottom: 24px;
+  }
+  .signup-sidebar-list {
+    list-style: none; padding: 0; margin: 0 0 32px;
+  }
+  .signup-sidebar-list li {
+    display: flex; align-items: flex-start; gap: 10px;
+    font-size: 15px; color: var(--slate-700); line-height: 1.5;
+    margin-bottom: 16px;
+  }
+  .signup-sidebar-list li svg {
+    flex-shrink: 0; width: 20px; height: 20px; color: var(--green-mid); margin-top: 2px;
+  }
+  .signup-sidebar-quote {
+    border-top: 1px solid var(--slate-200); padding-top: 24px;
+  }
+  .signup-sidebar-quote blockquote {
+    font-size: 14px; font-style: italic; color: var(--slate-500);
+    line-height: 1.7; margin: 0 0 12px; padding: 0;
+  }
+  .signup-sidebar-quote cite {
+    font-size: 13px; font-style: normal; font-weight: 600; color: var(--green-deep);
+  }
 
   .signup-card {
     background: var(--white); border: 1px solid var(--slate-200);
@@ -106,6 +138,9 @@
 
   @keyframes spin { to { transform: rotate(360deg); } }
 
+  @media (max-width: 900px) {
+    .signup-container { grid-template-columns: 1fr; max-width: 520px; }
+  }
   @media (max-width: 600px) {
     .form-row { grid-template-columns: 1fr; }
     .signup-card { padding: 28px 20px; }
@@ -141,6 +176,40 @@
 <!-- SIGNUP FORM -->
 <section class="signup-section">
   <div class="signup-container">
+    <div class="signup-sidebar">
+      <h3>What you get with ShelfSpace</h3>
+      <ul class="signup-sidebar-list">
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          <span>Free pilot access — no credit card required</span>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          <span>Automated weekly settlements & payments</span>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          <span>Dedicated portal for your role</span>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          <span>Works with any POS system</span>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          <span>Check 21-compliant vendor checks</span>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          <span>Onboarding support from our team</span>
+        </li>
+      </ul>
+      <div class="signup-sidebar-quote">
+        <blockquote>"I built ShelfSpace because I refused to keep watching this industry struggle with broken payment systems."</blockquote>
+        <cite>Chris Mitchem, Founder</cite>
+      </div>
+    </div>
+
     <div class="signup-card reveal">
       <form id="signupForm">
         <div class="form-row">
@@ -283,7 +352,7 @@
     </div>
     <div class="footer-col"><h4>Platform</h4><ul><li><a href="/features">Features</a></li><li><a href="/how-it-works">How It Works</a></li><li><a href="/pricing">Pricing</a></li><li><a href="/about">About</a></li></ul></div>
     <div class="footer-col"><h4>Access</h4><ul><li><a href="https://ourshelf.space">Login</a></li><li><a href="/signup">Sign Up</a></li><li><a href="/contact">Contact</a></li></ul></div>
-    <div class="footer-col"><h4>Company</h4><ul><li><a href="mailto:chris@shelfspace.pro">Email</a></li><li><a href="mailto:support@shelfspace.pro">Support</a></li></ul></div>
+    <div class="footer-col"><h4>Company</h4><ul><li><a href="mailto:chris@shelfspace.pro">Email</a></li><li><a href="mailto:support@shelfspace.pro">Support</a></li><li><a href="https://linkedin.com/company/shelfspace-pro" target="_blank" rel="noopener" class="footer-social-link"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> LinkedIn</a></li></ul></div>
   </div>
   <div class="footer-bottom"><p>&copy; 2026 ShelfSpace Technologies Inc.</p><div class="footer-bottom-links"><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div></div>
 </footer>
