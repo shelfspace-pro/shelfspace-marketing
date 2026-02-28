@@ -6,6 +6,7 @@
 (function () {
   var API_BASE = 'https://ourshelf.space/api/public';
   var verifiedEmail = null;
+  var demoToken = null;
 
   // Inject CSS
   var style = document.createElement('style');
@@ -175,6 +176,7 @@
 
       if (data.verified && data.skipCode) {
         // Already verified recently — skip to portal picker
+        demoToken = data.token;
         showStep(3);
       } else {
         // Show code input
@@ -220,6 +222,7 @@
       }
 
       if (data.verified) {
+        demoToken = data.token;
         showStep(3);
       }
     } catch (err) {
@@ -229,13 +232,13 @@
   };
 
   window.demoLaunch = function (portal) {
-    // Redirect to demo auth endpoint — it will create a session and redirect to the portal
+    // Redirect to demo auth endpoint with signed token
     window.location.href =
       API_BASE +
       '/demo-auth?portal=' +
       encodeURIComponent(portal) +
-      '&email=' +
-      encodeURIComponent(verifiedEmail);
+      '&token=' +
+      encodeURIComponent(demoToken);
   };
 
   // Auto-submit code on 6 digits
