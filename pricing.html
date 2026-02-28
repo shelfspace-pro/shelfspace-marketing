@@ -41,7 +41,15 @@
     font-size: 18px; line-height: 1.7; color: var(--slate-500);
     max-width: 460px; margin: 0 auto 40px;
   }
-  .pricing-note { font-size: 13px; color: var(--slate-400); margin-top: 24px; }
+  .pricing-pill {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 6px 16px 6px 8px;
+    background: var(--green-ghost); border: 1px solid rgba(149, 213, 178, 0.4);
+    border-radius: 100px; font-size: 13px; font-weight: 500; color: var(--green-dark);
+    margin-top: 32px;
+  }
+  .pricing-pill-dot { width: 8px; height: 8px; background: var(--green-accent); border-radius: 50%; animation: pulse-glow 2s ease-in-out infinite; }
+  @keyframes pulse-glow { 0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(149,213,178,0.6); } 50% { opacity: 0.7; box-shadow: 0 0 0 6px rgba(149,213,178,0); } }
 
   /* What's Included */
   .included-section {
@@ -159,7 +167,7 @@
       Get Started
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
     </a>
-    <p class="pricing-note">Currently enrolling retailers and vendors nationwide.</p>
+    <div class="pricing-pill"><span class="pricing-pill-dot"></span> Pilot program enrolling for select operators</div>
   </div>
 </section>
 
