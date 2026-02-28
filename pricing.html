@@ -21,7 +21,14 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 <style>
+  @keyframes ticker-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
   .page-hero { padding-bottom: 40px; }
+  .pos-ticker { padding: 48px 0; background: var(--slate-50); overflow: hidden; border-top: 1px solid var(--slate-100); }
+  .pos-ticker-label { text-align: center; font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--slate-400); margin-bottom: 28px; }
+  .pos-ticker-track { display: flex; width: max-content; animation: ticker-scroll 30s linear infinite; }
+  .pos-ticker-track:hover { animation-play-state: paused; }
+  .pos-ticker-logo { height: 32px; padding: 0 40px; opacity: 0.45; filter: grayscale(100%); transition: opacity 0.3s, filter 0.3s; }
+  .pos-ticker-logo:hover { opacity: 0.9; filter: grayscale(0%); }
   .pricing-section {
     background: var(--white); text-align: center; padding-top: 60px;
     padding: 80px 48px 120px; position: relative; overflow: hidden;
@@ -160,6 +167,33 @@
     </a>
   </div>
 </section>
+
+<!-- POS INTEGRATIONS TICKER -->
+<div class="pos-ticker">
+  <div class="pos-ticker-label">Works with every major cannabis POS</div>
+  <div style="overflow:hidden">
+    <div class="pos-ticker-track">
+      <img src="/logos/dutchie.png" alt="Dutchie" class="pos-ticker-logo">
+      <img src="/logos/flowhub.png" alt="Flowhub" class="pos-ticker-logo">
+      <img src="/logos/blaze.png" alt="BLAZE" class="pos-ticker-logo">
+      <img src="/logos/cova.png" alt="Cova" class="pos-ticker-logo">
+      <img src="/logos/treez.png" alt="Treez" class="pos-ticker-logo">
+      <img src="/logos/alleaves.png" alt="Alleaves" class="pos-ticker-logo">
+      <img src="/logos/mjfreeway.png" alt="MJ Freeway" class="pos-ticker-logo">
+      <img src="/logos/meadow.png" alt="Meadow" class="pos-ticker-logo">
+      <img src="/logos/indicaonline.png" alt="IndicaOnline" class="pos-ticker-logo">
+      <img src="/logos/dutchie.png" alt="Dutchie" class="pos-ticker-logo">
+      <img src="/logos/flowhub.png" alt="Flowhub" class="pos-ticker-logo">
+      <img src="/logos/blaze.png" alt="BLAZE" class="pos-ticker-logo">
+      <img src="/logos/cova.png" alt="Cova" class="pos-ticker-logo">
+      <img src="/logos/treez.png" alt="Treez" class="pos-ticker-logo">
+      <img src="/logos/alleaves.png" alt="Alleaves" class="pos-ticker-logo">
+      <img src="/logos/mjfreeway.png" alt="MJ Freeway" class="pos-ticker-logo">
+      <img src="/logos/meadow.png" alt="Meadow" class="pos-ticker-logo">
+      <img src="/logos/indicaonline.png" alt="IndicaOnline" class="pos-ticker-logo">
+    </div>
+  </div>
+</div>
 
 <!-- WHAT'S INCLUDED -->
 <section class="included-section">
