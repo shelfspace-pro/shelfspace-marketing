@@ -140,10 +140,7 @@
         <svg class="verified-icon" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
         <h3>You're verified</h3>
         <p>Click below to pick a time on our calendar.</p>
-        <button class="btn-primary" style="width:100%;justify-content:center;"
-          data-cal-link="shelfspace/cannabisconsignment"
-          data-cal-namespace="cannabisconsignment"
-          data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'>
+        <button class="btn-primary" style="width:100%;justify-content:center;" id="calBookBtn">
           Book a Call
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
         </button>
@@ -181,6 +178,13 @@
     document.getElementById('verifyStep').style.display = 'none';
     document.getElementById('calendarStep').style.display = 'block';
   }
+
+  document.getElementById('calBookBtn').addEventListener('click', function() {
+    Cal.ns.cannabisconsignment("modal", {
+      calLink: "shelfspace/cannabisconsignment",
+      config: {"layout":"month_view","useSlotsViewOnSmallScreen":"true","theme":"light"},
+    });
+  });
 </script>
 </body>
 </html>
