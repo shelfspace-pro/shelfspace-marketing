@@ -140,7 +140,10 @@
         <svg class="verified-icon" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
         <h3>You're verified</h3>
         <p>Click below to pick a time on our calendar.</p>
-        <button class="btn-primary" style="width:100%;justify-content:center;" onclick="openCalBooking()">
+        <button class="btn-primary" style="width:100%;justify-content:center;"
+          data-cal-link="shelfspace/cannabisconsignment"
+          data-cal-namespace="cannabisconsignment"
+          data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'>
           Book a Call
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
         </button>
@@ -168,7 +171,7 @@
 <script type="text/javascript">
   (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return;} p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
   Cal("init", "cannabisconsignment", {origin:"https://app.cal.com"});
-  Cal.ns.cannabisconsignment("ui", {"theme":"light","cssVarsPerTheme":{"light":{"cal-brand":"#1b4332"},"dark":{"cal-brand":"#ffffff"}},"hideEventTypeDetails":false,"layout":"month_view"});
+  Cal.ns.cannabisconsignment("ui", {"cssVarsPerTheme":{"light":{"cal-brand":"#1b4332"},"dark":{"cal-brand":"#ffffff"}},"hideEventTypeDetails":false,"layout":"month_view"});
 </script>
 <script>
   document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 20);
@@ -177,13 +180,6 @@
   function onTurnstileSuccess(token) {
     document.getElementById('verifyStep').style.display = 'none';
     document.getElementById('calendarStep').style.display = 'block';
-  }
-
-  function openCalBooking() {
-    Cal.ns.cannabisconsignment("modal", {
-      calLink: "shelfspace/cannabisconsignment",
-      config: {"layout":"month_view","theme":"light"},
-    });
   }
 </script>
 </body>
