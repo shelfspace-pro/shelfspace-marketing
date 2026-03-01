@@ -20,7 +20,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
-<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 <style>
   .page-hero { padding-bottom: 40px; }
   .contact-section { background: var(--white); padding-top: 60px; }
@@ -42,24 +41,14 @@
   .contact-method a { color: var(--green-mid); text-decoration: none; font-weight: 600; transition: color 0.2s; }
   .contact-method a:hover { color: var(--green-deep); }
 
-  .contact-form-card {
-    background: var(--white); border: 1px solid var(--slate-200);
-    border-radius: 16px; padding: 40px;
+  .cal-embed-wrap {
+    min-height: 500px; border: 1px solid var(--slate-200);
+    border-radius: 16px; overflow: hidden;
     box-shadow: 0 8px 40px rgba(27,67,50,0.06);
   }
-  .contact-form-card h3 { font-size: 20px; font-weight: 700; color: var(--green-deep); margin-bottom: 8px; }
-  .contact-form-card > p { font-size: 15px; color: var(--slate-500); line-height: 1.6; margin-bottom: 24px; }
-
-  .verify-step { text-align: center; }
-  .verify-step .cf-turnstile { display: flex; justify-content: center; }
-
-  .calendar-step { display: none; text-align: center; padding: 24px 0 0; }
-  .calendar-step .verified-icon { color: var(--green-mid); margin-bottom: 12px; }
-  .calendar-step p { font-size: 15px; color: var(--slate-500); line-height: 1.6; margin-bottom: 24px; }
-  .calendar-step .btn-primary { width: 100%; justify-content: center; }
 
   @media (max-width: 900px) {
-    .contact-container { grid-template-columns: 1fr; gap: 48px; max-width: 520px; }
+    .contact-container { grid-template-columns: 1fr; gap: 48px; max-width: 600px; }
   }
 </style>
 </head>
@@ -127,25 +116,8 @@
       </div>
     </div>
 
-    <div class="contact-form-card reveal reveal-delay-1">
-      <!-- Step 1: Bot verification -->
-      <div class="verify-step" id="verifyStep">
-        <h3>Book a Call</h3>
-        <p>Quick verification, then pick a time that works for you.</p>
-        <div class="cf-turnstile" data-sitekey="0x4AAAAAACiEpqqSU9lohNi-" data-callback="onTurnstileSuccess"></div>
-      </div>
-
-      <!-- Step 2: Calendar booking -->
-      <div class="calendar-step" id="calendarStep">
-        <svg class="verified-icon" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-        <h3>You're verified</h3>
-        <p>Click below to pick a time on our calendar.</p>
-        <a href="https://calendar.app.google/wfarAnHbE17jadJWA" target="_blank" rel="noopener" class="btn-primary">
-          Book a Call
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-        </a>
-        <p style="font-size:13px;color:var(--slate-400);margin-top:16px;">Or <a href="#" onclick="openDemoModal();return false;" style="color:var(--green-mid);font-weight:600;text-decoration:none;">try the demo</a> to explore on your own.</p>
-      </div>
+    <div class="cal-embed-wrap reveal reveal-delay-1">
+      <div style="width:100%;height:100%;overflow:scroll" id="my-cal-inline-cannabisconsignment"></div>
     </div>
   </div>
 </section>
@@ -168,11 +140,16 @@
 <script>
   document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 20);
   window.addEventListener('scroll', () => document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 20));
-
-  function onTurnstileSuccess(token) {
-    document.getElementById('verifyStep').style.display = 'none';
-    document.getElementById('calendarStep').style.display = 'block';
-  }
+</script>
+<script type="text/javascript">
+  (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return;} p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
+  Cal("init", "cannabisconsignment", {origin:"https://app.cal.com"});
+  Cal.ns.cannabisconsignment("inline", {
+    elementOrSelector:"#my-cal-inline-cannabisconsignment",
+    config: {"layout":"month_view","useSlotsViewOnSmallScreen":"true","theme":"light"},
+    calLink: "shelfspace/cannabisconsignment",
+  });
+  Cal.ns.cannabisconsignment("ui", {"theme":"light","cssVarsPerTheme":{"light":{"cal-brand":"#1b4332"},"dark":{"cal-brand":"#ffffff"}},"hideEventTypeDetails":false,"layout":"month_view"});
 </script>
 </body>
 </html>
