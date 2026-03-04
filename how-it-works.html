@@ -58,6 +58,42 @@
   }
   .process-highlight strong { color: var(--green-deep); }
 
+  /* Comparison section */
+  .compare-section { background: var(--white); padding-bottom: 0; }
+  .compare-header { text-align: center; max-width: 640px; margin: 0 auto 56px; }
+  .compare-header .section-desc { margin: 0 auto; }
+  .compare-grid { max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+  .compare-card {
+    border: 1px solid var(--slate-200); border-radius: 20px; padding: 40px 36px;
+    position: relative; overflow: hidden; transition: all 0.4s cubic-bezier(0.22,1,0.36,1);
+  }
+  .compare-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(27,67,50,0.08); }
+  .compare-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--green-accent), var(--green-mid)); }
+  .compare-card-tag {
+    display: inline-flex; padding: 4px 14px; border-radius: 100px;
+    font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+    background: var(--green-ghost); color: var(--green-dark); margin-bottom: 16px;
+  }
+  .compare-card h3 { font-size: 22px; font-weight: 700; color: var(--green-deep); margin-bottom: 8px; letter-spacing: -0.5px; }
+  .compare-card > p { font-size: 15px; line-height: 1.7; color: var(--slate-500); margin-bottom: 20px; }
+  .compare-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+  .compare-list li { display: flex; gap: 10px; font-size: 14px; line-height: 1.5; color: var(--slate-600); }
+  .compare-list li strong { color: var(--green-deep); font-weight: 600; white-space: nowrap; }
+  .compare-shared {
+    max-width: 1000px; margin: 40px auto 0;
+    background: var(--green-ghost); border: 1px solid rgba(149,213,178,0.3);
+    border-radius: 16px; padding: 32px 40px; text-align: center;
+  }
+  .compare-shared h3 { font-size: 18px; font-weight: 700; color: var(--green-deep); margin-bottom: 8px; }
+  .compare-shared p { font-size: 15px; line-height: 1.7; color: var(--slate-500); margin-bottom: 16px; max-width: 600px; margin-left: auto; margin-right: auto; }
+  .compare-shared-badges { display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; }
+  .compare-shared-badge { font-size: 13px; font-weight: 600; color: var(--green-dark); display: flex; align-items: center; gap: 6px; }
+  @media (max-width: 900px) {
+    .compare-grid { grid-template-columns: 1fr; max-width: 520px; }
+    .compare-shared { padding: 24px; }
+    .compare-shared-badges { gap: 16px; }
+  }
+
   /* Portal preview */
   .portal-section { background: var(--slate-50); border-top: 1px solid var(--slate-100); }
   .portal-header { text-align: center; max-width: 560px; margin: 0 auto 56px; }
@@ -128,6 +164,49 @@
   <h1 class="section-title">How ShelfSpace Works</h1>
   <p class="section-desc">Two vendor relationship types. One payment engine. ShelfSpace manages the full financial lifecycle between cannabis retailers and vendors.</p>
 </div>
+
+<!-- ONE PLATFORM, TWO MODELS -->
+<section class="compare-section">
+  <div class="compare-header">
+    <div class="section-label reveal">One Platform, Two Models</div>
+    <h2 class="section-title reveal">Consignment and wholesale<br>work differently — but pay<br>through the same engine</h2>
+    <p class="section-desc reveal">ShelfSpace manages both vendor relationship types. The difference is in how payments are triggered — not in how they're made.</p>
+  </div>
+  <div class="compare-grid">
+    <div class="compare-card reveal">
+      <span class="compare-card-tag">Consignment</span>
+      <h3>Pay when it sells</h3>
+      <p>Vendors place inventory in your store. You don't pay upfront — ShelfSpace tracks POS sales and settles automatically each week based on what actually sold.</p>
+      <ul class="compare-list">
+        <li><strong>Trigger:</strong> POS sales data drives weekly settlements</li>
+        <li><strong>Payment:</strong> Automated — calculated from confirmed sales</li>
+        <li><strong>Inventory:</strong> Vendor-owned until sold to customer</li>
+        <li><strong>Risk:</strong> Vendor carries the inventory risk, not you</li>
+      </ul>
+    </div>
+    <div class="compare-card reveal reveal-delay-1">
+      <span class="compare-card-tag">Wholesale</span>
+      <h3>Pay on your terms</h3>
+      <p>You buy inventory upfront from vendors. When an invoice is due, you create a payment in ShelfSpace and the vendor gets a check instantly — no more "Net Never."</p>
+      <ul class="compare-list">
+        <li><strong>Trigger:</strong> You create payments when invoices are due</li>
+        <li><strong>Payment:</strong> On-demand — you control the timing</li>
+        <li><strong>Inventory:</strong> You own it from the moment of purchase</li>
+        <li><strong>Risk:</strong> You carry the inventory risk</li>
+      </ul>
+    </div>
+  </div>
+  <div class="compare-shared reveal">
+    <h3>Same payment engine powers both</h3>
+    <p>Whether a payment is triggered by a weekly settlement or created manually, it flows through the same AP engine. Your vendors get the same experience either way.</p>
+    <div class="compare-shared-badges">
+      <span class="compare-shared-badge"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2d6a4f" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Check 21 compliant checks</span>
+      <span class="compare-shared-badge"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2d6a4f" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Vendor portal access</span>
+      <span class="compare-shared-badge"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2d6a4f" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Full audit trail</span>
+      <span class="compare-shared-badge"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2d6a4f" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Credit memo management</span>
+    </div>
+  </div>
+</section>
 
 <!-- CONSIGNMENT WORKFLOW -->
 <section class="process-section">
