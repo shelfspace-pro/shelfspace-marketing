@@ -142,6 +142,11 @@
   @media (max-width: 480px) {
     .pos-ticker-logo { height: 48px; padding: 0 24px; }
   }
+
+  /* Footer 5-col */
+  .footer-top { grid-template-columns: 2fr 1fr 1fr 1fr 1fr; }
+  @media (max-width: 900px) { .footer-top { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px) { .footer-top { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
@@ -153,6 +158,14 @@
     <span class="nav-logo-text">ShelfSpace</span>
   </a>
   <ul class="nav-links">
+    <li class="nav-dropdown">
+      <button class="nav-dropdown-toggle" aria-expanded="false" aria-haspopup="true">Services <svg class="dropdown-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
+      <div class="nav-dropdown-menu">
+        <a href="/consignment">Consignment</a>
+        <a href="/accounts-payable">Accounts Payable</a>
+        <a href="/credit-memos">Credit Memos</a>
+      </div>
+    </li>
     <li><a href="/features">Features</a></li>
     <li><a href="/how-it-works">How It Works</a></li>
     <li><a href="/pricing" class="active">Pricing</a></li>
@@ -251,6 +264,18 @@
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
       <span>Dedicated onboarding support</span>
     </div>
+    <div class="included-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      <span>AP payments to any vendor — consignment or wholesale</span>
+    </div>
+    <div class="included-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      <span>Credit memo management & resolution</span>
+    </div>
+    <div class="included-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      <span>Email-based vendor onboarding</span>
+    </div>
   </div>
 </section>
 
@@ -273,6 +298,18 @@
     <details>
       <summary>Is my data secure?</summary>
       <p>Yes. ShelfSpace uses row-level security, multi-tenant data isolation, full audit trails, and zero hard deletes. Your data is encrypted at rest and in transit.</p>
+    </details>
+    <details>
+      <summary>Do I have to use consignment to use ShelfSpace?</summary>
+      <p>No. ShelfSpace handles payments to all your vendors — consignment or wholesale. You can start by simply managing your AP through the platform and add consignment when you're ready.</p>
+    </details>
+    <details>
+      <summary>How do credit memos work?</summary>
+      <p>Either party can issue a credit memo through the platform for returns, pricing corrections, promotional adjustments, or special circumstances. The other party reviews and approves it, and the credit can be applied to the next settlement or settled independently. Everything is tracked with a full audit trail.</p>
+    </details>
+    <details>
+      <summary>How do I add a new vendor to the platform?</summary>
+      <p>Just enter their email address. The vendor receives an invitation to create their own portal account — no paperwork, no bank details needed upfront. Once they sign up, they can start receiving payments immediately.</p>
     </details>
   </div>
 </section>
@@ -298,8 +335,9 @@
   <div class="footer-top">
     <div class="footer-brand">
       <a href="/" class="nav-logo"><div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div><span class="nav-logo-text">ShelfSpace</span></a>
-      <p>The operating system for cannabis consignment.</p>
+      <p>The operating and payment system for cannabis trading.</p>
     </div>
+    <div class="footer-col"><h4>Services</h4><ul><li><a href="/consignment">Consignment</a></li><li><a href="/accounts-payable">Accounts Payable</a></li><li><a href="/credit-memos">Credit Memos</a></li></ul></div>
     <div class="footer-col"><h4>Platform</h4><ul><li><a href="/features">Features</a></li><li><a href="/how-it-works">How It Works</a></li><li><a href="/pricing">Pricing</a></li><li><a href="/about">About</a></li></ul></div>
     <div class="footer-col"><h4>Access</h4><ul><li><a href="https://ourshelf.space">Login</a></li><li><a href="/signup">Sign Up</a></li><li><a href="/contact">Contact</a></li></ul></div>
     <div class="footer-col"><h4>Company</h4><ul><li><a href="mailto:chris@shelfspace.pro">Email</a></li><li><a href="mailto:support@shelfspace.pro">Support</a></li><li><a href="https://linkedin.com/company/shelfspace-pro" target="_blank" rel="noopener" class="footer-social-link"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> LinkedIn</a></li></ul></div>
@@ -311,6 +349,16 @@
 <script>
   document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 20);
   window.addEventListener('scroll', () => document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 20));
+
+  // Mobile dropdown toggle
+  document.querySelectorAll('.nav-dropdown-toggle').forEach(function(btn) {
+    btn.addEventListener('click', function(e) {
+      e.preventDefault();
+      var parent = btn.closest('.nav-dropdown');
+      parent.classList.toggle('open');
+      btn.setAttribute('aria-expanded', parent.classList.contains('open'));
+    });
+  });
 </script>
 </body>
 </html>

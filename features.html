@@ -249,6 +249,11 @@
     .hero-bg-gradient, .hero-bg-gradient-2 { animation: none; }
     .flows-container::before { height: 100%; }
   }
+
+  /* Footer 5-col */
+  .footer-top { grid-template-columns: 2fr 1fr 1fr 1fr 1fr; }
+  @media (max-width: 900px) { .footer-top { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px) { .footer-top { grid-template-columns: 1fr; } }
 </style>
 <noscript><style>.reveal,.page-hero .section-label,.page-hero .section-title,.page-hero .section-desc{opacity:1;transform:none;transition:none;}</style></noscript>
 </head>
@@ -261,6 +266,14 @@
     <span class="nav-logo-text">ShelfSpace</span>
   </a>
   <ul class="nav-links">
+    <li class="nav-dropdown">
+      <button class="nav-dropdown-toggle" aria-expanded="false" aria-haspopup="true">Services <svg class="dropdown-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
+      <div class="nav-dropdown-menu">
+        <a href="/consignment">Consignment</a>
+        <a href="/accounts-payable">Accounts Payable</a>
+        <a href="/credit-memos">Credit Memos</a>
+      </div>
+    </li>
     <li><a href="/features" class="active">Features</a></li>
     <li><a href="/how-it-works">How It Works</a></li>
     <li><a href="/pricing">Pricing</a></li>
@@ -277,8 +290,8 @@
   <div class="hero-bg-gradient-2"></div>
   <div class="hero-grid-lines"></div>
   <div class="section-label">Platform Features</div>
-  <h1 class="section-title">Everything you need to run<br>consignment at scale</h1>
-  <p class="section-desc">Dedicated portals for retailers and vendors, automated weekly settlements, and precision financial tools — built for cannabis operators who refuse to settle for spreadsheets.</p>
+  <h1 class="section-title">Everything you need to manage<br>vendor payments at scale</h1>
+  <p class="section-desc">Consignment, accounts payable, and credit memos — with dedicated portals, automated settlements, and precision financial tools built for cannabis operators.</p>
   <div style="margin-top: 32px;">
     <a href="/how-it-works" class="btn-secondary">See How It Works <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a>
   </div>
@@ -331,7 +344,7 @@
   <div class="flows-header">
     <div class="section-label reveal">Core Flows</div>
     <h2 class="section-title reveal">From onboarding to<br>weekly payments</h2>
-    <p class="section-desc reveal">Five connected workflows that power the entire consignment lifecycle — fully automated, fully auditable.</p>
+    <p class="section-desc reveal">Six connected workflows that power the entire platform — from consignment to AP to credit memos — fully automated, fully auditable.</p>
   </div>
   <div class="flows-container">
 
@@ -388,9 +401,21 @@
       <div class="flow-step-content">
         <span class="step-tag">Flexible Operations</span>
         <h3>Ad-Hoc Payments</h3>
-        <p>Beyond weekly settlements, ShelfSpace supports ad-hoc payments for returns, adjustments, and special circumstances. Every non-standard transaction is fully documented and tied to the partnership audit trail.</p>
+        <p>Beyond weekly settlements, ShelfSpace supports ad-hoc payments for returns, adjustments, and special circumstances — including AP payments to any vendor, consignment or wholesale. Every non-standard transaction is fully documented and tied to the partnership audit trail.</p>
         <div class="flow-highlight">
           <strong>Full traceability:</strong> Every ad-hoc payment links back to a specific partnership, invoice, and reason code — nothing falls through the cracks.
+        </div>
+      </div>
+    </div>
+
+    <div class="flow-step reveal">
+      <div class="flow-step-number">06</div>
+      <div class="flow-step-content">
+        <span class="step-tag">Financial Resolution</span>
+        <h3>Credit Memo Management</h3>
+        <p>Issue, track, and resolve credit memos between retailers and vendors. Whether it's a return, pricing correction, promotional adjustment, or special circumstance — ShelfSpace provides a structured workflow with full transparency for both parties.</p>
+        <div class="flow-highlight">
+          <strong>Complete lifecycle:</strong> From issuance through review, approval, and settlement — every credit memo action is tracked and auditable.
         </div>
       </div>
     </div>
@@ -403,7 +428,7 @@
   <div class="deepdive-header">
     <div class="section-label reveal">Feature Deep Dive</div>
     <h2 class="section-title reveal">Built for the details<br>that matter</h2>
-    <p class="section-desc reveal">Six feature categories that cover every angle of cannabis consignment — from settlement math to security compliance.</p>
+    <p class="section-desc reveal">Eight feature categories covering every angle of cannabis operations — from consignment settlements to AP payments and credit memo management.</p>
   </div>
   <div class="deepdive-grid">
 
@@ -424,7 +449,7 @@
     <div class="deepdive-card reveal reveal-delay-1">
       <div class="deepdive-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div>
       <h3>Payments</h3>
-      <p>Check 21-compliant payment generation with instant vendor access and full federal compliance.</p>
+      <p>Check 21-compliant payment generation for all your vendors — consignment and wholesale — with instant access and full federal compliance.</p>
       <ul class="deepdive-list">
         <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Weekly automated check generation</li>
         <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Check 21 & UCC Article 3 compliant</li>
@@ -491,6 +516,34 @@
       </ul>
     </div>
 
+    <div class="deepdive-card reveal">
+      <div class="deepdive-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div>
+      <h3>Accounts Payable</h3>
+      <p>Pay any vendor in your network — consignment or wholesale — through one platform with Check 21 compliant checks and email-based onboarding.</p>
+      <ul class="deepdive-list">
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Email-based vendor onboarding</li>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Pay any vendor — consignment or wholesale</li>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Instant vendor portal access</li>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Void & reissue with one click</li>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Complete payment audit trail</li>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Works for every vendor relationship</li>
+      </ul>
+    </div>
+
+    <div class="deepdive-card reveal reveal-delay-1">
+      <div class="deepdive-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+      <h3>Credit Memos</h3>
+      <p>Issue, track, and resolve credit memos with structured workflows and full transparency for retailers and vendors.</p>
+      <ul class="deepdive-list">
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Structured issuance workflow</li>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Review & approval process</li>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Apply to settlements or settle independently</li>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Returns & pricing corrections</li>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Promotional adjustments</li>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Complete audit trail</li>
+      </ul>
+    </div>
+
   </div>
 </section>
 
@@ -541,7 +594,7 @@
   <div class="cta-content">
     <div class="section-label reveal">Get Started</div>
     <h2 class="section-title reveal">Ready to see the<br>full platform?</h2>
-    <p class="section-desc reveal">Join the pilot program and experience what automated consignment looks like.</p>
+    <p class="section-desc reveal">Join the pilot program and experience consignment, AP, and credit memos on one platform.</p>
     <div class="cta-actions reveal">
       <a href="/signup" class="btn-primary">Join the Pilot <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
       <button class="btn-secondary" onclick="openDemoModal()">Try the Instant Demo</button>
@@ -554,8 +607,9 @@
   <div class="footer-top">
     <div class="footer-brand">
       <a href="/" class="nav-logo"><div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div><span class="nav-logo-text">ShelfSpace</span></a>
-      <p>The operating system for cannabis consignment.</p>
+      <p>The operating and payment system for cannabis trading.</p>
     </div>
+    <div class="footer-col"><h4>Services</h4><ul><li><a href="/consignment">Consignment</a></li><li><a href="/accounts-payable">Accounts Payable</a></li><li><a href="/credit-memos">Credit Memos</a></li></ul></div>
     <div class="footer-col"><h4>Platform</h4><ul><li><a href="/features">Features</a></li><li><a href="/how-it-works">How It Works</a></li><li><a href="/pricing">Pricing</a></li><li><a href="/about">About</a></li></ul></div>
     <div class="footer-col"><h4>Access</h4><ul><li><a href="https://ourshelf.space">Login</a></li><li><a href="/signup">Sign Up</a></li><li><a href="/contact">Contact</a></li></ul></div>
     <div class="footer-col"><h4>Company</h4><ul><li><a href="mailto:chris@shelfspace.pro">Email</a></li><li><a href="mailto:support@shelfspace.pro">Support</a></li><li><a href="https://linkedin.com/company/shelfspace-pro" target="_blank" rel="noopener" class="footer-social-link"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> LinkedIn</a></li></ul></div>
@@ -704,6 +758,16 @@
         if (section) section.style.setProperty('--parallax-y', '0px');
       });
     }
+  });
+
+  // Mobile dropdown toggle
+  document.querySelectorAll('.nav-dropdown-toggle').forEach(function(btn) {
+    btn.addEventListener('click', function(e) {
+      e.preventDefault();
+      var parent = btn.closest('.nav-dropdown');
+      parent.classList.toggle('open');
+      btn.setAttribute('aria-expanded', parent.classList.contains('open'));
+    });
   });
 })();
 </script>

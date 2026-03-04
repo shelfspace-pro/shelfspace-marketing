@@ -85,6 +85,11 @@
     .process-step-number { position: static; }
     .portal-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
   }
+
+  /* Footer 5-col */
+  .footer-top { grid-template-columns: 2fr 1fr 1fr 1fr 1fr; }
+  @media (max-width: 900px) { .footer-top { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px) { .footer-top { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
@@ -96,6 +101,14 @@
     <span class="nav-logo-text">ShelfSpace</span>
   </a>
   <ul class="nav-links">
+    <li class="nav-dropdown">
+      <button class="nav-dropdown-toggle" aria-expanded="false" aria-haspopup="true">Services <svg class="dropdown-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
+      <div class="nav-dropdown-menu">
+        <a href="/consignment">Consignment</a>
+        <a href="/accounts-payable">Accounts Payable</a>
+        <a href="/credit-memos">Credit Memos</a>
+      </div>
+    </li>
     <li><a href="/features">Features</a></li>
     <li><a href="/how-it-works" class="active">How It Works</a></li>
     <li><a href="/pricing">Pricing</a></li>
@@ -109,12 +122,18 @@
 <!-- PAGE HERO -->
 <div class="page-hero">
   <div class="section-label">How It Works</div>
-  <h1 class="section-title">The inventory and payments<br>transformation</h1>
-  <p class="section-desc">From contracts to weekly checks — here's exactly how ShelfSpace turns consignment into a seamless, automated system.</p>
+  <h1 class="section-title">How ShelfSpace Works</h1>
+  <p class="section-desc">Three connected services that manage the full financial relationship between retailers and vendors — from consignment settlements to AP payments and credit memos.</p>
 </div>
 
-<!-- PROCESS STEPS -->
+<!-- CONSIGNMENT WORKFLOW -->
 <section class="process-section">
+  <div style="text-align:center; max-width:600px; margin:0 auto 56px;">
+    <div class="section-label reveal">Consignment</div>
+    <h2 class="section-title reveal">Scan-Based Trading</h2>
+    <p class="section-desc reveal" style="margin:0 auto;">Stock now, pay when it sells. ShelfSpace automates the entire consignment lifecycle — from contracts to weekly vendor checks.</p>
+    <div style="margin-top:20px;"><a href="/consignment" class="btn-secondary reveal" style="padding:10px 20px;font-size:14px;">Learn more about Consignment <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a></div>
+  </div>
   <div class="process-container">
 
     <div class="process-step reveal">
@@ -123,7 +142,6 @@
         <span class="step-tag">Standardized Framework</span>
         <h3>Contracts</h3>
         <p>ShelfSpace streamlines the legal relationship between Vendor and Retailer. Our purpose-built agreement automates the hard stuff — payments, discounts, and shrinkage policies — while ensuring compliance with regulatory and tax agencies.</p>
-        <p>We turn complex liabilities into a secure, standardized partnership so you can focus on moving product.</p>
       </div>
     </div>
 
@@ -133,92 +151,137 @@
         <span class="step-tag">Zero-Friction Fulfillment</span>
         <h3>Inventory Transfers</h3>
         <p>Inventory flows through your supply chain just like standard wholesale. The product is delivered, manifested in METRC, and received into your POS using your current protocols.</p>
-        <p>You simply load the cost, set the target price, and publish to your menu. We integrate into the background of your operation, ensuring that the only thing that changes is the efficiency of your capital.</p>
       </div>
     </div>
 
     <div class="process-step reveal">
       <div class="process-step-number">03</div>
       <div class="process-step-content">
-        <span class="step-tag">Unified Customer Experience</span>
-        <h3>Product Sales</h3>
-        <p>Customers purchase items just like any other product. They browse the menu, make their selection, and complete the transaction with zero friction.</p>
-        <p>These SKUs are indistinguishable from wholesale inventory, ensuring a consistent workflow for your staff and a standard experience for your clientele.</p>
+        <span class="step-tag">Transparent Data & Insights</span>
+        <h3>Weekly Reporting</h3>
+        <p>ShelfSpace ties into your POS to ingest sales and inventory data once a week. Our Engine handles the math — aggregating vendor sales, applying the profit split, and reconciling on-hand inventory.</p>
+        <div class="process-highlight">
+          <strong>Five-page settlement report:</strong> Vendor payout table, returns detail, discount audit, remaining inventory with JIT velocity metrics, and a depositable check.
+        </div>
       </div>
     </div>
 
     <div class="process-step reveal">
       <div class="process-step-number">04</div>
       <div class="process-step-content">
-        <span class="step-tag">Transparent Data & Insights</span>
-        <h3>Weekly Reporting</h3>
-        <p>ShelfSpace ties into your POS to ingest sales and inventory data once a week. Our Engine handles the math — aggregating vendor sales, applying the profit split, and reconciling on-hand inventory.</p>
-        <p>The result is a unified report giving you a complete financial snapshot, available for download in your portal whenever you need it.</p>
-        <div class="process-highlight">
-          <strong>Five-page settlement report:</strong> Vendor payout table, returns detail, discount audit with budget vs. actual reconciliation, remaining inventory with JIT velocity metrics, and a depositable check.
-        </div>
-      </div>
-    </div>
-
-    <div class="process-step reveal">
-      <div class="process-step-number">05</div>
-      <div class="process-step-content">
         <span class="step-tag">Automated Weekly Settlements</span>
         <h3>Weekly Payments</h3>
-        <p>ShelfSpace acts as your central payments coordinator to ensure consistent cash flow. Every week, the system generates a check for each Vendor based on the prior week's confirmed sales.</p>
-        <p>These checks are instantly available for download in the Vendor Portal. Fully compliant with the Federal Check 21 Act, our checks are legally valid to be printed on standard white paper with black ink on any at-home printer, and can be deposited immediately via mobile banking apps or in-person with a teller.</p>
+        <p>Every week, the system generates a Check 21-compliant check for each Vendor based on the prior week's confirmed sales. Checks are instantly available for download in the Vendor Portal.</p>
         <div class="process-highlight">
-          <strong>Check 21 Compliant:</strong> Every check is a valid "Substitute Check" under Federal Law. UCC Article 3 Compliant. Print-at-Home Legal. Mobile Deposit Ready.
+          <strong>Check 21 Compliant:</strong> Every check is a valid "Substitute Check" under Federal Law. Print-at-home legal. Mobile deposit ready.
         </div>
-      </div>
-    </div>
-
-    <div class="process-step reveal">
-      <div class="process-step-number">06</div>
-      <div class="process-step-content">
-        <span class="step-tag">Neutral Mediation</span>
-        <h3>Disputes</h3>
-        <p>ShelfSpace serves as the neutral intermediary — the "Switzerland" of your supply chain. Our role is to act as an objective third party, strictly adhering to the Master Agreement and the empirical data.</p>
-        <p>Should questions or conflicts arise, our goal is rapid resolution and restored alignment. We review the transaction logs, facilitate communication, and use data-driven insights to resolve the issue fairly, bringing all parties back into harmony.</p>
       </div>
     </div>
 
   </div>
 </section>
 
-<!-- PORTAL -->
-<section class="portal-section">
-  <div class="portal-header">
-    <div class="section-label reveal">Your Portal</div>
-    <h2 class="section-title reveal">Your data, on demand</h2>
-    <p class="section-desc reveal">Retailers and Vendors gain 24/7 access to a centralized dashboard designed for total visibility.</p>
+<!-- AP WORKFLOW -->
+<section class="process-section" style="background:var(--slate-50);border-top:1px solid var(--slate-100);">
+  <div style="text-align:center; max-width:600px; margin:0 auto 56px;">
+    <div class="section-label reveal">Accounts Payable</div>
+    <h2 class="section-title reveal">Pay Any Vendor</h2>
+    <p class="section-desc reveal" style="margin:0 auto;">Pay consignment and wholesale vendors from one platform — with Check 21 compliant checks and email-based onboarding.</p>
+    <div style="margin-top:20px;"><a href="/accounts-payable" class="btn-secondary reveal" style="padding:10px 20px;font-size:14px;">Learn more about AP <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a></div>
   </div>
-  <div class="portal-grid">
-    <div class="portal-card reveal">
-      <div class="portal-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
-      <h3>Retailer Portal</h3>
-      <p>Track settlements, manage vendor relationships, and monitor inventory — all from one dashboard.</p>
-      <ul>
-        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Settlement history & reports</li>
-        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Vendor performance insights</li>
-        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Inventory & restock alerts</li>
-        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Multi-store switching</li>
-      </ul>
+  <div class="process-container">
+
+    <div class="process-step reveal">
+      <div class="process-step-number">01</div>
+      <div class="process-step-content">
+        <span class="step-tag">Simple Onboarding</span>
+        <h3>Add a Vendor</h3>
+        <p>Add any vendor to ShelfSpace with just their email address. The vendor receives an invitation to create their portal account and start receiving payments — no paperwork required.</p>
+      </div>
     </div>
-    <div class="portal-card reveal reveal-delay-1">
-      <div class="portal-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div>
-      <h3>Vendor Portal</h3>
-      <p>Download checks, track sell-through by retailer, and know exactly when to restock.</p>
-      <ul>
-        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> One-click check download</li>
-        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Sales & velocity tracking</li>
-        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Inventory across all retailers</li>
-        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Run time-limited promotions</li>
-      </ul>
+
+    <div class="process-step reveal">
+      <div class="process-step-number">02</div>
+      <div class="process-step-content">
+        <span class="step-tag">Flexible Payments</span>
+        <h3>Create a Payment</h3>
+        <p>Create a payment for any vendor in your network. Set the amount, attach a memo or invoice reference, and submit. ShelfSpace generates a Check 21-compliant check automatically.</p>
+      </div>
     </div>
+
+    <div class="process-step reveal">
+      <div class="process-step-number">03</div>
+      <div class="process-step-content">
+        <span class="step-tag">Instant Access</span>
+        <h3>Vendor Gets Paid</h3>
+        <p>The vendor receives an email notification and can download their check immediately from the Vendor Portal. Checks are printable on standard paper and mobile deposit ready.</p>
+        <div class="process-highlight">
+          <strong>Check 21 Compliant:</strong> Every check is a valid Substitute Check under Federal Law. Print-at-home legal. Mobile deposit ready.
+        </div>
+      </div>
+    </div>
+
+    <div class="process-step reveal">
+      <div class="process-step-number">04</div>
+      <div class="process-step-content">
+        <span class="step-tag">Complete Visibility</span>
+        <h3>Track Everything</h3>
+        <p>Every payment is logged with a full audit trail — who created it, when it was issued, when it was downloaded, and its current status. Void and reissue any check with a single click.</p>
+      </div>
+    </div>
+
   </div>
-  <div style="text-align: center; margin-top: 48px;">
-    <a href="/features" class="btn-secondary reveal">Explore All Features <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a>
+</section>
+
+<!-- CREDIT MEMO WORKFLOW -->
+<section class="process-section">
+  <div style="text-align:center; max-width:600px; margin:0 auto 56px;">
+    <div class="section-label reveal">Credit Memos</div>
+    <h2 class="section-title reveal">Manage Credits</h2>
+    <p class="section-desc reveal" style="margin:0 auto;">Issue, track, and resolve credit memos with full transparency — structured workflows for returns, pricing corrections, and more.</p>
+    <div style="margin-top:20px;"><a href="/credit-memos" class="btn-secondary reveal" style="padding:10px 20px;font-size:14px;">Learn more about Credit Memos <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a></div>
+  </div>
+  <div class="process-container">
+
+    <div class="process-step reveal">
+      <div class="process-step-number">01</div>
+      <div class="process-step-content">
+        <span class="step-tag">Initiation</span>
+        <h3>Issue a Credit Memo</h3>
+        <p>Either party can issue a credit memo through ShelfSpace. Specify the amount, reason, and supporting details. The other party is notified immediately.</p>
+      </div>
+    </div>
+
+    <div class="process-step reveal">
+      <div class="process-step-number">02</div>
+      <div class="process-step-content">
+        <span class="step-tag">Verification</span>
+        <h3>Review & Approval</h3>
+        <p>The receiving party reviews the credit memo and can approve, dispute, or request modifications. All communication is tracked within the platform.</p>
+      </div>
+    </div>
+
+    <div class="process-step reveal">
+      <div class="process-step-number">03</div>
+      <div class="process-step-content">
+        <span class="step-tag">Resolution</span>
+        <h3>Apply or Settle</h3>
+        <p>Approved credit memos can be applied to the next settlement, offset against future payments, or settled independently. ShelfSpace tracks the balance automatically.</p>
+        <div class="process-highlight">
+          <strong>Flexible resolution:</strong> Apply credits to settlements, offset payments, or settle independently — whatever works for both parties.
+        </div>
+      </div>
+    </div>
+
+    <div class="process-step reveal">
+      <div class="process-step-number">04</div>
+      <div class="process-step-content">
+        <span class="step-tag">Compliance</span>
+        <h3>Audit Trail</h3>
+        <p>Every credit memo action is logged — issuance, review, approval, application, and settlement. Both parties have full visibility into the history and current status.</p>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -226,8 +289,8 @@
 <section class="cta-section">
   <div class="cta-content">
     <div class="section-label reveal">Get Started</div>
-    <h2 class="section-title reveal">Ready to transform your<br>supply chain?</h2>
-    <p class="section-desc reveal">Join the pilot program and see scan-based trading in action.</p>
+    <h2 class="section-title reveal">Ready to transform your<br>vendor operations?</h2>
+    <p class="section-desc reveal">Join the pilot program — consignment, AP, and credit memos all in one platform.</p>
     <div class="cta-actions reveal">
       <a href="/signup" class="btn-primary">Join the Pilot <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
       <a href="/contact" class="btn-secondary">Schedule a Call</a>
@@ -240,21 +303,29 @@
   <div class="footer-top">
     <div class="footer-brand">
       <a href="/" class="nav-logo"><div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div><span class="nav-logo-text">ShelfSpace</span></a>
-      <p>The operating system for cannabis consignment.</p>
+      <p>The operating and payment system for cannabis trading.</p>
     </div>
+    <div class="footer-col"><h4>Services</h4><ul><li><a href="/consignment">Consignment</a></li><li><a href="/accounts-payable">Accounts Payable</a></li><li><a href="/credit-memos">Credit Memos</a></li></ul></div>
     <div class="footer-col"><h4>Platform</h4><ul><li><a href="/features">Features</a></li><li><a href="/how-it-works">How It Works</a></li><li><a href="/pricing">Pricing</a></li><li><a href="/about">About</a></li></ul></div>
     <div class="footer-col"><h4>Access</h4><ul><li><a href="https://ourshelf.space">Login</a></li><li><a href="/signup">Sign Up</a></li><li><a href="/contact">Contact</a></li></ul></div>
     <div class="footer-col"><h4>Company</h4><ul><li><a href="mailto:chris@shelfspace.pro">Email</a></li><li><a href="mailto:support@shelfspace.pro">Support</a></li><li><a href="https://linkedin.com/company/shelfspace-pro" target="_blank" rel="noopener" class="footer-social-link"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> LinkedIn</a></li></ul></div>
   </div>
-  <div class="footer-bottom">
-    <p>&copy; 2026 ShelfSpace Technologies Inc.</p>
-    <div class="footer-bottom-links"><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div>
-  </div>
+  <div class="footer-bottom"><p>&copy; 2026 ShelfSpace Technologies Inc.</p><div class="footer-bottom-links"><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div></div>
 </footer>
 
 <script>
   document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 20);
   window.addEventListener('scroll', () => document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 20));
+
+  // Mobile dropdown toggle
+  document.querySelectorAll('.nav-dropdown-toggle').forEach(function(btn) {
+    btn.addEventListener('click', function(e) {
+      e.preventDefault();
+      var parent = btn.closest('.nav-dropdown');
+      parent.classList.toggle('open');
+      btn.setAttribute('aria-expanded', parent.classList.contains('open'));
+    });
+  });
 </script>
 </body>
 </html>
