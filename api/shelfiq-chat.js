@@ -142,34 +142,40 @@ export default async function handler(req, res) {
     return res.status(429).json({ error: 'Message limit reached' });
   }
 
-  const MAX_RETRIES = 3;
+  const MODELS = ['claude-haiku-4-5-20251001', 'claude-sonnet-4-5-20241022'];
 
-  for (let attempt = 0; attempt < MAX_RETRIES; attempt++) {
-    try {
-      const response = await client.messages.create({
-        model: 'claude-haiku-4-5-20251001',
-        max_tokens: 300,
-        system: SYSTEM_PROMPT,
-        messages: messages,
-      });
+  for (const model of MODELS) {
+    for (let attempt = 0; attempt < 2; attempt++) {
+      try {
+        const response = await client.messages.create({
+          model,
+          max_tokens: 300,
+          system: SYSTEM_PROMPT,
+          messages: messages,
+        });
 
-      const text = response.content
-        .filter(block => block.type === 'text')
-        .map(block => block.text)
-        .join('');
+        const text = response.content
+          .filter(block => block.type === 'text')
+          .map(block => block.text)
+          .join('');
 
-      return res.status(200).json({ reply: text });
-    } catch (err) {
-      const isOverloaded = err.status === 529 || (err.message && err.message.includes('overloaded'));
-      const isRateLimited = err.status === 429;
+        return res.status(200).json({ reply: text });
+      } catch (err) {
+        const isOverloaded = err.status === 529 || (err.message && err.message.includes('overloaded'));
+        const isRateLimited = err.status === 429;
 
-      if ((isOverloaded || isRateLimited) && attempt < MAX_RETRIES - 1) {
-        await new Promise(r => setTimeout(r, 1000 * (attempt + 1)));
-        continue;
+        if ((isOverloaded || isRateLimited) && attempt < 1) {
+          await new Promise(r => setTimeout(r, 1000));
+          continue;
+        }
+
+        if (isOverloaded || isRateLimited) break; // try next model
+
+        console.error('ShelfiQ chat error:', err);
+        return res.status(500).json({ error: 'Something went wrong. Please try again.' });
       }
-
-      console.error('ShelfiQ chat error:', err);
-      return res.status(500).json({ error: 'Something went wrong. Please try again.' });
     }
   }
+
+  return res.status(503).json({ error: 'Our AI is temporarily busy. Please try again in a moment.' });
 }
