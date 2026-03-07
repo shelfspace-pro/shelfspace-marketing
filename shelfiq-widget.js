@@ -18,6 +18,7 @@
     '.sq-toggle:hover{background:#2d6a4f;transform:translateY(-2px);box-shadow:0 8px 32px rgba(27,67,50,0.4)}',
     '.sq-toggle svg{flex-shrink:0}',
     '.sq-iq{background:linear-gradient(135deg,#40916c,#95d5b2);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}',
+    '.sq-iq-sm{color:#95d5b2}',
 
     /* Chat window */
     '.sq-window{position:fixed;bottom:24px;right:24px;z-index:9998;width:400px;height:520px;max-height:calc(100dvh - 48px);background:#fff;border-radius:20px;box-shadow:0 16px 64px rgba(27,67,50,0.18),0 2px 8px rgba(27,67,50,0.06);display:none;flex-direction:column;overflow:hidden;border:1px solid #e2e8f0}',
@@ -82,7 +83,7 @@
   var toggle = document.createElement('button');
   toggle.className = 'sq-toggle';
   toggle.setAttribute('aria-label', 'Ask ShelfiQ');
-  toggle.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg> Ask ShelfiQ';
+  toggle.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg> Ask Shelf<span class="sq-iq-sm">iQ</span>';
   document.body.appendChild(toggle);
 
   // --- Chat Window ---
