@@ -158,6 +158,9 @@ export default async function handler(req, res) {
     return res.status(200).json({ reply: text });
   } catch (err) {
     console.error('ShelfiQ chat error:', err);
-    return res.status(500).json({ error: 'Something went wrong. Please try again.' });
+    return res.status(500).json({
+      error: 'Something went wrong. Please try again.',
+      debug: err.message || String(err),
+    });
   }
 }
