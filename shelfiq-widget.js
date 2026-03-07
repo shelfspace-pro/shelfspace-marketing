@@ -17,6 +17,7 @@
     '.sq-toggle{position:fixed;bottom:24px;right:24px;z-index:9998;display:flex;align-items:center;gap:8px;background:#1b4332;color:#fff;border:none;padding:12px 20px 12px 16px;border-radius:100px;font-family:inherit;font-size:14px;font-weight:600;cursor:pointer;box-shadow:0 4px 24px rgba(27,67,50,0.3);transition:all .3s cubic-bezier(.22,1,.36,1)}',
     '.sq-toggle:hover{background:#2d6a4f;transform:translateY(-2px);box-shadow:0 8px 32px rgba(27,67,50,0.4)}',
     '.sq-toggle svg{flex-shrink:0}',
+    '.sq-iq{background:linear-gradient(135deg,#40916c,#95d5b2);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}',
 
     /* Chat window */
     '.sq-window{position:fixed;bottom:24px;right:24px;z-index:9998;width:400px;height:520px;max-height:calc(100dvh - 48px);background:#fff;border-radius:20px;box-shadow:0 16px 64px rgba(27,67,50,0.18),0 2px 8px rgba(27,67,50,0.06);display:none;flex-direction:column;overflow:hidden;border:1px solid #e2e8f0}',
@@ -81,7 +82,7 @@
   var toggle = document.createElement('button');
   toggle.className = 'sq-toggle';
   toggle.setAttribute('aria-label', 'Ask ShelfiQ');
-  toggle.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg> Ask ShelfiQ';
+  toggle.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg> Ask Shelf<span class="sq-iq">iQ</span>';
   document.body.appendChild(toggle);
 
   // --- Chat Window ---
@@ -90,7 +91,7 @@
   win.innerHTML = [
     '<div class="sq-title">',
     '  <div class="sq-title-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a4 4 0 0 1 4 4v2a4 4 0 0 1-8 0V6a4 4 0 0 1 4-4z"/><rect x="3" y="12" width="18" height="8" rx="3"/></svg></div>',
-    '  <div class="sq-title-info"><div class="sq-title-name">ShelfiQ</div><div class="sq-title-status">Online</div></div>',
+    '  <div class="sq-title-info"><div class="sq-title-name">Shelf<span class="sq-iq">iQ</span></div><div class="sq-title-status">Online</div></div>',
     '  <button class="sq-close" aria-label="Close chat">&times;</button>',
     '</div>',
     '<div class="sq-messages" id="sqMessages"></div>',
