@@ -142,25 +142,34 @@ export default async function handler(req, res) {
     return res.status(429).json({ error: 'Message limit reached' });
   }
 
-  try {
-    const response = await client.messages.create({
-      model: 'claude-haiku-4-5-20251001',
-      max_tokens: 300,
-      system: SYSTEM_PROMPT,
-      messages: messages,
-    });
+  const MAX_RETRIES = 3;
 
-    const text = response.content
-      .filter(block => block.type === 'text')
-      .map(block => block.text)
-      .join('');
+  for (let attempt = 0; attempt < MAX_RETRIES; attempt++) {
+    try {
+      const response = await client.messages.create({
+        model: 'claude-haiku-4-5-20251001',
+        max_tokens: 300,
+        system: SYSTEM_PROMPT,
+        messages: messages,
+      });
 
-    return res.status(200).json({ reply: text });
-  } catch (err) {
-    console.error('ShelfiQ chat error:', err);
-    return res.status(500).json({
-      error: 'Something went wrong. Please try again.',
-      debug: err.message || String(err),
-    });
+      const text = response.content
+        .filter(block => block.type === 'text')
+        .map(block => block.text)
+        .join('');
+
+      return res.status(200).json({ reply: text });
+    } catch (err) {
+      const isOverloaded = err.status === 529 || (err.message && err.message.includes('overloaded'));
+      const isRateLimited = err.status === 429;
+
+      if ((isOverloaded || isRateLimited) && attempt < MAX_RETRIES - 1) {
+        await new Promise(r => setTimeout(r, 1000 * (attempt + 1)));
+        continue;
+      }
+
+      console.error('ShelfiQ chat error:', err);
+      return res.status(500).json({ error: 'Something went wrong. Please try again.' });
+    }
   }
 }
