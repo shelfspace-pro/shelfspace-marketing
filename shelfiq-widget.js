@@ -151,12 +151,20 @@
   }
 
   function formatText(text) {
-    // Basic formatting: bold **text** and newlines
     return text
       .replace(/&/g, '&amp;')
       .replace(/</g, '&lt;')
       .replace(/>/g, '&gt;')
+      .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>')
       .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+      .replace(/(https?:\/\/[^\s<]+)/g, function (url) {
+        if (url.indexOf('"') !== -1) return url; // already inside an href
+        return '<a href="' + url + '" target="_blank" rel="noopener">' + url + '</a>';
+      })
+      .replace(/\b(shelfspace\.pro\/[^\s<,.)]+)/g, function (m, path) {
+        if (m.indexOf('"') !== -1) return m;
+        return '<a href="https://' + path + '">' + path + '</a>';
+      })
       .replace(/\n/g, '<br>');
   }
 
