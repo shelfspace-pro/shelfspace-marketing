@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ShelfiQ — AI-Powered Platform Intelligence | ShelfSpace</title>
+<meta name="description" content="ShelfiQ is your AI advisor built into ShelfSpace. Ask anything about your inventory, vendors, deal structures, payments, and performance — get instant, personalized answers.">
+<link rel="canonical" href="https://shelfspace.pro/shelfiq">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://shelfspace.pro/shelfiq">
+<meta property="og:title" content="ShelfiQ — AI-Powered Platform Intelligence | ShelfSpace">
+<meta property="og:description" content="Your AI advisor that knows your entire business. Ask ShelfiQ anything about inventory, vendors, deal structures, and performance.">
+<meta property="og:image" content="https://shelfspace.pro/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="ShelfiQ — AI-Powered Platform Intelligence | ShelfSpace">
+<meta name="twitter:description" content="Your AI advisor that knows your entire business. Ask ShelfiQ anything about inventory, vendors, deal structures, and performance.">
+<meta name="twitter:image" content="https://shelfspace.pro/og-image.png">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+  /* Scroll-triggered reveals */
+  .reveal {
+    opacity: 0; transform: translateY(40px);
+    transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .reveal.is-visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.15s; }
+  .reveal-delay-2 { transition-delay: 0.3s; }
+  .reveal-delay-3 { transition-delay: 0.45s; }
+
+  .page-hero { padding-bottom: 40px; }
+  .page-hero .section-label { font-size: 13px; letter-spacing: 3px; }
+
+  /* ShelfiQ branding accent */
+  .shelfiq-name { font-weight: 700; letter-spacing: -0.5px; }
+  .shelfiq-name .iq { background: linear-gradient(135deg, var(--green-mid), var(--green-accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+  /* Chat demo */
+  .chat-section { background: var(--white); }
+  .chat-container { max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+  .chat-text .section-desc { margin-bottom: 28px; }
+
+  .chat-window {
+    background: var(--white); border: 1px solid var(--slate-200);
+    border-radius: 20px; padding: 0; overflow: hidden;
+    box-shadow: 0 16px 64px rgba(27,67,50,0.10), 0 2px 8px rgba(27,67,50,0.04);
+  }
+  .chat-titlebar {
+    display: flex; align-items: center; gap: 10px;
+    padding: 16px 20px; border-bottom: 1px solid var(--slate-100);
+    background: var(--slate-50);
+  }
+  .chat-titlebar-icon {
+    width: 32px; height: 32px; border-radius: 10px;
+    background: linear-gradient(135deg, var(--green-deep), var(--green-mid));
+    display: flex; align-items: center; justify-content: center;
+  }
+  .chat-titlebar-icon svg { width: 16px; height: 16px; color: white; }
+  .chat-titlebar-name { font-size: 14px; font-weight: 700; color: var(--green-deep); }
+  .chat-titlebar-status { font-size: 11px; color: var(--green-mid); display: flex; align-items: center; gap: 5px; }
+  .chat-titlebar-status::before { content: ''; width: 6px; height: 6px; background: var(--green-mid); border-radius: 50%; }
+
+  .chat-body { padding: 20px; display: flex; flex-direction: column; gap: 16px; }
+
+  .chat-msg {
+    max-width: 85%; padding: 12px 16px;
+    border-radius: 16px; font-size: 14px; line-height: 1.6;
+    animation: chatFade 0.5s cubic-bezier(0.22,1,0.36,1) both;
+  }
+  .chat-msg.user {
+    align-self: flex-end; background: var(--green-deep); color: white;
+    border-bottom-right-radius: 6px;
+  }
+  .chat-msg.ai {
+    align-self: flex-start; background: var(--slate-50); color: var(--slate-700);
+    border: 1px solid var(--slate-100); border-bottom-left-radius: 6px;
+  }
+  .chat-msg.ai strong { color: var(--green-deep); }
+  .chat-msg:nth-child(2) { animation-delay: 0.3s; }
+  .chat-msg:nth-child(3) { animation-delay: 0.8s; }
+  .chat-msg:nth-child(4) { animation-delay: 1.3s; }
+
+  .chat-input-bar {
+    display: flex; align-items: center; gap: 8px;
+    padding: 14px 16px; border-top: 1px solid var(--slate-100);
+    background: var(--white);
+  }
+  .chat-input-bar input {
+    flex: 1; border: none; outline: none; font-size: 14px;
+    font-family: var(--font-display); color: var(--slate-400);
+    background: transparent;
+  }
+  .chat-input-bar button {
+    width: 32px; height: 32px; border-radius: 10px; border: none;
+    background: var(--green-deep); color: white; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.2s;
+  }
+  .chat-input-bar button:hover { background: var(--green-dark); }
+
+  @keyframes chatFade {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Knowledge section */
+  .knowledge-section { background: var(--green-deep); position: relative; overflow: hidden; }
+  .knowledge-section::before { content: ''; position: absolute; top: -200px; right: -200px; width: 600px; height: 600px; background: radial-gradient(circle, rgba(149,213,178,0.08), transparent 70%); }
+  .knowledge-section::after { content: ''; position: absolute; bottom: -150px; left: -150px; width: 500px; height: 500px; background: radial-gradient(circle, rgba(64,145,108,0.06), transparent 70%); }
+  .knowledge-header { text-align: center; max-width: 600px; margin: 0 auto 64px; position: relative; }
+  .knowledge-header .section-label { color: var(--green-accent); }
+  .knowledge-header .section-title { color: var(--white); }
+  .knowledge-header .section-desc { color: rgba(255,255,255,0.6); margin: 0 auto; }
+  .knowledge-grid { max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; position: relative; }
+  .knowledge-card {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 16px; padding: 32px 24px;
+    backdrop-filter: blur(8px);
+    transition: all 0.4s cubic-bezier(0.22,1,0.36,1);
+  }
+  .knowledge-card.reveal { transform: translateY(40px) scale(0.97); }
+  .knowledge-card.reveal.is-visible { transform: translateY(0) scale(1); }
+  .knowledge-card:hover { background: rgba(255,255,255,0.08); border-color: rgba(149,213,178,0.3); transform: translateY(-4px); }
+  .knowledge-card-icon {
+    width: 44px; height: 44px; background: rgba(149,213,178,0.12);
+    border: 1px solid rgba(149,213,178,0.2); border-radius: 12px;
+    display: flex; align-items: center; justify-content: center; margin-bottom: 16px;
+  }
+  .knowledge-card-icon svg { width: 20px; height: 20px; color: var(--green-accent); }
+  .knowledge-card h3 { font-size: 16px; font-weight: 700; color: var(--white); margin-bottom: 8px; }
+  .knowledge-card p { font-size: 14px; line-height: 1.6; color: rgba(255,255,255,0.55); }
+
+  /* Persona examples */
+  .examples-section { background: var(--white); }
+  .examples-header { text-align: center; max-width: 600px; margin: 0 auto 64px; }
+  .examples-header .section-desc { margin: 0 auto; }
+  .examples-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+  .examples-card {
+    border: 1px solid var(--slate-200); border-radius: 20px; padding: 40px 36px;
+    transition: all 0.4s cubic-bezier(0.22,1,0.36,1); position: relative; overflow: hidden;
+  }
+  .examples-card.reveal { transform: translateY(40px) scale(0.97); }
+  .examples-card.reveal.is-visible { transform: translateY(0) scale(1); }
+  .examples-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(27,67,50,0.08); }
+  .examples-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
+  .examples-card.retailer::before { background: linear-gradient(90deg, var(--green-accent), var(--green-mid)); }
+  .examples-card.vendor::before { background: linear-gradient(90deg, var(--green-deep), var(--green-dark)); }
+  .examples-tag {
+    display: inline-flex; padding: 4px 14px; border-radius: 100px;
+    font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 20px;
+  }
+  .examples-tag.retailer { background: var(--green-ghost); color: var(--green-dark); }
+  .examples-tag.vendor { background: rgba(27,67,50,0.06); color: var(--green-deep); }
+  .examples-card h3 { font-size: 20px; font-weight: 700; color: var(--green-deep); margin-bottom: 16px; letter-spacing: -0.5px; }
+  .example-prompt {
+    display: flex; align-items: flex-start; gap: 12px;
+    padding: 12px 0; border-bottom: 1px solid var(--slate-100);
+  }
+  .example-prompt:last-child { border-bottom: none; }
+  .example-prompt-icon {
+    width: 28px; height: 28px; border-radius: 8px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    margin-top: 1px;
+  }
+  .example-prompt-icon.q { background: var(--green-ghost); }
+  .example-prompt-icon.q svg { color: var(--green-mid); }
+  .example-prompt-text { font-size: 14px; line-height: 1.6; color: var(--slate-600); }
+  .example-prompt-text strong { color: var(--green-deep); font-weight: 600; }
+
+  /* How it works */
+  .how-section { background: var(--slate-50); border-top: 1px solid var(--slate-100); }
+  .how-header { text-align: center; max-width: 560px; margin: 0 auto 64px; }
+  .how-header .section-desc { margin: 0 auto; }
+  .how-steps { max-width: 700px; margin: 0 auto; display: flex; flex-direction: column; gap: 0; }
+  .how-step {
+    display: grid; grid-template-columns: 56px 1fr; gap: 20px;
+    padding: 32px 0; position: relative;
+  }
+  .how-step + .how-step { border-top: 1px solid var(--slate-200); }
+  .how-step-num {
+    width: 48px; height: 48px; border-radius: 14px;
+    background: var(--white); border: 1px solid var(--slate-200);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-mono); font-size: 16px; font-weight: 700;
+    color: var(--green-mid);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  }
+  .how-step h3 { font-size: 17px; font-weight: 700; color: var(--green-deep); margin-bottom: 6px; }
+  .how-step p { font-size: 15px; line-height: 1.7; color: var(--slate-500); }
+
+  /* CTA */
+  .cta-section { background: var(--white); text-align: center; position: relative; overflow: hidden; }
+  .cta-section::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 800px; height: 800px; background: radial-gradient(circle, rgba(149,213,178,0.15), transparent 70%); }
+  .cta-content { position: relative; z-index: 2; max-width: 640px; margin: 0 auto; }
+  .cta-content .section-desc { margin: 0 auto 40px; max-width: 480px; }
+  .cta-actions { display: flex; justify-content: center; gap: 16px; margin-bottom: 32px; }
+  .cta-note { font-size: 13px; color: var(--slate-400); }
+
+  /* Footer 5-col */
+  .footer-top { grid-template-columns: 2fr 1fr 1fr 1fr 1fr; }
+
+  @media (max-width: 900px) {
+    .chat-container { grid-template-columns: 1fr; max-width: 520px; }
+    .knowledge-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
+    .examples-grid { grid-template-columns: 1fr; max-width: 520px; margin: 0 auto; }
+    .cta-actions { flex-direction: column; align-items: center; }
+    .footer-top { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 600px) {
+    .footer-top { grid-template-columns: 1fr; }
+    .how-step { grid-template-columns: 44px 1fr; gap: 14px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; transition: none; }
+    .chat-msg { animation: none; }
+  }
+</style>
+<noscript><style>.reveal{opacity:1;transform:none;transition:none;}</style></noscript>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="/" class="nav-logo">
+    <div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div>
+    <span class="nav-logo-text">ShelfSpace</span>
+  </a>
+  <ul class="nav-links">
+    <li class="nav-dropdown">
+      <button class="nav-dropdown-toggle" aria-expanded="false" aria-haspopup="true">Services <svg class="dropdown-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
+      <div class="nav-dropdown-menu">
+        <span class="nav-dropdown-header">Vendor Relationships</span>
+        <a href="/consignment">Consignment</a>
+        <a href="/accounts-payable">Wholesale</a>
+        <span class="nav-dropdown-header">Payment Engine</span>
+        <a href="/accounts-payable">Accounts Payable</a>
+        <a href="/credit-memos">Credit Memos</a>
+        <span class="nav-dropdown-header">Intelligence</span>
+        <a href="/shelfiq" class="active">ShelfiQ</a>
+      </div>
+    </li>
+    <li><a href="/features">Features</a></li>
+    <li><a href="/how-it-works">How It Works</a></li>
+    <li><a href="/pricing">Pricing</a></li>
+    <li><a href="/about">About</a></li>
+    <li><a href="https://ourshelf.space">Login</a></li>
+    <li><a href="/signup" class="nav-cta">Sign Up <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a></li>
+  </ul>
+  <div class="nav-hamburger" onclick="document.querySelector('.nav-links').classList.toggle('mobile-open'); event.stopPropagation();"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="section-label">Platform Intelligence</div>
+  <h1 class="section-title">Meet <span class="shelfiq-name">Shelf<span class="iq">iQ</span></span></h1>
+  <p class="section-desc">Your AI advisor that knows your entire business. Ask anything about your inventory, vendors, deal structures, payments, and performance — get instant, personalized answers.</p>
+</div>
+
+<!-- CHAT DEMO -->
+<section class="chat-section">
+  <div class="chat-container">
+    <div class="chat-text">
+      <div class="section-label reveal">Ask Anything</div>
+      <h2 class="section-title reveal" style="font-size:clamp(28px,3.5vw,40px);">Your data.<br>Your questions.<br>Real answers.</h2>
+      <p class="section-desc reveal">ShelfiQ has full context on your account — every settlement, payment, vendor relationship, inventory position, and deal structure. Ask a question in plain English and get a real, data-backed answer in seconds.</p>
+      <a href="/signup" class="btn-primary reveal" style="margin-top:8px;">
+        Try ShelfiQ
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+
+    <div class="chat-window reveal reveal-delay-1">
+      <div class="chat-titlebar">
+        <div class="chat-titlebar-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a4 4 0 0 1 4 4v2a4 4 0 0 1-8 0V6a4 4 0 0 1 4-4z"/><path d="M18 14h.01"/><path d="M6 14h.01"/><rect x="3" y="12" width="18" height="8" rx="3"/><path d="M7 20v2"/><path d="M17 20v2"/></svg>
+        </div>
+        <div>
+          <div class="chat-titlebar-name">ShelfiQ</div>
+          <div class="chat-titlebar-status">Online</div>
+        </div>
+      </div>
+      <div class="chat-body">
+        <div class="chat-msg user">Which vendors had the highest sell-through rate last month?</div>
+        <div class="chat-msg ai"><strong>Top 3 by sell-through (Feb 2026):</strong><br>1. Green Valley Farms — 94.2%<br>2. Pacific Roots — 87.6%<br>3. Mountain High Co — 81.3%<br><br>Green Valley moved 412 units across your 3 locations. Want me to pull their full settlement history?</div>
+        <div class="chat-msg user">What's my total consignment liability right now?</div>
+        <div class="chat-msg ai">Your current consignment liability across all vendors is <strong>$47,832.40</strong> — down 12% from last month. That's spread across 8 active partnerships. Sunrise Extracts has the largest position at $12,450.</div>
+      </div>
+      <div class="chat-input-bar">
+        <input type="text" placeholder="Ask ShelfiQ anything..." disabled>
+        <button aria-label="Send">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- KNOWLEDGE -->
+<section class="knowledge-section">
+  <div class="knowledge-header">
+    <div class="section-label reveal">What ShelfiQ Knows</div>
+    <h2 class="section-title reveal">Full context on<br>your entire operation</h2>
+    <p class="section-desc reveal">ShelfiQ isn't a generic chatbot. It has deep access to your specific account data — every transaction, relationship, and metric on the platform.</p>
+  </div>
+  <div class="knowledge-grid">
+    <div class="knowledge-card reveal">
+      <div class="knowledge-card-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+      </div>
+      <h3>Sales & Inventory</h3>
+      <p>Sell-through rates, velocity by SKU, on-hand positions, restock timing, and inventory valuations across every location.</p>
+    </div>
+    <div class="knowledge-card reveal reveal-delay-1">
+      <div class="knowledge-card-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+      </div>
+      <h3>Vendor Relationships</h3>
+      <p>Partnership terms, profit splits, shrinkage policies, discount budgets, performance rankings, and payment history for every vendor.</p>
+    </div>
+    <div class="knowledge-card reveal reveal-delay-2">
+      <div class="knowledge-card-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+      </div>
+      <h3>Payments & Settlements</h3>
+      <p>Settlement reports, check status, AP payment history, credit memo balances, and weekly payout breakdowns.</p>
+    </div>
+    <div class="knowledge-card reveal">
+      <div class="knowledge-card-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+      </div>
+      <h3>Deal Structures</h3>
+      <p>Consignment vs. wholesale terms, MSA details, pricing structures, and how each deal compares to your portfolio average.</p>
+    </div>
+    <div class="knowledge-card reveal reveal-delay-1">
+      <div class="knowledge-card-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      </div>
+      <h3>Historical Trends</h3>
+      <p>Week-over-week comparisons, seasonal patterns, vendor growth trajectories, and long-term performance metrics.</p>
+    </div>
+    <div class="knowledge-card reveal reveal-delay-2">
+      <div class="knowledge-card-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
+      <h3>Compliance & Audit</h3>
+      <p>Verification status, W-9 records, MSA acceptance history, dispute resolutions, and complete transaction audit trails.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PERSONA EXAMPLES -->
+<section class="examples-section">
+  <div class="examples-header">
+    <div class="section-label reveal">What You Can Ask</div>
+    <h2 class="section-title reveal">Real questions.<br>Real answers.</h2>
+    <p class="section-desc reveal">Whether you're a retailer managing vendors or a vendor tracking sales, ShelfiQ speaks your language and knows your numbers.</p>
+  </div>
+  <div class="examples-grid">
+    <div class="examples-card retailer reveal">
+      <div class="examples-tag retailer">Retailers</div>
+      <h3>Run your operation smarter</h3>
+      <div class="example-prompt">
+        <div class="example-prompt-icon q"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+        <p class="example-prompt-text"><strong>"Which products should I restock this week?"</strong></p>
+      </div>
+      <div class="example-prompt">
+        <div class="example-prompt-icon q"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+        <p class="example-prompt-text"><strong>"Compare my top 5 vendors by margin"</strong></p>
+      </div>
+      <div class="example-prompt">
+        <div class="example-prompt-icon q"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+        <p class="example-prompt-text"><strong>"What's my total AP outstanding right now?"</strong></p>
+      </div>
+      <div class="example-prompt">
+        <div class="example-prompt-icon q"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+        <p class="example-prompt-text"><strong>"Show me slow-moving consignment inventory across all stores"</strong></p>
+      </div>
+      <div class="example-prompt">
+        <div class="example-prompt-icon q"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+        <p class="example-prompt-text"><strong>"How do my discount budgets compare to actual spend?"</strong></p>
+      </div>
+    </div>
+    <div class="examples-card vendor reveal reveal-delay-1">
+      <div class="examples-tag vendor">Vendors</div>
+      <h3>Know your numbers everywhere</h3>
+      <div class="example-prompt">
+        <div class="example-prompt-icon q"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+        <p class="example-prompt-text"><strong>"Which retailer sells the most of my flower?"</strong></p>
+      </div>
+      <div class="example-prompt">
+        <div class="example-prompt-icon q"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+        <p class="example-prompt-text"><strong>"What's my total outstanding across all retailers?"</strong></p>
+      </div>
+      <div class="example-prompt">
+        <div class="example-prompt-icon q"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+        <p class="example-prompt-text"><strong>"Show me my payment history with Green Leaf Dispensary"</strong></p>
+      </div>
+      <div class="example-prompt">
+        <div class="example-prompt-icon q"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+        <p class="example-prompt-text"><strong>"Where should I pitch my products next?"</strong></p>
+      </div>
+      <div class="example-prompt">
+        <div class="example-prompt-icon q"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+        <p class="example-prompt-text"><strong>"Am I running any active promotions that are underperforming?"</strong></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how-section">
+  <div class="how-header">
+    <div class="section-label reveal">How It Works</div>
+    <h2 class="section-title reveal">Intelligence built into<br>the platform</h2>
+    <p class="section-desc reveal">ShelfiQ isn't an add-on. It's woven directly into the ShelfSpace experience.</p>
+  </div>
+  <div class="how-steps">
+    <div class="how-step reveal">
+      <div class="how-step-num">01</div>
+      <div>
+        <h3>You ask a question</h3>
+        <p>Type anything in plain English — about your inventory, vendors, payments, deal terms, or performance. No special syntax, no query language.</p>
+      </div>
+    </div>
+    <div class="how-step reveal reveal-delay-1">
+      <div class="how-step-num">02</div>
+      <div>
+        <h3>ShelfiQ pulls your data</h3>
+        <p>It queries your specific account data in real time — settlements, POS data, vendor records, partnership terms, payment history, and more.</p>
+      </div>
+    </div>
+    <div class="how-step reveal reveal-delay-2">
+      <div class="how-step-num">03</div>
+      <div>
+        <h3>You get a tailored answer</h3>
+        <p>Not a generic response. A specific, data-backed answer about your business with real numbers, comparisons, and actionable recommendations.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-content">
+    <div class="section-label reveal">Get Started</div>
+    <h2 class="section-title reveal">Your AI advisor is<br>ready when you are</h2>
+    <p class="section-desc reveal">ShelfiQ is included with every ShelfSpace account. Sign up for the pilot and start asking questions on day one.</p>
+    <div class="cta-actions reveal">
+      <a href="/signup" class="btn-primary">
+        Join the Pilot
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+      <a href="/contact" class="btn-secondary">Schedule a Call</a>
+    </div>
+    <p class="cta-note reveal">Included free with every ShelfSpace account. No extra cost.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="/" class="nav-logo"><div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div><span class="nav-logo-text">ShelfSpace</span></a>
+      <p>The payment and operations platform for cannabis. Consignment and wholesale relationships, powered by one AP engine.</p>
+    </div>
+    <div class="footer-col"><h4>Services</h4><ul><li><a href="/consignment">Consignment</a></li><li><a href="/accounts-payable">Accounts Payable</a></li><li class="footer-sub-item"><a href="/credit-memos">Credit Memos</a></li><li><a href="/shelfiq">ShelfiQ</a></li></ul></div>
+    <div class="footer-col"><h4>Platform</h4><ul><li><a href="/features">Features</a></li><li><a href="/how-it-works">How It Works</a></li><li><a href="/pricing">Pricing</a></li><li><a href="/about">About</a></li></ul></div>
+    <div class="footer-col"><h4>Access</h4><ul><li><a href="https://ourshelf.space">Login</a></li><li><a href="/signup">Sign Up</a></li><li><a href="/contact">Contact</a></li></ul></div>
+    <div class="footer-col"><h4>Company</h4><ul><li><a href="mailto:chris@shelfspace.pro">Email</a></li><li><a href="mailto:support@shelfspace.pro">Support</a></li><li><a href="https://linkedin.com/company/shelfspace-pro" target="_blank" rel="noopener" class="footer-social-link"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> LinkedIn</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><p>&copy; 2026 ShelfSpace Technologies Inc.</p><div class="footer-bottom-links"><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div></div>
+</footer>
+
+<script src="demo-modal.js"></script>
+<script>
+(function() {
+  'use strict';
+  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 20);
+  window.addEventListener('scroll', function() {
+    document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 20);
+  });
+  document.querySelectorAll('.nav-dropdown-toggle').forEach(function(btn) {
+    btn.addEventListener('click', function(e) {
+      e.preventDefault();
+      var parent = btn.closest('.nav-dropdown');
+      parent.classList.toggle('open');
+      btn.setAttribute('aria-expanded', parent.classList.contains('open'));
+    });
+  });
+  var revealObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(function(el) { revealObserver.observe(el); });
+})();
+</script>
+</body>
+</html>
