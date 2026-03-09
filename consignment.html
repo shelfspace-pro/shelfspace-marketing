@@ -219,6 +219,184 @@
     .pos-ticker-track { animation-duration: 12s; }
   }
 
+  /* ─── SETTLEMENT CALCULATOR ─── */
+  .calc-section { background: var(--white); }
+  .calc-container { max-width: 1100px; margin: 0 auto; }
+  .calc-header { text-align: center; max-width: 600px; margin: 0 auto 64px; }
+  .calc-header .section-desc { margin: 0 auto; }
+  .calc-layout { display: grid; grid-template-columns: 380px 1fr; gap: 48px; align-items: start; }
+  .calc-controls { background: var(--green-ghost); border: 1px solid var(--slate-200); border-radius: 20px; padding: 36px 32px; position: sticky; top: 100px; }
+  .calc-slider-group { margin-bottom: 28px; }
+  .calc-slider-group:last-child { margin-bottom: 0; }
+  .calc-slider-label { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 12px; }
+  .calc-slider-label span:first-child { font-size: 14px; font-weight: 600; color: var(--green-deep); }
+  .calc-slider-value { font-family: var(--font-mono); font-size: 18px; font-weight: 700; color: var(--green-deep); }
+  .calc-slider {
+    -webkit-appearance: none; appearance: none; width: 100%; height: 6px;
+    background: var(--slate-200); border-radius: 3px; outline: none; cursor: pointer;
+  }
+  .calc-slider::-webkit-slider-thumb {
+    -webkit-appearance: none; appearance: none; width: 22px; height: 22px;
+    background: var(--green-deep); border-radius: 50%; cursor: pointer;
+    box-shadow: 0 2px 8px rgba(27,67,50,0.25);
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .calc-slider::-webkit-slider-thumb:hover { transform: scale(1.15); box-shadow: 0 4px 12px rgba(27,67,50,0.35); }
+  .calc-slider::-moz-range-thumb {
+    width: 22px; height: 22px; background: var(--green-deep);
+    border-radius: 50%; border: none; cursor: pointer;
+    box-shadow: 0 2px 8px rgba(27,67,50,0.25);
+  }
+  .calc-slider::-webkit-slider-runnable-track { height: 6px; border-radius: 3px; }
+  .calc-slider::-moz-range-track { height: 6px; border-radius: 3px; background: var(--slate-200); }
+
+  .calc-report { background: var(--white); border: 1px solid var(--slate-200); border-radius: 20px; overflow: hidden; min-height: 420px; }
+  .calc-report-header {
+    background: var(--green-deep); padding: 24px 32px; display: flex; justify-content: space-between; align-items: center;
+  }
+  .calc-report-header-left .calc-report-title { font-size: 16px; font-weight: 700; color: var(--white); margin-bottom: 2px; }
+  .calc-report-header-left .calc-report-period { font-size: 12px; color: rgba(255,255,255,0.5); font-family: var(--font-mono); }
+  .calc-report-header-right { text-align: right; }
+  .calc-report-header-right .calc-report-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--green-accent); margin-bottom: 2px; }
+  .calc-report-header-right .calc-report-total { font-family: var(--font-mono); font-size: 24px; font-weight: 700; color: var(--white); }
+
+  .calc-report-table { width: 100%; border-collapse: collapse; }
+  .calc-report-table thead th {
+    font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px;
+    color: var(--slate-400); padding: 16px 16px 12px; text-align: left; border-bottom: 1px solid var(--slate-100);
+  }
+  .calc-report-table thead th:last-child,
+  .calc-report-table thead th:nth-child(n+2) { text-align: right; }
+  .calc-report-table tbody td {
+    font-size: 14px; padding: 14px 16px; border-bottom: 1px solid var(--slate-50); color: var(--slate-700);
+  }
+  .calc-report-table tbody td:first-child { font-weight: 500; color: var(--green-deep); }
+  .calc-report-table tbody td:nth-child(n+2) { font-family: var(--font-mono); font-size: 13px; text-align: right; }
+  .calc-report-table tbody tr { opacity: 0; transform: translateY(8px); transition: opacity 0.35s ease, transform 0.35s ease; }
+  .calc-report-table tbody tr.line-visible { opacity: 1; transform: translateY(0); }
+
+  .calc-report-totals { padding: 20px 16px; border-top: 2px solid var(--slate-200); display: flex; flex-direction: column; gap: 8px; }
+  .calc-total-row { display: flex; justify-content: space-between; align-items: center; padding: 4px 0; }
+  .calc-total-row span:first-child { font-size: 13px; font-weight: 600; color: var(--slate-500); }
+  .calc-total-row span:last-child { font-family: var(--font-mono); font-size: 14px; font-weight: 700; color: var(--slate-700); }
+  .calc-total-row.payout-row span:first-child { color: var(--green-deep); font-size: 15px; }
+  .calc-total-row.payout-row span:last-child { color: var(--green-deep); font-size: 18px; }
+
+  .calc-check {
+    margin: 20px 16px 24px; padding: 20px 24px; background: var(--green-ghost); border: 1.5px dashed var(--green-accent);
+    border-radius: 12px; display: flex; align-items: center; gap: 16px;
+    opacity: 0; transform: translateY(12px); transition: opacity 0.5s ease 0.3s, transform 0.5s ease 0.3s;
+  }
+  .calc-check.check-visible { opacity: 1; transform: translateY(0); }
+  .calc-check-icon {
+    width: 44px; height: 44px; background: var(--green-accent); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .calc-check-icon svg { width: 22px; height: 22px; color: var(--green-deep); }
+  .calc-check-details .calc-check-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--green-mid); margin-bottom: 2px; }
+  .calc-check-details .calc-check-amount { font-family: var(--font-mono); font-size: 22px; font-weight: 700; color: var(--green-deep); }
+
+  /* ─── FOLLOW A PRODUCT TIMELINE ─── */
+  .timeline-section { background: var(--slate-50); }
+  .timeline-header { text-align: center; max-width: 680px; margin: 0 auto 72px; }
+  .timeline-header .section-desc { margin: 0 auto; }
+  .timeline-wrap { max-width: 1100px; margin: 0 auto; position: relative; }
+  .timeline-product-badge {
+    display: inline-flex; align-items: center; gap: 8px; background: var(--green-deep);
+    color: var(--white); font-size: 13px; font-weight: 600; padding: 8px 18px;
+    border-radius: 100px; margin: 0 auto 48px; font-family: var(--font-mono);
+    letter-spacing: 0.3px;
+  }
+  .timeline-product-badge svg { width: 16px; height: 16px; color: var(--green-accent); }
+
+  /* Desktop horizontal timeline */
+  .timeline-track { display: flex; align-items: flex-start; position: relative; }
+  .timeline-line-bg {
+    position: absolute; top: 28px; left: 28px; right: 28px; height: 3px;
+    background: var(--slate-200); border-radius: 2px; z-index: 0;
+  }
+  .timeline-line-fill {
+    position: absolute; top: 28px; left: 28px; height: 3px;
+    background: linear-gradient(90deg, var(--green-accent), var(--green-mid));
+    border-radius: 2px; z-index: 1; width: 0; transition: width 0.4s ease;
+  }
+  .timeline-step { flex: 1; display: flex; flex-direction: column; align-items: center; position: relative; z-index: 2; cursor: pointer; }
+  .timeline-node {
+    width: 56px; height: 56px; background: var(--green-ghost); border: 2px solid var(--slate-200);
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-mono); font-size: 15px; font-weight: 700; color: var(--slate-400);
+    transition: all 0.4s cubic-bezier(0.22,1,0.36,1); position: relative; flex-shrink: 0;
+  }
+  .timeline-node svg { width: 22px; height: 22px; }
+  .timeline-step.active .timeline-node,
+  .timeline-step.completed .timeline-node {
+    background: var(--green-deep); border-color: var(--green-deep); color: var(--white);
+  }
+  .timeline-step.completed .timeline-node { background: var(--green-mid); border-color: var(--green-mid); }
+  .timeline-step.active .timeline-node { box-shadow: 0 0 0 6px rgba(149,213,178,0.3); }
+
+  .timeline-step-label {
+    margin-top: 16px; font-size: 13px; font-weight: 700; color: var(--slate-400);
+    text-transform: uppercase; letter-spacing: 1px; text-align: center;
+    transition: color 0.3s;
+  }
+  .timeline-step.active .timeline-step-label,
+  .timeline-step.completed .timeline-step-label { color: var(--green-deep); }
+  .timeline-step-day {
+    margin-top: 4px; font-family: var(--font-mono); font-size: 11px; color: var(--slate-400);
+    text-align: center;
+  }
+
+  .timeline-detail-panel {
+    margin-top: 48px; background: var(--white); border: 1px solid var(--slate-200);
+    border-radius: 20px; padding: 40px; min-height: 140px;
+    position: relative; overflow: hidden;
+    transition: border-color 0.3s;
+  }
+  .timeline-detail-panel::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--green-accent), var(--green-mid));
+  }
+  .timeline-detail-content { opacity: 0; transform: translateY(12px); transition: opacity 0.4s ease, transform 0.4s ease; }
+  .timeline-detail-content.detail-visible { opacity: 1; transform: translateY(0); }
+  .timeline-detail-step-num {
+    font-family: var(--font-mono); font-size: 12px; font-weight: 700;
+    color: var(--green-accent); margin-bottom: 8px; letter-spacing: 1px;
+  }
+  .timeline-detail-title { font-size: 22px; font-weight: 700; color: var(--green-deep); margin-bottom: 12px; letter-spacing: -0.5px; }
+  .timeline-detail-text { font-size: 16px; line-height: 1.7; color: var(--slate-500); max-width: 640px; }
+  .timeline-detail-highlight {
+    display: inline-block; margin-top: 16px; padding: 8px 16px;
+    background: var(--green-ghost); border-radius: 8px;
+    font-family: var(--font-mono); font-size: 14px; font-weight: 700; color: var(--green-deep);
+  }
+
+  .timeline-progress-bar { margin-top: 32px; display: flex; align-items: center; gap: 16px; }
+  .timeline-progress-track { flex: 1; height: 3px; background: var(--slate-200); border-radius: 2px; overflow: hidden; }
+  .timeline-progress-fill { height: 100%; background: var(--green-accent); border-radius: 2px; width: 0%; transition: none; }
+  .timeline-progress-fill.animating { transition: width linear; }
+  .timeline-pause-btn {
+    background: none; border: 1px solid var(--slate-200); border-radius: 8px;
+    width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;
+    cursor: pointer; color: var(--slate-500); transition: all 0.2s;
+  }
+  .timeline-pause-btn:hover { border-color: var(--green-accent); color: var(--green-deep); background: var(--green-ghost); }
+  .timeline-pause-btn svg { width: 16px; height: 16px; }
+
+  /* Mobile vertical timeline */
+  @media (max-width: 900px) {
+    .calc-layout { grid-template-columns: 1fr; }
+    .calc-controls { position: static; }
+
+    .timeline-track { flex-direction: column; align-items: flex-start; gap: 0; padding-left: 28px; }
+    .timeline-line-bg { top: 28px; bottom: 28px; left: 28px; right: auto; width: 3px; height: auto; }
+    .timeline-line-fill { top: 28px; left: 28px; width: 3px !important; height: 0; transition: height 0.4s ease; }
+    .timeline-step { flex-direction: row; align-items: center; gap: 20px; width: 100%; padding: 12px 0; }
+    .timeline-step-label { margin-top: 0; text-align: left; }
+    .timeline-step-day { margin-top: 2px; text-align: left; }
+    .timeline-detail-panel { margin-top: 32px; padding: 28px 24px; }
+  }
+
   /* ─── REDUCED MOTION ─── */
   @media (prefers-reduced-motion: reduce) {
     .reveal, .how-card.reveal, .referee-card.reveal, .results-card.reveal {
@@ -231,6 +409,10 @@
       opacity: 1; transform: none; transition: none;
     }
     .hero-bg-gradient, .hero-bg-gradient-2 { animation: none; }
+    .calc-report-table tbody tr { opacity: 1; transform: none; transition: none; }
+    .calc-check { opacity: 1; transform: none; transition: none; }
+    .timeline-detail-content { opacity: 1; transform: none; transition: none; }
+    .timeline-progress-fill { transition: none; }
   }
 </style>
 <noscript><style>.reveal,.sbt-visual-row-reveal,.page-hero .section-label,.page-hero .section-title,.page-hero .section-desc{opacity:1;transform:none;transition:none;}</style></noscript>
@@ -322,6 +504,74 @@
   </div>
 </div>
 
+<!-- SETTLEMENT CALCULATOR -->
+<section class="calc-section" id="calculator">
+  <div class="calc-header">
+    <div class="section-label reveal">See Your Settlement</div>
+    <h2 class="section-title reveal">Watch your weekly payout<br>calculate in real-time</h2>
+    <p class="section-desc reveal">Adjust the sliders to model your consignment settlement. Line items build automatically to show exactly how vendors get paid.</p>
+  </div>
+  <div class="calc-layout">
+    <div class="calc-controls reveal">
+      <div class="calc-slider-group">
+        <div class="calc-slider-label">
+          <span>Number of Products</span>
+          <span class="calc-slider-value" id="calcProductsVal">10</span>
+        </div>
+        <input type="range" class="calc-slider" id="calcProducts" min="1" max="50" value="10">
+      </div>
+      <div class="calc-slider-group">
+        <div class="calc-slider-label">
+          <span>Avg. Sale Price</span>
+          <span class="calc-slider-value" id="calcPriceVal">$35</span>
+        </div>
+        <input type="range" class="calc-slider" id="calcPrice" min="10" max="100" value="35">
+      </div>
+      <div class="calc-slider-group">
+        <div class="calc-slider-label">
+          <span>Vendor Split</span>
+          <span class="calc-slider-value" id="calcSplitVal">50%</span>
+        </div>
+        <input type="range" class="calc-slider" id="calcSplit" min="30" max="70" value="50">
+      </div>
+    </div>
+    <div class="calc-report reveal reveal-delay-1" id="calcReport">
+      <div class="calc-report-header">
+        <div class="calc-report-header-left">
+          <div class="calc-report-title">Weekly Settlement Report</div>
+          <div class="calc-report-period">Week of Mar 1 – Mar 7, 2026</div>
+        </div>
+        <div class="calc-report-header-right">
+          <div class="calc-report-label">Vendor Payout</div>
+          <div class="calc-report-total" id="calcHeaderTotal">$0.00</div>
+        </div>
+      </div>
+      <table class="calc-report-table">
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Qty</th>
+            <th>Price</th>
+            <th>Split</th>
+            <th>Payout</th>
+          </tr>
+        </thead>
+        <tbody id="calcTableBody"></tbody>
+      </table>
+      <div class="calc-report-totals" id="calcTotals"></div>
+      <div class="calc-check" id="calcCheck">
+        <div class="calc-check-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <div class="calc-check-details">
+          <div class="calc-check-label">Check Generated</div>
+          <div class="calc-check-amount" id="calcCheckAmount">$0.00</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- HOW IT WORKS -->
 <section class="how-section" id="how">
   <div class="how-header">
@@ -356,6 +606,84 @@
     </div>
   </div>
   <p class="section-desc reveal" style="text-align:center;max-width:600px;margin:40px auto 0;">ShelfSpace also manages your wholesale vendor payments through the same AP engine. Consignment and wholesale, one platform.</p>
+</section>
+
+<!-- FOLLOW A PRODUCT TIMELINE -->
+<section class="timeline-section" id="follow-product">
+  <div class="timeline-header">
+    <div class="section-label reveal">Follow a Product</div>
+    <h2 class="section-title reveal">From delivery to deposit</h2>
+    <p class="section-desc reveal">One week in the life of a consignment product. Click any step or let it play through automatically.</p>
+  </div>
+  <div class="timeline-wrap reveal">
+    <div style="text-align:center;">
+      <div class="timeline-product-badge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+        Nimbus | Blue Dream Pre-roll 1g
+      </div>
+    </div>
+    <div class="timeline-track" id="timelineTrack">
+      <div class="timeline-line-bg"></div>
+      <div class="timeline-line-fill" id="timelineLineFill"></div>
+      <div class="timeline-step active" data-step="0">
+        <div class="timeline-node">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+        </div>
+        <div>
+          <div class="timeline-step-label">Delivered</div>
+          <div class="timeline-step-day">Mon</div>
+        </div>
+      </div>
+      <div class="timeline-step" data-step="1">
+        <div class="timeline-node">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+        </div>
+        <div>
+          <div class="timeline-step-label">On Shelf</div>
+          <div class="timeline-step-day">Mon–Sun</div>
+        </div>
+      </div>
+      <div class="timeline-step" data-step="2">
+        <div class="timeline-node">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+        </div>
+        <div>
+          <div class="timeline-step-label">Sold</div>
+          <div class="timeline-step-day">Sun</div>
+        </div>
+      </div>
+      <div class="timeline-step" data-step="3">
+        <div class="timeline-node">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <div>
+          <div class="timeline-step-label">Settlement</div>
+          <div class="timeline-step-day">Mon</div>
+        </div>
+      </div>
+      <div class="timeline-step" data-step="4">
+        <div class="timeline-node">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <div>
+          <div class="timeline-step-label">Paid</div>
+          <div class="timeline-step-day">Mon</div>
+        </div>
+      </div>
+    </div>
+    <div class="timeline-detail-panel" id="timelineDetail">
+      <div class="timeline-detail-content" id="timelineDetailContent"></div>
+    </div>
+    <div class="timeline-progress-bar">
+      <div class="timeline-progress-track">
+        <div class="timeline-progress-fill" id="timelineProgressFill"></div>
+      </div>
+      <button class="timeline-pause-btn" id="timelinePauseBtn" aria-label="Pause timeline">
+        <svg id="timelinePauseIcon" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+        <svg id="timelinePlayIcon" viewBox="0 0 24 24" fill="currentColor" style="display:none"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+      </button>
+    </div>
+  </div>
 </section>
 
 <!-- TICKER -->
@@ -653,6 +981,373 @@
       }
     });
   });
+
+  /* ══════════════════════════════════════════════════
+     EXHIBIT 1: Settlement Calculator
+     ══════════════════════════════════════════════════ */
+  (function initCalc() {
+    var productsSlider = document.getElementById('calcProducts');
+    var priceSlider = document.getElementById('calcPrice');
+    var splitSlider = document.getElementById('calcSplit');
+    if (!productsSlider) return;
+
+    var productsVal = document.getElementById('calcProductsVal');
+    var priceVal = document.getElementById('calcPriceVal');
+    var splitVal = document.getElementById('calcSplitVal');
+    var tableBody = document.getElementById('calcTableBody');
+    var totalsDiv = document.getElementById('calcTotals');
+    var headerTotal = document.getElementById('calcHeaderTotal');
+    var checkEl = document.getElementById('calcCheck');
+    var checkAmount = document.getElementById('calcCheckAmount');
+
+    var PRODUCTS = [
+      'Blue Dream Pre-roll 1g',
+      'Sour Diesel 3.5g',
+      'OG Kush Cartridge 1g',
+      'Gelato Live Resin 1g',
+      'Wedding Cake 7g',
+      'Jack Herer Pre-roll 5pk',
+      'Purple Punch Gummies 100mg',
+      'Mimosa 3.5g',
+      'Zkittlez Cartridge 0.5g',
+      'Northern Lights 1g Pre-roll',
+      'GSC Badder 1g',
+      'Pineapple Express 3.5g',
+      'Gorilla Glue Shatter 1g',
+      'Tangie Pre-roll 3pk',
+      'Strawberry Cough 7g',
+      'Durban Poison 3.5g',
+      'Cherry Pie Gummies 200mg',
+      'Lemon Haze Cart 1g',
+      'GMO Cookies 3.5g',
+      'Runtz Live Rosin 1g',
+      'Mac 1 Pre-roll 1g',
+      'Ice Cream Cake 3.5g',
+      'Do-Si-Dos 7g',
+      'Tropicana Cookies Cart 1g',
+      'White Widow Pre-roll 5pk',
+      'Papaya Punch 3.5g',
+      'Forbidden Fruit Gummies 100mg',
+      'Super Lemon Haze 3.5g',
+      'Cereal Milk 3.5g',
+      'Animal Mints Badder 1g',
+      'LA Confidential 3.5g',
+      'Trainwreck Pre-roll 1g',
+      'Granddaddy Purple 3.5g',
+      'Skywalker OG Cart 0.5g',
+      'Gary Payton 3.5g',
+      'Biscotti 3.5g',
+      'Slurricane Live Resin 1g',
+      'Mandarin Cookies 3.5g',
+      'Grape Ape Pre-roll 3pk',
+      'King Louis XIII 3.5g',
+      'Mango Kush Cart 1g',
+      'Pink Runtz 3.5g',
+      'Thin Mint Cookies 7g',
+      'Blackberry Kush 3.5g',
+      'Banana OG Pre-roll 1g',
+      'Bubba Kush 3.5g',
+      'Critical Mass 3.5g',
+      'AK-47 Pre-roll 5pk',
+      'Tahoe OG 3.5g',
+      'Maui Wowie Cart 1g'
+    ];
+
+    /* Seeded random for consistent quantities per product index */
+    function seededQty(index, max) {
+      var x = Math.sin(index * 127.1 + 311.7) * 43758.5453;
+      return Math.floor((x - Math.floor(x)) * max) + 1;
+    }
+
+    var debounceTimer = null;
+    function updateSliderTrack(slider) {
+      var pct = ((slider.value - slider.min) / (slider.max - slider.min)) * 100;
+      slider.style.background = 'linear-gradient(to right, #95d5b2 0%, #95d5b2 ' + pct + '%, #e2e8f0 ' + pct + '%, #e2e8f0 100%)';
+    }
+
+    function formatMoney(n) {
+      return '$' + n.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    }
+
+    function buildReport() {
+      var numProducts = parseInt(productsSlider.value);
+      var avgPrice = parseInt(priceSlider.value);
+      var splitPct = parseInt(splitSlider.value);
+
+      productsVal.textContent = numProducts;
+      priceVal.textContent = '$' + avgPrice;
+      splitVal.textContent = splitPct + '%';
+
+      updateSliderTrack(productsSlider);
+      updateSliderTrack(priceSlider);
+      updateSliderTrack(splitSlider);
+
+      /* Build line items */
+      var rows = '';
+      var totalSales = 0;
+      var totalPayout = 0;
+      for (var i = 0; i < numProducts; i++) {
+        var name = PRODUCTS[i % PRODUCTS.length];
+        var qty = seededQty(i, 8);
+        var price = avgPrice + seededQty(i + 50, 11) - 6; /* slight variation */
+        var lineSales = qty * price;
+        var linePayout = lineSales * (splitPct / 100);
+        totalSales += lineSales;
+        totalPayout += linePayout;
+        rows += '<tr style="transition-delay:' + (i * 40) + 'ms">' +
+          '<td>' + name + '</td>' +
+          '<td>' + qty + '</td>' +
+          '<td>' + formatMoney(price) + '</td>' +
+          '<td>' + splitPct + '%</td>' +
+          '<td>' + formatMoney(linePayout) + '</td>' +
+          '</tr>';
+      }
+
+      tableBody.innerHTML = rows;
+
+      /* Totals */
+      totalsDiv.innerHTML =
+        '<div class="calc-total-row"><span>Gross Sales</span><span>' + formatMoney(totalSales) + '</span></div>' +
+        '<div class="calc-total-row"><span>Vendor Split (' + splitPct + '%)</span><span>' + formatMoney(totalPayout) + '</span></div>' +
+        '<div class="calc-total-row payout-row"><span>Vendor Payout</span><span>' + formatMoney(totalPayout) + '</span></div>';
+
+      headerTotal.textContent = formatMoney(totalPayout);
+      checkAmount.textContent = formatMoney(totalPayout);
+
+      /* Animate line items in */
+      checkEl.classList.remove('check-visible');
+      requestAnimationFrame(function() {
+        var trs = tableBody.querySelectorAll('tr');
+        requestAnimationFrame(function() {
+          for (var j = 0; j < trs.length; j++) {
+            trs[j].classList.add('line-visible');
+          }
+          /* Show check after lines animate */
+          setTimeout(function() {
+            checkEl.classList.add('check-visible');
+          }, Math.min(numProducts * 40 + 200, 800));
+        });
+      });
+    }
+
+    function onSliderInput() {
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(buildReport, 150);
+    }
+
+    productsSlider.addEventListener('input', onSliderInput);
+    priceSlider.addEventListener('input', onSliderInput);
+    splitSlider.addEventListener('input', onSliderInput);
+
+    /* Initial build */
+    buildReport();
+
+    /* Re-observe new reveal elements */
+    document.querySelectorAll('.calc-section .reveal').forEach(function(el) {
+      revealObserver.observe(el);
+    });
+  })();
+
+  /* ══════════════════════════════════════════════════
+     EXHIBIT 2: Follow a Product Timeline
+     ══════════════════════════════════════════════════ */
+  (function initTimeline() {
+    var track = document.getElementById('timelineTrack');
+    if (!track) return;
+
+    var steps = track.querySelectorAll('.timeline-step');
+    var lineFill = document.getElementById('timelineLineFill');
+    var detailContent = document.getElementById('timelineDetailContent');
+    var progressFill = document.getElementById('timelineProgressFill');
+    var pauseBtn = document.getElementById('timelinePauseBtn');
+    var pauseIcon = document.getElementById('timelinePauseIcon');
+    var playIcon = document.getElementById('timelinePlayIcon');
+
+    var STEP_DATA = [
+      {
+        title: 'Delivered',
+        text: 'Vendor delivers 24 units to retailer. Manifested in METRC, received into POS.',
+        highlight: '24 units received'
+      },
+      {
+        title: 'On Shelf',
+        text: 'Product is stocked and available for sale. ShelfSpace tracks inventory in real-time.',
+        highlight: '7 days on shelf'
+      },
+      {
+        title: 'Sold',
+        text: '18 of 24 units sell this week at $12 each. POS data flows to ShelfSpace automatically.',
+        highlight: '18 units \u00d7 $12 = $216'
+      },
+      {
+        title: 'Settlement',
+        text: 'ShelfSpace calculates: $216 net sales \u00d7 50% split = $108 vendor payout.',
+        highlight: '$216 \u00d7 50% = $108'
+      },
+      {
+        title: 'Paid',
+        text: 'Check generated and available in vendor portal. $108 deposited.',
+        highlight: '$108.00 deposited'
+      }
+    ];
+
+    var currentStep = 0;
+    var paused = false;
+    var autoTimer = null;
+    var STEP_DURATION = 3000; /* 3 seconds per step */
+    var progressStart = 0;
+    var rafId = null;
+
+    function isMobileLayout() {
+      return window.innerWidth < 900;
+    }
+
+    function updateTimeline(index, fromUser) {
+      currentStep = index;
+
+      /* Update step classes */
+      for (var i = 0; i < steps.length; i++) {
+        steps[i].classList.remove('active', 'completed');
+        if (i < index) steps[i].classList.add('completed');
+        if (i === index) steps[i].classList.add('active');
+      }
+
+      /* Update connecting line fill */
+      if (steps.length > 1) {
+        if (isMobileLayout()) {
+          var totalHeight = steps[steps.length - 1].offsetTop - steps[0].offsetTop;
+          var fillHeight = index === 0 ? 0 : ((steps[index].offsetTop - steps[0].offsetTop) / totalHeight) * 100;
+          lineFill.style.width = '';
+          lineFill.style.height = fillHeight + '%';
+        } else {
+          var totalWidth = steps[steps.length - 1].offsetLeft - steps[0].offsetLeft;
+          var fillWidth = index === 0 ? 0 : ((steps[index].offsetLeft - steps[0].offsetLeft) / totalWidth) * 100;
+          lineFill.style.height = '';
+          lineFill.style.width = fillWidth + '%';
+        }
+      }
+
+      /* Update detail panel */
+      var data = STEP_DATA[index];
+      detailContent.classList.remove('detail-visible');
+
+      setTimeout(function() {
+        detailContent.innerHTML =
+          '<div class="timeline-detail-step-num">STEP ' + (index + 1) + ' OF 5</div>' +
+          '<div class="timeline-detail-title">' + data.title + '</div>' +
+          '<div class="timeline-detail-text">' + data.text + '</div>' +
+          '<div class="timeline-detail-highlight">' + data.highlight + '</div>';
+        requestAnimationFrame(function() {
+          detailContent.classList.add('detail-visible');
+        });
+      }, fromUser ? 0 : 80);
+
+      /* Restart progress timer */
+      startProgress();
+    }
+
+    function startProgress() {
+      if (rafId) cancelAnimationFrame(rafId);
+      progressFill.classList.remove('animating');
+      progressFill.style.width = '0%';
+
+      if (paused) return;
+
+      /* Force reflow then start CSS transition */
+      void progressFill.offsetWidth;
+      progressFill.classList.add('animating');
+      progressFill.style.transitionDuration = STEP_DURATION + 'ms';
+      progressFill.style.width = '100%';
+
+      progressStart = Date.now();
+      clearTimeout(autoTimer);
+      autoTimer = setTimeout(function() {
+        if (!paused) {
+          var next = (currentStep + 1) % steps.length;
+          updateTimeline(next, false);
+        }
+      }, STEP_DURATION);
+    }
+
+    function togglePause() {
+      paused = !paused;
+      pauseIcon.style.display = paused ? 'none' : '';
+      playIcon.style.display = paused ? '' : 'none';
+
+      if (paused) {
+        clearTimeout(autoTimer);
+        /* Freeze progress bar at current position */
+        var elapsed = Date.now() - progressStart;
+        var pct = Math.min((elapsed / STEP_DURATION) * 100, 100);
+        progressFill.classList.remove('animating');
+        progressFill.style.width = pct + '%';
+      } else {
+        /* Resume from where we left off */
+        var elapsed2 = Date.now() - progressStart;
+        var remaining = Math.max(STEP_DURATION - elapsed2, 200);
+        progressFill.classList.add('animating');
+        progressFill.style.transitionDuration = remaining + 'ms';
+        progressFill.style.width = '100%';
+
+        clearTimeout(autoTimer);
+        autoTimer = setTimeout(function() {
+          if (!paused) {
+            var next = (currentStep + 1) % steps.length;
+            updateTimeline(next, false);
+          }
+        }, remaining);
+      }
+    }
+
+    /* Click handlers for steps */
+    for (var i = 0; i < steps.length; i++) {
+      (function(idx) {
+        steps[idx].addEventListener('click', function() {
+          updateTimeline(idx, true);
+        });
+      })(i);
+    }
+
+    pauseBtn.addEventListener('click', togglePause);
+
+    /* Pause on hover over the detail panel and track */
+    var timelineWrap = track.closest('.timeline-wrap');
+    var wasManuallyPaused = false;
+    timelineWrap.addEventListener('mouseenter', function() {
+      if (!paused) {
+        wasManuallyPaused = false;
+        togglePause();
+      } else {
+        wasManuallyPaused = true;
+      }
+    });
+    timelineWrap.addEventListener('mouseleave', function() {
+      if (paused && !wasManuallyPaused) {
+        togglePause();
+      }
+    });
+
+    /* Start the timeline when it becomes visible */
+    var timelineObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          updateTimeline(0, false);
+          timelineObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+    timelineObserver.observe(timelineWrap);
+
+    /* Handle resize for layout changes */
+    window.addEventListener('resize', function() {
+      updateTimeline(currentStep, true);
+    });
+
+    /* Re-observe new reveal elements */
+    document.querySelectorAll('.timeline-section .reveal').forEach(function(el) {
+      revealObserver.observe(el);
+    });
+  })();
 })();
 </script>
 <script src="/shelfiq-widget.js"></script>

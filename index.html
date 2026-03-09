@@ -216,9 +216,265 @@
     .footer-top { grid-template-columns: 1fr; }
   }
 
+  /* ── EXHIBIT 3: Before/After Split ── */
+  .beforeafter-section { background: var(--white); overflow: hidden; }
+  .beforeafter-header { text-align: center; max-width: 600px; margin: 0 auto 64px; }
+  .beforeafter-header .section-desc { margin: 0 auto; }
+  .beforeafter-container {
+    max-width: 960px; margin: 0 auto; position: relative;
+    border-radius: 20px; overflow: hidden;
+    border: 1px solid var(--slate-200);
+    box-shadow: 0 8px 40px rgba(27,67,50,0.08);
+    height: 520px; user-select: none; -webkit-user-select: none;
+    cursor: ew-resize;
+  }
+  .ba-side {
+    position: absolute; top: 0; bottom: 0; overflow: hidden;
+  }
+  .ba-left {
+    left: 0; right: 0;
+    background: #fef6f4;
+    z-index: 1;
+  }
+  .ba-right {
+    left: 0; right: 0;
+    background: var(--green-ghost);
+    z-index: 2;
+  }
+  .ba-inner {
+    width: 960px; min-height: 100%; padding: 48px 44px;
+    position: relative;
+  }
+  .ba-side-label {
+    font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+    padding: 6px 16px; border-radius: 100px; display: inline-block; margin-bottom: 28px;
+  }
+  .ba-left .ba-side-label { background: rgba(220,80,60,0.1); color: #c0392b; }
+  .ba-right .ba-side-label { background: rgba(45,106,79,0.1); color: var(--green-dark); }
+
+  /* Chaos side elements */
+  .ba-chaos { position: relative; display: flex; flex-wrap: wrap; gap: 14px; }
+  .ba-chaos-item {
+    background: var(--white); border-radius: 12px; padding: 14px 18px;
+    font-size: 13px; line-height: 1.5; color: var(--slate-700);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    border: 1px solid rgba(220,80,60,0.15);
+    max-width: 260px;
+  }
+  .ba-chaos-item.tilted-1 { transform: rotate(-2deg); }
+  .ba-chaos-item.tilted-2 { transform: rotate(1.5deg); }
+  .ba-chaos-item.tilted-3 { transform: rotate(-1deg); }
+  .ba-chaos-item.tilted-4 { transform: rotate(2.5deg); }
+  .ba-chaos-item.sticky {
+    background: #fff9c4; border: 1px solid #f0e68c;
+    font-family: var(--font-display); font-weight: 600; font-size: 12px;
+    color: #7a6b00;
+  }
+  .ba-chaos-item.bubble {
+    background: #eee; border-radius: 14px 14px 14px 4px;
+    border: 1px solid #ddd; font-size: 12px; color: var(--slate-600);
+  }
+  .ba-chaos-item.bubble.right { border-radius: 14px 14px 4px 14px; }
+  .ba-chaos-item.spreadsheet {
+    font-family: var(--font-mono); font-size: 11px;
+    background: var(--white); padding: 0; overflow: hidden;
+  }
+  .ba-spreadsheet-row {
+    display: flex; border-bottom: 1px solid #f0f0f0; font-size: 11px;
+  }
+  .ba-spreadsheet-row span {
+    padding: 6px 10px; flex: 1; white-space: nowrap;
+  }
+  .ba-spreadsheet-row.header { background: #f7f7f7; font-weight: 700; color: var(--slate-600); }
+  .ba-spreadsheet-row .mismatch { color: #c0392b; text-decoration: line-through; }
+  .ba-chaos-item.check-wrong {
+    background: var(--white); border: 1.5px dashed rgba(220,80,60,0.3);
+    font-family: var(--font-mono); font-size: 12px;
+    position: relative;
+  }
+  .ba-check-line { text-decoration: line-through; color: #c0392b; }
+  .ba-chaos-item.calc {
+    font-family: var(--font-mono); font-size: 18px; font-weight: 700;
+    background: #333; color: #e74c3c; text-align: right;
+    padding: 10px 16px; border: 1px solid #555; border-radius: 8px;
+  }
+  .ba-calc-label { font-size: 10px; color: #999; font-weight: 400; display: block; text-align: left; margin-bottom: 2px; }
+
+  /* Clean side elements */
+  .ba-clean { display: flex; flex-direction: column; gap: 14px; }
+  .ba-clean-card {
+    background: var(--white); border-radius: 12px; padding: 16px 20px;
+    border: 1px solid var(--slate-200);
+    box-shadow: 0 2px 8px rgba(27,67,50,0.04);
+  }
+  .ba-clean-card h4 {
+    font-size: 12px; font-weight: 700; color: var(--slate-400);
+    letter-spacing: 1px; text-transform: uppercase; margin-bottom: 10px;
+  }
+  .ba-clean-row {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 8px 0; border-bottom: 1px solid var(--slate-100);
+    font-size: 13px;
+  }
+  .ba-clean-row:last-child { border-bottom: none; }
+  .ba-clean-row .vendor-name { color: var(--slate-700); font-weight: 500; }
+  .ba-clean-row .amount { font-family: var(--font-mono); font-weight: 600; color: var(--green-deep); }
+  .ba-status {
+    display: inline-flex; align-items: center; gap: 5px;
+    font-size: 11px; font-weight: 600; padding: 3px 10px;
+    border-radius: 100px;
+  }
+  .ba-status.paid { background: rgba(45,106,79,0.1); color: var(--green-dark); }
+  .ba-status.verified { background: rgba(149,213,178,0.3); color: var(--green-deep); }
+  .ba-status.ontime { background: var(--green-ghost); color: var(--green-mid); }
+  .ba-status-dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+  .ba-clean-check {
+    display: flex; align-items: center; gap: 12px;
+    padding: 14px 18px; background: var(--white); border-radius: 12px;
+    border: 1px solid var(--slate-200);
+  }
+  .ba-clean-check-icon {
+    width: 36px; height: 36px; border-radius: 10px;
+    background: var(--green-ghost); display: flex; align-items: center; justify-content: center;
+  }
+  .ba-clean-check-icon svg { width: 18px; height: 18px; color: var(--green-dark); }
+  .ba-clean-check-info { font-size: 13px; color: var(--slate-700); font-weight: 500; }
+  .ba-clean-check-info span { display: block; font-size: 11px; color: var(--slate-400); font-weight: 400; }
+
+  /* Divider */
+  .ba-divider {
+    position: absolute; top: 0; bottom: 0; width: 4px;
+    background: var(--green-deep); z-index: 10;
+    left: 50%; transform: translateX(-50%);
+    cursor: ew-resize;
+  }
+  .ba-divider-handle {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    width: 40px; height: 56px; background: var(--green-deep);
+    border-radius: 10px; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 3px;
+    box-shadow: 0 4px 16px rgba(27,67,50,0.3);
+    transition: box-shadow 0.2s;
+  }
+  .ba-divider-handle:hover, .ba-divider-handle:active {
+    box-shadow: 0 6px 24px rgba(27,67,50,0.45);
+  }
+  .ba-divider-dot {
+    width: 4px; height: 4px; border-radius: 50%; background: var(--white); opacity: 0.7;
+  }
+  .ba-divider-arrows {
+    display: flex; gap: 8px; margin-top: 2px;
+  }
+  .ba-divider-arrows svg { width: 10px; height: 10px; color: rgba(255,255,255,0.8); }
+
+  /* ── EXHIBIT 4: Dual Portal Preview ── */
+  .dualportal-section { background: var(--slate-50); border-top: 1px solid var(--slate-100); }
+  .dualportal-header { text-align: center; max-width: 680px; margin: 0 auto 64px; }
+  .dualportal-header .section-desc { margin: 0 auto; }
+  .dualportal-grid {
+    max-width: 1060px; margin: 0 auto; display: grid;
+    grid-template-columns: 1fr 1fr; gap: 32px;
+  }
+  .dp-portal {
+    background: var(--white); border: 1px solid var(--slate-200);
+    border-radius: 20px; overflow: hidden; position: relative;
+    transition: all 0.4s cubic-bezier(0.22,1,0.36,1);
+  }
+  .dp-portal.reveal { transform: translateY(40px) scale(0.97); }
+  .dp-portal.reveal.is-visible { transform: translateY(0) scale(1); }
+  .dp-portal:hover { box-shadow: 0 16px 48px rgba(27,67,50,0.08); }
+  .dp-tag {
+    position: absolute; top: 16px; right: 16px;
+    font-size: 10px; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; padding: 4px 12px; border-radius: 100px;
+    z-index: 2;
+  }
+  .dp-tag.retailer { background: var(--green-ghost); color: var(--green-dark); }
+  .dp-tag.vendor { background: rgba(27,67,50,0.06); color: var(--green-deep); }
+  .dp-header {
+    display: flex; align-items: center; gap: 12px;
+    padding: 20px 24px; border-bottom: 1px solid var(--slate-100);
+    background: var(--slate-50);
+  }
+  .dp-header-logo {
+    width: 32px; height: 32px; border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .dp-header-logo.retailer-logo { background: var(--green-deep); }
+  .dp-header-logo.vendor-logo { background: var(--green-dark); }
+  .dp-header-logo svg { width: 16px; height: 16px; color: var(--white); }
+  .dp-header-name { font-size: 15px; font-weight: 700; color: var(--green-deep); }
+  .dp-header-name span { display: block; font-size: 11px; font-weight: 500; color: var(--slate-400); }
+  .dp-summary {
+    padding: 20px 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+    border-bottom: 1px solid var(--slate-100);
+  }
+  .dp-summary-item { font-size: 11px; color: var(--slate-400); font-weight: 500; }
+  .dp-summary-item strong {
+    display: block; font-size: 14px; color: var(--slate-700);
+    font-weight: 600; margin-top: 2px;
+  }
+  .dp-summary-item.highlight strong {
+    color: var(--green-deep); font-size: 16px;
+  }
+  .dp-table { padding: 0 24px; }
+  .dp-table-header {
+    display: grid; grid-template-columns: 2fr 0.6fr 0.8fr 0.8fr;
+    padding: 12px 0 8px; border-bottom: 1px solid var(--slate-100);
+    font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+    color: var(--slate-400);
+  }
+  .dp-table-row {
+    display: grid; grid-template-columns: 2fr 0.6fr 0.8fr 0.8fr;
+    padding: 10px 0; border-bottom: 1px solid var(--slate-50);
+    font-size: 12px; color: var(--slate-600); align-items: center;
+    cursor: pointer; transition: all 0.2s; border-left: 3px solid transparent;
+    margin-left: -3px; padding-left: 3px;
+  }
+  .dp-table-row:hover, .dp-table-row.dp-highlighted {
+    background: var(--green-ghost); border-left-color: var(--green-accent);
+    border-radius: 4px;
+  }
+  .dp-table-row .product { font-weight: 500; color: var(--slate-700); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .dp-table-row .qty { text-align: center; }
+  .dp-table-row .price { font-family: var(--font-mono); font-size: 12px; }
+  .dp-table-row .payout { font-family: var(--font-mono); font-size: 12px; font-weight: 600; }
+  .dp-portal.vendor-portal .dp-table-row .payout { color: var(--green-deep); }
+  .dp-footer {
+    padding: 16px 24px 20px;
+  }
+  .dp-btn {
+    display: block; width: 100%; text-align: center; padding: 12px;
+    background: var(--green-deep); color: var(--white);
+    border-radius: 10px; font-size: 13px; font-weight: 600;
+    text-decoration: none; transition: all 0.25s;
+    border: none; cursor: pointer; font-family: var(--font-display);
+  }
+  .dp-btn:hover { background: var(--green-dark); transform: translateY(-1px); }
+  .dp-btn.vendor-btn { background: var(--green-dark); }
+  .dp-btn.vendor-btn:hover { background: var(--green-deep); }
+
+  /* Responsive for exhibits */
+  @media (max-width: 900px) {
+    .beforeafter-container { height: 440px; }
+    .ba-inner { width: 100%; padding: 32px 24px; }
+    .ba-chaos { gap: 10px; }
+    .ba-chaos-item { max-width: 200px; font-size: 11px; padding: 10px 14px; }
+    .dualportal-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
+    .dp-table-header, .dp-table-row { grid-template-columns: 2fr 0.5fr 0.8fr 0.8fr; }
+    .dp-table-row .product { font-size: 11px; }
+  }
+  @media (max-width: 600px) {
+    .beforeafter-container { height: 400px; }
+    .ba-chaos-item { max-width: 170px; }
+    .ba-chaos-item.spreadsheet .ba-spreadsheet-row span { padding: 4px 6px; font-size: 10px; }
+  }
+
   /* Reduced motion */
   @media (prefers-reduced-motion: reduce) {
-    .reveal, .service-card.reveal, .referee-card.reveal, .results-card.reveal {
+    .reveal, .service-card.reveal, .referee-card.reveal, .results-card.reveal,
+    .dp-portal.reveal {
       opacity: 1; transform: none; transition: none;
     }
     .hero-pill, .hero h1, .hero-sub, .hero-actions, .hero-founder-credit,
@@ -371,6 +627,112 @@
   </div>
 </section>
 
+<!-- EXHIBIT 3: BEFORE/AFTER SPLIT -->
+<section class="beforeafter-section">
+  <div class="beforeafter-header">
+    <div class="section-label reveal">The Difference</div>
+    <h2 class="section-title reveal">See what changes when payments<br>run themselves</h2>
+    <p class="section-desc reveal">Drag the slider to compare the chaos of manual vendor management with ShelfSpace's automated payment engine.</p>
+  </div>
+  <div class="beforeafter-container reveal" id="ba-container">
+    <!-- LEFT: Without ShelfSpace -->
+    <div class="ba-side ba-left" id="ba-left">
+      <div class="ba-inner">
+        <div class="ba-side-label">Without ShelfSpace</div>
+        <div class="ba-chaos">
+          <div class="ba-chaos-item check-wrong tilted-1">
+            <div style="font-size:10px;color:var(--slate-400);margin-bottom:4px;">CHECK #1847</div>
+            Pay to: Hudson Botanical<br>
+            Amount: <span class="ba-check-line">$587.40</span> <span style="color:#c0392b;font-weight:700;">$612.79??</span>
+          </div>
+          <div class="ba-chaos-item sticky tilted-2">
+            CALL VENDOR BACK<br>
+            <span style="font-size:11px;font-weight:400;color:#9a8400;">Net 30 overdue !!!</span>
+          </div>
+          <div class="ba-chaos-item spreadsheet tilted-3">
+            <div class="ba-spreadsheet-row header">
+              <span>Vendor</span><span>Owed</span><span>Paid</span>
+            </div>
+            <div class="ba-spreadsheet-row">
+              <span>Hudson Bot.</span><span>$612</span><span class="mismatch">$587</span>
+            </div>
+            <div class="ba-spreadsheet-row">
+              <span>Green Vly.</span><span>$430</span><span class="mismatch">$430??</span>
+            </div>
+          </div>
+          <div class="ba-chaos-item bubble tilted-4">
+            Where's my payment?? It's been 3 weeks 😤
+          </div>
+          <div class="ba-chaos-item bubble right tilted-1">
+            Check bounced — can you resend the invoice?
+          </div>
+          <div class="ba-chaos-item sticky tilted-3">
+            RECOUNT INVENTORY<br>
+            <span style="font-size:11px;font-weight:400;color:#9a8400;">Numbers don't match POS</span>
+          </div>
+          <div class="ba-chaos-item calc tilted-2">
+            <span class="ba-calc-label">TOTAL</span>
+            $1,847.??
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- RIGHT: With ShelfSpace -->
+    <div class="ba-side ba-right" id="ba-right">
+      <div class="ba-inner">
+        <div class="ba-side-label">With ShelfSpace</div>
+        <div class="ba-clean">
+          <div class="ba-clean-card">
+            <h4>Settlement Report</h4>
+            <div style="display:flex;gap:8px;margin-bottom:8px;">
+              <span class="ba-status paid"><span class="ba-status-dot"></span> Paid</span>
+              <span class="ba-status verified"><span class="ba-status-dot"></span> Verified</span>
+              <span class="ba-status ontime"><span class="ba-status-dot"></span> On Time</span>
+            </div>
+            <div style="font-size:12px;color:var(--slate-400);">Period: 02/23 – 03/01 &nbsp;|&nbsp; Auto-generated</div>
+          </div>
+          <div class="ba-clean-card">
+            <h4>Vendor Payments</h4>
+            <div class="ba-clean-row">
+              <span class="vendor-name">Hudson Botanical</span>
+              <span class="amount">$612.79</span>
+            </div>
+            <div class="ba-clean-row">
+              <span class="vendor-name">Green Valley Farms</span>
+              <span class="amount">$430.20</span>
+            </div>
+            <div class="ba-clean-row">
+              <span class="vendor-name">Pacific Roots</span>
+              <span class="amount">$287.55</span>
+            </div>
+          </div>
+          <div class="ba-clean-check">
+            <div class="ba-clean-check-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            </div>
+            <div class="ba-clean-check-info">
+              Check #1847 — $612.79
+              <span>Hudson Botanical &bull; Check 21 Compliant &bull; Depositable</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Divider -->
+    <div class="ba-divider" id="ba-divider">
+      <div class="ba-divider-handle">
+        <div class="ba-divider-arrows">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+        </div>
+        <div class="ba-divider-dot"></div>
+        <div class="ba-divider-dot"></div>
+        <div class="ba-divider-dot"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- REFEREE -->
 <section class="referee-section">
   <div class="referee-header">
@@ -466,6 +828,161 @@
           </div>
         </li>
       </ul>
+    </div>
+  </div>
+</section>
+
+<!-- EXHIBIT 4: DUAL PORTAL PREVIEW -->
+<section class="dualportal-section">
+  <div class="dualportal-header">
+    <div class="section-label reveal">One Settlement, Two Portals</div>
+    <h2 class="section-title reveal">Retailers and vendors see the same<br>data from their own perspective</h2>
+    <p class="section-desc reveal">Full transparency, zero confusion. Hover over any line item to see it highlighted on both sides simultaneously.</p>
+  </div>
+  <div class="dualportal-grid">
+    <!-- Retailer Portal -->
+    <div class="dp-portal retailer-portal reveal" id="dp-retailer">
+      <div class="dp-tag retailer">Retailer View</div>
+      <div class="dp-header">
+        <div class="dp-header-logo retailer-logo">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <div class="dp-header-name">
+          Diem Worcester
+          <span>Retailer Dashboard</span>
+        </div>
+      </div>
+      <div class="dp-summary">
+        <div class="dp-summary-item">
+          Vendor
+          <strong>Hudson Botanical</strong>
+        </div>
+        <div class="dp-summary-item">
+          Period
+          <strong>02/23 – 03/01</strong>
+        </div>
+        <div class="dp-summary-item">
+          Net Sales
+          <strong>$1,225.58</strong>
+        </div>
+        <div class="dp-summary-item highlight">
+          Vendor Payout
+          <strong>$612.79</strong>
+        </div>
+      </div>
+      <div class="dp-table">
+        <div class="dp-table-header">
+          <span>Product</span>
+          <span style="text-align:center;">Qty</span>
+          <span>Price</span>
+          <span>Payout</span>
+        </div>
+        <div class="dp-table-row" data-row="0">
+          <span class="product">Nimbus | Blu Piff Pre-roll 1/2g 5pk</span>
+          <span class="qty">8</span>
+          <span class="price">$44.00</span>
+          <span class="payout">$176.00</span>
+        </div>
+        <div class="dp-table-row" data-row="1">
+          <span class="product">Nimbus | Grape Gas Pre-roll 1g</span>
+          <span class="qty">12</span>
+          <span class="price">$12.00</span>
+          <span class="payout">$72.00</span>
+        </div>
+        <div class="dp-table-row" data-row="2">
+          <span class="product">Nimbus | Sunshine OG Cart 1g</span>
+          <span class="qty">6</span>
+          <span class="price">$48.00</span>
+          <span class="payout">$144.00</span>
+        </div>
+        <div class="dp-table-row" data-row="3">
+          <span class="product">Nimbus | Lemon Haze Flower 3.5g</span>
+          <span class="qty">5</span>
+          <span class="price">$35.00</span>
+          <span class="payout">$87.50</span>
+        </div>
+        <div class="dp-table-row" data-row="4">
+          <span class="product">Nimbus | Berry Gelato Gummies 10pk</span>
+          <span class="qty">9</span>
+          <span class="price">$24.00</span>
+          <span class="payout">$133.29</span>
+        </div>
+      </div>
+      <div class="dp-footer">
+        <button class="dp-btn">Generate Check</button>
+      </div>
+    </div>
+    <!-- Vendor Portal -->
+    <div class="dp-portal vendor-portal reveal reveal-delay-1" id="dp-vendor">
+      <div class="dp-tag vendor">Vendor View</div>
+      <div class="dp-header">
+        <div class="dp-header-logo vendor-logo">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div class="dp-header-name">
+          Hudson Botanical
+          <span>Vendor Dashboard</span>
+        </div>
+      </div>
+      <div class="dp-summary">
+        <div class="dp-summary-item">
+          Retailer
+          <strong>Diem Worcester</strong>
+        </div>
+        <div class="dp-summary-item">
+          Period
+          <strong>02/23 – 03/01</strong>
+        </div>
+        <div class="dp-summary-item">
+          Retail Sales
+          <strong>$1,225.58</strong>
+        </div>
+        <div class="dp-summary-item highlight">
+          Your Payout
+          <strong>$612.79</strong>
+        </div>
+      </div>
+      <div class="dp-table">
+        <div class="dp-table-header">
+          <span>Product</span>
+          <span style="text-align:center;">Qty</span>
+          <span>Price</span>
+          <span>Payout</span>
+        </div>
+        <div class="dp-table-row" data-row="0">
+          <span class="product">Nimbus | Blu Piff Pre-roll 1/2g 5pk</span>
+          <span class="qty">8</span>
+          <span class="price">$44.00</span>
+          <span class="payout">$176.00</span>
+        </div>
+        <div class="dp-table-row" data-row="1">
+          <span class="product">Nimbus | Grape Gas Pre-roll 1g</span>
+          <span class="qty">12</span>
+          <span class="price">$12.00</span>
+          <span class="payout">$72.00</span>
+        </div>
+        <div class="dp-table-row" data-row="2">
+          <span class="product">Nimbus | Sunshine OG Cart 1g</span>
+          <span class="qty">6</span>
+          <span class="price">$48.00</span>
+          <span class="payout">$144.00</span>
+        </div>
+        <div class="dp-table-row" data-row="3">
+          <span class="product">Nimbus | Lemon Haze Flower 3.5g</span>
+          <span class="qty">5</span>
+          <span class="price">$35.00</span>
+          <span class="payout">$87.50</span>
+        </div>
+        <div class="dp-table-row" data-row="4">
+          <span class="product">Nimbus | Berry Gelato Gummies 10pk</span>
+          <span class="qty">9</span>
+          <span class="price">$24.00</span>
+          <span class="payout">$133.29</span>
+        </div>
+      </div>
+      <div class="dp-footer">
+        <button class="dp-btn vendor-btn">Download Check</button>
+      </div>
     </div>
   </div>
 </section>
@@ -697,6 +1214,100 @@
       btn.setAttribute('aria-expanded', parent.classList.contains('open'));
     });
   });
+
+  /* ── EXHIBIT 3: Before/After Slider ── */
+  (function() {
+    var container = document.getElementById('ba-container');
+    if (!container) return;
+    var divider = document.getElementById('ba-divider');
+    var rightSide = document.getElementById('ba-right');
+    var isDragging = false;
+    var containerRect;
+
+    function setPosition(xPx) {
+      if (!containerRect) containerRect = container.getBoundingClientRect();
+      var pct = ((xPx - containerRect.left) / containerRect.width) * 100;
+      if (pct < 5) pct = 5;
+      if (pct > 95) pct = 95;
+      divider.style.left = pct + '%';
+      rightSide.style.clipPath = 'inset(0 0 0 ' + pct + '%)';
+    }
+
+    // Set initial 50/50
+    function initSlider() {
+      containerRect = container.getBoundingClientRect();
+      rightSide.style.clipPath = 'inset(0 0 0 50%)';
+      divider.style.left = '50%';
+    }
+    initSlider();
+    window.addEventListener('resize', initSlider);
+
+    function onPointerDown(e) {
+      isDragging = true;
+      containerRect = container.getBoundingClientRect();
+      e.preventDefault();
+      var x = e.touches ? e.touches[0].clientX : e.clientX;
+      setPosition(x);
+    }
+    function onPointerMove(e) {
+      if (!isDragging) return;
+      var x = e.touches ? e.touches[0].clientX : e.clientX;
+      requestAnimationFrame(function() { setPosition(x); });
+    }
+    function onPointerUp() {
+      isDragging = false;
+    }
+
+    // Mouse events on the whole container for better UX
+    container.addEventListener('mousedown', onPointerDown);
+    document.addEventListener('mousemove', onPointerMove);
+    document.addEventListener('mouseup', onPointerUp);
+
+    // Touch events
+    container.addEventListener('touchstart', onPointerDown, { passive: false });
+    document.addEventListener('touchmove', onPointerMove, { passive: true });
+    document.addEventListener('touchend', onPointerUp);
+  })();
+
+  /* ── EXHIBIT 4: Dual Portal Highlight Sync ── */
+  (function() {
+    var retailer = document.getElementById('dp-retailer');
+    var vendor = document.getElementById('dp-vendor');
+    if (!retailer || !vendor) return;
+
+    var retailerRows = retailer.querySelectorAll('.dp-table-row[data-row]');
+    var vendorRows = vendor.querySelectorAll('.dp-table-row[data-row]');
+
+    function highlightRow(index) {
+      retailerRows.forEach(function(r) { r.classList.remove('dp-highlighted'); });
+      vendorRows.forEach(function(r) { r.classList.remove('dp-highlighted'); });
+      if (index !== null) {
+        retailerRows.forEach(function(r) {
+          if (r.getAttribute('data-row') === index) r.classList.add('dp-highlighted');
+        });
+        vendorRows.forEach(function(r) {
+          if (r.getAttribute('data-row') === index) r.classList.add('dp-highlighted');
+        });
+      }
+    }
+
+    function addRowListeners(rows) {
+      rows.forEach(function(row) {
+        row.addEventListener('mouseenter', function() {
+          highlightRow(row.getAttribute('data-row'));
+        });
+        row.addEventListener('mouseleave', function() {
+          highlightRow(null);
+        });
+        row.addEventListener('click', function() {
+          highlightRow(row.getAttribute('data-row'));
+        });
+      });
+    }
+
+    addRowListeners(retailerRows);
+    addRowListeners(vendorRows);
+  })();
 })();
 </script>
 <script src="/shelfiq-widget.js"></script>
