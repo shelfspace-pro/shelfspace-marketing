@@ -203,6 +203,43 @@
     font-size: 13px; line-height: 1.6; color: var(--slate-500);
   }
 
+  /* ── Vendor portal ── */
+  .portal-section {
+    background: var(--slate-50);
+    border-top: 1px solid var(--slate-100);
+  }
+  .portal-grid {
+    max-width: 960px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+  }
+  .portal-feature {
+    background: var(--white);
+    border: 1px solid var(--slate-200);
+    border-radius: 16px;
+    padding: 32px 28px;
+    transition: all 0.4s cubic-bezier(0.22,1,0.36,1);
+  }
+  .portal-feature:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 48px rgba(27,67,50,0.08);
+    border-color: var(--green-accent);
+  }
+  .portal-feature-icon {
+    width: 44px; height: 44px;
+    background: var(--green-ghost);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 18px;
+  }
+  .portal-feature-icon svg { width: 22px; height: 22px; color: var(--green-deep); }
+  .portal-feature h3 {
+    font-size: 17px; font-weight: 700; color: var(--green-deep);
+    margin-bottom: 8px;
+  }
+  .portal-feature p {
+    font-size: 14px; line-height: 1.65; color: var(--slate-500);
+  }
+
   /* ── How to deposit ── */
   .deposit-section {
     background: var(--slate-50);
@@ -411,6 +448,7 @@
     .what-grid { grid-template-columns: 1fr; max-width: 560px; }
     .legal-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
     .better-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
+    .portal-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
     .deposit-methods { grid-template-columns: 1fr; max-width: 480px; }
     .deposit-notes-grid { grid-template-columns: 1fr; }
     .verify-container { padding: 40px 28px; }
@@ -524,8 +562,8 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-6l-2 3h-4l-2-3H2"/><path d="M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/></svg>
         </div>
         <div>
-          <div class="what-flow-label">Delivered to You</div>
-          <div class="what-flow-desc">The check is emailed to you instantly — ready to print and deposit.</div>
+          <div class="what-flow-label">You're Notified</div>
+          <div class="what-flow-desc">You receive an email notification and can log in to your secure vendor portal to download the check for deposit.</div>
         </div>
       </div>
     </div>
@@ -629,9 +667,48 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
       </div>
       <div>
-        <h3>Instant delivery</h3>
-        <p>No waiting for mail. Checks are delivered by email the moment the settlement is approved — ready to print and deposit immediately.</p>
+        <h3>Instant availability</h3>
+        <p>No waiting for mail. You're notified the moment a check is ready, and you can download it from your secure portal immediately.</p>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- VENDOR PORTAL -->
+<section class="portal-section">
+  <div class="section-header">
+    <div class="section-label reveal">Your Vendor Portal</div>
+    <h2 class="section-title reveal">More than just a check</h2>
+    <p class="section-desc reveal">Every ShelfSpace vendor gets access to a secure portal with full visibility into how your products are performing at the retailer.</p>
+  </div>
+  <div class="portal-grid">
+    <div class="portal-feature reveal">
+      <div class="portal-feature-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>
+      </div>
+      <h3>Sales Performance</h3>
+      <p>See exactly what's selling, how fast, and at what price — broken down by product, by week.</p>
+    </div>
+    <div class="portal-feature reveal reveal-delay-1">
+      <div class="portal-feature-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+      </div>
+      <h3>Live Inventory Levels</h3>
+      <p>Monitor on-hand quantities, days of supply remaining, and expiration dates so you know when to restock.</p>
+    </div>
+    <div class="portal-feature reveal">
+      <div class="portal-feature-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+      </div>
+      <h3>Payment History</h3>
+      <p>Full record of every check issued — amounts, dates, settlement references, and deposit status in one place.</p>
+    </div>
+    <div class="portal-feature reveal reveal-delay-1">
+      <div class="portal-feature-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="16" y2="17"/></svg>
+      </div>
+      <h3>Settlement Reports</h3>
+      <p>Download detailed reports showing product-level sales, discounts applied, and your exact payout calculation.</p>
     </div>
   </div>
 </section>
