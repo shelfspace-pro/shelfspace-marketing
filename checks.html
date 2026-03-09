@@ -622,6 +622,129 @@
   }
   .check-desc-panel.is-default .check-desc-label { display: none; }
 
+  /* Front/back toggle */
+  .check-flip-tabs {
+    display: flex; justify-content: center; gap: 4px;
+    margin-bottom: 20px;
+    background: var(--slate-100);
+    border-radius: 10px;
+    padding: 4px;
+    max-width: 240px;
+    margin-left: auto; margin-right: auto;
+  }
+  .check-flip-tab {
+    flex: 1; padding: 8px 16px;
+    font-family: var(--font-display);
+    font-size: 13px; font-weight: 600;
+    color: var(--slate-500);
+    background: none; border: none; border-radius: 8px;
+    cursor: pointer; transition: all 0.2s;
+  }
+  .check-flip-tab.active {
+    background: var(--white);
+    color: var(--green-deep);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  }
+  .check-side { display: none; }
+  .check-side.visible { display: block; }
+
+  /* Back of check */
+  .check-back {
+    background: var(--white);
+    border: 1.5px solid var(--slate-200);
+    border-radius: 14px;
+    padding: 28px 36px;
+    position: relative;
+    box-shadow:
+      0 1px 3px rgba(0,0,0,0.04),
+      0 8px 32px rgba(27,67,50,0.06);
+  }
+  .check-back-top {
+    display: flex; gap: 32px;
+    padding-bottom: 24px;
+    border-bottom: 1px dashed var(--slate-200);
+    margin-bottom: 24px;
+  }
+  .check-back-left { flex: 1; }
+  .check-back-right {
+    width: 200px; flex-shrink: 0;
+    display: flex; flex-direction: column;
+    align-items: stretch;
+  }
+  .check-back-micr {
+    font-family: var(--font-mono);
+    font-size: 14px; letter-spacing: 2px; color: var(--slate-400);
+    margin-bottom: 4px;
+  }
+  .check-back-drawer {
+    font-size: 14px; font-weight: 600; color: var(--slate-700);
+    margin-top: 12px; margin-bottom: 20px;
+  }
+  .check-back-section {
+    margin-bottom: 16px;
+  }
+  .check-back-section:last-child { margin-bottom: 0; }
+  .check-back-section-title {
+    font-size: 10px; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--slate-800);
+    margin-bottom: 6px;
+  }
+  .check-back-section li {
+    font-size: 12px; line-height: 1.6; color: var(--slate-500);
+    list-style: none;
+    padding-left: 14px;
+    position: relative;
+  }
+  .check-back-section li::before {
+    content: ''; position: absolute; left: 0; top: 7px;
+    width: 4px; height: 4px; border-radius: 50%;
+    background: var(--green-accent);
+  }
+  .check-endorse-area {
+    border: 1.5px solid var(--slate-200);
+    border-radius: 10px;
+    padding: 16px;
+    display: flex; flex-direction: column;
+    height: 100%;
+  }
+  .check-endorse-title {
+    font-size: 10px; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--slate-800);
+    text-align: center; margin-bottom: 12px;
+  }
+  .check-endorse-x {
+    font-size: 16px; color: var(--slate-300);
+    margin-bottom: 4px;
+  }
+  .check-endorse-line {
+    border-bottom: 1px solid var(--slate-300);
+    margin-bottom: 10px;
+    height: 20px;
+  }
+  .check-endorse-checkbox {
+    display: flex; align-items: center; gap: 8px;
+    margin-bottom: 12px;
+  }
+  .check-endorse-box {
+    width: 16px; height: 16px;
+    border: 1.5px solid var(--slate-300);
+    border-radius: 3px; flex-shrink: 0;
+  }
+  .check-endorse-checkbox-label {
+    font-size: 9px; font-weight: 700; letter-spacing: 0.8px;
+    text-transform: uppercase; color: var(--slate-500);
+    line-height: 1.3;
+  }
+  .check-endorse-fine {
+    font-size: 8px; color: var(--slate-300);
+    text-transform: uppercase; letter-spacing: 0.5px;
+    line-height: 1.4; margin-top: auto;
+  }
+  @media (max-width: 600px) {
+    .check-back-top { flex-direction: column; gap: 20px; }
+    .check-back-right { width: 100%; }
+  }
+
   /* ── Footer 5-col ── */
   .footer-top { grid-template-columns: 2fr 1fr 1fr 1fr 1fr; }
   @media (max-width: 900px) { .footer-top { grid-template-columns: 1fr 1fr; } }
@@ -739,6 +862,11 @@
     <p class="section-desc reveal">Hover over each part of the check to learn what it means.</p>
   </div>
   <div class="check-visual-wrap reveal">
+    <div class="check-flip-tabs">
+      <button class="check-flip-tab active" data-side="front">Front</button>
+      <button class="check-flip-tab" data-side="back">Back</button>
+    </div>
+    <div class="check-side visible" id="checkFront">
     <div class="check-mock" id="checkMock">
       <div class="check-sample-badge">SAMPLE</div>
 
@@ -803,6 +931,74 @@
         </div>
       </div>
     </div>
+
+    </div><!-- /checkFront -->
+
+    <div class="check-side" id="checkBack">
+    <div class="check-back" id="checkMockBack">
+      <div class="check-sample-badge">SAMPLE</div>
+      <div class="check-back-top">
+        <div class="check-back-left">
+          <div class="check-hotspot" data-label="MICR Repeat" data-desc="The same routing, account, and check numbers from the front — printed again on the back for bank processing during clearing.">
+            <div class="check-back-micr">⑆021000021⑆  004821</div>
+            <div class="check-back-micr">⑆123456789⑆</div>
+          </div>
+          <div class="check-hotspot" data-label="Drawer Name" data-desc="The retailer's legal business name — the entity whose bank account this check is drawn on.">
+            <div class="check-back-drawer">Acme Retail LLC</div>
+          </div>
+
+          <div class="check-hotspot" data-label="Security Features" data-desc="ShelfSpace checks include verified security protocols, encrypted digital transmission, and a tracked chain of custody from creation to deposit.">
+            <div class="check-back-section">
+              <div class="check-back-section-title">Security Features Included</div>
+              <ul>
+                <li>Padlock icon: Verified security protocols</li>
+                <li>Encrypted transmission via secure digital link</li>
+                <li>Chain of custody: Digitally tracked and logged</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="check-hotspot" data-label="Mobile Deposit Ready" data-desc="The check layout is optimized for mobile banking apps — remote capture friendly, high-contrast MICR, and verified for major bank software.">
+            <div class="check-back-section">
+              <div class="check-back-section-title">Mobile Deposit Ready</div>
+              <ul>
+                <li>Remote capture optimized layout</li>
+                <li>High-contrast MICR for optical accuracy</li>
+                <li>Verified for major bank software</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="check-hotspot" data-label="Check 21 Compliance" data-desc="This check is a valid Substitute Check under the Check Clearing for the 21st Century Act (2004). It meets all UCC Article 3 requirements and is legally enforceable as an original instrument upon printing.">
+            <div class="check-back-section">
+              <div class="check-back-section-title">Federal Check 21 Act Compliant</div>
+              <ul>
+                <li>Valid as a "Substitute Check" under Federal Law</li>
+                <li>UCC Article 3 compliant: Meets all requirements</li>
+                <li>Enforceable as an original instrument upon printing</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="check-back-right">
+          <div class="check-hotspot" data-label="Endorsement Area" data-desc="Sign your name, write your bank's name, and check the box if depositing via mobile or remote deposit. This is required by your bank to process the check.">
+            <div class="check-endorse-area">
+              <div class="check-endorse-title">Endorse Here</div>
+              <div class="check-endorse-x">&#x2715;</div>
+              <div class="check-endorse-line"></div>
+              <div class="check-endorse-line"></div>
+              <div class="check-endorse-checkbox">
+                <div class="check-endorse-box"></div>
+                <span class="check-endorse-checkbox-label">Check box for<br>mobile / remote deposit</span>
+              </div>
+              <div class="check-endorse-fine">Write name of financial institution on line above<br>Do not write below this line</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div><!-- /checkBack -->
 
     <!-- Description panel -->
     <div class="check-desc-panel is-default" id="checkDescPanel">
@@ -1225,7 +1421,7 @@
     var label = document.getElementById('checkDescLabel');
     var text = document.getElementById('checkDescText');
     var defaultText = 'Hover over any part of the check to learn what it means.';
-    var hotspots = document.querySelectorAll('#checkMock .check-hotspot');
+    var allHotspots = document.querySelectorAll('.check-hotspot');
     var activeSpot = null;
 
     function show(spot) {
@@ -1244,7 +1440,7 @@
       panel.classList.add('is-default');
     }
 
-    hotspots.forEach(function(spot) {
+    allHotspots.forEach(function(spot) {
       spot.addEventListener('mouseenter', function() { show(spot); });
       spot.addEventListener('click', function(e) {
         e.stopPropagation();
@@ -1253,6 +1449,22 @@
     });
 
     document.getElementById('checkMock').addEventListener('mouseleave', reset);
+    document.getElementById('checkMockBack').addEventListener('mouseleave', reset);
+
+    // Front/back flip tabs
+    var tabs = document.querySelectorAll('.check-flip-tab');
+    var front = document.getElementById('checkFront');
+    var back = document.getElementById('checkBack');
+    tabs.forEach(function(tab) {
+      tab.addEventListener('click', function() {
+        tabs.forEach(function(t) { t.classList.remove('active'); });
+        tab.classList.add('active');
+        var side = tab.getAttribute('data-side');
+        front.classList.toggle('visible', side === 'front');
+        back.classList.toggle('visible', side === 'back');
+        reset();
+      });
+    });
   })();
 </script>
 <script src="/shelfiq-widget.js"></script>
