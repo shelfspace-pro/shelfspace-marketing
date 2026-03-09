@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Understanding Your Check — ShelfSpace</title>
+<meta name="description" content="You received a check from your retail partner via ShelfSpace. Here's everything you need to know about depositing it, its legal basis, and how to verify it.">
+<link rel="canonical" href="https://shelfspace.pro/checks">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://shelfspace.pro/checks">
+<meta property="og:title" content="Understanding Your Check — ShelfSpace">
+<meta property="og:description" content="You received a check from your retail partner via ShelfSpace. Here's everything you need to know about depositing it, its legal basis, and how to verify it.">
+<meta property="og:image" content="https://shelfspace.pro/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Understanding Your Check — ShelfSpace">
+<meta name="twitter:description" content="You received a check from your retail partner via ShelfSpace. Here's everything you need to know.">
+<meta name="twitter:image" content="https://shelfspace.pro/og-image.png">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+  /* ── Hero ── */
+  .checks-hero {
+    padding: 160px 48px 80px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    background: var(--white);
+  }
+  .checks-hero::before {
+    content: ''; position: absolute; top: -200px; right: -200px;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(149,213,178,0.15), transparent 70%);
+  }
+  .checks-hero::after {
+    content: ''; position: absolute; bottom: -120px; left: -120px;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(149,213,178,0.08), transparent 70%);
+  }
+  .checks-hero .section-title {
+    font-size: clamp(36px, 5vw, 56px);
+    max-width: 740px; margin: 0 auto 20px;
+  }
+  .checks-hero .section-desc {
+    max-width: 580px; margin: 0 auto;
+  }
+  .hero-icon {
+    width: 72px; height: 72px;
+    background: var(--green-ghost);
+    border: 1.5px solid rgba(149,213,178,0.4);
+    border-radius: 20px;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 28px;
+  }
+  .hero-icon svg { width: 36px; height: 36px; color: var(--green-deep); }
+  .hero-trust-row {
+    display: flex; justify-content: center; gap: 28px; flex-wrap: wrap;
+    margin-top: 32px;
+  }
+  .hero-trust-item {
+    display: flex; align-items: center; gap: 7px;
+    font-size: 13px; font-weight: 600; color: var(--slate-500);
+  }
+  .hero-trust-item svg { flex-shrink: 0; }
+
+  /* ── Generic section header centering ── */
+  .section-header {
+    text-align: center; max-width: 640px; margin: 0 auto 56px;
+  }
+  .section-header .section-desc { margin: 0 auto; }
+
+  /* ── What is this check ── */
+  .what-section { background: var(--white); padding-top: 80px; }
+  .what-grid {
+    max-width: 960px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 48px;
+    align-items: center;
+  }
+  .what-text h2 {
+    font-size: clamp(28px, 3.5vw, 40px); font-weight: 700;
+    line-height: 1.15; letter-spacing: -1px;
+    color: var(--green-deep); margin-bottom: 20px;
+  }
+  .what-text p {
+    font-size: 16px; line-height: 1.75; color: var(--slate-500);
+    margin-bottom: 16px;
+  }
+  .what-text p:last-child { margin-bottom: 0; }
+  .what-text strong { color: var(--slate-700); }
+  .what-visual {
+    background: var(--slate-50);
+    border: 1px solid var(--slate-200);
+    border-radius: 20px;
+    padding: 40px 32px;
+    position: relative;
+    overflow: hidden;
+  }
+  .what-visual::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--green-accent), var(--green-mid));
+  }
+  .what-flow-item {
+    display: flex; align-items: flex-start; gap: 16px;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--slate-100);
+  }
+  .what-flow-item:last-child { border-bottom: none; }
+  .what-flow-icon {
+    width: 40px; height: 40px; flex-shrink: 0;
+    background: var(--green-ghost); border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .what-flow-icon svg { width: 20px; height: 20px; color: var(--green-deep); }
+  .what-flow-label { font-size: 13px; font-weight: 700; color: var(--green-deep); margin-bottom: 2px; }
+  .what-flow-desc { font-size: 13px; line-height: 1.55; color: var(--slate-500); }
+
+  /* ── Legal framework ── */
+  .legal-section { background: var(--slate-50); border-top: 1px solid var(--slate-100); }
+  .legal-grid {
+    max-width: 1000px; margin: 0 auto;
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+  }
+  .legal-card {
+    background: var(--white);
+    border: 1px solid var(--slate-200);
+    border-radius: 20px;
+    padding: 36px 28px;
+    position: relative; overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.22,1,0.36,1);
+  }
+  .legal-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 48px rgba(27,67,50,0.08);
+  }
+  .legal-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--green-accent), var(--green-mid));
+  }
+  .legal-card-icon {
+    width: 48px; height: 48px;
+    background: var(--green-ghost);
+    border: 1px solid rgba(149,213,178,0.3);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 20px;
+  }
+  .legal-card-icon svg { width: 24px; height: 24px; color: var(--green-deep); }
+  .legal-card-ref {
+    font-family: var(--font-mono); font-size: 11px; font-weight: 700;
+    letter-spacing: 1px; text-transform: uppercase;
+    color: var(--green-mid); margin-bottom: 10px; display: block;
+  }
+  .legal-card h3 {
+    font-size: 20px; font-weight: 700; color: var(--green-deep);
+    letter-spacing: -0.5px; margin-bottom: 12px;
+  }
+  .legal-card p {
+    font-size: 14px; line-height: 1.7; color: var(--slate-500);
+  }
+  .legal-note {
+    max-width: 1000px; margin: 32px auto 0;
+    background: var(--green-ghost);
+    border: 1px solid rgba(149,213,178,0.3);
+    border-radius: 14px;
+    padding: 20px 28px;
+    display: flex; align-items: flex-start; gap: 14px;
+    font-size: 14px; line-height: 1.65; color: var(--green-dark);
+  }
+  .legal-note svg { flex-shrink: 0; margin-top: 2px; }
+  .legal-note strong { color: var(--green-deep); }
+
+  /* ── Why better ── */
+  .better-section { background: var(--white); }
+  .better-grid {
+    max-width: 960px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+  }
+  .better-item {
+    display: flex; align-items: flex-start; gap: 16px;
+    padding: 24px;
+    border: 1px solid var(--slate-100);
+    border-radius: 14px;
+    transition: all 0.3s cubic-bezier(0.22,1,0.36,1);
+  }
+  .better-item:hover {
+    border-color: var(--green-accent);
+    background: var(--green-ghost);
+  }
+  .better-icon {
+    width: 42px; height: 42px; flex-shrink: 0;
+    background: var(--green-ghost);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .better-icon svg { width: 20px; height: 20px; color: var(--green-deep); }
+  .better-item h3 {
+    font-size: 15px; font-weight: 700; color: var(--green-deep);
+    margin-bottom: 4px;
+  }
+  .better-item p {
+    font-size: 13px; line-height: 1.6; color: var(--slate-500);
+  }
+
+  /* ── How to deposit ── */
+  .deposit-section {
+    background: var(--slate-50);
+    border-top: 1px solid var(--slate-100);
+  }
+  .deposit-methods {
+    max-width: 960px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 28px;
+  }
+  .deposit-card {
+    background: var(--white);
+    border: 1px solid var(--slate-200);
+    border-radius: 20px;
+    padding: 36px 32px;
+    position: relative; overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.22,1,0.36,1);
+  }
+  .deposit-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 48px rgba(27,67,50,0.08);
+  }
+  .deposit-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--green-accent), var(--green-mid));
+  }
+  .deposit-card-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 5px 14px; border-radius: 100px;
+    font-size: 12px; font-weight: 700; letter-spacing: 0.5px;
+    text-transform: uppercase;
+    background: var(--green-ghost); color: var(--green-dark);
+    margin-bottom: 18px;
+  }
+  .deposit-card h3 {
+    font-size: 22px; font-weight: 700; color: var(--green-deep);
+    letter-spacing: -0.5px; margin-bottom: 20px;
+  }
+  .deposit-step {
+    display: flex; gap: 14px; margin-bottom: 18px;
+  }
+  .deposit-step:last-child { margin-bottom: 0; }
+  .deposit-step-num {
+    width: 28px; height: 28px; flex-shrink: 0;
+    border-radius: 8px;
+    background: var(--green-ghost);
+    border: 1px solid rgba(149,213,178,0.3);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-mono); font-size: 12px; font-weight: 700;
+    color: var(--green-deep);
+  }
+  .deposit-step-text {
+    font-size: 14px; line-height: 1.65; color: var(--slate-600);
+    padding-top: 3px;
+  }
+  .deposit-step-text strong { color: var(--green-deep); }
+
+  .deposit-notes {
+    max-width: 960px; margin: 28px auto 0;
+    background: var(--white);
+    border: 1px solid var(--slate-200);
+    border-radius: 16px;
+    padding: 28px 32px;
+  }
+  .deposit-notes h3 {
+    font-size: 16px; font-weight: 700; color: var(--green-deep);
+    margin-bottom: 16px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .deposit-notes-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 12px 32px;
+  }
+  .deposit-note-item {
+    display: flex; align-items: flex-start; gap: 10px;
+    font-size: 14px; line-height: 1.55; color: var(--slate-600);
+  }
+  .deposit-note-item svg { flex-shrink: 0; margin-top: 2px; }
+  .deposit-note-item.caution { color: var(--slate-700); font-weight: 600; }
+  .deposit-note-item.caution svg { color: #dc6843; }
+
+  /* ── Verify ── */
+  .verify-section { background: var(--white); }
+  .verify-container {
+    max-width: 800px; margin: 0 auto;
+    background: var(--green-ghost);
+    border: 1.5px solid rgba(149,213,178,0.35);
+    border-radius: 24px;
+    padding: 56px 48px;
+    text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .verify-container::before {
+    content: ''; position: absolute; top: -80px; right: -80px;
+    width: 240px; height: 240px;
+    background: radial-gradient(circle, rgba(149,213,178,0.2), transparent 70%);
+  }
+  .verify-icon {
+    width: 60px; height: 60px;
+    background: var(--white);
+    border: 1.5px solid rgba(149,213,178,0.4);
+    border-radius: 16px;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 24px;
+  }
+  .verify-icon svg { width: 28px; height: 28px; color: var(--green-deep); }
+  .verify-container h2 {
+    font-size: clamp(24px, 3vw, 32px); font-weight: 700;
+    color: var(--green-deep); letter-spacing: -0.5px;
+    margin-bottom: 12px;
+  }
+  .verify-container > p {
+    font-size: 16px; line-height: 1.7; color: var(--slate-500);
+    max-width: 520px; margin: 0 auto 28px;
+  }
+  .verify-url-box {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--white);
+    border: 1px solid var(--slate-200);
+    border-radius: 10px;
+    padding: 12px 20px;
+    font-family: var(--font-mono);
+    font-size: 14px; font-weight: 700;
+    color: var(--green-deep);
+    margin-bottom: 20px;
+  }
+  .verify-url-box svg { flex-shrink: 0; }
+  .verify-subtext {
+    font-size: 13px; line-height: 1.6; color: var(--slate-400);
+    max-width: 440px; margin: 0 auto;
+  }
+
+  /* ── FAQ ── */
+  .faq-section {
+    background: var(--slate-50);
+    border-top: 1px solid var(--slate-100);
+  }
+  .faq-list {
+    max-width: 720px; margin: 0 auto;
+    display: flex; flex-direction: column; gap: 12px;
+  }
+  .faq-item {
+    background: var(--white);
+    border: 1px solid var(--slate-200);
+    border-radius: 14px;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+  .faq-item.open { border-color: var(--green-accent); }
+  .faq-question {
+    width: 100%; padding: 22px 28px;
+    display: flex; justify-content: space-between; align-items: center; gap: 16px;
+    font-family: var(--font-display); font-size: 16px; font-weight: 600;
+    color: var(--green-deep); text-align: left;
+    background: none; border: none; cursor: pointer;
+    transition: color 0.2s;
+  }
+  .faq-question:hover { color: var(--green-dark); }
+  .faq-question svg {
+    flex-shrink: 0; width: 18px; height: 18px; color: var(--slate-400);
+    transition: transform 0.3s cubic-bezier(0.22,1,0.36,1);
+  }
+  .faq-item.open .faq-question svg { transform: rotate(45deg); color: var(--green-mid); }
+  .faq-answer {
+    max-height: 0; overflow: hidden;
+    transition: max-height 0.4s cubic-bezier(0.22,1,0.36,1), padding 0.3s;
+  }
+  .faq-item.open .faq-answer { max-height: 300px; }
+  .faq-answer-inner {
+    padding: 0 28px 24px;
+    font-size: 15px; line-height: 1.7; color: var(--slate-500);
+  }
+  .faq-answer-inner a {
+    color: var(--green-mid); text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .faq-answer-inner a:hover { color: var(--green-deep); }
+
+  /* ── CTA ── */
+  .checks-cta {
+    background: var(--white); text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .checks-cta::before {
+    content: ''; position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(149,213,178,0.1), transparent 70%);
+  }
+
+  /* ── Footer 5-col ── */
+  .footer-top { grid-template-columns: 2fr 1fr 1fr 1fr 1fr; }
+  @media (max-width: 900px) { .footer-top { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px) { .footer-top { grid-template-columns: 1fr; } }
+
+  /* ── Responsive ── */
+  @media (max-width: 900px) {
+    .checks-hero { padding: 120px 24px 60px; }
+    .what-grid { grid-template-columns: 1fr; max-width: 560px; }
+    .legal-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
+    .better-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
+    .deposit-methods { grid-template-columns: 1fr; max-width: 480px; }
+    .deposit-notes-grid { grid-template-columns: 1fr; }
+    .verify-container { padding: 40px 28px; }
+    .hero-trust-row { gap: 16px; }
+  }
+  @media (max-width: 600px) {
+    .hero-trust-row { flex-direction: column; align-items: center; gap: 10px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="/" class="nav-logo">
+    <div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div>
+    <span class="nav-logo-text">ShelfSpace</span>
+  </a>
+  <ul class="nav-links">
+    <li class="nav-dropdown">
+      <button class="nav-dropdown-toggle" aria-expanded="false" aria-haspopup="true">Services <svg class="dropdown-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
+      <div class="nav-dropdown-menu">
+        <span class="nav-dropdown-header">Vendor Relationships</span>
+        <a href="/consignment">Consignment</a>
+        <a href="/accounts-payable">Wholesale</a>
+        <span class="nav-dropdown-header">Payment Engine</span>
+        <a href="/accounts-payable">Accounts Payable</a>
+        <a href="/credit-memos">Credit Memos</a>
+        <span class="nav-dropdown-header">Intelligence</span>
+        <a href="/shelfiq">ShelfiQ</a>
+      </div>
+    </li>
+    <li><a href="/features">Features</a></li>
+    <li><a href="/how-it-works">How It Works</a></li>
+    <li><a href="/pricing">Pricing</a></li>
+    <li><a href="/about">About</a></li>
+    <li><a href="https://ourshelf.space">Login</a></li>
+    <li><a href="/signup" class="nav-cta">Sign Up <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a></li>
+  </ul>
+  <div class="nav-hamburger" onclick="document.querySelector('.nav-links').classList.toggle('mobile-open')"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- HERO -->
+<div class="checks-hero">
+  <div class="hero-icon reveal">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="2" y="5" width="20" height="14" rx="2"/>
+      <line x1="2" y1="10" x2="22" y2="10"/>
+      <line x1="6" y1="14" x2="10" y2="14"/>
+      <line x1="14" y1="14" x2="18" y2="14"/>
+    </svg>
+  </div>
+  <div class="section-label reveal">Understanding Your Check</div>
+  <h1 class="section-title reveal reveal-delay-1">You received a payment<br>from your retail partner</h1>
+  <p class="section-desc reveal reveal-delay-2">This check was generated by ShelfSpace on behalf of your retailer. It's real, it's legal, and it's backed by funds in their bank account. Here's everything you need to know.</p>
+  <div class="hero-trust-row reveal reveal-delay-3">
+    <span class="hero-trust-item">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      Secure digital issuance
+    </span>
+    <span class="hero-trust-item">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      Check 21 compliant
+    </span>
+    <span class="hero-trust-item">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+      Mobile deposit ready
+    </span>
+  </div>
+</div>
+
+<!-- WHAT IS THIS CHECK -->
+<section class="what-section">
+  <div class="what-grid">
+    <div class="what-text reveal">
+      <h2>What is this check?</h2>
+      <p>ShelfSpace generates official checks on behalf of your retail partner. This check is <strong>drawn directly from the retailer's bank account</strong> — the same way a handwritten check would be.</p>
+      <p>Your retailer authorized this payment based on a verified settlement report that shows exactly what sold during the settlement period. Every dollar is accounted for, line by line.</p>
+      <p>This is <strong>the retailer's real money from their real bank account</strong>. ShelfSpace is the technology that creates and delivers the check — we are not a third-party intermediary holding or moving funds.</p>
+    </div>
+    <div class="what-visual reveal reveal-delay-1">
+      <div class="what-flow-item">
+        <div class="what-flow-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h18v18H3z"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+        </div>
+        <div>
+          <div class="what-flow-label">POS Sales Tracked</div>
+          <div class="what-flow-desc">Your products sell at the register. ShelfSpace tracks every transaction.</div>
+        </div>
+      </div>
+      <div class="what-flow-item">
+        <div class="what-flow-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="16" y2="17"/></svg>
+        </div>
+        <div>
+          <div class="what-flow-label">Settlement Calculated</div>
+          <div class="what-flow-desc">Payout calculated from confirmed sales, with full product-level detail.</div>
+        </div>
+      </div>
+      <div class="what-flow-item">
+        <div class="what-flow-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <div>
+          <div class="what-flow-label">Retailer Authorizes</div>
+          <div class="what-flow-desc">Your retailer reviews and approves the settlement and payment.</div>
+        </div>
+      </div>
+      <div class="what-flow-item">
+        <div class="what-flow-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+        </div>
+        <div>
+          <div class="what-flow-label">Check Delivered</div>
+          <div class="what-flow-desc">A Check 21 compliant check is generated and delivered to you via email.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LEGAL FRAMEWORK -->
+<section class="legal-section">
+  <div class="section-header">
+    <div class="section-label reveal">Legal Framework</div>
+    <h2 class="section-title reveal">Why this is legal</h2>
+    <p class="section-desc reveal">ShelfSpace checks are grounded in well-established federal and state law. The same legal framework that governs every check in the U.S. banking system governs yours.</p>
+  </div>
+  <div class="legal-grid">
+    <div class="legal-card reveal">
+      <div class="legal-card-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
+      <span class="legal-card-ref">Federal Law · Since 2004</span>
+      <h3>Check 21 Act</h3>
+      <p>The Check Clearing for the 21st Century Act specifically authorizes "substitute checks" — electronically created check images that carry the same legal enforceability as a handwritten original. ShelfSpace checks are valid substitute checks under this law.</p>
+    </div>
+    <div class="legal-card reveal reveal-delay-1">
+      <div class="legal-card-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+      </div>
+      <span class="legal-card-ref">UCC · Article 3</span>
+      <h3>Negotiable Instruments</h3>
+      <p>Article 3 of the Uniform Commercial Code defines the legal requirements for checks as negotiable instruments — an unconditional promise to pay a fixed amount. ShelfSpace checks satisfy every element required by Article 3.</p>
+    </div>
+    <div class="legal-card reveal reveal-delay-2">
+      <div class="legal-card-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="18" rx="2"/><line x1="2" y1="9" x2="22" y2="9"/><line x1="10" y1="3" x2="10" y2="9"/></svg>
+      </div>
+      <span class="legal-card-ref">UCC · Article 4</span>
+      <h3>Bank Deposits &amp; Collections</h3>
+      <p>Article 4 governs how banks process check deposits and collections. It establishes the rights and responsibilities of every party in the clearing chain — from deposit to settlement between banks.</p>
+    </div>
+  </div>
+  <div class="legal-note reveal">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2d6a4f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+    <div><strong>Bottom line:</strong> A ShelfSpace check has the same legal standing as a check your retailer would write by hand. The difference is that ours is generated by software — making it more accurate, more traceable, and faster to deliver.</div>
+  </div>
+</section>
+
+<!-- WHY BETTER -->
+<section class="better-section">
+  <div class="section-header">
+    <div class="section-label reveal">An Upgrade, Not a Workaround</div>
+    <h2 class="section-title reveal">Why this is better than<br>a handwritten check</h2>
+    <p class="section-desc reveal">ShelfSpace checks aren't a substitute for the "real thing." They are the real thing — with several significant improvements built in.</p>
+  </div>
+  <div class="better-grid">
+    <div class="better-item reveal">
+      <div class="better-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+      </div>
+      <div>
+        <h3>Eliminates human error</h3>
+        <p>Check amounts are auto-calculated from settlement data. No manual math, no transposed digits, no discrepancies.</p>
+      </div>
+    </div>
+    <div class="better-item reveal reveal-delay-1">
+      <div class="better-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      </div>
+      <div>
+        <h3>Tamper-evident chain of custody</h3>
+        <p>Every check has a digital audit trail from the moment it's created. No one can alter the amount, payee, or date after issuance.</p>
+      </div>
+    </div>
+    <div class="better-item reveal">
+      <div class="better-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="18" rx="2"/><line x1="2" y1="9" x2="22" y2="9"/><line x1="10" y1="3" x2="10" y2="9"/></svg>
+      </div>
+      <div>
+        <h3>Optimized MICR line</h3>
+        <p>Machine-printed MICR encoding is optimized for bank scanners, reducing misreads and deposit rejections compared to handwritten checks.</p>
+      </div>
+    </div>
+    <div class="better-item reveal reveal-delay-1">
+      <div class="better-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="16" y2="17"/></svg>
+      </div>
+      <div>
+        <h3>Tied to settlement data</h3>
+        <p>Every check references a specific settlement report with a complete product-level breakdown of what sold and what you're owed.</p>
+      </div>
+    </div>
+    <div class="better-item reveal">
+      <div class="better-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      <div>
+        <h3>Verified and trackable</h3>
+        <p>Check authenticity can be verified by anyone — you, your bank, or your accountant — via the ShelfSpace verification portal.</p>
+      </div>
+    </div>
+    <div class="better-item reveal reveal-delay-1">
+      <div class="better-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      </div>
+      <div>
+        <h3>Instant delivery</h3>
+        <p>No waiting for mail. Checks are delivered by email the moment the settlement is approved — ready to print and deposit immediately.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW TO DEPOSIT -->
+<section class="deposit-section">
+  <div class="section-header">
+    <div class="section-label reveal">Depositing Your Check</div>
+    <h2 class="section-title reveal">How to deposit</h2>
+    <p class="section-desc reveal">You have two options. Both work. Choose whichever is most convenient for you.</p>
+  </div>
+  <div class="deposit-methods">
+    <div class="deposit-card reveal">
+      <span class="deposit-card-badge">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+        Recommended
+      </span>
+      <h3>Mobile Deposit</h3>
+      <div class="deposit-step">
+        <div class="deposit-step-num">1</div>
+        <div class="deposit-step-text"><strong>Print</strong> the check page on standard 8.5" x 11" white paper using any regular printer.</div>
+      </div>
+      <div class="deposit-step">
+        <div class="deposit-step-num">2</div>
+        <div class="deposit-step-text"><strong>Cut</strong> along the dashed line to separate the check from the instruction sheet.</div>
+      </div>
+      <div class="deposit-step">
+        <div class="deposit-step-num">3</div>
+        <div class="deposit-step-text"><strong>Endorse</strong> the back: sign your name and write "For Mobile Deposit Only" (or check the box on the back).</div>
+      </div>
+      <div class="deposit-step">
+        <div class="deposit-step-num">4</div>
+        <div class="deposit-step-text"><strong>Photograph</strong> the front and back using your bank's mobile app, just like any other check.</div>
+      </div>
+    </div>
+    <div class="deposit-card reveal reveal-delay-1">
+      <span class="deposit-card-badge">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        Also Works
+      </span>
+      <h3>Bank Teller</h3>
+      <div class="deposit-step">
+        <div class="deposit-step-num">1</div>
+        <div class="deposit-step-text"><strong>Print</strong> the full page on standard 8.5" x 11" white paper. Color or black and white both work.</div>
+      </div>
+      <div class="deposit-step">
+        <div class="deposit-step-num">2</div>
+        <div class="deposit-step-text"><strong>Don't cut.</strong> Take the entire printed sheet to your bank — the teller can process it as-is.</div>
+      </div>
+      <div class="deposit-step">
+        <div class="deposit-step-num">3</div>
+        <div class="deposit-step-text"><strong>Deposit</strong> it with the teller like any other check. If asked, let them know it's a Check 21 substitute check.</div>
+      </div>
+    </div>
+  </div>
+  <div class="deposit-notes reveal">
+    <h3>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--green-deep)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+      Important notes
+    </h3>
+    <div class="deposit-notes-grid">
+      <div class="deposit-note-item caution">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
+        Do NOT use an ATM to deposit this check
+      </div>
+      <div class="deposit-note-item">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        Standard 8.5" x 11" white paper is all you need
+      </div>
+      <div class="deposit-note-item">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        Any regular printer — no special ink or paper required
+      </div>
+      <div class="deposit-note-item">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        Color or black and white printing both work fine
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VERIFY -->
+<section class="verify-section">
+  <div class="verify-container reveal">
+    <div class="verify-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+        <polyline points="9 12 12 15 16 10"/>
+      </svg>
+    </div>
+    <h2>Verify your check</h2>
+    <p>Every ShelfSpace check includes a QR code and a unique verification link. If you or your bank has questions about a check's authenticity, it can be verified instantly.</p>
+    <div class="verify-url-box">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--green-mid)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      shelfspace.pro/verify
+    </div>
+    <p class="verify-subtext">ShelfSpace maintains a complete digital chain of custody for every check issued — from creation through settlement. Scan the QR code on your check or visit the link above to verify status.</p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section">
+  <div class="section-header">
+    <div class="section-label reveal">Common Questions</div>
+    <h2 class="section-title reveal">Frequently asked questions</h2>
+  </div>
+  <div class="faq-list">
+    <div class="faq-item reveal">
+      <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+        What if my bank won't accept it?
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      </button>
+      <div class="faq-answer"><div class="faq-answer-inner">This is rare, but it can happen — especially with mobile deposit on first use. If your bank declines the deposit, try depositing with a teller instead and let them know it's a Check 21 substitute check. If you're still having trouble, contact us at <a href="mailto:support@shelfspace.pro">support@shelfspace.pro</a> and we'll help resolve it directly with your bank.</div></div>
+    </div>
+    <div class="faq-item reveal">
+      <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+        Is this the same as a cashier's check?
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      </button>
+      <div class="faq-answer"><div class="faq-answer-inner">No. A cashier's check is drawn on the bank's own funds. A ShelfSpace check is drawn on the retailer's bank account — just like a regular business check. The retailer's name and bank appear on the check because it's their money being paid to you.</div></div>
+    </div>
+    <div class="faq-item reveal">
+      <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+        When does the check expire?
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      </button>
+      <div class="faq-answer"><div class="faq-answer-inner">ShelfSpace checks are void after 90 days from the issue date (printed on the check). We recommend depositing within a few days of receiving it. If your check has expired, contact your retailer to request a reissue.</div></div>
+    </div>
+    <div class="faq-item reveal">
+      <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+        Can I get paid via ACH instead?
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      </button>
+      <div class="faq-answer"><div class="faq-answer-inner">Payment method preferences are set by your retail partner. If you'd prefer to receive payments via ACH or another method, talk to your retailer about their available payment options. ShelfSpace supports multiple payment methods at the retailer's discretion.</div></div>
+    </div>
+    <div class="faq-item reveal">
+      <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+        Who do I contact with questions?
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      </button>
+      <div class="faq-answer"><div class="faq-answer-inner">For questions about your check or payment, email <a href="mailto:support@shelfspace.pro">support@shelfspace.pro</a>. For questions about the settlement amount or what sold, contact your retail partner directly — they have full visibility into the settlement report that generated your check.</div></div>
+    </div>
+    <div class="faq-item reveal">
+      <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+        Can I deposit this check more than once?
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      </button>
+      <div class="faq-answer"><div class="faq-answer-inner">No. Like any check, it can only be deposited once. Attempting to deposit the same check twice is considered fraud. If you need a replacement check for any reason, contact your retailer — they can void and reissue through ShelfSpace.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="checks-cta">
+  <div class="cta-content">
+    <div class="section-label reveal">Still Have Questions?</div>
+    <h2 class="section-title reveal">We're here to help</h2>
+    <p class="section-desc reveal">If you have any questions about your check, the settlement process, or how ShelfSpace works, don't hesitate to reach out.</p>
+    <div class="cta-actions reveal">
+      <a href="mailto:support@shelfspace.pro" class="btn-primary">
+        Contact Support
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+      <a href="/verify" class="btn-secondary">Verify a Check</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="/" class="nav-logo"><div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div><span class="nav-logo-text">ShelfSpace</span></a>
+      <p>Operations and payments intelligence for cannabis.</p>
+    </div>
+    <div class="footer-col"><h4>Services</h4><ul><li><a href="/consignment">Consignment</a></li><li><a href="/accounts-payable">Accounts Payable</a></li><li><a href="/credit-memos">Credit Memos</a></li><li><a href="/shelfiq">ShelfiQ</a></li></ul></div>
+    <div class="footer-col"><h4>Platform</h4><ul><li><a href="/features">Features</a></li><li><a href="/how-it-works">How It Works</a></li><li><a href="/pricing">Pricing</a></li><li><a href="/about">About</a></li></ul></div>
+    <div class="footer-col"><h4>Access</h4><ul><li><a href="https://ourshelf.space">Login</a></li><li><a href="/signup">Sign Up</a></li><li><a href="/contact">Contact</a></li></ul></div>
+    <div class="footer-col"><h4>Company</h4><ul><li><a href="mailto:chris@shelfspace.pro">Email</a></li><li><a href="mailto:support@shelfspace.pro">Support</a></li><li><a href="https://linkedin.com/company/shelfspace-pro" target="_blank" rel="noopener" class="footer-social-link"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> LinkedIn</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><p>&copy; 2026 ShelfSpace Technologies Inc.</p><div class="footer-bottom-links"><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div></div>
+</footer>
+
+<script>
+  // Nav scroll behavior
+  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 20);
+  window.addEventListener('scroll', function() {
+    document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 20);
+  });
+
+  // Mobile dropdown toggle
+  document.querySelectorAll('.nav-dropdown-toggle').forEach(function(btn) {
+    btn.addEventListener('click', function(e) {
+      e.preventDefault();
+      var parent = btn.closest('.nav-dropdown');
+      parent.classList.toggle('open');
+      btn.setAttribute('aria-expanded', parent.classList.contains('open'));
+    });
+  });
+
+  // Scroll-triggered reveal animations
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.style.animationPlayState = 'running';
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(function(el) {
+    el.style.animationPlayState = 'paused';
+    observer.observe(el);
+  });
+</script>
+<script src="/shelfiq-widget.js"></script>
+</body>
+</html>
