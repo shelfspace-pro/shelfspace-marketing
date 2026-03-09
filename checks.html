@@ -437,6 +437,191 @@
     background: radial-gradient(circle, rgba(149,213,178,0.1), transparent 70%);
   }
 
+  /* ── Interactive Check Anatomy ── */
+  .check-anatomy {
+    background: var(--white);
+    padding-top: 0;
+    padding-bottom: 40px;
+  }
+  .check-visual-wrap {
+    max-width: 680px;
+    margin: 0 auto;
+  }
+  .check-mock {
+    background: linear-gradient(135deg, #fefdf8 0%, #faf9f4 100%);
+    border: 1.5px solid var(--slate-200);
+    border-radius: 14px;
+    padding: 32px 36px 24px;
+    position: relative;
+    box-shadow:
+      0 1px 3px rgba(0,0,0,0.04),
+      0 8px 32px rgba(27,67,50,0.06);
+  }
+  .check-mock::before {
+    content: '';
+    position: absolute; top: 0; left: 0; bottom: 0; width: 5px;
+    background: linear-gradient(180deg, var(--green-accent), var(--green-mid));
+    border-radius: 14px 0 0 14px;
+  }
+  .check-sample-badge {
+    position: absolute; top: 12px; right: 16px;
+    font-size: 9px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--slate-300);
+    pointer-events: none;
+  }
+  .check-hotspot {
+    padding: 5px 8px;
+    border-radius: 8px;
+    border: 1.5px solid transparent;
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.22,1,0.36,1);
+    position: relative;
+  }
+  .check-hotspot::after {
+    content: '';
+    position: absolute; top: 4px; right: 4px;
+    width: 6px; height: 6px;
+    background: var(--green-accent);
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .check-mock:not(:hover) .check-hotspot::after {
+    animation: checkPulse 2s ease-in-out infinite;
+    opacity: 0.6;
+  }
+  @keyframes checkPulse {
+    0%, 100% { opacity: 0.3; transform: scale(1); }
+    50% { opacity: 0.8; transform: scale(1.3); }
+  }
+  .check-hotspot:hover,
+  .check-hotspot.active {
+    border-color: var(--green-accent);
+    background: rgba(149,213,178,0.08);
+    box-shadow: 0 0 0 3px rgba(149,213,178,0.1);
+  }
+  .check-hotspot:hover::after,
+  .check-hotspot.active::after {
+    opacity: 0 !important;
+    animation: none;
+  }
+  .check-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  .check-row-top { margin-bottom: 16px; }
+  .check-bank-name {
+    font-size: 16px; font-weight: 700;
+    color: var(--slate-800); letter-spacing: -0.3px;
+  }
+  .check-bank-addr {
+    font-size: 11px; color: var(--slate-400); margin-top: 2px;
+  }
+  .check-number {
+    font-family: var(--font-mono);
+    font-size: 13px; font-weight: 700; color: var(--slate-500);
+  }
+  .check-row-date {
+    justify-content: flex-end;
+    margin-bottom: 18px;
+  }
+  .check-date-label {
+    font-size: 12px; color: var(--slate-400); margin-right: 6px;
+  }
+  .check-date-value {
+    font-family: var(--font-mono);
+    font-size: 14px; font-weight: 600; color: var(--slate-700);
+  }
+  .check-row-payto {
+    align-items: center; gap: 16px;
+    margin-bottom: 14px;
+  }
+  .check-hotspot-payto { flex: 1; }
+  .check-payto-label {
+    display: block; font-size: 9px; text-transform: uppercase;
+    letter-spacing: 1.2px; color: var(--slate-400); margin-bottom: 4px;
+  }
+  .check-payto-value {
+    display: block; font-size: 17px; font-weight: 600;
+    color: var(--slate-800);
+    border-bottom: 1.5px solid var(--slate-200); padding-bottom: 2px;
+  }
+  .check-amount-box {
+    font-family: var(--font-mono);
+    font-size: 19px; font-weight: 700; color: var(--green-deep);
+    border: 1.5px solid var(--slate-200); border-radius: 8px;
+    padding: 6px 14px; white-space: nowrap;
+    background: var(--white);
+  }
+  .check-row-written { margin-bottom: 22px; }
+  .check-written-text {
+    font-size: 13px; color: var(--slate-600); font-style: italic;
+    border-bottom: 1px solid var(--slate-200); padding-bottom: 2px;
+  }
+  .check-dollars-label {
+    font-size: 11px; font-weight: 700; color: var(--slate-400);
+    letter-spacing: 1px; margin-left: 8px;
+  }
+  .check-row-bottom {
+    align-items: flex-end;
+    margin-bottom: 24px;
+  }
+  .check-memo-label {
+    font-size: 9px; text-transform: uppercase;
+    letter-spacing: 1.2px; color: var(--slate-400);
+  }
+  .check-memo-value {
+    font-family: var(--font-mono);
+    font-size: 12px; color: var(--slate-500); margin-left: 4px;
+  }
+  .check-signature {
+    font-size: 15px; font-style: italic; color: var(--slate-500);
+    border-bottom: 1.5px solid var(--slate-300); padding-bottom: 2px;
+    font-family: 'Georgia', serif;
+  }
+  .check-row-micr {
+    justify-content: flex-start;
+    padding-top: 16px;
+    border-top: 1px dashed var(--slate-200);
+  }
+  .check-micr {
+    font-family: var(--font-mono);
+    font-size: 14px; letter-spacing: 2px; color: var(--slate-400);
+  }
+  .check-micr-label {
+    display: flex; gap: 24px; margin-top: 4px;
+  }
+  .check-micr-label span {
+    font-family: var(--font-display);
+    font-size: 9px; letter-spacing: 0.5px; color: var(--slate-300);
+    text-transform: uppercase; font-weight: 600;
+  }
+  /* Description panel */
+  .check-desc-panel {
+    margin-top: 16px;
+    min-height: 56px;
+    background: var(--green-ghost);
+    border: 1px solid rgba(149,213,178,0.3);
+    border-radius: 12px;
+    padding: 14px 20px;
+    display: flex; align-items: center; gap: 12px;
+    transition: all 0.3s cubic-bezier(0.22,1,0.36,1);
+  }
+  .check-desc-panel svg { flex-shrink: 0; }
+  .check-desc-text {
+    font-size: 14px; line-height: 1.6; color: var(--green-dark);
+  }
+  .check-desc-panel.is-default .check-desc-text {
+    color: var(--slate-400); font-style: italic;
+  }
+  .check-desc-panel.is-default { background: var(--slate-50); border-color: var(--slate-100); }
+  .check-desc-label {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.5px;
+    color: var(--green-deep); margin-bottom: 2px; display: block;
+  }
+  .check-desc-panel.is-default .check-desc-label { display: none; }
+
   /* ── Footer 5-col ── */
   .footer-top { grid-template-columns: 2fr 1fr 1fr 1fr 1fr; }
   @media (max-width: 900px) { .footer-top { grid-template-columns: 1fr 1fr; } }
@@ -453,9 +638,34 @@
     .deposit-notes-grid { grid-template-columns: 1fr; }
     .verify-container { padding: 40px 28px; }
     .hero-trust-row { gap: 16px; }
+    .check-mock { padding: 24px 20px 18px; }
+    .check-bank-name { font-size: 14px; }
+    .check-payto-value { font-size: 15px; }
+    .check-amount-box { font-size: 16px; padding: 5px 10px; }
+    .check-signature { font-size: 13px; }
+    .check-micr { font-size: 12px; letter-spacing: 1px; }
+    .check-row-payto { gap: 10px; }
   }
   @media (max-width: 600px) {
     .hero-trust-row { flex-direction: column; align-items: center; gap: 10px; }
+    .check-anatomy { padding-left: 16px; padding-right: 16px; }
+    .check-mock { padding: 20px 14px 14px; }
+    .check-bank-name { font-size: 12px; }
+    .check-bank-addr { font-size: 9px; }
+    .check-number { font-size: 11px; }
+    .check-payto-value { font-size: 13px; }
+    .check-amount-box { font-size: 14px; padding: 4px 8px; }
+    .check-written-text { font-size: 11px; }
+    .check-signature { font-size: 12px; }
+    .check-micr { font-size: 10px; letter-spacing: 1px; }
+    .check-micr-label { gap: 12px; }
+    .check-micr-label span { font-size: 7px; }
+    .check-hotspot { padding: 3px 5px; }
+    .check-row-top { margin-bottom: 10px; }
+    .check-row-date { margin-bottom: 12px; }
+    .check-row-payto { gap: 8px; margin-bottom: 10px; }
+    .check-row-written { margin-bottom: 16px; }
+    .check-row-bottom { margin-bottom: 18px; }
   }
 </style>
 </head>
