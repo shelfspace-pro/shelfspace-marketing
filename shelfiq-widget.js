@@ -92,7 +92,7 @@
   win.innerHTML = [
     '<div class="sq-title">',
     '  <div class="sq-title-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a4 4 0 0 1 4 4v2a4 4 0 0 1-8 0V6a4 4 0 0 1 4-4z"/><rect x="3" y="12" width="18" height="8" rx="3"/></svg></div>',
-    '  <div class="sq-title-info"><div class="sq-title-name">Shelf<span class="sq-iq">iQ</span></div><div class="sq-title-status">Online</div></div>',
+    '  <div class="sq-title-info"><div class="sq-title-name" style="font-variant-ligatures:none">Shelf<span class="sq-iq">iQ</span></div><div class="sq-title-status">Online</div></div>',
     '  <button class="sq-close" aria-label="Close chat">&times;</button>',
     '</div>',
     '<div class="sq-messages" id="sqMessages"></div>',
