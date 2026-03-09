@@ -731,6 +731,90 @@
   </div>
 </div>
 
+<!-- INTERACTIVE CHECK ANATOMY -->
+<section class="check-anatomy">
+  <div class="section-header">
+    <div class="section-label reveal">Anatomy of a Check</div>
+    <h2 class="section-title reveal">What's on your check</h2>
+    <p class="section-desc reveal">Hover over each part of the check to learn what it means.</p>
+  </div>
+  <div class="check-visual-wrap reveal">
+    <div class="check-mock" id="checkMock">
+      <div class="check-sample-badge">SAMPLE</div>
+
+      <!-- Bank info + Check number -->
+      <div class="check-row check-row-top">
+        <div class="check-hotspot" data-label="Bank Information" data-desc="The retailer's bank name and address. This is the drawee bank — where the funds come from when you deposit the check.">
+          <div class="check-bank-name">First National Bank</div>
+          <div class="check-bank-addr">123 Commerce Blvd, Anytown, USA 10001</div>
+        </div>
+        <div class="check-hotspot" data-label="Check Number" data-desc="A unique identifier for this check. Use this number to verify your check instantly at shelfspace.pro/verify.">
+          <div class="check-number">No. 004821</div>
+        </div>
+      </div>
+
+      <!-- Date -->
+      <div class="check-row check-row-date">
+        <div class="check-hotspot" data-label="Issue Date" data-desc="The date the check was issued by ShelfSpace. Deposit promptly — banks may reject checks older than 90 days.">
+          <span class="check-date-label">Date:</span>
+          <span class="check-date-value">02/28/2026</span>
+        </div>
+      </div>
+
+      <!-- Pay to the order of + Amount -->
+      <div class="check-row check-row-payto">
+        <div class="check-hotspot check-hotspot-payto" data-label="Payee Name" data-desc="Your business name as registered with your retail partner. This must match the name on your bank account for smooth deposits.">
+          <span class="check-payto-label">Pay to the order of</span>
+          <span class="check-payto-value">Acme Candle Co.</span>
+        </div>
+        <div class="check-hotspot" data-label="Payment Amount" data-desc="The exact amount in numerals — auto-calculated from the settlement report. No manual math, no transposed digits, no errors.">
+          <div class="check-amount-box">$ 1,247.50</div>
+        </div>
+      </div>
+
+      <!-- Written amount -->
+      <div class="check-row check-row-written">
+        <div class="check-hotspot" data-label="Written Amount" data-desc="The amount spelled out in words. Banks use this as the legal amount if there's ever a discrepancy with the numerals.">
+          <span class="check-written-text">One thousand two hundred forty-seven and 50/100</span>
+          <span class="check-dollars-label">DOLLARS</span>
+        </div>
+      </div>
+
+      <!-- Memo + Signature -->
+      <div class="check-row check-row-bottom">
+        <div class="check-hotspot" data-label="Memo / Reference" data-desc="References the specific settlement report or invoice this payment covers. Look it up in your vendor portal for a full product-level breakdown.">
+          <span class="check-memo-label">Memo:</span>
+          <span class="check-memo-value">Settlement #SS-20260228-004</span>
+        </div>
+        <div class="check-hotspot" data-label="Authorized Signature" data-desc="The retailer pre-authorizes payments through ShelfSpace. This signature is generated on their behalf — it carries the same legal weight as a hand-signed check.">
+          <div class="check-signature">Authorized Signatory</div>
+        </div>
+      </div>
+
+      <!-- MICR line -->
+      <div class="check-row check-row-micr">
+        <div class="check-hotspot" data-label="MICR Line" data-desc="Routing number, account number, and check number encoded for bank scanners. Machine-printed MICR is more accurate than handwritten checks, reducing deposit rejections.">
+          <div class="check-micr">⑆021000021⑆  ⑆123456789⑆  ⑆004821⑆</div>
+          <div class="check-micr-label">
+            <span>Routing</span>
+            <span>Account</span>
+            <span>Check No.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Description panel -->
+    <div class="check-desc-panel is-default" id="checkDescPanel">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+      <div>
+        <span class="check-desc-label" id="checkDescLabel"></span>
+        <span class="check-desc-text" id="checkDescText">Hover over any part of the check to learn what it means.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- WHAT IS THIS CHECK -->
 <section class="what-section">
   <div class="what-grid">
@@ -1134,6 +1218,42 @@
     el.style.animationPlayState = 'paused';
     observer.observe(el);
   });
+
+  // Interactive check anatomy
+  (function() {
+    var panel = document.getElementById('checkDescPanel');
+    var label = document.getElementById('checkDescLabel');
+    var text = document.getElementById('checkDescText');
+    var defaultText = 'Hover over any part of the check to learn what it means.';
+    var hotspots = document.querySelectorAll('#checkMock .check-hotspot');
+    var activeSpot = null;
+
+    function show(spot) {
+      if (activeSpot) activeSpot.classList.remove('active');
+      spot.classList.add('active');
+      activeSpot = spot;
+      label.textContent = spot.getAttribute('data-label');
+      text.textContent = spot.getAttribute('data-desc');
+      panel.classList.remove('is-default');
+    }
+    function reset() {
+      if (activeSpot) activeSpot.classList.remove('active');
+      activeSpot = null;
+      label.textContent = '';
+      text.textContent = defaultText;
+      panel.classList.add('is-default');
+    }
+
+    hotspots.forEach(function(spot) {
+      spot.addEventListener('mouseenter', function() { show(spot); });
+      spot.addEventListener('click', function(e) {
+        e.stopPropagation();
+        if (activeSpot === spot) { reset(); } else { show(spot); }
+      });
+    });
+
+    document.getElementById('checkMock').addEventListener('mouseleave', reset);
+  })();
 </script>
 <script src="/shelfiq-widget.js"></script>
 </body>
