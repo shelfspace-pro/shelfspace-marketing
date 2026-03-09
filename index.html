@@ -1263,9 +1263,10 @@
       if (isDragging) return;
       var rect = container.getBoundingClientRect();
       var viewH = window.innerHeight;
-      // progress: 0 when top of container hits bottom of viewport
-      // progress: 1 when bottom of container hits top of viewport
-      var progress = (viewH - rect.top) / (viewH + rect.height);
+      // Tighter range: transition completes while container is centered in view
+      var start = viewH * 0.7;  // starts when top is 70% down the viewport
+      var end = viewH * 0.15;   // ends when top is 15% down the viewport
+      var progress = (start - rect.top) / (start - end);
       progress = Math.max(0, Math.min(1, progress));
       // Map: 0 -> 95% (chaos visible), 1 -> 5% (clean visible)
       var pct = 95 - (progress * 90);
