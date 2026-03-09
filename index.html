@@ -1255,8 +1255,8 @@
       rightSide.style.clipPath = 'inset(0 0 0 ' + pct + '%)';
     }
 
-    // Start fully showing chaos (left), slider at right edge
-    setSlider(95);
+    // Start showing clean side (right), slider at left edge
+    setSlider(5);
 
     // Scroll-driven animation
     function onScrollUpdate() {
@@ -1268,8 +1268,8 @@
       var end = viewH * 0.15;   // ends when top is 15% down the viewport
       var progress = (start - rect.top) / (start - end);
       progress = Math.max(0, Math.min(1, progress));
-      // Map: 0 -> 95% (chaos visible), 1 -> 5% (clean visible)
-      var pct = 95 - (progress * 90);
+      // Map: 0 -> 5% (clean/right visible), 1 -> 95% (chaos/left visible)
+      var pct = 5 + (progress * 90);
       setSlider(pct);
     }
 
