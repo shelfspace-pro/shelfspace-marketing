@@ -326,6 +326,15 @@
     font-size: 14px; font-weight: 700;
     color: var(--green-deep);
     margin-bottom: 20px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .verify-url-box:hover {
+    border-color: var(--green-accent);
+    background: var(--green-ghost);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(27,67,50,0.1);
   }
   .verify-url-box svg { flex-shrink: 0; }
   .verify-subtext {
@@ -479,26 +488,17 @@
     <div class="what-text reveal">
       <h2>What is this check?</h2>
       <p>ShelfSpace generates official checks on behalf of your retail partner. This check is <strong>drawn directly from the retailer's bank account</strong> — the same way a handwritten check would be.</p>
-      <p>Your retailer authorized this payment based on a verified settlement report that shows exactly what sold during the settlement period. Every dollar is accounted for, line by line.</p>
+      <p>Your retailer authorized this payment through ShelfSpace — whether it's a weekly consignment settlement based on what sold, or a wholesale payment against an invoice. Either way, every dollar is documented and accounted for.</p>
       <p>This is <strong>the retailer's real money from their real bank account</strong>. ShelfSpace is the technology that creates and delivers the check — we are not a third-party intermediary holding or moving funds.</p>
     </div>
     <div class="what-visual reveal reveal-delay-1">
       <div class="what-flow-item">
         <div class="what-flow-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h18v18H3z"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
-        </div>
-        <div>
-          <div class="what-flow-label">POS Sales Tracked</div>
-          <div class="what-flow-desc">Your products sell at the register. ShelfSpace tracks every transaction.</div>
-        </div>
-      </div>
-      <div class="what-flow-item">
-        <div class="what-flow-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="16" y2="17"/></svg>
         </div>
         <div>
-          <div class="what-flow-label">Settlement Calculated</div>
-          <div class="what-flow-desc">Payout calculated from confirmed sales, with full product-level detail.</div>
+          <div class="what-flow-label">Payment Determined</div>
+          <div class="what-flow-desc">From a consignment settlement report or a wholesale invoice — the amount owed is established.</div>
         </div>
       </div>
       <div class="what-flow-item">
@@ -507,7 +507,7 @@
         </div>
         <div>
           <div class="what-flow-label">Retailer Authorizes</div>
-          <div class="what-flow-desc">Your retailer reviews and approves the settlement and payment.</div>
+          <div class="what-flow-desc">Your retailer reviews and approves the payment through ShelfSpace.</div>
         </div>
       </div>
       <div class="what-flow-item">
@@ -515,8 +515,17 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
         </div>
         <div>
-          <div class="what-flow-label">Check Delivered</div>
-          <div class="what-flow-desc">A Check 21 compliant check is generated and delivered to you via email.</div>
+          <div class="what-flow-label">Check Generated</div>
+          <div class="what-flow-desc">A Check 21 compliant check is created, drawn on the retailer's bank account.</div>
+        </div>
+      </div>
+      <div class="what-flow-item">
+        <div class="what-flow-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-6l-2 3h-4l-2-3H2"/><path d="M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/></svg>
+        </div>
+        <div>
+          <div class="what-flow-label">Delivered to You</div>
+          <div class="what-flow-desc">The check is emailed to you instantly — ready to print and deposit.</div>
         </div>
       </div>
     </div>
@@ -715,10 +724,10 @@
     </div>
     <h2>Verify your check</h2>
     <p>Every ShelfSpace check includes a QR code and a unique verification link. If you or your bank has questions about a check's authenticity, it can be verified instantly.</p>
-    <div class="verify-url-box">
+    <a href="/verify" class="verify-url-box">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--green-mid)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
       shelfspace.pro/verify
-    </div>
+    </a>
     <p class="verify-subtext">ShelfSpace maintains a complete digital chain of custody for every check issued — from creation through settlement. Scan the QR code on your check or visit the link above to verify status.</p>
   </div>
 </section>
