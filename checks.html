@@ -948,7 +948,7 @@
   <div class="section-header">
     <div class="section-label reveal">Anatomy of a Check</div>
     <h2 class="section-title reveal">What's on your check</h2>
-    <p class="section-desc reveal">Click any part of the check to learn what it means.</p>
+    <p class="section-desc reveal">Select any part of the check to learn what it means.</p>
   </div>
   <div class="check-visual-wrap reveal">
     <div class="check-flip-tabs">
@@ -1420,7 +1420,11 @@
     var panel = document.getElementById('checkDescPanel');
     var label = document.getElementById('checkDescLabel');
     var text = document.getElementById('checkDescText');
-    var defaultText = 'Hover over any part of the check to learn what it means.';
+    var isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    var defaultText = isTouch
+      ? 'Tap any part of the check to learn what it means.'
+      : 'Hover over any part of the check to learn what it means.';
+    text.textContent = defaultText;
     var allHotspots = document.querySelectorAll('.check-hotspot');
     var activeSpot = null;
 
@@ -1440,16 +1444,29 @@
       panel.classList.add('is-default');
     }
 
-    allHotspots.forEach(function(spot) {
-      spot.addEventListener('mouseenter', function() { show(spot); });
-      spot.addEventListener('click', function(e) {
-        e.stopPropagation();
-        if (activeSpot === spot) { reset(); } else { show(spot); }
+    if (isTouch) {
+      // Touch: tap to show, tap again to dismiss, tap outside to dismiss
+      allHotspots.forEach(function(spot) {
+        spot.addEventListener('click', function(e) {
+          e.stopPropagation();
+          if (activeSpot === spot) { reset(); } else { show(spot); }
+        });
       });
-    });
-
-    document.getElementById('checkMock').addEventListener('mouseleave', reset);
-    document.getElementById('checkMockBack').addEventListener('mouseleave', reset);
+      document.addEventListener('click', function() {
+        if (activeSpot) reset();
+      });
+    } else {
+      // Desktop: hover to show, mouseleave to reset, click also works
+      allHotspots.forEach(function(spot) {
+        spot.addEventListener('mouseenter', function() { show(spot); });
+        spot.addEventListener('click', function(e) {
+          e.stopPropagation();
+          if (activeSpot === spot) { reset(); } else { show(spot); }
+        });
+      });
+      document.getElementById('checkMock').addEventListener('mouseleave', reset);
+      document.getElementById('checkMockBack').addEventListener('mouseleave', reset);
+    }
 
     // Front/back flip tabs
     var tabs = document.querySelectorAll('.check-flip-tab');
