@@ -31,9 +31,9 @@
                 transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
   }
   .reveal.is-visible { opacity: 1; transform: translateY(0); }
-  .reveal-delay-1 { transition-delay: 0.15s; }
-  .reveal-delay-2 { transition-delay: 0.3s; }
-  .reveal-delay-3 { transition-delay: 0.45s; }
+  .reveal-delay-1 { transition-delay: 0.2s; }
+  .reveal-delay-2 { transition-delay: 0.4s; }
+  .reveal-delay-3 { transition-delay: 0.6s; }
 
   /* Hero */
   .hero {
@@ -225,7 +225,7 @@
     border-radius: 20px; overflow: hidden;
     border: 1px solid var(--slate-200);
     box-shadow: 0 8px 40px rgba(27,67,50,0.08);
-    height: 520px; user-select: none; -webkit-user-select: none;
+    height: 620px; user-select: none; -webkit-user-select: none;
     cursor: ew-resize;
   }
   .ba-side {
@@ -340,6 +340,16 @@
   .ba-clean-check-icon svg { width: 18px; height: 18px; color: var(--green-dark); }
   .ba-clean-check-info { font-size: 13px; color: var(--slate-700); font-weight: 500; }
   .ba-clean-check-info span { display: block; font-size: 11px; color: var(--slate-400); font-weight: 400; }
+  .ba-clean-row .amount.credit { color: #c0392b; }
+  .ba-clean-row .vendor-name.credit-label { color: var(--slate-500); font-size: 12px; }
+  .ba-net-payout {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 10px 0 0; margin-top: 4px;
+    border-top: 2px solid var(--green-accent);
+    font-size: 13px; font-weight: 700;
+  }
+  .ba-net-payout .vendor-name { color: var(--green-deep); }
+  .ba-net-payout .amount { font-family: var(--font-mono); font-weight: 700; color: var(--green-deep); font-size: 15px; }
 
   /* Divider */
   .ba-divider {
@@ -457,7 +467,7 @@
 
   /* Responsive for exhibits */
   @media (max-width: 900px) {
-    .beforeafter-container { height: 440px; }
+    .beforeafter-container { height: 540px; }
     .ba-inner { width: 100%; padding: 32px 24px; }
     .ba-chaos { gap: 10px; }
     .ba-chaos-item { max-width: 200px; font-size: 11px; padding: 10px 14px; }
@@ -466,7 +476,7 @@
     .dp-table-row .product { font-size: 11px; }
   }
   @media (max-width: 600px) {
-    .beforeafter-container { height: 400px; }
+    .beforeafter-container { height: 480px; }
     .ba-chaos-item { max-width: 170px; }
     .ba-chaos-item.spreadsheet .ba-spreadsheet-row span { padding: 4px 6px; font-size: 10px; }
   }
@@ -632,7 +642,7 @@
   <div class="beforeafter-header">
     <div class="section-label reveal">The Difference</div>
     <h2 class="section-title reveal">See what changes when<br>payments run themselves</h2>
-    <p class="section-desc reveal">Drag the slider to compare the chaos of manual vendor management with ShelfSpace's automated payment engine.</p>
+    <p class="section-desc reveal">Scroll to see the chaos of manual vendor management transform into ShelfSpace's automated payment engine.</p>
   </div>
   <div class="beforeafter-container reveal" id="ba-container">
     <!-- LEFT: Without ShelfSpace -->
@@ -705,14 +715,28 @@
               <span class="vendor-name">Pacific Roots</span>
               <span class="amount">$287.55</span>
             </div>
+            <h4 style="margin-top:12px;">Return Credit</h4>
+            <div class="ba-clean-row">
+              <span class="vendor-name credit-label">Greenleaf — damaged goods</span>
+              <span class="amount credit">-$45.00</span>
+            </div>
+            <h4 style="margin-top:12px;">Co-Marketing Credit</h4>
+            <div class="ba-clean-row">
+              <span class="vendor-name credit-label">Green Valley — display placement</span>
+              <span class="amount credit">-$75.00</span>
+            </div>
+            <div class="ba-net-payout">
+              <span class="vendor-name">Net Payout</span>
+              <span class="amount">$1,210.54</span>
+            </div>
           </div>
           <div class="ba-clean-check">
             <div class="ba-clean-check-icon">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
             </div>
             <div class="ba-clean-check-info">
-              Check #1847 — $612.79
-              <span>Greenleaf Gardens &bull; Check 21 Compliant &bull; Depositable</span>
+              3 Checks Issued — $1,210.54
+              <span>All vendors &bull; Check 21 Compliant &bull; Depositable</span>
             </div>
           </div>
         </div>
@@ -1215,56 +1239,74 @@
     });
   });
 
-  /* ── EXHIBIT 3: Before/After Slider ── */
+  /* ── EXHIBIT 3: Scroll-Driven Before/After ── */
   (function() {
     var container = document.getElementById('ba-container');
     if (!container) return;
     var divider = document.getElementById('ba-divider');
     var rightSide = document.getElementById('ba-right');
     var isDragging = false;
-    var containerRect;
+    var dragTimeout;
 
-    function setPosition(xPx) {
-      if (!containerRect) containerRect = container.getBoundingClientRect();
-      var pct = ((xPx - containerRect.left) / containerRect.width) * 100;
-      if (pct < 5) pct = 5;
-      if (pct > 95) pct = 95;
+    function setSlider(pct) {
+      if (pct < 2) pct = 2;
+      if (pct > 98) pct = 98;
       divider.style.left = pct + '%';
       rightSide.style.clipPath = 'inset(0 0 0 ' + pct + '%)';
     }
 
-    // Set initial 50/50
-    function initSlider() {
-      containerRect = container.getBoundingClientRect();
-      rightSide.style.clipPath = 'inset(0 0 0 50%)';
-      divider.style.left = '50%';
-    }
-    initSlider();
-    window.addEventListener('resize', initSlider);
+    // Start fully showing chaos (left), slider at right edge
+    setSlider(95);
 
+    // Scroll-driven animation
+    function onScrollUpdate() {
+      if (isDragging) return;
+      var rect = container.getBoundingClientRect();
+      var viewH = window.innerHeight;
+      // progress: 0 when top of container hits bottom of viewport
+      // progress: 1 when bottom of container hits top of viewport
+      var progress = (viewH - rect.top) / (viewH + rect.height);
+      progress = Math.max(0, Math.min(1, progress));
+      // Map: 0 -> 95% (chaos visible), 1 -> 5% (clean visible)
+      var pct = 95 - (progress * 90);
+      setSlider(pct);
+    }
+
+    window.addEventListener('scroll', function() {
+      if (!isDragging) requestAnimationFrame(onScrollUpdate);
+    }, { passive: true });
+    onScrollUpdate();
+
+    // Manual drag override
     function onPointerDown(e) {
       isDragging = true;
-      containerRect = container.getBoundingClientRect();
+      clearTimeout(dragTimeout);
       e.preventDefault();
       var x = e.touches ? e.touches[0].clientX : e.clientX;
-      setPosition(x);
+      var rect = container.getBoundingClientRect();
+      var pct = ((x - rect.left) / rect.width) * 100;
+      setSlider(pct);
     }
     function onPointerMove(e) {
       if (!isDragging) return;
       var x = e.touches ? e.touches[0].clientX : e.clientX;
-      requestAnimationFrame(function() { setPosition(x); });
+      var rect = container.getBoundingClientRect();
+      requestAnimationFrame(function() {
+        var pct = ((x - rect.left) / rect.width) * 100;
+        setSlider(pct);
+      });
     }
     function onPointerUp() {
+      if (!isDragging) return;
       isDragging = false;
+      // Resume scroll-driven after a short delay
+      dragTimeout = setTimeout(onScrollUpdate, 1500);
     }
 
-    // Mouse events on the whole container for better UX
-    container.addEventListener('mousedown', onPointerDown);
+    divider.addEventListener('mousedown', onPointerDown);
     document.addEventListener('mousemove', onPointerMove);
     document.addEventListener('mouseup', onPointerUp);
-
-    // Touch events
-    container.addEventListener('touchstart', onPointerDown, { passive: false });
+    divider.addEventListener('touchstart', onPointerDown, { passive: false });
     document.addEventListener('touchmove', onPointerMove, { passive: true });
     document.addEventListener('touchend', onPointerUp);
   })();
