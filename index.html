@@ -350,6 +350,43 @@
   }
   .ba-net-payout .vendor-name { color: var(--green-deep); }
   .ba-net-payout .amount { font-family: var(--font-mono); font-weight: 700; color: var(--green-deep); font-size: 15px; }
+  .ba-selling-points {
+    max-width: 960px; margin: 28px auto 0;
+    display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px;
+  }
+  .ba-selling-point {
+    background: var(--white);
+    border: 1px solid var(--slate-200);
+    border-radius: 16px;
+    padding: 28px 24px;
+    text-align: center;
+    position: relative; overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.22,1,0.36,1);
+  }
+  .ba-selling-point::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--green-accent), var(--green-mid));
+  }
+  .ba-selling-point:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(27,67,50,0.1);
+  }
+  .ba-selling-point-icon {
+    width: 44px; height: 44px;
+    background: var(--green-ghost);
+    border: 1px solid rgba(149,213,178,0.3);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 14px;
+  }
+  .ba-selling-point-icon svg { width: 22px; height: 22px; color: var(--green-deep); }
+  .ba-selling-point h3 {
+    font-size: 17px; font-weight: 700; color: var(--green-deep);
+    letter-spacing: -0.3px; margin-bottom: 6px;
+  }
+  .ba-selling-point p {
+    font-size: 13px; line-height: 1.6; color: var(--slate-500);
+  }
 
   /* Divider */
   .ba-divider {
@@ -471,6 +508,7 @@
     .ba-inner { width: 100%; padding: 32px 24px; }
     .ba-chaos { gap: 10px; }
     .ba-chaos-item { max-width: 200px; font-size: 11px; padding: 10px 14px; }
+    .ba-selling-points { grid-template-columns: 1fr; max-width: 400px; margin: 24px auto 0; }
     .dualportal-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
     .dp-table-header, .dp-table-row { grid-template-columns: 2fr 0.5fr 0.8fr 0.8fr; }
     .dp-table-row .product { font-size: 11px; }
@@ -641,7 +679,7 @@
 <section class="beforeafter-section">
   <div class="beforeafter-header">
     <div class="section-label reveal">The Difference</div>
-    <h2 class="section-title reveal">See what changes when<br>payments run themselves</h2>
+    <h2 class="section-title reveal">ShelfSpace is an Operational Game Changer</h2>
     <p class="section-desc reveal">Scroll to see the chaos of manual vendor management transform into ShelfSpace's automated payment engine.</p>
   </div>
   <div class="beforeafter-container reveal" id="ba-container">
@@ -748,6 +786,29 @@
         <div class="ba-divider-dot"></div>
         <div class="ba-divider-dot"></div>
       </div>
+    </div>
+  </div>
+  <div class="ba-selling-points">
+    <div class="ba-selling-point reveal">
+      <div class="ba-selling-point-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      </div>
+      <h3>Decrease Labor</h3>
+      <p>Eliminate manual data entry, hand-written checks, and spreadsheet reconciliation. ShelfSpace automates the work that eats your week.</p>
+    </div>
+    <div class="ba-selling-point reveal reveal-delay-1">
+      <div class="ba-selling-point-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+      </div>
+      <h3>Increase Accuracy</h3>
+      <p>Every settlement is auto-calculated from POS data. No transposed digits, no mismatched invoices, no disputes over what sold.</p>
+    </div>
+    <div class="ba-selling-point reveal reveal-delay-2">
+      <div class="ba-selling-point-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+      </div>
+      <h3>Boost Margins</h3>
+      <p>Return credits, consignment splits, and real-time inventory data ensure you keep more of every dollar and stock only what sells.</p>
     </div>
   </div>
 </section>
