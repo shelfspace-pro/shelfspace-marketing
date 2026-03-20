@@ -126,22 +126,8 @@
     <span class="nav-logo-text">ShelfSpace</span>
   </a>
   <ul class="nav-links">
-    <li class="nav-dropdown">
-      <button class="nav-dropdown-toggle" aria-expanded="false" aria-haspopup="true">Services <svg class="dropdown-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
-      <div class="nav-dropdown-menu">
-        <span class="nav-dropdown-header">Vendor Relationships</span>
-        <a href="/consignment">Consignment</a>
-        <a href="/accounts-payable">Wholesale</a>
-        <span class="nav-dropdown-header">Payment Engine</span>
-        <a href="/accounts-payable" class="active">Accounts Payable</a>
-        <a href="/credit-memos">Credit Memos</a>
-        <a href="/checks">Check Payments</a>
-        <span class="nav-dropdown-header">Intelligence</span>
-        <a href="/shelfiq">ShelfiQ</a>
-      </div>
-    </li>
-    <li><a href="/features">Features</a></li>
-    <li><a href="/how-it-works">How It Works</a></li>
+    <li><a href="/consignment">Consignment</a></li>
+    <li><a href="/accounts-payable" class="active">Wholesale</a></li>
     <li><a href="/pricing">Pricing</a></li>
     <li><a href="/about">About</a></li>
     <li><a href="https://ourshelf.space">Login</a></li>
@@ -306,9 +292,9 @@
   <div class="cta-content">
     <div class="section-label reveal">Get Started</div>
     <h2 class="section-title reveal">Ready to simplify vendor payments?</h2>
-    <p class="section-desc reveal">Join the pilot program and pay any vendor — consignment or wholesale — from one platform.</p>
+    <p class="section-desc reveal">Start a free 60-day pilot and pay any vendor — consignment or wholesale — from one platform.</p>
     <div class="cta-actions reveal">
-      <a href="/signup" class="btn-primary">Join the Pilot <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+      <a href="/signup" class="btn-primary">Start Free Pilot <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
       <a href="/contact" class="btn-secondary">Schedule a Call</a>
     </div>
   </div>
@@ -329,7 +315,6 @@
   <div class="footer-bottom"><p>&copy; 2026 ShelfSpace Technologies Inc.</p><div class="footer-bottom-links"><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div></div>
 </footer>
 
-<script src="demo-modal.js"></script>
 <script>
 (function() {
   /* ── Nav scroll state ── */
@@ -350,15 +335,6 @@
   }, { threshold: 0.1 });
   document.querySelectorAll('.reveal').forEach(function(el) { revealObserver.observe(el); });
 
-  /* ── Mobile dropdown toggle ── */
-  document.querySelectorAll('.nav-dropdown-toggle').forEach(function(btn) {
-    btn.addEventListener('click', function(e) {
-      e.preventDefault();
-      var parent = btn.closest('.nav-dropdown');
-      parent.classList.toggle('open');
-      btn.setAttribute('aria-expanded', parent.classList.contains('open'));
-    });
-  });
 })();
 </script>
 <script src="/shelfiq-widget.js"></script>

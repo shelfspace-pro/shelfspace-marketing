@@ -3,20 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ShelfSpace — The Payment and Operations Platform for Cannabis</title>
-<meta name="description" content="ShelfSpace manages consignment and wholesale vendor relationships for cannabis retailers — powered by a single AP engine with built-in credit memo management.">
+<title>ShelfSpace — Vendor Payment Automation &amp; Consignment for Cannabis</title>
+<meta name="description" content="ShelfSpace automates vendor payments, credit memo recovery, and consignment settlements for cannabis dispensaries. Recover thousands monthly. Free 60-day pilot.">
 <link rel="canonical" href="https://shelfspace.pro/">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://shelfspace.pro/">
-<meta property="og:title" content="ShelfSpace — The Payment and Operations Platform for Cannabis">
-<meta property="og:description" content="Consignment and wholesale vendor relationships, powered by one payment engine. Purpose-built for cannabis.">
+<meta property="og:title" content="ShelfSpace — Vendor Payment Automation &amp; Consignment for Cannabis">
+<meta property="og:description" content="ShelfSpace automates vendor payments, credit memo recovery, and consignment settlements for cannabis dispensaries. Recover thousands monthly. Free 60-day pilot.">
 <meta property="og:image" content="https://shelfspace.pro/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:type" content="image/png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="ShelfSpace — The Payment and Operations Platform for Cannabis">
-<meta name="twitter:description" content="Consignment and wholesale vendor relationships, powered by one payment engine. Purpose-built for cannabis.">
+<meta name="twitter:title" content="ShelfSpace — Vendor Payment Automation &amp; Consignment for Cannabis">
+<meta name="twitter:description" content="ShelfSpace automates vendor payments, credit memo recovery, and consignment settlements for cannabis dispensaries. Recover thousands monthly. Free 60-day pilot.">
 <meta name="twitter:image" content="https://shelfspace.pro/og-image.png">
 <meta name="apple-mobile-web-app-title" content="ShelfSpace">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -26,10 +26,15 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 <style>
+  /* ── Keyframes ── */
   @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-12px); } }
   @keyframes ticker-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
 
-  /* Scroll-triggered reveals */
+  /* ── Reveal System ── */
   .reveal {
     opacity: 0; transform: translateY(40px);
     transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
@@ -40,7 +45,7 @@
   .reveal-delay-2 { transition-delay: 0.4s; }
   .reveal-delay-3 { transition-delay: 0.6s; }
 
-  /* Hero */
+  /* ── Hero ── */
   .hero {
     position: relative; min-height: 100vh;
     display: flex; align-items: center; justify-content: center;
@@ -52,15 +57,6 @@
   .hero-parallax-layer { position: absolute; top: 0; left: 0; right: 0; bottom: 0; will-change: transform; }
 
   .hero-content { position: relative; z-index: 2; max-width: 840px; text-align: center; }
-  .hero-pill {
-    display: inline-flex; align-items: center; gap: 8px;
-    padding: 6px 16px 6px 8px;
-    background: var(--green-ghost); border: 1px solid rgba(149,213,178,0.4);
-    border-radius: 100px; font-size: 13px; font-weight: 500; color: var(--green-dark);
-    margin-bottom: 32px;
-    animation: fadeUp 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s both;
-  }
-  .hero-pill-dot { width: 8px; height: 8px; background: var(--green-accent); border-radius: 50%; animation: pulse-glow 2s ease-in-out infinite; }
   .hero h1 {
     font-size: clamp(42px, 6vw, 72px); font-weight: 700;
     line-height: 1.05; letter-spacing: -2.5px;
@@ -73,7 +69,7 @@
   }
   .hero-sub {
     font-size: clamp(17px, 2vw, 20px); line-height: 1.6;
-    color: var(--slate-500); max-width: 620px;
+    color: var(--slate-500); max-width: 680px;
     margin: 0 auto 40px; font-weight: 400;
     animation: fadeUp 0.8s cubic-bezier(0.22,1,0.36,1) 0.35s both;
   }
@@ -82,7 +78,8 @@
     animation: fadeUp 0.8s cubic-bezier(0.22,1,0.36,1) 0.5s both;
   }
   .hero-founder-credit {
-    font-size: 14px; color: var(--slate-500); margin-top: 24px;
+    font-size: 14px; color: var(--slate-500); margin-top: 32px; line-height: 1.6;
+    max-width: 640px; margin-left: auto; margin-right: auto;
     animation: fadeUp 0.8s cubic-bezier(0.22,1,0.36,1) 0.65s both;
   }
   .hero-founder-credit strong { color: var(--slate-600); font-weight: 600; }
@@ -94,135 +91,33 @@
     transform: scaleX(var(--scroll-progress, 0)); transform-origin: left;
   }
 
-  /* POS Ticker */
-  .pos-ticker { padding: 48px 0; background: var(--white); overflow: hidden; }
-  .pos-ticker-label { text-align: center; font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--slate-400); margin-bottom: 28px; }
-  .pos-ticker-track { display: flex; width: max-content; animation: ticker-scroll 30s linear infinite; }
-  .pos-ticker-track:hover { animation-play-state: paused; }
-  .pos-ticker-logo { height: 120px; padding: 0 48px; opacity: 0.45; filter: grayscale(100%); transition: opacity 0.3s, filter 0.3s; }
-  .pos-ticker-logo:hover { opacity: 0.9; filter: grayscale(0%); }
-
-  /* Three Services */
-  .services-section { background: var(--white); }
-  .services-header { text-align: center; max-width: 640px; margin: 0 auto 64px; }
-  .services-header .section-desc { margin: 0 auto; }
-  .services-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px; }
-  .service-card:last-child { grid-column: 1 / -1; }
-  .service-card {
+  /* ── Money Headlines ── */
+  .money-section { background: var(--white); }
+  .money-header { text-align: center; max-width: 640px; margin: 0 auto 64px; }
+  .money-header .section-desc { margin: 0 auto; }
+  .money-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+  .money-card {
     background: var(--white); border: 1px solid var(--slate-200);
     border-radius: 20px; padding: 44px 36px;
     transition: all 0.4s cubic-bezier(0.22,1,0.36,1);
     position: relative; overflow: hidden;
   }
-  .service-card.reveal { transform: translateY(40px) scale(0.97); }
-  .service-card.reveal.is-visible { transform: translateY(0) scale(1); }
-  .service-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--green-accent), var(--green-mid)); opacity: 0; transition: opacity 0.4s; }
-  .service-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(27,67,50,0.08); border-color: var(--green-accent); }
-  .service-card:hover::before { opacity: 1; }
-  .service-card-icon {
+  .money-card.reveal { transform: translateY(40px) scale(0.97); }
+  .money-card.reveal.is-visible { transform: translateY(0) scale(1); }
+  .money-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--green-accent), var(--green-mid)); opacity: 0; transition: opacity 0.4s; }
+  .money-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(27,67,50,0.08); border-color: var(--green-accent); }
+  .money-card:hover::before { opacity: 1; }
+  .money-card-icon {
     width: 52px; height: 52px; background: var(--green-ghost);
     border-radius: 14px; display: flex; align-items: center; justify-content: center;
     margin-bottom: 24px;
   }
-  .service-card-icon svg { width: 26px; height: 26px; color: var(--green-deep); }
-  .service-card h3 { font-size: 22px; font-weight: 700; color: var(--green-deep); margin-bottom: 12px; letter-spacing: -0.5px; }
-  .service-card > p { font-size: 15px; line-height: 1.7; color: var(--slate-500); margin-bottom: 24px; }
-  .service-card-link {
-    display: inline-flex; align-items: center; gap: 6px;
-    font-size: 14px; font-weight: 600; color: var(--green-mid);
-    text-decoration: none; transition: all 0.2s;
-  }
-  .service-card-link:hover { color: var(--green-deep); gap: 10px; }
-  .service-card-link svg { transition: transform 0.2s; }
-  .service-card-link:hover svg { transform: translateX(3px); }
+  .money-card-icon svg { width: 26px; height: 26px; color: var(--green-deep); }
+  .money-card h3 { font-size: 22px; font-weight: 700; color: var(--green-deep); margin-bottom: 12px; letter-spacing: -0.5px; }
+  .money-card > p { font-size: 15px; line-height: 1.7; color: var(--slate-500); }
 
-  /* Referee section */
-  .referee-section { background: var(--green-deep); position: relative; overflow: hidden; }
-  .referee-section::before { content: ''; position: absolute; top: -200px; right: -200px; width: 600px; height: 600px; background: radial-gradient(circle, rgba(149,213,178,0.08), transparent 70%); }
-  .referee-header { text-align: center; max-width: 600px; margin: 0 auto 64px; position: relative; }
-  .referee-header .section-label { color: var(--green-accent); }
-  .referee-header .section-title { color: var(--white); }
-  .referee-header .section-desc { color: rgba(255,255,255,0.6); margin: 0 auto; }
-  .referee-grid { max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; position: relative; }
-  .referee-card {
-    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 16px; padding: 36px 28px; text-align: center;
-    backdrop-filter: blur(8px);
-    transition: all 0.4s cubic-bezier(0.22,1,0.36,1);
-  }
-  .referee-card.reveal { transform: translateY(40px) scale(0.97); }
-  .referee-card.reveal.is-visible { transform: translateY(0) scale(1); }
-  .referee-card:hover { background: rgba(255,255,255,0.08); border-color: rgba(149,213,178,0.3); transform: translateY(-4px); }
-  .referee-card-icon { width: 52px; height: 52px; background: rgba(149,213,178,0.12); border: 1px solid rgba(149,213,178,0.2); border-radius: 14px; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; }
-  .referee-card-icon svg { width: 24px; height: 24px; color: var(--green-accent); }
-  .referee-card h3 { font-size: 18px; font-weight: 700; color: var(--white); margin-bottom: 12px; }
-  .referee-card p { font-size: 14px; line-height: 1.65; color: rgba(255,255,255,0.55); }
-
-  /* Results / Personas */
-  .results-section { background: var(--white); }
-  .results-header { text-align: center; max-width: 560px; margin: 0 auto 72px; }
-  .results-header .section-desc { margin: 0 auto; }
-  .results-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
-  .results-card {
-    border: 1px solid var(--slate-200); border-radius: 20px; padding: 48px 40px;
-    transition: all 0.4s cubic-bezier(0.22,1,0.36,1); position: relative; overflow: hidden;
-  }
-  .results-card.reveal { transform: translateY(40px) scale(0.97); }
-  .results-card.reveal.is-visible { transform: translateY(0) scale(1); }
-  .results-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(27,67,50,0.08); }
-  .results-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
-  .results-card.retailer::before { background: linear-gradient(90deg, var(--green-accent), var(--green-mid)); }
-  .results-card.vendor::before { background: linear-gradient(90deg, var(--green-deep), var(--green-dark)); }
-  .results-tag {
-    display: inline-flex; padding: 4px 14px; border-radius: 100px;
-    font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 24px;
-  }
-  .results-tag.retailer { background: var(--green-ghost); color: var(--green-dark); }
-  .results-tag.vendor { background: rgba(27,67,50,0.06); color: var(--green-deep); }
-  .results-card h3 { font-size: 24px; font-weight: 700; color: var(--green-deep); margin-bottom: 12px; letter-spacing: -0.5px; }
-  .results-card > p { font-size: 15px; line-height: 1.7; color: var(--slate-500); margin-bottom: 28px; }
-  .results-list { list-style: none; display: flex; flex-direction: column; gap: 20px; }
-  .results-list li { display: flex; gap: 16px; }
-  .results-list .num { font-family: var(--font-mono); font-size: 13px; font-weight: 700; color: var(--green-accent); flex-shrink: 0; margin-top: 2px; }
-  .results-list h4 { font-size: 15px; font-weight: 700; color: var(--green-deep); margin-bottom: 4px; }
-  .results-list p { font-size: 14px; line-height: 1.6; color: var(--slate-500); }
-
-  /* Credibility */
-  .credibility-section { background: var(--slate-50); border-top: 1px solid var(--slate-100); }
-  .credibility-container { max-width: 800px; margin: 0 auto; text-align: center; }
-  .credibility-container .section-desc { margin: 0 auto 40px; }
-  .credibility-badges { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; }
-  .credibility-badge { display: flex; flex-direction: column; align-items: center; gap: 12px; }
-  .credibility-badge-icon { width: 56px; height: 56px; background: var(--white); border: 1px solid var(--slate-200); border-radius: 14px; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
-  .credibility-badge-icon svg { width: 24px; height: 24px; color: var(--green-deep); }
-  .credibility-badge span { font-size: 13px; font-weight: 600; color: var(--slate-600); }
-
-  /* Footer 5-col */
-  .footer-top { grid-template-columns: 2fr 1fr 1fr 1fr 1fr; }
-
-  /* Responsive */
-  @media (max-width: 900px) {
-    .hero { padding: 100px 24px 60px; }
-    .hero-actions { flex-direction: column; align-items: center; }
-    .services-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
-    .service-card:last-child { grid-column: auto; }
-    .referee-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
-    .results-grid { grid-template-columns: 1fr; max-width: 520px; margin: 0 auto; }
-    .credibility-badges { gap: 24px; }
-    .shelfiq-section > div:nth-child(3) { grid-template-columns: 1fr !important; max-width: 520px !important; }
-    .pos-ticker-logo { height: 100px; padding: 0 36px; }
-    .pos-ticker { padding: 36px 0; }
-    .pos-ticker-track { animation-duration: 15s; }
-    .footer-top { grid-template-columns: 1fr 1fr; }
-  }
-  @media (max-width: 600px) {
-    .pos-ticker-logo { height: 80px; padding: 0 28px; }
-    .pos-ticker-track { animation-duration: 12s; }
-    .footer-top { grid-template-columns: 1fr; }
-  }
-
-  /* ── EXHIBIT 3: Before/After Split ── */
-  .beforeafter-section { background: var(--white); overflow: hidden; }
+  /* ── Before/After CSS ── */
+  .beforeafter-section { background: var(--slate-50); overflow: hidden; }
   .beforeafter-header { text-align: center; max-width: 600px; margin: 0 auto 64px; }
   .beforeafter-header .section-desc { margin: 0 auto; }
   .beforeafter-container {
@@ -355,43 +250,6 @@
   }
   .ba-net-payout .vendor-name { color: var(--green-deep); }
   .ba-net-payout .amount { font-family: var(--font-mono); font-weight: 700; color: var(--green-deep); font-size: 15px; }
-  .ba-selling-points {
-    max-width: 960px; margin: 28px auto 0;
-    display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px;
-  }
-  .ba-selling-point {
-    background: var(--white);
-    border: 1px solid var(--slate-200);
-    border-radius: 16px;
-    padding: 28px 24px;
-    text-align: center;
-    position: relative; overflow: hidden;
-    transition: all 0.4s cubic-bezier(0.22,1,0.36,1);
-  }
-  .ba-selling-point::before {
-    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
-    background: linear-gradient(90deg, var(--green-accent), var(--green-mid));
-  }
-  .ba-selling-point:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 40px rgba(27,67,50,0.1);
-  }
-  .ba-selling-point-icon {
-    width: 44px; height: 44px;
-    background: var(--green-ghost);
-    border: 1px solid rgba(149,213,178,0.3);
-    border-radius: 12px;
-    display: flex; align-items: center; justify-content: center;
-    margin: 0 auto 14px;
-  }
-  .ba-selling-point-icon svg { width: 22px; height: 22px; color: var(--green-deep); }
-  .ba-selling-point h3 {
-    font-size: 17px; font-weight: 700; color: var(--green-deep);
-    letter-spacing: -0.3px; margin-bottom: 6px;
-  }
-  .ba-selling-point p {
-    font-size: 13px; line-height: 1.6; color: var(--slate-500);
-  }
 
   /* Divider */
   .ba-divider {
@@ -419,10 +277,135 @@
   }
   .ba-divider-arrows svg { width: 10px; height: 10px; color: rgba(255,255,255,0.8); }
 
-  /* ── EXHIBIT 4: Dual Portal Preview ── */
-  .dualportal-section { background: var(--slate-50); border-top: 1px solid var(--slate-100); }
-  .dualportal-header { text-align: center; max-width: 680px; margin: 0 auto 64px; }
+  /* ── Benefits Row ── */
+  .benefits-row {
+    max-width: 960px; margin: 48px auto 0;
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+  }
+  .benefit-item {
+    display: flex; gap: 16px; align-items: flex-start;
+  }
+  .benefit-icon {
+    width: 40px; height: 40px; flex-shrink: 0;
+    background: var(--white); border: 1px solid var(--slate-200);
+    border-radius: 10px; display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  }
+  .benefit-icon svg { width: 20px; height: 20px; color: var(--green-deep); }
+  .benefit-text h4 { font-size: 15px; font-weight: 700; color: var(--green-deep); margin-bottom: 4px; }
+  .benefit-text p { font-size: 13px; line-height: 1.6; color: var(--slate-500); }
+
+  /* ── Two Paths ── */
+  .paths-section { background: var(--white); }
+  .paths-header { text-align: center; max-width: 640px; margin: 0 auto 64px; }
+  .paths-header .section-desc { margin: 0 auto; }
+  .paths-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+  .path-card {
+    border: 1px solid var(--slate-200); border-radius: 20px; padding: 48px 40px;
+    transition: all 0.4s cubic-bezier(0.22,1,0.36,1); position: relative; overflow: hidden;
+    background: var(--white);
+  }
+  .path-card.reveal { transform: translateY(40px) scale(0.97); }
+  .path-card.reveal.is-visible { transform: translateY(0) scale(1); }
+  .path-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(27,67,50,0.08); }
+  .path-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
+  .path-card.consignment::before { background: linear-gradient(90deg, var(--green-accent), var(--green-mid)); }
+  .path-card.wholesale::before { background: linear-gradient(90deg, var(--green-deep), var(--green-dark)); }
+  .path-tag {
+    display: inline-flex; padding: 4px 14px; border-radius: 100px;
+    font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 24px;
+  }
+  .path-tag.consignment { background: var(--green-ghost); color: var(--green-dark); }
+  .path-tag.wholesale { background: rgba(27,67,50,0.06); color: var(--green-deep); }
+  .path-card h3 { font-size: 24px; font-weight: 700; color: var(--green-deep); margin-bottom: 12px; letter-spacing: -0.5px; }
+  .path-card > p { font-size: 15px; line-height: 1.7; color: var(--slate-500); margin-bottom: 28px; }
+  .path-cta {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 14px; font-weight: 600; color: var(--green-mid);
+    text-decoration: none; transition: all 0.2s;
+  }
+  .path-cta:hover { color: var(--green-deep); gap: 10px; }
+
+  /* ── Proof Section ── */
+  .proof-section { background: var(--green-deep); position: relative; overflow: hidden; }
+  .proof-section::before { content: ''; position: absolute; top: -200px; right: -200px; width: 600px; height: 600px; background: radial-gradient(circle, rgba(149,213,178,0.08), transparent 70%); }
+  .proof-header { text-align: center; max-width: 600px; margin: 0 auto 64px; position: relative; }
+  .proof-header .section-label { color: var(--green-accent); }
+  .proof-header .section-title { color: var(--white); }
+
+  .proof-case {
+    max-width: 800px; margin: 0 auto 56px; position: relative;
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 20px; padding: 40px 36px; backdrop-filter: blur(8px);
+  }
+  .proof-case-label {
+    font-size: 12px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+    color: var(--green-accent); margin-bottom: 16px;
+  }
+  .proof-case p {
+    font-size: 17px; line-height: 1.7; color: rgba(255,255,255,0.7);
+  }
+
+  .proof-stats {
+    max-width: 800px; margin: 0 auto 56px; position: relative;
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px;
+  }
+  .proof-stat { text-align: center; }
+  .proof-stat-number {
+    font-family: var(--font-mono); font-size: clamp(28px, 3vw, 36px); font-weight: 700;
+    color: var(--white); margin-bottom: 8px;
+  }
+  .proof-stat-label {
+    font-size: 14px; color: rgba(255,255,255,0.5); line-height: 1.5;
+  }
+
+  .proof-founder {
+    max-width: 800px; margin: 0 auto 64px; position: relative;
+    display: flex; align-items: center; gap: 28px;
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 20px; padding: 36px 32px; backdrop-filter: blur(8px);
+  }
+  .proof-founder img {
+    width: 72px; height: 72px; border-radius: 50%; flex-shrink: 0;
+    object-fit: cover; border: 2px solid rgba(149,213,178,0.3);
+  }
+  .proof-founder-info h4 {
+    font-size: 16px; font-weight: 700; color: var(--white); margin-bottom: 8px;
+  }
+  .proof-founder-info p {
+    font-size: 14px; line-height: 1.6; color: rgba(255,255,255,0.6); margin-bottom: 12px;
+  }
+  .proof-founder-info a {
+    font-size: 14px; font-weight: 600; color: var(--green-accent);
+    text-decoration: none; transition: color 0.2s;
+  }
+  .proof-founder-info a:hover { color: var(--white); }
+
+  /* ── POS Ticker (base) ── */
+  .pos-ticker { padding: 48px 0; background: var(--white); overflow: hidden; }
+  .pos-ticker-label { text-align: center; font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--slate-400); margin-bottom: 28px; }
+  .pos-ticker-track { display: flex; width: max-content; animation: ticker-scroll 30s linear infinite; }
+  .pos-ticker-track:hover { animation-play-state: paused; }
+  .pos-ticker-logo { height: 120px; padding: 0 48px; opacity: 0.45; filter: grayscale(100%); transition: opacity 0.3s, filter 0.3s; }
+  .pos-ticker-logo:hover { opacity: 0.9; filter: grayscale(0%); }
+
+  /* POS Ticker dark bg variant */
+  .proof-ticker { padding: 48px 0 0; position: relative; }
+  .proof-ticker .pos-ticker-label { color: rgba(255,255,255,0.3); }
+  .proof-ticker .pos-ticker-logo {
+    filter: brightness(0) invert(1); opacity: 0.2;
+    height: 120px;
+  }
+  .proof-ticker .pos-ticker-logo:hover { opacity: 0.6; filter: brightness(0) invert(1); }
+
+  /* ── Dual Portal CSS ── */
+  .dualportal-section { background: var(--white); }
+  .dualportal-header { text-align: center; max-width: 680px; margin: 0 auto 48px; }
   .dualportal-header .section-desc { margin: 0 auto; }
+  .dualportal-intro {
+    text-align: center; max-width: 680px; margin: 0 auto 48px;
+    font-size: 16px; line-height: 1.7; color: var(--slate-500);
+  }
   .dualportal-grid {
     max-width: 1060px; margin: 0 auto; display: grid;
     grid-template-columns: 1fr 1fr; gap: 32px;
@@ -507,35 +490,113 @@
   .dp-btn.vendor-btn { background: var(--green-dark); }
   .dp-btn.vendor-btn:hover { background: var(--green-deep); }
 
-  /* Responsive for exhibits */
+  /* ── Vendor Value ── */
+  .vendor-section { background: var(--slate-50); }
+  .vendor-container { max-width: 800px; margin: 0 auto; }
+  .vendor-header { text-align: center; max-width: 640px; margin: 0 auto 24px; }
+  .vendor-header .section-desc { margin: 0 auto; }
+  .vendor-body {
+    text-align: center; max-width: 680px; margin: 0 auto 48px;
+    font-size: 16px; line-height: 1.7; color: var(--slate-500);
+  }
+  .vendor-bullets { display: flex; flex-direction: column; gap: 28px; }
+  .vendor-bullet {
+    display: flex; gap: 20px; align-items: flex-start;
+  }
+  .vendor-bullet-icon {
+    width: 48px; height: 48px; flex-shrink: 0;
+    background: var(--white); border: 1px solid var(--slate-200);
+    border-radius: 14px; display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  }
+  .vendor-bullet-icon svg { width: 22px; height: 22px; color: var(--green-deep); }
+  .vendor-bullet-text h4 { font-size: 16px; font-weight: 700; color: var(--green-deep); margin-bottom: 4px; }
+  .vendor-bullet-text p { font-size: 14px; line-height: 1.65; color: var(--slate-500); }
+
+  /* ── Final CTA ── */
+  .cta-section { background: var(--slate-50); position: relative; overflow: hidden; }
+  .cta-section::before {
+    content: ''; position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 800px; height: 800px;
+    background: radial-gradient(circle, rgba(149,213,178,0.15) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .cta-content {
+    max-width: 700px; margin: 0 auto; text-align: center; position: relative;
+  }
+  .cta-body {
+    font-size: 16px; line-height: 1.7; color: var(--slate-500); margin-bottom: 24px;
+  }
+  .cta-included {
+    font-size: 14px; line-height: 1.6; color: var(--slate-500);
+    background: var(--white); border: 1px solid var(--slate-200);
+    border-radius: 12px; padding: 16px 24px; margin-bottom: 32px;
+    display: inline-block;
+  }
+  .cta-actions {
+    display: flex; align-items: center; justify-content: center; gap: 16px;
+    margin-bottom: 20px;
+  }
+  .cta-note {
+    font-size: 14px; color: var(--slate-500); margin-bottom: 24px;
+  }
+  .cta-compliance {
+    font-size: 12px; color: var(--slate-400); letter-spacing: 0.3px;
+  }
+
+  /* ── Footer 5-col ── */
+  .footer-top { grid-template-columns: 2fr 1fr 1fr 1fr 1fr; }
+
+  /* ── Responsive ── */
   @media (max-width: 900px) {
+    .hero { padding: 100px 24px 60px; }
+    .hero-actions { flex-direction: column; align-items: center; }
+    .money-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
+    .paths-grid { grid-template-columns: 1fr; max-width: 520px; margin: 0 auto; }
+    .proof-stats { grid-template-columns: 1fr; }
+    .proof-founder { flex-direction: column; text-align: center; }
+    .proof-founder img { margin: 0 auto; }
+    .benefits-row { grid-template-columns: 1fr; max-width: 480px; margin: 36px auto 0; }
     .beforeafter-container { height: 440px; }
     .ba-inner { width: 100%; padding: 32px 24px; }
     .ba-chaos { gap: 10px; }
     .ba-chaos-item { max-width: 200px; font-size: 11px; padding: 10px 14px; }
-    .ba-selling-points { grid-template-columns: 1fr; max-width: 400px; margin: 24px auto 0; }
     .dualportal-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
     .dp-table-header, .dp-table-row { grid-template-columns: 2fr 0.5fr 0.8fr 0.8fr; }
     .dp-table-row .product { font-size: 11px; }
+    .pos-ticker-logo { height: 100px; padding: 0 36px; }
+    .pos-ticker { padding: 36px 0; }
+    .pos-ticker-track { animation-duration: 15s; }
+    .proof-ticker .pos-ticker-logo { height: 100px; }
+    .vendor-bullet { flex-direction: column; gap: 12px; }
+    .cta-actions { flex-direction: column; align-items: center; }
+    .footer-top { grid-template-columns: 1fr 1fr; }
   }
   @media (max-width: 600px) {
+    .pos-ticker-logo { height: 80px; padding: 0 28px; }
+    .pos-ticker-track { animation-duration: 12s; }
+    .proof-ticker .pos-ticker-logo { height: 48px; padding: 0 20px; }
+    .proof-stats { grid-template-columns: 1fr; }
     .beforeafter-container { height: 400px; }
     .ba-chaos-item { max-width: 170px; }
     .ba-chaos-item.spreadsheet .ba-spreadsheet-row span { padding: 4px 6px; font-size: 10px; }
+    .footer-top { grid-template-columns: 1fr; }
   }
 
-  /* Reduced motion */
+  /* ── Reduced Motion ── */
   @media (prefers-reduced-motion: reduce) {
-    .reveal, .service-card.reveal, .referee-card.reveal, .results-card.reveal,
+    .reveal, .money-card.reveal, .path-card.reveal,
     .dp-portal.reveal {
       opacity: 1; transform: none; transition: none;
     }
-    .hero-pill, .hero h1, .hero-sub, .hero-actions, .hero-founder-credit,
+    .hero h1, .hero-sub, .hero-actions, .hero-founder-credit,
     .hero-bg-gradient, .hero-bg-gradient-2 { animation: none; }
     .nav-progress { display: none; }
+    .pos-ticker-track { animation: none; }
   }
 </style>
-<noscript><style>.reveal{opacity:1;transform:none;transition:none;}</style></noscript>
+<noscript><style>.reveal,.money-card.reveal,.path-card.reveal,.dp-portal.reveal,.hero h1,.hero-sub,.hero-actions,.hero-founder-credit{opacity:1;transform:none;transition:none;animation:none;}</style></noscript>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -543,7 +604,7 @@
   "name": "ShelfSpace",
   "url": "https://shelfspace.pro",
   "logo": "https://shelfspace.pro/favicon.svg",
-  "description": "Every Vendor. Every Payment. One Engine.",
+  "description": "ShelfSpace automates vendor payments, credit memo recovery, and consignment settlements for cannabis dispensaries.",
   "contactPoint": {
     "@type": "ContactPoint",
     "email": "chris@shelfspace.pro",
@@ -557,40 +618,21 @@
 <!-- NAV -->
 <nav id="nav">
   <a href="/" class="nav-logo">
-    <div class="nav-logo-icon">
-      <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg>
-    </div>
+    <div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div>
     <span class="nav-logo-text">ShelfSpace</span>
   </a>
   <ul class="nav-links">
-    <li class="nav-dropdown">
-      <button class="nav-dropdown-toggle" aria-expanded="false" aria-haspopup="true">Services <svg class="dropdown-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
-      <div class="nav-dropdown-menu">
-        <span class="nav-dropdown-header">Vendor Relationships</span>
-        <a href="/consignment">Consignment</a>
-        <a href="/accounts-payable">Wholesale</a>
-        <span class="nav-dropdown-header">Payment Engine</span>
-        <a href="/accounts-payable">Accounts Payable</a>
-        <a href="/credit-memos">Credit Memos</a>
-        <a href="/checks">Check Payments</a>
-        <span class="nav-dropdown-header">Intelligence</span>
-        <a href="/shelfiq">ShelfiQ</a>
-      </div>
-    </li>
-    <li><a href="/features">Features</a></li>
-    <li><a href="/how-it-works">How It Works</a></li>
+    <li><a href="/consignment">Consignment</a></li>
+    <li><a href="/accounts-payable">Wholesale</a></li>
     <li><a href="/pricing">Pricing</a></li>
     <li><a href="/about">About</a></li>
     <li><a href="https://ourshelf.space">Login</a></li>
     <li><a href="/signup" class="nav-cta">Sign Up <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a></li>
   </ul>
-  <div class="nav-hamburger" onclick="document.querySelector('.nav-links').classList.toggle('mobile-open'); event.stopPropagation();">
-    <span></span><span></span><span></span>
-  </div>
-  <div class="nav-progress"></div>
+  <div class="nav-hamburger" onclick="document.querySelector('.nav-links').classList.toggle('mobile-open'); event.stopPropagation();"><span></span><span></span><span></span></div>
 </nav>
 
-<!-- HERO -->
+<!-- SECTION 1: HERO -->
 <section class="hero">
   <div class="hero-bg">
     <div class="hero-parallax-layer" data-speed="0.3">
@@ -601,91 +643,56 @@
     </div>
   </div>
   <div class="hero-content">
-    <div class="hero-pill">
-      <span class="hero-pill-dot"></span>
-      Pilot program enrolling for select operators
-    </div>
-    <h1>Every Vendor. Every Payment. <span class="text-accent">One Engine.</span></h1>
-    <p class="hero-sub">ShelfSpace gives cannabis retailers and vendors tight control over inventory, payments, and relationships — so both sides are more profitable.</p>
+    <h1>Stop losing money on every vendor relationship.</h1>
+    <p class="hero-sub">Cannabis retailers lose thousands every month to missed credit memos, payment errors, and inventory they paid for but shouldn't have. ShelfSpace automates your vendor payments, recovers the money you're owed, and runs consignment settlements — so you keep more of every dollar.</p>
     <div class="hero-actions">
       <a href="/signup" class="btn-primary">
-        Join the Pilot
+        Start Free Pilot
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
       </a>
-      <button class="btn-secondary" onclick="openDemoModal()">Try Instant Demo</button>
+      <a href="/how-it-works" class="btn-secondary">See How It Works</a>
     </div>
-    <p class="hero-founder-credit">From the founder of <a href="/about"><strong>Diem Cannabis</strong></a> — 10+ years building in the trenches of legal cannabis. <a href="/about">Meet the team &rarr;</a></p>
+    <p class="hero-founder-credit">Built by <a href="/about">Chris Mitchem</a> — 10 years operating dispensaries in Oregon and Massachusetts. Not a tech company. An operator who got tired of the broken system.</p>
   </div>
+  <div class="nav-progress"></div>
 </section>
 
-<!-- POS INTEGRATIONS TICKER -->
-<div class="pos-ticker">
-  <div class="pos-ticker-label">Works with every major cannabis POS</div>
-  <div style="overflow:hidden">
-    <div class="pos-ticker-track">
-      <img src="/logos/dutchie.png" alt="Dutchie" class="pos-ticker-logo">
-      <img src="/logos/flowhub.png" alt="Flowhub" class="pos-ticker-logo">
-      <img src="/logos/blaze.png" alt="BLAZE" class="pos-ticker-logo">
-      <img src="/logos/cova.png" alt="Cova" class="pos-ticker-logo">
-      <img src="/logos/treez.png" alt="Treez" class="pos-ticker-logo">
-      <img src="/logos/alleaves.png" alt="Alleaves" class="pos-ticker-logo">
-      <img src="/logos/mjfreeway.png" alt="MJ Freeway" class="pos-ticker-logo">
-      <img src="/logos/meadow.png" alt="Meadow" class="pos-ticker-logo">
-      <img src="/logos/indicaonline.png" alt="IndicaOnline" class="pos-ticker-logo">
-      <img src="/logos/dutchie.png" alt="Dutchie" class="pos-ticker-logo">
-      <img src="/logos/flowhub.png" alt="Flowhub" class="pos-ticker-logo">
-      <img src="/logos/blaze.png" alt="BLAZE" class="pos-ticker-logo">
-      <img src="/logos/cova.png" alt="Cova" class="pos-ticker-logo">
-      <img src="/logos/treez.png" alt="Treez" class="pos-ticker-logo">
-      <img src="/logos/alleaves.png" alt="Alleaves" class="pos-ticker-logo">
-      <img src="/logos/mjfreeway.png" alt="MJ Freeway" class="pos-ticker-logo">
-      <img src="/logos/meadow.png" alt="Meadow" class="pos-ticker-logo">
-      <img src="/logos/indicaonline.png" alt="IndicaOnline" class="pos-ticker-logo">
-    </div>
+<!-- SECTION 2: MONEY HEADLINES -->
+<section class="money-section">
+  <div class="money-header">
+    <div class="section-label reveal">Why ShelfSpace</div>
+    <h2 class="section-title reveal">ShelfSpace pays for itself in week one.</h2>
   </div>
-</div>
-
-<!-- THREE SERVICES -->
-<section class="services-section">
-  <div class="services-header">
-    <div class="section-label reveal">Our Services</div>
-    <h2 class="section-title reveal">Intelligent inventory management, purchasing, and payments</h2>
-    <p class="section-desc reveal">ShelfSpace optimizes how cannabis retailers and vendors work together — consignment, wholesale, payments, and inventory intelligence, all powered by a single engine.</p>
-  </div>
-  <div class="services-grid">
-    <div class="service-card reveal">
-      <div class="service-card-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg>
+  <div class="money-grid">
+    <div class="money-card reveal">
+      <div class="money-card-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
       </div>
-      <h3>Consignment</h3>
-      <p>Stock now, pay when it sells. Retailers carry inventory for free (huge cash bump), and vendors get guaranteed weekly payments based on sell-through and a powerful new way to get on more shelves.</p>
-      <a href="/consignment" class="service-card-link">Learn more <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a>
+      <h3>Recover thousands in missed credits every month</h3>
+      <p>Returns, expired product, co-marketing spend, pricing corrections — your vendors owe you money that nobody's tracking. ShelfSpace automatically generates credit memos and tracks them to resolution. Most operators recover $2,000–$5,000/month they were leaving on the table.</p>
     </div>
-    <div class="service-card reveal reveal-delay-1">
-      <div class="service-card-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+    <div class="money-card reveal reveal-delay-1">
+      <div class="money-card-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
       </div>
-      <h3>Wholesale</h3>
-      <p>Optimize your wholesale partnerships. Retailers stay organized with payments and vendor credits, vendors get paid on time and accurately, and get access to a free portal to see how their products are performing and when to restock.</p>
-      <a href="/accounts-payable" class="service-card-link">Learn more <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a>
+      <h3>Only pay for what was actually received</h3>
+      <p>ShelfSpace tracks every delivery from order to receiving to payment. Your team verifies what arrived. If the package count is short or the invoice doesn't match, you know before you cut the check — not after.</p>
     </div>
-    <div class="service-card reveal reveal-delay-2">
-      <div class="service-card-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+    <div class="money-card reveal reveal-delay-2">
+      <div class="money-card-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
       </div>
-      <h3>Powered by One Payment Engine</h3>
-      <p>Both consignment and wholesale relationships run on the ShelfSpace AP engine — Check 21 compliant checks, email-based vendor onboarding, credit memo management, and a complete audit trail. One system for every vendor payment.</p>
-      <a href="/accounts-payable" class="service-card-link">Explore the AP engine <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a>
+      <h3>Stock inventory for free with consignment</h3>
+      <p>Carry vendor products with zero upfront cost. You pay only when it sells at the register. ShelfSpace automates the weekly settlement — POS data in, vendor checks out. More selection, better cash flow, zero inventory risk.</p>
     </div>
   </div>
 </section>
 
-<!-- EXHIBIT 3: BEFORE/AFTER SPLIT -->
+<!-- SECTION 3: BEFORE/AFTER -->
 <section class="beforeafter-section">
   <div class="beforeafter-header">
     <div class="section-label reveal">The Difference</div>
-    <h2 class="section-title reveal">ShelfSpace is an Operational Game Changer</h2>
-    <p class="section-desc reveal">Drag the slider to compare the chaos of manual vendor management with ShelfSpace's automated payment engine.</p>
+    <h2 class="section-title reveal">Replace the chaos with a system that works</h2>
   </div>
   <div class="beforeafter-container reveal" id="ba-container">
     <!-- LEFT: Without ShelfSpace -->
@@ -784,137 +791,129 @@
       </div>
     </div>
   </div>
-  <div class="ba-selling-points">
-    <div class="ba-selling-point reveal">
-      <div class="ba-selling-point-icon">
+  <div class="benefits-row reveal">
+    <div class="benefit-item">
+      <div class="benefit-icon">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
       </div>
-      <h3>Decrease Labor</h3>
-      <p>Eliminate manual data entry, hand-written checks, and spreadsheet reconciliation. ShelfSpace automates the work that eats your week.</p>
+      <div class="benefit-text">
+        <h4>Cut labor</h4>
+        <p>No more manual invoice matching, handwritten checks, or spreadsheet reconciliation.</p>
+      </div>
     </div>
-    <div class="ba-selling-point reveal reveal-delay-1">
-      <div class="ba-selling-point-icon">
+    <div class="benefit-item">
+      <div class="benefit-icon">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
       </div>
-      <h3>Increase Accuracy</h3>
-      <p>Every settlement is auto-calculated from POS data. No transposed digits, no mismatched invoices, no disputes over what sold.</p>
+      <div class="benefit-text">
+        <h4>Eliminate errors</h4>
+        <p>Settlements auto-calculated from POS data. Integer-precision math. No rounding, no disputes.</p>
+      </div>
     </div>
-    <div class="ba-selling-point reveal reveal-delay-2">
-      <div class="ba-selling-point-icon">
+    <div class="benefit-item">
+      <div class="benefit-icon">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
       </div>
-      <h3>Boost Margins</h3>
-      <p>Return credits, consignment splits, and real-time inventory data ensure you keep more of every dollar and stock only what sells.</p>
+      <div class="benefit-text">
+        <h4>Recover money</h4>
+        <p>Automated credit memo generation catches every return, expiration, and pricing correction.</p>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- REFEREE -->
-<section class="referee-section">
-  <div class="referee-header">
-    <div class="section-label reveal">The Referee</div>
-    <h2 class="section-title reveal">ShelfSpace is the neutral third party</h2>
-    <p class="section-desc reveal">We handle contracts, ensure accurate payments are made on time, and manage disputes. Think of us as the Switzerland of your supply chain.</p>
+<!-- SECTION 4: TWO PATHS -->
+<section class="paths-section">
+  <div class="paths-header">
+    <div class="section-label reveal">Two Models, One Engine</div>
+    <h2 class="section-title reveal">One platform for every vendor relationship</h2>
   </div>
-  <div class="referee-grid">
-    <div class="referee-card reveal">
-      <div class="referee-card-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-      </div>
-      <h3>Contracts</h3>
-      <p>We work with retailers and vendors to set up fair, compliant agreements. Our purpose-built contracts automate payments, discounts, and shrinkage policies.</p>
+  <div class="paths-grid">
+    <div class="path-card consignment reveal">
+      <div class="path-tag consignment">Consignment</div>
+      <h3>Stock now, pay when it sells</h3>
+      <p>Stock vendor inventory for free. Pay only when it sells. ShelfSpace automates the weekly settlement — pulls your POS data, calculates the profit split, generates a five-page settlement report, and writes a Check 21 compliant check for every vendor. This is how you carry twice the SKUs without spending a dollar more on inventory.</p>
+      <a href="/consignment" class="path-cta">How Consignment Works &rarr;</a>
     </div>
-    <div class="referee-card reveal reveal-delay-1">
-      <div class="referee-card-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
-      </div>
-      <h3>Payments</h3>
-      <p>We track the data and make accurate payments to vendors — weekly settlements, AP checks, and credit memo resolutions. We literally write the checks.</p>
-    </div>
-    <div class="referee-card reveal reveal-delay-2">
-      <div class="referee-card-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-      </div>
-      <h3>Disputes</h3>
-      <p>Retailers and vendors can dispute payments through ShelfSpace. We review transaction logs, facilitate communication, and use data-driven insights to resolve issues fairly.</p>
+    <div class="path-card wholesale reveal reveal-delay-1">
+      <div class="path-tag wholesale">Wholesale</div>
+      <h3>Track, pay, and recover</h3>
+      <p>Already buying wholesale? ShelfSpace replaces your spreadsheets with a real payment operation. Track deliveries from order to payment. Match invoices to what was actually received. Auto-generate credit memos for returns, expirations, and promotions nobody's tracking today. Your vendors get a free portal to check payment status and download checks — so they stop calling you.</p>
+      <a href="/accounts-payable" class="path-cta">How Wholesale Works &rarr;</a>
     </div>
   </div>
 </section>
 
-<!-- RESULTS -->
-<section class="results-section">
-  <div class="results-header">
-    <div class="section-label reveal">The Results</div>
-    <h2 class="section-title reveal">Why retailers and vendors love ShelfSpace</h2>
-    <p class="section-desc reveal">Different problems, same platform. ShelfSpace transforms the economics of cannabis retail for both sides of the counter.</p>
+<!-- SECTION 5: PROOF -->
+<section class="proof-section">
+  <div class="proof-header">
+    <div class="section-label reveal">In Production</div>
+    <h2 class="section-title reveal">Live in production. Saving real money.</h2>
   </div>
-  <div class="results-grid">
-    <div class="results-card retailer reveal">
-      <div class="results-tag retailer">Retailers</div>
-      <h3>Simplify operations &amp; free up cash</h3>
-      <p>Manage every vendor relationship from one platform — consignment settlements, wholesale AP, and credit memos. No more spreadsheets, no more chasing invoices.</p>
-      <ul class="results-list">
-        <li>
-          <span class="num">01</span>
-          <div>
-            <h4>One payment platform</h4>
-            <p>Pay every vendor — consignment or wholesale — through a single system with Check 21 compliant checks.</p>
-          </div>
-        </li>
-        <li>
-          <span class="num">02</span>
-          <div>
-            <h4>Consignment without the headache</h4>
-            <p>Add more inventory for free. Automated settlements, precision math, and weekly vendor payments — all handled for you.</p>
-          </div>
-        </li>
-        <li>
-          <span class="num">03</span>
-          <div>
-            <h4>Complete audit trail</h4>
-            <p>Every payment, settlement, and credit memo is logged and traceable. Full compliance, zero guesswork.</p>
-          </div>
-        </li>
-      </ul>
+
+  <div class="proof-case reveal">
+    <div class="proof-case-label">A two-shop dispensary chain in Massachusetts</div>
+    <p>ShelfSpace is live and processing weekly vendor payments across two dispensary locations — consignment settlements, wholesale AP, credit memo recovery, and delivery verification for 30+ vendor relationships.</p>
+  </div>
+
+  <div class="proof-stats">
+    <div class="proof-stat reveal">
+      <div class="proof-stat-number">Thousands/mo</div>
+      <div class="proof-stat-label">in recovered credit memos</div>
     </div>
-    <div class="results-card vendor reveal reveal-delay-1">
-      <div class="results-tag vendor">Vendors</div>
-      <h3>Get paid reliably &amp; grow your reach</h3>
-      <p>ShelfSpace ensures you get paid on time — every week for consignment, on demand for wholesale. Plus a portal to track everything across all your retail partners.</p>
-      <ul class="results-list">
-        <li>
-          <span class="num">01</span>
-          <div>
-            <h4>Weekly payment certainty</h4>
-            <p>No more "Net 30" that turns into "Net Never." ShelfSpace writes the checks and vendors download them instantly.</p>
-          </div>
-        </li>
-        <li>
-          <span class="num">02</span>
-          <div>
-            <h4>Self-service portal</h4>
-            <p>Download checks, track sales velocity, view credit memos, and monitor inventory across all retailers — all in real time.</p>
-          </div>
-        </li>
-        <li>
-          <span class="num">03</span>
-          <div>
-            <h4>Get into more stores</h4>
-            <p>Consignment lowers the barrier for retailers to stock your products. More stores means more revenue.</p>
-          </div>
-        </li>
-      </ul>
+    <div class="proof-stat reveal reveal-delay-1">
+      <div class="proof-stat-number">30+ vendors</div>
+      <div class="proof-stat-label">managed across 2 locations</div>
+    </div>
+    <div class="proof-stat reveal reveal-delay-2">
+      <div class="proof-stat-number">Hours/week</div>
+      <div class="proof-stat-label">of manual AP eliminated</div>
+    </div>
+  </div>
+
+  <div class="proof-founder reveal">
+    <img src="/chris-mitchem.jpg" alt="Chris Mitchem">
+    <div class="proof-founder-info">
+      <h4>Chris Mitchem, Founder &amp; CEO</h4>
+      <p>10 years operating dispensaries across Oregon and Massachusetts. Built ShelfSpace to solve the problems he lived with every day.</p>
+      <a href="/about">Read his story &rarr;</a>
+    </div>
+  </div>
+
+  <div class="proof-ticker">
+    <div class="pos-ticker-label">Works with every major cannabis POS</div>
+    <div style="overflow:hidden">
+      <div class="pos-ticker-track">
+        <img src="/logos/dutchie.png" alt="Dutchie" class="pos-ticker-logo">
+        <img src="/logos/flowhub.png" alt="Flowhub" class="pos-ticker-logo">
+        <img src="/logos/blaze.png" alt="BLAZE" class="pos-ticker-logo">
+        <img src="/logos/cova.png" alt="Cova" class="pos-ticker-logo">
+        <img src="/logos/treez.png" alt="Treez" class="pos-ticker-logo">
+        <img src="/logos/alleaves.png" alt="Alleaves" class="pos-ticker-logo">
+        <img src="/logos/mjfreeway.png" alt="MJ Freeway" class="pos-ticker-logo">
+        <img src="/logos/meadow.png" alt="Meadow" class="pos-ticker-logo">
+        <img src="/logos/indicaonline.png" alt="IndicaOnline" class="pos-ticker-logo">
+        <img src="/logos/dutchie.png" alt="Dutchie" class="pos-ticker-logo">
+        <img src="/logos/flowhub.png" alt="Flowhub" class="pos-ticker-logo">
+        <img src="/logos/blaze.png" alt="BLAZE" class="pos-ticker-logo">
+        <img src="/logos/cova.png" alt="Cova" class="pos-ticker-logo">
+        <img src="/logos/treez.png" alt="Treez" class="pos-ticker-logo">
+        <img src="/logos/alleaves.png" alt="Alleaves" class="pos-ticker-logo">
+        <img src="/logos/mjfreeway.png" alt="MJ Freeway" class="pos-ticker-logo">
+        <img src="/logos/meadow.png" alt="Meadow" class="pos-ticker-logo">
+        <img src="/logos/indicaonline.png" alt="IndicaOnline" class="pos-ticker-logo">
+      </div>
     </div>
   </div>
 </section>
 
-<!-- EXHIBIT 4: DUAL PORTAL PREVIEW -->
+<!-- SECTION 6: DUAL PORTAL DEMO -->
 <section class="dualportal-section">
   <div class="dualportal-header">
-    <div class="section-label reveal">One Settlement, Two Portals</div>
-    <h2 class="section-title reveal">Retailers and vendors see the same data, different perspective</h2>
-    <p class="section-desc reveal">Full transparency, zero confusion. Hover over any line item to see it highlighted on both sides simultaneously.</p>
+    <div class="section-label reveal">Transparency</div>
+    <h2 class="section-title reveal">Full transparency. Both sides trust the math.</h2>
   </div>
+  <p class="dualportal-intro reveal">Retailers and vendors see the same settlement data from their own perspective. No black box. No disputes over what sold. ShelfSpace is the neutral third party — we verify the numbers and write the checks.</p>
   <div class="dualportal-grid">
     <!-- Retailer Portal -->
     <div class="dp-portal retailer-portal reveal" id="dp-retailer">
@@ -1063,90 +1062,62 @@
   </div>
 </section>
 
-<!-- SHELFIQ -->
-<section class="shelfiq-section" style="background:var(--green-deep);position:relative;overflow:hidden;">
-  <div style="position:absolute;top:-200px;right:-200px;width:600px;height:600px;background:radial-gradient(circle,rgba(149,213,178,0.08),transparent 70%);"></div>
-  <div style="position:absolute;bottom:-150px;left:-100px;width:500px;height:500px;background:radial-gradient(circle,rgba(64,145,108,0.06),transparent 70%);"></div>
-  <div style="max-width:900px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;position:relative;">
-    <div>
-      <div class="section-label reveal" style="color:var(--green-accent);">Platform Intelligence</div>
-      <h2 class="section-title reveal" style="color:var(--white);font-size:clamp(28px,3.5vw,40px);">Meet <span style="font-weight:700;letter-spacing:-0.5px;font-variant-ligatures:none;">Shelf<span style="background:linear-gradient(135deg,var(--green-mid),var(--green-accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">iQ</span></span></h2>
-      <p class="section-desc reveal" style="color:rgba(255,255,255,0.6);">Your AI advisor that knows your entire business. Ask anything about inventory, vendors, deal structures, payments, and performance — get instant, personalized answers backed by your real data.</p>
-      <a href="/shelfiq" class="btn-primary reveal" style="margin-top:24px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);">
-        Learn more
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
-      </a>
+<!-- SECTION 7: VENDOR VALUE -->
+<section class="vendor-section">
+  <div class="vendor-container">
+    <div class="vendor-header">
+      <div class="section-label reveal">For Your Vendors</div>
+      <h2 class="section-title reveal">Your vendors will thank you</h2>
     </div>
-    <div class="reveal reveal-delay-1" style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:20px;overflow:hidden;backdrop-filter:blur(8px);">
-      <div style="display:flex;align-items:center;gap:10px;padding:14px 18px;border-bottom:1px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.03);">
-        <div style="width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,var(--green-mid),var(--green-accent));display:flex;align-items:center;justify-content:center;">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a4 4 0 0 1 4 4v2a4 4 0 0 1-8 0V6a4 4 0 0 1 4-4z"/><rect x="3" y="12" width="18" height="8" rx="3"/></svg>
+    <p class="vendor-body reveal">When you join ShelfSpace, every vendor you work with gets a free portal — no cost, no setup, no catch. They log in, download their checks, track sales across your locations, and monitor inventory in real time. You stop fielding payment calls. They stop chasing invoices.</p>
+    <div class="vendor-bullets">
+      <div class="vendor-bullet reveal">
+        <div class="vendor-bullet-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
         </div>
-        <span style="font-size:13px;font-weight:700;color:var(--white);">ShelfiQ</span>
-      </div>
-      <div style="padding:18px;display:flex;flex-direction:column;gap:12px;">
-        <div style="align-self:flex-end;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.15);color:white;padding:10px 14px;border-radius:14px 14px 6px 14px;font-size:13px;line-height:1.5;max-width:85%;">Which vendors had the highest sell-through last month?</div>
-        <div style="align-self:flex-start;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.08);color:rgba(255,255,255,0.8);padding:10px 14px;border-radius:14px 14px 14px 6px;font-size:13px;line-height:1.6;max-width:85%;"><strong style="color:var(--green-accent);">Top 3 by sell-through:</strong><br>1. Green Valley Farms — 94.2%<br>2. Pacific Roots — 87.6%<br>3. Mountain High — 81.3%</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CREDIBILITY -->
-<section class="credibility-section">
-  <div class="credibility-container">
-    <div class="section-label reveal">Trust & Compliance</div>
-    <h2 class="section-title reveal">Built for the most regulated industry in America</h2>
-    <p class="section-desc reveal">Bank-grade compliance and financial infrastructure, designed specifically for cannabis.</p>
-    <div class="credibility-badges">
-      <div class="credibility-badge reveal">
-        <div class="credibility-badge-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <div class="vendor-bullet-text">
+          <h4>Weekly payment certainty</h4>
+          <p>Checks available for instant download, every week.</p>
         </div>
-        <span>Check 21 Act Compliant</span>
       </div>
-      <div class="credibility-badge reveal reveal-delay-1">
-        <div class="credibility-badge-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+      <div class="vendor-bullet reveal reveal-delay-1">
+        <div class="vendor-bullet-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
         </div>
-        <span>Row-Level Security</span>
+        <div class="vendor-bullet-text">
+          <h4>Multi-retailer dashboard</h4>
+          <p>Vendors see performance across all their retail partners in one view.</p>
+        </div>
       </div>
-      <div class="credibility-badge reveal reveal-delay-2">
-        <div class="credibility-badge-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+      <div class="vendor-bullet reveal reveal-delay-2">
+        <div class="vendor-bullet-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
         </div>
-        <span>Full Audit Trail</span>
-      </div>
-      <div class="credibility-badge reveal reveal-delay-3">
-        <div class="credibility-badge-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        <div class="vendor-bullet-text">
+          <h4>Zero-friction onboarding</h4>
+          <p>Email invite, no bank details needed upfront, portal access in minutes.</p>
         </div>
-        <span>POS Integration</span>
-      </div>
-      <div class="credibility-badge reveal reveal-delay-3">
-        <div class="credibility-badge-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-        </div>
-        <span>24/7 Portal Access</span>
       </div>
     </div>
   </div>
 </section>
 
-<!-- CTA -->
+<!-- SECTION 8: FINAL CTA -->
 <section class="cta-section">
   <div class="cta-content">
-    <div class="section-label reveal">Join the Pilot</div>
-    <h2 class="section-title reveal">See how ShelfSpace can transform your business</h2>
-    <p class="section-desc reveal">Currently enrolling retailers and vendors for the pilot program. Consignment and wholesale support, powered by our AP engine — free to start.</p>
+    <div class="section-label reveal">Get Started</div>
+    <h2 class="section-title reveal">Free 60-day pilot. We handle everything.</h2>
+    <p class="cta-body reveal">Full platform access — consignment settlements, wholesale AP, credit memo recovery, delivery verification, vendor portals, ShelfiQ intelligence. We set it up. We configure your vendors. You run it for 60 days and tell us what it's worth.</p>
+    <div class="cta-included reveal">All features, all portals, unlimited vendors, onboarding support, POS integration, and a dedicated line to the founder.</div>
     <div class="cta-actions reveal">
       <a href="/signup" class="btn-primary">
-        Get Started Now
+        Start the Pilot
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
       </a>
-      <a href="/contact" class="btn-secondary">Schedule a Call</a>
+      <a href="/contact" class="btn-secondary">Talk to Chris</a>
     </div>
-    <p class="cta-note reveal">Free to browse the platform. No commitment required.</p>
+    <p class="cta-note reveal">No credit card. No commitment. No risk. If it doesn't save you money, walk away.</p>
+    <p class="cta-compliance reveal">Check 21 Act compliant &middot; Full audit trail &middot; Bank-grade encryption &middot; Built for the most regulated industry in America</p>
   </div>
 </section>
 
@@ -1207,7 +1178,6 @@
   </div>
 </footer>
 
-<script src="demo-modal.js"></script>
 <script>
 (function() {
   'use strict';
@@ -1281,17 +1251,7 @@
     }
   });
 
-  /* Mobile dropdown toggle */
-  document.querySelectorAll('.nav-dropdown-toggle').forEach(function(btn) {
-    btn.addEventListener('click', function(e) {
-      e.preventDefault();
-      var parent = btn.closest('.nav-dropdown');
-      parent.classList.toggle('open');
-      btn.setAttribute('aria-expanded', parent.classList.contains('open'));
-    });
-  });
-
-  /* ── EXHIBIT 3: Before/After Slider ── */
+  /* ── Before/After Slider ── */
   (function() {
     var container = document.getElementById('ba-container');
     if (!container) return;
@@ -1345,7 +1305,7 @@
     document.addEventListener('touchend', onPointerUp);
   })();
 
-  /* ── EXHIBIT 4: Dual Portal Highlight Sync ── */
+  /* ── Dual Portal Highlight Sync ── */
   (function() {
     var retailer = document.getElementById('dp-retailer');
     var vendor = document.getElementById('dp-vendor');
