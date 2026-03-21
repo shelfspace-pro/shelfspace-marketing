@@ -86,6 +86,30 @@
   .reveal-delay-2 { transition-delay: 0.4s; }
   .reveal-delay-3 { transition-delay: 0.6s; }
 
+  /* ── Managed Service Callout ── */
+  .managed-callout {
+    background: var(--green-deep); position: relative; overflow: hidden;
+    padding: 80px 48px; text-align: center;
+  }
+  .managed-callout::before {
+    content: ''; position: absolute; top: -200px; left: -200px;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(149,213,178,0.08), transparent 70%);
+  }
+  .managed-callout-content { position: relative; max-width: 640px; margin: 0 auto; }
+  .managed-callout-content .section-label { color: var(--green-accent); }
+  .managed-callout-content h2 {
+    font-size: clamp(24px, 3vw, 36px); font-weight: 700; color: var(--white);
+    line-height: 1.25; letter-spacing: -1px; margin-bottom: 20px;
+  }
+  .managed-callout-content p {
+    font-size: 17px; line-height: 1.75; color: rgba(255,255,255,0.6);
+  }
+  .managed-callout-content p strong { color: rgba(255,255,255,0.85); font-weight: 600; }
+  @media (max-width: 900px) {
+    .managed-callout { padding: 60px 24px; }
+  }
+
   /* Comparison section */
   .compare-section { background: var(--white); padding-bottom: 0; }
   .compare-header { text-align: center; max-width: 640px; margin: 0 auto 56px; }
@@ -190,6 +214,15 @@
   <h1 class="section-title">How ShelfSpace Works</h1>
   <p class="section-desc">Two vendor relationship types. One payment engine. ShelfSpace manages the full financial lifecycle between cannabis retailers and vendors.</p>
 </div>
+
+<!-- MANAGED SERVICE CALLOUT -->
+<section class="managed-callout">
+  <div class="managed-callout-content">
+    <div class="section-label reveal">Not Another Portal to Manage</div>
+    <h2 class="reveal">We do the work. You run the dispensary.</h2>
+    <p class="reveal">ShelfSpace isn't software you have to learn — it's a team that runs your vendor finances for you. We handle your consignment settlements, recover your vendor credits, manage your AP, and cut your checks. <strong>Our goal is that you never need to log in.</strong> We just save you money and send you the reports.</p>
+  </div>
+</section>
 
 <!-- ONE PLATFORM, TWO MODELS -->
 <section class="compare-section">
