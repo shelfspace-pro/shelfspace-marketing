@@ -62,7 +62,7 @@ ShelfiQ knows about: sales & inventory (sell-through rates, velocity by SKU, on-
 - Full audit trail and data retention (zero hard deletes)
 - POS integration via CSV upload or direct API — works with ANY cannabis POS: Dutchie, Flowhub, BLAZE, Cova, Treez, Alleaves, MJ Freeway, Meadow, IndicaOnline, and more
 - METRC compatible — inventory is manifested in METRC and received into your POS using your existing protocols
-- QuickBooks sync — all payments flow to your books automatically
+- QuickBooks sync — all payments flow straight to your books
 - Dispute resolution through the platform
 
 ## How ShelfSpace Works (for Consignment)
