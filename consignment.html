@@ -4,19 +4,19 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Consignment — ShelfSpace</title>
-<meta name="description" content="Stock now, pay when it sells. ShelfSpace brings managed consignment to cannabis — weekly settlements, vendor payments, and real-time inventory tracking.">
+<meta name="description" content="Free up hundreds of thousands in cash trapped in inventory. ShelfSpace manages your consignment program end-to-end — vendor payments, POS integration, METRC compliance.">
 <link rel="canonical" href="https://shelfspace.pro/consignment">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://shelfspace.pro/consignment">
 <meta property="og:title" content="Consignment — ShelfSpace">
-<meta property="og:description" content="Stock now, pay when it sells. ShelfSpace brings managed consignment to cannabis — weekly settlements, vendor payments, and real-time inventory tracking.">
+<meta property="og:description" content="Free up hundreds of thousands in cash trapped in inventory. ShelfSpace manages your consignment program end-to-end — vendor payments, POS integration, METRC compliance.">
 <meta property="og:image" content="https://shelfspace.pro/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:type" content="image/png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Consignment — ShelfSpace">
-<meta name="twitter:description" content="Stock now, pay when it sells. ShelfSpace brings managed consignment to cannabis — weekly settlements, vendor payments, and real-time inventory tracking.">
+<meta name="twitter:description" content="Free up hundreds of thousands in cash trapped in inventory. ShelfSpace manages your consignment program end-to-end — vendor payments, POS integration, METRC compliance.">
 <meta name="twitter:image" content="https://shelfspace.pro/og-image.png">
 <meta name="apple-mobile-web-app-title" content="ShelfSpace">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -27,7 +27,8 @@
 <link rel="stylesheet" href="styles.css">
 <style>
   @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-12px); } }
-  @keyframes ticker-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  @keyframes countUp { from { opacity: 0; transform: scale(0.8) translateY(20px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+  @keyframes pulse-glow { 0%, 100% { box-shadow: 0 0 0 0 rgba(149,213,178,0); } 50% { box-shadow: 0 0 40px 8px rgba(149,213,178,0.25); } }
 
   /* ─── HERO ENHANCEMENTS ─── */
   .page-hero { padding-bottom: 40px; }
@@ -44,41 +45,82 @@
   .page-hero.hero-loaded .section-title,
   .page-hero.hero-loaded .section-desc { opacity: 1; transform: translateY(0); }
 
-  /* ─── WHAT IS CONSIGNMENT ─── */
-  .sbt-section { padding: 120px 48px; background: var(--white); }
-  .sbt-container { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
-  .sbt-visual {
-    background: var(--green-deep); border-radius: 20px; padding: 48px; position: relative; overflow: hidden;
-    display: flex; flex-direction: column; gap: 24px; min-height: 400px; justify-content: center;
+  /* ─── CASH BOOST CALCULATOR ─── */
+  .boost-section { background: var(--slate-50); }
+  .boost-header { text-align: center; max-width: 600px; margin: 0 auto 64px; }
+  .boost-header .section-desc { margin: 0 auto; }
+  .boost-container { max-width: 640px; margin: 0 auto; }
+  .boost-slider-wrapper { margin-bottom: 32px; }
+  .boost-slider-header {
+    display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 12px;
   }
-  .sbt-visual::before { content: ''; position: absolute; top: -100px; right: -100px; width: 300px; height: 300px; background: radial-gradient(circle, rgba(149,213,178,0.12), transparent 70%); }
-  .sbt-visual-row { display: flex; align-items: center; gap: 16px; position: relative; z-index: 1; }
-  .sbt-visual-entity { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); border-radius: 12px; padding: 16px 20px; flex: 1; text-align: center; }
-  .sbt-visual-entity .label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--green-accent); margin-bottom: 4px; }
-  .sbt-visual-entity .name { font-size: 15px; font-weight: 600; color: var(--white); }
-  .sbt-visual-arrow { color: var(--green-accent); font-size: 20px; flex-shrink: 0; }
-  .sbt-visual-center { background: rgba(149,213,178,0.15); border: 1px solid rgba(149,213,178,0.25); border-radius: 12px; padding: 20px; text-align: center; position: relative; z-index: 1; }
-  .sbt-visual-center .label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--green-accent); margin-bottom: 4px; }
-  .sbt-visual-center .value { font-family: var(--font-mono); font-size: 24px; font-weight: 700; color: var(--white); }
-  .sbt-visual-center .desc { font-size: 12px; color: rgba(255,255,255,0.5); margin-top: 4px; }
-  .sbt-visual-row-reveal {
-    opacity: 0; transform: translateY(20px);
-    transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
-                transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  .boost-slider-label { font-size: 14px; font-weight: 600; color: var(--green-deep); }
+  .boost-slider-value {
+    font-family: var(--font-mono); font-size: 20px; font-weight: 700; color: var(--green-deep);
   }
-  .sbt-visual.is-visible .sbt-visual-row-reveal { opacity: 1; transform: translateY(0); }
-  .sbt-visual.is-visible .sbt-visual-row-reveal:nth-child(1) { transition-delay: 0.2s; }
-  .sbt-visual.is-visible .sbt-visual-row-reveal:nth-child(2) { transition-delay: 0.5s; }
-  .sbt-visual.is-visible .sbt-visual-row-reveal:nth-child(3) { transition-delay: 0.8s; }
+  .boost-slider {
+    width: 100%; -webkit-appearance: none; appearance: none;
+    height: 8px; border-radius: 4px; background: var(--slate-200); outline: none;
+  }
+  .boost-slider::-webkit-slider-thumb {
+    -webkit-appearance: none; appearance: none; width: 28px; height: 28px; border-radius: 50%;
+    background: var(--green-deep); cursor: pointer; box-shadow: 0 2px 8px rgba(27,67,50,0.3);
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .boost-slider::-webkit-slider-thumb:hover { transform: scale(1.15); box-shadow: 0 4px 12px rgba(27,67,50,0.35); }
+  .boost-slider::-moz-range-thumb {
+    width: 28px; height: 28px; border-radius: 50%; background: var(--green-deep);
+    cursor: pointer; border: none; box-shadow: 0 2px 8px rgba(27,67,50,0.3);
+  }
+  .boost-slider-ticks {
+    display: flex; justify-content: space-between; font-size: 12px; color: var(--slate-400); margin-top: 8px;
+  }
+  .boost-result-card {
+    background: var(--white); border: 1px solid var(--slate-200); border-radius: 16px;
+    overflow: hidden; margin-top: 40px;
+  }
+  .boost-result-rows { padding: 0; }
+  .boost-result-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 18px 24px; border-bottom: 1px solid var(--slate-100);
+  }
+  .boost-result-row:last-child { border-bottom: none; }
+  .boost-result-row-label { font-size: 15px; color: var(--slate-600); }
+  .boost-result-row-value { font-family: var(--font-mono); font-size: 18px; font-weight: 700; color: var(--green-deep); }
+  .boost-total {
+    background: var(--green-deep); padding: 28px 24px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .boost-total-label {
+    font-size: 16px; font-weight: 700; color: rgba(255,255,255,0.7);
+  }
+  .boost-total-value {
+    font-family: var(--font-mono); font-size: clamp(32px, 4vw, 48px); font-weight: 700;
+    color: var(--white); letter-spacing: -1px;
+    transition: transform 0.3s cubic-bezier(0.22,1,0.36,1);
+  }
+  .boost-total-value.pop {
+    animation: countUp 0.4s cubic-bezier(0.22,1,0.36,1);
+  }
+  .boost-total-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
+    border-radius: 16px;
+  }
+  .boost-subtitle {
+    text-align: center; margin-top: 20px; font-size: 14px; color: var(--slate-500); font-style: italic;
+  }
+  .boost-cta-wrap {
+    text-align: center; margin-top: 32px;
+  }
 
-  /* ─── HOW IT WORKS ─── */
-  .how-section { background: var(--slate-50); }
-  .how-header { text-align: center; max-width: 600px; margin: 0 auto 72px; }
+  /* ─── HOW WE MANAGE IT ─── */
+  .how-section { background: var(--white); }
+  .how-header { text-align: center; max-width: 700px; margin: 0 auto 72px; }
   .how-header .section-desc { margin: 0 auto; }
-  .how-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+  .how-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
   .how-card {
-    background: var(--white); border: 1px solid var(--slate-200);
-    border-radius: 16px; padding: 40px 32px;
+    background: var(--slate-50); border: 1px solid var(--slate-200);
+    border-radius: 16px; padding: 36px 28px;
     transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
     position: relative; overflow: hidden;
   }
@@ -86,89 +128,85 @@
   .how-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(27, 67, 50, 0.1); border-color: var(--green-accent); }
   .how-card:hover::before { opacity: 1; }
   .how-step { font-family: var(--font-mono); font-size: 13px; font-weight: 700; color: var(--green-accent); margin-bottom: 20px; letter-spacing: 1px; }
-  .how-icon { width: 48px; height: 48px; background: var(--green-ghost); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 24px; }
+  .how-icon { width: 48px; height: 48px; background: var(--green-ghost); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; }
   .how-icon svg { width: 24px; height: 24px; color: var(--green-deep); }
-  .how-card h3 { font-size: 20px; font-weight: 700; color: var(--green-deep); margin-bottom: 12px; letter-spacing: -0.3px; }
-  .how-card p { font-size: 15px; line-height: 1.65; color: var(--slate-500); }
-  .how-card.reveal, .referee-card.reveal, .results-card.reveal {
+  .how-card h3 { font-size: 18px; font-weight: 700; color: var(--green-deep); margin-bottom: 10px; letter-spacing: -0.3px; }
+  .how-card p { font-size: 14px; line-height: 1.65; color: var(--slate-500); }
+  .how-card.reveal {
     transform: translateY(40px) scale(0.97);
   }
-  .how-card.reveal.is-visible, .referee-card.reveal.is-visible, .results-card.reveal.is-visible {
+  .how-card.reveal.is-visible {
     transform: translateY(0) scale(1);
   }
 
-  /* ─── TICKER ─── */
-  .ticker-section { padding: 40px 0; border-top: 1px solid var(--slate-100); border-bottom: 1px solid var(--slate-100); overflow: hidden; background: var(--slate-50); }
-  .ticker-label { text-align: center; font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--slate-400); margin-bottom: 24px; }
-  .ticker-track { display: flex; width: max-content; animation: ticker-scroll 35s linear infinite; }
-  .ticker-track:hover { animation-play-state: paused; }
-  .ticker-item { display: flex; align-items: center; gap: 12px; padding: 0 48px; white-space: nowrap; font-size: 15px; font-weight: 500; color: var(--slate-400); }
-  .ticker-item .ticker-stat { font-family: var(--font-mono); font-size: 20px; font-weight: 700; color: var(--green-deep); }
-
-  /* ─── POS TICKER ─── */
-  .pos-ticker { padding: 48px 0; background: var(--white); overflow: hidden; }
-  .pos-ticker-label { text-align: center; font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--slate-400); margin-bottom: 28px; }
-  .pos-ticker-track { display: flex; width: max-content; animation: ticker-scroll 30s linear infinite; }
-  .pos-ticker-track:hover { animation-play-state: paused; }
-  .pos-ticker-logo { height: 120px; padding: 0 48px; opacity: 0.45; filter: grayscale(100%); transition: opacity 0.3s, filter 0.3s; }
-  .pos-ticker-logo:hover { opacity: 0.9; filter: grayscale(0%); }
-
-  /* ─── REFEREE SECTION ─── */
-  .referee-section { background: var(--green-deep); position: relative; overflow: hidden; }
-  .referee-section::before { content: ''; position: absolute; top: -200px; right: -200px; width: 600px; height: 600px; background: radial-gradient(circle, rgba(149,213,178,0.08), transparent 70%); transform: translateY(var(--parallax-y, 0)); will-change: transform; }
-  .referee-header { text-align: center; max-width: 600px; margin: 0 auto 64px; position: relative; }
-  .referee-header .section-label { color: var(--green-accent); }
-  .referee-header .section-title { color: var(--white); }
-  .referee-header .section-desc { color: rgba(255,255,255,0.6); margin: 0 auto; }
-  .referee-grid { max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; position: relative; }
-  .referee-card {
-    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 16px; padding: 36px 28px; text-align: center;
-    backdrop-filter: blur(8px);
-    transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  /* ─── MANAGED SERVICE CALLOUT ─── */
+  .managed-callout {
+    background: var(--green-deep); position: relative; overflow: hidden;
+    padding: 80px 48px; text-align: center;
   }
-  .referee-card:hover { background: rgba(255,255,255,0.08); border-color: rgba(149,213,178,0.3); transform: translateY(-4px); }
-  .referee-card-icon { width: 52px; height: 52px; background: rgba(149,213,178,0.12); border: 1px solid rgba(149,213,178,0.2); border-radius: 14px; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; }
-  .referee-card-icon svg { width: 24px; height: 24px; color: var(--green-accent); }
-  .referee-card h3 { font-size: 18px; font-weight: 700; color: var(--white); margin-bottom: 12px; }
-  .referee-card p { font-size: 14px; line-height: 1.65; color: rgba(255,255,255,0.55); }
-
-  /* ─── RESULTS / PERSONAS ─── */
-  .results-section { background: var(--white); }
-  .results-header { text-align: center; max-width: 560px; margin: 0 auto 72px; }
-  .results-header .section-desc { margin: 0 auto; }
-  .results-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
-  .results-card {
-    border: 1px solid var(--slate-200); border-radius: 20px; padding: 48px 40px;
-    transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1); position: relative; overflow: hidden;
+  .managed-callout::before {
+    content: ''; position: absolute; top: -200px; left: -200px;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(149,213,178,0.08), transparent 70%);
   }
-  .results-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(27,67,50,0.08); }
-  .results-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
-  .results-card.retailer::before { background: linear-gradient(90deg, var(--green-accent), var(--green-mid)); }
-  .results-card.vendor::before { background: linear-gradient(90deg, var(--green-deep), var(--green-dark)); }
-  .results-tag {
-    display: inline-flex; padding: 4px 14px; border-radius: 100px;
-    font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 24px;
+  .managed-callout::after {
+    content: ''; position: absolute; bottom: -150px; right: -150px;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(149,213,178,0.06), transparent 70%);
   }
-  .results-tag.retailer { background: var(--green-ghost); color: var(--green-dark); }
-  .results-tag.vendor { background: rgba(27,67,50,0.06); color: var(--green-deep); }
-  .results-card h3 { font-size: 24px; font-weight: 700; color: var(--green-deep); margin-bottom: 12px; letter-spacing: -0.5px; }
-  .results-card > p { font-size: 15px; line-height: 1.7; color: var(--slate-500); margin-bottom: 28px; }
-  .results-list { list-style: none; display: flex; flex-direction: column; gap: 20px; }
-  .results-list li { display: flex; gap: 16px; }
-  .results-list .num { font-family: var(--font-mono); font-size: 13px; font-weight: 700; color: var(--green-accent); flex-shrink: 0; margin-top: 2px; }
-  .results-list h4 { font-size: 15px; font-weight: 700; color: var(--green-deep); margin-bottom: 4px; }
-  .results-list p { font-size: 14px; line-height: 1.6; color: var(--slate-500); }
+  .managed-callout-content { position: relative; max-width: 700px; margin: 0 auto; }
+  .managed-callout-content .section-label { color: var(--green-accent); }
+  .managed-callout-content h2 {
+    font-size: clamp(24px, 3vw, 36px); font-weight: 700; color: var(--white);
+    line-height: 1.25; letter-spacing: -1px; margin-bottom: 20px;
+  }
+  .managed-callout-content p {
+    font-size: 17px; line-height: 1.75; color: rgba(255,255,255,0.6);
+  }
+  .managed-callout-content p strong { color: rgba(255,255,255,0.85); font-weight: 600; }
+  .managed-bullets {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+    max-width: 560px; margin: 32px auto 0; text-align: left;
+  }
+  .managed-bullet {
+    display: flex; align-items: flex-start; gap: 12px;
+    font-size: 15px; color: rgba(255,255,255,0.7);
+  }
+  .managed-bullet svg { flex-shrink: 0; margin-top: 2px; color: var(--green-accent); }
 
-  /* ─── CREDIBILITY ─── */
-  .credibility-section { background: var(--slate-50); border-top: 1px solid var(--slate-100); }
-  .credibility-container { max-width: 800px; margin: 0 auto; text-align: center; }
-  .credibility-container .section-desc { margin: 0 auto 40px; }
-  .credibility-badges { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; }
-  .credibility-badge { display: flex; flex-direction: column; align-items: center; gap: 12px; }
-  .credibility-badge-icon { width: 56px; height: 56px; background: var(--white); border: 1px solid var(--slate-200); border-radius: 14px; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
-  .credibility-badge-icon svg { width: 24px; height: 24px; color: var(--green-deep); }
-  .credibility-badge span { font-size: 13px; font-weight: 600; color: var(--slate-600); }
+  /* ─── FAQ ─── */
+  .faq-section {
+    background: var(--slate-50); padding: 80px 48px;
+  }
+  .faq-header { text-align: center; max-width: 600px; margin: 0 auto 48px; }
+  .faq-header .section-desc { margin: 0 auto; }
+  .faq-list {
+    max-width: 680px; margin: 0 auto;
+  }
+  .faq-list details {
+    border-bottom: 1px solid var(--slate-200);
+  }
+  .faq-list details:first-child {
+    border-top: 1px solid var(--slate-200);
+  }
+  .faq-list summary {
+    padding: 20px 0; font-size: 17px; font-weight: 600;
+    color: var(--green-deep); cursor: pointer; list-style: none;
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  }
+  .faq-list summary::-webkit-details-marker { display: none; }
+  .faq-list summary::after {
+    content: '+'; font-size: 22px; font-weight: 400;
+    color: var(--slate-400); transition: transform 0.2s;
+    flex-shrink: 0;
+  }
+  .faq-list details[open] summary::after {
+    content: '\2212';
+  }
+  .faq-list details p {
+    padding: 0 0 20px; margin: 0; font-size: 15px;
+    line-height: 1.7; color: var(--slate-500);
+  }
 
   /* ─── CTA PARALLAX ─── */
   .cta-section::before { transform: translate(-50%,-50%) translateY(var(--parallax-y, 0)); will-change: transform; }
@@ -180,231 +218,32 @@
 
   /* ─── RESPONSIVE ─── */
   @media (max-width: 900px) {
-    .sbt-section { padding: 80px 24px; }
-    .sbt-container { grid-template-columns: 1fr; gap: 48px; }
-    .how-grid { grid-template-columns: 1fr; max-width: 480px; }
-    .referee-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
-    .results-grid { grid-template-columns: 1fr; max-width: 520px; margin: 0 auto; }
-    .credibility-badges { gap: 24px; }
-    .pos-ticker-logo { height: 100px; padding: 0 36px; }
-    .pos-ticker { padding: 36px 0; }
-    .pos-ticker-track { animation-duration: 15s; }
+    .how-grid { grid-template-columns: 1fr 1fr; max-width: 600px; }
+    .managed-callout { padding: 60px 24px; }
+    .managed-bullets { grid-template-columns: 1fr; }
+    .faq-section { padding: 60px 24px; }
   }
   @media (max-width: 600px) {
-    .pos-ticker-logo { height: 80px; padding: 0 28px; }
-    .pos-ticker-track { animation-duration: 12s; }
-  }
-
-  /* ─── SETTLEMENT CALCULATOR ─── */
-  .calc-section { background: var(--white); }
-  .calc-container { max-width: 1100px; margin: 0 auto; }
-  .calc-header { text-align: center; max-width: 600px; margin: 0 auto 64px; }
-  .calc-header .section-desc { margin: 0 auto; }
-  .calc-layout { display: grid; grid-template-columns: 380px 1fr; gap: 48px; align-items: start; }
-  .calc-controls { background: var(--green-ghost); border: 1px solid var(--slate-200); border-radius: 20px; padding: 36px 32px; position: sticky; top: 100px; }
-  .calc-slider-group { margin-bottom: 28px; }
-  .calc-slider-group:last-child { margin-bottom: 0; }
-  .calc-slider-label { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 12px; }
-  .calc-slider-label span:first-child { font-size: 14px; font-weight: 600; color: var(--green-deep); }
-  .calc-slider-value { font-family: var(--font-mono); font-size: 18px; font-weight: 700; color: var(--green-deep); }
-  .calc-slider {
-    -webkit-appearance: none; appearance: none; width: 100%; height: 6px;
-    background: var(--slate-200); border-radius: 3px; outline: none; cursor: pointer;
-  }
-  .calc-slider::-webkit-slider-thumb {
-    -webkit-appearance: none; appearance: none; width: 22px; height: 22px;
-    background: var(--green-deep); border-radius: 50%; cursor: pointer;
-    box-shadow: 0 2px 8px rgba(27,67,50,0.25);
-    transition: transform 0.15s, box-shadow 0.15s;
-  }
-  .calc-slider::-webkit-slider-thumb:hover { transform: scale(1.15); box-shadow: 0 4px 12px rgba(27,67,50,0.35); }
-  .calc-slider::-moz-range-thumb {
-    width: 22px; height: 22px; background: var(--green-deep);
-    border-radius: 50%; border: none; cursor: pointer;
-    box-shadow: 0 2px 8px rgba(27,67,50,0.25);
-  }
-  .calc-slider::-webkit-slider-runnable-track { height: 6px; border-radius: 3px; }
-  .calc-slider::-moz-range-track { height: 6px; border-radius: 3px; background: var(--slate-200); }
-
-  .calc-report { background: var(--white); border: 1px solid var(--slate-200); border-radius: 20px; overflow: hidden; min-height: 420px; }
-  .calc-report-header {
-    background: var(--green-deep); padding: 24px 32px; display: flex; justify-content: space-between; align-items: center;
-  }
-  .calc-report-header-left .calc-report-title { font-size: 16px; font-weight: 700; color: var(--white); margin-bottom: 2px; }
-  .calc-report-header-left .calc-report-period { font-size: 12px; color: rgba(255,255,255,0.5); font-family: var(--font-mono); }
-  .calc-report-header-right { text-align: right; }
-  .calc-report-header-right .calc-report-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--green-accent); margin-bottom: 2px; }
-  .calc-report-header-right .calc-report-total { font-family: var(--font-mono); font-size: 24px; font-weight: 700; color: var(--white); }
-
-  .calc-report-table { width: 100%; border-collapse: collapse; }
-  .calc-report-table thead th {
-    font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px;
-    color: var(--slate-400); padding: 16px 16px 12px; text-align: left; border-bottom: 1px solid var(--slate-100);
-  }
-  .calc-report-table thead th:last-child,
-  .calc-report-table thead th:nth-child(n+2) { text-align: right; }
-  .calc-report-table tbody td {
-    font-size: 14px; padding: 14px 16px; border-bottom: 1px solid var(--slate-50); color: var(--slate-700);
-  }
-  .calc-report-table tbody td:first-child { font-weight: 500; color: var(--green-deep); }
-  .calc-report-table tbody td:nth-child(n+2) { font-family: var(--font-mono); font-size: 13px; text-align: right; }
-  .calc-report-table tbody tr { opacity: 0; transform: translateY(8px); transition: opacity 0.35s ease, transform 0.35s ease; }
-  .calc-report-table tbody tr.line-visible { opacity: 1; transform: translateY(0); }
-
-  .calc-pagination { display: flex; align-items: center; justify-content: center; gap: 6px; padding: 12px 16px 4px; }
-  .calc-pagination:empty { display: none; }
-  .calc-pagination button {
-    width: 32px; height: 32px; border: 1px solid var(--slate-200); border-radius: 8px;
-    background: var(--white); color: var(--slate-600); font-size: 13px; font-weight: 600;
-    cursor: pointer; transition: all 0.2s ease; display: flex; align-items: center; justify-content: center;
-  }
-  .calc-pagination button:hover { background: var(--green-ghost); border-color: var(--green-accent); color: var(--green-deep); }
-  .calc-pagination button.active { background: var(--green-deep); border-color: var(--green-deep); color: var(--white); }
-  .calc-pagination button:disabled { opacity: 0.4; cursor: default; }
-  .calc-pagination button:disabled:hover { background: var(--white); border-color: var(--slate-200); color: var(--slate-600); }
-  .calc-pagination .calc-page-info { font-size: 12px; color: var(--slate-400); padding: 0 4px; }
-
-  .calc-report-totals { padding: 20px 16px; border-top: 2px solid var(--slate-200); display: flex; flex-direction: column; gap: 8px; }
-  .calc-total-row { display: flex; justify-content: space-between; align-items: center; padding: 4px 0; }
-  .calc-total-row span:first-child { font-size: 13px; font-weight: 600; color: var(--slate-500); }
-  .calc-total-row span:last-child { font-family: var(--font-mono); font-size: 14px; font-weight: 700; color: var(--slate-700); }
-  .calc-total-row.payout-row span:first-child { color: var(--green-deep); font-size: 15px; }
-  .calc-total-row.payout-row span:last-child { color: var(--green-deep); font-size: 18px; }
-
-  .calc-check {
-    margin: 20px 16px 24px; padding: 20px 24px; background: var(--green-ghost); border: 1.5px dashed var(--green-accent);
-    border-radius: 12px; display: flex; align-items: center; gap: 16px;
-    opacity: 0; transform: translateY(12px); transition: opacity 0.5s ease 0.3s, transform 0.5s ease 0.3s;
-  }
-  .calc-check.check-visible { opacity: 1; transform: translateY(0); }
-  .calc-check-icon {
-    width: 44px; height: 44px; background: var(--green-accent); border-radius: 50%;
-    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
-  }
-  .calc-check-icon svg { width: 22px; height: 22px; color: var(--green-deep); }
-  .calc-check-details .calc-check-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--green-mid); margin-bottom: 2px; }
-  .calc-check-details .calc-check-amount { font-family: var(--font-mono); font-size: 22px; font-weight: 700; color: var(--green-deep); }
-
-  /* ─── FOLLOW A PRODUCT TIMELINE ─── */
-  .timeline-section { background: var(--slate-50); }
-  .timeline-header { text-align: center; max-width: 680px; margin: 0 auto 72px; }
-  .timeline-header .section-desc { margin: 0 auto; }
-  .timeline-wrap { max-width: 1100px; margin: 0 auto; position: relative; }
-  .timeline-product-badge {
-    display: inline-flex; align-items: center; gap: 8px; background: var(--green-deep);
-    color: var(--white); font-size: 13px; font-weight: 600; padding: 8px 18px;
-    border-radius: 100px; margin: 0 auto 48px; font-family: var(--font-mono);
-    letter-spacing: 0.3px;
-  }
-  .timeline-product-badge svg { width: 16px; height: 16px; color: var(--green-accent); }
-
-  /* Desktop horizontal timeline */
-  .timeline-track { display: flex; align-items: flex-start; position: relative; }
-  .timeline-line-bg {
-    position: absolute; top: 28px; left: 28px; right: 28px; height: 3px;
-    background: var(--slate-200); border-radius: 2px; z-index: 0;
-  }
-  .timeline-line-fill {
-    position: absolute; top: 28px; left: 28px; height: 3px;
-    background: linear-gradient(90deg, var(--green-accent), var(--green-mid));
-    border-radius: 2px; z-index: 1; width: 0; transition: width 0.4s ease;
-  }
-  .timeline-step { flex: 1; display: flex; flex-direction: column; align-items: center; position: relative; z-index: 2; cursor: pointer; }
-  .timeline-node {
-    width: 56px; height: 56px; background: var(--green-ghost); border: 2px solid var(--slate-200);
-    border-radius: 50%; display: flex; align-items: center; justify-content: center;
-    font-family: var(--font-mono); font-size: 15px; font-weight: 700; color: var(--slate-400);
-    transition: all 0.4s cubic-bezier(0.22,1,0.36,1); position: relative; flex-shrink: 0;
-  }
-  .timeline-node svg { width: 22px; height: 22px; }
-  .timeline-step.active .timeline-node,
-  .timeline-step.completed .timeline-node {
-    background: var(--green-deep); border-color: var(--green-deep); color: var(--white);
-  }
-  .timeline-step.completed .timeline-node { background: var(--green-mid); border-color: var(--green-mid); }
-  .timeline-step.active .timeline-node { box-shadow: 0 0 0 6px rgba(149,213,178,0.3); }
-
-  .timeline-step-label {
-    margin-top: 16px; font-size: 13px; font-weight: 700; color: var(--slate-400);
-    text-transform: uppercase; letter-spacing: 1px; text-align: center;
-    transition: color 0.3s;
-  }
-  .timeline-step.active .timeline-step-label,
-  .timeline-step.completed .timeline-step-label { color: var(--green-deep); }
-  .timeline-step-day {
-    margin-top: 4px; font-family: var(--font-mono); font-size: 11px; color: var(--slate-400);
-    text-align: center;
-  }
-
-  .timeline-detail-panel {
-    margin-top: 48px; background: var(--white); border: 1px solid var(--slate-200);
-    border-radius: 20px; padding: 40px; min-height: 140px;
-    position: relative; overflow: hidden;
-    transition: border-color 0.3s;
-  }
-  .timeline-detail-panel::before {
-    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
-    background: linear-gradient(90deg, var(--green-accent), var(--green-mid));
-  }
-  .timeline-detail-content { opacity: 0; transform: translateY(12px); transition: opacity 0.4s ease, transform 0.4s ease; }
-  .timeline-detail-content.detail-visible { opacity: 1; transform: translateY(0); }
-  .timeline-detail-step-num {
-    font-family: var(--font-mono); font-size: 12px; font-weight: 700;
-    color: var(--green-accent); margin-bottom: 8px; letter-spacing: 1px;
-  }
-  .timeline-detail-title { font-size: 22px; font-weight: 700; color: var(--green-deep); margin-bottom: 12px; letter-spacing: -0.5px; }
-  .timeline-detail-text { font-size: 16px; line-height: 1.7; color: var(--slate-500); max-width: 640px; }
-  .timeline-detail-highlight {
-    display: inline-block; margin-top: 16px; padding: 8px 16px;
-    background: var(--green-ghost); border-radius: 8px;
-    font-family: var(--font-mono); font-size: 14px; font-weight: 700; color: var(--green-deep);
-  }
-
-  .timeline-progress-bar { margin-top: 32px; display: flex; align-items: center; gap: 16px; }
-  .timeline-progress-track { flex: 1; height: 3px; background: var(--slate-200); border-radius: 2px; overflow: hidden; }
-  .timeline-progress-fill { height: 100%; background: var(--green-accent); border-radius: 2px; width: 0%; transition: none; }
-  .timeline-progress-fill.animating { transition: width linear; }
-  .timeline-pause-btn {
-    background: none; border: 1px solid var(--slate-200); border-radius: 8px;
-    width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;
-    cursor: pointer; color: var(--slate-500); transition: all 0.2s;
-  }
-  .timeline-pause-btn:hover { border-color: var(--green-accent); color: var(--green-deep); background: var(--green-ghost); }
-  .timeline-pause-btn svg { width: 16px; height: 16px; }
-
-  /* Mobile vertical timeline */
-  @media (max-width: 900px) {
-    .calc-layout { grid-template-columns: 1fr; }
-    .calc-controls { position: static; }
-
-    .timeline-track { flex-direction: column; align-items: flex-start; gap: 0; padding-left: 28px; }
-    .timeline-line-bg { top: 28px; bottom: 28px; left: 28px; right: auto; width: 3px; height: auto; }
-    .timeline-line-fill { top: 28px; left: 28px; width: 3px !important; height: 0; transition: height 0.4s ease; }
-    .timeline-step { flex-direction: row; align-items: center; gap: 20px; width: 100%; padding: 12px 0; }
-    .timeline-step-label { margin-top: 0; text-align: left; }
-    .timeline-step-day { margin-top: 2px; text-align: left; }
-    .timeline-detail-panel { margin-top: 32px; padding: 28px 24px; }
+    .how-grid { grid-template-columns: 1fr; max-width: 400px; }
+    .boost-total { flex-direction: column; text-align: center; gap: 8px; }
   }
 
   /* ─── REDUCED MOTION ─── */
   @media (prefers-reduced-motion: reduce) {
-    .reveal, .how-card.reveal, .referee-card.reveal, .results-card.reveal {
+    .reveal, .how-card.reveal {
       opacity: 1; transform: none; transition: none;
     }
-    .sbt-visual-row-reveal { opacity: 1; transform: none; transition: none; }
     .page-hero .section-label,
     .page-hero .section-title,
     .page-hero .section-desc {
       opacity: 1; transform: none; transition: none;
     }
     .hero-bg-gradient, .hero-bg-gradient-2 { animation: none; }
-    .calc-report-table tbody tr { opacity: 1; transform: none; transition: none; }
-    .calc-check { opacity: 1; transform: none; transition: none; }
-    .timeline-detail-content { opacity: 1; transform: none; transition: none; }
-    .timeline-progress-fill { transition: none; }
+    .boost-total-value.pop { animation: none; }
+    .boost-total-glow { animation: none; }
   }
 </style>
-<noscript><style>.reveal,.sbt-visual-row-reveal,.page-hero .section-label,.page-hero .section-title,.page-hero .section-desc{opacity:1;transform:none;transition:none;}</style></noscript>
+<noscript><style>.reveal,.page-hero .section-label,.page-hero .section-title,.page-hero .section-desc{opacity:1;transform:none;transition:none;}</style></noscript>
 </head>
 <body>
 
@@ -432,129 +271,73 @@
   <div class="hero-bg-gradient-2"></div>
   <div class="hero-grid-lines"></div>
   <div class="section-label">Consignment</div>
-  <h1 class="section-title">Stock Now. Pay When It Sells.</h1>
-  <p class="section-desc">ShelfSpace brings managed consignment to cannabis — eliminating upfront inventory risk for retailers and guaranteeing weekly payments for vendors. Purpose-built for our industry.</p>
+  <h1 class="section-title">Your shelves are full. Your bank account doesn't have to be empty.</h1>
+  <p class="section-desc">The average dispensary has $200,000–$500,000 tied up in inventory at any given time. Consignment puts that cash back in your pocket. ShelfSpace manages the entire program — vendors get paid weekly, you keep your capital.</p>
   <div style="margin-top: 32px;">
     <a href="/contact" class="btn-primary">Start Free Pilot <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
   </div>
 </div>
 
-<!-- WHAT IS CONSIGNMENT -->
-<div class="sbt-section" id="sbt">
-  <div class="sbt-container">
-    <div class="reveal">
-      <div class="section-label">What is Consignment?</div>
-      <h2 class="section-title">Vendors get paid when products sell</h2>
-      <p class="section-desc" style="margin-bottom:24px;">Consignment is a payment system based on product sales. It creates a true partnership between retailers and their vendors — when a product sells to a customer, the retailer and vendor split the profit.</p>
-      <p class="section-desc">Customers purchase items just like any other product. They browse the menu, make their selection, and complete the transaction with zero friction. These SKUs are indistinguishable from wholesale inventory, ensuring a consistent workflow for your staff and a standard experience for your customers.</p>
-    </div>
-    <div class="sbt-visual reveal reveal-delay-1">
-      <div class="sbt-visual-row sbt-visual-row-reveal">
-        <div class="sbt-visual-entity">
-          <div class="label">Retailer</div>
-          <div class="name">Sells Product</div>
-        </div>
-        <div class="sbt-visual-arrow">&rarr;</div>
-        <div class="sbt-visual-entity">
-          <div class="label">Customer</div>
-          <div class="name">Buys at POS</div>
-        </div>
-      </div>
-      <div class="sbt-visual-center sbt-visual-row-reveal">
-        <div class="label">ShelfSpace Settles</div>
-        <div class="value">50 / 50</div>
-        <div class="desc">Profit split paid weekly</div>
-      </div>
-      <div class="sbt-visual-row sbt-visual-row-reveal">
-        <div class="sbt-visual-entity">
-          <div class="label">Vendor</div>
-          <div class="name">Gets Paid Weekly</div>
-        </div>
-        <div class="sbt-visual-arrow">&larr;</div>
-        <div class="sbt-visual-entity">
-          <div class="label">ShelfSpace</div>
-          <div class="name">Writes the Check</div>
-        </div>
-      </div>
-    </div>
+<!-- CASH BOOST CALCULATOR -->
+<section class="boost-section" id="calculator">
+  <div class="boost-header">
+    <div class="section-label reveal">See Your Cash Boost</div>
+    <h2 class="section-title reveal">How much cash is trapped in your inventory?</h2>
+    <p class="section-desc reveal">Slide to match your store. The cash boost is the capital you free up when vendors own the inventory instead of you.</p>
   </div>
-</div>
-
-<!-- SETTLEMENT CALCULATOR -->
-<section class="calc-section" id="calculator">
-  <div class="calc-header">
-    <div class="section-label reveal">See Your Settlement</div>
-    <h2 class="section-title reveal">Watch your weekly payout calculate in real-time</h2>
-    <p class="section-desc reveal">Adjust the sliders to model your consignment settlement. Line items build in real time to show exactly how vendors get paid.</p>
-  </div>
-  <div class="calc-layout">
-    <div class="calc-controls reveal">
-      <div class="calc-slider-group">
-        <div class="calc-slider-label">
-          <span>Number of Products</span>
-          <span class="calc-slider-value" id="calcProductsVal">10</span>
-        </div>
-        <input type="range" class="calc-slider" id="calcProducts" min="1" max="20" value="10">
+  <div class="boost-container reveal">
+    <div class="boost-slider-wrapper">
+      <div class="boost-slider-header">
+        <span class="boost-slider-label">Annual Revenue</span>
+        <span class="boost-slider-value" id="boost-revenue-val">$3,000,000</span>
       </div>
-      <div class="calc-slider-group">
-        <div class="calc-slider-label">
-          <span>Avg. Sale Price</span>
-          <span class="calc-slider-value" id="calcPriceVal">$35</span>
-        </div>
-        <input type="range" class="calc-slider" id="calcPrice" min="10" max="100" value="35">
-      </div>
-      <div class="calc-slider-group">
-        <div class="calc-slider-label">
-          <span>Vendor Split</span>
-          <span class="calc-slider-value" id="calcSplitVal">50%</span>
-        </div>
-        <input type="range" class="calc-slider" id="calcSplit" min="30" max="70" value="50">
+      <input type="range" class="boost-slider" id="boost-revenue" min="500000" max="10000000" step="100000" value="3000000">
+      <div class="boost-slider-ticks">
+        <span>$500K</span>
+        <span>$10M</span>
       </div>
     </div>
-    <div class="calc-report reveal reveal-delay-1" id="calcReport">
-      <div class="calc-report-header">
-        <div class="calc-report-header-left">
-          <div class="calc-report-title">Weekly Settlement Report</div>
-          <div class="calc-report-period">Week of Mar 1 – Mar 7, 2026</div>
+    <div class="boost-slider-wrapper">
+      <div class="boost-slider-header">
+        <span class="boost-slider-label">Vendors on Consignment</span>
+        <span class="boost-slider-value" id="boost-pct-val">50%</span>
+      </div>
+      <input type="range" class="boost-slider" id="boost-pct" min="10" max="100" step="5" value="50">
+      <div class="boost-slider-ticks">
+        <span>10%</span>
+        <span>100%</span>
+      </div>
+    </div>
+    <div class="boost-result-card boost-total-glow">
+      <div class="boost-result-rows">
+        <div class="boost-result-row">
+          <span class="boost-result-row-label">Estimated inventory value (50% of revenue)</span>
+          <span class="boost-result-row-value" id="boost-inv">$1,500,000</span>
         </div>
-        <div class="calc-report-header-right">
-          <div class="calc-report-label">Vendor Payout</div>
-          <div class="calc-report-total" id="calcHeaderTotal">$0.00</div>
+        <div class="boost-result-row">
+          <span class="boost-result-row-label">Vendors on consignment</span>
+          <span class="boost-result-row-value" id="boost-vendor-pct">50%</span>
         </div>
       </div>
-      <table class="calc-report-table">
-        <thead>
-          <tr>
-            <th>Product</th>
-            <th>Qty</th>
-            <th>Price</th>
-            <th>Split</th>
-            <th>Payout</th>
-          </tr>
-        </thead>
-        <tbody id="calcTableBody"></tbody>
-      </table>
-      <div class="calc-pagination" id="calcPagination"></div>
-      <div class="calc-report-totals" id="calcTotals"></div>
-      <div class="calc-check" id="calcCheck">
-        <div class="calc-check-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-        </div>
-        <div class="calc-check-details">
-          <div class="calc-check-label">Check Generated</div>
-          <div class="calc-check-amount" id="calcCheckAmount">$0.00</div>
-        </div>
+      <div class="boost-total">
+        <span class="boost-total-label">Cash back in your bank account</span>
+        <span class="boost-total-value" id="boost-result">$750,000</span>
       </div>
+    </div>
+    <p class="boost-subtitle">That's capital you can use for payroll, expansion, marketing, or just breathing room.</p>
+    <p style="text-align:center;margin-top:12px;font-size:11px;color:var(--slate-400);">*Cash boost is an estimate based on industry-average inventory-to-revenue ratios.</p>
+    <div class="boost-cta-wrap">
+      <a href="/contact" class="btn-primary">See What You'd Save <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
     </div>
   </div>
 </section>
 
-<!-- HOW IT WORKS -->
+<!-- HOW SHELFSPACE MANAGES YOUR CONSIGNMENT -->
 <section class="how-section" id="how">
   <div class="how-header">
     <div class="section-label reveal">How It Works</div>
-    <h2 class="section-title reveal">We integrate, crunch, and pay — you sell</h2>
-    <p class="section-desc reveal">Inventory flows through your supply chain just like standard wholesale. We integrate into the background of your operation. The only thing that changes is the efficiency of your capital.</p>
+    <h2 class="section-title reveal">How ShelfSpace manages your consignment program</h2>
+    <p class="section-desc reveal">We plug into your existing systems and handle everything. Nothing changes about how you receive product, stock shelves, or sell to customers. We just make sure vendors get paid and you keep your cash.</p>
   </div>
   <div class="how-grid">
     <div class="how-card reveal">
@@ -562,273 +345,106 @@
       <div class="how-icon">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
       </div>
-      <h3>We integrate with your POS</h3>
-      <p>We connect with retail POS systems like Dutchie and Flowhub to pull sales data. Product is delivered, manifested in METRC, and received into your POS using your current protocols.</p>
+      <h3>We connect to your POS and METRC</h3>
+      <p>ShelfSpace integrates with Dutchie, Flowhub, and other cannabis POS systems. We pull sales data automatically. Your METRC manifests flow through as normal.</p>
     </div>
     <div class="how-card reveal reveal-delay-1">
       <div class="how-step">02</div>
       <div class="how-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
       </div>
-      <h3>We crunch the numbers</h3>
-      <p>Our engine generates a weekly report on retail sales, discounts, and inventory status — showing what was sold, what it sold for, what's left in stock, and what's owed to vendors.</p>
+      <h3>We onboard your vendors</h3>
+      <p>We work directly with your vendors to set up consignment agreements. Fair terms, clear contracts, no awkward conversations for you.</p>
     </div>
     <div class="how-card reveal reveal-delay-2">
       <div class="how-step">03</div>
       <div class="how-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
+      <h3>We crunch the numbers weekly</h3>
+      <p>Every week our engine calculates what sold, at what price, and what each vendor is owed. Accurate to the penny, backed by POS data.</p>
+    </div>
+    <div class="how-card reveal reveal-delay-3">
+      <div class="how-step">04</div>
+      <div class="how-icon">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
       </div>
-      <h3>We pay the vendor</h3>
-      <p>We issue a weekly check to vendors on behalf of retailers, along with supporting documents. Checks are Check 21 compliant, printable on standard paper, and mobile-deposit ready.</p>
-    </div>
-  </div>
-  <p class="section-desc reveal" style="text-align:center;max-width:600px;margin:40px auto 0;">ShelfSpace also manages your wholesale vendor payments through the same AP engine. Consignment and wholesale, one platform.</p>
-</section>
-
-<!-- FOLLOW A PRODUCT TIMELINE -->
-<section class="timeline-section" id="follow-product">
-  <div class="timeline-header">
-    <div class="section-label reveal">Follow a Product</div>
-    <h2 class="section-title reveal">From delivery to deposit</h2>
-    <p class="section-desc reveal">One week in the life of a consignment product. Click any step or let it play through on its own.</p>
-  </div>
-  <div class="timeline-wrap reveal">
-    <div style="text-align:center;">
-      <div class="timeline-product-badge">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
-        Blue Dream Pre-roll 1g
-      </div>
-    </div>
-    <div class="timeline-track" id="timelineTrack">
-      <div class="timeline-line-bg"></div>
-      <div class="timeline-line-fill" id="timelineLineFill"></div>
-      <div class="timeline-step active" data-step="0">
-        <div class="timeline-node">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
-        </div>
-        <div>
-          <div class="timeline-step-label">Delivered</div>
-          <div class="timeline-step-day">Mon</div>
-        </div>
-      </div>
-      <div class="timeline-step" data-step="1">
-        <div class="timeline-node">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
-        </div>
-        <div>
-          <div class="timeline-step-label">On Shelf</div>
-          <div class="timeline-step-day">Mon–Sun</div>
-        </div>
-      </div>
-      <div class="timeline-step" data-step="2">
-        <div class="timeline-node">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
-        </div>
-        <div>
-          <div class="timeline-step-label">Sold</div>
-          <div class="timeline-step-day">Sun</div>
-        </div>
-      </div>
-      <div class="timeline-step" data-step="3">
-        <div class="timeline-node">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-        </div>
-        <div>
-          <div class="timeline-step-label">Settlement</div>
-          <div class="timeline-step-day">Mon</div>
-        </div>
-      </div>
-      <div class="timeline-step" data-step="4">
-        <div class="timeline-node">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-        </div>
-        <div>
-          <div class="timeline-step-label">Paid</div>
-          <div class="timeline-step-day">Mon</div>
-        </div>
-      </div>
-    </div>
-    <div class="timeline-detail-panel" id="timelineDetail">
-      <div class="timeline-detail-content" id="timelineDetailContent"></div>
-    </div>
-    <div class="timeline-progress-bar">
-      <div class="timeline-progress-track">
-        <div class="timeline-progress-fill" id="timelineProgressFill"></div>
-      </div>
-      <button class="timeline-pause-btn" id="timelinePauseBtn" aria-label="Pause timeline">
-        <svg id="timelinePauseIcon" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
-        <svg id="timelinePlayIcon" viewBox="0 0 24 24" fill="currentColor" style="display:none"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-      </button>
+      <h3>We pay vendors weekly</h3>
+      <p>ShelfSpace issues Check 21 compliant checks to every vendor, every week. Vendors get paid on time, every time. You never write a check.</p>
     </div>
   </div>
 </section>
 
-<!-- TICKER -->
-<div class="ticker-section">
-  <div class="ticker-label">A battle-tested system built by a 10+ year industry veteran</div>
-  <div style="overflow:hidden">
-    <div class="ticker-track">
-      <div class="ticker-item"><span class="ticker-stat">Weekly</span> Vendor Payments</div>
-      <div class="ticker-item">&bull;</div>
-      <div class="ticker-item"><span class="ticker-stat">$0</span> Inventory on Your Books</div>
-      <div class="ticker-item">&bull;</div>
-      <div class="ticker-item"><span class="ticker-stat">100%</span> Check 21 Compliant</div>
-      <div class="ticker-item">&bull;</div>
-      <div class="ticker-item"><span class="ticker-stat">10min</span> Weekly Settlements</div>
-      <div class="ticker-item">&bull;</div>
-      <div class="ticker-item"><span class="ticker-stat">24/7</span> Real-Time Portal Access</div>
-      <div class="ticker-item">&bull;</div>
-      <div class="ticker-item"><span class="ticker-stat">Weekly</span> Vendor Payments</div>
-      <div class="ticker-item">&bull;</div>
-      <div class="ticker-item"><span class="ticker-stat">$0</span> Inventory on Your Books</div>
-      <div class="ticker-item">&bull;</div>
-      <div class="ticker-item"><span class="ticker-stat">100%</span> Check 21 Compliant</div>
-      <div class="ticker-item">&bull;</div>
-      <div class="ticker-item"><span class="ticker-stat">10min</span> Weekly Settlements</div>
-      <div class="ticker-item">&bull;</div>
-      <div class="ticker-item"><span class="ticker-stat">24/7</span> Real-Time Portal Access</div>
-      <div class="ticker-item">&bull;</div>
-    </div>
-  </div>
-</div>
-
-<!-- REFEREE -->
-<section class="referee-section">
-  <div class="referee-header">
-    <div class="section-label reveal">The Referee</div>
-    <h2 class="section-title reveal">ShelfSpace is the neutral third party</h2>
-    <p class="section-desc reveal">We handle contracts, ensure accurate payments are made on time, and handle disputes. Think of us as the Switzerland of your supply chain.</p>
-  </div>
-  <div class="referee-grid">
-    <div class="referee-card reveal">
-      <div class="referee-card-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+<!-- MANAGED SERVICE CALLOUT -->
+<section class="managed-callout">
+  <div class="managed-callout-content">
+    <div class="section-label reveal">Done-For-You Managed Service</div>
+    <h2 class="reveal">Not another portal to log into. We do the work.</h2>
+    <p class="reveal">Most platforms give you a dashboard and leave you to figure it out. ShelfSpace is the opposite. <strong>We manage your consignment program so you never have to think about it.</strong> You get weekly reports and a portal if you want it — but the point is you shouldn't need it.</p>
+    <div class="managed-bullets reveal">
+      <div class="managed-bullet">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        <span>We pull your POS data</span>
       </div>
-      <h3>Contracts</h3>
-      <p>We work with retailers and vendors to set up a fair, compliant consignment contract. Our purpose-built agreement handles payments, discounts, and shrinkage policies.</p>
-    </div>
-    <div class="referee-card reveal reveal-delay-1">
-      <div class="referee-card-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+      <div class="managed-bullet">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        <span>We onboard vendors</span>
       </div>
-      <h3>Payments</h3>
-      <p>We track the data and make accurate weekly payments to vendors. This is the glue that makes this system work. We literally write the checks.</p>
-    </div>
-    <div class="referee-card reveal reveal-delay-2">
-      <div class="referee-card-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      <div class="managed-bullet">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        <span>We run weekly settlements</span>
       </div>
-      <h3>Disputes</h3>
-      <p>Retailers and vendors can easily dispute payments with ShelfSpace. We review transaction logs, facilitate communication, and use data-driven insights to resolve issues fairly.</p>
+      <div class="managed-bullet">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        <span>We write every check</span>
+      </div>
+      <div class="managed-bullet">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        <span>We handle disputes</span>
+      </div>
+      <div class="managed-bullet">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        <span>We send you reports</span>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- RESULTS -->
-<section class="results-section" id="results">
-  <div class="results-header">
-    <div class="section-label reveal">The Results</div>
-    <h2 class="section-title reveal">Why retailers and vendors love ShelfSpace</h2>
-    <p class="section-desc reveal">Different problems, same solution. ShelfSpace transforms the economics of cannabis retail for both sides of the counter.</p>
+<!-- FAQ -->
+<section class="faq-section">
+  <div class="faq-header">
+    <div class="section-label reveal">FAQ</div>
+    <h2 class="section-title reveal">Frequently asked questions</h2>
   </div>
-  <div class="results-grid">
-    <div class="results-card retailer reveal">
-      <div class="results-tag retailer">Retailers</div>
-      <h3>Boost margins & free up cash</h3>
-      <p>How much inventory are you holding on your balance sheet? What if that amount was $0? We make that a reality — while also protecting your margin from hidden inventory losses.</p>
-      <ul class="results-list">
-        <li>
-          <span class="num">01</span>
-          <div>
-            <h4>Add more inventory for free</h4>
-            <p>Grow your SKU count without spending a dime on product. More selection drives more revenue with zero upfront cost.</p>
-          </div>
-        </li>
-        <li>
-          <span class="num">02</span>
-          <div>
-            <h4>Boost profitability</h4>
-            <p>Eliminate hidden inventory costs from discounts, expired products, and moisture loss. Your margins are protected by the contract.</p>
-          </div>
-        </li>
-        <li>
-          <span class="num">03</span>
-          <div>
-            <h4>Cash flow stability</h4>
-            <p>It's a tough market and you need your cash. ShelfSpace frees up the capital currently trapped in inventory sitting on your shelf.</p>
-          </div>
-        </li>
-      </ul>
-    </div>
-    <div class="results-card vendor reveal reveal-delay-1">
-      <div class="results-tag vendor">Vendors</div>
-      <h3>Boost volume & get paid weekly</h3>
-      <p>We have an AR crisis in our industry. Are you tired of tracking down payments and eating losses? ShelfSpace facilitates payments so you get paid out weekly from your retail partners.</p>
-      <ul class="results-list">
-        <li>
-          <span class="num">01</span>
-          <div>
-            <h4>Get into more stores</h4>
-            <p>Being open to ShelfSpace opens more doors. Retailers want to say yes when the product is free to stock. More stores means more revenue.</p>
-          </div>
-        </li>
-        <li>
-          <span class="num">02</span>
-          <div>
-            <h4>Stores carry more of your SKUs</h4>
-            <p>Your retail partners will want to carry more of your lineup when there's no upfront cost. More SKUs on the shelf means more revenue.</p>
-          </div>
-        </li>
-        <li>
-          <span class="num">03</span>
-          <div>
-            <h4>Payment certainty</h4>
-            <p>ShelfSpace, as the referee, makes sure you get paid for your products once per week. No more chasing invoices. We literally write the checks.</p>
-          </div>
-        </li>
-      </ul>
-    </div>
-  </div>
-</section>
-
-<!-- CREDIBILITY -->
-<section class="credibility-section">
-  <div class="credibility-container">
-    <div class="section-label reveal">Trust & Compliance</div>
-    <h2 class="section-title reveal">Built for the most regulated industry in America</h2>
-    <p class="section-desc reveal">Bank-grade compliance and financial infrastructure, designed specifically for cannabis.</p>
-    <div class="credibility-badges">
-      <div class="credibility-badge reveal">
-        <div class="credibility-badge-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-        </div>
-        <span>Check 21 Act Compliant</span>
-      </div>
-      <div class="credibility-badge reveal reveal-delay-1">
-        <div class="credibility-badge-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
-        </div>
-        <span>Row-Level Security</span>
-      </div>
-      <div class="credibility-badge reveal reveal-delay-2">
-        <div class="credibility-badge-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-        </div>
-        <span>Full Audit Trail</span>
-      </div>
-      <div class="credibility-badge reveal reveal-delay-3">
-        <div class="credibility-badge-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-        </div>
-        <span>POS Integration</span>
-      </div>
-      <div class="credibility-badge reveal reveal-delay-3">
-        <div class="credibility-badge-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-        </div>
-        <span>24/7 Portal Access</span>
-      </div>
-    </div>
+  <div class="faq-list">
+    <details>
+      <summary>How do vendors get paid?</summary>
+      <p>ShelfSpace issues Check 21 compliant checks to vendors every week, based on actual sales data pulled from your POS. Checks are printable on standard paper and mobile-deposit ready. Vendors also get a detailed settlement report showing every line item — what sold, at what price, and their split.</p>
+    </details>
+    <details>
+      <summary>How much does consignment cost?</summary>
+      <p>Consignment is included in the free 60-day pilot. For post-pilot pricing details, visit our <a href="/pricing" style="color:var(--green-mid);font-weight:600;text-decoration:none;">pricing page</a>.</p>
+    </details>
+    <details>
+      <summary>Will my vendors agree to consignment?</summary>
+      <p>Most do. Vendors get guaranteed weekly payments (no more chasing invoices), access to more shelf space, and a neutral third party managing the relationship. We handle the conversations and contracts — you don't have to pitch it yourself.</p>
+    </details>
+    <details>
+      <summary>Does anything change about how I receive product?</summary>
+      <p>No. Product is delivered, manifested in METRC, and received into your POS the same way it is today. Your staff, your workflow, your process — nothing changes. Customers can't tell the difference either.</p>
+    </details>
+    <details>
+      <summary>What POS systems do you integrate with?</summary>
+      <p>We currently integrate with Dutchie and Flowhub, with more integrations coming. If you use a different POS, reach out — we're adding new connections regularly.</p>
+    </details>
+    <details>
+      <summary>What happens if a product doesn't sell?</summary>
+      <p>That's the whole point. With consignment, unsold inventory is the vendor's risk, not yours. No markdowns eating your margin. No expired product you already paid for. If it doesn't sell, you haven't lost a dime.</p>
+    </details>
+    <details>
+      <summary>Can I run consignment and wholesale at the same time?</summary>
+      <p>Absolutely. Most of our retailers run both. ShelfSpace manages consignment settlements and wholesale AP payments through the same engine. One platform for every vendor, every payment.</p>
+    </details>
   </div>
 </section>
 
@@ -836,14 +452,14 @@
 <section class="cta-section">
   <div class="cta-content">
     <div class="section-label reveal">Get Started</div>
-    <h2 class="section-title reveal">See how consignment can transform your business</h2>
-    <p class="section-desc reveal">Start a free 60-day pilot and run managed consignment alongside your existing wholesale operations — one platform, no risk.</p>
+    <h2 class="section-title reveal">Free up your cash. Let ShelfSpace run consignment for you.</h2>
+    <p class="section-desc reveal">Start a free 60-day pilot. We connect your systems, onboard your vendors, and start running settlements — you just keep selling.</p>
     <div class="cta-actions reveal">
       <a href="/contact" class="btn-primary">
         Start Free Pilot
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
       </a>
-      <a href="/contact" class="btn-secondary">Schedule a Call</a>
+      <a href="/contact" class="btn-secondary">Talk to Chris</a>
     </div>
     <p class="cta-note reveal">No credit card. No commitment. No risk.</p>
   </div>
@@ -869,7 +485,7 @@
   var nav = document.getElementById('nav');
   var pageHero = document.querySelector('.page-hero');
   var parallaxSections = [
-    document.querySelector('.referee-section'),
+    document.querySelector('.managed-callout'),
     document.querySelector('.cta-section')
   ];
 
@@ -897,14 +513,10 @@
   /* ── Scroll handler (rAF + ticking flag) ── */
   function onScroll() {
     var scrollY = window.scrollY;
-
-    /* Nav state */
     nav.classList.toggle('scrolled', scrollY > 20);
 
-    /* Skip parallax for reduced motion or mobile */
     if (prefersReduced || isMobile) return;
 
-    /* Section decorative parallax */
     var wh = window.innerHeight;
     parallaxSections.forEach(function(section) {
       if (!section) return;
@@ -925,10 +537,8 @@
     }
   }, { passive: true });
 
-  /* Initial call */
   onScroll();
 
-  /* ── Resize handler ── */
   window.addEventListener('resize', function() {
     isMobile = window.innerWidth < 900;
     if (isMobile) {
@@ -940,416 +550,77 @@
 
 
   /* ══════════════════════════════════════════════════
-     EXHIBIT 1: Settlement Calculator
+     CASH BOOST CALCULATOR
      ══════════════════════════════════════════════════ */
-  (function initCalc() {
-    var productsSlider = document.getElementById('calcProducts');
-    var priceSlider = document.getElementById('calcPrice');
-    var splitSlider = document.getElementById('calcSplit');
-    if (!productsSlider) return;
+  (function initBoost() {
+    var revenueSlider = document.getElementById('boost-revenue');
+    var pctSlider = document.getElementById('boost-pct');
+    if (!revenueSlider) return;
 
-    var productsVal = document.getElementById('calcProductsVal');
-    var priceVal = document.getElementById('calcPriceVal');
-    var splitVal = document.getElementById('calcSplitVal');
-    var tableBody = document.getElementById('calcTableBody');
-    var totalsDiv = document.getElementById('calcTotals');
-    var headerTotal = document.getElementById('calcHeaderTotal');
-    var checkEl = document.getElementById('calcCheck');
-    var checkAmount = document.getElementById('calcCheckAmount');
+    var revenueVal = document.getElementById('boost-revenue-val');
+    var pctVal = document.getElementById('boost-pct-val');
+    var invEl = document.getElementById('boost-inv');
+    var vendorPctEl = document.getElementById('boost-vendor-pct');
+    var resultEl = document.getElementById('boost-result');
 
-    var PRODUCTS = [
-      'Blue Dream Pre-roll 1g',
-      'Sour Diesel 3.5g',
-      'OG Kush Cartridge 1g',
-      'Gelato Live Resin 1g',
-      'Wedding Cake 7g',
-      'Jack Herer Pre-roll 5pk',
-      'Purple Punch Gummies 100mg',
-      'Mimosa 3.5g',
-      'Zkittlez Cartridge 0.5g',
-      'Northern Lights 1g Pre-roll',
-      'GSC Badder 1g',
-      'Pineapple Express 3.5g',
-      'Gorilla Glue Shatter 1g',
-      'Tangie Pre-roll 3pk',
-      'Strawberry Cough 7g',
-      'Durban Poison 3.5g',
-      'Cherry Pie Gummies 200mg',
-      'Lemon Haze Cart 1g',
-      'GMO Cookies 3.5g',
-      'Runtz Live Rosin 1g',
-      'Mac 1 Pre-roll 1g',
-      'Ice Cream Cake 3.5g',
-      'Do-Si-Dos 7g',
-      'Tropicana Cookies Cart 1g',
-      'White Widow Pre-roll 5pk',
-      'Papaya Punch 3.5g',
-      'Forbidden Fruit Gummies 100mg',
-      'Super Lemon Haze 3.5g',
-      'Cereal Milk 3.5g',
-      'Animal Mints Badder 1g',
-      'LA Confidential 3.5g',
-      'Trainwreck Pre-roll 1g',
-      'Granddaddy Purple 3.5g',
-      'Skywalker OG Cart 0.5g',
-      'Gary Payton 3.5g',
-      'Biscotti 3.5g',
-      'Slurricane Live Resin 1g',
-      'Mandarin Cookies 3.5g',
-      'Grape Ape Pre-roll 3pk',
-      'King Louis XIII 3.5g',
-      'Mango Kush Cart 1g',
-      'Pink Runtz 3.5g',
-      'Thin Mint Cookies 7g',
-      'Blackberry Kush 3.5g',
-      'Banana OG Pre-roll 1g',
-      'Bubba Kush 3.5g',
-      'Critical Mass 3.5g',
-      'AK-47 Pre-roll 5pk',
-      'Tahoe OG 3.5g',
-      'Maui Wowie Cart 1g'
-    ];
+    var lastResult = 0;
 
-    /* Seeded random for consistent quantities per product index */
-    function seededQty(index, max) {
-      var x = Math.sin(index * 127.1 + 311.7) * 43758.5453;
-      return Math.floor((x - Math.floor(x)) * max) + 1;
+    function formatCurrency(n) {
+      return '$' + Math.round(n).toLocaleString();
     }
 
-    var paginationDiv = document.getElementById('calcPagination');
-    var PAGE_SIZE = 5;
-    var currentPage = 0;
-    var lineItems = []; /* cached line items from last build */
-
-    var debounceTimer = null;
     function updateSliderTrack(slider) {
       var pct = ((slider.value - slider.min) / (slider.max - slider.min)) * 100;
       slider.style.background = 'linear-gradient(to right, #95d5b2 0%, #95d5b2 ' + pct + '%, #e2e8f0 ' + pct + '%, #e2e8f0 100%)';
     }
 
-    function formatMoney(n) {
-      return '$' + n.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-    }
-
-    function renderPage() {
-      var start = currentPage * PAGE_SIZE;
-      var end = Math.min(start + PAGE_SIZE, lineItems.length);
-      var rows = '';
-      for (var i = start; i < end; i++) {
-        var item = lineItems[i];
-        rows += '<tr style="transition-delay:' + ((i - start) * 40) + 'ms">' +
-          '<td>' + item.name + '</td>' +
-          '<td>' + item.qty + '</td>' +
-          '<td>' + formatMoney(item.price) + '</td>' +
-          '<td>' + item.splitPct + '%</td>' +
-          '<td>' + formatMoney(item.payout) + '</td>' +
-          '</tr>';
-      }
-      tableBody.innerHTML = rows;
-
-      /* Animate rows in */
-      requestAnimationFrame(function() {
-        var trs = tableBody.querySelectorAll('tr');
-        requestAnimationFrame(function() {
-          for (var j = 0; j < trs.length; j++) {
-            trs[j].classList.add('line-visible');
-          }
-        });
-      });
-
-      /* Pagination controls */
-      var totalPages = Math.ceil(lineItems.length / PAGE_SIZE);
-      if (totalPages <= 1) {
-        paginationDiv.innerHTML = '';
+    function animateValue(el, start, end, duration) {
+      if (prefersReduced || duration === 0) {
+        el.textContent = formatCurrency(end);
         return;
       }
-      var html = '<button class="calc-page-arrow" ' + (currentPage === 0 ? 'disabled' : '') + ' data-page="prev">' +
-        '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>';
-      for (var p = 0; p < totalPages; p++) {
-        html += '<button' + (p === currentPage ? ' class="active"' : '') + ' data-page="' + p + '">' + (p + 1) + '</button>';
+      var startTime = null;
+      function step(ts) {
+        if (!startTime) startTime = ts;
+        var progress = Math.min((ts - startTime) / duration, 1);
+        var eased = 1 - Math.pow(1 - progress, 3);
+        el.textContent = formatCurrency(start + (end - start) * eased);
+        if (progress < 1) requestAnimationFrame(step);
       }
-      html += '<button class="calc-page-arrow" ' + (currentPage === totalPages - 1 ? 'disabled' : '') + ' data-page="next">' +
-        '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>';
-      paginationDiv.innerHTML = html;
+      requestAnimationFrame(step);
     }
 
-    paginationDiv.addEventListener('click', function(e) {
-      var btn = e.target.closest('button');
-      if (!btn || btn.disabled) return;
-      var page = btn.getAttribute('data-page');
-      var totalPages = Math.ceil(lineItems.length / PAGE_SIZE);
-      if (page === 'prev') currentPage = Math.max(0, currentPage - 1);
-      else if (page === 'next') currentPage = Math.min(totalPages - 1, currentPage + 1);
-      else currentPage = parseInt(page);
-      renderPage();
-    });
+    function updateCalc() {
+      var revenue = parseInt(revenueSlider.value, 10);
+      var pct = parseInt(pctSlider.value, 10);
 
-    function buildReport() {
-      var numProducts = parseInt(productsSlider.value);
-      var avgPrice = parseInt(priceSlider.value);
-      var splitPct = parseInt(splitSlider.value);
+      revenueVal.textContent = formatCurrency(revenue);
+      pctVal.textContent = pct + '%';
 
-      productsVal.textContent = numProducts;
-      priceVal.textContent = '$' + avgPrice;
-      splitVal.textContent = splitPct + '%';
+      updateSliderTrack(revenueSlider);
+      updateSliderTrack(pctSlider);
 
-      updateSliderTrack(productsSlider);
-      updateSliderTrack(priceSlider);
-      updateSliderTrack(splitSlider);
+      var inventoryValue = revenue * 0.5;
+      var cashBoost = inventoryValue * (pct / 100);
 
-      /* Build line items */
-      lineItems = [];
-      var totalSales = 0;
-      var totalPayout = 0;
-      for (var i = 0; i < numProducts; i++) {
-        var name = PRODUCTS[i % PRODUCTS.length];
-        var qty = seededQty(i, 8);
-        var price = avgPrice + seededQty(i + 50, 11) - 6; /* slight variation */
-        var lineSales = qty * price;
-        var linePayout = lineSales * (splitPct / 100);
-        totalSales += lineSales;
-        totalPayout += linePayout;
-        lineItems.push({ name: name, qty: qty, price: price, splitPct: splitPct, payout: linePayout });
-      }
+      invEl.textContent = formatCurrency(inventoryValue);
+      vendorPctEl.textContent = pct + '%';
 
-      /* Reset to first page when sliders change */
-      currentPage = 0;
-      renderPage();
+      /* Animate the big number */
+      animateValue(resultEl, lastResult, cashBoost, 300);
 
-      /* Totals */
-      totalsDiv.innerHTML =
-        '<div class="calc-total-row"><span>Gross Sales</span><span>' + formatMoney(totalSales) + '</span></div>' +
-        '<div class="calc-total-row"><span>Vendor Split (' + splitPct + '%)</span><span>' + formatMoney(totalPayout) + '</span></div>' +
-        '<div class="calc-total-row payout-row"><span>Vendor Payout</span><span>' + formatMoney(totalPayout) + '</span></div>';
+      /* Pop animation */
+      resultEl.classList.remove('pop');
+      void resultEl.offsetWidth;
+      resultEl.classList.add('pop');
 
-      headerTotal.textContent = formatMoney(totalPayout);
-      checkAmount.textContent = formatMoney(totalPayout);
-
-      /* Show check after lines animate */
-      checkEl.classList.remove('check-visible');
-      var visibleRows = Math.min(numProducts, PAGE_SIZE);
-      setTimeout(function() {
-        checkEl.classList.add('check-visible');
-      }, Math.min(visibleRows * 40 + 200, 800));
+      lastResult = cashBoost;
     }
 
-    function onSliderInput() {
-      clearTimeout(debounceTimer);
-      debounceTimer = setTimeout(buildReport, 150);
-    }
+    revenueSlider.addEventListener('input', updateCalc);
+    pctSlider.addEventListener('input', updateCalc);
 
-    productsSlider.addEventListener('input', onSliderInput);
-    priceSlider.addEventListener('input', onSliderInput);
-    splitSlider.addEventListener('input', onSliderInput);
-
-    /* Initial build */
-    buildReport();
-
-    /* Re-observe new reveal elements */
-    document.querySelectorAll('.calc-section .reveal').forEach(function(el) {
-      revealObserver.observe(el);
-    });
-  })();
-
-  /* ══════════════════════════════════════════════════
-     EXHIBIT 2: Follow a Product Timeline
-     ══════════════════════════════════════════════════ */
-  (function initTimeline() {
-    var track = document.getElementById('timelineTrack');
-    if (!track) return;
-
-    var steps = track.querySelectorAll('.timeline-step');
-    var lineFill = document.getElementById('timelineLineFill');
-    var detailContent = document.getElementById('timelineDetailContent');
-    var progressFill = document.getElementById('timelineProgressFill');
-    var pauseBtn = document.getElementById('timelinePauseBtn');
-    var pauseIcon = document.getElementById('timelinePauseIcon');
-    var playIcon = document.getElementById('timelinePlayIcon');
-
-    var STEP_DATA = [
-      {
-        title: 'Delivered',
-        text: 'Vendor delivers 24 units to retailer. Manifested in METRC, received into POS.',
-        highlight: '24 units received'
-      },
-      {
-        title: 'On Shelf',
-        text: 'Product is stocked and available for sale. ShelfSpace tracks inventory in real-time.',
-        highlight: '7 days on shelf'
-      },
-      {
-        title: 'Sold',
-        text: '18 of 24 units sell this week at $12 each. POS data flows to ShelfSpace.',
-        highlight: '18 units \u00d7 $12 = $216'
-      },
-      {
-        title: 'Settlement',
-        text: 'ShelfSpace calculates: $216 net sales \u00d7 50% split = $108 vendor payout.',
-        highlight: '$216 \u00d7 50% = $108'
-      },
-      {
-        title: 'Paid',
-        text: 'Check generated and available in vendor portal. $108 deposited.',
-        highlight: '$108.00 deposited'
-      }
-    ];
-
-    var currentStep = 0;
-    var paused = false;
-    var autoTimer = null;
-    var STEP_DURATION = 3000; /* 3 seconds per step */
-    var progressStart = 0;
-    var rafId = null;
-
-    function isMobileLayout() {
-      return window.innerWidth < 900;
-    }
-
-    function updateTimeline(index, fromUser) {
-      currentStep = index;
-
-      /* Update step classes */
-      for (var i = 0; i < steps.length; i++) {
-        steps[i].classList.remove('active', 'completed');
-        if (i < index) steps[i].classList.add('completed');
-        if (i === index) steps[i].classList.add('active');
-      }
-
-      /* Update connecting line fill */
-      if (steps.length > 1) {
-        if (isMobileLayout()) {
-          var totalHeight = steps[steps.length - 1].offsetTop - steps[0].offsetTop;
-          var fillHeight = index === 0 ? 0 : ((steps[index].offsetTop - steps[0].offsetTop) / totalHeight) * 100;
-          lineFill.style.width = '';
-          lineFill.style.height = fillHeight + '%';
-        } else {
-          var totalWidth = steps[steps.length - 1].offsetLeft - steps[0].offsetLeft;
-          var fillWidth = index === 0 ? 0 : ((steps[index].offsetLeft - steps[0].offsetLeft) / totalWidth) * 100;
-          lineFill.style.height = '';
-          lineFill.style.width = fillWidth + '%';
-        }
-      }
-
-      /* Update detail panel */
-      var data = STEP_DATA[index];
-      detailContent.classList.remove('detail-visible');
-
-      setTimeout(function() {
-        detailContent.innerHTML =
-          '<div class="timeline-detail-step-num">STEP ' + (index + 1) + ' OF 5</div>' +
-          '<div class="timeline-detail-title">' + data.title + '</div>' +
-          '<div class="timeline-detail-text">' + data.text + '</div>' +
-          '<div class="timeline-detail-highlight">' + data.highlight + '</div>';
-        requestAnimationFrame(function() {
-          detailContent.classList.add('detail-visible');
-        });
-      }, fromUser ? 0 : 80);
-
-      /* Restart progress timer */
-      startProgress();
-    }
-
-    function startProgress() {
-      if (rafId) cancelAnimationFrame(rafId);
-      progressFill.classList.remove('animating');
-      progressFill.style.width = '0%';
-
-      if (paused) return;
-
-      /* Force reflow then start CSS transition */
-      void progressFill.offsetWidth;
-      progressFill.classList.add('animating');
-      progressFill.style.transitionDuration = STEP_DURATION + 'ms';
-      progressFill.style.width = '100%';
-
-      progressStart = Date.now();
-      clearTimeout(autoTimer);
-      autoTimer = setTimeout(function() {
-        if (!paused) {
-          var next = (currentStep + 1) % steps.length;
-          updateTimeline(next, false);
-        }
-      }, STEP_DURATION);
-    }
-
-    function togglePause() {
-      paused = !paused;
-      pauseIcon.style.display = paused ? 'none' : '';
-      playIcon.style.display = paused ? '' : 'none';
-
-      if (paused) {
-        clearTimeout(autoTimer);
-        /* Freeze progress bar at current position */
-        var elapsed = Date.now() - progressStart;
-        var pct = Math.min((elapsed / STEP_DURATION) * 100, 100);
-        progressFill.classList.remove('animating');
-        progressFill.style.width = pct + '%';
-      } else {
-        /* Resume from where we left off */
-        var elapsed2 = Date.now() - progressStart;
-        var remaining = Math.max(STEP_DURATION - elapsed2, 200);
-        progressFill.classList.add('animating');
-        progressFill.style.transitionDuration = remaining + 'ms';
-        progressFill.style.width = '100%';
-
-        clearTimeout(autoTimer);
-        autoTimer = setTimeout(function() {
-          if (!paused) {
-            var next = (currentStep + 1) % steps.length;
-            updateTimeline(next, false);
-          }
-        }, remaining);
-      }
-    }
-
-    /* Click handlers for steps */
-    for (var i = 0; i < steps.length; i++) {
-      (function(idx) {
-        steps[idx].addEventListener('click', function() {
-          updateTimeline(idx, true);
-        });
-      })(i);
-    }
-
-    pauseBtn.addEventListener('click', togglePause);
-
-    /* Pause on hover over the detail panel and track */
-    var timelineWrap = track.closest('.timeline-wrap');
-    var wasManuallyPaused = false;
-    timelineWrap.addEventListener('mouseenter', function() {
-      if (!paused) {
-        wasManuallyPaused = false;
-        togglePause();
-      } else {
-        wasManuallyPaused = true;
-      }
-    });
-    timelineWrap.addEventListener('mouseleave', function() {
-      if (paused && !wasManuallyPaused) {
-        togglePause();
-      }
-    });
-
-    /* Start the timeline when it becomes visible */
-    var timelineObserver = new IntersectionObserver(function(entries) {
-      entries.forEach(function(entry) {
-        if (entry.isIntersecting) {
-          updateTimeline(0, false);
-          timelineObserver.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.2 });
-    timelineObserver.observe(timelineWrap);
-
-    /* Handle resize for layout changes */
-    window.addEventListener('resize', function() {
-      updateTimeline(currentStep, true);
-    });
-
-    /* Re-observe new reveal elements */
-    document.querySelectorAll('.timeline-section .reveal').forEach(function(el) {
-      revealObserver.observe(el);
-    });
+    updateCalc();
   })();
 })();
 </script>
