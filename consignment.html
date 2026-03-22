@@ -251,6 +251,19 @@
   .calc-report-table tbody tr { opacity: 0; transform: translateY(8px); transition: opacity 0.35s ease, transform 0.35s ease; }
   .calc-report-table tbody tr.line-visible { opacity: 1; transform: translateY(0); }
 
+  .calc-pagination { display: flex; align-items: center; justify-content: center; gap: 6px; padding: 12px 16px 4px; }
+  .calc-pagination:empty { display: none; }
+  .calc-pagination button {
+    width: 32px; height: 32px; border: 1px solid var(--slate-200); border-radius: 8px;
+    background: var(--white); color: var(--slate-600); font-size: 13px; font-weight: 600;
+    cursor: pointer; transition: all 0.2s ease; display: flex; align-items: center; justify-content: center;
+  }
+  .calc-pagination button:hover { background: var(--green-ghost); border-color: var(--green-accent); color: var(--green-deep); }
+  .calc-pagination button.active { background: var(--green-deep); border-color: var(--green-deep); color: var(--white); }
+  .calc-pagination button:disabled { opacity: 0.4; cursor: default; }
+  .calc-pagination button:disabled:hover { background: var(--white); border-color: var(--slate-200); color: var(--slate-600); }
+  .calc-pagination .calc-page-info { font-size: 12px; color: var(--slate-400); padding: 0 4px; }
+
   .calc-report-totals { padding: 20px 16px; border-top: 2px solid var(--slate-200); display: flex; flex-direction: column; gap: 8px; }
   .calc-total-row { display: flex; justify-content: space-between; align-items: center; padding: 4px 0; }
   .calc-total-row span:first-child { font-size: 13px; font-weight: 600; color: var(--slate-500); }
@@ -481,7 +494,7 @@
           <span>Number of Products</span>
           <span class="calc-slider-value" id="calcProductsVal">10</span>
         </div>
-        <input type="range" class="calc-slider" id="calcProducts" min="1" max="50" value="10">
+        <input type="range" class="calc-slider" id="calcProducts" min="1" max="20" value="10">
       </div>
       <div class="calc-slider-group">
         <div class="calc-slider-label">
@@ -521,6 +534,7 @@
         </thead>
         <tbody id="calcTableBody"></tbody>
       </table>
+      <div class="calc-pagination" id="calcPagination"></div>
       <div class="calc-report-totals" id="calcTotals"></div>
       <div class="calc-check" id="calcCheck">
         <div class="calc-check-icon">
@@ -1002,6 +1016,11 @@
       return Math.floor((x - Math.floor(x)) * max) + 1;
     }
 
+    var paginationDiv = document.getElementById('calcPagination');
+    var PAGE_SIZE = 5;
+    var currentPage = 0;
+    var lineItems = []; /* cached line items from last build */
+
     var debounceTimer = null;
     function updateSliderTrack(slider) {
       var pct = ((slider.value - slider.min) / (slider.max - slider.min)) * 100;
@@ -1011,6 +1030,59 @@
     function formatMoney(n) {
       return '$' + n.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
     }
+
+    function renderPage() {
+      var start = currentPage * PAGE_SIZE;
+      var end = Math.min(start + PAGE_SIZE, lineItems.length);
+      var rows = '';
+      for (var i = start; i < end; i++) {
+        var item = lineItems[i];
+        rows += '<tr style="transition-delay:' + ((i - start) * 40) + 'ms">' +
+          '<td>' + item.name + '</td>' +
+          '<td>' + item.qty + '</td>' +
+          '<td>' + formatMoney(item.price) + '</td>' +
+          '<td>' + item.splitPct + '%</td>' +
+          '<td>' + formatMoney(item.payout) + '</td>' +
+          '</tr>';
+      }
+      tableBody.innerHTML = rows;
+
+      /* Animate rows in */
+      requestAnimationFrame(function() {
+        var trs = tableBody.querySelectorAll('tr');
+        requestAnimationFrame(function() {
+          for (var j = 0; j < trs.length; j++) {
+            trs[j].classList.add('line-visible');
+          }
+        });
+      });
+
+      /* Pagination controls */
+      var totalPages = Math.ceil(lineItems.length / PAGE_SIZE);
+      if (totalPages <= 1) {
+        paginationDiv.innerHTML = '';
+        return;
+      }
+      var html = '<button class="calc-page-arrow" ' + (currentPage === 0 ? 'disabled' : '') + ' data-page="prev">' +
+        '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>';
+      for (var p = 0; p < totalPages; p++) {
+        html += '<button' + (p === currentPage ? ' class="active"' : '') + ' data-page="' + p + '">' + (p + 1) + '</button>';
+      }
+      html += '<button class="calc-page-arrow" ' + (currentPage === totalPages - 1 ? 'disabled' : '') + ' data-page="next">' +
+        '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>';
+      paginationDiv.innerHTML = html;
+    }
+
+    paginationDiv.addEventListener('click', function(e) {
+      var btn = e.target.closest('button');
+      if (!btn || btn.disabled) return;
+      var page = btn.getAttribute('data-page');
+      var totalPages = Math.ceil(lineItems.length / PAGE_SIZE);
+      if (page === 'prev') currentPage = Math.max(0, currentPage - 1);
+      else if (page === 'next') currentPage = Math.min(totalPages - 1, currentPage + 1);
+      else currentPage = parseInt(page);
+      renderPage();
+    });
 
     function buildReport() {
       var numProducts = parseInt(productsSlider.value);
@@ -1026,7 +1098,7 @@
       updateSliderTrack(splitSlider);
 
       /* Build line items */
-      var rows = '';
+      lineItems = [];
       var totalSales = 0;
       var totalPayout = 0;
       for (var i = 0; i < numProducts; i++) {
@@ -1037,16 +1109,12 @@
         var linePayout = lineSales * (splitPct / 100);
         totalSales += lineSales;
         totalPayout += linePayout;
-        rows += '<tr style="transition-delay:' + (i * 40) + 'ms">' +
-          '<td>' + name + '</td>' +
-          '<td>' + qty + '</td>' +
-          '<td>' + formatMoney(price) + '</td>' +
-          '<td>' + splitPct + '%</td>' +
-          '<td>' + formatMoney(linePayout) + '</td>' +
-          '</tr>';
+        lineItems.push({ name: name, qty: qty, price: price, splitPct: splitPct, payout: linePayout });
       }
 
-      tableBody.innerHTML = rows;
+      /* Reset to first page when sliders change */
+      currentPage = 0;
+      renderPage();
 
       /* Totals */
       totalsDiv.innerHTML =
@@ -1057,20 +1125,12 @@
       headerTotal.textContent = formatMoney(totalPayout);
       checkAmount.textContent = formatMoney(totalPayout);
 
-      /* Animate line items in */
+      /* Show check after lines animate */
       checkEl.classList.remove('check-visible');
-      requestAnimationFrame(function() {
-        var trs = tableBody.querySelectorAll('tr');
-        requestAnimationFrame(function() {
-          for (var j = 0; j < trs.length; j++) {
-            trs[j].classList.add('line-visible');
-          }
-          /* Show check after lines animate */
-          setTimeout(function() {
-            checkEl.classList.add('check-visible');
-          }, Math.min(numProducts * 40 + 200, 800));
-        });
-      });
+      var visibleRows = Math.min(numProducts, PAGE_SIZE);
+      setTimeout(function() {
+        checkEl.classList.add('check-visible');
+      }, Math.min(visibleRows * 40 + 200, 800));
     }
 
     function onSliderInput() {
