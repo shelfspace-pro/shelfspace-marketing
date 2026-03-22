@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Credit Recovery — ShelfSpace</title>
+<meta name="description" content="ShelfSpace recovers an average of $50,000 per year in vendor credits for every retailer we serve. Returns, expirations, co-marketing — money you're owed but nobody's tracking.">
+<link rel="canonical" href="https://shelfspace.pro/credit-recovery">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://shelfspace.pro/credit-recovery">
+<meta property="og:title" content="Credit Recovery — ShelfSpace">
+<meta property="og:description" content="ShelfSpace recovers an average of $50,000 per year in vendor credits for every retailer we serve. Returns, expirations, co-marketing — money you're owed but nobody's tracking.">
+<meta property="og:image" content="https://shelfspace.pro/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Credit Recovery — ShelfSpace">
+<meta name="twitter:description" content="ShelfSpace recovers an average of $50,000 per year in vendor credits for every retailer we serve. Returns, expirations, co-marketing — money you're owed but nobody's tracking.">
+<meta name="twitter:image" content="https://shelfspace.pro/og-image.png">
+<meta name="apple-mobile-web-app-title" content="ShelfSpace">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+  @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-12px); } }
+
+  /* ─── HERO ENHANCEMENTS ─── */
+  .page-hero { padding-bottom: 40px; }
+  .hero-bg-gradient { position: absolute; top: -30%; right: -20%; width: 700px; height: 700px; background: radial-gradient(circle, rgba(149,213,178,0.18) 0%, rgba(149,213,178,0) 70%); animation: float 8s ease-in-out infinite; pointer-events: none; }
+  .hero-bg-gradient-2 { position: absolute; bottom: -20%; left: -15%; width: 550px; height: 550px; background: radial-gradient(circle, rgba(27,67,50,0.06) 0%, rgba(27,67,50,0) 70%); animation: float 10s ease-in-out infinite; animation-delay: -3s; pointer-events: none; }
+  .hero-grid-lines { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 1200px; height: 100%; opacity: 0.035; background-image: linear-gradient(var(--green-deep) 1px, transparent 1px), linear-gradient(90deg, var(--green-deep) 1px, transparent 1px); background-size: 80px 80px; pointer-events: none; }
+  .page-hero .section-label,
+  .page-hero .section-title,
+  .page-hero .section-desc { opacity: 0; transform: translateY(30px); }
+  .page-hero .section-label { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1); }
+  .page-hero .section-title { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s, transform 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s; }
+  .page-hero .section-desc { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1) 0.25s, transform 0.8s cubic-bezier(0.22,1,0.36,1) 0.25s; }
+  .page-hero.hero-loaded .section-label,
+  .page-hero.hero-loaded .section-title,
+  .page-hero.hero-loaded .section-desc { opacity: 1; transform: translateY(0); }
+
+  /* ─── REVEAL ─── */
+  .reveal {
+    opacity: 0; transform: translateY(40px);
+    transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .reveal.is-visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.2s; }
+  .reveal-delay-2 { transition-delay: 0.4s; }
+  .reveal-delay-3 { transition-delay: 0.6s; }
+
+  /* ─── PROBLEM CARDS ─── */
+  .problem-section { background: var(--white); }
+  .problem-header { text-align: center; max-width: 640px; margin: 0 auto 64px; }
+  .problem-header .section-desc { margin: 0 auto; }
+  .problem-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+  .problem-card {
+    background: var(--white); border: 1px solid var(--slate-200);
+    border-radius: 16px; padding: 40px 32px;
+    transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    position: relative; overflow: hidden;
+  }
+  .problem-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--green-accent), var(--green-mid)); opacity: 0; transition: opacity 0.4s; }
+  .problem-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(27, 67, 50, 0.1); border-color: var(--green-accent); }
+  .problem-card:hover::before { opacity: 1; }
+  .problem-icon { width: 48px; height: 48px; background: var(--green-ghost); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 24px; }
+  .problem-icon svg { width: 24px; height: 24px; color: var(--green-deep); }
+  .problem-card h3 { font-size: 20px; font-weight: 700; color: var(--green-deep); margin-bottom: 12px; letter-spacing: -0.3px; }
+  .problem-card p { font-size: 15px; line-height: 1.65; color: var(--slate-500); }
+  .problem-card.reveal { transform: translateY(40px) scale(0.97); }
+  .problem-card.reveal.is-visible { transform: translateY(0) scale(1); }
+
+  /* ─── CALCULATOR ─── */
+  .calc-section { background: var(--slate-50); }
+  .calc-header { text-align: center; max-width: 600px; margin: 0 auto 64px; }
+  .calc-header .section-desc { margin: 0 auto; }
+  .calc-container { max-width: 640px; margin: 0 auto; }
+  .calc-slider-wrapper { margin-bottom: 40px; }
+  .calc-revenue-display { text-align: center; font-family: var(--font-mono); font-size: clamp(32px, 4vw, 48px); font-weight: 700; color: var(--green-deep); letter-spacing: -1px; margin-bottom: 16px; }
+  .calc-slider { width: 100%; -webkit-appearance: none; appearance: none; height: 8px; border-radius: 4px; background: var(--slate-200); outline: none; }
+  .calc-slider::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 28px; height: 28px; border-radius: 50%; background: var(--green-deep); cursor: pointer; box-shadow: 0 2px 8px rgba(27,67,50,0.3); }
+  .calc-slider::-moz-range-thumb { width: 28px; height: 28px; border-radius: 50%; background: var(--green-deep); cursor: pointer; border: none; box-shadow: 0 2px 8px rgba(27,67,50,0.3); }
+  .calc-slider-labels { display: flex; justify-content: space-between; font-size: 12px; color: var(--slate-400); margin-top: 8px; }
+  .calc-results { background: var(--white); border: 1px solid var(--slate-200); border-radius: 16px; overflow: hidden; }
+  .calc-row { display: flex; justify-content: space-between; align-items: center; padding: 20px 24px; border-bottom: 1px solid var(--slate-100); }
+  .calc-row:last-child { border-bottom: none; }
+  .calc-row-label { font-size: 15px; color: var(--slate-600); }
+  .calc-row-value { font-family: var(--font-mono); font-size: 18px; font-weight: 700; color: var(--green-deep); }
+  .calc-total { background: var(--green-deep); }
+  .calc-total .calc-row-label { color: rgba(255,255,255,0.7); font-weight: 600; }
+  .calc-total .calc-row-value { color: var(--white); font-size: 24px; }
+  .calc-proof { text-align: center; margin-top: 32px; font-size: 14px; color: var(--slate-500); font-style: italic; }
+
+  /* ─── HOW IT WORKS (Process Steps) ─── */
+  .process-section { background: var(--white); padding-top: 60px; }
+  .process-header { text-align: center; max-width: 600px; margin: 0 auto 56px; }
+  .process-header .section-desc { margin: 0 auto; }
+  .process-container { max-width: 880px; margin: 0 auto; }
+  .process-step {
+    display: grid; grid-template-columns: 80px 1fr; gap: 40px;
+    padding: 56px 0; border-bottom: 1px solid var(--slate-100);
+    position: relative;
+  }
+  .process-step:last-child { border-bottom: none; }
+  .process-step-number {
+    width: 56px; height: 56px;
+    background: var(--green-ghost); border: 1px solid rgba(149,213,178,0.3);
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-mono); font-size: 16px; font-weight: 700; color: var(--green-deep);
+    position: sticky; top: 100px;
+  }
+  .process-step-content h3 {
+    font-size: 24px; font-weight: 700; color: var(--green-deep);
+    letter-spacing: -0.5px; margin-bottom: 8px;
+  }
+  .process-step-content .step-tag {
+    font-size: 11px; font-weight: 700; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--green-mid); margin-bottom: 16px;
+    display: block;
+  }
+  .process-step-content p {
+    font-size: 16px; line-height: 1.75; color: var(--slate-500); margin-bottom: 16px;
+  }
+  .process-step-content p:last-child { margin-bottom: 0; }
+
+  /* ─── MANAGED SERVICE CALLOUT (Dark section) ─── */
+  .managed-callout {
+    background: var(--green-deep); position: relative; overflow: hidden;
+    padding: 80px 48px; text-align: center;
+  }
+  .managed-callout::before {
+    content: ''; position: absolute; top: -200px; left: -200px;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(149,213,178,0.08), transparent 70%);
+  }
+  .managed-callout-content { position: relative; max-width: 640px; margin: 0 auto; }
+  .managed-callout-content .section-label { color: var(--green-accent); }
+  .managed-callout-content h2 {
+    font-size: clamp(24px, 3vw, 36px); font-weight: 700; color: var(--white);
+    line-height: 1.25; letter-spacing: -1px; margin-bottom: 20px;
+  }
+  .managed-callout-content p {
+    font-size: 17px; line-height: 1.75; color: rgba(255,255,255,0.6);
+  }
+  .managed-callout-content p strong { color: rgba(255,255,255,0.85); font-weight: 600; }
+
+  /* ─── FAQ ─── */
+  .faq-section {
+    background: var(--white); padding: 80px 48px;
+  }
+  .faq-header { text-align: center; max-width: 600px; margin: 0 auto 48px; }
+  .faq-header .section-desc { margin: 0 auto; }
+  .faq-list {
+    max-width: 680px; margin: 0 auto;
+  }
+  .faq-list details {
+    border-bottom: 1px solid var(--slate-200);
+  }
+  .faq-list details:first-child {
+    border-top: 1px solid var(--slate-200);
+  }
+  .faq-list summary {
+    padding: 20px 0; font-size: 17px; font-weight: 600;
+    color: var(--green-deep); cursor: pointer; list-style: none;
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  }
+  .faq-list summary::-webkit-details-marker { display: none; }
+  .faq-list summary::after {
+    content: '+'; font-size: 22px; font-weight: 400;
+    color: var(--slate-400); transition: transform 0.2s;
+    flex-shrink: 0;
+  }
+  .faq-list details[open] summary::after {
+    content: '\2212';
+  }
+  .faq-list details p {
+    padding: 0 0 20px; margin: 0; font-size: 15px;
+    line-height: 1.7; color: var(--slate-500);
+  }
+
+  /* ─── CTA PARALLAX ─── */
+  .cta-section::before { transform: translate(-50%,-50%) translateY(var(--parallax-y, 0)); will-change: transform; }
+
+  /* ─── FOOTER 5-COL ─── */
+  .footer-top { grid-template-columns: 2fr 1fr 1fr 1fr 1fr; }
+  @media (max-width: 900px) { .footer-top { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px) { .footer-top { grid-template-columns: 1fr; } }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    .problem-grid { grid-template-columns: 1fr; max-width: 480px; }
+    .process-step { grid-template-columns: 1fr; gap: 16px; }
+    .process-step-number { position: static; }
+    .managed-callout { padding: 60px 24px; }
+    .faq-section { padding: 60px 24px; }
+  }
+
+  /* ─── REDUCED MOTION ─── */
+  @media (prefers-reduced-motion: reduce) {
+    .reveal, .problem-card.reveal {
+      opacity: 1; transform: none; transition: none;
+    }
+    .page-hero .section-label,
+    .page-hero .section-title,
+    .page-hero .section-desc {
+      opacity: 1; transform: none; transition: none;
+    }
+    .hero-bg-gradient, .hero-bg-gradient-2 { animation: none; }
+  }
+</style>
+<noscript><style>.reveal,.page-hero .section-label,.page-hero .section-title,.page-hero .section-desc{opacity:1;transform:none;transition:none;}</style></noscript>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="/" class="nav-logo">
+    <div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div>
+    <span class="nav-logo-text">ShelfSpace</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="/consignment">Consignment</a></li>
+    <li><a href="/accounts-payable">Wholesale</a></li>
+    <li><a href="/credit-recovery" class="active">Credit Recovery</a></li>
+    <li><a href="/pricing">Pricing</a></li>
+    <li><a href="/about">About</a></li>
+    <li><a href="https://ourshelf.space">Login</a></li>
+    <li><a href="/contact" class="nav-cta">Sign Up <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a></li>
+  </ul>
+  <div class="nav-hamburger" onclick="document.querySelector('.nav-links').classList.toggle('mobile-open'); event.stopPropagation();"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="hero-bg-gradient"></div>
+  <div class="hero-bg-gradient-2"></div>
+  <div class="hero-grid-lines"></div>
+  <div class="section-label">Credit Recovery</div>
+  <h1 class="section-title">What would you do with an extra $50,000 per year?</h1>
+  <p class="section-desc">ShelfSpace recovers an average of $50,000 per year per retailer we serve using vendor credits. Returns, expirations, and co-marketing spend — money your vendors owe you that nobody's tracking.</p>
+</div>
+
+<!-- THE MONEY YOU'RE ALREADY OWED -->
+<section class="problem-section">
+  <div class="problem-header">
+    <div class="section-label reveal">The Problem</div>
+    <h2 class="section-title reveal">The money you're already owed</h2>
+    <p class="section-desc reveal">Right now, most of these credits expire unclaimed. Your team doesn't have time to track every return, pull METRC data, create memos, and chase vendors for approval. So the money just... disappears.</p>
+  </div>
+  <div class="problem-grid">
+    <div class="problem-card reveal">
+      <div class="problem-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+      </div>
+      <h3>Product Returns</h3>
+      <p>Damaged goods, wrong SKUs, quality issues — when product goes back to the vendor, you're owed a credit. Without a system to track it, most returns never get credited.</p>
+    </div>
+    <div class="problem-card reveal reveal-delay-1">
+      <div class="problem-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      </div>
+      <h3>Expired Product</h3>
+      <p>Product that expires on your shelf is the vendor's problem under consignment — and often under wholesale agreements too. ShelfSpace tracks every expiration through METRC and generates credits before they fall through the cracks.</p>
+    </div>
+    <div class="problem-card reveal reveal-delay-2">
+      <div class="problem-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><line x1="9" y1="10" x2="9" y2="10"/><line x1="15" y1="10" x2="15" y2="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/></svg>
+      </div>
+      <h3>Co-Marketing Credits</h3>
+      <p>Vendors fund promotions, discounts, and featured placement. When you run their promo, you're owed a credit for the discount you absorbed. Most operators never track this spend — ShelfSpace does.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CALCULATOR -->
+<section class="calc-section" id="calculator">
+  <div class="calc-header">
+    <div class="section-label reveal">See Your Savings</div>
+    <h2 class="section-title reveal">How much are you leaving on the table?</h2>
+  </div>
+  <div class="calc-container reveal">
+    <div class="calc-slider-wrapper">
+      <div class="calc-revenue-display" id="calc-revenue">$3,000,000</div>
+      <input type="range" class="calc-slider" id="calc-slider" min="500000" max="10000000" step="100000" value="3000000">
+      <div class="calc-slider-labels">
+        <span>$500K</span>
+        <span>Annual Revenue</span>
+        <span>$10M</span>
+      </div>
+    </div>
+    <div class="calc-results">
+      <div class="calc-row">
+        <span class="calc-row-label">Product return credits (0.75%)</span>
+        <span class="calc-row-value" id="calc-returns">$22,500</span>
+      </div>
+      <div class="calc-row">
+        <span class="calc-row-label">Expired product credits (0.5%)</span>
+        <span class="calc-row-value" id="calc-expired">$15,000</span>
+      </div>
+      <div class="calc-row">
+        <span class="calc-row-label">Co-marketing credits (1.5%)</span>
+        <span class="calc-row-value" id="calc-comark">$45,000</span>
+      </div>
+      <div class="calc-row calc-total">
+        <span class="calc-row-label">Total credits recovered by ShelfSpace per year</span>
+        <span class="calc-row-value" id="calc-total">$82,500</span>
+      </div>
+    </div>
+    <p class="calc-proof">We've already recovered $50,000+ per year for a two-shop dispensary chain in Massachusetts.</p>
+  </div>
+</section>
+
+<!-- HOW SHELFSPACE RECOVERS CREDITS -->
+<section class="process-section">
+  <div class="process-header">
+    <div class="section-label reveal">How It Works</div>
+    <h2 class="section-title reveal">How ShelfSpace recovers your credits</h2>
+  </div>
+  <div class="process-container">
+    <div class="process-step reveal">
+      <div class="process-step-number">01</div>
+      <div class="process-step-content">
+        <span class="step-tag">We Handle This</span>
+        <h3>We pull your data</h3>
+        <p>We connect to your POS and METRC to pull sales data, return records, expiration dates, and promotional discount spend. You don't export anything — we pull it directly.</p>
+      </div>
+    </div>
+    <div class="process-step reveal">
+      <div class="process-step-number">02</div>
+      <div class="process-step-content">
+        <span class="step-tag">We Handle This</span>
+        <h3>We create the credit memos</h3>
+        <p>For every return, expiration, and co-marketing promotion, we generate a detailed credit memo — line by line, vendor by vendor. Nothing slips through the cracks.</p>
+      </div>
+    </div>
+    <div class="process-step reveal">
+      <div class="process-step-number">03</div>
+      <div class="process-step-content">
+        <span class="step-tag">We Handle This</span>
+        <h3>We work with your vendors</h3>
+        <p>We send each credit memo to the vendor for approval and handle the entire back-and-forth. Your vendors email us, not you. Disputes, questions, clarifications — all handled by our team.</p>
+      </div>
+    </div>
+    <div class="process-step reveal">
+      <div class="process-step-number">04</div>
+      <div class="process-step-content">
+        <span class="step-tag">We Handle This</span>
+        <h3>We apply credits to your settlements</h3>
+        <p>Approved credits get applied to your next settlement or offset against open invoices. Less cash out the door. Every credit is tracked with a full audit trail.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WE DO ALL THE WORK -->
+<section class="managed-callout">
+  <div class="managed-callout-content">
+    <div class="section-label reveal">Not Another Portal to Manage</div>
+    <h2 class="reveal">Done with yet another portal? Good news — we do all of the work.</h2>
+    <p class="reveal">Our goal is that you never have to log in to your account. We pull your data, create every credit memo, communicate with your vendors, and apply approved credits to your settlements. <strong>You just get the reports and keep the money.</strong></p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section">
+  <div class="faq-header">
+    <div class="section-label reveal">FAQ</div>
+    <h2 class="section-title reveal">Frequently asked questions</h2>
+  </div>
+  <div class="faq-list">
+    <details>
+      <summary>Do my vendors have to agree to credits?</summary>
+      <p>Yes, but we handle the entire approval process. We send the credit memo to the vendor, manage any questions or disputes, and track it to resolution. Vendors appreciate the structure — it's transparent and fair for both sides.</p>
+    </details>
+    <details>
+      <summary>What if a vendor disputes a credit?</summary>
+      <p>We manage the resolution directly with the vendor. Everything is tracked with a full audit trail — dates, amounts, communication history. You stay out of it.</p>
+    </details>
+    <details>
+      <summary>Do I need to change my POS or METRC workflow?</summary>
+      <p>No. We pull data from your existing systems. Nothing changes on your end — same POS, same METRC process, same receiving workflow.</p>
+    </details>
+    <details>
+      <summary>What does credit recovery cost?</summary>
+      <p>Credit recovery is included in the free 60-day pilot. After the pilot, it's a flat fee per approved credit memo. Most operators recover far more than the cost.</p>
+    </details>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-content">
+    <div class="section-label reveal">Get Started</div>
+    <h2 class="section-title reveal">Start recovering what you're owed.</h2>
+    <p class="section-desc reveal">Free 60-day pilot. We set everything up, connect your systems, and start recovering credits from day one.</p>
+    <div class="cta-actions reveal">
+      <a href="/contact" class="btn-primary">
+        Start Free Pilot
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+      <a href="/contact" class="btn-secondary">Talk to Chris</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="/" class="nav-logo"><div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div><span class="nav-logo-text">ShelfSpace</span></a>
+      <p>Every Vendor. Every Payment. One Engine.</p>
+    </div>
+    <div class="footer-col"><h4>Services</h4><ul><li><a href="/consignment">Consignment</a></li><li><a href="/accounts-payable">Accounts Payable</a></li><li><a href="/credit-recovery">Credit Recovery</a></li><li><a href="/checks">Check Payments</a></li><li><a href="/shelfiq">ShelfiQ</a></li></ul></div>
+    <div class="footer-col"><h4>Platform</h4><ul><li><a href="/features">Features</a></li><li><a href="/how-it-works">How It Works</a></li><li><a href="/pricing">Pricing</a></li><li><a href="/about">About</a></li></ul></div>
+    <div class="footer-col"><h4>Access</h4><ul><li><a href="https://ourshelf.space">Login</a></li><li><a href="/contact">Sign Up</a></li><li><a href="/contact">Contact</a></li></ul></div>
+    <div class="footer-col"><h4>Company</h4><ul><li><a href="mailto:chris@shelfspace.pro">Email</a></li><li><a href="mailto:support@shelfspace.pro">Support</a></li><li><a href="https://linkedin.com/company/shelfspace-pro" target="_blank" rel="noopener" class="footer-social-link"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> LinkedIn</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><p>&copy; 2026 ShelfSpace Technologies Inc.</p><div class="footer-bottom-links"><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div></div>
+</footer>
+
+<script>
+(function() {
+  var nav = document.getElementById('nav');
+  var pageHero = document.querySelector('.page-hero');
+  var parallaxSections = [
+    document.querySelector('.managed-callout'),
+    document.querySelector('.cta-section')
+  ];
+
+  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var isMobile = window.innerWidth < 900;
+  var ticking = false;
+
+  /* ── Hero entrance ── */
+  requestAnimationFrame(function() {
+    nav.classList.toggle('scrolled', window.scrollY > 20);
+    if (pageHero) pageHero.classList.add('hero-loaded');
+  });
+
+  /* ── Scroll-Triggered Reveals (with unobserve for perf) ── */
+  var revealObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(function(el) { revealObserver.observe(el); });
+
+  /* ── Scroll handler (rAF + ticking flag) ── */
+  function onScroll() {
+    var scrollY = window.scrollY;
+
+    /* Nav state */
+    nav.classList.toggle('scrolled', scrollY > 20);
+
+    /* Skip parallax for reduced motion or mobile */
+    if (prefersReduced || isMobile) return;
+
+    /* Section decorative parallax */
+    var wh = window.innerHeight;
+    parallaxSections.forEach(function(section) {
+      if (!section) return;
+      var rect = section.getBoundingClientRect();
+      if (rect.bottom < 0 || rect.top > wh) return;
+      var center = rect.top + rect.height / 2 - wh / 2;
+      section.style.setProperty('--parallax-y', (center * 0.08) + 'px');
+    });
+  }
+
+  window.addEventListener('scroll', function() {
+    if (!ticking) {
+      requestAnimationFrame(function() {
+        onScroll();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, { passive: true });
+
+  /* Initial call */
+  onScroll();
+
+  /* ── Resize handler ── */
+  window.addEventListener('resize', function() {
+    isMobile = window.innerWidth < 900;
+    if (isMobile) {
+      parallaxSections.forEach(function(section) {
+        if (section) section.style.setProperty('--parallax-y', '0px');
+      });
+    }
+  });
+
+  /* ══════════════════════════════════════════════════
+     Credit Recovery Calculator
+     ══════════════════════════════════════════════════ */
+  var slider = document.getElementById('calc-slider');
+  var revenueDisplay = document.getElementById('calc-revenue');
+  var returnVal = document.getElementById('calc-returns');
+  var expiredVal = document.getElementById('calc-expired');
+  var comarkVal = document.getElementById('calc-comark');
+  var totalVal = document.getElementById('calc-total');
+
+  function formatCurrency(n) {
+    return '$' + Math.round(n).toLocaleString();
+  }
+
+  function updateCalc() {
+    var rev = parseInt(slider.value, 10);
+    revenueDisplay.textContent = formatCurrency(rev);
+    var returns = rev * 0.0075;
+    var expired = rev * 0.005;
+    var comark = rev * 0.015;
+    var total = returns + expired + comark;
+    returnVal.textContent = formatCurrency(returns);
+    expiredVal.textContent = formatCurrency(expired);
+    comarkVal.textContent = formatCurrency(comark);
+    totalVal.textContent = formatCurrency(total);
+  }
+
+  slider.addEventListener('input', updateCalc);
+  updateCalc();
+
+  /* ── Close mobile nav on outside click ── */
+  document.addEventListener('click', function() {
+    var navLinks = document.querySelector('.nav-links');
+    if (navLinks && navLinks.classList.contains('mobile-open')) {
+      navLinks.classList.remove('mobile-open');
+    }
+  });
+})();
+</script>
+<script src="/shelfiq-widget.js"></script>
+</body>
+</html>
