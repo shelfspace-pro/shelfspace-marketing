@@ -4,19 +4,19 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Accounts Payable — ShelfSpace</title>
-<meta name="description" content="Pay any vendor — consignment or wholesale — with Check 21 compliant checks, email-based onboarding, and a complete audit trail. Built for cannabis operators.">
+<meta name="description" content="ShelfSpace takes accounts payable off your plate. Every vendor paid on time, invoices verified before payment, credits recovered, QuickBooks synced. Free 60-day pilot.">
 <link rel="canonical" href="https://shelfspace.pro/accounts-payable">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://shelfspace.pro/accounts-payable">
 <meta property="og:title" content="Accounts Payable — ShelfSpace">
-<meta property="og:description" content="Pay any vendor — consignment or wholesale — with Check 21 compliant checks, email-based onboarding, and a complete audit trail. Built for cannabis operators.">
+<meta property="og:description" content="ShelfSpace takes accounts payable off your plate. Every vendor paid on time, invoices verified before payment, credits recovered, QuickBooks synced. Free 60-day pilot.">
 <meta property="og:image" content="https://shelfspace.pro/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:type" content="image/png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Accounts Payable — ShelfSpace">
-<meta name="twitter:description" content="Pay any vendor — consignment or wholesale — with Check 21 compliant checks, email-based onboarding, and a complete audit trail. Built for cannabis operators.">
+<meta name="twitter:description" content="ShelfSpace takes accounts payable off your plate. Every vendor paid on time, invoices verified before payment, credits recovered, QuickBooks synced. Free 60-day pilot.">
 <meta name="twitter:image" content="https://shelfspace.pro/og-image.png">
 <meta name="apple-mobile-web-app-title" content="ShelfSpace">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -26,8 +26,70 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 <style>
+  @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-12px); } }
+
+  /* ─── HERO ENHANCEMENTS ─── */
   .page-hero { padding-bottom: 40px; }
+  .hero-bg-gradient { position: absolute; top: -30%; right: -20%; width: 700px; height: 700px; background: radial-gradient(circle, rgba(149,213,178,0.18) 0%, rgba(149,213,178,0) 70%); animation: float 8s ease-in-out infinite; pointer-events: none; }
+  .hero-bg-gradient-2 { position: absolute; bottom: -20%; left: -15%; width: 550px; height: 550px; background: radial-gradient(circle, rgba(27,67,50,0.06) 0%, rgba(27,67,50,0) 70%); animation: float 10s ease-in-out infinite; animation-delay: -3s; pointer-events: none; }
+  .hero-grid-lines { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 1200px; height: 100%; opacity: 0.035; background-image: linear-gradient(var(--green-deep) 1px, transparent 1px), linear-gradient(90deg, var(--green-deep) 1px, transparent 1px); background-size: 80px 80px; pointer-events: none; }
+  .page-hero .section-label,
+  .page-hero .section-title,
+  .page-hero .section-desc { opacity: 0; transform: translateY(30px); }
+  .page-hero .section-label { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1); }
+  .page-hero .section-title { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s, transform 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s; }
+  .page-hero .section-desc { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1) 0.25s, transform 0.8s cubic-bezier(0.22,1,0.36,1) 0.25s; }
+  .page-hero.hero-loaded .section-label,
+  .page-hero.hero-loaded .section-title,
+  .page-hero.hero-loaded .section-desc { opacity: 1; transform: translateY(0); }
+
+  /* ─── REVEAL ─── */
+  .reveal {
+    opacity: 0; transform: translateY(40px);
+    transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .reveal.is-visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.2s; }
+  .reveal-delay-2 { transition-delay: 0.4s; }
+
+  /* ─── AP PROBLEM (Dark Section) ─── */
+  .ap-problem {
+    background: var(--green-deep); position: relative; overflow: hidden;
+  }
+  .ap-problem::before {
+    content: ''; position: absolute; top: -200px; left: -200px;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(149,213,178,0.08), transparent 70%);
+    transform: translateY(var(--parallax-y, 0)); will-change: transform;
+  }
+  .ap-problem-header { text-align: center; max-width: 640px; margin: 0 auto 64px; position: relative; }
+  .ap-problem-header .section-label { color: var(--green-accent); }
+  .ap-problem-header .section-title { color: var(--white); }
+  .pain-grid {
+    max-width: 1100px; margin: 0 auto; display: grid;
+    grid-template-columns: repeat(3, 1fr); gap: 40px; position: relative;
+  }
+  .pain-item { position: relative; }
+  .pain-icon {
+    width: 48px; height: 48px; background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px; display: flex; align-items: center; justify-content: center;
+    margin-bottom: 20px;
+  }
+  .pain-icon svg { width: 24px; height: 24px; color: var(--green-accent); }
+  .pain-item h3 { font-size: 18px; font-weight: 700; color: var(--white); margin-bottom: 12px; }
+  .pain-item p { font-size: 15px; line-height: 1.7; color: rgba(255,255,255,0.6); }
+  .pain-pivot {
+    text-align: center; max-width: 700px; margin: 56px auto 0;
+    font-size: 17px; line-height: 1.7; color: rgba(255,255,255,0.75);
+    position: relative;
+  }
+
+  /* ─── PROCESS STEPS ─── */
   .process-section { background: var(--white); padding-top: 60px; }
+  .process-header { text-align: center; max-width: 600px; margin: 0 auto 56px; }
+  .process-header .section-desc { margin: 0 auto; }
   .process-container { max-width: 880px; margin: 0 auto; }
   .process-step {
     display: grid; grid-template-columns: 80px 1fr; gap: 40px;
@@ -62,60 +124,120 @@
     font-size: 14px; line-height: 1.7; color: var(--green-dark);
   }
   .process-highlight strong { color: var(--green-deep); }
+  .process-proof {
+    text-align: center; max-width: 700px; margin: 48px auto 0;
+    font-size: 15px; line-height: 1.7; color: var(--slate-400);
+    font-style: italic;
+  }
 
-  /* ─── KEY BENEFITS GRID ─── */
-  .benefits-section { background: var(--slate-50); border-top: 1px solid var(--slate-100); }
-  .benefits-header { text-align: center; max-width: 600px; margin: 0 auto 64px; }
-  .benefits-header .section-desc { margin: 0 auto; }
-  .deepdive-grid {
-    max-width: 1100px; margin: 0 auto; display: grid;
-    grid-template-columns: repeat(3, 1fr); gap: 28px;
+  /* ─── CONTROL SECTION ─── */
+  .control-section { background: var(--slate-50); }
+  .control-header { text-align: center; max-width: 640px; margin: 0 auto; }
+  .control-header .section-desc { margin: 0 auto; }
+  .control-body { max-width: 700px; margin: 0 auto 48px; text-align: center; font-size: 17px; line-height: 1.75; color: var(--slate-500); }
+  .control-bullets {
+    max-width: 720px; margin: 0 auto; display: flex; flex-direction: column; gap: 28px;
   }
-  .deepdive-card {
-    background: var(--white); border: 1px solid var(--slate-200); border-radius: 16px;
-    padding: 36px 32px; transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-    position: relative; overflow: hidden;
+  .control-bullet {
+    display: flex; align-items: flex-start; gap: 20px;
   }
-  .deepdive-card.reveal { transform: translateY(40px) scale(0.97); }
-  .deepdive-card.reveal.is-visible { transform: translateY(0) scale(1); }
-  .deepdive-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--green-accent), var(--green-mid)); opacity: 0; transition: opacity 0.4s; }
-  .deepdive-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(27,67,50,0.08); border-color: var(--green-accent); }
-  .deepdive-card:hover::before { opacity: 1; }
-  .deepdive-card-icon {
+  .control-bullet-icon {
     width: 48px; height: 48px; background: var(--green-ghost);
+    border: 1px solid rgba(149,213,178,0.3);
     border-radius: 12px; display: flex; align-items: center; justify-content: center;
-    margin-bottom: 20px;
+    flex-shrink: 0;
   }
-  .deepdive-card-icon svg { width: 24px; height: 24px; color: var(--green-deep); }
-  .deepdive-card h3 { font-size: 18px; font-weight: 700; color: var(--green-deep); margin-bottom: 10px; }
-  .deepdive-card > p { font-size: 14px; line-height: 1.65; color: var(--slate-500); margin-bottom: 20px; }
-  .deepdive-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-  .deepdive-list li {
-    display: flex; align-items: center; gap: 8px;
-    font-size: 13px; color: var(--slate-600); line-height: 1.4;
-  }
-  .deepdive-list li svg { flex-shrink: 0; }
+  .control-bullet-icon svg { width: 22px; height: 22px; color: var(--green-deep); }
+  .control-bullet-text h3 { font-size: 16px; font-weight: 700; color: var(--green-deep); margin-bottom: 4px; }
+  .control-bullet-text p { font-size: 15px; line-height: 1.6; color: var(--slate-500); }
 
-  /* ─── FOOTER 5-COLUMN ─── */
+  /* ─── VENDOR PORTAL ─── */
+  .portal-section { background: var(--white); }
+  .portal-header { text-align: center; max-width: 640px; margin: 0 auto; }
+  .portal-header .section-desc { margin: 0 auto; }
+  .portal-body { max-width: 700px; margin: 0 auto 48px; text-align: center; font-size: 17px; line-height: 1.75; color: var(--slate-500); }
+  .portal-grid {
+    max-width: 900px; margin: 0 auto; display: grid;
+    grid-template-columns: 1fr 1fr; gap: 28px;
+  }
+  .portal-item {
+    display: flex; align-items: flex-start; gap: 16px;
+  }
+  .portal-item-icon {
+    width: 44px; height: 44px; background: var(--green-ghost);
+    border: 1px solid rgba(149,213,178,0.3);
+    border-radius: 10px; display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .portal-item-icon svg { width: 20px; height: 20px; color: var(--green-deep); }
+  .portal-item-text h3 { font-size: 15px; font-weight: 700; color: var(--green-deep); margin-bottom: 4px; }
+  .portal-item-text p { font-size: 14px; line-height: 1.6; color: var(--slate-500); }
+
+  /* ─── MORE THAN AP ─── */
+  .more-section { background: var(--slate-50); }
+  .more-header { text-align: center; max-width: 640px; margin: 0 auto; }
+  .more-header .section-desc { margin: 0 auto; }
+  .more-body { max-width: 680px; margin: 0 auto 32px; text-align: center; font-size: 17px; line-height: 1.75; color: var(--slate-500); }
+  .more-links { text-align: center; display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; }
+  .more-links a {
+    font-size: 16px; font-weight: 600; color: var(--green-mid);
+    text-decoration: none; transition: color 0.2s;
+  }
+  .more-links a:hover { color: var(--green-deep); }
+
+  /* ─── DARK CALLOUT (Compact) ─── */
+  .managed-callout {
+    background: var(--green-deep); position: relative; overflow: hidden;
+    padding: 64px 48px; text-align: center;
+  }
+  .managed-callout::before {
+    content: ''; position: absolute; top: -200px; right: -200px;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(149,213,178,0.08), transparent 70%);
+    transform: translateY(var(--parallax-y, 0)); will-change: transform;
+  }
+  .managed-callout-content { position: relative; max-width: 600px; margin: 0 auto; }
+  .managed-callout-content .section-label { color: var(--green-accent); }
+  .managed-callout-content h2 {
+    font-size: clamp(24px, 3vw, 34px); font-weight: 700; color: var(--white);
+    line-height: 1.25; letter-spacing: -1px; margin-bottom: 16px;
+  }
+  .managed-callout-content p {
+    font-size: 16px; line-height: 1.75; color: rgba(255,255,255,0.6);
+  }
+
+  /* ─── CTA PARALLAX ─── */
+  .cta-section::before { transform: translate(-50%,-50%) translateY(var(--parallax-y, 0)); will-change: transform; }
+
+  /* ─── FOOTER 5-COL ─── */
   .footer-top { grid-template-columns: 2fr 1fr 1fr 1fr 1fr; }
   @media (max-width: 900px) { .footer-top { grid-template-columns: 1fr 1fr; } }
   @media (max-width: 600px) { .footer-top { grid-template-columns: 1fr; } }
 
   /* ─── RESPONSIVE ─── */
   @media (max-width: 900px) {
+    .pain-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
     .process-step { grid-template-columns: 1fr; gap: 16px; }
     .process-step-number { position: static; }
-    .deepdive-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
+    .control-bullets { max-width: 100%; }
+    .portal-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
+    .managed-callout { padding: 48px 24px; }
   }
 
   /* ─── REDUCED MOTION ─── */
   @media (prefers-reduced-motion: reduce) {
-    .reveal, .deepdive-card.reveal {
+    .reveal {
       opacity: 1; transform: none; transition: none;
     }
+    .page-hero .section-label,
+    .page-hero .section-title,
+    .page-hero .section-desc {
+      opacity: 1; transform: none; transition: none;
+    }
+    .hero-bg-gradient, .hero-bg-gradient-2 { animation: none; }
   }
 </style>
-<noscript><style>.reveal{opacity:1;transform:none;transition:none;}</style></noscript>
+<noscript><style>.reveal,.page-hero .section-label,.page-hero .section-title,.page-hero .section-desc{opacity:1;transform:none;transition:none;}</style></noscript>
 </head>
 <body>
 
@@ -139,23 +261,62 @@
 
 <!-- PAGE HERO -->
 <div class="page-hero">
+  <div class="hero-bg-gradient"></div>
+  <div class="hero-bg-gradient-2"></div>
+  <div class="hero-grid-lines"></div>
   <div class="section-label">Accounts Payable</div>
-  <h1 class="section-title">Pay any vendor. Consignment or wholesale.</h1>
-  <p class="section-desc">ShelfSpace AP gives you one place to manage payments to every vendor — with Check 21 compliant checks, email-based onboarding, credit memo management, and a complete audit trail.</p>
+  <h1 class="section-title">Nobody started a dispensary to do accounts payable.</h1>
+  <p class="section-desc">ShelfSpace takes AP off your plate entirely. Every vendor gets paid on time and accurately. You just approve — we handle everything else.</p>
 </div>
 
-<!-- HOW AP WORKS -->
+<!-- THE AP PROBLEM -->
+<section class="ap-problem">
+  <div class="ap-problem-header">
+    <div class="section-label reveal">The Reality</div>
+    <h2 class="section-title reveal">What AP looks like without ShelfSpace</h2>
+  </div>
+  <div class="pain-grid">
+    <div class="pain-item reveal">
+      <div class="pain-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+      </div>
+      <h3>The spreadsheet nightmare</h3>
+      <p>Invoices in email, payments tracked in Excel, check stubs in a drawer. Nobody knows what's been paid, what's pending, or what's overdue.</p>
+    </div>
+    <div class="pain-item reveal reveal-delay-1">
+      <div class="pain-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+      </div>
+      <h3>Vendors calling every day</h3>
+      <p>Where's my payment? Did you get my invoice? Can you resend the check? Your team spends hours every week fielding calls that have nothing to do with running a dispensary.</p>
+    </div>
+    <div class="pain-item reveal reveal-delay-2">
+      <div class="pain-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+      </div>
+      <h3>Money walking out the door</h3>
+      <p>Paying for shorted deliveries nobody caught. Credits expiring because nobody tracked them. Double-paying invoices because there's no system. It adds up to tens of thousands a year.</p>
+    </div>
+  </div>
+  <p class="pain-pivot reveal">We replace all of that with a team that runs your AP like a real finance department — for a fraction of the cost of hiring one.</p>
+</section>
+
+<!-- WHAT WE HANDLE -->
 <section class="process-section">
+  <div class="process-header">
+    <div class="section-label reveal">Done For You</div>
+    <h2 class="section-title reveal">Here's what we take off your plate</h2>
+  </div>
   <div class="process-container">
 
     <div class="process-step reveal">
       <div class="process-step-number">01</div>
       <div class="process-step-content">
-        <span class="step-tag">Simple Onboarding</span>
-        <h3>Add a Vendor</h3>
-        <p>Add any vendor to ShelfSpace with just their email address. No paperwork, no bank details needed upfront. The vendor receives an invitation to create their portal account and start receiving payments.</p>
+        <span class="step-tag">We Handle This</span>
+        <h3>We onboard your vendors</h3>
+        <p>Give us your vendor list — cannabis or non-cannabis, it doesn't matter. We send invitations, set up portal accounts, and get every vendor payment-ready. No paperwork, no bank details needed upfront.</p>
         <div class="process-highlight">
-          <strong>Email-based onboarding:</strong> Vendors sign up themselves — you just need their email to get started.
+          <strong>Pay anyone:</strong> Cannabis vendors, wholesale distributors, landlords, marketing agencies, consultants — if you write them a check, we handle it.
         </div>
       </div>
     </div>
@@ -163,11 +324,11 @@
     <div class="process-step reveal">
       <div class="process-step-number">02</div>
       <div class="process-step-content">
-        <span class="step-tag">Flexible Payments</span>
-        <h3>Create a Payment</h3>
-        <p>Create a payment for any vendor in your network — consignment or wholesale. Set the amount, attach a memo or invoice reference, and submit. ShelfSpace generates a Check 21-compliant check.</p>
+        <span class="step-tag">We Handle This</span>
+        <h3>We verify before you pay</h3>
+        <p>We match every invoice to what was actually received. If a delivery was short or an invoice doesn't match, you know before you cut the check — not after. You only pay for what you actually got.</p>
         <div class="process-highlight">
-          <strong>One workflow:</strong> Same payment process whether you're settling consignment or paying a wholesale invoice.
+          <strong>Catch every discrepancy:</strong> Most operators unknowingly overpay vendors on shorted deliveries. We catch every discrepancy before a check goes out.
         </div>
       </div>
     </div>
@@ -175,11 +336,11 @@
     <div class="process-step reveal">
       <div class="process-step-number">03</div>
       <div class="process-step-content">
-        <span class="step-tag">Instant Access</span>
-        <h3>Vendor Gets Paid</h3>
-        <p>The vendor receives an email notification and can download their check immediately from the Vendor Portal. Checks are printable on standard paper, mobile deposit ready, and fully compliant with federal banking regulations.</p>
+        <span class="step-tag">You Approve, We Execute</span>
+        <h3>We process payments and cut checks</h3>
+        <p>You review and approve. We generate Check 21-compliant checks, notify vendors, and sync every payment to QuickBooks. Vendors download checks instantly from their portal.</p>
         <div class="process-highlight">
-          <strong>Check 21 Compliant:</strong> Every check is a valid Substitute Check under Federal Law. Print-at-home legal. Mobile deposit ready.
+          <strong>Check 21 Compliant:</strong> Every check is a valid Substitute Check under Federal Law. Print-at-home legal. Mobile deposit ready. Syncs to QuickBooks in real time.
         </div>
       </div>
     </div>
@@ -187,104 +348,120 @@
     <div class="process-step reveal">
       <div class="process-step-number">04</div>
       <div class="process-step-content">
-        <span class="step-tag">Complete Visibility</span>
-        <h3>Track Everything</h3>
-        <p>Every payment is logged with a full audit trail — who created it, when it was issued, when it was downloaded, and its current status. Void and reissue any check with a single click. Every payment syncs to QuickBooks in real time — no double entry, no reconciliation.</p>
-        <div class="process-highlight">
-          <strong>Full audit trail:</strong> Every action is timestamped and tied to a user, a vendor, and a payment record.
-        </div>
+        <span class="step-tag">We Handle This</span>
+        <h3>We handle vendor questions</h3>
+        <p>When vendors have questions about payments, invoices, or their account — they email us, not you. We manage every vendor inquiry so you never field another AP call.</p>
       </div>
     </div>
 
   </div>
-  <div style="max-width:880px;margin:40px auto 0;">
-    <div class="process-highlight reveal" style="text-align:center;">
-      <strong>Credit memos included:</strong> AP includes built-in credit memo management. Issue, track, and resolve credits for returns, pricing corrections, and promotional adjustments — all within the same system. <a href="/credit-recovery" style="color:var(--green-deep);font-weight:600;text-decoration:none;">Learn more about credit memos &rarr;</a>
+  <p class="process-proof reveal">We manage AP for a two-shop dispensary chain in Massachusetts — 40+ vendors, every payment on time, $45,000/year saved on AP and operations payroll.</p>
+</section>
+
+<!-- YOU STAY IN CONTROL -->
+<section class="control-section">
+  <div class="control-header">
+    <div class="section-label reveal">Your Money, Your Call</div>
+    <h2 class="section-title reveal">Full control without the busywork</h2>
+  </div>
+  <p class="control-body reveal">You're not handing over your checkbook — you're handing off the tedious work that surrounds it. Every payment requires your approval before it goes out. You see everything: who's getting paid, how much, and why. We just do the prep, the verification, the vendor communication, and the execution.</p>
+  <div class="control-bullets">
+    <div class="control-bullet reveal">
+      <div class="control-bullet-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+      </div>
+      <div class="control-bullet-text">
+        <h3>Approve every payment</h3>
+        <p>Nothing goes out without your sign-off.</p>
+      </div>
+    </div>
+    <div class="control-bullet reveal reveal-delay-1">
+      <div class="control-bullet-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+      </div>
+      <div class="control-bullet-text">
+        <h3>Full visibility</h3>
+        <p>Real-time dashboard, complete audit trail, every payment synced to QuickBooks.</p>
+      </div>
+    </div>
+    <div class="control-bullet reveal reveal-delay-2">
+      <div class="control-bullet-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/></svg>
+      </div>
+      <div class="control-bullet-text">
+        <h3>Void and reissue</h3>
+        <p>Made a mistake? One click to void, one click to reissue.</p>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- KEY BENEFITS -->
-<section class="benefits-section">
-  <div class="benefits-header">
-    <div class="section-label reveal">Key Benefits</div>
-    <h2 class="section-title reveal">Everything you need to pay every vendor</h2>
-    <p class="section-desc reveal">Six capabilities that make ShelfSpace AP the simplest way to manage vendor payments in cannabis.</p>
+<!-- VENDOR PORTAL -->
+<section class="portal-section">
+  <div class="portal-header">
+    <div class="section-label reveal">For Your Vendors</div>
+    <h2 class="section-title reveal">Every vendor gets a free portal</h2>
   </div>
-  <div class="deepdive-grid">
-
-    <div class="deepdive-card reveal">
-      <div class="deepdive-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div>
-      <h3>Works for Every Vendor</h3>
-      <p>Pay any vendor in your network through one platform — whether they're on consignment, wholesale, or a mix of both.</p>
-      <ul class="deepdive-list">
-        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Consignment vendors</li>
-        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Wholesale vendors</li>
-        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Service providers</li>
-        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Any business relationship</li>
-      </ul>
+  <p class="portal-body reveal">When you join ShelfSpace, every vendor you pay — cannabis or non-cannabis — gets their own portal at no cost. They stop calling you. And when they have questions, they reach out to us — not you.</p>
+  <div class="portal-grid">
+    <div class="portal-item reveal">
+      <div class="portal-item-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      </div>
+      <div class="portal-item-text">
+        <h3>Instant check downloads</h3>
+        <p>Checks available the moment they're issued.</p>
+      </div>
     </div>
-
-    <div class="deepdive-card reveal reveal-delay-1">
-      <div class="deepdive-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-      <h3>Check 21 Compliant</h3>
-      <p>Every check meets federal banking standards. Vendors can print at home or deposit via mobile banking instantly.</p>
-      <ul class="deepdive-list">
-        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> UCC Article 3 compliant</li>
-        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Substitute check under federal law</li>
-        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Print on standard paper</li>
-        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Mobile deposit ready</li>
-      </ul>
+    <div class="portal-item reveal reveal-delay-1">
+      <div class="portal-item-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+      </div>
+      <div class="portal-item-text">
+        <h3>Complete payment history</h3>
+        <p>Every payment, every check, searchable and exportable.</p>
+      </div>
     </div>
-
-    <div class="deepdive-card reveal reveal-delay-2">
-      <div class="deepdive-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
-      <h3>Email-Based Onboarding</h3>
-      <p>Add vendors with just an email address. They create their own account and start receiving payments — no paperwork required.</p>
-      <ul class="deepdive-list">
-        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> No bank details needed</li>
-        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Self-service vendor signup</li>
-        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Instant portal access</li>
-        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Works with any vendor</li>
-      </ul>
+    <div class="portal-item reveal">
+      <div class="portal-item-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>
+      </div>
+      <div class="portal-item-text">
+        <h3>Real-time notifications</h3>
+        <p>Vendors get emailed when a check is ready.</p>
+      </div>
     </div>
-
-    <div class="deepdive-card reveal">
-      <div class="deepdive-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
-      <h3>Full Audit Trail</h3>
-      <p>Every payment action is logged with timestamps, user attribution, and complete transaction history.</p>
-      <ul class="deepdive-list">
-        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Payment creation logs</li>
-        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Download tracking</li>
-        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Status history</li>
-        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> User attribution</li>
-      </ul>
+    <div class="portal-item reveal reveal-delay-1">
+      <div class="portal-item-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+      </div>
+      <div class="portal-item-text">
+        <h3>Multi-retailer dashboard</h3>
+        <p>Vendors working with multiple ShelfSpace retailers see everything in one view.</p>
+      </div>
     </div>
+  </div>
+</section>
 
-    <div class="deepdive-card reveal reveal-delay-1">
-      <div class="deepdive-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
-      <h3>Vendor Portal</h3>
-      <p>Vendors get their own dashboard to view payments, download checks, and track their payment history across all retailers.</p>
-      <ul class="deepdive-list">
-        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> One-click check download</li>
-        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Payment history</li>
-        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Multi-retailer view</li>
-        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Real-time notifications</li>
-      </ul>
-    </div>
+<!-- CREDIT RECOVERY + CONSIGNMENT -->
+<section class="more-section">
+  <div class="more-header">
+    <div class="section-label reveal">More Than AP</div>
+    <h2 class="section-title reveal">Credit recovery and consignment run on the same engine</h2>
+  </div>
+  <p class="more-body reveal">AP is just the start. We recover an average of $50,000/year per retailer in vendor credits that nobody's tracking — returns, expirations, and co-marketing spend. Running consignment? We handle the weekly settlements too. Same engine, same team, zero extra work for you.</p>
+  <div class="more-links reveal">
+    <a href="/credit-recovery">How Credit Recovery Works &rarr;</a>
+    <a href="/consignment">How Consignment Works &rarr;</a>
+  </div>
+</section>
 
-    <div class="deepdive-card reveal reveal-delay-2">
-      <div class="deepdive-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/></svg></div>
-      <h3>Void & Reissue</h3>
-      <p>Made a mistake? Void any check and reissue with a single click. The audit trail captures every change.</p>
-      <ul class="deepdive-list">
-        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> One-click void</li>
-        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Instant reissue</li>
-        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Reason code tracking</li>
-        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Vendor notification</li>
-      </ul>
-    </div>
-
+<!-- WE DO THE WORK -->
+<section class="managed-callout">
+  <div class="managed-callout-content">
+    <div class="section-label reveal">Not Another Portal to Manage</div>
+    <h2 class="reveal">We do the work. You run the dispensary.</h2>
+    <p class="reveal">Our goal is that you never need to log in. We just do the tedious AP work, save you money, and send you the reports.</p>
   </div>
 </section>
 
@@ -292,11 +469,14 @@
 <section class="cta-section">
   <div class="cta-content">
     <div class="section-label reveal">Get Started</div>
-    <h2 class="section-title reveal">Ready to simplify vendor payments?</h2>
-    <p class="section-desc reveal">Start a free 60-day pilot and pay any vendor — consignment or wholesale — from one platform.</p>
+    <h2 class="section-title reveal">Hand off your AP. Keep your sanity.</h2>
+    <p class="section-desc reveal">Free 60-day pilot. We onboard your vendors, connect your systems, and start managing payments from day one.</p>
     <div class="cta-actions reveal">
-      <a href="/contact" class="btn-primary">Start Free Pilot <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
-      <a href="/contact" class="btn-secondary">Schedule a Call</a>
+      <a href="/contact" class="btn-primary">
+        Start Free Pilot
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+      <a href="/contact" class="btn-secondary">Talk to Chris</a>
     </div>
   </div>
 </section>
@@ -318,14 +498,25 @@
 
 <script>
 (function() {
-  /* ── Nav scroll state ── */
   var nav = document.getElementById('nav');
-  nav.classList.toggle('scrolled', window.scrollY > 20);
-  window.addEventListener('scroll', function() {
-    nav.classList.toggle('scrolled', window.scrollY > 20);
-  }, { passive: true });
+  var pageHero = document.querySelector('.page-hero');
+  var parallaxSections = [
+    document.querySelector('.ap-problem'),
+    document.querySelector('.managed-callout'),
+    document.querySelector('.cta-section')
+  ];
 
-  /* ── Scroll-Triggered Reveals ── */
+  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var isMobile = window.innerWidth < 900;
+  var ticking = false;
+
+  /* ── Hero entrance ── */
+  requestAnimationFrame(function() {
+    nav.classList.toggle('scrolled', window.scrollY > 20);
+    if (pageHero) pageHero.classList.add('hero-loaded');
+  });
+
+  /* ── Scroll-Triggered Reveals (with unobserve for perf) ── */
   var revealObserver = new IntersectionObserver(function(entries) {
     entries.forEach(function(entry) {
       if (entry.isIntersecting) {
@@ -335,6 +526,58 @@
     });
   }, { threshold: 0.1 });
   document.querySelectorAll('.reveal').forEach(function(el) { revealObserver.observe(el); });
+
+  /* ── Scroll handler (rAF + ticking flag) ── */
+  function onScroll() {
+    var scrollY = window.scrollY;
+
+    /* Nav state */
+    nav.classList.toggle('scrolled', scrollY > 20);
+
+    /* Skip parallax for reduced motion or mobile */
+    if (prefersReduced || isMobile) return;
+
+    /* Section decorative parallax */
+    var wh = window.innerHeight;
+    parallaxSections.forEach(function(section) {
+      if (!section) return;
+      var rect = section.getBoundingClientRect();
+      if (rect.bottom < 0 || rect.top > wh) return;
+      var center = rect.top + rect.height / 2 - wh / 2;
+      section.style.setProperty('--parallax-y', (center * 0.08) + 'px');
+    });
+  }
+
+  window.addEventListener('scroll', function() {
+    if (!ticking) {
+      requestAnimationFrame(function() {
+        onScroll();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, { passive: true });
+
+  /* Initial call */
+  onScroll();
+
+  /* ── Resize handler ── */
+  window.addEventListener('resize', function() {
+    isMobile = window.innerWidth < 900;
+    if (isMobile) {
+      parallaxSections.forEach(function(section) {
+        if (section) section.style.setProperty('--parallax-y', '0px');
+      });
+    }
+  });
+
+  /* ── Close mobile nav on outside click ── */
+  document.addEventListener('click', function() {
+    var navLinks = document.querySelector('.nav-links');
+    if (navLinks && navLinks.classList.contains('mobile-open')) {
+      navLinks.classList.remove('mobile-open');
+    }
+  });
 
 })();
 </script>
