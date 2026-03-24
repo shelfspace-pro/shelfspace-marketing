@@ -315,8 +315,8 @@ document.head.appendChild(o)}initApollo();</script>
     <div class="boost-result-card boost-total-glow">
       <div class="boost-result-rows">
         <div class="boost-result-row">
-          <span class="boost-result-row-label">Estimated inventory value (50% of revenue)</span>
-          <span class="boost-result-row-value" id="boost-inv">$1,500,000</span>
+          <span class="boost-result-row-label">Inventory on shelves (~90 days, 50% COGS)</span>
+          <span class="boost-result-row-value" id="boost-inv">$375,000</span>
         </div>
         <div class="boost-result-row">
           <span class="boost-result-row-label">Vendors on consignment</span>
@@ -325,7 +325,7 @@ document.head.appendChild(o)}initApollo();</script>
       </div>
       <div class="boost-total">
         <span class="boost-total-label">Cash back in your bank account</span>
-        <span class="boost-total-value" id="boost-result">$750,000</span>
+        <span class="boost-total-value" id="boost-result">$187,500</span>
       </div>
     </div>
     <p class="boost-subtitle">That's capital you can use for payroll, expansion, marketing, or just breathing room.</p>
@@ -605,9 +605,10 @@ document.head.appendChild(o)}initApollo();</script>
       updateSliderTrack(pctSlider);
 
       var inventoryValue = revenue * 0.5;
-      var cashBoost = inventoryValue * (pct / 100);
+      var onHandInventory = inventoryValue / 4; /* ~90 days of inventory on shelves */
+      var cashBoost = onHandInventory * (pct / 100);
 
-      invEl.textContent = formatCurrency(inventoryValue);
+      invEl.textContent = formatCurrency(onHandInventory);
       vendorPctEl.textContent = pct + '%';
 
       /* Animate the big number */
