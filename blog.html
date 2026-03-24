@@ -3,20 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>About ShelfSpace — Built by a Dispensary Operator</title>
-<meta name="description" content="ShelfSpace was built by a 10-year cannabis dispensary operator who got tired of the broken vendor payment system. Not a tech company.">
-<link rel="canonical" href="https://shelfspace.pro/about">
+<title>Blog — Cannabis Dispensary Operations | ShelfSpace</title>
+<meta name="description" content="Guides for cannabis dispensary operators — consignment, vendor management, credit recovery, and AP. Written by a 10-year industry operator.">
+<link rel="canonical" href="https://shelfspace.pro/blog">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://shelfspace.pro/about">
-<meta property="og:title" content="About ShelfSpace — Built by a Dispensary Operator">
-<meta property="og:description" content="ShelfSpace was built by a 10-year cannabis dispensary operator who got tired of the broken vendor payment system. Not a tech company.">
+<meta property="og:url" content="https://shelfspace.pro/blog">
+<meta property="og:title" content="Blog — Cannabis Dispensary Operations | ShelfSpace">
+<meta property="og:description" content="Guides for cannabis dispensary operators — consignment, vendor management, credit recovery, and AP. Written by a 10-year industry operator.">
 <meta property="og:image" content="https://shelfspace.pro/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:type" content="image/png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="About ShelfSpace — Built by a Dispensary Operator">
-<meta name="twitter:description" content="ShelfSpace was built by a 10-year cannabis dispensary operator who got tired of the broken vendor payment system. Not a tech company.">
+<meta name="twitter:title" content="Blog — Cannabis Dispensary Operations | ShelfSpace">
+<meta name="twitter:description" content="Guides for cannabis dispensary operators — consignment, vendor management, credit recovery, and AP. Written by a 10-year industry operator.">
 <meta name="twitter:image" content="https://shelfspace.pro/og-image.png">
 <meta name="apple-mobile-web-app-title" content="ShelfSpace">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -27,6 +27,9 @@
 <link rel="stylesheet" href="styles.css">
 <style>
   @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-12px); } }
+
+  /* ─── HERO ENHANCEMENTS ─── */
+  .page-hero { padding-bottom: 40px; }
   .hero-bg-gradient { position: absolute; top: -30%; right: -20%; width: 700px; height: 700px; background: radial-gradient(circle, rgba(149,213,178,0.18) 0%, rgba(149,213,178,0) 70%); animation: float 8s ease-in-out infinite; pointer-events: none; }
   .hero-bg-gradient-2 { position: absolute; bottom: -20%; left: -15%; width: 550px; height: 550px; background: radial-gradient(circle, rgba(27,67,50,0.06) 0%, rgba(27,67,50,0) 70%); animation: float 10s ease-in-out infinite; animation-delay: -3s; pointer-events: none; }
   .hero-grid-lines { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 1200px; height: 100%; opacity: 0.035; background-image: linear-gradient(var(--green-deep) 1px, transparent 1px), linear-gradient(90deg, var(--green-deep) 1px, transparent 1px); background-size: 80px 80px; pointer-events: none; }
@@ -39,72 +42,66 @@
   .page-hero.hero-loaded .section-label,
   .page-hero.hero-loaded .section-title,
   .page-hero.hero-loaded .section-desc { opacity: 1; transform: translateY(0); }
+
+  /* ─── REVEAL ─── */
   .reveal {
     opacity: 0; transform: translateY(40px);
     transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
                 transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
   }
   .reveal.is-visible { opacity: 1; transform: translateY(0); }
-  .reveal-delay-1 { transition-delay: 0.2s; }
-  .reveal-delay-2 { transition-delay: 0.4s; }
-  .reveal-delay-3 { transition-delay: 0.6s; }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
   @media (prefers-reduced-motion: reduce) {
     .reveal, .page-hero .section-label, .page-hero .section-title, .page-hero .section-desc {
       opacity: 1; transform: none; transition: none;
     }
   }
-  .page-hero { padding-bottom: 40px; }
-  .about-section { background: var(--white); padding-top: 60px; }
-  .about-container { max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: 300px 1fr; gap: 64px; align-items: start; }
-  .about-photo {
-    position: sticky; top: 100px;
-    border-radius: 16px; overflow: hidden;
-    border: 1px solid var(--slate-200); box-shadow: 0 8px 32px rgba(0,0,0,0.06);
-  }
-  .about-photo img { width: 100%; display: block; aspect-ratio: 3/4; object-fit: cover; background: var(--slate-100); }
-  .about-photo-caption {
-    padding: 20px; background: var(--white);
-    border-top: 1px solid var(--slate-100);
-  }
-  .about-photo-caption h3 { font-size: 18px; font-weight: 700; color: var(--green-deep); margin-bottom: 2px; }
-  .about-photo-caption p { font-size: 14px; color: var(--slate-500); }
-  .about-linkedin {
-    display: inline-flex; align-items: center; vertical-align: middle;
-    margin-left: 6px; color: var(--slate-400); transition: color 0.2s;
-  }
-  .about-linkedin:hover { color: var(--green-mid); }
 
-  .about-text h2 {
-    font-size: 32px; font-weight: 700; letter-spacing: -1px;
-    color: var(--green-deep); margin-bottom: 32px; line-height: 1.2;
+  /* ─── BLOG GRID ─── */
+  .blog-section { background: var(--white); padding: 80px 48px; }
+  .blog-grid {
+    max-width: 900px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 24px;
   }
-  .about-text p {
-    font-size: 16px; line-height: 1.85; color: var(--slate-600); margin-bottom: 24px;
+  .blog-card {
+    display: block; padding: 28px 24px;
+    border: 1px solid var(--slate-200); border-radius: 12px;
+    text-decoration: none; transition: all 0.3s;
+    background: var(--white);
   }
-  .about-text p:last-of-type { margin-bottom: 0; }
-  .about-text strong { color: var(--green-deep); font-weight: 600; }
-  .about-text em { font-style: italic; }
-  .about-signature {
-    margin-top: 32px; padding-top: 32px; border-top: 1px solid var(--slate-100);
-    font-size: 20px; font-weight: 700; color: var(--green-deep); letter-spacing: -0.3px;
+  .blog-card:hover {
+    border-color: var(--green-mid);
+    box-shadow: 0 4px 20px rgba(27,67,50,0.08);
+    transform: translateY(-2px);
+  }
+  .blog-card-tag {
+    display: inline-block;
+    font-family: 'Space Mono', monospace;
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 1.2px; text-transform: uppercase;
+    color: var(--green-mid);
+    background: var(--green-ghost);
+    padding: 4px 10px; border-radius: 6px;
+    margin-bottom: 12px;
+  }
+  .blog-card-title {
+    font-size: 18px; font-weight: 700;
+    color: var(--green-deep); line-height: 1.35;
+    letter-spacing: -0.3px; margin-bottom: 8px;
+  }
+  .blog-card-desc {
+    font-size: 14px; color: var(--slate-500);
+    line-height: 1.6;
+  }
+  @media (max-width: 700px) {
+    .blog-section { padding: 60px 24px; }
+    .blog-grid { grid-template-columns: 1fr; }
   }
 
-  /* Mission */
-  .mission-section {
-    background: var(--green-deep); position: relative; overflow: hidden;
-    padding: 100px 48px;
-  }
-  .mission-section::before { content: ''; position: absolute; top: -200px; left: -200px; width: 500px; height: 500px; background: radial-gradient(circle, rgba(149,213,178,0.08), transparent 70%); }
-  .mission-container { max-width: 700px; margin: 0 auto; text-align: center; position: relative; }
-  .mission-container .section-label { color: var(--green-accent); }
-  .mission-container h2 { font-size: clamp(28px, 3.5vw, 40px); font-weight: 700; color: var(--white); line-height: 1.3; letter-spacing: -1px; margin-bottom: 20px; }
-  .mission-container p { font-size: 18px; line-height: 1.75; color: rgba(255,255,255,0.6); }
-
-  @media (max-width: 900px) {
-    .about-container { grid-template-columns: 1fr; gap: 40px; max-width: 600px; }
-    .about-photo { position: static; max-width: 280px; margin: 0 auto; }
-    .mission-section { padding: 80px 24px; }
-  }
   /* Footer 5-col */
   .footer-top { grid-template-columns: 2fr 1fr 1fr 1fr 1fr; }
   @media (max-width: 900px) { .footer-top { grid-template-columns: 1fr 1fr; } }
@@ -129,7 +126,7 @@ document.head.appendChild(o)}initApollo();</script>
     <li><a href="/accounts-payable">Accounts Payable</a></li>
     <li><a href="/credit-recovery">Credit Recovery</a></li>
     <li><a href="/pricing">Pricing</a></li>
-    <li><a href="/about" class="active">About</a></li>
+    <li><a href="/about">About</a></li>
     <li><a href="https://ourshelf.space">Login</a></li>
     <li><a href="/contact" class="nav-cta">Sign Up <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a></li>
   </ul>
@@ -141,79 +138,71 @@ document.head.appendChild(o)}initApollo();</script>
   <div class="hero-bg-gradient"></div>
   <div class="hero-bg-gradient-2"></div>
   <div class="hero-grid-lines"></div>
-  <div class="section-label">About ShelfSpace</div>
-  <h1 class="section-title">Born in the trenches</h1>
-  <p class="section-desc">Founded by a 10+ year cannabis industry veteran who's been on both sides of the counter.</p>
+  <div class="section-label">Blog</div>
+  <h1 class="section-title">Insights for Cannabis Operators</h1>
+  <p class="section-desc">Guides and strategies for managing vendors, recovering credits, and running smarter dispensary operations.</p>
 </div>
 
-<!-- ABOUT -->
-<section class="about-section">
-  <div class="about-container">
-    <div class="about-photo reveal">
-      <img src="/chris-mitchem.jpg" alt="Chris Mitchem, Founder and CEO of ShelfSpace">
-      <div class="about-photo-caption">
-        <h3>Chris Mitchem <a href="https://www.linkedin.com/in/chris-mitchem-mba/" target="_blank" rel="noopener" class="about-linkedin"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a></h3>
-        <p>Founder & CEO</p>
-      </div>
-    </div>
-    <div class="about-text reveal reveal-delay-1">
-      <h2>Hi, I'm Chris. Thanks for checking out ShelfSpace. I'd love to tell you why we're here.</h2>
+<!-- BLOG LISTING -->
+<section class="blog-section">
+  <div class="blog-grid">
 
-      <p>I'm not a stranger to the cannabis industry. I've spent the last decade in the trenches, and I've got the scars to prove it. I started my vertically integrated multi-state cannabis company in Oregon back in 2015. I have operated on both the wholesale and retail sides of this industry, and I've been through all of our shared ups and downs.</p>
+    <a href="/blog/how-cannabis-consignment-works" class="blog-card reveal">
+      <div class="blog-card-tag">Consignment</div>
+      <div class="blog-card-title">How Cannabis Consignment Works: A Guide for Dispensary Operators</div>
+      <div class="blog-card-desc">A complete breakdown of scan-based trading for cannabis retailers — how it works, why it matters, and how to get started.</div>
+    </a>
 
-      <p>Along the way, I've experienced incredible highs and navigated the brutal reality of market corrections. While we successfully continue to operate in Massachusetts today, we made the strategic decision to exit the Oregon market in 2023 — a reality that changed my perspective forever.</p>
+    <a href="/blog/track-returns-credits-cannabis" class="blog-card reveal reveal-delay-1">
+      <div class="blog-card-tag">Credit Recovery</div>
+      <div class="blog-card-title">How to Track Returns and Credits at a Cannabis Dispensary</div>
+      <div class="blog-card-desc">Most dispensaries lose thousands in vendor credits every year. Here's how to track returns, expirations, and co-marketing credits.</div>
+    </a>
 
-      <p>For years, I've watched vendors fight tooth and nail to get on dispensary shelves just to get paid on "Net 30" terms that often turn into "Net Never." I've watched retailers struggle with cash flow while perishable inventory sits collecting dust. I've seen great operators squeezed out by supply chain inefficiencies they couldn't control.</p>
+    <a href="/blog/dispensaries-overpay-vendors" class="blog-card reveal reveal-delay-2">
+      <div class="blog-card-tag">AP</div>
+      <div class="blog-card-title">Why Most Dispensaries Overpay Their Vendors</div>
+      <div class="blog-card-desc">Missed credits, duplicate payments, and bad invoice tracking cost dispensaries more than they realize.</div>
+    </a>
 
-      <p><strong>I founded ShelfSpace because I refused to keep watching my brothers and sisters in this industry struggle with a broken wholesale model.</strong> ShelfSpace is my way of fighting back.</p>
+    <a href="/blog/what-is-check-21" class="blog-card reveal reveal-delay-3">
+      <div class="blog-card-tag">Vendor Management</div>
+      <div class="blog-card-title">What Is a Check 21 Compliant Check?</div>
+      <div class="blog-card-desc">How Check 21 enables digital check payments for cannabis businesses locked out of traditional banking.</div>
+    </a>
 
-      <p>We are here to replace our industry's broken "Net 30" standard with a system that actually works for everyone. By bringing <strong>consignment</strong> to cannabis, we are removing the upfront risk for retailers, solving margin compression, and guaranteeing weekly payments for vendors to solve the accounts receivable crisis and stabilize cash flow.</p>
+    <a href="/blog/cannabis-vendor-management-guide" class="blog-card reveal">
+      <div class="blog-card-tag">Vendor Management</div>
+      <div class="blog-card-title">Cannabis Dispensary Vendor Management: A Complete Guide</div>
+      <div class="blog-card-desc">Everything you need to manage vendor relationships, payment terms, and inventory flow at your dispensary.</div>
+    </a>
 
-      <p>We started with consignment because that's where the pain is sharpest — but the AP engine we built works for every vendor relationship, with credit memo management built in. Whether you're running consignment or paying wholesale vendors, ShelfSpace gives you one platform to manage it all.</p>
+    <a href="/blog/cannabis-accounts-payable-cost" class="blog-card reveal reveal-delay-1">
+      <div class="blog-card-tag">AP</div>
+      <div class="blog-card-title">Cannabis Accounts Payable: The Hidden Cost of Doing It Yourself</div>
+      <div class="blog-card-desc">The true cost of managing AP in-house goes far beyond the person you hire to do it.</div>
+    </a>
 
-      <p>This isn't just about software — it's about creating a sustainable, transparent, and honest wholesale market.</p>
+    <a href="/blog/dispensary-vendor-costs" class="blog-card reveal reveal-delay-2">
+      <div class="blog-card-tag">AP</div>
+      <div class="blog-card-title">What Does a Cannabis Dispensary Pay in Vendor Costs Per Year?</div>
+      <div class="blog-card-desc">A realistic look at what dispensaries spend on vendor payments, processing fees, and operational overhead annually.</div>
+    </a>
 
-      <p>We're here to turn "inventory graveyards" into cash flow and to ensure that the next great brand or local shop has the tools they need to survive and thrive.</p>
+    <a href="/blog/get-started-cannabis-consignment" class="blog-card reveal reveal-delay-3">
+      <div class="blog-card-tag">Consignment</div>
+      <div class="blog-card-title">How to Get Started with Cannabis Consignment at Your Dispensary</div>
+      <div class="blog-card-desc">A step-by-step guide to launching consignment at your dispensary — from vendor conversations to your first settlement.</div>
+    </a>
 
-      <p>Let's fix this industry together.</p>
-
-      <div class="about-signature">— Chris</div>
-    </div>
   </div>
 </section>
-
-<!-- WHAT WE DO -->
-<section style="background:var(--white);padding:60px 48px;">
-  <div style="max-width:900px;margin:0 auto;display:flex;gap:32px;flex-wrap:wrap;justify-content:center;">
-    <a href="/consignment" style="flex:1;min-width:240px;max-width:280px;padding:24px;border:1px solid var(--slate-200);border-radius:12px;text-decoration:none;transition:all 0.3s;display:block;">
-      <div style="font-size:13px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--green-mid);margin-bottom:8px;">Consignment</div>
-      <div style="font-size:15px;color:var(--slate-600);line-height:1.5;">We run your consignment settlements and free up capital trapped in inventory.</div>
-    </a>
-    <a href="/credit-recovery" style="flex:1;min-width:240px;max-width:280px;padding:24px;border:1px solid var(--slate-200);border-radius:12px;text-decoration:none;transition:all 0.3s;display:block;">
-      <div style="font-size:13px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--green-mid);margin-bottom:8px;">Credit Recovery</div>
-      <div style="font-size:15px;color:var(--slate-600);line-height:1.5;">We recover $50K+/year in vendor credits most dispensaries don't track.</div>
-    </a>
-    <a href="/accounts-payable" style="flex:1;min-width:240px;max-width:280px;padding:24px;border:1px solid var(--slate-200);border-radius:12px;text-decoration:none;transition:all 0.3s;display:block;">
-      <div style="font-size:13px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--green-mid);margin-bottom:8px;">Accounts Payable</div>
-      <div style="font-size:15px;color:var(--slate-600);line-height:1.5;">We run your AP so you don't have to — every vendor paid on time.</div>
-    </a>
-  </div>
-</section>
-
-<!-- MISSION -->
-<div class="mission-section">
-  <div class="mission-container">
-    <div class="section-label reveal">Our Mission</div>
-    <h2 class="reveal">Replace the broken "Net 30" standard with a system that actually works for everyone.</h2>
-    <p class="reveal">Sustainable. Transparent. Honest. That's the wholesale market cannabis deserves.</p>
-  </div>
-</div>
 
 <!-- CTA -->
 <section class="cta-section">
   <div class="cta-content">
-    <div class="section-label reveal">Join Us</div>
-    <h2 class="section-title reveal">Ready to fix this industry together?</h2>
+    <div class="section-label reveal">Get Started</div>
+    <h2 class="section-title reveal">Ready to run a smarter dispensary?</h2>
     <p class="section-desc reveal">We're enrolling retailers and vendors for our free 60-day pilot. Let's talk.</p>
     <div class="cta-actions reveal">
       <a href="/contact" class="btn-primary">Get Started <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
@@ -242,7 +231,6 @@ document.head.appendChild(o)}initApollo();</script>
   var nav = document.getElementById('nav');
   var pageHero = document.querySelector('.page-hero');
   var parallaxSections = [
-    document.querySelector('.mission-section'),
     document.querySelector('.cta-section')
   ];
 
