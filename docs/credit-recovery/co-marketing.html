@@ -54,30 +54,9 @@
   }
   /* ── Docs Layout ── */
   .docs-layout {
-    display: grid; grid-template-columns: 260px 1fr;
-    max-width: 1200px; margin: 0 auto;
-    padding: 40px 48px 0; gap: 48px;
-    min-height: calc(100vh - 72px);
-    position: relative; z-index: 1; overflow: clip;
+    max-width: 760px; margin: 0 auto;
+    padding: 40px 48px 0;
   }
-  .docs-sidebar {
-    position: sticky; top: 100px;
-    max-height: calc(100vh - 120px); overflow-y: auto;
-    padding-right: 24px; border-right: 1px solid var(--slate-100);
-  }
-  .docs-nav-section { margin-bottom: 24px; }
-  .docs-nav-section h3 {
-    font-size: 11px; font-weight: 700; letter-spacing: 1.5px;
-    text-transform: uppercase; color: var(--slate-400);
-    margin-bottom: 8px; padding: 0 12px;
-  }
-  .docs-nav-section a {
-    display: block; padding: 6px 12px; font-size: 14px;
-    color: var(--slate-500); text-decoration: none;
-    border-radius: 6px; transition: all 0.15s;
-  }
-  .docs-nav-section a:hover { background: var(--green-ghost); color: var(--green-deep); }
-  .docs-nav-section a.active { background: var(--green-ghost); color: var(--green-deep); font-weight: 600; }
 
   /* ── Docs Content ── */
   .docs-content { max-width: 720px; padding-bottom: 80px; }
@@ -178,12 +157,7 @@
 
   /* ── Responsive ── */
   @media (max-width: 900px) {
-    .docs-layout { grid-template-columns: 1fr; padding: 32px 24px 0; gap: 0; }
-    .docs-sidebar {
-      position: static; max-height: none; border-right: none;
-      border-bottom: 1px solid var(--slate-100);
-      padding: 0 0 24px; margin-bottom: 32px; overflow: visible;
-    }
+    .docs-layout { padding: 24px 24px 0; }
     .footer-top { grid-template-columns: 1fr 1fr; }
   }
   @media (max-width: 600px) {
@@ -245,93 +219,6 @@ document.head.appendChild(o)}initApollo();</script>
 <!-- DOCS LAYOUT -->
 <div class="docs-layout">
 
-  <!-- SIDEBAR -->
-  <aside class="docs-sidebar">
-    <nav class="docs-nav">
-      <div class="docs-nav-section">
-        <h3>Getting Started</h3>
-        <a href="/docs">What is ShelfSpace?</a>
-        <a href="/docs/getting-started">Getting Started</a>
-      </div>
-      <div class="docs-nav-section">
-        <h3>Consignment</h3>
-        <a href="/docs/consignment/overview">Overview</a>
-        <a href="/docs/consignment/contracts">Contracts & Terms</a>
-        <a href="/docs/consignment/settlements">Settlements</a>
-        <a href="/docs/consignment/settlement-reports">Settlement Reports</a>
-        <a href="/docs/consignment/aging-discounts">Aging Discounts</a>
-        <a href="/docs/consignment/profit-splits">Profit Splits</a>
-      </div>
-      <div class="docs-nav-section">
-        <h3>Credit Recovery</h3>
-        <a href="/docs/credit-recovery/overview">Overview</a>
-        <a href="/docs/credit-recovery/returns">Return Credits</a>
-        <a href="/docs/credit-recovery/expirations">Expiration Credits</a>
-        <a href="/docs/credit-recovery/co-marketing" class="active">Co-Marketing Credits</a>
-        <a href="/docs/credit-recovery/approval-workflow">Approval Process</a>
-      </div>
-      <div class="docs-nav-section">
-        <h3>Accounts Payable</h3>
-        <a href="/docs/accounts-payable/overview">Overview</a>
-        <a href="/docs/accounts-payable/vendor-onboarding">Vendor Onboarding</a>
-        <a href="/docs/accounts-payable/creating-payments">Payments & Checks</a>
-        <a href="/docs/accounts-payable/invoice-verification">Invoice Verification</a>
-      </div>
-      <div class="docs-nav-section">
-        <h3>QuickBooks</h3>
-        <a href="/docs/quickbooks/overview">Overview</a>
-        <a href="/docs/quickbooks/setup">Setup Guide</a>
-      </div>
-      <div class="docs-nav-section">
-        <h3>Checks</h3>
-        <a href="/docs/checks/overview">Overview</a>
-        <a href="/docs/checks/depositing">Depositing</a>
-        <a href="/docs/checks/void-reissue">Void & Reissue</a>
-      </div>
-      <div class="docs-nav-section">
-        <h3>Vendor Portal</h3>
-        <a href="/docs/vendor-portal/overview">Overview</a>
-        <a href="/docs/vendor-portal/downloading-checks">Downloading Checks</a>
-        <a href="/docs/vendor-portal/payment-history">Payment History</a>
-        <a href="/docs/vendor-portal/disputes">Responding to Credits</a>
-      </div>
-      <div class="docs-nav-section">
-        <h3>ShelfiQ</h3>
-        <a href="/docs/shelfiq/overview">Overview</a>
-        <a href="/docs/shelfiq/tools">What ShelfiQ Can Do</a>
-      </div>
-      <div class="docs-nav-section">
-        <h3>Promotions</h3>
-        <a href="/docs/promotions/overview">Overview</a>
-        <a href="/docs/promotions/creating">Creating Promotions</a>
-      </div>
-      <div class="docs-nav-section">
-        <h3>Insights</h3>
-        <a href="/docs/insights/overview">Overview</a>
-        <a href="/docs/insights/vendor-scorecards">Vendor Scorecards</a>
-      </div>
-      <div class="docs-nav-section">
-        <h3>Integrations</h3>
-        <a href="/docs/integrations/pos">POS Integration</a>
-        <a href="/docs/integrations/metrc">METRC</a>
-      </div>
-      <div class="docs-nav-section">
-        <h3>Deliveries</h3>
-        <a href="/docs/deliveries/overview">Overview</a>
-        <a href="/docs/deliveries/reconciliation">Reconciliation</a>
-      </div>
-      <div class="docs-nav-section">
-        <h3>User Management</h3>
-        <a href="/docs/user-management/overview">Roles & Permissions</a>
-        <a href="/docs/user-management/mfa">MFA Setup</a>
-      </div>
-      <div class="docs-nav-section">
-        <h3>Security</h3>
-        <a href="/docs/security/overview">Overview</a>
-        <a href="/docs/security/audit-trail">Audit Trail</a>
-      </div>
-    </nav>
-  </aside>
 
   <!-- CONTENT -->
   <main class="docs-content">
