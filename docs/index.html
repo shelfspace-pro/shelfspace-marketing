@@ -3,20 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>What is ShelfSpace? Cannabis Operations Platform — ShelfSpace</title>
-<meta name="description" content="ShelfSpace cannabis operations platform — consignment, AP, and credit recovery managed for dispensaries. Every vendor, every payment, one engine.">
+<title>ShelfSpace Documentation — Guides for Every Feature</title>
+<meta name="description" content="ShelfSpace documentation hub — guides for consignment, accounts payable, credit recovery, vendor portal, ShelfiQ, and every feature of the platform.">
 <link rel="canonical" href="https://shelfspace.pro/docs">
-<meta property="og:type" content="article">
+<meta property="og:type" content="website">
 <meta property="og:url" content="https://shelfspace.pro/docs">
-<meta property="og:title" content="What is ShelfSpace? Cannabis Operations Platform — ShelfSpace">
-<meta property="og:description" content="ShelfSpace cannabis operations platform — consignment, AP, and credit recovery managed for dispensaries. Every vendor, every payment, one engine.">
+<meta property="og:title" content="ShelfSpace Documentation — Guides for Every Feature">
+<meta property="og:description" content="ShelfSpace documentation hub — guides for consignment, accounts payable, credit recovery, vendor portal, ShelfiQ, and every feature of the platform.">
 <meta property="og:image" content="https://shelfspace.pro/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:type" content="image/png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="What is ShelfSpace? Cannabis Operations Platform — ShelfSpace">
-<meta name="twitter:description" content="ShelfSpace cannabis operations platform — consignment, AP, and credit recovery managed for dispensaries. Every vendor, every payment, one engine.">
+<meta name="twitter:title" content="ShelfSpace Documentation — Guides for Every Feature">
+<meta name="twitter:description" content="ShelfSpace documentation hub — guides for consignment, accounts payable, credit recovery, vendor portal, ShelfiQ, and every feature of the platform.">
 <meta name="twitter:image" content="https://shelfspace.pro/og-image.png">
 <meta name="apple-mobile-web-app-title" content="ShelfSpace">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -26,182 +26,93 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/styles.css">
 <style>
-  /* ── Docs Hero ── */
-  .docs-hero {
-    padding: 120px 48px 40px; text-align: center;
-    background: var(--white); position: relative; overflow: hidden; z-index: 2;
-  }
-  .docs-hero::before {
-    content: ''; position: absolute; top: -200px; right: -200px;
-    width: 600px; height: 600px;
-    background: radial-gradient(circle, rgba(149,213,178,0.12), transparent 70%);
-  }
-  .docs-hero-content { position: relative; max-width: 640px; margin: 0 auto; }
-  .docs-hero-badge {
-    display: inline-flex; align-items: center; gap: 6px;
-    padding: 6px 16px; border-radius: 100px;
-    background: var(--green-ghost); border: 1px solid rgba(149,213,178,0.3);
-    font-size: 13px; font-weight: 600; color: var(--green-dark);
-    text-decoration: none; margin-bottom: 16px; transition: all 0.2s;
-  }
-  .docs-hero-badge:hover { background: var(--green-light); }
-  .docs-hero-title {
-    font-size: clamp(28px, 3.5vw, 40px); font-weight: 700;
-    color: var(--green-deep); letter-spacing: -1.5px; line-height: 1.2;
-  }
-  @media (max-width: 900px) {
-    .docs-hero { padding: 100px 24px 32px; }
-  }
-  .docs-hero-sub {
-    font-size: 17px; color: var(--slate-500); margin-top: 12px; line-height: 1.5;
-  }
-  /* ── Docs Layout ── */
-  .docs-layout {
-    display: grid; grid-template-columns: 260px 1fr;
-    max-width: 1200px; margin: 0 auto;
-    padding: 40px 48px 0; gap: 48px;
-    min-height: calc(100vh - 72px);
-    position: relative; z-index: 1;
-  }
-  .docs-sidebar {
-    position: sticky; top: 100px;
-    max-height: calc(100vh - 120px); overflow-y: auto;
-    padding-right: 24px; border-right: 1px solid var(--slate-100);
-  }
-  .docs-nav-section { margin-bottom: 24px; }
-  .docs-nav-section h3 {
-    font-size: 11px; font-weight: 700; letter-spacing: 1.5px;
-    text-transform: uppercase; color: var(--slate-400);
-    margin-bottom: 8px; padding: 0 12px;
-  }
-  .docs-nav-section a {
-    display: block; padding: 6px 12px; font-size: 14px;
-    color: var(--slate-500); text-decoration: none;
-    border-radius: 6px; transition: all 0.15s;
-  }
-  .docs-nav-section a:hover { background: var(--green-ghost); color: var(--green-deep); }
-  .docs-nav-section a.active { background: var(--green-ghost); color: var(--green-deep); font-weight: 600; }
+  @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-12px); } }
 
-  /* ── Docs Content ── */
-  .docs-content { max-width: 720px; padding-bottom: 80px; }
-  .docs-breadcrumb {
-    font-size: 13px; color: var(--slate-400); margin-bottom: 24px;
-  }
-  .docs-breadcrumb a { color: var(--slate-400); text-decoration: none; }
-  .docs-breadcrumb a:hover { color: var(--green-mid); }
-  .docs-category {
-    font-size: 11px; font-weight: 700; letter-spacing: 2px;
-    text-transform: uppercase; color: var(--green-mid); margin-bottom: 12px;
-  }
-  .docs-content h1 {
-    font-size: clamp(28px, 3.5vw, 36px); font-weight: 700;
-    color: var(--green-deep); letter-spacing: -1px; line-height: 1.2;
-    margin-bottom: 24px;
-  }
-  .docs-content h2 {
-    font-size: 22px; font-weight: 700; color: var(--green-deep);
-    margin: 40px 0 16px; letter-spacing: -0.5px; line-height: 1.3;
-    padding-top: 24px; border-top: 1px solid var(--slate-100);
-  }
-  .docs-content h2:first-of-type { border-top: none; padding-top: 0; }
-  .docs-content p {
-    font-size: 16px; line-height: 1.8; color: var(--slate-600); margin-bottom: 20px;
-  }
-  .docs-content ul, .docs-content ol { margin-bottom: 20px; padding-left: 24px; }
-  .docs-content li {
-    font-size: 16px; line-height: 1.8; color: var(--slate-600); margin-bottom: 6px;
-  }
-  .docs-content strong { color: var(--green-deep); font-weight: 600; }
-  .docs-content a { color: var(--green-mid); font-weight: 500; text-decoration: none; }
-  .docs-content a:hover { color: var(--green-deep); text-decoration: underline; }
+  /* ── Hero Enhancements ── */
+  .hero-bg-gradient { position: absolute; top: -30%; right: -20%; width: 700px; height: 700px; background: radial-gradient(circle, rgba(149,213,178,0.18) 0%, rgba(149,213,178,0) 70%); animation: float 8s ease-in-out infinite; pointer-events: none; }
+  .hero-bg-gradient-2 { position: absolute; bottom: -20%; left: -15%; width: 550px; height: 550px; background: radial-gradient(circle, rgba(27,67,50,0.06) 0%, rgba(27,67,50,0) 70%); animation: float 10s ease-in-out infinite; animation-delay: -3s; pointer-events: none; }
+  .hero-grid-lines { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 1200px; height: 100%; opacity: 0.035; background-image: linear-gradient(var(--green-deep) 1px, transparent 1px), linear-gradient(90deg, var(--green-deep) 1px, transparent 1px); background-size: 80px 80px; pointer-events: none; }
+  .page-hero .section-label,
+  .page-hero .section-title,
+  .page-hero .section-desc { opacity: 0; transform: translateY(30px); }
+  .page-hero .section-label { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1); }
+  .page-hero .section-title { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s, transform 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s; }
+  .page-hero .section-desc { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1) 0.25s, transform 0.8s cubic-bezier(0.22,1,0.36,1) 0.25s; }
+  .page-hero.hero-loaded .section-label,
+  .page-hero.hero-loaded .section-title,
+  .page-hero.hero-loaded .section-desc { opacity: 1; transform: translateY(0); }
 
-  /* ── At a Glance Box ── */
-  .docs-glance {
-    padding: 24px 28px; margin-bottom: 32px;
-    background: var(--green-ghost); border: 1px solid rgba(149,213,178,0.3);
-    border-radius: 12px;
+  /* ── Docs Index Grid ── */
+  .docs-index-grid {
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+    padding: 0 48px 80px;
   }
-  .docs-glance h2 {
-    font-size: 13px; font-weight: 700; letter-spacing: 1.5px;
-    text-transform: uppercase; color: var(--green-mid);
-    margin: 0 0 12px; border: none; padding: 0;
+  .docs-index-card {
+    background: var(--white); border: 1px solid var(--slate-200);
+    border-radius: 16px; padding: 32px 28px;
+    text-decoration: none; display: block;
+    transition: all 0.3s cubic-bezier(0.22,1,0.36,1);
+    position: relative; overflow: hidden;
+    opacity: 0; transform: translateY(30px);
   }
-  .docs-glance ul { list-style: none; padding: 0; margin: 0; }
-  .docs-glance li {
-    font-size: 15px; line-height: 1.6; color: var(--slate-600);
-    padding: 4px 0 4px 20px; position: relative;
+  .docs-index-card.is-visible {
+    opacity: 1; transform: translateY(0);
+    transition: all 0.3s cubic-bezier(0.22,1,0.36,1), opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1);
   }
-  .docs-glance li::before {
-    content: ''; position: absolute; left: 0; top: 12px;
-    width: 8px; height: 8px; border-radius: 50%; background: var(--green-accent);
+  .docs-index-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--green-accent), var(--green-mid));
+    opacity: 0; transition: opacity 0.3s;
   }
-
-  /* ── Highlight Box ── */
-  .docs-highlight {
-    background: var(--green-ghost); border: 1px solid rgba(149,213,178,0.3);
-    border-radius: 12px; padding: 20px 24px; margin: 24px 0;
-    font-size: 15px; line-height: 1.7; color: var(--green-dark);
+  .docs-index-card:hover {
+    transform: translateY(-4px); border-color: var(--green-accent);
+    box-shadow: 0 12px 40px rgba(27,67,50,0.08);
   }
-  .docs-highlight strong { color: var(--green-deep); }
-
-  /* ── Related Docs ── */
-  .docs-related {
-    margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--slate-100);
+  .docs-index-card.is-visible:hover {
+    transform: translateY(-4px);
   }
-  .docs-related h3 {
-    font-size: 13px; font-weight: 700; letter-spacing: 1.5px;
-    text-transform: uppercase; color: var(--slate-400); margin-bottom: 12px;
+  .docs-index-card:hover::before { opacity: 1; }
+  .docs-index-card h3 {
+    font-size: 18px; font-weight: 700; color: var(--green-deep);
+    margin-bottom: 6px; letter-spacing: -0.3px;
   }
-  .docs-related-links { display: flex; flex-wrap: wrap; gap: 12px; }
-  .docs-related-links a {
-    padding: 8px 16px; font-size: 14px; font-weight: 500;
-    color: var(--green-mid); background: var(--slate-50);
-    border-radius: 8px; text-decoration: none; transition: all 0.2s;
+  .docs-index-card .docs-card-count {
+    font-size: 12px; font-weight: 600; color: var(--green-mid);
+    letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px;
   }
-  .docs-related-links a:hover { background: var(--green-ghost); color: var(--green-deep); }
-
-  /* ── Docs CTA ── */
-  .docs-cta {
-    margin-top: 48px; padding: 32px; text-align: center;
-    background: var(--green-deep); border-radius: 16px;
+  .docs-index-card p {
+    font-size: 14px; line-height: 1.5; color: var(--slate-500);
   }
-  .docs-cta p { color: rgba(255,255,255,0.8); font-size: 16px; margin-bottom: 16px; }
-  .docs-cta p strong { color: var(--white); }
-  .docs-cta a {
-    display: inline-flex; align-items: center; gap: 8px;
-    padding: 12px 28px; background: var(--white); color: var(--green-deep);
-    border-radius: 10px; font-size: 15px; font-weight: 600;
-    text-decoration: none; transition: all 0.3s;
-  }
-  .docs-cta a:hover { background: var(--slate-50); transform: translateY(-1px); }
-  .docs-cta-note { margin-top: 12px; font-size: 13px; color: rgba(255,255,255,0.5); }
 
   /* ── Footer 5-col ── */
   .footer-top { grid-template-columns: 2fr 1fr 1fr 1fr 1fr; }
 
   /* ── Responsive ── */
   @media (max-width: 900px) {
-    .docs-layout { grid-template-columns: 1fr; padding: 32px 24px 0; gap: 0; }
-    .docs-sidebar {
-      position: static; max-height: none; border-right: none;
-      border-bottom: 1px solid var(--slate-100);
-      padding: 0 0 24px; margin-bottom: 32px; overflow: visible;
-    }
+    .docs-index-grid { grid-template-columns: repeat(2, 1fr); padding: 0 24px 60px; }
     .footer-top { grid-template-columns: 1fr 1fr; }
   }
   @media (max-width: 600px) {
+    .docs-index-grid { grid-template-columns: 1fr; }
     .footer-top { grid-template-columns: 1fr; }
   }
   @media (prefers-reduced-motion: reduce) {
-    * { animation: none !important; transition: none !important; }
+    .docs-index-card { opacity: 1; transform: none; transition: none; }
+    .page-hero .section-label,
+    .page-hero .section-title,
+    .page-hero .section-desc { opacity: 1; transform: none; transition: none; }
+    .hero-bg-gradient, .hero-bg-gradient-2 { animation: none; }
+    .reveal { opacity: 1; transform: none; transition: none; }
   }
 </style>
-<!-- ARTICLE SCHEMA -->
+<!-- SCHEMA -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "TechArticle",
-  "headline": "What is ShelfSpace?",
+  "@type": "WebPage",
+  "name": "ShelfSpace Documentation",
+  "description": "Guides for every feature of the ShelfSpace platform.",
   "datePublished": "2026-03-25",
   "dateModified": "2026-03-25",
   "author": { "@type": "Organization", "name": "ShelfSpace", "url": "https://shelfspace.pro" },
@@ -213,12 +124,12 @@
 o.src="https://assets.apollo.io/micro/website-tracker/tracker.iife.js?nocache="+n,o.async=!0,o.defer=!0,
 o.onload=function(){window.trackingFunctions.onLoad({appId:"69c141b32234890011a43849"})},
 document.head.appendChild(o)}initApollo();</script>
-<noscript><style>.docs-nav-section a.active{background:var(--green-ghost);color:var(--green-deep);font-weight:600;}</style></noscript>
+<noscript><style>.docs-index-card,.reveal,.page-hero .section-label,.page-hero .section-title,.page-hero .section-desc{opacity:1;transform:none;transition:none;}</style></noscript>
 </head>
 <body>
 <!-- last-synced: 2026-03-25 -->
 
-<!-- NAV (same as all site pages) -->
+<!-- NAV (no active state) -->
 <nav id="nav">
   <a href="/" class="nav-logo">
     <div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div>
@@ -236,171 +147,120 @@ document.head.appendChild(o)}initApollo();</script>
   <div class="nav-hamburger" onclick="document.querySelector('.nav-links').classList.toggle('mobile-open'); event.stopPropagation();"><span></span><span></span><span></span></div>
 </nav>
 
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="hero-bg-gradient"></div>
+  <div class="hero-bg-gradient-2"></div>
+  <div class="hero-grid-lines"></div>
+  <div class="section-label">Documentation</div>
+  <h1 class="section-title">ShelfSpace Documentation</h1>
+  <p class="section-desc">Guides for every feature of the ShelfSpace platform</p>
+</div>
 
-<!-- DOCS HERO -->
-<div class="docs-hero">
-  <div class="docs-hero-content">
-    <a href="/docs" class="docs-hero-badge">Documentation</a>
-    <h1 class="docs-hero-title">What is ShelfSpace?</h1>
-    <p class="docs-hero-sub">Guides for every feature of the ShelfSpace platform</p>
+<!-- SECTION CARDS -->
+<div class="docs-index-grid">
+
+  <a href="/docs/getting-started" class="docs-index-card" style="transition-delay: 0s;">
+    <h3>Getting Started</h3>
+    <div class="docs-card-count">2 articles</div>
+    <p>Platform overview and onboarding</p>
+  </a>
+
+  <a href="/docs/consignment/overview" class="docs-index-card" style="transition-delay: 0.06s;">
+    <h3>Consignment</h3>
+    <div class="docs-card-count">6 articles</div>
+    <p>Settlements, contracts, splits</p>
+  </a>
+
+  <a href="/docs/credit-recovery/overview" class="docs-index-card" style="transition-delay: 0.12s;">
+    <h3>Credit Recovery</h3>
+    <div class="docs-card-count">5 articles</div>
+    <p>Returns, expirations, co-marketing</p>
+  </a>
+
+  <a href="/docs/accounts-payable/overview" class="docs-index-card" style="transition-delay: 0.18s;">
+    <h3>Accounts Payable</h3>
+    <div class="docs-card-count">4 articles</div>
+    <p>Payments, verification, onboarding</p>
+  </a>
+
+  <a href="/docs/quickbooks/overview" class="docs-index-card" style="transition-delay: 0.24s;">
+    <h3>QuickBooks</h3>
+    <div class="docs-card-count">2 articles</div>
+    <p>Integration and setup</p>
+  </a>
+
+  <a href="/docs/checks/overview" class="docs-index-card" style="transition-delay: 0.30s;">
+    <h3>Checks</h3>
+    <div class="docs-card-count">3 articles</div>
+    <p>Depositing, voiding, compliance</p>
+  </a>
+
+  <a href="/docs/vendor-portal/overview" class="docs-index-card" style="transition-delay: 0.36s;">
+    <h3>Vendor Portal</h3>
+    <div class="docs-card-count">4 articles</div>
+    <p>Checks, history, disputes</p>
+  </a>
+
+  <a href="/docs/shelfiq/overview" class="docs-index-card" style="transition-delay: 0.42s;">
+    <h3>ShelfiQ</h3>
+    <div class="docs-card-count">2 articles</div>
+    <p>AI assistant and tools</p>
+  </a>
+
+  <a href="/docs/promotions/overview" class="docs-index-card" style="transition-delay: 0.48s;">
+    <h3>Promotions</h3>
+    <div class="docs-card-count">2 articles</div>
+    <p>Co-marketing campaigns</p>
+  </a>
+
+  <a href="/docs/insights/overview" class="docs-index-card" style="transition-delay: 0.54s;">
+    <h3>Insights</h3>
+    <div class="docs-card-count">2 articles</div>
+    <p>Analytics and scorecards</p>
+  </a>
+
+  <a href="/docs/integrations/pos" class="docs-index-card" style="transition-delay: 0.60s;">
+    <h3>Integrations</h3>
+    <div class="docs-card-count">2 articles</div>
+    <p>POS and METRC</p>
+  </a>
+
+  <a href="/docs/deliveries/overview" class="docs-index-card" style="transition-delay: 0.66s;">
+    <h3>Deliveries</h3>
+    <div class="docs-card-count">2 articles</div>
+    <p>Tracking and reconciliation</p>
+  </a>
+
+  <a href="/docs/user-management/overview" class="docs-index-card" style="transition-delay: 0.72s;">
+    <h3>User Management</h3>
+    <div class="docs-card-count">2 articles</div>
+    <p>Roles, permissions, MFA</p>
+  </a>
+
+  <a href="/docs/security/overview" class="docs-index-card" style="transition-delay: 0.78s;">
+    <h3>Security</h3>
+    <div class="docs-card-count">2 articles</div>
+    <p>Data protection and audit trail</p>
+  </a>
+
+</div>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-content">
+    <div class="section-label reveal">Get Started</div>
+    <h2 class="section-title reveal">Ready for a free 60-day pilot? Let's talk.</h2>
+    <p class="section-desc reveal">Start a free 60-day pilot. We connect your systems, onboard your vendors, and handle setup — you just keep selling.</p>
+    <div class="cta-actions reveal">
+      <a href="/contact" class="btn-primary">
+        Talk to Us
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+    <p class="cta-note reveal">Free 60-day pilot. We handle setup.</p>
   </div>
-</div>
-
-<!-- DOCS LAYOUT -->
-<div class="docs-layout">
-
-  <!-- SIDEBAR -->
-  <aside class="docs-sidebar">
-    <nav class="docs-nav">
-      <div class="docs-nav-section">
-        <h3>Getting Started</h3>
-        <a href="/docs" class="active">What is ShelfSpace?</a>
-        <a href="/docs/getting-started">Getting Started</a>
-      </div>
-      <div class="docs-nav-section">
-        <h3>Consignment</h3>
-        <a href="/docs/consignment/overview">Overview</a>
-        <a href="/docs/consignment/contracts">Contracts & Terms</a>
-        <a href="/docs/consignment/settlements">Settlements</a>
-        <a href="/docs/consignment/settlement-reports">Settlement Reports</a>
-        <a href="/docs/consignment/aging-discounts">Aging Discounts</a>
-        <a href="/docs/consignment/profit-splits">Profit Splits</a>
-      </div>
-      <div class="docs-nav-section">
-        <h3>Credit Recovery</h3>
-        <a href="/docs/credit-recovery/overview">Overview</a>
-        <a href="/docs/credit-recovery/returns">Return Credits</a>
-        <a href="/docs/credit-recovery/expirations">Expiration Credits</a>
-        <a href="/docs/credit-recovery/co-marketing">Co-Marketing Credits</a>
-        <a href="/docs/credit-recovery/approval-workflow">Approval Process</a>
-      </div>
-      <div class="docs-nav-section">
-        <h3>Accounts Payable</h3>
-        <a href="/docs/accounts-payable/overview">Overview</a>
-        <a href="/docs/accounts-payable/vendor-onboarding">Vendor Onboarding</a>
-        <a href="/docs/accounts-payable/creating-payments">Payments & Checks</a>
-        <a href="/docs/accounts-payable/invoice-verification">Invoice Verification</a>
-      </div>
-      <div class="docs-nav-section">
-        <h3>QuickBooks</h3>
-        <a href="/docs/quickbooks/overview">Overview</a>
-        <a href="/docs/quickbooks/setup">Setup Guide</a>
-      </div>
-      <div class="docs-nav-section">
-        <h3>Checks</h3>
-        <a href="/docs/checks/overview">Overview</a>
-        <a href="/docs/checks/depositing">Depositing</a>
-        <a href="/docs/checks/void-reissue">Void & Reissue</a>
-      </div>
-      <div class="docs-nav-section">
-        <h3>Vendor Portal</h3>
-        <a href="/docs/vendor-portal/overview">Overview</a>
-        <a href="/docs/vendor-portal/downloading-checks">Downloading Checks</a>
-        <a href="/docs/vendor-portal/payment-history">Payment History</a>
-        <a href="/docs/vendor-portal/disputes">Responding to Credits</a>
-      </div>
-      <div class="docs-nav-section">
-        <h3>ShelfiQ</h3>
-        <a href="/docs/shelfiq/overview">Overview</a>
-        <a href="/docs/shelfiq/tools">What ShelfiQ Can Do</a>
-      </div>
-      <div class="docs-nav-section">
-        <h3>Promotions</h3>
-        <a href="/docs/promotions/overview">Overview</a>
-        <a href="/docs/promotions/creating">Creating Promotions</a>
-      </div>
-      <div class="docs-nav-section">
-        <h3>Insights</h3>
-        <a href="/docs/insights/overview">Overview</a>
-        <a href="/docs/insights/vendor-scorecards">Vendor Scorecards</a>
-      </div>
-      <div class="docs-nav-section">
-        <h3>Integrations</h3>
-        <a href="/docs/integrations/pos">POS Integration</a>
-        <a href="/docs/integrations/metrc">METRC</a>
-      </div>
-      <div class="docs-nav-section">
-        <h3>Deliveries</h3>
-        <a href="/docs/deliveries/overview">Overview</a>
-        <a href="/docs/deliveries/reconciliation">Reconciliation</a>
-      </div>
-      <div class="docs-nav-section">
-        <h3>User Management</h3>
-        <a href="/docs/user-management/overview">Roles & Permissions</a>
-        <a href="/docs/user-management/mfa">MFA Setup</a>
-      </div>
-      <div class="docs-nav-section">
-        <h3>Security</h3>
-        <a href="/docs/security/overview">Overview</a>
-        <a href="/docs/security/audit-trail">Audit Trail</a>
-      </div>
-    </nav>
-  </aside>
-
-  <!-- CONTENT -->
-  <main class="docs-content">
-    <div class="docs-breadcrumb">
-      <a href="/docs">Docs</a> / What is ShelfSpace?
-    </div>
-    <div class="docs-category">Getting Started</div>
-
-    <!-- AT A GLANCE -->
-    <div class="docs-glance">
-      <h2>At a Glance</h2>
-      <ul>
-        <li>ShelfSpace cannabis operations platform — consignment, AP, and credit recovery in one place</li>
-        <li>Managed service: we handle the day-to-day so your team doesn't have to</li>
-        <li>Every vendor gets paid on time, every dollar is accounted for</li>
-        <li>Connects to your POS, QuickBooks, and METRC with no extra work</li>
-      </ul>
-    </div>
-
-    <!-- BODY CONTENT -->
-    <h2>Why ShelfSpace Cannabis Dispensaries Choose Us</h2>
-    <p>ShelfSpace cannabis is a managed operations platform built for dispensaries that work with dozens — sometimes hundreds — of vendors. We handle <a href="/consignment">consignment</a>, <a href="/accounts-payable">accounts payable</a>, and <a href="/credit-recovery">credit recovery</a> under one roof, so you get a single engine for every vendor relationship and every payment.</p>
-
-    <p>Most dispensaries cobble together spreadsheets, QuickBooks workarounds, and manual check runs. That works until it doesn't. ShelfSpace replaces the patchwork with a purpose-built system that we operate for you.</p>
-
-    <div class="docs-highlight">
-      <strong>What we handle:</strong> Vendor onboarding, settlement calculations, check payments, credit memo workflows, QuickBooks sync, and reporting. You review and approve — we do the rest.
-    </div>
-
-    <h2>Three Services, One Platform</h2>
-
-    <p><strong>Consignment.</strong> Vendors place inventory on your shelves and get paid after it sells. We calculate weekly settlements based on your POS data, apply category-level profit splits and aging discounts, then cut the check. <a href="/docs/consignment/overview">Learn how consignment works</a>.</p>
-
-    <p><strong>Accounts Payable.</strong> For wholesale purchases, we verify invoices against delivery records, generate Check 21 payments, and sync everything to QuickBooks. No more manual data entry or lost invoices. <a href="/docs/accounts-payable/overview">See the AP overview</a>.</p>
-
-    <p><strong>Credit Recovery.</strong> Returns, expiring product, and co-marketing credits often fall through the cracks. We track every credit memo from creation through vendor approval and final deduction, so you recover what you're owed. <a href="/docs/credit-recovery/overview">Explore credit recovery</a>.</p>
-
-    <h2>The Managed Service Model</h2>
-    <p>ShelfSpace is not self-serve software you have to learn and operate. We assign your account a dedicated team that configures your vendor terms, processes your weekly settlements, and handles vendor questions through the <a href="/docs/vendor-portal/overview">vendor portal</a>.</p>
-
-    <p>Your role is minimal: review settlement summaries, approve payments when you're ready, and reach out if anything looks off. We handle the volume.</p>
-
-    <h2>How Everything Connects</h2>
-    <p>ShelfSpace pulls sales data from your POS every day, matches it against vendor contracts and inventory records, and produces settlements and payment batches on a weekly cycle. QuickBooks stays in sync. Vendors access their own portal to view payments, download checks, and respond to credit memos.</p>
-
-    <p>ShelfiQ, our built-in AI assistant, gives both you and your vendors instant answers — payment status, settlement details, inventory lookups — without waiting on email.</p>
-
-    <!-- RELATED DOCS -->
-    <div class="docs-related">
-      <h3>Related</h3>
-      <div class="docs-related-links">
-        <a href="/docs/getting-started">Getting Started</a>
-        <a href="/docs/consignment/overview">Consignment Overview</a>
-        <a href="/docs/accounts-payable/overview">AP Overview</a>
-      </div>
-    </div>
-
-    <!-- CTA -->
-    <div class="docs-cta">
-      <p><strong>Ready for a free 60-day pilot? Let's talk.</strong></p>
-      <a href="/contact">Talk to Us <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a>
-      <div class="docs-cta-note">Free 60-day pilot. We handle setup.</div>
-    </div>
-  </main>
-</div>
+</section>
 
 <!-- FOOTER -->
 <footer>
@@ -420,7 +280,37 @@ document.head.appendChild(o)}initApollo();</script>
 <script>
 (function() {
   var nav = document.getElementById('nav');
-  nav.classList.toggle('scrolled', window.scrollY > 20);
+  var pageHero = document.querySelector('.page-hero');
+
+  /* ── Hero entrance ── */
+  requestAnimationFrame(function() {
+    nav.classList.toggle('scrolled', window.scrollY > 20);
+    if (pageHero) pageHero.classList.add('hero-loaded');
+  });
+
+  /* ── Scroll-Triggered Card Reveals (with staggered delays) ── */
+  var cardObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        cardObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.docs-index-card').forEach(function(el) { cardObserver.observe(el); });
+
+  /* ── Scroll-Triggered Reveals for CTA ── */
+  var revealObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(function(el) { revealObserver.observe(el); });
+
+  /* ── Nav scroll ── */
   window.addEventListener('scroll', function() {
     nav.classList.toggle('scrolled', window.scrollY > 20);
   }, { passive: true });
