@@ -26,11 +26,37 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/styles.css">
 <style>
+  /* ── Docs Hero ── */
+  .docs-hero {
+    padding: 120px 48px 40px; text-align: center;
+    background: var(--white); position: relative; overflow: hidden;
+  }
+  .docs-hero::before {
+    content: ''; position: absolute; top: -200px; right: -200px;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(149,213,178,0.12), transparent 70%);
+  }
+  .docs-hero-content { position: relative; max-width: 640px; margin: 0 auto; }
+  .docs-hero-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 6px 16px; border-radius: 100px;
+    background: var(--green-ghost); border: 1px solid rgba(149,213,178,0.3);
+    font-size: 13px; font-weight: 600; color: var(--green-dark);
+    text-decoration: none; margin-bottom: 16px; transition: all 0.2s;
+  }
+  .docs-hero-badge:hover { background: var(--green-light); }
+  .docs-hero-title {
+    font-size: clamp(28px, 3.5vw, 40px); font-weight: 700;
+    color: var(--green-deep); letter-spacing: -1.5px; line-height: 1.2;
+  }
+  @media (max-width: 900px) {
+    .docs-hero { padding: 100px 24px 32px; }
+  }
   /* ── Docs Layout ── */
   .docs-layout {
     display: grid; grid-template-columns: 260px 1fr;
     max-width: 1200px; margin: 0 auto;
-    padding: 100px 48px 0; gap: 48px;
+    padding: 24px 48px 0; gap: 48px;
     min-height: calc(100vh - 72px);
   }
   .docs-sidebar {
@@ -151,7 +177,7 @@
 
   /* ── Responsive ── */
   @media (max-width: 900px) {
-    .docs-layout { grid-template-columns: 1fr; padding: 80px 24px 0; gap: 0; }
+    .docs-layout { grid-template-columns: 1fr; padding: 16px 24px 0; gap: 0; }
     .docs-sidebar {
       position: static; max-height: none; border-right: none;
       border-bottom: 1px solid var(--slate-100);
@@ -205,6 +231,15 @@ document.head.appendChild(o)}initApollo();</script>
   </ul>
   <div class="nav-hamburger" onclick="document.querySelector('.nav-links').classList.toggle('mobile-open'); event.stopPropagation();"><span></span><span></span><span></span></div>
 </nav>
+
+
+<!-- DOCS HERO -->
+<div class="docs-hero">
+  <div class="docs-hero-content">
+    <a href="/docs" class="docs-hero-badge">Documentation</a>
+    <h1 class="docs-hero-title">Check 21 Payments on ShelfSpace</h1>
+  </div>
+</div>
 
 <!-- DOCS LAYOUT -->
 <div class="docs-layout">
@@ -303,7 +338,6 @@ document.head.appendChild(o)}initApollo();</script>
       <a href="/docs">Docs</a> / <a href="/docs/checks/overview">Checks</a> / Overview
     </div>
     <div class="docs-category">Checks</div>
-    <h1>Check 21 Payments on ShelfSpace</h1>
 
     <!-- AT A GLANCE -->
     <div class="docs-glance">
