@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # check-docs-sync.sh
 # Detects stale documentation by comparing platform changes to docs-manifest.json
 #
@@ -24,6 +24,14 @@ fi
 
 echo "🔍 Checking docs sync status..."
 echo ""
+
+# Handle empty manifest
+if [ "$(jq 'length' "$MANIFEST")" -eq 0 ]; then
+  echo "ℹ  Manifest is empty — no docs to check."
+  echo ""
+  echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+  exit 0
+fi
 
 # 1. Check each doc's source files for changes since lastSynced
 STALE_COUNT=0
@@ -60,7 +68,7 @@ NEW_COUNT=0
 
 for dir in "app/api" "lib" "app/(retailer)" "app/(vendor)" "app/(admin)"; do
   if [ -d "$PLATFORM_DIR/$dir" ]; then
-    find "$PLATFORM_DIR/$dir" -name "*.ts" -o -name "*.tsx" 2>/dev/null | while read -r file; do
+    while IFS= read -r file; do
       REL_PATH="${file#$PLATFORM_DIR/}"
       if ! echo "$ALL_MANIFEST_SOURCES" | grep -qF "$REL_PATH"; then
         # Check if file is newer than 7 days (recently added)
@@ -69,7 +77,7 @@ for dir in "app/api" "lib" "app/(retailer)" "app/(vendor)" "app/(admin)"; do
           NEW_COUNT=$((NEW_COUNT + 1))
         fi
       fi
-    done
+    done < <(find "$PLATFORM_DIR/$dir" -name "*.ts" -o -name "*.tsx" 2>/dev/null)
   fi
 done
 

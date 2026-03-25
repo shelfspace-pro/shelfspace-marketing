@@ -86,6 +86,7 @@
 - No "scan-based trading" or "SBT"
 - No "demo-modal" references
 - No "Diem Cannabis"
+- No `<br>` tags in headings — let text flow and wrap naturally
 
 ## Required Elements (checklist)
 1. Primary keyword in title, H1, meta description, first paragraph, at least one H2

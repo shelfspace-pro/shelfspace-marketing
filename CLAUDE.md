@@ -58,7 +58,7 @@ Consignment | Accounts Payable | Credit Recovery | Pricing | About | Login | Sig
 ```
 /                     — HTML pages (index.html, about.html, etc.)
 /blog/                — Blog articles (8 articles)
-/docs/                — Documentation pages (30+ pages)
+/docs/                — Documentation pages (not yet created)
 /api/                 — Serverless functions (shelfiq-chat.js)
 /logos/               — POS integration logos
 /marketing/           — Internal marketing files (platform-map, docs-plan, etc.)
