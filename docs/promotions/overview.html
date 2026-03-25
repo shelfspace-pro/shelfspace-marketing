@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cannabis Dispensary Co-Op Promotions — ShelfSpace</title>
+<meta name="description" content="Cannabis dispensary co-op promotions — how retailers and vendors run joint promotions, track impact, and generate credits through ShelfSpace.">
+<link rel="canonical" href="https://shelfspace.pro/docs/promotions/overview">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://shelfspace.pro/docs/promotions/overview">
+<meta property="og:title" content="Cannabis Dispensary Co-Op Promotions — ShelfSpace">
+<meta property="og:description" content="Cannabis dispensary co-op promotions — how retailers and vendors run joint promotions, track impact, and generate credits through ShelfSpace.">
+<meta property="og:image" content="https://shelfspace.pro/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Cannabis Dispensary Co-Op Promotions — ShelfSpace">
+<meta name="twitter:description" content="Cannabis dispensary co-op promotions — how retailers and vendors run joint promotions, track impact, and generate credits through ShelfSpace.">
+<meta name="twitter:image" content="https://shelfspace.pro/og-image.png">
+<meta name="apple-mobile-web-app-title" content="ShelfSpace">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+<style>
+  /* ── Docs Layout ── */
+  .docs-layout {
+    display: grid; grid-template-columns: 260px 1fr;
+    max-width: 1200px; margin: 0 auto;
+    padding: 100px 48px 0; gap: 48px;
+    min-height: calc(100vh - 72px);
+  }
+  .docs-sidebar {
+    position: sticky; top: 100px;
+    max-height: calc(100vh - 120px); overflow-y: auto;
+    padding-right: 24px; border-right: 1px solid var(--slate-100);
+  }
+  .docs-nav-section { margin-bottom: 24px; }
+  .docs-nav-section h3 {
+    font-size: 11px; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--slate-400);
+    margin-bottom: 8px; padding: 0 12px;
+  }
+  .docs-nav-section a {
+    display: block; padding: 6px 12px; font-size: 14px;
+    color: var(--slate-500); text-decoration: none;
+    border-radius: 6px; transition: all 0.15s;
+  }
+  .docs-nav-section a:hover { background: var(--green-ghost); color: var(--green-deep); }
+  .docs-nav-section a.active { background: var(--green-ghost); color: var(--green-deep); font-weight: 600; }
+
+  /* ── Docs Content ── */
+  .docs-content { max-width: 720px; padding-bottom: 80px; }
+  .docs-breadcrumb {
+    font-size: 13px; color: var(--slate-400); margin-bottom: 24px;
+  }
+  .docs-breadcrumb a { color: var(--slate-400); text-decoration: none; }
+  .docs-breadcrumb a:hover { color: var(--green-mid); }
+  .docs-category {
+    font-size: 11px; font-weight: 700; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--green-mid); margin-bottom: 12px;
+  }
+  .docs-content h1 {
+    font-size: clamp(28px, 3.5vw, 36px); font-weight: 700;
+    color: var(--green-deep); letter-spacing: -1px; line-height: 1.2;
+    margin-bottom: 24px;
+  }
+  .docs-content h2 {
+    font-size: 22px; font-weight: 700; color: var(--green-deep);
+    margin: 40px 0 16px; letter-spacing: -0.5px; line-height: 1.3;
+    padding-top: 24px; border-top: 1px solid var(--slate-100);
+  }
+  .docs-content h2:first-of-type { border-top: none; padding-top: 0; }
+  .docs-content p {
+    font-size: 16px; line-height: 1.8; color: var(--slate-600); margin-bottom: 20px;
+  }
+  .docs-content ul, .docs-content ol { margin-bottom: 20px; padding-left: 24px; }
+  .docs-content li {
+    font-size: 16px; line-height: 1.8; color: var(--slate-600); margin-bottom: 6px;
+  }
+  .docs-content strong { color: var(--green-deep); font-weight: 600; }
+  .docs-content a { color: var(--green-mid); font-weight: 500; text-decoration: none; }
+  .docs-content a:hover { color: var(--green-deep); text-decoration: underline; }
+
+  /* ── At a Glance Box ── */
+  .docs-glance {
+    padding: 24px 28px; margin-bottom: 32px;
+    background: var(--green-ghost); border: 1px solid rgba(149,213,178,0.3);
+    border-radius: 12px;
+  }
+  .docs-glance h2 {
+    font-size: 13px; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--green-mid);
+    margin: 0 0 12px; border: none; padding: 0;
+  }
+  .docs-glance ul { list-style: none; padding: 0; margin: 0; }
+  .docs-glance li {
+    font-size: 15px; line-height: 1.6; color: var(--slate-600);
+    padding: 4px 0 4px 20px; position: relative;
+  }
+  .docs-glance li::before {
+    content: ''; position: absolute; left: 0; top: 12px;
+    width: 8px; height: 8px; border-radius: 50%; background: var(--green-accent);
+  }
+
+  /* ── Highlight Box ── */
+  .docs-highlight {
+    background: var(--green-ghost); border: 1px solid rgba(149,213,178,0.3);
+    border-radius: 12px; padding: 20px 24px; margin: 24px 0;
+    font-size: 15px; line-height: 1.7; color: var(--green-dark);
+  }
+  .docs-highlight strong { color: var(--green-deep); }
+
+  /* ── Related Docs ── */
+  .docs-related {
+    margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--slate-100);
+  }
+  .docs-related h3 {
+    font-size: 13px; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--slate-400); margin-bottom: 12px;
+  }
+  .docs-related-links { display: flex; flex-wrap: wrap; gap: 12px; }
+  .docs-related-links a {
+    padding: 8px 16px; font-size: 14px; font-weight: 500;
+    color: var(--green-mid); background: var(--slate-50);
+    border-radius: 8px; text-decoration: none; transition: all 0.2s;
+  }
+  .docs-related-links a:hover { background: var(--green-ghost); color: var(--green-deep); }
+
+  /* ── Docs CTA ── */
+  .docs-cta {
+    margin-top: 48px; padding: 32px; text-align: center;
+    background: var(--green-deep); border-radius: 16px;
+  }
+  .docs-cta p { color: rgba(255,255,255,0.8); font-size: 16px; margin-bottom: 16px; }
+  .docs-cta p strong { color: var(--white); }
+  .docs-cta a {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 12px 28px; background: var(--white); color: var(--green-deep);
+    border-radius: 10px; font-size: 15px; font-weight: 600;
+    text-decoration: none; transition: all 0.3s;
+  }
+  .docs-cta a:hover { background: var(--slate-50); transform: translateY(-1px); }
+  .docs-cta-note { margin-top: 12px; font-size: 13px; color: rgba(255,255,255,0.5); }
+
+  /* ── Footer 5-col ── */
+  .footer-top { grid-template-columns: 2fr 1fr 1fr 1fr 1fr; }
+
+  /* ── Responsive ── */
+  @media (max-width: 900px) {
+    .docs-layout { grid-template-columns: 1fr; padding: 80px 24px 0; gap: 0; }
+    .docs-sidebar {
+      position: static; max-height: none; border-right: none;
+      border-bottom: 1px solid var(--slate-100);
+      padding: 0 0 24px; margin-bottom: 32px; overflow: visible;
+    }
+    .footer-top { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 600px) {
+    .footer-top { grid-template-columns: 1fr; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+  }
+</style>
+<!-- ARTICLE SCHEMA -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "Co-Marketing Promotions",
+  "datePublished": "2026-03-25",
+  "dateModified": "2026-03-25",
+  "author": { "@type": "Organization", "name": "ShelfSpace", "url": "https://shelfspace.pro" },
+  "publisher": { "@type": "Organization", "name": "ShelfSpace" },
+  "url": "https://shelfspace.pro/docs/promotions/overview"
+}
+</script>
+<script>function initApollo(){var n=Math.random().toString(36).substring(7),o=document.createElement("script");
+o.src="https://assets.apollo.io/micro/website-tracker/tracker.iife.js?nocache="+n,o.async=!0,o.defer=!0,
+o.onload=function(){window.trackingFunctions.onLoad({appId:"69c141b32234890011a43849"})},
+document.head.appendChild(o)}initApollo();</script>
+<noscript><style>.docs-nav-section a.active{background:var(--green-ghost);color:var(--green-deep);font-weight:600;}</style></noscript>
+</head>
+<body>
+<!-- last-synced: 2026-03-25 -->
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="/" class="nav-logo">
+    <div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div>
+    <span class="nav-logo-text">ShelfSpace</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="/consignment">Consignment</a></li>
+    <li><a href="/accounts-payable">Accounts Payable</a></li>
+    <li><a href="/credit-recovery">Credit Recovery</a></li>
+    <li><a href="/pricing">Pricing</a></li>
+    <li><a href="/about">About</a></li>
+    <li><a href="https://ourshelf.space">Login</a></li>
+    <li><a href="/contact" class="nav-cta">Sign Up <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a></li>
+  </ul>
+  <div class="nav-hamburger" onclick="document.querySelector('.nav-links').classList.toggle('mobile-open'); event.stopPropagation();"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- DOCS LAYOUT -->
+<div class="docs-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="docs-sidebar">
+    <nav class="docs-nav">
+      <div class="docs-nav-section">
+        <h3>Getting Started</h3>
+        <a href="/docs">What is ShelfSpace?</a>
+        <a href="/docs/getting-started">Getting Started</a>
+      </div>
+      <div class="docs-nav-section">
+        <h3>Consignment</h3>
+        <a href="/docs/consignment/overview">Overview</a>
+        <a href="/docs/consignment/contracts">Contracts & Terms</a>
+        <a href="/docs/consignment/settlements">Settlements</a>
+        <a href="/docs/consignment/settlement-reports">Settlement Reports</a>
+        <a href="/docs/consignment/aging-discounts">Aging Discounts</a>
+        <a href="/docs/consignment/profit-splits">Profit Splits</a>
+      </div>
+      <div class="docs-nav-section">
+        <h3>Credit Recovery</h3>
+        <a href="/docs/credit-recovery/overview">Overview</a>
+        <a href="/docs/credit-recovery/returns">Return Credits</a>
+        <a href="/docs/credit-recovery/expirations">Expiration Credits</a>
+        <a href="/docs/credit-recovery/co-marketing">Co-Marketing Credits</a>
+        <a href="/docs/credit-recovery/approval-workflow">Approval Process</a>
+      </div>
+      <div class="docs-nav-section">
+        <h3>Accounts Payable</h3>
+        <a href="/docs/accounts-payable/overview">Overview</a>
+        <a href="/docs/accounts-payable/vendor-onboarding">Vendor Onboarding</a>
+        <a href="/docs/accounts-payable/creating-payments">Payments & Checks</a>
+        <a href="/docs/accounts-payable/invoice-verification">Invoice Verification</a>
+      </div>
+      <div class="docs-nav-section">
+        <h3>QuickBooks</h3>
+        <a href="/docs/quickbooks/overview">Overview</a>
+        <a href="/docs/quickbooks/setup">Setup Guide</a>
+      </div>
+      <div class="docs-nav-section">
+        <h3>Checks</h3>
+        <a href="/docs/checks/overview">Overview</a>
+        <a href="/docs/checks/depositing">Depositing</a>
+        <a href="/docs/checks/void-reissue">Void & Reissue</a>
+      </div>
+      <div class="docs-nav-section">
+        <h3>Vendor Portal</h3>
+        <a href="/docs/vendor-portal/overview">Overview</a>
+        <a href="/docs/vendor-portal/downloading-checks">Downloading Checks</a>
+        <a href="/docs/vendor-portal/payment-history">Payment History</a>
+        <a href="/docs/vendor-portal/disputes">Responding to Credits</a>
+      </div>
+      <div class="docs-nav-section">
+        <h3>ShelfiQ</h3>
+        <a href="/docs/shelfiq/overview">Overview</a>
+        <a href="/docs/shelfiq/tools">What ShelfiQ Can Do</a>
+      </div>
+      <div class="docs-nav-section">
+        <h3>Promotions</h3>
+        <a href="/docs/promotions/overview" class="active">Overview</a>
+        <a href="/docs/promotions/creating">Creating Promotions</a>
+      </div>
+      <div class="docs-nav-section">
+        <h3>Insights</h3>
+        <a href="/docs/insights/overview">Overview</a>
+        <a href="/docs/insights/vendor-scorecards">Vendor Scorecards</a>
+      </div>
+      <div class="docs-nav-section">
+        <h3>Integrations</h3>
+        <a href="/docs/integrations/pos">POS Integration</a>
+        <a href="/docs/integrations/metrc">METRC</a>
+      </div>
+      <div class="docs-nav-section">
+        <h3>Deliveries</h3>
+        <a href="/docs/deliveries/overview">Overview</a>
+        <a href="/docs/deliveries/reconciliation">Reconciliation</a>
+      </div>
+      <div class="docs-nav-section">
+        <h3>User Management</h3>
+        <a href="/docs/user-management/overview">Roles & Permissions</a>
+        <a href="/docs/user-management/mfa">MFA Setup</a>
+      </div>
+      <div class="docs-nav-section">
+        <h3>Security</h3>
+        <a href="/docs/security/overview">Overview</a>
+        <a href="/docs/security/audit-trail">Audit Trail</a>
+      </div>
+    </nav>
+  </aside>
+
+  <!-- CONTENT -->
+  <main class="docs-content">
+    <div class="docs-breadcrumb">
+      <a href="/docs">Docs</a> / <a href="/docs/promotions/overview">Promotions</a> / Overview
+    </div>
+    <div class="docs-category">Promotions</div>
+    <h1>Co-Marketing Promotions</h1>
+
+    <!-- AT A GLANCE -->
+    <div class="docs-glance">
+      <h2>At a Glance</h2>
+      <ul>
+        <li>Cannabis dispensary co-op promotions let retailers and vendors share the cost of discounts</li>
+        <li>Either side can propose — the other accepts, counters, or declines</li>
+        <li>Credits are generated as co-marketing credit memos when the promotion ends</li>
+        <li>Full tracking of sales lift, budget spend, and promotion impact</li>
+        <li>Promotions can also be proposed through ShelfiQ via chat or email</li>
+      </ul>
+    </div>
+
+    <!-- BODY CONTENT -->
+    <h2>How Cannabis Dispensary Co-Op Promotions Work</h2>
+    <p>Co-op promotions are joint marketing agreements between a cannabis dispensary and a vendor. The vendor agrees to share the cost of a discount — typically a percentage off retail price — in exchange for increased shelf visibility and sales velocity. ShelfSpace manages the entire lifecycle: proposal, approval, tracking, and credit generation.</p>
+
+    <p>This is part of our <a href="/credit-recovery">credit recovery</a> system. When a co-op promotion runs, we track the discounted sales and generate a co-marketing credit memo against the vendor's account. The credit is then applied to the vendor's next settlement or payment. Both sides agree to the terms before the promotion starts, so there are no surprises.</p>
+
+    <div class="docs-highlight">
+      <strong>What we handle:</strong> We manage the negotiation workflow, track promotion performance against POS sales data, calculate the vendor's share of the discount, and generate the credit memo. You propose and approve — we do the rest.
+    </div>
+
+    <h2>Who Can Propose</h2>
+    <p>Either party can initiate a co-op promotion:</p>
+    <ul>
+      <li><strong>Retailers</strong> propose through their ShelfSpace dashboard when they want a vendor to co-fund a discount event</li>
+      <li><strong>Vendors</strong> propose through their <a href="/docs/vendor-portal/overview">vendor portal</a> or through <a href="/docs/shelfiq/overview">ShelfiQ</a> when they want to drive sales velocity at a specific store</li>
+    </ul>
+
+    <p>When a proposal is submitted, the other party receives a notification and can accept the terms, counter-propose with different numbers, or decline entirely. See <a href="/docs/promotions/creating">Creating a Promotion</a> for the step-by-step process.</p>
+
+    <h2>Promotion Terms</h2>
+    <p>Every co-op promotion includes:</p>
+    <ul>
+      <li><strong>Discount percentage</strong> — the retail discount offered to customers (e.g., 20% off)</li>
+      <li><strong>Co-marketing split</strong> — how much of the discount the vendor covers vs. the retailer</li>
+      <li><strong>Start and end dates</strong> — the promotion window</li>
+      <li><strong>Scope</strong> — all products from the vendor, or specific SKUs</li>
+      <li><strong>Budget cap</strong> — optional maximum dollar amount the vendor will cover</li>
+    </ul>
+
+    <h2>Credit Generation</h2>
+    <p>When the promotion ends, we calculate the total discount given during the promotion window using actual POS sales data. The vendor's share becomes a co-marketing credit memo, which goes through the standard <a href="/docs/credit-recovery/approval-workflow">approval process</a>. The vendor reviews it in their portal and confirms the amount before it is applied.</p>
+
+    <p>Co-marketing credits appear in the <a href="/docs/credit-recovery/co-marketing">co-marketing credits</a> section of the credit recovery dashboard, with full detail on which products were sold at what discount during the promotion period.</p>
+
+    <h2>Tracking Promotion Impact</h2>
+    <p>While a promotion is active, both the retailer and vendor can see real-time performance data: units sold, discount given, budget remaining, and sales lift compared to the pre-promotion period. This data lives in the <a href="/docs/insights/overview">Insights dashboard</a> and helps both sides measure whether the promotion is delivering results.</p>
+
+    <!-- RELATED DOCS -->
+    <div class="docs-related">
+      <h3>Related</h3>
+      <div class="docs-related-links">
+        <a href="/docs/promotions/creating">Creating a Promotion</a>
+        <a href="/docs/credit-recovery/co-marketing">Co-Marketing Credits</a>
+        <a href="/docs/credit-recovery/approval-workflow">Approval Process</a>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="docs-cta">
+      <p><strong>Ready to start recovering what you're owed? Let's talk.</strong></p>
+      <a href="/contact">Talk to Us <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a>
+      <div class="docs-cta-note">Free 60-day pilot. We handle setup.</div>
+    </div>
+  </main>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="/" class="nav-logo"><div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div><span class="nav-logo-text">ShelfSpace</span></a>
+      <p>Every Vendor. Every Payment. One Engine.</p>
+    </div>
+    <div class="footer-col"><h4>Services</h4><ul><li><a href="/consignment">Consignment</a></li><li><a href="/accounts-payable">Accounts Payable</a></li><li><a href="/credit-recovery">Credit Recovery</a></li><li><a href="/checks">Check Payments</a></li><li><a href="/shelfiq">ShelfiQ</a></li></ul></div>
+    <div class="footer-col"><h4>Platform</h4><ul><li><a href="/features">Features</a></li><li><a href="/how-it-works">How It Works</a></li><li><a href="/pricing">Pricing</a></li><li><a href="/about">About</a></li><li><a href="/blog">Blog</a></li><li><a href="/docs">Docs</a></li></ul></div>
+    <div class="footer-col"><h4>Access</h4><ul><li><a href="https://ourshelf.space">Login</a></li><li><a href="/contact">Sign Up</a></li><li><a href="/contact">Contact</a></li></ul></div>
+    <div class="footer-col"><h4>Company</h4><ul><li><a href="mailto:chris@shelfspace.pro">Email</a></li><li><a href="mailto:support@shelfspace.pro">Support</a></li><li><a href="https://linkedin.com/company/shelfspace-pro" target="_blank" rel="noopener" class="footer-social-link"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> LinkedIn</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><p>&copy; 2026 ShelfSpace Technologies Inc.</p><div class="footer-bottom-links"><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div></div>
+</footer>
+
+<script>
+(function() {
+  var nav = document.getElementById('nav');
+  nav.classList.toggle('scrolled', window.scrollY > 20);
+  window.addEventListener('scroll', function() {
+    nav.classList.toggle('scrolled', window.scrollY > 20);
+  }, { passive: true });
+})();
+</script>
+<script src="/shelfiq-widget.js"></script>
+</body>
+</html>
