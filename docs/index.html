@@ -29,7 +29,7 @@
   /* ── Docs Hero ── */
   .docs-hero {
     padding: 120px 48px 40px; text-align: center;
-    background: var(--white); position: relative; overflow: hidden;
+    background: var(--white); position: relative; overflow: hidden; z-index: 2;
   }
   .docs-hero::before {
     content: ''; position: absolute; top: -200px; right: -200px;
@@ -59,8 +59,9 @@
   .docs-layout {
     display: grid; grid-template-columns: 260px 1fr;
     max-width: 1200px; margin: 0 auto;
-    padding: 24px 48px 0; gap: 48px;
+    padding: 40px 48px 0; gap: 48px;
     min-height: calc(100vh - 72px);
+    position: relative; z-index: 1;
   }
   .docs-sidebar {
     position: sticky; top: 100px;
@@ -180,7 +181,7 @@
 
   /* ── Responsive ── */
   @media (max-width: 900px) {
-    .docs-layout { grid-template-columns: 1fr; padding: 16px 24px 0; gap: 0; }
+    .docs-layout { grid-template-columns: 1fr; padding: 32px 24px 0; gap: 0; }
     .docs-sidebar {
       position: static; max-height: none; border-right: none;
       border-bottom: 1px solid var(--slate-100);
