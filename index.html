@@ -160,60 +160,162 @@
   }
   .wedothework-pill svg { color: var(--green-mid); }
 
-  /* ── Proof Section ── */
-  .proof-section { background: var(--green-deep); position: relative; overflow: hidden; }
-  .proof-section::before { content: ''; position: absolute; top: -200px; right: -200px; width: 600px; height: 600px; background: radial-gradient(circle, rgba(149,213,178,0.08), transparent 70%); }
-  .proof-header { text-align: center; max-width: 600px; margin: 0 auto 64px; position: relative; }
-  .proof-header .section-label { color: var(--green-accent); }
-  .proof-header .section-title { color: var(--white); }
+  /* ── Case Study ── */
+  .casestudy-section { background: var(--white); position: relative; overflow: hidden; }
+  .casestudy-section::before {
+    content: ''; position: absolute; top: -300px; left: -200px;
+    width: 800px; height: 800px;
+    background: radial-gradient(circle, rgba(149,213,178,0.08), transparent 70%);
+  }
+  .casestudy-header { text-align: center; max-width: 700px; margin: 0 auto 56px; position: relative; }
+  .casestudy-header .section-desc { margin: 0 auto; }
 
-  .proof-case {
-    max-width: 800px; margin: 0 auto 56px; position: relative;
-    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 20px; padding: 40px 36px; backdrop-filter: blur(8px);
+  /* Big number display */
+  .casestudy-bignumber {
+    text-align: center; margin-bottom: 56px; position: relative;
   }
-  .proof-case-label {
-    font-size: 12px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
-    color: var(--green-accent); margin-bottom: 16px;
+  .casestudy-bignumber-range {
+    font-family: var(--font-mono); font-size: clamp(36px, 5vw, 56px);
+    font-weight: 700; color: var(--green-deep); letter-spacing: -2px;
+    line-height: 1.1; margin-bottom: 8px;
   }
-  .proof-case p {
-    font-size: 17px; line-height: 1.7; color: rgba(255,255,255,0.7);
+  .casestudy-bignumber-range span { color: var(--green-mid); }
+  .casestudy-bignumber-label {
+    font-size: 17px; color: var(--slate-500); margin-bottom: 8px;
   }
-
-  .proof-stats {
-    max-width: 800px; margin: 0 auto 56px; position: relative;
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px;
-  }
-  .proof-stat { text-align: center; }
-  .proof-stat-number {
-    font-family: var(--font-mono); font-size: clamp(28px, 3vw, 36px); font-weight: 700;
-    color: var(--white); margin-bottom: 8px;
-  }
-  .proof-stat-label {
-    font-size: 14px; color: rgba(255,255,255,0.5); line-height: 1.5;
+  .casestudy-bignumber-note {
+    font-size: 12px; color: var(--slate-400); font-style: italic;
   }
 
+  /* Location cards */
+  .casestudy-locations {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
+    max-width: 900px; margin: 0 auto 48px; position: relative;
+  }
+  .casestudy-loc {
+    background: var(--white); border: 1px solid var(--slate-200);
+    border-radius: 20px; padding: 36px 32px;
+    transition: all 0.4s cubic-bezier(0.22,1,0.36,1);
+    position: relative; overflow: hidden;
+  }
+  .casestudy-loc::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--green-accent), var(--green-mid));
+  }
+  .casestudy-loc:hover {
+    transform: translateY(-4px); box-shadow: 0 16px 48px rgba(27,67,50,0.08);
+  }
+  .casestudy-loc-header {
+    display: flex; justify-content: space-between; align-items: baseline;
+    margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--slate-100);
+  }
+  .casestudy-loc-name {
+    font-size: 14px; font-weight: 700; letter-spacing: 1px;
+    text-transform: uppercase; color: var(--green-mid);
+  }
+  .casestudy-loc-rev {
+    font-size: 13px; color: var(--slate-400); font-weight: 500;
+  }
+  .casestudy-loc-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 12px 0; border-bottom: 1px solid var(--slate-50);
+  }
+  .casestudy-loc-row:last-child { border-bottom: none; }
+  .casestudy-loc-row-label { font-size: 14px; color: var(--slate-500); }
+  .casestudy-loc-row-value {
+    font-family: var(--font-mono); font-size: 16px; font-weight: 700;
+    color: var(--green-deep);
+  }
+  .casestudy-loc-total {
+    margin-top: 16px; padding-top: 16px; border-top: 2px solid var(--green-accent);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .casestudy-loc-total-label {
+    font-size: 14px; font-weight: 600; color: var(--green-deep);
+  }
+  .casestudy-loc-total-value {
+    font-family: var(--font-mono); font-size: 20px; font-weight: 700;
+    color: var(--green-deep);
+  }
+
+  /* Insight callout */
+  .casestudy-insight {
+    background: var(--green-deep); border-radius: 20px;
+    padding: 48px; text-align: center; max-width: 900px;
+    margin: 0 auto 48px; position: relative; overflow: hidden;
+  }
+  .casestudy-insight::before {
+    content: ''; position: absolute; top: -100px; right: -100px;
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(149,213,178,0.1), transparent 70%);
+  }
+  .casestudy-insight-stat {
+    font-family: var(--font-mono); font-size: clamp(28px, 3.5vw, 40px);
+    font-weight: 700; color: var(--white); letter-spacing: -1px;
+    margin-bottom: 16px; position: relative;
+  }
+  .casestudy-insight-stat span { color: var(--green-accent); }
+  .casestudy-insight p {
+    font-size: 17px; line-height: 1.7; color: rgba(255,255,255,0.6);
+    max-width: 560px; margin: 0 auto; position: relative;
+  }
+
+  /* Updated stats row */
+  .casestudy-stats {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+    max-width: 900px; margin: 0 auto 56px; text-align: center;
+    position: relative;
+  }
+  .casestudy-stat-number {
+    font-family: var(--font-mono); font-size: clamp(24px, 3vw, 32px);
+    font-weight: 700; color: var(--green-deep); letter-spacing: -1px;
+    margin-bottom: 4px;
+  }
+  .casestudy-stat-label { font-size: 13px; color: var(--slate-400); line-height: 1.4; }
+
+  /* Case study CTA */
+  .casestudy-cta {
+    text-align: center; max-width: 560px; margin: 0 auto 56px;
+    padding: 32px; background: var(--green-ghost);
+    border: 1px solid rgba(149,213,178,0.3); border-radius: 16px;
+    position: relative;
+  }
+  .casestudy-cta p {
+    font-size: 17px; font-weight: 600; color: var(--green-deep);
+    margin-bottom: 16px;
+  }
+  .casestudy-cta a {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--green-deep); color: var(--white);
+    padding: 14px 28px; border-radius: 12px; font-size: 15px; font-weight: 600;
+    text-decoration: none; transition: all 0.3s cubic-bezier(0.22,1,0.36,1);
+    box-shadow: 0 4px 16px rgba(27,67,50,0.25);
+  }
+  .casestudy-cta a:hover { background: var(--green-dark); transform: translateY(-2px); box-shadow: 0 8px 32px rgba(27,67,50,0.35); }
+  .casestudy-cta-note { font-size: 13px; color: var(--slate-400); margin-top: 12px; }
+
+  /* ── Proof Founder (now on white bg) ── */
   .proof-founder {
     max-width: 800px; margin: 0 auto 64px; position: relative;
     display: flex; align-items: center; gap: 28px;
-    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 20px; padding: 36px 32px; backdrop-filter: blur(8px);
+    background: var(--slate-50); border: 1px solid var(--slate-200);
+    border-radius: 20px; padding: 36px 32px;
   }
   .proof-founder img {
     width: 72px; height: 72px; border-radius: 50%; flex-shrink: 0;
     object-fit: cover; border: 2px solid rgba(149,213,178,0.3);
   }
   .proof-founder-info h4 {
-    font-size: 16px; font-weight: 700; color: var(--white); margin-bottom: 8px;
+    font-size: 16px; font-weight: 700; color: var(--green-deep); margin-bottom: 8px;
   }
   .proof-founder-info p {
-    font-size: 14px; line-height: 1.6; color: rgba(255,255,255,0.6); margin-bottom: 12px;
+    font-size: 14px; line-height: 1.6; color: var(--slate-500); margin-bottom: 12px;
   }
   .proof-founder-info a {
-    font-size: 14px; font-weight: 600; color: var(--green-accent);
+    font-size: 14px; font-weight: 600; color: var(--green-mid);
     text-decoration: none; transition: color 0.2s;
   }
-  .proof-founder-info a:hover { color: var(--white); }
+  .proof-founder-info a:hover { color: var(--green-deep); }
 
   /* ── POS Ticker (base) ── */
   .pos-ticker { padding: 48px 0; background: var(--white); overflow: hidden; }
@@ -223,14 +325,12 @@
   .pos-ticker-logo { height: 120px; padding: 0 48px; opacity: 0.45; filter: grayscale(100%); transition: opacity 0.3s, filter 0.3s; }
   .pos-ticker-logo:hover { opacity: 0.9; filter: grayscale(0%); }
 
-  /* POS Ticker dark bg variant */
-  .proof-ticker { padding: 48px 0 0; position: relative; }
-  .proof-ticker .pos-ticker-label { color: rgba(255,255,255,0.3); }
-  .proof-ticker .pos-ticker-logo {
-    filter: brightness(0) invert(1); opacity: 0.2;
-    height: 120px;
+  /* POS Ticker inside case study */
+  .casestudy-ticker { padding: 48px 0 0; position: relative; }
+  .casestudy-ticker .pos-ticker-logo {
+    opacity: 0.35; filter: grayscale(100%); height: 120px;
   }
-  .proof-ticker .pos-ticker-logo:hover { opacity: 0.6; filter: brightness(0) invert(1); }
+  .casestudy-ticker .pos-ticker-logo:hover { opacity: 0.9; filter: grayscale(0%); }
 
   /* ── Vendor Value ── */
   .vendor-section { background: var(--slate-50); }
@@ -278,7 +378,9 @@
     .hero { padding: 100px 24px 60px; }
     .hero-actions { flex-direction: column; align-items: center; }
     .pillar-block { grid-template-columns: 1fr; gap: 16px; }
-    .proof-stats { grid-template-columns: 1fr; }
+    .casestudy-locations { grid-template-columns: 1fr; max-width: 480px; }
+    .casestudy-stats { grid-template-columns: 1fr; gap: 16px; }
+    .casestudy-insight { padding: 36px 24px; }
     .proof-founder { flex-direction: column; text-align: center; }
     .proof-founder img { margin: 0 auto; }
     .cta-actions { flex-direction: column; align-items: center; }
@@ -286,13 +388,12 @@
     .pos-ticker-logo { height: 100px; padding: 0 36px; }
     .pos-ticker { padding: 36px 0; }
     .pos-ticker-track { animation-duration: 15s; }
-    .proof-ticker .pos-ticker-logo { height: 100px; }
+    .casestudy-ticker .pos-ticker-logo { height: 100px; }
   }
   @media (max-width: 600px) {
     .pos-ticker-logo { height: 80px; padding: 0 28px; }
     .pos-ticker-track { animation-duration: 12s; }
-    .proof-ticker .pos-ticker-logo { height: 48px; padding: 0 20px; }
-    .proof-stats { grid-template-columns: 1fr; }
+    .casestudy-ticker .pos-ticker-logo { height: 48px; padding: 0 20px; }
     .footer-top { grid-template-columns: 1fr; }
   }
 
@@ -388,7 +489,7 @@ document.head.appendChild(o)}initApollo();</script>
   </div>
   <div class="pillars-grid">
     <div class="pillar-block reveal">
-      <div class="pillar-number">$50,000+<span class="pillar-label">per year</span></div>
+      <div class="pillar-number">$200,000+<span class="pillar-label">/year identified</span></div>
       <div class="pillar-content">
         <h3>We recover vendor credits nobody's tracking</h3>
         <p>Returns, expired product, co-marketing spend — your vendors owe you money. We pull your POS and METRC data, create credit memos, work with your vendors, and apply credits to your settlements. You do nothing.</p>
@@ -430,43 +531,102 @@ document.head.appendChild(o)}initApollo();</script>
   </div>
 </section>
 
-<!-- SECTION 4: PROOF -->
-<section class="proof-section">
-  <div class="proof-header">
-    <div class="section-label reveal">In Production</div>
-    <h2 class="section-title reveal">Live in production. Saving real money.</h2>
+<!-- SECTION 4: CASE STUDY -->
+<section class="casestudy-section">
+  <div class="casestudy-header">
+    <div class="section-label reveal">Case Study</div>
+    <h2 class="section-title reveal">What we found at a two-location dispensary chain</h2>
+    <p class="section-desc reveal">We analyzed a full year of Metrc data across two Massachusetts locations doing $10.3M in combined revenue. Here's what was sitting on the table.</p>
   </div>
 
-  <div class="proof-case reveal">
-    <div class="proof-case-label">A two-shop dispensary chain in Massachusetts</div>
-    <p>ShelfSpace is live and processing consignment and wholesale payments for this two-shop dispensary chain in Massachusetts, and it's going very well. This chain is saving thousands per month with vendor credits, transitioning vendors to consignment to free up cash that's tied down in inventory, has reduced AP and operations headcount to save money, and their vendors love it because they get paid on time and have access to their own personalized portal to see what is happening with their inventory in real time, track payment history, and more.</p>
+  <!-- Big Number -->
+  <div class="casestudy-bignumber reveal">
+    <div class="casestudy-bignumber-range">$213K <span>–</span> $589K<span>/year</span></div>
+    <div class="casestudy-bignumber-label">in recoverable vendor credits identified</div>
+    <div class="casestudy-bignumber-note">Conservative floor to base scenario · Metrc package adjustment & sales data · FY2025</div>
   </div>
 
-  <div class="proof-stats">
-    <div class="proof-stat reveal">
-      <div class="proof-stat-number">$50,000+/yr</div>
-      <div class="proof-stat-label">in vendor credits recovered</div>
+  <!-- Location Cards -->
+  <div class="casestudy-locations">
+    <div class="casestudy-loc reveal">
+      <div class="casestudy-loc-header">
+        <span class="casestudy-loc-name">Location 1</span>
+        <span class="casestudy-loc-rev">$3.6M revenue</span>
+      </div>
+      <div class="casestudy-loc-row">
+        <span class="casestudy-loc-row-label">Waste & returns</span>
+        <span class="casestudy-loc-row-value">$36,253</span>
+      </div>
+      <div class="casestudy-loc-row">
+        <span class="casestudy-loc-row-label">Co-marketing credits</span>
+        <span class="casestudy-loc-row-value">$56K – $215K</span>
+      </div>
+      <div class="casestudy-loc-total">
+        <span class="casestudy-loc-total-label">Total recoverable</span>
+        <span class="casestudy-loc-total-value">$93K – $251K</span>
+      </div>
     </div>
-    <div class="proof-stat reveal reveal-delay-1">
-      <div class="proof-stat-number">40 vendors</div>
-      <div class="proof-stat-label">managed across 2 locations</div>
-    </div>
-    <div class="proof-stat reveal reveal-delay-2">
-      <div class="proof-stat-number">$45,000/yr</div>
-      <div class="proof-stat-label">saved on AP &amp; operations payroll</div>
+    <div class="casestudy-loc reveal reveal-delay-1">
+      <div class="casestudy-loc-header">
+        <span class="casestudy-loc-name">Location 2</span>
+        <span class="casestudy-loc-rev">$6.7M revenue</span>
+      </div>
+      <div class="casestudy-loc-row">
+        <span class="casestudy-loc-row-label">Waste & returns</span>
+        <span class="casestudy-loc-row-value">$46,156</span>
+      </div>
+      <div class="casestudy-loc-row">
+        <span class="casestudy-loc-row-label">Co-marketing credits</span>
+        <span class="casestudy-loc-row-value">$74K – $292K</span>
+      </div>
+      <div class="casestudy-loc-total">
+        <span class="casestudy-loc-total-label">Total recoverable</span>
+        <span class="casestudy-loc-total-value">$120K – $338K</span>
+      </div>
     </div>
   </div>
 
+  <!-- Insight Callout -->
+  <div class="casestudy-insight reveal">
+    <div class="casestudy-insight-stat">Co-marketing credits alone were <span>4–6%</span> of revenue.</div>
+    <p>Every product sold below 50% margin means the vendor is underfunding the discount. Nobody was tracking it. We did — down to every SKU, every sale, every penny.</p>
+  </div>
+
+  <!-- Stats Row -->
+  <div class="casestudy-stats">
+    <div class="casestudy-stat reveal">
+      <div class="casestudy-stat-number">$200K+/yr</div>
+      <div class="casestudy-stat-label">in recoverable credits identified</div>
+    </div>
+    <div class="casestudy-stat reveal reveal-delay-1">
+      <div class="casestudy-stat-number">$10.3M</div>
+      <div class="casestudy-stat-label">annual revenue analyzed</div>
+    </div>
+    <div class="casestudy-stat reveal reveal-delay-2">
+      <div class="casestudy-stat-number">40+ vendors</div>
+      <div class="casestudy-stat-label">managed across 2 locations</div>
+    </div>
+  </div>
+
+  <!-- Case Study CTA -->
+  <div class="casestudy-cta reveal">
+    <p>Want to know what's on the table at your stores?</p>
+    <a href="/contact">Get a Free Analysis <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+    <div class="casestudy-cta-note">We'll analyze your Metrc data and show you exactly what you're missing. No commitment.</div>
+  </div>
+
+  <!-- Founder -->
   <div class="proof-founder reveal">
     <img src="/chris-mitchem.jpg" alt="Chris Mitchem">
     <div class="proof-founder-info">
       <h4>Chris Mitchem, Founder &amp; CEO</h4>
-      <p>10 years operating dispensaries across Oregon and Massachusetts. Built ShelfSpace to solve the problems he lived with every day.</p>
+      <p>Built ShelfSpace after discovering hundreds of thousands in unrecovered vendor credits at his own dispensaries.</p>
       <a href="/about">Read his story &rarr;</a>
     </div>
   </div>
 
-  <div class="proof-ticker">
+  <!-- POS Ticker -->
+  <div class="casestudy-ticker">
     <div class="pos-ticker-label">Works with every major cannabis POS</div>
     <div style="overflow:hidden">
       <div class="pos-ticker-track">

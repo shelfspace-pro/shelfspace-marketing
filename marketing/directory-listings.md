@@ -12,7 +12,7 @@ ShelfSpace is a managed service that handles vendor finances for cannabis dispen
 
 Three services, one team:
 
-• Credit Recovery — We recover an average of $50,000/year per retailer in vendor credits from returns, expirations, and co-marketing spend that nobody's tracking.
+• Credit Recovery — We identified $200,000/year in vendor credits at a two-location chain from returns, expirations, and co-marketing spend that nobody was tracking.
 
 • Consignment — We run weekly settlements so retailers can carry vendor inventory without paying upfront. Free up capital, double your SKUs, carry zero inventory risk.
 
@@ -42,7 +42,7 @@ Managed AP, consignment, and credit recovery for cannabis dispensaries.
 **Full Description:**
 ShelfSpace is a managed service that handles vendor finances for cannabis dispensaries. The company runs accounts payable, consignment settlements, and vendor credit recovery — saving the average retailer over $95,000 per year and freeing up $250,000 in capital trapped in inventory.
 
-ShelfSpace recovers an average of $50,000 per year per retailer in vendor credits from returns, expired product, and co-marketing spend. The consignment service lets retailers carry vendor inventory with zero upfront cost — paying only when product sells at the register. The AP service pays every vendor on time, verifies invoices, handles vendor questions, and syncs to QuickBooks.
+ShelfSpace identified $200,000 per year in vendor credits at a two-location chain from returns, expired product, and co-marketing spend. The consignment service lets retailers carry vendor inventory with zero upfront cost — paying only when product sells at the register. The AP service pays every vendor on time, verifies invoices, handles vendor questions, and syncs to QuickBooks.
 
 Founded by Chris Mitchem, a 10-year cannabis dispensary operator who scaled a multi-state retail operation across Oregon and Massachusetts. ShelfSpace was built to solve the vendor payment problems he lived with every day.
 

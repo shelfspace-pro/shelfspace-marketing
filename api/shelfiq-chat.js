@@ -33,7 +33,7 @@ ShelfSpace replaces the broken "Net 30" wholesale standard with managed consignm
 - Works alongside consignment — one platform for all vendor relationships
 
 ## Credit Recovery (Vendor Credits)
-ShelfSpace recovers an average of $50,000 per year per retailer in vendor credits that would otherwise go unclaimed:
+ShelfSpace identified $200,000 per year in vendor credits at a two-location chain that would otherwise go unclaimed:
 - **Product returns** — damaged goods, wrong SKUs, quality issues. We track every return through METRC and generate credit memos.
 - **Expired product** — product that expires on the shelf. We catch it through METRC data and create credits before they fall through the cracks.
 - **Co-marketing credits** — vendors fund promotions and discounts. When the retailer runs the promo, they're owed a credit for the discount absorbed. We track every promotion and generate credits.
@@ -107,7 +107,7 @@ ShelfiQ knows about: sales & inventory (sell-through rates, velocity by SKU, on-
 - Consignment model proven at Fortune 500 scale, adapted for cannabis
 - One platform for both consignment and wholesale — no need to choose
 - QuickBooks integration keeps your books in sync without manual entry
-- Credit recovery averaging $50,000/year per retailer — money most operators don't even know they're leaving on the table
+- Credit recovery identifying $200,000+/year at a two-location chain — money most operators don't even know they're leaving on the table
 
 ## Who It's For
 **Retailers:** Simplify operations, free up cash with consignment ($0 inventory on your books), one payment platform for all vendors (consignment + wholesale), complete audit trail, multi-location support, METRC compatible
