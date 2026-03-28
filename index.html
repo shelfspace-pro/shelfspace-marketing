@@ -86,6 +86,12 @@
   .hero-founder-credit strong { color: var(--slate-600); font-weight: 600; }
   .hero-founder-credit a { color: var(--green-mid); text-decoration: none; font-weight: 500; transition: color 0.2s; }
   .hero-founder-credit a:hover { color: var(--green-deep); }
+  .hero-trust {
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+    margin-top: 24px; animation: fadeUp 0.8s cubic-bezier(0.22,1,0.36,1) 0.8s both;
+  }
+  .hero-trust img { height: 22px; opacity: 0.5; }
+  .hero-trust span { font-size: 12px; font-weight: 600; color: var(--slate-400); letter-spacing: 0.3px; }
   .nav-progress {
     position: absolute; bottom: 0; left: 0; height: 2px; width: 100%;
     background: linear-gradient(90deg, var(--green-accent), var(--green-mid));
@@ -371,6 +377,7 @@
   }
 
   /* ── Footer 5-col ── */
+  .footer-metrc { display: flex; align-items: center; gap: 8px; justify-content: center; margin-top: 12px; }
   .footer-top { grid-template-columns: 2fr 1fr 1fr 1fr 1fr; }
 
   /* ── Responsive ── */
@@ -400,13 +407,13 @@
   /* ── Reduced Motion ── */
   @media (prefers-reduced-motion: reduce) {
     .reveal, .pillar-block.reveal,
-    .hero h1, .hero-sub, .hero-actions, .hero-founder-credit,
+    .hero h1, .hero-sub, .hero-actions, .hero-founder-credit, .hero-trust,
     .hero-bg-gradient, .hero-bg-gradient-2 { animation: none; opacity: 1; transform: none; transition: none; }
     .nav-progress { display: none; }
     .pos-ticker-track { animation: none; }
   }
 </style>
-<noscript><style>.reveal,.pillar-block.reveal,.hero h1,.hero-sub,.hero-actions,.hero-founder-credit{opacity:1;transform:none;transition:none;animation:none;}</style></noscript>
+<noscript><style>.reveal,.pillar-block.reveal,.hero h1,.hero-sub,.hero-actions,.hero-founder-credit,.hero-trust{opacity:1;transform:none;transition:none;animation:none;}</style></noscript>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -480,6 +487,10 @@ document.head.appendChild(o)}initApollo();</script>
       <a href="/how-it-works" class="btn-secondary">See How It Works</a>
     </div>
     <p class="hero-founder-credit">Built by <a href="/about">Chris Mitchem</a> — 10 years operating dispensaries in Oregon and Massachusetts. Not a tech company. An operator who got tired of the broken system.</p>
+    <div class="hero-trust">
+      <img src="/metrc-logo.png" alt="METRC">
+      <span>Certified METRC Third-Party Vendor</span>
+    </div>
   </div>
   <div class="nav-progress"></div>
 </section>
@@ -737,6 +748,7 @@ document.head.appendChild(o)}initApollo();</script>
   </div>
   <div class="footer-bottom">
     <p>&copy; 2026 ShelfSpace Technologies Inc.</p>
+    <div class="footer-metrc"><img src="/metrc-logo.png" alt="METRC" style="height:18px;opacity:0.4;filter:brightness(0) invert(1);"><span style="font-size:11px;color:rgba(255,255,255,0.35);">Certified METRC Third-Party Vendor</span></div>
     <div class="footer-bottom-links">
       <a href="/privacy">Privacy</a>
       <a href="/terms">Terms</a>
