@@ -86,7 +86,7 @@ ShelfiQ knows about: sales & inventory (sell-through rates, velocity by SKU, on-
 - The 60-day pilot is completely free — $0
 - No setup fees, no commitments, no credit card required
 - ShelfSpace is free for both retailers AND vendors during the 60-day pilot
-- After the 60-day pilot, pricing is usage-based — per transaction, not a flat monthly fee. No subscriptions, no minimums. Vendors never pay.
+- After the 60-day pilot, pricing is based on what we recover and manage for you. Most operators pay less than 15% of the credit value we find — and that includes running their entire consignment and AP operation. No contracts, cancel any time. Vendors never pay.
 - ShelfiQ AI is included free with every account
 
 ## Onboarding & Setup
