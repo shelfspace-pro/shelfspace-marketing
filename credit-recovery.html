@@ -4,19 +4,19 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Cannabis Vendor Credit Recovery — ShelfSpace</title>
-<meta name="description" content="ShelfSpace identifies $200,000+ per year in cannabis vendor credits most dispensaries don't track — returns, expirations, co-marketing. Done for you. Free analysis.">
+<meta name="description" content="Your dispensary is losing $200,000+ a year in vendor credits nobody's tracking. We recover it — no risk, no fee if we don't deliver. Free analysis.">
 <link rel="canonical" href="https://shelfspace.pro/credit-recovery">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://shelfspace.pro/credit-recovery">
 <meta property="og:title" content="Cannabis Vendor Credit Recovery — ShelfSpace">
-<meta property="og:description" content="ShelfSpace identifies $200,000+ per year in cannabis vendor credits most dispensaries don't track — returns, expirations, co-marketing. Done for you. Free analysis.">
+<meta property="og:description" content="Your dispensary is losing $200,000+ a year in vendor credits nobody's tracking. We recover it — no risk, no fee if we don't deliver. Free analysis.">
 <meta property="og:image" content="https://shelfspace.pro/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:type" content="image/png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Cannabis Vendor Credit Recovery — ShelfSpace">
-<meta name="twitter:description" content="ShelfSpace identifies $200,000+ per year in cannabis vendor credits most dispensaries don't track — returns, expirations, co-marketing. Done for you. Free analysis.">
+<meta name="twitter:description" content="Your dispensary is losing $200,000+ a year in vendor credits nobody's tracking. We recover it — no risk, no fee if we don't deliver. Free analysis.">
 <meta name="twitter:image" content="https://shelfspace.pro/og-image.png">
 <meta name="apple-mobile-web-app-title" content="ShelfSpace">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -54,31 +54,11 @@
   .reveal-delay-2 { transition-delay: 0.4s; }
   .reveal-delay-3 { transition-delay: 0.6s; }
 
-  /* ─── PROBLEM CARDS ─── */
-  .problem-section { background: var(--white); }
-  .problem-header { text-align: center; max-width: 640px; margin: 0 auto 64px; }
-  .problem-header .section-desc { margin: 0 auto; }
-  .problem-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
-  .problem-card {
-    background: var(--white); border: 1px solid var(--slate-200);
-    border-radius: 16px; padding: 40px 32px;
-    transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-    position: relative; overflow: hidden;
-  }
-  .problem-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--green-accent), var(--green-mid)); opacity: 0; transition: opacity 0.4s; }
-  .problem-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(27, 67, 50, 0.1); border-color: var(--green-accent); }
-  .problem-card:hover::before { opacity: 1; }
-  .problem-icon { width: 48px; height: 48px; background: var(--green-ghost); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 24px; }
-  .problem-icon svg { width: 24px; height: 24px; color: var(--green-deep); }
-  .problem-card h3 { font-size: 20px; font-weight: 700; color: var(--green-deep); margin-bottom: 12px; letter-spacing: -0.3px; }
-  .problem-card p { font-size: 15px; line-height: 1.65; color: var(--slate-500); }
-  .problem-card.reveal { transform: translateY(40px) scale(0.97); }
-  .problem-card.reveal.is-visible { transform: translateY(0) scale(1); }
-
   /* ─── CALCULATOR ─── */
   .calc-section { background: var(--slate-50); }
   .calc-header { text-align: center; max-width: 600px; margin: 0 auto 64px; }
   .calc-header .section-desc { margin: 0 auto; }
+  .calc-context { text-align: center; max-width: 540px; margin: 0 auto 40px; font-size: 16px; line-height: 1.7; color: var(--slate-500); }
   .calc-container { max-width: 640px; margin: 0 auto; }
   .calc-slider-wrapper { margin-bottom: 40px; }
   .calc-revenue-display { text-align: center; font-family: var(--font-mono); font-size: clamp(32px, 4vw, 48px); font-weight: 700; color: var(--green-deep); letter-spacing: -1px; margin-bottom: 16px; }
@@ -94,40 +74,35 @@
   .calc-total { background: var(--green-deep); }
   .calc-total .calc-row-label { color: rgba(255,255,255,0.7); font-weight: 600; }
   .calc-total .calc-row-value { color: var(--white); font-size: 24px; }
+  .calc-monthly { background: var(--white); border-top: 2px solid var(--green-accent); }
+  .calc-monthly .calc-row-label { font-weight: 600; color: var(--green-deep); font-style: italic; }
+  .calc-monthly .calc-row-value { color: var(--green-deep); font-size: 22px; }
   .calc-proof { text-align: center; margin-top: 32px; font-size: 14px; color: var(--slate-500); font-style: italic; }
 
-  /* ─── HOW IT WORKS (Process Steps) ─── */
-  .process-section { background: var(--white); padding-top: 60px; }
-  .process-header { text-align: center; max-width: 600px; margin: 0 auto 56px; }
-  .process-header .section-desc { margin: 0 auto; }
-  .process-container { max-width: 880px; margin: 0 auto; }
-  .process-step {
-    display: grid; grid-template-columns: 80px 1fr; gap: 40px;
-    padding: 56px 0; border-bottom: 1px solid var(--slate-100);
-    position: relative;
+  /* ─── GUARANTEE ─── */
+  .guarantee-section { background: var(--white); padding: 0 48px 80px; }
+  .guarantee-card {
+    max-width: 640px; margin: 0 auto; text-align: center;
+    padding: 48px 40px; background: var(--green-ghost);
+    border: 2px solid rgba(149,213,178,0.4); border-radius: 20px;
   }
-  .process-step:last-child { border-bottom: none; }
-  .process-step-number {
-    width: 56px; height: 56px;
-    background: var(--green-ghost); border: 1px solid rgba(149,213,178,0.3);
-    border-radius: 14px;
-    display: flex; align-items: center; justify-content: center;
-    font-family: var(--font-mono); font-size: 16px; font-weight: 700; color: var(--green-deep);
-    position: sticky; top: 100px;
-  }
-  .process-step-content h3 {
-    font-size: 24px; font-weight: 700; color: var(--green-deep);
-    letter-spacing: -0.5px; margin-bottom: 8px;
-  }
-  .process-step-content .step-tag {
-    font-size: 11px; font-weight: 700; letter-spacing: 2px;
-    text-transform: uppercase; color: var(--green-mid); margin-bottom: 16px;
-    display: block;
-  }
-  .process-step-content p {
-    font-size: 16px; line-height: 1.75; color: var(--slate-500); margin-bottom: 16px;
-  }
-  .process-step-content p:last-child { margin-bottom: 0; }
+  .guarantee-icon { margin-bottom: 20px; }
+  .guarantee-icon svg { width: 48px; height: 48px; color: var(--green-deep); }
+  .guarantee-card h2 { font-size: 28px; font-weight: 700; color: var(--green-deep); margin-bottom: 12px; letter-spacing: -0.5px; }
+  .guarantee-card > p { font-size: 17px; line-height: 1.7; color: var(--slate-600); margin-bottom: 20px; }
+  .guarantee-details { display: flex; justify-content: center; gap: 12px; font-size: 14px; font-weight: 600; color: var(--green-mid); }
+
+  /* ─── CASE STUDY ─── */
+  .cr-casestudy { background: var(--green-deep); padding: 80px 48px; position: relative; overflow: hidden; }
+  .cr-casestudy::before { content: ''; position: absolute; top: -200px; right: -200px; width: 500px; height: 500px; background: radial-gradient(circle, rgba(149,213,178,0.08), transparent 70%); }
+  .cr-casestudy-header { text-align: center; max-width: 600px; margin: 0 auto 48px; position: relative; }
+  .cr-casestudy-header .section-label { color: var(--green-accent); }
+  .cr-casestudy-header .section-title { color: var(--white); }
+  .cr-casestudy-header .section-desc { color: rgba(255,255,255,0.6); margin: 0 auto; }
+  .cr-casestudy-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; max-width: 800px; margin: 0 auto; text-align: center; position: relative; }
+  .cr-stat-number { font-family: var(--font-mono); font-size: clamp(24px, 3vw, 32px); font-weight: 700; color: var(--white); letter-spacing: -1px; margin-bottom: 8px; }
+  .cr-stat-label { font-size: 13px; color: rgba(255,255,255,0.5); line-height: 1.4; }
+  @media (max-width: 900px) { .cr-casestudy-stats { grid-template-columns: 1fr; gap: 24px; } .cr-casestudy { padding: 60px 24px; } }
 
   /* ─── MANAGED SERVICE CALLOUT (Dark section) ─── */
   .managed-callout {
@@ -187,6 +162,30 @@
   /* ─── CTA PARALLAX ─── */
   .cta-section::before { transform: translate(-50%,-50%) translateY(var(--parallax-y, 0)); will-change: transform; }
 
+  /* ─── STICKY CTA BAR ─── */
+  .sticky-cta {
+    position: fixed; bottom: 0; left: 0; right: 0; z-index: 999;
+    background: var(--green-deep); padding: 12px 24px;
+    transform: translateY(100%); transition: transform 0.3s ease;
+  }
+  .sticky-cta.visible { transform: translateY(0); }
+  .sticky-cta-inner {
+    max-width: 800px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  }
+  .sticky-cta-inner span { color: rgba(255,255,255,0.8); font-size: 15px; font-weight: 500; }
+  .sticky-cta-inner a {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 10px 24px; background: var(--white); color: var(--green-deep);
+    border-radius: 10px; font-size: 14px; font-weight: 600;
+    text-decoration: none; white-space: nowrap; transition: all 0.2s;
+  }
+  .sticky-cta-inner a:hover { background: var(--slate-50); }
+  @media (max-width: 600px) {
+    .sticky-cta-inner { flex-direction: column; text-align: center; gap: 8px; }
+    .sticky-cta-inner span { font-size: 13px; }
+  }
+
   /* ─── FOOTER 5-COL ─── */
   .footer-top { grid-template-columns: 2fr 1fr 1fr 1fr 1fr; }
   @media (max-width: 900px) { .footer-top { grid-template-columns: 1fr 1fr; } }
@@ -194,16 +193,14 @@
 
   /* ─── RESPONSIVE ─── */
   @media (max-width: 900px) {
-    .problem-grid { grid-template-columns: 1fr; max-width: 480px; }
-    .process-step { grid-template-columns: 1fr; gap: 16px; }
-    .process-step-number { position: static; }
     .managed-callout { padding: 60px 24px; }
     .faq-section { padding: 60px 24px; }
+    .guarantee-section { padding: 0 24px 60px; }
   }
 
   /* ─── REDUCED MOTION ─── */
   @media (prefers-reduced-motion: reduce) {
-    .reveal, .problem-card.reveal {
+    .reveal {
       opacity: 1; transform: none; transition: none;
     }
     .page-hero .section-label,
@@ -255,7 +252,31 @@ document.head.appendChild(o)}initApollo();</script>
       "name": "What does credit recovery cost?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Credit recovery is included in the free 60-day pilot. After the pilot, pricing is based on what we recover for you. Most operators pay a fraction of the savings. Visit our pricing page for details."
+        "text": "We only get paid when you get paid. If we don't recover credits, you owe nothing. Pricing is based on what we recover for you — most operators pay a fraction of the savings. Visit our pricing page for details."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How quickly will I see results?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Most operators see their first recovered credits within two weeks of data analysis. Vendor approvals typically follow within 30 days."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What if you don't recover anything?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "You pay nothing. We only get paid when you get paid — that's the guarantee."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How is this different from a collection agency?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We're not collecting debts. We're recovering credits you're already owed under existing vendor agreements — returns, expirations, and co-marketing adjustments. These are standard business credits that vendors expect. We handle them professionally, and vendors actually prefer the structure because it's transparent and fair."
       }
     }
   ]
@@ -267,7 +288,7 @@ document.head.appendChild(o)}initApollo();</script>
   "@type": "Service",
   "name": "Cannabis Vendor Credit Recovery",
   "provider": { "@type": "Organization", "name": "ShelfSpace", "url": "https://shelfspace.pro" },
-  "description": "ShelfSpace identifies $200,000+ per year in cannabis vendor credits most dispensaries don't track — returns, expirations, co-marketing spend. Done for you.",
+  "description": "Your dispensary is losing $200,000+ a year in vendor credits nobody's tracking. We recover it — no risk, no fee if we don't deliver.",
   "areaServed": "US",
   "url": "https://shelfspace.pro/credit-recovery"
 }
@@ -299,55 +320,14 @@ document.head.appendChild(o)}initApollo();</script>
   <div class="hero-bg-gradient-2"></div>
   <div class="hero-grid-lines"></div>
   <div class="section-label">Credit Recovery</div>
-  <h1 class="section-title">What would you do with an extra $200,000 per year?</h1>
-  <p class="section-desc">Our latest analysis found over $200,000 per year in recoverable vendor credits at a single two-location dispensary chain — and that's the conservative estimate.</p>
+  <h1 class="section-title">Your dispensary is losing $200,000 a year.</h1>
 </div>
-
-<!-- THE MONEY YOU'RE ALREADY OWED -->
-<section class="problem-section">
-  <div class="problem-header">
-    <div class="section-label reveal">The Problem</div>
-    <h2 class="section-title reveal">The money you're already owed</h2>
-    <p class="section-desc reveal">Right now, most of these credits expire unclaimed. Your team doesn't have time to track every return, pull METRC data, create memos, and chase vendors for approval. So the money just... disappears.</p>
-  </div>
-  <div class="problem-grid">
-    <div class="problem-card reveal">
-      <div class="problem-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><line x1="9" y1="10" x2="9" y2="10"/><line x1="15" y1="10" x2="15" y2="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/></svg>
-      </div>
-      <h3>Co-Marketing Credits</h3>
-      <p>Every time a product sells below 50% gross margin, your vendor should be sharing the hit. Discounts, promotions, price drops — when you absorb the markdown, you're owed a co-marketing credit. This is the biggest category: 4–6% of revenue at a typical dispensary, and almost nobody tracks it.</p>
-    </div>
-    <div class="problem-card reveal reveal-delay-1">
-      <div class="problem-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
-      </div>
-      <h3>Product Returns</h3>
-      <p>Damaged goods, wrong SKUs, quality issues — when product goes back to the vendor, you're owed a credit. Without a system to track it, most returns never get credited.</p>
-    </div>
-    <div class="problem-card reveal reveal-delay-2">
-      <div class="problem-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-      </div>
-      <h3>Expired Product</h3>
-      <p>Product that expires on your shelf is the vendor's problem under consignment — and often under wholesale agreements too. ShelfSpace tracks every expiration through METRC and generates credits before they fall through the cracks.</p>
-    </div>
-  </div>
-</section>
-
-<!-- BELOW-KEYSTONE INSIGHT -->
-<section style="background:var(--green-deep);padding:64px 48px;text-align:center;position:relative;overflow:hidden;">
-  <div style="position:absolute;top:-100px;right:-100px;width:300px;height:300px;background:radial-gradient(circle,rgba(149,213,178,0.1),transparent 70%);"></div>
-  <div style="max-width:640px;margin:0 auto;position:relative;">
-    <div style="font-family:var(--font-mono);font-size:clamp(28px,3.5vw,40px);font-weight:700;color:var(--white);letter-spacing:-1px;margin-bottom:16px;">4–6% of your revenue is owed back to you.</div>
-    <p style="font-size:17px;line-height:1.7;color:rgba(255,255,255,0.6);">Every product sold below 50% gross margin means the vendor's pricing problem is coming out of your pocket. ShelfSpace tracks every sale against wholesale cost and generates co-marketing credits for every dollar below keystone. At a $3M store, that's $90,000–$180,000 per year.</p>
-  </div>
-</section>
 
 <!-- CALCULATOR -->
 <section class="calc-section" id="calculator">
+  <p class="calc-context">Cannabis dispensaries leave billions on the table in unclaimed vendor credits every year. Most don't have the systems or staff to track them.</p>
   <div class="calc-header">
-    <div class="section-label reveal">See Your Savings</div>
+    <div class="section-label reveal">See What You're Losing</div>
     <h2 class="section-title reveal">How much are you leaving on the table?</h2>
   </div>
   <div class="calc-container reveal">
@@ -370,12 +350,16 @@ document.head.appendChild(o)}initApollo();</script>
         <span class="calc-row-value" id="calc-expired">$15,000</span>
       </div>
       <div class="calc-row">
-        <span class="calc-row-label">Co-marketing credits (3%)</span>
+        <span class="calc-row-label">Vendor-funded discount credits (3%)</span>
         <span class="calc-row-value" id="calc-comark">$90,000</span>
       </div>
       <div class="calc-row calc-total">
         <span class="calc-row-label">Total credits recovered by ShelfSpace per year</span>
         <span class="calc-row-value" id="calc-total">$127,500</span>
+      </div>
+      <div class="calc-row calc-monthly">
+        <span class="calc-row-label">That's every month walking out your door</span>
+        <span class="calc-row-value" id="calc-monthly">$10,625</span>
       </div>
     </div>
     <p class="calc-proof">Our latest analysis identified $200,000+ per year in recoverable credits at a two-location dispensary chain in Massachusetts.</p>
@@ -383,45 +367,53 @@ document.head.appendChild(o)}initApollo();</script>
   </div>
 </section>
 
-<!-- HOW SHELFSPACE RECOVERS CREDITS -->
-<section class="process-section">
-  <div class="process-header">
-    <div class="section-label reveal">How It Works</div>
-    <h2 class="section-title reveal">How ShelfSpace recovers your credits</h2>
+<!-- ZERO RISK GUARANTEE -->
+<section class="guarantee-section">
+  <div class="guarantee-card reveal">
+    <div class="guarantee-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+    </div>
+    <h2>Zero Risk Guarantee</h2>
+    <p>We only get paid when you get paid. If we don't recover credits, you owe nothing. No fees. No commitment. No catch.</p>
+    <div class="guarantee-details">
+      <span>Free analysis</span>
+      <span>&middot;</span>
+      <span>Results in 2 weeks</span>
+      <span>&middot;</span>
+      <span>No commitment</span>
+    </div>
   </div>
-  <div class="process-container">
-    <div class="process-step reveal">
-      <div class="process-step-number">01</div>
-      <div class="process-step-content">
-        <span class="step-tag">We Handle This</span>
-        <h3>We pull your data</h3>
-        <p>We connect to your POS and METRC to pull sales data, return records, expiration dates, and promotional discount spend. You don't export anything — we pull it directly.</p>
-      </div>
+</section>
+
+<!-- CASE STUDY -->
+<section class="cr-casestudy">
+  <div class="cr-casestudy-header">
+    <div class="section-label reveal">Real Results</div>
+    <h2 class="section-title reveal">What we found at a two-location chain</h2>
+    <p class="section-desc reveal">We analyzed a full year of compliance data across two Massachusetts dispensaries. Credits identified within 14 days of data analysis.</p>
+  </div>
+  <div class="cr-casestudy-stats">
+    <div class="cr-stat reveal">
+      <div class="cr-stat-number">$195K – $547K</div>
+      <div class="cr-stat-label">per year in recoverable credits</div>
     </div>
-    <div class="process-step reveal">
-      <div class="process-step-number">02</div>
-      <div class="process-step-content">
-        <span class="step-tag">We Handle This</span>
-        <h3>We create the credit memos</h3>
-        <p>For every return, expiration, and co-marketing promotion, we generate a detailed credit memo — line by line, vendor by vendor. Nothing slips through the cracks.</p>
-      </div>
+    <div class="cr-stat reveal reveal-delay-1">
+      <div class="cr-stat-number">3–6%</div>
+      <div class="cr-stat-label">of revenue in co-marketing credits alone</div>
     </div>
-    <div class="process-step reveal">
-      <div class="process-step-number">03</div>
-      <div class="process-step-content">
-        <span class="step-tag">We Handle This</span>
-        <h3>We work with your vendors</h3>
-        <p>We send each credit memo to the vendor for approval and handle the entire back-and-forth. Your vendors email us, not you. Disputes, questions, clarifications — all handled by our team.</p>
-      </div>
+    <div class="cr-stat reveal reveal-delay-2">
+      <div class="cr-stat-number">14 days</div>
+      <div class="cr-stat-label">from data pull to first credits identified</div>
     </div>
-    <div class="process-step reveal">
-      <div class="process-step-number">04</div>
-      <div class="process-step-content">
-        <span class="step-tag">We Handle This</span>
-        <h3>We apply credits to your settlements</h3>
-        <p>Approved credits get applied to your next settlement or offset against open invoices. Less cash out the door. Every credit is tracked with a full audit trail.</p>
-      </div>
-    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS (one-liner) -->
+<section style="background:var(--white);padding:60px 48px;text-align:center;">
+  <div style="max-width:640px;margin:0 auto;">
+    <div class="section-label reveal">How It Works</div>
+    <p class="reveal" style="font-size:18px;line-height:1.7;color:var(--slate-600);">We handle everything — data pull, credit memos, vendor communication, approvals, and settlement. <strong style="color:var(--green-deep);">You just approve and keep the money.</strong></p>
+    <a href="/how-it-works" class="reveal" style="display:inline-flex;align-items:center;gap:6px;margin-top:16px;font-size:15px;font-weight:600;color:var(--green-mid);text-decoration:none;">See the full process <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a>
   </div>
 </section>
 
@@ -455,7 +447,19 @@ document.head.appendChild(o)}initApollo();</script>
     </details>
     <details>
       <summary>What does credit recovery cost?</summary>
-      <p>Credit recovery is included in the free 60-day pilot. After the pilot, pricing is based on what we recover for you — most operators pay a fraction of the savings. <a href="/pricing" style="color:var(--green-mid);font-weight:600;text-decoration:none;">Visit our pricing page</a> for details.</p>
+      <p>We only get paid when you get paid. If we don't recover credits, you owe nothing. Pricing is based on what we recover for you — most operators pay a fraction of the savings. <a href="/pricing" style="color:var(--green-mid);font-weight:600;text-decoration:none;">Visit our pricing page</a> for details.</p>
+    </details>
+    <details>
+      <summary>How quickly will I see results?</summary>
+      <p>Most operators see their first recovered credits within two weeks of data analysis. Vendor approvals typically follow within 30 days.</p>
+    </details>
+    <details>
+      <summary>What if you don't recover anything?</summary>
+      <p>You pay nothing. We only get paid when you get paid — that's the guarantee.</p>
+    </details>
+    <details>
+      <summary>How is this different from a collection agency?</summary>
+      <p>We're not collecting debts. We're recovering credits you're already owed under existing vendor agreements — returns, expirations, and co-marketing adjustments. These are standard business credits that vendors expect. We handle them professionally, and vendors actually prefer the structure because it's transparent and fair.</p>
     </details>
   </div>
 </section>
@@ -464,17 +468,29 @@ document.head.appendChild(o)}initApollo();</script>
 <section class="cta-section">
   <div class="cta-content">
     <div class="section-label reveal">Get Started</div>
-    <h2 class="section-title reveal">Start recovering what you're owed.</h2>
-    <p class="section-desc reveal">Free 60-day pilot. We set everything up, connect your systems, and start recovering credits from day one.</p>
+    <h2 class="section-title reveal">Find out how much you're losing — free.</h2>
+    <p class="section-desc reveal">We'll analyze your data and show you exactly what's on the table. Takes 48 hours. No commitment. You only pay if we recover.</p>
     <div class="cta-actions reveal">
       <a href="/contact" class="btn-primary">
-        Get a Free Analysis
+        Get My Free Analysis
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
       </a>
       <a href="/contact" class="btn-secondary">Talk to Chris</a>
     </div>
+    <div class="cta-founder reveal" style="display:flex;align-items:center;gap:16px;justify-content:center;margin-top:32px;">
+      <img src="/chris-mitchem.jpg" alt="Chris Mitchem" style="width:48px;height:48px;border-radius:50%;object-fit:cover;">
+      <span style="font-size:14px;color:var(--slate-500);">Chris Mitchem, Founder — 10 years operating dispensaries</span>
+    </div>
   </div>
 </section>
+
+<!-- STICKY CTA BAR -->
+<div class="sticky-cta" id="sticky-cta">
+  <div class="sticky-cta-inner">
+    <span>Losing money on vendor credits?</span>
+    <a href="/contact">Get My Free Analysis <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a>
+  </div>
+</div>
 
 <!-- FOOTER -->
 <footer>
@@ -574,6 +590,7 @@ document.head.appendChild(o)}initApollo();</script>
   var expiredVal = document.getElementById('calc-expired');
   var comarkVal = document.getElementById('calc-comark');
   var totalVal = document.getElementById('calc-total');
+  var monthlyVal = document.getElementById('calc-monthly');
 
   function formatCurrency(n) {
     return '$' + Math.round(n).toLocaleString();
@@ -586,14 +603,26 @@ document.head.appendChild(o)}initApollo();</script>
     var expired = rev * 0.005;
     var comark = rev * 0.03;
     var total = returns + expired + comark;
+    var monthly = total / 12;
     returnVal.textContent = formatCurrency(returns);
     expiredVal.textContent = formatCurrency(expired);
     comarkVal.textContent = formatCurrency(comark);
     totalVal.textContent = formatCurrency(total);
+    monthlyVal.textContent = formatCurrency(monthly);
   }
 
   slider.addEventListener('input', updateCalc);
   updateCalc();
+
+  /* ── Sticky CTA bar ── */
+  var stickyCta = document.getElementById('sticky-cta');
+  var calcSection = document.getElementById('calculator');
+  if (stickyCta && calcSection) {
+    window.addEventListener('scroll', function() {
+      var calcBottom = calcSection.getBoundingClientRect().bottom;
+      stickyCta.classList.toggle('visible', calcBottom < 0);
+    }, { passive: true });
+  }
 
   /* ── Close mobile nav on outside click ── */
   document.addEventListener('click', function() {
