@@ -4,19 +4,19 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ShelfSpace — The AP Team for Cannabis Dispensaries</title>
-<meta name="description" content="Your dispensary is losing $200,000 a year in vendor credits. Add inventory waste and AP errors, and it's half a million. One team finds it all. Free analysis.">
+<meta name="description" content="We found half a million dollars at a two-store dispensary. Trapped inventory, overpaid invoices, untracked credits. One team found it all. Free analysis.">
 <link rel="canonical" href="https://shelfspace.pro/">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://shelfspace.pro/">
 <meta property="og:title" content="ShelfSpace — The AP Team for Cannabis Dispensaries">
-<meta property="og:description" content="Your dispensary is losing $200,000 a year in vendor credits. Add inventory waste and AP errors, and it's half a million. One team finds it all. Free analysis.">
+<meta property="og:description" content="We found half a million dollars at a two-store dispensary. Trapped inventory, overpaid invoices, untracked credits. One team found it all. Free analysis.">
 <meta property="og:image" content="https://shelfspace.pro/og-image.png?v=3">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:type" content="image/png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="ShelfSpace — The AP Team for Cannabis Dispensaries">
-<meta name="twitter:description" content="Your dispensary is losing $200,000 a year in vendor credits. Add inventory waste and AP errors, and it's half a million. One team finds it all. Free analysis.">
+<meta name="twitter:description" content="We found half a million dollars at a two-store dispensary. Trapped inventory, overpaid invoices, untracked credits. One team found it all. Free analysis.">
 <meta name="twitter:image" content="https://shelfspace.pro/og-image.png?v=3">
 <meta name="apple-mobile-web-app-title" content="ShelfSpace">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -26,228 +26,127 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 <style>
-  /* ── Keyframes ── */
-  @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-12px); } }
-  @keyframes ticker-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(24px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
+@keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-12px); } }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
 
-  /* ── Reveal System ── */
-  .reveal {
-    opacity: 0; transform: translateY(40px);
-    transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
-                transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
-  }
-  .reveal.is-visible { opacity: 1; transform: translateY(0); }
-  .reveal-delay-1 { transition-delay: 0.2s; }
-  .reveal-delay-2 { transition-delay: 0.4s; }
-  .reveal-delay-3 { transition-delay: 0.6s; }
+/* Reveals */
+.reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1); }
+.reveal.is-visible { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: 0.15s; }
+.reveal-delay-2 { transition-delay: 0.3s; }
+.reveal-delay-3 { transition-delay: 0.45s; }
+.reveal-delay-4 { transition-delay: 0.6s; }
 
-  /* ── Hero ── */
-  .hero {
-    position: relative; min-height: 100vh;
-    display: flex; align-items: center; justify-content: center;
-    padding: 120px 48px 80px; overflow: hidden; background: var(--white);
-  }
-  .hero-bg { position: absolute; top: 0; left: 0; right: 0; bottom: 0; overflow: hidden; }
-  .hero-bg-gradient { position: absolute; top: -30%; right: -20%; width: 900px; height: 900px; background: radial-gradient(circle, rgba(149,213,178,0.2) 0%, rgba(149,213,178,0) 70%); animation: float 8s ease-in-out infinite; }
-  .hero-bg-gradient-2 { position: absolute; bottom: -20%; left: -15%; width: 700px; height: 700px; background: radial-gradient(circle, rgba(27,67,50,0.06) 0%, rgba(27,67,50,0) 70%); animation: float 10s ease-in-out infinite; animation-delay: -3s; }
-  .hero-grid-lines { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 1200px; height: 100%; opacity: 0.035; background-image: linear-gradient(var(--green-deep) 1px, transparent 1px), linear-gradient(90deg, var(--green-deep) 1px, transparent 1px); background-size: 80px 80px; pointer-events: none; }
-  .hero-parallax-layer { position: absolute; top: 0; left: 0; right: 0; bottom: 0; will-change: transform; }
+/* Hero */
+.hero { position: relative; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 120px 48px 80px; overflow: hidden; background: var(--white); }
+.hero-bg { position: absolute; top: 0; left: 0; right: 0; bottom: 0; overflow: hidden; }
+.hero-bg-gradient { position: absolute; top: -30%; right: -20%; width: 900px; height: 900px; background: radial-gradient(circle, rgba(149,213,178,0.2) 0%, rgba(149,213,178,0) 70%); animation: float 8s ease-in-out infinite; }
+.hero-bg-gradient-2 { position: absolute; bottom: -20%; left: -15%; width: 700px; height: 700px; background: radial-gradient(circle, rgba(27,67,50,0.06) 0%, rgba(27,67,50,0) 70%); animation: float 10s ease-in-out infinite; animation-delay: -3s; }
+.hero-grid-lines { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 1200px; height: 100%; opacity: 0.035; background-image: linear-gradient(var(--green-deep) 1px, transparent 1px), linear-gradient(90deg, var(--green-deep) 1px, transparent 1px); background-size: 80px 80px; pointer-events: none; }
+.hero-parallax-layer { position: absolute; top: 0; left: 0; right: 0; bottom: 0; will-change: transform; }
+.hero-content { position: relative; z-index: 2; max-width: 840px; text-align: center; }
+.hero h1 { font-size: clamp(36px, 5vw, 56px); font-weight: 700; line-height: 1.1; letter-spacing: -2px; color: var(--green-deep); margin-bottom: 32px; animation: fadeUp 0.8s cubic-bezier(0.22,1,0.36,1) 0.2s both; }
+.hero-actions { display: flex; align-items: center; justify-content: center; gap: 16px; animation: fadeUp 0.8s cubic-bezier(0.22,1,0.36,1) 0.4s both; }
+.hero-founder-credit { font-size: 14px; color: var(--slate-500); margin-top: 24px; animation: fadeUp 0.8s cubic-bezier(0.22,1,0.36,1) 0.55s both; }
+.hero-founder-credit a { color: var(--green-mid); text-decoration: none; font-weight: 500; }
+.hero-trust { display: flex; align-items: center; gap: 8px; justify-content: center; margin-top: 16px; animation: fadeUp 0.8s cubic-bezier(0.22,1,0.36,1) 0.65s both; }
+.hero-trust img { height: 18px; opacity: 0.5; }
+.hero-trust span { font-size: 11px; font-weight: 600; color: var(--slate-400); }
+.nav-progress { position: absolute; bottom: 0; left: 0; height: 2px; width: 100%; background: linear-gradient(90deg, var(--green-accent), var(--green-mid)); transform: scaleX(var(--scroll-progress, 0)); transform-origin: left; }
 
-  .hero-content { position: relative; z-index: 2; max-width: 840px; text-align: center; }
-  .hero h1 {
-    font-size: clamp(42px, 6vw, 72px); font-weight: 700;
-    line-height: 1.05; letter-spacing: -2.5px;
-    color: var(--green-deep); margin-bottom: 24px;
-    animation: fadeUp 0.8s cubic-bezier(0.22,1,0.36,1) 0.2s both;
-  }
-  .hero h1 .text-accent {
-    background: linear-gradient(135deg, var(--green-mid), var(--green-accent));
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-  }
-  .hero-sub {
-    font-size: clamp(17px, 2vw, 20px); line-height: 1.6;
-    color: var(--slate-500); max-width: 680px;
-    margin: 0 auto 40px; font-weight: 400;
-    animation: fadeUp 0.8s cubic-bezier(0.22,1,0.36,1) 0.35s both;
-  }
-  .hero-actions {
-    display: flex; align-items: center; justify-content: center; gap: 16px;
-    animation: fadeUp 0.8s cubic-bezier(0.22,1,0.36,1) 0.5s both;
-  }
-  .hero-founder-credit {
-    font-size: 14px; color: var(--slate-500); margin-top: 32px; line-height: 1.6;
-    max-width: 640px; margin-left: auto; margin-right: auto;
-    animation: fadeUp 0.8s cubic-bezier(0.22,1,0.36,1) 0.65s both;
-  }
-  .hero-founder-credit strong { color: var(--slate-600); font-weight: 600; }
-  .hero-founder-credit a { color: var(--green-mid); text-decoration: none; font-weight: 500; transition: color 0.2s; }
-  .hero-founder-credit a:hover { color: var(--green-deep); }
-  .hero-trust {
-    display: flex; align-items: center; justify-content: center; gap: 10px;
-    margin-top: 24px; animation: fadeUp 0.8s cubic-bezier(0.22,1,0.36,1) 0.8s both;
-  }
-  .hero-trust img { height: 22px; opacity: 0.5; }
-  .hero-trust span { font-size: 12px; font-weight: 600; color: var(--slate-400); letter-spacing: 0.3px; }
-  .nav-progress {
-    position: absolute; bottom: 0; left: 0; height: 2px; width: 100%;
-    background: linear-gradient(90deg, var(--green-accent), var(--green-mid));
-    transform: scaleX(var(--scroll-progress, 0)); transform-origin: left;
-  }
+/* Chapters */
+.chapter { padding: 100px 48px; position: relative; overflow: hidden; }
+.chapter:nth-child(odd) { background: var(--white); }
+.chapter:nth-child(even) { background: var(--slate-50); }
+.chapter::before { content: ''; position: absolute; width: 600px; height: 600px; background: radial-gradient(circle, rgba(149,213,178,0.05), transparent 70%); pointer-events: none; }
+.chapter:nth-child(1)::before { top: -200px; right: -200px; }
+.chapter:nth-child(2)::before { bottom: -200px; left: -200px; }
+.chapter:nth-child(3)::before { top: -200px; left: -200px; }
+.chapter-inner { max-width: 700px; margin: 0 auto; }
+.chapter-number { font-family: var(--font-mono); font-size: clamp(40px, 6vw, 64px); font-weight: 700; color: #c0392b; letter-spacing: -2px; line-height: 1; margin-bottom: 8px; }
+.chapter-subtitle { font-size: 18px; font-weight: 600; color: #c0392b; margin-bottom: 32px; }
+.chapter-pain { font-size: 17px; line-height: 1.8; color: var(--slate-500); margin-bottom: 32px; }
+.chapter-resolution { font-size: 16px; line-height: 1.7; color: var(--green-mid); font-weight: 500; font-style: italic; padding-left: 20px; border-left: 3px solid var(--green-accent); }
 
-  /* ── Three Loss Line Items ── */
-  .losses-section { background: var(--white); padding: 60px 48px 80px; }
-  .losses-grid { max-width: 800px; margin: 0 auto; }
-  .loss-row {
-    display: grid; grid-template-columns: 200px 1fr auto; gap: 24px;
-    align-items: center; padding: 28px 0;
-    border-bottom: 1px solid var(--slate-100);
-    text-decoration: none; transition: all 0.2s;
-  }
-  .loss-row:first-child { border-top: 1px solid var(--slate-100); }
-  .loss-row:hover { background: rgba(192,57,43,0.02); padding-left: 12px; padding-right: 12px; border-radius: 12px; }
-  .loss-number {
-    font-family: var(--font-mono); font-size: clamp(22px, 2.5vw, 28px);
-    font-weight: 700; color: #c0392b; letter-spacing: -1px;
-  }
-  .loss-desc { font-size: 16px; color: var(--slate-600); line-height: 1.4; }
-  .loss-link {
-    display: flex; align-items: center; gap: 6px;
-    font-size: 14px; font-weight: 600; color: var(--green-mid);
-    white-space: nowrap;
-  }
-  .loss-row:hover .loss-link { color: var(--green-deep); gap: 10px; }
+/* Receipt */
+.receipt-section { background: var(--white); padding: 60px 48px 100px; }
+.receipt { max-width: 480px; margin: 0 auto; font-family: var(--font-mono); }
+.receipt-row { display: flex; justify-content: space-between; align-items: baseline; padding: 12px 0; border-bottom: 1px solid var(--slate-100); font-size: 16px; }
+.receipt-row-amount { font-weight: 700; color: #c0392b; }
+.receipt-row-label { color: var(--slate-500); font-family: var(--font-display); font-size: 14px; }
+.receipt-total { display: flex; justify-content: space-between; align-items: baseline; padding: 16px 0 0; margin-top: 4px; border-top: 3px double var(--green-accent); font-size: 20px; }
+.receipt-total-amount { font-weight: 700; color: var(--green-deep); }
+.receipt-total-label { color: var(--green-deep); font-weight: 600; font-family: var(--font-display); font-size: 15px; }
+.receipt-note { text-align: center; margin-top: 24px; font-size: 15px; color: var(--slate-500); }
 
-  /* ── Dark Pivot ── */
-  .pivot-section {
-    background: var(--green-deep); padding: 80px 48px;
-    text-align: center; position: relative; overflow: hidden;
-  }
-  .pivot-section::before {
-    content: ''; position: absolute; top: -200px; left: -200px;
-    width: 500px; height: 500px;
-    background: radial-gradient(circle, rgba(149,213,178,0.08), transparent 70%);
-  }
-  .pivot-content { max-width: 640px; margin: 0 auto; position: relative; }
-  .pivot-content h2 {
-    font-size: clamp(28px, 3.5vw, 44px); font-weight: 700;
-    color: var(--white); letter-spacing: -1.5px; margin-bottom: 20px;
-  }
-  .pivot-content p {
-    font-size: 17px; line-height: 1.75; color: rgba(255,255,255,0.6);
-  }
+/* Dark Pivot */
+.pivot-section { background: var(--green-deep); padding: 80px 48px; text-align: center; position: relative; overflow: hidden; }
+.pivot-section::before { content: ''; position: absolute; top: -200px; left: -200px; width: 500px; height: 500px; background: radial-gradient(circle, rgba(149,213,178,0.08), transparent 70%); transform: translateY(var(--parallax-y, 0)); will-change: transform; }
+.pivot-content { max-width: 700px; margin: 0 auto; position: relative; }
+.pivot-content h2 { font-size: clamp(28px, 3.5vw, 44px); font-weight: 700; color: var(--white); letter-spacing: -1.5px; margin-bottom: 20px; }
+.pivot-content p { font-size: 17px; line-height: 1.75; color: rgba(255,255,255,0.6); }
 
-  /* ── Case Study + CTA (combined) ── */
-  .proof-cta-section { background: var(--white); padding: 100px 48px; text-align: center; }
-  .proof-cta-header { max-width: 640px; margin: 0 auto 48px; }
-  .proof-cta-stats {
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px;
-    max-width: 700px; margin: 0 auto 16px; text-align: center;
-  }
-  .proof-cta-stat-num {
-    font-family: var(--font-mono); font-size: clamp(24px, 3vw, 32px);
-    font-weight: 700; color: var(--green-deep); letter-spacing: -1px; margin-bottom: 4px;
-  }
-  .proof-cta-stat-desc { font-size: 13px; color: var(--slate-400); }
-  .proof-cta-note { font-size: 13px; color: var(--slate-400); font-style: italic; margin-bottom: 48px; }
-  .proof-cta-action {
-    max-width: 520px; margin: 0 auto;
-    padding: 48px 40px; background: var(--green-ghost);
-    border: 1px solid rgba(149,213,178,0.3); border-radius: 20px;
-  }
-  .proof-cta-action h3 {
-    font-size: 22px; font-weight: 700; color: var(--green-deep);
-    margin-bottom: 12px; letter-spacing: -0.5px;
-  }
-  .proof-cta-action > p { font-size: 15px; color: var(--slate-500); line-height: 1.6; margin-bottom: 24px; }
-  .proof-cta-founder {
-    display: flex; align-items: center; gap: 12px; justify-content: center;
-    margin-top: 24px; font-size: 14px; color: var(--slate-500);
-  }
-  .proof-cta-risk { font-size: 13px; color: var(--slate-400); margin-top: 16px; }
+/* Proof + CTA */
+.proof-cta { background: var(--white); padding: 100px 48px; text-align: center; }
+.proof-cta-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; max-width: 700px; margin: 0 auto 16px; }
+.proof-cta-stat-num { font-family: var(--font-mono); font-size: clamp(24px, 3vw, 32px); font-weight: 700; color: var(--green-deep); letter-spacing: -1px; margin-bottom: 4px; }
+.proof-cta-stat-desc { font-size: 13px; color: var(--slate-400); }
+.proof-cta-note { font-size: 13px; color: var(--slate-400); font-style: italic; margin-bottom: 48px; }
+.proof-cta-card { max-width: 520px; margin: 0 auto; padding: 48px 40px; background: var(--green-ghost); border: 1px solid rgba(149,213,178,0.3); border-radius: 20px; }
+.proof-cta-card h3 { font-size: 22px; font-weight: 700; color: var(--green-deep); margin-bottom: 12px; letter-spacing: -0.5px; }
+.proof-cta-card > p { font-size: 15px; color: var(--slate-500); line-height: 1.6; margin-bottom: 24px; }
+.proof-cta-founder { display: flex; align-items: center; gap: 12px; justify-content: center; margin-top: 24px; font-size: 14px; color: var(--slate-500); }
+.proof-cta-risk { font-size: 13px; color: var(--slate-400); margin-top: 16px; }
 
-  /* ── FAQ ── */
-  .faq-section {
-    background: var(--white); padding: 80px 48px;
-  }
-  .faq-header { text-align: center; max-width: 600px; margin: 0 auto 48px; }
-  .faq-header .section-desc { margin: 0 auto; }
-  .faq-list {
-    max-width: 680px; margin: 0 auto;
-  }
-  .faq-list details {
-    border-bottom: 1px solid var(--slate-200);
-  }
-  .faq-list details:first-child {
-    border-top: 1px solid var(--slate-200);
-  }
-  .faq-list summary {
-    padding: 20px 0; font-size: 17px; font-weight: 600;
-    color: var(--green-deep); cursor: pointer; list-style: none;
-    display: flex; align-items: center; justify-content: space-between; gap: 16px;
-  }
-  .faq-list summary::-webkit-details-marker { display: none; }
-  .faq-list summary::after {
-    content: '+'; font-size: 22px; font-weight: 400;
-    color: var(--slate-400); transition: transform 0.2s;
-    flex-shrink: 0;
-  }
-  .faq-list details[open] summary::after {
-    content: '\2212';
-  }
-  .faq-list details p {
-    padding: 0 0 20px; margin: 0; font-size: 15px;
-    line-height: 1.7; color: var(--slate-500);
-  }
+/* FAQ */
+.faq-section { background: var(--slate-50); padding: 80px 48px; }
+.faq-header { text-align: center; max-width: 600px; margin: 0 auto 48px; }
+.faq-list { max-width: 680px; margin: 0 auto; }
+.faq-list details { border-bottom: 1px solid var(--slate-200); }
+.faq-list details:first-child { border-top: 1px solid var(--slate-200); }
+.faq-list summary { padding: 20px 0; font-size: 17px; font-weight: 600; color: var(--green-deep); cursor: pointer; list-style: none; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.faq-list summary::-webkit-details-marker { display: none; }
+.faq-list summary::after { content: '+'; font-size: 22px; font-weight: 400; color: var(--slate-400); flex-shrink: 0; }
+.faq-list details[open] summary::after { content: '\2212'; }
+.faq-list details p { padding: 0 0 20px; margin: 0; font-size: 15px; line-height: 1.7; color: var(--slate-500); }
 
-  /* ── POS Ticker ── */
-  .pos-ticker { padding: 48px 0; background: var(--white); overflow: hidden; }
-  .pos-ticker-label { text-align: center; font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--slate-400); margin-bottom: 28px; }
-  .pos-ticker-track { display: flex; width: max-content; animation: ticker-scroll 30s linear infinite; }
-  .pos-ticker-track:hover { animation-play-state: paused; }
-  .pos-ticker-logo { height: 120px; padding: 0 48px; opacity: 0.45; filter: grayscale(100%); transition: opacity 0.3s, filter 0.3s; }
-  .pos-ticker-logo:hover { opacity: 0.9; filter: grayscale(0%); }
+/* POS Ticker */
+@keyframes ticker-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.pos-ticker { padding: 48px 0; background: var(--white); overflow: hidden; }
+.pos-ticker-label { text-align: center; font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--slate-400); margin-bottom: 28px; }
+.pos-ticker-track { display: flex; width: max-content; animation: ticker-scroll 30s linear infinite; }
+.pos-ticker-track:hover { animation-play-state: paused; }
+.pos-ticker-logo { height: 120px; padding: 0 48px; opacity: 0.45; filter: grayscale(100%); transition: opacity 0.3s, filter 0.3s; }
+.pos-ticker-logo:hover { opacity: 0.9; filter: grayscale(0%); }
 
-  /* ── Footer 5-col ── */
-  .footer-metrc { display: flex; align-items: center; gap: 8px; justify-content: center; margin-top: 12px; }
-  .footer-top { grid-template-columns: 2fr 1fr 1fr 1fr 1fr; }
+/* Footer 5-col */
+.footer-top { grid-template-columns: 2fr 1fr 1fr 1fr 1fr; }
 
-  /* ── Responsive ── */
-  @media (max-width: 900px) {
-    .hero { padding: 100px 24px 60px; }
-    .hero-actions { flex-direction: column; align-items: center; }
-    .losses-section { padding: 40px 24px 60px; }
-    .loss-row { grid-template-columns: 1fr; gap: 8px; padding: 20px 0; }
-    .loss-link { margin-top: 4px; }
-    .pivot-section { padding: 60px 24px; }
-    .proof-cta-section { padding: 80px 24px; }
-    .proof-cta-stats { grid-template-columns: 1fr; gap: 20px; }
-    .proof-cta-action { padding: 32px 24px; }
-    .faq-section { padding: 60px 24px; }
-    .footer-top { grid-template-columns: 1fr 1fr; }
-    .pos-ticker-logo { height: 100px; padding: 0 36px; }
-    .pos-ticker { padding: 36px 0; }
-    .pos-ticker-track { animation-duration: 15s; }
-  }
-  @media (max-width: 600px) {
-    .pos-ticker-logo { height: 80px; padding: 0 28px; }
-    .pos-ticker-track { animation-duration: 12s; }
-    .footer-top { grid-template-columns: 1fr; }
-  }
-
-  /* ── Reduced Motion ── */
-  @media (prefers-reduced-motion: reduce) {
-    .reveal,
-    .hero h1, .hero-sub, .hero-actions, .hero-founder-credit, .hero-trust,
-    .hero-bg-gradient, .hero-bg-gradient-2 { animation: none; opacity: 1; transform: none; transition: none; }
-    .nav-progress { display: none; }
-    .pos-ticker-track { animation: none; }
-  }
+/* Responsive */
+@media (max-width: 900px) {
+  .hero { padding: 100px 24px 60px; }
+  .hero-actions { flex-direction: column; }
+  .chapter { padding: 60px 24px; }
+  .receipt-section { padding: 40px 24px 60px; }
+  .pivot-section { padding: 60px 24px; }
+  .proof-cta { padding: 60px 24px; }
+  .proof-cta-stats { grid-template-columns: 1fr; gap: 20px; }
+  .proof-cta-card { padding: 32px 24px; }
+  .faq-section { padding: 60px 24px; }
+  .footer-top { grid-template-columns: 1fr 1fr; }
+  .pos-ticker-logo { height: 72px; padding: 0 32px; }
+}
+@media (max-width: 600px) {
+  .footer-top { grid-template-columns: 1fr; }
+  .pos-ticker-logo { height: 48px; padding: 0 24px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal, .hero h1, .hero-actions, .hero-founder-credit, .hero-trust,
+  .hero-bg-gradient, .hero-bg-gradient-2 { animation: none; opacity: 1; transform: none; transition: none; }
+  .pos-ticker-track { animation: none; }
+}
 </style>
-<noscript><style>.reveal,.hero h1,.hero-sub,.hero-actions,.hero-founder-credit,.hero-trust{opacity:1;transform:none;transition:none;animation:none;}</style></noscript>
+<noscript><style>.reveal,.hero h1,.hero-actions,.hero-founder-credit,.hero-trust{opacity:1;transform:none;transition:none;animation:none;}</style></noscript>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -255,7 +154,7 @@
   "name": "ShelfSpace",
   "url": "https://shelfspace.pro",
   "logo": "https://shelfspace.pro/favicon.svg",
-  "description": "Your dispensary is losing $200,000 a year in vendor credits. Add inventory waste and AP errors, and it's half a million. One team finds it all.",
+  "description": "We found half a million dollars at a two-store dispensary. Trapped inventory, overpaid invoices, untracked credits. One team found it all.",
   "founder": {
     "@type": "Person",
     "name": "Chris Mitchem",
@@ -343,8 +242,7 @@ document.head.appendChild(o)}initApollo();</script>
     </div>
   </div>
   <div class="hero-content">
-    <h1>Your dispensary is losing <span style="color:#c0392b">$200,000</span> a year. <span style="color:var(--slate-400);font-weight:400;font-size:0.6em;display:block;margin-top:8px;">That's just the credits.</span></h1>
-    <p class="hero-sub">Add trapped inventory and AP waste, and most operators are leaving half a million on the table. One team finds it all.</p>
+    <h1>We found half a million dollars at a two-store dispensary.</h1>
     <div class="hero-actions">
       <a href="/contact" class="btn-primary">
         Get My Free Analysis
@@ -360,63 +258,90 @@ document.head.appendChild(o)}initApollo();</script>
   <div class="nav-progress"></div>
 </section>
 
-<!-- SECTION 2: THREE LOSS LINE ITEMS -->
-<section class="losses-section">
-  <div class="losses-grid">
-    <a href="/credit-recovery" class="loss-row reveal">
-      <div class="loss-number">$200,000/yr</div>
-      <div class="loss-desc">in vendor credits nobody's tracking</div>
-      <div class="loss-link">Calculate your savings <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></div>
-    </a>
-    <a href="/consignment" class="loss-row reveal">
-      <div class="loss-number">$250,000</div>
-      <div class="loss-desc">trapped in inventory you paid for upfront</div>
-      <div class="loss-link">Free up your cash <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></div>
-    </a>
-    <a href="/accounts-payable" class="loss-row reveal">
-      <div class="loss-number">$45,000/yr</div>
-      <div class="loss-desc">lost to overpaid invoices and manual AP</div>
-      <div class="loss-link">See your savings <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></div>
-    </a>
+<!-- SECTION 2: THREE CHAPTERS -->
+
+<!-- CHAPTER 1: TRAPPED CASH -->
+<section class="chapter">
+  <div class="chapter-inner">
+    <div class="chapter-number reveal">$250,000</div>
+    <div class="chapter-subtitle reveal">trapped in inventory they paid for upfront.</div>
+    <p class="chapter-pain reveal">Every product on their shelves was bought and paid for. Half of it sat there for months. Some expired. All of it was cash they couldn't use for payroll, expansion, or marketing.</p>
+    <div class="chapter-resolution reveal">We transitioned their vendors to consignment. Now vendors own the product until it sells. Cash went back in the bank. <a href="/consignment" style="color:var(--green-deep);font-weight:600;">See how consignment works →</a></div>
   </div>
 </section>
 
-<!-- SECTION 3: DARK PIVOT -->
+<!-- CHAPTER 2: OVERPAID VENDORS -->
+<section class="chapter">
+  <div class="chapter-inner">
+    <div class="chapter-number reveal">$45,000/year</div>
+    <div class="chapter-subtitle reveal">lost to overpaid invoices and manual AP.</div>
+    <p class="chapter-pain reveal">Vendors sent invoices. Staff paid them without checking. Deliveries came short but nobody noticed. One person spent 15 hours a week matching invoices, writing checks, and fielding vendor calls.</p>
+    <div class="chapter-resolution reveal">We took over. Our AI verifies every invoice against what was actually received. Vendors email us, not them. QuickBooks stays in sync. <a href="/accounts-payable" style="color:var(--green-deep);font-weight:600;">See how managed AP works →</a></div>
+  </div>
+</section>
+
+<!-- CHAPTER 3: UNTRACKED CREDITS -->
+<section class="chapter">
+  <div class="chapter-inner">
+    <div class="chapter-number reveal">$200,000/year</div>
+    <div class="chapter-subtitle reveal">in vendor credits nobody was tracking.</div>
+    <p class="chapter-pain reveal">Returns nobody filed. Expired product nobody credited. Discounts the retailers absorbed that vendors should have shared. Four to six percent of revenue — just gone.</p>
+    <div class="chapter-resolution reveal">We pulled their data, created credit memos for every qualifying event, and worked with vendors to get them approved. Money that was always theirs — back in their account. <a href="/credit-recovery" style="color:var(--green-deep);font-weight:600;">See how credit recovery works →</a></div>
+  </div>
+</section>
+
+<!-- SECTION 3: RECEIPT -->
+<section class="receipt-section">
+  <div class="receipt">
+    <div class="receipt-row reveal">
+      <span class="receipt-row-amount">$250,000</span>
+      <span class="receipt-row-label">trapped cash</span>
+    </div>
+    <div class="receipt-row reveal reveal-delay-1">
+      <span class="receipt-row-amount">$45,000</span>
+      <span class="receipt-row-label">AP waste</span>
+    </div>
+    <div class="receipt-row reveal reveal-delay-2">
+      <span class="receipt-row-amount">$200,000</span>
+      <span class="receipt-row-label">untracked credits</span>
+    </div>
+    <div class="receipt-total reveal reveal-delay-3">
+      <span class="receipt-total-amount" id="receipt-total">$0</span>
+      <span class="receipt-total-label">total found</span>
+    </div>
+  </div>
+  <p class="receipt-note reveal reveal-delay-4">This was one dispensary chain. Two locations. Yours could be similar.</p>
+</section>
+
+<!-- SECTION 4: DARK PIVOT -->
 <section class="pivot-section">
   <div class="pivot-content">
-    <h2 class="reveal">One team. All of it. Done.</h2>
-    <p class="reveal">We run your consignment settlements, recover your vendor credits, verify every invoice, cut every check, and handle every vendor email. Our AI handles 95% of vendor inquiries. Your team handles nothing.</p>
+    <h2 class="reveal">One team found all of it. One team fixed all of it.</h2>
+    <p class="reveal">Consignment settlements. Credit recovery. Invoice verification. Vendor emails. Check payments. QuickBooks sync. AI-powered. Human-backed.</p>
   </div>
 </section>
 
-<!-- SECTION 4: CASE STUDY + CTA -->
-<section class="proof-cta-section">
-  <div class="proof-cta-header">
-    <div class="section-label reveal">Real Results</div>
-    <h2 class="section-title reveal">We analyzed a two-location dispensary. We found $547K on the table.</h2>
-  </div>
+<!-- SECTION 5: PROOF + CTA -->
+<section class="proof-cta">
   <div class="proof-cta-stats">
     <div class="proof-cta-stat reveal">
-      <div class="proof-cta-stat-num">$200K+/yr</div>
+      <div class="proof-cta-stat-num" data-target="200000" data-suffix="+/yr">$0</div>
       <div class="proof-cta-stat-desc">in recoverable credits</div>
     </div>
     <div class="proof-cta-stat reveal reveal-delay-1">
-      <div class="proof-cta-stat-num">$45K/yr</div>
+      <div class="proof-cta-stat-num" data-target="45000" data-suffix="/yr">$0</div>
       <div class="proof-cta-stat-desc">saved on AP operations</div>
     </div>
     <div class="proof-cta-stat reveal reveal-delay-2">
-      <div class="proof-cta-stat-num">$250K</div>
+      <div class="proof-cta-stat-num" data-target="250000" data-suffix="">$0</div>
       <div class="proof-cta-stat-desc">freed from inventory</div>
     </div>
   </div>
   <p class="proof-cta-note reveal">Real results from a two-location Massachusetts dispensary chain.</p>
-  <div class="proof-cta-action reveal">
-    <h3>Want to know what's on the table at your stores?</h3>
+  <div class="proof-cta-card reveal">
+    <h3>Want to know what's hiding at your stores?</h3>
     <p>We'll analyze your data — Metrc, POS, vendor invoices — and show you exactly what you're missing. 48 hours. Free.</p>
-    <a href="/contact" class="btn-primary">
-      Get My Free Analysis
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-    </a>
+    <a href="/contact" class="btn-primary">Get My Free Analysis <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
     <div class="proof-cta-founder">
       <img src="/chris-mitchem.jpg" alt="Chris Mitchem" style="width:48px;height:48px;border-radius:50%;object-fit:cover;">
       <span>Chris Mitchem, Founder — 10 years operating dispensaries</span>
@@ -425,7 +350,7 @@ document.head.appendChild(o)}initApollo();</script>
   </div>
 </section>
 
-<!-- SECTION 5: FAQ -->
+<!-- SECTION 6: FAQ -->
 <section class="faq-section">
   <div class="faq-header">
     <div class="section-label reveal">FAQ</div>
@@ -447,7 +372,7 @@ document.head.appendChild(o)}initApollo();</script>
   </div>
 </section>
 
-<!-- SECTION 6: POS TICKER -->
+<!-- SECTION 7: POS TICKER -->
 <section class="pos-ticker">
   <div class="pos-ticker-label">Works with every major cannabis POS</div>
   <div style="overflow:hidden">
@@ -536,19 +461,17 @@ document.head.appendChild(o)}initApollo();</script>
 
 <script>
 (function() {
-  'use strict';
-
   var nav = document.getElementById('nav');
-  var navProgress = document.querySelector('.nav-progress');
-  var heroContent = document.querySelector('.hero-content');
   var hero = document.querySelector('.hero');
-  var parallaxLayers = document.querySelectorAll('.hero-parallax-layer');
+  var heroContent = document.querySelector('.hero-content');
+  var pivotSection = document.querySelector('.pivot-section');
+  var proofSection = document.querySelector('.proof-cta');
 
   var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var isMobile = window.innerWidth < 900;
   var ticking = false;
 
-  /* Scroll-Triggered Reveals */
+  /* Reveals */
   var revealObserver = new IntersectionObserver(function(entries) {
     entries.forEach(function(entry) {
       if (entry.isIntersecting) {
@@ -557,61 +480,112 @@ document.head.appendChild(o)}initApollo();</script>
       }
     });
   }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(function(el) { revealObserver.observe(el); });
 
-  document.querySelectorAll('.reveal').forEach(function(el) {
-    revealObserver.observe(el);
-  });
+  /* Counter Animation */
+  function animateCounter(el, target, suffix, duration) {
+    var start = null;
+    function step(timestamp) {
+      if (!start) start = timestamp;
+      var progress = Math.min((timestamp - start) / duration, 1);
+      var eased = 1 - Math.pow(1 - progress, 3);
+      var current = Math.floor(eased * target);
+      el.textContent = '$' + current.toLocaleString() + suffix;
+      if (progress < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
 
-  /* Unified Scroll Controller */
+  /* Receipt total counter */
+  var receiptTotal = document.getElementById('receipt-total');
+  var receiptAnimated = false;
+  if (receiptTotal) {
+    var receiptObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting && !receiptAnimated) {
+          receiptAnimated = true;
+          animateCounter(receiptTotal, 495000, '', 2000);
+          receiptObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.5 });
+    receiptObserver.observe(receiptTotal);
+  }
+
+  /* Proof stats counters */
+  var statsAnimated = false;
+  var statsSection = document.querySelector('.proof-cta-stats');
+  if (statsSection) {
+    var statsObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting && !statsAnimated) {
+          statsAnimated = true;
+          var nums = statsSection.querySelectorAll('[data-target]');
+          nums.forEach(function(el) {
+            var target = parseInt(el.dataset.target, 10);
+            var suffix = el.dataset.suffix || '';
+            animateCounter(el, target, suffix, 1500);
+          });
+          statsObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.3 });
+    statsObserver.observe(statsSection);
+  }
+
+  /* Scroll handler */
   function onScroll() {
     var scrollY = window.scrollY;
-    var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    var docHeight = document.body.scrollHeight - window.innerHeight;
 
     nav.classList.toggle('scrolled', scrollY > 20);
 
     var progress = docHeight > 0 ? scrollY / docHeight : 0;
-    if (navProgress) navProgress.style.setProperty('--scroll-progress', progress);
+    document.querySelector('.nav-progress').style.transform = 'scaleX(' + progress + ')';
 
     if (prefersReduced || isMobile) return;
 
-    var heroH = hero.offsetHeight;
-    if (scrollY < heroH) {
-      parallaxLayers.forEach(function(layer) {
-        var speed = parseFloat(layer.dataset.speed) || 0;
+    /* Hero parallax */
+    if (hero && scrollY < hero.offsetHeight) {
+      var layers = hero.querySelectorAll('.hero-parallax-layer');
+      layers.forEach(function(layer) {
+        var speed = parseFloat(layer.dataset.speed) || 0.2;
         layer.style.transform = 'translateY(' + (scrollY * speed) + 'px)';
       });
-      var fade = 1 - (scrollY / (heroH * 0.6));
-      if (fade < 0) fade = 0;
-      heroContent.style.opacity = fade;
-      heroContent.style.transform = 'translateY(' + (scrollY * 0.15) + 'px)';
+      var fade = 1 - (scrollY / (hero.offsetHeight * 0.6));
+      if (heroContent) {
+        heroContent.style.opacity = Math.max(fade, 0);
+        heroContent.style.transform = 'translateY(' + (scrollY * 0.15) + 'px)';
+      }
     }
+
+    /* Section parallax */
+    var wh = window.innerHeight;
+    [pivotSection, proofSection].forEach(function(section) {
+      if (!section) return;
+      var rect = section.getBoundingClientRect();
+      if (rect.bottom < 0 || rect.top > wh) return;
+      var center = rect.top + rect.height / 2 - wh / 2;
+      section.style.setProperty('--parallax-y', (center * 0.08) + 'px');
+    });
   }
 
   window.addEventListener('scroll', function() {
     if (!ticking) {
-      requestAnimationFrame(function() {
-        onScroll();
-        ticking = false;
-      });
+      requestAnimationFrame(function() { onScroll(); ticking = false; });
       ticking = true;
     }
   }, { passive: true });
-
   onScroll();
 
   window.addEventListener('resize', function() {
     isMobile = window.innerWidth < 900;
-    if (isMobile) {
-      parallaxLayers.forEach(function(layer) { layer.style.transform = ''; });
-      if (heroContent) { heroContent.style.opacity = ''; heroContent.style.transform = ''; }
-    }
   });
 
-  /* Mobile nav close on outside click */
+  /* Close mobile nav on outside click */
   document.addEventListener('click', function(e) {
     var navLinks = document.querySelector('.nav-links');
-    var hamburger = document.querySelector('.nav-hamburger');
-    if (navLinks && navLinks.classList.contains('mobile-open') && !navLinks.contains(e.target) && !hamburger.contains(e.target)) {
+    if (navLinks && navLinks.classList.contains('mobile-open') && !e.target.closest('.nav-links') && !e.target.closest('.nav-hamburger')) {
       navLinks.classList.remove('mobile-open');
     }
   });
