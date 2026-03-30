@@ -56,17 +56,45 @@
 
   /* ─── PAIN SECTION ─── */
   .pain-section { background: var(--white); padding: 80px 48px; text-align: center; }
-  .pain-story { max-width: 600px; margin: 0 auto 48px; }
-  .pain-scenario {
-    font-size: 18px; line-height: 1.8; color: var(--slate-500);
-    margin-bottom: 24px;
+  .pain-cards {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
+    max-width: 760px; margin: 0 auto 48px;
   }
-  .pain-scenario strong { color: var(--green-deep); font-weight: 700; }
+  .pain-card {
+    background: var(--slate-50); border: 1px solid var(--slate-200);
+    border-radius: 16px; padding: 32px 28px; text-align: left;
+    position: relative; overflow: hidden;
+  }
+  .pain-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, #e74c3c, #c0392b);
+  }
+  .pain-card-label {
+    font-size: 11px; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--slate-400); margin-bottom: 16px;
+  }
+  .pain-card-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 10px 0; border-bottom: 1px solid var(--slate-100);
+  }
+  .pain-card-row:last-child { border-bottom: none; }
+  .pain-card-row-label { font-size: 14px; color: var(--slate-500); }
+  .pain-card-row-value {
+    font-family: var(--font-mono); font-size: 18px; font-weight: 700;
+  }
+  .pain-card-row-value.invoice { color: var(--slate-600); }
+  .pain-card-row-value.mismatch { color: #e74c3c; }
+  .pain-card-row-value.paid { color: var(--slate-600); }
+  .pain-card-loss {
+    margin-top: 16px; padding-top: 12px; border-top: 2px solid #e74c3c;
+    font-size: 14px; font-weight: 600; color: #c0392b; text-align: center;
+  }
   .pain-multiplier {
     font-size: clamp(20px, 2.5vw, 28px); font-weight: 700;
     color: var(--green-deep); letter-spacing: -0.5px;
     max-width: 600px; margin: 0 auto;
   }
+  @media (max-width: 600px) { .pain-cards { grid-template-columns: 1fr; max-width: 380px; } }
 
   /* ─── AP CALCULATOR ─── */
   .calc-section { background: var(--slate-50); }
@@ -297,9 +325,39 @@ document.head.appendChild(o)}initApollo();</script>
 
 <!-- PAIN STORY -->
 <section class="pain-section">
-  <div class="pain-story">
-    <p class="pain-scenario reveal">A vendor invoices you for <strong>24 units</strong>. Your team received <strong>22</strong>. Nobody catches it. You pay for <strong>24</strong>.</p>
-    <p class="pain-scenario reveal">Another vendor emails you six times about a payment. It's easier to just pay than to verify. So you pay — and the invoice was <strong>$400 more</strong> than what was delivered.</p>
+  <div class="pain-cards">
+    <div class="pain-card reveal">
+      <div class="pain-card-label">Scenario 1: Short Delivery</div>
+      <div class="pain-card-row">
+        <span class="pain-card-row-label">Invoice says</span>
+        <span class="pain-card-row-value invoice">24 units</span>
+      </div>
+      <div class="pain-card-row">
+        <span class="pain-card-row-label">Actually received</span>
+        <span class="pain-card-row-value mismatch">22 units</span>
+      </div>
+      <div class="pain-card-row">
+        <span class="pain-card-row-label">You paid for</span>
+        <span class="pain-card-row-value paid">24 units</span>
+      </div>
+      <div class="pain-card-loss">You overpaid by 2 units. Nobody caught it.</div>
+    </div>
+    <div class="pain-card reveal reveal-delay-1">
+      <div class="pain-card-label">Scenario 2: Invoice Mismatch</div>
+      <div class="pain-card-row">
+        <span class="pain-card-row-label">Invoice total</span>
+        <span class="pain-card-row-value invoice">$4,800</span>
+      </div>
+      <div class="pain-card-row">
+        <span class="pain-card-row-label">Correct amount</span>
+        <span class="pain-card-row-value mismatch">$4,400</span>
+      </div>
+      <div class="pain-card-row">
+        <span class="pain-card-row-label">You paid</span>
+        <span class="pain-card-row-value paid">$4,800</span>
+      </div>
+      <div class="pain-card-loss">$400 overpaid. Vendor emailed 6 times — easier to just pay.</div>
+    </div>
   </div>
   <p class="pain-multiplier reveal">Multiply that across your entire AP operation. 40 vendors. 52 weeks a year.</p>
 </section>
