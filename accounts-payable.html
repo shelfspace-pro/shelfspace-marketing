@@ -4,19 +4,19 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Managed AP for Cannabis Dispensaries — ShelfSpace</title>
-<meta name="description" content="15 hours a week on AP. $45,000 a year wasted. We take over your entire accounts payable operation — you just approve. Free 60-day pilot.">
+<meta name="description" content="You're overpaying vendors every week. ShelfSpace verifies every invoice against what was actually received. $45K+/year saved. Free 60-day pilot.">
 <link rel="canonical" href="https://shelfspace.pro/accounts-payable">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://shelfspace.pro/accounts-payable">
 <meta property="og:title" content="Managed AP for Cannabis Dispensaries — ShelfSpace">
-<meta property="og:description" content="15 hours a week on AP. $45,000 a year wasted. We take over your entire accounts payable operation — you just approve. Free 60-day pilot.">
+<meta property="og:description" content="You're overpaying vendors every week. ShelfSpace verifies every invoice against what was actually received. $45K+/year saved. Free 60-day pilot.">
 <meta property="og:image" content="https://shelfspace.pro/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:type" content="image/png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Managed AP for Cannabis Dispensaries — ShelfSpace">
-<meta name="twitter:description" content="15 hours a week on AP. $45,000 a year wasted. We take over your entire accounts payable operation — you just approve. Free 60-day pilot.">
+<meta name="twitter:description" content="You're overpaying vendors every week. ShelfSpace verifies every invoice against what was actually received. $45K+/year saved. Free 60-day pilot.">
 <meta name="twitter:image" content="https://shelfspace.pro/og-image.png">
 <meta name="apple-mobile-web-app-title" content="ShelfSpace">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -56,24 +56,50 @@
 
   /* ─── PAIN SECTION ─── */
   .pain-section { background: var(--white); padding: 80px 48px; text-align: center; }
-  .pain-boxes {
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
-    max-width: 800px; margin: 0 auto 48px;
+  .pain-story { max-width: 600px; margin: 0 auto 48px; }
+  .pain-scenario {
+    font-size: 18px; line-height: 1.8; color: var(--slate-500);
+    margin-bottom: 24px;
   }
-  .pain-box {
-    padding: 32px 24px; background: var(--slate-50);
-    border: 1px solid var(--slate-200); border-radius: 16px;
-  }
-  .pain-box-number {
-    font-family: var(--font-mono); font-size: clamp(24px, 3vw, 32px);
-    font-weight: 700; color: var(--green-deep); letter-spacing: -1px;
-    margin-bottom: 8px;
-  }
-  .pain-box-label { font-size: 14px; color: var(--slate-500); line-height: 1.4; }
-  .pain-pivot {
+  .pain-scenario strong { color: var(--green-deep); font-weight: 700; }
+  .pain-multiplier {
     font-size: clamp(20px, 2.5vw, 28px); font-weight: 700;
     color: var(--green-deep); letter-spacing: -0.5px;
+    max-width: 600px; margin: 0 auto;
   }
+
+  /* ─── AP CALCULATOR ─── */
+  .calc-section { background: var(--slate-50); }
+  .calc-header { text-align: center; max-width: 600px; margin: 0 auto 64px; }
+  .calc-header .section-desc { margin: 0 auto; }
+  .calc-container { max-width: 640px; margin: 0 auto; }
+  .calc-slider-wrapper { margin-bottom: 40px; }
+  .calc-slider-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 12px; }
+  .calc-slider-label { font-size: 14px; font-weight: 600; color: var(--green-deep); }
+  .calc-slider-value { font-family: var(--font-mono); font-size: 18px; font-weight: 700; color: var(--green-deep); }
+  .calc-slider-labels { display: flex; justify-content: space-between; font-size: 12px; color: var(--slate-400); margin-top: 8px; }
+  .calc-slider { width: 100%; -webkit-appearance: none; appearance: none; height: 8px; border-radius: 4px; background: var(--slate-200); outline: none; }
+  .calc-slider::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 28px; height: 28px; border-radius: 50%; background: var(--green-deep); cursor: pointer; box-shadow: 0 2px 8px rgba(27,67,50,0.3); }
+  .calc-slider::-moz-range-thumb { width: 28px; height: 28px; border-radius: 50%; background: var(--green-deep); cursor: pointer; border: none; box-shadow: 0 2px 8px rgba(27,67,50,0.3); }
+  .calc-results { background: var(--white); border: 1px solid var(--slate-200); border-radius: 16px; overflow: hidden; }
+  .calc-row { display: flex; justify-content: space-between; align-items: center; padding: 20px 24px; border-bottom: 1px solid var(--slate-100); }
+  .calc-row:last-child { border-bottom: none; }
+  .calc-row-label { font-size: 15px; color: var(--slate-600); }
+  .calc-row-value { font-family: var(--font-mono); font-size: 18px; font-weight: 700; color: var(--green-deep); }
+  .calc-total { background: var(--green-deep); }
+  .calc-total .calc-row-label { color: rgba(255,255,255,0.7); font-weight: 600; }
+  .calc-total .calc-row-value { color: var(--white); font-size: 24px; }
+  .calc-monthly { background: var(--white); border-top: 2px solid var(--green-accent); }
+  .calc-monthly .calc-row-label { font-weight: 600; color: var(--green-deep); font-style: italic; }
+  .calc-monthly .calc-row-value { color: var(--green-deep); font-size: 22px; }
+  .calc-guarantee {
+    text-align: center; max-width: 540px; margin: 32px auto 24px;
+    padding: 16px 24px; background: var(--green-ghost);
+    border: 1px solid rgba(149,213,178,0.3); border-radius: 12px;
+  }
+  .calc-guarantee p { font-size: 15px; color: var(--slate-600); margin: 0; }
+  .calc-guarantee strong { color: var(--green-deep); }
+  .calc-cta-wrap { text-align: center; margin-top: 24px; }
 
   /* ─── PROOF TIMELINE ─── */
   .proof-timeline { background: var(--green-deep); padding: 100px 48px; position: relative; overflow: hidden; }
@@ -151,7 +177,7 @@
   /* ─── RESPONSIVE ─── */
   @media (max-width: 900px) {
     .pain-section { padding: 60px 24px; }
-    .pain-boxes { grid-template-columns: 1fr; max-width: 360px; }
+    .calc-section { padding: 60px 24px; }
     .proof-timeline { padding: 80px 24px; }
     .proof-stats-row { grid-template-columns: 1fr; gap: 20px; }
     .faq-section { padding: 60px 24px; }
@@ -201,7 +227,7 @@ document.head.appendChild(o)}initApollo();</script>
       "name": "How is this different from AP software?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "We're not software. We're a team that does the work. You don't learn a dashboard or manage a system — you just approve payments and move on. We handle the vendor onboarding, invoice verification, check generation, QuickBooks sync, and vendor communication."
+        "text": "We're not software. We're a team that does the work. You don't learn a dashboard or manage a system — you just approve payments and move on. We handle vendor onboarding, invoice verification, check generation, QuickBooks sync, and vendor communication."
       }
     },
     {
@@ -209,7 +235,7 @@ document.head.appendChild(o)}initApollo();</script>
       "name": "How fast can we start?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "First payments within 14 days. We onboard your vendors, connect your POS and QuickBooks, and start processing immediately."
+        "text": "First verified payments within 14 days. We onboard your vendors, connect your POS and QuickBooks, and start processing immediately."
       }
     },
     {
@@ -217,7 +243,7 @@ document.head.appendChild(o)}initApollo();</script>
       "name": "Do you pay non-cannabis vendors too?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes — landlords, marketing agencies, consultants, distributors, anyone you write a check to. Cannabis or non-cannabis, we handle it all."
+        "text": "Yes — landlords, marketing agencies, consultants, distributors. Cannabis or non-cannabis, if you write them a check, we handle it."
       }
     },
     {
@@ -266,33 +292,81 @@ document.head.appendChild(o)}initApollo();</script>
   <div class="hero-bg-gradient-2"></div>
   <div class="hero-grid-lines"></div>
   <div class="section-label">Accounts Payable</div>
-  <h1 class="section-title">15 hours a week. That's what AP costs your team.</h1>
+  <h1 class="section-title">You're paying vendors for product that never showed up.</h1>
 </div>
 
-<!-- PAIN BOXES -->
+<!-- PAIN STORY -->
 <section class="pain-section">
-  <div class="pain-boxes reveal">
-    <div class="pain-box">
-      <div class="pain-box-number">15 hrs/week</div>
-      <div class="pain-box-label">wasted on manual AP</div>
-    </div>
-    <div class="pain-box">
-      <div class="pain-box-number">$45,000/yr</div>
-      <div class="pain-box-label">in labor and errors</div>
-    </div>
-    <div class="pain-box">
-      <div class="pain-box-number">Every vendor</div>
-      <div class="pain-box-label">calling you instead of us</div>
-    </div>
+  <div class="pain-story">
+    <p class="pain-scenario reveal">A vendor invoices you for <strong>24 units</strong>. Your team received <strong>22</strong>. Nobody catches it. You pay for <strong>24</strong>.</p>
+    <p class="pain-scenario reveal">Another vendor emails you six times about a payment. It's easier to just pay than to verify. So you pay — and the invoice was <strong>$400 more</strong> than what was delivered.</p>
   </div>
-  <p class="pain-pivot reveal">We take over. You just approve.</p>
+  <p class="pain-multiplier reveal">Multiply that across your entire AP operation. 40 vendors. 52 weeks a year.</p>
+</section>
+
+<!-- AP SAVINGS CALCULATOR -->
+<section class="calc-section" id="calculator">
+  <div class="calc-header">
+    <div class="section-label reveal">Your Numbers</div>
+    <h2 class="section-title reveal">See how much your AP is really costing you</h2>
+  </div>
+  <div class="calc-container reveal">
+    <div class="calc-slider-wrapper">
+      <div class="calc-slider-header">
+        <span class="calc-slider-label">Annual Revenue</span>
+        <span class="calc-slider-value" id="ap-revenue-val">$3,000,000</span>
+      </div>
+      <input type="range" class="calc-slider" id="ap-revenue" min="500000" max="10000000" step="100000" value="3000000">
+      <div class="calc-slider-labels">
+        <span>$500K</span>
+        <span>$10M</span>
+      </div>
+    </div>
+    <div class="calc-slider-wrapper">
+      <div class="calc-slider-header">
+        <span class="calc-slider-label">Number of Vendors</span>
+        <span class="calc-slider-value" id="ap-vendors-val">40</span>
+      </div>
+      <input type="range" class="calc-slider" id="ap-vendors" min="10" max="100" step="5" value="40">
+      <div class="calc-slider-labels">
+        <span>10</span>
+        <span>100</span>
+      </div>
+    </div>
+    <div class="calc-results">
+      <div class="calc-row">
+        <span class="calc-row-label">Money you're overpaying vendors</span>
+        <span class="calc-row-value" id="ap-overpay">$15,000</span>
+      </div>
+      <div class="calc-row">
+        <span class="calc-row-label">Time your team wastes on AP</span>
+        <span class="calc-row-value" id="ap-labor">$24,000</span>
+      </div>
+      <div class="calc-row calc-total">
+        <span class="calc-row-label">Total annual AP waste</span>
+        <span class="calc-row-value" id="ap-total">$39,000</span>
+      </div>
+      <div class="calc-row calc-monthly">
+        <span class="calc-row-label">That's every month going to waste</span>
+        <span class="calc-row-value" id="ap-monthly">$3,250</span>
+      </div>
+    </div>
+    <div class="calc-guarantee">
+      <p><strong>You approve every payment. We verify every invoice.</strong> Nothing goes out without your sign-off.</p>
+    </div>
+    <div class="calc-cta-wrap">
+      <a href="/contact" class="btn-primary">Get My Free Analysis <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+      <p style="font-size:14px;color:var(--slate-400);margin-top:12px;">We'll estimate your overpayment risk. 48 hours. Free.</p>
+    </div>
+    <p style="text-align:center;margin-top:16px;font-size:11px;color:var(--slate-400);">*Savings are estimates based on industry averages, not a guarantee.</p>
+  </div>
 </section>
 
 <!-- PROOF TIMELINE -->
 <section class="proof-timeline">
   <div class="proof-timeline-header">
     <div class="section-label reveal">What Happens Next</div>
-    <h2 class="section-title reveal">From vendor list to full AP operation in 30 days</h2>
+    <h2 class="section-title reveal">From vendor list to managed AP in 30 days</h2>
   </div>
   <div class="timeline-track">
     <div class="timeline-step reveal">
@@ -301,15 +375,15 @@ document.head.appendChild(o)}initApollo();</script>
     </div>
     <div class="timeline-step reveal reveal-delay-1">
       <div class="timeline-day">Day 14</div>
-      <div class="timeline-text">Every vendor onboarded with their own portal. First payments processed. QuickBooks synced.</div>
+      <div class="timeline-text">Every vendor onboarded. First payments verified against delivery records and processed.</div>
     </div>
     <div class="timeline-step reveal reveal-delay-2">
       <div class="timeline-day">Day 30</div>
-      <div class="timeline-text">Vendors email us, not you. You haven't written a check in a month.</div>
+      <div class="timeline-text">Vendors email us, not you. QuickBooks stays in sync. You haven't written a check in a month.</div>
     </div>
     <div class="timeline-step reveal reveal-delay-3">
       <div class="timeline-day">Day 60</div>
-      <div class="timeline-text">$45K/year saved. 15 hours/week freed. You forgot AP was a thing.</div>
+      <div class="timeline-text">$45K+ saved. Every invoice verified. You forgot AP was a thing.</div>
     </div>
   </div>
   <div class="proof-stats-row">
@@ -322,8 +396,8 @@ document.head.appendChild(o)}initApollo();</script>
       <div class="proof-stat-desc">vendors managed</div>
     </div>
     <div class="proof-stat reveal reveal-delay-2">
-      <div class="proof-stat-num">On time</div>
-      <div class="proof-stat-desc">every payment, every week</div>
+      <div class="proof-stat-num">Verified</div>
+      <div class="proof-stat-desc">every invoice, every payment</div>
     </div>
   </div>
   <p class="proof-note reveal">Real results from a two-location Massachusetts dispensary chain.</p>
@@ -332,7 +406,7 @@ document.head.appendChild(o)}initApollo();</script>
 <!-- VENDOR PORTAL (COMPACT) -->
 <section class="portal-compact">
   <div class="portal-compact-inner reveal">
-    <h2>Every vendor gets a free portal.</h2>
+    <h2>Your vendors stop calling.</h2>
     <div class="portal-pills">
       <span class="portal-pill"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Check downloads</span>
       <span class="portal-pill"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Payment history</span>
@@ -347,7 +421,7 @@ document.head.appendChild(o)}initApollo();</script>
   <div class="cta-content">
     <div class="section-label reveal">Get Started</div>
     <h2 class="section-title reveal">Your AP could be off your plate in 30 days.</h2>
-    <p class="section-desc reveal">We'll look at your vendor list and show you how much time and money you'd save. Free. 48 hours.</p>
+    <p class="section-desc reveal">We'll look at your vendor list, estimate your overpayment risk, and show you how much you'd save. Free. 48 hours.</p>
     <div class="cta-actions reveal">
       <a href="/contact" class="btn-primary">
         Get My Free Analysis
@@ -371,15 +445,15 @@ document.head.appendChild(o)}initApollo();</script>
   <div class="faq-list">
     <details>
       <summary>How is this different from AP software?</summary>
-      <p>We're not software. We're a team that does the work. You don't learn a dashboard or manage a system — you just approve payments and move on. We handle the vendor onboarding, invoice verification, check generation, QuickBooks sync, and vendor communication.</p>
+      <p>We're not software. We're a team that does the work. You don't learn a dashboard or manage a system — you just approve payments and move on. We handle vendor onboarding, invoice verification, check generation, QuickBooks sync, and vendor communication.</p>
     </details>
     <details>
       <summary>How fast can we start?</summary>
-      <p>First payments within 14 days. We onboard your vendors, connect your POS and QuickBooks, and start processing immediately.</p>
+      <p>First verified payments within 14 days. We onboard your vendors, connect your POS and QuickBooks, and start processing immediately.</p>
     </details>
     <details>
       <summary>Do you pay non-cannabis vendors too?</summary>
-      <p>Yes — landlords, marketing agencies, consultants, distributors, anyone you write a check to. Cannabis or non-cannabis, we handle it all.</p>
+      <p>Yes — landlords, marketing agencies, consultants, distributors. Cannabis or non-cannabis, if you write them a check, we handle it.</p>
     </details>
     <details>
       <summary>Do I still approve every payment?</summary>
@@ -488,6 +562,53 @@ document.head.appendChild(o)}initApollo();</script>
       navLinks.classList.remove('mobile-open');
     }
   });
+
+  /* ── AP Calculator ── */
+  var revSlider = document.getElementById('ap-revenue');
+  var vendorSlider = document.getElementById('ap-vendors');
+  if (revSlider && vendorSlider) {
+    var revVal = document.getElementById('ap-revenue-val');
+    var vendorsVal = document.getElementById('ap-vendors-val');
+    var overpayEl = document.getElementById('ap-overpay');
+    var laborEl = document.getElementById('ap-labor');
+    var totalEl = document.getElementById('ap-total');
+    var monthlyEl = document.getElementById('ap-monthly');
+
+    function formatCurrency(n) {
+      return '$' + Math.round(n).toLocaleString();
+    }
+
+    function updateSliderTrack(slider) {
+      var pct = ((slider.value - slider.min) / (slider.max - slider.min)) * 100;
+      slider.style.background = 'linear-gradient(to right, #95d5b2 0%, #95d5b2 ' + pct + '%, #e2e8f0 ' + pct + '%, #e2e8f0 100%)';
+    }
+
+    function updateAPCalc() {
+      var revenue = parseInt(revSlider.value, 10);
+      var vendors = parseInt(vendorSlider.value, 10);
+
+      revVal.textContent = formatCurrency(revenue);
+      vendorsVal.textContent = vendors;
+
+      updateSliderTrack(revSlider);
+      updateSliderTrack(vendorSlider);
+
+      var overpay = revenue * 0.005;
+      var labor = vendors * 20 * 30;
+      var total = overpay + labor;
+      var monthly = total / 12;
+
+      overpayEl.textContent = formatCurrency(overpay);
+      laborEl.textContent = formatCurrency(labor);
+      totalEl.textContent = formatCurrency(total);
+      monthlyEl.textContent = formatCurrency(monthly);
+    }
+
+    revSlider.addEventListener('input', updateAPCalc);
+    vendorSlider.addEventListener('input', updateAPCalc);
+
+    updateAPCalc();
+  }
 
 })();
 </script>
