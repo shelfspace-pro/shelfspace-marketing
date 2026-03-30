@@ -4,19 +4,19 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Managed Cannabis Consignment — ShelfSpace</title>
-<meta name="description" content="Managed cannabis consignment. Stop paying for inventory upfront — we run weekly settlements, cut vendor checks, and free up your capital. Free pilot.">
+<meta name="description" content="Stop paying for inventory upfront. ShelfSpace runs consignment for cannabis dispensaries — vendors own the product until it sells. $250K freed. We handle everything.">
 <link rel="canonical" href="https://shelfspace.pro/consignment">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://shelfspace.pro/consignment">
 <meta property="og:title" content="Managed Cannabis Consignment — ShelfSpace">
-<meta property="og:description" content="Managed cannabis consignment. Stop paying for inventory upfront — we run weekly settlements, cut vendor checks, and free up your capital. Free pilot.">
+<meta property="og:description" content="Stop paying for inventory upfront. ShelfSpace runs consignment for cannabis dispensaries — vendors own the product until it sells. $250K freed. We handle everything.">
 <meta property="og:image" content="https://shelfspace.pro/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:type" content="image/png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Managed Cannabis Consignment — ShelfSpace">
-<meta name="twitter:description" content="Managed cannabis consignment. Stop paying for inventory upfront — we run weekly settlements, cut vendor checks, and free up your capital. Free pilot.">
+<meta name="twitter:description" content="Stop paying for inventory upfront. ShelfSpace runs consignment for cannabis dispensaries — vendors own the product until it sells. $250K freed. We handle everything.">
 <meta name="twitter:image" content="https://shelfspace.pro/og-image.png">
 <meta name="apple-mobile-web-app-title" content="ShelfSpace">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -44,6 +44,23 @@
   .page-hero.hero-loaded .section-label,
   .page-hero.hero-loaded .section-title,
   .page-hero.hero-loaded .section-desc { opacity: 1; transform: translateY(0); }
+
+  /* ─── PAIN SECTION ─── */
+  .pain-section { background: var(--white); padding: 80px 48px; text-align: center; }
+  .pain-stack { max-width: 500px; margin: 0 auto 48px; }
+  .pain-item { padding: 24px 0; }
+  .pain-number {
+    font-family: var(--font-mono); font-size: clamp(40px, 6vw, 64px);
+    font-weight: 700; color: var(--green-deep); letter-spacing: -2px;
+    line-height: 1;
+  }
+  .pain-item:last-child .pain-number { color: var(--slate-300); }
+  .pain-label { font-size: 17px; color: var(--slate-500); margin-top: 8px; }
+  .pain-pivot {
+    font-size: clamp(20px, 2.5vw, 28px); font-weight: 700;
+    color: var(--green-deep); letter-spacing: -0.5px;
+    max-width: 500px; margin: 0 auto;
+  }
 
   /* ─── CASH BOOST CALCULATOR ─── */
   .boost-section { background: var(--slate-50); }
@@ -113,66 +130,23 @@
     text-align: center; margin-top: 32px;
   }
 
-  /* ─── HOW WE MANAGE IT ─── */
-  .how-section { background: var(--white); }
-  .how-header { text-align: center; max-width: 700px; margin: 0 auto 72px; }
-  .how-header .section-desc { margin: 0 auto; }
-  .how-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
-  .how-card {
-    background: var(--slate-50); border: 1px solid var(--slate-200);
-    border-radius: 16px; padding: 36px 28px;
-    transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-    position: relative; overflow: hidden;
-  }
-  .how-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--green-accent), var(--green-mid)); opacity: 0; transition: opacity 0.4s; }
-  .how-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(27, 67, 50, 0.1); border-color: var(--green-accent); }
-  .how-card:hover::before { opacity: 1; }
-  .how-step { font-family: var(--font-mono); font-size: 13px; font-weight: 700; color: var(--green-accent); margin-bottom: 20px; letter-spacing: 1px; }
-  .how-icon { width: 48px; height: 48px; background: var(--green-ghost); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; }
-  .how-icon svg { width: 24px; height: 24px; color: var(--green-deep); }
-  .how-card h3 { font-size: 18px; font-weight: 700; color: var(--green-deep); margin-bottom: 10px; letter-spacing: -0.3px; }
-  .how-card p { font-size: 14px; line-height: 1.65; color: var(--slate-500); }
-  .how-card.reveal {
-    transform: translateY(40px) scale(0.97);
-  }
-  .how-card.reveal.is-visible {
-    transform: translateY(0) scale(1);
-  }
-
-  /* ─── MANAGED SERVICE CALLOUT ─── */
-  .managed-callout {
-    background: var(--green-deep); position: relative; overflow: hidden;
-    padding: 80px 48px; text-align: center;
-  }
-  .managed-callout::before {
-    content: ''; position: absolute; top: -200px; left: -200px;
-    width: 500px; height: 500px;
-    background: radial-gradient(circle, rgba(149,213,178,0.08), transparent 70%);
-  }
-  .managed-callout::after {
-    content: ''; position: absolute; bottom: -150px; right: -150px;
-    width: 400px; height: 400px;
-    background: radial-gradient(circle, rgba(149,213,178,0.06), transparent 70%);
-  }
-  .managed-callout-content { position: relative; max-width: 700px; margin: 0 auto; }
-  .managed-callout-content .section-label { color: var(--green-accent); }
-  .managed-callout-content h2 {
-    font-size: clamp(24px, 3vw, 36px); font-weight: 700; color: var(--white);
-    line-height: 1.25; letter-spacing: -1px; margin-bottom: 20px;
-  }
-  .managed-callout-content p {
-    font-size: 17px; line-height: 1.75; color: rgba(255,255,255,0.6);
-  }
-  .managed-callout-content p strong { color: rgba(255,255,255,0.85); font-weight: 600; }
-  .managed-bullets {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
-    max-width: 560px; margin: 32px auto 0; text-align: left;
-  }
-  .managed-bullet {
-    display: flex; align-items: flex-start; gap: 12px;
-    font-size: 15px; color: rgba(255,255,255,0.7);
-  }
-  .managed-bullet svg { flex-shrink: 0; margin-top: 2px; color: var(--green-accent); }
+  /* ─── PROOF TIMELINE ─── */
+  .proof-timeline { background: var(--green-deep); padding: 100px 48px; position: relative; overflow: hidden; }
+  .proof-timeline::before { content: ''; position: absolute; top: -200px; right: -200px; width: 500px; height: 500px; background: radial-gradient(circle, rgba(149,213,178,0.08), transparent 70%); }
+  .proof-timeline-header { text-align: center; max-width: 500px; margin: 0 auto 64px; position: relative; }
+  .proof-timeline-header .section-label { color: var(--green-accent); }
+  .proof-timeline-header .section-title { color: var(--white); }
+  .timeline-track { max-width: 600px; margin: 0 auto 64px; position: relative; padding-left: 32px; border-left: 2px solid rgba(149,213,178,0.3); }
+  .timeline-step { padding: 0 0 48px 32px; position: relative; }
+  .timeline-step:last-child { padding-bottom: 0; }
+  .timeline-step::before { content: ''; position: absolute; left: -9px; top: 4px; width: 16px; height: 16px; border-radius: 50%; background: var(--green-accent); border: 3px solid var(--green-deep); }
+  .timeline-day { font-family: var(--font-mono); font-size: 14px; font-weight: 700; color: var(--green-accent); margin-bottom: 4px; letter-spacing: 1px; }
+  .timeline-text { font-size: 16px; line-height: 1.6; color: rgba(255,255,255,0.7); }
+  .timeline-step:last-child .timeline-text { color: var(--white); font-weight: 600; }
+  .proof-stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; max-width: 600px; margin: 0 auto 24px; text-align: center; position: relative; }
+  .proof-stat-num { font-family: var(--font-mono); font-size: clamp(24px, 3vw, 32px); font-weight: 700; color: var(--white); letter-spacing: -1px; margin-bottom: 4px; }
+  .proof-stat-desc { font-size: 13px; color: rgba(255,255,255,0.5); }
+  .proof-note { text-align: center; font-size: 13px; color: rgba(255,255,255,0.35); font-style: italic; position: relative; }
 
   /* ─── FAQ ─── */
   .faq-section {
@@ -211,6 +185,26 @@
   /* ─── CTA PARALLAX ─── */
   .cta-section::before { transform: translate(-50%,-50%) translateY(var(--parallax-y, 0)); will-change: transform; }
 
+  /* ─── STICKY CTA BAR ─── */
+  .sticky-cta {
+    position: fixed; bottom: 0; left: 0; right: 0; z-index: 999;
+    background: var(--green-deep); padding: 12px 24px;
+    transform: translateY(100%); transition: transform 0.3s ease;
+  }
+  .sticky-cta.visible { transform: translateY(0); }
+  .sticky-cta-inner {
+    max-width: 800px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  }
+  .sticky-cta-inner span { color: rgba(255,255,255,0.8); font-size: 15px; font-weight: 500; }
+  .sticky-cta-inner a {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 10px 24px; background: var(--white); color: var(--green-deep);
+    border-radius: 10px; font-size: 14px; font-weight: 600;
+    text-decoration: none; white-space: nowrap; transition: all 0.2s;
+  }
+  .sticky-cta-inner a:hover { background: var(--slate-50); }
+
   /* ─── FOOTER 5-COL ─── */
   .footer-top { grid-template-columns: 2fr 1fr 1fr 1fr 1fr; }
   @media (max-width: 900px) { .footer-top { grid-template-columns: 1fr 1fr; } }
@@ -218,19 +212,20 @@
 
   /* ─── RESPONSIVE ─── */
   @media (max-width: 900px) {
-    .how-grid { grid-template-columns: 1fr 1fr; max-width: 600px; }
-    .managed-callout { padding: 60px 24px; }
-    .managed-bullets { grid-template-columns: 1fr; }
+    .proof-timeline { padding: 80px 24px; }
+    .proof-stats-row { grid-template-columns: 1fr; gap: 20px; }
     .faq-section { padding: 60px 24px; }
+    .pain-section { padding: 60px 24px; }
   }
   @media (max-width: 600px) {
-    .how-grid { grid-template-columns: 1fr; max-width: 400px; }
     .boost-total { flex-direction: column; text-align: center; gap: 8px; }
+    .sticky-cta-inner { flex-direction: column; text-align: center; gap: 8px; }
+    .sticky-cta-inner span { font-size: 13px; }
   }
 
   /* ─── REDUCED MOTION ─── */
   @media (prefers-reduced-motion: reduce) {
-    .reveal, .how-card.reveal {
+    .reveal {
       opacity: 1; transform: none; transition: none;
     }
     .page-hero .section-label,
@@ -257,58 +252,42 @@ document.head.appendChild(o)}initApollo();</script>
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "How do vendors get paid?",
+      "name": "Will my vendors agree to this?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "ShelfSpace issues Check 21 compliant checks to vendors every week, based on actual sales data pulled from your POS. Checks are printable on standard paper and mobile-deposit ready. Vendors also get a detailed settlement report showing every line item — what sold, at what price, and their split."
+        "text": "Most do. They get guaranteed weekly payments instead of chasing you for months. We handle every conversation — you don't pitch it yourself."
       }
     },
     {
       "@type": "Question",
-      "name": "How much does consignment cost?",
+      "name": "Does anything change about how I run my store?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Everything is included in the 60-day free pilot. After that, pricing is based on what we recover and manage for you — most operators pay a fraction of the savings. No contracts, cancel any time."
+        "text": "Nothing. Same deliveries, same POS, same METRC, same staff. Customers can't tell the difference."
       }
     },
     {
       "@type": "Question",
-      "name": "Will my vendors agree to consignment?",
+      "name": "What if product doesn't sell?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Most do. Vendors get guaranteed weekly payments (no more chasing invoices), access to more shelf space, and a neutral third party managing the relationship. We handle the conversations and contracts — you don't have to pitch it yourself."
+        "text": "You haven't paid for it. It goes back to the vendor. That's the entire point."
       }
     },
     {
       "@type": "Question",
-      "name": "Does anything change about how I receive product?",
+      "name": "How fast can I start?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "No. Product is delivered, manifested in METRC, and received into your POS the same way it is today. Your staff, your workflow, your process — nothing changes. Customers can't tell the difference either."
+        "text": "First vendor agreements within 14 days. Settlements start the following week."
       }
     },
     {
       "@type": "Question",
-      "name": "What POS systems do you integrate with?",
+      "name": "What does this cost?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "We currently integrate with Dutchie and Flowhub, with more integrations coming. If you use a different POS, reach out — we're adding new connections regularly."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What happens if a product doesn't sell?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "That's the whole point. With consignment, unsold inventory is the vendor's risk, not yours. No markdowns eating your margin. No expired product you already paid for. If it doesn't sell, you haven't lost a dime."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Can I run consignment and wholesale at the same time?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Absolutely. Most of our retailers run both. ShelfSpace manages consignment settlements and wholesale AP payments through the same engine. One platform for every vendor, every payment."
+        "text": "The 60-day pilot is free. After that, you pay a fraction of what we recover and manage. No contracts."
       }
     }
   ]
@@ -320,7 +299,7 @@ document.head.appendChild(o)}initApollo();</script>
   "@type": "Service",
   "name": "Managed Cannabis Consignment",
   "provider": { "@type": "Organization", "name": "ShelfSpace", "url": "https://shelfspace.pro" },
-  "description": "Managed consignment for cannabis dispensaries. Stop paying for inventory upfront — we run weekly settlements, cut vendor checks, and free up your capital.",
+  "description": "Stop paying for inventory upfront. ShelfSpace runs consignment for cannabis dispensaries — vendors own the product until it sells. $250K freed. We handle everything.",
   "areaServed": "US",
   "url": "https://shelfspace.pro/consignment"
 }
@@ -346,24 +325,39 @@ document.head.appendChild(o)}initApollo();</script>
   <div class="nav-hamburger" onclick="document.querySelector('.nav-links').classList.toggle('mobile-open'); event.stopPropagation();"><span></span><span></span><span></span></div>
 </nav>
 
-<!-- PAGE HERO -->
+<!-- SECTION 1: HERO -->
 <div class="page-hero">
   <div class="hero-bg-gradient"></div>
   <div class="hero-bg-gradient-2"></div>
   <div class="hero-grid-lines"></div>
   <div class="section-label">Consignment</div>
-  <h1 class="section-title">Your shelves are full. Your bank account doesn't have to be empty.</h1>
-  <p class="section-desc">The average dispensary has $200,000–$500,000 tied up in inventory at any given time. Consignment puts that cash back in your pocket. ShelfSpace manages the entire program — vendors get paid weekly, you keep your capital.</p>
-  <div style="margin-top: 32px;">
-    <a href="/contact" class="btn-primary">Get a Free Analysis <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
-  </div>
+  <h1 class="section-title">You paid $300,000 for the product sitting on your shelves right now.</h1>
 </div>
 
-<!-- CASH BOOST CALCULATOR -->
+<!-- SECTION 2: PAIN BREAKDOWN -->
+<section class="pain-section">
+  <div class="pain-stack">
+    <div class="pain-item reveal">
+      <div class="pain-number">$300,000</div>
+      <div class="pain-label">tied up on your shelves right now</div>
+    </div>
+    <div class="pain-item reveal reveal-delay-1">
+      <div class="pain-number">$50,000</div>
+      <div class="pain-label">will expire before it sells</div>
+    </div>
+    <div class="pain-item reveal reveal-delay-2">
+      <div class="pain-number">$0</div>
+      <div class="pain-label">you can get back</div>
+    </div>
+  </div>
+  <p class="pain-pivot reveal">Unless your vendors own it instead of you.</p>
+</section>
+
+<!-- SECTION 3: CALCULATOR -->
 <section class="boost-section" id="calculator">
   <div class="boost-header">
-    <div class="section-label reveal">Consignment Calculator</div>
-    <h2 class="section-title reveal">Consignment increases your cash</h2>
+    <div class="section-label reveal">See What Changes</div>
+    <h2 class="section-title reveal">Slide to see your cash flow transform</h2>
     <p class="section-desc reveal">Slide to match your store. See how much capital you free up when vendors own the inventory instead of you.</p>
   </div>
   <div class="boost-container reveal">
@@ -405,94 +399,77 @@ document.head.appendChild(o)}initApollo();</script>
         <span class="boost-total-value" id="boost-result">$187,500</span>
       </div>
     </div>
-    <p class="boost-subtitle">That's capital you can use for payroll, expansion, marketing, or just breathing room.</p>
+    <p class="boost-subtitle"><span id="boost-monthly-context"></span> The stress you feel right now? <strong>Gone.</strong></p>
     <p style="text-align:center;margin-top:12px;font-size:11px;color:var(--slate-400);">*Cash boost is an estimate based on industry-average inventory-to-revenue ratios.</p>
     <div class="boost-cta-wrap">
-      <a href="/contact" class="btn-primary">See What You'd Save <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+      <a href="/contact" class="btn-primary">Get My Free Analysis <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+      <p style="font-size:14px;color:var(--slate-400);margin-top:12px;">We'll show you which vendors to start with. 48 hours. Free.</p>
     </div>
   </div>
 </section>
 
-<!-- HOW SHELFSPACE MANAGES YOUR CONSIGNMENT -->
-<section class="how-section" id="how">
-  <div class="how-header">
-    <div class="section-label reveal">How It Works</div>
-    <h2 class="section-title reveal">How ShelfSpace manages your consignment program</h2>
-    <p class="section-desc reveal">We plug into your existing systems and handle everything. Nothing changes about how you receive product, stock shelves, or sell to customers. We just make sure vendors get paid and you keep your cash.</p>
+<!-- SECTION 4: PROOF TIMELINE -->
+<section class="proof-timeline">
+  <div class="proof-timeline-header">
+    <div class="section-label reveal">What Happens Next</div>
+    <h2 class="section-title reveal">From signup to cash flow in 30 days</h2>
   </div>
-  <div class="how-grid">
-    <div class="how-card reveal">
-      <div class="how-step">01</div>
-      <div class="how-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-      </div>
-      <h3>We connect to your POS and METRC</h3>
-      <p>ShelfSpace integrates with Dutchie, Flowhub, and other cannabis POS systems. We pull sales data directly. Your METRC manifests flow through as normal.</p>
-      <div style="display:flex;align-items:center;gap:8px;margin-top:14px;"><img src="/metrc-logo.png" alt="METRC" style="height:18px;opacity:0.6;"><span style="font-size:11px;font-weight:600;color:var(--slate-400);">Certified METRC Third-Party Vendor</span></div>
+  <div class="timeline-track">
+    <div class="timeline-step reveal">
+      <div class="timeline-day">Day 1</div>
+      <div class="timeline-text">We analyze your inventory and identify consignment-ready vendors.</div>
     </div>
-    <div class="how-card reveal reveal-delay-1">
-      <div class="how-step">02</div>
-      <div class="how-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
-      </div>
-      <h3>We onboard your vendors</h3>
-      <p>We work directly with your vendors to set up consignment agreements. Fair terms, clear contracts, no awkward conversations for you.</p>
+    <div class="timeline-step reveal reveal-delay-1">
+      <div class="timeline-day">Day 14</div>
+      <div class="timeline-text">First vendor agreements signed. We handle all conversations and contracts.</div>
     </div>
-    <div class="how-card reveal reveal-delay-2">
-      <div class="how-step">03</div>
-      <div class="how-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-      </div>
-      <h3>We crunch the numbers weekly</h3>
-      <p>Every week our engine calculates what sold, at what price, and what each vendor is owed. Accurate to the penny, backed by POS data.</p>
+    <div class="timeline-step reveal reveal-delay-2">
+      <div class="timeline-day">Day 30</div>
+      <div class="timeline-text">Weekly settlements running. Cash flowing back into your account.</div>
     </div>
-    <div class="how-card reveal reveal-delay-3">
-      <div class="how-step">04</div>
-      <div class="how-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
-      </div>
-      <h3>We pay vendors weekly</h3>
-      <p>ShelfSpace issues Check 21 compliant checks to every vendor, every week. Vendors get paid on time, every time. You never write a check.</p>
+    <div class="timeline-step reveal reveal-delay-3">
+      <div class="timeline-day">Day 60</div>
+      <div class="timeline-text">$187,500+ freed up. Vendors paid on time. You did nothing.</div>
     </div>
+  </div>
+  <div class="proof-stats-row">
+    <div class="proof-stat reveal">
+      <div class="proof-stat-num">$250K</div>
+      <div class="proof-stat-desc">freed in capital</div>
+    </div>
+    <div class="proof-stat reveal reveal-delay-1">
+      <div class="proof-stat-num">40+</div>
+      <div class="proof-stat-desc">vendors managed</div>
+    </div>
+    <div class="proof-stat reveal reveal-delay-2">
+      <div class="proof-stat-num">14 days</div>
+      <div class="proof-stat-desc">to first agreements</div>
+    </div>
+  </div>
+  <p class="proof-note reveal">Real results from a two-location Massachusetts dispensary chain.</p>
+</section>
+
+<!-- SECTION 5: CTA -->
+<section class="cta-section">
+  <div class="cta-content">
+    <div class="section-label reveal">Get Started</div>
+    <h2 class="section-title reveal">Your cash flow could change in 30 days.</h2>
+    <p class="section-desc reveal">We'll analyze your inventory, identify which vendors are consignment-ready, and show you exactly how much capital you'd free up. Free. No commitment.</p>
+    <div class="cta-actions reveal">
+      <a href="/contact" class="btn-primary">
+        Get My Free Analysis
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+    <div class="cta-founder reveal" style="display:flex;align-items:center;gap:16px;justify-content:center;margin-top:32px;">
+      <img src="/chris-mitchem.jpg" alt="Chris Mitchem" style="width:48px;height:48px;border-radius:50%;object-fit:cover;">
+      <span style="font-size:14px;color:var(--slate-500);">Chris Mitchem, Founder — 10 years operating dispensaries</span>
+    </div>
+    <p class="cta-note reveal">No credit card. No commitment. No risk.</p>
   </div>
 </section>
 
-<!-- MANAGED SERVICE CALLOUT -->
-<section class="managed-callout">
-  <div class="managed-callout-content">
-    <div class="section-label reveal">Done-For-You Managed Service</div>
-    <h2 class="reveal">Not another portal to log into. We do the work.</h2>
-    <p class="reveal">Most platforms give you a dashboard and leave you to figure it out. ShelfSpace is the opposite. <strong>We manage your consignment program so you never have to think about it.</strong> You get weekly reports and a portal if you want it — but the point is you shouldn't need it.</p>
-    <div class="managed-bullets reveal">
-      <div class="managed-bullet">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-        <span>We pull your POS data</span>
-      </div>
-      <div class="managed-bullet">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-        <span>We onboard vendors</span>
-      </div>
-      <div class="managed-bullet">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-        <span>We run weekly settlements</span>
-      </div>
-      <div class="managed-bullet">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-        <span>We write every check</span>
-      </div>
-      <div class="managed-bullet">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-        <span>We handle disputes</span>
-      </div>
-      <div class="managed-bullet">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-        <span>We send you reports</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FAQ -->
+<!-- SECTION 6: FAQ -->
 <section class="faq-section">
   <div class="faq-header">
     <div class="section-label reveal">FAQ</div>
@@ -500,52 +477,35 @@ document.head.appendChild(o)}initApollo();</script>
   </div>
   <div class="faq-list">
     <details>
-      <summary>How do vendors get paid?</summary>
-      <p>ShelfSpace issues Check 21 compliant checks to vendors every week, based on actual sales data pulled from your POS. Checks are printable on standard paper and mobile-deposit ready. Vendors also get a detailed settlement report showing every line item — what sold, at what price, and their split.</p>
+      <summary>Will my vendors agree to this?</summary>
+      <p>Most do. They get guaranteed weekly payments instead of chasing you for months. We handle every conversation — you don't pitch it yourself.</p>
     </details>
     <details>
-      <summary>How much does consignment cost?</summary>
-      <p>Everything is included in the 60-day free pilot. After that, pricing is based on what we recover and manage for you — most operators pay a fraction of the savings. No contracts, cancel any time. <a href="/pricing" style="color:var(--green-mid);font-weight:600;text-decoration:none;">See pricing</a>.</p>
+      <summary>Does anything change about how I run my store?</summary>
+      <p>Nothing. Same deliveries, same POS, same METRC, same staff. Customers can't tell the difference.</p>
     </details>
     <details>
-      <summary>Will my vendors agree to consignment?</summary>
-      <p>Most do. Vendors get guaranteed weekly payments (no more chasing invoices), access to more shelf space, and a neutral third party managing the relationship. We handle the conversations and contracts — you don't have to pitch it yourself.</p>
+      <summary>What if product doesn't sell?</summary>
+      <p>You haven't paid for it. It goes back to the vendor. That's the entire point.</p>
     </details>
     <details>
-      <summary>Does anything change about how I receive product?</summary>
-      <p>No. Product is delivered, manifested in METRC, and received into your POS the same way it is today. Your staff, your workflow, your process — nothing changes. Customers can't tell the difference either.</p>
+      <summary>How fast can I start?</summary>
+      <p>First vendor agreements within 14 days. Settlements start the following week.</p>
     </details>
     <details>
-      <summary>What POS systems do you integrate with?</summary>
-      <p>We currently integrate with Dutchie and Flowhub, with more integrations coming. If you use a different POS, reach out — we're adding new connections regularly.</p>
-    </details>
-    <details>
-      <summary>What happens if a product doesn't sell?</summary>
-      <p>That's the whole point. With consignment, unsold inventory is the vendor's risk, not yours. No markdowns eating your margin. No expired product you already paid for. If it doesn't sell, you haven't lost a dime.</p>
-    </details>
-    <details>
-      <summary>Can I run consignment and wholesale at the same time?</summary>
-      <p>Absolutely. Most of our retailers run both. ShelfSpace manages consignment settlements and wholesale AP payments through the same engine. One platform for every vendor, every payment.</p>
+      <summary>What does this cost?</summary>
+      <p>The 60-day pilot is free. After that, you pay a fraction of what we recover and manage. No contracts.</p>
     </details>
   </div>
 </section>
 
-<!-- CTA -->
-<section class="cta-section">
-  <div class="cta-content">
-    <div class="section-label reveal">Get Started</div>
-    <h2 class="section-title reveal">Free up your cash. Let ShelfSpace run consignment for you.</h2>
-    <p class="section-desc reveal">Start a free 60-day pilot. We connect your systems, onboard your vendors, and start running settlements — you just keep selling.</p>
-    <div class="cta-actions reveal">
-      <a href="/contact" class="btn-primary">
-        Get a Free Analysis
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-      </a>
-      <a href="/contact" class="btn-secondary">Talk to Chris</a>
-    </div>
-    <p class="cta-note reveal">No credit card. No commitment. No risk.</p>
+<!-- SECTION 7: STICKY BOTTOM BAR -->
+<div class="sticky-cta" id="sticky-cta">
+  <div class="sticky-cta-inner">
+    <span>$300K trapped on your shelves?</span>
+    <a href="/contact">Get My Free Analysis <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a>
   </div>
-</section>
+</div>
 
 <!-- FOOTER -->
 <footer>
@@ -567,7 +527,7 @@ document.head.appendChild(o)}initApollo();</script>
   var nav = document.getElementById('nav');
   var pageHero = document.querySelector('.page-hero');
   var parallaxSections = [
-    document.querySelector('.managed-callout'),
+    document.querySelector('.proof-timeline'),
     document.querySelector('.cta-section')
   ];
 
@@ -630,6 +590,16 @@ document.head.appendChild(o)}initApollo();</script>
     }
   });
 
+  /* ── Sticky CTA bar ── */
+  var stickyCta = document.getElementById('sticky-cta');
+  var calcSection = document.getElementById('calculator');
+  if (stickyCta && calcSection) {
+    window.addEventListener('scroll', function() {
+      var calcBottom = calcSection.getBoundingClientRect().bottom;
+      stickyCta.classList.toggle('visible', calcBottom < 0);
+    }, { passive: true });
+  }
+
 
   /* ══════════════════════════════════════════════════
      CASH BOOST CALCULATOR
@@ -688,6 +658,21 @@ document.head.appendChild(o)}initApollo();</script>
 
       invEl.textContent = formatCurrency(onHandInventory);
       vendorPctEl.textContent = pct + '%';
+
+      /* Emotional context line */
+      var monthly = Math.round(cashBoost / 12);
+      var contextEl = document.getElementById('boost-monthly-context');
+      if (contextEl) {
+        if (cashBoost >= 200000) {
+          contextEl.textContent = "That's your second location funded.";
+        } else if (cashBoost >= 100000) {
+          contextEl.textContent = "That's a full year of payroll for two employees.";
+        } else if (cashBoost >= 50000) {
+          contextEl.textContent = "That's six months of breathing room.";
+        } else {
+          contextEl.textContent = "That's real money back in your pocket.";
+        }
+      }
 
       /* Animate the big number */
       animateValue(resultEl, lastResult, cashBoost, 300);

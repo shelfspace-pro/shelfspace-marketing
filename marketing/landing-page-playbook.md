@@ -164,6 +164,49 @@ Seven sections. That's the max. If you need more sections, you're over-explainin
 - Every CTA links to /contact — one destination, no confusion
 - "Talk to Chris" as secondary only on pages where it adds value (not everywhere)
 
+## SEO Rules
+
+Every page needs to convert AND be findable. Emotion gets the click. SEO gets the visitor there in the first place.
+
+### Page-Level Requirements
+- Every page gets a unique `<title>` tag — include the primary keyword and "ShelfSpace"
+- Every page gets a unique `<meta name="description">` — write it as a direct answer to the question someone would Google. 150-160 characters max.
+- Every page gets a canonical URL (`<link rel="canonical">`)
+- One H1 per page. It should contain the primary keyword naturally — don't stuff it.
+- Use H2s for section headings, H3s for sub-sections. Don't skip levels.
+
+### Keyword Strategy
+- Each page targets ONE primary keyword phrase (e.g., "cannabis consignment management")
+- Use the keyword in: H1, meta description, first paragraph of body copy, and at least one H2
+- Use natural variations and related terms throughout — don't repeat the exact phrase robotically
+- Think about what a dispensary operator would actually type into Google, not what a marketer would
+
+### Structured Data
+- Every page gets Organization schema in JSON-LD
+- FAQ sections get FAQPage schema — this is free real estate in search results
+- Service pages get Service schema
+- The homepage gets WebSite schema with a SearchAction if applicable
+
+### Technical SEO
+- All images need descriptive `alt` text — not "image1.png", not empty
+- Open Graph and Twitter Card meta tags on every page (title, description, image)
+- All internal links use relative paths (`/consignment`, not `https://shelfspace.pro/consignment`)
+- Page load speed matters — no massive images, no render-blocking scripts above the fold
+- Mobile-first: every page must work perfectly on a phone. Google indexes mobile-first.
+
+### Content for AI Search (GEO)
+- Write FAQ answers as complete, standalone statements — AI models pull these verbatim
+- Include `llms.txt` at the site root with a structured summary of what ShelfSpace does
+- Use clear, factual language in at least one section per page — AI models favor authoritative, direct answers over marketing fluff
+- Structured data helps AI models parse your content — don't skip it
+- Being cited on external sites (directories, LinkedIn, industry blogs) compounds AI search visibility
+
+### What NOT to Do
+- Don't sacrifice conversion copy for keyword density — the emotional arc comes first
+- Don't add thin "SEO pages" that exist only for keywords — every page must earn its existence
+- Don't duplicate meta descriptions across pages
+- Don't hide text or keyword-stuff — Google's smarter than that, and so are AI models
+
 ## How to Use This Playbook
 
 1. Before writing ANY marketing page, read this file
@@ -172,3 +215,4 @@ Seven sections. That's the max. If you need more sections, you're over-explainin
 4. Count your sections — if more than 7, cut until it's 7 or fewer
 5. Read every sentence and ask: "Does this make someone FEEL something?" If no, cut it.
 6. Test the page by reading only the headlines and CTA buttons (skip all body copy). Does the page still make sense? Does it still compel action? If not, the headlines aren't strong enough.
+7. Before shipping, run the SEO checklist: unique title, unique meta description, one H1 with keyword, structured data, alt text on images, OG/Twitter tags.
