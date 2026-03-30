@@ -148,9 +148,37 @@
   .proof-note { text-align: center; font-size: 13px; color: rgba(255,255,255,0.35); font-style: italic; position: relative; }
 
   /* ─── PORTAL COMPACT ─── */
-  .portal-compact { background: var(--slate-50); padding: 60px 48px; text-align: center; }
-  .portal-compact-inner { max-width: 640px; margin: 0 auto; }
-  .portal-compact h2 { font-size: 24px; font-weight: 700; color: var(--green-deep); margin-bottom: 20px; }
+  /* ─── SHELFIQ VENDOR COMMS ─── */
+  .shelfiq-ap { background: var(--slate-50); padding: 80px 48px; }
+  .shelfiq-ap-content { max-width: 640px; margin: 0 auto; text-align: center; }
+  .shelfiq-ap-body { font-size: 17px; line-height: 1.7; color: var(--slate-500); margin-bottom: 32px; }
+  .shelfiq-ap-body strong { color: var(--green-deep); }
+  .shelfiq-ap-example {
+    max-width: 520px; margin: 0 auto 32px; text-align: left;
+  }
+  .shelfiq-msg {
+    padding: 16px 20px; border-radius: 12px; margin-bottom: 12px;
+    font-size: 15px; line-height: 1.5;
+  }
+  .shelfiq-msg.vendor {
+    background: var(--white); border: 1px solid var(--slate-200);
+    border-radius: 12px 12px 12px 4px;
+  }
+  .shelfiq-msg.ai {
+    background: var(--green-deep); color: rgba(255,255,255,0.9);
+    border-radius: 12px 12px 4px 12px;
+  }
+  .shelfiq-msg-label {
+    font-size: 11px; font-weight: 700; letter-spacing: 1px;
+    text-transform: uppercase; margin-bottom: 6px;
+  }
+  .shelfiq-msg.vendor .shelfiq-msg-label { color: var(--slate-400); }
+  .shelfiq-msg.ai .shelfiq-msg-label { color: var(--green-accent); }
+  .shelfiq-msg-text { font-size: 15px; }
+  .shelfiq-msg.vendor .shelfiq-msg-text { color: var(--slate-600); }
+  .shelfiq-ap-bottom {
+    font-size: 16px; font-weight: 600; color: var(--green-deep);
+  }
   .portal-pills { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
   .portal-pill {
     display: inline-flex; align-items: center; gap: 8px;
@@ -211,7 +239,7 @@
     .faq-section { padding: 60px 24px; }
   }
   @media (max-width: 600px) {
-    .portal-compact { padding: 40px 24px; }
+    .shelfiq-ap { padding: 60px 24px; }
   }
 
   /* ─── REDUCED MOTION ─── */
@@ -420,6 +448,26 @@ document.head.appendChild(o)}initApollo();</script>
   </div>
 </section>
 
+<!-- SHELFIQ VENDOR COMMUNICATION -->
+<section class="shelfiq-ap">
+  <div class="shelfiq-ap-content">
+    <div class="section-label reveal">Vendor Communication</div>
+    <h2 class="section-title reveal">Never answer another AP email.</h2>
+    <p class="shelfiq-ap-body reveal">ShelfiQ — our AI — sits on top of your Metrc data and handles <strong>95% of vendor inquiries</strong> without human intervention. Vendors email in. ShelfiQ responds with real answers, backed by real data. Only 5% escalate to our team — and we handle those too.</p>
+    <div class="shelfiq-ap-example reveal">
+      <div class="shelfiq-msg vendor">
+        <div class="shelfiq-msg-label">Vendor asks:</div>
+        <div class="shelfiq-msg-text">"Why was this invoice paid $400 short?"</div>
+      </div>
+      <div class="shelfiq-msg ai">
+        <div class="shelfiq-msg-label">ShelfiQ responds:</div>
+        <div class="shelfiq-msg-text">"Invoice #4821 was adjusted because we received 22 of 24 units on delivery. The payment reflects the 22 units at the contracted rate. Full breakdown attached."</div>
+      </div>
+    </div>
+    <p class="shelfiq-ap-bottom reveal">Your vendors get instant answers. Your team gets zero AP emails. First of its kind in cannabis.</p>
+  </div>
+</section>
+
 <!-- PROOF TIMELINE -->
 <section class="proof-timeline">
   <div class="proof-timeline-header">
@@ -461,18 +509,6 @@ document.head.appendChild(o)}initApollo();</script>
   <p class="proof-note reveal">Real results from a two-location Massachusetts dispensary chain.</p>
 </section>
 
-<!-- VENDOR PORTAL (COMPACT) -->
-<section class="portal-compact">
-  <div class="portal-compact-inner reveal">
-    <h2>Your vendors stop calling.</h2>
-    <div class="portal-pills">
-      <span class="portal-pill"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Check downloads</span>
-      <span class="portal-pill"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Payment history</span>
-      <span class="portal-pill"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Notifications</span>
-      <span class="portal-pill"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Multi-retailer view</span>
-    </div>
-  </div>
-</section>
 
 <!-- CTA -->
 <section class="cta-section">
