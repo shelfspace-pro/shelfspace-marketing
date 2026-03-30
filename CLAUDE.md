@@ -29,6 +29,14 @@ ShelfSpace marketing site — static HTML/CSS deployed on Vercel at shelfspace.p
 
 Consignment | Accounts Payable | Credit Recovery | Pricing | About | Login | Sign Up
 
+## Marketing & Copy
+
+When writing or rewriting ANY marketing page, read `marketing/landing-page-playbook.md` first. It contains the full framework: 5-beat emotional arc, psychological triggers, visual design rules, copy rules, CTA rules, and page structure template. Every page should follow this playbook.
+
+Key references:
+- `marketing/landing-page-playbook.md` — The conversion playbook (5-beat emotional arc, design rules, copy rules)
+- `marketing/docs-instructions.md` — Writing rules for documentation pages (different from marketing pages)
+
 ## Documentation System
 
 ### How it works
