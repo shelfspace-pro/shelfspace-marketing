@@ -54,11 +54,32 @@
   .reveal-delay-2 { transition-delay: 0.4s; }
   .reveal-delay-3 { transition-delay: 0.6s; }
 
+  /* ─── PAIN SECTION ─── */
+  .pain-section { background: var(--white); padding: 80px 48px; text-align: center; }
+  .pain-monthly { margin-bottom: 40px; }
+  .pain-monthly-number {
+    font-family: var(--font-mono); font-size: clamp(48px, 7vw, 80px);
+    font-weight: 700; color: var(--green-deep); letter-spacing: -3px;
+    line-height: 1;
+  }
+  .pain-monthly-sub {
+    font-size: 18px; color: var(--slate-500); margin-top: 12px;
+    max-width: 480px; margin-left: auto; margin-right: auto; line-height: 1.5;
+  }
+  .pain-monthly-sub em { font-style: italic; color: var(--green-deep); font-weight: 600; }
+  .pain-lines { margin-bottom: 40px; }
+  .pain-lines p {
+    font-size: 17px; color: var(--slate-500); margin-bottom: 8px; line-height: 1.5;
+  }
+  .pain-pivot {
+    font-size: clamp(20px, 2.5vw, 28px); font-weight: 700;
+    color: var(--green-deep); letter-spacing: -0.5px;
+  }
+
   /* ─── CALCULATOR ─── */
   .calc-section { background: var(--slate-50); }
   .calc-header { text-align: center; max-width: 600px; margin: 0 auto 64px; }
   .calc-header .section-desc { margin: 0 auto; }
-  .calc-context { text-align: center; max-width: 540px; margin: 0 auto 40px; font-size: 16px; line-height: 1.7; color: var(--slate-500); }
   .calc-container { max-width: 640px; margin: 0 auto; }
   .calc-slider-wrapper { margin-bottom: 40px; }
   .calc-revenue-display { text-align: center; font-family: var(--font-mono); font-size: clamp(32px, 4vw, 48px); font-weight: 700; color: var(--green-deep); letter-spacing: -1px; margin-bottom: 16px; }
@@ -78,52 +99,32 @@
   .calc-monthly .calc-row-label { font-weight: 600; color: var(--green-deep); font-style: italic; }
   .calc-monthly .calc-row-value { color: var(--green-deep); font-size: 22px; }
   .calc-proof { text-align: center; margin-top: 32px; font-size: 14px; color: var(--slate-500); font-style: italic; }
+  .calc-guarantee {
+    text-align: center; max-width: 540px; margin: 32px auto 24px;
+    padding: 16px 24px; background: var(--green-ghost);
+    border: 1px solid rgba(149,213,178,0.3); border-radius: 12px;
+  }
+  .calc-guarantee p { font-size: 15px; color: var(--slate-600); margin: 0; }
+  .calc-guarantee strong { color: var(--green-deep); }
+  .calc-cta-wrap { text-align: center; margin-top: 24px; }
 
-  /* ─── GUARANTEE ─── */
-  .guarantee-section { background: var(--white); padding: 60px 48px 80px; }
-  .guarantee-card {
-    max-width: 640px; margin: 0 auto; text-align: center;
-    padding: 64px 56px; background: var(--green-ghost);
-    border: 2px solid rgba(149,213,178,0.4); border-radius: 20px;
-  }
-  .guarantee-icon { margin-bottom: 20px; }
-  .guarantee-icon svg { width: 48px; height: 48px; color: var(--green-deep); }
-  .guarantee-card h2 { font-size: 28px; font-weight: 700; color: var(--green-deep); margin-bottom: 12px; letter-spacing: -0.5px; }
-  .guarantee-card > p { font-size: 17px; line-height: 1.7; color: var(--slate-600); margin-bottom: 20px; }
-  .guarantee-details { display: flex; justify-content: center; gap: 12px; font-size: 14px; font-weight: 600; color: var(--green-mid); }
-
-  /* ─── CASE STUDY ─── */
-  .cr-casestudy { background: var(--green-deep); padding: 80px 48px; position: relative; overflow: hidden; }
-  .cr-casestudy::before { content: ''; position: absolute; top: -200px; right: -200px; width: 500px; height: 500px; background: radial-gradient(circle, rgba(149,213,178,0.08), transparent 70%); }
-  .cr-casestudy-header { text-align: center; max-width: 600px; margin: 0 auto 48px; position: relative; }
-  .cr-casestudy-header .section-label { color: var(--green-accent); }
-  .cr-casestudy-header .section-title { color: var(--white); }
-  .cr-casestudy-header .section-desc { color: rgba(255,255,255,0.6); margin: 0 auto; }
-  .cr-casestudy-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; max-width: 800px; margin: 0 auto; text-align: center; position: relative; }
-  .cr-stat-number { font-family: var(--font-mono); font-size: clamp(24px, 3vw, 32px); font-weight: 700; color: var(--white); letter-spacing: -1px; margin-bottom: 8px; }
-  .cr-stat-label { font-size: 13px; color: rgba(255,255,255,0.5); line-height: 1.4; }
-  @media (max-width: 900px) { .cr-casestudy-stats { grid-template-columns: 1fr; gap: 24px; } .cr-casestudy { padding: 60px 24px; } }
-
-  /* ─── MANAGED SERVICE CALLOUT (Dark section) ─── */
-  .managed-callout {
-    background: var(--green-deep); position: relative; overflow: hidden;
-    padding: 80px 48px; text-align: center;
-  }
-  .managed-callout::before {
-    content: ''; position: absolute; top: -200px; left: -200px;
-    width: 500px; height: 500px;
-    background: radial-gradient(circle, rgba(149,213,178,0.08), transparent 70%);
-  }
-  .managed-callout-content { position: relative; max-width: 640px; margin: 0 auto; }
-  .managed-callout-content .section-label { color: var(--green-accent); }
-  .managed-callout-content h2 {
-    font-size: clamp(24px, 3vw, 36px); font-weight: 700; color: var(--white);
-    line-height: 1.25; letter-spacing: -1px; margin-bottom: 20px;
-  }
-  .managed-callout-content p {
-    font-size: 17px; line-height: 1.75; color: rgba(255,255,255,0.6);
-  }
-  .managed-callout-content p strong { color: rgba(255,255,255,0.85); font-weight: 600; }
+  /* ─── PROOF TIMELINE ─── */
+  .proof-timeline { background: var(--green-deep); padding: 100px 48px; position: relative; overflow: hidden; }
+  .proof-timeline::before { content: ''; position: absolute; top: -200px; right: -200px; width: 500px; height: 500px; background: radial-gradient(circle, rgba(149,213,178,0.08), transparent 70%); }
+  .proof-timeline-header { text-align: center; max-width: 500px; margin: 0 auto 64px; position: relative; }
+  .proof-timeline-header .section-label { color: var(--green-accent); }
+  .proof-timeline-header .section-title { color: var(--white); }
+  .timeline-track { max-width: 600px; margin: 0 auto 64px; position: relative; padding-left: 32px; border-left: 2px solid rgba(149,213,178,0.3); }
+  .timeline-step { padding: 0 0 48px 32px; position: relative; }
+  .timeline-step:last-child { padding-bottom: 0; }
+  .timeline-step::before { content: ''; position: absolute; left: -9px; top: 4px; width: 16px; height: 16px; border-radius: 50%; background: var(--green-accent); border: 3px solid var(--green-deep); }
+  .timeline-day { font-family: var(--font-mono); font-size: 14px; font-weight: 700; color: var(--green-accent); margin-bottom: 4px; letter-spacing: 1px; }
+  .timeline-text { font-size: 16px; line-height: 1.6; color: rgba(255,255,255,0.7); }
+  .timeline-step:last-child .timeline-text { color: var(--white); font-weight: 600; }
+  .proof-stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; max-width: 600px; margin: 0 auto 24px; text-align: center; position: relative; }
+  .proof-stat-num { font-family: var(--font-mono); font-size: clamp(24px, 3vw, 32px); font-weight: 700; color: var(--white); letter-spacing: -1px; margin-bottom: 4px; }
+  .proof-stat-desc { font-size: 13px; color: rgba(255,255,255,0.5); }
+  .proof-note { text-align: center; font-size: 13px; color: rgba(255,255,255,0.35); font-style: italic; position: relative; }
 
   /* ─── FAQ ─── */
   .faq-section {
@@ -193,9 +194,10 @@
 
   /* ─── RESPONSIVE ─── */
   @media (max-width: 900px) {
-    .managed-callout { padding: 60px 24px; }
+    .pain-section { padding: 60px 24px; }
+    .proof-timeline { padding: 80px 24px; }
+    .proof-stats-row { grid-template-columns: 1fr; gap: 20px; }
     .faq-section { padding: 60px 24px; }
-    .guarantee-section { padding: 0 24px 60px; }
   }
 
   /* ─── REDUCED MOTION ─── */
@@ -233,26 +235,10 @@ document.head.appendChild(o)}initApollo();</script>
     },
     {
       "@type": "Question",
-      "name": "What if a vendor disputes a credit?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "We manage the resolution directly with the vendor. Everything is tracked with a full audit trail — dates, amounts, communication history. You stay out of it."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Do I need to change my POS or METRC workflow?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "No. We pull data from your existing systems. Nothing changes on your end — same POS, same METRC process, same receiving workflow."
-      }
-    },
-    {
-      "@type": "Question",
       "name": "What does credit recovery cost?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "We only get paid when you get paid. If we don't recover credits, you owe nothing. Pricing is based on what we recover for you — most operators pay a fraction of the savings. Visit our pricing page for details."
+        "text": "We only get paid when you get paid. The 60-day pilot is free. After that, pricing is based on what we recover — most operators pay a fraction of the savings. See pricing."
       }
     },
     {
@@ -265,18 +251,10 @@ document.head.appendChild(o)}initApollo();</script>
     },
     {
       "@type": "Question",
-      "name": "What if you don't recover anything?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "You pay nothing. We only get paid when you get paid — that's the guarantee."
-      }
-    },
-    {
-      "@type": "Question",
       "name": "How is this different from a collection agency?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "We're not collecting debts. We're recovering credits you're already owed under existing vendor agreements — returns, expirations, and co-marketing adjustments. These are standard business credits that vendors expect. We handle them professionally, and vendors actually prefer the structure because it's transparent and fair."
+        "text": "We're not collecting debts. We're recovering credits you're already owed under existing vendor agreements — returns, expirations, and co-marketing adjustments. Vendors actually prefer the structure because it's transparent and fair."
       }
     }
   ]
@@ -314,7 +292,7 @@ document.head.appendChild(o)}initApollo();</script>
   <div class="nav-hamburger" onclick="document.querySelector('.nav-links').classList.toggle('mobile-open'); event.stopPropagation();"><span></span><span></span><span></span></div>
 </nav>
 
-<!-- PAGE HERO -->
+<!-- SECTION 1: PAGE HERO -->
 <div class="page-hero">
   <div class="hero-bg-gradient"></div>
   <div class="hero-bg-gradient-2"></div>
@@ -323,12 +301,25 @@ document.head.appendChild(o)}initApollo();</script>
   <h1 class="section-title">Your dispensary is losing $200,000 a year.</h1>
 </div>
 
-<!-- CALCULATOR -->
+<!-- SECTION 2: PAIN -->
+<section class="pain-section">
+  <div class="pain-monthly reveal">
+    <div class="pain-monthly-number">$17,000</div>
+    <div class="pain-monthly-sub">That's how much your dispensary loses <em>every month</em> in vendor credits nobody's tracking.</div>
+  </div>
+  <div class="pain-lines reveal">
+    <p>Returns nobody filed.</p>
+    <p>Expired product nobody credited.</p>
+    <p>Discounts you absorbed that vendors should have shared.</p>
+  </div>
+  <p class="pain-pivot reveal">We recover your vendor credits. You keep the money.</p>
+</section>
+
+<!-- SECTION 3: CALCULATOR + INLINE GUARANTEE + CTA -->
 <section class="calc-section" id="calculator">
-  <p class="calc-context">Cannabis dispensaries leave billions on the table in unclaimed vendor credits every year. Most don't have the systems or staff to track them.</p>
   <div class="calc-header">
-    <div class="section-label reveal">See What You're Losing</div>
-    <h2 class="section-title reveal">How much are you leaving on the table?</h2>
+    <div class="section-label reveal">Your Numbers</div>
+    <h2 class="section-title reveal">How much are you losing in vendor credits?</h2>
   </div>
   <div class="calc-container reveal">
     <div class="calc-slider-wrapper">
@@ -342,15 +333,15 @@ document.head.appendChild(o)}initApollo();</script>
     </div>
     <div class="calc-results">
       <div class="calc-row">
-        <span class="calc-row-label">Product return credits (0.75%)</span>
+        <span class="calc-row-label">Product return credits</span>
         <span class="calc-row-value" id="calc-returns">$22,500</span>
       </div>
       <div class="calc-row">
-        <span class="calc-row-label">Expired product credits (0.5%)</span>
+        <span class="calc-row-label">Expired product credits</span>
         <span class="calc-row-value" id="calc-expired">$15,000</span>
       </div>
       <div class="calc-row">
-        <span class="calc-row-label">Vendor-funded discount credits (3%)</span>
+        <span class="calc-row-label">Vendor-funded discount credits</span>
         <span class="calc-row-value" id="calc-comark">$90,000</span>
       </div>
       <div class="calc-row calc-total">
@@ -364,69 +355,78 @@ document.head.appendChild(o)}initApollo();</script>
     </div>
     <p class="calc-proof">Our latest analysis identified $200,000+ per year in recoverable credits at a two-location dispensary chain in Massachusetts.</p>
     <p style="text-align:center;margin-top:16px;font-size:11px;color:var(--slate-400);">*Total credits recovered is an estimate, not a guarantee.</p>
-  </div>
-</section>
-
-<!-- ZERO RISK GUARANTEE -->
-<section class="guarantee-section">
-  <div class="guarantee-card reveal">
-    <div class="guarantee-icon">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+    <div class="calc-guarantee reveal">
+      <p><strong>Zero risk: we only get paid when you get paid.</strong> Free analysis · Results in 2 weeks · No commitment</p>
     </div>
-    <h2>Zero Risk Guarantee</h2>
-    <p>We only get paid when you get paid. If we don't recover credits, you owe nothing. No fees. No commitment. No catch.</p>
-    <div class="guarantee-details">
-      <span>Free analysis</span>
-      <span>&middot;</span>
-      <span>Results in 2 weeks</span>
-      <span>&middot;</span>
-      <span>No commitment</span>
+    <div class="calc-cta-wrap">
+      <a href="/contact" class="btn-primary">Get My Free Analysis <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+      <p style="font-size:14px;color:var(--slate-400);margin-top:12px;">We'll show you exactly what's on the table. 48 hours. Free.</p>
     </div>
   </div>
 </section>
 
-<!-- CASE STUDY -->
-<section class="cr-casestudy">
-  <div class="cr-casestudy-header">
+<!-- SECTION 4: PROOF TIMELINE -->
+<section class="proof-timeline">
+  <div class="proof-timeline-header">
     <div class="section-label reveal">Real Results</div>
-    <h2 class="section-title reveal">What we found at a two-location chain</h2>
-    <p class="section-desc reveal">We analyzed a full year of compliance data across two Massachusetts dispensaries. Credits identified within 14 days of data analysis.</p>
+    <h2 class="section-title reveal">From data pull to recovered credits in 14 days</h2>
   </div>
-  <div class="cr-casestudy-stats">
-    <div class="cr-stat reveal">
-      <div class="cr-stat-number">$195K – $547K</div>
-      <div class="cr-stat-label">per year in recoverable credits</div>
+  <div class="timeline-track">
+    <div class="timeline-step reveal">
+      <div class="timeline-day">Day 1</div>
+      <div class="timeline-text">We connect to your POS and compliance systems. You don't export anything.</div>
     </div>
-    <div class="cr-stat reveal reveal-delay-1">
-      <div class="cr-stat-number">3–6%</div>
-      <div class="cr-stat-label">of revenue in co-marketing credits alone</div>
+    <div class="timeline-step reveal reveal-delay-1">
+      <div class="timeline-day">Day 14</div>
+      <div class="timeline-text">First credits identified. You see the full report — every return, expiration, and vendor-funded discount.</div>
     </div>
-    <div class="cr-stat reveal reveal-delay-2">
-      <div class="cr-stat-number">14 days</div>
-      <div class="cr-stat-label">from data pull to first credits identified</div>
+    <div class="timeline-step reveal reveal-delay-2">
+      <div class="timeline-day">Day 30</div>
+      <div class="timeline-text">Vendor approvals coming in. Credits applied to your settlements. Cash stays in your account.</div>
     </div>
+    <div class="timeline-step reveal reveal-delay-3">
+      <div class="timeline-day">Day 60</div>
+      <div class="timeline-text">$200K+ identified. Money that was always yours — now it's back.</div>
+    </div>
+  </div>
+  <div class="proof-stats-row">
+    <div class="proof-stat reveal">
+      <div class="proof-stat-num">$195K–$547K</div>
+      <div class="proof-stat-desc">per year in recoverable credits</div>
+    </div>
+    <div class="proof-stat reveal reveal-delay-1">
+      <div class="proof-stat-num">3–6%</div>
+      <div class="proof-stat-desc">of revenue in vendor-funded discounts</div>
+    </div>
+    <div class="proof-stat reveal reveal-delay-2">
+      <div class="proof-stat-num">14 days</div>
+      <div class="proof-stat-desc">to first credits identified</div>
+    </div>
+  </div>
+  <p class="proof-note reveal">Real results from a two-location Massachusetts dispensary chain.</p>
+</section>
+
+<!-- SECTION 5: FINAL CTA -->
+<section class="cta-section">
+  <div class="cta-content">
+    <div class="section-label reveal">Get Started</div>
+    <h2 class="section-title reveal">Find out how much you're losing — free.</h2>
+    <p class="section-desc reveal">We'll analyze your data and show you exactly what's on the table. Takes 48 hours. No commitment. You only pay if we recover.</p>
+    <div class="cta-actions reveal">
+      <a href="/contact" class="btn-primary">
+        Get My Free Analysis
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+    <div class="cta-founder reveal" style="display:flex;align-items:center;gap:16px;justify-content:center;margin-top:32px;">
+      <img src="/chris-mitchem.jpg" alt="Chris Mitchem" style="width:48px;height:48px;border-radius:50%;object-fit:cover;">
+      <span style="font-size:14px;color:var(--slate-500);">Chris Mitchem, Founder — 10 years operating dispensaries</span>
+    </div>
+    <p class="cta-note reveal">No credit card. No commitment. No risk.</p>
   </div>
 </section>
 
-<!-- HOW IT WORKS (one-liner) -->
-<section style="background:var(--white);padding:60px 48px;text-align:center;">
-  <div style="max-width:640px;margin:0 auto;">
-    <div class="section-label reveal">How It Works</div>
-    <p class="reveal" style="font-size:18px;line-height:1.7;color:var(--slate-600);">We handle everything — data pull, credit memos, vendor communication, approvals, and settlement. <strong style="color:var(--green-deep);">You just approve and keep the money.</strong></p>
-    <a href="/how-it-works" class="reveal" style="display:inline-flex;align-items:center;gap:6px;margin-top:16px;font-size:15px;font-weight:600;color:var(--green-mid);text-decoration:none;">See the full process <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a>
-  </div>
-</section>
-
-<!-- WE DO ALL THE WORK -->
-<section class="managed-callout">
-  <div class="managed-callout-content">
-    <div class="section-label reveal">Not Another Portal to Manage</div>
-    <h2 class="reveal">Done with yet another portal? Good news — we do all of the work.</h2>
-    <p class="reveal">Our goal is that you never have to log in to your account. We pull your data, create every credit memo, communicate with your vendors, and apply approved credits to your settlements. <strong>You just get the reports and keep the money.</strong></p>
-  </div>
-</section>
-
-<!-- FAQ -->
+<!-- SECTION 6: FAQ -->
 <section class="faq-section">
   <div class="faq-header">
     <div class="section-label reveal">FAQ</div>
@@ -438,53 +438,21 @@ document.head.appendChild(o)}initApollo();</script>
       <p>Yes, but we handle the entire approval process. We send the credit memo to the vendor, manage any questions or disputes, and track it to resolution. Vendors appreciate the structure — it's transparent and fair for both sides.</p>
     </details>
     <details>
-      <summary>What if a vendor disputes a credit?</summary>
-      <p>We manage the resolution directly with the vendor. Everything is tracked with a full audit trail — dates, amounts, communication history. You stay out of it.</p>
-    </details>
-    <details>
-      <summary>Do I need to change my POS or METRC workflow?</summary>
-      <p>No. We pull data from your existing systems. Nothing changes on your end — same POS, same METRC process, same receiving workflow.</p>
-    </details>
-    <details>
       <summary>What does credit recovery cost?</summary>
-      <p>We only get paid when you get paid. If we don't recover credits, you owe nothing. Pricing is based on what we recover for you — most operators pay a fraction of the savings. <a href="/pricing" style="color:var(--green-mid);font-weight:600;text-decoration:none;">Visit our pricing page</a> for details.</p>
+      <p>We only get paid when you get paid. The 60-day pilot is free. After that, pricing is based on what we recover — most operators pay a fraction of the savings. <a href="/pricing" style="color:var(--green-mid);font-weight:600;text-decoration:none;">See pricing</a>.</p>
     </details>
     <details>
       <summary>How quickly will I see results?</summary>
       <p>Most operators see their first recovered credits within two weeks of data analysis. Vendor approvals typically follow within 30 days.</p>
     </details>
     <details>
-      <summary>What if you don't recover anything?</summary>
-      <p>You pay nothing. We only get paid when you get paid — that's the guarantee.</p>
-    </details>
-    <details>
       <summary>How is this different from a collection agency?</summary>
-      <p>We're not collecting debts. We're recovering credits you're already owed under existing vendor agreements — returns, expirations, and co-marketing adjustments. These are standard business credits that vendors expect. We handle them professionally, and vendors actually prefer the structure because it's transparent and fair.</p>
+      <p>We're not collecting debts. We're recovering credits you're already owed under existing vendor agreements — returns, expirations, and co-marketing adjustments. Vendors actually prefer the structure because it's transparent and fair.</p>
     </details>
   </div>
 </section>
 
-<!-- CTA -->
-<section class="cta-section">
-  <div class="cta-content">
-    <div class="section-label reveal">Get Started</div>
-    <h2 class="section-title reveal">Find out how much you're losing — free.</h2>
-    <p class="section-desc reveal">We'll analyze your data and show you exactly what's on the table. Takes 48 hours. No commitment. You only pay if we recover.</p>
-    <div class="cta-actions reveal">
-      <a href="/contact" class="btn-primary">
-        Get My Free Analysis
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-      </a>
-      <a href="/contact" class="btn-secondary">Talk to Chris</a>
-    </div>
-    <div class="cta-founder reveal" style="display:flex;align-items:center;gap:16px;justify-content:center;margin-top:32px;">
-      <img src="/chris-mitchem.jpg" alt="Chris Mitchem" style="width:48px;height:48px;border-radius:50%;object-fit:cover;">
-      <span style="font-size:14px;color:var(--slate-500);">Chris Mitchem, Founder — 10 years operating dispensaries</span>
-    </div>
-  </div>
-</section>
-
-<!-- STICKY CTA BAR -->
+<!-- SECTION 7: STICKY CTA BAR -->
 <div class="sticky-cta" id="sticky-cta">
   <div class="sticky-cta-inner">
     <span>Losing money on vendor credits?</span>
@@ -512,7 +480,7 @@ document.head.appendChild(o)}initApollo();</script>
   var nav = document.getElementById('nav');
   var pageHero = document.querySelector('.page-hero');
   var parallaxSections = [
-    document.querySelector('.managed-callout'),
+    document.querySelector('.proof-timeline'),
     document.querySelector('.cta-section')
   ];
 
