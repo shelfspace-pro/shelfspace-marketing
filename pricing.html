@@ -4,19 +4,19 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ShelfSpace Pricing — Cannabis AP & Consignment</title>
-<meta name="description" content="ShelfSpace pricing for cannabis dispensaries. Free 60-day pilot. After that, you pay a fraction of what we recover and manage for you. No contracts.">
+<meta name="description" content="You only pay when we find money. Modular pricing for cannabis dispensaries — credit recovery, consignment, and AP. Free evaluation. No commitment.">
 <link rel="canonical" href="https://shelfspace.pro/pricing">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://shelfspace.pro/pricing">
 <meta property="og:title" content="ShelfSpace Pricing — Cannabis AP & Consignment">
-<meta property="og:description" content="ShelfSpace pricing for cannabis dispensaries. Free 60-day pilot. After that, you pay a fraction of what we recover and manage for you. No contracts.">
+<meta property="og:description" content="You only pay when we find money. Modular pricing for cannabis dispensaries — credit recovery, consignment, and AP. Free evaluation. No commitment.">
 <meta property="og:image" content="https://shelfspace.pro/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:type" content="image/png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="ShelfSpace Pricing — Cannabis AP & Consignment">
-<meta name="twitter:description" content="ShelfSpace pricing for cannabis dispensaries. Free 60-day pilot. After that, you pay a fraction of what we recover and manage for you. No contracts.">
+<meta name="twitter:description" content="You only pay when we find money. Modular pricing for cannabis dispensaries — credit recovery, consignment, and AP. Free evaluation. No commitment.">
 <meta name="twitter:image" content="https://shelfspace.pro/og-image.png">
 <meta name="apple-mobile-web-app-title" content="ShelfSpace">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -32,107 +32,97 @@
   .hero-bg-gradient-2 { position: absolute; bottom: -20%; left: -15%; width: 550px; height: 550px; background: radial-gradient(circle, rgba(27,67,50,0.06) 0%, rgba(27,67,50,0) 70%); animation: float 10s ease-in-out infinite; animation-delay: -3s; pointer-events: none; }
   .hero-grid-lines { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 1200px; height: 100%; opacity: 0.035; background-image: linear-gradient(var(--green-deep) 1px, transparent 1px), linear-gradient(90deg, var(--green-deep) 1px, transparent 1px); background-size: 80px 80px; pointer-events: none; }
   .page-hero .section-label,
-  .page-hero .section-title { opacity: 0; transform: translateY(30px); }
+  .page-hero .section-title,
+  .page-hero .section-desc { opacity: 0; transform: translateY(30px); }
   .page-hero .section-label { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1); }
   .page-hero .section-title { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s, transform 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s; }
+  .page-hero .section-desc { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1) 0.2s, transform 0.8s cubic-bezier(0.22,1,0.36,1) 0.2s; }
   .page-hero.hero-loaded .section-label,
-  .page-hero.hero-loaded .section-title { opacity: 1; transform: translateY(0); }
+  .page-hero.hero-loaded .section-title,
+  .page-hero.hero-loaded .section-desc { opacity: 1; transform: translateY(0); }
 
-  /* Free Pilot */
-  .pilot-section { background: var(--white); text-align: center; padding: 80px 48px 100px; position: relative; overflow: hidden; }
-  .pilot-section::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 800px; height: 800px; background: radial-gradient(circle, rgba(149,213,178,0.15), transparent 70%); }
-  .pilot-content { position: relative; z-index: 2; max-width: 560px; margin: 0 auto; }
-  .pilot-headline { font-family: var(--font-mono); font-size: clamp(36px, 5vw, 56px); font-weight: 700; color: var(--green-deep); letter-spacing: -2px; margin-bottom: 20px; }
-  .pilot-sub { font-size: 18px; line-height: 1.7; color: var(--slate-500); max-width: 460px; margin: 0 auto 16px; }
-  .pilot-detail { font-size: 15px; color: var(--slate-400); margin-bottom: 32px; }
+  /* Free Evaluation */
+  .eval-section { background: var(--white); padding: 80px 48px; text-align: center; }
+  .eval-content { max-width: 640px; margin: 0 auto; }
+  .eval-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin: 40px 0; text-align: left; }
+  .eval-step { display: flex; gap: 16px; align-items: flex-start; }
+  .eval-step-num { width: 32px; height: 32px; background: var(--green-ghost); border: 1px solid rgba(149,213,178,0.3); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 14px; font-weight: 700; color: var(--green-deep); flex-shrink: 0; }
+  .eval-step-text { font-size: 14px; line-height: 1.5; color: var(--slate-600); }
+  .eval-step-text strong { color: var(--green-deep); display: block; margin-bottom: 2px; }
+  .eval-proof { padding: 20px 28px; background: var(--green-ghost); border: 1px solid rgba(149,213,178,0.3); border-radius: 12px; font-size: 16px; color: var(--slate-600); margin-bottom: 32px; }
+  .eval-proof strong { color: var(--green-deep); font-family: var(--font-mono); }
+  .eval-cta { margin-top: 0; }
 
-  /* After the Pilot */
-  .postpilot-section { background: var(--slate-50); text-align: center; padding: 80px 48px; }
-  .postpilot-content { max-width: 640px; margin: 0 auto; }
-  .postpilot-price { font-family: var(--font-mono); font-size: clamp(40px, 5vw, 64px); font-weight: 700; color: var(--green-deep); letter-spacing: -2px; margin-bottom: 4px; }
-  .postpilot-unit { font-size: 18px; font-weight: 600; color: var(--slate-500); margin-bottom: 24px; }
-  .postpilot-includes { max-width: 400px; margin: 0 auto 32px; text-align: left; list-style: none; padding: 0; display: flex; flex-direction: column; gap: 14px; }
-  .postpilot-includes li { display: flex; align-items: center; gap: 12px; font-size: 16px; color: var(--slate-600); }
-  .postpilot-includes li svg { flex-shrink: 0; color: var(--green-mid); }
-  .postpilot-terms { font-size: 15px; color: var(--slate-400); margin-top: 24px; }
+  /* Module sections */
+  .module-section { padding: 80px 48px; }
+  .module-primary { background: var(--slate-50); }
+  .module-inner { max-width: 640px; margin: 0 auto; text-align: center; }
+  .module-tag { display: inline-flex; padding: 4px 16px; border-radius: 100px; font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; background: var(--green-ghost); color: var(--green-dark); margin-bottom: 16px; }
+  .module-title { font-size: clamp(28px, 3.5vw, 36px); font-weight: 700; color: var(--green-deep); letter-spacing: -1px; margin-bottom: 8px; }
+  .module-who { font-size: 15px; color: var(--slate-400); font-style: italic; margin-bottom: 24px; }
+  .module-desc { font-size: 16px; line-height: 1.7; color: var(--slate-600); margin-bottom: 32px; }
+  .module-pricing { padding: 24px; background: var(--white); border: 1px solid var(--slate-200); border-radius: 12px; margin-bottom: 24px; }
+  .module-pricing-model { font-size: 17px; font-weight: 600; color: var(--green-deep); margin-bottom: 8px; }
+  .module-pricing-zero { font-size: 14px; color: var(--slate-500); }
+  .module-link { display: inline-flex; align-items: center; gap: 6px; font-size: 15px; font-weight: 600; color: var(--green-mid); text-decoration: none; }
+  .module-link:hover { color: var(--green-deep); gap: 10px; }
 
-  /* FAQ */
-  .faq-section {
-    background: var(--white); padding: 80px 48px;
-  }
-  .faq-section h2 {
-    text-align: center; font-size: clamp(24px, 3vw, 32px);
-    font-weight: 700; color: var(--green-deep); margin-bottom: 48px;
-  }
-  .faq-list {
-    max-width: 680px; margin: 0 auto;
-  }
-  .faq-list details {
-    border-bottom: 1px solid var(--slate-200);
-  }
-  .faq-list details:first-child {
-    border-top: 1px solid var(--slate-200);
-  }
-  .faq-list summary {
-    padding: 20px 0; font-size: 17px; font-weight: 600;
-    color: var(--green-deep); cursor: pointer; list-style: none;
-    display: flex; align-items: center; justify-content: space-between; gap: 16px;
-  }
-  .faq-list summary::-webkit-details-marker { display: none; }
-  .faq-list summary::after {
-    content: '+'; font-size: 22px; font-weight: 400;
-    color: var(--slate-400); transition: transform 0.2s;
-    flex-shrink: 0;
-  }
-  .faq-list details[open] summary::after {
-    content: '\2212';
-  }
-  .faq-list details p {
-    padding: 0 0 20px; margin: 0; font-size: 15px;
-    line-height: 1.7; color: var(--slate-500);
-  }
+  /* Modules duo */
+  .modules-duo { background: var(--white); padding: 0 48px 80px; }
+  .modules-duo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; max-width: 900px; margin: 0 auto; }
+  .module-card { background: var(--white); border: 1px solid var(--slate-200); border-radius: 20px; padding: 36px 32px; transition: all 0.3s; position: relative; overflow: hidden; }
+  .module-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--green-accent), var(--green-mid)); opacity: 0; transition: opacity 0.3s; }
+  .module-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(27,67,50,0.08); border-color: var(--green-accent); }
+  .module-card:hover::before { opacity: 1; }
+  .module-card h3 { font-size: 22px; font-weight: 700; color: var(--green-deep); margin-bottom: 8px; }
+  .module-card-who { font-size: 13px; color: var(--slate-400); font-style: italic; margin-bottom: 16px; }
+  .module-card-desc { font-size: 15px; line-height: 1.6; color: var(--slate-500); margin-bottom: 20px; }
+  .module-card-pricing { padding: 16px; background: var(--slate-50); border-radius: 8px; margin-bottom: 20px; }
+  .module-card-pricing strong { display: block; font-size: 15px; color: var(--green-deep); margin-bottom: 4px; }
+  .module-card-pricing span { font-size: 13px; color: var(--slate-400); }
+
+  /* Bundle */
+  .bundle-section { background: var(--green-deep); padding: 80px 48px; text-align: center; position: relative; overflow: hidden; }
+  .bundle-section::before { content: ''; position: absolute; top: -200px; right: -200px; width: 500px; height: 500px; background: radial-gradient(circle, rgba(149,213,178,0.08), transparent 70%); }
+  .bundle-content { max-width: 640px; margin: 0 auto; position: relative; }
+  .bundle-content h2 { font-size: clamp(24px, 3vw, 32px); font-weight: 700; color: var(--white); margin-bottom: 20px; letter-spacing: -0.5px; }
+  .bundle-content p { font-size: 17px; line-height: 1.75; color: rgba(255,255,255,0.6); }
 
   /* Pricing CTA */
-  .pricing-cta {
-    background: var(--green-deep); padding: 80px 48px; text-align: center;
-  }
-  .pricing-cta h2 {
-    font-size: clamp(24px, 3vw, 32px); font-weight: 700;
-    color: var(--white); margin-bottom: 16px;
-  }
-  .pricing-cta p {
-    font-size: 17px; color: rgba(255,255,255,0.7);
-    max-width: 480px; margin: 0 auto 32px; line-height: 1.6;
-  }
-  .pricing-cta .btn-primary {
-    background: var(--white); color: var(--green-deep);
-  }
-  .pricing-cta .btn-primary:hover {
-    background: var(--slate-50); box-shadow: 0 8px 32px rgba(0,0,0,0.2);
-  }
-  .pricing-cta .btn-secondary {
-    color: var(--green-deep); background: var(--green-accent);
-    border-color: var(--green-accent); font-weight: 600;
-  }
-  .pricing-cta .btn-secondary:hover {
-    background: #b7e4c7; border-color: #b7e4c7;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.2);
-  }
+  .pricing-cta { background: var(--slate-50); padding: 100px 48px; text-align: center; }
+  .pricing-cta-inner { max-width: 560px; margin: 0 auto; }
+  .pricing-cta-anchor { font-size: 16px; color: #c0392b; font-weight: 600; margin-bottom: 16px; }
+  .pricing-cta-founder { display: flex; align-items: center; gap: 12px; justify-content: center; margin-top: 32px; font-size: 14px; color: var(--slate-500); }
 
-  .reveal {
-    opacity: 0; transform: translateY(40px);
-    transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
-                transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
-  }
+  /* FAQ */
+  .faq-section { background: var(--white); padding: 80px 48px; }
+  .faq-section h2 { text-align: center; font-size: clamp(24px, 3vw, 32px); font-weight: 700; color: var(--green-deep); margin-bottom: 48px; }
+  .faq-list { max-width: 680px; margin: 0 auto; }
+  .faq-list details { border-bottom: 1px solid var(--slate-200); }
+  .faq-list details:first-child { border-top: 1px solid var(--slate-200); }
+  .faq-list summary { padding: 20px 0; font-size: 17px; font-weight: 600; color: var(--green-deep); cursor: pointer; list-style: none; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+  .faq-list summary::-webkit-details-marker { display: none; }
+  .faq-list summary::after { content: '+'; font-size: 22px; font-weight: 400; color: var(--slate-400); transition: transform 0.2s; flex-shrink: 0; }
+  .faq-list details[open] summary::after { content: '\2212'; }
+  .faq-list details p { padding: 0 0 20px; margin: 0; font-size: 15px; line-height: 1.7; color: var(--slate-500); }
+
+  /* Reveals */
+  .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1); }
   .reveal.is-visible { opacity: 1; transform: translateY(0); }
   .reveal-delay-1 { transition-delay: 0.2s; }
   .reveal-delay-2 { transition-delay: 0.4s; }
   .reveal-delay-3 { transition-delay: 0.6s; }
 
+  /* Responsive */
   @media (max-width: 900px) {
-    .pilot-section { padding: 60px 24px 80px; }
-    .postpilot-section { padding: 60px 24px; }
-    .faq-section, .pricing-cta { padding: 60px 24px; }
+    .eval-steps { grid-template-columns: 1fr; gap: 20px; }
+    .eval-section { padding: 60px 24px; }
+    .module-section { padding: 60px 24px; }
+    .modules-duo { padding: 0 24px 60px; }
+    .modules-duo-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
+    .bundle-section { padding: 60px 24px; }
+    .pricing-cta { padding: 60px 24px; }
+    .faq-section { padding: 60px 24px; }
   }
 
   /* Footer 5-col */
@@ -141,12 +131,12 @@
   @media (max-width: 600px) { .footer-top { grid-template-columns: 1fr; } }
 
   @media (prefers-reduced-motion: reduce) {
-    .reveal, .page-hero .section-label, .page-hero .section-title {
+    .reveal, .page-hero .section-label, .page-hero .section-title, .page-hero .section-desc {
       opacity: 1; transform: none; transition: none;
     }
   }
 </style>
-<noscript><style>.reveal,.page-hero .section-label,.page-hero .section-title{opacity:1;transform:none;transition:none;}</style></noscript>
+<noscript><style>.reveal,.page-hero .section-label,.page-hero .section-title,.page-hero .section-desc{opacity:1;transform:none;transition:none;}</style></noscript>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-H2LBJT03WE"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-H2LBJT03WE');</script>
 <script>function initApollo(){var n=Math.random().toString(36).substring(7),o=document.createElement("script");
@@ -160,26 +150,34 @@ document.head.appendChild(o)}initApollo();</script>
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What happens after the pilot?",
+      "name": "What does the free evaluation include?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "After the 60-day pilot, pricing is based on what we recover and manage for you. Most operators pay a fraction of what we save them — and that includes running their entire consignment and AP operation. No contracts, cancel any time."
+        "text": "We connect to your Metrc account, analyze your historical data, and deliver a detailed report showing every unrecovered vendor credit — waste, returns, and co-marketing. No commitment, no credit card."
       }
     },
     {
       "@type": "Question",
-      "name": "What POS systems do you support?",
+      "name": "When does pricing start?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "ShelfSpace works with any POS system. We integrate via CSV upload or direct API connection — no proprietary lock-in."
+        "text": "After the evaluation, once you decide to move forward. Credit recovery pricing starts from day one of active recovery. The evaluation is the free part — there's no trial period."
       }
     },
     {
       "@type": "Question",
-      "name": "How long does setup take?",
+      "name": "Do I have to use all three modules?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Most retailers and vendors are fully onboarded within a week. We handle the integration work so you can focus on your business."
+        "text": "No. Each module works standalone. Most operators start with credit recovery and add consignment or AP when they're ready."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How does bundle pricing work?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Credit recovery rates improve when you add consignment or AP. We manage more of your vendor operation, so we recover more efficiently. All three together gives you the lowest total cost."
       }
     },
     {
@@ -187,39 +185,15 @@ document.head.appendChild(o)}initApollo();</script>
       "name": "Is my data secure?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes. ShelfSpace uses row-level security, multi-tenant data isolation, full audit trails, and zero hard deletes. Your data is encrypted at rest and in transit."
+        "text": "Yes. We use read-only Metrc access. We never modify your compliance data. All data is encrypted and isolated per operator."
       }
     },
     {
       "@type": "Question",
-      "name": "Do I have to use consignment to use ShelfSpace?",
+      "name": "Can I cancel?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "No. ShelfSpace handles payments to all your vendors — consignment or wholesale. You can start by simply managing your AP through the platform and add consignment when you're ready."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "How do credit memos work?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Either party can issue a credit memo through the platform for returns, pricing corrections, promotional adjustments, or special circumstances. The other party reviews and approves it, and the credit can be applied to the next settlement or settled independently. Everything is tracked with a full audit trail."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "How do I add a new vendor to the platform?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Just enter their email address. The vendor receives an invitation to create their own portal account — no paperwork, no bank details needed upfront. Once they sign up, they can start receiving payments immediately."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What is ShelfiQ?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "ShelfiQ is your AI-powered advisor built into ShelfSpace. It has full context on your account — inventory, vendors, deal structures, payments, and performance history. Ask anything in plain English and get instant, data-backed answers specific to your business. It's included free with every account."
+        "text": "Yes. No contracts. No minimums. Cancel any time."
       }
     }
   ]
@@ -252,37 +226,99 @@ document.head.appendChild(o)}initApollo();</script>
   <div class="hero-bg-gradient-2"></div>
   <div class="hero-grid-lines"></div>
   <div class="section-label">Pricing</div>
-  <h1 class="section-title">Transparent pricing. Try it free first.</h1>
+  <h1 class="section-title">You only pay when we find money.</h1>
+  <p class="section-desc">Modular pricing for cannabis dispensaries. Start with what saves you money.</p>
 </div>
 
-<!-- FREE PILOT -->
-<section class="pilot-section">
-  <div class="pilot-content reveal">
-    <div class="section-label">Free Pilot</div>
-    <h2 class="pilot-headline">60-day free pilot</h2>
-    <p class="pilot-sub">Full platform, all features, unlimited vendors, QuickBooks sync included. We handle setup and onboarding. You evaluate whether it saves you money.</p>
-    <p class="pilot-detail">No credit card. No commitment. No obligation after the pilot ends.</p>
-    <a href="/contact" class="btn-primary">Get a Free Analysis <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+<!-- FREE EVALUATION -->
+<section class="eval-section">
+  <div class="eval-content">
+    <div class="section-label reveal">Free Evaluation</div>
+    <h2 class="section-title reveal">Before you pay anything, we show you what you're missing.</h2>
+    <div class="eval-steps reveal">
+      <div class="eval-step">
+        <div class="eval-step-num">1</div>
+        <div class="eval-step-text"><strong>Connect your Metrc account</strong><br>Takes minutes. Read-only access.</div>
+      </div>
+      <div class="eval-step">
+        <div class="eval-step-num">2</div>
+        <div class="eval-step-text"><strong>We analyze your historical data</strong><br>1–3 days. You do nothing.</div>
+      </div>
+      <div class="eval-step">
+        <div class="eval-step-num">3</div>
+        <div class="eval-step-text"><strong>You get a detailed report</strong><br>Every unrecovered credit, line by line.</div>
+      </div>
+    </div>
+    <div class="eval-proof reveal">Our average evaluation uncovers <strong>$8K–$25K/month</strong> in unrecovered vendor credits.</div>
+    <div class="eval-cta reveal">
+      <a href="/contact" class="btn-primary">Get My Free Evaluation <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+      <p style="font-size:14px;color:var(--slate-400);margin-top:12px;">No commitment. No credit card. No obligation.</p>
+    </div>
   </div>
 </section>
 
-<!-- AFTER THE PILOT -->
-<section class="postpilot-section">
-  <div class="postpilot-content reveal">
-    <div class="section-label">After the Pilot</div>
-    <h2 style="font-size:clamp(24px,3vw,32px);font-weight:700;color:var(--green-deep);margin-bottom:24px;">You only pay for what we recover and manage.</h2>
-    <div class="postpilot-price" style="font-size:clamp(28px,4vw,48px);">A fraction</div>
-    <div class="postpilot-unit">of what we save you</div>
-    <ul class="postpilot-includes">
-      <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Consignment settlements</li>
-      <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Accounts payable</li>
-      <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Credit recovery</li>
-      <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Check payments</li>
-      <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> QuickBooks sync</li>
-      <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Unlimited vendors</li>
-      <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> ShelfiQ AI</li>
-    </ul>
-    <p class="postpilot-terms">No contracts. Cancel any time.</p>
+<!-- CREDIT RECOVERY MODULE -->
+<section class="module-section module-primary">
+  <div class="module-inner">
+    <div class="module-tag reveal">Most Popular</div>
+    <h2 class="module-title reveal">Credit Recovery</h2>
+    <p class="module-who reveal">For any dispensary with wholesale or consignment vendors.</p>
+    <p class="module-desc reveal">We connect to your Metrc account, identify every unrecovered vendor credit — waste, returns, and co-marketing — and generate ready-to-send credit memos weekly. You apply them in your existing AP system. No workflow changes.</p>
+    <div class="module-pricing reveal">
+      <div class="module-pricing-model">You keep the majority. We take a small share of what we find.</div>
+      <div class="module-pricing-zero">No recovery, no fee.</div>
+    </div>
+    <a href="/credit-recovery" class="module-link reveal">How Credit Recovery Works <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a>
+  </div>
+</section>
+
+<!-- CONSIGNMENT + AP -->
+<section class="modules-duo">
+  <div class="modules-duo-grid">
+    <div class="module-card reveal">
+      <h3>Consignment Management</h3>
+      <p class="module-card-who">For dispensaries running or considering consignment.</p>
+      <p class="module-card-desc">Weekly settlements for consignment vendors. POS-agnostic via Metrc. Check generation, settlement reports, vendor payment tracking.</p>
+      <div class="module-card-pricing">
+        <strong>A small fee per vendor payment.</strong>
+        <span>No payments processed, no fee.</span>
+      </div>
+      <a href="/consignment" class="module-link">How Consignment Works <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a>
+    </div>
+    <div class="module-card reveal reveal-delay-1">
+      <h3>Accounts Payable</h3>
+      <p class="module-card-who">For dispensaries with 20+ vendors or 10+ hours/week on AP.</p>
+      <p class="module-card-desc">Managed invoices, payment scheduling, check generation for wholesale vendors. AI-powered vendor communication. Replaces the cost of an AP employee.</p>
+      <div class="module-card-pricing">
+        <strong>Monthly fee based on operation size.</strong>
+        <span>Vendor count and payment volume.</span>
+      </div>
+      <a href="/accounts-payable" class="module-link">How AP Works <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<!-- BUNDLE -->
+<section class="bundle-section">
+  <div class="bundle-content">
+    <h2 class="reveal">Start with credit recovery. Add what you need. Save more together.</h2>
+    <p class="reveal">Each module works standalone. As you add consignment or AP, credit recovery rates improve — we manage more of your vendor operation, so we recover more efficiently. All three together gives you the lowest total cost and the most value.</p>
+  </div>
+</section>
+
+<!-- CTA + PROOF -->
+<section class="pricing-cta">
+  <div class="pricing-cta-inner">
+    <p class="pricing-cta-anchor reveal">The average dispensary loses $8K–$25K/month in unrecovered vendor credits.</p>
+    <h2 class="section-title reveal">Start with a free evaluation.</h2>
+    <p class="section-desc reveal">We connect to your Metrc account and show you exactly what you're leaving on the table. No commitment.</p>
+    <div class="reveal">
+      <a href="/contact" class="btn-primary">Get My Free Evaluation <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+    </div>
+    <div class="pricing-cta-founder reveal">
+      <img src="/chris-mitchem.jpg" alt="Chris Mitchem" style="width:48px;height:48px;border-radius:50%;object-fit:cover;">
+      <span>Chris Mitchem, Founder — 10 years operating dispensaries</span>
+    </div>
   </div>
 </section>
 
@@ -291,50 +327,29 @@ document.head.appendChild(o)}initApollo();</script>
   <h2>Frequently asked questions</h2>
   <div class="faq-list">
     <details>
-      <summary>What happens after the pilot?</summary>
-      <p>Pricing is based on what we actually recover and manage for you. Most operators pay a fraction of what we save them — and that includes running their entire consignment and AP operation. No contracts, cancel any time.</p>
+      <summary>What does the free evaluation include?</summary>
+      <p>We connect to your Metrc account, analyze your historical data, and deliver a detailed report showing every unrecovered vendor credit — waste, returns, and co-marketing. No commitment, no credit card.</p>
     </details>
     <details>
-      <summary>What POS systems do you support?</summary>
-      <p>ShelfSpace works with any POS system. We integrate via CSV upload or direct API connection — no proprietary lock-in.</p>
+      <summary>When does pricing start?</summary>
+      <p>After the evaluation, once you decide to move forward. Credit recovery pricing starts from day one of active recovery. The evaluation is the free part — there's no trial period.</p>
     </details>
     <details>
-      <summary>How long does setup take?</summary>
-      <p>Most retailers and vendors are fully onboarded within a week. We handle the integration work so you can focus on your business.</p>
+      <summary>Do I have to use all three modules?</summary>
+      <p>No. Each module works standalone. Most operators start with credit recovery and add consignment or AP when they're ready.</p>
+    </details>
+    <details>
+      <summary>How does bundle pricing work?</summary>
+      <p>Credit recovery rates improve when you add consignment or AP. We manage more of your vendor operation, so we recover more efficiently. All three together gives you the lowest total cost.</p>
     </details>
     <details>
       <summary>Is my data secure?</summary>
-      <p>Yes. ShelfSpace uses row-level security, multi-tenant data isolation, full audit trails, and zero hard deletes. Your data is encrypted at rest and in transit.</p>
+      <p>Yes. We use read-only Metrc access. We never modify your compliance data. All data is encrypted and isolated per operator.</p>
     </details>
     <details>
-      <summary>Do I have to use consignment to use ShelfSpace?</summary>
-      <p>No. ShelfSpace handles payments to all your vendors — consignment or wholesale. You can start by simply managing your AP through the platform and add consignment when you're ready.</p>
+      <summary>Can I cancel?</summary>
+      <p>Yes. No contracts. No minimums. Cancel any time.</p>
     </details>
-    <details>
-      <summary>How do credit memos work?</summary>
-      <p>Either party can issue a credit memo through the platform for returns, pricing corrections, promotional adjustments, or special circumstances. The other party reviews and approves it, and the credit can be applied to the next settlement or settled independently. Everything is tracked with a full audit trail.</p>
-    </details>
-    <details>
-      <summary>How do I add a new vendor to the platform?</summary>
-      <p>Just enter their email address. The vendor receives an invitation to create their own portal account — no paperwork, no bank details needed upfront. Once they sign up, they can start receiving payments immediately.</p>
-    </details>
-    <details>
-      <summary>What is ShelfiQ?</summary>
-      <p>ShelfiQ is your AI-powered advisor built into ShelfSpace. It has full context on your account — inventory, vendors, deal structures, payments, and performance history. Ask anything in plain English and get instant, data-backed answers specific to your business. It's included free with every account.</p>
-    </details>
-  </div>
-</section>
-
-<!-- CTA -->
-<section class="pricing-cta">
-  <h2>Ready to get started?</h2>
-  <p>Join the 60-day pilot today — no fees, no commitments, no credit card required.</p>
-  <div style="display:flex;justify-content:center;gap:16px;flex-wrap:wrap;">
-    <a href="/contact" class="btn-primary">
-      Get a Free Analysis
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-    </a>
-    <a href="/contact" class="btn-secondary">Talk to Chris</a>
   </div>
 </section>
 
@@ -357,13 +372,8 @@ document.head.appendChild(o)}initApollo();</script>
 (function() {
   var nav = document.getElementById('nav');
   var pageHero = document.querySelector('.page-hero');
-  var parallaxSections = [
-    document.querySelector('.pricing-cta'),
-    document.querySelector('.cta-section')
-  ];
 
   var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var isMobile = window.innerWidth < 900;
   var ticking = false;
 
   /* Hero entrance */
@@ -385,17 +395,7 @@ document.head.appendChild(o)}initApollo();</script>
 
   /* Scroll handler */
   function onScroll() {
-    var scrollY = window.scrollY;
-    nav.classList.toggle('scrolled', scrollY > 20);
-    if (prefersReduced || isMobile) return;
-    var wh = window.innerHeight;
-    parallaxSections.forEach(function(section) {
-      if (!section) return;
-      var rect = section.getBoundingClientRect();
-      if (rect.bottom < 0 || rect.top > wh) return;
-      var center = rect.top + rect.height / 2 - wh / 2;
-      section.style.setProperty('--parallax-y', (center * 0.08) + 'px');
-    });
+    nav.classList.toggle('scrolled', window.scrollY > 20);
   }
 
   window.addEventListener('scroll', function() {
@@ -409,15 +409,6 @@ document.head.appendChild(o)}initApollo();</script>
   }, { passive: true });
 
   onScroll();
-
-  window.addEventListener('resize', function() {
-    isMobile = window.innerWidth < 900;
-    if (isMobile) {
-      parallaxSections.forEach(function(section) {
-        if (section) section.style.setProperty('--parallax-y', '0px');
-      });
-    }
-  });
 
 })();
 </script>
