@@ -4,19 +4,19 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ShelfSpace Features — Cannabis Vendor Payment Platform</title>
-<meta name="description" content="Explore the ShelfSpace platform — vendor portals, weekly settlements, credit recovery, QuickBooks sync. Built for cannabis dispensary operations.">
+<meta name="description" content="Every feature your cannabis dispensary needs. Credit recovery, consignment settlements, managed AP, AI-powered vendor communication, QuickBooks sync, Metrc integration.">
 <link rel="canonical" href="https://shelfspace.pro/features">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://shelfspace.pro/features">
 <meta property="og:title" content="ShelfSpace Features — Cannabis Vendor Payment Platform">
-<meta property="og:description" content="Explore the ShelfSpace platform — vendor portals, weekly settlements, credit recovery, QuickBooks sync. Built for cannabis dispensary operations.">
+<meta property="og:description" content="Every feature your cannabis dispensary needs. Credit recovery, consignment settlements, managed AP, AI-powered vendor communication, QuickBooks sync, Metrc integration.">
 <meta property="og:image" content="https://shelfspace.pro/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:type" content="image/png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="ShelfSpace Features — Cannabis Vendor Payment Platform">
-<meta name="twitter:description" content="Explore the ShelfSpace platform — vendor portals, weekly settlements, credit recovery, QuickBooks sync. Built for cannabis dispensary operations.">
+<meta name="twitter:description" content="Every feature your cannabis dispensary needs. Credit recovery, consignment settlements, managed AP, AI-powered vendor communication, QuickBooks sync, Metrc integration.">
 <meta name="twitter:image" content="https://shelfspace.pro/og-image.png">
 <meta name="apple-mobile-web-app-title" content="ShelfSpace">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -26,241 +26,241 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 <style>
-  @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-12px); } }
+@keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-12px); } }
+@keyframes ticker-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
-  /* ─── HERO ENHANCEMENTS ─── */
-  .page-hero { padding-bottom: 40px; }
-  .hero-bg-gradient { position: absolute; top: -30%; right: -20%; width: 700px; height: 700px; background: radial-gradient(circle, rgba(149,213,178,0.18) 0%, rgba(149,213,178,0) 70%); animation: float 8s ease-in-out infinite; pointer-events: none; }
-  .hero-bg-gradient-2 { position: absolute; bottom: -20%; left: -15%; width: 550px; height: 550px; background: radial-gradient(circle, rgba(27,67,50,0.06) 0%, rgba(27,67,50,0) 70%); animation: float 10s ease-in-out infinite; animation-delay: -3s; pointer-events: none; }
-  .hero-grid-lines { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 1200px; height: 100%; opacity: 0.035; background-image: linear-gradient(var(--green-deep) 1px, transparent 1px), linear-gradient(90deg, var(--green-deep) 1px, transparent 1px); background-size: 80px 80px; pointer-events: none; }
-  .page-hero .section-label,
-  .page-hero .section-title,
-  .page-hero .section-desc { opacity: 0; transform: translateY(30px); }
-  .page-hero .section-label { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1); }
-  .page-hero .section-title { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s, transform 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s; }
-  .page-hero .section-desc { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1) 0.25s, transform 0.8s cubic-bezier(0.22,1,0.36,1) 0.25s; }
-  .page-hero.hero-loaded .section-label,
-  .page-hero.hero-loaded .section-title,
-  .page-hero.hero-loaded .section-desc { opacity: 1; transform: translateY(0); }
+.reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1); }
+.reveal.is-visible { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: 0.15s; }
+.reveal-delay-2 { transition-delay: 0.3s; }
+.reveal-delay-3 { transition-delay: 0.45s; }
 
-  /* ─── PORTALS SECTION ─── */
-  .portals-section { background: var(--white); padding-top: 60px; }
-  .portals-header { text-align: center; max-width: 600px; margin: 0 auto 56px; }
-  .portals-header .section-desc { margin: 0 auto; }
-  .portals-grid {
-    max-width: 1000px; margin: 0 auto; display: grid;
-    grid-template-columns: 1fr 1fr; gap: 28px;
-  }
-  .portal-card {
-    background: var(--white); border: 1px solid var(--slate-200); border-radius: 20px;
-    padding: 44px 36px; position: relative; overflow: hidden;
-    transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-  }
-  .portal-card.reveal { transform: translateY(40px) scale(0.97); }
-  .portal-card.reveal.is-visible { transform: translateY(0) scale(1); }
-  .portal-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(27,67,50,0.08), 0 0 24px rgba(149,213,178,0.15); }
-  .portal-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; opacity: 0; transition: opacity 0.4s; }
-  .portal-card:hover::before { opacity: 1; }
-  .portal-card.retailer::before { background: linear-gradient(90deg, var(--green-accent), var(--green-mid)); }
-  .portal-card.vendor::before { background: linear-gradient(90deg, var(--green-deep), var(--green-dark)); }
-  .portal-card-icon {
-    width: 48px; height: 48px; background: var(--green-ghost);
-    border-radius: 12px; display: flex; align-items: center; justify-content: center;
-    margin-bottom: 20px;
-  }
-  .portal-card-icon svg { width: 24px; height: 24px; color: var(--green-deep); }
-  .portal-tag {
-    display: inline-flex; padding: 4px 14px; border-radius: 100px;
-    font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 16px;
-  }
-  .portal-tag.retailer { background: var(--green-ghost); color: var(--green-dark); }
-  .portal-tag.vendor { background: rgba(27,67,50,0.06); color: var(--green-deep); }
-  .portal-card h3 { font-size: 22px; font-weight: 700; color: var(--green-deep); margin-bottom: 10px; letter-spacing: -0.5px; }
-  .portal-card > p { font-size: 15px; line-height: 1.7; color: var(--slate-500); margin-bottom: 24px; }
-  .portal-features {
-    list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
-  }
-  .portal-features li {
-    display: flex; align-items: center; gap: 8px;
-    font-size: 13px; color: var(--slate-600); line-height: 1.4;
-  }
-  .portal-features li svg { flex-shrink: 0; }
+/* ── HERO (dark) ── */
+.features-hero {
+  background: var(--green-deep); padding: 140px 48px 80px;
+  text-align: center; position: relative; overflow: hidden;
+}
+.features-hero::before {
+  content: ''; position: absolute; top: -300px; right: -200px;
+  width: 800px; height: 800px;
+  background: radial-gradient(circle, rgba(149,213,178,0.1), transparent 70%);
+}
+.features-hero::after {
+  content: ''; position: absolute; bottom: -200px; left: -200px;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(149,213,178,0.06), transparent 70%);
+  animation: float 10s ease-in-out infinite;
+}
+.features-hero-content { max-width: 800px; margin: 0 auto; position: relative; z-index: 2; }
+.features-hero .section-label { color: var(--green-accent); }
+.features-hero h1 { font-size: clamp(32px, 4.5vw, 48px); font-weight: 700; color: var(--white); letter-spacing: -2px; line-height: 1.1; margin-bottom: 16px; }
+.features-hero-sub { font-size: 18px; color: rgba(255,255,255,0.6); margin-bottom: 32px; }
+.features-hero-pills { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin-bottom: 32px; }
+.features-hero-pill {
+  padding: 8px 20px; border-radius: 100px;
+  background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+  font-size: 14px; font-weight: 500; color: rgba(255,255,255,0.7);
+}
+.features-hero .btn-primary { background: var(--white); color: var(--green-deep); }
+.features-hero .btn-primary:hover { background: var(--slate-50); transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,0,0,0.2); }
+.hero-cta-note { font-size: 13px; color: rgba(255,255,255,0.4); margin-top: 16px; }
+.hero-trust-row {
+  display: flex; justify-content: center; gap: 24px; flex-wrap: wrap;
+  margin-top: 40px; padding-top: 32px; border-top: 1px solid rgba(255,255,255,0.08);
+}
+.hero-trust-item { display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 500; color: rgba(255,255,255,0.4); }
+.hero-trust-item svg { width: 14px; height: 14px; color: var(--green-accent); }
+.hero-trust-item img { height: 14px; opacity: 0.5; filter: brightness(0) invert(1); }
 
-  /* ─── FLOWS SECTION ─── */
-  .flows-section { background: var(--white); padding-top: 60px; }
-  .flows-header { text-align: center; max-width: 600px; margin: 0 auto 56px; }
-  .flows-header .section-desc { margin: 0 auto; }
-  .flows-container { max-width: 880px; margin: 0 auto; position: relative; }
-  .flows-container::before {
-    content: ''; position: absolute; top: 0; left: 39px; width: 2px;
-    height: calc(var(--flow-progress, 0) * 100%);
-    background: linear-gradient(180deg, var(--green-accent), var(--green-mid));
-    border-radius: 2px; transition: height 0.1s linear;
-  }
-  .flow-step {
-    display: grid; grid-template-columns: 80px 1fr; gap: 40px;
-    padding: 56px 0; border-bottom: 1px solid var(--slate-100);
-    position: relative;
-  }
-  .flow-step:last-child { border-bottom: none; }
-  .flow-step-number {
-    width: 56px; height: 56px;
-    background: var(--green-ghost); border: 1px solid rgba(149,213,178,0.3);
-    border-radius: 14px;
-    display: flex; align-items: center; justify-content: center;
-    font-family: var(--font-mono); font-size: 16px; font-weight: 700; color: var(--green-deep);
-    position: sticky; top: 100px;
-    transition: box-shadow 0.4s, border-color 0.4s;
-  }
-  .flow-step-number.pulse {
-    border-color: var(--green-accent);
-    box-shadow: 0 0 16px rgba(149,213,178,0.35);
-  }
-  .flow-step-content h3 {
-    font-size: 24px; font-weight: 700; color: var(--green-deep);
-    letter-spacing: -0.5px; margin-bottom: 8px;
-  }
-  .flow-step-content .step-tag {
-    font-size: 11px; font-weight: 700; letter-spacing: 2px;
-    text-transform: uppercase; color: var(--green-mid); margin-bottom: 16px;
-    display: block;
-  }
-  .flow-step-content p {
-    font-size: 16px; line-height: 1.75; color: var(--slate-500); margin-bottom: 16px;
-  }
-  .flow-step-content p:last-child { margin-bottom: 0; }
-  .flow-highlight {
-    background: var(--green-ghost); border: 1px solid rgba(149,213,178,0.3);
-    border-radius: 12px; padding: 20px 24px; margin-top: 20px;
-    font-size: 14px; line-height: 1.7; color: var(--green-dark);
-  }
-  .flow-highlight strong { color: var(--green-deep); }
+/* ── MODULE CARDS ── */
+.modules-section { background: var(--white); padding: 80px 48px; }
+.modules-header { text-align: center; max-width: 600px; margin: 0 auto 48px; }
+.modules-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 1000px; margin: 0 auto; }
+.mod-card {
+  background: var(--white); border: 1px solid var(--slate-200);
+  border-radius: 20px; padding: 36px 28px; text-align: center;
+  transition: all 0.3s; position: relative; overflow: hidden;
+}
+.mod-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--green-accent), var(--green-mid)); opacity: 0; transition: opacity 0.3s; }
+.mod-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(27,67,50,0.08); border-color: var(--green-accent); }
+.mod-card:hover::before { opacity: 1; }
+.mod-card-num { font-family: var(--font-mono); font-size: 24px; font-weight: 700; color: var(--green-deep); margin-bottom: 8px; }
+.mod-card h3 { font-size: 20px; font-weight: 700; color: var(--green-deep); margin-bottom: 8px; }
+.mod-card p { font-size: 14px; line-height: 1.6; color: var(--slate-500); margin-bottom: 16px; }
+.mod-card a { display: inline-flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 600; color: var(--green-mid); text-decoration: none; }
+.mod-card a:hover { color: var(--green-deep); gap: 10px; }
 
-  /* ─── FEATURE DEEP DIVE ─── */
-  .deepdive-section { background: var(--slate-50); border-top: 1px solid var(--slate-100); }
-  .deepdive-header { text-align: center; max-width: 600px; margin: 0 auto 64px; }
-  .deepdive-header .section-desc { margin: 0 auto; }
-  .deepdive-grid {
-    max-width: 1100px; margin: 0 auto; display: grid;
-    grid-template-columns: repeat(3, 1fr); gap: 28px;
-  }
-  .deepdive-card {
-    background: var(--white); border: 1px solid var(--slate-200); border-radius: 16px;
-    padding: 36px 32px; transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-    position: relative; overflow: hidden;
-  }
-  .deepdive-card.reveal { transform: translateY(40px) scale(0.97); }
-  .deepdive-card.reveal.is-visible { transform: translateY(0) scale(1); }
-  .deepdive-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--green-accent), var(--green-mid)); opacity: 0; transition: opacity 0.4s; }
-  .deepdive-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(27,67,50,0.08); border-color: var(--green-accent); }
-  .deepdive-card:hover::before { opacity: 1; }
-  .deepdive-card-icon {
-    width: 48px; height: 48px; background: var(--green-ghost);
-    border-radius: 12px; display: flex; align-items: center; justify-content: center;
-    margin-bottom: 20px;
-  }
-  .deepdive-card-icon svg { width: 24px; height: 24px; color: var(--green-deep); }
-  .deepdive-card h3 { font-size: 18px; font-weight: 700; color: var(--green-deep); margin-bottom: 10px; }
-  .deepdive-card > p { font-size: 14px; line-height: 1.65; color: var(--slate-500); margin-bottom: 20px; }
-  .deepdive-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-  .deepdive-list li {
-    display: flex; align-items: center; gap: 8px;
-    font-size: 13px; color: var(--slate-600); line-height: 1.4;
-  }
-  .deepdive-list li svg { flex-shrink: 0; }
+/* ── PORTALS ── */
+.portals-section { background: var(--slate-50); padding: 80px 48px; }
+.portals-header { text-align: center; max-width: 600px; margin: 0 auto 48px; }
+.portals-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; max-width: 900px; margin: 0 auto; }
+.portal-card {
+  background: var(--white); border: 1px solid var(--slate-200);
+  border-radius: 20px; padding: 40px 32px;
+  transition: all 0.3s; position: relative; overflow: hidden;
+}
+.portal-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; opacity: 0; transition: opacity 0.3s; }
+.portal-card.retailer::before { background: linear-gradient(90deg, var(--green-accent), var(--green-mid)); }
+.portal-card.vendor::before { background: linear-gradient(90deg, var(--green-deep), var(--green-dark)); }
+.portal-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(27,67,50,0.08); }
+.portal-card:hover::before { opacity: 1; }
+.portal-tag { display: inline-flex; padding: 4px 14px; border-radius: 100px; font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 16px; }
+.portal-tag.retailer { background: var(--green-ghost); color: var(--green-dark); }
+.portal-tag.vendor { background: rgba(27,67,50,0.06); color: var(--green-deep); }
+.portal-card h3 { font-size: 22px; font-weight: 700; color: var(--green-deep); margin-bottom: 10px; }
+.portal-card > p { font-size: 15px; line-height: 1.7; color: var(--slate-500); margin-bottom: 24px; }
+.portal-features { list-style: none; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.portal-features li { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--slate-600); }
+.portal-features li svg { flex-shrink: 0; }
 
-  /* ─── TECHNICAL INFRASTRUCTURE ─── */
-  .tech-section {
-    background: var(--green-deep); position: relative; overflow: hidden;
-  }
-  .tech-section::before {
-    content: ''; position: absolute; top: -200px; right: -200px;
-    width: 600px; height: 600px;
-    background: radial-gradient(circle, rgba(149,213,178,0.08), transparent 70%);
-    transform: translateY(var(--parallax-y, 0)); will-change: transform;
-  }
-  .tech-section::after {
-    content: ''; position: absolute; bottom: -200px; left: -200px;
-    width: 500px; height: 500px;
-    background: radial-gradient(circle, rgba(149,213,178,0.06), transparent 70%);
-    transform: translateY(calc(var(--parallax-y, 0) * -0.6)); will-change: transform;
-  }
-  .tech-header { text-align: center; max-width: 600px; margin: 0 auto 64px; position: relative; }
-  .tech-header .section-label { color: var(--green-accent); }
-  .tech-header .section-title { color: var(--white); }
-  .tech-header .section-desc { color: rgba(255,255,255,0.6); margin: 0 auto; }
+/* ── SPLIT SECTIONS (text + visual) ── */
+.split-section { padding: 100px 48px; }
+.split-section.white { background: var(--white); }
+.split-section.slate { background: var(--slate-50); }
+.split-inner {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 64px;
+  align-items: center; max-width: 1000px; margin: 0 auto;
+}
+.split-inner.reverse { direction: rtl; }
+.split-inner.reverse > * { direction: ltr; }
+.split-text .section-label { margin-bottom: 12px; }
+.split-text h2 { font-size: clamp(24px, 3vw, 32px); font-weight: 700; color: var(--green-deep); letter-spacing: -0.5px; margin-bottom: 16px; }
+.split-text > p { font-size: 16px; line-height: 1.7; color: var(--slate-500); margin-bottom: 24px; }
+.split-bullets { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+.split-bullets li {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 14px; color: var(--slate-600);
+}
+.split-bullets li svg { flex-shrink: 0; width: 16px; height: 16px; color: var(--green-mid); }
 
-  .tech-stats {
-    max-width: 800px; margin: 0 auto 64px; display: grid;
-    grid-template-columns: repeat(3, 1fr); gap: 32px;
-    position: relative; text-align: center;
-  }
-  .tech-stat-number {
-    font-family: var(--font-mono); font-size: clamp(36px, 5vw, 56px);
-    font-weight: 700; color: var(--green-accent); letter-spacing: -2px;
-    margin-bottom: 8px;
-  }
-  .tech-stat-label {
-    font-size: 14px; color: rgba(255,255,255,0.5); line-height: 1.5;
-  }
+/* CSS Mock Visuals */
+.mock-card {
+  background: var(--green-deep); border-radius: 16px; padding: 32px;
+  font-family: var(--font-mono); color: var(--white); position: relative;
+  overflow: hidden; box-shadow: 0 24px 64px rgba(27,67,50,0.2);
+}
+.mock-card::before {
+  content: ''; position: absolute; top: -50px; right: -50px;
+  width: 150px; height: 150px;
+  background: radial-gradient(circle, rgba(149,213,178,0.1), transparent 70%);
+}
+.mock-card-title { font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--green-accent); margin-bottom: 16px; }
+.mock-card-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.08); font-size: 14px; }
+.mock-card-row:last-child { border-bottom: none; }
+.mock-card-row-label { color: rgba(255,255,255,0.5); font-family: var(--font-display); }
+.mock-card-row-value { font-weight: 700; color: var(--white); }
+.mock-card-total { margin-top: 12px; padding-top: 12px; border-top: 2px solid var(--green-accent); display: flex; justify-content: space-between; font-size: 16px; }
+.mock-card-total .mock-card-row-label { color: rgba(255,255,255,0.7); font-weight: 600; }
+.mock-card-badge { display: inline-flex; align-items: center; gap: 6px; margin-top: 16px; font-size: 12px; color: var(--green-accent); font-family: var(--font-display); }
+.mock-card-badge svg { width: 14px; height: 14px; }
 
-  .tech-grid {
-    max-width: 1000px; margin: 0 auto; display: grid;
-    grid-template-columns: repeat(3, 1fr); gap: 28px;
-    position: relative;
-  }
-  .tech-card {
-    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 16px; padding: 36px 28px; text-align: center;
-    backdrop-filter: blur(8px);
-    transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-  }
-  .tech-card:hover { background: rgba(255,255,255,0.08); border-color: rgba(149,213,178,0.3); transform: translateY(-4px); }
-  .tech-card-icon {
-    width: 52px; height: 52px; background: rgba(149,213,178,0.12);
-    border: 1px solid rgba(149,213,178,0.2); border-radius: 14px;
-    display: flex; align-items: center; justify-content: center;
-    margin: 0 auto 20px;
-  }
-  .tech-card-icon svg { width: 24px; height: 24px; color: var(--green-accent); }
-  .tech-card h3 { font-size: 18px; font-weight: 700; color: var(--white); margin-bottom: 12px; }
-  .tech-card p { font-size: 14px; line-height: 1.65; color: rgba(255,255,255,0.55); }
+/* ── SHELFIQ (dark) ── */
+.shelfiq-feature { background: var(--green-deep); padding: 100px 48px; text-align: center; position: relative; overflow: hidden; }
+.shelfiq-feature::before { content: ''; position: absolute; top: -200px; left: -200px; width: 500px; height: 500px; background: radial-gradient(circle, rgba(149,213,178,0.08), transparent 70%); }
+.shelfiq-feature-content { max-width: 700px; margin: 0 auto; position: relative; }
+.shelfiq-feature .section-label { color: var(--green-accent); }
+.shelfiq-feature h2 { font-size: clamp(24px, 3vw, 36px); font-weight: 700; color: var(--white); margin-bottom: 16px; letter-spacing: -0.5px; font-variant-ligatures: none; }
+.shelfiq-feature > p, .shelfiq-feature-content > p { font-size: 17px; line-height: 1.7; color: rgba(255,255,255,0.6); margin-bottom: 32px; }
+.shelfiq-chat-example { max-width: 520px; margin: 0 auto 32px; text-align: left; }
+.shelfiq-msg { padding: 16px 20px; border-radius: 12px; margin-bottom: 12px; font-size: 15px; line-height: 1.5; }
+.shelfiq-msg.vendor { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px 12px 12px 4px; color: rgba(255,255,255,0.8); }
+.shelfiq-msg.ai { background: rgba(149,213,178,0.15); border: 1px solid rgba(149,213,178,0.2); border-radius: 12px 12px 4px 12px; color: rgba(255,255,255,0.9); }
+.shelfiq-msg-label { font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 6px; }
+.shelfiq-msg.vendor .shelfiq-msg-label { color: rgba(255,255,255,0.4); }
+.shelfiq-msg.ai .shelfiq-msg-label { color: var(--green-accent); }
+.shelfiq-pills { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+.shelfiq-pill {
+  padding: 6px 16px; border-radius: 100px;
+  background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+  font-size: 13px; color: rgba(255,255,255,0.6);
+}
 
-  /* ─── CTA PARALLAX ─── */
-  .cta-section::before { transform: translate(-50%,-50%) translateY(var(--parallax-y, 0)); will-change: transform; }
+/* ── INTEGRATIONS ── */
+.integrations-section { background: var(--slate-50); padding: 80px 48px; }
+.integrations-header { text-align: center; max-width: 600px; margin: 0 auto 48px; }
+.integrations-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; max-width: 900px; margin: 0 auto; }
+.int-card {
+  background: var(--white); border: 1px solid var(--slate-200);
+  border-radius: 16px; padding: 28px 24px; text-align: center;
+  transition: all 0.3s;
+}
+.int-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(27,67,50,0.08); border-color: var(--green-accent); }
+.int-card-icon { margin-bottom: 16px; }
+.int-card-icon img { height: 28px; opacity: 0.7; }
+.int-card-icon svg { width: 28px; height: 28px; color: var(--green-mid); }
+.int-card h4 { font-size: 16px; font-weight: 700; color: var(--green-deep); margin-bottom: 6px; }
+.int-card p { font-size: 13px; color: var(--slate-500); line-height: 1.4; }
 
-  /* ─── RESPONSIVE ─── */
-  @media (max-width: 900px) {
-    .portals-grid { grid-template-columns: 1fr; max-width: 520px; margin: 0 auto; }
-    .portal-features { grid-template-columns: 1fr; }
-    .flow-step { grid-template-columns: 1fr; gap: 16px; }
-    .flow-step-number { position: static; }
-    .flows-container::before { display: none; }
-    .deepdive-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
-    .tech-stats { grid-template-columns: 1fr; gap: 24px; }
-    .tech-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
-  }
+/* ── SECURITY ── */
+.security-section { background: var(--white); padding: 80px 48px; }
+.security-header { text-align: center; max-width: 600px; margin: 0 auto 48px; }
+.security-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; max-width: 700px; margin: 0 auto 48px; text-align: center; }
+.security-stat-num { font-family: var(--font-mono); font-size: clamp(28px, 3.5vw, 40px); font-weight: 700; color: var(--green-deep); letter-spacing: -1px; margin-bottom: 8px; }
+.security-stat-desc { font-size: 13px; color: var(--slate-500); line-height: 1.4; }
+.security-features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 800px; margin: 0 auto; }
+.security-feature { display: flex; align-items: flex-start; gap: 12px; }
+.security-feature svg { flex-shrink: 0; width: 20px; height: 20px; color: var(--green-mid); margin-top: 2px; }
+.security-feature-text h4 { font-size: 14px; font-weight: 700; color: var(--green-deep); margin-bottom: 4px; }
+.security-feature-text p { font-size: 13px; color: var(--slate-500); line-height: 1.4; }
 
-  /* ─── REDUCED MOTION ─── */
-  @media (prefers-reduced-motion: reduce) {
-    .reveal, .portal-card.reveal, .deepdive-card.reveal {
-      opacity: 1; transform: none; transition: none;
-    }
-    .page-hero .section-label,
-    .page-hero .section-title,
-    .page-hero .section-desc {
-      opacity: 1; transform: none; transition: none;
-    }
-    .hero-bg-gradient, .hero-bg-gradient-2 { animation: none; }
-    .flows-container::before { height: 100%; }
-  }
+/* ── PROOF + CTA ── */
+.features-cta { background: var(--slate-50); padding: 100px 48px; text-align: center; }
+.features-cta-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; max-width: 800px; margin: 0 auto 16px; }
+.features-cta-stat-num { font-family: var(--font-mono); font-size: clamp(22px, 2.5vw, 28px); font-weight: 700; color: var(--green-deep); letter-spacing: -0.5px; margin-bottom: 4px; }
+.features-cta-stat-desc { font-size: 12px; color: var(--slate-400); }
+.features-cta-note { font-size: 13px; color: var(--slate-400); font-style: italic; margin-bottom: 48px; }
+.features-cta-card { max-width: 520px; margin: 0 auto; padding: 48px 40px; background: var(--green-ghost); border: 1px solid rgba(149,213,178,0.3); border-radius: 20px; }
+.features-cta-card h3 { font-size: 22px; font-weight: 700; color: var(--green-deep); margin-bottom: 12px; }
+.features-cta-card > p { font-size: 15px; color: var(--slate-500); line-height: 1.6; margin-bottom: 24px; }
+.features-cta-founder { display: flex; align-items: center; gap: 12px; justify-content: center; margin-top: 24px; font-size: 14px; color: var(--slate-500); }
 
-  /* Footer 5-col */
-  .footer-top { grid-template-columns: 2fr 1fr 1fr 1fr 1fr; }
-  @media (max-width: 900px) { .footer-top { grid-template-columns: 1fr 1fr; } }
-  @media (max-width: 600px) { .footer-top { grid-template-columns: 1fr; } }
+/* ── POS TICKER ── */
+.pos-ticker { padding: 48px 0; background: var(--white); overflow: hidden; border-top: 1px solid var(--slate-100); }
+.pos-ticker-label { text-align: center; font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--slate-400); margin-bottom: 28px; }
+.pos-ticker-track { display: flex; width: max-content; animation: ticker-scroll 30s linear infinite; }
+.pos-ticker-track:hover { animation-play-state: paused; }
+.pos-ticker-logo { height: 120px; padding: 0 48px; opacity: 0.45; filter: grayscale(100%); transition: opacity 0.3s, filter 0.3s; }
+.pos-ticker-logo:hover { opacity: 0.9; filter: grayscale(0%); }
+
+.footer-top { grid-template-columns: 2fr 1fr 1fr 1fr 1fr; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  .features-hero { padding: 120px 24px 60px; }
+  .features-hero-pills { gap: 8px; }
+  .modules-section { padding: 60px 24px; }
+  .modules-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
+  .portals-section { padding: 60px 24px; }
+  .portals-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
+  .portal-features { grid-template-columns: 1fr; }
+  .split-section { padding: 60px 24px; }
+  .split-inner, .split-inner.reverse { grid-template-columns: 1fr; direction: ltr; gap: 32px; }
+  .mock-card { max-width: 400px; margin: 0 auto; }
+  .shelfiq-feature { padding: 60px 24px; }
+  .integrations-section { padding: 60px 24px; }
+  .integrations-grid { grid-template-columns: 1fr 1fr; }
+  .security-section { padding: 60px 24px; }
+  .security-stats { grid-template-columns: 1fr; gap: 24px; }
+  .security-features { grid-template-columns: 1fr; }
+  .features-cta { padding: 60px 24px; }
+  .features-cta-stats { grid-template-columns: repeat(2, 1fr); }
+  .features-cta-card { padding: 32px 24px; }
+  .footer-top { grid-template-columns: 1fr 1fr; }
+  .pos-ticker-logo { height: 72px; padding: 0 32px; }
+}
+@media (max-width: 600px) {
+  .footer-top { grid-template-columns: 1fr; }
+  .integrations-grid { grid-template-columns: 1fr; max-width: 300px; margin: 0 auto; }
+  .features-cta-stats { grid-template-columns: 1fr; }
+  .pos-ticker-logo { height: 48px; padding: 0 24px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .features-hero::after { animation: none; }
+  .pos-ticker-track { animation: none; }
+}
 </style>
-<noscript><style>.reveal,.page-hero .section-label,.page-hero .section-title,.page-hero .section-desc{opacity:1;transform:none;transition:none;}</style></noscript>
+<noscript><style>.reveal{opacity:1;transform:none;transition:none;}</style></noscript>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-H2LBJT03WE"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-H2LBJT03WE');</script>
 <script>function initApollo(){var n=Math.random().toString(36).substring(7),o=document.createElement("script");
@@ -288,30 +288,59 @@ document.head.appendChild(o)}initApollo();</script>
   <div class="nav-hamburger" onclick="document.querySelector('.nav-links').classList.toggle('mobile-open'); event.stopPropagation();"><span></span><span></span><span></span></div>
 </nav>
 
-<!-- PAGE HERO -->
-<div class="page-hero">
-  <div class="hero-bg-gradient"></div>
-  <div class="hero-bg-gradient-2"></div>
-  <div class="hero-grid-lines"></div>
-  <div class="section-label">Platform Features</div>
-  <h1 class="section-title">Everything you need to manage vendor payments at scale</h1>
-  <p class="section-desc">Consignment and wholesale vendor management, powered by a single AP engine with built-in credit memo management. Dedicated portals, weekly settlements, and precision financial tools built for cannabis operators. Start with a free evaluation to see what ShelfSpace finds.</p>
-  <div style="margin-top: 32px;">
-    <a href="/how-it-works" class="btn-secondary">See How It Works <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a>
+<!-- SECTION 1: HERO -->
+<section class="features-hero">
+  <div class="features-hero-content">
+    <div class="section-label reveal">Platform</div>
+    <h1 class="reveal">Every feature your cannabis dispensary needs to manage vendors.</h1>
+    <p class="features-hero-sub reveal">Three modules. One engine. Built by a dispensary operator.</p>
+    <div class="features-hero-pills reveal">
+      <span class="features-hero-pill">Credit Recovery</span>
+      <span class="features-hero-pill">Consignment</span>
+      <span class="features-hero-pill">Accounts Payable</span>
+    </div>
+    <div class="reveal">
+      <a href="/contact" class="btn-primary">Get My Free Evaluation <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+    </div>
+    <div class="hero-cta-note reveal">No commitment. No credit card.</div>
+    <div class="hero-trust-row reveal">
+      <span class="hero-trust-item"><img src="/metrc-logo.png" alt="METRC"> METRC Certified</span>
+      <span class="hero-trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg> QuickBooks Sync</span>
+      <span class="hero-trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg> Bank-Grade Encryption</span>
+      <span class="hero-trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Metrc-Integrated AI</span>
+    </div>
   </div>
-</div>
+</section>
 
-<!-- TRUST BAR -->
-<div style="background:var(--slate-50);padding:16px 48px;text-align:center;border-bottom:1px solid var(--slate-100);">
-  <div style="display:flex;justify-content:center;gap:32px;flex-wrap:wrap;font-size:12px;font-weight:600;color:var(--slate-400);">
-    <span>✓ METRC Certified</span>
-    <span>✓ QuickBooks Sync</span>
-    <span>✓ 40+ Vendors Managed</span>
-    <span>✓ Read-Only Access</span>
+<!-- SECTION 2: THREE MODULE CARDS -->
+<section class="modules-section">
+  <div class="modules-header">
+    <div class="section-label reveal">Three Modules</div>
+    <h2 class="section-title reveal">Start with one. Add what you need.</h2>
   </div>
-</div>
+  <div class="modules-grid">
+    <div class="mod-card reveal">
+      <div class="mod-card-num">$8K–$25K/mo</div>
+      <h3>Credit Recovery</h3>
+      <p>We find unrecovered vendor credits — returns, expirations, co-marketing — and generate weekly credit memos.</p>
+      <a href="/credit-recovery">How it works <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a>
+    </div>
+    <div class="mod-card reveal reveal-delay-1">
+      <div class="mod-card-num">$250K freed</div>
+      <h3>Consignment</h3>
+      <p>Weekly settlements for consignment vendors. POS-agnostic via Metrc. Checks cut, vendors paid.</p>
+      <a href="/consignment">How it works <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a>
+    </div>
+    <div class="mod-card reveal reveal-delay-2">
+      <div class="mod-card-num">$45K/yr saved</div>
+      <h3>Accounts Payable</h3>
+      <p>Managed invoices, verified payments, AI-powered vendor communication. You just approve.</p>
+      <a href="/accounts-payable">How it works <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a>
+    </div>
+  </div>
+</section>
 
-<!-- TWO PORTALS -->
+<!-- SECTION 3: TWO PORTALS -->
 <section class="portals-section">
   <div class="portals-header">
     <div class="section-label reveal">Dedicated Portals</div>
@@ -321,7 +350,6 @@ document.head.appendChild(o)}initApollo();</script>
   <div class="portals-grid">
 
     <div class="portal-card retailer reveal">
-      <div class="portal-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
       <span class="portal-tag retailer">Retailer</span>
       <h3>Retailer Portal</h3>
       <p>Track settlements, manage vendor relationships, and monitor consignment inventory across all your locations.</p>
@@ -336,7 +364,6 @@ document.head.appendChild(o)}initApollo();</script>
     </div>
 
     <div class="portal-card vendor reveal reveal-delay-1">
-      <div class="portal-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div>
       <span class="portal-tag vendor">Vendor</span>
       <h3>Vendor Portal</h3>
       <p>Download checks, track sell-through by retailer, and know exactly when to restock — all in real time.</p>
@@ -353,280 +380,239 @@ document.head.appendChild(o)}initApollo();</script>
   </div>
 </section>
 
-<!-- CORE BUSINESS FLOWS -->
-<section class="flows-section">
-  <div class="flows-header">
-    <div class="section-label reveal">Core Flows</div>
-    <h2 class="section-title reveal">From onboarding to weekly payments</h2>
-    <p class="section-desc reveal">Six connected workflows that power the entire platform — consignment, wholesale, and credit memos, all running on one engine. Fully managed, fully auditable.</p>
-  </div>
-  <div class="flows-container">
-
-    <div class="flow-step reveal">
-      <div class="flow-step-number">01</div>
-      <div class="flow-step-content">
-        <span class="step-tag">Account Setup</span>
-        <h3>Onboarding</h3>
-        <p>New retailers and vendors create accounts, verify their business details, and get instant access to their dedicated portal. ShelfSpace handles the compliance groundwork so you can focus on operations.</p>
-        <div class="flow-highlight">
-          <strong>Self-service signup:</strong> Business verification, portal access, and initial configuration — all in minutes, not weeks.
-        </div>
-      </div>
-    </div>
-
-    <div class="flow-step reveal">
-      <div class="flow-step-number">02</div>
-      <div class="flow-step-content">
-        <span class="step-tag">Connecting the Supply Chain</span>
-        <h3>Partnership Formation</h3>
-        <p>Retailers and vendors formalize their consignment relationship through ShelfSpace. The platform generates a standardized Master Agreement that handles payment terms, profit splits, shrinkage policies, and discount budgets.</p>
-        <div class="flow-highlight">
-          <strong>Standardized contracts:</strong> Every partnership starts from the same legally vetted framework — eliminating back-and-forth negotiation on boilerplate terms.
-        </div>
-      </div>
-    </div>
-
-    <div class="flow-step reveal">
-      <div class="flow-step-number">03</div>
-      <div class="flow-step-content">
-        <span class="step-tag">Weekly Reconciliation</span>
-        <h3>Weekly Settlements</h3>
-        <p>Every week, the ShelfSpace Engine ingests POS sales data, reconciles on-hand inventory, applies the contracted profit split, and generates a five-page settlement report for each active partnership.</p>
-        <div class="flow-highlight">
-          <strong>Five-page report:</strong> Vendor payout table, returns detail, discount audit with budget vs. actual reconciliation, remaining inventory with JIT velocity metrics, and a depositable check.
-        </div>
-      </div>
-    </div>
-
-    <div class="flow-step reveal">
-      <div class="flow-step-number">04</div>
-      <div class="flow-step-content">
-        <span class="step-tag">Consistent Cash Flow</span>
-        <h3>Payment</h3>
-        <p>ShelfSpace generates a Check 21-compliant check for each vendor based on confirmed weekly sales. Vendors download and deposit instantly via mobile banking — no more waiting on "Net 30" terms that turn into "Net Never."</p>
-        <div class="flow-highlight">
-          <strong>Check 21 Compliant:</strong> Every check is a valid "Substitute Check" under Federal Law. UCC Article 3 Compliant. Print-at-Home Legal. Mobile Deposit Ready.
-        </div>
-      </div>
-    </div>
-
-    <div class="flow-step reveal">
-      <div class="flow-step-number">05</div>
-      <div class="flow-step-content">
-        <span class="step-tag">Flexible Operations</span>
-        <h3>Ad-Hoc Payments</h3>
-        <p>Beyond weekly settlements, ShelfSpace supports ad-hoc payments for returns, adjustments, and special circumstances — including AP payments to any vendor, consignment or wholesale. Every non-standard transaction is fully documented and tied to the partnership audit trail.</p>
-        <div class="flow-highlight">
-          <strong>Full traceability:</strong> Every ad-hoc payment links back to a specific partnership, invoice, and reason code — nothing falls through the cracks.
-        </div>
-      </div>
-    </div>
-
-    <div class="flow-step reveal">
-      <div class="flow-step-number">06</div>
-      <div class="flow-step-content">
-        <span class="step-tag">Financial Resolution</span>
-        <h3>Credit Memo Management</h3>
-        <p>Issue, track, and resolve credit memos between retailers and vendors. Whether it's a return, pricing correction, promotional adjustment, or special circumstance — ShelfSpace provides a structured workflow with full transparency for both parties.</p>
-        <div class="flow-highlight">
-          <strong>Complete lifecycle:</strong> From issuance through review, approval, and settlement — every credit memo action is tracked and auditable.
-        </div>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- FEATURE DEEP DIVE -->
-<section class="deepdive-section">
-  <div class="deepdive-header">
-    <div class="section-label reveal">Feature Deep Dive</div>
-    <h2 class="section-title reveal">Built for the details that matter</h2>
-    <p class="section-desc reveal">Nine feature categories covering every angle of cannabis operations — two vendor relationship types, one payment engine, AI-powered intelligence, and the tools to run them.</p>
-  </div>
-  <div class="deepdive-grid">
-
-    <div class="deepdive-card reveal">
-      <div class="deepdive-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
-      <h3>Settlements & Invoices</h3>
-      <p>Weekly settlement engine with five-page reports and full financial reconciliation.</p>
-      <ul class="deepdive-list">
-        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Weekly settlement runs</li>
-        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Five-page PDF reports</li>
-        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Discount budget vs. actual audit</li>
-        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Returns & shrinkage reconciliation</li>
-        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Vendor payout breakdowns</li>
-        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Remaining inventory valuation</li>
+<!-- SECTION 4: SETTLEMENT ENGINE -->
+<section class="split-section white">
+  <div class="split-inner">
+    <div class="split-text reveal">
+      <div class="section-label">The Engine</div>
+      <h2>Weekly settlements, calculated to the penny.</h2>
+      <p>Every week, ShelfSpace pulls your sales data, reconciles inventory, applies profit splits and aging discounts, and generates a five-page settlement report for each vendor.</p>
+      <ul class="split-bullets">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Weekly settlement runs from POS/Metrc data</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Five-page PDF settlement reports</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Category-level profit splits with aging discounts</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Returns and shrinkage reconciliation</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Integer-precision math — zero rounding errors</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Full audit trail on every calculation</li>
       </ul>
-    </div>
-
-    <div class="deepdive-card reveal reveal-delay-1">
-      <div class="deepdive-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div>
-      <h3>Payments</h3>
-      <p>Check 21-compliant payment generation for all your vendors — consignment and wholesale — with instant access and full federal compliance.</p>
-      <ul class="deepdive-list">
-        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Weekly check generation</li>
-        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Check 21 & UCC Article 3 compliant</li>
-        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Print-at-home, mobile deposit ready</li>
-        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Ad-hoc payment support</li>
-        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Void & reissue workflows</li>
-        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Complete payment audit trail</li>
-        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Real-time QuickBooks sync</li>
-      </ul>
-    </div>
-
-    <div class="deepdive-card reveal reveal-delay-2">
-      <div class="deepdive-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
-      <h3>Data & Reporting</h3>
-      <p>Real-time visibility into sales velocity, inventory levels, and financial performance across every partnership.</p>
-      <ul class="deepdive-list">
-        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Sales velocity by SKU & retailer</li>
-        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> JIT restock metrics</li>
-        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> On-hand inventory tracking</li>
-        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Settlement history & trends</li>
-        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Vendor performance rankings</li>
-        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Downloadable PDF & CSV exports</li>
-      </ul>
-    </div>
-
-    <div class="deepdive-card reveal">
-      <div class="deepdive-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div>
-      <h3>Partnerships</h3>
-      <p>Structured retailer-vendor relationships with standardized terms, managed splits, and built-in dispute resolution.</p>
-      <ul class="deepdive-list">
-        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Standardized Master Agreements</li>
-        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Configurable profit splits</li>
-        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Shrinkage policy enforcement</li>
-        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Discount budget allocation</li>
-        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Multi-location support</li>
-        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Neutral dispute mediation</li>
-      </ul>
-    </div>
-
-    <div class="deepdive-card reveal reveal-delay-1">
-      <div class="deepdive-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
-      <h3>Promotions</h3>
-      <p>Vendor-funded promotional tools with built-in discount tracking and budget reconciliation at settlement.</p>
-      <ul class="deepdive-list">
-        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Vendor-initiated promotions</li>
-        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Time-limited discount windows</li>
-        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Built-in budget deduction</li>
-        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Budget vs. actual audit trail</li>
-        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Per-partnership promo tracking</li>
-        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Settlement-integrated reporting</li>
-      </ul>
-    </div>
-
-    <div class="deepdive-card reveal reveal-delay-2">
-      <div class="deepdive-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div>
-      <h3>Security & Compliance</h3>
-      <p>Enterprise-grade security architecture with full audit trails, soft deletes, and regulatory compliance built in.</p>
-      <ul class="deepdive-list">
-        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Zero hard deletes — full data retention</li>
-        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Row-level audit timestamps</li>
-        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Role-based access control</li>
-        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Multi-tenant data isolation</li>
-        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Tax & regulatory compliance</li>
-        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Encrypted data at rest & in transit</li>
-      </ul>
-    </div>
-
-    <div class="deepdive-card reveal">
-      <div class="deepdive-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div>
-      <h3>Accounts Payable</h3>
-      <p>Pay any vendor in your network — consignment or wholesale — through one platform with Check 21 compliant checks and email-based onboarding.</p>
-      <ul class="deepdive-list">
-        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Email-based vendor onboarding</li>
-        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Pay any vendor — consignment or wholesale</li>
-        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Instant vendor portal access</li>
-        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Void & reissue with one click</li>
-        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Complete payment audit trail</li>
-        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Works for every vendor relationship</li>
-      </ul>
-    </div>
-
-    <div class="deepdive-card reveal reveal-delay-1">
-      <div class="deepdive-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
-      <h3>Credit Memos</h3>
-      <p>Built into the AP engine. Issue, track, and resolve credit memos with structured workflows and full transparency for retailers and vendors.</p>
-      <ul class="deepdive-list">
-        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Structured issuance workflow</li>
-        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Review & approval process</li>
-        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Apply to settlements or settle independently</li>
-        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Returns & pricing corrections</li>
-        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Promotional adjustments</li>
-        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Complete audit trail</li>
-      </ul>
-    </div>
-
-    <div class="deepdive-card reveal reveal-delay-2">
-      <div class="deepdive-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a4 4 0 0 1 4 4v2a4 4 0 0 1-8 0V6a4 4 0 0 1 4-4z"/><path d="M18 14h.01"/><path d="M6 14h.01"/><rect x="3" y="12" width="18" height="8" rx="3"/><path d="M7 20v2"/><path d="M17 20v2"/></svg></div>
-      <h3><span style="font-weight:700;letter-spacing:-0.3px;font-variant-ligatures:none;">Shelf<span style="background:linear-gradient(135deg,var(--green-mid),var(--green-accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">iQ</span></span> Intelligence</h3>
-      <p>AI-powered advisor built into the platform. Ask anything about your business in plain English and get instant, data-backed answers.</p>
-      <ul class="deepdive-list">
-        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Natural language queries</li>
-        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Full account data context</li>
-        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Vendor performance insights</li>
-        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Inventory recommendations</li>
-        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Deal structure analysis</li>
-        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Historical trend comparisons</li>
-      </ul>
-    </div>
-
-  </div>
-</section>
-
-<!-- TECHNICAL INFRASTRUCTURE -->
-<section class="tech-section">
-  <div class="tech-header">
-    <div class="section-label reveal">Under the Hood</div>
-    <h2 class="section-title reveal">Built for precision, built to last</h2>
-    <p class="section-desc reveal">The ShelfSpace platform is engineered with financial-grade accuracy and enterprise-level durability at its core.</p>
-  </div>
-
-  <div class="tech-stats">
-    <div class="reveal">
-      <div class="tech-stat-number" data-target="42" data-suffix="+">42+</div>
-      <div class="tech-stat-label">Database tables powering<br>the settlement engine</div>
     </div>
     <div class="reveal reveal-delay-1">
-      <div class="tech-stat-number" data-target="10000" data-suffix="x" data-format="comma">10,000x</div>
-      <div class="tech-stat-label">Integer-based precision —<br>zero floating point errors</div>
-    </div>
-    <div class="reveal reveal-delay-2">
-      <div class="tech-stat-number" data-target="0" data-suffix="">0</div>
-      <div class="tech-stat-label">Hard deletes — every record<br>is retained for audit</div>
-    </div>
-  </div>
-
-  <div class="tech-grid">
-    <div class="tech-card reveal">
-      <div class="tech-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg></div>
-      <h3>Precision Math</h3>
-      <p>All financial calculations use 10,000x integer scaling — eliminating rounding errors that plague floating-point currency math. Every cent is accounted for.</p>
-    </div>
-    <div class="tech-card reveal reveal-delay-1">
-      <div class="tech-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-      <h3>Audit & Security</h3>
-      <p>Zero hard deletes. Every record carries created-at and updated-at timestamps. Row-level security with multi-tenant isolation ensures your data stays yours.</p>
-    </div>
-    <div class="tech-card reveal reveal-delay-2">
-      <div class="tech-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
-      <h3>Integration & Processing</h3>
-      <p>POS data ingestion, settlement runs, check generation, and report delivery — the engine handles the heavy lifting so you don't have to.</p>
+      <div class="mock-card">
+        <div class="mock-card-title">Settlement Report</div>
+        <div class="mock-card-row"><span class="mock-card-row-label">Week ending</span><span class="mock-card-row-value">03/29/26</span></div>
+        <div class="mock-card-row"><span class="mock-card-row-label">Vendor</span><span class="mock-card-row-value">Greenleaf Gardens</span></div>
+        <div class="mock-card-row"><span class="mock-card-row-label">Net Sales</span><span class="mock-card-row-value">$1,175.00</span></div>
+        <div class="mock-card-row"><span class="mock-card-row-label">Profit Split (50/50)</span><span class="mock-card-row-value">$587.50</span></div>
+        <div class="mock-card-total"><span class="mock-card-row-label">Vendor Payout</span><span class="mock-card-row-value">$587.50</span></div>
+        <div class="mock-card-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Check 21 Compliant</div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- CTA -->
-<section class="cta-section">
-  <div class="cta-content">
-    <div class="section-label reveal">Get Started</div>
-    <h2 class="section-title reveal">Ready to see the full platform?</h2>
-    <p class="section-desc reveal">Start with a free evaluation — we'll review your vendor payments, credit gaps, and AP workflow, then show you exactly what ShelfSpace can recover.</p>
-    <div class="cta-actions reveal">
-      <a href="/contact" class="btn-primary">Get My Free Evaluation <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
-      <a href="/contact" class="btn-secondary">Talk to Chris</a>
+<!-- SECTION 5: PAYMENTS (REVERSED) -->
+<section class="split-section slate">
+  <div class="split-inner reverse">
+    <div class="split-text reveal">
+      <div class="section-label">Payments</div>
+      <h2>Check 21 compliant. Every vendor. Every week.</h2>
+      <p>ShelfSpace generates federally compliant checks for every vendor payment. Vendors download and deposit instantly — mobile banking or print at home.</p>
+      <ul class="split-bullets">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Check 21 & UCC Article 3 compliant</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Print on standard paper, mobile deposit ready</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Void and reissue with one click</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Real-time QuickBooks sync</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Vendor notification on issuance</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Complete payment audit trail</li>
+      </ul>
+    </div>
+    <div class="reveal reveal-delay-1">
+      <div class="mock-card">
+        <div class="mock-card-title">Check Payment</div>
+        <div class="mock-card-row"><span class="mock-card-row-label">Check #</span><span class="mock-card-row-value">4821</span></div>
+        <div class="mock-card-row"><span class="mock-card-row-label">Pay to</span><span class="mock-card-row-value">Greenleaf Gardens</span></div>
+        <div class="mock-card-row"><span class="mock-card-row-label">Amount</span><span class="mock-card-row-value">$587.50</span></div>
+        <div class="mock-card-row"><span class="mock-card-row-label">Status</span><span class="mock-card-row-value" style="color:var(--green-accent);">Ready</span></div>
+        <div class="mock-card-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Mobile Deposit Ready</div>
+        <div class="mock-card-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Print-at-Home Legal</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 6: SHELFIQ AI -->
+<section class="shelfiq-feature">
+  <div class="shelfiq-feature-content">
+    <div class="section-label reveal">AI-Powered</div>
+    <h2 class="reveal" style="font-variant-ligatures:none;">Shelf<span style="color:var(--green-accent);">iQ</span> handles 95% of vendor communication.</h2>
+    <p class="reveal">Our Metrc-integrated AI responds to vendor inquiries with real data. Invoice parsing, payment questions, credit memo disputes — handled before your team sees them.</p>
+    <div class="shelfiq-chat-example reveal">
+      <div class="shelfiq-msg vendor">
+        <div class="shelfiq-msg-label">Vendor asks:</div>
+        <div>"Why was invoice #4821 paid $400 short?"</div>
+      </div>
+      <div class="shelfiq-msg ai">
+        <div class="shelfiq-msg-label">ShelfiQ responds:</div>
+        <div>"Invoice #4821 was adjusted because we received 22 of 24 units on delivery. Payment reflects the 22 units at the contracted rate. Full breakdown attached."</div>
+      </div>
+    </div>
+    <div class="shelfiq-pills reveal">
+      <span class="shelfiq-pill">Invoice Parsing</span>
+      <span class="shelfiq-pill">Vendor Emails</span>
+      <span class="shelfiq-pill">Natural Language</span>
+      <span class="shelfiq-pill">Metrc Data</span>
+      <span class="shelfiq-pill">Escalation Handling</span>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 7: CREDIT RECOVERY ENGINE -->
+<section class="split-section white">
+  <div class="split-inner">
+    <div class="split-text reveal">
+      <div class="section-label">Credit Recovery</div>
+      <h2>We find money nobody's tracking.</h2>
+      <p>ShelfSpace connects to your Metrc account and identifies every unrecovered vendor credit — waste, returns, expirations, and co-marketing spend that's falling through the cracks.</p>
+      <ul class="split-bullets">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Metrc-integrated waste and returns tracking</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Below-keystone co-marketing analysis</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Weekly credit memo generation</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Vendor approval workflow</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Settlement application</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Full audit trail</li>
+      </ul>
+    </div>
+    <div class="reveal reveal-delay-1">
+      <div class="mock-card">
+        <div class="mock-card-title">Credit Memo Summary</div>
+        <div class="mock-card-row"><span class="mock-card-row-label">Returns</span><span class="mock-card-row-value">$2,340</span></div>
+        <div class="mock-card-row"><span class="mock-card-row-label">Expirations</span><span class="mock-card-row-value">$1,890</span></div>
+        <div class="mock-card-row"><span class="mock-card-row-label">Co-Marketing</span><span class="mock-card-row-value">$8,400</span></div>
+        <div class="mock-card-total"><span class="mock-card-row-label">Total Recovered</span><span class="mock-card-row-value">$12,630</span></div>
+        <div class="mock-card-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Vendor Approved</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 8: INTEGRATIONS -->
+<section class="integrations-section">
+  <div class="integrations-header">
+    <div class="section-label reveal">Integrations</div>
+    <h2 class="section-title reveal">Connects to the systems you already use.</h2>
+  </div>
+  <div class="integrations-grid">
+    <div class="int-card reveal">
+      <div class="int-card-icon"><img src="/metrc-logo.png" alt="METRC"></div>
+      <h4>Metrc</h4>
+      <p>Direct integration. Sales, transfers, adjustments. Read-only access.</p>
+    </div>
+    <div class="int-card reveal reveal-delay-1">
+      <div class="int-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+      <h4>QuickBooks</h4>
+      <p>Every payment syncs in real time. Vendor mapping. GL accounts.</p>
+    </div>
+    <div class="int-card reveal reveal-delay-2">
+      <div class="int-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+      <h4>Any Cannabis POS</h4>
+      <p>Dutchie, Flowhub, BLAZE, Cova, Treez, and more. Or just Metrc.</p>
+    </div>
+    <div class="int-card reveal reveal-delay-3">
+      <div class="int-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div>
+      <h4>Check 21</h4>
+      <p>Federal banking compliant checks. Print at home. Mobile deposit.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 9: SECURITY -->
+<section class="security-section">
+  <div class="security-header">
+    <div class="section-label reveal">Security</div>
+    <h2 class="section-title reveal">Built for the most regulated industry in America.</h2>
+  </div>
+  <div class="security-stats">
+    <div class="reveal">
+      <div class="security-stat-num">10,000x</div>
+      <div class="security-stat-desc">Integer-precision math.<br>Zero floating point errors.</div>
+    </div>
+    <div class="reveal reveal-delay-1">
+      <div class="security-stat-num">0</div>
+      <div class="security-stat-desc">Hard deletes. Every record<br>retained for audit.</div>
+    </div>
+    <div class="reveal reveal-delay-2">
+      <div class="security-stat-num">100%</div>
+      <div class="security-stat-desc">Row-level security.<br>Multi-tenant isolation.</div>
+    </div>
+  </div>
+  <div class="security-features">
+    <div class="security-feature reveal">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+      <div class="security-feature-text">
+        <h4>Read-only Metrc access</h4>
+        <p>We never modify your compliance data.</p>
+      </div>
+    </div>
+    <div class="security-feature reveal reveal-delay-1">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+      <div class="security-feature-text">
+        <h4>Bank-grade encryption</h4>
+        <p>All data encrypted at rest and in transit.</p>
+      </div>
+    </div>
+    <div class="security-feature reveal reveal-delay-2">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+      <div class="security-feature-text">
+        <h4>Role-based access</h4>
+        <p>Admin, viewer, and inventory roles per portal.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 10: PROOF + CTA -->
+<section class="features-cta">
+  <div class="features-cta-stats">
+    <div class="reveal"><div class="features-cta-stat-num">$200K+/yr</div><div class="features-cta-stat-desc">credits identified</div></div>
+    <div class="reveal reveal-delay-1"><div class="features-cta-stat-num">$250K</div><div class="features-cta-stat-desc">freed from inventory</div></div>
+    <div class="reveal reveal-delay-2"><div class="features-cta-stat-num">$45K/yr</div><div class="features-cta-stat-desc">AP savings</div></div>
+    <div class="reveal reveal-delay-3"><div class="features-cta-stat-num">40+</div><div class="features-cta-stat-desc">vendors managed</div></div>
+  </div>
+  <p class="features-cta-note reveal">Real results from a two-location Massachusetts dispensary chain.</p>
+  <div class="features-cta-card reveal">
+    <h3>See what ShelfSpace finds at your stores.</h3>
+    <p>We connect to your Metrc account and show you exactly what you're leaving on the table. No commitment.</p>
+    <a href="/contact" class="btn-primary">Get My Free Evaluation <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+    <div class="features-cta-founder">
+      <img src="/chris-mitchem.jpg" alt="Chris Mitchem" style="width:48px;height:48px;border-radius:50%;object-fit:cover;">
+      <span>Chris Mitchem, Founder — 10 years operating dispensaries</span>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 11: POS TICKER -->
+<section class="pos-ticker">
+  <div class="pos-ticker-label">Works with every major cannabis POS</div>
+  <div style="overflow:hidden">
+    <div class="pos-ticker-track">
+      <img src="/logos/dutchie.png" alt="Dutchie cannabis POS integration" class="pos-ticker-logo">
+      <img src="/logos/flowhub.png" alt="Flowhub cannabis POS integration" class="pos-ticker-logo">
+      <img src="/logos/blaze.png" alt="BLAZE cannabis POS integration" class="pos-ticker-logo">
+      <img src="/logos/cova.png" alt="Cova cannabis POS integration" class="pos-ticker-logo">
+      <img src="/logos/treez.png" alt="Treez cannabis POS integration" class="pos-ticker-logo">
+      <img src="/logos/alleaves.png" alt="Alleaves cannabis POS integration" class="pos-ticker-logo">
+      <img src="/logos/mjfreeway.png" alt="MJ Freeway cannabis POS integration" class="pos-ticker-logo">
+      <img src="/logos/meadow.png" alt="Meadow cannabis POS integration" class="pos-ticker-logo">
+      <img src="/logos/indicaonline.png" alt="IndicaOnline cannabis POS integration" class="pos-ticker-logo">
+      <img src="/logos/dutchie.png" alt="Dutchie cannabis POS integration" class="pos-ticker-logo">
+      <img src="/logos/flowhub.png" alt="Flowhub cannabis POS integration" class="pos-ticker-logo">
+      <img src="/logos/blaze.png" alt="BLAZE cannabis POS integration" class="pos-ticker-logo">
+      <img src="/logos/cova.png" alt="Cova cannabis POS integration" class="pos-ticker-logo">
+      <img src="/logos/treez.png" alt="Treez cannabis POS integration" class="pos-ticker-logo">
+      <img src="/logos/alleaves.png" alt="Alleaves cannabis POS integration" class="pos-ticker-logo">
+      <img src="/logos/mjfreeway.png" alt="MJ Freeway cannabis POS integration" class="pos-ticker-logo">
+      <img src="/logos/meadow.png" alt="Meadow cannabis POS integration" class="pos-ticker-logo">
+      <img src="/logos/indicaonline.png" alt="IndicaOnline cannabis POS integration" class="pos-ticker-logo">
     </div>
   </div>
 </section>
@@ -649,27 +635,14 @@ document.head.appendChild(o)}initApollo();</script>
 <script>
 (function() {
   var nav = document.getElementById('nav');
-  var pageHero = document.querySelector('.page-hero');
-  var flowsSection = document.querySelector('.flows-section');
-  var flowsContainer = document.querySelector('.flows-container');
-  var flowNumbers = document.querySelectorAll('.flow-step-number');
-  var parallaxSections = [
-    document.querySelector('.tech-section'),
-    document.querySelector('.cta-section')
-  ];
-
-  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var isMobile = window.innerWidth < 900;
   var ticking = false;
-  var countersAnimated = false;
 
-  /* ── Hero entrance ── */
+  /* ── Nav scroll state ── */
   requestAnimationFrame(function() {
     nav.classList.toggle('scrolled', window.scrollY > 20);
-    if (pageHero) pageHero.classList.add('hero-loaded');
   });
 
-  /* ── Scroll-Triggered Reveals (with unobserve for perf) ── */
+  /* ── Scroll-Triggered Reveals ── */
   var revealObserver = new IntersectionObserver(function(entries) {
     entries.forEach(function(entry) {
       if (entry.isIntersecting) {
@@ -680,89 +653,9 @@ document.head.appendChild(o)}initApollo();</script>
   }, { threshold: 0.1 });
   document.querySelectorAll('.reveal').forEach(function(el) { revealObserver.observe(el); });
 
-  /* ── Flow step pulse observer ── */
-  var flowObserver = new IntersectionObserver(function(entries) {
-    entries.forEach(function(entry) {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('pulse');
-      } else {
-        entry.target.classList.remove('pulse');
-      }
-    });
-  }, { threshold: 0.5 });
-  flowNumbers.forEach(function(el) { flowObserver.observe(el); });
-
-  /* ── Counter Animation ── */
-  function animateCounters() {
-    if (countersAnimated) return;
-    countersAnimated = true;
-    var stats = document.querySelectorAll('.tech-stat-number[data-target]');
-    stats.forEach(function(el) {
-      var target = parseInt(el.dataset.target, 10);
-      var suffix = el.dataset.suffix || '';
-      var useComma = el.dataset.format === 'comma';
-      if (target === 0) { el.textContent = '0' + suffix; return; }
-      var duration = 1500;
-      var start = null;
-      function step(timestamp) {
-        if (!start) start = timestamp;
-        var progress = Math.min((timestamp - start) / duration, 1);
-        var eased = 1 - Math.pow(1 - progress, 3);
-        var current = Math.floor(eased * target);
-        el.textContent = (useComma ? current.toLocaleString() : current) + suffix;
-        if (progress < 1) requestAnimationFrame(step);
-      }
-      requestAnimationFrame(step);
-    });
-  }
-
-  var counterObserver = new IntersectionObserver(function(entries) {
-    entries.forEach(function(entry) {
-      if (entry.isIntersecting) {
-        animateCounters();
-        counterObserver.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.3 });
-  var techStats = document.querySelector('.tech-stats');
-  if (techStats) counterObserver.observe(techStats);
-
-  /* ── Scroll handler (rAF + ticking flag) ── */
+  /* ── Scroll handler ── */
   function onScroll() {
-    var scrollY = window.scrollY;
-
-    /* Nav state */
-    nav.classList.toggle('scrolled', scrollY > 20);
-
-    /* Skip parallax for reduced motion or mobile */
-    if (prefersReduced || isMobile) {
-      updateFlowProgress();
-      return;
-    }
-
-    /* Section decorative parallax */
-    var wh = window.innerHeight;
-    parallaxSections.forEach(function(section) {
-      if (!section) return;
-      var rect = section.getBoundingClientRect();
-      if (rect.bottom < 0 || rect.top > wh) return;
-      var center = rect.top + rect.height / 2 - wh / 2;
-      section.style.setProperty('--parallax-y', (center * 0.08) + 'px');
-    });
-
-    updateFlowProgress();
-  }
-
-  function updateFlowProgress() {
-    if (!flowsSection || !flowsContainer) return;
-    var rect = flowsSection.getBoundingClientRect();
-    var wh = window.innerHeight;
-    if (rect.bottom < 0 || rect.top > wh) return;
-    var sectionStart = rect.top - wh * 0.8;
-    var sectionEnd = rect.bottom - wh * 0.3;
-    var range = sectionEnd - sectionStart;
-    var progress = range > 0 ? Math.max(0, Math.min(1, (0 - sectionStart) / range)) : 0;
-    flowsContainer.style.setProperty('--flow-progress', progress);
+    nav.classList.toggle('scrolled', window.scrollY > 20);
   }
 
   window.addEventListener('scroll', function() {
@@ -775,16 +668,11 @@ document.head.appendChild(o)}initApollo();</script>
     }
   }, { passive: true });
 
-  /* Initial call */
-  onScroll();
-
-  /* ── Resize handler ── */
-  window.addEventListener('resize', function() {
-    isMobile = window.innerWidth < 900;
-    if (isMobile) {
-      parallaxSections.forEach(function(section) {
-        if (section) section.style.setProperty('--parallax-y', '0px');
-      });
+  /* ── Mobile nav close on outside click ── */
+  document.addEventListener('click', function(e) {
+    var navLinks = document.querySelector('.nav-links');
+    if (navLinks.classList.contains('mobile-open') && !e.target.closest('.nav-links') && !e.target.closest('.nav-hamburger')) {
+      navLinks.classList.remove('mobile-open');
     }
   });
 
