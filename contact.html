@@ -3,20 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Contact ShelfSpace — Free Evaluation</title>
-<meta name="description" content="Talk to ShelfSpace about managed AP, consignment, and credit recovery for your dispensary. Free evaluation. No commitment.">
+<title>Contact ShelfSpace — Free Evaluation for Cannabis Dispensaries</title>
+<meta name="description" content="Request your free evaluation. Connect your Metrc account and see what you're leaving on the table. No commitment. Report within days.">
 <link rel="canonical" href="https://shelfspace.pro/contact">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://shelfspace.pro/contact">
-<meta property="og:title" content="Contact ShelfSpace — Free Evaluation">
-<meta property="og:description" content="Talk to ShelfSpace about managed AP, consignment, and credit recovery for your dispensary. Free evaluation. No commitment.">
+<meta property="og:title" content="Contact ShelfSpace — Free Evaluation for Cannabis Dispensaries">
+<meta property="og:description" content="Request your free evaluation. Connect your Metrc account and see what you're leaving on the table. No commitment. Report within days.">
 <meta property="og:image" content="https://shelfspace.pro/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:type" content="image/png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Contact ShelfSpace — Free Evaluation">
-<meta name="twitter:description" content="Talk to ShelfSpace about managed AP, consignment, and credit recovery for your dispensary. Free evaluation. No commitment.">
+<meta name="twitter:title" content="Contact ShelfSpace — Free Evaluation for Cannabis Dispensaries">
+<meta name="twitter:description" content="Request your free evaluation. Connect your Metrc account and see what you're leaving on the table. No commitment. Report within days.">
 <meta name="twitter:image" content="https://shelfspace.pro/og-image.png">
 <meta name="apple-mobile-web-app-title" content="ShelfSpace">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -27,12 +27,51 @@
 <link rel="stylesheet" href="styles.css">
 <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 <style>
-  .page-hero { padding-bottom: 40px; }
-  .contact-section { background: var(--white); padding-top: 60px; }
+  /* Reveals */
+  .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1); }
+  .reveal.is-visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.15s; }
+  .reveal-delay-2 { transition-delay: 0.3s; }
+
+  /* ── HERO (dark) ── */
+  .contact-hero {
+    background: var(--green-deep); padding: 140px 48px 80px;
+    text-align: center; position: relative; overflow: hidden;
+  }
+  .contact-hero::before {
+    content: ''; position: absolute; top: -300px; right: -200px;
+    width: 800px; height: 800px;
+    background: radial-gradient(circle, rgba(149,213,178,0.1), transparent 70%);
+  }
+  .contact-hero-content { max-width: 800px; margin: 0 auto; position: relative; z-index: 2; }
+  .contact-hero .section-label { color: var(--green-accent); }
+  .contact-hero h1 {
+    font-size: clamp(32px, 4.5vw, 48px); font-weight: 700;
+    color: var(--white); letter-spacing: -2px; line-height: 1.1;
+    margin-bottom: 16px;
+  }
+  .contact-hero-sub { font-size: 18px; color: rgba(255,255,255,0.6); margin-bottom: 48px; }
+  .contact-hero-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .contact-step {
+    background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px; padding: 20px; text-align: left;
+  }
+  .contact-step-num {
+    width: 28px; height: 28px; background: rgba(149,213,178,0.2);
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-mono); font-size: 13px; font-weight: 700;
+    color: var(--green-accent); margin-bottom: 10px;
+  }
+  .contact-step-text { font-size: 14px; line-height: 1.5; color: rgba(255,255,255,0.5); }
+  .contact-step-text strong { color: var(--white); display: block; margin-bottom: 2px; }
+
+  /* ── FORM SECTION ── */
+  .contact-section { background: var(--white); padding: 80px 48px; }
   .contact-container { max-width: 960px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: start; }
 
-  .contact-info h2 { font-size: 28px; font-weight: 700; color: var(--green-deep); letter-spacing: -0.8px; margin-bottom: 16px; }
-  .contact-info > p { font-size: 16px; line-height: 1.7; color: var(--slate-500); margin-bottom: 40px; }
+  .contact-info h2 { font-size: 28px; font-weight: 700; color: var(--green-deep); letter-spacing: -0.8px; margin-bottom: 24px; }
+
+  .contact-founder { display: flex; align-items: center; gap: 16px; margin-bottom: 32px; }
 
   .contact-method { display: flex; align-items: flex-start; gap: 16px; padding: 20px 0; border-bottom: 1px solid var(--slate-100); }
   .contact-method:last-child { border-bottom: none; }
@@ -64,9 +103,20 @@
   .calendar-step .btn-primary { width: 100%; justify-content: center; }
   .calendly-inline-widget { min-width: 280px; height: 580px; border: none; }
 
+  /* ── TRUST BAR ── */
+  .contact-trust { background: var(--slate-50); padding: 24px 48px; border-top: 1px solid var(--slate-100); }
+  .contact-trust-inner { max-width: 800px; margin: 0 auto; display: flex; justify-content: center; gap: 32px; flex-wrap: wrap; }
+  .contact-trust-inner span { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 500; color: var(--slate-400); }
+  .contact-trust-inner svg { width: 16px; height: 16px; color: var(--green-mid); }
+
+  /* ── RESPONSIVE ── */
   @media (max-width: 900px) {
+    .contact-hero { padding: 120px 24px 60px; }
+    .contact-hero-steps { grid-template-columns: 1fr; gap: 12px; }
+    .contact-section { padding: 60px 24px; }
     .contact-container { grid-template-columns: 1fr; gap: 48px; max-width: 520px; }
   }
+
   /* Footer 5-col */
   .footer-top { grid-template-columns: 2fr 1fr 1fr 1fr 1fr; }
   @media (max-width: 900px) { .footer-top { grid-template-columns: 1fr 1fr; } }
@@ -99,47 +149,61 @@ document.head.appendChild(o)}initApollo();</script>
   <div class="nav-hamburger" onclick="document.querySelector('.nav-links').classList.toggle('mobile-open'); event.stopPropagation();"><span></span><span></span><span></span></div>
 </nav>
 
-<!-- PAGE HERO -->
-<div class="page-hero">
-  <div class="section-label">Contact</div>
-  <h1 class="section-title">Let's talk about your business</h1>
-  <p class="section-desc">Whether you're a retailer or vendor, we'd love to show you how ShelfSpace can simplify your vendor payments and supply chain.</p>
-</div>
+<!-- HERO (dark) -->
+<section class="contact-hero">
+  <div class="contact-hero-content reveal">
+    <div class="section-label">Free Evaluation</div>
+    <h1>You're one step away from seeing what you're missing.</h1>
+    <p class="contact-hero-sub">Connect your Metrc account. We deliver a detailed report of every unrecovered vendor credit. Free. No commitment.</p>
+    <div class="contact-hero-steps">
+      <div class="contact-step">
+        <div class="contact-step-num">1</div>
+        <div class="contact-step-text"><strong>Book a call below</strong><br>Pick a time that works.</div>
+      </div>
+      <div class="contact-step">
+        <div class="contact-step-num">2</div>
+        <div class="contact-step-text"><strong>We connect your Metrc</strong><br>Read-only. Takes minutes.</div>
+      </div>
+      <div class="contact-step">
+        <div class="contact-step-num">3</div>
+        <div class="contact-step-text"><strong>Report delivered</strong><br>Every credit, line by line.</div>
+      </div>
+    </div>
+  </div>
+</section>
 
-<!-- CONTACT -->
+<!-- CONTACT SECTION -->
 <section class="contact-section">
   <div class="contact-container">
     <div class="contact-info reveal">
-      <h2>Let's connect</h2>
-      <p>Book a call with our team to see how ShelfSpace can streamline your vendor payments and supply chain. Pick a time that works for you.</p>
-
-      <div class="contact-method">
-        <div class="contact-method-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-        </div>
+      <h2>Talk to the founder directly.</h2>
+      <div class="contact-founder">
+        <img src="/chris-mitchem.jpg" alt="Chris Mitchem" style="width:64px;height:64px;border-radius:50%;object-fit:cover;">
         <div>
-          <h4>Email</h4>
-          <p><a href="mailto:chris@shelfspace.pro">chris@shelfspace.pro</a></p>
+          <strong style="color:var(--green-deep);font-size:16px;">Chris Mitchem</strong>
+          <p style="font-size:14px;color:var(--slate-500);margin:4px 0 0;">Founder & CEO — 10 years operating dispensaries</p>
         </div>
       </div>
 
-      <div class="contact-method">
-        <div class="contact-method-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+      <div class="contact-methods">
+        <div class="contact-method">
+          <div class="contact-method-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <div>
+            <h4>Email</h4>
+            <p><a href="mailto:chris@shelfspace.pro">chris@shelfspace.pro</a></p>
+          </div>
         </div>
-        <div>
-          <h4>Support</h4>
-          <p><a href="mailto:support@shelfspace.pro">support@shelfspace.pro</a></p>
-        </div>
-      </div>
 
-      <div class="contact-method">
-        <div class="contact-method-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-        </div>
-        <div>
-          <h4>Location</h4>
-          <p>Serving the cannabis industry nationwide</p>
+        <div class="contact-method">
+          <div class="contact-method-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+          </div>
+          <div>
+            <h4>Support</h4>
+            <p><a href="mailto:support@shelfspace.pro">support@shelfspace.pro</a></p>
+          </div>
         </div>
       </div>
     </div>
@@ -147,8 +211,8 @@ document.head.appendChild(o)}initApollo();</script>
     <div class="contact-form-card reveal reveal-delay-1">
       <!-- Step 1: Bot verification -->
       <div class="verify-step" id="verifyStep">
-        <h3>Book a Call</h3>
-        <p>Quick verification, then pick a time that works for you.</p>
+        <h3>Book Your Evaluation Call</h3>
+        <p>Quick verification, then schedule your evaluation.</p>
         <div class="cf-turnstile" data-sitekey="0x4AAAAAACiEpqqSU9lohNi-" data-callback="onTurnstileSuccess"></div>
       </div>
 
@@ -159,6 +223,21 @@ document.head.appendChild(o)}initApollo();</script>
     </div>
   </div>
 </section>
+
+<!-- TRUST BAR -->
+<section class="contact-trust">
+  <div class="contact-trust-inner">
+    <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> METRC Certified</span>
+    <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg> Bank-Grade Encryption</span>
+    <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg> Read-Only Access</span>
+    <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg> Data Isolated Per Operator</span>
+  </div>
+</section>
+
+<!-- PROOF LINE -->
+<div style="text-align:center;padding:32px 48px;background:var(--slate-50);">
+  <p style="font-size:15px;color:var(--slate-500);font-style:italic;">Our average evaluation uncovers $8K–$25K/month in unrecovered vendor credits.</p>
+</div>
 
 <!-- FOOTER -->
 <footer>
@@ -183,6 +262,12 @@ document.head.appendChild(o)}initApollo();</script>
     document.getElementById('verifyStep').style.display = 'none';
     document.getElementById('calendarStep').style.display = 'block';
   }
+
+  // Reveal on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('is-visible'); observer.unobserve(entry.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 </script>
 <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
 <script src="/shelfiq-widget.js"></script>
