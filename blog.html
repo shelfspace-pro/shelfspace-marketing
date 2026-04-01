@@ -97,9 +97,42 @@
     font-size: 14px; color: var(--slate-500);
     line-height: 1.6;
   }
+  /* Filter + Search */
+  .blog-controls { max-width: 800px; margin: 0 auto 40px; text-align: center; }
+  .blog-filters { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
+  .blog-filter {
+    padding: 8px 20px; border-radius: 100px; font-size: 14px; font-weight: 500;
+    border: 1px solid var(--slate-200); background: var(--white); color: var(--slate-500);
+    cursor: pointer; transition: all 0.2s; font-family: var(--font-display);
+  }
+  .blog-filter:hover { border-color: var(--green-accent); color: var(--green-deep); }
+  .blog-filter.active { background: var(--green-deep); color: var(--white); border-color: var(--green-deep); }
+  .blog-search {
+    max-width: 400px; margin: 0 auto; position: relative;
+  }
+  .blog-search input {
+    width: 100%; padding: 12px 20px 12px 44px; border: 1px solid var(--slate-200);
+    border-radius: 12px; font-size: 15px; font-family: var(--font-display);
+    color: var(--slate-700); background: var(--white); outline: none;
+    transition: border-color 0.2s;
+  }
+  .blog-search input:focus { border-color: var(--green-accent); }
+  .blog-search input::placeholder { color: var(--slate-400); }
+  .blog-search svg {
+    position: absolute; left: 16px; top: 50%; transform: translateY(-50%);
+    width: 18px; height: 18px; color: var(--slate-400); pointer-events: none;
+  }
+  .blog-card[style*="display: none"] { display: none !important; }
+  .blog-no-results {
+    grid-column: 1 / -1; text-align: center; padding: 60px 20px;
+    font-size: 16px; color: var(--slate-400); display: none;
+  }
+
   @media (max-width: 700px) {
     .blog-section { padding: 60px 24px; }
     .blog-grid { grid-template-columns: 1fr; }
+    .blog-filters { gap: 6px; }
+    .blog-filter { padding: 6px 16px; font-size: 13px; }
   }
 
   /* Footer 5-col */
@@ -146,109 +179,125 @@ document.head.appendChild(o)}initApollo();</script>
 
 <!-- BLOG LISTING -->
 <section class="blog-section">
+  <div class="blog-controls">
+    <div class="blog-filters">
+      <button class="blog-filter active" data-filter="all">All</button>
+      <button class="blog-filter" data-filter="AP">Accounts Payable</button>
+      <button class="blog-filter" data-filter="Consignment">Consignment</button>
+      <button class="blog-filter" data-filter="Credit Recovery">Credit Recovery</button>
+      <button class="blog-filter" data-filter="Vendor Management">Vendor Management</button>
+      <button class="blog-filter" data-filter="Case Study">Case Studies</button>
+    </div>
+    <div class="blog-search">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" placeholder="Search articles..." id="blog-search-input">
+    </div>
+  </div>
   <div class="blog-grid">
 
-    <a href="/blog/case-study-vendor-credit-recovery" class="blog-card reveal">
+    <a href="/blog/case-study-vendor-credit-recovery" class="blog-card reveal" data-category="Case Study">
       <div class="blog-card-tag">Case Study</div>
       <div class="blog-card-title">How a Two-Location Dispensary Recovered $200K+ in Vendor Credits</div>
       <div class="blog-card-desc">Returns, expirations, and co-marketing spend — all untracked. Here's what we found and how we recovered it.</div>
     </a>
 
-    <a href="/blog/case-study-duplicate-invoice" class="blog-card reveal">
+    <a href="/blog/case-study-duplicate-invoice" class="blog-card reveal" data-category="Case Study">
       <div class="blog-card-tag">Case Study</div>
       <div class="blog-card-title">Catching $47K in Duplicate Invoice Payments</div>
       <div class="blog-card-desc">A dispensary was double-paying vendors without knowing it. ShelfSpace's invoice verification caught every one.</div>
     </a>
 
-    <a href="/blog/case-study-consignment-conversion" class="blog-card reveal">
+    <a href="/blog/case-study-consignment-conversion" class="blog-card reveal" data-category="Case Study">
       <div class="blog-card-tag">Case Study</div>
       <div class="blog-card-title">From Wholesale to Consignment — Freeing $250K in Capital</div>
       <div class="blog-card-desc">How transitioning vendors to consignment freed up a quarter million in cash trapped in inventory.</div>
     </a>
 
-    <a href="/blog/shelfspace-vs-stampli-cannabis-ap" class="blog-card reveal">
+    <a href="/blog/shelfspace-vs-stampli-cannabis-ap" class="blog-card reveal" data-category="AP">
       <div class="blog-card-tag">AP</div>
       <div class="blog-card-title">Cannabis AP Software: ShelfSpace vs Stampli — What Dispensaries Actually Need</div>
       <div class="blog-card-desc">Stampli is great for generic AP. Cannabis dispensaries need Metrc integration, credit recovery, consignment, and Check 21 checks.</div>
     </a>
 
-    <a href="/blog/shelfspace-vs-quickbooks-cannabis-ap" class="blog-card reveal">
+    <a href="/blog/shelfspace-vs-quickbooks-cannabis-ap" class="blog-card reveal" data-category="AP">
       <div class="blog-card-tag">AP</div>
       <div class="blog-card-title">ShelfSpace vs QuickBooks for Cannabis AP</div>
       <div class="blog-card-desc">QuickBooks tracks your books. ShelfSpace runs your vendor operations. Here's the difference.</div>
     </a>
 
-    <a href="/blog/shelfspace-vs-bill-cannabis-ap" class="blog-card reveal">
+    <a href="/blog/shelfspace-vs-bill-cannabis-ap" class="blog-card reveal" data-category="AP">
       <div class="blog-card-tag">AP</div>
       <div class="blog-card-title">ShelfSpace vs Bill.com for Cannabis Dispensaries</div>
       <div class="blog-card-desc">Bill.com doesn't do cannabis. ShelfSpace was built for it. Full comparison.</div>
     </a>
 
-    <a href="/blog/shelfspace-vs-leaflink-cannabis-ap" class="blog-card reveal">
+    <a href="/blog/shelfspace-vs-leaflink-cannabis-ap" class="blog-card reveal" data-category="Vendor Management">
       <div class="blog-card-tag">Vendor Management</div>
       <div class="blog-card-title">ShelfSpace vs LeafLink for Cannabis Vendor Management</div>
       <div class="blog-card-desc">LeafLink is a marketplace. ShelfSpace manages your vendor finances. Different problems, different tools.</div>
     </a>
 
-    <a href="/blog/shelfspace-vs-dispensaryops-credit-recovery" class="blog-card reveal">
+    <a href="/blog/shelfspace-vs-dispensaryops-credit-recovery" class="blog-card reveal" data-category="Credit Recovery">
       <div class="blog-card-tag">Credit Recovery</div>
       <div class="blog-card-title">ShelfSpace vs DispensaryOps for Credit Recovery</div>
       <div class="blog-card-desc">Both recover vendor credits. ShelfSpace adds consignment, AP, and AI-powered vendor communication.</div>
     </a>
 
-    <a href="/blog/shelfspace-vs-cannabis-cpa-firm" class="blog-card reveal">
+    <a href="/blog/shelfspace-vs-cannabis-cpa-firm" class="blog-card reveal" data-category="AP">
       <div class="blog-card-tag">AP</div>
       <div class="blog-card-title">ShelfSpace vs Hiring a Cannabis CPA Firm for AP</div>
       <div class="blog-card-desc">A CPA firm does your books. ShelfSpace runs your vendor operations and recovers credits they'd never find.</div>
     </a>
 
-    <a href="/blog/how-cannabis-consignment-works" class="blog-card reveal reveal-delay-1">
+    <a href="/blog/how-cannabis-consignment-works" class="blog-card reveal reveal-delay-1" data-category="Consignment">
       <div class="blog-card-tag">Consignment</div>
       <div class="blog-card-title">How Cannabis Consignment Works: A Guide for Dispensary Operators</div>
       <div class="blog-card-desc">A complete breakdown of consignment for cannabis retailers — how it works, why it matters, and how to get started.</div>
     </a>
 
-    <a href="/blog/track-returns-credits-cannabis" class="blog-card reveal reveal-delay-2">
+    <a href="/blog/track-returns-credits-cannabis" class="blog-card reveal reveal-delay-2" data-category="Credit Recovery">
       <div class="blog-card-tag">Credit Recovery</div>
       <div class="blog-card-title">How to Track Returns and Credits at a Cannabis Dispensary</div>
       <div class="blog-card-desc">Most dispensaries lose thousands in vendor credits every year. Here's how to track returns, expirations, and co-marketing credits.</div>
     </a>
 
-    <a href="/blog/dispensaries-overpay-vendors" class="blog-card reveal reveal-delay-3">
+    <a href="/blog/dispensaries-overpay-vendors" class="blog-card reveal reveal-delay-3" data-category="AP">
       <div class="blog-card-tag">AP</div>
       <div class="blog-card-title">Why Most Dispensaries Overpay Their Vendors</div>
       <div class="blog-card-desc">Missed credits, duplicate payments, and bad invoice tracking cost dispensaries more than they realize.</div>
     </a>
 
-    <a href="/blog/what-is-check-21" class="blog-card reveal">
+    <a href="/blog/what-is-check-21" class="blog-card reveal" data-category="Vendor Management">
       <div class="blog-card-tag">Vendor Management</div>
       <div class="blog-card-title">What Is a Check 21 Compliant Check?</div>
       <div class="blog-card-desc">How Check 21 enables digital check payments for cannabis businesses locked out of traditional banking.</div>
     </a>
 
-    <a href="/blog/cannabis-vendor-management-guide" class="blog-card reveal">
+    <a href="/blog/cannabis-vendor-management-guide" class="blog-card reveal" data-category="Vendor Management">
       <div class="blog-card-tag">Vendor Management</div>
       <div class="blog-card-title">Cannabis Dispensary Vendor Management: A Complete Guide</div>
       <div class="blog-card-desc">Everything you need to manage vendor relationships, payment terms, and inventory flow at your dispensary.</div>
     </a>
 
-    <a href="/blog/cannabis-accounts-payable-cost" class="blog-card reveal reveal-delay-1">
+    <a href="/blog/cannabis-accounts-payable-cost" class="blog-card reveal reveal-delay-1" data-category="AP">
       <div class="blog-card-tag">AP</div>
       <div class="blog-card-title">Cannabis Accounts Payable: The Hidden Cost of Doing It Yourself</div>
       <div class="blog-card-desc">The true cost of managing AP in-house goes far beyond the person you hire to do it.</div>
     </a>
 
-    <a href="/blog/dispensary-vendor-costs" class="blog-card reveal reveal-delay-2">
+    <a href="/blog/dispensary-vendor-costs" class="blog-card reveal reveal-delay-2" data-category="AP">
       <div class="blog-card-tag">AP</div>
       <div class="blog-card-title">What Does a Cannabis Dispensary Pay in Vendor Costs Per Year?</div>
       <div class="blog-card-desc">A realistic look at what dispensaries spend on vendor payments, processing fees, and operational overhead annually.</div>
     </a>
 
-    <a href="/blog/get-started-cannabis-consignment" class="blog-card reveal reveal-delay-3">
+    <a href="/blog/get-started-cannabis-consignment" class="blog-card reveal reveal-delay-3" data-category="Consignment">
       <div class="blog-card-tag">Consignment</div>
       <div class="blog-card-title">How to Get Started with Cannabis Consignment at Your Dispensary</div>
       <div class="blog-card-desc">A step-by-step guide to launching consignment at your dispensary — from vendor conversations to your first settlement.</div>
     </a>
+
+    <div class="blog-no-results" id="blog-no-results">No articles match your search.</div>
 
   </div>
 </section>
@@ -346,6 +395,49 @@ document.head.appendChild(o)}initApollo();</script>
     }
   });
 
+})();
+</script>
+<script>
+// Blog filter + search
+(function() {
+  var filters = document.querySelectorAll('.blog-filter');
+  var cards = document.querySelectorAll('.blog-card');
+  var searchInput = document.getElementById('blog-search-input');
+  var noResults = document.getElementById('blog-no-results');
+  var activeFilter = 'all';
+
+  function applyFilters() {
+    var query = searchInput ? searchInput.value.toLowerCase().trim() : '';
+    var visible = 0;
+    cards.forEach(function(card) {
+      var cat = card.getAttribute('data-category') || '';
+      var title = card.querySelector('.blog-card-title');
+      var desc = card.querySelector('.blog-card-desc');
+      var text = ((title ? title.textContent : '') + ' ' + (desc ? desc.textContent : '')).toLowerCase();
+      var matchFilter = (activeFilter === 'all' || cat === activeFilter);
+      var matchSearch = (!query || text.indexOf(query) !== -1);
+      if (matchFilter && matchSearch) {
+        card.style.display = '';
+        visible++;
+      } else {
+        card.style.display = 'none';
+      }
+    });
+    if (noResults) noResults.style.display = visible === 0 ? 'block' : 'none';
+  }
+
+  filters.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      filters.forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      activeFilter = btn.getAttribute('data-filter');
+      applyFilters();
+    });
+  });
+
+  if (searchInput) {
+    searchInput.addEventListener('input', applyFilters);
+  }
 })();
 </script>
 <script src="/shelfiq-widget.js"></script>
