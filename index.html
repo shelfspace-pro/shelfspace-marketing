@@ -107,6 +107,12 @@
 .case-speed::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--green-accent); flex-shrink: 0; }
 .case-link { font-size: 14px; font-weight: 600; color: var(--green-deep); text-decoration: none; display: flex; align-items: center; gap: 4px; transition: gap 0.2s; }
 .case-link:hover { gap: 8px; }
+.case-grid-wrap { position: relative; }
+.case-arrow { position: absolute; top: 50%; transform: translateY(-50%); z-index: 10; width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--slate-200); background: rgba(255,255,255,0.95); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); color: var(--green-deep); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; box-shadow: 0 2px 12px rgba(27,67,50,0.1); }
+.case-arrow:hover { background: var(--green-deep); color: var(--white); border-color: var(--green-deep); }
+.case-arrow--left { left: 12px; }
+.case-arrow--right { right: 12px; }
+.case-arrow.is-hidden { opacity: 0; pointer-events: none; }
 @media (max-width: 900px) {
   .case-studies { padding: 60px 0; }
   .case-studies-header { padding: 0 24px; }
@@ -370,6 +376,9 @@ document.head.appendChild(o)}initApollo();</script>
       <button class="case-filter" data-filter="credit-recovery">Credit Recovery</button>
       <button class="case-filter" data-filter="operations">Operations</button>
     </div>
+    <div class="case-grid-wrap">
+      <button class="case-arrow case-arrow--left is-hidden" aria-label="Scroll left"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg></button>
+      <button class="case-arrow case-arrow--right" aria-label="Scroll right"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 6 15 12 9 18"/></svg></button>
     <div class="case-grid">
       <div class="case-card reveal" data-category="accounts-payable">
         <div class="case-tag case-tag--ap">Accounts Payable</div>
@@ -451,6 +460,7 @@ document.head.appendChild(o)}initApollo();</script>
           <a href="/blog/case-study-quickbooks-sync" class="case-link">Read the full story <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
         </div>
       </div>
+    </div>
     </div>
   </div>
 </section>
@@ -719,6 +729,10 @@ document.head.appendChild(o)}initApollo();</script>
   /* Case study filters */
   var filters = document.querySelectorAll('.case-filter');
   var cards = document.querySelectorAll('.case-card');
+  var caseGrid = document.querySelector('.case-grid');
+  var arrowLeft = document.querySelector('.case-arrow--left');
+  var arrowRight = document.querySelector('.case-arrow--right');
+
   filters.forEach(function(btn) {
     btn.addEventListener('click', function() {
       filters.forEach(function(f) { f.classList.remove('active'); });
@@ -731,8 +745,53 @@ document.head.appendChild(o)}initApollo();</script>
           card.classList.add('hidden');
         }
       });
+      caseGrid.scrollTo({ left: 0 });
+      updateArrows();
     });
   });
+
+  /* Case study arrows */
+  function updateArrows() {
+    if (!caseGrid || !arrowLeft || !arrowRight) return;
+    arrowLeft.classList.toggle('is-hidden', caseGrid.scrollLeft < 10);
+    arrowRight.classList.toggle('is-hidden', caseGrid.scrollLeft + caseGrid.offsetWidth >= caseGrid.scrollWidth - 10);
+  }
+  if (caseGrid) {
+    caseGrid.addEventListener('scroll', updateArrows, { passive: true });
+    updateArrows();
+  }
+  if (arrowLeft) {
+    arrowLeft.addEventListener('click', function() {
+      caseGrid.scrollBy({ left: -364, behavior: 'smooth' });
+    });
+  }
+  if (arrowRight) {
+    arrowRight.addEventListener('click', function() {
+      caseGrid.scrollBy({ left: 364, behavior: 'smooth' });
+    });
+  }
+
+  /* Case study auto-scroll */
+  var caseAutoInterval = null;
+  var caseUserScrolled = false;
+  function startCaseAutoScroll() {
+    if (prefersReduced) return;
+    caseAutoInterval = setInterval(function() {
+      if (!caseGrid || caseUserScrolled) return;
+      if (caseGrid.scrollLeft + caseGrid.offsetWidth >= caseGrid.scrollWidth - 10) {
+        caseGrid.scrollTo({ left: 0, behavior: 'smooth' });
+      } else {
+        caseGrid.scrollBy({ left: 364, behavior: 'smooth' });
+      }
+    }, 4000);
+  }
+  if (caseGrid) {
+    caseGrid.addEventListener('mouseenter', function() { caseUserScrolled = true; });
+    caseGrid.addEventListener('touchstart', function() { caseUserScrolled = true; }, { passive: true });
+    startCaseAutoScroll();
+  }
+  if (arrowLeft) arrowLeft.addEventListener('click', function() { caseUserScrolled = true; });
+  if (arrowRight) arrowRight.addEventListener('click', function() { caseUserScrolled = true; });
 
   /* Close mobile nav on outside click */
   document.addEventListener('click', function(e) {
