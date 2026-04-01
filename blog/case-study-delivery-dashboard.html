@@ -272,6 +272,53 @@ document.head.appendChild(o)}initApollo();</script>
 
   <p>In the first 14 days, the dashboard flagged 3 delivery shortages across 2 vendors:</p>
 
+  <!-- Delivery Verification Dashboard Mockup -->
+  <div style="max-width:720px;margin:0 auto 32px;border:1px solid #e2e8f0;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,0.06);overflow:hidden;font-family:'DM Sans',sans-serif;">
+    <!-- Header -->
+    <div style="background:#1b4332;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;">
+      <span style="font-size:11px;font-weight:700;letter-spacing:1.8px;text-transform:uppercase;color:#95d5b2;">Delivery Verification</span>
+      <span style="font-size:11px;font-weight:500;color:rgba(149,213,178,0.6);">Live</span>
+    </div>
+    <!-- Vendor / Date row -->
+    <div style="padding:14px 20px;border-bottom:1px solid #e2e8f0;display:flex;align-items:center;justify-content:space-between;background:#fff;">
+      <div>
+        <span style="font-size:11px;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;color:#94a3b8;">Vendor</span>
+        <span style="display:block;font-family:'Space Mono',monospace;font-size:14px;font-weight:700;color:#1b4332;margin-top:2px;">Vendor A</span>
+      </div>
+      <div style="text-align:right;">
+        <span style="font-size:11px;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;color:#94a3b8;">Date</span>
+        <span style="display:block;font-family:'Space Mono',monospace;font-size:14px;font-weight:700;color:#1b4332;margin-top:2px;">03/15</span>
+      </div>
+    </div>
+    <!-- Comparison columns -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid #e2e8f0;">
+      <div style="padding:14px 20px;background:#f0faf4;border-right:1px solid #e2e8f0;">
+        <span style="font-size:11px;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;color:#52796f;">Metrc Manifest</span>
+        <span style="display:block;font-family:'Space Mono',monospace;font-size:22px;font-weight:700;color:#1b4332;margin-top:4px;">42 <span style="font-size:13px;font-weight:400;color:#52796f;">units</span></span>
+      </div>
+      <div style="padding:14px 20px;background:#fff;">
+        <span style="font-size:11px;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;color:#94a3b8;">Invoice</span>
+        <span style="display:block;font-family:'Space Mono',monospace;font-size:22px;font-weight:700;color:#c0392b;margin-top:4px;">50 <span style="font-size:13px;font-weight:400;color:#c0392b;">units</span></span>
+      </div>
+    </div>
+    <!-- Discrepancy alert -->
+    <div style="padding:12px 20px;background:rgba(192,57,43,0.06);border-bottom:1px solid #e2e8f0;display:flex;align-items:center;gap:8px;">
+      <span style="font-size:16px;line-height:1;">&#9888;</span>
+      <span style="font-size:13px;font-weight:700;color:#c0392b;letter-spacing:0.3px;">DISCREPANCY: 8 units short</span>
+    </div>
+    <!-- Status row -->
+    <div style="padding:12px 20px;background:#fff;display:flex;align-items:center;justify-content:space-between;">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <span style="font-size:12px;font-weight:600;color:#94a3b8;text-transform:uppercase;letter-spacing:0.5px;">Savings</span>
+        <span style="font-family:'Space Mono',monospace;font-size:14px;font-weight:700;color:#1b4332;">$1,140</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:6px;">
+        <span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:#e67e22;"></span>
+        <span style="font-size:12px;font-weight:600;color:#64748b;">Flagged — payment adjusted</span>
+      </div>
+    </div>
+  </div>
+
   <ol>
     <li>A vendor delivered 47 units but invoiced for 50 — 3 units missing. The Metrc manifest confirmed 47 received.</li>
     <li>A second delivery was short by 5 units — the invoice matched the original order, not what actually arrived.</li>
