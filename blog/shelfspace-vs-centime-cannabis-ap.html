@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Centime vs ShelfSpace — Cannabis AP Software vs Managed Service</title>
+<meta name="description" content="Centime is AP software with a cannabis page. ShelfSpace is a managed AP team built for cannabis. One gives you tools. The other does the work.">
+<link rel="canonical" href="https://shelfspace.pro/blog/shelfspace-vs-centime-cannabis-ap">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://shelfspace.pro/blog/shelfspace-vs-centime-cannabis-ap">
+<meta property="og:title" content="Centime vs ShelfSpace — Cannabis AP Software vs Managed Service">
+<meta property="og:description" content="Centime is AP software with a cannabis page. ShelfSpace is a managed AP team built for cannabis. One gives you tools. The other does the work.">
+<meta property="og:image" content="https://shelfspace.pro/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Centime vs ShelfSpace — Cannabis AP Software vs Managed Service">
+<meta name="twitter:description" content="Centime is AP software with a cannabis page. ShelfSpace is a managed AP team built for cannabis. One gives you tools. The other does the work.">
+<meta name="twitter:image" content="https://shelfspace.pro/og-image.png">
+<meta name="apple-mobile-web-app-title" content="ShelfSpace">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+<style>
+  /* ─── HERO ENHANCEMENTS ─── */
+  .page-hero { padding-bottom: 40px; }
+  .hero-bg-gradient { position: absolute; top: -30%; right: -20%; width: 700px; height: 700px; background: radial-gradient(circle, rgba(149,213,178,0.18) 0%, rgba(149,213,178,0) 70%); animation: float 8s ease-in-out infinite; pointer-events: none; }
+  .hero-bg-gradient-2 { position: absolute; bottom: -20%; left: -15%; width: 550px; height: 550px; background: radial-gradient(circle, rgba(27,67,50,0.06) 0%, rgba(27,67,50,0) 70%); animation: float 10s ease-in-out infinite; animation-delay: -3s; pointer-events: none; }
+  .hero-grid-lines { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 1200px; height: 100%; opacity: 0.035; background-image: linear-gradient(var(--green-deep) 1px, transparent 1px), linear-gradient(90deg, var(--green-deep) 1px, transparent 1px); background-size: 80px 80px; pointer-events: none; }
+  .page-hero .section-label,
+  .page-hero .section-title,
+  .page-hero .section-desc { opacity: 0; transform: translateY(30px); }
+  .page-hero .section-label { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1); }
+  .page-hero .section-title { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s, transform 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s; }
+  .page-hero .section-desc { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1) 0.25s, transform 0.8s cubic-bezier(0.22,1,0.36,1) 0.25s; }
+  .page-hero.hero-loaded .section-label,
+  .page-hero.hero-loaded .section-title,
+  .page-hero.hero-loaded .section-desc { opacity: 1; transform: translateY(0); }
+
+  /* ─── REVEAL ─── */
+  .reveal {
+    opacity: 0; transform: translateY(40px);
+    transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .reveal.is-visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.2s; }
+  .reveal-delay-2 { transition-delay: 0.4s; }
+
+  /* ─── ARTICLE BODY ─── */
+  .article-body { max-width: 720px; margin: 0 auto; padding: 0 48px 80px; }
+  .article-body h2 { font-size: 24px; font-weight: 700; color: var(--green-deep); margin: 48px 0 16px; letter-spacing: -0.5px; line-height: 1.3; }
+  .article-body p { font-size: 17px; line-height: 1.85; color: var(--slate-600); margin-bottom: 24px; }
+  .article-body ul, .article-body ol { margin-bottom: 24px; padding-left: 24px; }
+  .article-body li { font-size: 17px; line-height: 1.85; color: var(--slate-600); margin-bottom: 8px; }
+  .article-body strong { color: var(--green-deep); font-weight: 600; }
+  .article-body a { color: var(--green-mid); font-weight: 500; text-decoration: none; }
+  .article-body a:hover { color: var(--green-deep); text-decoration: underline; }
+  .article-body blockquote { border-left: 3px solid var(--green-accent); padding: 16px 24px; margin: 32px 0; background: var(--green-ghost); border-radius: 0 8px 8px 0; }
+  .article-body blockquote p { font-style: italic; color: var(--green-dark); margin-bottom: 0; }
+
+  /* ─── AT A GLANCE ─── */
+  .article-glance {
+    max-width: 720px; margin: 0 auto 40px; padding: 24px 28px;
+    background: var(--green-ghost); border: 1px solid rgba(149,213,178,0.3);
+    border-radius: 12px;
+  }
+  .article-glance h2 {
+    font-size: 14px; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--green-mid); margin: 0 0 12px;
+  }
+  .article-glance ul { list-style: none; padding: 0; margin: 0; }
+  .article-glance li {
+    font-size: 15px; line-height: 1.6; color: var(--slate-600);
+    padding: 4px 0 4px 20px; position: relative;
+  }
+  .article-glance li::before {
+    content: ''; position: absolute; left: 0; top: 12px;
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--green-accent);
+  }
+
+  /* ─── COMPARISON TABLE ─── */
+  .compare-table { width: 100%; border-collapse: collapse; margin: 32px 0; border-radius: 12px; overflow: hidden; border: 1px solid var(--slate-200); }
+  .compare-table th { padding: 14px 16px; font-size: 14px; font-weight: 700; text-align: left; border-bottom: 2px solid var(--slate-200); }
+  .compare-table th:first-child { color: var(--slate-500); background: var(--white); width: 40%; }
+  .compare-table th:nth-child(2) { color: var(--slate-400); background: var(--slate-50); }
+  .compare-table th:nth-child(3) { color: var(--green-deep); background: var(--green-ghost); }
+  .compare-table td { padding: 12px 16px; font-size: 14px; border-bottom: 1px solid var(--slate-100); }
+  .compare-table td:first-child { color: var(--slate-600); font-weight: 500; }
+  .compare-table td:nth-child(2) { background: var(--slate-50); color: var(--slate-500); }
+  .compare-table td:nth-child(3) { background: rgba(240,250,244,0.5); }
+  .compare-table tr:last-child td { border-bottom: none; }
+  .compare-check { color: var(--green-mid); font-weight: 700; }
+  .compare-x { color: #c0392b; font-weight: 700; }
+  .compare-plus { color: var(--green-deep); font-size: 13px; }
+  .compare-warn { color: #e67e22; font-weight: 700; }
+
+  /* ─── CTA PARALLAX ─── */
+  .cta-section::before { transform: translate(-50%,-50%) translateY(var(--parallax-y, 0)); will-change: transform; }
+
+  /* ─── FOOTER 5-COL ─── */
+  .footer-top { grid-template-columns: 2fr 1fr 1fr 1fr 1fr; }
+  @media (max-width: 900px) { .footer-top { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px) { .footer-top { grid-template-columns: 1fr; } }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    .article-body { padding: 0 24px 60px; }
+    .article-body h2 { margin-top: 36px; }
+    .compare-table { font-size: 13px; }
+    .compare-table th, .compare-table td { padding: 10px 12px; }
+  }
+
+  /* ─── REDUCED MOTION ─── */
+  @media (prefers-reduced-motion: reduce) {
+    .reveal {
+      opacity: 1; transform: none; transition: none;
+    }
+    .page-hero .section-label,
+    .page-hero .section-title,
+    .page-hero .section-desc {
+      opacity: 1; transform: none; transition: none;
+    }
+    .hero-bg-gradient, .hero-bg-gradient-2 { animation: none; }
+  }
+</style>
+<noscript><style>.reveal,.page-hero .section-label,.page-hero .section-title,.page-hero .section-desc{opacity:1;transform:none;transition:none;}</style></noscript>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-H2LBJT03WE"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-H2LBJT03WE');</script>
+<script>function initApollo(){var n=Math.random().toString(36).substring(7),o=document.createElement("script");
+o.src="https://assets.apollo.io/micro/website-tracker/tracker.iife.js?nocache="+n,o.async=!0,o.defer=!0,
+o.onload=function(){window.trackingFunctions.onLoad({appId:"69c141b32234890011a43849"})},
+document.head.appendChild(o)}initApollo();</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Centime vs ShelfSpace — Cannabis AP Software vs Managed Service",
+  "description": "Centime is AP software with a cannabis page. ShelfSpace is a managed AP team built for cannabis. One gives you tools. The other does the work.",
+  "author": {
+    "@type": "Person",
+    "name": "Chris Mitchem"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "ShelfSpace",
+    "url": "https://shelfspace.pro"
+  },
+  "datePublished": "2026-04-01",
+  "url": "https://shelfspace.pro/blog/shelfspace-vs-centime-cannabis-ap",
+  "image": "https://shelfspace.pro/og-image.png"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is Centime specifically designed for cannabis?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Centime has a cannabis industry page and serves cannabis businesses. But it's a general AP platform — no Metrc integration, no consignment, no credit recovery. ShelfSpace was designed from the ground up for cannabis dispensary workflows."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does Centime offer a managed service?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Centime is software — your team operates it. ShelfSpace is a managed service — our team does the AP work. You just approve payments."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I switch from Centime to ShelfSpace?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. We onboard during your 60-day pilot. We import your vendor list, connect Metrc, and start managing AP immediately. Most clients see recovered credits within 14 days."
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="/" class="nav-logo">
+    <div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div>
+    <span class="nav-logo-text">ShelfSpace</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="/consignment">Consignment</a></li>
+    <li><a href="/accounts-payable">Accounts Payable</a></li>
+    <li><a href="/credit-recovery">Credit Recovery</a></li>
+    <li><a href="/pricing">Pricing</a></li>
+    <li><a href="/about">About</a></li>
+    <li><a href="/contact" class="nav-cta">Get Started <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a></li>
+  </ul>
+  <div class="nav-hamburger" onclick="document.querySelector('.nav-links').classList.toggle('mobile-open'); event.stopPropagation();"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="hero-bg-gradient"></div>
+  <div class="hero-bg-gradient-2"></div>
+  <div class="hero-grid-lines"></div>
+  <div class="section-label">Accounts Payable</div>
+  <h1 class="section-title">Centime vs ShelfSpace: Cannabis AP Software vs a Managed AP Team</h1>
+  <p class="section-desc">Centime offers AP software with a cannabis industry page. ShelfSpace is a managed AP service purpose-built for cannabis dispensaries. One gives you tools. The other does the work.</p>
+</div>
+
+<!-- AT A GLANCE -->
+<div class="article-glance">
+  <h2>At a glance</h2>
+  <ul>
+    <li>Centime is AP software with AI-powered invoice capture, PO matching, and approval workflows — plus a cannabis industry page</li>
+    <li>Centime is self-serve software you run yourself. ShelfSpace is a managed service — our team does the work.</li>
+    <li>Centime has no Metrc integration, no consignment settlements, and no vendor credit recovery</li>
+    <li>ShelfSpace is purpose-built for cannabis: Metrc-native, credit recovery built in, consignment and AP in one system</li>
+  </ul>
+</div>
+
+<!-- COMPARISON TABLE -->
+<div style="max-width: 720px; margin: 0 auto; padding: 0 48px;" class="reveal">
+<table class="compare-table">
+  <thead>
+    <tr>
+      <th>Feature</th>
+      <th>Centime</th>
+      <th>ShelfSpace</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>Invoice capture (OCR/AI)</td><td><span class="compare-check">&#10003;</span></td><td><span class="compare-check">&#10003;</span> <span class="compare-plus">AI-powered + Metrc verified</span></td></tr>
+    <tr><td>PO matching</td><td><span class="compare-check">&#10003;</span> <span class="compare-plus">2-way and 3-way</span></td><td><span class="compare-check">&#10003;</span> <span class="compare-plus">Plus Metrc delivery matching</span></td></tr>
+    <tr><td>Approval workflows</td><td><span class="compare-check">&#10003;</span> <span class="compare-plus">Multi-tier</span></td><td><span class="compare-check">&#10003;</span> <span class="compare-plus">Single approval</span></td></tr>
+    <tr><td>Metrc integration</td><td><span class="compare-x">&#10007;</span></td><td><span class="compare-check">&#10003;</span> <span class="compare-plus">Native — read-only</span></td></tr>
+    <tr><td>Delivery verification</td><td><span class="compare-x">&#10007;</span></td><td><span class="compare-check">&#10003;</span> <span class="compare-plus">Invoice vs. Metrc</span></td></tr>
+    <tr><td>Credit recovery</td><td><span class="compare-x">&#10007;</span></td><td><span class="compare-check">&#10003;</span> <span class="compare-plus">$8K–$25K/mo found</span></td></tr>
+    <tr><td>Consignment settlements</td><td><span class="compare-x">&#10007;</span></td><td><span class="compare-check">&#10003;</span> <span class="compare-plus">Weekly, to the penny</span></td></tr>
+    <tr><td>Check 21 checks</td><td><span class="compare-check">&#10003;</span> <span class="compare-plus">Check printing/mailing</span></td><td><span class="compare-check">&#10003;</span> <span class="compare-plus">Print at home, mobile deposit</span></td></tr>
+    <tr><td>Vendor portal</td><td><span class="compare-check">&#10003;</span> <span class="compare-plus">Supplier portal</span></td><td><span class="compare-check">&#10003;</span> <span class="compare-plus">Free — download checks, view history</span></td></tr>
+    <tr><td>AI vendor communication</td><td><span class="compare-x">&#10007;</span></td><td><span class="compare-check">&#10003;</span> <span class="compare-plus">ShelfiQ handles 95%</span></td></tr>
+    <tr><td>QuickBooks sync</td><td><span class="compare-check">&#10003;</span> <span class="compare-plus">(also NetSuite, Sage Intacct)</span></td><td><span class="compare-check">&#10003;</span> <span class="compare-plus">Real-time</span></td></tr>
+    <tr><td>Cannabis-specific</td><td><span class="compare-warn">&#9888;&#65039;</span> <span class="compare-plus">Has a page, not purpose-built</span></td><td><span class="compare-check">&#10003;</span> <span class="compare-plus">Purpose-built</span></td></tr>
+    <tr><td>Managed service</td><td><span class="compare-x">&#10007;</span> Software only</td><td><span class="compare-check">&#10003;</span> <span class="compare-plus">Team does the work</span></td></tr>
+  </tbody>
+</table>
+</div>
+
+<!-- ARTICLE BODY -->
+<div class="article-body reveal">
+
+  <h2>Centime is solid AP software. It's still software.</h2>
+
+  <p>Centime offers real AP capabilities. Their platform includes AI-powered OCR for invoice capture, predictive GL coding that learns your chart of accounts, 2-way and 3-way PO matching, multi-tier approval workflows, and payment processing including check printing. They integrate with NetSuite, Sage Intacct, and QuickBooks. They even earn 2.25% APY on funds held in their system. And they have a <a href="https://centime.com/industries/cannabis" target="_blank" rel="noopener">cannabis-specific industry page</a>.</p>
+
+  <p>For a general business — or even a cannabis business with a dedicated AP team — Centime is a viable option. The software handles the workflow. Your team runs the software.</p>
+
+  <p>That's the distinction. Centime gives you tools. ShelfSpace gives you a team.</p>
+
+  <h2>The cannabis gaps</h2>
+
+  <p>The same structural gaps that affect every general AP tool apply to Centime:</p>
+
+  <ol>
+    <li><strong>No Metrc integration.</strong> Centime can match invoices to POs. But in cannabis, the source of truth for deliveries is Metrc — the state-mandated seed-to-sale tracking system. Without Metrc data, you can't verify that what a vendor invoiced matches what was actually delivered and manifested. You're trusting the invoice, which is exactly how dispensaries end up overpaying vendors by tens of thousands per year. We recently <a href="/blog/case-study-duplicate-invoice">caught a $4,873 duplicate invoice</a> — the kind of cross-entity billing error that's invisible without Metrc cross-referencing. <a href="/accounts-payable">Learn more about delivery verification</a>.</li>
+
+    <li><strong>No credit recovery.</strong> Centime processes invoices and payments. It doesn't identify credits you're owed from vendors — returns, expirations, co-marketing commitments that were fulfilled but never claimed. That's a separate workflow that requires pulling POS and Metrc data, building credit memos, and negotiating with vendors. We routinely find <a href="/credit-recovery">$8,000 to $25,000 per month</a> in recoverable credits during our first evaluation of a new client. Read our <a href="/blog/case-study-vendor-credit-recovery">credit recovery case study</a> to see what that looks like in practice.</li>
+
+    <li><strong>No consignment settlements.</strong> Cannabis consignment requires weekly settlement calculations based on POS sell-through data, profit splits, and aging discounts. It's not an invoice workflow — it's a settlement workflow. Centime has no concept of it because <a href="/consignment">consignment</a> barely exists outside cannabis and a few other niche industries.</li>
+
+    <li><strong>You still run it.</strong> The most fundamental difference: Centime gives you software and expects your team to operate it. For a cannabis operator stretched across compliance, inventory, customer service, and daily operations, "here's another software platform to manage" is a burden, not a solution.</li>
+  </ol>
+
+  <h2>What managed AP looks like</h2>
+
+  <p>Here's what happens when you hand AP to ShelfSpace instead of running software yourself:</p>
+
+  <ul>
+    <li><strong>Vendors email ShelfSpace, not you.</strong> Every invoice, every question, every credit dispute goes to your dedicated ShelfSpace inbox. Our team and <a href="/shelfiq">ShelfiQ</a> handle 95% of it without you ever seeing it.</li>
+    <li><strong>Every invoice verified against Metrc before payment.</strong> We match line items to Metrc delivery data. If the invoice says 50 units and Metrc says 47 were received, we flag it before you pay.</li>
+    <li><strong>Credits found and applied every cycle.</strong> Returns processed in Metrc but never invoiced back. Expirations with credit terms. Promotional commitments that were fulfilled but never claimed. We track every one and deduct them from the next payment.</li>
+    <li><strong>Consignment settled weekly.</strong> Settlement reports calculated to the penny, with profit splits, aging discounts, and sell-through data pulled directly from your POS and Metrc.</li>
+    <li><strong>Payments prepared, you approve, checks go out.</strong> We prepare the payment run. You review and approve. That's it.</li>
+    <li><strong>Everything synced to QuickBooks.</strong> Real-time sync — no double entry, no reconciliation headaches.</li>
+  </ul>
+
+  <p>Your AP workload: approve payments. 15 minutes per week.</p>
+
+  <h2>Who should use what</h2>
+
+  <p><strong>Have a dedicated AP team and want software to make them more efficient?</strong> Centime is worth evaluating. The AI-powered invoice capture, predictive coding, and multi-tier approvals are genuinely useful for teams that want to do AP themselves, better.</p>
+
+  <p><strong>Don't have an AP team and don't want to build one?</strong> ShelfSpace does the work. You don't need to hire, train, or manage AP staff. Our team handles the entire workflow — you just approve payments.</p>
+
+  <p><strong>Running cannabis and need Metrc verification, credit recovery, and consignment?</strong> ShelfSpace is purpose-built for this. No general AP platform — Centime included — offers Metrc integration, consignment settlements, or credit recovery. Those aren't add-ons we bolted on. They're the foundation.</p>
+
+  <h2>The real question: tools or a team?</h2>
+
+  <p>Most dispensary operators don't want more software. They want someone to handle the problem. Centime is a good tool for teams that want to do AP themselves, better. ShelfSpace is for operators who want AP done for them, right.</p>
+
+  <p>Centime gives you a dashboard. We give you a team that knows cannabis, knows Metrc, knows your vendors, and handles the work so you can focus on running your stores.</p>
+
+  <blockquote>
+    <p>We'll run a free evaluation — show you the credits Centime can't find, the Metrc discrepancies it can't check, and exactly how much a managed service would save you.</p>
+  </blockquote>
+
+</div>
+
+<!-- FAQ -->
+<section style="max-width: 720px; margin: 0 auto; padding: 0 48px 60px;">
+  <h2 style="font-size: 22px; font-weight: 700; color: var(--green-deep); margin-bottom: 24px; letter-spacing: -0.5px;">Frequently asked questions</h2>
+  <div class="faq-list">
+    <details>
+      <summary>Is Centime specifically designed for cannabis?</summary>
+      <p>Centime has a cannabis industry page and serves cannabis businesses. But it's a general AP platform — no Metrc integration, no consignment, no credit recovery. ShelfSpace was designed from the ground up for cannabis dispensary workflows.</p>
+    </details>
+    <details>
+      <summary>Does Centime offer a managed service?</summary>
+      <p>No. Centime is software — your team operates it. ShelfSpace is a managed service — our team does the AP work. You just approve payments.</p>
+    </details>
+    <details>
+      <summary>Can I switch from Centime to ShelfSpace?</summary>
+      <p>Yes. We onboard during your 60-day pilot. We import your vendor list, connect Metrc, and start managing AP immediately. Most clients see recovered credits within 14 days.</p>
+    </details>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-content">
+    <div class="section-label reveal">Get Started</div>
+    <h2 class="section-title reveal">Get My Free Evaluation</h2>
+    <p class="section-desc reveal">We'll show you what AP software misses — Metrc discrepancies, vendor credits, and consignment gaps that only a cannabis-native managed service can catch.</p>
+    <div class="cta-actions reveal">
+      <a href="/contact" class="btn-primary">
+        Get My Free Evaluation
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+      <a href="/contact" class="btn-secondary">Talk to Chris</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="/" class="nav-logo"><div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div><span class="nav-logo-text">ShelfSpace</span></a>
+      <p>Every Vendor. Every Payment. One Engine.</p>
+    </div>
+    <div class="footer-col"><h4>Services</h4><ul><li><a href="/consignment">Consignment</a></li><li><a href="/accounts-payable">Accounts Payable</a></li><li><a href="/credit-recovery">Credit Recovery</a></li><li><a href="/checks">Check Payments</a></li><li><a href="/shelfiq">ShelfiQ</a></li></ul></div>
+    <div class="footer-col"><h4>Platform</h4><ul><li><a href="/features">Features</a></li><li><a href="/how-it-works">How It Works</a></li><li><a href="/pricing">Pricing</a></li><li><a href="/about">About</a></li><li><a href="/blog">Blog</a></li><li><a href="/docs">Docs</a></li></ul></div>
+    <div class="footer-col"><h4>Access</h4><ul><li><a href="https://ourshelf.space">Login</a></li><li><a href="/contact">Sign Up</a></li><li><a href="/contact">Contact</a></li></ul></div>
+    <div class="footer-col"><h4>Company</h4><ul><li><a href="mailto:chris@shelfspace.pro">Email</a></li><li><a href="mailto:support@shelfspace.pro">Support</a></li><li><a href="https://linkedin.com/company/shelfspace-pro" target="_blank" rel="noopener" class="footer-social-link"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> LinkedIn</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><p>&copy; 2026 ShelfSpace Technologies Inc.</p><div class="footer-bottom-links"><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div></div>
+</footer>
+
+<script>
+(function() {
+  var nav = document.getElementById('nav');
+  var pageHero = document.querySelector('.page-hero');
+  var parallaxSections = [
+    document.querySelector('.cta-section')
+  ];
+
+  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var isMobile = window.innerWidth < 900;
+  var ticking = false;
+
+  /* ── Hero entrance ── */
+  requestAnimationFrame(function() {
+    nav.classList.toggle('scrolled', window.scrollY > 20);
+    if (pageHero) pageHero.classList.add('hero-loaded');
+  });
+
+  /* ── Scroll-Triggered Reveals (with unobserve for perf) ── */
+  var revealObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(function(el) { revealObserver.observe(el); });
+
+  /* ── Scroll handler (rAF + ticking flag) ── */
+  function onScroll() {
+    var scrollY = window.scrollY;
+
+    /* Nav state */
+    nav.classList.toggle('scrolled', scrollY > 20);
+
+    /* Skip parallax for reduced motion or mobile */
+    if (prefersReduced || isMobile) return;
+
+    /* Section decorative parallax */
+    var wh = window.innerHeight;
+    parallaxSections.forEach(function(section) {
+      if (!section) return;
+      var rect = section.getBoundingClientRect();
+      if (rect.bottom < 0 || rect.top > wh) return;
+      var center = rect.top + rect.height / 2 - wh / 2;
+      section.style.setProperty('--parallax-y', (center * 0.08) + 'px');
+    });
+  }
+
+  window.addEventListener('scroll', function() {
+    if (!ticking) {
+      requestAnimationFrame(function() {
+        onScroll();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, { passive: true });
+
+  /* Initial call */
+  onScroll();
+
+  /* ── Resize handler ── */
+  window.addEventListener('resize', function() {
+    isMobile = window.innerWidth < 900;
+    if (isMobile) {
+      parallaxSections.forEach(function(section) {
+        if (section) section.style.setProperty('--parallax-y', '0px');
+      });
+    }
+  });
+
+  /* ── Close mobile nav on outside click ── */
+  document.addEventListener('click', function() {
+    var navLinks = document.querySelector('.nav-links');
+    if (navLinks && navLinks.classList.contains('mobile-open')) {
+      navLinks.classList.remove('mobile-open');
+    }
+  });
+})();
+</script>
+<script src="/shelfiq-widget.js"></script>
+</body>
+</html>
