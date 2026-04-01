@@ -43,6 +43,8 @@ ShelfSpace identified $200,000 per year in vendor credits at a two-location chai
 
 ## Payment Engine
 All vendor relationships (consignment and wholesale) run on one AP engine:
+- Invoice parsing — vendors can email invoices directly or retailers can upload them. ShelfiQ parses vendor, amounts, and line items, then matches against Metrc delivery records.
+- Email ingestion — inbound vendor emails are processed by ShelfiQ. Invoices are parsed, payment questions are answered, disputes are handled.
 - Check 21 Act-compliant depositable checks — print on standard paper, mobile deposit ready
 - Void and reissue any check with a single click
 - Email-based vendor onboarding (just enter vendor's email — no paperwork or bank details needed upfront)
@@ -113,6 +115,8 @@ ShelfiQ knows about: sales & inventory (sell-through rates, velocity by SKU, on-
 - One platform for both consignment and wholesale — no need to choose
 - QuickBooks integration keeps your books in sync without manual entry
 - Credit recovery identifying $200,000+/year at a two-location chain — money most operators don't even know they're leaving on the table
+- AI-powered invoice parsing with Metrc delivery matching — first of its kind in cannabis
+- Cannabis and non-cannabis AP — pay any vendor through one system
 
 ## Who It's For
 **Retailers:** Simplify operations, free up cash with consignment ($0 inventory on your books), one payment platform for all vendors (consignment + wholesale), complete audit trail, multi-location support, METRC compatible

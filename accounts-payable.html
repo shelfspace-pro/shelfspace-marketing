@@ -254,6 +254,13 @@
     }
     .hero-bg-gradient, .hero-bg-gradient-2 { animation: none; }
   }
+
+  /* ─── SHELFIQ INVOICE FLOW ─── */
+  .shelfiq-flow-steps { display: flex; align-items: center; justify-content: center; gap: 8px; flex-wrap: wrap; margin: 0 auto; max-width: 700px; }
+  .shelfiq-flow-step { display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 16px; background: var(--slate-50); border: 1px solid var(--slate-200); border-radius: 12px; min-width: 120px; text-align: center; }
+  .shelfiq-flow-icon { color: var(--green-mid); }
+  .shelfiq-flow-step span { font-size: 13px; color: var(--slate-600); font-weight: 500; }
+  .shelfiq-flow-arrow { font-size: 18px; color: var(--slate-300); }
 </style>
 <noscript><style>.reveal,.page-hero .section-label,.page-hero .section-title,.page-hero .section-desc{opacity:1;transform:none;transition:none;}</style></noscript>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-H2LBJT03WE"></script>
@@ -388,6 +395,12 @@ document.head.appendChild(o)}initApollo();</script>
   </div>
   <p class="pain-multiplier reveal">Multiply that across 40 vendors. 52 weeks a year.</p>
   <p class="pain-pivot-sub reveal" style="font-size:18px;color:var(--slate-500);max-width:560px;margin:16px auto 0;line-height:1.6;">You're paying a human to do this. Pay a Metrc-integrated AI a fraction of the cost to do it faster, more accurately, and without a single vendor call landing on your desk.</p>
+  <div style="display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:24px;" class="reveal">
+    <span style="display:inline-flex;align-items:center;gap:6px;padding:8px 20px;border-radius:100px;background:var(--green-ghost);border:1px solid rgba(149,213,178,0.3);font-size:14px;font-weight:500;color:var(--green-dark);">Cannabis vendors</span>
+    <span style="display:inline-flex;align-items:center;gap:6px;padding:8px 20px;border-radius:100px;background:var(--green-ghost);border:1px solid rgba(149,213,178,0.3);font-size:14px;font-weight:500;color:var(--green-dark);">Non-cannabis vendors</span>
+    <span style="display:inline-flex;align-items:center;gap:6px;padding:8px 20px;border-radius:100px;background:var(--green-ghost);border:1px solid rgba(149,213,178,0.3);font-size:14px;font-weight:500;color:var(--green-dark);">Landlords & agencies</span>
+    <span style="display:inline-flex;align-items:center;gap:6px;padding:8px 20px;border-radius:100px;background:var(--green-ghost);border:1px solid rgba(149,213,178,0.3);font-size:14px;font-weight:500;color:var(--green-dark);">Anyone you pay</span>
+  </div>
 </section>
 
 <!-- AP SAVINGS CALCULATOR -->
@@ -453,7 +466,7 @@ document.head.appendChild(o)}initApollo();</script>
   <div class="shelfiq-ap-content">
     <div class="section-label reveal">Vendor Communication</div>
     <h2 class="section-title reveal">Never answer another AP email.</h2>
-    <p class="shelfiq-ap-body reveal">ShelfiQ — our AI — sits on top of your Metrc data and handles <strong>95% of vendor inquiries</strong> without human intervention. Vendors email in. ShelfiQ responds with real answers, backed by real data. Only 5% escalate to our team — and we handle those too.</p>
+    <p class="shelfiq-ap-body reveal">ShelfiQ — our AI — sits on top of your Metrc data and handles <strong>95% of vendor inquiries</strong> without human intervention. Vendors email in. ShelfiQ responds with real answers, backed by real data. Only 5% escalate to our team — and we handle those too. It also parses vendor invoices — uploaded or emailed — extracting amounts, line items, and vendor details, then matching everything against your Metrc delivery records.</p>
     <div class="shelfiq-ap-example reveal">
       <div class="shelfiq-msg vendor">
         <div class="shelfiq-msg-label">Vendor asks:</div>
@@ -462,6 +475,30 @@ document.head.appendChild(o)}initApollo();</script>
       <div class="shelfiq-msg ai">
         <div class="shelfiq-msg-label">ShelfiQ responds:</div>
         <div class="shelfiq-msg-text">"Invoice #4821 was adjusted because we received 22 of 24 units on delivery. The payment reflects the 22 units at the contracted rate. Full breakdown attached."</div>
+      </div>
+    </div>
+    <div class="shelfiq-ap-flow reveal">
+      <h3 style="font-size:18px;font-weight:700;color:var(--green-deep);margin:32px 0 20px;text-align:center;">Invoice parsing — upload or email</h3>
+      <div class="shelfiq-flow-steps">
+        <div class="shelfiq-flow-step">
+          <div class="shelfiq-flow-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+          <span>Vendor emails invoice</span>
+        </div>
+        <div class="shelfiq-flow-arrow">&rarr;</div>
+        <div class="shelfiq-flow-step">
+          <div class="shelfiq-flow-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+          <span>ShelfiQ parses it</span>
+        </div>
+        <div class="shelfiq-flow-arrow">&rarr;</div>
+        <div class="shelfiq-flow-step">
+          <div class="shelfiq-flow-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+          <span>Matches to Metrc delivery</span>
+        </div>
+        <div class="shelfiq-flow-arrow">&rarr;</div>
+        <div class="shelfiq-flow-step">
+          <div class="shelfiq-flow-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg></div>
+          <span>Ready for approval</span>
+        </div>
       </div>
     </div>
     <p class="shelfiq-ap-bottom reveal">Your vendors get instant answers. Your team gets zero AP emails. First of its kind in cannabis.</p>
