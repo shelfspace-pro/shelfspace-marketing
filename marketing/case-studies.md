@@ -110,7 +110,7 @@ Add a one-line entry for the new case study under the blog section.
 | # | Slug | Category | Amount | Headline | Status |
 |---|---|---|---|---|---|
 | 1 | `case-study-duplicate-invoice` | accounts-payable | $4,873 | Stopped a duplicate invoice across two locations | Planned |
-| 2 | `case-study-consignment-conversion` | consignment | $127,400 | Freed trapped inventory with one vendor switch | Planned |
+| 2 | `case-study-consignment-conversion` | consignment | $27,350 | Freed trapped inventory with one vendor switch | Planned |
 | 3 | `case-study-vendor-credit-recovery` | credit-recovery | $2,340 | Recovered co-marketing credits nobody was tracking | Planned |
 
 ## SEO Targets
@@ -118,7 +118,7 @@ Add a one-line entry for the new case study under the blog section.
 | Case Study | Primary Keyword | Title Tag | Meta Description |
 |---|---|---|---|
 | Duplicate Invoice | `dispensary accounts payable errors` | How a $4,873 Duplicate Invoice Got Caught — ShelfSpace | A vendor billed the wrong location for an invoice already paid. ShelfSpace caught it the same day. Here's how dispensary AP errors silently drain cash. |
-| Consignment | `cannabis consignment for dispensaries` | Cannabis Consignment Freed $127K in Inventory — Case Study | One dispensary freed $127K in tied-up inventory by switching a single vendor to consignment. Dead stock dropped to zero. Margins hit 50%. |
+| Consignment | `cannabis consignment for dispensaries` | Cannabis Consignment Freed $27K in Inventory — Case Study | One dispensary freed $27K in tied-up inventory by switching a single vendor to consignment. Dead stock dropped to zero. Margins hit 50%. |
 | Credit Recovery | `cannabis vendor credit recovery` | $2,340 in Vendor Credits Recovered — ShelfSpace Case Study | A dispensary was owed co-marketing credits and didn't know it. ShelfSpace calculated, got vendor approval, and applied the credit same cycle. |
 
 ## Case Study Details (for blog post content)
@@ -142,10 +142,10 @@ Add a one-line entry for the new case study under the blog section.
 ### Case Study 2: Consignment Conversion
 
 **Category:** Consignment
-**Amount freed:** $127,400
+**Amount freed:** $27,350
 **Speed:** 60-day pilot
 
-**What happened:** A single-location dispensary was buying all inventory wholesale — $310K+ sitting on shelves at any given time. Product expired before it sold. Margins fluctuated because they bore all the risk. We onboarded their top vendor onto consignment during a 60-day pilot. That vendor alone represented $127,400 in shelf inventory the dispensary no longer had to pay for upfront. Dead stock from that vendor dropped to near zero (the vendor owns it until it sells). Consignment pricing locked in a 50% margin floor, stabilizing gross margin on that vendor's products. Cash that was tied up in inventory went back to operations.
+**What happened:** A single-location dispensary was buying all inventory wholesale — $310K+ sitting on shelves at any given time. Product expired before it sold. Margins fluctuated because they bore all the risk. We onboarded their top vendor onto consignment during a 60-day pilot. That vendor alone represented $27,350 in shelf inventory the dispensary no longer had to pay for upfront. Dead stock from that vendor dropped to near zero (the vendor owns it until it sells). Consignment pricing locked in a 50% margin floor, stabilizing gross margin on that vendor's products. Cash that was tied up in inventory went back to operations.
 
 **Features used:**
 - Vendor onboarding (transitioning from wholesale to consignment terms)
