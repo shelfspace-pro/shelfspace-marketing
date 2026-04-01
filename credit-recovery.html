@@ -43,6 +43,27 @@
   .page-hero.hero-loaded .section-title,
   .page-hero.hero-loaded .section-desc { opacity: 1; transform: translateY(0); }
 
+  /* ─── HERO DEMO ─── */
+  .page-hero { display: flex; align-items: center; justify-content: center; gap: 64px; padding-bottom: 40px; }
+  .hero-text { flex: 1; }
+  .hero-demo { flex: 1; max-width: 480px; pointer-events: none; }
+  .hero-demo-frame { background: #1b4332; border-radius: 12px; overflow: hidden; box-shadow: 0 24px 80px rgba(27,67,50,0.18); }
+  .hero-demo-titlebar { display: flex; align-items: center; gap: 6px; padding: 10px 14px; background: #2d6a4f; }
+  .hero-demo-dot { width: 10px; height: 10px; border-radius: 50%; }
+  .hero-demo-dot--r { background: #ef4444; }
+  .hero-demo-dot--y { background: #eab308; }
+  .hero-demo-dot--g { background: #22c55e; }
+  .hero-demo-titlebar span { font-size: 11px; color: #95d5b2; margin-left: 8px; font-family: var(--font-mono); }
+  .hero-demo-screen { position: relative; height: 280px; background: var(--white); overflow: hidden; }
+  .hero-demo-slide { position: absolute; inset: 0; padding: 20px 24px; opacity: 0; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+  .hero-demo-caption { padding: 8px 14px; background: #2d6a4f; font-size: 12px; font-weight: 600; color: #95d5b2; font-family: var(--font-mono); letter-spacing: 0.5px; }
+  @keyframes demoSlide1 { 0%,2% { opacity: 0; } 4%,30% { opacity: 1; } 33% { opacity: 0; } 100% { opacity: 0; } }
+  @keyframes demoSlide2 { 0%,33% { opacity: 0; } 36%,63% { opacity: 1; } 66% { opacity: 0; } 100% { opacity: 0; } }
+  @keyframes demoSlide3 { 0%,66% { opacity: 0; } 69%,96% { opacity: 1; } 98%,100% { opacity: 0; } }
+  .hero-demo-slide:nth-child(1) { animation: demoSlide1 15s ease-in-out infinite; }
+  .hero-demo-slide:nth-child(2) { animation: demoSlide2 15s ease-in-out infinite; }
+  .hero-demo-slide:nth-child(3) { animation: demoSlide3 15s ease-in-out infinite; }
+
   /* ─── REVEAL ─── */
   .reveal {
     opacity: 0; transform: translateY(40px);
@@ -179,6 +200,10 @@
 
   /* ─── RESPONSIVE ─── */
   @media (max-width: 900px) {
+    .page-hero { flex-direction: column; gap: 32px; }
+    .hero-text { text-align: center; }
+    .hero-demo { max-width: 100%; }
+    .hero-demo-screen { height: 240px; }
     .pain-section { padding: 60px 24px; }
     .proof-timeline { padding: 80px 24px; }
     .proof-stats-row { grid-template-columns: 1fr; gap: 20px; }
@@ -196,6 +221,8 @@
       opacity: 1; transform: none; transition: none;
     }
     .hero-bg-gradient, .hero-bg-gradient-2 { animation: none; }
+    .hero-demo-slide { animation: none !important; opacity: 0 !important; }
+    .hero-demo-slide:nth-child(2) { opacity: 1 !important; }
   }
 </style>
 <noscript><style>.reveal,.page-hero .section-label,.page-hero .section-title,.page-hero .section-desc{opacity:1;transform:none;transition:none;}</style></noscript>
@@ -281,8 +308,44 @@ document.head.appendChild(o)}initApollo();</script>
   <div class="hero-bg-gradient"></div>
   <div class="hero-bg-gradient-2"></div>
   <div class="hero-grid-lines"></div>
-  <div class="section-label">Credit Recovery</div>
-  <h1 class="section-title">Your dispensary is losing $200,000 a year.</h1>
+  <div class="hero-text">
+    <div class="section-label">Credit Recovery</div>
+    <h1 class="section-title">Your dispensary is losing $200,000 a year.</h1>
+  </div>
+  <div class="hero-demo">
+    <div class="hero-demo-frame">
+      <div class="hero-demo-titlebar">
+        <div class="hero-demo-dot hero-demo-dot--r"></div>
+        <div class="hero-demo-dot hero-demo-dot--y"></div>
+        <div class="hero-demo-dot hero-demo-dot--g"></div>
+        <span>shelfspace</span>
+      </div>
+      <div class="hero-demo-screen">
+        <div class="hero-demo-slide">
+          <div style="text-align:center;">
+            <div style="font-size:11px;font-weight:600;color:#94a3b8;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:12px;">Credits tracked</div>
+            <div style="font-family:'Space Mono',monospace;font-size:clamp(36px,5vw,48px);font-weight:700;color:#c0392b;letter-spacing:-2px;margin-bottom:8px;">$0</div>
+            <div style="font-size:15px;color:#64748b;">Returns filed. Expirations ignored. Credits unclaimed.</div>
+          </div>
+        </div>
+        <div class="hero-demo-slide">
+          <div style="text-align:center;">
+            <div style="font-size:11px;font-weight:600;color:#94a3b8;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:12px;">We found</div>
+            <div style="font-family:'Space Mono',monospace;font-size:clamp(36px,5vw,48px);font-weight:700;color:#1b4332;letter-spacing:-2px;margin-bottom:8px;">$7,367</div>
+            <div style="font-size:15px;color:#64748b;">3 vendors. Returns, expirations, co-marketing.</div>
+          </div>
+        </div>
+        <div class="hero-demo-slide">
+          <div style="text-align:center;">
+            <div style="font-size:11px;font-weight:600;color:#94a3b8;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:12px;">Applied</div>
+            <div style="font-family:'Space Mono',monospace;font-size:clamp(36px,5vw,48px);font-weight:700;color:#40916c;letter-spacing:-2px;margin-bottom:8px;">$7,367 recovered</div>
+            <div style="font-size:15px;color:#64748b;">Deducted from next payment. One cycle.</div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-demo-caption">Unclaimed → Found → Recovered</div>
+    </div>
+  </div>
 </div>
 
 <!-- SECTION 2: PAIN -->
