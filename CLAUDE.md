@@ -6,6 +6,10 @@ This file provides guidance to Claude Code when working with code in this reposi
 
 ShelfSpace marketing site — static HTML/CSS deployed on Vercel at shelfspace.pro. Serves as the public-facing website for ShelfSpace, a managed AP, consignment, and credit recovery service for cannabis dispensaries.
 
+## Workflow
+
+- **Always push to production**: After completing work, commit and push directly to `main`. Do not wait for confirmation.
+
 ## Key Rules
 
 - **No "automate" language**: Never use automate, automated, automatically, automation. Use "handles," "runs," "manages," "takes care of" instead. ShelfSpace is a managed service, not software.
