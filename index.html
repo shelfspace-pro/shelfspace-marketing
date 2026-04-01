@@ -80,17 +80,18 @@
 .receipt-note { text-align: center; margin-top: 24px; font-size: 15px; color: var(--slate-500); }
 
 /* Case Studies */
-.case-studies { background: var(--white); padding: 100px 48px; }
-.case-studies-inner { max-width: 1080px; margin: 0 auto; }
-.case-studies-header { text-align: center; margin-bottom: 48px; }
+.case-studies { background: var(--white); padding: 100px 0; }
+.case-studies-inner { max-width: 100%; }
+.case-studies-header { text-align: center; margin-bottom: 48px; padding: 0 48px; }
 .case-studies-header h2 { font-size: clamp(28px, 3.5vw, 40px); font-weight: 700; color: var(--green-deep); letter-spacing: -1.5px; margin-bottom: 12px; }
 .case-studies-header p { font-size: 17px; color: var(--slate-500); max-width: 540px; margin: 0 auto; }
-.case-filters { display: flex; justify-content: center; gap: 8px; margin-bottom: 40px; flex-wrap: wrap; }
+.case-filters { display: flex; justify-content: center; gap: 8px; margin-bottom: 40px; flex-wrap: wrap; padding: 0 48px; }
 .case-filter { padding: 8px 20px; border-radius: 100px; border: 1px solid var(--slate-200); background: var(--white); font-family: var(--font-display); font-size: 14px; font-weight: 500; color: var(--slate-500); cursor: pointer; transition: all 0.2s; }
 .case-filter:hover { border-color: var(--green-accent); color: var(--green-deep); }
 .case-filter.active { background: var(--green-deep); color: var(--white); border-color: var(--green-deep); }
-.case-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-.case-card { background: var(--white); border: 1px solid var(--slate-200); border-radius: 16px; padding: 32px 28px; transition: transform 0.3s cubic-bezier(0.22,1,0.36,1), box-shadow 0.3s, opacity 0.3s; }
+.case-grid { display: flex; gap: 24px; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; padding: 0 48px 16px; scrollbar-width: none; }
+.case-grid::-webkit-scrollbar { display: none; }
+.case-card { background: var(--white); border: 1px solid var(--slate-200); border-radius: 16px; padding: 32px 28px; min-width: 340px; max-width: 340px; flex-shrink: 0; scroll-snap-align: start; transition: transform 0.3s cubic-bezier(0.22,1,0.36,1), box-shadow 0.3s, opacity 0.3s; }
 .case-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(27,67,50,0.1); }
 .case-card.hidden { display: none; }
 .case-tag { display: inline-block; font-size: 12px; font-weight: 600; letter-spacing: 0.5px; padding: 4px 12px; border-radius: 100px; margin-bottom: 16px; }
@@ -107,8 +108,11 @@
 .case-link { font-size: 14px; font-weight: 600; color: var(--green-deep); text-decoration: none; display: flex; align-items: center; gap: 4px; transition: gap 0.2s; }
 .case-link:hover { gap: 8px; }
 @media (max-width: 900px) {
-  .case-studies { padding: 60px 24px; }
-  .case-grid { grid-template-columns: 1fr; gap: 16px; }
+  .case-studies { padding: 60px 0; }
+  .case-studies-header { padding: 0 24px; }
+  .case-filters { padding: 0 24px; }
+  .case-grid { padding: 0 24px 16px; gap: 16px; }
+  .case-card { min-width: 280px; max-width: 280px; }
 }
 
 /* Dark Pivot */
