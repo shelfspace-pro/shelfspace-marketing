@@ -35,7 +35,17 @@ When writing or rewriting ANY marketing page, read `marketing/landing-page-playb
 
 Key references:
 - `marketing/landing-page-playbook.md` — The conversion playbook (5-beat emotional arc, design rules, copy rules)
+- `marketing/case-studies.md` — Case study system (de-identification rules, blog template, homepage cards, SEO targets)
 - `marketing/docs-instructions.md` — Writing rules for documentation pages (different from marketing pages)
+
+## Case Study System
+
+When the user drops an email chain, PDF, or describes a situation they want turned into a case study:
+1. Read `marketing/case-studies.md` first — it has the full playbook
+2. De-identify (no names, no round dollar amounts, no dates)
+3. Create the blog post at `/blog/case-study-{slug}.html`
+4. Add a card to the homepage case study section in `index.html`
+5. Update sitemap.xml and llms.txt
 
 ## Documentation System
 

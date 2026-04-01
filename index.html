@@ -79,6 +79,37 @@
 .receipt-total-label { color: var(--green-deep); font-weight: 600; font-family: var(--font-display); font-size: 15px; }
 .receipt-note { text-align: center; margin-top: 24px; font-size: 15px; color: var(--slate-500); }
 
+/* Case Studies */
+.case-studies { background: var(--white); padding: 100px 48px; }
+.case-studies-inner { max-width: 1080px; margin: 0 auto; }
+.case-studies-header { text-align: center; margin-bottom: 48px; }
+.case-studies-header h2 { font-size: clamp(28px, 3.5vw, 40px); font-weight: 700; color: var(--green-deep); letter-spacing: -1.5px; margin-bottom: 12px; }
+.case-studies-header p { font-size: 17px; color: var(--slate-500); max-width: 540px; margin: 0 auto; }
+.case-filters { display: flex; justify-content: center; gap: 8px; margin-bottom: 40px; flex-wrap: wrap; }
+.case-filter { padding: 8px 20px; border-radius: 100px; border: 1px solid var(--slate-200); background: var(--white); font-family: var(--font-display); font-size: 14px; font-weight: 500; color: var(--slate-500); cursor: pointer; transition: all 0.2s; }
+.case-filter:hover { border-color: var(--green-accent); color: var(--green-deep); }
+.case-filter.active { background: var(--green-deep); color: var(--white); border-color: var(--green-deep); }
+.case-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.case-card { background: var(--white); border: 1px solid var(--slate-200); border-radius: 16px; padding: 32px 28px; transition: transform 0.3s cubic-bezier(0.22,1,0.36,1), box-shadow 0.3s, opacity 0.3s; }
+.case-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(27,67,50,0.1); }
+.case-card.hidden { display: none; }
+.case-tag { display: inline-block; font-size: 12px; font-weight: 600; letter-spacing: 0.5px; padding: 4px 12px; border-radius: 100px; margin-bottom: 16px; }
+.case-tag--ap { background: rgba(27,67,50,0.08); color: var(--green-deep); }
+.case-tag--consignment { background: rgba(59,130,246,0.08); color: #2563eb; }
+.case-tag--credit { background: rgba(217,119,6,0.08); color: #b45309; }
+.case-amount { font-family: var(--font-mono); font-size: clamp(28px, 3vw, 36px); font-weight: 700; color: var(--green-deep); letter-spacing: -1.5px; margin-bottom: 8px; }
+.case-headline { font-size: 17px; font-weight: 600; color: var(--slate-800); line-height: 1.4; margin-bottom: 12px; }
+.case-summary { font-size: 15px; line-height: 1.65; color: var(--slate-500); margin-bottom: 20px; }
+.case-meta { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-top: 16px; border-top: 1px solid var(--slate-100); }
+.case-speed { font-size: 13px; font-weight: 600; color: var(--green-mid); display: flex; align-items: center; gap: 6px; }
+.case-speed::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--green-accent); flex-shrink: 0; }
+.case-link { font-size: 14px; font-weight: 600; color: var(--green-deep); text-decoration: none; display: flex; align-items: center; gap: 4px; transition: gap 0.2s; }
+.case-link:hover { gap: 8px; }
+@media (max-width: 900px) {
+  .case-studies { padding: 60px 24px; }
+  .case-grid { grid-template-columns: 1fr; gap: 16px; }
+}
+
 /* Dark Pivot */
 .pivot-section { background: var(--green-deep); padding: 80px 48px; text-align: center; position: relative; overflow: hidden; }
 .pivot-section::before { content: ''; position: absolute; top: -200px; left: -200px; width: 500px; height: 500px; background: radial-gradient(circle, rgba(149,213,178,0.08), transparent 70%); transform: translateY(var(--parallax-y, 0)); will-change: transform; }
@@ -320,7 +351,55 @@ document.head.appendChild(o)}initApollo();</script>
   </div>
 </section>
 
-<!-- SECTION 5: PROOF + CTA -->
+<!-- SECTION 5: CASE STUDIES -->
+<section class="case-studies">
+  <div class="case-studies-inner">
+    <div class="case-studies-header reveal">
+      <h2>What We Caught This Month</h2>
+      <p>Real savings from real dispensaries. De-identified to protect our clients, but the dollars are real.</p>
+    </div>
+    <div class="case-filters reveal">
+      <button class="case-filter active" data-filter="all">All</button>
+      <button class="case-filter" data-filter="accounts-payable">Accounts Payable</button>
+      <button class="case-filter" data-filter="consignment">Consignment</button>
+      <button class="case-filter" data-filter="credit-recovery">Credit Recovery</button>
+    </div>
+    <div class="case-grid">
+      <div class="case-card reveal" data-category="accounts-payable">
+        <div class="case-tag case-tag--ap">Accounts Payable</div>
+        <div class="case-amount">$4,873</div>
+        <div class="case-headline">Stopped a duplicate invoice across two locations</div>
+        <p class="case-summary">A vendor billed the wrong entity for an invoice already paid from another location. We cross-checked the system, confirmed with the bank, and killed it the same day.</p>
+        <div class="case-meta">
+          <span class="case-speed">Same-day catch</span>
+          <a href="/blog/case-study-duplicate-invoice" class="case-link">Read the full story <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        </div>
+      </div>
+      <div class="case-card reveal reveal-delay-1" data-category="consignment">
+        <div class="case-tag case-tag--consignment">Consignment</div>
+        <div class="case-amount">$127,400</div>
+        <div class="case-headline">Freed trapped inventory with one vendor switch</div>
+        <p class="case-summary">A single-location dispensary switched their top vendor to consignment. Dead stock dropped to zero, margins locked at 50%, and $127K went back to operations.</p>
+        <div class="case-meta">
+          <span class="case-speed">60-day pilot</span>
+          <a href="/blog/case-study-consignment-conversion" class="case-link">Read the full story <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        </div>
+      </div>
+      <div class="case-card reveal reveal-delay-2" data-category="credit-recovery">
+        <div class="case-tag case-tag--credit">Credit Recovery</div>
+        <div class="case-amount">$2,340</div>
+        <div class="case-headline">Recovered co-marketing credits nobody was tracking</div>
+        <p class="case-summary">A dispensary ran in-store promos for a vendor but never billed back. We calculated the credit against keystone, got vendor approval, and applied it to an open invoice.</p>
+        <div class="case-meta">
+          <span class="case-speed">Found in 14 days</span>
+          <a href="/blog/case-study-vendor-credit-recovery" class="case-link">Read the full story <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 6: PROOF + CTA -->
 <section class="proof-cta">
   <div class="proof-cta-stats">
     <div class="proof-cta-stat reveal">
@@ -579,6 +658,24 @@ document.head.appendChild(o)}initApollo();</script>
 
   window.addEventListener('resize', function() {
     isMobile = window.innerWidth < 900;
+  });
+
+  /* Case study filters */
+  var filters = document.querySelectorAll('.case-filter');
+  var cards = document.querySelectorAll('.case-card');
+  filters.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      filters.forEach(function(f) { f.classList.remove('active'); });
+      btn.classList.add('active');
+      var filter = btn.dataset.filter;
+      cards.forEach(function(card) {
+        if (filter === 'all' || card.dataset.category === filter) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+    });
   });
 
   /* Close mobile nav on outside click */
