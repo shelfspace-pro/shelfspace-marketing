@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dispensary Delivery Reconciliation: A Case Study — ShelfSpace</title>
+<meta name="description" content="Spreadsheets can't catch shorted deliveries. See how one dispensary replaced manual reconciliation with Metrc-powered verification and caught 3 shortages in 14 days.">
+<link rel="canonical" href="https://shelfspace.pro/blog/case-study-delivery-dashboard">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://shelfspace.pro/blog/case-study-delivery-dashboard">
+<meta property="og:title" content="Dispensary Delivery Reconciliation: A Case Study — ShelfSpace">
+<meta property="og:description" content="Spreadsheets can't catch shorted deliveries. See how one dispensary replaced manual reconciliation with Metrc-powered verification and caught 3 shortages in 14 days.">
+<meta property="og:image" content="https://shelfspace.pro/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Dispensary Delivery Reconciliation: A Case Study — ShelfSpace">
+<meta name="twitter:description" content="Spreadsheets can't catch shorted deliveries. See how one dispensary replaced manual reconciliation with Metrc-powered verification and caught 3 shortages in 14 days.">
+<meta name="twitter:image" content="https://shelfspace.pro/og-image.png">
+<meta name="apple-mobile-web-app-title" content="ShelfSpace">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+<style>
+  /* ─── HERO ENHANCEMENTS ─── */
+  .page-hero { padding-bottom: 40px; }
+  .hero-bg-gradient { position: absolute; top: -30%; right: -20%; width: 700px; height: 700px; background: radial-gradient(circle, rgba(149,213,178,0.18) 0%, rgba(149,213,178,0) 70%); animation: float 8s ease-in-out infinite; pointer-events: none; }
+  .hero-bg-gradient-2 { position: absolute; bottom: -20%; left: -15%; width: 550px; height: 550px; background: radial-gradient(circle, rgba(27,67,50,0.06) 0%, rgba(27,67,50,0) 70%); animation: float 10s ease-in-out infinite; animation-delay: -3s; pointer-events: none; }
+  .hero-grid-lines { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 1200px; height: 100%; opacity: 0.035; background-image: linear-gradient(var(--green-deep) 1px, transparent 1px), linear-gradient(90deg, var(--green-deep) 1px, transparent 1px); background-size: 80px 80px; pointer-events: none; }
+  .page-hero .section-label,
+  .page-hero .section-title,
+  .page-hero .section-desc { opacity: 0; transform: translateY(30px); }
+  .page-hero .section-label { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1); }
+  .page-hero .section-title { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s, transform 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s; }
+  .page-hero .section-desc { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1) 0.25s, transform 0.8s cubic-bezier(0.22,1,0.36,1) 0.25s; }
+  .page-hero.hero-loaded .section-label,
+  .page-hero.hero-loaded .section-title,
+  .page-hero.hero-loaded .section-desc { opacity: 1; transform: translateY(0); }
+
+  /* ─── REVEAL ─── */
+  .reveal {
+    opacity: 0; transform: translateY(40px);
+    transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .reveal.is-visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.2s; }
+  .reveal-delay-2 { transition-delay: 0.4s; }
+
+  /* ─── ARTICLE BODY ─── */
+  .article-body { max-width: 720px; margin: 0 auto; padding: 0 48px 80px; }
+  .article-body h2 { font-size: 24px; font-weight: 700; color: var(--green-deep); margin: 48px 0 16px; letter-spacing: -0.5px; line-height: 1.3; }
+  .article-body p { font-size: 17px; line-height: 1.85; color: var(--slate-600); margin-bottom: 24px; }
+  .article-body ul, .article-body ol { margin-bottom: 24px; padding-left: 24px; }
+  .article-body li { font-size: 17px; line-height: 1.85; color: var(--slate-600); margin-bottom: 8px; }
+  .article-body strong { color: var(--green-deep); font-weight: 600; }
+  .article-body a { color: var(--green-mid); font-weight: 500; text-decoration: none; }
+  .article-body a:hover { color: var(--green-deep); text-decoration: underline; }
+  .article-body blockquote { border-left: 3px solid var(--green-accent); padding: 16px 24px; margin: 32px 0; background: var(--green-ghost); border-radius: 0 8px 8px 0; }
+  .article-body blockquote p { font-style: italic; color: var(--green-dark); margin-bottom: 0; }
+
+  /* ─── AT A GLANCE ─── */
+  .article-glance {
+    max-width: 720px; margin: 0 auto 40px; padding: 24px 28px;
+    background: var(--green-ghost); border: 1px solid rgba(149,213,178,0.3);
+    border-radius: 12px;
+  }
+  .article-glance h2 {
+    font-size: 14px; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--green-mid); margin: 0 0 12px;
+  }
+  .article-glance ul { list-style: none; padding: 0; margin: 0; }
+  .article-glance li {
+    font-size: 15px; line-height: 1.6; color: var(--slate-600);
+    padding: 4px 0 4px 20px; position: relative;
+  }
+  .article-glance li::before {
+    content: ''; position: absolute; left: 0; top: 12px;
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--green-accent);
+  }
+
+  /* ─── FAQ ─── */
+  .faq-section { max-width: 720px; margin: 0 auto; padding: 0 48px 60px; }
+  .faq-section h2 {
+    font-size: 24px; font-weight: 700; color: var(--green-deep);
+    margin: 0 0 24px; letter-spacing: -0.5px; line-height: 1.3;
+  }
+  .faq-list details {
+    border-bottom: 1px solid var(--slate-200);
+  }
+  .faq-list details:first-child {
+    border-top: 1px solid var(--slate-200);
+  }
+  .faq-list summary {
+    padding: 20px 0; font-size: 17px; font-weight: 600;
+    color: var(--green-deep); cursor: pointer; list-style: none;
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  }
+  .faq-list summary::-webkit-details-marker { display: none; }
+  .faq-list summary::after {
+    content: '+'; font-size: 22px; font-weight: 400;
+    color: var(--slate-400); transition: transform 0.2s;
+    flex-shrink: 0;
+  }
+  .faq-list details[open] summary::after {
+    content: '\2212';
+  }
+  .faq-list details p {
+    padding: 0 0 20px; margin: 0; font-size: 15px;
+    line-height: 1.7; color: var(--slate-500);
+  }
+
+  /* ─── CTA PARALLAX ─── */
+  .cta-section::before { transform: translate(-50%,-50%) translateY(var(--parallax-y, 0)); will-change: transform; }
+
+  /* ─── FOOTER 5-COL ─── */
+  .footer-top { grid-template-columns: 2fr 1fr 1fr 1fr 1fr; }
+  @media (max-width: 900px) { .footer-top { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px) { .footer-top { grid-template-columns: 1fr; } }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    .article-body { padding: 0 24px 60px; }
+    .article-body h2 { margin-top: 36px; }
+    .faq-section { padding: 0 24px 40px; }
+  }
+
+  /* ─── REDUCED MOTION ─── */
+  @media (prefers-reduced-motion: reduce) {
+    .reveal {
+      opacity: 1; transform: none; transition: none;
+    }
+    .page-hero .section-label,
+    .page-hero .section-title,
+    .page-hero .section-desc {
+      opacity: 1; transform: none; transition: none;
+    }
+    .hero-bg-gradient, .hero-bg-gradient-2 { animation: none; }
+  }
+</style>
+<noscript><style>.reveal,.page-hero .section-label,.page-hero .section-title,.page-hero .section-desc{opacity:1;transform:none;transition:none;}</style></noscript>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-H2LBJT03WE"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-H2LBJT03WE');</script>
+<script>function initApollo(){var n=Math.random().toString(36).substring(7),o=document.createElement("script");
+o.src="https://assets.apollo.io/micro/website-tracker/tracker.iife.js?nocache="+n,o.async=!0,o.defer=!0,
+o.onload=function(){window.trackingFunctions.onLoad({appId:"69c141b32234890011a43849"})},
+document.head.appendChild(o)}initApollo();</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Dispensary Delivery Reconciliation: A Case Study",
+  "description": "Spreadsheets can't catch shorted deliveries. See how one dispensary replaced manual reconciliation with Metrc-powered verification and caught 3 shortages in 14 days.",
+  "author": {
+    "@type": "Person",
+    "name": "Chris Mitchem"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "ShelfSpace",
+    "url": "https://shelfspace.pro"
+  },
+  "datePublished": "2026-04-01",
+  "url": "https://shelfspace.pro/blog/case-study-delivery-dashboard",
+  "image": "https://shelfspace.pro/og-image.png"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Does ShelfSpace connect to Metrc directly?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. ShelfSpace connects to your Metrc account with read-only access. We pull every delivery, transfer, and package record — no manual entry required. Invoice verification runs against this live Metrc data."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What happens when a delivery shortage is found?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "ShelfSpace flags the discrepancy before payment goes out. You see the exact difference — what Metrc says was received vs. what the invoice charges. We handle the vendor communication to resolve it."
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="/" class="nav-logo">
+    <div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div>
+    <span class="nav-logo-text">ShelfSpace</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="/consignment">Consignment</a></li>
+    <li><a href="/accounts-payable">Accounts Payable</a></li>
+    <li><a href="/credit-recovery">Credit Recovery</a></li>
+    <li><a href="/pricing">Pricing</a></li>
+    <li><a href="/about">About</a></li>
+    <li><a href="/contact" class="nav-cta">Get Started <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a></li>
+  </ul>
+  <div class="nav-hamburger" onclick="document.querySelector('.nav-links').classList.toggle('mobile-open'); event.stopPropagation();"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="hero-bg-gradient"></div>
+  <div class="hero-bg-gradient-2"></div>
+  <div class="hero-grid-lines"></div>
+  <div class="section-label">Case Study · Accounts Payable</div>
+  <h1 class="section-title">How the Delivery Dashboard Replaced a 200-Row Spreadsheet</h1>
+  <p class="section-desc">A dispensary was reconciling deliveries in a shared Google Sheet. Nobody trusted it. The dashboard replaced it with Metrc data and caught 3 shortages in the first 14 days.</p>
+</div>
+
+<!-- AT A GLANCE -->
+<div class="article-glance">
+  <h2>At a glance</h2>
+  <ul>
+    <li>Multi-location dispensary reconciling deliveries in a 200+ row shared Google Sheet</li>
+    <li>Receiving staff updated it manually — rows got deleted, data was always stale, nobody trusted the numbers</li>
+    <li>ShelfSpace connected to Metrc and pulled every delivery into a real-time dashboard — package IDs, quantities, vendor, manifest status</li>
+    <li>Invoices now match against Metrc delivery data line-by-line — discrepancies surface instantly</li>
+    <li>First 14 days: caught 3 delivery shortages totaling 11 units that would have been invoiced in full</li>
+  </ul>
+</div>
+
+<!-- ARTICLE BODY -->
+<div class="article-body reveal">
+
+  <h2>The Setup</h2>
+
+  <p>A multi-location dispensary was doing delivery reconciliation the way most dispensaries do it: a shared Google Sheet. 200+ rows. Updated by hand every time a delivery came in. One column for vendor, one for date, one for what was ordered, one for what arrived, one for notes. The receiving team was supposed to fill it in after every delivery. Sometimes they did. Sometimes they didn't. Sometimes they filled in the wrong row.</p>
+
+  <p>The AP person would cross-reference invoices against the spreadsheet before paying. But the spreadsheet was always out of date. Rows got accidentally deleted. Data conflicted with what Metrc showed. The team spent more time arguing about whether the spreadsheet was right than actually catching discrepancies.</p>
+
+  <p>Nobody trusted the numbers. So in practice, most invoices got paid based on trust — "the vendor says we owe $4,200, that sounds about right, send the check."</p>
+
+  <h2>What Changed</h2>
+
+  <p>We connected ShelfSpace to the dispensary's Metrc account and pulled every delivery into the dashboard — real-time, direct from the state tracking system. Every package ID, every quantity, every vendor, every manifest, every transfer date. Not entered by hand. Not dependent on someone remembering to update a row.</p>
+
+  <p>When an invoice arrives, ShelfSpace matches it against the Metrc delivery data line-by-line. Package received? Check. Quantity matches manifest? Check. Invoice amount matches what was delivered? Check. Any discrepancy — short delivery, wrong quantity, missing packages — surfaces instantly with the exact Metrc data to back it up.</p>
+
+  <p>No spreadsheet. No manual cross-referencing. No "I think we received that, let me check."</p>
+
+  <p><a href="/accounts-payable">Learn more about managed accounts payable</a>.</p>
+
+  <h2>What the Dashboard Caught</h2>
+
+  <p>In the first 14 days, the dashboard flagged 3 delivery shortages across 2 vendors:</p>
+
+  <ol>
+    <li>A vendor delivered 47 units but invoiced for 50 — 3 units missing. The Metrc manifest confirmed 47 received.</li>
+    <li>A second delivery was short by 5 units — the invoice matched the original order, not what actually arrived.</li>
+    <li>A third delivery included a substituted SKU at a higher price point than what was ordered.</li>
+  </ol>
+
+  <p>Total: 11 units that would have been paid for but never received. At an average unit cost of $45, that's roughly $495 in 14 days — or about $12,000 annualized across all vendors.</p>
+
+  <p>The old spreadsheet had none of these flagged. The receiving team had noted one of the three shortages in the spreadsheet, but it was in a "notes" column nobody checked before paying invoices.</p>
+
+  <p><a href="/blog/dispensaries-overpay-vendors">Read more: why dispensaries overpay vendors</a>.</p>
+
+  <h2>Why Spreadsheets Fail at This</h2>
+
+  <p>Three reasons:</p>
+
+  <ul>
+    <li><strong>Manual entry is unreliable.</strong> Receiving staff are busy. They're checking in product, stocking shelves, and helping customers. Updating a spreadsheet is the lowest priority task on delivery day.</li>
+    <li><strong>Spreadsheets don't talk to Metrc.</strong> The state-mandated tracking system has the ground truth of what was delivered. A spreadsheet only knows what someone typed into it.</li>
+    <li><strong>Nobody audits before payment.</strong> Even when the spreadsheet has discrepancies noted, the AP person often doesn't check it — because they've learned not to trust it. The invoice gets paid, the discrepancy gets forgotten.</li>
+  </ul>
+
+  <p>The delivery dashboard eliminates all three problems. Metrc IS the source of truth. The data enters itself. And the discrepancy is surfaced at the moment of invoice verification — not buried in row 147 of a spreadsheet.</p>
+
+  <h2>The Result</h2>
+
+  <p>200-row spreadsheet — zero. 3 shortages caught in 14 days. ~$12,000/year in shorted deliveries that would have been paid in full.</p>
+
+  <p>But the bigger result is trust. The AP person now trusts the data because it comes from Metrc, not from someone's memory. The receiving team no longer wastes time on a spreadsheet they know nobody reads. And the dispensary pays for what it actually received — not what the vendor says it shipped.</p>
+
+  <blockquote>
+    <p>The spreadsheet was always wrong. Metrc is never wrong. We just connected the two.</p>
+  </blockquote>
+
+  <p>If your team is still reconciling deliveries in a spreadsheet, it's costing you more than time. <a href="/contact">Talk to us</a> — we'll show you what Metrc-powered delivery verification looks like in practice.</p>
+
+</div>
+
+<!-- FAQ -->
+<div class="faq-section reveal">
+  <h2>Frequently Asked Questions</h2>
+  <div class="faq-list">
+    <details>
+      <summary>Does ShelfSpace connect to Metrc directly?</summary>
+      <p>Yes. ShelfSpace connects to your Metrc account with read-only access. We pull every delivery, transfer, and package record — no manual entry required. Invoice verification runs against this live Metrc data.</p>
+    </details>
+    <details>
+      <summary>What happens when a delivery shortage is found?</summary>
+      <p>ShelfSpace flags the discrepancy before payment goes out. You see the exact difference — what Metrc says was received vs. what the invoice charges. We handle the vendor communication to resolve it.</p>
+    </details>
+  </div>
+</div>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-content">
+    <div class="section-label reveal">Get Started</div>
+    <h2 class="section-title reveal">Stop reconciling deliveries in a spreadsheet. Free evaluation.</h2>
+    <p class="section-desc reveal">We connect to Metrc, verify every delivery against every invoice, and catch shortages before your money goes out the door. Free evaluation, no commitment.</p>
+    <div class="cta-actions reveal">
+      <a href="/contact" class="btn-primary">
+        Get a Demo
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+      <a href="/contact" class="btn-secondary">Talk to Chris</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="/" class="nav-logo"><div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div><span class="nav-logo-text">ShelfSpace</span></a>
+      <p>Every Vendor. Every Payment. One Engine.</p>
+    </div>
+    <div class="footer-col"><h4>Services</h4><ul><li><a href="/consignment">Consignment</a></li><li><a href="/accounts-payable">Accounts Payable</a></li><li><a href="/credit-recovery">Credit Recovery</a></li><li><a href="/checks">Check Payments</a></li><li><a href="/shelfiq">ShelfiQ</a></li></ul></div>
+    <div class="footer-col"><h4>Platform</h4><ul><li><a href="/features">Features</a></li><li><a href="/how-it-works">How It Works</a></li><li><a href="/pricing">Pricing</a></li><li><a href="/about">About</a></li><li><a href="/blog">Blog</a></li><li><a href="/docs">Docs</a></li></ul></div>
+    <div class="footer-col"><h4>Access</h4><ul><li><a href="https://ourshelf.space">Login</a></li><li><a href="/contact">Sign Up</a></li><li><a href="/contact">Contact</a></li></ul></div>
+    <div class="footer-col"><h4>Company</h4><ul><li><a href="mailto:chris@shelfspace.pro">Email</a></li><li><a href="mailto:support@shelfspace.pro">Support</a></li><li><a href="https://linkedin.com/company/shelfspace-pro" target="_blank" rel="noopener" class="footer-social-link"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> LinkedIn</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><p>&copy; 2026 ShelfSpace Technologies Inc.</p><div class="footer-bottom-links"><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div></div>
+</footer>
+
+<script>
+(function() {
+  var nav = document.getElementById('nav');
+  var pageHero = document.querySelector('.page-hero');
+  var parallaxSections = [
+    document.querySelector('.cta-section')
+  ];
+
+  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var isMobile = window.innerWidth < 900;
+  var ticking = false;
+
+  /* ── Hero entrance ── */
+  requestAnimationFrame(function() {
+    nav.classList.toggle('scrolled', window.scrollY > 20);
+    if (pageHero) pageHero.classList.add('hero-loaded');
+  });
+
+  /* ── Scroll-Triggered Reveals (with unobserve for perf) ── */
+  var revealObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(function(el) { revealObserver.observe(el); });
+
+  /* ── Scroll handler (rAF + ticking flag) ── */
+  function onScroll() {
+    var scrollY = window.scrollY;
+
+    /* Nav state */
+    nav.classList.toggle('scrolled', scrollY > 20);
+
+    /* Skip parallax for reduced motion or mobile */
+    if (prefersReduced || isMobile) return;
+
+    /* Section decorative parallax */
+    var wh = window.innerHeight;
+    parallaxSections.forEach(function(section) {
+      if (!section) return;
+      var rect = section.getBoundingClientRect();
+      if (rect.bottom < 0 || rect.top > wh) return;
+      var center = rect.top + rect.height / 2 - wh / 2;
+      section.style.setProperty('--parallax-y', (center * 0.08) + 'px');
+    });
+  }
+
+  window.addEventListener('scroll', function() {
+    if (!ticking) {
+      requestAnimationFrame(function() {
+        onScroll();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, { passive: true });
+
+  /* Initial call */
+  onScroll();
+
+  /* ── Resize handler ── */
+  window.addEventListener('resize', function() {
+    isMobile = window.innerWidth < 900;
+    if (isMobile) {
+      parallaxSections.forEach(function(section) {
+        if (section) section.style.setProperty('--parallax-y', '0px');
+      });
+    }
+  });
+
+  /* ── Close mobile nav on outside click ── */
+  document.addEventListener('click', function() {
+    var navLinks = document.querySelector('.nav-links');
+    if (navLinks && navLinks.classList.contains('mobile-open')) {
+      navLinks.classList.remove('mobile-open');
+    }
+  });
+})();
+</script>
+<script src="/shelfiq-widget.js"></script>
+</body>
+</html>
