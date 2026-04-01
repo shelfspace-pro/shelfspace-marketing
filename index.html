@@ -63,22 +63,23 @@
 .hero-demo-dot--y { background: #eab308; }
 .hero-demo-dot--g { background: #22c55e; }
 .hero-demo-titlebar span { font-size: 11px; color: var(--green-accent); margin-left: 8px; font-family: var(--font-mono); }
-.hero-demo-screen { position: relative; height: 320px; background: var(--white); overflow: hidden; }
+.hero-demo-screen { position: relative; height: 340px; background: var(--white); overflow: hidden; }
 .hero-demo-slide { position: absolute; inset: 0; padding: 20px 24px; opacity: 0; display: flex; flex-direction: column; }
 .hero-demo-caption { padding: 8px 14px; background: var(--green-dark); font-size: 12px; font-weight: 600; color: var(--green-accent); font-family: var(--font-mono); letter-spacing: 0.5px; }
-@keyframes demoSlide1 { 0%,2% { opacity: 0; } 3%,18% { opacity: 1; } 20% { opacity: 0; } 100% { opacity: 0; } }
-@keyframes demoSlide2 { 0%,20% { opacity: 0; } 22%,38% { opacity: 1; } 40% { opacity: 0; } 100% { opacity: 0; } }
-@keyframes demoSlide3 { 0%,40% { opacity: 0; } 42%,58% { opacity: 1; } 60% { opacity: 0; } 100% { opacity: 0; } }
-@keyframes demoSlide4 { 0%,60% { opacity: 0; } 62%,78% { opacity: 1; } 80% { opacity: 0; } 100% { opacity: 0; } }
-@keyframes demoSlide5 { 0%,80% { opacity: 0; } 82%,96% { opacity: 1; } 98%,100% { opacity: 0; } }
+@keyframes demoSlide1 { 0%,2% { opacity: 0; } 4%,30% { opacity: 1; } 33% { opacity: 0; } 100% { opacity: 0; } }
+@keyframes demoSlide2 { 0%,33% { opacity: 0; } 36%,63% { opacity: 1; } 66% { opacity: 0; } 100% { opacity: 0; } }
+@keyframes demoSlide3 { 0%,66% { opacity: 0; } 69%,96% { opacity: 1; } 99%,100% { opacity: 0; } }
 .hero-demo-slide:nth-child(1) { animation: demoSlide1 15s ease-in-out infinite; }
 .hero-demo-slide:nth-child(2) { animation: demoSlide2 15s ease-in-out infinite; }
 .hero-demo-slide:nth-child(3) { animation: demoSlide3 15s ease-in-out infinite; }
-.hero-demo-slide:nth-child(4) { animation: demoSlide4 15s ease-in-out infinite; }
-.hero-demo-slide:nth-child(5) { animation: demoSlide5 15s ease-in-out infinite; }
-@keyframes checkIn { from { opacity: 0; transform: scale(0.5); } to { opacity: 1; transform: scale(1); } }
-.demo-check { color: var(--green-mid); font-weight: 700; animation: checkIn 0.3s ease both; }
-.demo-flag { color: #c0392b; font-weight: 700; }
+.demo-row { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; font-family: var(--font-mono); font-size: 14px; }
+.demo-row-label { color: var(--slate-500); }
+.demo-row-value { font-weight: 700; color: var(--green-deep); }
+.demo-row-value--red { color: #c0392b; }
+.demo-divider { border: none; border-top: 1px dashed var(--slate-200); margin: 8px 0; }
+.demo-slide-title { font-size: 11px; font-weight: 600; color: var(--slate-400); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 20px; text-align: center; }
+.demo-total .demo-row-label { font-weight: 600; color: var(--green-deep); }
+.demo-total .demo-row-value { font-size: 18px; color: var(--green-deep); }
 .nav-progress { position: absolute; bottom: 0; left: 0; height: 2px; width: 100%; background: linear-gradient(90deg, var(--green-accent), var(--green-mid)); transform: scaleX(var(--scroll-progress, 0)); transform-origin: left; }
 
 /* Chapters */
@@ -340,49 +341,46 @@ document.head.appendChild(o)}initApollo();</script>
           <span>shelfspace</span>
         </div>
         <div class="hero-demo-screen">
-          <!-- Slide 1: Invoice -->
-          <div class="hero-demo-slide" style="justify-content:center;align-items:center;">
-            <div style="text-align:center;">
-              <div style="font-size:11px;font-weight:600;color:var(--slate-400);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:12px;">Invoice received</div>
-              <div style="font-family:var(--font-mono);font-size:clamp(36px,5vw,48px);font-weight:700;color:var(--green-deep);letter-spacing:-2px;margin-bottom:8px;">$4,280</div>
-              <div style="font-size:15px;color:var(--slate-500);">Vendor A — 47 units across 3 SKUs</div>
+          <!-- Slide 1: Connected to Metrc -->
+          <div class="hero-demo-slide" style="justify-content:center;padding:28px 32px;">
+            <div class="demo-slide-title">Connected to Metrc</div>
+            <div style="display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:24px;">
+              <img src="/metrc-logo.png" alt="Metrc" style="height:22px;opacity:0.7;">
+              <span style="font-family:var(--font-mono);font-size:12px;color:var(--green-mid);font-weight:600;">● Live sync</span>
             </div>
+            <div class="demo-row"><span class="demo-row-label">Active SKUs</span><span class="demo-row-value">47</span></div>
+            <div class="demo-row"><span class="demo-row-label">Vendors</span><span class="demo-row-value">12</span></div>
+            <div class="demo-row"><span class="demo-row-label">On shelves</span><span class="demo-row-value">$312,400</span></div>
+            <hr class="demo-divider">
+            <div class="demo-row"><span class="demo-row-label">Open invoices</span><span class="demo-row-value">8</span></div>
+            <div class="demo-row"><span class="demo-row-label">Pending credits</span><span class="demo-row-value">3</span></div>
           </div>
-          <!-- Slide 2: Verified -->
-          <div class="hero-demo-slide" style="justify-content:center;align-items:center;">
-            <div style="text-align:center;">
-              <div style="font-size:11px;font-weight:600;color:var(--slate-400);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:12px;">Verified against Metrc</div>
-              <div style="font-family:var(--font-mono);font-size:clamp(36px,5vw,48px);font-weight:700;color:#c0392b;letter-spacing:-2px;margin-bottom:8px;">3 units short</div>
-              <div style="font-size:15px;color:var(--slate-500);">Adjusted before payment — <span style="font-family:var(--font-mono);font-weight:700;color:#c0392b;">$427 saved</span></div>
-            </div>
+          <!-- Slide 2: Discrepancies found -->
+          <div class="hero-demo-slide" style="justify-content:center;padding:28px 32px;">
+            <div class="demo-slide-title">Discrepancies found</div>
+            <div class="demo-row"><span class="demo-row-label">Invoice #4821</span><span class="demo-row-value">$4,280</span></div>
+            <div class="demo-row"><span class="demo-row-label">Metrc verified</span><span class="demo-row-value">$3,853</span></div>
+            <hr class="demo-divider">
+            <div class="demo-row"><span class="demo-row-label">Overpayment caught</span><span class="demo-row-value demo-row-value--red">$427</span></div>
+            <div style="height:16px;"></div>
+            <div class="demo-row"><span class="demo-row-label">Expired product</span><span class="demo-row-value demo-row-value--red">$1,847</span></div>
+            <div class="demo-row"><span class="demo-row-label">Credit memo filed</span><span style="font-family:var(--font-mono);font-size:14px;font-weight:600;color:var(--green-mid);">Sent to vendor</span></div>
           </div>
-          <!-- Slide 3: Credits -->
-          <div class="hero-demo-slide" style="justify-content:center;align-items:center;">
-            <div style="text-align:center;">
-              <div style="font-size:11px;font-weight:600;color:var(--slate-400);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:12px;">Credits applied</div>
-              <div style="font-family:var(--font-mono);font-size:clamp(36px,5vw,48px);font-weight:700;color:var(--green-deep);letter-spacing:-2px;margin-bottom:8px;">−$1,847</div>
-              <div style="font-size:15px;color:var(--slate-500);">Return credit found and deducted</div>
-            </div>
-          </div>
-          <!-- Slide 4: Approve -->
-          <div class="hero-demo-slide" style="justify-content:center;align-items:center;">
-            <div style="text-align:center;">
-              <div style="font-size:11px;font-weight:600;color:var(--slate-400);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:12px;">You approve</div>
-              <div style="font-family:var(--font-mono);font-size:clamp(36px,5vw,48px);font-weight:700;color:var(--green-deep);letter-spacing:-2px;margin-bottom:16px;">$2,005</div>
-              <div style="display:inline-block;padding:10px 32px;background:var(--green-deep);color:white;border-radius:8px;font-size:14px;font-weight:600;">✓ Approved</div>
-            </div>
-          </div>
-          <!-- Slide 5: Done -->
-          <div class="hero-demo-slide" style="justify-content:center;align-items:center;">
-            <div style="text-align:center;">
-              <div style="width:48px;height:48px;border-radius:50%;background:var(--green-ghost);display:flex;align-items:center;justify-content:center;margin:0 auto 12px;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
-              <div style="font-size:15px;font-weight:600;color:var(--green-deep);margin-bottom:4px;">Paid. Synced to QuickBooks.</div>
-              <div style="font-family:var(--font-mono);font-size:13px;color:var(--slate-400);">$2,274 saved on one invoice</div>
+          <!-- Slide 3: Money recovered -->
+          <div class="hero-demo-slide" style="justify-content:center;padding:28px 32px;">
+            <div class="demo-slide-title">Money recovered</div>
+            <div class="demo-row"><span class="demo-row-label">Invoice savings</span><span class="demo-row-value">$427</span></div>
+            <div class="demo-row"><span class="demo-row-label">Credits recovered</span><span class="demo-row-value">$1,847</span></div>
+            <div class="demo-row"><span class="demo-row-label">Consignment freed</span><span class="demo-row-value">$8,200</span></div>
+            <hr class="demo-divider">
+            <div class="demo-row demo-total"><span class="demo-row-label">Total found</span><span class="demo-row-value">$10,474</span></div>
+            <div style="text-align:center;margin-top:16px;">
+              <div style="display:inline-flex;align-items:center;gap:6px;padding:8px 20px;background:var(--green-ghost);border-radius:8px;font-size:13px;font-weight:600;color:var(--green-deep);"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Synced to QuickBooks</div>
             </div>
           </div>
         </div>
         <div class="hero-demo-caption">
-          <span class="hero-demo-caption-text">Invoice → Verified → Credits → Approve → Paid</span>
+          <span class="hero-demo-caption-text">Connect → Find → Recover</span>
         </div>
       </div>
     </div>
