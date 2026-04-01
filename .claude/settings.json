@@ -1,13 +1,14 @@
 {
   "hooks": {
-    "SessionStart": [
+    "PreToolUse": [
       {
         "hooks": [
           {
             "type": "command",
             "command": "cd /Users/chrismitchem/shelfspace-marketing && bash marketing/scripts/check-docs-sync.sh 2>/dev/null || true",
             "timeout": 15,
-            "statusMessage": "Checking docs sync status..."
+            "statusMessage": "Checking docs sync status...",
+            "once": true
           }
         ]
       }
