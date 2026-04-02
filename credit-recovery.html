@@ -407,11 +407,11 @@ document.head.appendChild(o)}initApollo();</script>
         </div>
       </div>
       <div class="calc-margin-row">
-        <span>Estimated margin improvement</span>
-        <span id="calc-margin">+1.2% – 3.0%</span>
+        <span>EBITDA impact</span>
+        <span id="calc-margin">15.0% → 17.0%</span>
       </div>
     </div>
-    <p style="text-align:center;margin-top:12px;font-size:13px;color:var(--green-mid);font-weight:500;">Every recovered credit goes straight to gross profit. Same revenue, same COGS — better margins.</p>
+    <p style="text-align:center;margin-top:12px;font-size:13px;color:var(--green-mid);font-weight:500;">Recovered credits drop straight to the bottom line. Same revenue, same overhead — higher EBITDA.</p>
     <p class="calc-proof">Depends on vendor mix, credit terms, and how much is currently being tracked. The free evaluation shows your actual number.</p>
     <p style="text-align:center;margin-top:16px;font-size:11px;color:var(--slate-400);">*Total credits recovered is an estimate, not a guarantee.</p>
     <div class="calc-guarantee reveal">
@@ -629,9 +629,10 @@ document.head.appendChild(o)}initApollo();</script>
     midMonth.textContent = formatCurrency(mid / 12);
     highYear.textContent = formatCurrency(high);
     highMonth.textContent = formatCurrency(high / 12);
-    var marginLow = (low / rev * 100).toFixed(1);
-    var marginHigh = (high / rev * 100).toFixed(1);
-    marginVal.textContent = '+' + marginLow + '% – ' + marginHigh + '%';
+    /* Credits drop straight to EBITDA — assume 15% baseline */
+    var ebitdaBefore = 15;
+    var ebitdaAfter = ((rev * 0.15 + mid) / rev * 100).toFixed(1);
+    marginVal.textContent = ebitdaBefore + '% → ' + ebitdaAfter + '%';
   }
 
   slider.addEventListener('input', updateCalc);
