@@ -406,7 +406,7 @@ document.head.appendChild(o)}initApollo();</script>
         <span class="calc-row-value" id="calc-monthly">$10,625</span>
       </div>
       <div class="calc-row calc-margin">
-        <span class="calc-row-label">Your margin improvement</span>
+        <span class="calc-row-label">Gross margin improvement</span>
         <span class="calc-row-value" id="calc-margin">+4.3%</span>
       </div>
     </div>
@@ -618,18 +618,23 @@ document.head.appendChild(o)}initApollo();</script>
   function updateCalc() {
     var rev = parseInt(slider.value, 10);
     revenueDisplay.textContent = formatCurrency(rev);
-    var returns = rev * 0.0075;
-    var expired = rev * 0.005;
-    var comark = rev * 0.03;
+    /* Smaller stores lose more — scale factor decreases with revenue */
+    var scale = 1 + 0.3 * Math.max(0, (3000000 - rev) / 2500000) - 0.15 * Math.max(0, (rev - 3000000) / 7000000);
+    var returns = rev * 0.0075 * scale;
+    var expired = rev * 0.005 * scale;
+    var comark = rev * 0.03 * scale;
     var total = returns + expired + comark;
     var monthly = total / 12;
-    var marginPct = (total / rev) * 100;
+    /* Assume 50% gross margin, credits go straight to gross profit */
+    var grossProfit = rev * 0.5;
+    var newMargin = ((grossProfit + total) / rev) * 100;
+    var marginLift = newMargin - 50;
     returnVal.textContent = formatCurrency(returns);
     expiredVal.textContent = formatCurrency(expired);
     comarkVal.textContent = formatCurrency(comark);
     totalVal.textContent = formatCurrency(total);
     monthlyVal.textContent = formatCurrency(monthly);
-    marginVal.textContent = '+' + marginPct.toFixed(1) + '%';
+    marginVal.textContent = '+' + marginLift.toFixed(1) + ' pts';
   }
 
   slider.addEventListener('input', updateCalc);
