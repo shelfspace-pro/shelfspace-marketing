@@ -130,6 +130,9 @@
   .calc-monthly { background: var(--white); border-top: 2px solid var(--green-accent); }
   .calc-monthly .calc-row-label { font-weight: 600; color: #c0392b; font-style: italic; }
   .calc-monthly .calc-row-value { color: #c0392b; font-size: 22px; }
+  .calc-margin { background: var(--green-ghost); border-top: 2px solid var(--green-accent); }
+  .calc-margin .calc-row-label { font-weight: 600; color: var(--green-deep); }
+  .calc-margin .calc-row-value { color: var(--green-mid); font-size: 22px; }
   .calc-proof { text-align: center; margin-top: 32px; font-size: 14px; color: var(--slate-500); font-style: italic; }
   .calc-guarantee {
     text-align: center; max-width: 540px; margin: 32px auto 24px;
@@ -402,7 +405,12 @@ document.head.appendChild(o)}initApollo();</script>
         <span class="calc-row-label">That's every month walking out your door</span>
         <span class="calc-row-value" id="calc-monthly">$10,625</span>
       </div>
+      <div class="calc-row calc-margin">
+        <span class="calc-row-label">Your margin improvement</span>
+        <span class="calc-row-value" id="calc-margin">+4.3%</span>
+      </div>
     </div>
+    <p style="text-align:center;margin-top:12px;font-size:13px;color:var(--green-mid);font-weight:500;">Every recovered credit goes straight to gross profit. Same revenue, same COGS — better margins.</p>
     <p class="calc-proof">Our latest evaluation identified $200,000+ per year in recoverable credits at a two-location dispensary chain in Massachusetts.</p>
     <p style="text-align:center;margin-top:16px;font-size:11px;color:var(--slate-400);">*Total credits recovered is an estimate, not a guarantee.</p>
     <div class="calc-guarantee reveal">
@@ -601,6 +609,7 @@ document.head.appendChild(o)}initApollo();</script>
   var comarkVal = document.getElementById('calc-comark');
   var totalVal = document.getElementById('calc-total');
   var monthlyVal = document.getElementById('calc-monthly');
+  var marginVal = document.getElementById('calc-margin');
 
   function formatCurrency(n) {
     return '$' + Math.round(n).toLocaleString();
@@ -614,11 +623,13 @@ document.head.appendChild(o)}initApollo();</script>
     var comark = rev * 0.03;
     var total = returns + expired + comark;
     var monthly = total / 12;
+    var marginPct = (total / rev) * 100;
     returnVal.textContent = formatCurrency(returns);
     expiredVal.textContent = formatCurrency(expired);
     comarkVal.textContent = formatCurrency(comark);
     totalVal.textContent = formatCurrency(total);
     monthlyVal.textContent = formatCurrency(monthly);
+    marginVal.textContent = '+' + marginPct.toFixed(1) + '%';
   }
 
   slider.addEventListener('input', updateCalc);
