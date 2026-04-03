@@ -415,8 +415,8 @@ document.head.appendChild(o)}initApollo();</script>
         </div>
       </div>
       <div class="boost-ebitda">
-        <span>Cash freed for operations</span>
-        <span id="boost-context">That's 6 months of breathing room</span>
+        <span>EBITDA impact</span>
+        <span id="boost-ebitda-val">15.0% → 18.8%</span>
       </div>
     </div>
     <p style="text-align:center;margin-top:12px;font-size:13px;color:var(--green-mid);font-weight:500;">Consignment frees cash without reducing shelf selection. Same products, zero upfront cost.</p>
@@ -612,7 +612,7 @@ document.head.appendChild(o)}initApollo();</script>
     var lowEl = document.getElementById('boost-low');
     var midEl = document.getElementById('boost-mid');
     var highEl = document.getElementById('boost-high');
-    var contextEl = document.getElementById('boost-context');
+    var ebitdaEl = document.getElementById('boost-ebitda-val');
 
     function formatCurrency(n) {
       return '$' + Math.round(n).toLocaleString();
@@ -638,16 +638,9 @@ document.head.appendChild(o)}initApollo();</script>
       midEl.textContent = formatCurrency(mid);
       highEl.textContent = formatCurrency(high);
 
-      /* Emotional context based on typical (mid) value */
-      if (mid >= 200000) {
-        contextEl.textContent = "That's your second location funded";
-      } else if (mid >= 100000) {
-        contextEl.textContent = "That's a full year of payroll for two employees";
-      } else if (mid >= 50000) {
-        contextEl.textContent = "That's 6 months of breathing room";
-      } else {
-        contextEl.textContent = "That's real money back in your pocket";
-      }
+      /* EBITDA impact — freed cash reduces effective COGS */
+      var ebitdaAfter = ((revenue * 0.15 + mid) / revenue * 100).toFixed(1);
+      ebitdaEl.textContent = '15.0% → ' + ebitdaAfter + '%';
     }
 
     revenueSlider.addEventListener('input', updateCalc);
