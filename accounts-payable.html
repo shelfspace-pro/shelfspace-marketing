@@ -133,16 +133,23 @@
   .calc-slider::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 28px; height: 28px; border-radius: 50%; background: var(--green-deep); cursor: pointer; box-shadow: 0 2px 8px rgba(27,67,50,0.3); }
   .calc-slider::-moz-range-thumb { width: 28px; height: 28px; border-radius: 50%; background: var(--green-deep); cursor: pointer; border: none; box-shadow: 0 2px 8px rgba(27,67,50,0.3); }
   .calc-results { background: var(--white); border: 1px solid var(--slate-200); border-radius: 16px; overflow: hidden; }
-  .calc-row { display: flex; justify-content: space-between; align-items: center; padding: 20px 24px; border-bottom: 1px solid var(--slate-100); }
-  .calc-row:last-child { border-bottom: none; }
-  .calc-row-label { font-size: 15px; color: var(--slate-600); }
-  .calc-row-value { font-family: var(--font-mono); font-size: 18px; font-weight: 700; color: var(--green-deep); }
-  .calc-total { background: var(--green-deep); }
-  .calc-total .calc-row-label { color: rgba(255,255,255,0.7); font-weight: 600; }
-  .calc-total .calc-row-value { color: var(--white); font-size: 24px; }
-  .calc-monthly { background: var(--white); border-top: 2px solid var(--green-accent); }
-  .calc-monthly .calc-row-label { font-weight: 600; color: #c0392b; font-style: italic; }
-  .calc-monthly .calc-row-value { color: #c0392b; font-size: 22px; }
+  .calc-range { display: grid; grid-template-columns: repeat(3, 1fr); }
+  .calc-range-col { padding: 24px 20px; text-align: center; border-right: 1px solid var(--slate-100); }
+  .calc-range-col:last-child { border-right: none; }
+  .calc-range-label { font-size: 12px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 12px; }
+  .calc-range-col--low .calc-range-label { color: var(--slate-400); }
+  .calc-range-col--mid .calc-range-label { color: var(--green-mid); }
+  .calc-range-col--high .calc-range-label { color: var(--green-deep); }
+  .calc-range-value { font-family: var(--font-mono); font-size: clamp(20px, 2.5vw, 28px); font-weight: 700; letter-spacing: -1px; margin-bottom: 4px; }
+  .calc-range-col--low .calc-range-value { color: var(--slate-600); }
+  .calc-range-col--mid .calc-range-value { color: var(--green-mid); }
+  .calc-range-col--high .calc-range-value { color: var(--green-deep); }
+  .calc-range-sub { font-size: 13px; color: var(--slate-400); }
+  .calc-range-col--mid { background: var(--green-ghost); }
+  .calc-ebitda { display: flex; justify-content: space-between; align-items: center; padding: 16px 24px; background: var(--green-deep); }
+  .calc-ebitda span:first-child { font-size: 14px; font-weight: 600; color: rgba(255,255,255,0.7); }
+  .calc-ebitda span:last-child { font-family: var(--font-mono); font-size: 20px; font-weight: 700; color: var(--white); }
+  @media (max-width: 600px) { .calc-range-value { font-size: 18px; } .calc-range-col { padding: 20px 12px; } }
   .calc-guarantee {
     text-align: center; max-width: 540px; margin: 32px auto 24px;
     padding: 16px 24px; background: var(--green-ghost);
@@ -488,35 +495,30 @@ document.head.appendChild(o)}initApollo();</script>
         <span>$10M</span>
       </div>
     </div>
-    <div class="calc-slider-wrapper">
-      <div class="calc-slider-header">
-        <span class="calc-slider-label">Number of Vendors</span>
-        <span class="calc-slider-value" id="ap-vendors-val">40</span>
-      </div>
-      <input type="range" class="calc-slider" id="ap-vendors" min="10" max="100" step="5" value="40">
-      <div class="calc-slider-labels">
-        <span>10</span>
-        <span>100</span>
-      </div>
-    </div>
     <div class="calc-results">
-      <div class="calc-row">
-        <span class="calc-row-label">Money you're overpaying vendors</span>
-        <span class="calc-row-value" id="ap-overpay">$15,000</span>
+      <div class="calc-range">
+        <div class="calc-range-col calc-range-col--low">
+          <div class="calc-range-label">Conservative</div>
+          <div class="calc-range-value" id="ap-low-year">$21,000</div>
+          <div class="calc-range-sub"><span id="ap-low-month">$1,750</span>/mo</div>
+        </div>
+        <div class="calc-range-col calc-range-col--mid">
+          <div class="calc-range-label">Typical</div>
+          <div class="calc-range-value" id="ap-mid-year">$39,000</div>
+          <div class="calc-range-sub"><span id="ap-mid-month">$3,250</span>/mo</div>
+        </div>
+        <div class="calc-range-col calc-range-col--high">
+          <div class="calc-range-label">Aggressive</div>
+          <div class="calc-range-value" id="ap-high-year">$63,000</div>
+          <div class="calc-range-sub"><span id="ap-high-month">$5,250</span>/mo</div>
+        </div>
       </div>
-      <div class="calc-row">
-        <span class="calc-row-label">Time your team wastes on AP</span>
-        <span class="calc-row-value" id="ap-labor">$24,000</span>
-      </div>
-      <div class="calc-row calc-total">
-        <span class="calc-row-label">Total annual AP waste</span>
-        <span class="calc-row-value" id="ap-total">$39,000</span>
-      </div>
-      <div class="calc-row calc-monthly">
-        <span class="calc-row-label">That's every month going to waste</span>
-        <span class="calc-row-value" id="ap-monthly">$3,250</span>
+      <div class="calc-ebitda">
+        <span>EBITDA impact</span>
+        <span id="ap-ebitda">15.0% &rarr; 16.3%</span>
       </div>
     </div>
+    <p style="text-align:center;margin-top:12px;font-size:13px;color:var(--green-mid);font-weight:500;">Overpayments and wasted labor drop straight off your bottom line.</p>
     <div class="calc-guarantee">
       <p><strong>You approve every payment. We verify every invoice.</strong> Nothing goes out without your sign-off.</p>
     </div>
@@ -763,14 +765,15 @@ document.head.appendChild(o)}initApollo();</script>
 
   /* ── AP Calculator ── */
   var revSlider = document.getElementById('ap-revenue');
-  var vendorSlider = document.getElementById('ap-vendors');
-  if (revSlider && vendorSlider) {
+  if (revSlider) {
     var revVal = document.getElementById('ap-revenue-val');
-    var vendorsVal = document.getElementById('ap-vendors-val');
-    var overpayEl = document.getElementById('ap-overpay');
-    var laborEl = document.getElementById('ap-labor');
-    var totalEl = document.getElementById('ap-total');
-    var monthlyEl = document.getElementById('ap-monthly');
+    var lowYearEl = document.getElementById('ap-low-year');
+    var lowMonthEl = document.getElementById('ap-low-month');
+    var midYearEl = document.getElementById('ap-mid-year');
+    var midMonthEl = document.getElementById('ap-mid-month');
+    var highYearEl = document.getElementById('ap-high-year');
+    var highMonthEl = document.getElementById('ap-high-month');
+    var ebitdaEl = document.getElementById('ap-ebitda');
 
     function formatCurrency(n) {
       return '$' + Math.round(n).toLocaleString();
@@ -783,27 +786,27 @@ document.head.appendChild(o)}initApollo();</script>
 
     function updateAPCalc() {
       var revenue = parseInt(revSlider.value, 10);
-      var vendors = parseInt(vendorSlider.value, 10);
 
       revVal.textContent = formatCurrency(revenue);
-      vendorsVal.textContent = vendors;
-
       updateSliderTrack(revSlider);
-      updateSliderTrack(vendorSlider);
 
-      var overpay = revenue * 0.005;
-      var labor = vendors * 20 * 30;
-      var total = overpay + labor;
-      var monthly = total / 12;
+      var low = revenue * 0.007;
+      var mid = revenue * 0.013;
+      var high = revenue * 0.021;
 
-      overpayEl.textContent = formatCurrency(overpay);
-      laborEl.textContent = formatCurrency(labor);
-      totalEl.textContent = formatCurrency(total);
-      monthlyEl.textContent = formatCurrency(monthly);
+      lowYearEl.textContent = formatCurrency(low);
+      lowMonthEl.textContent = formatCurrency(low / 12);
+      midYearEl.textContent = formatCurrency(mid);
+      midMonthEl.textContent = formatCurrency(mid / 12);
+      highYearEl.textContent = formatCurrency(high);
+      highMonthEl.textContent = formatCurrency(high / 12);
+
+      var baselineEbitda = 0.15;
+      var newEbitda = ((revenue * baselineEbitda + mid) / revenue) * 100;
+      ebitdaEl.innerHTML = baselineEbitda * 100 + '.0% &rarr; ' + newEbitda.toFixed(1) + '%';
     }
 
     revSlider.addEventListener('input', updateAPCalc);
-    vendorSlider.addEventListener('input', updateAPCalc);
 
     updateAPCalc();
   }

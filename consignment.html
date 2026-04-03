@@ -27,8 +27,6 @@
 <link rel="stylesheet" href="styles.css">
 <style>
   @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-12px); } }
-  @keyframes countUp { from { opacity: 0; transform: scale(0.8) translateY(20px); } to { opacity: 1; transform: scale(1) translateY(0); } }
-  @keyframes pulse-glow { 0%, 100% { box-shadow: 0 0 0 0 rgba(149,213,178,0); } 50% { box-shadow: 0 0 40px 8px rgba(149,213,178,0.25); } }
 
   /* ─── HERO ENHANCEMENTS ─── */
   .page-hero { padding-bottom: 40px; }
@@ -116,40 +114,23 @@
   .boost-slider-ticks {
     display: flex; justify-content: space-between; font-size: 12px; color: var(--slate-400); margin-top: 8px;
   }
-  .boost-result-card {
-    background: var(--white); border: 1px solid var(--slate-200); border-radius: 16px;
-    overflow: hidden; margin-top: 40px;
-  }
-  .boost-result-rows { padding: 0; }
-  .boost-result-row {
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 18px 24px; border-bottom: 1px solid var(--slate-100);
-  }
-  .boost-result-row:last-child { border-bottom: none; }
-  .boost-result-row-label { font-size: 15px; color: var(--slate-600); }
-  .boost-result-row-value { font-family: var(--font-mono); font-size: 18px; font-weight: 700; color: var(--green-deep); }
-  .boost-total {
-    background: var(--green-deep); padding: 28px 24px;
-    display: flex; justify-content: space-between; align-items: center;
-  }
-  .boost-total-label {
-    font-size: 16px; font-weight: 700; color: rgba(255,255,255,0.7);
-  }
-  .boost-total-value {
-    font-family: var(--font-mono); font-size: clamp(32px, 4vw, 48px); font-weight: 700;
-    color: var(--white); letter-spacing: -1px;
-    transition: transform 0.3s cubic-bezier(0.22,1,0.36,1);
-  }
-  .boost-total-value.pop {
-    animation: countUp 0.4s cubic-bezier(0.22,1,0.36,1);
-  }
-  .boost-total-glow {
-    animation: pulse-glow 2s ease-in-out infinite;
-    border-radius: 16px;
-  }
-  .boost-subtitle {
-    text-align: center; margin-top: 20px; font-size: 14px; color: var(--slate-500); font-style: italic;
-  }
+  .boost-results { background: var(--white); border: 1px solid var(--slate-200); border-radius: 16px; overflow: hidden; margin-top: 40px; }
+  .boost-range { display: grid; grid-template-columns: repeat(3, 1fr); }
+  .boost-range-col { padding: 24px 20px; text-align: center; border-right: 1px solid var(--slate-100); }
+  .boost-range-col:last-child { border-right: none; }
+  .boost-range-label { font-size: 12px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 12px; }
+  .boost-range-col--low .boost-range-label { color: var(--slate-400); }
+  .boost-range-col--mid .boost-range-label { color: var(--green-mid); }
+  .boost-range-col--high .boost-range-label { color: var(--green-deep); }
+  .boost-range-value { font-family: var(--font-mono); font-size: clamp(20px, 2.5vw, 28px); font-weight: 700; letter-spacing: -1px; margin-bottom: 4px; }
+  .boost-range-col--low .boost-range-value { color: var(--slate-600); }
+  .boost-range-col--mid .boost-range-value { color: var(--green-mid); }
+  .boost-range-col--high .boost-range-value { color: var(--green-deep); }
+  .boost-range-sub { font-size: 13px; color: var(--slate-400); }
+  .boost-range-col--mid { background: var(--green-ghost); }
+  .boost-ebitda { display: flex; justify-content: space-between; align-items: center; padding: 16px 24px; background: var(--green-deep); }
+  .boost-ebitda span:first-child { font-size: 14px; font-weight: 600; color: rgba(255,255,255,0.7); }
+  .boost-ebitda span:last-child { font-family: var(--font-mono); font-size: 20px; font-weight: 700; color: var(--white); }
   .boost-cta-wrap {
     text-align: center; margin-top: 32px;
   }
@@ -227,7 +208,8 @@
     .pain-section { padding: 60px 24px; }
   }
   @media (max-width: 600px) {
-    .boost-total { flex-direction: column; text-align: center; gap: 8px; }
+    .boost-range-value { font-size: 18px; }
+    .boost-range-col { padding: 20px 12px; }
   }
 
   /* ─── REDUCED MOTION ─── */
@@ -243,8 +225,6 @@
     .hero-bg-gradient, .hero-bg-gradient-2 { animation: none; }
     .hero-demo-slide { animation: none !important; opacity: 0 !important; }
     .hero-demo-slide:nth-child(1) { opacity: 1 !important; }
-    .boost-total-value.pop { animation: none; }
-    .boost-total-glow { animation: none; }
   }
 </style>
 <noscript><style>.reveal,.page-hero .section-label,.page-hero .section-title,.page-hero .section-desc{opacity:1;transform:none;transition:none;}.hero-demo-slide{animation:none!important;opacity:0!important;}.hero-demo-slide:nth-child(1){opacity:1!important;}</style></noscript>
@@ -416,35 +396,30 @@ document.head.appendChild(o)}initApollo();</script>
         <span>$10M</span>
       </div>
     </div>
-    <div class="boost-slider-wrapper">
-      <div class="boost-slider-header">
-        <span class="boost-slider-label">Vendors on Consignment</span>
-        <span class="boost-slider-value" id="boost-pct-val">50%</span>
-      </div>
-      <input type="range" class="boost-slider" id="boost-pct" min="10" max="100" step="5" value="50">
-      <div class="boost-slider-ticks">
-        <span>10%</span>
-        <span>100%</span>
-      </div>
-    </div>
-    <div class="boost-result-card boost-total-glow">
-      <div class="boost-result-rows">
-        <div class="boost-result-row">
-          <span class="boost-result-row-label">Inventory on shelves (~45 days, 50% COGS)</span>
-          <span class="boost-result-row-value" id="boost-inv">$375,000</span>
+    <div class="boost-results">
+      <div class="boost-range">
+        <div class="boost-range-col boost-range-col--low">
+          <div class="boost-range-label">Conservative</div>
+          <div class="boost-range-value" id="boost-low">$46,233</div>
+          <div class="boost-range-sub">25% on consignment</div>
         </div>
-        <div class="boost-result-row">
-          <span class="boost-result-row-label">Vendors on consignment</span>
-          <span class="boost-result-row-value" id="boost-vendor-pct">50%</span>
+        <div class="boost-range-col boost-range-col--mid">
+          <div class="boost-range-label">Typical</div>
+          <div class="boost-range-value" id="boost-mid">$92,466</div>
+          <div class="boost-range-sub">50% on consignment</div>
+        </div>
+        <div class="boost-range-col boost-range-col--high">
+          <div class="boost-range-label">Aggressive</div>
+          <div class="boost-range-value" id="boost-high">$138,699</div>
+          <div class="boost-range-sub">75% on consignment</div>
         </div>
       </div>
-      <div class="boost-total">
-        <span class="boost-total-label">Cash back in your bank account</span>
-        <span class="boost-total-value" id="boost-result">$187,500</span>
+      <div class="boost-ebitda">
+        <span>Cash freed for operations</span>
+        <span id="boost-context">That's 6 months of breathing room</span>
       </div>
     </div>
-    <p class="boost-subtitle"><span id="boost-monthly-context"></span> The stress you feel right now? <strong>Gone.</strong></p>
-    <p style="text-align:center;margin-top:12px;font-size:11px;color:var(--slate-400);">*Cash boost is an estimate based on industry-average inventory-to-revenue ratios.</p>
+    <p style="text-align:center;margin-top:12px;font-size:13px;color:var(--green-mid);font-weight:500;">Consignment frees cash without reducing shelf selection. Same products, zero upfront cost.</p>
     <div class="boost-cta-wrap">
       <a href="/contact" class="btn-primary">Get My Free Evaluation <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
       <p style="font-size:14px;color:var(--slate-400);margin-top:12px;">We'll show you which vendors to start with. 48 hours. Free.</p>
@@ -631,16 +606,13 @@ document.head.appendChild(o)}initApollo();</script>
      ══════════════════════════════════════════════════ */
   (function initBoost() {
     var revenueSlider = document.getElementById('boost-revenue');
-    var pctSlider = document.getElementById('boost-pct');
     if (!revenueSlider) return;
 
     var revenueVal = document.getElementById('boost-revenue-val');
-    var pctVal = document.getElementById('boost-pct-val');
-    var invEl = document.getElementById('boost-inv');
-    var vendorPctEl = document.getElementById('boost-vendor-pct');
-    var resultEl = document.getElementById('boost-result');
-
-    var lastResult = 0;
+    var lowEl = document.getElementById('boost-low');
+    var midEl = document.getElementById('boost-mid');
+    var highEl = document.getElementById('boost-high');
+    var contextEl = document.getElementById('boost-context');
 
     function formatCurrency(n) {
       return '$' + Math.round(n).toLocaleString();
@@ -651,67 +623,34 @@ document.head.appendChild(o)}initApollo();</script>
       slider.style.background = 'linear-gradient(to right, #95d5b2 0%, #95d5b2 ' + pct + '%, #e2e8f0 ' + pct + '%, #e2e8f0 100%)';
     }
 
-    function animateValue(el, start, end, duration) {
-      if (prefersReduced || duration === 0) {
-        el.textContent = formatCurrency(end);
-        return;
-      }
-      var startTime = null;
-      function step(ts) {
-        if (!startTime) startTime = ts;
-        var progress = Math.min((ts - startTime) / duration, 1);
-        var eased = 1 - Math.pow(1 - progress, 3);
-        el.textContent = formatCurrency(start + (end - start) * eased);
-        if (progress < 1) requestAnimationFrame(step);
-      }
-      requestAnimationFrame(step);
-    }
-
     function updateCalc() {
       var revenue = parseInt(revenueSlider.value, 10);
-      var pct = parseInt(pctSlider.value, 10);
 
       revenueVal.textContent = formatCurrency(revenue);
-      pctVal.textContent = pct + '%';
-
       updateSliderTrack(revenueSlider);
-      updateSliderTrack(pctSlider);
 
-      var inventoryValue = revenue * 0.5;
-      var onHandInventory = inventoryValue * (45 / 365); /* ~45 days of inventory on shelves */
-      var cashBoost = onHandInventory * (pct / 100);
+      var onHandInventory = revenue * 0.5 * (45 / 365);
+      var low = onHandInventory * 0.25;
+      var mid = onHandInventory * 0.50;
+      var high = onHandInventory * 0.75;
 
-      invEl.textContent = formatCurrency(onHandInventory);
-      vendorPctEl.textContent = pct + '%';
+      lowEl.textContent = formatCurrency(low);
+      midEl.textContent = formatCurrency(mid);
+      highEl.textContent = formatCurrency(high);
 
-      /* Emotional context line */
-      var monthly = Math.round(cashBoost / 12);
-      var contextEl = document.getElementById('boost-monthly-context');
-      if (contextEl) {
-        if (cashBoost >= 200000) {
-          contextEl.textContent = "That's your second location funded.";
-        } else if (cashBoost >= 100000) {
-          contextEl.textContent = "That's a full year of payroll for two employees.";
-        } else if (cashBoost >= 50000) {
-          contextEl.textContent = "That's six months of breathing room.";
-        } else {
-          contextEl.textContent = "That's real money back in your pocket.";
-        }
+      /* Emotional context based on typical (mid) value */
+      if (mid >= 200000) {
+        contextEl.textContent = "That's your second location funded";
+      } else if (mid >= 100000) {
+        contextEl.textContent = "That's a full year of payroll for two employees";
+      } else if (mid >= 50000) {
+        contextEl.textContent = "That's 6 months of breathing room";
+      } else {
+        contextEl.textContent = "That's real money back in your pocket";
       }
-
-      /* Animate the big number */
-      animateValue(resultEl, lastResult, cashBoost, 300);
-
-      /* Pop animation */
-      resultEl.classList.remove('pop');
-      void resultEl.offsetWidth;
-      resultEl.classList.add('pop');
-
-      lastResult = cashBoost;
     }
 
     revenueSlider.addEventListener('input', updateCalc);
-    pctSlider.addEventListener('input', updateCalc);
 
     updateCalc();
   })();
