@@ -101,16 +101,71 @@
 .chapter-pain { font-size: 17px; line-height: 1.8; color: var(--slate-500); margin-bottom: 32px; }
 .chapter-resolution { font-size: 16px; line-height: 1.7; color: var(--green-mid); font-weight: 500; font-style: italic; padding-left: 20px; border-left: 3px solid var(--green-accent); }
 
-/* Receipt */
-.receipt-section { background: var(--white); padding: 60px 48px 100px; }
-.receipt { max-width: 480px; margin: 0 auto; font-family: var(--font-mono); }
-.receipt-row { display: flex; justify-content: space-between; align-items: baseline; padding: 12px 0; border-bottom: 1px solid var(--slate-100); font-size: 16px; }
-.receipt-row-amount { font-weight: 700; color: #c0392b; }
-.receipt-row-label { color: var(--slate-500); font-family: var(--font-display); font-size: 14px; }
-.receipt-total { display: flex; justify-content: space-between; align-items: baseline; padding: 16px 0 0; margin-top: 4px; border-top: 3px double var(--green-accent); font-size: 20px; }
-.receipt-total-amount { font-weight: 700; color: var(--green-deep); }
-.receipt-total-label { color: var(--green-deep); font-weight: 600; font-family: var(--font-display); font-size: 15px; }
-.receipt-note { text-align: center; margin-top: 24px; font-size: 15px; color: var(--slate-500); }
+/* Ultimate Calculator */
+.uc-section { background: var(--slate-50); padding: 100px 48px; }
+.uc-header { text-align: center; max-width: 600px; margin: 0 auto 48px; }
+.uc-container { max-width: 720px; margin: 0 auto; }
+.uc-slider-wrapper { margin-bottom: 40px; }
+.uc-revenue-display { text-align: center; font-family: var(--font-mono); font-size: clamp(32px, 4vw, 48px); font-weight: 700; color: var(--green-deep); letter-spacing: -1px; margin-bottom: 16px; }
+.uc-slider { width: 100%; -webkit-appearance: none; appearance: none; height: 8px; border-radius: 4px; background: var(--slate-200); outline: none; }
+.uc-slider::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 28px; height: 28px; border-radius: 50%; background: var(--green-deep); cursor: pointer; box-shadow: 0 2px 8px rgba(27,67,50,0.3); }
+.uc-slider::-moz-range-thumb { width: 28px; height: 28px; border-radius: 50%; background: var(--green-deep); cursor: pointer; border: none; box-shadow: 0 2px 8px rgba(27,67,50,0.3); }
+.uc-slider-labels { display: flex; justify-content: space-between; font-size: 12px; color: var(--slate-400); margin-top: 8px; }
+.uc-card { background: var(--white); border: 1px solid var(--slate-200); border-radius: 16px; overflow: hidden; }
+.uc-col-headers { display: grid; grid-template-columns: 1.4fr repeat(3, 1fr); padding: 16px 20px 12px; border-bottom: 1px solid var(--slate-100); }
+.uc-col-headers span { font-size: 11px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; text-align: center; }
+.uc-col-headers span:first-child { text-align: left; }
+.uc-col-headers .uc-col--low { color: var(--slate-400); }
+.uc-col-headers .uc-col--mid { color: var(--green-mid); }
+.uc-col-headers .uc-col--high { color: var(--green-deep); }
+.uc-row { display: grid; grid-template-columns: 1.4fr repeat(3, 1fr); padding: 20px; border-bottom: 1px solid var(--slate-100); align-items: center; }
+.uc-row:last-child { border-bottom: none; }
+.uc-row-label a { font-size: 13px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; color: var(--green-deep); text-decoration: none; }
+.uc-row-label a:hover { text-decoration: underline; }
+.uc-row-desc { font-size: 12px; color: var(--slate-400); margin-top: 2px; }
+.uc-val { text-align: center; }
+.uc-val-year { font-family: var(--font-mono); font-size: clamp(16px, 2vw, 20px); font-weight: 700; letter-spacing: -0.5px; }
+.uc-val-month { font-size: 12px; color: var(--slate-400); margin-top: 2px; }
+.uc-val-sub { font-size: 11px; color: var(--slate-400); margin-top: 2px; }
+.uc-val--low .uc-val-year { color: var(--slate-600); }
+.uc-val--mid .uc-val-year { color: var(--green-mid); }
+.uc-val--high .uc-val-year { color: var(--green-deep); }
+.uc-row--mid-bg { background: var(--green-ghost); }
+.uc-total { display: grid; grid-template-columns: 1.4fr repeat(3, 1fr); padding: 20px; background: var(--green-deep); }
+.uc-total-label { font-size: 14px; font-weight: 700; color: rgba(255,255,255,0.7); text-transform: uppercase; letter-spacing: 0.5px; }
+.uc-total-val { text-align: center; font-family: var(--font-mono); font-size: clamp(18px, 2.2vw, 24px); font-weight: 700; color: var(--white); letter-spacing: -0.5px; }
+.uc-ebitda { display: grid; grid-template-columns: 1.4fr repeat(3, 1fr); padding: 14px 20px; background: var(--green-dark); }
+.uc-ebitda-label { font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.5); }
+.uc-ebitda-val { text-align: center; font-family: var(--font-mono); font-size: 15px; font-weight: 700; color: rgba(255,255,255,0.85); }
+.uc-bottom { text-align: center; margin-top: 32px; }
+.uc-bottom-tag { font-size: 15px; font-weight: 500; color: var(--green-mid); margin-bottom: 24px; }
+.uc-bottom-sub { font-size: 14px; color: var(--slate-400); margin-top: 12px; }
+.uc-bottom-disclaimer { font-size: 11px; color: var(--slate-400); margin-top: 16px; }
+@media (max-width: 640px) {
+  .uc-section { padding: 60px 24px; }
+  .uc-col-headers { display: none; }
+  .uc-row { grid-template-columns: 1fr; gap: 12px; padding: 20px; }
+  .uc-row-label { margin-bottom: 4px; }
+  .uc-val { display: flex; justify-content: space-between; align-items: baseline; text-align: left; padding: 4px 0; }
+  .uc-val::before { font-size: 11px; font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase; }
+  .uc-val--low::before { content: 'Conservative'; color: var(--slate-400); }
+  .uc-val--mid::before { content: 'Typical'; color: var(--green-mid); }
+  .uc-val--high::before { content: 'Aggressive'; color: var(--green-deep); }
+  .uc-val-month { display: inline; margin-left: 8px; }
+  .uc-val-sub { display: inline; margin-left: 8px; }
+  .uc-total { grid-template-columns: 1fr; gap: 8px; padding: 20px; }
+  .uc-total-val { text-align: left; display: flex; justify-content: space-between; }
+  .uc-total-val::before { font-size: 11px; font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase; color: rgba(255,255,255,0.5); align-self: center; }
+  .uc-total-val:nth-child(2)::before { content: 'Conservative'; }
+  .uc-total-val:nth-child(3)::before { content: 'Typical'; }
+  .uc-total-val:nth-child(4)::before { content: 'Aggressive'; }
+  .uc-ebitda { grid-template-columns: 1fr; gap: 4px; padding: 14px 20px; }
+  .uc-ebitda-val { text-align: left; display: flex; justify-content: space-between; }
+  .uc-ebitda-val::before { font-size: 11px; font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase; color: rgba(255,255,255,0.35); align-self: center; }
+  .uc-ebitda-val:nth-child(2)::before { content: 'Conservative'; }
+  .uc-ebitda-val:nth-child(3)::before { content: 'Typical'; }
+  .uc-ebitda-val:nth-child(4)::before { content: 'Aggressive'; }
+}
 
 /* Case Studies */
 .case-studies { background: var(--white); padding: 100px 0 40px; }
@@ -212,7 +267,7 @@
   .demo-slide-title { margin-bottom: 12px !important; }
   .demo-row { padding: 4px 0; font-size: 13px; }
   .chapter { padding: 60px 24px; }
-  .receipt-section { padding: 40px 24px 60px; }
+  .uc-section { padding: 60px 24px; }
   .pivot-section { padding: 60px 24px; }
   .proof-cta { padding: 24px 24px 60px; }
   .proof-cta-stats { grid-template-columns: 1fr; gap: 20px; }
@@ -426,27 +481,72 @@ document.head.appendChild(o)}initApollo();</script>
   </div>
 </section>
 
-<!-- SECTION 3: RECEIPT -->
-<section class="receipt-section">
-  <div class="receipt">
-    <div class="receipt-row reveal">
-      <span class="receipt-row-amount">$250,000</span>
-      <span class="receipt-row-label">trapped cash</span>
+<!-- SECTION 3: ULTIMATE CALCULATOR -->
+<section class="uc-section" id="calculator">
+  <div class="uc-header">
+    <div class="section-label reveal">Your Numbers</div>
+    <h2 class="section-title reveal">Slide to see what we'd find at your stores</h2>
+  </div>
+  <div class="uc-container reveal">
+    <div class="uc-slider-wrapper">
+      <div class="uc-revenue-display" id="uc-revenue">$3,000,000</div>
+      <input type="range" class="uc-slider" id="uc-slider" min="500000" max="10000000" step="100000" value="3000000">
+      <div class="uc-slider-labels">
+        <span>$500K</span>
+        <span>Annual Revenue</span>
+        <span>$10M</span>
+      </div>
     </div>
-    <div class="receipt-row reveal reveal-delay-1">
-      <span class="receipt-row-amount">$45,000</span>
-      <span class="receipt-row-label">AP waste</span>
+    <div class="uc-card">
+      <div class="uc-col-headers">
+        <span></span>
+        <span class="uc-col--low">Conservative</span>
+        <span class="uc-col--mid">Typical</span>
+        <span class="uc-col--high">Aggressive</span>
+      </div>
+      <!-- Consignment row -->
+      <div class="uc-row">
+        <div class="uc-row-label"><a href="/consignment">Consignment</a><div class="uc-row-desc">Cash freed from inventory</div></div>
+        <div class="uc-val uc-val--low"><div class="uc-val-year" id="uc-con-low">$46,233</div><div class="uc-val-sub">25% on consignment</div></div>
+        <div class="uc-val uc-val--mid"><div class="uc-val-year" id="uc-con-mid">$92,466</div><div class="uc-val-sub">50% on consignment</div></div>
+        <div class="uc-val uc-val--high"><div class="uc-val-year" id="uc-con-high">$138,699</div><div class="uc-val-sub">75% on consignment</div></div>
+      </div>
+      <!-- AP row -->
+      <div class="uc-row">
+        <div class="uc-row-label"><a href="/accounts-payable">Accounts Payable</a><div class="uc-row-desc">Invoice &amp; payment savings</div></div>
+        <div class="uc-val uc-val--low"><div class="uc-val-year" id="uc-ap-low">$21,000</div><div class="uc-val-month" id="uc-ap-low-mo">$1,750/mo</div></div>
+        <div class="uc-val uc-val--mid"><div class="uc-val-year" id="uc-ap-mid">$39,000</div><div class="uc-val-month" id="uc-ap-mid-mo">$3,250/mo</div></div>
+        <div class="uc-val uc-val--high"><div class="uc-val-year" id="uc-ap-high">$63,000</div><div class="uc-val-month" id="uc-ap-high-mo">$5,250/mo</div></div>
+      </div>
+      <!-- Credit Recovery row -->
+      <div class="uc-row">
+        <div class="uc-row-label"><a href="/credit-recovery">Credit Recovery</a><div class="uc-row-desc">Recovered vendor credits</div></div>
+        <div class="uc-val uc-val--low"><div class="uc-val-year" id="uc-cr-low">$36,000</div><div class="uc-val-month" id="uc-cr-low-mo">$3,000/mo</div></div>
+        <div class="uc-val uc-val--mid"><div class="uc-val-year" id="uc-cr-mid">$60,000</div><div class="uc-val-month" id="uc-cr-mid-mo">$5,000/mo</div></div>
+        <div class="uc-val uc-val--high"><div class="uc-val-year" id="uc-cr-high">$90,000</div><div class="uc-val-month" id="uc-cr-high-mo">$7,500/mo</div></div>
+      </div>
+      <!-- Total bar -->
+      <div class="uc-total">
+        <div class="uc-total-label">Total Impact</div>
+        <div class="uc-total-val" id="uc-total-low">$103,233</div>
+        <div class="uc-total-val" id="uc-total-mid">$191,466</div>
+        <div class="uc-total-val" id="uc-total-high">$291,699</div>
+      </div>
+      <!-- EBITDA bar -->
+      <div class="uc-ebitda">
+        <div class="uc-ebitda-label">EBITDA</div>
+        <div class="uc-ebitda-val" id="uc-ebitda-low">15% &rarr; 18.3%</div>
+        <div class="uc-ebitda-val" id="uc-ebitda-mid">15% &rarr; 20.3%</div>
+        <div class="uc-ebitda-val" id="uc-ebitda-high">15% &rarr; 23.2%</div>
+      </div>
     </div>
-    <div class="receipt-row reveal reveal-delay-2">
-      <span class="receipt-row-amount">$200,000</span>
-      <span class="receipt-row-label">untracked credits</span>
-    </div>
-    <div class="receipt-total reveal reveal-delay-3">
-      <span class="receipt-total-amount" id="receipt-total">$0</span>
-      <span class="receipt-total-label">total found</span>
+    <div class="uc-bottom">
+      <p class="uc-bottom-tag">One team. All three. You only pay when we produce results.</p>
+      <a href="/contact" class="btn-primary">Get My Free Evaluation <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+      <p class="uc-bottom-sub">We'll show your actual numbers across all three. 48 hours. Free.</p>
+      <p class="uc-bottom-disclaimer">*Estimates based on industry averages, not a guarantee.</p>
     </div>
   </div>
-  <p class="receipt-note reveal reveal-delay-4">This was one dispensary chain. Two locations. Yours could be similar.</p>
 </section>
 
 <!-- SECTION 4: DARK PIVOT -->
@@ -795,21 +895,97 @@ document.head.appendChild(o)}initApollo();</script>
     requestAnimationFrame(step);
   }
 
-  /* Receipt total counter */
-  var receiptTotal = document.getElementById('receipt-total');
-  var receiptAnimated = false;
-  if (receiptTotal) {
-    var receiptObserver = new IntersectionObserver(function(entries) {
-      entries.forEach(function(entry) {
-        if (entry.isIntersecting && !receiptAnimated) {
-          receiptAnimated = true;
-          animateCounter(receiptTotal, 495000, '', 2000);
-          receiptObserver.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.5 });
-    receiptObserver.observe(receiptTotal);
-  }
+  /* Ultimate Calculator */
+  (function() {
+    var slider = document.getElementById('uc-slider');
+    if (!slider) return;
+    var revenueDisplay = document.getElementById('uc-revenue');
+
+    var conLow = document.getElementById('uc-con-low');
+    var conMid = document.getElementById('uc-con-mid');
+    var conHigh = document.getElementById('uc-con-high');
+    var apLow = document.getElementById('uc-ap-low');
+    var apMid = document.getElementById('uc-ap-mid');
+    var apHigh = document.getElementById('uc-ap-high');
+    var apLowMo = document.getElementById('uc-ap-low-mo');
+    var apMidMo = document.getElementById('uc-ap-mid-mo');
+    var apHighMo = document.getElementById('uc-ap-high-mo');
+    var crLow = document.getElementById('uc-cr-low');
+    var crMid = document.getElementById('uc-cr-mid');
+    var crHigh = document.getElementById('uc-cr-high');
+    var crLowMo = document.getElementById('uc-cr-low-mo');
+    var crMidMo = document.getElementById('uc-cr-mid-mo');
+    var crHighMo = document.getElementById('uc-cr-high-mo');
+    var totalLow = document.getElementById('uc-total-low');
+    var totalMid = document.getElementById('uc-total-mid');
+    var totalHigh = document.getElementById('uc-total-high');
+    var ebitdaLow = document.getElementById('uc-ebitda-low');
+    var ebitdaMid = document.getElementById('uc-ebitda-mid');
+    var ebitdaHigh = document.getElementById('uc-ebitda-high');
+
+    function fmt(n) { return '$' + Math.round(n).toLocaleString(); }
+    function fmtMo(n) { return fmt(n / 12) + '/mo'; }
+
+    function updateSliderTrack() {
+      var pct = ((slider.value - slider.min) / (slider.max - slider.min)) * 100;
+      slider.style.background = 'linear-gradient(to right, #95d5b2 0%, #95d5b2 ' + pct + '%, #e2e8f0 ' + pct + '%, #e2e8f0 100%)';
+    }
+
+    function updateCalc() {
+      var rev = parseInt(slider.value, 10);
+      revenueDisplay.textContent = fmt(rev);
+      updateSliderTrack();
+
+      /* Consignment: cash freed from inventory */
+      var onHand = rev * 0.5 * (45 / 365);
+      var cLow = onHand * 0.25;
+      var cMid = onHand * 0.50;
+      var cHigh = onHand * 0.75;
+      conLow.textContent = fmt(cLow);
+      conMid.textContent = fmt(cMid);
+      conHigh.textContent = fmt(cHigh);
+
+      /* AP: invoice & payment savings */
+      var aLow = rev * 0.007;
+      var aMid = rev * 0.013;
+      var aHigh = rev * 0.021;
+      apLow.textContent = fmt(aLow);
+      apMid.textContent = fmt(aMid);
+      apHigh.textContent = fmt(aHigh);
+      apLowMo.textContent = fmtMo(aLow);
+      apMidMo.textContent = fmtMo(aMid);
+      apHighMo.textContent = fmtMo(aHigh);
+
+      /* Credit Recovery */
+      var rLow = rev * 0.012;
+      var rMid = rev * 0.02;
+      var rHigh = rev * 0.03;
+      crLow.textContent = fmt(rLow);
+      crMid.textContent = fmt(rMid);
+      crHigh.textContent = fmt(rHigh);
+      crLowMo.textContent = fmtMo(rLow);
+      crMidMo.textContent = fmtMo(rMid);
+      crHighMo.textContent = fmtMo(rHigh);
+
+      /* Totals */
+      totalLow.textContent = fmt(cLow + aLow + rLow);
+      totalMid.textContent = fmt(cMid + aMid + rMid);
+      totalHigh.textContent = fmt(cHigh + aHigh + rHigh);
+
+      /* EBITDA: baseline 15%, add AP + CR savings + consignment waste elimination (2% of rev) */
+      var waste = rev * 0.02;
+      var basePct = 15;
+      var eLow = ((rev * 0.15 + aLow + rLow + waste) / rev * 100).toFixed(1);
+      var eMid = ((rev * 0.15 + aMid + rMid + waste) / rev * 100).toFixed(1);
+      var eHigh = ((rev * 0.15 + aHigh + rHigh + waste) / rev * 100).toFixed(1);
+      ebitdaLow.innerHTML = basePct + '% &rarr; ' + eLow + '%';
+      ebitdaMid.innerHTML = basePct + '% &rarr; ' + eMid + '%';
+      ebitdaHigh.innerHTML = basePct + '% &rarr; ' + eHigh + '%';
+    }
+
+    slider.addEventListener('input', updateCalc);
+    updateCalc();
+  })();
 
   /* Proof stats counters */
   var statsAnimated = false;
