@@ -26,6 +26,7 @@ Each case study belongs to exactly one category:
 - `accounts-payable` — duplicate invoices, overpayments, shorted deliveries, wrong-entity billing, AP errors
 - `consignment` — vendor onboarding, inventory conversion, waste reduction, margin protection
 - `credit-recovery` — vendor credits, co-marketing credits, return credits, promo reimbursements
+- `operations` — time savings, workflow improvements, vendor communication, data-driven decisions, quality of life
 
 ### 4. SEO optimization
 Before writing, determine:
@@ -123,6 +124,11 @@ Add a one-line entry for the new case study under the blog section.
 | 12 | `case-study-vendor-portal` | operations | 90% fewer calls | Vendor portal ends payment status calls | Live |
 | 13 | `case-study-quickbooks-sync` | operations | Real-time books | Cannabis AP to QuickBooks — real-time sync | Live |
 | 14 | `case-study-settlement-dispute` | operations | Resolved in 24h | Settlement dispute resolved in 24 hours | Live |
+| 15 | `case-study-vendor-replenishment` | consignment | Zero stockouts | Vendor started restocking from their settlement report | Live |
+| 16 | `case-study-metrc-invoice-accuracy` | accounts-payable | $7,340 | We caught 12 wrong invoices in one month using Metrc | Live |
+| 17 | `case-study-consignment-new-product` | consignment | $14,230 | We got a new product on shelves — zero risk for both sides | Live |
+| 18 | `case-study-ceo-email-relief` | operations | 20+ hrs/month | We took over vendor emails — the owner never answered another one | Live |
+| 19 | `case-study-buyer-reorder-data` | operations | 23% less waste | We gave a buyer real data — waste dropped 23% | Live |
 
 ## SEO Targets
 
