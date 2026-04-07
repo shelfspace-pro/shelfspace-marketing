@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>We Caught 12 Wrong Invoices in One Month — ShelfSpace</title>
+<meta name="description" content="We matched 80 invoices against Metrc delivery data. 12 had wrong quantities or amounts. $7,340 in overpayments stopped before checks went out.">
+<link rel="canonical" href="https://shelfspace.pro/blog/case-study-metrc-invoice-accuracy">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://shelfspace.pro/blog/case-study-metrc-invoice-accuracy">
+<meta property="og:title" content="We Caught 12 Wrong Invoices in One Month — ShelfSpace">
+<meta property="og:description" content="We matched 80 invoices against Metrc delivery data. 12 had wrong quantities or amounts. $7,340 in overpayments stopped before checks went out.">
+<meta property="og:image" content="https://shelfspace.pro/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="We Caught 12 Wrong Invoices in One Month — ShelfSpace">
+<meta name="twitter:description" content="We matched 80 invoices against Metrc delivery data. 12 had wrong quantities or amounts. $7,340 in overpayments stopped before checks went out.">
+<meta name="twitter:image" content="https://shelfspace.pro/og-image.png">
+<meta name="apple-mobile-web-app-title" content="ShelfSpace">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+<style>
+  /* ─── HERO ENHANCEMENTS ─── */
+  .page-hero { padding-bottom: 40px; }
+  .hero-bg-gradient { position: absolute; top: -30%; right: -20%; width: 700px; height: 700px; background: radial-gradient(circle, rgba(149,213,178,0.18) 0%, rgba(149,213,178,0) 70%); animation: float 8s ease-in-out infinite; pointer-events: none; }
+  .hero-bg-gradient-2 { position: absolute; bottom: -20%; left: -15%; width: 550px; height: 550px; background: radial-gradient(circle, rgba(27,67,50,0.06) 0%, rgba(27,67,50,0) 70%); animation: float 10s ease-in-out infinite; animation-delay: -3s; pointer-events: none; }
+  .hero-grid-lines { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 1200px; height: 100%; opacity: 0.035; background-image: linear-gradient(var(--green-deep) 1px, transparent 1px), linear-gradient(90deg, var(--green-deep) 1px, transparent 1px); background-size: 80px 80px; pointer-events: none; }
+  .page-hero .section-label,
+  .page-hero .section-title,
+  .page-hero .section-desc { opacity: 0; transform: translateY(30px); }
+  .page-hero .section-label { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1); }
+  .page-hero .section-title { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s, transform 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s; }
+  .page-hero .section-desc { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1) 0.25s, transform 0.8s cubic-bezier(0.22,1,0.36,1) 0.25s; }
+  .page-hero.hero-loaded .section-label,
+  .page-hero.hero-loaded .section-title,
+  .page-hero.hero-loaded .section-desc { opacity: 1; transform: translateY(0); }
+
+  /* ─── REVEAL ─── */
+  .reveal {
+    opacity: 0; transform: translateY(40px);
+    transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .reveal.is-visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.2s; }
+  .reveal-delay-2 { transition-delay: 0.4s; }
+
+  /* ─── ARTICLE BODY ─── */
+  .article-body { max-width: 720px; margin: 0 auto; padding: 0 48px 80px; }
+  .article-body h2 { font-size: 24px; font-weight: 700; color: var(--green-deep); margin: 48px 0 16px; letter-spacing: -0.5px; line-height: 1.3; }
+  .article-body p { font-size: 17px; line-height: 1.85; color: var(--slate-600); margin-bottom: 24px; }
+  .article-body ul, .article-body ol { margin-bottom: 24px; padding-left: 24px; }
+  .article-body li { font-size: 17px; line-height: 1.85; color: var(--slate-600); margin-bottom: 8px; }
+  .article-body strong { color: var(--green-deep); font-weight: 600; }
+  .article-body a { color: var(--green-mid); font-weight: 500; text-decoration: none; }
+  .article-body a:hover { color: var(--green-deep); text-decoration: underline; }
+  .article-body blockquote { border-left: 3px solid var(--green-accent); padding: 16px 24px; margin: 32px 0; background: var(--green-ghost); border-radius: 0 8px 8px 0; }
+  .article-body blockquote p { font-style: italic; color: var(--green-dark); margin-bottom: 0; }
+
+  /* ─── AT A GLANCE ─── */
+  .article-glance {
+    max-width: 720px; margin: 0 auto 40px; padding: 24px 28px;
+    background: var(--green-ghost); border: 1px solid rgba(149,213,178,0.3);
+    border-radius: 12px;
+  }
+  .article-glance h2 {
+    font-size: 14px; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--green-mid); margin: 0 0 12px;
+  }
+  .article-glance ul { list-style: none; padding: 0; margin: 0; }
+  .article-glance li {
+    font-size: 15px; line-height: 1.6; color: var(--slate-600);
+    padding: 4px 0 4px 20px; position: relative;
+  }
+  .article-glance li::before {
+    content: ''; position: absolute; left: 0; top: 12px;
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--green-accent);
+  }
+
+  /* ─── FAQ ─── */
+  .faq-section { max-width: 720px; margin: 0 auto; padding: 0 48px 60px; }
+  .faq-section h2 {
+    font-size: 24px; font-weight: 700; color: var(--green-deep);
+    margin: 0 0 24px; letter-spacing: -0.5px; line-height: 1.3;
+  }
+  .faq-list details {
+    border-bottom: 1px solid var(--slate-200);
+  }
+  .faq-list details:first-child {
+    border-top: 1px solid var(--slate-200);
+  }
+  .faq-list summary {
+    padding: 20px 0; font-size: 17px; font-weight: 600;
+    color: var(--green-deep); cursor: pointer; list-style: none;
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  }
+  .faq-list summary::-webkit-details-marker { display: none; }
+  .faq-list summary::after {
+    content: '+'; font-size: 22px; font-weight: 400;
+    color: var(--slate-400); transition: transform 0.2s;
+    flex-shrink: 0;
+  }
+  .faq-list details[open] summary::after {
+    content: '\2212';
+  }
+  .faq-list details p {
+    padding: 0 0 20px; margin: 0; font-size: 15px;
+    line-height: 1.7; color: var(--slate-500);
+  }
+
+  /* ─── CTA PARALLAX ─── */
+  .cta-section::before { transform: translate(-50%,-50%) translateY(var(--parallax-y, 0)); will-change: transform; }
+
+  /* ─── FOOTER 5-COL ─── */
+  .footer-top { grid-template-columns: 2fr 1fr 1fr 1fr 1fr; }
+  @media (max-width: 900px) { .footer-top { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px) { .footer-top { grid-template-columns: 1fr; } }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    .article-body { padding: 0 24px 60px; }
+    .article-body h2 { margin-top: 36px; }
+    .faq-section { padding: 0 24px 40px; }
+    section [style*="grid-template-columns"] { grid-template-columns: 1fr !important; gap: 12px !important; }
+  }
+
+  /* ─── REDUCED MOTION ─── */
+  @media (prefers-reduced-motion: reduce) {
+    .reveal {
+      opacity: 1; transform: none; transition: none;
+    }
+    .page-hero .section-label,
+    .page-hero .section-title,
+    .page-hero .section-desc {
+      opacity: 1; transform: none; transition: none;
+    }
+    .hero-bg-gradient, .hero-bg-gradient-2 { animation: none; }
+  }
+</style>
+<noscript><style>.reveal,.page-hero .section-label,.page-hero .section-title,.page-hero .section-desc{opacity:1;transform:none;transition:none;}</style></noscript>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-H2LBJT03WE"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-H2LBJT03WE');</script>
+<script>function initApollo(){var n=Math.random().toString(36).substring(7),o=document.createElement("script");
+o.src="https://assets.apollo.io/micro/website-tracker/tracker.iife.js?nocache="+n,o.async=!0,o.defer=!0,
+o.onload=function(){window.trackingFunctions.onLoad({appId:"69c141b32234890011a43849"})},
+document.head.appendChild(o)}initApollo();</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "We Caught 12 Wrong Invoices in One Month Using Metrc Data",
+  "description": "We matched 80 invoices against Metrc delivery data. 12 had wrong quantities or amounts. $7,340 in overpayments stopped before checks went out.",
+  "author": {
+    "@type": "Person",
+    "name": "Chris Mitchem"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "ShelfSpace",
+    "url": "https://shelfspace.pro"
+  },
+  "datePublished": "2026-04-06",
+  "url": "https://shelfspace.pro/blog/case-study-metrc-invoice-accuracy",
+  "image": "https://shelfspace.pro/og-image.png"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How does ShelfSpace verify invoices?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We match every line item on every invoice against Metrc delivery records — quantities, unit costs, package IDs, and receiving location. If something doesn't match, it gets flagged and we handle the vendor conversation before payment goes out."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What happens when an invoice doesn't match?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We flag the specific discrepancy, contact the vendor, get the correction, and adjust the payment. The dispensary doesn't have to get involved unless they want to."
+      }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://shelfspace.pro/" },
+    { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://shelfspace.pro/blog" },
+    { "@type": "ListItem", "position": 3, "name": "We Caught 12 Wrong Invoices in One Month" }
+  ]
+}
+</script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="/" class="nav-logo">
+    <div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div>
+    <span class="nav-logo-text">ShelfSpace</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="/consignment">Consignment</a></li>
+    <li><a href="/accounts-payable">Accounts Payable</a></li>
+    <li><a href="/credit-recovery">Credit Recovery</a></li>
+    <li><a href="/pricing">Pricing</a></li>
+    <li><a href="/about">About</a></li>
+    <li><a href="/contact" class="nav-cta">Get Started <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a></li>
+  </ul>
+  <div class="nav-hamburger" onclick="document.querySelector('.nav-links').classList.toggle('mobile-open'); event.stopPropagation();"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="hero-bg-gradient"></div>
+  <div class="hero-bg-gradient-2"></div>
+  <div class="hero-grid-lines"></div>
+  <div class="section-label">Case Study · Accounts Payable</div>
+  <h1 class="section-title">We Caught 12 Wrong Invoices in One Month Using Metrc Data</h1>
+  <p class="section-desc">A two-location dispensary was paying invoices without checking them against deliveries. We matched every invoice to Metrc and found 12 with wrong quantities or amounts.</p>
+</div>
+
+<!-- AT A GLANCE -->
+<div class="article-glance">
+  <h2>At a glance</h2>
+  <ul>
+    <li>Two-location dispensary processing 80+ vendor invoices per month</li>
+    <li>Staff checked vendor name and total — nobody compared line items to deliveries</li>
+    <li>We matched every invoice against Metrc delivery records in the first 30 days</li>
+    <li>12 invoices had discrepancies: wrong quantities, wrong prices, wrong locations, one duplicate</li>
+    <li>$7,340 in overpayments stopped before a single check went out</li>
+    <li>Features used: invoice verification, Metrc delivery matching, multi-location tracking, ShelfiQ invoice parsing</li>
+  </ul>
+</div>
+
+<!-- ARTICLE BODY -->
+<div class="article-body reveal">
+
+  <h2>The Setup</h2>
+
+  <p>A two-location dispensary was processing 80+ vendor invoices per month. Staff checked the vendor name and the total — that was it. Nobody was comparing line items against what actually came through the door. If a vendor said 50 units at $12, that's what got paid.</p>
+
+  <p>They'd been doing this for years. No one questioned the numbers because no one had the time to check them.</p>
+
+  <h2>What We Caught</h2>
+
+  <p>In the first 30 days, we matched every incoming invoice against Metrc delivery records — manifest by manifest, line item by line item. 12 invoices didn't match.</p>
+
+  <p>The discrepancies:</p>
+
+  <ul>
+    <li><strong>4 invoices</strong> billed for more units than Metrc showed received (quantity mismatches)</li>
+    <li><strong>3 invoices</strong> had per-unit prices that didn't match the agreed rate on the delivery manifest</li>
+    <li><strong>2 invoices</strong> included items that weren't on the Metrc manifest at all</li>
+    <li><strong>2 invoices</strong> billed the wrong location for a delivery received at the other store</li>
+    <li><strong>1 invoice</strong> was a straight duplicate of one paid the prior week</li>
+  </ul>
+
+  <p>Total overpayment prevented: <strong>$7,340</strong>. That's 15% of invoices with errors in a single month.</p>
+
+  <h2>How We Caught It</h2>
+
+  <p>We pull delivery data directly from Metrc. When an invoice comes in — uploaded or emailed — <a href="/shelfiq">ShelfiQ</a> parses it and we match every line item against the corresponding Metrc delivery. Quantities, unit costs, package IDs, receiving location. If something doesn't match, it gets flagged before payment is approved.</p>
+
+  <p>This isn't sampling. It's every invoice, every line item, every time. The <a href="/accounts-payable">invoice verification process</a> runs on every payment before a check goes out.</p>
+
+  <p>The errors weren't malicious — vendors make mistakes too. Quantities get transposed. Prices don't get updated after a negotiation. Deliveries get logged to the wrong store. These are normal mistakes that become real money when nobody's checking.</p>
+
+  <h2>The Result</h2>
+
+  <p>$7,340 saved in month one. 12 out of roughly 80 invoices had errors — a 15% error rate. None of these would have been caught by someone glancing at the total. The dispensary had been paying unverified invoices for years.</p>
+
+  <p>Extrapolated across a full year, the same error rate would cost them over $88,000. And that's before factoring in the compounding effect — once vendors know invoices get checked, error rates tend to drop.</p>
+
+  <blockquote>
+    <p>15% of their invoices were wrong. They'd been paying every one of them.</p>
+  </blockquote>
+
+  <p>If your team is paying invoices without matching them to Metrc deliveries, you're overpaying. The only question is how much. <a href="/contact">Talk to us</a> — we'll run a free evaluation on your last 90 days of invoices and show you what we find.</p>
+
+</div>
+
+<!-- FAQ -->
+<div class="faq-section reveal">
+  <h2>Frequently Asked Questions</h2>
+  <div class="faq-list">
+    <details>
+      <summary>How does ShelfSpace verify invoices?</summary>
+      <p>We match every line item on every invoice against Metrc delivery records — quantities, unit costs, package IDs, and receiving location. If something doesn't match, it gets flagged and we handle the vendor conversation before payment goes out.</p>
+    </details>
+    <details>
+      <summary>What happens when an invoice doesn't match?</summary>
+      <p>We flag the specific discrepancy, contact the vendor, get the correction, and adjust the payment. The dispensary doesn't have to get involved unless they want to.</p>
+    </details>
+  </div>
+</div>
+
+<!-- RELATED CASE STUDIES -->
+<section style="max-width:720px;margin:0 auto;padding:0 48px 60px;">
+  <h2 style="font-size:22px;font-weight:700;color:#1b4332;margin-bottom:24px;letter-spacing:-0.5px;">Related Case Studies</h2>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;">
+    <a href="/blog/case-study-duplicate-invoice" style="text-decoration:none;padding:20px;border:1px solid #e2e8f0;border-radius:12px;transition:all 0.2s;">
+      <span style="display:block;font-size:11px;font-weight:600;letter-spacing:0.5px;color:#1b4332;margin-bottom:8px;">AP</span>
+      <span style="display:block;font-family:'Space Mono',monospace;font-size:20px;font-weight:700;color:#1b4332;letter-spacing:-1px;margin-bottom:4px;">$4,873</span>
+      <span style="display:block;font-size:14px;font-weight:500;color:#334155;line-height:1.4;">Stopped a duplicate invoice across two locations</span>
+    </a>
+    <a href="/blog/case-study-shorted-delivery" style="text-decoration:none;padding:20px;border:1px solid #e2e8f0;border-radius:12px;transition:all 0.2s;">
+      <span style="display:block;font-size:11px;font-weight:600;letter-spacing:0.5px;color:#1b4332;margin-bottom:8px;">AP</span>
+      <span style="display:block;font-family:'Space Mono',monospace;font-size:20px;font-weight:700;color:#1b4332;letter-spacing:-1px;margin-bottom:4px;">$1,140</span>
+      <span style="display:block;font-size:14px;font-weight:500;color:#334155;line-height:1.4;">Caught a shorted delivery before payment</span>
+    </a>
+    <a href="/blog/case-study-delivery-dashboard" style="text-decoration:none;padding:20px;border:1px solid #e2e8f0;border-radius:12px;transition:all 0.2s;">
+      <span style="display:block;font-size:11px;font-weight:600;letter-spacing:0.5px;color:#7c3aed;margin-bottom:8px;">OPERATIONS</span>
+      <span style="display:block;font-family:'Space Mono',monospace;font-size:20px;font-weight:700;color:#1b4332;letter-spacing:-1px;margin-bottom:4px;">Zero spreadsheets</span>
+      <span style="display:block;font-size:14px;font-weight:500;color:#334155;line-height:1.4;">Delivery dashboard replaced a spreadsheet</span>
+    </a>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-content">
+    <div class="section-label reveal">Get Started</div>
+    <h2 class="section-title reveal">Stop paying invoices on faith. Free evaluation.</h2>
+    <p class="section-desc reveal">We match every invoice against Metrc delivery records. Free evaluation — we'll show you what's been slipping through.</p>
+    <div class="cta-actions reveal">
+      <a href="/contact" class="btn-primary">
+        Get My Free Evaluation
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="/" class="nav-logo"><div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div><span class="nav-logo-text">ShelfSpace</span></a>
+      <p>Every Vendor. Every Payment. One Engine.</p>
+    </div>
+    <div class="footer-col"><h4>Services</h4><ul><li><a href="/consignment">Consignment</a></li><li><a href="/accounts-payable">Accounts Payable</a></li><li><a href="/credit-recovery">Credit Recovery</a></li><li><a href="/checks">Check Payments</a></li><li><a href="/shelfiq">ShelfiQ</a></li></ul></div>
+    <div class="footer-col"><h4>Platform</h4><ul><li><a href="/features">Features</a></li><li><a href="/how-it-works">How It Works</a></li><li><a href="/pricing">Pricing</a></li><li><a href="/about">About</a></li><li><a href="/blog">Blog</a></li><li><a href="/docs">Docs</a></li></ul></div>
+    <div class="footer-col"><h4>Access</h4><ul><li><a href="https://ourshelf.space">Login</a></li><li><a href="/contact">Sign Up</a></li><li><a href="/contact">Contact</a></li></ul></div>
+    <div class="footer-col"><h4>Company</h4><ul><li><a href="mailto:chris@shelfspace.pro">Email</a></li><li><a href="mailto:support@shelfspace.pro">Support</a></li><li><a href="https://linkedin.com/company/shelfspace-pro" target="_blank" rel="noopener" class="footer-social-link"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> LinkedIn</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><p>&copy; 2026 ShelfSpace Technologies Inc.</p><div class="footer-bottom-links"><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div></div>
+</footer>
+
+<script>
+(function() {
+  var nav = document.getElementById('nav');
+  var pageHero = document.querySelector('.page-hero');
+  var parallaxSections = [
+    document.querySelector('.cta-section')
+  ];
+
+  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var isMobile = window.innerWidth < 900;
+  var ticking = false;
+
+  /* ── Hero entrance ── */
+  requestAnimationFrame(function() {
+    nav.classList.toggle('scrolled', window.scrollY > 20);
+    if (pageHero) pageHero.classList.add('hero-loaded');
+  });
+
+  /* ── Scroll-Triggered Reveals (with unobserve for perf) ── */
+  var revealObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(function(el) { revealObserver.observe(el); });
+
+  /* ── Scroll handler (rAF + ticking flag) ── */
+  function onScroll() {
+    var scrollY = window.scrollY;
+
+    /* Nav state */
+    nav.classList.toggle('scrolled', scrollY > 20);
+
+    /* Skip parallax for reduced motion or mobile */
+    if (prefersReduced || isMobile) return;
+
+    /* Section decorative parallax */
+    var wh = window.innerHeight;
+    parallaxSections.forEach(function(section) {
+      if (!section) return;
+      var rect = section.getBoundingClientRect();
+      if (rect.bottom < 0 || rect.top > wh) return;
+      var center = rect.top + rect.height / 2 - wh / 2;
+      section.style.setProperty('--parallax-y', (center * 0.08) + 'px');
+    });
+  }
+
+  window.addEventListener('scroll', function() {
+    if (!ticking) {
+      requestAnimationFrame(function() {
+        onScroll();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, { passive: true });
+
+  /* Initial call */
+  onScroll();
+
+  /* ── Resize handler ── */
+  window.addEventListener('resize', function() {
+    isMobile = window.innerWidth < 900;
+    if (isMobile) {
+      parallaxSections.forEach(function(section) {
+        if (section) section.style.setProperty('--parallax-y', '0px');
+      });
+    }
+  });
+
+  /* ── Close mobile nav on outside click ── */
+  document.addEventListener('click', function() {
+    var navLinks = document.querySelector('.nav-links');
+    if (navLinks && navLinks.classList.contains('mobile-open')) {
+      navLinks.classList.remove('mobile-open');
+    }
+  });
+})();
+</script>
+<script src="/shelfiq-widget.js"></script>
+</body>
+</html>
