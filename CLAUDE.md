@@ -17,8 +17,8 @@ ShelfSpace marketing site — static HTML/CSS deployed on Vercel at shelfspace.p
 - **No "Diem Cannabis"**: Removed from site, don't reintroduce.
 - **No demo-modal**: Deleted. Don't reference or recreate.
 - **No `<br>` in headings**: Let text flow and wrap naturally.
-- **All CTAs → /contact**: Every signup/pilot button goes to the contact page.
-- **60-day pilot language**: Always specify "60-day" when mentioning the pilot.
+- **All CTAs → /contact**: Every signup button goes to the contact page.
+- **No pilot/trial language**: Never use "60-day pilot" or any pilot/trial framing. The model is free evaluation → paid on results.
 - **"We" voice**: Use "we" for ShelfSpace in body copy, not "ShelfSpace does" or "the platform does."
 
 ## Design System

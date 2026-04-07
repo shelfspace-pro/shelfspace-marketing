@@ -66,9 +66,9 @@
      - AP: "Ready to hand off your AP? Let's talk."
      - Vendor Portal: "Want your vendors on a portal? Let's talk."
      - Integrations: "Ready to connect your systems? Let's talk."
-     - Generic: "Ready for a free 60-day pilot? Let's talk."
+     - Generic: "Ready for a free evaluation? Let's talk."
    - One button: "Talk to Us →" → /contact
-   - Below button: "Free 60-day pilot. We handle setup."
+   - Below button: "Free evaluation. We handle setup."
    - No secondary CTA
 ```
 

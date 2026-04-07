@@ -22,7 +22,7 @@ Our goal is that you never need to log in. We do the tedious AP work, save you m
 
 Founded by Chris Mitchem — 10 years operating dispensaries in Oregon and Massachusetts. Not a tech company. An operator who got tired of the broken system.
 
-Free 60-day pilot: shelfspace.pro/contact
+Free evaluation: shelfspace.pro/contact
 
 **Industry:** Cannabis
 **Company size:** 2-10 employees
@@ -46,7 +46,7 @@ ShelfSpace identified $200,000 per year in vendor credits at a two-location chai
 
 Founded by Chris Mitchem, a 10-year cannabis dispensary operator who scaled a multi-state retail operation across Oregon and Massachusetts. ShelfSpace was built to solve the vendor payment problems he lived with every day.
 
-The company offers a free 60-day pilot with full platform access.
+The company offers a free evaluation — you only pay when they produce results.
 
 **Fields to fill:**
 - Website: https://shelfspace.pro

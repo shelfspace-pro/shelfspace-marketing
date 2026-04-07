@@ -96,7 +96,7 @@ Add a card to the case study section in `index.html`:
 - `.case-amount`: dollar amount saved (Space Mono, big, bold — the hero of the card)
 - `.case-headline`: one line, what ShelfSpace did
 - `.case-summary`: 2 sentences max, what happened
-- `.case-speed`: how fast ("Same-day catch", "60-day pilot", "Found in 14 days")
+- `.case-speed`: how fast ("Same-day catch", "Results in 60 days", "Found in 14 days")
 - `.case-link`: link to full blog post
 
 ### 7. Update sitemap.xml
@@ -109,9 +109,20 @@ Add a one-line entry for the new case study under the blog section.
 
 | # | Slug | Category | Amount | Headline | Status |
 |---|---|---|---|---|---|
-| 1 | `case-study-duplicate-invoice` | accounts-payable | $4,873 | Stopped a duplicate invoice across two locations | Planned |
-| 2 | `case-study-consignment-conversion` | consignment | $27,350 | Freed trapped inventory with one vendor switch | Planned |
-| 3 | `case-study-vendor-credit-recovery` | credit-recovery | $2,340 | Recovered co-marketing credits nobody was tracking | Planned |
+| 1 | `case-study-duplicate-invoice` | accounts-payable | $4,873 | Stopped a duplicate invoice across two locations | Live |
+| 2 | `case-study-shorted-delivery` | accounts-payable | $1,140 | Caught a shorted delivery before payment went out | Live |
+| 3 | `case-study-non-cannabis-vendors` | accounts-payable | 12 vendors | Every vendor in one system — cannabis and non-cannabis | Live |
+| 4 | `case-study-consignment-conversion` | consignment | $27,350 | Freed trapped inventory with one vendor switch | Live |
+| 5 | `case-study-expired-returns` | consignment | $8,370 | $8,370 in expired product returned at zero cost | Live |
+| 6 | `case-study-vendor-credit-recovery` | credit-recovery | $2,340 | Recovered co-marketing credits nobody was tracking | Live |
+| 7 | `case-study-return-credit` | credit-recovery | $1,847 | Return credit nobody filed — $1,847 recovered | Live |
+| 8 | `case-study-expiration-credit` | credit-recovery | $3,180 | Expiration credits from a vendor agreement — $3,180 recovered | Live |
+| 9 | `case-study-shelfiq-vendor-emails` | operations | 47 emails | AI handles vendor emails for dispensaries | Live |
+| 10 | `case-study-ap-time-savings` | operations | 98% less time | From 15 hours a week to one approve button | Live |
+| 11 | `case-study-delivery-dashboard` | operations | Zero spreadsheets | Dispensary delivery reconciliation — no more spreadsheets | Live |
+| 12 | `case-study-vendor-portal` | operations | 90% fewer calls | Vendor portal ends payment status calls | Live |
+| 13 | `case-study-quickbooks-sync` | operations | Real-time books | Cannabis AP to QuickBooks — real-time sync | Live |
+| 14 | `case-study-settlement-dispute` | operations | Resolved in 24h | Settlement dispute resolved in 24 hours | Live |
 
 ## SEO Targets
 
@@ -143,9 +154,9 @@ Add a one-line entry for the new case study under the blog section.
 
 **Category:** Consignment
 **Amount freed:** $27,350
-**Speed:** 60-day pilot
+**Speed:** Results in 60 days
 
-**What happened:** A single-location dispensary was buying all inventory wholesale — $310K+ sitting on shelves at any given time. Product expired before it sold. Margins fluctuated because they bore all the risk. We onboarded their top vendor onto consignment during a 60-day pilot. That vendor alone represented $27,350 in shelf inventory the dispensary no longer had to pay for upfront. Dead stock from that vendor dropped to near zero (the vendor owns it until it sells). Consignment pricing locked in a 50% margin floor, stabilizing gross margin on that vendor's products. Cash that was tied up in inventory went back to operations.
+**What happened:** A single-location dispensary was buying all inventory wholesale — $310K+ sitting on shelves at any given time. Product expired before it sold. Margins fluctuated because they bore all the risk. We onboarded their top vendor onto consignment within 60 days. That vendor alone represented $27,350 in shelf inventory the dispensary no longer had to pay for upfront. Dead stock from that vendor dropped to near zero (the vendor owns it until it sells). Consignment pricing locked in a 50% margin floor, stabilizing gross margin on that vendor's products. Cash that was tied up in inventory went back to operations.
 
 **Features used:**
 - Vendor onboarding (transitioning from wholesale to consignment terms)
