@@ -235,6 +235,133 @@
     .hero-demo-slide { animation: none !important; opacity: 0 !important; }
     .hero-demo-slide:nth-child(2) { opacity: 1 !important; }
   }
+
+  /* ══════════════════════════════════════════════════════════
+     MOTION-V2 — pilot scoped under body.motion-v2
+     Remove the class from <body> to revert instantly.
+     ══════════════════════════════════════════════════════════ */
+
+  /* Softer reveal distance */
+  .motion-v2 .reveal { transform: translateY(16px); }
+  .motion-v2 .reveal.is-visible { transform: translateY(0); }
+
+  /* Stable number widths during count-up */
+  .motion-v2 .countup { font-variant-numeric: tabular-nums; font-feature-settings: 'tnum'; }
+
+  /* ─── V2 STATEMENT STACK (replaces pain pills) ─── */
+  .motion-v2 .v2-statement-stack {
+    max-width: 720px; margin: 0 auto 40px;
+    display: flex; flex-direction: column; gap: 32px;
+  }
+  .motion-v2 .v2-statement { text-align: center; }
+  .motion-v2 .v2-statement-main {
+    font-family: 'DM Sans', sans-serif;
+    font-size: clamp(26px, 3.6vw, 40px);
+    font-weight: 500; color: var(--green-deep);
+    letter-spacing: -0.8px; line-height: 1.15;
+    margin-bottom: 8px;
+  }
+  .motion-v2 .v2-statement-sub {
+    font-size: 15px; color: var(--slate-500);
+    line-height: 1.5; max-width: 520px; margin: 0 auto;
+  }
+
+  /* ─── V2 STAT BAND (Tone C) ─── */
+  .motion-v2 .v2-stat-band {
+    background: var(--green-ghost);
+    padding: 144px 48px;
+    text-align: center;
+  }
+  .motion-v2 .v2-stat-band-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 12px; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--green-mid);
+    margin-bottom: 24px;
+  }
+  .motion-v2 .v2-stat-band-value {
+    font-family: 'Space Mono', monospace;
+    font-size: clamp(40px, 8.5vw, 96px);
+    font-weight: 500; color: var(--green-deep);
+    letter-spacing: -3px; line-height: 1;
+    margin-bottom: 24px;
+  }
+  .motion-v2 .v2-stat-band-value .v2-dash {
+    color: var(--green-mid); font-weight: 400;
+    margin: 0 clamp(4px, 1vw, 12px);
+  }
+  .motion-v2 .v2-stat-band-sub {
+    font-size: 18px; color: var(--slate-600);
+    max-width: 480px; margin: 0 auto; line-height: 1.5;
+  }
+
+  /* ─── V2 SIGNATURE STAT (Tone D — EBITDA moment) ─── */
+  .motion-v2 .v2-signature-stat {
+    background: var(--green-deep);
+    padding: 144px 48px;
+    text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .motion-v2 .v2-signature-stat::before {
+    content: ''; position: absolute;
+    top: -200px; right: -200px;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(149,213,178,0.08), transparent 70%);
+    pointer-events: none;
+  }
+  .motion-v2 .v2-signature-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 12px; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--green-accent);
+    margin-bottom: 24px; position: relative;
+  }
+  .motion-v2 .v2-signature-value {
+    font-family: 'Space Mono', monospace;
+    font-size: clamp(44px, 9vw, 96px);
+    font-weight: 500; color: var(--white);
+    letter-spacing: -4px; line-height: 1;
+    margin-bottom: 28px; position: relative;
+    display: flex; align-items: center; justify-content: center;
+    gap: clamp(12px, 2vw, 24px); flex-wrap: wrap;
+  }
+  .motion-v2 .v2-signature-value .v2-arrow {
+    color: var(--green-accent); font-weight: 400;
+  }
+  .motion-v2 .v2-signature-sub {
+    font-size: 18px; color: rgba(255,255,255,0.7);
+    max-width: 520px; margin: 0 auto; line-height: 1.5;
+    position: relative;
+  }
+
+  /* ─── V2 STATEMENT BAND (Tone C — "You only pay") ─── */
+  .motion-v2 .v2-statement-band {
+    background: var(--green-ghost);
+    padding: 144px 48px;
+    text-align: center;
+  }
+  .motion-v2 .v2-statement-band-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 12px; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--green-mid);
+    margin-bottom: 24px;
+  }
+  .motion-v2 .v2-statement-band-title {
+    font-size: clamp(36px, 5.5vw, 64px);
+    font-weight: 500; color: var(--green-deep);
+    letter-spacing: -2px; line-height: 1.1;
+    max-width: 900px; margin: 0 auto 20px;
+  }
+  .motion-v2 .v2-statement-band-sub {
+    font-size: 18px; color: var(--slate-600);
+    max-width: 560px; margin: 0 auto; line-height: 1.5;
+  }
+
+  /* Responsive padding for v2 sections */
+  @media (max-width: 900px) {
+    .motion-v2 .v2-stat-band,
+    .motion-v2 .v2-signature-stat,
+    .motion-v2 .v2-statement-band { padding: 88px 24px; }
+    .motion-v2 .v2-statement-stack { gap: 24px; padding: 0 16px; }
+  }
 </style>
 <noscript><style>.reveal,.page-hero .section-label,.page-hero .section-title,.page-hero .section-desc{opacity:1;transform:none;transition:none;}</style></noscript>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-H2LBJT03WE"></script>
@@ -295,7 +422,7 @@ document.head.appendChild(o)}initApollo();</script>
 }
 </script>
 </head>
-<body>
+<body class="motion-v2">
 
 <!-- NAV -->
 <nav id="nav">
@@ -362,15 +489,33 @@ document.head.appendChild(o)}initApollo();</script>
 <!-- SECTION 2: PAIN -->
 <section class="pain-section">
   <div class="pain-monthly reveal">
-    <div class="pain-monthly-number">$17,000</div>
+    <div class="pain-monthly-number countup" data-to="17000" data-format="currency">$17,000</div>
     <div class="pain-monthly-sub">That's how much your dispensary loses <em>every month</em> in vendor credits nobody's tracking.</div>
   </div>
-  <div class="pain-lines reveal">
-    <span class="pain-pill"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg> Returns nobody filed</span>
-    <span class="pain-pill"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Expired product nobody credited</span>
-    <span class="pain-pill"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg> Discounts vendors should have shared</span>
+  <div class="v2-statement-stack reveal-stagger">
+    <div class="v2-statement reveal">
+      <div class="v2-statement-main">Returns nobody filed.</div>
+      <div class="v2-statement-sub">Defective product goes back in Metrc. The credit memo never follows.</div>
+    </div>
+    <div class="v2-statement reveal">
+      <div class="v2-statement-main">Expired product nobody credited.</div>
+      <div class="v2-statement-sub">Shelf life runs out, packages get destroyed, the vendor invoice doesn't change.</div>
+    </div>
+    <div class="v2-statement reveal">
+      <div class="v2-statement-main">Discounts vendors should have shared.</div>
+      <div class="v2-statement-sub">You ran the promo. They got the volume. Nobody asked for the co-marketing credit.</div>
+    </div>
   </div>
   <p class="pain-pivot reveal">We recover your vendor credits. You keep the money.</p>
+</section>
+
+<!-- V2 STAT BAND — typical per-evaluation finding (Tone C breath) -->
+<section class="v2-stat-band reveal">
+  <div class="v2-stat-band-label">Typical Finding</div>
+  <div class="v2-stat-band-value">
+    <span class="countup" data-to="8" data-format="currency-k" data-force="true">$8K</span><span class="v2-dash">–</span><span class="countup" data-to="25" data-format="currency-k" data-force="true">$25K</span>
+  </div>
+  <div class="v2-stat-band-sub">per month in unrecovered vendor credits, found in a free ShelfSpace evaluation.</div>
 </section>
 
 <!-- SECTION 3: CALCULATOR + INLINE GUARANTEE + CTA -->
@@ -407,12 +552,7 @@ document.head.appendChild(o)}initApollo();</script>
           <div class="calc-range-month"><span id="calc-high-month">$7,500</span>/mo</div>
         </div>
       </div>
-      <div class="calc-margin-row">
-        <span>EBITDA impact</span>
-        <span id="calc-margin">15.0% → 17.0%</span>
-      </div>
     </div>
-    <p style="text-align:center;margin-top:12px;font-size:13px;color:var(--green-mid);font-weight:500;">Recovered credits drop straight to the bottom line. Same revenue, same overhead — higher EBITDA.</p>
     <p class="calc-proof">Depends on vendor mix, credit terms, and how much is currently being tracked. The free evaluation shows your actual number.</p>
     <p style="text-align:center;margin-top:16px;font-size:11px;color:var(--slate-400);">*Total credits recovered is an estimate, not a guarantee.</p>
     <div class="calc-guarantee reveal">
@@ -423,6 +563,17 @@ document.head.appendChild(o)}initApollo();</script>
       <p style="font-size:14px;color:var(--slate-400);margin-top:12px;">Minutes to connect. Report within days.</p>
     </div>
   </div>
+</section>
+
+<!-- V2 SIGNATURE STAT — EBITDA moment (Tone D) -->
+<section class="v2-signature-stat">
+  <div class="v2-signature-label reveal">EBITDA impact at typical recovery</div>
+  <div class="v2-signature-value reveal">
+    <span class="countup" id="ebitda-before" data-to="15" data-format="percent" data-decimals="1" data-force="true">15.0%</span>
+    <span class="v2-arrow">→</span>
+    <span class="countup" id="ebitda-after" data-to="17" data-format="percent" data-decimals="1" data-force="true">17.0%</span>
+  </div>
+  <div class="v2-signature-sub reveal">Recovered credits drop straight to the bottom line. Same revenue, same overhead.</div>
 </section>
 
 <!-- METRC TRUST STRIP -->
@@ -487,6 +638,13 @@ document.head.appendChild(o)}initApollo();</script>
       <p style="font-size:13px;color:var(--slate-400);margin-top:12px;font-style:italic;">Based on real Metrc data. Your numbers will be different — that's the whole point.</p>
     </div>
   </div>
+</section>
+
+<!-- V2 STATEMENT BAND — "You only pay" (Tone C breath before the close) -->
+<section class="v2-statement-band">
+  <div class="v2-statement-band-label reveal">The Deal</div>
+  <h2 class="v2-statement-band-title reveal">You only pay when we find money.</h2>
+  <p class="v2-statement-band-sub reveal">Free evaluation. No contract, no minimum. If we don't recover credits, you don't pay.</p>
 </section>
 
 <!-- SECTION 4: PROOF TIMELINE -->
@@ -591,6 +749,10 @@ document.head.appendChild(o)}initApollo();</script>
   <div class="footer-bottom"><p>&copy; 2026 ShelfSpace Technologies Inc.</p><div style="display:flex;align-items:center;gap:8px;justify-content:center;margin-top:12px;"><img src="/metrc-logo.png" alt="METRC" style="height:18px;opacity:0.4;filter:brightness(0) invert(1);"><span style="font-size:11px;color:rgba(255,255,255,0.35);">Certified METRC Third-Party Vendor</span></div><div class="footer-bottom-links"><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div></div>
 </footer>
 
+<!-- Motion v2 (stagger + countup). Place BEFORE the inline page script below
+     so stagger children get marked .staggered before the reveal observer runs. -->
+<script src="/motion.js"></script>
+
 <script>
 (function() {
   var nav = document.getElementById('nav');
@@ -619,7 +781,7 @@ document.head.appendChild(o)}initApollo();</script>
       }
     });
   }, { threshold: 0.1 });
-  document.querySelectorAll('.reveal').forEach(function(el) { revealObserver.observe(el); });
+  document.querySelectorAll('.reveal:not(.staggered)').forEach(function(el) { revealObserver.observe(el); });
 
   /* ── Scroll handler (rAF + ticking flag) ── */
   function onScroll() {
@@ -676,7 +838,7 @@ document.head.appendChild(o)}initApollo();</script>
   var midMonth = document.getElementById('calc-mid-month');
   var highYear = document.getElementById('calc-high-year');
   var highMonth = document.getElementById('calc-high-month');
-  var marginVal = document.getElementById('calc-margin');
+  var ebitdaAfterEl = document.getElementById('ebitda-after');
 
   function formatCurrency(n) {
     return '$' + Math.round(n).toLocaleString();
@@ -694,10 +856,13 @@ document.head.appendChild(o)}initApollo();</script>
     midMonth.textContent = formatCurrency(mid / 12);
     highYear.textContent = formatCurrency(high);
     highMonth.textContent = formatCurrency(high / 12);
-    /* Credits drop straight to EBITDA — assume 15% baseline */
-    var ebitdaBefore = 15;
-    var ebitdaAfter = ((rev * 0.15 + mid) / rev * 100).toFixed(1);
-    marginVal.textContent = ebitdaBefore + '% → ' + ebitdaAfter + '%';
+    /* EBITDA after — credits drop straight to bottom line, 15% baseline */
+    var ebitdaAfter = parseFloat(((rev * 0.15 + mid) / rev * 100).toFixed(1));
+    if (ebitdaAfterEl && window.motionV2UpdateCountup) {
+      window.motionV2UpdateCountup(ebitdaAfterEl, ebitdaAfter);
+    } else if (ebitdaAfterEl) {
+      ebitdaAfterEl.textContent = ebitdaAfter.toFixed(1) + '%';
+    }
   }
 
   slider.addEventListener('input', updateCalc);
