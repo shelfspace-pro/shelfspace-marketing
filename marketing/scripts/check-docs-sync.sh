@@ -46,8 +46,10 @@ for doc in $(jq -r 'keys[]' "$MANIFEST"); do
   for src in $SOURCES; do
     FULL_PATH="$PLATFORM_DIR/$src"
 
-    # Check if source file was deleted
-    if [ ! -f "$FULL_PATH" ]; then
+    # Check if source file OR directory was deleted. `-e` catches both;
+    # `-f` alone misses manifest entries that are directory paths like
+    # `app/api/payments/`, flagging them as deleted when they still exist.
+    if [ ! -e "$FULL_PATH" ]; then
       DELETED_REPORT="$DELETED_REPORT\n  ⛔ $doc → source deleted: $src"
       continue
     fi
