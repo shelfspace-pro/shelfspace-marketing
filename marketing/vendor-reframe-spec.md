@@ -96,6 +96,11 @@ Use this for sitewide search-and-replace passes. Always review in context — th
 | 1.8 | `:480` Chapter 3 resolution | `…created credit memos for every qualifying event, and worked with vendors to get them approved.` | `…built documented credit memos against the agreement terms both sides already signed, sent them with line-item Metrc backup, and got cleaner approvals because the math was auditable.` | Vendors approve faster *because* the doc is clean. Verifies against platform-map (`credit_memo_documents` table exists). No SLA claim. |
 | 1.9 | `:631` Case card #6 headline | `Settlement dispute resolved in 24 hours with data` | `Settlement question answered in 24 hours with shared data` | "Dispute" implies adversaries. |
 | 1.10 | `:761–762` Case card #18 (CEO email) | `We took over vendor emails — the owner never answered another one.` / `He hasn't answered one since.` | `We took over vendor emails — vendors get instant answers, the owner gets his inbox back.` / `Vendors now get answers in seconds; he hasn't had to triage a vendor email since.` | Today the vendor reads as an interruption. |
+| 1.11 | `:583` case summary | `…killed it the same day.` | `…stopped it the same day.` | Glossary: "killed" is gotcha-coded. |
+| 1.12 | `:585, :595` case-speed labels | `Same-day catch` (×2) | `Same-day fix` (×2) | Glossary: "catch" is gotcha-coded. |
+| 1.13 | `:592` Case card headline | `Caught a shorted delivery before payment went out` | `Flagged a shorted delivery before payment went out` | Glossary. |
+| 1.14 | `:703` case summary | `…caught 3 shortages in 14 days.` | `…flagged 3 shortages in 14 days.` | Glossary. |
+| 1.15 | `:742` Case card headline | `We caught 12 wrong invoices in one month using Metrc` | `We flagged 12 invoice mismatches in one month using Metrc` | Glossary: "caught" + softens "wrong" to "mismatches". |
 
 **No-change (audited and intentionally unchanged):** hero H1 `:387` (already system-framed), Chapter 1 (consignment story is bilateral), pivot section copy `:487–488`, calculator subtag `:552`, Metrc integration callout, all Apollo/GA scripts, all SVG iconography.
 
