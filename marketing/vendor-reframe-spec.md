@@ -86,14 +86,14 @@ Use this for sitewide search-and-replace passes. Always review in context — th
 
 | # | Location | Current | Proposed | Notes |
 |---|---|---|---|---|
-| 1.1 | `:7,12,19` meta/og/twitter description | `Trapped inventory, overpaid invoices, untracked credits. One team found it all. Free analysis.` (138c) | `Trapped inventory, mismatched invoices, untracked credits. One transparency layer surfaces it all — for retailers and vendors.` (147c) | ≤160 ✓ |
+| 1.1 | `:7,12,19` meta/og/twitter description | `We found $500,000 at a two-store dispensary chain. Trapped inventory, overpaid invoices, untracked credits. One team found it all. Free analysis.` | `We found $500,000 at a two-store dispensary chain. Mismatched invoices, untracked credits, trapped inventory — surfaced for retailers and vendors.` (146c) | ≤160 ✓. Keeps $500K proof point at front. |
 | 1.2 | `:299` JSON-LD Organization description | mirror of 1.1 | mirror of 1.1 | |
 | 1.3 | `:425` hero demo Slide 2 title | `Discrepancies Found` | `Mismatches Surfaced` | Red kept — color signals dollar at risk, not vendor blame |
 | 1.4 | `:444` hero demo caption | `Connect → Find → Recover` | `Connect → Reconcile → Recover` | |
 | 1.5 | `:467–469` Chapter 2 subtitle + body | subtitle: `lost to overpaid invoices and manual AP.` body: `Vendors sent invoices. Staff paid them without checking. Deliveries came short but nobody noticed. One person spent 15 hours a week matching invoices, writing checks, and fielding vendor calls.` | subtitle: `lost to invoice/delivery mismatches nobody had time to reconcile.` body: `Invoices arrived from forty vendors a month. Receiving counts lived on a clipboard. Short deliveries quietly cleared. One person spent 15 hours a week matching invoices, writing checks, and fielding vendor calls.` | Same word count. Drops "Staff paid them without checking" (reads as retailer-blame to vendors AND retailers). |
 | 1.6 | `:470` Chapter 2 resolution | `Vendors email us, not them.` | `Vendors email us, not them — and ShelfiQ answers most of them in seconds with live Metrc data, so vendors get faster answers too.` | Adds vendor-win. |
 | 1.7 | `:479` Chapter 3 body | `Discounts the retailers absorbed that vendors should have shared.` | `Co-marketing dollars and shared promo costs committed in vendor agreements but never invoiced back.` | Removes "should have shared" accusation; keeps SEO terms. |
-| 1.8 | `:480` Chapter 3 resolution | `…created credit memos for every qualifying event, and worked with vendors to get them approved.` | `…built documented credit memos against the agreement terms both sides already signed, sent them with line-item Metrc backup, and got approvals in days instead of months.` | Vendors approve faster *because* the doc is clean. Verifies against platform-map (`credit_memo_documents` table exists). |
+| 1.8 | `:480` Chapter 3 resolution | `…created credit memos for every qualifying event, and worked with vendors to get them approved.` | `…built documented credit memos against the agreement terms both sides already signed, sent them with line-item Metrc backup, and got cleaner approvals because the math was auditable.` | Vendors approve faster *because* the doc is clean. Verifies against platform-map (`credit_memo_documents` table exists). No SLA claim. |
 | 1.9 | `:631` Case card #6 headline | `Settlement dispute resolved in 24 hours with data` | `Settlement question answered in 24 hours with shared data` | "Dispute" implies adversaries. |
 | 1.10 | `:761–762` Case card #18 (CEO email) | `We took over vendor emails — the owner never answered another one.` / `He hasn't answered one since.` | `We took over vendor emails — vendors get instant answers, the owner gets his inbox back.` / `Vendors now get answers in seconds; he hasn't had to triage a vendor email since.` | Today the vendor reads as an interruption. |
 
@@ -112,8 +112,8 @@ Use this for sitewide search-and-replace passes. Always review in context — th
 | 2.7 | `:373` pain pivot tagline (**HIGH conversion risk — A/B test**) | `We recover your vendor credits. You keep the money.` (9 words, loss-frame) | `We get the credits your agreements already promised. You keep the money.` (12 words, loss-frame preserved) | **Keeps "you keep the money" punch.** Drops "recover from vendors" implication; replaces with "agreement already promised" (contractual, not extractive). Run as A/B vs. control if possible. |
 | 2.8 | `:380` calculator H2 | `How much are you losing in vendor credits?` | `How much in vendor credits is going un-reconciled at your stores?` | Keeps loss frame ("losing"→"un-reconciled" still implies missing money). |
 | 2.9 | `:505` proof timeline Day 14 | `…cross-reference every delivery, return, and waste event in Metrc against what your vendors invoiced.` | `…cross-reference every delivery, return, and waste event in Metrc against existing invoices and vendor agreements — the same data we share with vendors during approval.` | Establishes shared-data principle. |
-| 2.10 | `:513` proof timeline Day 60 | `$200K+ identified. Money that was always yours — now it's back.` | `$200K+ documented and approved. Money your agreements already promised — now reconciled.` | "Always yours" implies someone took it. |
-| 2.11 | `:280, 574` FAQ #4 answer (collection-agency Q) | `…Vendors actually prefer the structure because it's transparent and fair.` | append: `It also gets vendors paid faster — credit memos with line-item Metrc backup approve in days, not months.` | Most-likely landing point for skeptical vendor. JSON-LD mirror at `:280`. |
+| 2.10 | `:513` proof timeline Day 60 | `$200K+ identified. Money that was always yours — now it's back.` | `$200K+ documented and approved. Money your agreements already promised — now in your account.` | "Always yours" implies someone took it. "In your account" preserves the emotional landing of "back". |
+| 2.11 | `:280, 574` FAQ #4 answer (collection-agency Q) | `…Vendors actually prefer the structure because it's transparent and fair.` | append: `It also makes approval easier on the vendor side — credit memos arrive with line-item Metrc backup, so there's documentation to confirm instead of invoicing back-and-forth.` | Most-likely landing point for skeptical vendor. JSON-LD mirror at `:280`. No SLA claim. |
 
 **No-change:** H1 `:324` (system-framed already), title tag `:6` (primary keyword), FAQ #1 `:256, 562` (model line), sample-eval section.
 
@@ -140,7 +140,7 @@ Use this for sitewide search-and-replace passes. Always review in context — th
 | 4.2 | `:294` JSON-LD Service description | mirror of 4.1 | mirror of 4.1 | |
 | 4.3 | `:380` pain pivot | `Unless you switch to consignment — and your vendors own it instead of you.` | `Unless you switch to consignment — vendors own the product, take the expiration risk, and get paid weekly on actual sales.` | Names the vendor benefit (weekly cash, sell-through) — directly defuses the "will my vendors agree" objection. |
 | 4.4 | `:248, 508` FAQ #1 ("Will my vendors agree?") | `Most do. They get guaranteed weekly payments instead of chasing you for months. We handle every conversation.` | `Most do — and most are eager once they see the structure. They get guaranteed weekly settlements with sell-through data on every SKU, instead of chasing payment for months on Net 60. We handle every conversation, contract, and weekly payment cycle.` | Triple down on vendor benefits. JSON-LD mirror required. |
-| 4.5 | `:266, 516` FAQ #3 ("What if product doesn't sell?") | `You haven't paid for it. It goes back to the vendor. That's the entire point.` | `You haven't paid for it. It goes back to the vendor with a documented return through Metrc. That's the entire point.` | **Verify before shipping:** does the platform send a documented return record to vendor on consignment returns? `marketing/platform-map.md` lists `returns` and `credit_memo_documents` tables — likely yes, but confirm in repo before publishing. If not verifiable, drop the "documented return through Metrc" clause and ship the original line. |
+| 4.5 | `:266, 516` FAQ #3 ("What if product doesn't sell?") | `You haven't paid for it. It goes back to the vendor. That's the entire point.` | **No change at this time.** Vendor-friendly "documented return through Metrc" framing was considered but pulled — feature surface unverified per §12. Original line is already neutral and accurate. Revisit after platform verification. |
 
 **No-change:** H1, title tag, calculator section.
 
@@ -287,11 +287,13 @@ Do not ship copy that asserts a feature unless it ships in the platform.
 
 ## 13. Rollout plan
 
-**PR 1 — Tier 1 (high-traffic pages).** Homepage + credit-recovery + AP + consignment. ~3–4 hours of edits. Bundle JSON-LD mirror updates. Two specific items run as A/B tests if A/B tooling exists, else ship as straight swaps with a 2-week conversion-metric baseline:
+**PR 1 — Tier 1 (high-traffic pages).** Homepage + credit-recovery + AP + consignment. ~3–4 hours of edits. Bundle JSON-LD mirror updates.
+
+Site has no A/B tooling (static HTML on Vercel + GA4 + Apollo), so ship as straight swaps and monitor. The two highest-conversion-risk swaps to watch closely:
 - 2.7 (credit-recovery pivot tagline)
 - 3.3 (AP H1)
 
-If conversion drops >5% on either page in the 2-week baseline, revert that specific item.
+Watch GA4 for conversion-event drop on `/credit-recovery` and `/accounts-payable` over 2 weeks post-ship. If conversion drops >5% on either page, revert that specific item via single-line Edit.
 
 **PR 2 — Tier 2 (supporting pages).** about / how-it-works / shelfiq / pricing / features. ~1 hour.
 
