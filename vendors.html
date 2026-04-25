@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ShelfSpace for Vendors — Free Portal, Weekly Checks, No Fees</title>
+<meta name="description" content="Your retailer is on ShelfSpace. Here's what it means for you: weekly checks, a free portal across all your ShelfSpace retailers, no fees ever.">
+<link rel="canonical" href="https://shelfspace.pro/vendors">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://shelfspace.pro/vendors">
+<meta property="og:title" content="ShelfSpace for Vendors — Free Portal, Weekly Checks, No Fees">
+<meta property="og:description" content="Your retailer is on ShelfSpace. Here's what it means for you: weekly checks, a free portal across all your ShelfSpace retailers, no fees ever.">
+<meta property="og:image" content="https://shelfspace.pro/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="ShelfSpace for Vendors — Free Portal, Weekly Checks, No Fees">
+<meta name="twitter:description" content="Your retailer is on ShelfSpace. Here's what it means for you: weekly checks, a free portal across all your ShelfSpace retailers, no fees ever.">
+<meta name="twitter:image" content="https://shelfspace.pro/og-image.png">
+<meta name="apple-mobile-web-app-title" content="ShelfSpace">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+<style>
+  @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-12px); } }
+
+  /* ─── HERO ─── */
+  .page-hero { padding: 160px 48px 60px; text-align: center; position: relative; overflow: hidden; }
+  .hero-bg-gradient { position: absolute; top: -30%; right: -20%; width: 700px; height: 700px; background: radial-gradient(circle, rgba(149,213,178,0.18) 0%, rgba(149,213,178,0) 70%); animation: float 8s ease-in-out infinite; pointer-events: none; }
+  .hero-bg-gradient-2 { position: absolute; bottom: -20%; left: -15%; width: 550px; height: 550px; background: radial-gradient(circle, rgba(27,67,50,0.06) 0%, rgba(27,67,50,0) 70%); animation: float 10s ease-in-out infinite; animation-delay: -3s; pointer-events: none; }
+  .hero-grid-lines { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 1200px; height: 100%; opacity: 0.035; background-image: linear-gradient(var(--green-deep) 1px, transparent 1px), linear-gradient(90deg, var(--green-deep) 1px, transparent 1px); background-size: 80px 80px; pointer-events: none; }
+  .page-hero .section-label,
+  .page-hero .section-title,
+  .page-hero .section-desc { opacity: 0; transform: translateY(30px); position: relative; }
+  .page-hero .section-label { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1); }
+  .page-hero .section-title { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s, transform 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s; max-width: 780px; margin-left: auto; margin-right: auto; font-size: clamp(32px, 4vw, 48px); }
+  .page-hero .section-desc { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1) 0.25s, transform 0.8s cubic-bezier(0.22,1,0.36,1) 0.25s; max-width: 640px; margin-left: auto; margin-right: auto; }
+  .page-hero.hero-loaded .section-label,
+  .page-hero.hero-loaded .section-title,
+  .page-hero.hero-loaded .section-desc { opacity: 1; transform: translateY(0); }
+
+  /* ─── REVEAL ─── */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1); }
+  .reveal.is-visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+
+  /* ─── 30-SECOND ANSWER (article-glance variant) ─── */
+  .quick-answer {
+    max-width: 720px; margin: 0 auto 80px; padding: 32px 36px;
+    background: var(--green-ghost);
+    border: 1px solid rgba(149,213,178,0.4);
+    border-radius: 16px;
+  }
+  .quick-answer-label {
+    font-family: var(--font-mono); font-size: 12px; font-weight: 700;
+    letter-spacing: 1.5px; text-transform: uppercase; color: var(--green-mid);
+    margin-bottom: 18px;
+  }
+  .quick-answer ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 18px; }
+  .quick-answer li { font-size: 16px; line-height: 1.6; color: var(--slate-600); padding-left: 24px; position: relative; }
+  .quick-answer li::before { content: ''; position: absolute; left: 0; top: 10px; width: 8px; height: 8px; border-radius: 50%; background: var(--green-accent); }
+  .quick-answer li strong { color: var(--green-deep); font-weight: 700; }
+
+  /* ─── COMPARISON TABLE (neutral — no red) ─── */
+  .compare-section { padding: 0 48px 80px; }
+  .compare-header { text-align: center; max-width: 640px; margin: 0 auto 40px; }
+  .compare-table-wrap { max-width: 880px; margin: 0 auto; }
+  .compare-table { width: 100%; border-collapse: collapse; border-radius: 12px; overflow: hidden; border: 1px solid var(--slate-200); }
+  .compare-table th { padding: 16px 20px; font-size: 13px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; text-align: left; }
+  .compare-table th.col-today { background: var(--slate-50); color: var(--slate-500); width: 50%; }
+  .compare-table th.col-shelf { background: var(--green-ghost); color: var(--green-deep); width: 50%; }
+  .compare-table td { padding: 16px 20px; font-size: 15px; line-height: 1.55; vertical-align: top; border-top: 1px solid var(--slate-100); }
+  .compare-table td.cell-today { background: var(--slate-50); color: var(--slate-600); }
+  .compare-table td.cell-shelf { color: var(--green-deep); font-weight: 500; }
+
+  /* ─── WHAT DOESN'T CHANGE (Tone B fallback to white) ─── */
+  .doesnt-change { background: var(--slate-50); padding: 96px 48px; }
+  .doesnt-change-inner { max-width: 720px; margin: 0 auto; }
+  .doesnt-change-header { text-align: center; margin-bottom: 40px; }
+  .doesnt-change ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 22px; }
+  .doesnt-change li { font-size: 16px; line-height: 1.7; color: var(--slate-600); padding-left: 28px; position: relative; }
+  .doesnt-change li::before {
+    content: ''; position: absolute; left: 0; top: 10px;
+    width: 14px; height: 14px; border-radius: 50%;
+    background: var(--white); border: 2px solid var(--green-mid);
+  }
+  .doesnt-change li strong { color: var(--green-deep); font-weight: 700; display: inline; }
+
+  /* ─── PORTAL MOCKUP ─── */
+  .portal-section { padding: 96px 48px; }
+  .portal-header { text-align: center; max-width: 640px; margin: 0 auto 40px; }
+  .portal-mockup { max-width: 780px; margin: 0 auto 32px; }
+  .portal-frame {
+    background: #1b4332; border-radius: 14px; overflow: hidden;
+    box-shadow: 0 30px 80px rgba(27,67,50,0.18);
+  }
+  .portal-titlebar {
+    display: flex; align-items: center; gap: 8px;
+    padding: 12px 16px; background: #2d6a4f;
+  }
+  .portal-dot { width: 10px; height: 10px; border-radius: 50%; }
+  .portal-dot--r { background: #ef4444; }
+  .portal-dot--y { background: #eab308; }
+  .portal-dot--g { background: #22c55e; }
+  .portal-titlebar-url { font-family: var(--font-mono); font-size: 11px; color: #95d5b2; margin-left: 10px; }
+  .portal-titlebar-context { font-family: var(--font-mono); font-size: 11px; color: rgba(149,213,178,0.6); margin-left: auto; }
+  .portal-screen { background: var(--white); padding: 28px 28px 24px; }
+  .portal-screen-header {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid var(--slate-100);
+  }
+  .portal-screen-header h3 {
+    font-size: 18px; font-weight: 700; color: var(--green-deep); margin: 0;
+    letter-spacing: -0.3px;
+  }
+  .portal-screen-status {
+    font-size: 12px; font-weight: 600; color: var(--green-mid);
+    background: var(--green-ghost); padding: 4px 10px; border-radius: 100px;
+    border: 1px solid rgba(149,213,178,0.3);
+  }
+  .portal-rows { display: flex; flex-direction: column; gap: 12px; }
+  .portal-row {
+    display: grid;
+    grid-template-columns: auto 1fr auto auto auto;
+    gap: 16px; align-items: center;
+    padding: 14px 16px;
+    background: var(--slate-50); border-radius: 10px;
+    border: 1px solid var(--slate-100);
+  }
+  .portal-avatar {
+    width: 36px; height: 36px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .portal-avatar svg { width: 18px; height: 18px; color: var(--white); }
+  .portal-avatar--deep { background: var(--green-deep); }
+  .portal-avatar--mid { background: var(--green-mid); }
+  .portal-avatar--accent { background: var(--green-accent); }
+  .portal-avatar--accent svg { color: var(--green-deep); }
+  .portal-row-name { font-size: 14px; font-weight: 700; color: var(--green-deep); }
+  .portal-row-stat { display: flex; flex-direction: column; gap: 2px; min-width: 110px; }
+  .portal-stat-label { font-size: 10px; font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase; color: var(--slate-400); }
+  .portal-stat-val { font-family: var(--font-mono); font-size: 14px; font-weight: 700; color: var(--green-deep); }
+  .portal-row-btn {
+    background: var(--green-deep); color: var(--white);
+    padding: 8px 14px; border-radius: 8px; font-size: 12px; font-weight: 600;
+    border: none; cursor: pointer;
+  }
+  .portal-caption {
+    font-family: var(--font-mono); font-size: 12px; color: var(--green-mid);
+    text-align: center; margin: 18px auto 0; max-width: 540px;
+    letter-spacing: 0.3px;
+  }
+  .portal-body-copy {
+    max-width: 640px; margin: 32px auto 0; text-align: center;
+    font-size: 16px; line-height: 1.65; color: var(--slate-600);
+  }
+
+  /* ─── FAQ ─── */
+  .faq-section { padding: 96px 48px; background: var(--white); }
+  .faq-header { text-align: center; max-width: 640px; margin: 0 auto 40px; }
+  .faq-list { max-width: 720px; margin: 0 auto; }
+  .faq-list details { border-bottom: 1px solid var(--slate-200); }
+  .faq-list details:first-child { border-top: 1px solid var(--slate-200); }
+  .faq-list summary {
+    padding: 22px 0; font-size: 17px; font-weight: 600;
+    color: var(--green-deep); cursor: pointer; list-style: none;
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  }
+  .faq-list summary::-webkit-details-marker { display: none; }
+  .faq-list summary::after {
+    content: '+'; font-size: 22px; font-weight: 400;
+    color: var(--slate-400); flex-shrink: 0;
+  }
+  .faq-list details[open] summary::after { content: '\2212'; }
+  .faq-list details p {
+    padding: 0 0 22px; margin: 0; font-size: 15px;
+    line-height: 1.7; color: var(--slate-500);
+  }
+
+  /* ─── CONSIGNMENT SUBSECTION ─── */
+  .consignment-section { background: var(--slate-50); padding: 96px 48px; }
+  .consignment-inner { max-width: 720px; margin: 0 auto; }
+  .consignment-header { text-align: center; margin-bottom: 36px; }
+  .consignment-header .section-label { justify-content: center; color: var(--green-mid); }
+  .consignment-header h2 {
+    font-size: clamp(24px, 3vw, 32px); font-weight: 700; color: var(--green-deep);
+    letter-spacing: -0.5px; line-height: 1.25; margin: 16px 0 0;
+  }
+  .consignment-body p {
+    font-size: 16px; line-height: 1.75; color: var(--slate-600);
+    margin-bottom: 22px;
+  }
+  .consignment-body p strong { color: var(--green-deep); font-weight: 700; }
+  .consignment-links {
+    margin-top: 32px; padding-top: 24px;
+    border-top: 1px solid var(--slate-200);
+    font-size: 14px; line-height: 1.7; color: var(--slate-500);
+  }
+  .consignment-links a { color: var(--green-mid); font-weight: 600; text-decoration: none; }
+  .consignment-links a:hover { color: var(--green-deep); text-decoration: underline; }
+
+  /* ─── STAT BAND (45+ vendors) ─── */
+  .stat-band {
+    background: var(--green-ghost);
+    padding: 120px 48px;
+    text-align: center;
+  }
+  .stat-band-num {
+    font-family: var(--font-mono); font-size: clamp(72px, 10vw, 112px);
+    font-weight: 700; color: var(--green-deep);
+    letter-spacing: -4px; line-height: 1;
+    margin-bottom: 20px;
+  }
+  .stat-band-label {
+    font-size: clamp(18px, 2vw, 22px); font-weight: 600;
+    color: var(--green-deep); letter-spacing: -0.3px;
+    max-width: 540px; margin: 0 auto 16px;
+  }
+  .stat-band-sub {
+    font-size: 16px; color: var(--slate-600);
+    max-width: 540px; margin: 0 auto; line-height: 1.5;
+  }
+
+  /* ─── FOUNDER (card + bio) ─── */
+  .founder-section { background: var(--slate-50); padding: 96px 48px; }
+  .founder-inner { max-width: 640px; margin: 0 auto; }
+  .founder-card {
+    display: flex; align-items: center; gap: 18px;
+    margin-bottom: 24px;
+  }
+  .founder-card-photo {
+    width: 80px; height: 80px; border-radius: 50%;
+    object-fit: cover; flex-shrink: 0;
+    box-shadow: 0 4px 14px rgba(27,67,50,0.12);
+  }
+  .founder-card-meta { display: flex; flex-direction: column; gap: 4px; }
+  .founder-card-name { font-size: 18px; font-weight: 700; color: var(--green-deep); letter-spacing: -0.3px; }
+  .founder-card-role { font-family: var(--font-mono); font-size: 13px; color: var(--slate-500); letter-spacing: 0.3px; }
+  .founder-bio {
+    font-size: 16px; line-height: 1.75; color: var(--slate-600);
+    margin: 0;
+  }
+
+  /* ─── CLOSING (soft outbound) ─── */
+  .closing-section { padding: 96px 48px 120px; text-align: center; }
+  .closing-inner { max-width: 640px; margin: 0 auto; }
+  .closing-section h2 {
+    font-size: clamp(22px, 2.6vw, 28px); font-weight: 700;
+    color: var(--green-deep); letter-spacing: -0.5px;
+    margin-bottom: 36px;
+  }
+  .closing-list { display: flex; flex-direction: column; gap: 28px; text-align: left; }
+  .closing-item { padding-left: 24px; position: relative; }
+  .closing-item::before {
+    content: ''; position: absolute; left: 0; top: 11px;
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--green-accent);
+  }
+  .closing-item-q { font-size: 17px; font-weight: 600; color: var(--green-deep); margin-bottom: 4px; }
+  .closing-item-a { font-size: 15px; line-height: 1.6; color: var(--slate-500); }
+  .closing-item-a a { color: var(--green-mid); font-weight: 600; text-decoration: none; }
+  .closing-item-a a:hover { color: var(--green-deep); text-decoration: underline; }
+
+  /* ─── SECTION LABEL/TITLE shared (used in headers) ─── */
+  .section-title {
+    font-size: clamp(24px, 3vw, 32px); font-weight: 700;
+    color: var(--green-deep); letter-spacing: -0.5px; line-height: 1.25;
+    margin: 0 0 14px;
+  }
+
+  /* ─── FOOTER 5-COL ─── */
+  .footer-top { grid-template-columns: 2fr 1fr 1fr 1fr 1fr; }
+  @media (max-width: 900px) { .footer-top { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px) { .footer-top { grid-template-columns: 1fr; } }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    .page-hero { padding: 120px 24px 48px; }
+    .quick-answer { margin: 0 24px 60px; padding: 24px 22px; }
+    .compare-section { padding: 0 24px 60px; }
+    .compare-table { font-size: 14px; }
+    .compare-table th, .compare-table td { padding: 12px 14px; }
+    .doesnt-change { padding: 72px 24px; }
+    .portal-section { padding: 72px 24px; }
+    .portal-row { grid-template-columns: auto 1fr; row-gap: 8px; }
+    .portal-row-stat { grid-column: 2 / -1; }
+    .portal-row-btn { grid-column: 1 / -1; justify-self: stretch; text-align: center; }
+    .faq-section { padding: 72px 24px; }
+    .consignment-section { padding: 72px 24px; }
+    .stat-band { padding: 88px 24px; }
+    .founder-section { padding: 72px 24px; }
+    .founder-card { flex-direction: row; align-items: center; }
+    .closing-section { padding: 72px 24px 88px; }
+  }
+
+  /* ─── REDUCED MOTION ─── */
+  @media (prefers-reduced-motion: reduce) {
+    .reveal,
+    .page-hero .section-label,
+    .page-hero .section-title,
+    .page-hero .section-desc { opacity: 1; transform: none; transition: none; }
+    .hero-bg-gradient, .hero-bg-gradient-2 { animation: none; }
+  }
+</style>
+<noscript><style>.reveal,.page-hero .section-label,.page-hero .section-title,.page-hero .section-desc{opacity:1;transform:none;transition:none;}</style></noscript>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-H2LBJT03WE"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-H2LBJT03WE');</script>
+<script>function initApollo(){var n=Math.random().toString(36).substring(7),o=document.createElement("script");
+o.src="https://assets.apollo.io/micro/website-tracker/tracker.iife.js?nocache="+n,o.async=!0,o.defer=!0,
+o.onload=function(){window.trackingFunctions.onLoad({appId:"69c141b32234890011a43849"})},
+document.head.appendChild(o)}initApollo();</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "ShelfSpace for Vendors",
+  "url": "https://shelfspace.pro/vendors",
+  "description": "Your retailer is on ShelfSpace. Here's what it means for you: weekly checks, a free portal across all your ShelfSpace retailers, no fees ever.",
+  "publisher": { "@type": "Organization", "name": "ShelfSpace", "url": "https://shelfspace.pro" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Does this cost me anything?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. The portal is free, there are no per-transaction fees, and we don't take a percentage of your invoices. We're paid by the retailer, not by you. We've never charged vendors and have no plans to."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "When do I get paid?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Weekly. Once an invoice is both approved by the retailer and past its due date per your terms, it goes into the next weekly check run. You log into the portal and download your check from there. Your terms still apply — we just batch payable invoices into weekly cycles instead of you waiting on the retailer's check-cutting cadence."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What if the retailer doesn't approve my invoice?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We're the AP team now, so the question comes to us first. We triage with Metrc data and delivery records, and most issues resolve within 24 hours without you chasing anyone. If we can't resolve it ourselves, we loop in the retailer directly — you're not stuck in a portal ticket queue waiting on someone to respond."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What kind of check is it? Will my bank accept it?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It's a Check 21–compliant Substitute Check, legally valid under federal law. You can deposit it by mobile phone, print it and walk it into the bank, or process it through remote deposit capture. Your bank doesn't treat it differently from a paper check from the retailer."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What happens if ShelfSpace goes away?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Your relationship with the retailer is unchanged. You'd go back to invoicing them directly, the way you did before. Nothing about your business depends on us continuing to exist — we don't hold your money, we don't hold your data, we don't lock you in."
+      }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://shelfspace.pro/" },
+    { "@type": "ListItem", "position": 2, "name": "For Vendors" }
+  ]
+}
+</script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="/" class="nav-logo">
+    <div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div>
+    <span class="nav-logo-text">ShelfSpace</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="/consignment">Consignment</a></li>
+    <li><a href="/accounts-payable">Accounts Payable</a></li>
+    <li><a href="/credit-recovery">Credit Recovery</a></li>
+    <li><a href="/pricing">Pricing</a></li>
+    <li><a href="/about">About</a></li>
+    <li><a href="/contact" class="nav-cta">Get Started <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a></li>
+  </ul>
+  <div class="nav-hamburger" onclick="document.querySelector('.nav-links').classList.toggle('mobile-open'); event.stopPropagation();"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- SECTION 1: HERO -->
+<div class="page-hero">
+  <div class="hero-bg-gradient"></div>
+  <div class="hero-bg-gradient-2"></div>
+  <div class="hero-grid-lines"></div>
+  <div class="section-label">For Vendors</div>
+  <h1 class="section-title">Your retailer is on ShelfSpace. Here's what that means for you.</h1>
+  <p class="section-desc">Plain English: free portal, no fees, weekly check runs that clear on your terms, all your ShelfSpace retailers in one login.</p>
+</div>
+
+<!-- SECTION 2: 30-SECOND ANSWER -->
+<div class="quick-answer reveal">
+  <div class="quick-answer-label">The 30-Second Answer</div>
+  <ul>
+    <li><strong>It costs you nothing.</strong> Free portal, no per-transaction fees, no percentage of your invoices. We're paid by the retailer, never by you.</li>
+    <li><strong>You get paid weekly.</strong> Every invoice that's due and approved goes out in that week's check run, paid by Check 21–compliant check you can deposit by phone or print.</li>
+    <li><strong>You see everything in one place.</strong> All your ShelfSpace retailers in a single login at <strong>ourshelf.space</strong> — payments, settlements, sales data, credit memos.</li>
+  </ul>
+</div>
+
+<!-- SECTION 3: WHAT CHANGES (comparison table — NEUTRAL, no red) -->
+<section class="compare-section">
+  <div class="compare-header reveal">
+    <h2 class="section-title">What changes for you</h2>
+  </div>
+  <div class="compare-table-wrap reveal">
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th class="col-today">Today</th>
+          <th class="col-shelf">With ShelfSpace</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="cell-today">You invoice the retailer; you call AP if it's late</td>
+          <td class="cell-shelf">Same invoice — paid weekly through us, or Metrc-driven settlement if you ship on consignment</td>
+        </tr>
+        <tr>
+          <td class="cell-today">Wait past terms when the retailer's behind</td>
+          <td class="cell-shelf">Paid in the next weekly check run after your invoice is due</td>
+        </tr>
+        <tr>
+          <td class="cell-today">Email asking "where's my check?"</td>
+          <td class="cell-shelf">Log in, download your check yourself the day it's cut</td>
+        </tr>
+        <tr>
+          <td class="cell-today">Credit memo conversations happen over phone or email</td>
+          <td class="cell-shelf">Credit memos sent through the portal — you approve or dispute in one click</td>
+        </tr>
+        <tr>
+          <td class="cell-today">Sales data: whatever the retailer chooses to share</td>
+          <td class="cell-shelf">Real-time sell-through visibility on your products at every ShelfSpace retailer</td>
+        </tr>
+        <tr>
+          <td class="cell-today">Multiple retailers = multiple AP contacts and systems</td>
+          <td class="cell-shelf">One login covers every ShelfSpace retailer you work with</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- SECTION 4: WHAT DOESN'T CHANGE (the trust spine) -->
+<section class="doesnt-change">
+  <div class="doesnt-change-inner">
+    <div class="doesnt-change-header reveal">
+      <h2 class="section-title">What doesn't change</h2>
+    </div>
+    <ul>
+      <li class="reveal"><strong>We never take a cut of your invoices.</strong> Not now, not ever. We're paid by the retailer. You aren't.</li>
+      <li class="reveal reveal-delay-1"><strong>You own every credit memo decision.</strong> Yes, ShelfSpace surfaces credit opportunities from the retailer's data — returns, expirations, co-marketing. But every credit memo goes to you for approval. You can dispute or reject any of them. Nothing comes off your invoices without your sign-off.</li>
+      <li class="reveal reveal-delay-2"><strong>You own the relationship with the retailer.</strong> We don't get in the middle of pricing, terms, or sales conversations — we just handle the payment side.</li>
+      <li class="reveal"><strong>You set your own pricing.</strong> ShelfSpace doesn't price your products.</li>
+      <li class="reveal reveal-delay-1"><strong>You set your own payment terms.</strong> Net 7, Net 30, Net 60 — your call. Once an invoice hits its due date and is approved, it goes out in that week's check run.</li>
+      <li class="reveal reveal-delay-2"><strong>You can stop using ShelfSpace any time.</strong> No contract with you, no lock-in, no exit fee.</li>
+      <li class="reveal reveal-delay-3"><strong>Your products, your branding, your sales conversations — unchanged.</strong> ShelfSpace is plumbing, not a marketplace.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- SECTION 5: PORTAL MOCKUP -->
+<section class="portal-section">
+  <div class="portal-header reveal">
+    <h2 class="section-title">The portal is built for vendors</h2>
+  </div>
+  <div class="portal-mockup reveal">
+    <div class="portal-frame">
+      <div class="portal-titlebar">
+        <span class="portal-dot portal-dot--r"></span>
+        <span class="portal-dot portal-dot--y"></span>
+        <span class="portal-dot portal-dot--g"></span>
+        <span class="portal-titlebar-url">ourshelf.space</span>
+        <span class="portal-titlebar-context">Vendor Dashboard</span>
+      </div>
+      <div class="portal-screen">
+        <div class="portal-screen-header">
+          <h3>Your retailers</h3>
+          <span class="portal-screen-status">3 retailers · all current</span>
+        </div>
+        <div class="portal-rows">
+          <div class="portal-row">
+            <div class="portal-avatar portal-avatar--deep">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            </div>
+            <div class="portal-row-name">Retailer A</div>
+            <div class="portal-row-stat">
+              <span class="portal-stat-label">Last check</span>
+              <span class="portal-stat-val">$12,840</span>
+            </div>
+            <div class="portal-row-stat">
+              <span class="portal-stat-label">WTD sales</span>
+              <span class="portal-stat-val">$8,420</span>
+            </div>
+            <button class="portal-row-btn">Download check</button>
+          </div>
+          <div class="portal-row">
+            <div class="portal-avatar portal-avatar--mid">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            </div>
+            <div class="portal-row-name">Retailer B</div>
+            <div class="portal-row-stat">
+              <span class="portal-stat-label">Last check</span>
+              <span class="portal-stat-val">$6,310</span>
+            </div>
+            <div class="portal-row-stat">
+              <span class="portal-stat-label">WTD sales</span>
+              <span class="portal-stat-val">$4,180</span>
+            </div>
+            <button class="portal-row-btn">Download check</button>
+          </div>
+          <div class="portal-row">
+            <div class="portal-avatar portal-avatar--accent">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            </div>
+            <div class="portal-row-name">Retailer C</div>
+            <div class="portal-row-stat">
+              <span class="portal-stat-label">Last check</span>
+              <span class="portal-stat-val">$9,275</span>
+            </div>
+            <div class="portal-row-stat">
+              <span class="portal-stat-label">WTD sales</span>
+              <span class="portal-stat-val">$5,840</span>
+            </div>
+            <button class="portal-row-btn">Download check</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="portal-caption">All your ShelfSpace retailers. One login. No fees, ever.</div>
+  </div>
+  <p class="portal-body-copy reveal">Every vendor working with a ShelfSpace retailer gets free access to the portal. One login, every retailer. Download checks the day they're cut, see real-time sell-through across your customers, approve or dispute credit memos without phone tag, and ask ShelfiQ about anything in plain English.</p>
+</section>
+
+<!-- SECTION 6: MONEY QUESTIONS (FAQ) -->
+<section class="faq-section">
+  <div class="faq-header reveal">
+    <h2 class="section-title">The money questions</h2>
+  </div>
+  <div class="faq-list">
+    <details>
+      <summary>Does this cost me anything?</summary>
+      <p>No. The portal is free, there are no per-transaction fees, and we don't take a percentage of your invoices. We're paid by the retailer, not by you. We've never charged vendors and have no plans to.</p>
+    </details>
+    <details>
+      <summary>When do I get paid?</summary>
+      <p>Weekly. Once an invoice is both approved by the retailer and past its due date per your terms, it goes into the next weekly check run. You log into the portal and download your check from there. Your terms still apply — we just batch payable invoices into weekly cycles instead of you waiting on the retailer's check-cutting cadence.</p>
+    </details>
+    <details>
+      <summary>What if the retailer doesn't approve my invoice?</summary>
+      <p>We're the AP team now, so the question comes to us first. We triage with Metrc data and delivery records, and most issues resolve within 24 hours without you chasing anyone. If we can't resolve it ourselves, we loop in the retailer directly — you're not stuck in a portal ticket queue waiting on someone to respond.</p>
+    </details>
+    <details>
+      <summary>What kind of check is it? Will my bank accept it?</summary>
+      <p>It's a Check 21–compliant Substitute Check, legally valid under federal law. You can deposit it by mobile phone, print it and walk it into the bank, or process it through remote deposit capture. Your bank doesn't treat it differently from a paper check from the retailer.</p>
+    </details>
+    <details>
+      <summary>What happens if ShelfSpace goes away?</summary>
+      <p>Your relationship with the retailer is unchanged. You'd go back to invoicing them directly, the way you did before. Nothing about your business depends on us continuing to exist — we don't hold your money, we don't hold your data, we don't lock you in.</p>
+    </details>
+  </div>
+</section>
+
+<!-- SECTION 7: CONSIGNMENT (optional read) -->
+<section class="consignment-section">
+  <div class="consignment-inner">
+    <div class="consignment-header reveal">
+      <div class="section-label">Consignment</div>
+      <h2>If you're being asked to ship on consignment, here's how it works.</h2>
+    </div>
+    <div class="consignment-body reveal">
+      <p><strong>Your product, your inventory, until it sells.</strong> When you ship on consignment, the product lives on the retailer's shelf but stays your property. The retailer's POS sees the unit ring at the register, and that's the trigger that creates the obligation to pay you. No invoice required up front. No COD. No Net 30 from a purchase order that may or may not exist.</p>
+      <p><strong>Settlement runs weekly from POS data.</strong> Every cycle, ShelfSpace pulls the week's POS data and calculates what's owed to you on each unit per your wholesale terms with the retailer. You see the calculation line by line in the portal. Your check is ready that cycle. No invoicing, no chase, no reconciliation calls.</p>
+      <p><strong>Unsold product comes back, no questions.</strong> If a SKU isn't moving, you can pull it. No write-off, no awkward "we need to return this" conversation. Your product, your decision.</p>
+      <div class="consignment-links">
+        Longer reads on the consignment model: <a href="/blog/how-cannabis-consignment-works">How cannabis consignment works</a> · <a href="/blog/vertically-integrated-cannabis-shelfspace">Why vertically integrated companies use ShelfSpace</a> · <a href="/blog/cannabis-reciprocal-buying-consignment">Reciprocal buying on consignment</a>.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 8: PLATFORM TODAY (stat band) -->
+<section class="stat-band">
+  <div class="stat-band-num reveal">45+</div>
+  <div class="stat-band-label reveal reveal-delay-1">Massachusetts cannabis vendors paid weekly through ShelfSpace.</div>
+  <div class="stat-band-sub reveal reveal-delay-2">If you sell into MA, there's a good chance one of your retailers is already on the platform.</div>
+</section>
+
+<!-- SECTION 9: BUILT BY AN OPERATOR (founder card + bio) -->
+<section class="founder-section">
+  <div class="founder-inner">
+    <div class="founder-card reveal">
+      <img src="/chris-mitchem.jpg" alt="Chris Mitchem" class="founder-card-photo">
+      <div class="founder-card-meta">
+        <div class="founder-card-name">Chris Mitchem</div>
+        <div class="founder-card-role">Founder · ShelfSpace</div>
+      </div>
+    </div>
+    <p class="founder-bio reveal reveal-delay-1">Chris ran a vertically integrated cannabis company for nearly a decade — production and retail. He's been the vendor waiting months on a check, and he's been the retailer trying to verify what got delivered. ShelfSpace exists because both sides deserve better. We're cannabis-specific, METRC-certified, and bank-grade secure.</p>
+  </div>
+</section>
+
+<!-- SECTION 10: CLOSING -->
+<section class="closing-section">
+  <div class="closing-inner">
+    <h2 class="reveal">Three ways to take the next step.</h2>
+    <div class="closing-list">
+      <div class="closing-item reveal">
+        <div class="closing-item-q">Have an account?</div>
+        <div class="closing-item-a">Log in at <a href="https://ourshelf.space">ourshelf.space</a>.</div>
+      </div>
+      <div class="closing-item reveal reveal-delay-1">
+        <div class="closing-item-q">Have a question?</div>
+        <div class="closing-item-a">Email <a href="mailto:support@shelfspace.pro">support@shelfspace.pro</a> — we usually reply within a business day.</div>
+      </div>
+      <div class="closing-item reveal reveal-delay-2">
+        <div class="closing-item-q">Prefer to talk to your retailer directly?</div>
+        <div class="closing-item-a">They asked us to be the system that pays you. They're the right first stop for any concern about the change.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="/" class="nav-logo"><div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div><span class="nav-logo-text">ShelfSpace</span></a>
+      <p>Every Vendor. Every Payment. One Engine.</p>
+    </div>
+    <div class="footer-col"><h4>Services</h4><ul><li><a href="/consignment">Consignment</a></li><li><a href="/accounts-payable">Accounts Payable</a></li><li><a href="/credit-recovery">Credit Recovery</a></li><li><a href="/checks">Check Payments</a></li><li><a href="/shelfiq">ShelfiQ</a></li></ul></div>
+    <div class="footer-col"><h4>Platform</h4><ul><li><a href="/features">Features</a></li><li><a href="/how-it-works">How It Works</a></li><li><a href="/pricing">Pricing</a></li><li><a href="/about">About</a></li><li><a href="/blog">Blog</a></li><li><a href="/docs">Docs</a></li></ul></div>
+    <div class="footer-col"><h4>Access</h4><ul><li><a href="https://ourshelf.space">Login</a></li><li><a href="/contact">Sign Up</a></li><li><a href="/contact">Contact</a></li><li><a href="/vendors">For Vendors</a></li></ul></div>
+    <div class="footer-col"><h4>Company</h4><ul><li><a href="mailto:chris@shelfspace.pro">Email</a></li><li><a href="mailto:support@shelfspace.pro">Support</a></li><li><a href="https://linkedin.com/company/shelfspace-pro" target="_blank" rel="noopener" class="footer-social-link"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> LinkedIn</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><p>&copy; 2026 ShelfSpace Technologies Inc.</p><div style="display:flex;align-items:center;gap:8px;justify-content:center;margin-top:12px;"><img src="/metrc-logo.png" alt="METRC" style="height:18px;opacity:0.4;filter:brightness(0) invert(1);"><span style="font-size:11px;color:rgba(255,255,255,0.35);">Certified METRC Third-Party Vendor</span></div><div class="footer-bottom-links"><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div></div>
+</footer>
+
+<script>
+(function() {
+  var nav = document.getElementById('nav');
+  var pageHero = document.querySelector('.page-hero');
+
+  /* ── Hero entrance ── */
+  requestAnimationFrame(function() {
+    nav.classList.toggle('scrolled', window.scrollY > 20);
+    if (pageHero) pageHero.classList.add('hero-loaded');
+  });
+
+  /* ── Scroll-triggered reveals ── */
+  var revealObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(function(el) { revealObserver.observe(el); });
+
+  /* ── Nav scroll state ── */
+  window.addEventListener('scroll', function() {
+    nav.classList.toggle('scrolled', window.scrollY > 20);
+  }, { passive: true });
+
+  /* ── Close mobile nav on outside click ── */
+  document.addEventListener('click', function() {
+    var navLinks = document.querySelector('.nav-links');
+    if (navLinks && navLinks.classList.contains('mobile-open')) {
+      navLinks.classList.remove('mobile-open');
+    }
+  });
+})();
+</script>
+<script src="/shelfiq-widget.js"></script>
+</body>
+</html>
