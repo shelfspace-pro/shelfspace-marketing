@@ -29,13 +29,14 @@
 | /docs/credit-recovery/co-marketing | Co-Marketing Credits | dispensary co-op vendor marketing | promotions table, credit_memos (reason=Comarketing) | /docs/credit-recovery/overview, /docs/promotions/overview |
 | /docs/credit-recovery/approval-workflow | Credit Memo Approval Process | credit memo approval cannabis | credit_memo_responses, disputes table, credit_memos statuses | /docs/credit-recovery/overview |
 
-### Accounts Payable (4 pages)
+### Accounts Payable (5 pages)
 | URL | Title | Primary Keyword | Source Files | Cross-links |
 |-----|-------|----------------|-------------|-------------|
 | /docs/accounts-payable/overview | How Managed AP Works | cannabis dispensary accounts payable | /app/api/payments/, /app/api/purchase-orders/, purchase_orders table, payments table, invoices table | /accounts-payable, /docs/accounts-payable/creating-payments |
 | /docs/accounts-payable/vendor-onboarding | Vendor Onboarding | onboard cannabis vendor | /app/api/users/invite, vendor signup flow | /docs/vendor-portal/overview |
 | /docs/accounts-payable/creating-payments | Payments and Check Generation | cannabis vendor check payment | /app/api/payments/, payments table, bank_accounts table | /docs/checks/overview |
 | /docs/accounts-payable/invoice-verification | Invoice Verification and Delivery Matching | verify cannabis vendor invoice | invoices table, purchase_orders table, deliveries table | /docs/accounts-payable/overview, /docs/deliveries/overview |
+| /docs/accounts-payable/email-deliveries | How to Manage Cannabis Deliveries by Email | manage cannabis deliveries by email | /lib/shelfiq/create-delivery-from-invoice.ts, /lib/shelfiq/retailer-ap-tools.ts, /lib/shelfiq/thread.ts, /lib/deliveries/notify-delivery-received.ts, /app/api/inbound-email/ | /docs/deliveries/overview, /docs/shelfiq/tools, /docs/accounts-payable/invoice-verification |
 
 ### QuickBooks (2 pages)
 | URL | Title | Primary Keyword | Source Files | Cross-links |
@@ -116,7 +117,6 @@ They are partially referenced in existing pages but warrant their own pages in a
 
 | Module | Currently Referenced In | Notes |
 |--------|------------------------|-------|
-| Retailer AP Email Bot | /docs/shelfiq/tools (tangential) | Customer-facing email ingestion; deserves own page |
 | Conversion Credits | /docs/consignment/overview (tangential) | Wholesale-to-consignment conversion tracking |
 | Reps Portal | none | Sales rep management, commissions; separate portal |
 | Bulk Onboarding | /docs/getting-started (tangential) | CSV/XLSX import for retailers, vendors, inventory |
