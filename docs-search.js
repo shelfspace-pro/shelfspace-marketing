@@ -6,13 +6,13 @@
 
   var DOCS = [
     { t: "Getting Started with ShelfSpace", d: "Setup for dispensaries — live in under a week. What to expect during onboarding and what we handle for you.", s: "Getting Started", u: "/docs/getting-started", k: "onboarding setup live week" },
-    { t: "How Consignment Works", d: "Vendor-owned inventory, weekly settlements, profit splits. We handle the math and the checks.", s: "Consignment", u: "/docs/consignment/overview", k: "scan-based trading SBT" },
+    { t: "How Consignment Works", d: "Vendor-owned inventory, weekly settlements, profit splits. We handle the math and the checks.", s: "Consignment", u: "/docs/consignment/overview", k: "consigned model pay after sale" },
     { t: "Weekly Consignment Settlements", d: "How weekly payouts are calculated from POS data, category splits, aging discounts, and credits. Penny-precise.", s: "Consignment", u: "/docs/consignment/settlements", k: "payout weekly" },
     { t: "Reading Your Settlement Report", d: "Payout table, returns, discounts, inventory snapshot, and final check. How to read every section.", s: "Consignment", u: "/docs/consignment/settlement-reports", k: "report" },
     { t: "Consignment Contracts and Terms", d: "Profit splits, shrinkage, discounts, and payment terms. We draft it, you review.", s: "Consignment", u: "/docs/consignment/contracts", k: "agreement" },
-    { t: "Category Splits and Profit Sharing", d: "How category-level splits are negotiated, configured, and applied in weekly settlements.", s: "Consignment", u: "/docs/consignment/profit-splits", k: "split" },
-    { t: "Aging Discounts and Inventory Markdowns", d: "How aging discounts work for expiring product, why they exist, and how they affect settlements.", s: "Consignment", u: "/docs/consignment/aging-discounts", k: "markdown expiring" },
-    { t: "How Credit Recovery Works", d: "ShelfSpace tracks returns, expirations, and co-marketing credits so dispensaries recover what they're owed.", s: "Credit Recovery", u: "/docs/credit-recovery/overview", k: "credit memo recovery" },
+    { t: "Category Splits and Profit Sharing", d: "How category-level splits are negotiated, configured, and applied in weekly settlements.", s: "Consignment", u: "/docs/consignment/profit-splits", k: "split percentage margin gross" },
+    { t: "Aging Discounts and Inventory Markdowns", d: "How aging discounts work for expiring product, why they exist, and how they affect settlements.", s: "Consignment", u: "/docs/consignment/aging-discounts", k: "markdown expiring stale dead stock shrinkage" },
+    { t: "How Credit Recovery Works", d: "We track returns, expirations, and co-marketing credits so dispensaries recover what they're owed.", s: "Credit Recovery", u: "/docs/credit-recovery/overview", k: "credit memo recovery" },
     { t: "Return Credits", d: "We track returned cannabis products in METRC and generate credit memos against vendor payments.", s: "Credit Recovery", u: "/docs/credit-recovery/returns", k: "returns" },
     { t: "Expiration Credits", d: "We monitor expiration dates, flag aging inventory, and generate credit memos for you.", s: "Credit Recovery", u: "/docs/credit-recovery/expirations", k: "expired expiration" },
     { t: "Co-Marketing Credits", d: "We track vendor-funded promotions and generate credit memos so you collect what was agreed to.", s: "Credit Recovery", u: "/docs/credit-recovery/co-marketing", k: "co-op marketing" },
@@ -25,11 +25,11 @@
     { t: "QuickBooks Integration", d: "Settlements, bills, vendor lists, and payment records sync to QuickBooks Online with no manual data entry.", s: "QuickBooks", u: "/docs/quickbooks/overview", k: "QBO sync" },
     { t: "QuickBooks Setup Guide", d: "OAuth connection, vendor mapping, GL account mapping, and bank account configuration. We handle it during onboarding.", s: "QuickBooks", u: "/docs/quickbooks/setup", k: "OAuth GL mapping" },
     { t: "Check 21 Payments", d: "Why cannabis needs Check 21, how digital checks work, and how vendors deposit them.", s: "Checks", u: "/docs/checks/overview", k: "digital check" },
-    { t: "How to Deposit a ShelfSpace Check", d: "Deposit via mobile deposit, print at home, or branch visit. Compatible with every major U.S. bank.", s: "Checks", u: "/docs/checks/depositing", k: "deposit mobile bank" },
-    { t: "Voiding and Reissuing Checks", d: "Cannabis vendor payment void and reissue in one step. Maintain a full audit trail.", s: "Checks", u: "/docs/checks/void-reissue", k: "void reissue" },
+    { t: "How to Deposit a ShelfSpace Check", d: "Deposit via mobile deposit, print at home, or branch visit. Compatible with every major U.S. bank.", s: "Checks", u: "/docs/checks/depositing", k: "deposit mobile bank ACH wire substitute check IRD" },
+    { t: "Voiding and Reissuing Checks", d: "Cannabis vendor payment void and reissue in one step. Maintain a full audit trail.", s: "Checks", u: "/docs/checks/void-reissue", k: "void reissue cancel stop payment lost check" },
     { t: "Cannabis Vendor Portal", d: "Where every vendor checks downloads, payment history, and credit memos across all retailer partners — free.", s: "Vendor Portal", u: "/docs/vendor-portal/overview", k: "vendor portal" },
     { t: "Downloading Vendor Checks", d: "How vendors access, download, and deposit Check 21-compliant payment checks through the secure portal.", s: "Vendor Portal", u: "/docs/vendor-portal/downloading-checks", k: "download check" },
-    { t: "Vendor Payment History", d: "View all payments, filter by date and retailer, export data, and track every dollar through the portal.", s: "Vendor Portal", u: "/docs/vendor-portal/payment-history", k: "history export" },
+    { t: "Vendor Payment History", d: "View all payments, filter by date and retailer, export data, and track every dollar through the portal.", s: "Vendor Portal", u: "/docs/vendor-portal/payment-history", k: "history export csv 1099 statement" },
     { t: "Vendor Dispute Credit Memo", d: "How vendors review credit memos, accept or dispute charges, and upload documentation through the portal.", s: "Vendor Portal", u: "/docs/vendor-portal/disputes", k: "dispute" },
     { t: "ShelfiQ — Cannabis AI Assistant", d: "ShelfiQ answers vendor questions, parses invoices, manages AP, and exports data through a simple chat.", s: "ShelfiQ", u: "/docs/shelfiq/overview", k: "AI chat assistant" },
     { t: "ShelfiQ Tools", d: "AI invoice parsing, vendor matching, payment queries, data exports, and AP management — everything ShelfiQ can do.", s: "ShelfiQ", u: "/docs/shelfiq/tools", k: "tools invoice parsing" },
@@ -133,7 +133,7 @@
     host.innerHTML =
       '<label class="docs-search" for="docs-search">' +
         '<svg class="docs-search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>' +
-        '<input type="search" id="docs-search" placeholder="' + escapeHtml(placeholder) + '" aria-label="Search documentation" aria-controls="docs-search-results" aria-autocomplete="list" autocomplete="off" spellcheck="false">' +
+        '<input type="search" id="docs-search" role="combobox" placeholder="' + escapeHtml(placeholder) + '" aria-label="Search documentation" aria-controls="docs-search-results" aria-haspopup="listbox" aria-autocomplete="list" aria-expanded="false" autocomplete="off" spellcheck="false">' +
         '<kbd class="docs-search-kbd">/</kbd>' +
         '<button type="button" class="docs-search-clear" aria-label="Clear search">' +
           '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>' +
@@ -152,39 +152,54 @@
       var matches = search(q);
       current = matches;
       activeIdx = -1;
+      input.removeAttribute('aria-activedescendant');
 
       if (!q.trim()) {
         resultsEl.classList.remove('is-open');
         resultsEl.innerHTML = '';
+        input.setAttribute('aria-expanded', 'false');
         return;
       }
 
       if (!matches.length) {
         resultsEl.innerHTML = '<div class="docs-search-empty">No matches. Try "settlement", "METRC", or "vendor".</div>';
         resultsEl.classList.add('is-open');
+        input.setAttribute('aria-expanded', 'true');
         return;
       }
 
       var terms = q.toLowerCase().trim().split(/\s+/).filter(Boolean);
       resultsEl.innerHTML = matches.map(function(d, i) {
-        return '<a href="' + d.u + '" class="docs-search-result" role="option" data-idx="' + i + '">' +
+        return '<a href="' + d.u + '" class="docs-search-result" role="option" id="docs-search-result-' + i + '" data-idx="' + i + '" aria-selected="false">' +
           '<div class="docs-search-result-section">' + escapeHtml(d.s) + '</div>' +
           '<div class="docs-search-result-title">' + highlight(d.t, terms) + '</div>' +
           '<div class="docs-search-result-desc">' + highlight(d.d, terms) + '</div>' +
         '</a>';
       }).join('');
       resultsEl.classList.add('is-open');
+      input.setAttribute('aria-expanded', 'true');
     }
 
     function setActive(idx) {
       var items = resultsEl.querySelectorAll('.docs-search-result');
-      items.forEach(function(el, i) { el.classList.toggle('is-active', i === idx); });
-      if (idx >= 0 && items[idx]) items[idx].scrollIntoView({ block: 'nearest' });
+      items.forEach(function(el, i) {
+        var on = i === idx;
+        el.classList.toggle('is-active', on);
+        el.setAttribute('aria-selected', on ? 'true' : 'false');
+      });
+      if (idx >= 0 && items[idx]) {
+        items[idx].scrollIntoView({ block: 'nearest' });
+        input.setAttribute('aria-activedescendant', 'docs-search-result-' + idx);
+      } else {
+        input.removeAttribute('aria-activedescendant');
+      }
       activeIdx = idx;
     }
 
     function close() {
       resultsEl.classList.remove('is-open');
+      input.setAttribute('aria-expanded', 'false');
+      input.removeAttribute('aria-activedescendant');
       activeIdx = -1;
     }
 
