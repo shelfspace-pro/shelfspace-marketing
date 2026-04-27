@@ -216,6 +216,13 @@
     display: none;
   }
 
+  /* ─── SCREEN-READER-ONLY ─── */
+  .sr-only {
+    position: absolute; width: 1px; height: 1px;
+    padding: 0; margin: -1px; overflow: hidden;
+    clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+  }
+
   /* ─── MOBILE ─── */
   @media (max-width: 700px) {
     .blog-section-wrap { padding: 60px 0; }
@@ -269,6 +276,26 @@
   .blog-card[data-rank="19"], .blog-card[data-rank="20"], .blog-card[data-rank="99"],
   .blog-section-rest, .section-view-all, .blog-controls { display: none; }
 </style></noscript>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Blog",
+  "name": "ShelfSpace Blog",
+  "description": "Guides for cannabis dispensary operators — consignment, vendor management, credit recovery, and AP. Written by a 10-year industry operator.",
+  "url": "https://shelfspace.pro/blog",
+  "publisher": { "@type": "Organization", "name": "ShelfSpace", "url": "https://shelfspace.pro" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://shelfspace.pro/" },
+    { "@type": "ListItem", "position": 2, "name": "Blog" }
+  ]
+}
+</script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-H2LBJT03WE"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-H2LBJT03WE');</script>
 <script>function initApollo(){var n=Math.random().toString(36).substring(7),o=document.createElement("script");
@@ -316,7 +343,7 @@ document.head.appendChild(o)}initApollo();</script>
         <span class="featured-label">Featured</span>
         <span class="blog-card-tag">AP</span>
       </div>
-      <h2 class="featured-title">Manage Cannabis Deliveries by Email — A Buyer's Guide</h2>
+      <h2 class="featured-title">Cannabis Deliveries by Email: A Buyer's Guide</h2>
       <p class="featured-desc">How dispensary buyers manage cannabis deliveries by email — forward invoices, update ETAs, attach COAs, and leave notes for the dock crew without touching the portal.</p>
       <span class="featured-cta">Read article <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg></span>
     </a>
@@ -324,7 +351,7 @@ document.head.appendChild(o)}initApollo();</script>
 
   <!-- FILTER + SEARCH -->
   <div class="blog-controls">
-    <div class="blog-filters">
+    <div class="blog-filters" role="group" aria-label="Filter blog posts by category">
       <button class="blog-filter active" data-filter="all">All</button>
       <button class="blog-filter" data-filter="AP">Accounts Payable</button>
       <button class="blog-filter" data-filter="Consignment">Consignment</button>
@@ -334,8 +361,9 @@ document.head.appendChild(o)}initApollo();</script>
     </div>
     <div class="blog-search">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-      <input type="text" placeholder="Search articles..." id="blog-search-input">
+      <input type="text" placeholder="Search articles..." id="blog-search-input" aria-label="Search blog articles">
     </div>
+    <div id="blog-search-announce" class="sr-only" aria-live="polite" aria-atomic="true"></div>
   </div>
 
   <!-- SECTION: CASE STUDIES -->
@@ -639,7 +667,7 @@ document.head.appendChild(o)}initApollo();</script>
       <a href="/blog/manage-cannabis-deliveries-by-email" class="blog-card" data-category="AP" data-rank="99">
         <span class="blog-card-tag">AP</span>
         <div class="blog-card-content">
-          <div class="blog-card-title">Manage Cannabis Deliveries by Email — A Buyer's Guide</div>
+          <div class="blog-card-title">Cannabis Deliveries by Email: A Buyer's Guide</div>
           <div class="blog-card-desc">How dispensary buyers manage cannabis deliveries by email — forward invoices, update ETAs, attach COAs, and leave notes for the dock crew without touching the portal.</div>
         </div>
         <svg class="blog-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
@@ -880,19 +908,27 @@ document.head.appendChild(o)}initApollo();</script>
   var cards = document.querySelectorAll('.blog-card');
   var searchInput = document.getElementById('blog-search-input');
   var noResults = document.getElementById('blog-no-results');
+  var announce = document.getElementById('blog-search-announce');
   var featured = document.querySelector('.blog-featured');
+  var allSections = document.querySelectorAll('.blog-section[data-section-cat]');
   var sectionHeaders = document.querySelectorAll('.section-header');
   var sectionRest = document.querySelector('.blog-section-rest');
   var viewAllLinks = document.querySelectorAll('.section-view-all');
   var blogControls = document.querySelector('.blog-controls');
   var activeFilter = 'all';
 
-  /* Inject section counts from actual card counts (auto-updates as posts added) */
-  document.querySelectorAll('.blog-section[data-section-cat]').forEach(function(sec) {
+  /* Inject section counts + contextual aria-labels on view-all links */
+  allSections.forEach(function(sec) {
     var cat = sec.getAttribute('data-section-cat');
     var count = document.querySelectorAll('.blog-card[data-category="' + cat + '"]').length;
     var span = sec.querySelector('.section-count');
     if (span) span.textContent = count;
+    var viewAll = sec.querySelector('.section-view-all');
+    if (viewAll) {
+      var headerH2 = sec.querySelector('.section-header h2');
+      var sectionName = headerH2 ? headerH2.firstChild.textContent.trim() : cat;
+      viewAll.setAttribute('aria-label', 'View all ' + count + ' ' + sectionName + ' articles');
+    }
   });
 
   function applyFilters() {
@@ -920,7 +956,22 @@ document.head.appendChild(o)}initApollo();</script>
       if (show) visible++;
     });
 
+    /* Hide entire .blog-section containers that have zero visible cards (eliminates phantom margin gaps) */
+    allSections.forEach(function(sec) {
+      var visibleInSection = sec.querySelectorAll('.blog-card:not([style*="display: none"])').length;
+      sec.style.display = (visibleInSection === 0 && !isCurated) ? 'none' : '';
+    });
+
     if (noResults) noResults.style.display = (!isCurated && visible === 0) ? 'block' : 'none';
+
+    /* Announce result count to screen readers */
+    if (announce && !isCurated) {
+      announce.textContent = visible === 0
+        ? 'No articles match.'
+        : visible + (visible === 1 ? ' article matches.' : ' articles match.');
+    } else if (announce) {
+      announce.textContent = '';
+    }
   }
 
   /* Filter pills */
