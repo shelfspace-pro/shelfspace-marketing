@@ -56,14 +56,18 @@ Also check for AI-residue: em-dash overuse, "X, then Y, but Z" cadence, "this is
 
 - `sitemap.xml`: add `<url>` entry with today's `lastmod` and `<priority>0.6</priority>`
 - `llms.txt`: add line under "Blog Articles" — `- {Title}: https://shelfspace.pro/blog/{slug}`
-- `blog.html` (REQUIRED — landing page card grid): insert a new card at the top of `<div class="blog-grid">`. Pick `data-category` from the 5 valid values used by the filter UI: `AP`, `Case Study`, `Consignment`, `Credit Recovery`, `Vendor Management`. Card structure:
+- `blog.html` (REQUIRED — landing page sectioned layout): insert a new compact-row card at the top of the matching category section's `.section-list` (e.g., for an AP post: top of `<div class="section-list">` inside `<section class="blog-section" data-section-cat="AP">`). Set `data-rank="1"` and bump existing cards' ranks. Pick `data-category` from the 5 valid values: `AP`, `Case Study`, `Consignment`, `Credit Recovery`, `Vendor Management`. **Small categories** (Credit Recovery, Vendor Management) go in `<div class="blog-section-rest">` instead — all cards there carry `data-rank="99"`. Card structure:
   ```html
-  <a href="/blog/{slug}" class="blog-card reveal" data-category="{Category}">
-    <div class="blog-card-tag">{Category}</div>
-    <div class="blog-card-title">{post-title minus " — ShelfSpace" suffix}</div>
-    <div class="blog-card-desc">{≤170-char one-line summary; trim from meta description}</div>
+  <a href="/blog/{slug}" class="blog-card" data-category="{Category}" data-rank="1">
+    <span class="blog-card-tag">{Category}</span>
+    <div class="blog-card-content">
+      <div class="blog-card-title">{post-title minus " — ShelfSpace" suffix}</div>
+      <div class="blog-card-desc">{≤170-char one-line summary; trim from meta description}</div>
+    </div>
+    <svg class="blog-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
   </a>
   ```
+  Optionally promote the new post to the **featured slot** at the top of the page (replace `.featured-card` body). The previous featured drops back into its category's `.section-list` at `data-rank="1"`.
 - Cross-link from 1-3 related existing blog posts (find adjacent topics; add a one-line "See also" reference at a natural pivot point — usually toward the end of a related section or near the post's CTA)
 - Case studies: also add the homepage card per `marketing/case-studies.md` rules
 - After all infrastructure edits, run `marketing/scripts/check-blog-sync.sh` to verify zero orphans across blog.html ↔ filesystem ↔ llms.txt

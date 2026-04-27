@@ -61,10 +61,11 @@ When the user drops an email chain, PDF, or describes a situation they want turn
 
 ### When creating a new blog post
 The `/blog-post` and `/case-study` skills handle the full rollout. Manual checklist if you bypass the skills:
-1. Add a card to `blog.html` at the top of `<div class="blog-grid">` with one of: `AP`, `Case Study`, `Consignment`, `Credit Recovery`, `Vendor Management`
-2. Add a line to `llms.txt` under the "Blog Articles" section
-3. Add a `<url>` to `sitemap.xml`
-4. Run `marketing/scripts/check-blog-sync.sh` to verify
+1. Add a compact-row card to the matching category section's `.section-list` in `blog.html` (e.g., for an AP post: top of `<div class="section-list">` inside `<section class="blog-section" data-section-cat="AP">`). Set `data-rank="1"` and bump prior cards' ranks. Categories: `AP`, `Case Study`, `Consignment`, `Credit Recovery`, `Vendor Management`. Small categories (Credit Recovery, Vendor Management) live in `<div class="blog-section-rest">` instead — all cards there carry `data-rank="99"`.
+2. Optionally promote to the **featured slot** at the top of `blog.html` (replace the existing `.featured-card` body). The previous featured drops back to its category's section list.
+3. Add a line to `llms.txt` under the "Blog Articles" section
+4. Add a `<url>` to `sitemap.xml`
+5. Run `marketing/scripts/check-blog-sync.sh` to verify
 
 ## Documentation System
 
