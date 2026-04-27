@@ -213,7 +213,9 @@
   /* Default state = curated. Cards with rank ≥ 4 and the rest container
      are hidden by CSS so initial render matches the curated layout
      even before JS executes. JS adds .blog-flat-mode to body when filter
-     or search is active to switch behavior. */
+     or search is active to switch behavior. Belt-and-suspenders: also
+     zero out height/margin/padding/border to guarantee zero layout
+     contribution under any browser/spec edge case. */
   .blog-card[data-rank="4"],
   .blog-card[data-rank="5"],
   .blog-card[data-rank="6"],
@@ -231,13 +233,42 @@
   .blog-card[data-rank="18"],
   .blog-card[data-rank="19"],
   .blog-card[data-rank="20"],
-  .blog-card[data-rank="99"] { display: none; }
-  .blog-section-rest { display: none; }
+  .blog-card[data-rank="99"] {
+    display: none !important;
+    height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    overflow: hidden !important;
+  }
+  .blog-section-rest {
+    display: none !important;
+    height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+  }
 
-  /* Filter/search mode (set on body by JS) */
-  body.blog-flat-mode .blog-card { display: flex; }
-  body.blog-flat-mode .blog-card.is-hidden-by-filter { display: none; }
-  body.blog-flat-mode .blog-section-rest { display: block; }
+  /* Filter/search mode (set on body by JS) — overrides the !important defaults
+     by being more specific (extra body-class adds specificity). */
+  body.blog-flat-mode .blog-card[data-rank] {
+    display: flex !important;
+    height: auto !important;
+    padding: 16px 18px !important;
+    border: 1px solid transparent !important;
+    border-bottom: 1px solid var(--slate-100) !important;
+    border-radius: 8px !important;
+    overflow: visible !important;
+  }
+  body.blog-flat-mode .blog-card.is-hidden-by-filter {
+    display: none !important;
+  }
+  body.blog-flat-mode .blog-section-rest {
+    display: block !important;
+    height: auto !important;
+    margin-bottom: 48px !important;
+    overflow: visible !important;
+  }
   body.blog-flat-mode .blog-featured { display: none; }
   body.blog-flat-mode .section-header { display: none; }
   body.blog-flat-mode .blog-section.is-empty { display: none; }
