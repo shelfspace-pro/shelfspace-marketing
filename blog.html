@@ -209,6 +209,39 @@
     border-top: 1px solid var(--slate-100);
   }
 
+  /* ─── CURATED-MODE DEFAULT (also covers pre-JS render) ─── */
+  /* Default state = curated. Cards with rank ≥ 4 and the rest container
+     are hidden by CSS so initial render matches the curated layout
+     even before JS executes. JS adds .blog-flat-mode to body when filter
+     or search is active to switch behavior. */
+  .blog-card[data-rank="4"],
+  .blog-card[data-rank="5"],
+  .blog-card[data-rank="6"],
+  .blog-card[data-rank="7"],
+  .blog-card[data-rank="8"],
+  .blog-card[data-rank="9"],
+  .blog-card[data-rank="10"],
+  .blog-card[data-rank="11"],
+  .blog-card[data-rank="12"],
+  .blog-card[data-rank="13"],
+  .blog-card[data-rank="14"],
+  .blog-card[data-rank="15"],
+  .blog-card[data-rank="16"],
+  .blog-card[data-rank="17"],
+  .blog-card[data-rank="18"],
+  .blog-card[data-rank="19"],
+  .blog-card[data-rank="20"],
+  .blog-card[data-rank="99"] { display: none; }
+  .blog-section-rest { display: none; }
+
+  /* Filter/search mode (set on body by JS) */
+  body.blog-flat-mode .blog-card { display: flex; }
+  body.blog-flat-mode .blog-card.is-hidden-by-filter { display: none; }
+  body.blog-flat-mode .blog-section-rest { display: block; }
+  body.blog-flat-mode .blog-featured { display: none; }
+  body.blog-flat-mode .section-header { display: none; }
+  body.blog-flat-mode .blog-section.is-empty { display: none; }
+
   /* ─── NO RESULTS ─── */
   .blog-no-results {
     text-align: center; padding: 60px 20px;
@@ -935,12 +968,10 @@ document.head.appendChild(o)}initApollo();</script>
     var query = searchInput ? searchInput.value.toLowerCase().trim() : '';
     var isCurated = (activeFilter === 'all' && !query);
 
-    /* Toggle featured + section UI */
-    if (featured) featured.style.display = isCurated ? '' : 'none';
-    sectionHeaders.forEach(function(el) { el.style.display = isCurated ? '' : 'none'; });
-    if (sectionRest) sectionRest.style.display = isCurated ? 'none' : '';
+    /* Toggle global mode: curated (CSS-driven) vs flat (JS-driven) */
+    document.body.classList.toggle('blog-flat-mode', !isCurated);
 
-    /* Toggle individual cards */
+    /* Toggle individual cards via class — only meaningful in flat mode */
     var visible = 0;
     cards.forEach(function(card) {
       var cat = card.getAttribute('data-category') || '';
@@ -950,16 +981,19 @@ document.head.appendChild(o)}initApollo();</script>
       var text = ((titleEl ? titleEl.textContent : '') + ' ' + (descEl ? descEl.textContent : '')).toLowerCase();
       var matchFilter = (activeFilter === 'all' || cat === activeFilter);
       var matchSearch = (!query || text.indexOf(query) !== -1);
-      var inCurated = isCurated && rank <= 3;
-      var show = isCurated ? inCurated : (matchFilter && matchSearch);
-      card.style.display = show ? '' : 'none';
-      if (show) visible++;
+      var matchesInFlat = matchFilter && matchSearch;
+      card.classList.toggle('is-hidden-by-filter', !matchesInFlat);
+      if (isCurated) {
+        if (rank <= 3) visible++;
+      } else if (matchesInFlat) {
+        visible++;
+      }
     });
 
-    /* Hide entire .blog-section containers that have zero visible cards (eliminates phantom margin gaps) */
+    /* Mark sections empty so CSS hides them in flat mode */
     allSections.forEach(function(sec) {
-      var visibleInSection = sec.querySelectorAll('.blog-card:not([style*="display: none"])').length;
-      sec.style.display = (visibleInSection === 0 && !isCurated) ? 'none' : '';
+      var anyVisible = sec.querySelectorAll('.blog-card:not(.is-hidden-by-filter)').length > 0;
+      sec.classList.toggle('is-empty', !anyVisible);
     });
 
     if (noResults) noResults.style.display = (!isCurated && visible === 0) ? 'block' : 'none';
