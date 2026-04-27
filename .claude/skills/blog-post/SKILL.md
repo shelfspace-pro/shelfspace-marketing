@@ -56,8 +56,17 @@ Also check for AI-residue: em-dash overuse, "X, then Y, but Z" cadence, "this is
 
 - `sitemap.xml`: add `<url>` entry with today's `lastmod` and `<priority>0.6</priority>`
 - `llms.txt`: add line under "Blog Articles" — `- {Title}: https://shelfspace.pro/blog/{slug}`
+- `blog.html` (REQUIRED — landing page card grid): insert a new card at the top of `<div class="blog-grid">`. Pick `data-category` from the 5 valid values used by the filter UI: `AP`, `Case Study`, `Consignment`, `Credit Recovery`, `Vendor Management`. Card structure:
+  ```html
+  <a href="/blog/{slug}" class="blog-card reveal" data-category="{Category}">
+    <div class="blog-card-tag">{Category}</div>
+    <div class="blog-card-title">{post-title minus " — ShelfSpace" suffix}</div>
+    <div class="blog-card-desc">{≤170-char one-line summary; trim from meta description}</div>
+  </a>
+  ```
 - Cross-link from 1-3 related existing blog posts (find adjacent topics; add a one-line "See also" reference at a natural pivot point — usually toward the end of a related section or near the post's CTA)
 - Case studies: also add the homepage card per `marketing/case-studies.md` rules
+- After all infrastructure edits, run `marketing/scripts/check-blog-sync.sh` to verify zero orphans across blog.html ↔ filesystem ↔ llms.txt
 
 # Step 6 — Audit before commit
 

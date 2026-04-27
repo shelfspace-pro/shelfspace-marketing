@@ -50,6 +50,21 @@ When the user drops an email chain, PDF, or describes a situation they want turn
 3. Create the blog post at `/blog/case-study-{slug}.html`
 4. Add a card to the homepage case study section in `index.html`
 5. Update sitemap.xml and llms.txt
+6. Add a card to `blog.html` (see Blog System below)
+
+## Blog System
+
+### How it works
+- `blog.html` — Blog landing page card grid; every post in `/blog/` MUST have a card
+- `llms.txt` — AI-readable site reference; lists every blog article under "Blog Articles"
+- `marketing/scripts/check-blog-sync.sh` — Detects orphans (filesystem ↔ blog.html ↔ llms.txt) and broken links
+
+### When creating a new blog post
+The `/blog-post` and `/case-study` skills handle the full rollout. Manual checklist if you bypass the skills:
+1. Add a card to `blog.html` at the top of `<div class="blog-grid">` with one of: `AP`, `Case Study`, `Consignment`, `Credit Recovery`, `Vendor Management`
+2. Add a line to `llms.txt` under the "Blog Articles" section
+3. Add a `<url>` to `sitemap.xml`
+4. Run `marketing/scripts/check-blog-sync.sh` to verify
 
 ## Documentation System
 
@@ -74,6 +89,7 @@ When the user drops an email chain, PDF, or describes a situation they want turn
 3. Follow ALL rules in `marketing/docs-instructions.md`
 4. Add entry to `docs-manifest.json`
 5. Add entry to `sitemap.xml`
+6. Add entry to the DOCS array in `/docs-search.js` (title, description, section, url, optional synonym keywords) and bump `?v=N` on every `<script src="/docs-search.js?v=N">` reference site-wide
 
 ## Repo Structure
 
@@ -86,6 +102,7 @@ When the user drops an email chain, PDF, or describes a situation they want turn
 /marketing/           — Internal marketing files (platform-map, docs-plan, etc.)
 /styles.css           — Shared design system CSS
 /shelfiq-widget.js    — Chat widget (included on all pages)
+/docs-search.js       — Docs search (DOCS index + auto-mount; included on all /docs pages)
 /llms.txt             — AI-readable site reference
 /sitemap.xml          — All indexable URLs
 /robots.txt           — Crawl rules

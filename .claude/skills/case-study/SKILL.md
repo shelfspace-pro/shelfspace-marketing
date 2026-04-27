@@ -48,7 +48,7 @@ For "blog post" or "both," continue at Step 5. For "homepage card only," skip to
 
 # Step 5 — Build the blog post
 
-Invoke `/blog-post` with `type=case-study`. Use the slug pattern `blog/case-study-{descriptor}.html` (e.g., `case-study-return-credit`). All Step 3-7 work in `/blog-post` applies — voice check, schema, sitemap, llms.txt, cross-links, commit.
+Invoke `/blog-post` with `type=case-study`. Use the slug pattern `blog/case-study-{descriptor}.html` (e.g., `case-study-return-credit`). All Step 3-7 work in `/blog-post` applies — voice check, schema, sitemap, llms.txt, **blog.html card (always `data-category="Case Study"` for case studies)**, cross-links, commit.
 
 # Step 6 — Homepage card
 
