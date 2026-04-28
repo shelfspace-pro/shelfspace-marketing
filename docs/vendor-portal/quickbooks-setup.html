@@ -4,19 +4,19 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Cannabis Vendor QuickBooks Setup — ShelfSpace</title>
-<meta name="description" content="Cannabis vendor QuickBooks setup for ShelfSpace. Connect QBO, map customers and items, backfill history — every settlement becomes an Invoice and a Payment.">
+<meta name="description" content="Cannabis vendor QuickBooks setup for ShelfSpace. Connect QBO, map customers and items, backfill history. Every settlement becomes an Invoice + Payment.">
 <link rel="canonical" href="https://shelfspace.pro/docs/vendor-portal/quickbooks-setup">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://shelfspace.pro/docs/vendor-portal/quickbooks-setup">
 <meta property="og:title" content="Cannabis Vendor QuickBooks Setup — ShelfSpace">
-<meta property="og:description" content="Cannabis vendor QuickBooks setup for ShelfSpace. Connect QBO, map customers and items, backfill history — every settlement becomes an Invoice and a Payment.">
+<meta property="og:description" content="Cannabis vendor QuickBooks setup for ShelfSpace. Connect QBO, map customers and items, backfill history. Every settlement becomes an Invoice + Payment.">
 <meta property="og:image" content="https://shelfspace.pro/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:type" content="image/png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Cannabis Vendor QuickBooks Setup — ShelfSpace">
-<meta name="twitter:description" content="Cannabis vendor QuickBooks setup for ShelfSpace. Connect QBO, map customers and items, backfill history — every settlement becomes an Invoice and a Payment.">
+<meta name="twitter:description" content="Cannabis vendor QuickBooks setup for ShelfSpace. Connect QBO, map customers and items, backfill history. Every settlement becomes an Invoice + Payment.">
 <meta name="twitter:image" content="https://shelfspace.pro/og-image.png">
 <meta name="apple-mobile-web-app-title" content="ShelfSpace">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -226,7 +226,7 @@ document.head.appendChild(o)}initApollo();</script>
 <div class="docs-hero">
   <div class="docs-hero-content">
     <a href="/docs" class="docs-hero-badge">Documentation</a>
-    <h1 class="docs-hero-title">ShelfSpace Vendor QuickBooks Setup</h1>
+    <h1 class="docs-hero-title">Cannabis Vendor QuickBooks Setup</h1>
   </div>
 </div>
 
@@ -257,7 +257,7 @@ document.head.appendChild(o)}initApollo();</script>
 
     <!-- BODY CONTENT -->
     <h2>Setup in 6 steps</h2>
-    <p>If you only read one section, read this. The rest of the page expands each step in detail.</p>
+    <p>Cannabis vendor QuickBooks setup is a one-time, ~10-minute flow if you sell <a href="/consignment">consignment</a> or wholesale to a ShelfSpace retailer. The six steps below get every settlement landing in your books on its own. If you only need a quick reference, read this section — the rest of the page expands each step in detail.</p>
     <ol>
       <li>In your vendor portal, go to <strong>Settings → QuickBooks Online</strong> and click <strong>Connect to QuickBooks</strong>. Authorize on Intuit.</li>
       <li>Pick your <strong>Income Account</strong> (where settlement revenue posts) and a <strong>Bank Account</strong> (where settlement checks deposit). Click <strong>Save Account</strong>.</li>
@@ -274,16 +274,16 @@ document.head.appendChild(o)}initApollo();</script>
     <p>Click <strong>Save Account</strong>.</p>
 
     <h2>Map your customers</h2>
-    <p>Click <strong>Manage Customers</strong>. You will see one row per ShelfSpace retailer you have settlements with. Each row's <strong>QBO Customer</strong> column shows either the QBO Customer we auto-matched on a prior sync, or empty if no settlement has synced against that retailer yet.</p>
+    <p>Click <strong>Manage Customers</strong>. You will see one row per ShelfSpace retailer you have settlements with. Each row's <strong>QBO Customer</strong> column shows either the QBO Customer we matched on a prior sync, or empty if no settlement has synced against that retailer yet.</p>
 
     <figure class="docs-figure">
       <img src="/screenshots/qbo-vendor-customer-mapping.png"
            alt="QuickBooks Customer Mapping screen showing retailer-to-QBO-customer mapping with first-time-setup verification banner."
            width="1070" height="531" loading="lazy">
-      <figcaption>Customer mapping. The yellow banner is your reminder to verify each row — auto-matching uses display-name <code>LIKE</code> matching, which can pick the wrong record when two customers have similar names.</figcaption>
+      <figcaption>Customer mapping. The yellow banner is your reminder to verify each row — name-based matching uses display-name <code>LIKE</code> matching, which can pick the wrong record when two customers have similar names.</figcaption>
     </figure>
 
-    <p>Auto-matching can pick the wrong record when you have similarly-named entities — for example, "Acme Cannabis" vs. "Acme Wholesale LLC". Pre-mapping a retailer here before the next settlement runs is the cleanest way to guarantee correct attribution.</p>
+    <p>Name-based matching can pick the wrong record when you have similarly-named entities — for example, "Acme Cannabis" vs. "Acme Wholesale LLC". Pre-mapping a retailer here before the next settlement runs is the cleanest way to guarantee correct attribution.</p>
     <p>For each row: click the dropdown (or the <strong>Change</strong> link if it is already mapped), type to filter your QBO customers, and pick the right one. The mapping saves instantly. If a customer you expect is missing, click <strong>Refresh from QBO</strong>.</p>
     <p>Changing a mapping does <strong>not</strong> re-link past Invoices. Already-synced settlements stay under whichever customer they were created against. Future syncs use the new mapping.</p>
 
@@ -336,7 +336,7 @@ document.head.appendChild(o)}initApollo();</script>
     <h2>Troubleshooting</h2>
     <ul>
       <li><strong>Settlement shows "Failed":</strong> click <strong>Retry</strong> on that row. Most failures recover. Failed rows also retry every 10 minutes on their own.</li>
-      <li><strong>"Account Period Closed":</strong> auto-handled. We retry with today's TxnDate. The DocNumber stays as the settlement reference and the check number stays on the PaymentReceived's <code>PaymentRefNum</code>, so your bank-feed match still works.</li>
+      <li><strong>"Account Period Closed":</strong> we handle it. We retry with today's TxnDate. The DocNumber stays as the settlement reference and the check number stays on the PaymentReceived's <code>PaymentRefNum</code>, so your bank-feed match still works.</li>
       <li><strong>Wrong customer on a posted Invoice:</strong> open <strong>Manage Customers</strong>, click <strong>Change</strong>, and pick the right one. Future settlements use the new mapping. To re-route the existing Invoice, edit it directly in QBO.</li>
       <li><strong>New QBO item or customer not in the dropdown:</strong> click <strong>Refresh from QBO</strong>.</li>
       <li><strong>Connection expired banner:</strong> click <strong>Reconnect to QuickBooks</strong>. QBO refresh tokens expire after 100 days of inactivity. Reconnecting takes 10 seconds and resumes everything.</li>
@@ -357,8 +357,8 @@ document.head.appendChild(o)}initApollo();</script>
 
     <!-- CTA -->
     <div class="docs-cta">
-      <p><strong>Want your retailer on ShelfSpace? Let's talk.</strong></p>
-      <a href="/contact">Talk to Us <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a>
+      <p><strong>Want a free vendor account? Let's talk.</strong></p>
+      <a href="/contact">Talk to Us <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg></a>
       <div class="docs-cta-note">Free for vendors. Always.</div>
     </div>
   </main>

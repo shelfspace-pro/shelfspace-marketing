@@ -3,19 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cannabis Vendor QuickBooks Setup: Step-by-Step Guide — ShelfSpace</title>
+<title>Cannabis Vendor QuickBooks Setup Guide — ShelfSpace</title>
 <meta name="description" content="Cannabis vendor QuickBooks setup, step by step. Connect QBO, map customers and items, and backfill history so every settlement lands in your books.">
 <link rel="canonical" href="https://shelfspace.pro/blog/cannabis-vendor-quickbooks-setup">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://shelfspace.pro/blog/cannabis-vendor-quickbooks-setup">
-<meta property="og:title" content="Cannabis Vendor QuickBooks Setup: Step-by-Step Guide — ShelfSpace">
+<meta property="og:title" content="Cannabis Vendor QuickBooks Setup Guide — ShelfSpace">
 <meta property="og:description" content="Cannabis vendor QuickBooks setup, step by step. Connect QBO, map customers and items, and backfill history so every settlement lands in your books.">
 <meta property="og:image" content="https://shelfspace.pro/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:type" content="image/png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Cannabis Vendor QuickBooks Setup: Step-by-Step Guide — ShelfSpace">
+<meta name="twitter:title" content="Cannabis Vendor QuickBooks Setup Guide — ShelfSpace">
 <meta name="twitter:description" content="Cannabis vendor QuickBooks setup, step by step. Connect QBO, map customers and items, and backfill history so every settlement lands in your books.">
 <meta name="twitter:image" content="https://shelfspace.pro/og-image.png">
 <meta name="apple-mobile-web-app-title" content="ShelfSpace">
@@ -182,6 +182,8 @@ document.head.appendChild(o)}initApollo();</script>
   "author": { "@type": "Person", "name": "Chris Mitchem" },
   "publisher": { "@type": "Organization", "name": "ShelfSpace", "url": "https://shelfspace.pro" },
   "datePublished": "2026-04-28",
+  "dateModified": "2026-04-28",
+  "mainEntityOfPage": "https://shelfspace.pro/blog/cannabis-vendor-quickbooks-setup",
   "url": "https://shelfspace.pro/blog/cannabis-vendor-quickbooks-setup",
   "image": "https://shelfspace.pro/og-image.png"
 }
@@ -290,7 +292,7 @@ document.head.appendChild(o)}initApollo();</script>
 
 <!-- BYLINE -->
 <div class="article-byline">
-  <img src="/chris-mitchem.jpg" alt="Chris Mitchem">
+  <img src="/chris-mitchem.jpg" alt="Chris Mitchem, ShelfSpace founder">
   <span>Chris Mitchem, Founder — 10 years operating dispensaries</span>
 </div>
 
@@ -319,7 +321,7 @@ document.head.appendChild(o)}initApollo();</script>
   <p>The <strong>Bank Account</strong> dropdown is optional but strongly recommended. Pick the bank account where the settlement check actually deposits. This routes each PaymentReceived's <code>DepositToAccountRef</code> there, so QBO's bank feed can match the deposit. Leave it blank and payments land in <strong>Undeposited Funds</strong> for manual matching. Click <strong>Save Account</strong>.</p>
 
   <h2>3. Map your customers</h2>
-  <p>Click <strong>Manage Customers</strong>. You will see one row per ShelfSpace retailer you have settlements with. Each row's <strong>QBO Customer</strong> column shows either the QBO Customer we auto-matched on a prior sync, or empty if no settlement has synced against that retailer yet.</p>
+  <p>Click <strong>Manage Customers</strong>. You will see one row per ShelfSpace retailer you have settlements with. Each row's <strong>QBO Customer</strong> column shows either the QBO Customer we matched on a prior sync, or empty if no settlement has synced against that retailer yet.</p>
 
   <figure class="article-figure">
     <img src="/screenshots/qbo-vendor-customer-mapping.png"
@@ -328,7 +330,7 @@ document.head.appendChild(o)}initApollo();</script>
     <figcaption>Customer mapping in the vendor portal. The yellow banner is your reminder to verify each row before the next settlement runs.</figcaption>
   </figure>
 
-  <p>Auto-matching uses display-name <code>LIKE</code> matching, which can pick the wrong record when two of your customers have similar names — for example, "Acme Cannabis" and "Acme Wholesale LLC". Pre-mapping each retailer here is the cleanest way to guarantee correct attribution before the next settlement runs.</p>
+  <p>Name-based matching uses display-name <code>LIKE</code> matching, which can pick the wrong record when two of your customers have similar names — for example, "Acme Cannabis" and "Acme Wholesale LLC". Pre-mapping each retailer here is the cleanest way to guarantee correct attribution before the next settlement runs.</p>
   <p>For each row: click the dropdown (or the <strong>Change</strong> link if it is already mapped), type to filter your QBO customers, and pick the right one. The mapping saves instantly. If a customer you expect is missing, click <strong>Refresh from QBO</strong> at the top.</p>
   <p>One thing to know: changing a mapping does <em>not</em> re-link past Invoices. Already-synced settlements stay under whichever customer they were created against. Future syncs use the new mapping.</p>
 
@@ -368,7 +370,7 @@ document.head.appendChild(o)}initApollo();</script>
   <h2 id="troubleshooting">Troubleshooting in 60 seconds</h2>
   <ul>
     <li><strong>A row shows "Failed".</strong> Click <strong>Retry</strong>. Most failures recover on retry. If it still fails, the error message gives the QBO reason; failed rows also retry every 10 minutes on their own.</li>
-    <li><strong>"Account Period Closed".</strong> Auto-handled — see the section above.</li>
+    <li><strong>"Account Period Closed".</strong> We handle this for you — see the section above.</li>
     <li><strong>Wrong customer on a posted Invoice.</strong> Open <strong>Manage Customers</strong>, click <strong>Change</strong>, and pick the right one. Future settlements use the new mapping. To re-route the existing Invoice, edit it directly in QBO.</li>
     <li><strong>New QBO item or customer not in the dropdown.</strong> Click <strong>Refresh from QBO</strong>.</li>
     <li><strong>Connection expired banner.</strong> Click <strong>Reconnect to QuickBooks</strong>. Refresh tokens expire after 100 days of inactivity. Reconnecting takes 10 seconds.</li>
@@ -410,22 +412,22 @@ document.head.appendChild(o)}initApollo();</script>
 
 <!-- RELATED -->
 <section style="max-width:720px;margin:0 auto;padding:0 48px 60px;">
-  <h2 style="font-size:22px;font-weight:700;color:#1b4332;margin-bottom:24px;letter-spacing:-0.5px;">Related Reading</h2>
+  <h2 style="font-size:22px;font-weight:700;color:var(--green-deep);margin-bottom:24px;letter-spacing:-0.5px;">Related Reading</h2>
   <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;">
-    <a href="/blog/case-study-quickbooks-sync" style="text-decoration:none;padding:20px;border:1px solid #e2e8f0;border-radius:12px;transition:all 0.2s;">
-      <span style="display:block;font-size:11px;font-weight:600;letter-spacing:0.5px;color:#1b4332;margin-bottom:8px;">CASE STUDY</span>
-      <span style="display:block;font-family:'Space Mono',monospace;font-size:18px;font-weight:700;color:#1b4332;letter-spacing:-1px;margin-bottom:4px;">Real-time sync</span>
-      <span style="display:block;font-size:14px;font-weight:500;color:#334155;line-height:1.4;">3-day lag → real-time QBO</span>
+    <a href="/blog/case-study-quickbooks-sync" style="text-decoration:none;padding:20px;border:1px solid var(--slate-200);border-radius:12px;transition:all 0.2s;">
+      <span style="display:block;font-size:11px;font-weight:600;letter-spacing:0.5px;color:var(--green-deep);margin-bottom:8px;">CASE STUDY</span>
+      <span style="display:block;font-family:'Space Mono',monospace;font-size:18px;font-weight:700;color:var(--green-deep);letter-spacing:-1px;margin-bottom:4px;">Real-time sync</span>
+      <span style="display:block;font-size:14px;font-weight:500;color:var(--slate-700);line-height:1.4;">3-day lag → real-time QBO</span>
     </a>
-    <a href="/blog/cannabis-vendor-management-guide" style="text-decoration:none;padding:20px;border:1px solid #e2e8f0;border-radius:12px;transition:all 0.2s;">
+    <a href="/blog/cannabis-vendor-management-guide" style="text-decoration:none;padding:20px;border:1px solid var(--slate-200);border-radius:12px;transition:all 0.2s;">
       <span style="display:block;font-size:11px;font-weight:600;letter-spacing:0.5px;color:#7c3aed;margin-bottom:8px;">VENDOR MANAGEMENT</span>
-      <span style="display:block;font-family:'Space Mono',monospace;font-size:18px;font-weight:700;color:#1b4332;letter-spacing:-1px;margin-bottom:4px;">Full guide</span>
-      <span style="display:block;font-size:14px;font-weight:500;color:#334155;line-height:1.4;">Dispensary vendor management</span>
+      <span style="display:block;font-family:'Space Mono',monospace;font-size:18px;font-weight:700;color:var(--green-deep);letter-spacing:-1px;margin-bottom:4px;">Full guide</span>
+      <span style="display:block;font-size:14px;font-weight:500;color:var(--slate-700);line-height:1.4;">Dispensary vendor management</span>
     </a>
-    <a href="/docs/vendor-portal/quickbooks-setup" style="text-decoration:none;padding:20px;border:1px solid #e2e8f0;border-radius:12px;transition:all 0.2s;">
-      <span style="display:block;font-size:11px;font-weight:600;letter-spacing:0.5px;color:#1b4332;margin-bottom:8px;">DOCS</span>
-      <span style="display:block;font-family:'Space Mono',monospace;font-size:18px;font-weight:700;color:#1b4332;letter-spacing:-1px;margin-bottom:4px;">Reference</span>
-      <span style="display:block;font-size:14px;font-weight:500;color:#334155;line-height:1.4;">Vendor QuickBooks Setup doc</span>
+    <a href="/docs/vendor-portal/quickbooks-setup" style="text-decoration:none;padding:20px;border:1px solid var(--slate-200);border-radius:12px;transition:all 0.2s;">
+      <span style="display:block;font-size:11px;font-weight:600;letter-spacing:0.5px;color:var(--green-deep);margin-bottom:8px;">DOCS</span>
+      <span style="display:block;font-family:'Space Mono',monospace;font-size:18px;font-weight:700;color:var(--green-deep);letter-spacing:-1px;margin-bottom:4px;">Reference</span>
+      <span style="display:block;font-size:14px;font-weight:500;color:var(--slate-700);line-height:1.4;">Vendor QuickBooks Setup doc</span>
     </a>
   </div>
 </section>
@@ -439,7 +441,7 @@ document.head.appendChild(o)}initApollo();</script>
     <div class="cta-actions reveal">
       <a href="/contact" class="btn-primary">
         Get a Free Vendor Account
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
       </a>
       <a href="mailto:chris@shelfspace.pro" class="btn-secondary">Email Chris</a>
     </div>
