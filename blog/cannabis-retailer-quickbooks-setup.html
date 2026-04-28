@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cannabis Dispensary QuickBooks Setup Guide — ShelfSpace</title>
+<meta name="description" content="Cannabis dispensary QuickBooks setup, step by step. Connect QBO, map accounts, backfill history. Every settlement and AP payment becomes a Bill + Check.">
+<link rel="canonical" href="https://shelfspace.pro/blog/cannabis-retailer-quickbooks-setup">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://shelfspace.pro/blog/cannabis-retailer-quickbooks-setup">
+<meta property="og:title" content="Cannabis Dispensary QuickBooks Setup Guide — ShelfSpace">
+<meta property="og:description" content="Cannabis dispensary QuickBooks setup, step by step. Connect QBO, map accounts, backfill history. Every settlement and AP payment becomes a Bill + Check.">
+<meta property="og:image" content="https://shelfspace.pro/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Cannabis Dispensary QuickBooks Setup Guide — ShelfSpace">
+<meta name="twitter:description" content="Cannabis dispensary QuickBooks setup, step by step. Connect QBO, map accounts, backfill history. Every settlement and AP payment becomes a Bill + Check.">
+<meta name="twitter:image" content="https://shelfspace.pro/og-image.png">
+<meta name="apple-mobile-web-app-title" content="ShelfSpace">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+<style>
+  /* ─── HERO ENHANCEMENTS ─── */
+  .page-hero { padding-bottom: 40px; }
+  .hero-bg-gradient { position: absolute; top: -30%; right: -20%; width: 700px; height: 700px; background: radial-gradient(circle, rgba(149,213,178,0.18) 0%, rgba(149,213,178,0) 70%); animation: float 8s ease-in-out infinite; pointer-events: none; }
+  .hero-bg-gradient-2 { position: absolute; bottom: -20%; left: -15%; width: 550px; height: 550px; background: radial-gradient(circle, rgba(27,67,50,0.06) 0%, rgba(27,67,50,0) 70%); animation: float 10s ease-in-out infinite; animation-delay: -3s; pointer-events: none; }
+  .hero-grid-lines { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 1200px; height: 100%; opacity: 0.035; background-image: linear-gradient(var(--green-deep) 1px, transparent 1px), linear-gradient(90deg, var(--green-deep) 1px, transparent 1px); background-size: 80px 80px; pointer-events: none; }
+  .page-hero .section-label,
+  .page-hero .section-title,
+  .page-hero .section-desc { opacity: 0; transform: translateY(30px); }
+  .page-hero .section-label { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1); }
+  .page-hero .section-title { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s, transform 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s; }
+  .page-hero .section-desc { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1) 0.25s, transform 0.8s cubic-bezier(0.22,1,0.36,1) 0.25s; }
+  .page-hero.hero-loaded .section-label,
+  .page-hero.hero-loaded .section-title,
+  .page-hero.hero-loaded .section-desc { opacity: 1; transform: translateY(0); }
+
+  /* ─── REVEAL ─── */
+  .reveal {
+    opacity: 0; transform: translateY(40px);
+    transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .reveal.is-visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.2s; }
+  .reveal-delay-2 { transition-delay: 0.4s; }
+
+  /* ─── BYLINE ─── */
+  .article-byline {
+    max-width: 720px; margin: 0 auto 32px; padding: 0 48px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .article-byline img { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; }
+  .article-byline span { font-size: 14px; color: var(--slate-500); }
+
+  /* ─── ARTICLE BODY ─── */
+  .article-body { max-width: 720px; margin: 0 auto; padding: 0 48px 80px; }
+  .article-body h2 { font-size: 24px; font-weight: 700; color: var(--green-deep); margin: 48px 0 16px; letter-spacing: -0.5px; line-height: 1.3; }
+  .article-body p { font-size: 17px; line-height: 1.85; color: var(--slate-600); margin-bottom: 24px; }
+  .article-body ul, .article-body ol { margin-bottom: 24px; padding-left: 24px; }
+  .article-body li { font-size: 17px; line-height: 1.85; color: var(--slate-600); margin-bottom: 8px; }
+  .article-body strong { color: var(--green-deep); font-weight: 600; }
+  .article-body a { color: var(--green-mid); font-weight: 500; text-decoration: none; }
+  .article-body a:hover { color: var(--green-deep); text-decoration: underline; }
+  .article-body code {
+    font-family: var(--font-mono); font-size: 14px;
+    background: var(--slate-50); color: var(--green-deep);
+    padding: 2px 6px; border-radius: 4px;
+  }
+  .article-body blockquote { border-left: 3px solid var(--green-accent); padding: 16px 24px; margin: 32px 0; background: var(--green-ghost); border-radius: 0 8px 8px 0; }
+  .article-body blockquote p { font-style: italic; color: var(--green-dark); margin-bottom: 0; }
+
+  /* ─── AT A GLANCE ─── */
+  .article-glance {
+    max-width: 720px; margin: 0 auto 40px; padding: 24px 28px;
+    background: var(--green-ghost); border: 1px solid rgba(149,213,178,0.3);
+    border-radius: 12px;
+  }
+  .article-glance h2 {
+    font-size: 14px; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--green-mid); margin: 0 0 12px;
+  }
+  .article-glance ul { list-style: none; padding: 0; margin: 0; }
+  .article-glance li {
+    font-size: 15px; line-height: 1.6; color: var(--slate-600);
+    padding: 4px 0 4px 20px; position: relative;
+  }
+  .article-glance li::before {
+    content: ''; position: absolute; left: 0; top: 12px;
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--green-accent);
+  }
+
+  /* ─── FAQ ─── */
+  .faq-section { max-width: 720px; margin: 0 auto; padding: 0 48px 60px; }
+  .faq-section h2 {
+    font-size: 24px; font-weight: 700; color: var(--green-deep);
+    margin: 0 0 24px; letter-spacing: -0.5px; line-height: 1.3;
+  }
+  .faq-list details {
+    border-bottom: 1px solid var(--slate-200);
+  }
+  .faq-list details:first-child {
+    border-top: 1px solid var(--slate-200);
+  }
+  .faq-list summary {
+    padding: 20px 0; font-size: 17px; font-weight: 600;
+    color: var(--green-deep); cursor: pointer; list-style: none;
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  }
+  .faq-list summary::-webkit-details-marker { display: none; }
+  .faq-list summary::after {
+    content: '+'; font-size: 22px; font-weight: 400;
+    color: var(--slate-400); transition: transform 0.2s;
+    flex-shrink: 0;
+  }
+  .faq-list details[open] summary::after {
+    content: '\2212';
+  }
+  .faq-list details p {
+    padding: 0 0 20px; margin: 0; font-size: 15px;
+    line-height: 1.7; color: var(--slate-500);
+  }
+
+  /* ─── CTA PARALLAX ─── */
+  .cta-section::before { transform: translate(-50%,-50%) translateY(var(--parallax-y, 0)); will-change: transform; }
+
+  /* ─── FOOTER 5-COL ─── */
+  .footer-top { grid-template-columns: 2fr 1fr 1fr 1fr 1fr; }
+  @media (max-width: 900px) { .footer-top { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px) { .footer-top { grid-template-columns: 1fr; } }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    .article-byline { padding: 0 24px; }
+    .article-body { padding: 0 24px 60px; }
+    .article-body h2 { margin-top: 36px; }
+    .faq-section { padding: 0 24px 40px; }
+    section [style*="grid-template-columns"] { grid-template-columns: 1fr !important; gap: 12px !important; }
+  }
+
+  /* ─── REDUCED MOTION ─── */
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; transition: none; }
+    .page-hero .section-label,
+    .page-hero .section-title,
+    .page-hero .section-desc { opacity: 1; transform: none; transition: none; }
+    .hero-bg-gradient, .hero-bg-gradient-2 { animation: none; }
+  }
+</style>
+<noscript><style>.reveal,.page-hero .section-label,.page-hero .section-title,.page-hero .section-desc{opacity:1;transform:none;transition:none;}</style></noscript>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-H2LBJT03WE"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-H2LBJT03WE');</script>
+<script>function initApollo(){var n=Math.random().toString(36).substring(7),o=document.createElement("script");
+o.src="https://assets.apollo.io/micro/website-tracker/tracker.iife.js?nocache="+n,o.async=!0,o.defer=!0,
+o.onload=function(){window.trackingFunctions.onLoad({appId:"69c141b32234890011a43849"})},
+document.head.appendChild(o)}initApollo();</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Cannabis Dispensary QuickBooks Setup: A Step-by-Step Guide",
+  "description": "Cannabis dispensary QuickBooks setup, step by step. Connect QBO, map accounts, backfill history. Every settlement and AP payment becomes a Bill + Check.",
+  "author": { "@type": "Person", "name": "Chris Mitchem" },
+  "publisher": { "@type": "Organization", "name": "ShelfSpace", "url": "https://shelfspace.pro" },
+  "datePublished": "2026-04-28",
+  "dateModified": "2026-04-28",
+  "mainEntityOfPage": "https://shelfspace.pro/blog/cannabis-retailer-quickbooks-setup",
+  "url": "https://shelfspace.pro/blog/cannabis-retailer-quickbooks-setup",
+  "image": "https://shelfspace.pro/og-image.png"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How long does cannabis dispensary QuickBooks setup take?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "About 5 minutes, one time. Most retailers don't do it themselves — ShelfSpace handles the connection during onboarding and verifies the first sync. The hands-on work is picking your Expense Account and Bank Account from your QBO chart of accounts."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What does ShelfSpace push to QuickBooks for retailers?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Every settlement and AP payment becomes a Bill plus a matching Bill Payment (Check) in your QBO. The Bill posts to your Expense Account against the matched QBO vendor with the settlement PDF attached. The Bill Payment posts to your bank account with the check number as the DocNumber, linked to the Bill so AP balance clears."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is Bookkeeper Match Health?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Bookkeeper Match Health is a panel on your QuickBooks settings page that shows how many checks are pre-matched in QBO's bank feed. When the bank feed sees a check clear, QBO pre-suggests the match by check number plus amount, so your bookkeeper sees the payee instantly. If checks are missing, click Backfill checks and ShelfSpace pushes the matching Bill Payments in batches of 50."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does ShelfSpace mark checks as Cleared automatically?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Daily at 3am ET, ShelfSpace reads cleared and reconciled Bill Payments from your QBO bank feed and flips matching ShelfSpace payments from Downloaded to Cleared, with the QBO clearing date. As long as your bank account is mapped and your bookkeeper accepts the pre-suggested match in QBO, ShelfSpace status catches up within 24 hours."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What happens if my books are closed for a settlement's accrual period?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "ShelfSpace handles it. The Bill posts with today's date as the TxnDate. The DocNumber, Amount, and Vendor stay intact for bank-feed reconciliation; only the posting date shifts. You don't need to reopen anything."
+      }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://shelfspace.pro/" },
+    { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://shelfspace.pro/blog" },
+    { "@type": "ListItem", "position": 3, "name": "Cannabis Dispensary QuickBooks Setup: A Step-by-Step Guide" }
+  ]
+}
+</script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="/" class="nav-logo">
+    <div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div>
+    <span class="nav-logo-text">ShelfSpace</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="/consignment">Consignment</a></li>
+    <li><a href="/accounts-payable">Accounts Payable</a></li>
+    <li><a href="/credit-recovery">Credit Recovery</a></li>
+    <li><a href="/pricing">Pricing</a></li>
+    <li><a href="/about">About</a></li>
+    <li><a href="/vendors" class="nav-secondary">For Vendors</a></li>
+    <li><a href="/contact" class="nav-cta">Get Started <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a></li>
+  </ul>
+  <div class="nav-hamburger" onclick="document.querySelector('.nav-links').classList.toggle('mobile-open'); event.stopPropagation();"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="hero-bg-gradient"></div>
+  <div class="hero-bg-gradient-2"></div>
+  <div class="hero-grid-lines"></div>
+  <div class="section-label">Accounts Payable · QuickBooks</div>
+  <h1 class="section-title">Cannabis Dispensary QuickBooks Setup: A Step-by-Step Guide</h1>
+  <p class="section-desc">How dispensaries connect QuickBooks Online to ShelfSpace so every settlement and AP payment lands in their books as a Bill plus a matching Check — and check-clearing status flows back from QBO daily. About 5 minutes, one time.</p>
+</div>
+
+<!-- AT A GLANCE -->
+<div class="article-glance">
+  <h2>At a glance</h2>
+  <ul>
+    <li>Cannabis dispensary QuickBooks setup takes about 5 minutes, one time.</li>
+    <li>Every settlement and AP payment becomes a Bill plus a matching Bill Payment (Check) in your QBO.</li>
+    <li>Bookkeeper Match Health shows whether checks are pre-matched in QBO's bank feed at a glance.</li>
+    <li>When a check clears in your bank feed, ShelfSpace flips status to <strong>Cleared</strong> within 24 hours — no manual reconciliation.</li>
+    <li>Closed periods, transient errors, and refresh tokens — all handled for you.</li>
+  </ul>
+</div>
+
+<!-- BYLINE -->
+<div class="article-byline">
+  <img src="/chris-mitchem.jpg" alt="Chris Mitchem, ShelfSpace founder">
+  <span>Chris Mitchem, Founder — 10 years operating dispensaries</span>
+</div>
+
+<!-- ARTICLE BODY -->
+<div class="article-body reveal">
+
+  <p>If you run a dispensary on ShelfSpace, you can connect your QuickBooks Online once and have every settlement and <a href="/accounts-payable">AP payment</a> land in your books on its own — Bill, matching Check, vendor lookup, account coding, the works. When checks clear in your bank feed, we flip ShelfSpace status to Cleared within 24 hours. The result: month-end reconciliation collapses from hours to minutes.</p>
+
+  <p>This guide walks the whole setup. If you're mid-setup and stuck, jump to <a href="#troubleshooting">Troubleshooting</a> at the bottom. Most retailers never do this themselves — we handle the connection during onboarding — but if your bookkeeper or controller wants to know what we're pushing and why, this is the reference.</p>
+
+  <h2>What ShelfSpace pushes to your QBO</h2>
+
+  <p>Once connected, two transaction types push to your QuickBooks Online instance:</p>
+  <ol>
+    <li><strong>A Bill</strong>, created when a settlement is approved or an AP payment is sent. The Bill posts to your <strong>Expense Account</strong> against the matched QBO Vendor, with the settlement PDF or invoice reference attached. <code>DocNumber</code> is the settlement reference (<code>SR-...</code>), the invoice reference (truncated to 21 chars), or the payment ID (<code>PM-...</code>).</li>
+    <li><strong>A Bill Payment (Check)</strong>, created when the check number is assigned (at PDF generation for settlements, at payment creation for AP). <code>DocNumber</code> is the check number, <code>BankAccountRef</code> is your mapped bank account, and the row links the Bill via QBO's <code>LinkedTxn</code> so AP balance clears.</li>
+  </ol>
+
+  <p>Both appear in your QBO instantly. The Recent Sync Activity panel shows status badges per row (Synced, Failed, Pending, Skipped). Failed rows retry every 10 minutes on their own.</p>
+
+  <h2>1. Connect QuickBooks</h2>
+  <p>In your retailer portal, open <strong>Settings → QuickBooks Online</strong> and click <strong>Connect to QuickBooks</strong>. You will be redirected to Intuit, where you authorize ShelfSpace. After you approve, you land back on the settings page with a "Connected" badge.</p>
+
+  <h2>2. Pick your Expense and Bank accounts</h2>
+  <p>The <strong>Expense Account</strong> dropdown lists every Expense, Cost of Goods Sold, and Other Expense account from your QBO chart of accounts. Pick the one where ShelfSpace consignment and AP charges should post — typically a <strong>Cost of Goods Sold</strong> account. We try to pre-select an account whose name contains "cost of goods" or "cogs", but verify the choice.</p>
+  <p>The <strong>Bank Account</strong> dropdown is recommended — not strictly required, but the Bookkeeper Match Health panel and bank-feed clearing only work when it is set. Pick the bank account the physical settlement and AP checks draw from. This routes each Bill Payment's <code>BankAccountRef</code> to that account so QBO's bank feed pre-matches checks by check number plus amount, and it enables the daily clearing-sync that flips ShelfSpace status from Downloaded to Cleared on its own. Click <strong>Save Account</strong>.</p>
+
+  <h2>3. Per-vendor expense overrides (optional)</h2>
+  <p>If a specific vendor's spend should post to a different GL account than your global default — for example, a non-cannabis service vendor that should hit a Services expense account instead of COGS — set it on the vendor:</p>
+  <ol>
+    <li><strong>Vendors → [vendor name]</strong>, scroll to the QuickBooks section on the vendor detail page.</li>
+    <li>Pick the desired QBO Expense Account.</li>
+    <li>Save.</li>
+  </ol>
+  <p>The override applies to that vendor's future Bills only. Already-synced Bills are not re-routed. There is also a per-payment override available when you create an AP payment — use it sparingly; the per-vendor default is usually the right place to set this.</p>
+
+  <h2>4. Backfill historical settlements and payments</h2>
+  <p>If you connected QBO after already running settlements or AP payments on ShelfSpace, those past transactions are not yet in your QBO. To push them, go back to <strong>Settings → QuickBooks Online</strong> and click <strong>Sync Historical Transactions</strong>. The button processes the most recent batch in one click. If you have a lot of history, click it more than once.</p>
+
+  <h2>5. Watch Bookkeeper Match Health</h2>
+  <p>The QuickBooks settings panel shows a <strong>Bookkeeper Match Health</strong> indicator near the top:</p>
+  <ul>
+    <li><strong>Pre-matched</strong> — Bill Payments successfully synced. When the bank feed sees these checks clear, QBO will pre-suggest the match and your bookkeeper sees the payee instantly.</li>
+    <li><strong>Missing</strong> — Bills that have a check assigned in ShelfSpace but no matching Bill Payment in QBO. Click <strong>Backfill checks</strong> and the button loops through batches of 50 until everything is caught up.</li>
+    <li><strong>Skipped</strong> — Bills awaiting check issuance, or Bills where the bank account is not mapped (set the bank account in step 2 to clear these).</li>
+    <li><strong>Failed</strong> — pushes that hit a QBO error. Retry from the Recent Sync Activity panel.</li>
+  </ul>
+  <p>When all three counters read zero, the panel shows <strong>"All caught up."</strong></p>
+
+  <h2>6. Done — what happens next</h2>
+  <p>Once setup is complete, you do not need to touch anything. Each settlement creates a Bill within seconds of approval. Each AP payment creates a Bill + Bill Payment together at payment creation. The Recent Sync Activity panel shows status badges. Failed rows retry every 10 minutes on their own. Daily at 3am ET, the clearing-sync reads cleared and reconciled Bill Payments from your QBO bank feed and flips matching ShelfSpace payments to <strong>Cleared</strong>.</p>
+
+  <blockquote>
+    <p>The books used to tell you what happened last week. With Bills, Checks, and Cleared status all flowing on their own, they tell you what's happening right now.</p>
+  </blockquote>
+
+  <h2>What if my books are closed?</h2>
+  <p>If a settlement's accrual week falls inside a closed QBO period, we do <em>not</em> ask you to reopen the period. The push retries with today's date as the TxnDate. The DocNumber, Amount, and Vendor still match for bank-feed reconciliation; only the posting date shifts. The Recent Sync Activity panel also shows a <strong>Post to Today</strong> button per row and a <strong>Post All to Today</strong> bulk action when closed-period rows exist.</p>
+
+  <h2 id="troubleshooting">Troubleshooting in 60 seconds</h2>
+  <ul>
+    <li><strong>A row shows "Failed".</strong> Click <strong>Retry</strong>. Most failures recover. Failed rows also retry every 10 minutes on their own.</li>
+    <li><strong>"Account Period Closed".</strong> We handle it — see the section above.</li>
+    <li><strong>Bill posted under the wrong QBO Vendor.</strong> Edit the Bill directly in QBO to repoint it. Email Chris if you want the cached mapping updated for future Bills.</li>
+    <li><strong>Bookkeeper Match Health shows missing checks.</strong> Click <strong>Backfill checks</strong>. Loops through batches of 50 until missing reaches zero.</li>
+    <li><strong>No Bill Payments are pushing.</strong> Check that the Bank Account is set. Without it, every Bill Payment is skipped with reason "QBO bank account not mapped."</li>
+    <li><strong>Connection expired banner.</strong> Click <strong>Reconnect to QuickBooks</strong>. Refresh tokens expire after 100 days of inactivity. Reconnecting takes 10 seconds.</li>
+    <li><strong>Cleared status not flipping.</strong> The clearing-sync runs daily at 3am ET. If a check cleared with a different DocNumber due to a manual edit, use the manual "Mark Cleared" override on the payment detail screen.</li>
+  </ul>
+
+  <h2>Need help?</h2>
+  <p>Email Chris directly at <a href="mailto:chris@shelfspace.pro">chris@shelfspace.pro</a>. Most retailers never have to do any of this themselves — we set it up during onboarding and verify the first sync. The reference version of this guide lives in our docs at <a href="/docs/quickbooks/setup">Cannabis Dispensary QuickBooks Setup</a>, with the higher-level overview at <a href="/docs/quickbooks/overview">QuickBooks Integration</a>.</p>
+
+  <p>If you have <a href="/vendors">vendors</a> on ShelfSpace asking about their side, point them to <a href="/blog/cannabis-vendor-quickbooks-setup">Cannabis Vendor QuickBooks Setup</a> — same idea, different direction (Invoices + PaymentReceived in their books instead of Bills + Checks in yours). And if you want to see what real-time QBO looks like in practice, our <a href="/blog/case-study-quickbooks-sync">case study</a> walks through one dispensary's 3-day-lag-to-real-time switch.</p>
+
+</div>
+
+<!-- FAQ -->
+<div class="faq-section reveal">
+  <h2>Frequently Asked Questions</h2>
+  <div class="faq-list">
+    <details>
+      <summary>How long does cannabis dispensary QuickBooks setup take?</summary>
+      <p>About 5 minutes, one time. Most retailers don't do it themselves — ShelfSpace handles the connection during onboarding and verifies the first sync. The hands-on work is picking your Expense Account and Bank Account from your QBO chart of accounts.</p>
+    </details>
+    <details>
+      <summary>What does ShelfSpace push to QuickBooks for retailers?</summary>
+      <p>Every settlement and AP payment becomes a Bill plus a matching Bill Payment (Check) in your QBO. The Bill posts to your Expense Account against the matched QBO vendor with the settlement PDF attached. The Bill Payment posts to your bank account with the check number as the DocNumber, linked to the Bill so AP balance clears.</p>
+    </details>
+    <details>
+      <summary>What is Bookkeeper Match Health?</summary>
+      <p>Bookkeeper Match Health is a panel on your QuickBooks settings page that shows how many checks are pre-matched in QBO's bank feed. When the bank feed sees a check clear, QBO pre-suggests the match by check number plus amount, so your bookkeeper sees the payee instantly. If checks are missing, click Backfill checks and ShelfSpace pushes the matching Bill Payments in batches of 50.</p>
+    </details>
+    <details>
+      <summary>Does ShelfSpace mark checks as Cleared automatically?</summary>
+      <p>Yes. Daily at 3am ET, ShelfSpace reads cleared and reconciled Bill Payments from your QBO bank feed and flips matching ShelfSpace payments from Downloaded to Cleared, with the QBO clearing date. As long as your bank account is mapped and your bookkeeper accepts the pre-suggested match in QBO, ShelfSpace status catches up within 24 hours.</p>
+    </details>
+    <details>
+      <summary>What happens if my books are closed for a settlement's accrual period?</summary>
+      <p>ShelfSpace handles it. The Bill posts with today's date as the TxnDate. The DocNumber, Amount, and Vendor stay intact for bank-feed reconciliation; only the posting date shifts. You don't need to reopen anything.</p>
+    </details>
+  </div>
+</div>
+
+<!-- RELATED -->
+<section style="max-width:720px;margin:0 auto;padding:0 48px 60px;">
+  <h2 style="font-size:22px;font-weight:700;color:var(--green-deep);margin-bottom:24px;letter-spacing:-0.5px;">Related Reading</h2>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;">
+    <a href="/blog/case-study-quickbooks-sync" style="text-decoration:none;padding:20px;border:1px solid var(--slate-200);border-radius:12px;transition:all 0.2s;">
+      <span style="display:block;font-size:11px;font-weight:600;letter-spacing:0.5px;color:var(--green-deep);margin-bottom:8px;">CASE STUDY</span>
+      <span style="display:block;font-family:'Space Mono',monospace;font-size:18px;font-weight:700;color:var(--green-deep);letter-spacing:-1px;margin-bottom:4px;">Real-time sync</span>
+      <span style="display:block;font-size:14px;font-weight:500;color:var(--slate-700);line-height:1.4;">3-day lag → real-time QBO</span>
+    </a>
+    <a href="/blog/cannabis-vendor-quickbooks-setup" style="text-decoration:none;padding:20px;border:1px solid var(--slate-200);border-radius:12px;transition:all 0.2s;">
+      <span style="display:block;font-size:11px;font-weight:600;letter-spacing:0.5px;color:#7c3aed;margin-bottom:8px;">VENDOR MANAGEMENT</span>
+      <span style="display:block;font-family:'Space Mono',monospace;font-size:18px;font-weight:700;color:var(--green-deep);letter-spacing:-1px;margin-bottom:4px;">Vendor side</span>
+      <span style="display:block;font-size:14px;font-weight:500;color:var(--slate-700);line-height:1.4;">QBO setup for vendors</span>
+    </a>
+    <a href="/docs/quickbooks/setup" style="text-decoration:none;padding:20px;border:1px solid var(--slate-200);border-radius:12px;transition:all 0.2s;">
+      <span style="display:block;font-size:11px;font-weight:600;letter-spacing:0.5px;color:var(--green-deep);margin-bottom:8px;">DOCS</span>
+      <span style="display:block;font-family:'Space Mono',monospace;font-size:18px;font-weight:700;color:var(--green-deep);letter-spacing:-1px;margin-bottom:4px;">Reference</span>
+      <span style="display:block;font-size:14px;font-weight:500;color:var(--slate-700);line-height:1.4;">Dispensary QBO Setup doc</span>
+    </a>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-content">
+    <div class="section-label reveal">Get Started</div>
+    <h2 class="section-title reveal">Your books should be right, right now.</h2>
+    <p class="section-desc reveal">We sync every settlement and AP payment to QuickBooks in real time. No double-entry. No lag. No month-end fire drills. Free evaluation, no commitment.</p>
+    <div class="cta-actions reveal">
+      <a href="/contact" class="btn-primary">
+        Get a Free Evaluation
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+      <a href="mailto:chris@shelfspace.pro" class="btn-secondary">Email Chris</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="/" class="nav-logo"><div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div><span class="nav-logo-text">ShelfSpace</span></a>
+      <p>Every Vendor. Every Payment. One Engine.</p>
+    </div>
+    <div class="footer-col"><h4>Services</h4><ul><li><a href="/consignment">Consignment</a></li><li><a href="/accounts-payable">Accounts Payable</a></li><li><a href="/credit-recovery">Credit Recovery</a></li><li><a href="/checks">Check Payments</a></li><li><a href="/shelfiq">ShelfiQ</a></li></ul></div>
+    <div class="footer-col"><h4>Platform</h4><ul><li><a href="/features">Features</a></li><li><a href="/how-it-works">How It Works</a></li><li><a href="/pricing">Pricing</a></li><li><a href="/about">About</a></li><li><a href="/blog">Blog</a></li><li><a href="/docs">Docs</a></li></ul></div>
+    <div class="footer-col"><h4>Access</h4><ul><li><a href="https://ourshelf.space">Login</a></li><li><a href="/contact">Sign Up</a></li><li><a href="/contact">Contact</a></li><li><a href="/vendors">For Vendors</a></li></ul></div>
+    <div class="footer-col"><h4>Company</h4><ul><li><a href="mailto:chris@shelfspace.pro">Email</a></li><li><a href="mailto:support@shelfspace.pro">Support</a></li><li><a href="https://linkedin.com/company/shelfspace-pro" target="_blank" rel="noopener" class="footer-social-link"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> LinkedIn</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><p>&copy; 2026 ShelfSpace Technologies Inc.</p><div class="footer-bottom-links"><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div></div>
+</footer>
+
+<script>
+(function() {
+  var nav = document.getElementById('nav');
+  var pageHero = document.querySelector('.page-hero');
+  var parallaxSections = [
+    document.querySelector('.cta-section')
+  ];
+
+  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var isMobile = window.innerWidth < 900;
+  var ticking = false;
+
+  requestAnimationFrame(function() {
+    nav.classList.toggle('scrolled', window.scrollY > 20);
+    if (pageHero) pageHero.classList.add('hero-loaded');
+  });
+
+  var revealObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(function(el) { revealObserver.observe(el); });
+
+  function onScroll() {
+    var scrollY = window.scrollY;
+    nav.classList.toggle('scrolled', scrollY > 20);
+    if (prefersReduced || isMobile) return;
+    var wh = window.innerHeight;
+    parallaxSections.forEach(function(section) {
+      if (!section) return;
+      var rect = section.getBoundingClientRect();
+      if (rect.bottom < 0 || rect.top > wh) return;
+      var center = rect.top + rect.height / 2 - wh / 2;
+      section.style.setProperty('--parallax-y', (center * 0.08) + 'px');
+    });
+  }
+
+  window.addEventListener('scroll', function() {
+    if (!ticking) {
+      requestAnimationFrame(function() {
+        onScroll();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, { passive: true });
+
+  onScroll();
+
+  window.addEventListener('resize', function() {
+    isMobile = window.innerWidth < 900;
+    if (isMobile) {
+      parallaxSections.forEach(function(section) {
+        if (section) section.style.setProperty('--parallax-y', '0px');
+      });
+    }
+  });
+
+  document.addEventListener('click', function() {
+    var navLinks = document.querySelector('.nav-links');
+    if (navLinks && navLinks.classList.contains('mobile-open')) {
+      navLinks.classList.remove('mobile-open');
+    }
+  });
+})();
+</script>
+<script src="/shelfiq-widget.js"></script>
+</body>
+</html>

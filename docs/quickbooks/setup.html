@@ -3,20 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>QuickBooks Setup Guide — ShelfSpace</title>
-<meta name="description" content="ShelfSpace QuickBooks setup guide. OAuth connection, vendor mapping, GL account mapping, and bank account configuration — we handle it during onboarding.">
+<title>Cannabis Dispensary QuickBooks Setup — ShelfSpace</title>
+<meta name="description" content="Cannabis dispensary QuickBooks setup for ShelfSpace. Connect QBO, pick accounts. Every settlement and AP payment becomes a Bill + matching Check.">
 <link rel="canonical" href="https://shelfspace.pro/docs/quickbooks/setup">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://shelfspace.pro/docs/quickbooks/setup">
-<meta property="og:title" content="QuickBooks Setup Guide — ShelfSpace">
-<meta property="og:description" content="ShelfSpace QuickBooks setup guide. OAuth connection, vendor mapping, GL account mapping, and bank account configuration — we handle it during onboarding.">
+<meta property="og:title" content="Cannabis Dispensary QuickBooks Setup — ShelfSpace">
+<meta property="og:description" content="Cannabis dispensary QuickBooks setup for ShelfSpace. Connect QBO, pick accounts. Every settlement and AP payment becomes a Bill + matching Check.">
 <meta property="og:image" content="https://shelfspace.pro/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:type" content="image/png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="QuickBooks Setup Guide — ShelfSpace">
-<meta name="twitter:description" content="ShelfSpace QuickBooks setup guide. OAuth connection, vendor mapping, GL account mapping, and bank account configuration — we handle it during onboarding.">
+<meta name="twitter:title" content="Cannabis Dispensary QuickBooks Setup — ShelfSpace">
+<meta name="twitter:description" content="Cannabis dispensary QuickBooks setup for ShelfSpace. Connect QBO, pick accounts. Every settlement and AP payment becomes a Bill + matching Check.">
 <meta name="twitter:image" content="https://shelfspace.pro/og-image.png">
 <meta name="apple-mobile-web-app-title" content="ShelfSpace">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -88,6 +88,11 @@
     font-size: 16px; line-height: 1.8; color: var(--slate-600); margin-bottom: 6px;
   }
   .docs-content strong { color: var(--green-deep); font-weight: 600; }
+  .docs-content code {
+    font-family: var(--font-mono); font-size: 14px;
+    background: var(--slate-50); color: var(--green-deep);
+    padding: 2px 6px; border-radius: 4px;
+  }
   .docs-content a { color: var(--green-mid); font-weight: 500; text-decoration: none; }
   .docs-content a:hover { color: var(--green-deep); text-decoration: underline; }
 
@@ -119,6 +124,21 @@
     font-size: 15px; line-height: 1.7; color: var(--green-dark);
   }
   .docs-highlight strong { color: var(--green-deep); }
+
+  /* ── Adjust Table ── */
+  .docs-content table {
+    width: 100%; border-collapse: collapse; margin: 24px 0;
+    font-size: 14px; line-height: 1.55;
+  }
+  .docs-content th, .docs-content td {
+    padding: 12px 14px; border-bottom: 1px solid var(--slate-100);
+    text-align: left; vertical-align: top; color: var(--slate-600);
+  }
+  .docs-content th {
+    background: var(--slate-50); color: var(--green-deep);
+    font-weight: 600; letter-spacing: 0.2px;
+  }
+  .docs-table-wrap { overflow-x: auto; }
 
   /* ── Related Docs ── */
   .docs-related {
@@ -172,9 +192,9 @@
 {
   "@context": "https://schema.org",
   "@type": "TechArticle",
-  "headline": "QuickBooks Setup Guide",
+  "headline": "Cannabis Dispensary QuickBooks Setup",
   "datePublished": "2026-03-25",
-  "dateModified": "2026-04-27",
+  "dateModified": "2026-04-28",
   "author": { "@type": "Organization", "name": "ShelfSpace", "url": "https://shelfspace.pro" },
   "publisher": { "@type": "Organization", "name": "ShelfSpace" },
   "url": "https://shelfspace.pro/docs/quickbooks/setup"
@@ -189,7 +209,7 @@ document.head.appendChild(o)}initApollo();</script>
 <noscript><style>.docs-nav-section a.active{background:var(--green-ghost);color:var(--green-deep);font-weight:600;}</style></noscript>
 </head>
 <body>
-<!-- last-synced: 2026-03-25 -->
+<!-- last-synced: 2026-04-28 -->
 
 <!-- NAV -->
 <nav id="nav">
@@ -214,7 +234,7 @@ document.head.appendChild(o)}initApollo();</script>
 <div class="docs-hero">
   <div class="docs-hero-content">
     <a href="/docs" class="docs-hero-badge">Documentation</a>
-    <h1 class="docs-hero-title">ShelfSpace QuickBooks Setup Guide</h1>
+    <h1 class="docs-hero-title">Cannabis Dispensary QuickBooks Setup</h1>
   </div>
 </div>
 
@@ -235,68 +255,151 @@ document.head.appendChild(o)}initApollo();</script>
     <div class="docs-glance">
       <h2>At a Glance</h2>
       <ul>
-        <li>ShelfSpace QuickBooks setup uses OAuth to securely connect your QBO account</li>
-        <li>Three things to configure: expense account, bank account, and vendor mappings</li>
-        <li>We handle the entire setup during onboarding — no technical work on your end</li>
-        <li>Tokens refresh in the background so the connection stays active</li>
-        <li>You can disconnect and reconnect at any time from your ShelfSpace settings</li>
+        <li>Cannabis dispensary QuickBooks setup takes about 5 minutes, one time.</li>
+        <li>Every settlement and <a href="/accounts-payable">AP payment</a> becomes a Bill plus a matching Check in your QBO.</li>
+        <li>Bookkeeper Match Health shows you, at a glance, whether checks are pre-matched in QBO's bank feed.</li>
+        <li>When checks clear in your bank feed, we flip ShelfSpace status to <strong>Cleared</strong> within 24 hours — no manual reconciliation.</li>
+        <li>Closed periods, transient errors, and refresh tokens — all handled for you.</li>
       </ul>
     </div>
 
     <!-- BODY CONTENT -->
-    <h2>Connecting ShelfSpace to QuickBooks</h2>
-    <p>Setting up the ShelfSpace QuickBooks connection starts with OAuth, the same secure authorization flow used by every QuickBooks integration. You click "Connect to QuickBooks" in your ShelfSpace settings, sign in to your Intuit account, and grant ShelfSpace permission to create Bills and Vendors in your QBO company. The entire process takes less than two minutes, and we walk you through it during onboarding.</p>
-
-    <p>Once connected, ShelfSpace stores encrypted tokens that keep the connection alive. Tokens refresh in the background before they expire, so you never need to reconnect manually. If a token does expire (for example, if your QBO subscription lapses), ShelfSpace marks the connection as inactive and notifies you. See the <a href="/docs/quickbooks/overview">QuickBooks integration overview</a> for what syncs once the connection is live.</p>
-
-    <h2>Mapping Your GL Accounts</h2>
-    <p>After connecting, we configure two account mappings that tell ShelfSpace where to post transactions in your chart of accounts:</p>
-
-    <ul>
-      <li><strong>Expense account</strong> — The GL account where settlement and payment Bills are posted. This is typically a Cost of Goods Sold or Expense account. ShelfSpace pulls your active account list from QBO so you can pick from a dropdown.</li>
-      <li><strong>Bank account</strong> — The checking account used for BillPayment records. This tells QuickBooks which account the check was drawn from, so your bank reconciliation stays accurate.</li>
-    </ul>
-
-    <p>If you are not sure which accounts to use, our team will review your chart of accounts during onboarding and recommend the right mapping. Most dispensaries use a single COGS account for vendor payments.</p>
-
-    <div class="docs-highlight">
-      <strong>What we handle:</strong> We configure the OAuth connection, map your GL accounts, set up vendor matching, and verify the first sync. You do not need to touch the QuickBooks API or configure anything technical. If your chart of accounts changes later, we update the mapping for you.
-    </div>
-
-    <h2>Vendor Mapping During ShelfSpace QuickBooks Setup</h2>
-    <p>ShelfSpace needs to know which QBO vendor corresponds to each vendor in your ShelfSpace account. During setup, we match your existing vendors in three ways:</p>
-
+    <h2>Setup in 6 steps</h2>
+    <p>Cannabis dispensary QuickBooks setup is a one-time, ~5-minute flow. The six steps below get every settlement and <a href="/accounts-payable">AP payment</a> landing in your books, with check-clearing status syncing back from QBO daily. If you only need a quick reference, read this section — the rest of the page expands each step in detail.</p>
     <ol>
-      <li><strong>Name matching</strong> — We search QBO for vendors with matching display names or company names. Most vendors match on the first pass.</li>
-      <li><strong>Manual mapping</strong> — For vendors that exist in QBO under a different name, you (or we) can manually link them in the vendor mapping screen.</li>
-      <li><strong>New vendor creation</strong> — For vendors that do not exist in QBO yet, ShelfSpace creates them with the company name, email, and phone number from your ShelfSpace records.</li>
+      <li>In your retailer portal, go to <strong>Settings → QuickBooks Online</strong> and click <strong>Connect to QuickBooks</strong>. Authorize on Intuit.</li>
+      <li>Pick your <strong>Expense Account</strong> (typically COGS) and your <strong>Bank Account</strong> (where checks draw from). Click <strong>Save Account</strong>.</li>
+      <li>Optional: open any <strong>Vendors → [vendor]</strong> page and set a per-vendor expense override if that vendor's spend should hit a different GL account.</li>
+      <li>If you ran settlements or AP payments before connecting, click <strong>Sync Historical Transactions</strong> to backfill.</li>
+      <li>Watch the <strong>Bookkeeper Match Health</strong> panel. If it shows missing checks, click <strong>Backfill checks</strong> and let it loop until "All caught up."</li>
+      <li>Done. Future settlements and AP payments push to your books on their own. Cleared status syncs back from QBO daily.</li>
     </ol>
 
-    <p>Once a vendor is mapped, the mapping is cached. Future syncs use the cached mapping without making additional QBO API calls, which keeps the integration fast and efficient.</p>
+    <h2>Connect your QuickBooks</h2>
+    <p>Open your retailer portal, then <strong>Settings → QuickBooks Online → Connect to QuickBooks</strong>. You will be redirected to Intuit, where you authorize ShelfSpace. After authorization, you land back on the settings page with a "Connected" badge.</p>
 
-    <h2>After Setup</h2>
-    <p>Once the connection is active and accounts are mapped, syncing happens in the background. Every time a <a href="/docs/consignment/settlements">settlement</a> is finalized or an <a href="/docs/accounts-payable/creating-payments">AP payment</a> is processed, the corresponding Bill is created in QuickBooks within seconds. A sync log in your ShelfSpace settings shows the status of every synced record so you can verify that everything is flowing correctly.</p>
+    <h2>Pick your Expense and Bank accounts</h2>
+    <p>The <strong>Expense Account</strong> dropdown lists every Expense, Cost of Goods Sold, and Other Expense account from your QBO chart of accounts. Pick the one where ShelfSpace consignment + AP charges should post — typically a <strong>Cost of Goods Sold</strong> account. We try to pre-select an account whose name contains "cost of goods" or "cogs", but verify the choice.</p>
+    <p>The <strong>Bank Account</strong> dropdown is recommended (not strictly required, but the Bookkeeper Match Health panel and bank-feed clearing only work when it is set). Pick the bank account the physical settlement and AP checks draw from. Setting this:</p>
+    <ul>
+      <li>Routes each Bill Payment's <code>BankAccountRef</code> to that account so QBO's bank feed pre-matches checks by check number plus amount.</li>
+      <li>Enables the daily clearing-sync that flips ShelfSpace check status from Downloaded to Cleared on its own.</li>
+    </ul>
+    <p>If you leave it blank, Bill Payments are skipped (the Bill still pushes) and you will match checks manually in QBO. Click <strong>Save Account</strong> when both are selected.</p>
 
-    <p>If a sync fails (for example, due to a QBO rate limit), ShelfSpace retries with exponential backoff. Failed syncs are flagged in the log with the error message so we can investigate. Duplicate Bills are impossible because every sync checks for an existing record before creating a new one.</p>
+    <h2>Per-vendor expense overrides (optional)</h2>
+    <p>If a specific vendor's spend should post to a different GL account than your global default — for example, a non-cannabis service vendor that should hit a Services expense account instead of COGS — set it on the vendor:</p>
+    <ol>
+      <li><strong>Vendors → [vendor name]</strong>, scroll to the QuickBooks section on the vendor detail page.</li>
+      <li>Pick the desired QBO Expense Account.</li>
+      <li>Save.</li>
+    </ol>
+    <p>The override applies to that vendor's future Bills only. Already-synced Bills are not re-routed. There is also a per-payment override available when you create an AP payment — use it sparingly; the per-vendor default is usually the right place to set this.</p>
 
-    <h2>Disconnecting</h2>
-    <p>You can disconnect from QuickBooks at any time from your ShelfSpace settings. Disconnecting revokes the OAuth token and stops all future syncs. Existing Bills in QuickBooks are not affected. If you reconnect later, ShelfSpace picks up where it left off and syncs any transactions that were processed while disconnected.</p>
+    <h2>Vendor matching</h2>
+    <p>When we push our first Bill for a vendor, we search your QBO Vendors by display name (DBA first, legal name fallback) and match the first hit. If no match exists, we create a new QBO Vendor with the ShelfSpace vendor's display name.</p>
+    <p>There is no manual vendor-mapping UI on the retailer side today. If a Bill posts under the wrong QBO Vendor (this happens when you have similarly-named records like "INSA, Inc." vs. "INSA/Easthampton Production"):</p>
+    <ul>
+      <li>Edit the Bill in QBO directly to repoint it.</li>
+      <li>Email <a href="mailto:chris@shelfspace.pro">chris@shelfspace.pro</a> if you want the cached mapping updated so future Bills go to the right vendor.</li>
+    </ul>
+
+    <h2>Backfill historical settlements and payments</h2>
+    <p>If you connected QBO after already running settlements or AP payments, those past transactions are not yet in your QBO. Go back to <strong>Settings → QuickBooks Online</strong> and click <strong>Sync Historical Transactions</strong>. The button processes the most recent batch in one click; if you have a lot of history, click it more than once.</p>
+    <p>Each historical row creates the same Bill plus Bill Payment pair that future transactions do. If a row's accrual date falls inside a closed QBO period, we shift the TxnDate to today for you — no need to reopen anything.</p>
+
+    <h2>What we push on each settlement</h2>
+    <p>Once setup is complete, you do not need to touch anything. Per consignment settlement:</p>
+    <ol>
+      <li>Settlement is approved on ShelfSpace.</li>
+      <li>We create a <strong>Bill</strong> in your QBO with <code>VendorRef</code> = the matched QBO vendor, <code>Amount</code> = net payout, <code>Account</code> = the resolved expense account (per-vendor override, then global default), and <code>PrivateNote</code> = <code>ShelfSpace Settlement {id}</code>.</li>
+      <li>When the settlement PDF generates and the check number is assigned, we create the matching <strong>Bill Payment (Check)</strong> with <code>DocNumber</code> = check number, <code>BankAccountRef</code> = your mapped bank account, and <code>LinkedTxn</code> to the Bill. The Bill's AP balance clears.</li>
+      <li>Both transactions are visible in your QBO instantly. The Recent Sync Activity panel shows status badges (Synced / Failed / Pending / Skipped).</li>
+    </ol>
+
+    <h2>What we push on each AP payment</h2>
+    <p>For accounts payable (non-consignment) payments, the Bill plus Bill Payment push together at payment creation, because the check number is assigned atomically at that point. Same DocNumber rules, same expense-account hierarchy, same bank-feed clearing once the check clears.</p>
+
+    <h2>Bookkeeper Match Health</h2>
+    <p>The QuickBooks settings panel shows a <strong>Bookkeeper Match Health</strong> indicator near the top:</p>
+    <ul>
+      <li><strong><code>{N} checks are pre-matched in QBO bank feed</code></strong> — Bill Payments successfully synced. When the bank feed sees these checks clear, QBO will pre-suggest the match and your bookkeeper sees the payee instantly.</li>
+      <li><strong><code>{M} missing — your bookkeeper won't see payees on these</code></strong> — Bills that have a check assigned in ShelfSpace but no matching Bill Payment in QBO. Click <strong>Backfill checks</strong> to push them. The button processes 50 per click and loops via a sticky toast that shows progress until everything is caught up.</li>
+      <li><strong>Skipped count</strong> — Bills awaiting check issuance, or Bills where the bank account is not mapped (set the bank account in step 2 to clear these).</li>
+      <li><strong>Failed count</strong> — pushes that hit a QBO error. Retry from the Recent Sync Activity panel below.</li>
+    </ul>
+    <p>When all three counters read zero, the panel shows <strong>"All caught up."</strong></p>
+
+    <h2>Cleared status syncs from QBO</h2>
+    <p>This is unique to the retailer side. Daily at 3am ET, our clearing-sync:</p>
+    <ol>
+      <li>Reads cleared and reconciled Bill Payments from your QBO bank feed (last 90 days).</li>
+      <li>Matches each row to a ShelfSpace payment by <code>DocNumber</code> (check number) plus <code>Amount</code>.</li>
+      <li>Flips matched ShelfSpace payments from <strong>Downloaded</strong> to <strong>Cleared</strong> with the QBO clearing date.</li>
+      <li>Cascades the cleared status to any related purchase orders.</li>
+    </ol>
+    <p>You do not have to do anything. As long as the bank account is mapped and your bookkeeper accepts the pre-suggested match in QBO, the ShelfSpace Cleared status catches up within 24 hours.</p>
+    <p>If a check cleared with a different DocNumber due to a manual edit in QBO, you can manually mark a payment as cleared from the payment detail screen.</p>
+
+    <div class="docs-highlight">
+      <strong>What we handle:</strong> closed-period weeks, transient QBO API errors (10-minute retry), OAuth refresh tokens, vendor matching, daily check-clearing sync, and void cascade (Bill Payment voids before Bill, in the order QBO requires).
+    </div>
+
+    <h2>Adjusting after the fact</h2>
+    <div class="docs-table-wrap">
+    <table>
+      <thead>
+        <tr><th>Change</th><th>Effect on already-synced rows</th><th>Effect on future rows</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Change Expense Account (global)</td><td>Past Bills stay on the old account</td><td>Future Bills post to the new account</td></tr>
+        <tr><td>Change a per-vendor Expense Account override</td><td>Past Bills for that vendor stay on the old account</td><td>Future Bills for that vendor use the override</td></tr>
+        <tr><td>Change Bank Account</td><td>Past Bill Payments stay on the old bank</td><td>Future Bill Payments use the new bank</td></tr>
+        <tr><td>Disconnect QuickBooks</td><td>Past Bills + Bill Payments stay in QBO</td><td>No further sync; reconnect to resume</td></tr>
+        <tr><td>Void a payment in ShelfSpace</td><td>Voids the Bill Payment, then voids the Bill in QBO (in that order — QBO requires it)</td><td>n/a</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p>If you need to re-route a specific past Bill, edit it directly in QBO — we will not override your manual edits.</p>
+
+    <h2>Troubleshooting</h2>
+    <ul>
+      <li><strong>A row shows "Failed":</strong> click <strong>Retry</strong>. Most failures recover. Failed rows also retry every 10 minutes on their own.</li>
+      <li><strong>"Account Period Closed":</strong> we handle it. We retry with today's TxnDate. The DocNumber + Amount + Vendor still match for bank-feed reconciliation; only the posting date shifts. The Recent Sync Activity panel also shows a <strong>Post to Today</strong> button per row and a <strong>Post All to Today</strong> bulk action when closed-period rows exist.</li>
+      <li><strong>Bill posted under the wrong QBO Vendor:</strong> QBO's name match can land on a similarly-named record (e.g. "Transfer To/From Acme LLC" vs. "Acme LLC"). Edit the Bill directly in QBO to repoint it, and email Chris if you want the cached mapping updated for future Bills.</li>
+      <li><strong>Bookkeeper Match Health shows missing checks:</strong> click <strong>Backfill checks</strong> on the Match Health panel. The button loops through batches of 50 until missing reaches zero.</li>
+      <li><strong>No Bill Payments are pushing at all:</strong> check that you set a Bank Account in step 2. Without it, every Bill Payment is skipped with reason "QBO bank account not mapped." Set the bank account, then click <strong>Backfill checks</strong> to fill the gap.</li>
+      <li><strong>Connection expired banner:</strong> click <strong>Reconnect to QuickBooks</strong>. QBO refresh tokens expire after 100 days of inactivity. Reconnecting takes 10 seconds and resumes everything.</li>
+      <li><strong>Duplicate Document Number error:</strong> QBO complains when someone manually entered a Bill or Check with the same number we are pushing. Edit or delete the manual entry in QBO, then click <strong>Retry</strong>.</li>
+      <li><strong>Cleared status not flipping after the check cleared:</strong> the clearing-sync runs daily at 3am ET. If it has been more than 24 hours, double-check that (a) the Bank Account is mapped and (b) the QBO Bill Payment's <code>DocNumber</code> matches the check number on the ShelfSpace payment exactly. If they diverge, use the manual "Mark Cleared" override on the payment detail screen.</li>
+    </ul>
+
+    <h2>What's not covered today</h2>
+    <ul>
+      <li><strong>Sales tax handling</strong> — transactions push as-is; no separate tax line.</li>
+      <li><strong>Multi-location / class tracking</strong> — Bills push without a Location or Class reference. If you use those for departmental reporting, set them manually in QBO.</li>
+      <li><strong>Vendor name correction UI</strong> — today this requires a Chris-side cache update. A retailer-facing vendor mapping page is on the roadmap.</li>
+    </ul>
+
+    <h2>Need help with setup?</h2>
+    <p>Email Chris at <a href="mailto:chris@shelfspace.pro">chris@shelfspace.pro</a> — most retailers don't need to do any of this themselves; we handle the connection during onboarding and verify the first sync. If you have <a href="/docs/vendor-portal/overview">vendors</a> on ShelfSpace asking how their side works, point them to our <a href="/docs/vendor-portal/quickbooks-setup">Cannabis Vendor QuickBooks Setup</a> guide.</p>
 
     <!-- RELATED DOCS -->
     <div class="docs-related">
       <h3>Related</h3>
       <div class="docs-related-links">
         <a href="/docs/quickbooks/overview">QuickBooks Overview</a>
+        <a href="/docs/accounts-payable/overview">Managed AP</a>
         <a href="/docs/consignment/settlements">Settlements</a>
-        <a href="/docs/integrations/pos">POS Integration</a>
+        <a href="/docs/vendor-portal/quickbooks-setup">Vendor QuickBooks Setup</a>
       </div>
     </div>
 
     <!-- CTA -->
     <div class="docs-cta">
-      <p><strong>Ready to connect your systems? Let's talk.</strong></p>
-      <a href="/contact">Talk to Us <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a>
-      <div class="docs-cta-note">Free evaluation. No commitment.</div>
+      <p><strong>Ready to connect your books? Let's talk.</strong></p>
+      <a href="/contact">Talk to Us <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg></a>
+      <div class="docs-cta-note">Free evaluation. We handle setup.</div>
     </div>
   </main>
 </div>
@@ -325,7 +428,7 @@ document.head.appendChild(o)}initApollo();</script>
   }, { passive: true });
 })();
 </script>
-<script src="/docs-search.js?v=3" defer></script>
+<script src="/docs-search.js?v=4" defer></script>
 <script src="/shelfiq-widget.js"></script>
 </body>
 </html>

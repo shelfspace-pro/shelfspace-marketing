@@ -274,6 +274,15 @@ document.head.appendChild(o)}initApollo();</script>
 
     <p>Are you a <strong>vendor</strong> connecting <em>your</em> QuickBooks Online to ShelfSpace? See our <a href="/docs/vendor-portal/quickbooks-setup">Vendor QuickBooks Setup guide</a> — every settlement becomes an Invoice plus a matching PaymentReceived in your books, with the settlement PDF attached.</p>
 
+    <h2>Bookkeeper Match Health, Backfill, and Cleared Status</h2>
+    <p>Three pieces of the integration are worth calling out because they cut bookkeeper work to near zero:</p>
+    <ul>
+      <li><strong>Bookkeeper Match Health</strong> — a panel on your QuickBooks settings page that shows how many checks are pre-matched in QBO's bank feed. When the bank feed sees a check clear, QBO pre-suggests the match and your bookkeeper sees the payee instantly.</li>
+      <li><strong>Backfill checks</strong> — if any Bills are missing their matching Bill Payments in QBO, click <strong>Backfill checks</strong> and the button loops through batches of 50 until everything is caught up.</li>
+      <li><strong>Cleared status sync</strong> — daily at 3am ET, we read cleared and reconciled Bill Payments from your QBO bank feed and flip matching ShelfSpace payments from <strong>Downloaded</strong> to <strong>Cleared</strong>, with the QBO clearing date.</li>
+    </ul>
+    <p>For the full step-by-step walkthrough — including per-vendor expense overrides, historical backfill, and the closed-period workflow — see our <a href="/docs/quickbooks/setup">Cannabis Dispensary QuickBooks Setup guide</a>.</p>
+
     <h2>Why This Matters for Cannabis Operators</h2>
     <p>Cannabis dispensaries process dozens of vendor payments per week across consignment settlements and wholesale AP. Without an integration, someone on your team is manually entering each transaction into QuickBooks. That means hours of data entry, inevitable typos, and books that are always a week behind.</p>
 
@@ -322,7 +331,7 @@ document.head.appendChild(o)}initApollo();</script>
   }, { passive: true });
 })();
 </script>
-<script src="/docs-search.js?v=3" defer></script>
+<script src="/docs-search.js?v=4" defer></script>
 <script src="/shelfiq-widget.js"></script>
 </body>
 </html>
