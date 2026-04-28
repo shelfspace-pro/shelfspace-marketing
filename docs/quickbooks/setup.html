@@ -125,6 +125,13 @@
   }
   .docs-highlight strong { color: var(--green-deep); }
 
+  /* ── Screen-reader-only ── */
+  .sr-only {
+    position: absolute; width: 1px; height: 1px;
+    padding: 0; margin: -1px; overflow: hidden;
+    clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+  }
+
   /* ── Adjust Table ── */
   .docs-content table {
     width: 100%; border-collapse: collapse; margin: 24px 0;
@@ -247,7 +254,7 @@ document.head.appendChild(o)}initApollo();</script>
   <!-- CONTENT -->
   <main class="docs-content">
     <div class="docs-breadcrumb">
-      <a href="/docs">Docs</a> / <a href="/docs/quickbooks/overview">QuickBooks</a> / Setup Guide
+      <a href="/docs">Docs</a> / <a href="/docs/quickbooks/overview">QuickBooks</a> / Cannabis Dispensary Setup
     </div>
     <div class="docs-category">QuickBooks</div>
 
@@ -279,7 +286,7 @@ document.head.appendChild(o)}initApollo();</script>
     <p>Open your retailer portal, then <strong>Settings → QuickBooks Online → Connect to QuickBooks</strong>. You will be redirected to Intuit, where you authorize ShelfSpace. After authorization, you land back on the settings page with a "Connected" badge.</p>
 
     <h2>Pick your Expense and Bank accounts</h2>
-    <p>The <strong>Expense Account</strong> dropdown lists every Expense, Cost of Goods Sold, and Other Expense account from your QBO chart of accounts. Pick the one where ShelfSpace consignment + AP charges should post — typically a <strong>Cost of Goods Sold</strong> account. We try to pre-select an account whose name contains "cost of goods" or "cogs", but verify the choice.</p>
+    <p>The <strong>Expense Account</strong> dropdown lists every Expense, Cost of Goods Sold, and Other Expense account from your QBO chart of accounts. Pick the one where ShelfSpace consignment and AP charges should post — typically a <strong>Cost of Goods Sold</strong> account. We try to pre-select an account whose name contains "cost of goods" or "cogs", but verify the choice.</p>
     <p>The <strong>Bank Account</strong> dropdown is recommended (not strictly required, but the Bookkeeper Match Health panel and bank-feed clearing only work when it is set). Pick the bank account the physical settlement and AP checks draw from. Setting this:</p>
     <ul>
       <li>Routes each Bill Payment's <code>BankAccountRef</code> to that account so QBO's bank feed pre-matches checks by check number plus amount.</li>
@@ -298,7 +305,7 @@ document.head.appendChild(o)}initApollo();</script>
 
     <h2>Vendor matching</h2>
     <p>When we push our first Bill for a vendor, we search your QBO Vendors by display name (DBA first, legal name fallback) and match the first hit. If no match exists, we create a new QBO Vendor with the ShelfSpace vendor's display name.</p>
-    <p>There is no manual vendor-mapping UI on the retailer side today. If a Bill posts under the wrong QBO Vendor (this happens when you have similarly-named records like "INSA, Inc." vs. "INSA/Easthampton Production"):</p>
+    <p>There is no manual vendor-mapping UI on the retailer side today. If a Bill posts under the wrong QBO Vendor (this happens when you have similarly-named records like "Acme, Inc." vs. "Acme/Production Co."):</p>
     <ul>
       <li>Edit the Bill in QBO directly to repoint it.</li>
       <li>Email <a href="mailto:chris@shelfspace.pro">chris@shelfspace.pro</a> if you want the cached mapping updated so future Bills go to the right vendor.</li>
@@ -328,7 +335,7 @@ document.head.appendChild(o)}initApollo();</script>
       <li><strong>Skipped count</strong> — Bills awaiting check issuance, or Bills where the bank account is not mapped (set the bank account in step 2 to clear these).</li>
       <li><strong>Failed count</strong> — pushes that hit a QBO error. Retry from the Recent Sync Activity panel below.</li>
     </ul>
-    <p>When all three counters read zero, the panel shows <strong>"All caught up."</strong></p>
+    <p>When Missing, Skipped, and Failed all read zero, the panel shows <strong>"All caught up."</strong></p>
 
     <h2>Cleared status syncs from QBO</h2>
     <p>This is unique to the retailer side. Daily at 3am ET, our clearing-sync:</p>
@@ -348,8 +355,9 @@ document.head.appendChild(o)}initApollo();</script>
     <h2>Adjusting after the fact</h2>
     <div class="docs-table-wrap">
     <table>
+      <caption class="sr-only">Effects of common QuickBooks settings changes on already-synced rows versus future rows</caption>
       <thead>
-        <tr><th>Change</th><th>Effect on already-synced rows</th><th>Effect on future rows</th></tr>
+        <tr><th scope="col">Change</th><th scope="col">Effect on already-synced rows</th><th scope="col">Effect on future rows</th></tr>
       </thead>
       <tbody>
         <tr><td>Change Expense Account (global)</td><td>Past Bills stay on the old account</td><td>Future Bills post to the new account</td></tr>
@@ -428,7 +436,7 @@ document.head.appendChild(o)}initApollo();</script>
   }, { passive: true });
 })();
 </script>
-<script src="/docs-search.js?v=4" defer></script>
+<script src="/docs-search.js?v=5" defer></script>
 <script src="/shelfiq-widget.js"></script>
 </body>
 </html>

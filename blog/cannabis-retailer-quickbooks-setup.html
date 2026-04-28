@@ -207,7 +207,7 @@ document.head.appendChild(o)}initApollo();</script>
     },
     {
       "@type": "Question",
-      "name": "Does ShelfSpace mark checks as Cleared automatically?",
+      "name": "Does ShelfSpace mark checks as Cleared on its own?",
       "acceptedAnswer": {
         "@type": "Answer",
         "text": "Yes. Daily at 3am ET, ShelfSpace reads cleared and reconciled Bill Payments from your QBO bank feed and flips matching ShelfSpace payments from Downloaded to Cleared, with the QBO clearing date. As long as your bank account is mapped and your bookkeeper accepts the pre-suggested match in QBO, ShelfSpace status catches up within 24 hours."
@@ -287,7 +287,7 @@ document.head.appendChild(o)}initApollo();</script>
 <!-- ARTICLE BODY -->
 <div class="article-body reveal">
 
-  <p>If you run a dispensary on ShelfSpace, you can connect your QuickBooks Online once and have every settlement and <a href="/accounts-payable">AP payment</a> land in your books on its own — Bill, matching Check, vendor lookup, account coding, the works. When checks clear in your bank feed, we flip ShelfSpace status to Cleared within 24 hours. The result: month-end reconciliation collapses from hours to minutes.</p>
+  <p>Cannabis dispensary QuickBooks setup is a one-time, ~5-minute flow that connects your retailer portal to QBO. Once it's done, every settlement and <a href="/accounts-payable">AP payment</a> lands in your books on its own — Bill, matching Check, vendor lookup, account coding, the works. When checks clear in your bank feed, we flip ShelfSpace status to Cleared within 24 hours. The result: month-end reconciliation collapses from hours to minutes.</p>
 
   <p>This guide walks the whole setup. If you're mid-setup and stuck, jump to <a href="#troubleshooting">Troubleshooting</a> at the bottom. Most retailers never do this themselves — we handle the connection during onboarding — but if your bookkeeper or controller wants to know what we're pushing and why, this is the reference.</p>
 
@@ -328,13 +328,13 @@ document.head.appendChild(o)}initApollo();</script>
     <li><strong>Skipped</strong> — Bills awaiting check issuance, or Bills where the bank account is not mapped (set the bank account in step 2 to clear these).</li>
     <li><strong>Failed</strong> — pushes that hit a QBO error. Retry from the Recent Sync Activity panel.</li>
   </ul>
-  <p>When all three counters read zero, the panel shows <strong>"All caught up."</strong></p>
+  <p>When Missing, Skipped, and Failed all read zero, the panel shows <strong>"All caught up."</strong></p>
 
   <h2>6. Done — what happens next</h2>
   <p>Once setup is complete, you do not need to touch anything. Each settlement creates a Bill within seconds of approval. Each AP payment creates a Bill + Bill Payment together at payment creation. The Recent Sync Activity panel shows status badges. Failed rows retry every 10 minutes on their own. Daily at 3am ET, the clearing-sync reads cleared and reconciled Bill Payments from your QBO bank feed and flips matching ShelfSpace payments to <strong>Cleared</strong>.</p>
 
   <blockquote>
-    <p>The books used to tell you what happened last week. With Bills, Checks, and Cleared status all flowing on their own, they tell you what's happening right now.</p>
+    <p>Most retailers hand this off to their bookkeeper or controller and stop thinking about it. The reconciliation that doesn't happen is the highest praise you can give an accounting integration.</p>
   </blockquote>
 
   <h2>What if my books are closed?</h2>
@@ -375,7 +375,7 @@ document.head.appendChild(o)}initApollo();</script>
       <p>Bookkeeper Match Health is a panel on your QuickBooks settings page that shows how many checks are pre-matched in QBO's bank feed. When the bank feed sees a check clear, QBO pre-suggests the match by check number plus amount, so your bookkeeper sees the payee instantly. If checks are missing, click Backfill checks and ShelfSpace pushes the matching Bill Payments in batches of 50.</p>
     </details>
     <details>
-      <summary>Does ShelfSpace mark checks as Cleared automatically?</summary>
+      <summary>Does ShelfSpace mark checks as Cleared on its own?</summary>
       <p>Yes. Daily at 3am ET, ShelfSpace reads cleared and reconciled Bill Payments from your QBO bank feed and flips matching ShelfSpace payments from Downloaded to Cleared, with the QBO clearing date. As long as your bank account is mapped and your bookkeeper accepts the pre-suggested match in QBO, ShelfSpace status catches up within 24 hours.</p>
     </details>
     <details>
