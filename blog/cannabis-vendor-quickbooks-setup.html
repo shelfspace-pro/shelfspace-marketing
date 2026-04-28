@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cannabis Vendor QuickBooks Setup: Step-by-Step Guide — ShelfSpace</title>
+<meta name="description" content="Cannabis vendor QuickBooks setup, step by step. Connect QBO, map customers and items, and backfill history so every settlement lands in your books.">
+<link rel="canonical" href="https://shelfspace.pro/blog/cannabis-vendor-quickbooks-setup">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://shelfspace.pro/blog/cannabis-vendor-quickbooks-setup">
+<meta property="og:title" content="Cannabis Vendor QuickBooks Setup: Step-by-Step Guide — ShelfSpace">
+<meta property="og:description" content="Cannabis vendor QuickBooks setup, step by step. Connect QBO, map customers and items, and backfill history so every settlement lands in your books.">
+<meta property="og:image" content="https://shelfspace.pro/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Cannabis Vendor QuickBooks Setup: Step-by-Step Guide — ShelfSpace">
+<meta name="twitter:description" content="Cannabis vendor QuickBooks setup, step by step. Connect QBO, map customers and items, and backfill history so every settlement lands in your books.">
+<meta name="twitter:image" content="https://shelfspace.pro/og-image.png">
+<meta name="apple-mobile-web-app-title" content="ShelfSpace">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+<style>
+  /* ─── HERO ENHANCEMENTS ─── */
+  .page-hero { padding-bottom: 40px; }
+  .hero-bg-gradient { position: absolute; top: -30%; right: -20%; width: 700px; height: 700px; background: radial-gradient(circle, rgba(149,213,178,0.18) 0%, rgba(149,213,178,0) 70%); animation: float 8s ease-in-out infinite; pointer-events: none; }
+  .hero-bg-gradient-2 { position: absolute; bottom: -20%; left: -15%; width: 550px; height: 550px; background: radial-gradient(circle, rgba(27,67,50,0.06) 0%, rgba(27,67,50,0) 70%); animation: float 10s ease-in-out infinite; animation-delay: -3s; pointer-events: none; }
+  .hero-grid-lines { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 1200px; height: 100%; opacity: 0.035; background-image: linear-gradient(var(--green-deep) 1px, transparent 1px), linear-gradient(90deg, var(--green-deep) 1px, transparent 1px); background-size: 80px 80px; pointer-events: none; }
+  .page-hero .section-label,
+  .page-hero .section-title,
+  .page-hero .section-desc { opacity: 0; transform: translateY(30px); }
+  .page-hero .section-label { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1); }
+  .page-hero .section-title { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s, transform 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s; }
+  .page-hero .section-desc { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1) 0.25s, transform 0.8s cubic-bezier(0.22,1,0.36,1) 0.25s; }
+  .page-hero.hero-loaded .section-label,
+  .page-hero.hero-loaded .section-title,
+  .page-hero.hero-loaded .section-desc { opacity: 1; transform: translateY(0); }
+
+  /* ─── REVEAL ─── */
+  .reveal {
+    opacity: 0; transform: translateY(40px);
+    transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .reveal.is-visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.2s; }
+  .reveal-delay-2 { transition-delay: 0.4s; }
+
+  /* ─── BYLINE ─── */
+  .article-byline {
+    max-width: 720px; margin: 0 auto 32px; padding: 0 48px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .article-byline img { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; }
+  .article-byline span { font-size: 14px; color: var(--slate-500); }
+
+  /* ─── ARTICLE BODY ─── */
+  .article-body { max-width: 720px; margin: 0 auto; padding: 0 48px 80px; }
+  .article-body h2 { font-size: 24px; font-weight: 700; color: var(--green-deep); margin: 48px 0 16px; letter-spacing: -0.5px; line-height: 1.3; }
+  .article-body p { font-size: 17px; line-height: 1.85; color: var(--slate-600); margin-bottom: 24px; }
+  .article-body ul, .article-body ol { margin-bottom: 24px; padding-left: 24px; }
+  .article-body li { font-size: 17px; line-height: 1.85; color: var(--slate-600); margin-bottom: 8px; }
+  .article-body strong { color: var(--green-deep); font-weight: 600; }
+  .article-body a { color: var(--green-mid); font-weight: 500; text-decoration: none; }
+  .article-body a:hover { color: var(--green-deep); text-decoration: underline; }
+  .article-body code {
+    font-family: var(--font-mono); font-size: 14px;
+    background: var(--slate-50); color: var(--green-deep);
+    padding: 2px 6px; border-radius: 4px;
+  }
+  .article-body blockquote { border-left: 3px solid var(--green-accent); padding: 16px 24px; margin: 32px 0; background: var(--green-ghost); border-radius: 0 8px 8px 0; }
+  .article-body blockquote p { font-style: italic; color: var(--green-dark); margin-bottom: 0; }
+
+  /* ─── ARTICLE FIGURE ─── */
+  .article-figure { margin: 32px 0; }
+  .article-figure img {
+    display: block; max-width: 100%; height: auto;
+    border: 1px solid var(--slate-200); border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(27,67,50,0.06);
+  }
+  .article-figure figcaption {
+    font-size: 14px; color: var(--slate-500);
+    margin-top: 10px; line-height: 1.55;
+  }
+
+  /* ─── AT A GLANCE ─── */
+  .article-glance {
+    max-width: 720px; margin: 0 auto 40px; padding: 24px 28px;
+    background: var(--green-ghost); border: 1px solid rgba(149,213,178,0.3);
+    border-radius: 12px;
+  }
+  .article-glance h2 {
+    font-size: 14px; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--green-mid); margin: 0 0 12px;
+  }
+  .article-glance ul { list-style: none; padding: 0; margin: 0; }
+  .article-glance li {
+    font-size: 15px; line-height: 1.6; color: var(--slate-600);
+    padding: 4px 0 4px 20px; position: relative;
+  }
+  .article-glance li::before {
+    content: ''; position: absolute; left: 0; top: 12px;
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--green-accent);
+  }
+
+  /* ─── FAQ ─── */
+  .faq-section { max-width: 720px; margin: 0 auto; padding: 0 48px 60px; }
+  .faq-section h2 {
+    font-size: 24px; font-weight: 700; color: var(--green-deep);
+    margin: 0 0 24px; letter-spacing: -0.5px; line-height: 1.3;
+  }
+  .faq-list details {
+    border-bottom: 1px solid var(--slate-200);
+  }
+  .faq-list details:first-child {
+    border-top: 1px solid var(--slate-200);
+  }
+  .faq-list summary {
+    padding: 20px 0; font-size: 17px; font-weight: 600;
+    color: var(--green-deep); cursor: pointer; list-style: none;
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  }
+  .faq-list summary::-webkit-details-marker { display: none; }
+  .faq-list summary::after {
+    content: '+'; font-size: 22px; font-weight: 400;
+    color: var(--slate-400); transition: transform 0.2s;
+    flex-shrink: 0;
+  }
+  .faq-list details[open] summary::after {
+    content: '\2212';
+  }
+  .faq-list details p {
+    padding: 0 0 20px; margin: 0; font-size: 15px;
+    line-height: 1.7; color: var(--slate-500);
+  }
+
+  /* ─── CTA PARALLAX ─── */
+  .cta-section::before { transform: translate(-50%,-50%) translateY(var(--parallax-y, 0)); will-change: transform; }
+
+  /* ─── FOOTER 5-COL ─── */
+  .footer-top { grid-template-columns: 2fr 1fr 1fr 1fr 1fr; }
+  @media (max-width: 900px) { .footer-top { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px) { .footer-top { grid-template-columns: 1fr; } }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    .article-byline { padding: 0 24px; }
+    .article-body { padding: 0 24px 60px; }
+    .article-body h2 { margin-top: 36px; }
+    .faq-section { padding: 0 24px 40px; }
+    section [style*="grid-template-columns"] { grid-template-columns: 1fr !important; gap: 12px !important; }
+  }
+
+  /* ─── REDUCED MOTION ─── */
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; transition: none; }
+    .page-hero .section-label,
+    .page-hero .section-title,
+    .page-hero .section-desc { opacity: 1; transform: none; transition: none; }
+    .hero-bg-gradient, .hero-bg-gradient-2 { animation: none; }
+  }
+</style>
+<noscript><style>.reveal,.page-hero .section-label,.page-hero .section-title,.page-hero .section-desc{opacity:1;transform:none;transition:none;}</style></noscript>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-H2LBJT03WE"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-H2LBJT03WE');</script>
+<script>function initApollo(){var n=Math.random().toString(36).substring(7),o=document.createElement("script");
+o.src="https://assets.apollo.io/micro/website-tracker/tracker.iife.js?nocache="+n,o.async=!0,o.defer=!0,
+o.onload=function(){window.trackingFunctions.onLoad({appId:"69c141b32234890011a43849"})},
+document.head.appendChild(o)}initApollo();</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Cannabis Vendor QuickBooks Setup: A Step-by-Step Guide",
+  "description": "Cannabis vendor QuickBooks setup, step by step. Connect QBO, map customers and items, and backfill history so every settlement lands in your books.",
+  "author": { "@type": "Person", "name": "Chris Mitchem" },
+  "publisher": { "@type": "Organization", "name": "ShelfSpace", "url": "https://shelfspace.pro" },
+  "datePublished": "2026-04-28",
+  "url": "https://shelfspace.pro/blog/cannabis-vendor-quickbooks-setup",
+  "image": "https://shelfspace.pro/og-image.png"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How long does cannabis vendor QuickBooks setup take?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "About 10 minutes, one time. Connecting takes seconds. Most of the time is verifying customer mappings and choosing whether to map items individually or auto-create them."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Will ShelfSpace overwrite anything in my QuickBooks?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. ShelfSpace only creates new Invoices and PaymentReceived records tied to the QBO Customers and Items you map. Existing records and any manual edits you make in QBO are not modified."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What happens if my books are closed for the week the settlement covers?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "ShelfSpace handles it. The Invoice posts with today's date as the TxnDate. The DocNumber stays as the settlement reference and the check number stays on the PaymentReceived, so your bank-feed match still works. You don't need to reopen anything."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I have to map every Metrc item to a QBO Item?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. You can click Auto-create all in QBO to bootstrap the catalog as Service items in seconds, or leave items set to Ignore (use default) to roll into a single fallback line called ShelfSpace Consignment Sales."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What if my QuickBooks connection expires?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "QBO refresh tokens expire after 100 days of inactivity. Click Reconnect to QuickBooks in the vendor portal — it takes 10 seconds and resumes everything where it left off. Past Invoices and Payments stay intact."
+      }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://shelfspace.pro/" },
+    { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://shelfspace.pro/blog" },
+    { "@type": "ListItem", "position": 3, "name": "Cannabis Vendor QuickBooks Setup: A Step-by-Step Guide" }
+  ]
+}
+</script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="/" class="nav-logo">
+    <div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div>
+    <span class="nav-logo-text">ShelfSpace</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="/consignment">Consignment</a></li>
+    <li><a href="/accounts-payable">Accounts Payable</a></li>
+    <li><a href="/credit-recovery">Credit Recovery</a></li>
+    <li><a href="/pricing">Pricing</a></li>
+    <li><a href="/about">About</a></li>
+    <li><a href="/vendors" class="nav-secondary">For Vendors</a></li>
+    <li><a href="/contact" class="nav-cta">Get Started <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a></li>
+  </ul>
+  <div class="nav-hamburger" onclick="document.querySelector('.nav-links').classList.toggle('mobile-open'); event.stopPropagation();"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="hero-bg-gradient"></div>
+  <div class="hero-bg-gradient-2"></div>
+  <div class="hero-grid-lines"></div>
+  <div class="section-label">Vendor Management · QuickBooks</div>
+  <h1 class="section-title">Cannabis Vendor QuickBooks Setup: A Step-by-Step Guide</h1>
+  <p class="section-desc">How vendors connect QuickBooks Online to ShelfSpace so every weekly settlement lands in their books as an Invoice plus a matching Payment — with the PDF attached. About 10 minutes, one time.</p>
+</div>
+
+<!-- AT A GLANCE -->
+<div class="article-glance">
+  <h2>At a glance</h2>
+  <ul>
+    <li>Cannabis vendor QuickBooks setup takes about 10 minutes, one time.</li>
+    <li>Each weekly settlement becomes an Invoice in your QBO with the settlement PDF attached.</li>
+    <li>The matching PaymentReceived posts when the check is cut, deposit-routed to the bank account you choose.</li>
+    <li>Pick your Income and Bank accounts once, map customers and items, and you are done.</li>
+    <li>Closed periods, transient errors, and refresh tokens — all handled for you.</li>
+  </ul>
+</div>
+
+<!-- BYLINE -->
+<div class="article-byline">
+  <img src="/chris-mitchem.jpg" alt="Chris Mitchem">
+  <span>Chris Mitchem, Founder — 10 years operating dispensaries</span>
+</div>
+
+<!-- ARTICLE BODY -->
+<div class="article-body reveal">
+
+  <p>If you sell to a dispensary running on ShelfSpace, you can connect your QuickBooks Online to your ShelfSpace vendor portal and have every weekly settlement land in your books on its own — Invoice, Payment, deposit routing, and the settlement PDF attached. No more re-keying line items off a check stub. No more wondering whether last week's payout got booked to the right customer.</p>
+
+  <p>This guide walks through the whole setup, with screenshots from the actual portal. If you are mid-setup and stuck, jump to <a href="#troubleshooting">Troubleshooting</a> at the bottom.</p>
+
+  <h2>What ShelfSpace pushes to your QBO</h2>
+
+  <p>Once connected, every weekly settlement triggers two pushes to your QuickBooks Online instance:</p>
+  <ol>
+    <li><strong>An Invoice</strong> against the retailer (your QBO Customer), with one line per Metrc product sold (or one fallback line if you skip item mapping), plus separate negative-amount lines for returns credit, discount true-up, conversion credit, and the ShelfSpace platform fee. The settlement PDF is attached to the Invoice.</li>
+    <li><strong>A PaymentReceived</strong>, created when the settlement check is issued. Pay type is Check, RefNum is the check number, deposit-routed to the bank account you pick, and linked to the Invoice via QBO's <code>LinkedTxn</code> so AR aging clears.</li>
+  </ol>
+
+  <p>Both appear in your QBO instantly. The portal shows recent sync activity with a status badge per row (Synced, Failed, Pending, Skipped). Failed rows retry every 10 minutes on their own; you almost never need to touch them.</p>
+
+  <h2>1. Connect QuickBooks</h2>
+  <p>In your vendor portal, open <strong>Settings → QuickBooks Online</strong> and click <strong>Connect to QuickBooks</strong>. You will be redirected to Intuit, where you authorize ShelfSpace. After you approve, you land back on the settings page with a "Connected" badge.</p>
+
+  <h2>2. Pick your Income and Bank accounts</h2>
+  <p>On the same settings screen, the <strong>Income Account</strong> dropdown lists every Income or Other Income account from your QBO chart of accounts. Pick the one where settlement revenue should post — typically a "Sales" or "Consignment Revenue" account. We try to pre-select an account whose name contains "sales" or "revenue", but verify the choice.</p>
+  <p>The <strong>Bank Account</strong> dropdown is optional but strongly recommended. Pick the bank account where the settlement check actually deposits. This routes each PaymentReceived's <code>DepositToAccountRef</code> there, so QBO's bank feed can match the deposit. Leave it blank and payments land in <strong>Undeposited Funds</strong> for manual matching. Click <strong>Save Account</strong>.</p>
+
+  <h2>3. Map your customers</h2>
+  <p>Click <strong>Manage Customers</strong>. You will see one row per ShelfSpace retailer you have settlements with. Each row's <strong>QBO Customer</strong> column shows either the QBO Customer we auto-matched on a prior sync, or empty if no settlement has synced against that retailer yet.</p>
+
+  <figure class="article-figure">
+    <img src="/screenshots/qbo-vendor-customer-mapping.png"
+         alt="QuickBooks Customer Mapping screen showing retailer-to-QBO-customer mapping with first-time-setup verification banner."
+         width="1070" height="531" loading="lazy">
+    <figcaption>Customer mapping in the vendor portal. The yellow banner is your reminder to verify each row before the next settlement runs.</figcaption>
+  </figure>
+
+  <p>Auto-matching uses display-name <code>LIKE</code> matching, which can pick the wrong record when two of your customers have similar names — for example, "Acme Cannabis" and "Acme Wholesale LLC". Pre-mapping each retailer here is the cleanest way to guarantee correct attribution before the next settlement runs.</p>
+  <p>For each row: click the dropdown (or the <strong>Change</strong> link if it is already mapped), type to filter your QBO customers, and pick the right one. The mapping saves instantly. If a customer you expect is missing, click <strong>Refresh from QBO</strong> at the top.</p>
+  <p>One thing to know: changing a mapping does <em>not</em> re-link past Invoices. Already-synced settlements stay under whichever customer they were created against. Future syncs use the new mapping.</p>
+
+  <h2>4. Map your items (or auto-create them)</h2>
+  <p>Click <strong>Manage Items</strong>. You will see one row per Metrc product that has appeared on a settlement.</p>
+
+  <figure class="article-figure">
+    <img src="/screenshots/qbo-vendor-item-mapping.png"
+         alt="QuickBooks Item Mapping screen showing Metrc product names mapped to QBO Items, with Auto-create and Ignore options."
+         width="1139" height="725" loading="lazy">
+    <figcaption>Item mapping. You have three options per row: map to a specific QBO Item, click <strong>Auto-create all in QBO</strong> to bootstrap the catalog, or pick <strong>Ignore (use default)</strong> to roll items into a single fallback line.</figcaption>
+  </figure>
+
+  <p>Three options per row:</p>
+  <ul>
+    <li><strong>Map to a specific QBO Item.</strong> Click the dropdown, search by name, and pick. Best for products you want to track individually in QBO sales reports.</li>
+    <li><strong>Auto-create all in QBO.</strong> Click the green button at the top. We create a <code>Service</code> item in your QBO for every unmapped Metrc item, named identically to the Metrc item, posting to your Income Account. Quickest way to bootstrap the full catalog.</li>
+    <li><strong>Use default (Ignore).</strong> Pick <strong>Ignore (use default)</strong>. The item rolls up into a single fallback line called <code>ShelfSpace Consignment Sales</code>. Best for products you do not need to track individually.</li>
+  </ul>
+  <p>You can change any row at any time — even ones already set to "Using default" — by clicking the <strong>Change</strong> link. New mappings apply to future settlements; past Invoices keep whatever line items they synced with.</p>
+  <p>Two notes on the dropdown: the QBO catalog uses parent/child item names (e.g. <code>Flower:Indoor:Hybrid</code>), so the full path shows to disambiguate identical leaf names. And only Service, Inventory, and NonInventory item types appear — Bundle and Category types are excluded. If you need a product that is a Bundle in QBO, create a Service version for ShelfSpace to map against.</p>
+
+  <h2>5. Backfill historical settlements</h2>
+  <p>If you connected QBO after already running settlements on ShelfSpace, those past settlements are not yet in your QBO. To push them, go back to <strong>Settings → QuickBooks Online</strong> and click <strong>Sync Historical Transactions</strong>.</p>
+  <p>The button processes up to 50 settlements per click. If you have more than 50 unsynced, just click again — keep clicking until the panel shows zero pending. Each historical settlement creates the same Invoice + PaymentReceived pair that future settlements do.</p>
+
+  <h2>6. Done — what happens next</h2>
+  <p>Once setup is complete, you do not need to touch anything. Each settlement triggers Invoice + Payment within seconds of approval. The portal shows recent sync activity with status badges. Failed rows retry every 10 minutes on their own.</p>
+
+  <blockquote>
+    <p>Once it is connected, you stop touching it. Settlements land in QBO before you know they happened.</p>
+  </blockquote>
+
+  <h2>What if my books are closed?</h2>
+  <p>If a settlement's accrual week falls inside a closed QBO period, we do <em>not</em> ask you to reopen the period. The push retries with today's date as the TxnDate. The DocNumber stays as the settlement reference (<code>SR-...</code>) and the check number stays on the PaymentReceived's <code>PaymentRefNum</code>, so your bank-feed match still works. You will see the row flip from Failed to Synced on the next retry cycle, within 10 minutes.</p>
+
+  <h2 id="troubleshooting">Troubleshooting in 60 seconds</h2>
+  <ul>
+    <li><strong>A row shows "Failed".</strong> Click <strong>Retry</strong>. Most failures recover on retry. If it still fails, the error message gives the QBO reason; failed rows also retry every 10 minutes on their own.</li>
+    <li><strong>"Account Period Closed".</strong> Auto-handled — see the section above.</li>
+    <li><strong>Wrong customer on a posted Invoice.</strong> Open <strong>Manage Customers</strong>, click <strong>Change</strong>, and pick the right one. Future settlements use the new mapping. To re-route the existing Invoice, edit it directly in QBO.</li>
+    <li><strong>New QBO item or customer not in the dropdown.</strong> Click <strong>Refresh from QBO</strong>.</li>
+    <li><strong>Connection expired banner.</strong> Click <strong>Reconnect to QuickBooks</strong>. Refresh tokens expire after 100 days of inactivity. Reconnecting takes 10 seconds.</li>
+  </ul>
+
+  <h2>Need help?</h2>
+  <p>Email me directly at <a href="mailto:chris@shelfspace.pro">chris@shelfspace.pro</a>, or message ShelfiQ at <a href="mailto:shelfiq@inbound.shelfspace.pro">shelfiq@inbound.shelfspace.pro</a> in plain English — ShelfiQ has full context on your account and can answer most "where do I see X" or "why did Y happen" questions instantly. The reference version of this guide lives in our docs at <a href="/docs/vendor-portal/quickbooks-setup">Cannabis Vendor QuickBooks Setup</a>.</p>
+
+  <p>If you are not on ShelfSpace yet and your retailer is asking about it, see <a href="/vendors">what ShelfSpace does for vendors</a> (free portal across every retailer you sell to, weekly checks, no fees), or read the <a href="/docs/quickbooks/overview">retailer-side QuickBooks integration</a> for the other half of the picture. There is also a <a href="/blog/case-study-quickbooks-sync">case study</a> on what real-time QBO sync looks like for the dispensary on the other end of these settlements.</p>
+
+</div>
+
+<!-- FAQ -->
+<div class="faq-section reveal">
+  <h2>Frequently Asked Questions</h2>
+  <div class="faq-list">
+    <details>
+      <summary>How long does cannabis vendor QuickBooks setup take?</summary>
+      <p>About 10 minutes, one time. Connecting takes seconds. Most of the time is verifying customer mappings and choosing whether to map items individually or auto-create them.</p>
+    </details>
+    <details>
+      <summary>Will ShelfSpace overwrite anything in my QuickBooks?</summary>
+      <p>No. ShelfSpace only creates new Invoices and PaymentReceived records tied to the QBO Customers and Items you map. Existing records and any manual edits you make in QBO are not modified.</p>
+    </details>
+    <details>
+      <summary>What happens if my books are closed for the week the settlement covers?</summary>
+      <p>ShelfSpace handles it. The Invoice posts with today's date as the TxnDate. The DocNumber stays as the settlement reference and the check number stays on the PaymentReceived, so your bank-feed match still works. You don't need to reopen anything.</p>
+    </details>
+    <details>
+      <summary>Do I have to map every Metrc item to a QBO Item?</summary>
+      <p>No. You can click "Auto-create all in QBO" to bootstrap the catalog as Service items in seconds, or leave items set to "Ignore (use default)" to roll into a single fallback line called <code>ShelfSpace Consignment Sales</code>.</p>
+    </details>
+    <details>
+      <summary>What if my QuickBooks connection expires?</summary>
+      <p>QBO refresh tokens expire after 100 days of inactivity. Click "Reconnect to QuickBooks" in the vendor portal — it takes 10 seconds and resumes everything where it left off. Past Invoices and Payments stay intact.</p>
+    </details>
+  </div>
+</div>
+
+<!-- RELATED -->
+<section style="max-width:720px;margin:0 auto;padding:0 48px 60px;">
+  <h2 style="font-size:22px;font-weight:700;color:#1b4332;margin-bottom:24px;letter-spacing:-0.5px;">Related Reading</h2>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;">
+    <a href="/blog/case-study-quickbooks-sync" style="text-decoration:none;padding:20px;border:1px solid #e2e8f0;border-radius:12px;transition:all 0.2s;">
+      <span style="display:block;font-size:11px;font-weight:600;letter-spacing:0.5px;color:#1b4332;margin-bottom:8px;">CASE STUDY</span>
+      <span style="display:block;font-family:'Space Mono',monospace;font-size:18px;font-weight:700;color:#1b4332;letter-spacing:-1px;margin-bottom:4px;">Real-time sync</span>
+      <span style="display:block;font-size:14px;font-weight:500;color:#334155;line-height:1.4;">3-day lag → real-time QBO</span>
+    </a>
+    <a href="/blog/cannabis-vendor-management-guide" style="text-decoration:none;padding:20px;border:1px solid #e2e8f0;border-radius:12px;transition:all 0.2s;">
+      <span style="display:block;font-size:11px;font-weight:600;letter-spacing:0.5px;color:#7c3aed;margin-bottom:8px;">VENDOR MANAGEMENT</span>
+      <span style="display:block;font-family:'Space Mono',monospace;font-size:18px;font-weight:700;color:#1b4332;letter-spacing:-1px;margin-bottom:4px;">Full guide</span>
+      <span style="display:block;font-size:14px;font-weight:500;color:#334155;line-height:1.4;">Dispensary vendor management</span>
+    </a>
+    <a href="/docs/vendor-portal/quickbooks-setup" style="text-decoration:none;padding:20px;border:1px solid #e2e8f0;border-radius:12px;transition:all 0.2s;">
+      <span style="display:block;font-size:11px;font-weight:600;letter-spacing:0.5px;color:#1b4332;margin-bottom:8px;">DOCS</span>
+      <span style="display:block;font-family:'Space Mono',monospace;font-size:18px;font-weight:700;color:#1b4332;letter-spacing:-1px;margin-bottom:4px;">Reference</span>
+      <span style="display:block;font-size:14px;font-weight:500;color:#334155;line-height:1.4;">Vendor QuickBooks Setup doc</span>
+    </a>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-content">
+    <div class="section-label reveal">Get Started</div>
+    <h2 class="section-title reveal">Free for vendors. Always.</h2>
+    <p class="section-desc reveal">If your retailer is on ShelfSpace, you get a free portal across every ShelfSpace retailer you sell to — checks, payment history, credit memos, QuickBooks sync, all of it.</p>
+    <div class="cta-actions reveal">
+      <a href="/contact" class="btn-primary">
+        Get a Free Vendor Account
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+      <a href="mailto:chris@shelfspace.pro" class="btn-secondary">Email Chris</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="/" class="nav-logo"><div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div><span class="nav-logo-text">ShelfSpace</span></a>
+      <p>Every Vendor. Every Payment. One Engine.</p>
+    </div>
+    <div class="footer-col"><h4>Services</h4><ul><li><a href="/consignment">Consignment</a></li><li><a href="/accounts-payable">Accounts Payable</a></li><li><a href="/credit-recovery">Credit Recovery</a></li><li><a href="/checks">Check Payments</a></li><li><a href="/shelfiq">ShelfiQ</a></li></ul></div>
+    <div class="footer-col"><h4>Platform</h4><ul><li><a href="/features">Features</a></li><li><a href="/how-it-works">How It Works</a></li><li><a href="/pricing">Pricing</a></li><li><a href="/about">About</a></li><li><a href="/blog">Blog</a></li><li><a href="/docs">Docs</a></li></ul></div>
+    <div class="footer-col"><h4>Access</h4><ul><li><a href="https://ourshelf.space">Login</a></li><li><a href="/contact">Sign Up</a></li><li><a href="/contact">Contact</a></li><li><a href="/vendors">For Vendors</a></li></ul></div>
+    <div class="footer-col"><h4>Company</h4><ul><li><a href="mailto:chris@shelfspace.pro">Email</a></li><li><a href="mailto:support@shelfspace.pro">Support</a></li><li><a href="https://linkedin.com/company/shelfspace-pro" target="_blank" rel="noopener" class="footer-social-link"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> LinkedIn</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><p>&copy; 2026 ShelfSpace Technologies Inc.</p><div class="footer-bottom-links"><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div></div>
+</footer>
+
+<script>
+(function() {
+  var nav = document.getElementById('nav');
+  var pageHero = document.querySelector('.page-hero');
+  var parallaxSections = [
+    document.querySelector('.cta-section')
+  ];
+
+  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var isMobile = window.innerWidth < 900;
+  var ticking = false;
+
+  requestAnimationFrame(function() {
+    nav.classList.toggle('scrolled', window.scrollY > 20);
+    if (pageHero) pageHero.classList.add('hero-loaded');
+  });
+
+  var revealObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(function(el) { revealObserver.observe(el); });
+
+  function onScroll() {
+    var scrollY = window.scrollY;
+    nav.classList.toggle('scrolled', scrollY > 20);
+    if (prefersReduced || isMobile) return;
+    var wh = window.innerHeight;
+    parallaxSections.forEach(function(section) {
+      if (!section) return;
+      var rect = section.getBoundingClientRect();
+      if (rect.bottom < 0 || rect.top > wh) return;
+      var center = rect.top + rect.height / 2 - wh / 2;
+      section.style.setProperty('--parallax-y', (center * 0.08) + 'px');
+    });
+  }
+
+  window.addEventListener('scroll', function() {
+    if (!ticking) {
+      requestAnimationFrame(function() {
+        onScroll();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, { passive: true });
+
+  onScroll();
+
+  window.addEventListener('resize', function() {
+    isMobile = window.innerWidth < 900;
+    if (isMobile) {
+      parallaxSections.forEach(function(section) {
+        if (section) section.style.setProperty('--parallax-y', '0px');
+      });
+    }
+  });
+
+  document.addEventListener('click', function() {
+    var navLinks = document.querySelector('.nav-links');
+    if (navLinks && navLinks.classList.contains('mobile-open')) {
+      navLinks.classList.remove('mobile-open');
+    }
+  });
+})();
+</script>
+<script src="/shelfiq-widget.js"></script>
+</body>
+</html>

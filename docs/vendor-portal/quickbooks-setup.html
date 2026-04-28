@@ -3,20 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>How Consignment Works on ShelfSpace — ShelfSpace</title>
-<meta name="description" content="Cannabis consignment platform — how vendor-owned inventory, weekly settlements, and profit splits work on ShelfSpace. We handle the math and the checks.">
-<link rel="canonical" href="https://shelfspace.pro/docs/consignment/overview">
+<title>Cannabis Vendor QuickBooks Setup — ShelfSpace</title>
+<meta name="description" content="Cannabis vendor QuickBooks setup for ShelfSpace. Connect QBO, map customers and items, backfill history — every settlement becomes an Invoice and a Payment.">
+<link rel="canonical" href="https://shelfspace.pro/docs/vendor-portal/quickbooks-setup">
 <meta property="og:type" content="article">
-<meta property="og:url" content="https://shelfspace.pro/docs/consignment/overview">
-<meta property="og:title" content="How Consignment Works on ShelfSpace — ShelfSpace">
-<meta property="og:description" content="Cannabis consignment platform — how vendor-owned inventory, weekly settlements, and profit splits work on ShelfSpace. We handle the math and the checks.">
+<meta property="og:url" content="https://shelfspace.pro/docs/vendor-portal/quickbooks-setup">
+<meta property="og:title" content="Cannabis Vendor QuickBooks Setup — ShelfSpace">
+<meta property="og:description" content="Cannabis vendor QuickBooks setup for ShelfSpace. Connect QBO, map customers and items, backfill history — every settlement becomes an Invoice and a Payment.">
 <meta property="og:image" content="https://shelfspace.pro/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:type" content="image/png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="How Consignment Works on ShelfSpace — ShelfSpace">
-<meta name="twitter:description" content="Cannabis consignment platform — how vendor-owned inventory, weekly settlements, and profit splits work on ShelfSpace. We handle the math and the checks.">
+<meta name="twitter:title" content="Cannabis Vendor QuickBooks Setup — ShelfSpace">
+<meta name="twitter:description" content="Cannabis vendor QuickBooks setup for ShelfSpace. Connect QBO, map customers and items, backfill history — every settlement becomes an Invoice and a Payment.">
 <meta name="twitter:image" content="https://shelfspace.pro/og-image.png">
 <meta name="apple-mobile-web-app-title" content="ShelfSpace">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -120,6 +120,18 @@
   }
   .docs-highlight strong { color: var(--green-deep); }
 
+  /* ── Figure (screenshots) ── */
+  .docs-figure { margin: 28px 0; }
+  .docs-figure img {
+    display: block; max-width: 100%; height: auto;
+    border: 1px solid var(--slate-200); border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(27,67,50,0.06);
+  }
+  .docs-figure figcaption {
+    font-size: 13px; color: var(--slate-500);
+    margin-top: 10px; line-height: 1.55;
+  }
+
   /* ── Related Docs ── */
   .docs-related {
     margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--slate-100);
@@ -172,12 +184,12 @@
 {
   "@context": "https://schema.org",
   "@type": "TechArticle",
-  "headline": "How Consignment Works on ShelfSpace",
-  "datePublished": "2026-03-25",
-  "dateModified": "2026-04-27",
+  "headline": "Cannabis Vendor QuickBooks Setup",
+  "datePublished": "2026-04-28",
+  "dateModified": "2026-04-28",
   "author": { "@type": "Organization", "name": "ShelfSpace", "url": "https://shelfspace.pro" },
   "publisher": { "@type": "Organization", "name": "ShelfSpace" },
-  "url": "https://shelfspace.pro/docs/consignment/overview"
+  "url": "https://shelfspace.pro/docs/vendor-portal/quickbooks-setup"
 }
 </script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-H2LBJT03WE"></script>
@@ -189,7 +201,7 @@ document.head.appendChild(o)}initApollo();</script>
 <noscript><style>.docs-nav-section a.active{background:var(--green-ghost);color:var(--green-deep);font-weight:600;}</style></noscript>
 </head>
 <body>
-<!-- last-synced: 2026-03-25 -->
+<!-- last-synced: 2026-04-28 -->
 
 <!-- NAV -->
 <nav id="nav">
@@ -214,7 +226,7 @@ document.head.appendChild(o)}initApollo();</script>
 <div class="docs-hero">
   <div class="docs-hero-content">
     <a href="/docs" class="docs-hero-badge">Documentation</a>
-    <h1 class="docs-hero-title">How Consignment Works on ShelfSpace</h1>
+    <h1 class="docs-hero-title">ShelfSpace Vendor QuickBooks Setup</h1>
   </div>
 </div>
 
@@ -227,70 +239,127 @@ document.head.appendChild(o)}initApollo();</script>
   <!-- CONTENT -->
   <main class="docs-content">
     <div class="docs-breadcrumb">
-      <a href="/docs">Docs</a> / <a href="/docs/consignment/overview">Consignment</a> / Overview
+      <a href="/docs">Docs</a> / <a href="/docs/vendor-portal/overview">Vendor Portal</a> / QuickBooks Setup
     </div>
-    <div class="docs-category">Consignment</div>
+    <div class="docs-category">Vendor Portal</div>
 
     <!-- AT A GLANCE -->
     <div class="docs-glance">
       <h2>At a Glance</h2>
       <ul>
-        <li>Cannabis consignment platform — vendors place product, you pay after it sells</li>
-        <li>The vendor owns the inventory until a customer buys it</li>
-        <li>Weekly settlements calculated from your POS data with category-level profit splits</li>
-        <li>We handle the settlement math, the check, and the vendor communication</li>
+        <li>Cannabis vendor QuickBooks setup takes about 10 minutes, one time.</li>
+        <li>Every weekly settlement becomes an Invoice in your QBO with the settlement PDF attached.</li>
+        <li>The matching PaymentReceived posts when the check is cut, deposit-routed to the bank account you choose.</li>
+        <li>Pick your Income and Bank accounts once, map customers and items, and you are done.</li>
+        <li>We handle book-closed weeks, transient API errors, and refresh tokens for you.</li>
       </ul>
     </div>
 
     <!-- BODY CONTENT -->
-    <h2>The Cannabis Consignment Platform Model</h2>
-    <p>ShelfSpace is a cannabis consignment platform that manages the full lifecycle of vendor-owned inventory on your shelves. Instead of paying for product upfront, your vendors deliver goods on consignment — they retain ownership until a sale happens at the register. You never tie up capital in inventory you haven't sold yet.</p>
+    <h2>Setup in 6 steps</h2>
+    <p>If you only read one section, read this. The rest of the page expands each step in detail.</p>
+    <ol>
+      <li>In your vendor portal, go to <strong>Settings → QuickBooks Online</strong> and click <strong>Connect to QuickBooks</strong>. Authorize on Intuit.</li>
+      <li>Pick your <strong>Income Account</strong> (where settlement revenue posts) and a <strong>Bank Account</strong> (where settlement checks deposit). Click <strong>Save Account</strong>.</li>
+      <li>Click <strong>Manage Customers</strong>. For each retailer, verify or pick the right QBO Customer.</li>
+      <li>Click <strong>Manage Items</strong>. Either click <strong>Auto-create all in QBO</strong> to bootstrap the full catalog, or map items one-by-one (or pick <strong>Ignore</strong> to roll into a single fallback line).</li>
+      <li>If you ran settlements before connecting, click <strong>Sync Historical Transactions</strong> until the unsynced count is zero (50 per click).</li>
+      <li>Done. Future settlements push to your books on their own.</li>
+    </ol>
 
-    <p>This model works especially well in cannabis, where product variety is high and shelf life is limited. Consignment lets you carry more SKUs, test new brands, and avoid getting stuck with slow movers — all without upfront cost. Learn more on our <a href="/consignment">consignment service page</a>.</p>
+    <h2>Connect your QuickBooks</h2>
+    <p>Open your vendor portal, then <strong>Settings → QuickBooks Online → Connect to QuickBooks</strong>. You will be redirected to Intuit, where you authorize ShelfSpace. After authorization you land back on the settings page with a "Connected" badge.</p>
+    <p>On the same screen, the <strong>Income Account</strong> dropdown lists every Income or Other Income account from your QBO chart of accounts. Pick the one where settlement revenue should post — typically a "Sales" or "Consignment Revenue" account. We try to pre-select an account whose name contains "sales" or "revenue", but verify the choice.</p>
+    <p>The <strong>Bank Account</strong> dropdown is optional but recommended. Pick the bank account where the physical settlement check actually deposits. This routes each PaymentReceived's <code>DepositToAccountRef</code> there, so QBO's bank feed can match the deposit. Leave it blank and payments land in <strong>Undeposited Funds</strong> for manual matching.</p>
+    <p>Click <strong>Save Account</strong>.</p>
 
-    <div class="docs-highlight">
-      <strong>What we handle:</strong> POS data ingestion, settlement calculations, aging discount application, profit split math, check generation, vendor portal access, and QuickBooks sync. You review the weekly settlement summary and approve payment.
-    </div>
+    <h2>Map your customers</h2>
+    <p>Click <strong>Manage Customers</strong>. You will see one row per ShelfSpace retailer you have settlements with. Each row's <strong>QBO Customer</strong> column shows either the QBO Customer we auto-matched on a prior sync, or empty if no settlement has synced against that retailer yet.</p>
 
-    <h2>Who Owns the Inventory</h2>
-    <p>Under a consignment arrangement, the vendor retains legal ownership of the product until it sells. Your dispensary provides the shelf space, the staff, and the customer relationship. When a unit sells, the revenue is split between you and the vendor according to your <a href="/docs/consignment/profit-splits">agreed category splits</a>.</p>
+    <figure class="docs-figure">
+      <img src="/screenshots/qbo-vendor-customer-mapping.png"
+           alt="QuickBooks Customer Mapping screen showing retailer-to-QBO-customer mapping with first-time-setup verification banner."
+           width="1070" height="531" loading="lazy">
+      <figcaption>Customer mapping. The yellow banner is your reminder to verify each row — auto-matching uses display-name <code>LIKE</code> matching, which can pick the wrong record when two customers have similar names.</figcaption>
+    </figure>
 
-    <p>Unsold inventory remains the vendor's responsibility. If product ages past a threshold, <a href="/docs/consignment/aging-discounts">aging discounts</a> kick in to keep shelves fresh and pricing competitive.</p>
+    <p>Auto-matching can pick the wrong record when you have similarly-named entities — for example, "Acme Cannabis" vs. "Acme Wholesale LLC". Pre-mapping a retailer here before the next settlement runs is the cleanest way to guarantee correct attribution.</p>
+    <p>For each row: click the dropdown (or the <strong>Change</strong> link if it is already mapped), type to filter your QBO customers, and pick the right one. The mapping saves instantly. If a customer you expect is missing, click <strong>Refresh from QBO</strong>.</p>
+    <p>Changing a mapping does <strong>not</strong> re-link past Invoices. Already-synced settlements stay under whichever customer they were created against. Future syncs use the new mapping.</p>
 
-    <h2>The Weekly Settlement Cycle</h2>
-    <p>Every week, ShelfSpace pulls your POS sales data and runs the settlement calculation for each vendor. Here's the formula at a high level:</p>
+    <h2>Map your items (or auto-create them)</h2>
+    <p>Click <strong>Manage Items</strong>. You will see one row per Metrc product that has appeared on a settlement. Three options per row:</p>
+
+    <figure class="docs-figure">
+      <img src="/screenshots/qbo-vendor-item-mapping.png"
+           alt="QuickBooks Item Mapping screen showing Metrc product names mapped to QBO Items, with Auto-create and Ignore options."
+           width="1139" height="725" loading="lazy">
+      <figcaption>Item mapping. Three options per row: map to a specific QBO Item, click <strong>Auto-create all in QBO</strong> to bootstrap the catalog, or pick <strong>Ignore (use default)</strong> to roll into a single fallback line.</figcaption>
+    </figure>
 
     <ul>
-      <li><strong>Gross sales</strong> — total revenue from that vendor's consigned products</li>
-      <li><strong>Category splits</strong> — each product category has a negotiated vendor/retailer percentage</li>
-      <li><strong>Aging discounts</strong> — deductions for product that sat on the shelf past agreed thresholds</li>
-      <li><strong>Return credits</strong> — any credits for returned or defective product</li>
-      <li><strong>Platform fee</strong> — a small tiered fee based on net sales volume</li>
-      <li><strong>Net payout</strong> — the vendor's check amount after all deductions</li>
+      <li><strong>Map to a specific QBO Item.</strong> Click the dropdown, search, and pick. Best for products you want to track individually in QBO sales reports.</li>
+      <li><strong>Auto-create all in QBO.</strong> Click the green button at the top. We create a <code>Service</code> item in your QBO for every unmapped Metrc item, named identically to the Metrc item, posting to your Income Account.</li>
+      <li><strong>Use default (Ignore).</strong> Pick <strong>Ignore (use default)</strong> in the dropdown. The item rolls up into a single fallback line called <code>ShelfSpace Consignment Sales</code>.</li>
+    </ul>
+    <p>Change any row at any time — even ones already set to "Using default" — by clicking the <strong>Change</strong> link. New mappings apply to future settlements; past Invoices keep whatever line items they synced with.</p>
+    <p>Two notes on the dropdown: the QBO catalog uses parent/child item names (e.g. <code>Flower:Indoor:Hybrid</code>), so the full path shows to disambiguate identical leaf names. And Bundle and Category item types are excluded — only Service, Inventory, and NonInventory items appear.</p>
+
+    <h2>Backfill historical settlements</h2>
+    <p>If you connected QBO after already running settlements on ShelfSpace, those past settlements are not yet in your QBO. To push them, go back to <strong>Settings → QuickBooks Online</strong> and click <strong>Sync Historical Transactions</strong>. The button processes up to 50 settlements per click. If you have more than 50 unsynced, just click again until the panel shows zero pending.</p>
+    <p>Each historical settlement creates the same Invoice + PaymentReceived pair that future settlements do. If a settlement's accrual week falls inside a closed QBO period, we shift the TxnDate to today for you (see Troubleshooting below) — you do not need to reopen anything.</p>
+
+    <h2>What we push on each settlement</h2>
+    <p>Once setup is complete, you do not need to touch anything. Per settlement:</p>
+    <ul>
+      <li>We create the <strong>Invoice</strong> against the retailer (your QBO Customer), with one line per Metrc product (mapped or fallback) plus separate negative-amount lines for returns credit, discount true-up, conversion credit, and the ShelfSpace platform fee. The settlement PDF is attached.</li>
+      <li>When the settlement check is generated, we create the matching <strong>PaymentReceived</strong> (PayType: Check, RefNum: check number, deposit-routed to your bank account) and link it to the Invoice via <code>LinkedTxn</code>.</li>
+      <li>AR aging clears on its own.</li>
+      <li>Both transactions appear in your QBO instantly. The settings page shows recent sync activity with status badges (Synced / Failed / Pending / Skipped).</li>
     </ul>
 
-    <p>All math uses integer-precision arithmetic rounded to the penny, so there are no floating-point surprises. See <a href="/docs/consignment/settlements">weekly settlements</a> for the full calculation breakdown.</p>
+    <div class="docs-highlight">
+      <strong>What we handle:</strong> book-closed weeks, transient QBO API errors (10-minute retry), and OAuth refresh tokens. You do not need to reopen closed periods or manage tokens.
+    </div>
 
-    <h2>What You Get Each Week</h2>
-    <p>Every settlement produces a detailed <a href="/docs/consignment/settlement-reports">settlement report</a> — a five-section document covering the payout summary, returns, discounts, current inventory, and the final check amount. Vendors receive the same report through their portal, so both sides are looking at the same numbers.</p>
+    <h2>ShelfSpace-managed line items</h2>
+    <p>We create and cache a few helper QBO Items in your books on first sync. You do not need to create or maintain them:</p>
+    <ul>
+      <li><code>ShelfSpace Consignment Sales</code> — fallback line for any unmapped or ignored Metrc product.</li>
+      <li><code>ShelfSpace - Returns Credit</code> — negative-amount line for returns offsets.</li>
+      <li><code>ShelfSpace - Discount True-Up</code> — negative-amount line for aging, promotional, and operational discount adjustments.</li>
+      <li><code>ShelfSpace - Conversion Credit</code> — negative-amount line for unit-conversion adjustments.</li>
+      <li><code>ShelfSpace - Platform Fee</code> — negative-amount line for the ShelfSpace platform fee.</li>
+    </ul>
+    <p>All five post to the Income Account you picked in step 2.</p>
 
-    <p>The check is generated as a Check 21 payment and delivered digitally. Vendors can download it directly from the <a href="/docs/vendor-portal/overview">vendor portal</a>.</p>
+    <h2>Troubleshooting</h2>
+    <ul>
+      <li><strong>Settlement shows "Failed":</strong> click <strong>Retry</strong> on that row. Most failures recover. Failed rows also retry every 10 minutes on their own.</li>
+      <li><strong>"Account Period Closed":</strong> auto-handled. We retry with today's TxnDate. The DocNumber stays as the settlement reference and the check number stays on the PaymentReceived's <code>PaymentRefNum</code>, so your bank-feed match still works.</li>
+      <li><strong>Wrong customer on a posted Invoice:</strong> open <strong>Manage Customers</strong>, click <strong>Change</strong>, and pick the right one. Future settlements use the new mapping. To re-route the existing Invoice, edit it directly in QBO.</li>
+      <li><strong>New QBO item or customer not in the dropdown:</strong> click <strong>Refresh from QBO</strong>.</li>
+      <li><strong>Connection expired banner:</strong> click <strong>Reconnect to QuickBooks</strong>. QBO refresh tokens expire after 100 days of inactivity. Reconnecting takes 10 seconds and resumes everything.</li>
+    </ul>
+
+    <h2>Need help with setup?</h2>
+    <p>Email Chris at <a href="mailto:chris@shelfspace.pro">chris@shelfspace.pro</a>, or message ShelfiQ at <a href="mailto:shelfiq@inbound.shelfspace.pro">shelfiq@inbound.shelfspace.pro</a> — ShelfiQ has full context on your account and can answer most "where do I see X" or "why did Y happen" questions instantly. The deeper version of this guide, with extra context for prospects, is in our blog post <a href="/blog/cannabis-vendor-quickbooks-setup">Cannabis Vendor QuickBooks Setup: A Step-by-Step Guide</a>.</p>
 
     <!-- RELATED DOCS -->
     <div class="docs-related">
       <h3>Related</h3>
       <div class="docs-related-links">
-        <a href="/docs/consignment/contracts">Contracts & Terms</a>
-        <a href="/docs/consignment/settlements">Weekly Settlements</a>
-        <a href="/docs/consignment/profit-splits">Profit Splits</a>
+        <a href="/docs/vendor-portal/overview">Vendor Portal Overview</a>
+        <a href="/docs/vendor-portal/payment-history">Payment History</a>
+        <a href="/docs/quickbooks/overview">QuickBooks Integration (Retailer)</a>
       </div>
     </div>
 
     <!-- CTA -->
     <div class="docs-cta">
-      <p><strong>Ready to free up your capital? Let's talk.</strong></p>
+      <p><strong>Want your retailer on ShelfSpace? Let's talk.</strong></p>
       <a href="/contact">Talk to Us <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a>
-      <div class="docs-cta-note">Free evaluation. No commitment.</div>
+      <div class="docs-cta-note">Free for vendors. Always.</div>
     </div>
   </main>
 </div>
