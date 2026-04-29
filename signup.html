@@ -50,7 +50,7 @@
     margin-bottom: 16px;
   }
   .signup-sidebar-list li svg {
-    flex-shrink: 0; width: 20px; height: 20px; color: var(--green-mid); margin-top: 2px;
+    flex-shrink: 0; width: 20px; height: 20px; color: var(--green-dark); margin-top: 2px;
   }
   .signup-sidebar-quote {
     border-top: 1px solid var(--slate-200); padding-top: 24px;
@@ -85,10 +85,10 @@
     transition: border-color 0.2s, box-shadow 0.2s;
     -webkit-appearance: none; appearance: none;
   }
-  .form-group input::placeholder { color: var(--slate-400); }
+  .form-group input::placeholder { color: var(--slate-500); }
   .form-group input:not([type="checkbox"]):focus,
   .form-group select:focus {
-    outline: none; border-color: var(--green-mid);
+    outline: none; border-color: var(--green-dark);
     box-shadow: 0 0 0 3px rgba(64,145,108,0.1);
   }
   .form-group select {
@@ -98,7 +98,7 @@
     padding-right: 40px;
     cursor: pointer;
   }
-  .form-group select option[value=""] { color: var(--slate-400); }
+  .form-group select option[value=""] { color: var(--slate-500); }
 
   .signup-card .btn-primary {
     width: 100%; justify-content: center; margin-top: 4px;
@@ -116,7 +116,7 @@
   .form-success {
     display: none; text-align: center; padding: 24px 0;
   }
-  .form-success svg { color: var(--green-mid); margin-bottom: 12px; }
+  .form-success svg { color: var(--green-dark); margin-bottom: 12px; }
   .form-success h3 { font-size: 20px; font-weight: 700; color: var(--green-deep); margin-bottom: 8px; }
   .form-success p { font-size: 15px; color: var(--slate-500); line-height: 1.6; }
 
@@ -124,7 +124,7 @@
     text-align: center; margin-top: 24px; font-size: 14px; color: var(--slate-500);
   }
   .login-link a {
-    color: var(--green-mid); text-decoration: none; font-weight: 600; transition: color 0.2s;
+    color: var(--green-dark); text-decoration: none; font-weight: 600; transition: color 0.2s;
   }
   .login-link a:hover { color: var(--green-deep); }
 
@@ -135,10 +135,10 @@
     display: grid; grid-template-columns: 1fr 1fr; gap: 4px 16px;
   }
   .pw-requirements li {
-    font-size: 12px; color: var(--slate-400); display: flex; align-items: center; gap: 6px;
+    font-size: 12px; color: var(--slate-500); display: flex; align-items: center; gap: 6px;
     transition: color 0.2s;
   }
-  .pw-requirements li.met { color: var(--green-mid); }
+  .pw-requirements li.met { color: var(--green-dark); }
   .pw-requirements li .check-icon { flex-shrink: 0; width: 14px; height: 14px; }
 
   @keyframes spin { to { transform: rotate(360deg); } }
@@ -346,8 +346,8 @@ document.head.appendChild(o)}initApollo();</script>
 
         <div class="form-group" style="margin-bottom:24px;">
           <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;font-weight:400;color:var(--slate-600);font-size:13px;line-height:1.5;">
-            <input type="checkbox" id="agreeTerms" required style="margin-top:3px;width:16px;height:16px;accent-color:var(--green-mid);flex-shrink:0;cursor:pointer;">
-            <span>By creating an account, you agree to our <a href="/terms" target="_blank" style="color:var(--green-mid);text-decoration:none;font-weight:600;">Terms&nbsp;of&nbsp;Service</a> and <a href="/privacy" target="_blank" style="color:var(--green-mid);text-decoration:none;font-weight:600;">Privacy&nbsp;Policy</a>.</span>
+            <input type="checkbox" id="agreeTerms" required style="margin-top:3px;width:16px;height:16px;accent-color:var(--green-dark);flex-shrink:0;cursor:pointer;">
+            <span>By creating an account, you agree to our <a href="/terms" target="_blank" style="color:var(--green-dark);text-decoration:none;font-weight:600;">Terms&nbsp;of&nbsp;Service</a> and <a href="/privacy" target="_blank" style="color:var(--green-dark);text-decoration:none;font-weight:600;">Privacy&nbsp;Policy</a>.</span>
           </label>
         </div>
 
@@ -366,7 +366,7 @@ document.head.appendChild(o)}initApollo();</script>
       <div class="form-success" id="formSuccess">
         <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
         <h3>Account created</h3>
-        <p>You're all set. <a href="https://ourshelf.space" style="color: var(--green-mid); font-weight: 600; text-decoration: none;">Log in to get started.</a></p>
+        <p>You're all set. <a href="https://ourshelf.space" style="color: var(--green-dark); font-weight: 600; text-decoration: none;">Log in to get started.</a></p>
       </div>
     </div>
 
@@ -464,14 +464,14 @@ document.head.appendChild(o)}initApollo();</script>
       if (!res.ok) {
         const data = await res.json().catch(() => null);
         if (data?.code === 'EMAIL_EXISTS') {
-          errorEl.innerHTML = 'A user with that email already exists. <a href="https://ourshelf.space" style="color:var(--green-mid);font-weight:600;text-decoration:none;">Log in instead &rarr;</a>';
+          errorEl.innerHTML = 'A user with that email already exists. <a href="https://ourshelf.space" style="color:var(--green-dark);font-weight:600;text-decoration:none;">Log in instead &rarr;</a>';
           errorEl.style.display = 'block';
           btn.disabled = false;
           btn.innerHTML = 'Create Account <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>';
           return;
         }
         if (data?.code === 'BUSINESS_EXISTS') {
-          errorEl.innerHTML = 'This business already exists on ShelfSpace. Ask your account admin to add you as a user, or <a href="https://ourshelf.space" style="color:var(--green-mid);font-weight:600;text-decoration:none;">log in here &rarr;</a><br><br>If this seems like an error, email us at <a href="mailto:support@shelfspace.pro" style="color:var(--green-mid);font-weight:600;text-decoration:none;">support@shelfspace.pro</a>.';
+          errorEl.innerHTML = 'This business already exists on ShelfSpace. Ask your account admin to add you as a user, or <a href="https://ourshelf.space" style="color:var(--green-dark);font-weight:600;text-decoration:none;">log in here &rarr;</a><br><br>If this seems like an error, email us at <a href="mailto:support@shelfspace.pro" style="color:var(--green-dark);font-weight:600;text-decoration:none;">support@shelfspace.pro</a>.';
           errorEl.style.display = 'block';
           btn.disabled = false;
           btn.innerHTML = 'Create Account <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>';

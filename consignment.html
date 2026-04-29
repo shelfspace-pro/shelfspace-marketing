@@ -112,25 +112,25 @@
     cursor: pointer; border: none; box-shadow: 0 2px 8px rgba(27,67,50,0.3);
   }
   .boost-slider-ticks {
-    display: flex; justify-content: space-between; font-size: 12px; color: var(--slate-400); margin-top: 8px;
+    display: flex; justify-content: space-between; font-size: 12px; color: var(--slate-500); margin-top: 8px;
   }
   .boost-results { background: var(--white); border: 1px solid var(--slate-200); border-radius: 16px; overflow: hidden; margin-top: 40px; }
   .boost-range { display: grid; grid-template-columns: repeat(3, 1fr); }
   .boost-range-col { padding: 24px 20px; text-align: center; border-right: 1px solid var(--slate-100); }
   .boost-range-col:last-child { border-right: none; }
   .boost-range-label { font-size: 12px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 12px; }
-  .boost-range-col--low .boost-range-label { color: var(--slate-400); }
-  .boost-range-col--mid .boost-range-label { color: var(--green-mid); }
+  .boost-range-col--low .boost-range-label { color: var(--slate-500); }
+  .boost-range-col--mid .boost-range-label { color: var(--green-dark); }
   .boost-range-col--high .boost-range-label { color: var(--green-deep); }
   .boost-range-value { font-family: var(--font-mono); font-size: clamp(20px, 2.5vw, 28px); font-weight: 700; letter-spacing: -1px; margin-bottom: 4px; }
   .boost-range-col--low .boost-range-value { color: var(--slate-600); }
-  .boost-range-col--mid .boost-range-value { color: var(--green-mid); }
+  .boost-range-col--mid .boost-range-value { color: var(--green-dark); }
   .boost-range-col--high .boost-range-value { color: var(--green-deep); }
-  .boost-range-sub { font-size: 13px; color: var(--slate-400); }
+  .boost-range-sub { font-size: 13px; color: var(--slate-600); }
   .boost-range-col--mid { background: var(--green-ghost); }
   .boost-badges { display: flex; justify-content: center; gap: 12px; padding: 16px 20px; border-top: 1px solid var(--slate-100); flex-wrap: wrap; }
   .boost-badge { display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; background: var(--green-ghost); border: 1px solid rgba(149,213,178,0.3); border-radius: 100px; font-size: 13px; font-weight: 600; color: var(--green-deep); }
-  .boost-badge-label { color: var(--slate-500); font-weight: 500; }
+  .boost-badge-label { color: var(--slate-600); font-weight: 500; }
   .boost-ebitda { display: flex; justify-content: space-between; align-items: center; padding: 16px 24px; background: var(--green-deep); }
   .boost-ebitda span:first-child { font-size: 14px; font-weight: 600; color: rgba(255,255,255,0.7); }
   .boost-ebitda span:last-child { font-family: var(--font-mono); font-size: 20px; font-weight: 700; color: var(--white); }
@@ -179,7 +179,7 @@
   .faq-list summary::-webkit-details-marker { display: none; }
   .faq-list summary::after {
     content: '+'; font-size: 22px; font-weight: 400;
-    color: var(--slate-400); transition: transform 0.2s;
+    color: var(--slate-500); transition: transform 0.2s;
     flex-shrink: 0;
   }
   .faq-list details[open] summary::after {
@@ -394,7 +394,7 @@ document.head.appendChild(o)}initApollo();</script>
         <span class="boost-slider-label">Annual Revenue</span>
         <span class="boost-slider-value" id="boost-revenue-val">$3,000,000</span>
       </div>
-      <input type="range" class="boost-slider" id="boost-revenue" min="500000" max="10000000" step="100000" value="3000000">
+      <input type="range" class="boost-slider" id="boost-revenue" min="500000" max="10000000" step="100000" value="3000000" aria-label="Annual revenue">
       <div class="boost-slider-ticks">
         <span>$500K</span>
         <span>$10M</span>
@@ -428,10 +428,10 @@ document.head.appendChild(o)}initApollo();</script>
         <span id="boost-ebitda-val">15.0% → 17.0%</span>
       </div>
     </div>
-    <p style="text-align:center;margin-top:12px;font-size:13px;color:var(--green-mid);font-weight:500;">Cash freed + zero waste + locked margins. Straight to your bottom line.</p>
+    <p style="text-align:center;margin-top:12px;font-size:13px;color:var(--green-dark);font-weight:500;">Cash freed + zero waste + locked margins. Straight to your bottom line.</p>
     <div class="boost-cta-wrap">
       <a href="/contact" class="btn-primary">Get My Free Evaluation <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
-      <p style="font-size:14px;color:var(--slate-400);margin-top:12px;">We'll show you which vendors to start with. 48 hours. Free.</p>
+      <p style="font-size:14px;color:var(--slate-500);margin-top:12px;">We'll show you which vendors to start with. 48 hours. Free.</p>
     </div>
   </div>
 </section>
@@ -522,7 +522,7 @@ document.head.appendChild(o)}initApollo();</script>
     </details>
     <details>
       <summary>What does this cost?</summary>
-      <p>The evaluation is free. After that, consignment is a flat monthly fee. No contracts, cancel any time. <a href="/pricing" style="color:var(--green-mid);font-weight:600;text-decoration:none;">See pricing</a>.</p>
+      <p>The evaluation is free. After that, consignment is a flat monthly fee. No contracts, cancel any time. <a href="/pricing" style="color:var(--green-dark);font-weight:600;text-decoration:none;">See pricing</a>.</p>
     </details>
   </div>
 </section>
