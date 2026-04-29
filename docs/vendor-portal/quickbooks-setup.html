@@ -305,6 +305,11 @@ document.head.appendChild(o)}initApollo();</script>
     <p>Change any row at any time — even ones already set to "Using default" — by clicking the <strong>Change</strong> link. New mappings apply to future settlements; past Invoices keep whatever line items they synced with.</p>
     <p>Two notes on the dropdown: the QBO catalog uses parent/child item names (e.g. <code>Flower:Indoor:Hybrid</code>), so the full path shows to disambiguate identical leaf names. And Bundle and Category item types are excluded — only Service, Inventory, and NonInventory items appear.</p>
 
+    <h2>Auto-create Payment toggle (optional)</h2>
+    <p>By default, ShelfSpace pushes a <strong>PaymentReceived</strong> to QBO as soon as the settlement check is issued — marks the Invoice paid, deposits to the bank account you mapped, and clears your AR aging on its own. That is the right default for vendors who want the integration to be fully hands-off.</p>
+    <p>If you would rather record deposits yourself (e.g. you reconcile via QBO's bank feed and prefer the manual <em>Receive Payments</em> workflow), turn off the <strong>Auto-create Payment in QuickBooks</strong> switch on the QuickBooks settings panel. With it off, ShelfSpace pushes only the Invoice for each settlement — no PaymentReceived — and you record the deposit yourself when the bank feed picks up the cleared check.</p>
+    <p>The toggle is forward-looking. Flipping it off will not undo Payments already pushed for past settlements; flipping it back on later will not auto-backfill the gap (you would click the per-settlement <strong>Push Payment</strong> button on each one).</p>
+
     <h2>Backfill historical settlements</h2>
     <p>If you connected QBO after already running settlements on ShelfSpace, those past settlements are not yet in your QBO. To push them, go back to <strong>Settings → QuickBooks Online</strong> and click <strong>Sync Historical Transactions</strong>. The button processes up to 50 settlements per click. If you have more than 50 unsynced, just click again until the panel shows zero pending.</p>
     <p>Each historical settlement creates the same Invoice + PaymentReceived pair that future settlements do. If a settlement's accrual week falls inside a closed QBO period, we shift the TxnDate to today for you (see Troubleshooting below) — you do not need to reopen anything.</p>
@@ -313,8 +318,8 @@ document.head.appendChild(o)}initApollo();</script>
     <p>Once setup is complete, you do not need to touch anything. Per settlement:</p>
     <ul>
       <li>We create the <strong>Invoice</strong> against the retailer (your QBO Customer), with one line per Metrc product (mapped or fallback) plus separate negative-amount lines for returns credit, discount true-up, conversion credit, and the ShelfSpace platform fee. The settlement PDF is attached.</li>
-      <li>When the settlement check is generated, we create the matching <strong>PaymentReceived</strong> (PayType: Check, RefNum: check number, deposit-routed to your bank account) and link it to the Invoice via <code>LinkedTxn</code>.</li>
-      <li>AR aging clears on its own.</li>
+      <li>When the settlement check is generated, we create the matching <strong>PaymentReceived</strong> (PayType: Check, RefNum: check number, deposit-routed to your bank account) and link it to the Invoice via <code>LinkedTxn</code>. If you've turned off the <strong>Auto-create Payment</strong> toggle, this step is skipped — only the Invoice is pushed and you record the deposit yourself.</li>
+      <li>AR aging clears on its own (when auto-payment is on).</li>
       <li>Both transactions appear in your QBO instantly. The settings page shows recent sync activity with status badges (Synced / Failed / Pending / Skipped).</li>
     </ul>
 
@@ -340,6 +345,7 @@ document.head.appendChild(o)}initApollo();</script>
       <li><strong>Wrong customer on a posted Invoice:</strong> open <strong>Manage Customers</strong>, click <strong>Change</strong>, and pick the right one. Future settlements use the new mapping. To re-route the existing Invoice, edit it directly in QBO.</li>
       <li><strong>New QBO item or customer not in the dropdown:</strong> click <strong>Refresh from QBO</strong>.</li>
       <li><strong>Connection expired banner:</strong> click <strong>Reconnect to QuickBooks</strong>. QBO refresh tokens expire after 100 days of inactivity. Reconnecting takes 10 seconds and resumes everything.</li>
+      <li><strong>You deleted the Invoice in QBO directly:</strong> click <strong>Re-sync to QBO</strong> on that settlement. ShelfSpace detects the deleted Invoice automatically and pushes a fresh one. <em>Caveat:</em> if you had already linked a check Payment in QBO for that settlement, deleting the Invoice does not auto-delete the Payment — you'll have an orphan unapplied Payment in QBO that you'll need to delete or re-apply manually.</li>
     </ul>
 
     <h2>Need help with setup?</h2>
