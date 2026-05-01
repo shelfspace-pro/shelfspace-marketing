@@ -3,20 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ShelfSpace Pricing — Cannabis AP & Consignment</title>
-<meta name="description" content="Outsourced AP for cannabis dispensaries from $1,800/mo per location. Plus success-based credit recovery — 25% of what we recover, you keep 75%.">
+<title>ShelfSpace Pricing — Cannabis AP & Credit Recovery</title>
+<meta name="description" content="Outsourced AP for cannabis dispensaries from $1,800/mo per location. Add success-based credit recovery — service pays for itself, then turns profit-positive.">
 <link rel="canonical" href="https://shelfspace.pro/pricing">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://shelfspace.pro/pricing">
-<meta property="og:title" content="ShelfSpace Pricing — Cannabis AP & Consignment">
-<meta property="og:description" content="Outsourced AP for cannabis dispensaries from $1,800/mo per location. Plus success-based credit recovery — 25% of what we recover, you keep 75%.">
+<meta property="og:title" content="ShelfSpace Pricing — Cannabis AP & Credit Recovery">
+<meta property="og:description" content="Outsourced AP for cannabis dispensaries from $1,800/mo per location. Add success-based credit recovery — service pays for itself, then turns profit-positive.">
 <meta property="og:image" content="https://shelfspace.pro/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:type" content="image/png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="ShelfSpace Pricing — Cannabis AP & Consignment">
-<meta name="twitter:description" content="Outsourced AP for cannabis dispensaries from $1,800/mo per location. Plus success-based credit recovery — 25% of what we recover, you keep 75%.">
+<meta name="twitter:title" content="ShelfSpace Pricing — Cannabis AP & Credit Recovery">
+<meta name="twitter:description" content="Outsourced AP for cannabis dispensaries from $1,800/mo per location. Add success-based credit recovery — service pays for itself, then turns profit-positive.">
 <meta name="twitter:image" content="https://shelfspace.pro/og-image.png">
 <meta name="apple-mobile-web-app-title" content="ShelfSpace">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -26,226 +26,174 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 <style>
-  @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-12px); } }
-
-  /* Reveals */
-  .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1); }
+  /* ── Reveals ── */
+  .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1); }
   .reveal.is-visible { opacity: 1; transform: translateY(0); }
-  .reveal-delay-1 { transition-delay: 0.15s; }
-  .reveal-delay-2 { transition-delay: 0.3s; }
-  .reveal-delay-3 { transition-delay: 0.45s; }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
 
-  /* ── HERO (dark) ── */
+  /* ── HERO (light) ── */
   .pricing-hero {
-    background: var(--green-deep); padding: 140px 48px 80px;
-    text-align: center; position: relative; overflow: hidden;
+    background: var(--white); padding: 140px 48px 56px;
+    text-align: center; position: relative;
   }
-  .pricing-hero::before {
-    content: ''; position: absolute; top: -300px; right: -200px;
-    width: 800px; height: 800px;
-    background: radial-gradient(circle, rgba(149,213,178,0.1), transparent 70%);
-    transform: translateY(var(--parallax-y, 0)); will-change: transform;
-  }
-  .pricing-hero::after {
-    content: ''; position: absolute; bottom: -200px; left: -200px;
-    width: 600px; height: 600px;
-    background: radial-gradient(circle, rgba(149,213,178,0.06), transparent 70%);
-    animation: float 10s ease-in-out infinite;
-  }
-  .pricing-hero-content { max-width: 800px; margin: 0 auto; position: relative; z-index: 2; }
-  .pricing-hero .section-label { color: var(--green-accent); }
+  .pricing-hero-content { max-width: 780px; margin: 0 auto; }
   .pricing-hero h1 {
     font-size: clamp(36px, 5vw, 56px); font-weight: 700;
-    color: var(--white); letter-spacing: -2px; line-height: 1.1;
-    margin-bottom: 16px;
+    color: var(--green-deep); letter-spacing: -2px; line-height: 1.1;
+    margin-bottom: 20px;
   }
-  .pricing-hero-sub { font-size: 18px; color: rgba(255,255,255,0.6); margin-bottom: 48px; }
-
-  /* Hero eval steps */
-  .hero-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 40px; }
-  .hero-step {
-    background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 12px; padding: 20px; text-align: left;
+  .pricing-hero-sub {
+    font-size: 18px; line-height: 1.6; color: var(--slate-600);
+    max-width: 640px; margin: 0 auto 16px;
   }
-  .hero-step-num {
-    width: 28px; height: 28px; background: rgba(149,213,178,0.2);
-    border-radius: 50%; display: flex; align-items: center; justify-content: center;
-    font-family: var(--font-mono); font-size: 13px; font-weight: 700;
-    color: var(--green-accent); margin-bottom: 10px;
-  }
-  .hero-step-title { font-size: 14px; font-weight: 600; color: var(--white); margin-bottom: 4px; }
-  .hero-step-desc { font-size: 13px; color: rgba(255,255,255,0.45); line-height: 1.4; }
-
-  /* Hero proof metric */
-  .hero-proof {
-    font-family: var(--font-mono); font-size: clamp(28px, 3.5vw, 40px);
-    font-weight: 700; color: var(--green-accent); letter-spacing: -1px;
-    margin-bottom: 8px;
-  }
-  .hero-proof-label { font-size: 14px; color: rgba(255,255,255,0.45); margin-bottom: 32px; }
-
-  /* Hero CTA */
-  .pricing-hero .btn-primary { background: var(--white); color: var(--green-deep); }
-  .pricing-hero .btn-primary:hover { background: var(--slate-50); transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,0,0,0.2); }
-  .hero-cta-note { font-size: 13px; color: rgba(255,255,255,0.4); margin-top: 16px; }
-
-  /* Hero trust badges */
-  .hero-trust-row {
-    display: flex; justify-content: center; gap: 24px; flex-wrap: wrap;
-    margin-top: 40px; padding-top: 32px; border-top: 1px solid rgba(255,255,255,0.08);
-  }
-  .hero-trust-item {
-    display: flex; align-items: center; gap: 6px;
-    font-size: 12px; font-weight: 500; color: rgba(255,255,255,0.4);
-  }
-  .hero-trust-item svg { width: 14px; height: 14px; color: var(--green-accent); }
-  .hero-trust-item img { height: 14px; opacity: 0.5; filter: brightness(0) invert(1); }
-
-  /* ── CREDIT RECOVERY MODULE ── */
-  .cr-module { background: var(--green-ghost); padding: 80px 48px; }
-  .cr-module-inner { max-width: 640px; margin: 0 auto; text-align: center; }
-  .cr-module-tag {
-    display: inline-flex; padding: 4px 16px; border-radius: 100px;
-    font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
-    background: var(--green-deep); color: var(--white); margin-bottom: 16px;
-  }
-  .cr-module h2 { font-size: clamp(28px, 3.5vw, 36px); font-weight: 700; color: var(--green-deep); letter-spacing: -1px; margin-bottom: 8px; }
-  .cr-module-who { font-size: 15px; color: var(--slate-600); font-style: italic; margin-bottom: 24px; }
-  .cr-module-desc { font-size: 16px; line-height: 1.7; color: var(--slate-600); margin-bottom: 32px; }
-  .cr-module-pricing {
-    padding: 24px; background: var(--white); border: 2px solid var(--green-accent);
-    border-radius: 12px; margin-bottom: 24px;
-  }
-  .cr-module-pricing-model { font-size: 17px; font-weight: 600; color: var(--green-deep); margin-bottom: 8px; }
-  .cr-module-pricing-zero { font-size: 14px; color: var(--slate-500); }
-  .cr-module .module-link {
-    display: inline-flex; align-items: center; gap: 6px;
-    font-size: 15px; font-weight: 600; color: var(--green-dark); text-decoration: none;
-  }
-  .cr-module .module-link:hover { color: var(--green-deep); gap: 10px; }
-
-  /* ── CONSIGNMENT + AP CARDS ── */
-  .duo-section { background: var(--white); padding: 80px 48px; }
-  .duo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; max-width: 900px; margin: 0 auto; }
-  .duo-card {
-    background: var(--white); border: 1px solid var(--slate-200);
-    border-radius: 20px; padding: 44px 36px;
-    transition: all 0.3s; position: relative; overflow: hidden;
-  }
-  .duo-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--green-accent), var(--green-mid)); opacity: 0; transition: opacity 0.3s; }
-  .duo-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(27,67,50,0.08); border-color: var(--green-accent); }
-  .duo-card:hover::before { opacity: 1; }
-  .duo-card h3 { font-size: 22px; font-weight: 700; color: var(--green-deep); margin-bottom: 8px; }
-  .duo-card-who { font-size: 13px; color: var(--slate-500); font-style: italic; margin-bottom: 16px; }
-  .duo-card-desc { font-size: 15px; line-height: 1.6; color: var(--slate-500); margin-bottom: 20px; }
-  .duo-card-pricing { padding: 16px; background: var(--slate-50); border-radius: 8px; margin-bottom: 20px; }
-  .duo-card-pricing strong { display: block; font-size: 15px; color: var(--green-deep); margin-bottom: 4px; }
-  .duo-card-pricing span { font-size: 13px; color: var(--slate-500); }
-  .duo-card .module-link {
-    display: inline-flex; align-items: center; gap: 6px;
-    font-size: 14px; font-weight: 600; color: var(--green-dark); text-decoration: none;
-  }
-  .duo-card .module-link:hover { color: var(--green-deep); gap: 10px; }
-
-  /* ── BUNDLE (dark) ── */
-  .bundle-section {
-    background: var(--green-deep); padding: 80px 48px;
-    text-align: center; position: relative; overflow: hidden;
-  }
-  .bundle-section::before { content: ''; position: absolute; top: -200px; right: -200px; width: 500px; height: 500px; background: radial-gradient(circle, rgba(149,213,178,0.08), transparent 70%); }
-  .bundle-content { max-width: 640px; margin: 0 auto; position: relative; }
-  .bundle-content h2 { font-size: clamp(24px, 3vw, 32px); font-weight: 700; color: var(--white); margin-bottom: 20px; letter-spacing: -0.5px; }
-  .bundle-content p { font-size: 17px; line-height: 1.75; color: rgba(255,255,255,0.6); }
-
-  /* ── TRUST SECTION ── */
-  .trust-section { background: var(--white); padding: 100px 48px; }
-  .trust-header { text-align: center; max-width: 600px; margin: 0 auto 56px; }
-  .trust-grid {
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
-    max-width: 900px; margin: 0 auto 48px;
-  }
-  .trust-item { text-align: center; padding: 24px; }
-  .trust-item-icon { margin-bottom: 16px; }
-  .trust-item-icon svg { width: 32px; height: 32px; color: var(--green-dark); }
-  .trust-item-icon img { height: 28px; opacity: 0.7; }
-  .trust-item h3 { font-size: 15px; font-weight: 700; color: var(--green-deep); margin-bottom: 6px; }
-  .trust-item p { font-size: 13px; color: var(--slate-500); line-height: 1.5; }
-
-  .trust-founder {
-    max-width: 700px; margin: 0 auto 48px; text-align: center;
-    padding: 40px; background: var(--slate-50); border-radius: 16px;
-  }
-  .trust-founder blockquote {
-    font-size: 18px; line-height: 1.7; color: var(--slate-600);
-    font-style: italic; margin: 0 0 20px; max-width: 560px; margin-left: auto; margin-right: auto;
-  }
-  .trust-founder-credit {
-    display: flex; align-items: center; gap: 12px; justify-content: center;
+  .pricing-hero-eval {
     font-size: 14px; color: var(--slate-500);
   }
+  .pricing-hero-eval a { color: var(--green-dark); font-weight: 600; text-decoration: none; }
+  .pricing-hero-eval a:hover { color: var(--green-deep); text-decoration: underline; text-underline-offset: 3px; }
 
-  .trust-stats {
-    display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px;
-    max-width: 800px; margin: 0 auto; text-align: center;
+  /* ── TIER GRID ── */
+  .tiers-section {
+    background: var(--slate-50); padding: 64px 48px 96px;
   }
-  .trust-stat-num { font-family: var(--font-mono); font-size: clamp(22px, 2.5vw, 28px); font-weight: 700; color: var(--green-deep); letter-spacing: -0.5px; margin-bottom: 4px; }
-  .trust-stat-desc { font-size: 12px; color: var(--slate-500); }
-  .trust-stats-note { text-align: center; margin-top: 16px; font-size: 13px; color: var(--slate-500); font-style: italic; }
+  .tiers-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 24px; max-width: 1080px; margin: 0 auto;
+    align-items: stretch;
+  }
+  .tier {
+    display: flex; flex-direction: column;
+    background: var(--white); border: 1px solid var(--slate-200);
+    border-radius: 16px; padding: 32px 28px;
+    position: relative;
+    transition: transform 0.3s cubic-bezier(0.22,1,0.36,1), box-shadow 0.3s;
+  }
+  .tier:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(27,67,50,0.06); }
+  .tier--featured {
+    border: 2px solid var(--green-deep);
+    transform: translateY(-8px);
+    box-shadow: 0 16px 48px rgba(27,67,50,0.10);
+  }
+  .tier--featured:hover { transform: translateY(-10px); box-shadow: 0 20px 56px rgba(27,67,50,0.14); }
+  .tier-badge {
+    position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+    background: var(--green-deep); color: var(--white);
+    font-family: var(--font-mono); font-size: 11px; font-weight: 700;
+    letter-spacing: 1px; text-transform: uppercase;
+    padding: 6px 14px; border-radius: 100px;
+  }
+  .tier-name {
+    font-size: 14px; font-weight: 700; color: var(--green-deep);
+    letter-spacing: 1px; text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .tier-tagline {
+    font-size: 15px; color: var(--slate-600); line-height: 1.5;
+    min-height: 44px; margin-bottom: 24px;
+  }
+  .tier-price-wrap {
+    padding-bottom: 24px; margin-bottom: 24px;
+    border-bottom: 1px solid var(--slate-100);
+  }
+  .tier-price {
+    font-family: var(--font-mono); font-size: 32px; font-weight: 700;
+    color: var(--green-deep); letter-spacing: -1px; line-height: 1.1;
+    margin-bottom: 4px;
+  }
+  .tier-price-unit { font-size: 14px; color: var(--slate-500); font-family: var(--font-display); font-weight: 500; }
+  .tier-price-add {
+    font-size: 14px; color: var(--slate-600); margin-top: 8px; line-height: 1.5;
+  }
+  .tier-price-add strong { color: var(--green-deep); font-family: var(--font-mono); font-weight: 700; }
+  .tier-price-sub {
+    font-size: 13px; color: var(--slate-500); margin-top: 12px; line-height: 1.5;
+  }
+  .tier-features-label {
+    font-family: var(--font-mono); font-size: 11px; font-weight: 700;
+    color: var(--slate-500); letter-spacing: 1px; text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .tier-features {
+    list-style: none; padding: 0; margin: 0 0 32px;
+    flex-grow: 1;
+    display: flex; flex-direction: column; gap: 10px;
+  }
+  .tier-features li {
+    display: flex; gap: 12px; align-items: flex-start;
+    font-size: 14px; line-height: 1.5; color: var(--slate-700);
+  }
+  .tier-features li svg {
+    flex-shrink: 0; width: 16px; height: 16px;
+    color: var(--green-mid); margin-top: 3px;
+  }
+  .tier-cta {
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    width: 100%; padding: 14px 20px;
+    border-radius: 10px; font-size: 15px; font-weight: 600;
+    text-decoration: none; transition: all 0.2s;
+    font-family: var(--font-display);
+  }
+  .tier-cta--primary {
+    background: var(--green-deep); color: var(--white);
+    box-shadow: 0 2px 8px rgba(27,67,50,0.15);
+  }
+  .tier-cta--primary:hover { background: var(--green-dark); transform: translateY(-1px); box-shadow: 0 4px 16px rgba(27,67,50,0.25); }
+  .tier-cta--secondary {
+    background: var(--white); color: var(--green-deep);
+    border: 1px solid var(--slate-200);
+  }
+  .tier-cta--secondary:hover { border-color: var(--green-mid); color: var(--green-dark); }
 
-  /* ── CTA ── */
-  .pricing-final-cta { background: var(--slate-50); padding: 100px 48px; text-align: center; }
-  .pricing-final-cta-inner { max-width: 520px; margin: 0 auto; }
-  .pricing-final-cta-founder { display: flex; align-items: center; gap: 12px; justify-content: center; margin-top: 32px; font-size: 14px; color: var(--slate-500); }
+  .tiers-footnote {
+    text-align: center; max-width: 720px; margin: 40px auto 0;
+    font-size: 14px; color: var(--slate-500); line-height: 1.6;
+  }
+  .tiers-footnote strong { color: var(--green-deep); font-weight: 600; }
 
   /* ── FAQ ── */
-  .faq-section { background: var(--white); padding: 80px 48px; }
+  .faq-section { background: var(--white); padding: 96px 48px; }
   .faq-header { text-align: center; max-width: 600px; margin: 0 auto 48px; }
-  .faq-list { max-width: 680px; margin: 0 auto; }
+  .faq-header h2 { font-size: clamp(28px,3.5vw,36px); font-weight: 700; color: var(--green-deep); letter-spacing: -1px; }
+  .faq-list { max-width: 720px; margin: 0 auto; }
   .faq-list details { border-bottom: 1px solid var(--slate-200); }
   .faq-list details:first-child { border-top: 1px solid var(--slate-200); }
-  .faq-list summary { padding: 20px 0; font-size: 17px; font-weight: 600; color: var(--green-deep); cursor: pointer; list-style: none; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+  .faq-list summary { padding: 22px 0; font-size: 17px; font-weight: 600; color: var(--green-deep); cursor: pointer; list-style: none; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
   .faq-list summary::-webkit-details-marker { display: none; }
   .faq-list summary::after { content: '+'; font-size: 22px; font-weight: 400; color: var(--slate-500); flex-shrink: 0; }
   .faq-list details[open] summary::after { content: '\2212'; }
-  .faq-list details p { padding: 0 0 20px; margin: 0; font-size: 15px; line-height: 1.7; color: var(--slate-500); }
+  .faq-list details p { padding: 0 0 22px; margin: 0; font-size: 15px; line-height: 1.7; color: var(--slate-600); }
+  .faq-list details p strong { color: var(--green-deep); }
 
-  /* ── POS TICKER ── */
-  @keyframes ticker-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-  .pos-ticker { padding: 48px 0; background: var(--white); overflow: hidden; border-top: 1px solid var(--slate-100); }
-  .pos-ticker-label { text-align: center; font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--slate-500); margin-bottom: 28px; }
-  .pos-ticker-track { display: flex; width: max-content; animation: ticker-scroll 30s linear infinite; }
-  .pos-ticker-track:hover { animation-play-state: paused; }
-  .pos-ticker-logo { height: 120px; padding: 0 48px; opacity: 0.45; filter: grayscale(100%); transition: opacity 0.3s, filter 0.3s; }
-  .pos-ticker-logo:hover { opacity: 0.9; filter: grayscale(0%); }
+  /* ── CLOSER ── */
+  .closer-section { background: var(--slate-50); padding: 80px 48px; text-align: center; }
+  .closer-inner { max-width: 560px; margin: 0 auto; }
+  .closer-inner h2 { font-size: clamp(24px,3vw,32px); font-weight: 700; color: var(--green-deep); letter-spacing: -0.8px; margin-bottom: 12px; }
+  .closer-inner p { font-size: 16px; line-height: 1.6; color: var(--slate-600); margin-bottom: 28px; }
 
   /* Footer */
   .footer-top { grid-template-columns: 2fr 1fr 1fr 1fr 1fr; }
 
-  /* Responsive */
+  /* ── Responsive ── */
+  @media (max-width: 1000px) {
+    .tiers-grid { grid-template-columns: 1fr; max-width: 480px; gap: 32px; }
+    .tier--featured { transform: translateY(0); }
+    .tier--featured:hover { transform: translateY(-2px); }
+  }
   @media (max-width: 900px) {
-    .pricing-hero { padding: 120px 24px 60px; }
-    .hero-steps { grid-template-columns: 1fr; gap: 12px; }
-    .cr-module { padding: 60px 24px; }
-    .duo-section { padding: 60px 24px; }
-    .duo-grid { grid-template-columns: 1fr; max-width: 480px; }
-    .bundle-section { padding: 60px 24px; }
-    .trust-section { padding: 60px 24px; }
-    .trust-grid { grid-template-columns: 1fr; max-width: 360px; margin: 0 auto 40px; }
-    .trust-stats { grid-template-columns: repeat(2, 1fr); }
-    .pricing-final-cta { padding: 60px 24px; }
-    .faq-section { padding: 60px 24px; }
+    .pricing-hero { padding: 120px 24px 40px; }
+    .tiers-section { padding: 56px 24px 80px; }
+    .faq-section, .closer-section { padding: 64px 24px; }
     .footer-top { grid-template-columns: 1fr 1fr; }
-    .pos-ticker-logo { height: 72px; padding: 0 32px; }
   }
   @media (max-width: 600px) {
     .footer-top { grid-template-columns: 1fr; }
-    .trust-stats { grid-template-columns: 1fr; }
-    .pos-ticker-logo { height: 48px; padding: 0 24px; }
+    .tier { padding: 28px 24px; }
   }
   @media (prefers-reduced-motion: reduce) {
     .reveal { opacity: 1; transform: none; transition: none; }
-    .pricing-hero::after { animation: none; }
-    .pos-ticker-track { animation: none; }
+    .tier { transition: none; }
+    .tier:hover, .tier--featured:hover { transform: none; }
   }
 </style>
 <noscript><style>.reveal{opacity:1;transform:none;transition:none;}</style></noscript>
@@ -265,15 +213,15 @@ document.head.appendChild(o)}initApollo();</script>
       "name": "What does the free evaluation include?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "We connect to your Metrc account, analyze your historical data, and deliver a detailed report showing every unrecovered vendor credit — waste, returns, and co-marketing. No commitment, no credit card. View a sample evaluation at shelfspace.pro/ShelfSpace_Sample_Evaluation.pdf."
+        "text": "We connect to your Metrc account, analyze your historical data, and deliver a detailed report on your AP, your consignment opportunity, and unrecovered vendor credits — waste, returns, and co-marketing. No commitment, no credit card. View a sample evaluation at shelfspace.pro/ShelfSpace_Sample_Evaluation.pdf."
       }
     },
     {
       "@type": "Question",
-      "name": "When does pricing start?",
+      "name": "Does the service actually pay for itself?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "After the evaluation, once you decide to move forward. Core AP and consignment are billed monthly starting day one of service. Credit recovery is billed on each monthly recovery cycle. The evaluation is the free part."
+        "text": "Most operators run net-positive within 90 days. Core AP at $1,800–$2,500/month per location is roughly equivalent to the bookkeeper hours you free up. Add Credit Recovery and the average evaluation finds $8,000–$25,000/month in unrecovered vendor credits — after the 25% success fee, you keep $6,000–$19,000/month in net profit on top of the AP value. Core AP runs cost-comparable; Credit Recovery runs profit-positive."
       }
     },
     {
@@ -281,23 +229,15 @@ document.head.appendChild(o)}initApollo();</script>
       "name": "How does this work with my bookkeeper or accounting firm?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "ShelfSpace handles AP — invoice processing, three-way matching, per-vendor payment terms, vendor payments, vendor calls, credit recovery. Your buyer keeps product selection, vendor negotiation, sell-through analysis, and promotional planning. Your bookkeeper or firm keeps month-end close, bank reconciliations, payroll, journal entries, financial statements, tax prep, and 280E compliance. We sync to QuickBooks in real time, so your bookkeeper sees clean entries and closes faster."
+        "text": "ShelfSpace handles AP — invoice processing, three-way matching, per-vendor payment terms, vendor payments, vendor calls, credit recovery. Your bookkeeper or firm keeps month-end close, bank reconciliations, payroll, journal entries, financial statements, tax prep, and 280E compliance. We sync to QuickBooks in real time, so your bookkeeper sees clean entries and closes faster."
       }
     },
     {
       "@type": "Question",
-      "name": "Does this actually pay for itself?",
+      "name": "Can I switch tiers later?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes — and most operators see it become net-positive within 90 days. Core AP at $1,800–$2,500/month per location is roughly equivalent to the bookkeeper hours you free up. Credit recovery is success-based at 25% — the average evaluation finds $8,000–$25,000/month in unrecovered credits. After our 25% fee, you keep 75% — that's $6,000–$19,000/month in net profit on top of the AP value. AP runs cost-comparable, credit recovery runs profit-positive."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Do I have to use both modules?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "No. Core AP and Credit Recovery work standalone. Most operators run both — Core AP is the spine, Credit Recovery is the success-based profit add-on. We make money on Credit Recovery only when you do."
+        "text": "Yes. Most operators start with Core AP and add Credit Recovery once they see the evaluation results. Multi-Location operators upgrade as they add stores. Month-to-month, no long-term commitments."
       }
     },
     {
@@ -306,14 +246,6 @@ document.head.appendChild(o)}initApollo();</script>
       "acceptedAnswer": {
         "@type": "Answer",
         "text": "Yes. We use read-only Metrc access. We never modify your compliance data. All data is encrypted and isolated per operator."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Can I cancel?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Month to month. No long-term commitments. If we're not delivering value, you'll know from the numbers."
       }
     }
   ]
@@ -334,6 +266,8 @@ document.head.appendChild(o)}initApollo();</script>
     <li><a href="/credit-recovery">Credit Recovery</a></li>
     <li><a href="/pricing" class="active">Pricing</a></li>
     <li><a href="/about">About</a></li>
+    <li><a href="/vendors" class="nav-secondary">For Vendors</a></li>
+    <li><a href="/for-bookkeepers" class="nav-secondary">For Bookkeepers</a></li>
     <li><a href="/contact" class="nav-cta">Get Started <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a></li>
   </ul>
   <div class="nav-hamburger" onclick="document.querySelector('.nav-links').classList.toggle('mobile-open'); event.stopPropagation();"><span></span><span></span><span></span></div>
@@ -342,278 +276,129 @@ document.head.appendChild(o)}initApollo();</script>
 <!-- HERO -->
 <section class="pricing-hero">
   <div class="pricing-hero-content">
-    <div class="section-label reveal">Pricing</div>
-    <h1 class="reveal">Pay monthly for AP. Pay nothing for credits we don't recover.</h1>
-    <p class="pricing-hero-sub reveal">Modular pricing for cannabis dispensaries. The pricing is here so you can do the math before we talk.</p>
-
-    <div class="hero-steps reveal">
-      <div class="hero-step">
-        <div class="hero-step-num">1</div>
-        <div class="hero-step-title">Connect your Metrc account</div>
-        <div class="hero-step-desc">Takes minutes. Read-only access.</div>
-      </div>
-      <div class="hero-step">
-        <div class="hero-step-num">2</div>
-        <div class="hero-step-title">We analyze your data</div>
-        <div class="hero-step-desc">1–3 days. You do nothing.</div>
-      </div>
-      <div class="hero-step">
-        <div class="hero-step-num">3</div>
-        <div class="hero-step-title">You get a detailed report</div>
-        <div class="hero-step-desc">AP, consignment opportunity, and unrecovered credits.</div>
-      </div>
-    </div>
-
-    <div class="hero-proof reveal">From $1,800/mo</div>
-    <div class="hero-proof-label reveal">per location for Core AP. Plus $6K–$19K/mo in net credit-recovery profit.</div>
-
-    <div class="reveal">
-      <a href="/contact" class="btn-primary">Get My Free AP Evaluation <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
-    </div>
-    <div class="hero-cta-note reveal">No commitment. No credit card.</div>
-
-    <div class="hero-trust-row reveal">
-      <span class="hero-trust-item"><img src="/metrc-logo.png" alt="METRC"> METRC Certified</span>
-      <span class="hero-trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg> Bank-Grade Encryption</span>
-      <span class="hero-trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg> Read-Only Access</span>
-      <span class="hero-trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> 10+ Years Cannabis Ops</span>
-    </div>
+    <h1 class="reveal">An AP team that actually makes you money.</h1>
+    <p class="pricing-hero-sub reveal">Outsourced AP for cannabis dispensaries. Add credit recovery and the service pays for itself, then turns profit-positive.</p>
+    <p class="pricing-hero-eval reveal">Free evaluation first — <a href="/contact">see your numbers before you commit</a>.</p>
   </div>
 </section>
 
-<!-- CORE AP MODULE -->
-<section class="cr-module">
-  <div class="cr-module-inner">
-    <div class="cr-module-tag reveal">Most Popular</div>
-    <h2 class="reveal">Core AP</h2>
-    <p class="cr-module-who reveal">For any cannabis dispensary with vendors.</p>
-    <p class="cr-module-desc reveal">Outsourced AP team. Three-way invoice matching, per-vendor payment terms (COD, Net 30, Net 60, consignment), vendor payments, ShelfiQ for vendor calls, QuickBooks sync. We pay every vendor — cannabis and non-cannabis, on whatever terms work — and you approve.</p>
-    <div class="cr-module-pricing reveal">
-      <div class="cr-module-pricing-model" style="font-family:var(--font-mono);font-size:24px;">$1,800–$2,500/month per location</div>
-      <div class="cr-module-pricing-zero" style="margin-top:8px;">Frees your buyer and bookkeeper for higher-value work — they keep product, negotiation, close, reporting.</div>
-    </div>
-    <a href="/accounts-payable" class="module-link reveal">How AP Works <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a>
-  </div>
-</section>
+<!-- TIERS -->
+<section class="tiers-section">
+  <div class="tiers-grid">
 
-<!-- CREDIT RECOVERY ADD-ON -->
-<section class="duo-section">
-  <div class="duo-grid" style="grid-template-columns:1fr;max-width:560px;">
-    <div class="duo-card reveal">
-      <h3>+ Credit Recovery</h3>
-      <p class="duo-card-who">Add to Core AP, or run standalone.</p>
-      <p class="duo-card-desc">Monthly recovery cycles for returns, expirations, and co-marketing. Documented memos with line-item Metrc backup. Average evaluation finds $8K–$25K/month — you keep $6K–$19K in net profit after our fee.</p>
-      <div class="duo-card-pricing">
-        <strong style="font-family:var(--font-mono);font-size:18px;">25% of what we recover. You keep 75%.</strong>
-        <span>No recovery, no fee. We make money only if you do.</span>
+    <!-- TIER 1: Core AP -->
+    <article class="tier reveal">
+      <div class="tier-name">Core AP</div>
+      <p class="tier-tagline">Outsource the AP. Free your buyer and bookkeeper for real work.</p>
+      <div class="tier-price-wrap">
+        <div class="tier-price">From $1,800<span class="tier-price-unit">/mo</span></div>
+        <div class="tier-price-unit">per location</div>
+        <div class="tier-price-sub">Includes consignment terms. Multi-location discount applies at 2+ stores.</div>
       </div>
-      <a href="/credit-recovery" class="module-link">How Credit Recovery Works <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a>
-    </div>
-  </div>
-  <p style="text-align:center;font-size:14px;color:var(--slate-500);margin-top:32px;max-width:680px;margin-left:auto;margin-right:auto;">Multi-location discount applies. 6+ locations: custom. Final fee is set after the free evaluation.</p>
-</section>
+      <div class="tier-features-label">What's included</div>
+      <ul class="tier-features">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Three-way invoice matching (invoice ↔ delivery ↔ PO)</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Per-vendor payment terms — COD, Net, consignment</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Vendor payments (Check 21 compliant)</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>ShelfiQ handles vendor inquiries</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>QuickBooks sync (real-time)</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Vendor portal — payment status &amp; check downloads</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Cannabis &amp; non-cannabis vendors</li>
+      </ul>
+      <a href="/contact" class="tier-cta tier-cta--secondary">Get My Free AP Evaluation
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </article>
 
-<!-- WHO WE WORK WITH -->
-<section style="background:var(--white);padding:80px 48px;border-top:1px solid var(--slate-100);">
-  <div style="max-width:720px;margin:0 auto;">
-    <div style="text-align:center;margin-bottom:40px;">
-      <div class="section-label reveal">Who we work with</div>
-      <h2 class="reveal" style="font-size:clamp(28px,3.5vw,36px);font-weight:700;color:var(--green-deep);letter-spacing:-1px;margin-top:8px;">Is ShelfSpace right for you?</h2>
-    </div>
-    <div style="display:flex;flex-direction:column;gap:20px;">
-      <div class="reveal" style="display:flex;gap:16px;background:var(--slate-50);border-radius:12px;padding:24px;">
-        <span style="color:var(--green-deep);font-size:20px;flex-shrink:0;">✓</span>
-        <div>
-          <strong style="display:block;color:var(--green-deep);font-size:16px;margin-bottom:6px;">Operators with a buyer drowning in vendor logistics, or a bookkeeper drowning in vendor invoices.</strong>
-          <span style="font-size:15px;color:var(--slate-600);line-height:1.6;">Your buyer was hired to find product and grow margin — not chase delivery shorts. Your bookkeeper was hired to close the books — not handle 40 vendor emails a week. We take the AP off both their plates.</span>
-        </div>
+    <!-- TIER 2: Core AP + Credit Recovery (FEATURED) -->
+    <article class="tier tier--featured reveal reveal-delay-1">
+      <span class="tier-badge">Most Popular</span>
+      <div class="tier-name">Core AP + Credit Recovery</div>
+      <p class="tier-tagline">An AP team that pays for itself, then makes you money.</p>
+      <div class="tier-price-wrap">
+        <div class="tier-price">From $1,800<span class="tier-price-unit">/mo</span></div>
+        <div class="tier-price-unit">per location</div>
+        <div class="tier-price-add">+ <strong>25%</strong> of recovered credits<br><span style="color:var(--slate-500);font-size:13px;">No recovery, no fee.</span></div>
+        <div class="tier-price-sub">Average evaluation finds $8K–$25K/mo. You keep <strong style="color:var(--green-deep);">$6K–$19K/mo net</strong>.</div>
       </div>
-      <div class="reveal reveal-delay-1" style="display:flex;gap:16px;background:var(--slate-50);border-radius:12px;padding:24px;">
-        <span style="color:var(--green-deep);font-size:20px;flex-shrink:0;">✓</span>
-        <div>
-          <strong style="display:block;color:var(--green-deep);font-size:16px;margin-bottom:6px;">Operators outsourced to <a href="/for-bookkeepers" style="color:inherit;text-decoration:underline;text-decoration-color:rgba(27,67,50,0.3);">an accounting firm</a> where AP is the expensive line item.</strong>
-          <span style="font-size:15px;color:var(--slate-600);line-height:1.6;">Cannabis accounting firms charge $75–150/hour. We handle AP for less, in dedicated cannabis infrastructure. Your firm keeps the close, the reporting, the strategic work.</span>
-        </div>
+      <div class="tier-features-label">Everything in Core AP, plus</div>
+      <ul class="tier-features">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Monthly recovery cycles — returns, expirations, co-marketing</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Documented credit memos with line-item Metrc backup</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Vendor approval workflow handled end-to-end</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Most operators net-positive within 90 days</li>
+      </ul>
+      <a href="/contact" class="tier-cta tier-cta--primary">Get My Free AP Evaluation
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </article>
+
+    <!-- TIER 3: Multi-Location -->
+    <article class="tier reveal reveal-delay-2">
+      <div class="tier-name">Multi-Location</div>
+      <p class="tier-tagline">For operators with 6+ stores or vertical integration.</p>
+      <div class="tier-price-wrap">
+        <div class="tier-price">Custom</div>
+        <div class="tier-price-unit">Volume discount + dedicated success</div>
+        <div class="tier-price-sub">Fee structured around your store count and vendor volume.</div>
       </div>
-      <div class="reveal reveal-delay-2" style="display:flex;gap:16px;background:var(--slate-50);border-radius:12px;padding:24px;">
-        <span style="color:var(--green-deep);font-size:20px;flex-shrink:0;">✓</span>
-        <div>
-          <strong style="display:block;color:var(--green-deep);font-size:16px;margin-bottom:6px;">Multi-location MA operators who want one team across all stores.</strong>
-          <span style="font-size:15px;color:var(--slate-600);line-height:1.6;">Your buyer doesn't scale linearly. Your bookkeeper doesn't either. ShelfSpace does.</span>
-        </div>
-      </div>
-    </div>
-    <p style="text-align:center;margin-top:24px;font-size:14px;color:var(--slate-500);font-style:italic;">Not sure? The free evaluation tells you in days, not weeks.</p>
-  </div>
-</section>
+      <div class="tier-features-label">Everything above, plus</div>
+      <ul class="tier-features">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Volume discount on Core AP</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Dedicated success manager</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Custom onboarding across stores</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Quarterly business review with the founder</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Priority vendor onboarding</li>
+      </ul>
+      <a href="/contact" class="tier-cta tier-cta--secondary">Talk to Us
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </article>
 
-<!-- DUAL MATH -->
-<section style="background:var(--green-deep);padding:80px 48px;color:var(--white);">
-  <div style="max-width:900px;margin:0 auto;">
-    <div style="text-align:center;margin-bottom:48px;">
-      <div class="section-label reveal" style="color:var(--green-accent);">The math</div>
-      <h2 class="reveal" style="font-size:clamp(28px,3.5vw,40px);font-weight:700;color:var(--white);letter-spacing:-1.5px;margin-top:8px;line-height:1.2;">ShelfSpace pays for itself. Then it makes you money.</h2>
-      <p class="reveal" style="font-size:17px;color:rgba(255,255,255,0.65);margin-top:16px;">Most operators run net-positive within 90 days. Here's how.</p>
-    </div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:32px;">
-      <div class="reveal" style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:32px;">
-        <div style="font-family:var(--font-mono);font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--green-accent);margin-bottom:12px;">AP runs cost-comparable</div>
-        <p style="font-size:15px;line-height:1.7;color:rgba(255,255,255,0.85);margin:0 0 16px;">Your bookkeeper at <strong style="color:var(--white);">$25/hour</strong> spends <strong style="color:var(--white);">10–15 hours a week</strong> on AP — that's <strong style="color:var(--white);">$1,000–$1,500/month</strong> per location of bookkeeper time on AP.</p>
-        <p style="font-size:15px;line-height:1.7;color:rgba(255,255,255,0.85);margin:0;">ShelfSpace AP runs <strong style="color:var(--white);">$1,800–$2,500/month per location</strong>, covers all your stores, and frees your bookkeeper for close, reporting, and strategy.</p>
-      </div>
-      <div class="reveal reveal-delay-1" style="background:rgba(149,213,178,0.08);border:1px solid rgba(149,213,178,0.2);border-radius:16px;padding:32px;">
-        <div style="font-family:var(--font-mono);font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--green-accent);margin-bottom:12px;">Credit recovery runs profit-positive</div>
-        <p style="font-size:15px;line-height:1.7;color:rgba(255,255,255,0.85);margin:0 0 16px;">Average evaluation finds <strong style="color:var(--white);">$8,000–$25,000/month</strong> in unrecovered vendor credits — returns, expirations, co-marketing.</p>
-        <p style="font-size:15px;line-height:1.7;color:rgba(255,255,255,0.85);margin:0;">We recover at <strong style="color:var(--white);">25%</strong> success fee. You keep <strong style="color:var(--green-accent);">$6,000–$19,000/month in net profit</strong> — money your agreements already promised.</p>
-      </div>
-    </div>
-    <p class="reveal" style="text-align:center;font-size:18px;font-weight:500;line-height:1.6;color:var(--white);max-width:780px;margin:0 auto;">Net: ShelfSpace runs cost-comparable on AP and generates <strong style="color:var(--green-accent);">$6,000–$19,000/month in profit</strong> on credit recovery — while your buyer and bookkeeper get back to the work you actually hired them for.</p>
-    <div class="reveal" style="text-align:center;margin-top:32px;">
-      <a href="/contact" class="btn-primary" style="background:var(--white);color:var(--green-deep);">Get My Free AP Evaluation <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
-    </div>
-  </div>
-</section>
-
-<!-- BUNDLE -->
-<section class="bundle-section">
-  <div class="bundle-content">
-    <h2 class="reveal">Start with Core AP. Add credit recovery any time.</h2>
-    <p class="reveal">AP is the spine. Consignment terms are baked in. Credit recovery is the optional add-on — success-based, no risk. Operators who run both see the lowest total cost — we're inside more of your vendor data, so we surface more.</p>
-  </div>
-</section>
-
-<!-- TRUST -->
-<section class="trust-section">
-  <div class="trust-header">
-    <div class="section-label reveal">Why We're Trusted</div>
-    <h2 class="section-title reveal">Why cannabis operators trust ShelfSpace</h2>
   </div>
 
-  <div class="trust-grid">
-    <div class="trust-item reveal">
-      <div class="trust-item-icon"><img src="/metrc-logo.png" alt="METRC Certified"></div>
-      <h3>Certified METRC Vendor</h3>
-      <p>Official third-party vendor. Direct Metrc integration.</p>
-    </div>
-    <div class="trust-item reveal reveal-delay-1">
-      <div class="trust-item-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-      <h3>Bank-Grade Security</h3>
-      <p>Read-only access. Encrypted. Data isolated per operator.</p>
-    </div>
-    <div class="trust-item reveal reveal-delay-2">
-      <div class="trust-item-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
-      <h3>10+ Years in Cannabis</h3>
-      <p>Built by a dispensary operator, not a tech company.</p>
-    </div>
-  </div>
-
-  <div class="trust-founder reveal">
-    <blockquote>"I ran dispensaries for 10 years. I built ShelfSpace because I was tired of losing money to the exact problems we now solve. Every feature exists because I lived without it."</blockquote>
-    <div class="trust-founder-credit">
-      <img src="/chris-mitchem.jpg" alt="Chris Mitchem" style="width:40px;height:40px;border-radius:50%;object-fit:cover;">
-      <span>Chris Mitchem, Founder & CEO</span>
-    </div>
-  </div>
-
-  <div class="trust-stats reveal">
-    <div>
-      <div class="trust-stat-num">$200K+/yr</div>
-      <div class="trust-stat-desc">credits identified</div>
-    </div>
-    <div>
-      <div class="trust-stat-num">$250K</div>
-      <div class="trust-stat-desc">freed from inventory</div>
-    </div>
-    <div>
-      <div class="trust-stat-num">$45K/yr</div>
-      <div class="trust-stat-desc">AP savings</div>
-    </div>
-    <div>
-      <div class="trust-stat-num">50+</div>
-      <div class="trust-stat-desc">MA vendors paid</div>
-    </div>
-  </div>
-  <p class="trust-stats-note reveal">One dispensary chain. Two locations. Real numbers.</p>
-</section>
-
-<!-- CTA -->
-<section class="pricing-final-cta">
-  <div class="pricing-final-cta-inner">
-    <div class="section-label reveal">Get Started</div>
-    <h2 class="section-title reveal">Start with a free evaluation.</h2>
-    <p class="section-desc reveal" style="margin-bottom:32px;">We connect to your Metrc account and show you what you're leaving on the table. No commitment.</p>
-    <div class="reveal">
-      <a href="/contact" class="btn-primary">Get My Free AP Evaluation <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
-    </div>
-    <div class="pricing-final-cta-founder reveal">
-      <img src="/chris-mitchem.jpg" alt="Chris Mitchem" style="width:48px;height:48px;border-radius:50%;object-fit:cover;">
-      <span>Chris Mitchem, Founder — 10 years operating dispensaries</span>
-    </div>
-  </div>
+  <p class="tiers-footnote reveal">
+    <strong>No contracts, month-to-month, cancel any time.</strong> Final fee is set after the free evaluation. Vendors never pay.
+  </p>
 </section>
 
 <!-- FAQ -->
 <section class="faq-section">
-  <div class="faq-header">
-    <div class="section-label reveal">FAQ</div>
-    <h2 class="section-title reveal">Frequently asked questions</h2>
+  <div class="faq-header reveal">
+    <h2>Frequently asked questions</h2>
   </div>
   <div class="faq-list">
     <details>
       <summary>What does the free evaluation include?</summary>
-      <p>We connect to your Metrc account, analyze your historical data, and deliver a detailed report showing every unrecovered vendor credit — waste, returns, and co-marketing. No commitment, no credit card. <a href="/ShelfSpace_Sample_Evaluation.pdf" target="_blank" rel="noopener" style="color:var(--green-dark);font-weight:600;text-decoration:none;">See a sample evaluation</a>.</p>
+      <p>We connect to your Metrc account, analyze your historical data, and deliver a detailed report on your AP, your consignment opportunity, and unrecovered vendor credits — waste, returns, and co-marketing. No commitment, no credit card. <a href="/ShelfSpace_Sample_Evaluation.pdf" target="_blank" rel="noopener" style="color:var(--green-dark);font-weight:600;text-decoration:none;">See a sample evaluation</a>.</p>
     </details>
     <details>
-      <summary>When does pricing start?</summary>
-      <p>After the evaluation, once you decide to move forward. Core AP and consignment are billed monthly starting day one of service. Credit recovery is billed on each monthly recovery cycle. The evaluation is the free part.</p>
+      <summary>Does the service actually pay for itself?</summary>
+      <p>Most operators run net-positive within 90 days. Core AP at <strong>$1,800–$2,500/mo per location</strong> is roughly equivalent to the bookkeeper hours you free up. Add Credit Recovery and the average evaluation finds <strong>$8,000–$25,000/month</strong> in unrecovered vendor credits — after our 25% success fee, you keep <strong>$6,000–$19,000/month in net profit</strong> on top of the AP value. Core AP runs cost-comparable; Credit Recovery runs profit-positive.</p>
     </details>
     <details>
       <summary>How does this work with my bookkeeper or accounting firm?</summary>
-      <p>ShelfSpace handles AP — invoice processing, three-way matching, per-vendor payment terms, vendor payments, vendor calls, credit recovery. Your buyer keeps product selection, vendor negotiation, sell-through analysis, and promotional planning. Your bookkeeper or firm keeps month-end close, bank reconciliations, payroll, journal entries, financial statements, tax prep, and 280E compliance. We sync to QuickBooks in real time, so your bookkeeper sees clean entries and closes faster.</p>
+      <p>ShelfSpace handles AP — invoice processing, three-way matching, per-vendor payment terms, vendor payments, vendor calls, credit recovery. Your bookkeeper or firm keeps month-end close, bank reconciliations, payroll, journal entries, financial statements, tax prep, and 280E compliance. We sync to QuickBooks in real time, so your bookkeeper sees clean entries and closes faster. <a href="/for-bookkeepers" style="color:var(--green-dark);font-weight:600;text-decoration:none;">More for firms →</a></p>
     </details>
     <details>
-      <summary>Does this actually pay for itself?</summary>
-      <p>Yes — and most operators see it become net-positive within 90 days. Core AP at $1,800–$2,500/month per location is roughly equivalent to the bookkeeper hours you free up. Credit recovery is success-based at 25% — the average evaluation finds $8,000–$25,000/month in unrecovered credits. After our 25% fee, you keep 75% — that's $6,000–$19,000/month in net profit on top of the AP value. AP runs cost-comparable, credit recovery runs profit-positive.</p>
-    </details>
-    <details>
-      <summary>Do I have to use both modules?</summary>
-      <p>No. Core AP and Credit Recovery work standalone. Most operators run both — Core AP is the spine, Credit Recovery is the success-based profit add-on. We make money on Credit Recovery only when you do.</p>
+      <summary>Can I switch tiers later?</summary>
+      <p>Yes. Most operators start with Core AP and add Credit Recovery once they see the evaluation results. Multi-Location operators upgrade as they add stores. Month-to-month, no long-term commitments.</p>
     </details>
     <details>
       <summary>Is my data secure?</summary>
       <p>Yes. We use read-only Metrc access. We never modify your compliance data. All data is encrypted and isolated per operator.</p>
     </details>
-    <details>
-      <summary>Can I cancel?</summary>
-      <p>Month to month. No long-term commitments. If we're not delivering value, you'll know from the numbers.</p>
-    </details>
   </div>
 </section>
 
-<!-- POS TICKER -->
-<section class="pos-ticker">
-  <div class="pos-ticker-label">Works with every major cannabis POS</div>
-  <div style="overflow:hidden">
-    <div class="pos-ticker-track">
-      <img src="/logos/dutchie.png" alt="Dutchie cannabis POS integration" class="pos-ticker-logo">
-      <img src="/logos/flowhub.png" alt="Flowhub cannabis POS integration" class="pos-ticker-logo">
-      <img src="/logos/blaze.png" alt="BLAZE cannabis POS integration" class="pos-ticker-logo">
-      <img src="/logos/cova.png" alt="Cova cannabis POS integration" class="pos-ticker-logo">
-      <img src="/logos/treez.png" alt="Treez cannabis POS integration" class="pos-ticker-logo">
-      <img src="/logos/alleaves.png" alt="Alleaves cannabis POS integration" class="pos-ticker-logo">
-      <img src="/logos/mjfreeway.png" alt="MJ Freeway cannabis POS integration" class="pos-ticker-logo">
-      <img src="/logos/meadow.png" alt="Meadow cannabis POS integration" class="pos-ticker-logo">
-      <img src="/logos/indicaonline.png" alt="IndicaOnline cannabis POS integration" class="pos-ticker-logo">
-      <img src="/logos/dutchie.png" alt="Dutchie cannabis POS integration" class="pos-ticker-logo">
-      <img src="/logos/flowhub.png" alt="Flowhub cannabis POS integration" class="pos-ticker-logo">
-      <img src="/logos/blaze.png" alt="BLAZE cannabis POS integration" class="pos-ticker-logo">
-      <img src="/logos/cova.png" alt="Cova cannabis POS integration" class="pos-ticker-logo">
-      <img src="/logos/treez.png" alt="Treez cannabis POS integration" class="pos-ticker-logo">
-      <img src="/logos/alleaves.png" alt="Alleaves cannabis POS integration" class="pos-ticker-logo">
-      <img src="/logos/mjfreeway.png" alt="MJ Freeway cannabis POS integration" class="pos-ticker-logo">
-      <img src="/logos/meadow.png" alt="Meadow cannabis POS integration" class="pos-ticker-logo">
-      <img src="/logos/indicaonline.png" alt="IndicaOnline cannabis POS integration" class="pos-ticker-logo">
-    </div>
+<!-- CLOSER -->
+<section class="closer-section">
+  <div class="closer-inner">
+    <h2>Start with the free evaluation.</h2>
+    <p>We connect to your Metrc account, analyze your data, and show you what you're leaving on the table — before you commit to anything.</p>
+    <a href="/contact" class="btn-primary">Get My Free AP Evaluation
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </a>
   </div>
 </section>
 
@@ -647,24 +432,8 @@ document.head.appendChild(o)}initApollo();</script>
   }, { threshold: 0.1 });
   document.querySelectorAll('.reveal').forEach(function(el) { revealObserver.observe(el); });
 
-  var ticking = false;
   window.addEventListener('scroll', function() {
-    if (!ticking) {
-      requestAnimationFrame(function() {
-        nav.classList.toggle('scrolled', window.scrollY > 20);
-        var hero = document.querySelector('.pricing-hero');
-        if (hero) {
-          var rect = hero.getBoundingClientRect();
-          var wh = window.innerHeight;
-          if (rect.bottom > 0 && rect.top < wh) {
-            var center = rect.top + rect.height / 2 - wh / 2;
-            hero.style.setProperty('--parallax-y', (center * 0.08) + 'px');
-          }
-        }
-        ticking = false;
-      });
-      ticking = true;
-    }
+    nav.classList.toggle('scrolled', window.scrollY > 20);
   }, { passive: true });
 
   document.addEventListener('click', function(e) {
