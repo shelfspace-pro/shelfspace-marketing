@@ -389,6 +389,22 @@ document.head.appendChild(o)}initApollo();</script>
     },
     {
       "@type": "Question",
+      "name": "How does this compare to a bookkeeper doing AP?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A bookkeeper at $25/hour spends 10–15 hours a week on AP — that's $1,000–$1,500/month per location in bookkeeper time. ShelfSpace runs comparable to that, covers all your stores from day one, and frees your bookkeeper for close, reporting, and strategy."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How does an invoice go from inbox to payment?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Vendor sends or emails the invoice. We parse it, match it against the Metrc delivery and your PO, queue any discrepancies, and present you with a single approve button. You approve, we cut the check (or send the ACH), and QuickBooks updates in real time."
+      }
+    },
+    {
+      "@type": "Question",
       "name": "What does this cost?",
       "acceptedAnswer": {
         "@type": "Answer",
@@ -459,7 +475,7 @@ document.head.appendChild(o)}initApollo();</script>
         <span class="pain-card-row-label">You paid for</span>
         <span class="pain-card-row-value paid">24 units</span>
       </div>
-      <div class="pain-card-loss">You paid for 2 units the delivery never included. The mismatch never got reconciled.</div>
+      <div class="pain-card-loss">You paid for 2 units that never showed up.</div>
     </div>
     <div class="pain-card reveal reveal-delay-1">
       <div class="pain-card-label">Scenario 2: Invoice Mismatch</div>
@@ -475,11 +491,10 @@ document.head.appendChild(o)}initApollo();</script>
         <span class="pain-card-row-label">You paid</span>
         <span class="pain-card-row-value paid">$4,800</span>
       </div>
-      <div class="pain-card-loss">$400 paid in error. Six emails of back-and-forth — paying was easier than reconciling.</div>
+      <div class="pain-card-loss">$400 paid in error. Reconciling was harder than overpaying.</div>
     </div>
   </div>
-  <p class="pain-multiplier reveal">Multiply that across 40 vendors. 52 weeks a year.</p>
-  <p class="pain-pivot-sub reveal" style="font-size:18px;color:var(--slate-500);max-width:560px;margin:16px auto 0;line-height:1.6;">You're paying a human to do this. Pay a Metrc-integrated AI a fraction of the cost to do it faster, more accurately, and vendors get instant answers from ShelfiQ instead of waiting on you.</p>
+  <p class="pain-multiplier reveal">Multiply that across 40 vendors. 52 weeks a year. We catch every one before the check goes out.</p>
   <div style="display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:24px;" class="reveal">
     <span style="display:inline-flex;align-items:center;gap:6px;padding:8px 20px;border-radius:100px;background:var(--green-ghost);border:1px solid rgba(149,213,178,0.3);font-size:14px;font-weight:500;color:var(--green-dark);">Cannabis vendors</span>
     <span style="display:inline-flex;align-items:center;gap:6px;padding:8px 20px;border-radius:100px;background:var(--green-ghost);border:1px solid rgba(149,213,178,0.3);font-size:14px;font-weight:500;color:var(--green-dark);">Non-cannabis vendors</span>
@@ -499,12 +514,11 @@ document.head.appendChild(o)}initApollo();</script>
       <div class="reveal" style="background:var(--white);border:1px solid var(--slate-200);border-radius:16px;padding:32px;">
         <div style="font-family:var(--font-mono);font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--green-dark);margin-bottom:12px;">Three-way matching</div>
         <h3 style="font-size:22px;font-weight:700;color:var(--green-deep);letter-spacing:-0.5px;margin-bottom:12px;">Invoice ↔ Delivery ↔ PO.</h3>
-        <p style="font-size:16px;line-height:1.7;color:var(--slate-600);margin:0;">We don't pay until all three line up. Short shipments, wrong items, pricing errors, duplicate invoices — flagged at the gate, not after the check clears.</p>
+        <p style="font-size:16px;line-height:1.7;color:var(--slate-600);margin:0;">We don't pay until all three line up. Mismatches flagged before the check clears.</p>
       </div>
       <div class="reveal reveal-delay-1" style="background:var(--white);border:1px solid var(--slate-200);border-radius:16px;padding:32px;">
         <div style="font-family:var(--font-mono);font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--green-dark);margin-bottom:12px;">Payment terms, your call</div>
-        <h3 style="font-size:22px;font-weight:700;color:var(--green-deep);letter-spacing:-0.5px;margin-bottom:12px;">COD, Net 30, Net 60, consignment — per vendor.</h3>
-        <p style="font-size:16px;line-height:1.7;color:var(--slate-600);margin-bottom:16px;">Some vendors require cash on delivery. Some accept Net 30. Some prefer consignment with weekly settlements. We run all of them from one workflow — and you set the terms per vendor, switchable when relationships change.</p>
+        <h3 style="font-size:22px;font-weight:700;color:var(--green-deep);letter-spacing:-0.5px;margin-bottom:16px;">COD, Net 30, Net 60, consignment — per vendor.</h3>
         <div style="display:flex;gap:8px;flex-wrap:wrap;">
           <span style="display:inline-flex;align-items:center;padding:6px 14px;border-radius:100px;background:var(--green-ghost);border:1px solid rgba(149,213,178,0.3);font-family:var(--font-mono);font-size:12px;font-weight:600;color:var(--green-dark);letter-spacing:0.5px;">COD</span>
           <span style="display:inline-flex;align-items:center;padding:6px 14px;border-radius:100px;background:var(--green-ghost);border:1px solid rgba(149,213,178,0.3);font-family:var(--font-mono);font-size:12px;font-weight:600;color:var(--green-dark);letter-spacing:0.5px;">NET 30</span>
@@ -555,11 +569,7 @@ document.head.appendChild(o)}initApollo();</script>
         </div>
       </div>
     </div>
-    <p class="reveal" style="text-align:center;font-size:15px;color:var(--slate-600);max-width:680px;margin:0 auto 24px;line-height:1.7;">We don't do close, recon, payroll, AR, tax, or 280E. Your team does — and we make their jobs easier with clean QuickBooks entries in real time.</p>
-    <div class="reveal" style="background:var(--green-ghost);border:1px solid rgba(149,213,178,0.3);border-radius:16px;padding:28px 32px;max-width:780px;margin:0 auto;">
-      <div style="font-family:var(--font-mono);font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--green-dark);margin-bottom:10px;">Vendors get more, not less</div>
-      <p style="font-size:16px;line-height:1.7;color:var(--slate-700);margin:0;">Every vendor gets their own portal — payment status, downloadable checks, complete history. ShelfiQ answers questions in seconds with live Metrc data. Payments arrive on time, the right amount, with documented credit memos when applicable. <strong style="color:var(--green-deep);">Switching to ShelfSpace doesn't damage your vendor relationships — it improves them.</strong></p>
-    </div>
+    <p class="reveal" style="text-align:center;font-size:15px;color:var(--slate-600);max-width:680px;margin:0 auto;line-height:1.7;">We don't do close, recon, payroll, AR, tax, or 280E. Your team does — and we make their jobs easier with clean QuickBooks entries in real time.</p>
   </div>
 </section>
 
@@ -606,13 +616,13 @@ document.head.appendChild(o)}initApollo();</script>
     </div>
     <p style="text-align:center;margin-top:12px;font-size:13px;color:var(--green-dark);font-weight:500;">Straight to your bottom line.</p>
     <div class="calc-guarantee">
-      <p><strong>You approve every payment. We verify every invoice.</strong> Nothing goes out without your sign-off.</p>
+      <p><strong>You approve every payment. We verify every invoice.</strong></p>
     </div>
     <div class="calc-cta-wrap">
       <a href="/contact" class="btn-primary">Get My Free AP Evaluation <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
-      <p style="font-size:14px;color:var(--slate-500);margin-top:12px;">We'll estimate your overpayment risk. 48 hours. Free.</p>
+      <p style="font-size:14px;color:var(--slate-500);margin-top:12px;">Free evaluation in 48 hours.</p>
     </div>
-    <p style="text-align:center;margin-top:16px;font-size:11px;color:var(--slate-500);">*Savings are estimates based on industry averages, not a guarantee.</p>
+    <p style="text-align:center;margin-top:16px;font-size:11px;color:var(--slate-500);">*Estimates only — your actual numbers may vary.</p>
   </div>
 </section>
 
@@ -621,7 +631,7 @@ document.head.appendChild(o)}initApollo();</script>
   <div class="shelfiq-ap-content">
     <div class="section-label reveal">Vendor Communication</div>
     <h2 class="section-title reveal">Vendors get instant answers. Your team gets zero AP emails.</h2>
-    <p class="shelfiq-ap-body reveal">We run your vendor AP inbox. Every email — payment status, balance questions, missing-check follow-ups, credit memo questions, settlement inquiries — comes to us, not you. Most get a reply in under thirty seconds, backed by live Metrc and settlement data. The handful that need a human judgment call escalate to our team — also us, also handled, never your desk. We also parse the invoices vendors send in, match them against your Metrc delivery records, and queue them for your approval.</p>
+    <p class="shelfiq-ap-body reveal">Every vendor email — payment status, balances, missing checks, credit memos, settlements — comes to us. ShelfiQ replies in seconds with live Metrc data. The 5% that need a human judgment call land on our desk, never yours.</p>
     <div class="shelfiq-ap-example reveal">
       <div class="shelfiq-msg vendor">
         <div class="shelfiq-msg-label">Vendor asks:</div>
@@ -656,7 +666,7 @@ document.head.appendChild(o)}initApollo();</script>
         </div>
       </div>
     </div>
-    <p class="shelfiq-ap-bottom reveal">Your vendors get instant answers. Your team gets zero AP emails. First of its kind in cannabis.</p>
+    <p class="shelfiq-ap-bottom reveal">Your vendors get instant answers. Your team gets zero AP emails.</p>
   </div>
 </section>
 
@@ -669,19 +679,19 @@ document.head.appendChild(o)}initApollo();</script>
   <div class="timeline-track">
     <div class="timeline-step reveal">
       <div class="timeline-day">Day 1</div>
-      <div class="timeline-text">Hand us your vendor list — cannabis or non-cannabis, anyone you pay.</div>
+      <div class="timeline-text">Hand us your vendor list — cannabis or not.</div>
     </div>
     <div class="timeline-step reveal reveal-delay-1">
       <div class="timeline-day">Day 14</div>
-      <div class="timeline-text">Every vendor onboarded. First payments verified against delivery records and processed.</div>
+      <div class="timeline-text">Every vendor onboarded. First payments verified against deliveries.</div>
     </div>
     <div class="timeline-step reveal reveal-delay-2">
       <div class="timeline-day">Day 30</div>
-      <div class="timeline-text">Vendors email us, not you. QuickBooks stays in sync. You haven't written a check in a month.</div>
+      <div class="timeline-text">Vendors email us, not you. QuickBooks stays in sync.</div>
     </div>
     <div class="timeline-step reveal reveal-delay-3">
       <div class="timeline-day">Day 60</div>
-      <div class="timeline-text">$45K+ saved. Every invoice verified. You forgot AP was a thing.</div>
+      <div class="timeline-text">$45K+ saved. You forgot AP was a thing.</div>
     </div>
   </div>
   <div class="proof-stats-row">
@@ -707,7 +717,7 @@ document.head.appendChild(o)}initApollo();</script>
   <div class="cta-content">
     <div class="section-label reveal">Get Started</div>
     <h2 class="section-title reveal">Your AP could be off your plate in 30 days.</h2>
-    <p class="section-desc reveal">We'll look at your vendor list, estimate your overpayment risk, and show you how much you'd save. Free. 48 hours.</p>
+    <p class="section-desc reveal">Free analysis in 48 hours. You only pay if we deliver.</p>
     <div class="cta-actions reveal">
       <a href="/contact" class="btn-primary">
         Get My Free AP Evaluation
@@ -716,9 +726,9 @@ document.head.appendChild(o)}initApollo();</script>
     </div>
     <div class="cta-founder reveal" style="display:flex;align-items:center;gap:16px;justify-content:center;margin-top:32px;">
       <img src="/chris-mitchem.jpg" alt="Chris Mitchem" style="width:48px;height:48px;border-radius:50%;object-fit:cover;">
-      <span style="font-size:14px;color:var(--slate-500);">Chris Mitchem, Founder — 10 years operating dispensaries</span>
+      <span style="font-size:14px;color:var(--slate-500);">Chris Mitchem, Founder — 10 years in cannabis</span>
     </div>
-    <p class="cta-note reveal">No credit card. No commitment. No risk.</p>
+    <p class="cta-note reveal">No credit card. No commitment.</p>
   </div>
 </section>
 
@@ -727,8 +737,7 @@ document.head.appendChild(o)}initApollo();</script>
   <div style="max-width:680px;margin:0 auto;text-align:center;">
     <div class="section-label reveal">What it costs</div>
     <h2 class="reveal" style="font-size:clamp(32px,4vw,44px);font-weight:700;color:var(--green-deep);letter-spacing:-1.5px;margin:8px 0 16px;font-family:var(--font-mono);">$1,800–$2,500/mo per location</h2>
-    <p class="reveal" style="font-size:17px;line-height:1.7;color:var(--slate-600);max-width:560px;margin:0 auto 16px;">Three-way matching, per-vendor payment terms, vendor payments, vendor inbox handling, QuickBooks sync, vendor management. Consignment terms included.</p>
-    <p class="reveal" style="font-size:15px;line-height:1.7;color:var(--slate-600);max-width:560px;margin:0 auto 20px;">Your bookkeeper at $25/hour spends 10–15 hours a week on AP — that's $1,000–$1,500/month per location of bookkeeper time. ShelfSpace runs comparable to that, covers all your stores from day one, and frees your bookkeeper to focus on close, reporting, and strategy.</p>
+    <p class="reveal" style="font-size:17px;line-height:1.7;color:var(--slate-600);max-width:560px;margin:0 auto 20px;">Three-way matching, per-vendor terms, vendor payments, vendor inbox, QuickBooks sync. Consignment included.</p>
     <p class="reveal" style="font-size:13px;color:var(--slate-500);font-style:italic;">Multi-location discount applies. 6+ locations: custom. Final fee set after the free evaluation.</p>
   </div>
 </section>
@@ -763,6 +772,14 @@ document.head.appendChild(o)}initApollo();</script>
     <details>
       <summary>What does this cost?</summary>
       <p>The evaluation is free. After that, Core AP runs <strong>$1,800–$2,500/month per location</strong> — invoice processing, three-way matching, per-vendor payment terms (COD, Net, consignment), vendor payments, ShelfiQ access, QuickBooks sync. Multi-location discount applies; 6+ locations are custom. No contracts, cancel any time. <a href="/pricing" style="color:var(--green-dark);font-weight:600;text-decoration:none;">See pricing</a>.</p>
+    </details>
+    <details>
+      <summary>How does this compare to a bookkeeper doing AP?</summary>
+      <p>A bookkeeper at $25/hour spends 10–15 hours a week on AP — that's $1,000–$1,500/month per location in bookkeeper time. ShelfSpace runs comparable to that, covers all your stores from day one, and frees your bookkeeper for close, reporting, and strategy.</p>
+    </details>
+    <details>
+      <summary>How does an invoice go from inbox to payment?</summary>
+      <p>Vendor sends or emails the invoice. We parse it, match it against the Metrc delivery and your PO, queue any discrepancies, and present you with a single approve button. You approve, we cut the check (or send the ACH), and QuickBooks updates in real time.</p>
     </details>
   </div>
 </section>
