@@ -328,6 +328,16 @@
   .footer-top { grid-template-columns: 1fr 1fr; }
   .pos-ticker-logo { height: 72px; padding: 0 32px; }
 }
+@media (max-width: 700px) {
+  /* Suppress decorative radial gradients on mobile — bleed off-screen anyway, save paint cost */
+  .hero-bg-gradient, .hero-bg-gradient-2,
+  .chapter::before, .pivot-section::before { display: none; }
+  /* Case-studies horizontal scroll: fade right edge to hint at swipeable content */
+  .case-grid {
+    -webkit-mask-image: linear-gradient(to right, black 88%, transparent);
+    mask-image: linear-gradient(to right, black 88%, transparent);
+  }
+}
 @media (max-width: 600px) {
   .footer-top { grid-template-columns: 1fr; }
   .pos-ticker-logo { height: 48px; padding: 0 24px; }
