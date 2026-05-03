@@ -331,6 +331,68 @@
 /* Case-grid mobile-only "See all" link (default hidden; flips on at ≤700px) */
 .case-grid-mobile-foot { display: none; }
 
+/* ── Mobile collapse pattern (pure CSS, no JS) ──
+   Desktop: trigger hidden via display:contents on label, body always visible.
+   Mobile: trigger visible as toggle, body hidden until checkbox checked. */
+.m-collapse-cb { position: absolute; opacity: 0; pointer-events: none; height: 0; width: 0; }
+.m-collapse-trigger { display: contents; }   /* desktop: invisible passthrough */
+.m-collapse-body    { display: block; }       /* desktop: always visible */
+
+@media (max-width: 700px) {
+  .m-collapse-body { display: none; }
+  .m-collapse-cb:checked ~ .m-collapse-body { display: block; }
+  /* Reveal-class fallback: when expanded, force opacity:1 (IO won't have triggered) */
+  .m-collapse-cb:checked ~ .m-collapse-body .reveal {
+    opacity: 1 !important; transform: none !important;
+  }
+
+  /* Chapter trigger — full-width row showing eyebrow + amount + chevron */
+  .chapter .m-collapse-trigger {
+    display: block; cursor: pointer;
+    padding: 14px 0 18px;
+    position: relative;
+  }
+  .chapter .m-collapse-trigger::after {
+    content: '↓';
+    position: absolute; right: 4px; top: 22px;
+    color: var(--green-mid);
+    font-family: var(--font-mono); font-size: 22px; font-weight: 700;
+    transition: transform 0.2s;
+  }
+  .chapter .m-collapse-cb:checked ~ .m-collapse-trigger::after {
+    content: '↑';
+  }
+  /* Inner chapter-detail "How we did it" toggle — hidden on mobile */
+  .chapter .m-collapse-body .chapter-detail { display: none; }
+  /* Tighten chapter spacing on mobile when collapsed */
+  .chapter { padding: 24px 24px !important; }
+
+  /* Calc / scope / trust trigger — pill button */
+  .uc-section .m-collapse-trigger,
+  .scope-section .m-collapse-trigger,
+  .trust-signals-section .m-collapse-trigger {
+    display: inline-flex; cursor: pointer;
+    align-items: center; justify-content: center; gap: 8px;
+    margin: 8px auto 0;
+    padding: 14px 28px;
+    background: var(--green-deep); color: var(--white);
+    border-radius: 12px;
+    font-family: var(--font-mono); font-size: 13px; font-weight: 700;
+    letter-spacing: 1px; text-transform: uppercase;
+  }
+  /* Center the pill in its section */
+  .uc-section, .scope-section, .trust-signals-section { text-align: center; }
+  .uc-section .m-collapse-body,
+  .scope-section .m-collapse-body,
+  .trust-signals-section .m-collapse-body { text-align: left; }
+
+  /* Calc fallback CTA — visible only when calc is collapsed */
+  .uc-mobile-fallback-cta { display: none; }
+  .uc-section .m-collapse-cb:not(:checked) ~ .uc-mobile-fallback-cta {
+    display: flex; justify-content: center; padding: 20px 24px 0; margin: 0;
+  }
+}
+
 @media (max-width: 700px) {
   /* Calm-it-down mobile pass — drop secondary sections, flatten backgrounds, cap case-grid */
 
@@ -572,60 +634,80 @@ document.head.appendChild(o)}initApollo();</script>
 <!-- CHAPTER 1: WE DON'T OVERPAY -->
 <section class="chapter">
   <div class="chapter-inner">
-    <div class="chapter-eyebrow reveal">We don't overpay</div>
-    <div class="chapter-number reveal">$45,000/year</div>
-    <p class="chapter-tagline reveal">Every invoice three-way matched against Metrc and your PO before any check goes out.</p>
-    <details class="chapter-detail reveal">
-      <summary>How we did it</summary>
-      <p class="chapter-story-pain">Invoices arrived from forty vendors a month. Receiving counts lived on a clipboard. Short deliveries quietly cleared. One person spent 15 hours a week matching invoices, writing checks, and fielding vendor calls.</p>
-      <p class="chapter-story-resolution">We took over. Three-way matching on every invoice — invoice ↔ delivery ↔ PO — before any payment goes out. QuickBooks stays in sync. Vendor emails go to us, not them.</p>
-    </details>
-    <a class="chapter-link reveal" href="/accounts-payable">See how managed AP works →</a>
+    <input type="checkbox" id="m-collapse-ch1" class="m-collapse-cb">
+    <label for="m-collapse-ch1" class="m-collapse-trigger">
+      <div class="chapter-eyebrow reveal">We don't overpay</div>
+      <div class="chapter-number reveal">$45,000/year</div>
+    </label>
+    <div class="m-collapse-body">
+      <p class="chapter-tagline reveal">Every invoice three-way matched against Metrc and your PO before any check goes out.</p>
+      <details class="chapter-detail reveal">
+        <summary>How we did it</summary>
+        <p class="chapter-story-pain">Invoices arrived from forty vendors a month. Receiving counts lived on a clipboard. Short deliveries quietly cleared. One person spent 15 hours a week matching invoices, writing checks, and fielding vendor calls.</p>
+        <p class="chapter-story-resolution">We took over. Three-way matching on every invoice — invoice ↔ delivery ↔ PO — before any payment goes out. QuickBooks stays in sync. Vendor emails go to us, not them.</p>
+      </details>
+      <a class="chapter-link reveal" href="/accounts-payable">See how managed AP works →</a>
+    </div>
   </div>
 </section>
 
 <!-- CHAPTER 2: WE PAY ON THE RIGHT TERMS -->
 <section class="chapter">
   <div class="chapter-inner">
-    <div class="chapter-eyebrow reveal">We pay on the right terms</div>
-    <div class="chapter-number reveal">$250,000</div>
-    <p class="chapter-tagline reveal">Cash freed when the right vendors switch to consignment — they own it until it sells.</p>
-    <details class="chapter-detail reveal">
-      <summary>How we did it</summary>
-      <p class="chapter-story-pain">Every product on their shelves was bought and paid for. Half of it sat there for months. Some expired. All of it was cash they couldn't use for payroll, expansion, or marketing.</p>
-      <p class="chapter-story-resolution">We pay every vendor on the right terms — COD, Net, or consignment, configurable per vendor. For this retailer, we transitioned the right vendors to consignment. Now those vendors own the product until it sells. Cash went back in the bank.</p>
-    </details>
-    <a class="chapter-link reveal" href="/consignment">See how consignment works →</a>
+    <input type="checkbox" id="m-collapse-ch2" class="m-collapse-cb">
+    <label for="m-collapse-ch2" class="m-collapse-trigger">
+      <div class="chapter-eyebrow reveal">We pay on the right terms</div>
+      <div class="chapter-number reveal">$250,000</div>
+    </label>
+    <div class="m-collapse-body">
+      <p class="chapter-tagline reveal">Cash freed when the right vendors switch to consignment — they own it until it sells.</p>
+      <details class="chapter-detail reveal">
+        <summary>How we did it</summary>
+        <p class="chapter-story-pain">Every product on their shelves was bought and paid for. Half of it sat there for months. Some expired. All of it was cash they couldn't use for payroll, expansion, or marketing.</p>
+        <p class="chapter-story-resolution">We pay every vendor on the right terms — COD, Net, or consignment, configurable per vendor. For this retailer, we transitioned the right vendors to consignment. Now those vendors own the product until it sells. Cash went back in the bank.</p>
+      </details>
+      <a class="chapter-link reveal" href="/consignment">See how consignment works →</a>
+    </div>
   </div>
 </section>
 
 <!-- CHAPTER 3: WE RECOVER CREDITS -->
 <section class="chapter">
   <div class="chapter-inner">
-    <div class="chapter-eyebrow reveal">We recover credits</div>
-    <div class="chapter-number reveal">$200,000/year</div>
-    <p class="chapter-tagline reveal">Returns, expirations, co-marketing — credit memos pulled from Metrc, sent monthly, paid back.</p>
-    <details class="chapter-detail reveal">
-      <summary>How we did it</summary>
-      <p class="chapter-story-pain">Returns nobody filed. Expired product nobody credited. Co-marketing dollars and shared promo costs committed in vendor agreements but never invoiced back. Four to six percent of revenue — just gone.</p>
-      <p class="chapter-story-resolution">We pulled their data, built documented credit memos against the agreement terms both sides already signed, sent them to vendors with line-item Metrc backup, and got cleaner approvals because the math was auditable. Money that was always theirs — back in their account.</p>
-    </details>
-    <a class="chapter-link reveal" href="/credit-recovery">See how credit recovery works →</a>
+    <input type="checkbox" id="m-collapse-ch3" class="m-collapse-cb">
+    <label for="m-collapse-ch3" class="m-collapse-trigger">
+      <div class="chapter-eyebrow reveal">We recover credits</div>
+      <div class="chapter-number reveal">$200,000/year</div>
+    </label>
+    <div class="m-collapse-body">
+      <p class="chapter-tagline reveal">Returns, expirations, co-marketing — credit memos pulled from Metrc, sent monthly, paid back.</p>
+      <details class="chapter-detail reveal">
+        <summary>How we did it</summary>
+        <p class="chapter-story-pain">Returns nobody filed. Expired product nobody credited. Co-marketing dollars and shared promo costs committed in vendor agreements but never invoiced back. Four to six percent of revenue — just gone.</p>
+        <p class="chapter-story-resolution">We pulled their data, built documented credit memos against the agreement terms both sides already signed, sent them to vendors with line-item Metrc backup, and got cleaner approvals because the math was auditable. Money that was always theirs — back in their account.</p>
+      </details>
+      <a class="chapter-link reveal" href="/credit-recovery">See how credit recovery works →</a>
+    </div>
   </div>
 </section>
 
 <!-- CHAPTER 4: WE OWN THE INBOX -->
 <section class="chapter">
   <div class="chapter-inner">
-    <div class="chapter-eyebrow reveal">We own the inbox</div>
-    <div class="chapter-number reveal">40 emails/week</div>
-    <p class="chapter-tagline reveal">Vendor emails come to us — answered with live data, off your plate.</p>
-    <details class="chapter-detail reveal">
-      <summary>How we did it</summary>
-      <p class="chapter-story-pain">"When am I getting paid?" "Why was my invoice short?" "Did you receive my credit memo?" "When does the next settlement run?" Forty of those a week. Each one a five-minute interruption. None of them the work you're actually trying to do — and the relationships still suffered because the answers came late.</p>
-      <p class="chapter-story-resolution">We took over the inbox. Every vendor email about payments, balances, credits, and settlements comes to us — answered with live Metrc and settlement data, in the same tone you'd use, without you ever seeing it. The five percent that genuinely need a human decision come to your desk with the work already done.</p>
-    </details>
-    <a class="chapter-link reveal" href="/accounts-payable#vendor-communications">See how vendor communications works →</a>
+    <input type="checkbox" id="m-collapse-ch4" class="m-collapse-cb">
+    <label for="m-collapse-ch4" class="m-collapse-trigger">
+      <div class="chapter-eyebrow reveal">We own the inbox</div>
+      <div class="chapter-number reveal">40 emails/week</div>
+    </label>
+    <div class="m-collapse-body">
+      <p class="chapter-tagline reveal">Vendor emails come to us — answered with live data, off your plate.</p>
+      <details class="chapter-detail reveal">
+        <summary>How we did it</summary>
+        <p class="chapter-story-pain">"When am I getting paid?" "Why was my invoice short?" "Did you receive my credit memo?" "When does the next settlement run?" Forty of those a week. Each one a five-minute interruption. None of them the work you're actually trying to do — and the relationships still suffered because the answers came late.</p>
+        <p class="chapter-story-resolution">We took over the inbox. Every vendor email about payments, balances, credits, and settlements comes to us — answered with live Metrc and settlement data, in the same tone you'd use, without you ever seeing it. The five percent that genuinely need a human decision come to your desk with the work already done.</p>
+      </details>
+      <a class="chapter-link reveal" href="/accounts-payable#vendor-communications">See how vendor communications works →</a>
+    </div>
   </div>
 </section>
 
@@ -650,6 +732,10 @@ document.head.appendChild(o)}initApollo();</script>
     <div class="section-label reveal">Your Numbers</div>
     <h2 class="section-title reveal">Slide to see what we'd find at your stores</h2>
   </div>
+  <input type="checkbox" id="m-collapse-calc" class="m-collapse-cb">
+  <label for="m-collapse-calc" class="m-collapse-trigger">Run the numbers ↓</label>
+  <p class="uc-mobile-fallback-cta"><a href="/contact" class="btn-primary">Get My Free AP Evaluation</a></p>
+  <div class="m-collapse-body">
   <div class="uc-container reveal">
     <div class="uc-slider-wrapper">
       <div class="uc-revenue-display" id="uc-revenue">$3,000,000</div>
@@ -709,6 +795,7 @@ document.head.appendChild(o)}initApollo();</script>
       <p style="font-size:14px;color:var(--slate-500);margin-top:8px;"><strong style="color:var(--green-deep);font-family:var(--font-mono);">$1,800–$2,500/mo per location</strong>. Free evaluation in 48 hours.</p>
       <p class="uc-bottom-disclaimer">*Estimates only — your actual numbers may vary.</p>
     </div>
+  </div>
   </div>
 </section>
 
@@ -1110,6 +1197,9 @@ document.head.appendChild(o)}initApollo();</script>
       <div class="section-label reveal">Who does what</div>
       <h2 class="reveal">Free your team. They have better work to do.</h2>
     </div>
+    <input type="checkbox" id="m-collapse-scope" class="m-collapse-cb">
+    <label for="m-collapse-scope" class="m-collapse-trigger">See the breakdown ↓</label>
+    <div class="m-collapse-body">
 
     <div class="scope-grid reveal">
       <!-- LEFT: ShelfSpace handles -->
@@ -1206,6 +1296,7 @@ document.head.appendChild(o)}initApollo();</script>
         </div>
       </div>
     </div>
+    </div>
 
   </div>
 
@@ -1234,12 +1325,15 @@ document.head.appendChild(o)}initApollo();</script>
 </section>
 
 <!-- TRUST SIGNALS: vendor experience + Metrc -->
-<section style="background:var(--white);padding:96px 48px;border-top:1px solid var(--slate-100);">
+<section class="trust-signals-section" style="background:var(--white);padding:96px 48px;border-top:1px solid var(--slate-100);">
   <div style="max-width:1100px;margin:0 auto;">
     <div style="text-align:center;margin-bottom:48px;" class="reveal">
       <div class="section-label">Built to be trusted</div>
       <h2 style="font-size:clamp(28px,3.5vw,40px);font-weight:700;color:var(--green-deep);letter-spacing:-1.5px;margin-top:8px;">Vendors win. Compliance wins.</h2>
     </div>
+    <input type="checkbox" id="m-collapse-trust" class="m-collapse-cb">
+    <label for="m-collapse-trust" class="m-collapse-trigger">Show me ↓</label>
+    <div class="m-collapse-body">
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(360px,1fr));gap:24px;">
       <!-- Vendor card -->
       <div class="reveal" style="background:var(--white);border:1px solid var(--slate-200);border-radius:16px;padding:36px;display:flex;flex-direction:column;">
@@ -1259,6 +1353,7 @@ document.head.appendChild(o)}initApollo();</script>
           <li style="display:flex;align-items:center;gap:10px;font-size:14px;font-weight:600;color:var(--green-deep);"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="flex-shrink:0;"><polyline points="20 6 9 17 4 12"/></svg> Vetted by Metrc — official third-party vendor</li>
         </ul>
       </div>
+    </div>
     </div>
   </div>
 </section>
