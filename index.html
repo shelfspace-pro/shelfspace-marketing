@@ -384,6 +384,25 @@
     font-family: var(--font-mono); font-size: 13px; font-weight: 700;
     letter-spacing: 1px; text-transform: uppercase;
   }
+  /* Pill trigger arrow — flips ↓/↑ on expand */
+  .uc-section .m-collapse-trigger::after,
+  .scope-section .m-collapse-trigger::after,
+  .trust-signals-section .m-collapse-trigger::after {
+    content: '↓';
+    font-size: 16px;
+    line-height: 1;
+  }
+  .uc-section .m-collapse-cb:checked ~ .m-collapse-trigger::after,
+  .scope-section .m-collapse-cb:checked ~ .m-collapse-trigger::after,
+  .trust-signals-section .m-collapse-cb:checked ~ .m-collapse-trigger::after {
+    content: '↑';
+  }
+  /* Padding between pill trigger and revealed body so content doesn't touch the button */
+  .uc-section .m-collapse-cb:checked ~ .m-collapse-body,
+  .scope-section .m-collapse-cb:checked ~ .m-collapse-body,
+  .trust-signals-section .m-collapse-cb:checked ~ .m-collapse-body {
+    margin-top: 28px;
+  }
   /* Center the pill in its section */
   .uc-section, .scope-section, .trust-signals-section { text-align: center; }
   .uc-section .m-collapse-body,
@@ -737,7 +756,7 @@ document.head.appendChild(o)}initApollo();</script>
     <h2 class="section-title reveal">Slide to see what we'd find at your stores</h2>
   </div>
   <input type="checkbox" id="m-collapse-calc" class="m-collapse-cb">
-  <label for="m-collapse-calc" class="m-collapse-trigger">Run the numbers ↓</label>
+  <label for="m-collapse-calc" class="m-collapse-trigger">Run the numbers</label>
   <p class="uc-mobile-fallback-cta"><a href="/contact" class="btn-primary">Get My Free AP Evaluation</a></p>
   <div class="m-collapse-body">
   <div class="uc-container reveal">
@@ -1202,7 +1221,7 @@ document.head.appendChild(o)}initApollo();</script>
       <h2 class="reveal">Free your team. They have better work to do.</h2>
     </div>
     <input type="checkbox" id="m-collapse-scope" class="m-collapse-cb">
-    <label for="m-collapse-scope" class="m-collapse-trigger">See the breakdown ↓</label>
+    <label for="m-collapse-scope" class="m-collapse-trigger">See the breakdown</label>
     <div class="m-collapse-body">
 
     <div class="scope-grid reveal">
@@ -1336,7 +1355,7 @@ document.head.appendChild(o)}initApollo();</script>
       <h2 style="font-size:clamp(28px,3.5vw,40px);font-weight:700;color:var(--green-deep);letter-spacing:-1.5px;margin-top:8px;">Vendors win. Compliance wins.</h2>
     </div>
     <input type="checkbox" id="m-collapse-trust" class="m-collapse-cb">
-    <label for="m-collapse-trust" class="m-collapse-trigger">Show me ↓</label>
+    <label for="m-collapse-trust" class="m-collapse-trigger">Show me</label>
     <div class="m-collapse-body">
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(360px,1fr));gap:24px;">
       <!-- Vendor card -->
