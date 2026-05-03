@@ -23,1331 +23,291 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Space+Mono:wght@400;700&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Funnel+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 <style>
-/* ============================================================
-   OPERATOR'S LEDGER — homepage-scoped redesign
-   All selectors prefixed with body.home-ledger to prevent cascade.
-   styles.css and inner pages are not affected.
-   ============================================================ */
+@keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-12px); } }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
 
-body.home-ledger {
-  --ink: #11201A;
-  --ink-mute: #4A5C53;
-  --ink-faint: #8A9590;
-  --cream: #F4EFE6;
-  --cream-deep: #ECE5D6;
-  --oxblood: #7A2A1E;
-  --oxblood-deep: #5C1F15;
-  --rule: rgba(17,32,26,0.16);
-  --rule-strong: rgba(17,32,26,0.42);
-  --gilt: #C9A66B;
-  --font-display-l: 'Newsreader', Georgia, 'Times New Roman', serif;
-  --font-body-l: 'Funnel Sans', system-ui, -apple-system, sans-serif;
-  --font-mono-l: 'IBM Plex Mono', ui-monospace, monospace;
-
-  font-family: var(--font-body-l);
-  color: var(--ink);
-  background: var(--cream);
-}
-body.home-ledger::before { opacity: 0.045; }
-
-/* Reusable typographic primitives */
-.home-ledger .h-xxl {
-  font-family: var(--font-mono-l);
-  font-weight: 500;
-  font-size: clamp(56px, 8vw, 112px);
-  letter-spacing: -0.045em;
-  line-height: 0.9;
-  font-variant-numeric: tabular-nums;
-  font-feature-settings: 'tnum','ss01';
-  color: var(--oxblood);
-  margin: 0;
-  white-space: nowrap;
-}
-.home-ledger .h-xl {
-  font-family: var(--font-display-l);
-  font-weight: 400;
-  font-variation-settings: 'opsz' 144;
-  font-size: clamp(40px, 6vw, 80px);
-  line-height: 1.0;
-  letter-spacing: -0.025em;
-  color: var(--ink);
-  margin: 0;
-}
-.home-ledger .h-l {
-  font-family: var(--font-display-l);
-  font-weight: 400;
-  font-variation-settings: 'opsz' 72;
-  font-size: clamp(32px, 4vw, 50px);
-  line-height: 1.06;
-  letter-spacing: -0.02em;
-  color: var(--ink);
-  margin: 0;
-}
-.home-ledger .h-m {
-  font-family: var(--font-display-l);
-  font-weight: 500;
-  font-variation-settings: 'opsz' 36;
-  font-size: clamp(20px, 2.2vw, 26px);
-  line-height: 1.2;
-  letter-spacing: -0.012em;
-  color: var(--ink);
-  margin: 0;
-}
-.home-ledger .body-lede {
-  font-family: var(--font-body-l);
-  font-size: clamp(17px, 1.4vw, 19px);
-  line-height: 1.55;
-  color: var(--ink);
-  max-width: 56ch;
-  margin: 0;
-}
-.home-ledger .body-default {
-  font-family: var(--font-body-l);
-  font-size: 17px;
-  line-height: 1.6;
-  color: var(--ink-mute);
-  margin: 0;
-}
-.home-ledger .body-small {
-  font-family: var(--font-body-l);
-  font-size: 14px;
-  line-height: 1.55;
-  color: var(--ink-mute);
-  margin: 0;
-}
-.home-ledger .num {
-  font-family: var(--font-mono-l);
-  font-variant-numeric: tabular-nums;
-  font-feature-settings: 'tnum','ss01';
-  letter-spacing: -0.01em;
-  color: var(--ink);
-}
-.home-ledger .num--accent { color: var(--oxblood); }
-.home-ledger .gutter-label {
-  font-family: var(--font-mono-l);
-  font-weight: 500;
-  font-size: 11px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--ink-mute);
-}
-.home-ledger .ledger-link {
-  color: var(--oxblood);
-  text-decoration: none;
-  border-bottom: 1px solid currentColor;
-  padding-bottom: 1px;
-  transition: background 0.15s, color 0.15s;
-}
-.home-ledger .ledger-link:hover {
-  background: var(--oxblood);
-  color: var(--cream);
-}
-
-.home-ledger .rule { border-top: 1px solid var(--rule); }
-.home-ledger .rule-bold { border-top: 1px solid var(--rule-strong); }
-.home-ledger .rule-double { border-top: 3px double var(--rule-strong); }
-
-/* Suppress global decoration that would interfere with ledger tone */
-.home-ledger .hero-bg-gradient,
-.home-ledger .hero-bg-gradient-2,
-.home-ledger .pivot-section::before,
-.home-ledger .hero-parallax-layer { display: none !important; }
-.home-ledger footer::before { display: none; }
-
-/* === REVEALS === */
-.reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1); }
+/* Reveals */
+.reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1); }
 .reveal.is-visible { opacity: 1; transform: translateY(0); }
-.reveal-delay-1 { transition-delay: 0.12s; }
-.reveal-delay-2 { transition-delay: 0.24s; }
-.reveal-delay-3 { transition-delay: 0.36s; }
-.reveal-delay-4 { transition-delay: 0.48s; }
+.reveal-delay-1 { transition-delay: 0.15s; }
+.reveal-delay-2 { transition-delay: 0.3s; }
+.reveal-delay-3 { transition-delay: 0.45s; }
+.reveal-delay-4 { transition-delay: 0.6s; }
 
-/* === NAV ADAPTER === */
-body.home-ledger nav {
-  background: rgba(244,239,230,0.85);
-  backdrop-filter: blur(20px) saturate(140%);
-  -webkit-backdrop-filter: blur(20px) saturate(140%);
-  border-bottom: 1px solid var(--rule);
-  box-shadow: none !important;
-}
-body.home-ledger nav.scrolled { border-bottom-color: var(--rule-strong); }
-body.home-ledger .nav-logo { color: var(--ink); }
-body.home-ledger .nav-logo-icon { background: var(--ink); border-radius: 4px; }
-body.home-ledger .nav-links a { color: var(--ink-mute); font-family: var(--font-body-l); }
-body.home-ledger .nav-links a:hover { color: var(--ink); }
-body.home-ledger .nav-cta {
-  background: transparent;
-  color: var(--oxblood) !important;
-  border: 1px solid var(--oxblood);
-  border-radius: 0;
-  font-family: var(--font-mono-l);
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  padding: 10px 18px;
-  box-shadow: none !important;
-}
-body.home-ledger .nav-cta:hover {
-  background: var(--oxblood);
-  color: var(--cream) !important;
-  transform: none;
-  box-shadow: none !important;
-}
-body.home-ledger .nav-cta svg { display: none; }
-body.home-ledger .nav-progress { background: var(--oxblood); }
-body.home-ledger .nav-hamburger span { background: var(--ink); }
-body.home-ledger .nav-links.mobile-open { background: rgba(244,239,230,0.97); box-shadow: none !important; border-bottom: 1px solid var(--rule); }
+/* Hero */
+.hero { position: relative; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 120px 48px 80px; overflow: hidden; background: var(--white); }
+.hero-bg { position: absolute; top: 0; left: 0; right: 0; bottom: 0; overflow: hidden; }
+.hero-bg-gradient { position: absolute; top: -30%; right: -20%; width: 900px; height: 900px; background: radial-gradient(circle, rgba(149,213,178,0.2) 0%, rgba(149,213,178,0) 70%); animation: float 8s ease-in-out infinite; }
+.hero-bg-gradient-2 { position: absolute; bottom: -20%; left: -15%; width: 700px; height: 700px; background: radial-gradient(circle, rgba(27,67,50,0.06) 0%, rgba(27,67,50,0) 70%); animation: float 10s ease-in-out infinite; animation-delay: -3s; }
+.hero-grid-lines { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 1200px; height: 100%; opacity: 0.035; background-image: linear-gradient(var(--green-deep) 1px, transparent 1px), linear-gradient(90deg, var(--green-deep) 1px, transparent 1px); background-size: 80px 80px; pointer-events: none; }
+.hero-parallax-layer { position: absolute; top: 0; left: 0; right: 0; bottom: 0; will-change: transform; }
+.hero-split { position: relative; z-index: 2; max-width: 1200px; width: 100%; display: flex; align-items: center; gap: 64px; }
+.hero-content { flex: 1; text-align: left; }
+.hero h1 { font-size: clamp(32px, 4vw, 48px); font-weight: 700; line-height: 1.1; letter-spacing: -2px; color: var(--green-deep); margin-bottom: 32px; animation: fadeUp 0.8s cubic-bezier(0.22,1,0.36,1) 0.2s both; }
+.hero-actions { display: flex; align-items: center; gap: 16px; animation: fadeUp 0.8s cubic-bezier(0.22,1,0.36,1) 0.4s both; }
+.hero-founder-credit { font-size: 14px; color: var(--slate-500); margin-top: 24px; animation: fadeUp 0.8s cubic-bezier(0.22,1,0.36,1) 0.55s both; }
+.hero-founder-credit a { color: var(--green-dark); text-decoration: none; font-weight: 500; }
+.hero-trust { display: flex; align-items: center; gap: 8px; margin-top: 16px; animation: fadeUp 0.8s cubic-bezier(0.22,1,0.36,1) 0.65s both; }
+.hero-trust img { height: 18px; opacity: 0.5; }
+.hero-trust span { font-size: 11px; font-weight: 600; color: var(--slate-500); }
 
-/* === BUTTON OVERRIDES === */
-body.home-ledger .btn-primary,
-body.home-ledger .btn-ledger {
-  display: inline-flex; align-items: center; gap: 10px;
-  background: transparent; color: var(--oxblood);
-  font-family: var(--font-mono-l); font-size: 12px; font-weight: 500;
-  letter-spacing: 0.12em; text-transform: uppercase;
-  padding: 16px 28px; border: 1px solid var(--oxblood);
-  border-radius: 0; text-decoration: none;
-  transition: background 0.18s, color 0.18s;
-  box-shadow: none !important;
-}
-body.home-ledger .btn-primary:hover,
-body.home-ledger .btn-ledger:hover {
-  background: var(--oxblood); color: var(--cream);
-  transform: none;
-  box-shadow: none !important;
-}
-body.home-ledger .btn-primary svg,
-body.home-ledger .btn-ledger svg { display: none; }
+/* Hero Demo */
+.hero-demo { flex: 1; max-width: 520px; animation: fadeUp 0.8s cubic-bezier(0.22,1,0.36,1) 0.5s both; pointer-events: none; }
+.hero-demo-frame { background: var(--green-deep); border-radius: 12px; overflow: hidden; box-shadow: 0 24px 80px rgba(27,67,50,0.18); }
+.hero-demo-titlebar { display: flex; align-items: center; gap: 6px; padding: 10px 14px; background: var(--green-dark); }
+.hero-demo-dot { width: 10px; height: 10px; border-radius: 50%; }
+.hero-demo-dot--r { background: #ef4444; }
+.hero-demo-dot--y { background: #eab308; }
+.hero-demo-dot--g { background: #22c55e; }
+.hero-demo-titlebar span { font-size: 11px; color: var(--green-light); margin-left: 8px; font-family: var(--font-mono); }
+.hero-demo-screen { position: relative; height: 340px; background: var(--white); overflow: hidden; }
+.hero-demo-slide { position: absolute; inset: 0; padding: 20px 24px; opacity: 0; display: flex; flex-direction: column; }
+.hero-demo-caption { padding: 8px 14px; background: var(--green-dark); font-size: 12px; font-weight: 600; color: var(--green-light); font-family: var(--font-mono); letter-spacing: 0.5px; }
+@keyframes demoSlide1 { 0%,2% { opacity: 0; } 4%,30% { opacity: 1; } 33% { opacity: 0; } 100% { opacity: 0; } }
+@keyframes demoSlide2 { 0%,33% { opacity: 0; } 36%,63% { opacity: 1; } 66% { opacity: 0; } 100% { opacity: 0; } }
+@keyframes demoSlide3 { 0%,66% { opacity: 0; } 69%,96% { opacity: 1; } 99%,100% { opacity: 0; } }
+.hero-demo-slide:nth-child(1) { animation: demoSlide1 15s ease-in-out infinite; }
+.hero-demo-slide:nth-child(2) { animation: demoSlide2 15s ease-in-out infinite; }
+.hero-demo-slide:nth-child(3) { animation: demoSlide3 15s ease-in-out infinite; }
+.demo-row { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; font-family: var(--font-mono); font-size: 14px; }
+.demo-row-label { color: var(--slate-500); }
+.demo-row-value { font-weight: 700; color: var(--green-deep); }
+.demo-row-value--red { color: #c0392b; }
+.demo-divider { border: none; border-top: 1px dashed var(--slate-200); margin: 8px 0; }
+.demo-slide-title { font-size: 11px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 20px; text-align: center; font-family: var(--font-mono); }
+.demo-slide-title--green { color: var(--green-deep); }
+.demo-slide-title--red { color: #c0392b; }
+@keyframes dotPulse { 0% { content: ''; } 25% { content: '.'; } 50% { content: '..'; } 75%,100% { content: '...'; } }
+.demo-dots { display: inline-block; width: 2ch; text-align: left; }
+.demo-dots::after { content: ''; animation: dotPulse 1.5s steps(1) infinite; }
+.demo-total .demo-row-label { font-weight: 600; color: var(--green-deep); }
+.demo-total .demo-row-value { font-size: 18px; color: var(--green-deep); }
+.nav-progress { position: absolute; bottom: 0; left: 0; height: 2px; width: 100%; background: linear-gradient(90deg, var(--green-accent), var(--green-mid)); transform: scaleX(var(--scroll-progress, 0)); transform-origin: left; }
 
-/* === HERO === */
-body.home-ledger .hero {
-  position: relative;
-  min-height: 92vh;
-  background: var(--cream);
-  padding: clamp(140px, 18vh, 200px) clamp(24px, 4vw, 72px) clamp(60px, 10vh, 100px);
-  overflow-x: clip;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-body.home-ledger .hero-bg { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
-body.home-ledger .hero-grid-lines {
-  position: absolute; top: 0; left: 50%; transform: translateX(-50%);
-  width: 1400px; max-width: 100%; height: 100%;
-  background-image: linear-gradient(var(--ink) 1px, transparent 1px),
-                    linear-gradient(90deg, var(--ink) 1px, transparent 1px);
-  background-size: 96px 96px;
-  opacity: 0.025;
-}
-.ledger-hero-grid {
-  position: relative; z-index: 1;
-  max-width: 1400px; width: 100%;
-  display: grid;
-  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1.25fr);
-  gap: 64px;
-  align-items: center;
-}
-.ledger-hero-text { display: flex; flex-direction: column; gap: 24px; text-align: left; }
-.ledger-hero-text .gutter-label.rule { padding-top: 16px; }
-.ledger-hero-text .body-lede { margin: 0; }
-.ledger-hero-text .founder-credit {
-  margin-top: -8px;
-  font-family: var(--font-display-l);
-  font-style: italic;
-  font-size: 15px;
-  color: var(--ink-mute);
-}
-.ledger-hero-text .hero-actions { margin-top: 8px; }
-.ledger-hero-text .hero-trust {
-  margin-top: 24px; padding-top: 16px;
-  display: flex; align-items: center; gap: 10px;
-}
-.ledger-hero-text .hero-trust img { height: 18px; opacity: 0.55; filter: grayscale(1) brightness(0.4); }
-
-.ledger-hero-figure {
-  position: relative;
-  display: flex; flex-direction: column;
-  align-items: flex-end;
-  text-align: right;
-  margin-right: 0;
-  gap: 4px;
-  min-width: 0;
-}
-.ledger-hero-figure .gutter-label { display: block; }
-.ledger-hero-figure .h-xxl { line-height: 0.85; margin: 6px 0; }
-.ledger-hero-figure .rule { width: 100%; margin: 8px 0 4px; }
-.ledger-hero-figure .ledger-hero-dateline { display: block; }
-
-@media (max-width: 980px) {
-  body.home-ledger .hero { min-height: auto; padding: 110px 24px 60px; }
-  .ledger-hero-grid { grid-template-columns: 1fr; gap: 32px; }
-  .ledger-hero-figure { align-items: flex-start; text-align: left; margin-right: 0; }
-  .ledger-hero-figure .h-xxl { font-size: clamp(56px, 22vw, 130px); }
-}
-
-/* === FOUNDER STRIP (editorial byline) === */
-body.home-ledger .founder-strip {
-  background: var(--cream);
-  border-top: 1px solid var(--rule-strong);
-  border-bottom: 1px solid var(--rule-strong);
-  padding: 60px clamp(24px, 4vw, 72px);
-}
-body.home-ledger .founder-strip-inner {
-  max-width: 1100px; margin: 0 auto;
-  display: grid;
-  grid-template-columns: 200px 1fr;
-  gap: 56px;
-  align-items: start;
-  text-align: left;
-}
-.ledger-byline-figure { display: flex; flex-direction: column; gap: 10px; }
-body.home-ledger .founder-strip-photo {
-  width: 200px !important; height: 250px !important;
-  border-radius: 0 !important;
-  object-fit: cover; object-position: center 25%;
-  filter: sepia(0.18) contrast(1.04);
-  border: 1px solid var(--rule-strong);
-  box-shadow: none !important;
-  display: block;
-}
-.ledger-byline-text { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
-.ledger-byline-text .gutter-label.rule { padding-top: 12px; }
-.ledger-byline-quote {
-  font-family: var(--font-display-l);
-  font-style: italic;
-  font-weight: 400;
-  font-size: clamp(20px, 2.2vw, 26px);
-  line-height: 1.42;
-  color: var(--ink);
-  margin: 0;
-  max-width: 56ch;
-  letter-spacing: -0.005em;
-}
-.ledger-byline-signature {
-  font-family: var(--font-display-l);
-  font-style: italic;
-  font-weight: 400;
-  font-size: 26px;
-  color: var(--oxblood);
-  letter-spacing: -0.02em;
-  line-height: 1;
-}
-.ledger-byline-meta {
-  font-family: var(--font-body-l);
-  font-size: 14px;
-  color: var(--ink-mute);
-  display: flex; align-items: center; flex-wrap: wrap; gap: 8px 12px;
-}
-.ledger-byline-meta strong { color: var(--ink); font-weight: 600; }
-.ledger-byline-meta a { color: var(--ink-mute); text-decoration: none; transition: color 0.15s; display: inline-flex; align-items: center; }
-.ledger-byline-meta a:hover { color: var(--oxblood); }
-.ledger-byline-meta a.ledger-link { color: var(--oxblood); }
+/* Founder Strip */
+.founder-strip { background: var(--green-ghost); border-top: 1px solid rgba(149,213,178,0.3); border-bottom: 1px solid rgba(149,213,178,0.3); padding: 40px 48px; }
+.founder-strip-inner { max-width: 960px; margin: 0 auto; display: flex; align-items: center; gap: 28px; }
+.founder-strip-photo { flex-shrink: 0; width: 96px; height: 96px; border-radius: 50%; object-fit: cover; object-position: center 25%; box-shadow: 0 4px 16px rgba(27,67,50,0.12); display: block; }
+.founder-strip-text { flex: 1; min-width: 0; }
+.founder-strip-eyebrow { font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--slate-500); margin-bottom: 8px; }
+.founder-strip-quote { font-size: 17px; font-weight: 500; line-height: 1.5; color: var(--slate-800); margin: 0 0 10px; max-width: 640px; }
+.founder-strip-meta { font-size: 13px; color: var(--slate-600); display: flex; align-items: center; flex-wrap: wrap; gap: 6px 10px; }
+.founder-strip-meta a.founder-strip-li { display: inline-flex; align-items: center; color: var(--slate-600); transition: color 0.2s; }
+.founder-strip-meta a.founder-strip-li:hover { color: var(--green-mid); }
+.founder-strip-link { display: inline-flex; align-items: center; gap: 4px; margin-top: 10px; font-size: 13px; font-weight: 600; color: var(--green-dark); text-decoration: none; transition: color 0.2s; }
+.founder-strip-link:hover { color: var(--green-deep); }
 @media (max-width: 700px) {
-  body.home-ledger .founder-strip { padding: 40px 24px; }
-  body.home-ledger .founder-strip-inner { grid-template-columns: 1fr; gap: 24px; }
-  body.home-ledger .founder-strip-photo { width: 140px !important; height: 180px !important; }
+  .founder-strip { padding: 32px 24px; }
+  .founder-strip-inner { flex-direction: column; text-align: center; gap: 16px; }
+  .founder-strip-photo { width: 80px; height: 80px; }
+  .founder-strip-meta { justify-content: center; }
 }
 
-/* === METHOD (4 pillars) === */
-.ledger-method {
-  background: var(--cream);
-  padding: clamp(80px, 12vh, 140px) clamp(24px, 4vw, 72px);
-}
-.ledger-method-inner { max-width: 1200px; margin: 0 auto; }
-.ledger-method-head { margin-bottom: 56px; max-width: 720px; display: flex; flex-direction: column; gap: 16px; }
-.ledger-method-table { display: flex; flex-direction: column; }
-.ledger-method-headrow {
-  display: grid;
-  grid-template-columns: 64px 1fr 240px;
-  gap: 32px;
-  padding: 16px 0;
-  align-items: baseline;
-  border-top: 1px solid var(--rule-strong);
-}
-.ledger-method-headrow .gutter-label:last-child { text-align: right; }
-.ledger-method-row {
-  display: grid;
-  grid-template-columns: 64px 1fr 240px;
-  gap: 32px;
-  padding: 36px 0;
-  align-items: start;
-  transition: background 0.2s;
-  border-top: 1px solid var(--rule);
-  position: relative;
-}
-.ledger-method-row:last-child { border-bottom: 1px solid var(--rule-strong); }
-.ledger-method-row:hover { background: var(--cream-deep); }
-.ledger-method-num {
-  font-size: 18px;
-  color: var(--ink-mute);
-  letter-spacing: 0.02em;
-  padding-top: 6px;
-}
-.ledger-method-body { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
-.ledger-method-resolution { color: var(--ink) !important; }
-.ledger-method-amount {
-  text-align: right;
-  font-family: var(--font-mono-l);
-  font-size: clamp(28px, 3.6vw, 44px);
-  letter-spacing: -0.02em;
-  font-weight: 500;
-  color: var(--oxblood);
-  font-variant-numeric: tabular-nums;
-  font-feature-settings: 'tnum','ss01';
-  align-self: start;
-  padding-top: 6px;
-  white-space: nowrap;
-}
-.ledger-method-amount-unit {
-  font-family: var(--font-mono-l);
-  font-size: 0.32em;
-  color: var(--ink-mute);
-  margin-left: 4px;
-  letter-spacing: 0.04em;
-  font-weight: 500;
-}
-.ledger-method-amount--small { font-size: clamp(20px, 2.4vw, 28px); }
-@media (max-width: 820px) {
-  .ledger-method-headrow { display: none; }
-  .ledger-method-row {
-    grid-template-columns: 1fr;
-    gap: 12px;
-    padding: 28px 0;
-  }
-  .ledger-method-num {
-    font-family: var(--font-mono-l);
-    font-size: 11px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--ink-mute);
-    padding-top: 0;
-  }
-  .ledger-method-amount {
-    text-align: left;
-    border-top: 1px solid var(--rule);
-    padding-top: 16px;
-    margin-top: 4px;
-  }
+/* Chapters */
+.chapter { padding: 100px 48px; position: relative; overflow: hidden; }
+.chapter:nth-child(even) { background: var(--white); }
+.chapter:nth-child(odd) { background: var(--slate-50); }
+.chapter::before { content: ''; position: absolute; width: 600px; height: 600px; background: radial-gradient(circle, rgba(149,213,178,0.05), transparent 70%); pointer-events: none; }
+.chapter:nth-child(1)::before { top: -200px; right: -200px; }
+.chapter:nth-child(2)::before { bottom: -200px; left: -200px; }
+.chapter:nth-child(3)::before { top: -200px; left: -200px; }
+.chapter-inner { max-width: 700px; margin: 0 auto; }
+.chapter-number { font-family: var(--font-mono); font-size: clamp(40px, 6vw, 64px); font-weight: 700; color: #c0392b; letter-spacing: -2px; line-height: 1; margin-bottom: 8px; }
+.chapter-subtitle { font-size: 18px; font-weight: 600; color: #c0392b; margin-bottom: 32px; }
+.chapter-pain { font-size: 17px; line-height: 1.8; color: var(--slate-500); margin-bottom: 32px; }
+.chapter-resolution { font-size: 16px; line-height: 1.7; color: var(--green-dark); font-weight: 500; font-style: italic; padding-left: 20px; border-left: 3px solid var(--green-accent); }
+
+/* Ultimate Calculator */
+.uc-section { background: var(--slate-50); padding: 100px 48px; }
+.uc-header { text-align: center; max-width: 600px; margin: 0 auto 48px; }
+.uc-container { max-width: 720px; margin: 0 auto; }
+.uc-slider-wrapper { margin-bottom: 40px; }
+.uc-revenue-display { text-align: center; font-family: var(--font-mono); font-size: clamp(32px, 4vw, 48px); font-weight: 700; color: var(--green-deep); letter-spacing: -1px; margin-bottom: 16px; }
+.uc-slider { width: 100%; -webkit-appearance: none; appearance: none; height: 8px; border-radius: 4px; background: var(--slate-200); outline: none; }
+.uc-slider::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 28px; height: 28px; border-radius: 50%; background: var(--green-deep); cursor: pointer; box-shadow: 0 2px 8px rgba(27,67,50,0.3); }
+.uc-slider::-moz-range-thumb { width: 28px; height: 28px; border-radius: 50%; background: var(--green-deep); cursor: pointer; border: none; box-shadow: 0 2px 8px rgba(27,67,50,0.3); }
+.uc-slider-labels { display: flex; justify-content: space-between; font-size: 12px; color: var(--slate-500); margin-top: 8px; }
+.uc-card { background: var(--white); border: 1px solid var(--slate-200); border-radius: 16px; overflow: hidden; }
+.uc-col-headers { display: grid; grid-template-columns: 1.4fr repeat(3, 1fr); padding: 16px 20px 12px; border-bottom: 1px solid var(--slate-100); }
+.uc-col-headers span { font-size: 11px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; text-align: center; }
+.uc-col-headers span:first-child { text-align: left; }
+.uc-col-headers .uc-col--low { color: var(--slate-500); }
+.uc-col-headers .uc-col--mid { color: var(--green-dark); }
+.uc-col-headers .uc-col--high { color: var(--green-deep); }
+.uc-row { display: grid; grid-template-columns: 1.4fr repeat(3, 1fr); padding: 20px; border-bottom: 1px solid var(--slate-100); align-items: center; }
+.uc-row:last-child { border-bottom: none; }
+.uc-row-label a { font-size: 13px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; color: var(--green-deep); text-decoration: none; }
+.uc-row-label a:hover { text-decoration: underline; }
+.uc-row-desc { font-size: 12px; color: var(--slate-500); margin-top: 2px; }
+.uc-val { text-align: center; }
+.uc-val-year { font-family: var(--font-mono); font-size: clamp(16px, 2vw, 20px); font-weight: 700; letter-spacing: -0.5px; }
+.uc-val-month { font-size: 12px; color: var(--slate-500); margin-top: 2px; }
+.uc-val-sub { font-size: 11px; color: var(--slate-500); margin-top: 2px; }
+.uc-val--low .uc-val-year { color: var(--slate-600); }
+.uc-val--mid .uc-val-year { color: var(--green-dark); }
+.uc-val--high .uc-val-year { color: var(--green-deep); }
+.uc-row--mid-bg { background: var(--green-ghost); }
+.uc-total { display: grid; grid-template-columns: 1.4fr repeat(3, 1fr); padding: 20px; background: var(--green-deep); }
+.uc-total-label { font-size: 14px; font-weight: 700; color: rgba(255,255,255,0.7); text-transform: uppercase; letter-spacing: 0.5px; }
+.uc-total-val { text-align: center; font-family: var(--font-mono); font-size: clamp(18px, 2.2vw, 24px); font-weight: 700; color: var(--white); letter-spacing: -0.5px; }
+.uc-ebitda { display: grid; grid-template-columns: 1.4fr repeat(3, 1fr); padding: 14px 20px; background: var(--green-dark); }
+.uc-ebitda-label { font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.85); }
+.uc-ebitda-val { text-align: center; font-family: var(--font-mono); font-size: 15px; font-weight: 700; color: rgba(255,255,255,0.85); }
+.uc-bottom { text-align: center; margin-top: 32px; }
+.uc-bottom-tag { font-size: 15px; font-weight: 500; color: var(--green-dark); margin-bottom: 24px; }
+.uc-bottom-sub { font-size: 14px; color: var(--slate-500); margin-top: 12px; }
+.uc-bottom-disclaimer { font-size: 11px; color: var(--slate-500); margin-top: 16px; }
+@media (max-width: 640px) {
+  .uc-section { padding: 60px 24px; }
+  .uc-col-headers { display: none; }
+  .uc-row { grid-template-columns: 1fr; gap: 12px; padding: 20px; }
+  .uc-row-label { margin-bottom: 4px; }
+  .uc-val { display: flex; justify-content: space-between; align-items: baseline; text-align: left; padding: 4px 0; }
+  .uc-val::before { font-size: 11px; font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase; }
+  .uc-val--low::before { content: 'Conservative'; color: var(--slate-500); }
+  .uc-val--mid::before { content: 'Typical'; color: var(--green-dark); }
+  .uc-val--high::before { content: 'Aggressive'; color: var(--green-deep); }
+  .uc-val-month { display: inline; margin-left: 8px; }
+  .uc-val-sub { display: inline; margin-left: 8px; }
+  .uc-total { grid-template-columns: 1fr; gap: 8px; padding: 20px; }
+  .uc-total-val { text-align: left; display: flex; justify-content: space-between; }
+  .uc-total-val::before { font-size: 11px; font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase; color: rgba(255,255,255,0.5); align-self: center; }
+  .uc-total-val:nth-child(2)::before { content: 'Conservative'; }
+  .uc-total-val:nth-child(3)::before { content: 'Typical'; }
+  .uc-total-val:nth-child(4)::before { content: 'Aggressive'; }
+  .uc-ebitda { grid-template-columns: 1fr; gap: 4px; padding: 14px 20px; }
+  .uc-ebitda-val { text-align: left; display: flex; justify-content: space-between; }
+  .uc-ebitda-val::before { font-size: 11px; font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase; color: rgba(255,255,255,0.35); align-self: center; }
+  .uc-ebitda-val:nth-child(2)::before { content: 'Conservative'; }
+  .uc-ebitda-val:nth-child(3)::before { content: 'Typical'; }
+  .uc-ebitda-val:nth-child(4)::before { content: 'Aggressive'; }
 }
 
-/* === DARK PIVOT === */
-body.home-ledger .pivot-section {
-  background: var(--ink);
-  padding: clamp(80px, 12vw, 140px) clamp(24px, 4vw, 72px);
-  text-align: left;
-}
-.ledger-pivot-inner { max-width: 980px; margin: 0 auto; display: flex; flex-direction: column; gap: 24px; }
-body.home-ledger .pivot-content {
-  max-width: none; margin: 0;
-  display: flex; flex-direction: column; gap: 24px;
-}
-body.home-ledger .pivot-content .gutter-label { color: rgba(201,166,107,0.7); }
-body.home-ledger .pivot-content h2 {
-  color: var(--cream);
-  font-family: var(--font-display-l);
-  font-weight: 400;
-  font-size: clamp(32px, 4vw, 52px);
-  line-height: 1.06;
-  letter-spacing: -0.02em;
-  margin: 0;
-}
-body.home-ledger .pivot-content p {
-  color: rgba(244,239,230,0.78);
-  font-family: var(--font-body-l);
-  font-size: 19px;
-  line-height: 1.6;
-  margin: 0;
-  max-width: 780px;
-}
-body.home-ledger .pivot-content a {
-  color: var(--gilt);
-  text-decoration: none;
-  border-bottom: 1px solid rgba(201,166,107,0.4);
-  padding-bottom: 1px;
-  transition: background 0.15s, color 0.15s;
-}
-body.home-ledger .pivot-content a:hover {
-  background: var(--gilt);
-  color: var(--ink);
-}
-
-/* === NETWORK STRIP === */
-.ledger-network {
-  background: var(--cream-deep);
-  padding: 36px clamp(24px, 4vw, 72px);
-  border-top: 1px solid var(--rule-strong);
-  border-bottom: 1px solid var(--rule-strong);
-}
-.ledger-network-inner {
-  max-width: 980px; margin: 0 auto;
-  display: flex; flex-direction: column; gap: 10px;
-  align-items: flex-start;
-}
-.ledger-network-inner p {
-  color: var(--ink);
-  font-family: var(--font-body-l);
-  font-size: 18px;
-  line-height: 1.55;
-  margin: 0;
-}
-.ledger-network-inner .num--accent { font-size: 1.3em; font-weight: 600; }
-
-/* === CALCULATOR (TALLY MACHINE) === */
-body.home-ledger .uc-section {
-  background: var(--cream);
-  padding: clamp(80px, 12vh, 140px) clamp(24px, 4vw, 72px);
-}
-.ledger-tally-head {
-  max-width: 720px;
-  margin: 0 auto 48px;
-  display: flex; flex-direction: column; gap: 16px;
-}
-.ledger-tally-machine {
-  max-width: 980px; margin: 0 auto;
-  background: var(--cream-deep);
-  border: 1px solid var(--rule-strong);
-  position: relative;
-}
-.ledger-tally-machine::after {
-  content: '';
-  position: absolute;
-  bottom: -10px; left: 0; right: 0; height: 10px;
-  background-image: radial-gradient(circle at 6px 0, var(--cream) 4px, transparent 4.5px);
-  background-size: 16px 10px;
-  background-repeat: repeat-x;
-  pointer-events: none;
-}
-.ledger-tally-slider-wrap {
-  padding: 32px clamp(20px, 3vw, 40px) 28px;
-  border-bottom: 1px solid var(--rule);
-  display: flex; flex-direction: column; gap: 6px;
-  align-items: center; text-align: center;
-}
-.ledger-tally-slider-wrap > .gutter-label { display: block; }
-body.home-ledger .uc-revenue-display,
-.ledger-tally-revenue {
-  font-family: var(--font-mono-l);
-  font-size: clamp(36px, 5vw, 56px);
-  color: var(--ink);
-  font-variant-numeric: tabular-nums;
-  font-feature-settings: 'tnum','ss01';
-  letter-spacing: -0.025em;
-  margin: 4px 0 12px;
-  font-weight: 500;
-}
-body.home-ledger .uc-slider {
-  -webkit-appearance: none; appearance: none;
-  width: 100%; max-width: 520px;
-  height: 1px;
-  background: var(--ink) !important;
-  outline: none;
-  margin: 12px 0 8px;
-  border: none;
-}
-body.home-ledger .uc-slider::-webkit-slider-thumb {
-  -webkit-appearance: none; appearance: none;
-  width: 8px; height: 28px;
-  border-radius: 0;
-  background: var(--oxblood);
-  cursor: pointer;
-  border: none;
-  box-shadow: none !important;
-}
-body.home-ledger .uc-slider::-moz-range-thumb {
-  width: 8px; height: 28px;
-  border-radius: 0;
-  background: var(--oxblood);
-  cursor: pointer;
-  border: none;
-  box-shadow: none !important;
-}
-body.home-ledger .uc-slider-labels {
-  width: 100%; max-width: 520px;
-  display: flex; justify-content: space-between; align-items: center;
-  font-family: var(--font-mono-l); font-size: 11px;
-  color: var(--ink-mute);
-  letter-spacing: 0.05em;
-  margin-top: 8px;
-}
-body.home-ledger .uc-slider-labels .num { color: var(--ink-mute); }
-body.home-ledger .uc-card {
-  background: transparent;
-  border: none;
-  border-radius: 0;
-  overflow: visible;
-}
-body.home-ledger .uc-col-headers {
-  display: grid;
-  grid-template-columns: 1.4fr repeat(3, 1fr);
-  padding: 18px 24px 14px;
-  border-bottom: 1px solid var(--rule);
-  border-top: none;
-  gap: 16px;
-}
-body.home-ledger .uc-col-headers span {
-  font-family: var(--font-mono-l);
-  font-size: 10px;
-  font-weight: 500;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  text-align: right;
-  color: var(--ink-mute);
-}
-body.home-ledger .uc-col-headers span:first-child { text-align: left; }
-body.home-ledger .uc-col-headers .uc-col--high { color: var(--oxblood); }
-body.home-ledger .uc-row {
-  display: grid;
-  grid-template-columns: 1.4fr repeat(3, 1fr);
-  padding: 22px 24px;
-  gap: 16px;
-  border-bottom: 1px solid var(--rule);
-  align-items: center;
-  background: transparent;
-}
-body.home-ledger .uc-row:last-of-type { border-bottom: 1px solid var(--rule-strong); }
-body.home-ledger .uc-row-label a {
-  font-family: var(--font-display-l);
-  font-weight: 500;
-  font-size: 17px;
-  color: var(--ink);
-  text-decoration: none;
-  letter-spacing: -0.005em;
-  text-transform: none;
-}
-body.home-ledger .uc-row-label a:hover { color: var(--oxblood); text-decoration: underline; text-underline-offset: 4px; }
-body.home-ledger .uc-row-desc {
-  font-family: var(--font-body-l);
-  font-size: 13px;
-  color: var(--ink-mute);
-  margin-top: 4px;
-}
-body.home-ledger .uc-val { text-align: right; }
-body.home-ledger .uc-val-year {
-  font-family: var(--font-mono-l);
-  font-size: clamp(15px, 1.8vw, 18px);
-  font-weight: 500;
-  letter-spacing: -0.005em;
-  font-variant-numeric: tabular-nums;
-  font-feature-settings: 'tnum','ss01';
-}
-body.home-ledger .uc-val-month,
-body.home-ledger .uc-val-sub {
-  font-family: var(--font-mono-l);
-  font-size: 10px;
-  color: var(--ink-mute);
-  margin-top: 4px;
-  letter-spacing: 0.04em;
-}
-body.home-ledger .uc-val--low .uc-val-year { color: var(--ink-mute); }
-body.home-ledger .uc-val--mid .uc-val-year { color: var(--ink); }
-body.home-ledger .uc-val--high .uc-val-year { color: var(--oxblood); font-weight: 600; }
-body.home-ledger .uc-row--mid-bg { background: transparent !important; }
-
-body.home-ledger .uc-total {
-  display: grid;
-  grid-template-columns: 1.4fr repeat(3, 1fr);
-  padding: 24px;
-  gap: 16px;
-  background: var(--cream);
-  border-top: 3px double var(--rule-strong);
-  border-bottom: 3px double var(--rule-strong);
-}
-body.home-ledger .uc-total-label {
-  font-family: var(--font-mono-l);
-  font-size: 11px; font-weight: 600; letter-spacing: 0.18em;
-  text-transform: uppercase; color: var(--ink);
-}
-body.home-ledger .uc-total-val {
-  text-align: right;
-  font-family: var(--font-mono-l);
-  font-size: clamp(18px, 2.4vw, 24px);
-  font-weight: 600;
-  letter-spacing: -0.01em;
-  color: var(--ink);
-  font-variant-numeric: tabular-nums;
-  font-feature-settings: 'tnum','ss01';
-}
-body.home-ledger .uc-total-val:last-child { color: var(--oxblood); }
-
-body.home-ledger .uc-ebitda {
-  display: grid;
-  grid-template-columns: 1.4fr repeat(3, 1fr);
-  padding: 14px 24px;
-  gap: 16px;
-  background: transparent;
-}
-body.home-ledger .uc-ebitda-label {
-  font-family: var(--font-mono-l);
-  font-size: 10px;
-  font-weight: 500;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--ink-mute);
-}
-body.home-ledger .uc-ebitda-val {
-  text-align: right;
-  font-family: var(--font-mono-l);
-  font-size: 13px;
-  color: var(--ink-mute);
-  font-variant-numeric: tabular-nums;
-  font-feature-settings: 'tnum','ss01';
-}
-body.home-ledger .uc-ebitda-val:last-child { color: var(--oxblood); }
-
-body.home-ledger .uc-bottom {
-  text-align: center;
-  margin-top: 40px;
-  padding: 0 clamp(20px, 3vw, 40px);
-  display: flex; flex-direction: column; align-items: center; gap: 16px;
-}
-body.home-ledger .uc-bottom-tag {
-  font-family: var(--font-display-l);
-  font-style: italic;
-  font-weight: 400;
-  font-size: 19px;
-  color: var(--ink);
-  margin: 0;
-  max-width: 560px;
-}
-body.home-ledger .uc-bottom-sub {
-  font-family: var(--font-body-l);
-  font-size: 14px;
-  color: var(--ink-mute);
-  margin: 0;
-}
-body.home-ledger .uc-bottom-disclaimer {
-  font-family: var(--font-mono-l);
-  font-size: 10px; letter-spacing: 0.06em;
-  color: var(--ink-mute);
-  margin: 0;
-}
-
-@media (max-width: 720px) {
-  body.home-ledger .uc-col-headers { display: none; }
-  body.home-ledger .uc-row { grid-template-columns: 1fr; gap: 8px; padding: 22px 20px; }
-  body.home-ledger .uc-val { text-align: left; display: flex; justify-content: space-between; align-items: baseline; padding: 4px 0; }
-  body.home-ledger .uc-val::before { font-family: var(--font-mono-l); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-mute); align-self: center; font-weight: 500; }
-  body.home-ledger .uc-val--low::before { content: 'Conservative'; }
-  body.home-ledger .uc-val--mid::before { content: 'Typical'; }
-  body.home-ledger .uc-val--high::before { content: 'Aggressive'; color: var(--oxblood); }
-  body.home-ledger .uc-val-month, body.home-ledger .uc-val-sub { display: inline; margin-left: 8px; }
-  body.home-ledger .uc-total { grid-template-columns: 1fr; gap: 8px; padding: 20px; }
-  body.home-ledger .uc-total-val { text-align: left; display: flex; justify-content: space-between; align-items: baseline; }
-  body.home-ledger .uc-total-val::before { font-family: var(--font-mono-l); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-mute); align-self: center; font-weight: 500; }
-  body.home-ledger .uc-total-val:nth-child(2)::before { content: 'Conservative'; }
-  body.home-ledger .uc-total-val:nth-child(3)::before { content: 'Typical'; }
-  body.home-ledger .uc-total-val:nth-child(4)::before { content: 'Aggressive'; color: var(--oxblood); }
-  body.home-ledger .uc-ebitda { grid-template-columns: 1fr; gap: 4px; padding: 14px 20px; }
-  body.home-ledger .uc-ebitda-val { text-align: left; display: flex; justify-content: space-between; align-items: baseline; }
-  body.home-ledger .uc-ebitda-val::before { font-family: var(--font-mono-l); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-mute); align-self: center; font-weight: 500; }
-  body.home-ledger .uc-ebitda-val:nth-child(2)::before { content: 'Conservative'; }
-  body.home-ledger .uc-ebitda-val:nth-child(3)::before { content: 'Typical'; }
-  body.home-ledger .uc-ebitda-val:nth-child(4)::before { content: 'Aggressive'; color: var(--oxblood); }
-}
-
-/* === REGISTER OF RECOVERIES === */
-body.home-ledger .case-studies {
-  background: var(--cream);
-  padding: clamp(80px, 12vh, 140px) clamp(24px, 4vw, 72px) 60px;
-}
-body.home-ledger .case-studies-inner {
-  max-width: 1200px;
-  margin: 0 auto;
-}
-.ledger-register-head {
-  max-width: 720px; margin: 0 auto 40px;
-  text-align: center;
-  display: flex; flex-direction: column; gap: 12px;
-  padding: 0;
-}
-.ledger-register-head .gutter-label { display: block; }
-body.home-ledger .case-filters {
-  display: flex; justify-content: center; gap: 0;
-  margin: 0 0 24px; padding: 0;
-  border-bottom: 1px solid var(--rule);
-  flex-wrap: wrap;
-  border-radius: 0;
-}
-body.home-ledger .case-filter {
-  padding: 14px 18px;
-  border: none; border-bottom: 2px solid transparent;
-  background: transparent !important;
-  font-family: var(--font-mono-l);
-  font-size: 11px; font-weight: 500;
-  letter-spacing: 0.16em; text-transform: uppercase;
-  color: var(--ink-mute); cursor: pointer;
-  border-radius: 0;
-  transition: color 0.15s, border-color 0.15s;
-  margin-bottom: -1px;
-}
-body.home-ledger .case-filter:hover { color: var(--ink); }
-body.home-ledger .case-filter.active {
-  color: var(--oxblood) !important;
-  border-bottom-color: var(--oxblood);
-  background: transparent !important;
-}
-
-body.home-ledger .case-grid-wrap { padding: 0; position: static; }
-body.home-ledger .case-arrow { display: none !important; }
-body.home-ledger .case-grid {
-  display: flex !important;
-  flex-direction: column;
-  gap: 0;
-  overflow: visible !important;
-  padding: 0 !important;
-  scroll-snap-type: none !important;
-}
-
-body.home-ledger .case-card {
-  display: grid;
-  grid-template-columns: 110px 100px 1fr 130px;
-  gap: 24px;
-  padding: 22px 0;
-  background: transparent !important;
-  border: none;
-  border-top: 1px solid var(--rule);
-  border-radius: 0;
-  min-width: 0; max-width: none;
-  flex-shrink: 1;
-  scroll-snap-align: none;
-  align-items: center;
-  cursor: pointer;
-  transition: background 0.15s, padding 0.15s;
-  text-decoration: none;
-  color: var(--ink);
-  box-shadow: none !important;
-  transform: none !important;
-}
-body.home-ledger .case-card:hover { background: var(--cream-deep); transform: none !important; box-shadow: none !important; }
-body.home-ledger .case-card:last-child { border-bottom: 1px solid var(--rule); }
-body.home-ledger .case-card.hidden { display: none !important; }
-body.home-ledger .case-card.is-featured {
-  border-top: 1px solid var(--rule-strong);
-  background: var(--cream-deep) !important;
-  padding: 30px 16px;
-}
-
-body.home-ledger .case-tag {
-  display: inline-block;
-  background: transparent !important;
-  font-family: var(--font-mono-l);
-  font-size: 10px; font-weight: 500;
-  letter-spacing: 0.16em; text-transform: uppercase;
-  padding: 0; border-radius: 0;
-  margin: 0;
-  color: var(--ink-mute);
-}
-body.home-ledger .case-tag--ap { color: var(--ink) !important; }
-body.home-ledger .case-tag--consignment { color: var(--oxblood) !important; }
-body.home-ledger .case-tag--credit { color: var(--ink-mute) !important; }
-body.home-ledger .case-tag--ops { color: var(--ink-faint) !important; }
-
-body.home-ledger .case-amount {
-  font-family: var(--font-mono-l);
-  font-size: 17px;
-  font-weight: 500;
-  color: var(--oxblood);
-  letter-spacing: -0.005em;
-  margin: 0;
-  text-align: right;
-  font-variant-numeric: tabular-nums;
-  font-feature-settings: 'tnum','ss01';
-  white-space: nowrap;
-  align-self: center;
-}
-body.home-ledger .case-card.is-featured .case-amount { font-size: 22px; font-weight: 600; }
-
-body.home-ledger .case-card-text {
-  display: flex; flex-direction: column; gap: 2px;
-  min-width: 0;
-}
-body.home-ledger .case-headline {
-  font-family: var(--font-display-l);
-  font-weight: 500;
-  font-size: 17px;
-  line-height: 1.3;
-  color: var(--ink);
-  margin: 0;
-  letter-spacing: -0.005em;
-  display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden;
-}
-body.home-ledger .case-card.is-featured .case-headline { font-size: 21px; -webkit-line-clamp: 2; }
-
-body.home-ledger .case-summary {
-  font-family: var(--font-body-l);
-  font-size: 13px;
-  line-height: 1.4;
-  color: var(--ink-mute);
-  margin: 0;
-  display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden;
-}
-
-body.home-ledger .case-meta { display: none; }
-body.home-ledger .case-link { display: none; }
-body.home-ledger .case-card .case-speed {
-  font-family: var(--font-mono-l);
-  font-size: 11px; font-weight: 500;
-  letter-spacing: 0.1em; color: var(--ink-mute);
-  display: block;
-  align-self: center;
-}
-body.home-ledger .case-card .case-speed::before { display: none; }
-body.home-ledger .case-card.is-featured .case-speed { color: var(--oxblood); }
-
+/* Case Studies */
+.case-studies { background: var(--white); padding: 100px 0 40px; }
+.case-studies-inner { max-width: 100%; }
+.case-studies-header { text-align: center; margin-bottom: 48px; padding: 0 48px; }
+.case-studies-header h2 { font-size: clamp(28px, 3.5vw, 40px); font-weight: 700; color: var(--green-deep); letter-spacing: -1.5px; margin-bottom: 12px; }
+.case-studies-header p { font-size: 17px; color: var(--slate-500); max-width: 540px; margin: 0 auto; }
+.case-filters { display: flex; justify-content: center; gap: 8px; margin-bottom: 40px; flex-wrap: wrap; padding: 0 48px; }
+.case-filter { padding: 8px 20px; border-radius: 100px; border: 1px solid var(--slate-200); background: var(--white); font-family: var(--font-display); font-size: 14px; font-weight: 500; color: var(--slate-500); cursor: pointer; transition: all 0.2s; }
+.case-filter:hover { border-color: var(--green-accent); color: var(--green-deep); }
+.case-filter.active { background: var(--green-deep); color: var(--white); border-color: var(--green-deep); }
+.case-grid { display: flex; gap: 24px; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; padding: 0 48px 16px; scrollbar-width: none; }
+.case-grid::-webkit-scrollbar { display: none; }
+.case-card { background: var(--white); border: 1px solid var(--slate-200); border-radius: 16px; padding: 32px 28px; min-width: 340px; max-width: 340px; flex-shrink: 0; scroll-snap-align: start; transition: transform 0.3s cubic-bezier(0.22,1,0.36,1), box-shadow 0.3s, opacity 0.3s; display: flex; flex-direction: column; }
+.case-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(27,67,50,0.1); }
+.case-card.hidden { display: none; }
+.case-tag { display: inline-block; font-size: 12px; font-weight: 600; letter-spacing: 0.5px; padding: 4px 12px; border-radius: 100px; margin-bottom: 16px; }
+.case-tag--ap { background: rgba(27,67,50,0.08); color: var(--green-deep); }
+.case-tag--consignment { background: rgba(59,130,246,0.08); color: #2563eb; }
+.case-tag--credit { background: rgba(217,119,6,0.08); color: #b45309; }
+.case-tag--ops { background: rgba(124,58,237,0.08); color: #7c3aed; }
+.case-amount { font-family: var(--font-mono); font-size: clamp(28px, 3vw, 36px); font-weight: 700; color: var(--green-deep); letter-spacing: -1.5px; margin-bottom: 8px; }
+.case-headline { font-size: 17px; font-weight: 600; color: var(--slate-800); line-height: 1.4; margin-bottom: 12px; }
+.case-summary { font-size: 15px; line-height: 1.65; color: var(--slate-500); margin-bottom: 20px; }
+.case-meta { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-top: 16px; border-top: 1px solid var(--slate-100); margin-top: auto; }
+.case-speed { font-size: 13px; font-weight: 600; color: var(--green-dark); display: flex; align-items: center; gap: 6px; }
+.case-speed::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--green-accent); flex-shrink: 0; }
+.case-link { font-size: 14px; font-weight: 600; color: var(--green-deep); text-decoration: none; display: flex; align-items: center; gap: 4px; transition: gap 0.2s; }
+.case-link:hover { gap: 8px; }
+.case-grid-wrap { position: relative; }
+.case-arrow { position: absolute; top: 50%; transform: translateY(-50%); z-index: 10; width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--slate-200); background: rgba(255,255,255,0.95); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); color: var(--green-deep); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; box-shadow: 0 2px 12px rgba(27,67,50,0.1); }
+.case-arrow:hover { background: var(--green-deep); color: var(--white); border-color: var(--green-deep); }
+.case-arrow--left { left: 12px; }
+.case-arrow--right { right: 12px; }
+.case-arrow.is-hidden { opacity: 0.35; cursor: default; }
 @media (max-width: 900px) {
-  body.home-ledger .case-card {
-    grid-template-columns: 1fr 110px;
-    grid-template-areas:
-      "tag amount"
-      "headline headline"
-      "summary summary"
-      "speed speed";
-    gap: 6px 16px;
-    padding: 18px 0;
-  }
-  body.home-ledger .case-tag { grid-area: tag; align-self: center; }
-  body.home-ledger .case-amount { grid-area: amount; text-align: right; align-self: center; font-size: 17px; }
-  body.home-ledger .case-card-text { grid-area: headline / headline / summary / summary; gap: 4px; }
-  body.home-ledger .case-headline { grid-area: auto; }
-  body.home-ledger .case-summary { grid-area: auto; -webkit-line-clamp: 2; }
-  body.home-ledger .case-card .case-speed { grid-area: speed; margin-top: 4px; }
-  body.home-ledger .case-card.is-featured { padding: 22px 12px; }
-  body.home-ledger .case-card.is-featured .case-headline { font-size: 18px; -webkit-line-clamp: 3; }
-  body.home-ledger .case-card.is-featured .case-amount { font-size: 19px; }
+  .case-studies { padding: 60px 0 24px; }
+  .case-studies-header { padding: 0 24px; }
+  .case-filters { padding: 0 24px; }
+  .case-grid { padding: 0 24px 16px; gap: 16px; }
+  .case-card { min-width: 280px; max-width: 280px; }
 }
 
-.ledger-register-foot {
-  text-align: center;
-  margin-top: 32px;
-  padding-top: 24px;
-}
+/* Dark Pivot */
+.pivot-section { background: var(--green-deep); padding: 80px 48px; text-align: center; position: relative; overflow: hidden; }
+.pivot-section::before { content: ''; position: absolute; top: -200px; left: -200px; width: 500px; height: 500px; background: radial-gradient(circle, rgba(149,213,178,0.08), transparent 70%); transform: translateY(var(--parallax-y, 0)); will-change: transform; }
+.pivot-content { max-width: 700px; margin: 0 auto; position: relative; }
+.pivot-content h2 { font-size: clamp(28px, 3.5vw, 44px); font-weight: 700; color: var(--white); letter-spacing: -1.5px; margin-bottom: 20px; }
+.pivot-content p { font-size: 17px; line-height: 1.75; color: rgba(255,255,255,0.6); }
 
-/* === ROLES TABLE === */
-body.home-ledger .scope-section {
-  background: var(--cream-deep);
-  padding: clamp(80px, 12vh, 140px) clamp(24px, 4vw, 72px);
-}
-.ledger-roles-head {
-  max-width: 720px; margin: 0 auto 48px;
-  text-align: center;
-  display: flex; flex-direction: column; gap: 12px;
-}
-.ledger-roles-head .gutter-label { display: block; }
-.ledger-roles-table { max-width: 1080px; margin: 0 auto; }
-.ledger-roles-headrow {
-  display: grid;
-  grid-template-columns: 1fr 140px 140px 140px;
-  gap: 24px;
-  padding: 16px 0;
-  align-items: center;
-  border-top: 1px solid var(--rule-strong);
-  border-bottom: 1px solid var(--rule-strong);
-}
-.ledger-roles-headrow .gutter-label { text-align: center; }
-.ledger-roles-headrow .gutter-label:first-child { text-align: left; }
-.ledger-roles-row {
-  display: grid;
-  grid-template-columns: 1fr 140px 140px 140px;
-  gap: 24px;
-  padding: 16px 0;
-  align-items: center;
-  border-top: 1px solid var(--rule);
-}
-.ledger-roles-row:last-child { border-bottom: 1px solid var(--rule-strong); }
-.ledger-roles-label {
-  font-family: var(--font-display-l);
-  font-weight: 400;
-  font-size: 17px;
-  color: var(--ink);
-  letter-spacing: -0.005em;
-}
-.ledger-roles-mark {
-  font-family: var(--font-mono-l);
-  font-size: 18px;
-  text-align: center;
-  letter-spacing: 0;
-  color: var(--ink-faint);
-  font-weight: 500;
-  font-variant-numeric: tabular-nums;
-  font-feature-settings: 'tnum','ss01';
-}
-.ledger-roles-mark.is-yes { color: var(--oxblood); font-weight: 600; }
-.ledger-roles-foot {
-  max-width: 720px;
-  margin: 32px auto 0;
-  text-align: center;
-}
-@media (max-width: 760px) {
-  .ledger-roles-headrow { display: none; }
-  .ledger-roles-row {
-    grid-template-columns: 1fr;
-    gap: 8px;
-    padding: 16px 0;
-  }
-  .ledger-roles-mark {
-    text-align: left;
-    display: flex;
-    justify-content: space-between;
-    font-size: 15px;
-    padding: 4px 0;
-  }
-  .ledger-roles-mark::before {
-    font-family: var(--font-mono-l);
-    font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase;
-    color: var(--ink-mute); font-weight: 500;
-    align-self: center;
-  }
-  .ledger-roles-mark.col-shelfspace::before { content: 'ShelfSpace'; }
-  .ledger-roles-mark.col-buyer::before { content: 'Buyer'; }
-  .ledger-roles-mark.col-bookkeeper::before { content: 'Bookkeeper'; }
-}
+/* Proof + CTA */
+.proof-cta { background: var(--white); padding: 40px 48px 100px; text-align: center; }
+.proof-cta-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; max-width: 700px; margin: 0 auto 16px; }
+.proof-cta-stat-num { font-family: var(--font-mono); font-size: clamp(24px, 3vw, 32px); font-weight: 700; color: var(--green-deep); letter-spacing: -1px; margin-bottom: 4px; }
+.proof-cta-stat-desc { font-size: 13px; color: var(--slate-500); }
+.proof-cta-note { font-size: 13px; color: var(--slate-500); font-style: italic; margin-bottom: 48px; }
+.proof-cta-card { max-width: 520px; margin: 0 auto; padding: 48px 40px; background: var(--green-ghost); border: 1px solid rgba(149,213,178,0.3); border-radius: 20px; }
+.proof-cta-card h3 { font-size: 22px; font-weight: 700; color: var(--green-deep); margin-bottom: 12px; letter-spacing: -0.5px; }
+.proof-cta-card > p { font-size: 15px; color: var(--slate-600); line-height: 1.6; margin-bottom: 24px; }
+.proof-cta-founder { display: flex; align-items: center; gap: 12px; justify-content: center; margin-top: 24px; font-size: 14px; color: var(--slate-600); }
+.proof-cta-risk { font-size: 13px; color: var(--slate-600); margin-top: 16px; }
 
-/* === TRUST PANELS === */
-.ledger-trust {
-  background: var(--cream);
-  padding: clamp(80px, 12vh, 140px) clamp(24px, 4vw, 72px);
-}
-.ledger-trust-head {
-  max-width: 720px; margin: 0 auto 48px;
-  text-align: center;
-  display: flex; flex-direction: column; gap: 12px;
-}
-.ledger-trust-head .gutter-label { display: block; }
-.ledger-trust-grid {
-  max-width: 1100px; margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 48px;
-}
-.ledger-trust-panel {
-  padding: 40px 0;
-  border-top: 1px solid var(--rule-strong);
-  border-bottom: 1px solid var(--rule-strong);
-  display: flex; flex-direction: column; gap: 16px;
-}
-.ledger-trust-panel .gutter-label { display: block; }
-.ledger-trust-panel .ledger-link { align-self: flex-start; margin-top: 8px; }
-.ledger-trust-seal {
-  margin: 4px 0 12px;
-  display: flex; align-items: center; gap: 16px;
-}
-.ledger-trust-seal-meta {
-  font-family: var(--font-mono-l);
-  font-size: 11px;
-  letter-spacing: 0.16em;
-  color: var(--ink-mute);
-  text-transform: uppercase;
-}
-.ledger-trust-list {
-  list-style: none; padding: 0; margin: 8px 0 0;
-  display: flex; flex-direction: column; gap: 0;
-}
-.ledger-trust-list li {
-  padding: 14px 0;
-  border-top: 1px solid var(--rule);
-  font-family: var(--font-body-l);
-  font-size: 14px;
-  color: var(--ink);
-  display: flex; align-items: center; gap: 12px;
-  font-weight: 500;
-}
-.ledger-trust-list li:last-child { border-bottom: 1px solid var(--rule); }
-.ledger-trust-list li .num--accent { font-size: 16px; font-weight: 600; }
-.ledger-trust-emphasis {
-  color: var(--oxblood) !important;
-  font-weight: 500;
-  font-style: italic;
-  font-family: var(--font-display-l);
-}
-@media (max-width: 820px) {
-  .ledger-trust-grid { grid-template-columns: 1fr; gap: 32px; }
-}
+/* FAQ */
+.faq-section { background: var(--slate-50); padding: 80px 48px; }
+.faq-header { text-align: center; max-width: 600px; margin: 0 auto 48px; }
+.faq-list { max-width: 680px; margin: 0 auto; }
+.faq-list details { border-bottom: 1px solid var(--slate-200); }
+.faq-list details:first-child { border-top: 1px solid var(--slate-200); }
+.faq-list summary { padding: 20px 0; font-size: 17px; font-weight: 600; color: var(--green-deep); cursor: pointer; list-style: none; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.faq-list summary::-webkit-details-marker { display: none; }
+.faq-list summary::after { content: '+'; font-size: 22px; font-weight: 400; color: var(--slate-500); flex-shrink: 0; }
+.faq-list details[open] summary::after { content: '\2212'; }
+.faq-list details p { padding: 0 0 20px; margin: 0; font-size: 15px; line-height: 1.7; color: var(--slate-500); }
 
-/* === PROOF + CTA === */
-body.home-ledger .proof-cta {
-  background: var(--cream);
-  padding: clamp(60px, 8vh, 100px) clamp(24px, 4vw, 72px) clamp(80px, 12vh, 120px);
-  text-align: center;
-}
-body.home-ledger .proof-cta-stats {
-  display: flex !important;
-  flex-direction: column;
-  max-width: 640px;
-  margin: 0 auto 16px;
-  border-top: 3px double var(--rule-strong);
-  border-bottom: 3px double var(--rule-strong);
-  gap: 0;
-  grid-template-columns: none;
-}
-body.home-ledger .proof-cta-stat {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 24px;
-  align-items: baseline;
-  padding: 20px 0;
-  border-top: 1px solid var(--rule);
-  text-align: left;
-}
-body.home-ledger .proof-cta-stat:first-child { border-top: none; }
-body.home-ledger .proof-cta-stat-num {
-  font-family: var(--font-mono-l);
-  font-size: clamp(20px, 2.6vw, 30px);
-  font-weight: 600;
-  color: var(--oxblood);
-  letter-spacing: -0.01em;
-  font-variant-numeric: tabular-nums;
-  font-feature-settings: 'tnum','ss01';
-  margin: 0;
-  text-align: right;
-}
-body.home-ledger .proof-cta-stat-desc {
-  font-family: var(--font-mono-l);
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--ink-mute);
-}
-body.home-ledger .proof-cta-note {
-  font-family: var(--font-display-l);
-  font-style: italic;
-  font-size: 15px;
-  color: var(--ink-mute);
-  max-width: 640px;
-  margin: 16px auto 56px;
-}
-body.home-ledger .proof-cta-card {
-  max-width: 720px;
-  margin: 0 auto;
-  background: var(--cream-deep);
-  border: none;
-  border-top: 1px solid var(--rule-strong);
-  border-bottom: 1px solid var(--rule-strong);
-  border-radius: 0;
-  padding: clamp(40px, 6vw, 64px) clamp(28px, 5vw, 64px);
-  text-align: left;
-  display: flex; flex-direction: column; gap: 20px;
-  box-shadow: none !important;
-}
-body.home-ledger .proof-cta-card .gutter-label { display: block; margin-bottom: 4px; }
-body.home-ledger .proof-cta-card h3 {
-  font-family: var(--font-display-l);
-  font-weight: 400;
-  font-size: clamp(28px, 3.4vw, 40px);
-  line-height: 1.08;
-  letter-spacing: -0.02em;
-  color: var(--ink);
-  margin: 0;
-}
-body.home-ledger .proof-cta-card > p {
-  font-family: var(--font-body-l);
-  font-size: 17px;
-  line-height: 1.6;
-  color: var(--ink);
-  margin: 0;
-}
-body.home-ledger .proof-cta-card .btn-primary,
-body.home-ledger .proof-cta-card .btn-ledger { align-self: flex-start; margin: 8px 0; }
-body.home-ledger .proof-cta-founder {
-  display: flex; align-items: center; gap: 14px;
-  margin-top: 12px;
-  font-family: var(--font-body-l);
-  font-size: 14px;
-  color: var(--ink-mute);
-  justify-content: flex-start;
-}
-body.home-ledger .proof-cta-founder img {
-  width: 56px !important; height: 70px !important;
-  border-radius: 0 !important;
-  object-fit: cover;
-  filter: sepia(0.18) contrast(1.04);
-  border: 1px solid var(--rule-strong);
-}
-body.home-ledger .proof-cta-risk {
-  font-family: var(--font-mono-l);
-  font-size: 11px;
-  letter-spacing: 0.06em;
-  color: var(--ink-mute);
-  margin: 0;
-}
+/* POS Ticker */
+@keyframes ticker-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.pos-ticker { padding: 48px 0; background: var(--white); overflow: hidden; }
+.pos-ticker-label { text-align: center; font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--slate-500); margin-bottom: 28px; }
+.pos-ticker-track { display: flex; width: max-content; animation: ticker-scroll 30s linear infinite; }
+.pos-ticker-track:hover { animation-play-state: paused; }
+.pos-ticker-logo { height: 120px; padding: 0 48px; opacity: 0.45; filter: grayscale(100%); transition: opacity 0.3s, filter 0.3s; }
+.pos-ticker-logo:hover { opacity: 0.9; filter: grayscale(0%); }
 
-/* === FAQ === */
-body.home-ledger .faq-section {
-  background: var(--cream);
-  padding: clamp(80px, 12vh, 140px) clamp(24px, 4vw, 72px);
-  border-top: 1px solid var(--rule);
-}
-body.home-ledger .faq-header {
-  max-width: 720px; margin: 0 auto 48px;
-  text-align: center;
-  display: flex; flex-direction: column; gap: 16px;
-}
-body.home-ledger .faq-header .section-label {
-  color: var(--ink-mute);
-  font-family: var(--font-mono-l);
-  font-size: 11px;
-  letter-spacing: 0.18em;
-  margin: 0;
-}
-body.home-ledger .faq-header .section-label::before { display: none; }
-body.home-ledger .faq-header .section-title {
-  font-family: var(--font-display-l);
-  font-weight: 400;
-  font-size: clamp(32px, 4vw, 50px);
-  color: var(--ink);
-  letter-spacing: -0.02em;
-  line-height: 1.06;
-  margin: 0;
-}
-body.home-ledger .faq-list { max-width: 800px; margin: 0 auto; }
-body.home-ledger .faq-list details {
-  border-bottom: 1px solid var(--rule);
-}
-body.home-ledger .faq-list details:first-child {
-  border-top: 1px solid var(--rule-strong);
-}
-body.home-ledger .faq-list details:last-child {
-  border-bottom: 1px solid var(--rule-strong);
-}
-body.home-ledger .faq-list summary {
-  padding: 24px 0;
-  font-family: var(--font-display-l);
-  font-weight: 400;
-  font-size: clamp(20px, 2.2vw, 24px);
-  color: var(--ink);
-  letter-spacing: -0.01em;
-  list-style: none;
-  cursor: pointer;
-  display: flex; align-items: center; justify-content: space-between; gap: 16px;
-}
-body.home-ledger .faq-list summary::after {
-  content: '§+';
-  font-family: var(--font-mono-l);
-  font-size: 13px;
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  color: var(--ink-mute);
-  flex-shrink: 0;
-}
-body.home-ledger .faq-list details[open] summary::after { content: '§−'; color: var(--oxblood); }
-body.home-ledger .faq-list details p {
-  padding: 0 0 24px;
-  margin: 0;
-  font-family: var(--font-body-l);
-  font-size: 16px;
-  line-height: 1.7;
-  color: var(--ink-mute);
-  max-width: 70ch;
-}
-body.home-ledger .faq-list details p strong { color: var(--ink); font-weight: 600; }
+/* Footer 5-col */
+.footer-top { grid-template-columns: 2fr 1fr 1fr 1fr 1fr; }
 
-/* === POS STRIP === */
-body.home-ledger .pos-ticker {
-  background: var(--ink);
-  padding: 56px 0;
-  overflow: hidden;
+/* Responsive */
+@media (max-width: 900px) {
+  .hero { padding: 110px 24px 40px; overflow: visible; min-height: auto; }
+  .hero-grid-lines { width: 100%; }
+  .hero-split { flex-direction: column; gap: 24px; }
+  .hero-content { text-align: center; }
+  .hero h1 { margin-bottom: 16px; }
+  .hero-actions { flex-direction: column; justify-content: center; }
+  .hero-trust { justify-content: center; }
+  .hero-demo { max-width: 100%; }
+  .hero-demo-screen { height: 280px; }
+  .hero-demo-slide { padding: 14px 20px !important; }
+  .demo-slide-title { margin-bottom: 12px !important; }
+  .demo-row { padding: 4px 0; font-size: 13px; }
+  .chapter { padding: 60px 24px; }
+  .uc-section { padding: 60px 24px; }
+  .pivot-section { padding: 60px 24px; }
+  .proof-cta { padding: 24px 24px 60px; }
+  .proof-cta-stats { grid-template-columns: 1fr; gap: 20px; }
+  .proof-cta-card { padding: 32px 24px; }
+  .faq-section { padding: 60px 24px; }
+  .footer-top { grid-template-columns: 1fr 1fr; }
+  .pos-ticker-logo { height: 72px; padding: 0 32px; }
 }
-body.home-ledger .pos-ticker-label,
-body.home-ledger .pos-ticker .gutter-label {
-  display: block;
-  text-align: center;
-  margin-bottom: 36px;
-  color: rgba(244,239,230,0.5) !important;
-  letter-spacing: 0.22em;
-  font-family: var(--font-mono-l);
-  font-size: 11px;
-  font-weight: 500;
-  text-transform: uppercase;
+@media (max-width: 600px) {
+  .footer-top { grid-template-columns: 1fr; }
+  .pos-ticker-logo { height: 48px; padding: 0 24px; }
 }
-body.home-ledger .pos-ticker-track {
-  display: flex;
-  width: max-content;
-  animation: ticker-scroll 30s linear infinite;
-}
-body.home-ledger .pos-ticker-track:hover { animation-play-state: paused; }
-body.home-ledger .pos-ticker-logo {
-  filter: brightness(0) invert(1);
-  opacity: 0.55;
-  height: 56px;
-  padding: 0 56px;
-  transition: opacity 0.2s;
-  flex-shrink: 0;
-}
-body.home-ledger .pos-ticker-logo:hover { opacity: 1; }
-@media (max-width: 760px) {
-  body.home-ledger .pos-ticker-logo { height: 36px; padding: 0 32px; }
-}
-
-/* === FOOTER ADAPTER === */
-body.home-ledger footer {
-  background: var(--ink);
-  padding: 80px clamp(24px, 4vw, 72px) 40px;
-}
-body.home-ledger .footer-brand p {
-  font-family: var(--font-display-l);
-  font-style: italic;
-  font-weight: 400;
-  font-size: 17px;
-  color: rgba(244,239,230,0.7);
-  letter-spacing: -0.01em;
-  max-width: 320px;
-  line-height: 1.4;
-}
-body.home-ledger .footer-brand .nav-logo { color: var(--cream); }
-body.home-ledger .footer-brand .nav-logo-icon {
-  background: rgba(244,239,230,0.08);
-  border: 1px solid rgba(244,239,230,0.15);
-  border-radius: 4px;
-}
-body.home-ledger .footer-col h3 {
-  font-family: var(--font-mono-l);
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.18em;
-  color: rgba(244,239,230,0.45);
-}
-body.home-ledger .footer-col a {
-  font-family: var(--font-body-l);
-  color: rgba(244,239,230,0.7);
-}
-body.home-ledger .footer-col a:hover { color: var(--gilt); }
-body.home-ledger .footer-bottom {
-  border-top: 1px solid rgba(244,239,230,0.08);
-}
-body.home-ledger .footer-bottom p,
-body.home-ledger .footer-bottom-links a {
-  font-family: var(--font-mono-l);
-  font-size: 11px;
-  letter-spacing: 0.06em;
-  color: rgba(244,239,230,0.45);
-}
-body.home-ledger .footer-bottom-links a:hover { color: var(--cream); }
-body.home-ledger .footer-colophon {
-  max-width: 1100px;
-  margin: 32px auto 16px;
-  text-align: center;
-}
-body.home-ledger .footer-colophon p {
-  font-family: var(--font-mono-l);
-  font-size: 10px;
-  letter-spacing: 0.14em;
-  color: rgba(244,239,230,0.35);
-  margin: 0;
-  text-transform: uppercase;
-}
-
-/* === REDUCED MOTION === */
 @media (prefers-reduced-motion: reduce) {
-  body.home-ledger .reveal { opacity: 1; transform: none; transition: none; }
-  body.home-ledger .pos-ticker-track { animation: none !important; }
-  body.home-ledger .scope-pill-dot { animation: none; }
+  .reveal, .hero h1, .hero-actions, .hero-founder-credit, .hero-trust,
+  .hero-bg-gradient, .hero-bg-gradient-2, .hero-demo { animation: none; opacity: 1; transform: none; transition: none; }
+  .pos-ticker-track { animation: none; }
+  .hero-demo-slide { animation: none !important; opacity: 0 !important; }
+  .hero-demo-slide:nth-child(2) { opacity: 1 !important; }
 }
 </style>
-<noscript><style>.reveal{opacity:1;transform:none;transition:none;animation:none;}</style></noscript>
+<noscript><style>.reveal,.hero h1,.hero-actions,.hero-founder-credit,.hero-trust,.hero-demo{opacity:1;transform:none;transition:none;animation:none;}.hero-demo-slide{animation:none!important;opacity:0!important;}.hero-demo-slide:nth-child(2){opacity:1!important;}</style></noscript>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -1413,7 +373,7 @@ o.src="https://assets.apollo.io/micro/website-tracker/tracker.iife.js?nocache="+
 o.onload=function(){window.trackingFunctions.onLoad({appId:"69c141b32234890011a43849"})},
 document.head.appendChild(o)}initApollo();</script>
 </head>
-<body class="home-ledger">
+<body>
 
 <!-- NAV -->
 <nav id="nav">
@@ -1432,144 +392,177 @@ document.head.appendChild(o)}initApollo();</script>
   <div class="nav-hamburger" onclick="document.querySelector('.nav-links').classList.toggle('mobile-open'); event.stopPropagation();"><span></span><span></span><span></span></div>
 </nav>
 
-<!-- § 01 — HERO -->
+<!-- SECTION 1: HERO -->
 <section class="hero">
   <div class="hero-bg">
     <div class="hero-grid-lines"></div>
+    <div class="hero-parallax-layer" data-speed="0.3">
+      <div class="hero-bg-gradient"></div>
+    </div>
+    <div class="hero-parallax-layer" data-speed="0.15">
+      <div class="hero-bg-gradient-2"></div>
+    </div>
   </div>
-  <div class="ledger-hero-grid">
-    <div class="ledger-hero-text hero-content">
-      <div class="gutter-label rule">Vol. I — Issue 01 · Mass.</div>
-      <h1 class="h-xl">The AP team for cannabis dispensaries.</h1>
-      <p class="body-lede">We run accounts payable end-to-end — invoices verified, vendors paid on the right terms, credits recovered monthly. So your buyer and bookkeeper can focus on real work.</p>
-      <p class="founder-credit">Built by a 10-year cannabis operator.</p>
+  <div class="hero-split">
+    <div class="hero-content">
+      <div class="section-label" style="margin-bottom:16px;">The AP Team for Cannabis Dispensaries</div>
+      <h1>We found <span style="color:var(--green-mid)">$500,000</span> at a two-store dispensary chain.</h1>
+      <p style="font-size:17px;color:var(--slate-600);line-height:1.5;margin-bottom:20px;max-width:540px;">We run accounts payable end-to-end — invoices verified, vendors paid on the right terms, credits recovered monthly. So your buyer and bookkeeper can focus on real work.</p>
+      <p style="font-size:14px;color:var(--slate-500);margin-bottom:28px;">Built by a 10-year cannabis operator.</p>
       <div class="hero-actions">
-        <a href="/contact" class="btn-ledger">Get my free AP evaluation →</a>
+        <a href="/contact" class="btn-primary">
+          Get My Free AP Evaluation
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
       </div>
-      <div class="hero-trust rule">
+      <div class="hero-trust">
         <img src="/metrc-logo.png" alt="METRC">
-        <span class="gutter-label">Certified Metrc third-party vendor</span>
+        <span>Certified METRC Third-Party Vendor</span>
       </div>
     </div>
-    <aside class="ledger-hero-figure">
-      <div class="gutter-label">Recovered, single chain · 90 days</div>
-      <div class="h-xxl num num--accent" id="ledger-hero-figure" data-target="500000">$0</div>
-      <div class="rule"></div>
-      <div class="gutter-label ledger-hero-dateline">Mass. · 2-store retailer · audit-confirmed</div>
-    </aside>
+    <div class="hero-demo">
+      <div class="hero-demo-frame">
+        <div class="hero-demo-titlebar">
+          <div class="hero-demo-dot hero-demo-dot--r"></div>
+          <div class="hero-demo-dot hero-demo-dot--y"></div>
+          <div class="hero-demo-dot hero-demo-dot--g"></div>
+          <span>shelfspace AP</span>
+        </div>
+        <div class="hero-demo-screen">
+          <!-- Slide 1: Connected to Metrc -->
+          <div class="hero-demo-slide" style="justify-content:center;padding:28px 32px;">
+            <div class="demo-slide-title demo-slide-title--green">Connected to Metrc<span class="demo-dots"></span></div>
+            <div style="display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:24px;">
+              <img src="/metrc-logo.png" alt="Metrc" style="height:22px;opacity:0.7;">
+              <span style="font-family:var(--font-mono);font-size:12px;color:var(--green-dark);font-weight:600;">● Live sync</span>
+            </div>
+            <div class="demo-row"><span class="demo-row-label">Active SKUs</span><span class="demo-row-value">47</span></div>
+            <div class="demo-row"><span class="demo-row-label">Vendors</span><span class="demo-row-value">12</span></div>
+            <div class="demo-row"><span class="demo-row-label">On shelves</span><span class="demo-row-value">$312,400</span></div>
+            <hr class="demo-divider">
+            <div class="demo-row"><span class="demo-row-label">Open invoices</span><span class="demo-row-value">8</span></div>
+            <div class="demo-row"><span class="demo-row-label">Pending credits</span><span class="demo-row-value">3</span></div>
+          </div>
+          <!-- Slide 2: Discrepancies found -->
+          <div class="hero-demo-slide" style="justify-content:center;padding:28px 32px;">
+            <div class="demo-slide-title demo-slide-title--red">Mismatches Surfaced<span class="demo-dots"></span></div>
+            <div class="demo-row"><span class="demo-row-label">Invoice #4821</span><span class="demo-row-value">$4,280</span></div>
+            <div class="demo-row"><span class="demo-row-label">Metrc verified</span><span class="demo-row-value">$3,853</span></div>
+            <hr class="demo-divider">
+            <div class="demo-row"><span class="demo-row-label">Overpaid</span><span class="demo-row-value demo-row-value--red">$427</span></div>
+            <div class="demo-row"><span class="demo-row-label">Expired product</span><span class="demo-row-value demo-row-value--red">$1,847</span></div>
+            <div class="demo-row"><span class="demo-row-label">Credit filed</span><span style="font-family:var(--font-mono);font-size:14px;font-weight:600;color:var(--green-dark);">Sent</span></div>
+          </div>
+          <!-- Slide 3: Money recovered -->
+          <div class="hero-demo-slide" style="justify-content:center;padding:28px 32px;">
+            <div class="demo-slide-title demo-slide-title--green">Money Recovered<span class="demo-dots"></span></div>
+            <div class="demo-row"><span class="demo-row-label">Invoice savings</span><span class="demo-row-value">$427</span></div>
+            <div class="demo-row"><span class="demo-row-label">Credits recovered</span><span class="demo-row-value">$1,847</span></div>
+            <div class="demo-row"><span class="demo-row-label">Consignment freed</span><span class="demo-row-value">$8,200</span></div>
+            <hr class="demo-divider">
+            <div class="demo-row demo-total"><span class="demo-row-label">Total found</span><span class="demo-row-value">$10,474</span></div>
+          </div>
+        </div>
+        <div class="hero-demo-caption">
+          <span class="hero-demo-caption-text">Connect → Reconcile → Recover</span>
+        </div>
+      </div>
+    </div>
   </div>
   <div class="nav-progress"></div>
 </section>
 
-<!-- FOUNDER STRIP — editorial byline -->
+<!-- SECTION 1.5: FOUNDER STRIP -->
 <section class="founder-strip" id="founder">
   <div class="founder-strip-inner reveal">
-    <div class="ledger-byline-figure">
-      <img src="/chris-mitchem.jpg" alt="Chris Mitchem, ShelfSpace founder" class="founder-strip-photo" width="200" height="250" loading="eager">
-      <div class="gutter-label">Mass. — Est. 2024</div>
-    </div>
-    <div class="ledger-byline-text">
-      <div class="gutter-label rule">From the desk of —</div>
-      <p class="ledger-byline-quote">"I've been a cannabis operator since 2015 — cultivation, manufacturing, retail. ShelfSpace is the AP team I always wished I had."</p>
-      <div class="ledger-byline-signature">— Chris</div>
-      <div class="ledger-byline-meta">
-        <strong>Chris Mitchem</strong> · Founder &amp; CEO · Massachusetts
-        <a href="https://www.linkedin.com/in/chris-mitchem-mba/" target="_blank" rel="noopener" aria-label="Chris Mitchem on LinkedIn"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
-        <span>·</span>
-        <a href="/about" class="ledger-link">More about Chris →</a>
+    <img src="/chris-mitchem.jpg" alt="Chris Mitchem, ShelfSpace founder" class="founder-strip-photo" width="96" height="96" loading="eager">
+    <div class="founder-strip-text">
+      <div class="founder-strip-eyebrow">From the founder</div>
+      <p class="founder-strip-quote">I've been a cannabis operator since 2015 — cultivation, manufacturing, retail. ShelfSpace is the AP team I always wished I had.</p>
+      <div class="founder-strip-meta">
+        <span><strong style="color:var(--slate-800);font-weight:600;">Chris Mitchem</strong> · Founder &amp; CEO · Massachusetts</span>
+        <a href="https://www.linkedin.com/in/chris-mitchem-mba/" target="_blank" rel="noopener" class="founder-strip-li" aria-label="Chris Mitchem on LinkedIn"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
       </div>
+      <a href="/about" class="founder-strip-link">More about Chris <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
     </div>
   </div>
 </section>
 
-<!-- § 02 — METHOD (4 pillars as one ledger statement) -->
-<section class="ledger-method">
-  <div class="ledger-method-inner">
-    <header class="ledger-method-head reveal">
-      <div class="gutter-label">§ 02 — Method</div>
-      <h2 class="h-l">Where the money comes from.</h2>
-      <p class="body-default">Four ledgers we keep, every month, for every store we serve.</p>
-    </header>
-    <div class="ledger-method-table">
-      <div class="ledger-method-headrow">
-        <span class="gutter-label">Line</span>
-        <span class="gutter-label">What we do</span>
-        <span class="gutter-label" style="text-align:right">Annual recovery</span>
-      </div>
-      <article class="ledger-method-row reveal">
-        <div class="ledger-method-num num">01</div>
-        <div class="ledger-method-body">
-          <h3 class="h-m">We don't overpay.</h3>
-          <p class="body-default">Invoices arrived from forty vendors a month. Receiving counts lived on a clipboard. Short deliveries quietly cleared. One person spent 15 hours a week matching invoices, writing checks, and fielding vendor calls.</p>
-          <p class="body-default ledger-method-resolution">We took over. Three-way matching on every invoice — invoice ↔ delivery ↔ PO — before any payment goes out. QuickBooks stays in sync. Vendor emails go to us, not them. <a href="/accounts-payable" class="ledger-link">See how managed AP works →</a></p>
-        </div>
-        <div class="ledger-method-amount">$45,000<span class="ledger-method-amount-unit">/yr</span></div>
-      </article>
-      <article class="ledger-method-row reveal">
-        <div class="ledger-method-num num">02</div>
-        <div class="ledger-method-body">
-          <h3 class="h-m">We pay on the right terms.</h3>
-          <p class="body-default">Every product on their shelves was bought and paid for. Half of it sat there for months. Some expired. All of it was cash they couldn't use for payroll, expansion, or marketing.</p>
-          <p class="body-default ledger-method-resolution">We pay every vendor on the right terms — COD, Net, or consignment, configurable per vendor. For this retailer, we transitioned the right vendors to consignment. Now those vendors own the product until it sells. Cash went back in the bank. <a href="/consignment" class="ledger-link">See how consignment works →</a></p>
-        </div>
-        <div class="ledger-method-amount">$250,000</div>
-      </article>
-      <article class="ledger-method-row reveal">
-        <div class="ledger-method-num num">03</div>
-        <div class="ledger-method-body">
-          <h3 class="h-m">We recover credits.</h3>
-          <p class="body-default">Returns nobody filed. Expired product nobody credited. Co-marketing dollars and shared promo costs committed in vendor agreements but never invoiced back. Four to six percent of revenue — just gone.</p>
-          <p class="body-default ledger-method-resolution">We pulled their data, built documented credit memos against the agreement terms both sides already signed, sent them to vendors with line-item Metrc backup, and got cleaner approvals because the math was auditable. Money that was always theirs — back in their account. <a href="/credit-recovery" class="ledger-link">See how credit recovery works →</a></p>
-        </div>
-        <div class="ledger-method-amount">$200,000<span class="ledger-method-amount-unit">/yr</span></div>
-      </article>
-      <article class="ledger-method-row reveal">
-        <div class="ledger-method-num num">04</div>
-        <div class="ledger-method-body">
-          <h3 class="h-m">We own the inbox.</h3>
-          <p class="body-default">"When am I getting paid?" "Why was my invoice short?" "Did you receive my credit memo?" "When does the next settlement run?" Forty of those a week. Each one a five-minute interruption. None of them the work you're actually trying to do — and the relationships still suffered because the answers came late.</p>
-          <p class="body-default ledger-method-resolution">We took over the inbox. Every vendor email about payments, balances, credits, and settlements comes to us — answered with live Metrc and settlement data, in the same tone you'd use, without you ever seeing it. The five percent that genuinely need a human decision come to your desk with the work already done. <a href="/accounts-payable#vendor-communications" class="ledger-link">See how vendor communications works →</a></p>
-        </div>
-        <div class="ledger-method-amount ledger-method-amount--small">40 emails<span class="ledger-method-amount-unit">/wk</span></div>
-      </article>
-    </div>
+<!-- SECTION 2: THREE CHAPTERS -->
+
+<!-- CHAPTER 1: WE DON'T OVERPAY -->
+<section class="chapter">
+  <div class="chapter-inner">
+    <div class="reveal" style="font-family:var(--font-mono);font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--slate-500);margin-bottom:12px;">We don't overpay</div>
+    <div class="chapter-number reveal">$45,000/year</div>
+    <div class="chapter-subtitle reveal">lost to invoice/delivery mismatches nobody had time to reconcile.</div>
+    <p class="chapter-pain reveal">Invoices arrived from forty vendors a month. Receiving counts lived on a clipboard. Short deliveries quietly cleared. One person spent 15 hours a week matching invoices, writing checks, and fielding vendor calls.</p>
+    <div class="chapter-resolution reveal">We took over. Three-way matching on every invoice — invoice ↔ delivery ↔ PO — before any payment goes out. QuickBooks stays in sync. Vendor emails go to us, not them. <a href="/accounts-payable" style="color:var(--green-deep);font-weight:600;">See how managed AP works →</a></div>
   </div>
 </section>
 
-<!-- § 03 — DARK PIVOT -->
+<!-- CHAPTER 2: WE PAY ON THE RIGHT TERMS -->
+<section class="chapter">
+  <div class="chapter-inner">
+    <div class="reveal" style="font-family:var(--font-mono);font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--slate-500);margin-bottom:12px;">We pay on the right terms</div>
+    <div class="chapter-number reveal">$250,000</div>
+    <div class="chapter-subtitle reveal">trapped in inventory they paid for upfront.</div>
+    <p class="chapter-pain reveal">Every product on their shelves was bought and paid for. Half of it sat there for months. Some expired. All of it was cash they couldn't use for payroll, expansion, or marketing.</p>
+    <div class="chapter-resolution reveal">We pay every vendor on the right terms — COD, Net, or consignment, configurable per vendor. For this retailer, we transitioned the right vendors to consignment. Now those vendors own the product until it sells. Cash went back in the bank. <a href="/consignment" style="color:var(--green-deep);font-weight:600;">See how consignment works →</a></div>
+  </div>
+</section>
+
+<!-- CHAPTER 3: WE RECOVER CREDITS -->
+<section class="chapter">
+  <div class="chapter-inner">
+    <div class="reveal" style="font-family:var(--font-mono);font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--slate-500);margin-bottom:12px;">We recover credits</div>
+    <div class="chapter-number reveal">$200,000/year</div>
+    <div class="chapter-subtitle reveal">in vendor credits nobody was tracking.</div>
+    <p class="chapter-pain reveal">Returns nobody filed. Expired product nobody credited. Co-marketing dollars and shared promo costs committed in vendor agreements but never invoiced back. Four to six percent of revenue — just gone.</p>
+    <div class="chapter-resolution reveal">We pulled their data, built documented credit memos against the agreement terms both sides already signed, sent them to vendors with line-item Metrc backup, and got cleaner approvals because the math was auditable. Money that was always theirs — back in their account. <a href="/credit-recovery" style="color:var(--green-deep);font-weight:600;">See how credit recovery works →</a></div>
+  </div>
+</section>
+
+<!-- CHAPTER 4: WE OWN THE INBOX -->
+<section class="chapter">
+  <div class="chapter-inner">
+    <div class="reveal" style="font-family:var(--font-mono);font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--slate-500);margin-bottom:12px;">We own the inbox</div>
+    <div class="chapter-number reveal">40 emails/week</div>
+    <div class="chapter-subtitle reveal">of vendor AP back-and-forth, off your plate.</div>
+    <p class="chapter-pain reveal">"When am I getting paid?" "Why was my invoice short?" "Did you receive my credit memo?" "When does the next settlement run?" Forty of those a week. Each one a five-minute interruption. None of them the work you're actually trying to do — and the relationships still suffered because the answers came late.</p>
+    <div class="chapter-resolution reveal">We took over the inbox. Every vendor email about payments, balances, credits, and settlements comes to us — answered with live Metrc and settlement data, in the same tone you'd use, without you ever seeing it. The five percent that genuinely need a human decision come to your desk with the work already done. <a href="/accounts-payable#vendor-communications" style="color:var(--green-deep);font-weight:600;">See how vendor communications works →</a></div>
+  </div>
+</section>
+
+<!-- SECTION 3: DARK PIVOT -->
 <section class="pivot-section">
-  <div class="ledger-pivot-inner">
-    <div class="pivot-content">
-      <div class="gutter-label">§ 03 — Stack</div>
-      <h2 class="reveal">One AP team. Three legs of the same stack.</h2>
-      <p class="reveal">We don't overpay — every invoice three-way matched before payment. We pay every vendor on the right terms — COD, Net, or consignment, configurable per vendor. We recover the credits your agreements already promised — returns, expirations, co-marketing, every month. And every vendor email about payments, balances, and credits lands with us, not you. Your buyer focuses on product. Your <a href="/for-bookkeepers">bookkeeper focuses on close</a>. We handle the AP underneath.</p>
-    </div>
+  <div class="pivot-content">
+    <h2 class="reveal">One AP team. Three legs of the same stack.</h2>
+    <p class="reveal">We don't overpay — every invoice three-way matched before payment. We pay every vendor on the right terms — COD, Net, or consignment, configurable per vendor. We recover the credits your agreements already promised — returns, expirations, co-marketing, every month. And every vendor email about payments, balances, and credits lands with us, not you. Your buyer focuses on product. Your <a href="/for-bookkeepers" style="color:var(--green-accent);text-decoration:none;border-bottom:1px solid rgba(149,213,178,0.4);">bookkeeper focuses on close</a>. We handle the AP underneath.</p>
   </div>
 </section>
 
-<!-- NETWORK STRIP -->
-<section class="ledger-network">
-  <div class="ledger-network-inner reveal">
-    <span class="gutter-label">Footnote — Volume</span>
-    <p><span class="num num--accent">50+</span> Massachusetts vendors are already paid through ShelfSpace. The AP we run for one MA two-store retailer is the AP we run for you.</p>
+<!-- VENDOR NETWORK PROOF -->
+<section style="background:var(--white);padding:36px 48px;border-bottom:1px solid var(--slate-100);">
+  <div style="max-width:780px;margin:0 auto;text-align:center;" class="reveal">
+    <p style="font-size:16px;line-height:1.7;color:var(--slate-700);margin:0;"><strong style="color:var(--green-deep);font-family:var(--font-mono);font-size:18px;">50+ MA vendors</strong> are already paid through ShelfSpace. The AP we run for one MA two-store retailer is the AP we run for you.</p>
   </div>
 </section>
 
-<!-- § 04 — CALCULATOR (TALLY MACHINE) -->
+<!-- SECTION 4: ULTIMATE CALCULATOR -->
 <section class="uc-section" id="calculator">
-  <div class="ledger-tally-head reveal">
-    <div class="gutter-label">§ 04 — Your numbers</div>
-    <h2 class="h-l">Slide to see what we'd find at your stores.</h2>
+  <div class="uc-header">
+    <div class="section-label reveal">Your Numbers</div>
+    <h2 class="section-title reveal">Slide to see what we'd find at your stores</h2>
   </div>
-  <div class="ledger-tally-machine reveal">
-    <div class="ledger-tally-slider-wrap">
-      <span class="gutter-label">Annual revenue</span>
-      <div class="uc-revenue-display ledger-tally-revenue" id="uc-revenue">$3,000,000</div>
+  <div class="uc-container reveal">
+    <div class="uc-slider-wrapper">
+      <div class="uc-revenue-display" id="uc-revenue">$3,000,000</div>
       <input type="range" class="uc-slider" id="uc-slider" min="500000" max="10000000" step="100000" value="3000000" aria-label="Annual revenue">
       <div class="uc-slider-labels">
-        <span class="num">$500K</span>
-        <span class="gutter-label">drag →</span>
-        <span class="num">$10M</span>
+        <span>$500K</span>
+        <span>Annual Revenue</span>
+        <span>$10M</span>
       </div>
     </div>
     <div class="uc-card">
@@ -1579,30 +572,35 @@ document.head.appendChild(o)}initApollo();</script>
         <span class="uc-col--mid">Typical</span>
         <span class="uc-col--high">Aggressive</span>
       </div>
+      <!-- Consignment row -->
       <div class="uc-row">
         <div class="uc-row-label"><a href="/consignment">Consignment</a><div class="uc-row-desc">Cash freed from inventory</div></div>
         <div class="uc-val uc-val--low"><div class="uc-val-year" id="uc-con-low">$46,233</div><div class="uc-val-sub">25% on consignment</div></div>
         <div class="uc-val uc-val--mid"><div class="uc-val-year" id="uc-con-mid">$92,466</div><div class="uc-val-sub">50% on consignment</div></div>
         <div class="uc-val uc-val--high"><div class="uc-val-year" id="uc-con-high">$138,699</div><div class="uc-val-sub">75% on consignment</div></div>
       </div>
+      <!-- AP row -->
       <div class="uc-row">
         <div class="uc-row-label"><a href="/accounts-payable">Accounts Payable</a><div class="uc-row-desc">Invoice &amp; payment savings</div></div>
         <div class="uc-val uc-val--low"><div class="uc-val-year" id="uc-ap-low">$21,000</div><div class="uc-val-month" id="uc-ap-low-mo">$1,750/mo</div></div>
         <div class="uc-val uc-val--mid"><div class="uc-val-year" id="uc-ap-mid">$39,000</div><div class="uc-val-month" id="uc-ap-mid-mo">$3,250/mo</div></div>
         <div class="uc-val uc-val--high"><div class="uc-val-year" id="uc-ap-high">$63,000</div><div class="uc-val-month" id="uc-ap-high-mo">$5,250/mo</div></div>
       </div>
+      <!-- Credit Recovery row -->
       <div class="uc-row">
         <div class="uc-row-label"><a href="/credit-recovery">Credit Recovery</a><div class="uc-row-desc">Recovered vendor credits</div></div>
         <div class="uc-val uc-val--low"><div class="uc-val-year" id="uc-cr-low">$36,000</div><div class="uc-val-month" id="uc-cr-low-mo">$3,000/mo</div></div>
         <div class="uc-val uc-val--mid"><div class="uc-val-year" id="uc-cr-mid">$60,000</div><div class="uc-val-month" id="uc-cr-mid-mo">$5,000/mo</div></div>
         <div class="uc-val uc-val--high"><div class="uc-val-year" id="uc-cr-high">$90,000</div><div class="uc-val-month" id="uc-cr-high-mo">$7,500/mo</div></div>
       </div>
+      <!-- Total bar -->
       <div class="uc-total">
-        <div class="uc-total-label">Total impact</div>
+        <div class="uc-total-label">Total Impact</div>
         <div class="uc-total-val" id="uc-total-low">$103,233</div>
         <div class="uc-total-val" id="uc-total-mid">$191,466</div>
         <div class="uc-total-val" id="uc-total-high">$291,699</div>
       </div>
+      <!-- EBITDA bar -->
       <div class="uc-ebitda">
         <div class="uc-ebitda-label">EBITDA</div>
         <div class="uc-ebitda-val" id="uc-ebitda-low">15% &rarr; 18.3%</div>
@@ -1612,23 +610,22 @@ document.head.appendChild(o)}initApollo();</script>
     </div>
     <div class="uc-bottom">
       <p class="uc-bottom-tag">One team. All three. You only pay when we produce results.</p>
-      <a href="/contact" class="btn-ledger">Get my free AP evaluation →</a>
+      <a href="/contact" class="btn-primary">Get My Free AP Evaluation <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
       <p class="uc-bottom-sub">We'll show your actual numbers across all three. 48 hours. Free.</p>
-      <p class="uc-bottom-sub">Plus our service: <span class="num num--accent">$1,800–$2,500/mo per location</span>. Multi-location discount applies.</p>
+      <p style="font-size:14px;color:var(--slate-500);margin-top:8px;">Plus our service: <strong style="color:var(--green-deep);font-family:var(--font-mono);">$1,800–$2,500/mo per location</strong>. Multi-location discount applies.</p>
       <p class="uc-bottom-disclaimer">*Estimates based on industry averages, not a guarantee.</p>
     </div>
   </div>
 </section>
 
-<!-- § 05 — REGISTER OF RECOVERIES (case studies) -->
+<!-- SECTION 5: CASE STUDIES -->
 <section class="case-studies">
   <div class="case-studies-inner">
-    <div class="ledger-register-head reveal">
-      <div class="gutter-label">§ 05 — Register of Recoveries</div>
-      <h2 class="h-l">Real results from real dispensaries.</h2>
-      <p class="body-default">De-identified to protect our clients.</p>
+    <div class="case-studies-header reveal">
+      <h2>Case Studies</h2>
+      <p>Real results from real dispensaries. De-identified to protect our clients.</p>
     </div>
-    <div class="case-filters reveal" role="tablist" aria-label="Filter case studies">
+    <div class="case-filters reveal">
       <button class="case-filter active" data-filter="all">All</button>
       <button class="case-filter" data-filter="accounts-payable">Accounts Payable</button>
       <button class="case-filter" data-filter="consignment">Consignment</button>
@@ -1636,359 +633,468 @@ document.head.appendChild(o)}initApollo();</script>
       <button class="case-filter" data-filter="operations">Operations</button>
     </div>
     <div class="case-grid-wrap">
-      <div class="case-grid">
-        <a href="/blog/case-study-ebitda-credit-recovery" class="case-card is-featured" data-category="credit-recovery">
-          <span class="case-speed">Featured · 90 days</span>
-          <span class="case-tag case-tag--credit">Credit</span>
-          <span class="case-card-text">
-            <span class="case-headline">Credit recovery lifted EBITDA 15% at one dispensary</span>
-            <span class="case-summary">A Massachusetts retailer was leaving money on the table with 10 vendors. We pulled 90 days of Metrc data and found the gap.</span>
-          </span>
-          <span class="case-amount">$83,741<span style="font-family:var(--font-mono-l);font-size:0.5em;color:var(--ink-mute);margin-left:2px;letter-spacing:0.04em;">/yr</span></span>
-        </a>
-        <a href="/blog/case-study-duplicate-invoice" class="case-card" data-category="accounts-payable">
+      <button class="case-arrow case-arrow--left is-hidden" aria-label="Scroll left"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg></button>
+      <button class="case-arrow case-arrow--right" aria-label="Scroll right"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 6 15 12 9 18"/></svg></button>
+    <div class="case-grid">
+      <div class="case-card reveal" data-category="accounts-payable">
+        <div class="case-tag case-tag--ap">Accounts Payable</div>
+        <div class="case-amount">$4,873</div>
+        <div class="case-headline">Stopped a duplicate invoice across two locations</div>
+        <p class="case-summary">A vendor billed the wrong entity for an invoice already paid from another location. We cross-checked the system, confirmed with the bank, and stopped it the same day.</p>
+        <div class="case-meta">
           <span class="case-speed">Same-day fix</span>
-          <span class="case-tag case-tag--ap">AP</span>
-          <span class="case-card-text">
-            <span class="case-headline">Stopped a duplicate invoice across two locations</span>
-            <span class="case-summary">A vendor billed the wrong entity for an invoice already paid from another location.</span>
-          </span>
-          <span class="case-amount">$4,873</span>
-        </a>
-        <a href="/blog/case-study-shorted-delivery" class="case-card" data-category="accounts-payable">
+          <a href="/blog/case-study-duplicate-invoice" class="case-link">Read the full story <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        </div>
+      </div>
+      <div class="case-card reveal reveal-delay-1" data-category="accounts-payable">
+        <div class="case-tag case-tag--ap">Accounts Payable</div>
+        <div class="case-amount">$1,140</div>
+        <div class="case-headline">Flagged a shorted delivery before payment went out</div>
+        <p class="case-summary">A vendor delivered 42 units but invoiced for 50. Metrc confirmed the shortage. We adjusted the payment and saved $1,140 before a check was cut.</p>
+        <div class="case-meta">
           <span class="case-speed">Same-day fix</span>
-          <span class="case-tag case-tag--ap">AP</span>
-          <span class="case-card-text">
-            <span class="case-headline">Flagged a shorted delivery before payment went out</span>
-            <span class="case-summary">A vendor delivered 42 units but invoiced for 50. Metrc confirmed the shortage.</span>
-          </span>
-          <span class="case-amount">$1,140</span>
-        </a>
-        <a href="/blog/case-study-non-cannabis-vendors" class="case-card" data-category="accounts-payable">
+          <a href="/blog/case-study-shorted-delivery" class="case-link">Read the full story <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        </div>
+      </div>
+      <div class="case-card reveal reveal-delay-2" data-category="accounts-payable">
+        <div class="case-tag case-tag--ap">Accounts Payable</div>
+        <div class="case-amount">12 vendors</div>
+        <div class="case-headline">Non-cannabis vendors finally in the system</div>
+        <p class="case-summary">Landlord, security, cleaning, insurance — 12 non-cannabis vendors were being paid by personal check. We onboarded all of them in one week. One system for everyone.</p>
+        <div class="case-meta">
           <span class="case-speed">First 7 days</span>
-          <span class="case-tag case-tag--ap">AP</span>
-          <span class="case-card-text">
-            <span class="case-headline">Non-cannabis vendors finally in the system</span>
-            <span class="case-summary">Landlord, security, cleaning, insurance — 12 vendors paid by personal check, onboarded in one week.</span>
-          </span>
-          <span class="case-amount">12 vendors</span>
-        </a>
-        <a href="/blog/case-study-consignment-conversion" class="case-card" data-category="consignment">
+          <a href="/blog/case-study-non-cannabis-vendors" class="case-link">Read the full story <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        </div>
+      </div>
+      <div class="case-card reveal" data-category="consignment">
+        <div class="case-tag case-tag--consignment">Consignment</div>
+        <div class="case-amount">$27,350</div>
+        <div class="case-headline">Freed trapped inventory with one vendor switch</div>
+        <p class="case-summary">A single-location dispensary switched their top vendor to consignment. Dead stock dropped to zero, margins locked at 50%, and $27K went back to operations.</p>
+        <div class="case-meta">
           <span class="case-speed">Results in 60 days</span>
-          <span class="case-tag case-tag--consignment">Consign</span>
-          <span class="case-card-text">
-            <span class="case-headline">Freed trapped inventory with one vendor switch</span>
-            <span class="case-summary">A single-location dispensary switched their top vendor to consignment. Dead stock dropped to zero.</span>
-          </span>
-          <span class="case-amount">$27,350</span>
-        </a>
-        <a href="/blog/case-study-expired-returns" class="case-card" data-category="consignment">
+          <a href="/blog/case-study-consignment-conversion" class="case-link">Read the full story <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        </div>
+      </div>
+      <div class="case-card reveal reveal-delay-1" data-category="consignment">
+        <div class="case-tag case-tag--consignment">Consignment</div>
+        <div class="case-amount">$8,370</div>
+        <div class="case-headline">Expired product returned at zero cost</div>
+        <p class="case-summary">Under wholesale, 47 expired units would have been an $8,370 write-off. Under consignment, the vendor owns it. All 47 went back. The dispensary's loss: $0.</p>
+        <div class="case-meta">
           <span class="case-speed">Quarterly</span>
-          <span class="case-tag case-tag--consignment">Consign</span>
-          <span class="case-card-text">
-            <span class="case-headline">Expired product returned at zero cost</span>
-            <span class="case-summary">Under wholesale, 47 expired units would have been an $8,370 write-off. Under consignment, the vendor owns it.</span>
-          </span>
-          <span class="case-amount">$8,370</span>
-        </a>
-        <a href="/blog/case-study-settlement-dispute" class="case-card" data-category="consignment">
+          <a href="/blog/case-study-expired-returns" class="case-link">Read the full story <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        </div>
+      </div>
+      <div class="case-card reveal reveal-delay-2" data-category="consignment">
+        <div class="case-tag case-tag--consignment">Consignment</div>
+        <div class="case-amount">$6,230</div>
+        <div class="case-headline">Settlement question answered in 24 hours with shared data</div>
+        <p class="case-summary">A vendor claimed they were underpaid $1,800 on a settlement. We pulled POS data, Metrc records, and the profit split math. Settlement was correct to the penny.</p>
+        <div class="case-meta">
           <span class="case-speed">24-hour resolution</span>
-          <span class="case-tag case-tag--consignment">Consign</span>
-          <span class="case-card-text">
-            <span class="case-headline">Settlement question answered in 24 hours with shared data</span>
-            <span class="case-summary">A vendor claimed they were underpaid $1,800 on a settlement. Settlement was correct to the penny.</span>
-          </span>
-          <span class="case-amount">$6,230</span>
-        </a>
-        <a href="/blog/case-study-vendor-credit-recovery" class="case-card" data-category="credit-recovery">
+          <a href="/blog/case-study-settlement-dispute" class="case-link">Read the full story <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        </div>
+      </div>
+      <div class="case-card reveal" data-category="credit-recovery">
+        <div class="case-tag case-tag--credit">Credit Recovery</div>
+        <div class="case-amount">$83,741/yr</div>
+        <div class="case-headline">Credit recovery lifted EBITDA 15% at one dispensary</div>
+        <p class="case-summary">A Massachusetts retailer was leaving money on the table with 10 vendors. We pulled 90 days of Metrc data and found $83,741/yr in recoverable co-marketing and waste credits.</p>
+        <div class="case-meta">
+          <span class="case-speed">First 90 days</span>
+          <a href="/blog/case-study-ebitda-credit-recovery" class="case-link">Read the full story <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        </div>
+      </div>
+      <div class="case-card reveal reveal-delay-1" data-category="credit-recovery">
+        <div class="case-tag case-tag--credit">Credit Recovery</div>
+        <div class="case-amount">$2,340</div>
+        <div class="case-headline">Recovered co-marketing credits nobody was tracking</div>
+        <p class="case-summary">A dispensary ran in-store promos for a vendor but never billed back. We calculated the credit against keystone, got vendor approval, and applied it to an open invoice.</p>
+        <div class="case-meta">
           <span class="case-speed">Found in 14 days</span>
-          <span class="case-tag case-tag--credit">Credit</span>
-          <span class="case-card-text">
-            <span class="case-headline">Recovered co-marketing credits nobody was tracking</span>
-            <span class="case-summary">A dispensary ran in-store promos for a vendor but never billed back. We calculated the credit.</span>
-          </span>
-          <span class="case-amount">$2,340</span>
-        </a>
-        <a href="/blog/case-study-return-credit" class="case-card" data-category="credit-recovery">
+          <a href="/blog/case-study-vendor-credit-recovery" class="case-link">Read the full story <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        </div>
+      </div>
+      <div class="case-card reveal" data-category="credit-recovery">
+        <div class="case-tag case-tag--credit">Credit Recovery</div>
+        <div class="case-amount">$1,847</div>
+        <div class="case-headline">Return credit nobody filed — recovered</div>
+        <p class="case-summary">23 defective units were returned to a vendor and processed in Metrc. Nobody created a credit memo. We found it, built the memo, and recovered $1,847.</p>
+        <div class="case-meta">
           <span class="case-speed">First evaluation</span>
-          <span class="case-tag case-tag--credit">Credit</span>
-          <span class="case-card-text">
-            <span class="case-headline">Return credit nobody filed — recovered</span>
-            <span class="case-summary">23 defective units were returned to a vendor and processed in Metrc. Nobody created a credit memo.</span>
-          </span>
-          <span class="case-amount">$1,847</span>
-        </a>
-        <a href="/blog/case-study-expiration-credit" class="case-card" data-category="credit-recovery">
+          <a href="/blog/case-study-return-credit" class="case-link">Read the full story <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        </div>
+      </div>
+      <div class="case-card reveal reveal-delay-1" data-category="credit-recovery">
+        <div class="case-tag case-tag--credit">Credit Recovery</div>
+        <div class="case-amount">$3,180</div>
+        <div class="case-headline">Expiration credits buried in a vendor agreement</div>
+        <p class="case-summary">31 units expired over 90 days. The vendor agreement included 75% credit terms nobody enforced. We calculated $3,180, got approval, and applied it to the next settlement.</p>
+        <div class="case-meta">
           <span class="case-speed">Found in 14 days</span>
-          <span class="case-tag case-tag--credit">Credit</span>
-          <span class="case-card-text">
-            <span class="case-headline">Expiration credits buried in a vendor agreement</span>
-            <span class="case-summary">31 units expired over 90 days. The vendor agreement included 75% credit terms nobody enforced.</span>
-          </span>
-          <span class="case-amount">$3,180</span>
-        </a>
-        <a href="/blog/case-study-shelfiq-vendor-emails" class="case-card" data-category="operations">
+          <a href="/blog/case-study-expiration-credit" class="case-link">Read the full story <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        </div>
+      </div>
+      <div class="case-card reveal reveal-delay-2" data-category="operations">
+        <div class="case-tag case-tag--ops">Operations</div>
+        <div class="case-amount">47 emails</div>
+        <div class="case-headline">We handled 47 vendor emails in one week</div>
+        <p class="case-summary">A dispensary owner was fielding 50+ vendor emails a week. We took over — payment confirmations, balance inquiries, settlement questions — all with live data.</p>
+        <div class="case-meta">
           <span class="case-speed">First week</span>
-          <span class="case-tag case-tag--ops">Ops</span>
-          <span class="case-card-text">
-            <span class="case-headline">We handled 47 vendor emails in one week</span>
-            <span class="case-summary">A dispensary owner was fielding 50+ vendor emails a week. We took over with live data.</span>
-          </span>
-          <span class="case-amount">47 emails</span>
-        </a>
-        <a href="/blog/case-study-ap-time-savings" class="case-card" data-category="operations">
+          <a href="/blog/case-study-shelfiq-vendor-emails" class="case-link">Read the full story <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        </div>
+      </div>
+      <div class="case-card reveal reveal-delay-1" data-category="operations">
+        <div class="case-tag case-tag--ops">Operations</div>
+        <div class="case-amount">98% less time</div>
+        <div class="case-headline">From 15 hours a week to one approve button</div>
+        <p class="case-summary">A store manager spent 15 hours a week on AP — spreadsheets, checks, vendor calls. Now they review and approve in 15 minutes. Two workdays back, every week.</p>
+        <div class="case-meta">
           <span class="case-speed">Results in 60 days</span>
-          <span class="case-tag case-tag--ops">Ops</span>
-          <span class="case-card-text">
-            <span class="case-headline">From 15 hours a week to one approve button</span>
-            <span class="case-summary">A store manager spent 15 hours a week on AP. Now they review and approve in 15 minutes.</span>
-          </span>
-          <span class="case-amount">98% less</span>
-        </a>
-        <a href="/blog/case-study-delivery-dashboard" class="case-card" data-category="operations">
+          <a href="/blog/case-study-ap-time-savings" class="case-link">Read the full story <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        </div>
+      </div>
+      <div class="case-card reveal reveal-delay-2" data-category="operations">
+        <div class="case-tag case-tag--ops">Operations</div>
+        <div class="case-amount">Zero spreadsheets</div>
+        <div class="case-headline">Replaced a 200-row spreadsheet with Metrc data</div>
+        <p class="case-summary">Delivery reconciliation lived in a shared Google Sheet nobody trusted. The dashboard replaced it with real-time Metrc data and flagged 3 shortages in 14 days.</p>
+        <div class="case-meta">
           <span class="case-speed">First 14 days</span>
-          <span class="case-tag case-tag--ops">Ops</span>
-          <span class="case-card-text">
-            <span class="case-headline">Replaced a 200-row spreadsheet with Metrc data</span>
-            <span class="case-summary">Delivery reconciliation lived in a shared Google Sheet nobody trusted. Replaced with real-time data.</span>
-          </span>
-          <span class="case-amount">0 sheets</span>
-        </a>
-        <a href="/blog/case-study-vendor-portal" class="case-card" data-category="operations">
+          <a href="/blog/case-study-delivery-dashboard" class="case-link">Read the full story <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        </div>
+      </div>
+      <div class="case-card reveal" data-category="operations">
+        <div class="case-tag case-tag--ops">Operations</div>
+        <div class="case-amount">90% fewer calls</div>
+        <div class="case-headline">Vendor portal stopped 30 payment calls a month</div>
+        <p class="case-summary">Vendors called 30+ times a month asking "where's my check?" We gave them a portal. Payment status calls dropped to 3 in the first month.</p>
+        <div class="case-meta">
           <span class="case-speed">First 30 days</span>
-          <span class="case-tag case-tag--ops">Ops</span>
-          <span class="case-card-text">
-            <span class="case-headline">Vendor portal stopped 30 payment calls a month</span>
-            <span class="case-summary">Vendors called 30+ times a month asking "where's my check?" Calls dropped to 3 in the first month.</span>
-          </span>
-          <span class="case-amount">90% fewer</span>
-        </a>
-        <a href="/blog/case-study-quickbooks-sync" class="case-card" data-category="operations">
+          <a href="/blog/case-study-vendor-portal" class="case-link">Read the full story <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        </div>
+      </div>
+      <div class="case-card reveal reveal-delay-1" data-category="operations">
+        <div class="case-tag case-tag--ops">Operations</div>
+        <div class="case-amount">Real-time books</div>
+        <div class="case-headline">QuickBooks went from 3 days behind to instant</div>
+        <p class="case-summary">Payments were entered into QuickBooks 2-3 days late. Month-end took 8 hours. Now every payment syncs the moment it clears. Reconciliation: under 1 hour.</p>
+        <div class="case-meta">
           <span class="case-speed">Day 1</span>
-          <span class="case-tag case-tag--ops">Ops</span>
-          <span class="case-card-text">
-            <span class="case-headline">QuickBooks went from 3 days behind to instant</span>
-            <span class="case-summary">Payments were entered 2-3 days late. Month-end took 8 hours. Now reconciliation: under 1 hour.</span>
-          </span>
-          <span class="case-amount">Real-time</span>
-        </a>
-        <a href="/blog/case-study-vendor-replenishment" class="case-card" data-category="consignment">
+          <a href="/blog/case-study-quickbooks-sync" class="case-link">Read the full story <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        </div>
+      </div>
+      <div class="case-card reveal" data-category="consignment">
+        <div class="case-tag case-tag--consignment">Consignment</div>
+        <div class="case-amount">Zero stockouts</div>
+        <div class="case-headline">Vendor started restocking from their settlement report</div>
+        <p class="case-summary">A consignment vendor noticed their settlement report showed inventory and velocity per SKU. They started replenishing before the dispensary even asked.</p>
+        <div class="case-meta">
           <span class="case-speed">Within first month</span>
-          <span class="case-tag case-tag--consignment">Consign</span>
-          <span class="case-card-text">
-            <span class="case-headline">Vendor started restocking from their settlement report</span>
-            <span class="case-summary">A consignment vendor noticed inventory and velocity per SKU. They started replenishing without being asked.</span>
-          </span>
-          <span class="case-amount">0 stockouts</span>
-        </a>
-        <a href="/blog/case-study-metrc-invoice-accuracy" class="case-card" data-category="accounts-payable">
+          <a href="/blog/case-study-vendor-replenishment" class="case-link">Read the full story <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        </div>
+      </div>
+      <div class="case-card reveal reveal-delay-1" data-category="accounts-payable">
+        <div class="case-tag case-tag--ap">Accounts Payable</div>
+        <div class="case-amount">$7,340</div>
+        <div class="case-headline">We flagged 12 invoice mismatches in one month using Metrc</div>
+        <p class="case-summary">A two-location dispensary was paying invoices without checking deliveries. We matched every invoice to Metrc. 12 had wrong quantities or amounts.</p>
+        <div class="case-meta">
           <span class="case-speed">Found in 30 days</span>
-          <span class="case-tag case-tag--ap">AP</span>
-          <span class="case-card-text">
-            <span class="case-headline">We flagged 12 invoice mismatches in one month using Metrc</span>
-            <span class="case-summary">A two-location dispensary was paying invoices without checking deliveries. 12 had wrong quantities.</span>
-          </span>
-          <span class="case-amount">$7,340</span>
-        </a>
-        <a href="/blog/case-study-consignment-new-product" class="case-card" data-category="consignment">
+          <a href="/blog/case-study-metrc-invoice-accuracy" class="case-link">Read the full story <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        </div>
+      </div>
+      <div class="case-card reveal reveal-delay-2" data-category="consignment">
+        <div class="case-tag case-tag--consignment">Consignment</div>
+        <div class="case-amount">$14,230</div>
+        <div class="case-headline">We got a new product on shelves — zero risk for both sides</div>
+        <p class="case-summary">A vendor had a new edible line nobody would buy wholesale. We structured a consignment deal. It sold $14,230 in the first month.</p>
+        <div class="case-meta">
           <span class="case-speed">First 30 days</span>
-          <span class="case-tag case-tag--consignment">Consign</span>
-          <span class="case-card-text">
-            <span class="case-headline">We got a new product on shelves — zero risk for both sides</span>
-            <span class="case-summary">A vendor had a new edible line nobody would buy wholesale. We structured a consignment deal.</span>
-          </span>
-          <span class="case-amount">$14,230</span>
-        </a>
-        <a href="/blog/case-study-ceo-email-relief" class="case-card" data-category="operations">
+          <a href="/blog/case-study-consignment-new-product" class="case-link">Read the full story <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        </div>
+      </div>
+      <div class="case-card reveal" data-category="operations">
+        <div class="case-tag case-tag--ops">Operations</div>
+        <div class="case-amount">20+ hrs/month</div>
+        <div class="case-headline">We took over vendor emails — vendors get instant answers, the owner gets his inbox back</div>
+        <p class="case-summary">The owner of a two-store chain was fielding 30+ vendor emails a week. We took over on day one. Vendors now get answers in seconds; he hasn't had to triage a vendor email since.</p>
+        <div class="case-meta">
           <span class="case-speed">First week</span>
-          <span class="case-tag case-tag--ops">Ops</span>
-          <span class="case-card-text">
-            <span class="case-headline">We took over vendor emails — vendors get instant answers, owner gets his inbox back</span>
-            <span class="case-summary">The owner of a two-store chain was fielding 30+ vendor emails a week. We took over on day one.</span>
-          </span>
-          <span class="case-amount">20+ hrs/mo</span>
-        </a>
-        <a href="/blog/case-study-buyer-reorder-data" class="case-card" data-category="operations">
+          <a href="/blog/case-study-ceo-email-relief" class="case-link">Read the full story <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        </div>
+      </div>
+      <div class="case-card reveal reveal-delay-1" data-category="operations">
+        <div class="case-tag case-tag--ops">Operations</div>
+        <div class="case-amount">23% less waste</div>
+        <div class="case-headline">We gave a buyer real data — waste dropped 23%</div>
+        <p class="case-summary">A buyer was reordering by gut. We showed them sell-through and velocity data. They cut 8 slow SKUs, doubled 5 winners. Waste dropped 23% in two months.</p>
+        <div class="case-meta">
           <span class="case-speed">First 60 days</span>
-          <span class="case-tag case-tag--ops">Ops</span>
-          <span class="case-card-text">
-            <span class="case-headline">We gave a buyer real data — waste dropped 23%</span>
-            <span class="case-summary">A buyer was reordering by gut. We showed them sell-through and velocity data. They cut 8 slow SKUs.</span>
-          </span>
-          <span class="case-amount">23% less</span>
-        </a>
+          <a href="/blog/case-study-buyer-reorder-data" class="case-link">Read the full story <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        </div>
       </div>
     </div>
-    <p class="ledger-register-foot body-small">All amounts de-identified. <a href="/blog" class="ledger-link">Full archive in the journal →</a></p>
+    </div>
   </div>
 </section>
 
-<!-- § 06 — ROLES -->
+<!-- SCOPE CLARITY: who does what -->
 <section class="scope-section">
-  <div class="ledger-roles-head reveal">
-    <div class="gutter-label">§ 06 — Roles</div>
-    <h2 class="h-l">Free your team. They have better work to do.</h2>
-  </div>
-  <div class="ledger-roles-table reveal">
-    <div class="ledger-roles-headrow">
-      <span class="gutter-label">Responsibility</span>
-      <span class="gutter-label">ShelfSpace</span>
-      <span class="gutter-label">Your buyer</span>
-      <span class="gutter-label">Your bookkeeper</span>
-    </div>
-    <div class="ledger-roles-row">
-      <span class="ledger-roles-label">Invoice ingestion &amp; parsing</span>
-      <span class="ledger-roles-mark is-yes col-shelfspace">✓</span>
-      <span class="ledger-roles-mark col-buyer">—</span>
-      <span class="ledger-roles-mark col-bookkeeper">—</span>
-    </div>
-    <div class="ledger-roles-row">
-      <span class="ledger-roles-label">Three-way matching (invoice ↔ delivery ↔ PO)</span>
-      <span class="ledger-roles-mark is-yes col-shelfspace">✓</span>
-      <span class="ledger-roles-mark col-buyer">—</span>
-      <span class="ledger-roles-mark col-bookkeeper">—</span>
-    </div>
-    <div class="ledger-roles-row">
-      <span class="ledger-roles-label">Per-vendor terms (COD, Net, consignment)</span>
-      <span class="ledger-roles-mark is-yes col-shelfspace">✓</span>
-      <span class="ledger-roles-mark col-buyer">—</span>
-      <span class="ledger-roles-mark col-bookkeeper">—</span>
-    </div>
-    <div class="ledger-roles-row">
-      <span class="ledger-roles-label">Vendor payments &amp; check generation</span>
-      <span class="ledger-roles-mark is-yes col-shelfspace">✓</span>
-      <span class="ledger-roles-mark col-buyer">—</span>
-      <span class="ledger-roles-mark col-bookkeeper">—</span>
-    </div>
-    <div class="ledger-roles-row">
-      <span class="ledger-roles-label">Vendor email &amp; call handling</span>
-      <span class="ledger-roles-mark is-yes col-shelfspace">✓</span>
-      <span class="ledger-roles-mark col-buyer">—</span>
-      <span class="ledger-roles-mark col-bookkeeper">—</span>
-    </div>
-    <div class="ledger-roles-row">
-      <span class="ledger-roles-label">Credit recovery cycles</span>
-      <span class="ledger-roles-mark is-yes col-shelfspace">✓</span>
-      <span class="ledger-roles-mark col-buyer">—</span>
-      <span class="ledger-roles-mark col-bookkeeper">—</span>
-    </div>
-    <div class="ledger-roles-row">
-      <span class="ledger-roles-label">QuickBooks sync</span>
-      <span class="ledger-roles-mark is-yes col-shelfspace">✓</span>
-      <span class="ledger-roles-mark col-buyer">—</span>
-      <span class="ledger-roles-mark col-bookkeeper">—</span>
-    </div>
-    <div class="ledger-roles-row">
-      <span class="ledger-roles-label">Product selection &amp; vendor negotiation</span>
-      <span class="ledger-roles-mark col-shelfspace">—</span>
-      <span class="ledger-roles-mark is-yes col-buyer">✓</span>
-      <span class="ledger-roles-mark col-bookkeeper">—</span>
-    </div>
-    <div class="ledger-roles-row">
-      <span class="ledger-roles-label">Sell-through &amp; promotional planning</span>
-      <span class="ledger-roles-mark col-shelfspace">—</span>
-      <span class="ledger-roles-mark is-yes col-buyer">✓</span>
-      <span class="ledger-roles-mark col-bookkeeper">—</span>
-    </div>
-    <div class="ledger-roles-row">
-      <span class="ledger-roles-label">New vendor sourcing</span>
-      <span class="ledger-roles-mark col-shelfspace">—</span>
-      <span class="ledger-roles-mark is-yes col-buyer">✓</span>
-      <span class="ledger-roles-mark col-bookkeeper">—</span>
-    </div>
-    <div class="ledger-roles-row">
-      <span class="ledger-roles-label">Month-end close &amp; reconciliations</span>
-      <span class="ledger-roles-mark col-shelfspace">—</span>
-      <span class="ledger-roles-mark col-buyer">—</span>
-      <span class="ledger-roles-mark is-yes col-bookkeeper">✓</span>
-    </div>
-    <div class="ledger-roles-row">
-      <span class="ledger-roles-label">Payroll, JEs, financial statements</span>
-      <span class="ledger-roles-mark col-shelfspace">—</span>
-      <span class="ledger-roles-mark col-buyer">—</span>
-      <span class="ledger-roles-mark is-yes col-bookkeeper">✓</span>
-    </div>
-    <div class="ledger-roles-row">
-      <span class="ledger-roles-label">Tax prep &amp; 280E compliance</span>
-      <span class="ledger-roles-mark col-shelfspace">—</span>
-      <span class="ledger-roles-mark col-buyer">—</span>
-      <span class="ledger-roles-mark is-yes col-bookkeeper">✓</span>
-    </div>
-  </div>
-  <p class="ledger-roles-foot body-default reveal">We don't do close, recon, payroll, AR, tax, or 280E. Your team does — and we make their jobs easier with clean QuickBooks entries in real time.</p>
-</section>
+  <style>
+    .scope-section { background: var(--slate-50); padding: 80px 48px; }
+    .scope-inner { max-width: 980px; margin: 0 auto; }
+    .scope-header { text-align: center; margin-bottom: 48px; }
+    .scope-header h2 { font-size: clamp(28px,3.5vw,40px); font-weight: 700; color: var(--green-deep); letter-spacing: -1.5px; margin-top: 8px; line-height: 1.15; }
+    .scope-grid { display: grid; grid-template-columns: 1.12fr 1fr; gap: 24px; margin-bottom: 28px; }
 
-<!-- § 07 — TRUST -->
-<section class="ledger-trust">
-  <div class="ledger-trust-head reveal">
-    <div class="gutter-label">§ 07 — Trust</div>
-    <h2 class="h-l">Vendors win. Compliance wins.</h2>
-  </div>
-  <div class="ledger-trust-grid">
-    <article class="ledger-trust-panel reveal">
-      <div class="gutter-label">What vendors get</div>
-      <h3 class="h-m">Vendors get more, not less.</h3>
-      <p class="body-default">Every vendor gets their own portal — payment status, downloadable checks, complete history. ShelfiQ answers questions in seconds with live Metrc data. Payments arrive on time, the right amount, with documented credit memos when applicable.</p>
-      <p class="body-default ledger-trust-emphasis">Switching to ShelfSpace doesn't damage your vendor relationships — it improves them.</p>
-      <a href="/vendors" class="ledger-link">See the vendor view →</a>
-    </article>
-    <article class="ledger-trust-panel reveal reveal-delay-1">
-      <div class="gutter-label">Reads from</div>
-      <div class="ledger-trust-seal" aria-hidden="true">
-        <svg viewBox="0 0 80 80" width="64" height="64">
-          <circle cx="40" cy="40" r="36" fill="#7A2A1E"/>
-          <circle cx="40" cy="40" r="32" fill="none" stroke="#F4EFE6" stroke-width="0.5" stroke-dasharray="2 2.5"/>
-          <text x="40" y="38" text-anchor="middle" fill="#F4EFE6" font-family="'IBM Plex Mono', monospace" font-size="10" font-weight="700" letter-spacing="2">METRC</text>
-          <text x="40" y="50" text-anchor="middle" fill="#F4EFE6" font-family="'IBM Plex Mono', monospace" font-size="6" letter-spacing="1.5">CERTIFIED</text>
-        </svg>
-        <div class="ledger-trust-seal-meta">Official third-party<br>vendor seal</div>
+    /* Shared card chrome */
+    .scope-card { border-radius: 16px; padding: 30px 28px; position: relative; }
+    .scope-card-eyebrow { font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; }
+
+    /* LEFT — operational/active */
+    .scope-card--ours {
+      background: linear-gradient(155deg, var(--white) 0%, var(--green-ghost) 100%);
+      border: 1px solid rgba(149,213,178,0.45);
+      box-shadow: 0 10px 30px rgba(27,67,50,0.07), 0 1px 0 rgba(255,255,255,0.6) inset;
+    }
+    .scope-card--ours .scope-card-eyebrow { color: var(--green-deep); }
+    .scope-card-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 22px; }
+    .scope-pill {
+      display: inline-flex; align-items: center; gap: 7px;
+      font-family: var(--font-mono); font-size: 10px; font-weight: 700;
+      letter-spacing: 1px; color: var(--green-dark);
+      background: var(--white); padding: 5px 11px; border-radius: 100px;
+      border: 1px solid rgba(149,213,178,0.5);
+    }
+    .scope-pill-dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--green-mid);
+      box-shadow: 0 0 0 3px rgba(82,183,136,0.22);
+      animation: scope-pulse 2.4s ease-in-out infinite;
+    }
+    @keyframes scope-pulse {
+      0%, 100% { box-shadow: 0 0 0 3px rgba(82,183,136,0.22); }
+      50% { box-shadow: 0 0 0 6px rgba(82,183,136,0.05); }
+    }
+    @media (prefers-reduced-motion: reduce) { .scope-pill-dot { animation: none; } }
+
+    .scope-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+    .scope-item {
+      display: flex; align-items: center; gap: 12px;
+      font-size: 15px; color: var(--slate-700);
+      padding: 4px 0;
+    }
+    .scope-icon {
+      width: 32px; height: 32px; border-radius: 8px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(149,213,178,0.2); color: var(--green-deep);
+    }
+    .scope-icon svg { width: 16px; height: 16px; }
+
+    /* The highlighted vendor-email row */
+    .scope-item--star {
+      background: var(--white);
+      border: 1px solid rgba(149,213,178,0.55);
+      border-radius: 10px;
+      padding: 12px 14px;
+      margin: 4px -6px;
+      box-shadow: 0 4px 14px rgba(27,67,50,0.05);
+      color: var(--green-deep); font-weight: 600;
+    }
+    .scope-item--star .scope-icon { background: var(--green-deep); color: var(--white); }
+    .scope-item--star .scope-text { flex: 1; }
+    .scope-stat {
+      font-family: var(--font-mono); font-size: 11px; font-weight: 700;
+      color: var(--green-dark); background: var(--green-ghost);
+      padding: 4px 9px; border-radius: 6px; letter-spacing: 0.5px;
+      border: 1px solid rgba(149,213,178,0.4);
+    }
+
+    /* RIGHT — calm/focused */
+    .scope-card--theirs {
+      background: var(--white);
+      border: 1px solid var(--slate-200);
+    }
+    .scope-card--theirs .scope-card-eyebrow { color: var(--slate-600); margin-bottom: 22px; display: block; }
+    .scope-subhead {
+      display: flex; align-items: center; gap: 10px;
+      font-family: var(--font-mono); font-size: 11px; font-weight: 600;
+      letter-spacing: 0.5px; color: var(--slate-500); margin-bottom: 12px;
+    }
+    .scope-subhead-icon {
+      width: 22px; height: 22px; border-radius: 6px;
+      display: inline-flex; align-items: center; justify-content: center;
+      background: var(--slate-100); color: var(--slate-600);
+    }
+    .scope-subhead-icon svg { width: 12px; height: 12px; }
+    .scope-list--theirs { gap: 8px; }
+    .scope-list--theirs .scope-item { color: var(--slate-700); padding: 2px 0; }
+    .scope-arrow {
+      width: 22px; flex-shrink: 0; color: var(--slate-400);
+      font-family: var(--font-mono); font-weight: 700; font-size: 14px;
+      text-align: center;
+    }
+    .scope-divider { border-top: 1px solid var(--slate-100); padding-top: 22px; margin-top: 22px; }
+
+    .scope-footer {
+      text-align: center; font-size: 15px; color: var(--slate-600);
+      max-width: 680px; margin: 0 auto; line-height: 1.7;
+    }
+
+    @media (max-width: 820px) {
+      .scope-grid { grid-template-columns: 1fr; gap: 20px; }
+      .scope-card { padding: 26px 22px; }
+      .scope-section { padding: 64px 24px; }
+    }
+  </style>
+
+  <div class="scope-inner">
+    <div class="scope-header">
+      <div class="section-label reveal">Who does what</div>
+      <h2 class="reveal">Free your team. They have better work to do.</h2>
+    </div>
+
+    <div class="scope-grid reveal">
+      <!-- LEFT: ShelfSpace handles -->
+      <div class="scope-card scope-card--ours">
+        <div class="scope-card-head">
+          <div class="scope-card-eyebrow">ShelfSpace handles</div>
+          <div class="scope-pill"><span class="scope-pill-dot"></span>ALWAYS ON</div>
+        </div>
+        <ul class="scope-list">
+          <li class="scope-item">
+            <span class="scope-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="13" y2="17"/></svg></span>
+            <span class="scope-text">Invoice ingestion &amp; parsing</span>
+          </li>
+          <li class="scope-item">
+            <span class="scope-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></span>
+            <span class="scope-text">Three-way matching (invoice ↔ delivery ↔ PO)</span>
+          </li>
+          <li class="scope-item">
+            <span class="scope-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>
+            <span class="scope-text">Per-vendor terms (COD, Net, consignment)</span>
+          </li>
+          <li class="scope-item">
+            <span class="scope-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></span>
+            <span class="scope-text">Vendor payments &amp; check generation</span>
+          </li>
+          <li class="scope-item scope-item--star">
+            <span class="scope-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></span>
+            <span class="scope-text">Vendor email &amp; call handling</span>
+            <span class="scope-stat">≈40/wk</span>
+          </li>
+          <li class="scope-item">
+            <span class="scope-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg></span>
+            <span class="scope-text">Credit recovery cycles</span>
+          </li>
+          <li class="scope-item">
+            <span class="scope-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-9-9"/><polyline points="21 4 21 12 13 12"/></svg></span>
+            <span class="scope-text">QuickBooks sync</span>
+          </li>
+        </ul>
       </div>
-      <h3 class="h-m">Same source of truth as your compliance.</h3>
-      <p class="body-default">We pull directly from Metrc. No CSVs. No manual uploads. No stale data. Every credit, every invoice, every settlement is backed by what Metrc actually shows.</p>
-      <ul class="ledger-trust-list">
-        <li><span class="num num--accent">✓</span> Read-only — we never write to your account</li>
-        <li><span class="num num--accent">✓</span> Live sync — data updates as Metrc does</li>
-        <li><span class="num num--accent">✓</span> Vetted by Metrc — official third-party vendor</li>
-      </ul>
-    </article>
+
+      <!-- RIGHT: Your team focuses on -->
+      <div class="scope-card scope-card--theirs">
+        <div class="scope-card-eyebrow">Your team focuses on</div>
+
+        <div class="scope-subhead">
+          <span class="scope-subhead-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
+          YOUR BUYER
+        </div>
+        <ul class="scope-list scope-list--theirs">
+          <li class="scope-item"><span class="scope-arrow">→</span><span class="scope-text">Product selection &amp; vendor negotiation</span></li>
+          <li class="scope-item"><span class="scope-arrow">→</span><span class="scope-text">Sell-through &amp; promotional planning</span></li>
+          <li class="scope-item"><span class="scope-arrow">→</span><span class="scope-text">New vendor sourcing</span></li>
+        </ul>
+
+        <div class="scope-divider">
+          <div class="scope-subhead">
+            <span class="scope-subhead-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></span>
+            YOUR BOOKKEEPER OR FIRM
+          </div>
+          <ul class="scope-list scope-list--theirs">
+            <li class="scope-item"><span class="scope-arrow">→</span><span class="scope-text">Month-end close &amp; reconciliations</span></li>
+            <li class="scope-item"><span class="scope-arrow">→</span><span class="scope-text">Payroll, JEs, financial statements</span></li>
+            <li class="scope-item"><span class="scope-arrow">→</span><span class="scope-text">Tax prep &amp; 280E compliance</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <p class="scope-footer reveal">We don't do close, recon, payroll, AR, tax, or 280E. Your team does — and we make their jobs easier with clean QuickBooks entries in real time.</p>
   </div>
 </section>
 
-<!-- § 08 — PROOF + CTA -->
+<!-- TRUST SIGNALS: vendor experience + Metrc -->
+<section style="background:var(--white);padding:96px 48px;border-top:1px solid var(--slate-100);">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div style="text-align:center;margin-bottom:48px;" class="reveal">
+      <div class="section-label">Built to be trusted</div>
+      <h2 style="font-size:clamp(28px,3.5vw,40px);font-weight:700;color:var(--green-deep);letter-spacing:-1.5px;margin-top:8px;">Vendors win. Compliance wins.</h2>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(360px,1fr));gap:24px;">
+      <!-- Vendor card -->
+      <div class="reveal" style="background:var(--white);border:1px solid var(--slate-200);border-radius:16px;padding:36px;display:flex;flex-direction:column;">
+        <div style="font-family:var(--font-mono);font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--green-deep);margin-bottom:20px;">What vendors get</div>
+        <h3 style="font-size:24px;font-weight:700;color:var(--green-deep);letter-spacing:-0.5px;margin:0 0 16px;line-height:1.2;">Vendors get more, not less</h3>
+        <p style="font-size:15px;line-height:1.7;color:var(--slate-600);margin:0 0 16px;">Every vendor gets their own portal — payment status, downloadable checks, complete history. ShelfiQ answers questions in seconds with live Metrc data. Payments arrive on time, the right amount, with documented credit memos when applicable.</p>
+        <p style="font-size:15px;line-height:1.7;color:var(--green-deep);font-weight:600;margin:0 0 24px;">Switching to ShelfSpace doesn't damage your vendor relationships — it improves them.</p>
+        <a href="/vendors" style="display:inline-flex;align-items:center;gap:6px;margin-top:auto;font-size:14px;font-weight:600;color:var(--green-dark);text-decoration:none;">See the vendor view <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+      </div>
+      <!-- Metrc card -->
+      <div class="reveal reveal-delay-1" style="background:var(--white);border:1px solid var(--slate-200);border-radius:16px;padding:36px;display:flex;flex-direction:column;">
+        <div style="font-family:var(--font-mono);font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--green-deep);margin-bottom:20px;">Official Metrc integration</div>
+        <img src="/metrc-logo.png" alt="METRC" style="height:36px;width:auto;margin-bottom:16px;align-self:flex-start;">
+        <h3 style="font-size:24px;font-weight:700;color:var(--green-deep);letter-spacing:-0.5px;margin:0 0 16px;line-height:1.2;">Same source of truth as your compliance</h3>
+        <p style="font-size:15px;line-height:1.7;color:var(--slate-600);margin:0 0 20px;">We pull directly from Metrc. No CSVs. No manual uploads. No stale data. Every credit, every invoice, every settlement is backed by what Metrc actually shows.</p>
+        <ul style="list-style:none;padding:20px 0 0;margin:auto 0 0;display:flex;flex-direction:column;gap:10px;border-top:1px solid var(--slate-200);">
+          <li style="display:flex;align-items:center;gap:10px;font-size:14px;font-weight:600;color:var(--green-deep);"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="flex-shrink:0;"><polyline points="20 6 9 17 4 12"/></svg> Read-only — we never write to your account</li>
+          <li style="display:flex;align-items:center;gap:10px;font-size:14px;font-weight:600;color:var(--green-deep);"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="flex-shrink:0;"><polyline points="20 6 9 17 4 12"/></svg> Live sync — data updates as Metrc does</li>
+          <li style="display:flex;align-items:center;gap:10px;font-size:14px;font-weight:600;color:var(--green-deep);"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="flex-shrink:0;"><polyline points="20 6 9 17 4 12"/></svg> Vetted by Metrc — official third-party vendor</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 6: PROOF + CTA -->
 <section class="proof-cta">
   <div class="proof-cta-stats">
     <div class="proof-cta-stat reveal">
-      <div class="proof-cta-stat-desc">In recoverable credits</div>
       <div class="proof-cta-stat-num" data-target="200000" data-suffix="+/yr">$0</div>
+      <div class="proof-cta-stat-desc">in recoverable credits</div>
     </div>
     <div class="proof-cta-stat reveal reveal-delay-1">
-      <div class="proof-cta-stat-desc">Saved on AP operations</div>
       <div class="proof-cta-stat-num" data-target="45000" data-suffix="/yr">$0</div>
+      <div class="proof-cta-stat-desc">saved on AP operations</div>
     </div>
     <div class="proof-cta-stat reveal reveal-delay-2">
-      <div class="proof-cta-stat-desc">Freed from inventory</div>
       <div class="proof-cta-stat-num" data-target="250000" data-suffix="">$0</div>
+      <div class="proof-cta-stat-desc">freed from inventory</div>
     </div>
   </div>
   <p class="proof-cta-note reveal">Real results from a two-location Massachusetts dispensary chain.</p>
   <div class="proof-cta-card reveal">
-    <div class="gutter-label">§ 08 — Evaluation</div>
     <h3>Want to know what we'd find at your stores?</h3>
-    <p>We'll analyze your data — Metrc, POS, vendor invoices — and show you exactly what you're missing. <span class="num num--accent">48 hours. Free.</span></p>
-    <p class="body-small"><a href="/ShelfSpace_Sample_Evaluation.pdf" target="_blank" rel="noopener" class="ledger-link">View a sample evaluation from a Massachusetts dispensary →</a></p>
-    <a href="/contact" class="btn-ledger">Get my free AP evaluation →</a>
+    <p>We'll analyze your data — Metrc, POS, vendor invoices — and show you exactly what you're missing. 48 hours. Free.</p>
+    <p style="margin-top:8px;"><a href="/ShelfSpace_Sample_Evaluation.pdf" target="_blank" rel="noopener" style="font-size:14px;color:var(--green-dark);font-weight:600;text-decoration:none;">View a sample evaluation from a Massachusetts dispensary <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="vertical-align:middle;"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a></p>
+    <a href="/contact" class="btn-primary">Get My Free AP Evaluation <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
     <div class="proof-cta-founder">
-      <img src="/chris-mitchem.jpg" alt="Chris Mitchem">
-      <span>Chris Mitchem, Founder — 10 years operating in cannabis</span>
+      <img src="/chris-mitchem.jpg" alt="Chris Mitchem" style="width:48px;height:48px;border-radius:50%;object-fit:cover;">
+      <span>Chris Mitchem, Founder — 10 years operating dispensaries</span>
     </div>
     <p class="proof-cta-risk">No credit card. No commitment. You only pay if we deliver.</p>
   </div>
 </section>
 
-<!-- FAQ -->
+<!-- SECTION 6: FAQ -->
 <section class="faq-section">
   <div class="faq-header">
-    <div class="section-label reveal">§ 09 — Questions</div>
+    <div class="section-label reveal">FAQ</div>
     <h2 class="section-title reveal">Frequently asked questions</h2>
   </div>
   <div class="faq-list">
@@ -2007,9 +1113,9 @@ document.head.appendChild(o)}initApollo();</script>
   </div>
 </section>
 
-<!-- § 10 — POS STRIP -->
+<!-- SECTION 7: POS TICKER -->
 <section class="pos-ticker">
-  <div class="gutter-label">§ 10 — Reads from</div>
+  <div class="pos-ticker-label">Works with every major cannabis POS</div>
   <div style="overflow:hidden">
     <div class="pos-ticker-track">
       <img src="/logos/dutchie.png" alt="Dutchie cannabis POS integration" class="pos-ticker-logo">
@@ -2086,12 +1192,9 @@ document.head.appendChild(o)}initApollo();</script>
       </ul>
     </div>
   </div>
-  <div class="footer-colophon">
-    <p>Set in Newsreader, Funnel Sans &amp; IBM Plex Mono · Published from Massachusetts · Est. 2024</p>
-  </div>
   <div class="footer-bottom">
     <p>&copy; 2026 ShelfSpace Technologies Inc.</p>
-    <div style="display:flex;align-items:center;gap:8px;justify-content:center;margin:12px 0;"><img src="/metrc-logo.png" alt="METRC" style="height:16px;opacity:0.4;filter:brightness(0) invert(1);vertical-align:middle;"><span style="font-size:11px;color:rgba(244,239,230,0.35);line-height:1;font-family:var(--font-mono-l);letter-spacing:0.06em;">Certified METRC Third-Party Vendor</span></div>
+    <div style="display:flex;align-items:center;gap:8px;justify-content:center;margin:12px 0;"><img src="/metrc-logo.png" alt="METRC" style="height:16px;opacity:0.4;filter:brightness(0) invert(1);vertical-align:middle;"><span style="font-size:11px;color:rgba(255,255,255,0.35);line-height:1;">Certified METRC Third-Party Vendor</span></div>
     <div class="footer-bottom-links">
       <a href="/privacy">Privacy</a>
       <a href="/terms">Terms</a>
@@ -2136,17 +1239,6 @@ document.head.appendChild(o)}initApollo();</script>
     requestAnimationFrame(step);
   }
 
-  /* Hero figure odometer */
-  var heroFigure = document.getElementById('ledger-hero-figure');
-  if (heroFigure) {
-    var heroTarget = parseInt(heroFigure.dataset.target, 10);
-    if (prefersReduced) {
-      heroFigure.textContent = '$' + heroTarget.toLocaleString();
-    } else {
-      animateCounter(heroFigure, heroTarget, '', 1600);
-    }
-  }
-
   /* Ultimate Calculator */
   (function() {
     var slider = document.getElementById('uc-slider');
@@ -2180,7 +1272,7 @@ document.head.appendChild(o)}initApollo();</script>
 
     function updateSliderTrack() {
       var pct = ((slider.value - slider.min) / (slider.max - slider.min)) * 100;
-      slider.style.setProperty('--slider-pct', pct + '%');
+      slider.style.background = 'linear-gradient(to right, #95d5b2 0%, #95d5b2 ' + pct + '%, #e2e8f0 ' + pct + '%, #e2e8f0 100%)';
     }
 
     function updateCalc() {
@@ -2268,20 +1360,22 @@ document.head.appendChild(o)}initApollo();</script>
     nav.classList.toggle('scrolled', scrollY > 20);
 
     var progress = docHeight > 0 ? scrollY / docHeight : 0;
-    var navProgress = document.querySelector('.nav-progress');
-    if (navProgress) navProgress.style.transform = 'scaleX(' + progress + ')';
+    document.querySelector('.nav-progress').style.transform = 'scaleX(' + progress + ')';
 
     if (prefersReduced || isMobile) return;
 
-    /* Hero parallax — gracefully no-ops if no parallax layers exist.
-       Scroll-fade is intentionally disabled on the ledger aesthetic so both
-       hero columns stay solid until they leave the viewport naturally. */
+    /* Hero parallax */
     if (hero && scrollY < hero.offsetHeight) {
       var layers = hero.querySelectorAll('.hero-parallax-layer');
       layers.forEach(function(layer) {
         var speed = parseFloat(layer.dataset.speed) || 0.2;
         layer.style.transform = 'translateY(' + (scrollY * speed) + 'px)';
       });
+      var fade = 1 - (scrollY / (hero.offsetHeight * 0.6));
+      if (heroContent) {
+        heroContent.style.opacity = Math.max(fade, 0);
+        heroContent.style.transform = 'translateY(' + (scrollY * 0.15) + 'px)';
+      }
     }
 
     /* Section parallax */
@@ -2310,6 +1404,9 @@ document.head.appendChild(o)}initApollo();</script>
   /* Case study filters */
   var filters = document.querySelectorAll('.case-filter');
   var cards = document.querySelectorAll('.case-card');
+  var caseGrid = document.querySelector('.case-grid');
+  var arrowLeft = document.querySelector('.case-arrow--left');
+  var arrowRight = document.querySelector('.case-arrow--right');
 
   filters.forEach(function(btn) {
     btn.addEventListener('click', function() {
@@ -2323,8 +1420,53 @@ document.head.appendChild(o)}initApollo();</script>
           card.classList.add('hidden');
         }
       });
+      caseGrid.scrollTo({ left: 0 });
+      updateArrows();
     });
   });
+
+  /* Case study arrows */
+  function updateArrows() {
+    if (!caseGrid || !arrowLeft || !arrowRight) return;
+    arrowLeft.classList.toggle('is-hidden', caseGrid.scrollLeft < 10);
+    arrowRight.classList.toggle('is-hidden', caseGrid.scrollLeft + caseGrid.offsetWidth >= caseGrid.scrollWidth - 10);
+  }
+  if (caseGrid) {
+    caseGrid.addEventListener('scroll', updateArrows, { passive: true });
+    updateArrows();
+  }
+  if (arrowLeft) {
+    arrowLeft.addEventListener('click', function() {
+      caseGrid.scrollBy({ left: -364, behavior: 'smooth' });
+    });
+  }
+  if (arrowRight) {
+    arrowRight.addEventListener('click', function() {
+      caseGrid.scrollBy({ left: 364, behavior: 'smooth' });
+    });
+  }
+
+  /* Case study auto-scroll */
+  var caseAutoInterval = null;
+  var caseUserScrolled = false;
+  function startCaseAutoScroll() {
+    if (prefersReduced) return;
+    caseAutoInterval = setInterval(function() {
+      if (!caseGrid || caseUserScrolled) return;
+      if (caseGrid.scrollLeft + caseGrid.offsetWidth >= caseGrid.scrollWidth - 10) {
+        caseGrid.scrollTo({ left: 0, behavior: 'smooth' });
+      } else {
+        caseGrid.scrollBy({ left: 364, behavior: 'smooth' });
+      }
+    }, 4000);
+  }
+  if (caseGrid) {
+    caseGrid.addEventListener('mouseenter', function() { caseUserScrolled = true; });
+    caseGrid.addEventListener('touchstart', function() { caseUserScrolled = true; }, { passive: true });
+    startCaseAutoScroll();
+  }
+  if (arrowLeft) arrowLeft.addEventListener('click', function() { caseUserScrolled = true; });
+  if (arrowRight) arrowRight.addEventListener('click', function() { caseUserScrolled = true; });
 
   /* Close mobile nav on outside click */
   document.addEventListener('click', function(e) {
