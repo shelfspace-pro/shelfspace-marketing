@@ -46,7 +46,7 @@
 .hero-parallax-layer { position: absolute; top: 0; left: 0; right: 0; bottom: 0; will-change: transform; }
 .hero-split { position: relative; z-index: 2; max-width: 1200px; width: 100%; display: flex; align-items: center; gap: 64px; }
 .hero-content { flex: 1; text-align: left; }
-.hero h1 { font-size: clamp(32px, 4vw, 48px); font-weight: 700; line-height: 1.1; letter-spacing: -2px; color: var(--green-deep); margin-bottom: 32px; animation: fadeUp 0.8s cubic-bezier(0.22,1,0.36,1) 0.2s both; }
+.hero h1 { font-size: clamp(36px, 5vw, 56px); font-weight: 700; line-height: 1.1; letter-spacing: -2px; color: var(--green-deep); margin-bottom: 32px; animation: fadeUp 0.8s cubic-bezier(0.22,1,0.36,1) 0.2s both; }
 .hero-actions { display: flex; align-items: center; gap: 16px; animation: fadeUp 0.8s cubic-bezier(0.22,1,0.36,1) 0.4s both; }
 .hero-founder-credit { font-size: 14px; color: var(--slate-500); margin-top: 24px; animation: fadeUp 0.8s cubic-bezier(0.22,1,0.36,1) 0.55s both; }
 .hero-founder-credit a { color: var(--green-dark); text-decoration: none; font-weight: 500; }
@@ -142,6 +142,20 @@
 .chapter-subtitle { font-size: 18px; font-weight: 600; color: var(--slate-700); margin-bottom: 32px; }
 .chapter-pain { font-size: 17px; line-height: 1.8; color: var(--slate-500); margin-bottom: 32px; }
 .chapter-resolution { font-size: 16px; line-height: 1.7; color: var(--green-dark); font-weight: 500; font-style: italic; padding-left: 20px; border-left: 3px solid var(--green-accent); }
+
+/* Simplified chapter primitives */
+.chapter-eyebrow { font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--slate-500); margin-bottom: 12px; }
+.chapter-tagline { font-size: 18px; font-weight: 500; line-height: 1.5; color: var(--slate-700); margin: 0 0 24px; max-width: 580px; }
+.chapter-detail { margin: 0 0 24px; }
+.chapter-detail summary { font-family: var(--font-mono); font-size: 12px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: var(--green-dark); cursor: pointer; padding: 12px 0; list-style: none; display: inline-flex; align-items: center; gap: 8px; border-bottom: 1px solid var(--slate-200); transition: color 0.15s, border-color 0.15s; }
+.chapter-detail summary::-webkit-details-marker { display: none; }
+.chapter-detail summary::after { content: '+'; font-size: 16px; font-weight: 400; color: var(--slate-500); margin-left: 4px; }
+.chapter-detail[open] summary::after { content: '\2212'; }
+.chapter-detail summary:hover { color: var(--green-deep); border-color: var(--green-mid); }
+.chapter-story-pain { font-size: 16px; line-height: 1.7; color: var(--slate-600); margin: 16px 0 0; max-width: 620px; }
+.chapter-story-resolution { font-size: 16px; line-height: 1.7; color: var(--green-dark); font-weight: 500; font-style: italic; padding-left: 20px; border-left: 3px solid var(--green-accent); margin: 16px 0 0; max-width: 620px; }
+.chapter-link { display: inline-block; font-size: 15px; font-weight: 600; color: var(--green-deep); text-decoration: none; border-bottom: 1px solid var(--green-mid); padding-bottom: 1px; transition: color 0.15s, border-color 0.15s; }
+.chapter-link:hover { color: var(--green-dark); border-bottom-color: var(--green-dark); }
 
 /* Ultimate Calculator */
 .uc-section { background: var(--slate-50); padding: 100px 48px; }
@@ -480,44 +494,60 @@ document.head.appendChild(o)}initApollo();</script>
 <!-- CHAPTER 1: WE DON'T OVERPAY -->
 <section class="chapter">
   <div class="chapter-inner">
-    <div class="reveal" style="font-family:var(--font-mono);font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--slate-500);margin-bottom:12px;">We don't overpay</div>
+    <div class="chapter-eyebrow reveal">We don't overpay</div>
     <div class="chapter-number reveal">$45,000/year</div>
-    <div class="chapter-subtitle reveal">lost to invoice/delivery mismatches nobody had time to reconcile.</div>
-    <p class="chapter-pain reveal">Invoices arrived from forty vendors a month. Receiving counts lived on a clipboard. Short deliveries quietly cleared. One person spent 15 hours a week matching invoices, writing checks, and fielding vendor calls.</p>
-    <div class="chapter-resolution reveal">We took over. Three-way matching on every invoice — invoice ↔ delivery ↔ PO — before any payment goes out. QuickBooks stays in sync. Vendor emails go to us, not them. <a href="/accounts-payable" style="color:var(--green-deep);font-weight:600;">See how managed AP works →</a></div>
+    <p class="chapter-tagline reveal">Every invoice three-way matched against Metrc and your PO before any check goes out.</p>
+    <details class="chapter-detail reveal">
+      <summary>How we did it</summary>
+      <p class="chapter-story-pain">Invoices arrived from forty vendors a month. Receiving counts lived on a clipboard. Short deliveries quietly cleared. One person spent 15 hours a week matching invoices, writing checks, and fielding vendor calls.</p>
+      <p class="chapter-story-resolution">We took over. Three-way matching on every invoice — invoice ↔ delivery ↔ PO — before any payment goes out. QuickBooks stays in sync. Vendor emails go to us, not them.</p>
+    </details>
+    <a class="chapter-link reveal" href="/accounts-payable">See how managed AP works →</a>
   </div>
 </section>
 
 <!-- CHAPTER 2: WE PAY ON THE RIGHT TERMS -->
 <section class="chapter">
   <div class="chapter-inner">
-    <div class="reveal" style="font-family:var(--font-mono);font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--slate-500);margin-bottom:12px;">We pay on the right terms</div>
+    <div class="chapter-eyebrow reveal">We pay on the right terms</div>
     <div class="chapter-number reveal">$250,000</div>
-    <div class="chapter-subtitle reveal">trapped in inventory they paid for upfront.</div>
-    <p class="chapter-pain reveal">Every product on their shelves was bought and paid for. Half of it sat there for months. Some expired. All of it was cash they couldn't use for payroll, expansion, or marketing.</p>
-    <div class="chapter-resolution reveal">We pay every vendor on the right terms — COD, Net, or consignment, configurable per vendor. For this retailer, we transitioned the right vendors to consignment. Now those vendors own the product until it sells. Cash went back in the bank. <a href="/consignment" style="color:var(--green-deep);font-weight:600;">See how consignment works →</a></div>
+    <p class="chapter-tagline reveal">Cash freed when the right vendors switch to consignment — they own it until it sells.</p>
+    <details class="chapter-detail reveal">
+      <summary>How we did it</summary>
+      <p class="chapter-story-pain">Every product on their shelves was bought and paid for. Half of it sat there for months. Some expired. All of it was cash they couldn't use for payroll, expansion, or marketing.</p>
+      <p class="chapter-story-resolution">We pay every vendor on the right terms — COD, Net, or consignment, configurable per vendor. For this retailer, we transitioned the right vendors to consignment. Now those vendors own the product until it sells. Cash went back in the bank.</p>
+    </details>
+    <a class="chapter-link reveal" href="/consignment">See how consignment works →</a>
   </div>
 </section>
 
 <!-- CHAPTER 3: WE RECOVER CREDITS -->
 <section class="chapter">
   <div class="chapter-inner">
-    <div class="reveal" style="font-family:var(--font-mono);font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--slate-500);margin-bottom:12px;">We recover credits</div>
+    <div class="chapter-eyebrow reveal">We recover credits</div>
     <div class="chapter-number reveal">$200,000/year</div>
-    <div class="chapter-subtitle reveal">in vendor credits nobody was tracking.</div>
-    <p class="chapter-pain reveal">Returns nobody filed. Expired product nobody credited. Co-marketing dollars and shared promo costs committed in vendor agreements but never invoiced back. Four to six percent of revenue — just gone.</p>
-    <div class="chapter-resolution reveal">We pulled their data, built documented credit memos against the agreement terms both sides already signed, sent them to vendors with line-item Metrc backup, and got cleaner approvals because the math was auditable. Money that was always theirs — back in their account. <a href="/credit-recovery" style="color:var(--green-deep);font-weight:600;">See how credit recovery works →</a></div>
+    <p class="chapter-tagline reveal">Returns, expirations, co-marketing — credit memos pulled from Metrc, sent monthly, paid back.</p>
+    <details class="chapter-detail reveal">
+      <summary>How we did it</summary>
+      <p class="chapter-story-pain">Returns nobody filed. Expired product nobody credited. Co-marketing dollars and shared promo costs committed in vendor agreements but never invoiced back. Four to six percent of revenue — just gone.</p>
+      <p class="chapter-story-resolution">We pulled their data, built documented credit memos against the agreement terms both sides already signed, sent them to vendors with line-item Metrc backup, and got cleaner approvals because the math was auditable. Money that was always theirs — back in their account.</p>
+    </details>
+    <a class="chapter-link reveal" href="/credit-recovery">See how credit recovery works →</a>
   </div>
 </section>
 
 <!-- CHAPTER 4: WE OWN THE INBOX -->
 <section class="chapter">
   <div class="chapter-inner">
-    <div class="reveal" style="font-family:var(--font-mono);font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--slate-500);margin-bottom:12px;">We own the inbox</div>
+    <div class="chapter-eyebrow reveal">We own the inbox</div>
     <div class="chapter-number reveal">40 emails/week</div>
-    <div class="chapter-subtitle reveal">of vendor AP back-and-forth, off your plate.</div>
-    <p class="chapter-pain reveal">"When am I getting paid?" "Why was my invoice short?" "Did you receive my credit memo?" "When does the next settlement run?" Forty of those a week. Each one a five-minute interruption. None of them the work you're actually trying to do — and the relationships still suffered because the answers came late.</p>
-    <div class="chapter-resolution reveal">We took over the inbox. Every vendor email about payments, balances, credits, and settlements comes to us — answered with live Metrc and settlement data, in the same tone you'd use, without you ever seeing it. The five percent that genuinely need a human decision come to your desk with the work already done. <a href="/accounts-payable#vendor-communications" style="color:var(--green-deep);font-weight:600;">See how vendor communications works →</a></div>
+    <p class="chapter-tagline reveal">Vendor emails come to us — answered with live data, off your plate.</p>
+    <details class="chapter-detail reveal">
+      <summary>How we did it</summary>
+      <p class="chapter-story-pain">"When am I getting paid?" "Why was my invoice short?" "Did you receive my credit memo?" "When does the next settlement run?" Forty of those a week. Each one a five-minute interruption. None of them the work you're actually trying to do — and the relationships still suffered because the answers came late.</p>
+      <p class="chapter-story-resolution">We took over the inbox. Every vendor email about payments, balances, credits, and settlements comes to us — answered with live Metrc and settlement data, in the same tone you'd use, without you ever seeing it. The five percent that genuinely need a human decision come to your desk with the work already done.</p>
+    </details>
+    <a class="chapter-link reveal" href="/accounts-payable#vendor-communications">See how vendor communications works →</a>
   </div>
 </section>
 
@@ -525,14 +555,14 @@ document.head.appendChild(o)}initApollo();</script>
 <section class="pivot-section">
   <div class="pivot-content">
     <h2 class="reveal">One AP team. Three legs of the same stack.</h2>
-    <p class="reveal">We don't overpay — every invoice three-way matched before payment. We pay every vendor on the right terms — COD, Net, or consignment, configurable per vendor. We recover the credits your agreements already promised — returns, expirations, co-marketing, every month. And every vendor email about payments, balances, and credits lands with us, not you. Your buyer focuses on product. Your <a href="/for-bookkeepers" style="color:var(--green-accent);text-decoration:none;border-bottom:1px solid rgba(149,213,178,0.4);">bookkeeper focuses on close</a>. We handle the AP underneath.</p>
+    <p class="reveal">Your buyer picks product. Your <a href="/for-bookkeepers" style="color:var(--green-accent);text-decoration:none;border-bottom:1px solid rgba(149,213,178,0.4);">bookkeeper closes the books</a>. We handle every dollar in between.</p>
   </div>
 </section>
 
 <!-- VENDOR NETWORK PROOF -->
 <section style="background:var(--white);padding:36px 48px;border-bottom:1px solid var(--slate-100);">
   <div style="max-width:780px;margin:0 auto;text-align:center;" class="reveal">
-    <p style="font-size:16px;line-height:1.7;color:var(--slate-700);margin:0;"><strong style="color:var(--green-deep);font-family:var(--font-mono);font-size:18px;">50+ MA vendors</strong> are already paid through ShelfSpace. The AP we run for one MA two-store retailer is the AP we run for you.</p>
+    <p style="font-size:16px;line-height:1.7;color:var(--slate-700);margin:0;"><strong style="color:var(--green-deep);font-family:var(--font-mono);font-size:18px;">50+ Massachusetts vendors</strong> already paid through ShelfSpace. Your store is next.</p>
   </div>
 </section>
 
@@ -596,11 +626,10 @@ document.head.appendChild(o)}initApollo();</script>
       </div>
     </div>
     <div class="uc-bottom">
-      <p class="uc-bottom-tag">One team. All three. You only pay when we produce results.</p>
+      <p class="uc-bottom-tag">One team. All three. You only pay if we deliver.</p>
       <a href="/contact" class="btn-primary">Get My Free AP Evaluation <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
-      <p class="uc-bottom-sub">We'll show your actual numbers across all three. 48 hours. Free.</p>
-      <p style="font-size:14px;color:var(--slate-500);margin-top:8px;">Plus our service: <strong style="color:var(--green-deep);font-family:var(--font-mono);">$1,800–$2,500/mo per location</strong>. Multi-location discount applies.</p>
-      <p class="uc-bottom-disclaimer">*Estimates based on industry averages, not a guarantee.</p>
+      <p style="font-size:14px;color:var(--slate-500);margin-top:8px;"><strong style="color:var(--green-deep);font-family:var(--font-mono);">$1,800–$2,500/mo per location</strong>. Free evaluation in 48 hours.</p>
+      <p class="uc-bottom-disclaimer">*Estimates only — your actual numbers may vary.</p>
     </div>
   </div>
 </section>
@@ -627,7 +656,6 @@ document.head.appendChild(o)}initApollo();</script>
         <div class="case-tag case-tag--ap">Accounts Payable</div>
         <div class="case-amount">$4,873</div>
         <div class="case-headline">Stopped a duplicate invoice across two locations</div>
-        <p class="case-summary">A vendor billed the wrong entity for an invoice already paid from another location. We cross-checked the system, confirmed with the bank, and stopped it the same day.</p>
         <div class="case-meta">
           <span class="case-speed">Same-day fix</span>
           <a href="/blog/case-study-duplicate-invoice" class="case-link">Read the full story <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
@@ -637,7 +665,6 @@ document.head.appendChild(o)}initApollo();</script>
         <div class="case-tag case-tag--ap">Accounts Payable</div>
         <div class="case-amount">$1,140</div>
         <div class="case-headline">Flagged a shorted delivery before payment went out</div>
-        <p class="case-summary">A vendor delivered 42 units but invoiced for 50. Metrc confirmed the shortage. We adjusted the payment and saved $1,140 before a check was cut.</p>
         <div class="case-meta">
           <span class="case-speed">Same-day fix</span>
           <a href="/blog/case-study-shorted-delivery" class="case-link">Read the full story <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
@@ -647,7 +674,6 @@ document.head.appendChild(o)}initApollo();</script>
         <div class="case-tag case-tag--ap">Accounts Payable</div>
         <div class="case-amount">12 vendors</div>
         <div class="case-headline">Non-cannabis vendors finally in the system</div>
-        <p class="case-summary">Landlord, security, cleaning, insurance — 12 non-cannabis vendors were being paid by personal check. We onboarded all of them in one week. One system for everyone.</p>
         <div class="case-meta">
           <span class="case-speed">First 7 days</span>
           <a href="/blog/case-study-non-cannabis-vendors" class="case-link">Read the full story <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
@@ -657,7 +683,6 @@ document.head.appendChild(o)}initApollo();</script>
         <div class="case-tag case-tag--consignment">Consignment</div>
         <div class="case-amount">$27,350</div>
         <div class="case-headline">Freed trapped inventory with one vendor switch</div>
-        <p class="case-summary">A single-location dispensary switched their top vendor to consignment. Dead stock dropped to zero, margins locked at 50%, and $27K went back to operations.</p>
         <div class="case-meta">
           <span class="case-speed">Results in 60 days</span>
           <a href="/blog/case-study-consignment-conversion" class="case-link">Read the full story <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
@@ -667,7 +692,6 @@ document.head.appendChild(o)}initApollo();</script>
         <div class="case-tag case-tag--consignment">Consignment</div>
         <div class="case-amount">$8,370</div>
         <div class="case-headline">Expired product returned at zero cost</div>
-        <p class="case-summary">Under wholesale, 47 expired units would have been an $8,370 write-off. Under consignment, the vendor owns it. All 47 went back. The dispensary's loss: $0.</p>
         <div class="case-meta">
           <span class="case-speed">Quarterly</span>
           <a href="/blog/case-study-expired-returns" class="case-link">Read the full story <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
@@ -677,7 +701,6 @@ document.head.appendChild(o)}initApollo();</script>
         <div class="case-tag case-tag--consignment">Consignment</div>
         <div class="case-amount">$6,230</div>
         <div class="case-headline">Settlement question answered in 24 hours with shared data</div>
-        <p class="case-summary">A vendor claimed they were underpaid $1,800 on a settlement. We pulled POS data, Metrc records, and the profit split math. Settlement was correct to the penny.</p>
         <div class="case-meta">
           <span class="case-speed">24-hour resolution</span>
           <a href="/blog/case-study-settlement-dispute" class="case-link">Read the full story <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
@@ -687,7 +710,6 @@ document.head.appendChild(o)}initApollo();</script>
         <div class="case-tag case-tag--credit">Credit Recovery</div>
         <div class="case-amount">$83,741/yr</div>
         <div class="case-headline">Credit recovery lifted EBITDA 15% at one dispensary</div>
-        <p class="case-summary">A Massachusetts retailer was leaving money on the table with 10 vendors. We pulled 90 days of Metrc data and found $83,741/yr in recoverable co-marketing and waste credits.</p>
         <div class="case-meta">
           <span class="case-speed">First 90 days</span>
           <a href="/blog/case-study-ebitda-credit-recovery" class="case-link">Read the full story <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
@@ -697,7 +719,6 @@ document.head.appendChild(o)}initApollo();</script>
         <div class="case-tag case-tag--credit">Credit Recovery</div>
         <div class="case-amount">$2,340</div>
         <div class="case-headline">Recovered co-marketing credits nobody was tracking</div>
-        <p class="case-summary">A dispensary ran in-store promos for a vendor but never billed back. We calculated the credit against keystone, got vendor approval, and applied it to an open invoice.</p>
         <div class="case-meta">
           <span class="case-speed">Found in 14 days</span>
           <a href="/blog/case-study-vendor-credit-recovery" class="case-link">Read the full story <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
@@ -707,7 +728,6 @@ document.head.appendChild(o)}initApollo();</script>
         <div class="case-tag case-tag--credit">Credit Recovery</div>
         <div class="case-amount">$1,847</div>
         <div class="case-headline">Return credit nobody filed — recovered</div>
-        <p class="case-summary">23 defective units were returned to a vendor and processed in Metrc. Nobody created a credit memo. We found it, built the memo, and recovered $1,847.</p>
         <div class="case-meta">
           <span class="case-speed">First evaluation</span>
           <a href="/blog/case-study-return-credit" class="case-link">Read the full story <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
@@ -717,7 +737,6 @@ document.head.appendChild(o)}initApollo();</script>
         <div class="case-tag case-tag--credit">Credit Recovery</div>
         <div class="case-amount">$3,180</div>
         <div class="case-headline">Expiration credits buried in a vendor agreement</div>
-        <p class="case-summary">31 units expired over 90 days. The vendor agreement included 75% credit terms nobody enforced. We calculated $3,180, got approval, and applied it to the next settlement.</p>
         <div class="case-meta">
           <span class="case-speed">Found in 14 days</span>
           <a href="/blog/case-study-expiration-credit" class="case-link">Read the full story <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
@@ -727,7 +746,6 @@ document.head.appendChild(o)}initApollo();</script>
         <div class="case-tag case-tag--ops">Operations</div>
         <div class="case-amount">47 emails</div>
         <div class="case-headline">We handled 47 vendor emails in one week</div>
-        <p class="case-summary">A dispensary owner was fielding 50+ vendor emails a week. We took over — payment confirmations, balance inquiries, settlement questions — all with live data.</p>
         <div class="case-meta">
           <span class="case-speed">First week</span>
           <a href="/blog/case-study-shelfiq-vendor-emails" class="case-link">Read the full story <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
@@ -737,7 +755,6 @@ document.head.appendChild(o)}initApollo();</script>
         <div class="case-tag case-tag--ops">Operations</div>
         <div class="case-amount">98% less time</div>
         <div class="case-headline">From 15 hours a week to one approve button</div>
-        <p class="case-summary">A store manager spent 15 hours a week on AP — spreadsheets, checks, vendor calls. Now they review and approve in 15 minutes. Two workdays back, every week.</p>
         <div class="case-meta">
           <span class="case-speed">Results in 60 days</span>
           <a href="/blog/case-study-ap-time-savings" class="case-link">Read the full story <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
@@ -747,7 +764,6 @@ document.head.appendChild(o)}initApollo();</script>
         <div class="case-tag case-tag--ops">Operations</div>
         <div class="case-amount">Zero spreadsheets</div>
         <div class="case-headline">Replaced a 200-row spreadsheet with Metrc data</div>
-        <p class="case-summary">Delivery reconciliation lived in a shared Google Sheet nobody trusted. The dashboard replaced it with real-time Metrc data and flagged 3 shortages in 14 days.</p>
         <div class="case-meta">
           <span class="case-speed">First 14 days</span>
           <a href="/blog/case-study-delivery-dashboard" class="case-link">Read the full story <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
@@ -757,7 +773,6 @@ document.head.appendChild(o)}initApollo();</script>
         <div class="case-tag case-tag--ops">Operations</div>
         <div class="case-amount">90% fewer calls</div>
         <div class="case-headline">Vendor portal stopped 30 payment calls a month</div>
-        <p class="case-summary">Vendors called 30+ times a month asking "where's my check?" We gave them a portal. Payment status calls dropped to 3 in the first month.</p>
         <div class="case-meta">
           <span class="case-speed">First 30 days</span>
           <a href="/blog/case-study-vendor-portal" class="case-link">Read the full story <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
@@ -767,7 +782,6 @@ document.head.appendChild(o)}initApollo();</script>
         <div class="case-tag case-tag--ops">Operations</div>
         <div class="case-amount">Real-time books</div>
         <div class="case-headline">QuickBooks went from 3 days behind to instant</div>
-        <p class="case-summary">Payments were entered into QuickBooks 2-3 days late. Month-end took 8 hours. Now every payment syncs the moment it clears. Reconciliation: under 1 hour.</p>
         <div class="case-meta">
           <span class="case-speed">Day 1</span>
           <a href="/blog/case-study-quickbooks-sync" class="case-link">Read the full story <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
@@ -777,7 +791,6 @@ document.head.appendChild(o)}initApollo();</script>
         <div class="case-tag case-tag--consignment">Consignment</div>
         <div class="case-amount">Zero stockouts</div>
         <div class="case-headline">Vendor started restocking from their settlement report</div>
-        <p class="case-summary">A consignment vendor noticed their settlement report showed inventory and velocity per SKU. They started replenishing before the dispensary even asked.</p>
         <div class="case-meta">
           <span class="case-speed">Within first month</span>
           <a href="/blog/case-study-vendor-replenishment" class="case-link">Read the full story <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
@@ -787,7 +800,6 @@ document.head.appendChild(o)}initApollo();</script>
         <div class="case-tag case-tag--ap">Accounts Payable</div>
         <div class="case-amount">$7,340</div>
         <div class="case-headline">We flagged 12 invoice mismatches in one month using Metrc</div>
-        <p class="case-summary">A two-location dispensary was paying invoices without checking deliveries. We matched every invoice to Metrc. 12 had wrong quantities or amounts.</p>
         <div class="case-meta">
           <span class="case-speed">Found in 30 days</span>
           <a href="/blog/case-study-metrc-invoice-accuracy" class="case-link">Read the full story <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
@@ -797,7 +809,6 @@ document.head.appendChild(o)}initApollo();</script>
         <div class="case-tag case-tag--consignment">Consignment</div>
         <div class="case-amount">$14,230</div>
         <div class="case-headline">We got a new product on shelves — zero risk for both sides</div>
-        <p class="case-summary">A vendor had a new edible line nobody would buy wholesale. We structured a consignment deal. It sold $14,230 in the first month.</p>
         <div class="case-meta">
           <span class="case-speed">First 30 days</span>
           <a href="/blog/case-study-consignment-new-product" class="case-link">Read the full story <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
@@ -807,7 +818,6 @@ document.head.appendChild(o)}initApollo();</script>
         <div class="case-tag case-tag--ops">Operations</div>
         <div class="case-amount">20+ hrs/month</div>
         <div class="case-headline">We took over vendor emails — vendors get instant answers, the owner gets his inbox back</div>
-        <p class="case-summary">The owner of a two-store chain was fielding 30+ vendor emails a week. We took over on day one. Vendors now get answers in seconds; he hasn't had to triage a vendor email since.</p>
         <div class="case-meta">
           <span class="case-speed">First week</span>
           <a href="/blog/case-study-ceo-email-relief" class="case-link">Read the full story <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
@@ -817,7 +827,6 @@ document.head.appendChild(o)}initApollo();</script>
         <div class="case-tag case-tag--ops">Operations</div>
         <div class="case-amount">23% less waste</div>
         <div class="case-headline">We gave a buyer real data — waste dropped 23%</div>
-        <p class="case-summary">A buyer was reordering by gut. We showed them sell-through and velocity data. They cut 8 slow SKUs, doubled 5 winners. Waste dropped 23% in two months.</p>
         <div class="case-meta">
           <span class="case-speed">First 60 days</span>
           <a href="/blog/case-study-buyer-reorder-data" class="case-link">Read the full story <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
@@ -1157,8 +1166,7 @@ document.head.appendChild(o)}initApollo();</script>
       <div class="reveal" style="background:var(--white);border:1px solid var(--slate-200);border-radius:16px;padding:36px;display:flex;flex-direction:column;">
         <div style="font-family:var(--font-mono);font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--green-deep);margin-bottom:20px;">What vendors get</div>
         <h3 style="font-size:24px;font-weight:700;color:var(--green-deep);letter-spacing:-0.5px;margin:0 0 16px;line-height:1.2;">Vendors get more, not less</h3>
-        <p style="font-size:15px;line-height:1.7;color:var(--slate-600);margin:0 0 16px;">Every vendor gets their own portal — payment status, downloadable checks, complete history. ShelfiQ answers questions in seconds with live Metrc data. Payments arrive on time, the right amount, with documented credit memos when applicable.</p>
-        <p style="font-size:15px;line-height:1.7;color:var(--green-deep);font-weight:600;margin:0 0 24px;">Switching to ShelfSpace doesn't damage your vendor relationships — it improves them.</p>
+        <p style="font-size:15px;line-height:1.7;color:var(--slate-600);margin:0 0 24px;">Their own portal. Live payment status. Credit memos when due. ShelfiQ answers their questions in seconds.</p>
         <a href="/vendors" style="display:inline-flex;align-items:center;gap:6px;margin-top:auto;font-size:14px;font-weight:600;color:var(--green-dark);text-decoration:none;">See the vendor view <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
       </div>
       <!-- Metrc card -->
@@ -1166,7 +1174,6 @@ document.head.appendChild(o)}initApollo();</script>
         <div style="font-family:var(--font-mono);font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--green-deep);margin-bottom:20px;">Official Metrc integration</div>
         <img src="/metrc-logo.png" alt="METRC" style="height:36px;width:auto;margin-bottom:16px;align-self:flex-start;">
         <h3 style="font-size:24px;font-weight:700;color:var(--green-deep);letter-spacing:-0.5px;margin:0 0 16px;line-height:1.2;">Same source of truth as your compliance</h3>
-        <p style="font-size:15px;line-height:1.7;color:var(--slate-600);margin:0 0 20px;">We pull directly from Metrc. No CSVs. No manual uploads. No stale data. Every credit, every invoice, every settlement is backed by what Metrc actually shows.</p>
         <ul style="list-style:none;padding:20px 0 0;margin:auto 0 0;display:flex;flex-direction:column;gap:10px;border-top:1px solid var(--slate-200);">
           <li style="display:flex;align-items:center;gap:10px;font-size:14px;font-weight:600;color:var(--green-deep);"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="flex-shrink:0;"><polyline points="20 6 9 17 4 12"/></svg> Read-only — we never write to your account</li>
           <li style="display:flex;align-items:center;gap:10px;font-size:14px;font-weight:600;color:var(--green-deep);"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="flex-shrink:0;"><polyline points="20 6 9 17 4 12"/></svg> Live sync — data updates as Metrc does</li>
@@ -1195,15 +1202,15 @@ document.head.appendChild(o)}initApollo();</script>
   </div>
   <p class="proof-cta-note reveal">Real results from a two-location Massachusetts dispensary chain.</p>
   <div class="proof-cta-card reveal">
-    <h3>Want to know what we'd find at your stores?</h3>
-    <p>We'll analyze your data — Metrc, POS, vendor invoices — and show you exactly what you're missing. 48 hours. Free.</p>
-    <p style="margin-top:8px;"><a href="/ShelfSpace_Sample_Evaluation.pdf" target="_blank" rel="noopener" style="font-size:14px;color:var(--green-dark);font-weight:600;text-decoration:none;">View a sample evaluation from a Massachusetts dispensary <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="vertical-align:middle;"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a></p>
+    <h3>What would we find at your stores?</h3>
+    <p>Free analysis in 48 hours. You only pay if we deliver.</p>
+    <p style="margin-top:8px;"><a href="/ShelfSpace_Sample_Evaluation.pdf" target="_blank" rel="noopener" style="font-size:14px;color:var(--green-dark);font-weight:600;text-decoration:none;">See a sample evaluation <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="vertical-align:middle;"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a></p>
     <a href="/contact" class="btn-primary">Get My Free AP Evaluation <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
     <div class="proof-cta-founder">
       <img src="/chris-mitchem.jpg" alt="Chris Mitchem" style="width:48px;height:48px;border-radius:50%;object-fit:cover;">
-      <span>Chris Mitchem, Founder — 10 years operating dispensaries</span>
+      <span>Chris Mitchem, Founder — 10 years in cannabis</span>
     </div>
-    <p class="proof-cta-risk">No credit card. No commitment. You only pay if we deliver.</p>
+    <p class="proof-cta-risk">No credit card. No commitment.</p>
   </div>
 </section>
 
