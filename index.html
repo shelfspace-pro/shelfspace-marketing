@@ -335,8 +335,12 @@
    Desktop: trigger hidden via display:contents on label, body always visible.
    Mobile: trigger visible as toggle, body hidden until checkbox checked. */
 .m-collapse-cb { position: absolute; opacity: 0; pointer-events: none; height: 0; width: 0; }
-.m-collapse-trigger { display: contents; }   /* desktop: invisible passthrough */
-.m-collapse-body    { display: block; }       /* desktop: always visible */
+/* Desktop default: trigger hidden (calc/scope/trust pill text). Chapter trigger overrides below. */
+.m-collapse-trigger { display: none; }
+/* Chapter trigger contains eyebrow + amount divs that MUST show on desktop — display:contents lets children flow */
+.chapter .m-collapse-trigger { display: contents; }
+.m-collapse-body { display: block; }   /* desktop: always visible */
+.uc-mobile-fallback-cta { display: none; }
 
 @media (max-width: 700px) {
   .m-collapse-body { display: none; }
