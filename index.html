@@ -328,14 +328,50 @@
   .footer-top { grid-template-columns: 1fr 1fr; }
   .pos-ticker-logo { height: 72px; padding: 0 32px; }
 }
+/* Case-grid mobile-only "See all" link (default hidden; flips on at ≤700px) */
+.case-grid-mobile-foot { display: none; }
+
 @media (max-width: 700px) {
-  /* Suppress decorative radial gradients on mobile — bleed off-screen anyway, save paint cost */
+  /* Calm-it-down mobile pass — drop secondary sections, flatten backgrounds, cap case-grid */
+
+  /* Drop sections that don't earn their scroll on mobile */
+  .pivot-section { display: none; }
+  .pos-ticker { display: none; }
+
+  /* Flatten background alternation — chapters + calc + scope + FAQ all white */
+  .chapter:nth-child(even),
+  .chapter:nth-child(odd),
+  .uc-section,
+  .scope-section,
+  .faq-section { background: var(--white); }
+
+  /* Suppress decorative radial gradients — bleed off-screen anyway, save paint cost */
   .hero-bg-gradient, .hero-bg-gradient-2,
-  .chapter::before, .pivot-section::before { display: none; }
+  .chapter::before { display: none; }
+
   /* Case-studies horizontal scroll: fade right edge to hint at swipeable content */
   .case-grid {
     -webkit-mask-image: linear-gradient(to right, black 88%, transparent);
     mask-image: linear-gradient(to right, black 88%, transparent);
+  }
+
+  /* Cap case-grid to first 6 cards on mobile + show "See all" link, hide filter pills */
+  .case-filters { display: none; }
+  .case-card:nth-child(n+7) { display: none; }
+  .case-grid-mobile-foot {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 24px 24px 0;
+    margin: 0;
+  }
+  .case-grid-mobile-foot a {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--green-deep);
+    text-decoration: none;
+    border-bottom: 1px solid var(--green-mid);
+    padding-bottom: 1px;
   }
 }
 @media (max-width: 600px) {
@@ -876,6 +912,7 @@ document.head.appendChild(o)}initApollo();</script>
       </div>
     </div>
     </div>
+    <p class="case-grid-mobile-foot"><a href="/blog">See all 20 in the journal →</a></p>
   </div>
 </section>
 
