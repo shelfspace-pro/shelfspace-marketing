@@ -106,15 +106,19 @@
   .pain-section { background: var(--white); padding: 80px 48px; text-align: center; }
   .pain-monthly { margin-bottom: 40px; }
   .pain-monthly-number {
-    font-family: var(--font-mono); font-size: clamp(48px, 7vw, 80px);
-    font-weight: 700; color: #c0392b; letter-spacing: -3px;
+    font-family: var(--font-mono); font-size: clamp(40px, 6vw, 72px);
+    font-weight: 700; color: var(--green-deep); letter-spacing: -3px;
     line-height: 1;
   }
-  .pain-monthly-sub {
-    font-size: 18px; color: var(--slate-500); margin-top: 12px;
-    max-width: 480px; margin-left: auto; margin-right: auto; line-height: 1.5;
+  .pain-monthly-qualifier {
+    font-size: 0.42em; font-weight: 700; letter-spacing: -1px;
+    color: var(--green-dark); margin-left: 6px;
   }
-  .pain-monthly-sub em { font-style: italic; color: #c0392b; font-weight: 600; }
+  .pain-monthly-sub {
+    font-size: 18px; color: var(--slate-500); margin-top: 14px;
+    max-width: 520px; margin-left: auto; margin-right: auto; line-height: 1.5;
+  }
+  .pain-monthly-sub strong { color: var(--green-deep); font-weight: 700; }
   .pain-lines {
     display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;
     margin-bottom: 40px;
@@ -122,12 +126,12 @@
   .pain-pill {
     display: inline-flex; align-items: center; gap: 10px;
     padding: 12px 24px; border-radius: 12px;
-    background: rgba(192,57,43,0.05); border: 1px solid rgba(192,57,43,0.2);
-    font-size: 15px; font-weight: 500; color: #c0392b;
+    background: rgba(149,213,178,0.12); border: 1px solid rgba(149,213,178,0.45);
+    font-size: 15px; font-weight: 600; color: var(--green-deep);
     transition: all 0.3s;
   }
-  .pain-pill:hover { border-color: rgba(192,57,43,0.4); background: rgba(192,57,43,0.08); }
-  .pain-pill svg { flex-shrink: 0; color: #c0392b; }
+  .pain-pill:hover { border-color: rgba(149,213,178,0.7); background: rgba(149,213,178,0.2); }
+  .pain-pill svg { flex-shrink: 0; color: var(--green-deep); }
   .pain-pivot {
     font-size: clamp(20px, 2.5vw, 28px); font-weight: 700;
     color: var(--green-deep); letter-spacing: -0.5px;
@@ -381,15 +385,15 @@ document.head.appendChild(o)}initApollo();</script>
 <!-- SECTION 2: PAIN -->
 <section class="pain-section">
   <div class="pain-monthly reveal">
-    <div class="pain-monthly-number">$17,000</div>
-    <div class="pain-monthly-sub">That's how much your dispensary loses <em>every month</em> in vendor credits nobody's tracking.</div>
+    <div class="pain-monthly-number">+$17,000<span class="pain-monthly-qualifier">/month in cash</span></div>
+    <div class="pain-monthly-sub"><strong>Straight to the bottom line.</strong> That's what vendor credits can do for you.</div>
   </div>
   <div class="pain-lines reveal">
-    <span class="pain-pill"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg> Returns nobody filed</span>
-    <span class="pain-pill"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Expired product nobody credited</span>
-    <span class="pain-pill"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg> Shared promo costs not split per agreement</span>
+    <span class="pain-pill"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg> Product Returns</span>
+    <span class="pain-pill"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Expired Products</span>
+    <span class="pain-pill"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg> Deals and Promotions</span>
   </div>
-  <p class="pain-pivot reveal">We get the credits your agreements already promised. You keep the money.</p>
+  <p class="pain-pivot reveal">We ask vendors for credits on your behalf.</p>
 </section>
 
 <!-- SECTION 3: CALCULATOR + INLINE GUARANTEE + CTA -->
