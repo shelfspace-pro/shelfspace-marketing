@@ -258,6 +258,38 @@
     .hero-rotator-slide:first-child { opacity: 1 !important; position: relative !important; inset: auto !important; }
     .hero-rotator-ghost { display: none !important; }
   }
+
+  /* ─── MOBILE COLLAPSE PATTERN (matches homepage d03212a) ─── */
+  .m-collapse-cb { position: absolute; opacity: 0; pointer-events: none; height: 0; width: 0; }
+  .m-collapse-trigger { display: none; }
+  .m-collapse-body { display: block; }
+  .uc-mobile-fallback-cta { display: none; }
+
+  @media (max-width: 700px) {
+    .m-collapse-body { display: none; }
+    .m-collapse-cb:checked ~ .m-collapse-body { display: block; }
+    .m-collapse-cb:checked ~ .m-collapse-body .reveal {
+      opacity: 1 !important; transform: none !important;
+    }
+    .boost-section .m-collapse-trigger {
+      display: inline-flex; cursor: pointer;
+      align-items: center; justify-content: center; gap: 8px;
+      margin: 8px auto 0;
+      padding: 14px 28px;
+      background: var(--green-deep); color: var(--white);
+      border-radius: 12px;
+      font-family: var(--font-mono); font-size: 13px; font-weight: 700;
+      letter-spacing: 1px; text-transform: uppercase;
+    }
+    .boost-section .m-collapse-trigger::after { content: '↓'; font-size: 16px; line-height: 1; }
+    .boost-section .m-collapse-cb:checked ~ .m-collapse-trigger::after { content: '↑'; }
+    .boost-section .m-collapse-cb:checked ~ .m-collapse-body { margin-top: 28px; }
+    .boost-section { text-align: center; }
+    .boost-section .m-collapse-body { text-align: left; }
+    .boost-section .m-collapse-cb:not(:checked) ~ .uc-mobile-fallback-cta {
+      display: flex; justify-content: center; padding: 20px 24px 0; margin: 0;
+    }
+  }
 </style>
 <noscript><style>.reveal,.page-hero .section-label,.page-hero .section-title,.page-hero .section-desc{opacity:1;transform:none;transition:none;}</style></noscript>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-H2LBJT03WE"></script>
@@ -402,6 +434,10 @@ document.head.appendChild(o)}initApollo();</script>
     <div class="section-label reveal">See What Changes</div>
     <h2 class="section-title reveal">Slide to see how consignment transforms your cash flow</h2>
   </div>
+  <input type="checkbox" id="m-collapse-con-calc" class="m-collapse-cb">
+  <label for="m-collapse-con-calc" class="m-collapse-trigger">Run the numbers</label>
+  <p class="uc-mobile-fallback-cta"><a href="/contact" class="btn-primary">Get My Free Evaluation</a></p>
+  <div class="m-collapse-body">
   <div class="boost-container reveal">
     <div class="boost-slider-wrapper">
       <div class="boost-slider-header">
@@ -447,6 +483,7 @@ document.head.appendChild(o)}initApollo();</script>
       <a href="/contact" class="btn-primary">Get My Free Evaluation <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
       <p style="font-size:14px;color:var(--slate-500);margin-top:12px;">We'll show you which vendors to start with. 48 hours. Free.</p>
     </div>
+  </div>
   </div>
 </section>
 

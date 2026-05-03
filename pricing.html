@@ -335,6 +335,33 @@
     .tier { transition: none; }
     .tier:hover, .tier--featured:hover { transform: none; }
   }
+
+  /* ─── MOBILE COLLAPSE PATTERN — pricing tier feature lists ─── */
+  .m-collapse-cb { position: absolute; opacity: 0; pointer-events: none; height: 0; width: 0; }
+  .m-collapse-trigger { display: none; }
+  .m-collapse-body { display: block; }
+
+  @media (max-width: 700px) {
+    .tier .m-collapse-body { display: none; }
+    .tier .m-collapse-cb:checked ~ .m-collapse-body { display: block; }
+    .tier .m-collapse-cb:checked ~ .m-collapse-body .reveal {
+      opacity: 1 !important; transform: none !important;
+    }
+    .tier .m-collapse-trigger {
+      display: inline-flex; cursor: pointer;
+      align-items: center; gap: 6px;
+      margin: 16px 0 0;
+      padding: 12px 0;
+      color: var(--green-dark);
+      font-size: 14px; font-weight: 600;
+      border-bottom: 1px solid rgba(64,145,108,0.4);
+      align-self: flex-start;
+    }
+    .tier .m-collapse-trigger::after { content: '↓'; font-size: 14px; line-height: 1; }
+    .tier .m-collapse-cb:checked ~ .m-collapse-trigger::after { content: '↑'; }
+    /* Hide the in-body label on mobile — the trigger replaces it */
+    .tier .m-collapse-body .tier-features-label { display: none; }
+  }
 </style>
 <noscript><style>.reveal{opacity:1;transform:none;transition:none;}</style></noscript>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-H2LBJT03WE"></script>
@@ -438,6 +465,9 @@ document.head.appendChild(o)}initApollo();</script>
         <div class="tier-price-unit">per location</div>
         <div class="tier-price-sub">Includes consignment terms.</div>
       </div>
+      <input type="checkbox" id="m-collapse-tier-1" class="m-collapse-cb">
+      <label for="m-collapse-tier-1" class="m-collapse-trigger">See what's included</label>
+      <div class="m-collapse-body">
       <div class="tier-features-label">What's included</div>
       <ul class="tier-features">
         <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Three-way invoice matching (invoice ↔ delivery ↔ PO)</li>
@@ -448,6 +478,7 @@ document.head.appendChild(o)}initApollo();</script>
         <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Vendor portal — payment status &amp; check downloads</li>
         <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Cannabis &amp; non-cannabis vendors</li>
       </ul>
+      </div>
       <a href="/contact" class="tier-cta tier-cta--secondary">Get My Free AP Evaluation
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
       </a>
@@ -468,6 +499,9 @@ document.head.appendChild(o)}initApollo();</script>
         <div class="tier-price-add">+ <strong>25%</strong> of recovered credits<br><span style="color:var(--slate-500);font-size:13px;">No recovery, no fee.</span></div>
         <div class="tier-price-sub">Average evaluation finds $8K–$25K/mo. You keep <strong style="color:var(--green-deep);">$6K–$19K/mo net</strong>.</div>
       </div>
+      <input type="checkbox" id="m-collapse-tier-2" class="m-collapse-cb">
+      <label for="m-collapse-tier-2" class="m-collapse-trigger">See what's included</label>
+      <div class="m-collapse-body">
       <div class="tier-features-label">Everything in Core AP, plus</div>
       <ul class="tier-features">
         <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Monthly recovery cycles — returns, expirations, co-marketing</li>
@@ -475,6 +509,7 @@ document.head.appendChild(o)}initApollo();</script>
         <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Vendor approval workflow handled end-to-end</li>
         <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Most operators net-positive within 90 days</li>
       </ul>
+      </div>
       <a href="/contact" class="tier-cta tier-cta--primary">Get My Free AP Evaluation
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
       </a>
@@ -490,6 +525,9 @@ document.head.appendChild(o)}initApollo();</script>
         <div class="tier-price-unit">Volume discount + dedicated success</div>
         <div class="tier-price-sub">Fee structured around your store count and vendor volume.</div>
       </div>
+      <input type="checkbox" id="m-collapse-tier-3" class="m-collapse-cb">
+      <label for="m-collapse-tier-3" class="m-collapse-trigger">See what's included</label>
+      <div class="m-collapse-body">
       <div class="tier-features-label">Everything above, plus</div>
       <ul class="tier-features">
         <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Volume discount on Core AP</li>
@@ -498,6 +536,7 @@ document.head.appendChild(o)}initApollo();</script>
         <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Quarterly business review with the founder</li>
         <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Priority vendor onboarding</li>
       </ul>
+      </div>
       <a href="/contact" class="tier-cta tier-cta--secondary">Talk to Us
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
       </a>
