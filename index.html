@@ -63,7 +63,7 @@
 .hero-rotator {
   position: relative; display: block;
   margin-bottom: 32px;
-  font-size: clamp(40px, 7vw, 80px);
+  font-size: clamp(36px, 6vw, 72px);
   line-height: 1.05;
   letter-spacing: -2px;
   font-weight: 700;
@@ -878,26 +878,110 @@ document.head.appendChild(o)}initApollo();</script>
       width: 32px; height: 32px; border-radius: 8px; flex-shrink: 0;
       display: flex; align-items: center; justify-content: center;
       background: rgba(149,213,178,0.2); color: var(--green-deep);
+      transition: background 0.2s ease, color 0.2s ease;
     }
     .scope-icon svg { width: 16px; height: 16px; }
-
-    /* The highlighted vendor-email row */
-    .scope-item--star {
-      background: var(--white);
-      border: 1px solid rgba(149,213,178,0.55);
-      border-radius: 10px;
-      padding: 12px 14px;
-      margin: 4px -6px;
-      box-shadow: 0 4px 14px rgba(27,67,50,0.05);
-      color: var(--green-deep); font-weight: 600;
-    }
-    .scope-item--star .scope-icon { background: var(--green-deep); color: var(--white); }
-    .scope-item--star .scope-text { flex: 1; }
     .scope-stat {
       font-family: var(--font-mono); font-size: 11px; font-weight: 700;
       color: var(--green-dark); background: var(--green-ghost);
       padding: 4px 9px; border-radius: 6px; letter-spacing: 0.5px;
       border: 1px solid rgba(149,213,178,0.4);
+    }
+
+    /* Interactive rows in the "ShelfSpace handles" card */
+    .scope-card--ours .scope-list { gap: 4px; }
+    .scope-card--ours .scope-item {
+      display: flex; flex-wrap: wrap; align-items: center; gap: 0;
+      padding: 12px 14px;
+      margin: 0 -6px;
+      border: 1px solid transparent;
+      border-radius: 10px;
+      color: var(--slate-700);
+      transition: background 0.2s ease, border-color 0.2s ease,
+                  box-shadow 0.2s ease, color 0.2s ease;
+    }
+    .scope-card--ours .scope-item-trigger {
+      display: flex; align-items: center; gap: 12px;
+      width: 100%;
+      background: none; border: 0; padding: 0; margin: 0;
+      font: inherit; color: inherit; cursor: pointer; text-align: left;
+    }
+    .scope-card--ours .scope-item-trigger .scope-text { flex: 1; }
+    .scope-card--ours .scope-item-trigger:focus-visible {
+      outline: 2px solid var(--green-mid); outline-offset: 4px;
+      border-radius: 8px;
+    }
+    .scope-card--ours .scope-chevron {
+      flex-shrink: 0; width: 14px; height: 14px;
+      color: var(--slate-400);
+      transition: transform 0.2s ease, color 0.2s ease;
+    }
+    .scope-card--ours .scope-chevron svg { width: 100%; height: 100%; display: block; }
+
+    /* Description reveal — grid 0fr→1fr trick (smooth height animation) */
+    .scope-card--ours .scope-item-desc-wrap {
+      flex: 1 1 100%;
+      display: grid; grid-template-rows: 0fr;
+      transition: grid-template-rows 0.25s ease;
+    }
+    .scope-card--ours .scope-item-desc {
+      overflow: hidden;
+      padding-left: 44px;
+      padding-top: 0;
+      font-size: 13.5px; line-height: 1.55; color: var(--slate-600);
+      font-weight: 400;
+      opacity: 0;
+      transition: opacity 0.18s ease, padding-top 0.2s ease;
+    }
+
+    /* Open state (sticky — set by JS via .is-open) */
+    .scope-card--ours .scope-item.is-open {
+      background: var(--white);
+      border-color: rgba(149,213,178,0.55);
+      box-shadow: 0 4px 14px rgba(27,67,50,0.05);
+      color: var(--green-deep);
+    }
+    .scope-card--ours .scope-item.is-open .scope-icon {
+      background: var(--green-deep); color: var(--white);
+    }
+    .scope-card--ours .scope-item.is-open .scope-chevron {
+      transform: rotate(180deg); color: var(--green-deep);
+    }
+    .scope-card--ours .scope-item.is-open .scope-item-desc-wrap {
+      grid-template-rows: 1fr;
+    }
+    .scope-card--ours .scope-item.is-open .scope-item-desc {
+      opacity: 1; padding-top: 8px;
+    }
+
+    /* Desktop hover (transient — gated to true hover devices) */
+    @media (hover: hover) {
+      .scope-card--ours .scope-item:hover {
+        background: var(--white);
+        border-color: rgba(149,213,178,0.55);
+        box-shadow: 0 4px 14px rgba(27,67,50,0.05);
+        color: var(--green-deep);
+      }
+      .scope-card--ours .scope-item:hover .scope-icon {
+        background: var(--green-deep); color: var(--white);
+      }
+      .scope-card--ours .scope-item:hover .scope-chevron {
+        transform: rotate(180deg); color: var(--green-deep);
+      }
+      .scope-card--ours .scope-item:hover .scope-item-desc-wrap {
+        grid-template-rows: 1fr;
+      }
+      .scope-card--ours .scope-item:hover .scope-item-desc {
+        opacity: 1; padding-top: 8px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .scope-card--ours .scope-item,
+      .scope-card--ours .scope-item-desc-wrap,
+      .scope-card--ours .scope-item-desc,
+      .scope-card--ours .scope-chevron,
+      .scope-card--ours .scope-icon { transition: none; }
     }
 
     /* RIGHT — calm/focused */
@@ -926,11 +1010,6 @@ document.head.appendChild(o)}initApollo();</script>
     }
     .scope-divider { border-top: 1px solid var(--slate-100); padding-top: 22px; margin-top: 22px; }
 
-    .scope-footer {
-      text-align: center; font-size: 15px; color: var(--slate-600);
-      max-width: 680px; margin: 0 auto; line-height: 1.7;
-    }
-
     @media (max-width: 820px) {
       .scope-grid { grid-template-columns: 1fr; gap: 20px; }
       .scope-card { padding: 26px 22px; }
@@ -953,33 +1032,61 @@ document.head.appendChild(o)}initApollo();</script>
         </div>
         <ul class="scope-list">
           <li class="scope-item">
-            <span class="scope-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="13" y2="17"/></svg></span>
-            <span class="scope-text">Invoice ingestion &amp; parsing</span>
+            <button class="scope-item-trigger" type="button" aria-expanded="false" aria-controls="scope-desc-1">
+              <span class="scope-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="13" y2="17"/></svg></span>
+              <span class="scope-text">Invoice ingestion &amp; parsing</span>
+              <span class="scope-chevron" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+            </button>
+            <div class="scope-item-desc-wrap"><div id="scope-desc-1" class="scope-item-desc">We pull invoices from email, vendor portals, and PDFs. Line items, totals, terms, and due dates land in our system and match against Metrc deliveries.</div></div>
           </li>
           <li class="scope-item">
-            <span class="scope-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></span>
-            <span class="scope-text">Three-way matching (invoice ↔ delivery ↔ PO)</span>
+            <button class="scope-item-trigger" type="button" aria-expanded="false" aria-controls="scope-desc-2">
+              <span class="scope-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></span>
+              <span class="scope-text">Three-way matching (invoice ↔ delivery ↔ PO)</span>
+              <span class="scope-chevron" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+            </button>
+            <div class="scope-item-desc-wrap"><div id="scope-desc-2" class="scope-item-desc">We cross-reference every invoice against the Metrc delivery and your purchase order. Discrepancies surface before payment goes out.</div></div>
           </li>
           <li class="scope-item">
-            <span class="scope-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>
-            <span class="scope-text">Per-vendor terms (COD, Net, consignment)</span>
+            <button class="scope-item-trigger" type="button" aria-expanded="false" aria-controls="scope-desc-3">
+              <span class="scope-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>
+              <span class="scope-text">Per-vendor terms (COD, Net, consignment)</span>
+              <span class="scope-chevron" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+            </button>
+            <div class="scope-item-desc-wrap"><div id="scope-desc-3" class="scope-item-desc">Each vendor's terms tracked per relationship — COD pays on delivery, Net 15/30 pays on schedule, consignment pays on sell-through.</div></div>
           </li>
           <li class="scope-item">
-            <span class="scope-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></span>
-            <span class="scope-text">Vendor payments &amp; check generation</span>
+            <button class="scope-item-trigger" type="button" aria-expanded="false" aria-controls="scope-desc-4">
+              <span class="scope-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></span>
+              <span class="scope-text">Vendor payments &amp; check generation</span>
+              <span class="scope-chevron" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+            </button>
+            <div class="scope-item-desc-wrap"><div id="scope-desc-4" class="scope-item-desc">We cut checks, send ACH, or use whatever rail your vendors prefer. Right amount, on time, with documented reasoning attached.</div></div>
           </li>
-          <li class="scope-item scope-item--star">
-            <span class="scope-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></span>
-            <span class="scope-text">Vendor email &amp; call handling</span>
-            <span class="scope-stat">≈40/wk</span>
+          <li class="scope-item is-open">
+            <button class="scope-item-trigger" type="button" aria-expanded="true" aria-controls="scope-desc-5">
+              <span class="scope-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></span>
+              <span class="scope-text">Vendor email &amp; call handling</span>
+              <span class="scope-stat">≈40/wk</span>
+              <span class="scope-chevron" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+            </button>
+            <div class="scope-item-desc-wrap"><div id="scope-desc-5" class="scope-item-desc">"Where's my check?" emails and follow-up calls come to us, not your buyer. We respond with live data and dispute-ready credit memos.</div></div>
           </li>
           <li class="scope-item">
-            <span class="scope-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg></span>
-            <span class="scope-text">Credit recovery cycles</span>
+            <button class="scope-item-trigger" type="button" aria-expanded="false" aria-controls="scope-desc-6">
+              <span class="scope-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg></span>
+              <span class="scope-text">Credit recovery cycles</span>
+              <span class="scope-chevron" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+            </button>
+            <div class="scope-item-desc-wrap"><div id="scope-desc-6" class="scope-item-desc">Returns, expiration credits, and co-marketing credits tracked from Metrc and POS data through resolution. Every credit gets pursued and applied to the next invoice.</div></div>
           </li>
           <li class="scope-item">
-            <span class="scope-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-9-9"/><polyline points="21 4 21 12 13 12"/></svg></span>
-            <span class="scope-text">QuickBooks sync</span>
+            <button class="scope-item-trigger" type="button" aria-expanded="false" aria-controls="scope-desc-7">
+              <span class="scope-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-9-9"/><polyline points="21 4 21 12 13 12"/></svg></span>
+              <span class="scope-text">QuickBooks sync</span>
+              <span class="scope-chevron" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+            </button>
+            <div class="scope-item-desc-wrap"><div id="scope-desc-7" class="scope-item-desc">We push bills, vendor credits, and payments to QuickBooks in real time with proper coding. Your bookkeeper sees clean entries, not a backlog.</div></div>
           </li>
         </ul>
       </div>
@@ -1012,8 +1119,30 @@ document.head.appendChild(o)}initApollo();</script>
       </div>
     </div>
 
-    <p class="scope-footer reveal">We don't do close, recon, payroll, AR, tax, or 280E. Your team does — and we make their jobs easier with clean QuickBooks entries in real time.</p>
   </div>
+
+  <script>
+  (function () {
+    var card = document.querySelector('.scope-card--ours');
+    if (!card) return;
+    var triggers = card.querySelectorAll('.scope-item-trigger');
+    triggers.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var li = btn.closest('.scope-item');
+        var wasOpen = li.classList.contains('is-open');
+        triggers.forEach(function (b) {
+          var sib = b.closest('.scope-item');
+          sib.classList.remove('is-open');
+          b.setAttribute('aria-expanded', 'false');
+        });
+        if (!wasOpen) {
+          li.classList.add('is-open');
+          btn.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+  })();
+  </script>
 </section>
 
 <!-- TRUST SIGNALS: vendor experience + Metrc -->
