@@ -102,6 +102,17 @@
   .reveal-delay-2 { transition-delay: 0.4s; }
   .reveal-delay-3 { transition-delay: 0.6s; }
 
+  /* ─── SCOPE CLARITY GRID (2-up cards, mobile collapse) ─── */
+  .ap-scope-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 32px;
+  }
+  @media (max-width: 700px) {
+    .ap-scope-grid { grid-template-columns: 1fr; }
+  }
+
   /* ─── PAIN SECTION ─── */
   .pain-section { background: var(--white); padding: 80px 48px; text-align: center; }
   .pain-cards {
@@ -174,7 +185,17 @@
   .calc-ebitda { display: flex; justify-content: space-between; align-items: center; padding: 16px 24px; background: var(--green-deep); }
   .calc-ebitda span:first-child { font-size: 14px; font-weight: 600; color: rgba(255,255,255,0.7); }
   .calc-ebitda span:last-child { font-family: var(--font-mono); font-size: 20px; font-weight: 700; color: var(--white); }
-  @media (max-width: 600px) { .calc-range-value { font-size: 18px; } .calc-range-col { padding: 20px 12px; } }
+  @media (max-width: 600px) {
+    .calc-range { grid-template-columns: 1fr; }
+    .calc-range-col {
+      border-right: none;
+      border-bottom: 1px solid var(--slate-100);
+      padding: 18px 24px;
+    }
+    .calc-range-col:last-child { border-bottom: none; }
+    .calc-range-col--mid { background: transparent; }
+    .calc-range-value { font-size: 22px; }
+  }
   .calc-guarantee {
     text-align: center; max-width: 540px; margin: 32px auto 24px;
     padding: 16px 24px; background: var(--green-ghost);
@@ -537,7 +558,7 @@ document.head.appendChild(o)}initApollo();</script>
       <div class="section-label reveal">Who does what</div>
       <h2 class="section-title reveal" style="margin-top:8px;">We run the AP. Your team focuses on what they're hired for.</h2>
     </div>
-    <div class="reveal" style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:32px;">
+    <div class="reveal ap-scope-grid">
       <div style="background:var(--slate-50);border:1px solid var(--slate-200);border-radius:16px;padding:28px;">
         <div style="font-family:var(--font-mono);font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--green-deep);margin-bottom:16px;">ShelfSpace handles</div>
         <ul style="list-style:none;padding:0;margin:0;font-size:15px;line-height:1.9;color:var(--slate-700);">
