@@ -310,12 +310,20 @@
     .stats-strip { grid-template-columns: 1fr; }
     .stats-strip-cell { border-right: none; border-bottom: 1px solid var(--slate-100); }
     .stats-strip-cell:last-child { border-bottom: none; }
+    .tier-tagline { min-height: auto; }
   }
   @media (max-width: 900px) {
     .pricing-hero { padding: 120px 24px 40px; }
     .tiers-section { padding: 56px 24px 80px; }
     .faq-section, .closer-section { padding: 64px 24px; }
     .footer-top { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 700px) {
+    .tier--featured::after { display: none; }
+    .tier-features li { font-size: 15px; }
+    .pricing-hero::before, .pricing-hero::after,
+    .closer-section::before, .closer-section::after,
+    .tiers-section::before { display: none; }
   }
   @media (max-width: 600px) {
     .footer-top { grid-template-columns: 1fr; }
