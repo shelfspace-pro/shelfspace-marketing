@@ -57,13 +57,14 @@ body.home-ledger::before { opacity: 0.045; }
 .home-ledger .h-xxl {
   font-family: var(--font-mono-l);
   font-weight: 500;
-  font-size: clamp(80px, 14vw, 200px);
+  font-size: clamp(56px, 8vw, 112px);
   letter-spacing: -0.045em;
-  line-height: 0.88;
+  line-height: 0.9;
   font-variant-numeric: tabular-nums;
   font-feature-settings: 'tnum','ss01';
   color: var(--oxblood);
   margin: 0;
+  white-space: nowrap;
 }
 .home-ledger .h-xl {
   font-family: var(--font-display-l);
@@ -272,8 +273,9 @@ body.home-ledger .hero-grid-lines {
   display: flex; flex-direction: column;
   align-items: flex-end;
   text-align: right;
-  margin-right: -4vw;
+  margin-right: 0;
   gap: 4px;
+  min-width: 0;
 }
 .ledger-hero-figure .gutter-label { display: block; }
 .ledger-hero-figure .h-xxl { line-height: 0.85; margin: 6px 0; }
@@ -1626,13 +1628,13 @@ document.head.appendChild(o)}initApollo();</script>
       <h2 class="h-l">Real results from real dispensaries.</h2>
       <p class="body-default">De-identified to protect our clients.</p>
     </div>
-    <nav class="case-filters reveal" aria-label="Filter case studies">
+    <div class="case-filters reveal" role="tablist" aria-label="Filter case studies">
       <button class="case-filter active" data-filter="all">All</button>
       <button class="case-filter" data-filter="accounts-payable">Accounts Payable</button>
       <button class="case-filter" data-filter="consignment">Consignment</button>
       <button class="case-filter" data-filter="credit-recovery">Credit Recovery</button>
       <button class="case-filter" data-filter="operations">Operations</button>
-    </nav>
+    </div>
     <div class="case-grid-wrap">
       <div class="case-grid">
         <a href="/blog/case-study-ebitda-credit-recovery" class="case-card is-featured" data-category="credit-recovery">
