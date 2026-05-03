@@ -101,8 +101,8 @@
     pointer-events: none; z-index: 0;
   }
   .tiers-grid {
-    display: grid; grid-template-columns: repeat(2, 1fr);
-    gap: 24px; max-width: 760px; margin: 0 auto;
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 24px; max-width: 1140px; margin: 0 auto;
     align-items: stretch;
     position: relative; z-index: 1;
   }
@@ -116,7 +116,6 @@
   .tier:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(27,67,50,0.06); border-color: var(--green-accent); }
   .tier--featured {
     border: 2px solid var(--green-deep);
-    transform: translateY(-8px);
     box-shadow: 0 20px 48px rgba(27,67,50,0.14), 0 0 0 1px rgba(27,67,50,0.05);
     background: linear-gradient(180deg, var(--green-ghost) 0%, var(--white) 12%);
   }
@@ -131,7 +130,7 @@
     z-index: -1; pointer-events: none;
     border-radius: 50%; filter: blur(20px);
   }
-  .tier--featured:hover { transform: translateY(-10px); box-shadow: 0 24px 56px rgba(27,67,50,0.18), 0 0 0 1px rgba(27,67,50,0.08); }
+  .tier--featured:hover { transform: translateY(-2px); box-shadow: 0 24px 56px rgba(27,67,50,0.18), 0 0 0 1px rgba(27,67,50,0.08); }
   .tier-num {
     position: absolute; top: 24px; right: 24px;
     font-family: var(--font-mono); font-size: 12px; font-weight: 700;
@@ -172,38 +171,51 @@
     font-size: 14px; color: var(--slate-600); margin-top: 8px; line-height: 1.5;
   }
   .tier-price-add strong { color: var(--green-deep); font-family: var(--font-mono); font-weight: 700; }
+  .tier-price-additional {
+    font-family: var(--font-mono); font-size: 13px; color: var(--slate-600);
+    margin-top: 8px; font-weight: 600;
+  }
   .tier-price-sub {
     font-size: 13px; color: var(--slate-500); margin-top: 12px; line-height: 1.5;
   }
   .tier-features-label {
     font-family: var(--font-mono); font-size: 11px; font-weight: 700;
     color: var(--slate-500); letter-spacing: 1px; text-transform: uppercase;
-    margin-bottom: 16px;
+    margin-bottom: 8px;
   }
+  /* Per-feature collapsible — 3-word summary + click-to-expand description */
   .tier-features {
-    list-style: none; padding: 0; margin: 0 0 32px;
+    padding: 0; margin: 0 0 24px;
     flex-grow: 1;
-    display: flex; flex-direction: column; gap: 10px;
+    display: flex; flex-direction: column;
   }
-  .tier-features li {
-    display: flex; gap: 12px; align-items: flex-start;
-    font-size: 14px; line-height: 1.5; color: var(--slate-700);
+  .tier-feature {
+    border-bottom: 1px solid var(--slate-100);
   }
-  .tier-features li svg {
+  .tier-feature:last-child { border-bottom: none; }
+  .tier-feature > summary {
+    display: flex; align-items: center; gap: 12px;
+    padding: 11px 0; cursor: pointer; list-style: none;
+    font-size: 14px; font-weight: 500; color: var(--slate-700);
+  }
+  .tier-feature > summary::-webkit-details-marker { display: none; }
+  .tier-feature > summary::after {
+    content: '+'; margin-left: auto;
+    color: var(--slate-400); font-size: 18px; font-weight: 400; line-height: 1;
+    transition: color 0.15s;
+  }
+  .tier-feature[open] > summary::after { content: '\2212'; color: var(--green-deep); }
+  .tier-feature > summary:hover::after { color: var(--green-deep); }
+  .tier-feature-check {
     flex-shrink: 0; width: 16px; height: 16px;
-    color: var(--green-mid); margin-top: 3px;
+    color: var(--green-mid);
   }
-  .tier--featured .tier-features li {
-    color: var(--slate-800);
+  .tier-feature-detail {
+    margin: 0 0 14px 28px;
+    font-size: 13px; line-height: 1.55; color: var(--slate-500);
   }
-  .tier--featured .tier-features li svg {
-    color: var(--white);
-    background: var(--green-deep);
-    border-radius: 50%;
-    padding: 3px;
-    width: 18px; height: 18px;
-    margin-top: 1px;
-  }
+  .tier--featured .tier-feature > summary { color: var(--slate-800); }
+  .tier--featured .tier-feature-check { color: var(--green-deep); }
   .tier-cta {
     display: flex; align-items: center; justify-content: center; gap: 8px;
     width: 100%; padding: 14px 20px;
@@ -305,8 +317,6 @@
   /* ── Responsive ── */
   @media (max-width: 1000px) {
     .tiers-grid { grid-template-columns: 1fr; max-width: 480px; gap: 32px; }
-    .tier--featured { transform: translateY(0); }
-    .tier--featured:hover { transform: translateY(-2px); }
     .stats-strip { grid-template-columns: 1fr; }
     .stats-strip-cell { border-right: none; border-bottom: 1px solid var(--slate-100); }
     .stats-strip-cell:last-child { border-bottom: none; }
@@ -320,7 +330,7 @@
   }
   @media (max-width: 700px) {
     .tier--featured::after { display: none; }
-    .tier-features li { font-size: 15px; }
+    .tier-feature > summary { font-size: 15px; }
     .pricing-hero::before, .pricing-hero::after,
     .closer-section::before, .closer-section::after,
     .tiers-section::before { display: none; }
@@ -388,7 +398,7 @@ document.head.appendChild(o)}initApollo();</script>
       "name": "Does the service actually pay for itself?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Most operators run net-positive within 90 days. Core AP at $1,800–$2,500/month per location is roughly equivalent to the bookkeeper hours you free up. Add Credit Recovery and the average evaluation finds $8,000–$25,000/month in unrecovered vendor credits — after the 25% success fee, you keep $6,000–$19,000/month in net profit on top of the AP value. Core AP runs cost-comparable; Credit Recovery runs profit-positive."
+        "text": "Most operators run net-positive within 90 days. Core AP at $2,500/mo for your first location and $1,800/mo for each additional is roughly equivalent to the bookkeeper hours you free up. Add Credit Recovery and the average evaluation finds $8,000–$25,000/month in unrecovered vendor credits — after the 25% success fee, you keep $6,000–$19,000/month in net profit on top of the AP value. Core AP runs cost-comparable; Credit Recovery runs profit-positive."
       }
     },
     {
@@ -413,14 +423,6 @@ document.head.appendChild(o)}initApollo();</script>
       "acceptedAnswer": {
         "@type": "Answer",
         "text": "Yes. We use read-only Metrc access. We never modify your compliance data. All data is encrypted and isolated per operator."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Do you offer multi-location pricing?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes. For 6+ stores or vertical integration, fees are custom — volume discount on Core AP, dedicated success manager, custom onboarding, quarterly business review with the founder. Contact us to scope."
       }
     },
     {
@@ -462,7 +464,7 @@ document.head.appendChild(o)}initApollo();</script>
   <div class="pricing-hero-content">
     <div class="pricing-hero-eyebrow reveal">Pricing</div>
     <h1 class="reveal">An AP team that actually makes you money.</h1>
-    <p class="pricing-hero-sub reveal">$1,800–$2,500/mo per location. Credit recovery makes it profit-positive.</p>
+    <p class="pricing-hero-sub reveal">$2,500/mo first location, $1,800 each more. Credit recovery makes it profit-positive.</p>
     <p class="pricing-hero-eval reveal">Free evaluation first — <a href="/contact">see your numbers before you commit</a>.</p>
   </div>
 </section>
@@ -475,25 +477,43 @@ document.head.appendChild(o)}initApollo();</script>
     <article class="tier reveal">
       <div class="tier-num">01</div>
       <div class="tier-name">Core AP</div>
-      <p class="tier-tagline">Outsource the AP. Free your buyer and bookkeeper for real work.</p>
+      <p class="tier-tagline">Outsource the AP. Free your team.</p>
       <div class="tier-price-wrap">
-        <div class="tier-price">$1,800–$2,500<span class="tier-price-unit">/mo</span></div>
-        <div class="tier-price-unit">per location</div>
+        <div class="tier-price">$2,500<span class="tier-price-unit">/mo</span></div>
+        <div class="tier-price-unit">first location</div>
+        <div class="tier-price-additional">+ $1,800/mo each additional</div>
         <div class="tier-price-sub">Includes consignment terms.</div>
       </div>
-      <input type="checkbox" id="m-collapse-tier-1" class="m-collapse-cb">
-      <label for="m-collapse-tier-1" class="m-collapse-trigger">See what's included</label>
-      <div class="m-collapse-body">
       <div class="tier-features-label">What's included</div>
-      <ul class="tier-features">
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Three-way invoice matching (invoice ↔ delivery ↔ PO)</li>
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Per-vendor payment terms — COD, Net, consignment</li>
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Vendor payments (Check 21 compliant)</li>
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Every vendor email &amp; call handled</li>
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>QuickBooks sync (real-time)</li>
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Vendor portal — payment status &amp; check downloads</li>
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Cannabis &amp; non-cannabis vendors</li>
-      </ul>
+      <div class="tier-features">
+        <details class="tier-feature">
+          <summary><svg class="tier-feature-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Three-way matching</span></summary>
+          <p class="tier-feature-detail">Invoice ↔ delivery ↔ PO checked against each other before any payment goes out.</p>
+        </details>
+        <details class="tier-feature">
+          <summary><svg class="tier-feature-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Per-vendor terms</span></summary>
+          <p class="tier-feature-detail">COD, Net 30, Net 60, or consignment — set per vendor, switchable any time.</p>
+        </details>
+        <details class="tier-feature">
+          <summary><svg class="tier-feature-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Vendor payments</span></summary>
+          <p class="tier-feature-detail">Check 21 compliant. We cut, sign, send. ACH or other rails on request.</p>
+        </details>
+        <details class="tier-feature">
+          <summary><svg class="tier-feature-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Inbox handled</span></summary>
+          <p class="tier-feature-detail">Every vendor email and call about payments comes to us, not your team.</p>
+        </details>
+        <details class="tier-feature">
+          <summary><svg class="tier-feature-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>QuickBooks sync</span></summary>
+          <p class="tier-feature-detail">Real-time. Your bookkeeper sees clean, coded entries instantly.</p>
+        </details>
+        <details class="tier-feature">
+          <summary><svg class="tier-feature-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Vendor portal</span></summary>
+          <p class="tier-feature-detail">Vendors check payment status and download checks themselves. ShelfiQ answers questions in seconds.</p>
+        </details>
+        <details class="tier-feature">
+          <summary><svg class="tier-feature-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>All vendors</span></summary>
+          <p class="tier-feature-detail">Cannabis and non-cannabis. Landlords, security, marketing, insurance — anyone you pay.</p>
+        </details>
       </div>
       <a href="/contact" class="tier-cta tier-cta--secondary">Get My Free AP Evaluation
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
@@ -508,24 +528,68 @@ document.head.appendChild(o)}initApollo();</script>
       </span>
       <div class="tier-num">02</div>
       <div class="tier-name">Core AP + Credit Recovery</div>
-      <p class="tier-tagline">An AP team that pays for itself, then makes you money.</p>
+      <p class="tier-tagline">An AP team that pays for itself.</p>
       <div class="tier-price-wrap">
-        <div class="tier-price">$1,800–$2,500<span class="tier-price-unit">/mo</span></div>
-        <div class="tier-price-unit">per location</div>
+        <div class="tier-price">$2,500<span class="tier-price-unit">/mo</span></div>
+        <div class="tier-price-unit">first location</div>
+        <div class="tier-price-additional">+ $1,800/mo each additional</div>
         <div class="tier-price-add">+ <strong>25%</strong> of recovered credits<br><span style="color:var(--slate-500);font-size:13px;">No recovery, no fee.</span></div>
       </div>
-      <input type="checkbox" id="m-collapse-tier-2" class="m-collapse-cb">
-      <label for="m-collapse-tier-2" class="m-collapse-trigger">See what's included</label>
-      <div class="m-collapse-body">
       <div class="tier-features-label">Everything in Core AP, plus</div>
-      <ul class="tier-features">
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Monthly recovery cycles — returns, expirations, co-marketing</li>
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Documented credit memos with line-item Metrc backup</li>
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Vendor approval workflow handled end-to-end</li>
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Most operators net-positive within 90 days</li>
-      </ul>
+      <div class="tier-features">
+        <details class="tier-feature">
+          <summary><svg class="tier-feature-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Monthly recovery</span></summary>
+          <p class="tier-feature-detail">Returns, expirations, co-marketing — recovered every month.</p>
+        </details>
+        <details class="tier-feature">
+          <summary><svg class="tier-feature-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Documented credits</span></summary>
+          <p class="tier-feature-detail">Credit memos with line-item Metrc backup, sent for vendor approval.</p>
+        </details>
+        <details class="tier-feature">
+          <summary><svg class="tier-feature-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Vendor approvals</span></summary>
+          <p class="tier-feature-detail">We handle the full approval workflow end-to-end. You see the result, not the work.</p>
+        </details>
+        <details class="tier-feature">
+          <summary><svg class="tier-feature-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Net-positive in 90 days</span></summary>
+          <p class="tier-feature-detail">Most operators recoup the full Core AP cost in vendor credits within the first quarter.</p>
+        </details>
       </div>
       <a href="/contact" class="tier-cta tier-cta--primary">Get My Free AP Evaluation
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </article>
+
+    <!-- TIER 3: Enterprise -->
+    <article class="tier reveal reveal-delay-2">
+      <div class="tier-num">03</div>
+      <div class="tier-name">Enterprise</div>
+      <p class="tier-tagline">For 5+ locations.</p>
+      <div class="tier-price-wrap">
+        <div class="tier-price">Custom</div>
+        <div class="tier-price-unit">5+ locations</div>
+        <div class="tier-price-additional">Volume discount + dedicated support</div>
+        <div class="tier-price-sub">Per-location fee scales below $1,800/mo as you grow.</div>
+      </div>
+      <div class="tier-features-label">Everything above, plus</div>
+      <div class="tier-features">
+        <details class="tier-feature">
+          <summary><svg class="tier-feature-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Volume discount</span></summary>
+          <p class="tier-feature-detail">Tiered per-location pricing — fee per store decreases as your network grows.</p>
+        </details>
+        <details class="tier-feature">
+          <summary><svg class="tier-feature-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Dedicated success</span></summary>
+          <p class="tier-feature-detail">Named success manager owns your account and the relationship across stores.</p>
+        </details>
+        <details class="tier-feature">
+          <summary><svg class="tier-feature-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Custom onboarding</span></summary>
+          <p class="tier-feature-detail">We onboard each location in parallel with a custom playbook for your structure.</p>
+        </details>
+        <details class="tier-feature">
+          <summary><svg class="tier-feature-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Founder review</span></summary>
+          <p class="tier-feature-detail">Quarterly business review with Chris — strategy, vendor mix, growth.</p>
+        </details>
+      </div>
+      <a href="/contact" class="tier-cta tier-cta--secondary">Talk to Us
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
       </a>
     </article>
@@ -547,7 +611,7 @@ document.head.appendChild(o)}initApollo();</script>
     </details>
     <details>
       <summary>Does the service actually pay for itself?</summary>
-      <p>Most operators run net-positive within 90 days. Core AP at <strong>$1,800–$2,500/mo per location</strong> is roughly equivalent to the bookkeeper hours you free up. Add Credit Recovery and the average evaluation finds <strong>$8,000–$25,000/month</strong> in unrecovered vendor credits — after our 25% success fee, you keep <strong>$6,000–$19,000/month in net profit</strong> on top of the AP value. Core AP runs cost-comparable; Credit Recovery runs profit-positive.</p>
+      <p>Most operators run net-positive within 90 days. Core AP at <strong>$2,500/mo for your first location and $1,800/mo for each additional</strong> is roughly equivalent to the bookkeeper hours you free up. Add Credit Recovery and the average evaluation finds <strong>$8,000–$25,000/month</strong> in unrecovered vendor credits — after our 25% success fee, you keep <strong>$6,000–$19,000/month in net profit</strong> on top of the AP value. Core AP runs cost-comparable; Credit Recovery runs profit-positive.</p>
     </details>
     <details>
       <summary>How does this work with my bookkeeper or accounting firm?</summary>
@@ -560,10 +624,6 @@ document.head.appendChild(o)}initApollo();</script>
     <details>
       <summary>Is my data secure?</summary>
       <p>Yes. We use read-only Metrc access. We never modify your compliance data. All data is encrypted and isolated per operator.</p>
-    </details>
-    <details>
-      <summary>Do you offer multi-location pricing?</summary>
-      <p>Yes. For 6+ stores or vertical integration, fees are custom — volume discount on Core AP, dedicated success manager, custom onboarding, quarterly business review with the founder. Contact us to scope.</p>
     </details>
     <details>
       <summary>Do vendors pay anything?</summary>
