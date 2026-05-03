@@ -43,28 +43,53 @@
   .page-hero.hero-loaded .section-title,
   .page-hero.hero-loaded .section-desc { opacity: 1; transform: translateY(0); }
 
-  /* ─── HERO DEMO ─── */
-  .page-hero { display: flex; align-items: center; justify-content: center; gap: 64px; padding: 160px 48px 80px; min-height: 100vh; text-align: left; }
-  .page-hero .section-title { max-width: none; margin: 0 0 20px; font-size: clamp(32px, 4vw, 48px); }
-  .page-hero .section-label { justify-content: flex-start; }
-  .hero-text { flex: 1; }
-  .hero-demo { flex: 1; max-width: 480px; pointer-events: none; }
-  .hero-demo-frame { background: #1b4332; border-radius: 12px; overflow: hidden; box-shadow: 0 24px 80px rgba(27,67,50,0.18); }
-  .hero-demo-titlebar { display: flex; align-items: center; gap: 6px; padding: 10px 14px; background: #2d6a4f; }
-  .hero-demo-dot { width: 10px; height: 10px; border-radius: 50%; }
-  .hero-demo-dot--r { background: #ef4444; }
-  .hero-demo-dot--y { background: #eab308; }
-  .hero-demo-dot--g { background: #22c55e; }
-  .hero-demo-titlebar span { font-size: 11px; color: #95d5b2; margin-left: 8px; font-family: var(--font-mono); }
-  .hero-demo-screen { position: relative; height: 280px; background: var(--white); overflow: hidden; }
-  .hero-demo-slide { position: absolute; inset: 0; padding: 20px 24px; opacity: 0; display: flex; flex-direction: column; justify-content: center; align-items: center; }
-  .hero-demo-caption { padding: 8px 14px; background: #2d6a4f; font-size: 12px; font-weight: 600; color: #95d5b2; font-family: var(--font-mono); letter-spacing: 0.5px; }
-  @keyframes demoSlide1 { 0%,2% { opacity: 0; } 4%,30% { opacity: 1; } 33% { opacity: 0; } 100% { opacity: 0; } }
-  @keyframes demoSlide2 { 0%,33% { opacity: 0; } 36%,63% { opacity: 1; } 66% { opacity: 0; } 100% { opacity: 0; } }
-  @keyframes demoSlide3 { 0%,66% { opacity: 0; } 69%,96% { opacity: 1; } 98%,100% { opacity: 0; } }
-  .hero-demo-slide:nth-child(1) { animation: demoSlide1 15s ease-in-out infinite; }
-  .hero-demo-slide:nth-child(2) { animation: demoSlide2 15s ease-in-out infinite; }
-  .hero-demo-slide:nth-child(3) { animation: demoSlide3 15s ease-in-out infinite; }
+  /* ─── HERO ROTATOR (replaces hero-demo) ─── */
+  .page-hero { display: flex; align-items: center; justify-content: center; padding: 160px 48px 80px; min-height: 100vh; }
+  .hero-text--solo { flex: 1; max-width: 880px; margin: 0 auto; text-align: center; }
+  .hero-text--solo .section-label { display: inline-flex; }
+  .page-hero .hero-rotator {
+    position: relative; display: block;
+    margin: 0 0 28px;
+    font-size: clamp(36px, 6vw, 72px);
+    line-height: 1.05;
+    letter-spacing: -2px;
+    font-weight: 700;
+    color: var(--green-deep);
+    max-width: none;
+  }
+  .hero-rotator-ghost {
+    display: block;
+    visibility: hidden;
+    pointer-events: none;
+    user-select: none;
+  }
+  .hero-rotator-slide {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(14px);
+    will-change: opacity, transform;
+  }
+  @keyframes heroRotate {
+    0%   { opacity: 0; transform: translateY(14px); }
+    2%   { opacity: 1; transform: translateY(0); }
+    12%  { opacity: 1; transform: translateY(0); }
+    14%  { opacity: 0; transform: translateY(-14px); }
+    100% { opacity: 0; transform: translateY(-14px); }
+  }
+  .hero-rotator-slide:nth-child(1) { animation: heroRotate 21s ease-out infinite; }
+  .hero-rotator-slide:nth-child(2) { animation: heroRotate 21s ease-out infinite; animation-delay: 3s; }
+  .hero-rotator-slide:nth-child(3) { animation: heroRotate 21s ease-out infinite; animation-delay: 6s; }
+  .hero-rotator-slide:nth-child(4) { animation: heroRotate 21s ease-out infinite; animation-delay: 9s; }
+  .hero-rotator-slide:nth-child(5) { animation: heroRotate 21s ease-out infinite; animation-delay: 12s; }
+  .hero-rotator-slide:nth-child(6) { animation: heroRotate 21s ease-out infinite; animation-delay: 15s; }
+  .hero-rotator-slide:nth-child(7) { animation: heroRotate 21s ease-out infinite; animation-delay: 18s; }
+  .hero-lede { font-size: 17px; color: var(--slate-600); line-height: 1.5; margin: 0 auto 28px; max-width: 560px; }
+  .hero-actions-centered { display: flex; justify-content: center; }
 
   /* ─── PAIN SECTION ─── */
   .pain-section { background: var(--white); padding: 80px 48px; text-align: center; }
@@ -200,11 +225,9 @@
 
   /* ─── RESPONSIVE ─── */
   @media (max-width: 900px) {
-    .page-hero { flex-direction: column; gap: 32px; padding: 100px 24px 48px; min-height: auto; }
+    .page-hero { padding: 100px 24px 48px; min-height: auto; }
     .hero-grid-lines { width: 100%; }
-    .hero-text { text-align: center; }
-    .hero-demo { max-width: 100%; }
-    .hero-demo-screen { height: 240px; }
+    .page-hero .hero-rotator { letter-spacing: -1px; }
     .proof-timeline { padding: 80px 24px; }
     .proof-stats-row { grid-template-columns: 1fr; gap: 20px; }
     .faq-section { padding: 60px 24px; }
@@ -226,11 +249,12 @@
       opacity: 1; transform: none; transition: none;
     }
     .hero-bg-gradient, .hero-bg-gradient-2 { animation: none; }
-    .hero-demo-slide { animation: none !important; opacity: 0 !important; }
-    .hero-demo-slide:nth-child(1) { opacity: 1 !important; }
+    .hero-rotator-slide { animation: none !important; opacity: 0 !important; transform: none !important; }
+    .hero-rotator-slide:first-child { opacity: 1 !important; position: relative !important; inset: auto !important; }
+    .hero-rotator-ghost { display: none !important; }
   }
 </style>
-<noscript><style>.reveal,.page-hero .section-label,.page-hero .section-title,.page-hero .section-desc{opacity:1;transform:none;transition:none;}.hero-demo-slide{animation:none!important;opacity:0!important;}.hero-demo-slide:nth-child(1){opacity:1!important;}</style></noscript>
+<noscript><style>.reveal,.page-hero .section-label,.page-hero .section-title,.page-hero .section-desc{opacity:1;transform:none;transition:none;}</style></noscript>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-H2LBJT03WE"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-H2LBJT03WE');</script>
 <script>function initApollo(){var n=Math.random().toString(36).substring(7),o=document.createElement("script");
@@ -321,42 +345,21 @@ document.head.appendChild(o)}initApollo();</script>
   <div class="hero-bg-gradient"></div>
   <div class="hero-bg-gradient-2"></div>
   <div class="hero-grid-lines"></div>
-  <div class="hero-text">
+  <div class="hero-text hero-text--solo">
     <div class="section-label">Consignment</div>
-    <h1 class="section-title">You paid $250,000 for the product sitting on your shelves right now.</h1>
-  </div>
-  <div class="hero-demo">
-    <div class="hero-demo-frame">
-      <div class="hero-demo-titlebar">
-        <div class="hero-demo-dot hero-demo-dot--r"></div>
-        <div class="hero-demo-dot hero-demo-dot--y"></div>
-        <div class="hero-demo-dot hero-demo-dot--g"></div>
-        <span>shelfspace</span>
-      </div>
-      <div class="hero-demo-screen">
-        <div class="hero-demo-slide">
-          <div style="text-align:center;">
-            <div style="font-size:11px;font-weight:600;color:#94a3b8;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:12px;">Wholesale</div>
-            <div style="font-family:'Space Mono',monospace;font-size:clamp(36px,5vw,48px);font-weight:700;color:#1b4332;letter-spacing:-2px;margin-bottom:8px;">$250,000</div>
-            <div style="font-size:15px;color:#64748b;">Your cash. On shelves. At risk.</div>
-          </div>
-        </div>
-        <div class="hero-demo-slide">
-          <div style="text-align:center;">
-            <div style="font-size:11px;font-weight:600;color:#94a3b8;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:12px;">Consignment</div>
-            <div style="font-family:'Space Mono',monospace;font-size:clamp(36px,5vw,48px);font-weight:700;color:#40916c;letter-spacing:-2px;margin-bottom:8px;">$0 upfront</div>
-            <div style="font-size:15px;color:#64748b;">Same product. Vendor owns it until it sells.</div>
-          </div>
-        </div>
-        <div class="hero-demo-slide">
-          <div style="text-align:center;">
-            <div style="font-size:11px;font-weight:600;color:#94a3b8;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:12px;">Result</div>
-            <div style="font-family:'Space Mono',monospace;font-size:clamp(36px,5vw,48px);font-weight:700;color:#1b4332;letter-spacing:-2px;margin-bottom:8px;">50% margins</div>
-            <div style="font-size:15px;color:#64748b;">Dead stock: zero. Cash freed. You just sell.</div>
-          </div>
-        </div>
-      </div>
-      <div class="hero-demo-caption">Wholesale → Consignment → Result</div>
+    <h1 class="hero-rotator section-title" aria-label="Sell on consignment — vendor owns it until it sells">
+      <span class="hero-rotator-slide">Sell on Consignment</span>
+      <span class="hero-rotator-slide">Free up inventory cash</span>
+      <span class="hero-rotator-slide">Vendor owns it until it sells</span>
+      <span class="hero-rotator-slide">Zero write-offs on expired stock</span>
+      <span class="hero-rotator-slide">Settlement reports vendors trust</span>
+      <span class="hero-rotator-slide">Done For You</span>
+      <span class="hero-rotator-slide">Boost profitability</span>
+      <span class="hero-rotator-ghost" aria-hidden="true">Settlement reports vendors trust</span>
+    </h1>
+    <p class="hero-lede">No portals, no BS. Just an amazing accounts payable service that actually MAKES you money.</p>
+    <div class="hero-actions-centered">
+      <a href="/contact" class="btn-primary">Get My Free AP Evaluation <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
     </div>
   </div>
 </div>
