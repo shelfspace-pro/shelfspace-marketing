@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>OG · Anatomy of a Vendor Credit Memo</title>
+<!--
+  1200x630 OG card for /blog/anatomy-of-a-vendor-credit-memo.
+  Render to PNG with any headless screenshot tool, e.g.:
+
+    npx puppeteer-cli screenshot http://localhost:3000/og-templates/credit-memo.html \
+      --width 1200 --height 630 \
+      --output ../og-credit-memo.png
+
+  Or open in browser, set viewport to 1200x630, screenshot, save as
+  /og-credit-memo.png at repo root, then update <meta property="og:image">
+  and <meta name="twitter:image"> in /blog/anatomy-of-a-vendor-credit-memo.html.
+-->
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green-deep: #1b4332;
+    --green-dark: #2d6a4f;
+    --green-mid: #40916c;
+    --green-accent: #95d5b2;
+    --green-ghost: #f0faf4;
+    --white: #ffffff;
+    --slate-100: #f1f5f9;
+    --slate-200: #e2e8f0;
+    --slate-500: #64748b;
+    --slate-600: #475569;
+    --slate-700: #334155;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    width: 1200px;
+    height: 630px;
+    font-family: 'DM Sans', system-ui, sans-serif;
+    background: var(--white);
+    overflow: hidden;
+    position: relative;
+  }
+  .canvas {
+    width: 1200px;
+    height: 630px;
+    display: flex;
+    position: relative;
+    background:
+      radial-gradient(circle at 85% 15%, rgba(149,213,178,0.18) 0%, rgba(149,213,178,0) 55%),
+      radial-gradient(circle at 10% 90%, rgba(27,67,50,0.06) 0%, rgba(27,67,50,0) 55%),
+      var(--white);
+  }
+  .grid-bg {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(var(--green-deep) 1px, transparent 1px),
+      linear-gradient(90deg, var(--green-deep) 1px, transparent 1px);
+    background-size: 60px 60px;
+    opacity: 0.025;
+    pointer-events: none;
+  }
+  .left {
+    flex: 1;
+    padding: 56px 0 56px 64px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    z-index: 2;
+    max-width: 660px;
+  }
+  .brand {
+    display: flex; align-items: center; gap: 12px;
+  }
+  .brand-icon {
+    width: 36px; height: 36px;
+    background: var(--green-deep);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .brand-text {
+    font-size: 22px; font-weight: 700;
+    color: var(--green-deep);
+    letter-spacing: -0.5px;
+  }
+  .eyebrow {
+    font-family: 'Space Mono', monospace;
+    font-size: 13px; font-weight: 700;
+    letter-spacing: 2px; text-transform: uppercase;
+    color: var(--green-mid);
+    margin-bottom: 18px;
+  }
+  .headline {
+    font-size: 56px; font-weight: 700;
+    color: var(--green-deep);
+    letter-spacing: -1.6px;
+    line-height: 1.05;
+    margin: 0 0 18px;
+  }
+  .deck {
+    font-size: 19px;
+    color: var(--slate-600);
+    line-height: 1.5;
+    margin: 0;
+    max-width: 580px;
+  }
+  .footer-row {
+    display: flex; align-items: center; gap: 14px;
+    font-size: 14px;
+    color: var(--slate-500);
+    font-family: 'Space Mono', monospace;
+    letter-spacing: 0.5px;
+  }
+  .footer-row .dot {
+    width: 4px; height: 4px; border-radius: 50%;
+    background: var(--slate-200);
+  }
+  /* Right-side document mockup */
+  .right {
+    width: 480px;
+    display: flex; align-items: center; justify-content: center;
+    z-index: 2;
+    position: relative;
+    padding-right: 64px;
+  }
+  .doc {
+    width: 360px;
+    background: var(--white);
+    border: 1px solid var(--slate-200);
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 18px 48px rgba(27,67,50,0.14);
+    transform: rotate(-3deg);
+  }
+  .doc-head {
+    background: var(--green-deep);
+    padding: 14px 18px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .doc-head-title { font-size: 13px; font-weight: 700; color: var(--white); }
+  .doc-head-sub { font-size: 9px; color: rgba(255,255,255,0.85); letter-spacing: 1.2px; text-transform: uppercase; margin-top: 2px; }
+  .doc-head-ref { font-size: 9px; color: rgba(255,255,255,0.85); text-align: right; }
+  .doc-body { padding: 22px 18px; }
+  .doc-eyebrow {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px; font-weight: 700;
+    letter-spacing: 1.4px; text-transform: uppercase;
+    color: var(--green-dark);
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  .doc-total {
+    text-align: center;
+    font-family: 'Space Mono', monospace;
+    font-size: 30px; font-weight: 700;
+    color: var(--green-deep);
+    letter-spacing: -1.6px;
+    margin-bottom: 4px;
+  }
+  .doc-cite {
+    text-align: center;
+    font-size: 10px;
+    color: var(--slate-500);
+    margin-bottom: 14px;
+  }
+  .doc-row {
+    display: flex; justify-content: space-between;
+    padding: 7px 10px;
+    border: 1px solid var(--slate-200);
+    border-radius: 6px;
+    font-size: 10px;
+    margin-bottom: 6px;
+  }
+  .doc-row span:first-child { color: var(--slate-600); }
+  .doc-row span:last-child { font-family: 'Space Mono', monospace; font-weight: 700; color: var(--green-deep); }
+  .doc-row.accent {
+    background: var(--green-ghost);
+    border-color: rgba(149,213,178,0.4);
+  }
+  .doc-row.accent span:first-child { color: var(--green-dark); font-weight: 600; }
+  .doc-window {
+    margin-top: 10px;
+    background: var(--green-deep);
+    border-radius: 6px;
+    padding: 8px 12px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .doc-window-label { font-size: 9px; font-weight: 600; color: rgba(255,255,255,0.7); }
+  .doc-window-val { font-family: 'Space Mono', monospace; font-size: 11px; font-weight: 700; color: var(--white); }
+</style>
+</head>
+<body>
+<div class="canvas">
+  <div class="grid-bg"></div>
+
+  <div class="left">
+    <div class="brand">
+      <div class="brand-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/>
+          <polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/>
+          <polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/>
+          <path d="M17 13a2 2 0 0 0 4 0"/>
+        </svg>
+      </div>
+      <div class="brand-text">ShelfSpace</div>
+    </div>
+
+    <div>
+      <div class="eyebrow">Guide · Credit Recovery</div>
+      <h1 class="headline">Anatomy of a Cannabis Vendor Credit Memo</h1>
+      <p class="deck">A line-by-line walkthrough of what we send your vendors every month — Metrc-backed, AP-ready, and built to get paid.</p>
+    </div>
+
+    <div class="footer-row">
+      <span>shelfspace.pro</span>
+      <span class="dot"></span>
+      <span>7-page sample inside</span>
+      <span class="dot"></span>
+      <span>Free download</span>
+    </div>
+  </div>
+
+  <div class="right">
+    <div class="doc">
+      <div class="doc-head">
+        <div>
+          <div class="doc-head-title">Monthly Review · CM-1042</div>
+          <div class="doc-head-sub">Credit Memo · April 2026</div>
+        </div>
+        <div class="doc-head-ref">Sent monthly</div>
+      </div>
+      <div class="doc-body">
+        <div class="doc-eyebrow">Total credit request</div>
+        <div class="doc-total">$1,147.53</div>
+        <div class="doc-cite">cited line-by-line to Metrc</div>
+        <div class="doc-row"><span>Customer returns</span><span>$177.26</span></div>
+        <div class="doc-row"><span>Destruction (Waste)</span><span>$220.27</span></div>
+        <div class="doc-row accent"><span>Co-marketing (50%)</span><span>$750.00</span></div>
+        <div class="doc-window">
+          <span class="doc-window-label">Review window</span>
+          <span class="doc-window-val">14 days</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
