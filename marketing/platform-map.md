@@ -133,7 +133,8 @@
 - Tables: qb_exports, data_export_requests
 
 ### Cron Jobs
-- Automated scheduled tasks: credit memo auto-approval, proposal auto-approval, data cleanup, demo followup, ShelfiQ digest, dev digest
+- Scheduled tasks: monthly statement reminder cron (every 3 business days), stale credit memo escalation (90-day backstop, one-shot per statement), proposal auto-approval, data cleanup, demo followup, ShelfiQ digest, dev digest
+- Note: monthly_statement_auto_approve_enabled flag defaults to false (auto-approval cron returns early; statements stay Pending Review until vendor responds). invoice_payment_hold_on_open_statement_enabled flag also defaults to false.
 - Key files: /app/api/cron/ (6 endpoints)
 
 ### Platform Administration

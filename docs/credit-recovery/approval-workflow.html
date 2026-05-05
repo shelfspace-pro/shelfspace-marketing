@@ -4,19 +4,19 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Credit Memo Approval Process — ShelfSpace</title>
-<meta name="description" content="Credit memo approval cannabis workflow. See each status from Draft to Applied, how vendors respond, and what happens when the 16-day window closes.">
+<meta name="description" content="Credit memo approval cannabis workflow. See each status from Draft to Applied, how vendors respond, and how ShelfSpace drives the response — no auto-approval on silence.">
 <link rel="canonical" href="https://shelfspace.pro/docs/credit-recovery/approval-workflow">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://shelfspace.pro/docs/credit-recovery/approval-workflow">
 <meta property="og:title" content="Credit Memo Approval Process — ShelfSpace">
-<meta property="og:description" content="Credit memo approval cannabis workflow. See each status from Draft to Applied, how vendors respond, and what happens when the 16-day window closes.">
+<meta property="og:description" content="Credit memo approval cannabis workflow. See each status from Draft to Applied, how vendors respond, and how ShelfSpace drives the response — no auto-approval on silence.">
 <meta property="og:image" content="https://shelfspace.pro/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:type" content="image/png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Credit Memo Approval Process — ShelfSpace">
-<meta name="twitter:description" content="Credit memo approval cannabis workflow. See each status from Draft to Applied, how vendors respond, and what happens when the 16-day window closes.">
+<meta name="twitter:description" content="Credit memo approval cannabis workflow. See each status from Draft to Applied, how vendors respond, and how ShelfSpace drives the response — no auto-approval on silence.">
 <meta name="twitter:image" content="https://shelfspace.pro/og-image.png">
 <meta name="apple-mobile-web-app-title" content="ShelfSpace">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -234,9 +234,10 @@ document.head.appendChild(o)}initApollo();</script>
     <div class="docs-glance">
       <h2>At a Glance</h2>
       <ul>
-        <li>Credit memo approval in cannabis follows a five-status workflow: Draft, Pending, Disputed, Applied, Voided</li>
-        <li>Vendors have 16 days to respond before a credit is approved by default</li>
-        <li>Vendors can accept, counter-propose a different amount, or decline with a reason</li>
+        <li>Credit memo approval in cannabis follows a five-status workflow: Draft, Pending Vendor Response, In Discussion, Applied, Voided</li>
+        <li>Vendors reply Approved, or Let's discuss — silence does not approve a credit memo</li>
+        <li>ShelfSpace follows up with the vendor every few business days until they answer</li>
+        <li>"Let's discuss" replies escalate to a human conversation between the retailer's escalation contact and the vendor</li>
         <li>Both parties receive email and in-app notifications at every status change</li>
         <li>Applied credits are deducted from the next payment or settlement</li>
       </ul>
@@ -244,39 +245,39 @@ document.head.appendChild(o)}initApollo();</script>
 
     <!-- BODY CONTENT -->
     <h2>How Credit Memo Approval Works in Cannabis</h2>
-    <p>The credit memo approval process in cannabis determines how a credit moves from initial creation to final application against a vendor payment. ShelfSpace manages this workflow end to end, notifying both parties at each step and enforcing response deadlines. Every credit memo follows the same path, whether it originates from a <a href="/docs/credit-recovery/returns">return</a>, <a href="/docs/credit-recovery/expirations">expiration</a>, or <a href="/docs/credit-recovery/co-marketing">co-marketing deal</a>.</p>
+    <p>The credit memo approval process in cannabis determines how a credit moves from initial creation to final application against a vendor payment. ShelfSpace manages this workflow end to end, notifying both parties at each step and following up actively until the vendor responds. Every credit memo follows the same path, whether it originates from a <a href="/docs/credit-recovery/returns">return</a>, <a href="/docs/credit-recovery/expirations">expiration</a>, or <a href="/docs/credit-recovery/co-marketing">co-marketing deal</a>.</p>
 
-    <p>Our <a href="/credit-recovery">credit recovery platform</a> eliminates the back-and-forth that usually happens over email and phone. Vendors respond through their portal, and the entire conversation is recorded in the credit memo's event log.</p>
+    <p>Our <a href="/credit-recovery">credit recovery platform</a> eliminates the back-and-forth that usually happens over email and phone. Vendors respond through their portal or by email reply, and the entire conversation is recorded in the credit memo's event log.</p>
 
     <h2>The Five Credit Memo Statuses</h2>
     <ul>
       <li><strong>Draft</strong> — The credit memo has been created but not yet sent to the vendor. You can edit line items, attach supporting documents, and adjust the amount. Nothing is visible to the vendor at this stage.</li>
-      <li><strong>Pending Vendor Response</strong> — The memo has been submitted and the vendor has been notified. The 16-day response clock starts. The vendor sees the full memo in their portal and receives an email with the amount and reference number.</li>
-      <li><strong>Disputed</strong> — The vendor has counter-proposed a different amount or declined the credit with a stated reason. You can accept their counter-proposal, reject it and revert to Pending, or void the memo entirely.</li>
-      <li><strong>Applied</strong> — The credit has been approved (by the vendor, by mutual agreement on a counter-proposal, or by default after 16 days). The amount is queued for deduction on the vendor's next outgoing payment.</li>
+      <li><strong>Pending Vendor Response</strong> — The memo has been submitted and the vendor has been notified. The vendor sees the full memo in their portal and receives an email with the amount and reference number. ShelfSpace follows up every few business days until the vendor replies.</li>
+      <li><strong>In Discussion</strong> — The vendor has replied "Let's discuss" or counter-proposed a different amount. ShelfiQ steps out and the conversation is owned by humans — the retailer's escalation contact and the vendor team. When both sides agree, an admin finalizes the credit at the agreed amount or voids it.</li>
+      <li><strong>Applied</strong> — The credit has been approved (by the vendor, or by mutual agreement on a counter-proposal). The amount is queued for deduction on the vendor's next outgoing payment.</li>
       <li><strong>Voided</strong> — The credit memo has been cancelled. Either party can void a memo before it reaches Applied status. A voided memo cannot be reactivated.</li>
     </ul>
 
     <div class="docs-highlight">
-      <strong>What we handle:</strong> We send notifications at every status change, enforce the 16-day response window, process counter-proposals, and apply approved credits to the next payment. You do not need to track deadlines or follow up with vendors manually.
+      <strong>What we handle:</strong> We send notifications at every status change, follow up with the vendor on a regular cadence until they respond, route counter-proposals to the right human, and apply approved credits to the next payment. You do not need to chase vendors manually.
     </div>
 
-    <h2>The 16-Day Auto-Approval Window</h2>
-    <p>When a credit memo moves to Pending, the vendor has 16 days to respond. If the vendor takes no action, the credit is approved by default and moves to Applied status. ShelfSpace sends reminder emails as the deadline approaches so vendors have every opportunity to review.</p>
+    <h2>The Vendor Response Cadence</h2>
+    <p>When a credit memo moves to Pending Vendor Response, the vendor receives the memo by email and in their portal. ShelfSpace then follows up every few business days — by reminder email, in-app notification, and through ShelfiQ when the vendor emails about a related invoice payment. There is no automatic deadline; credit memos do not approve on silence.</p>
 
-    <p>This deadline exists to prevent credits from sitting in limbo indefinitely. Both parties are notified when auto-approval occurs, and the event is logged in the credit memo history.</p>
+    <p>If a credit memo sits open for an extended period without a response, the platform escalates it to retailer admins so a human can decide whether to keep waiting, void the memo, or finalize through manual approval. This backstop prevents credits from sitting in indefinite limbo without ever forcing an outcome the vendor didn't agree to.</p>
 
     <h2>How Counter-Proposals Work</h2>
-    <p>Instead of accepting or declining outright, a vendor can counter-propose a different amount. For example, if you submit a $500 credit for returned product and the vendor believes only $400 is justified, they can propose $400 with an explanation.</p>
+    <p>Instead of accepting outright, a vendor can counter-propose a different amount or open a "Let's discuss" thread. For example, if you submit a $500 credit for returned product and the vendor believes only $400 is justified, they can propose $400 with an explanation. The credit memo flips to In Discussion and a kickoff email goes to the retailer's escalation contact.</p>
 
-    <p>When a counter-proposal comes in, you have two options:</p>
+    <p>While In Discussion, ShelfiQ steps out and humans take over the conversation. When both sides agree, an admin uses the retailer's monthly statement page to finalize:</p>
     <ul>
-      <li><strong>Accept the adjustment</strong> — The credit is approved at the vendor's proposed amount and moves to Applied.</li>
-      <li><strong>Reject the adjustment</strong> — The credit returns to Pending Vendor Response status, and the vendor has another opportunity to accept the original amount or negotiate further.</li>
+      <li><strong>Approve at the agreed amount</strong> — The credit moves to Applied at the negotiated number.</li>
+      <li><strong>Void the memo</strong> — The credit is cancelled and no deduction occurs. Use this when the dispute reveals the credit doesn't apply.</li>
     </ul>
 
     <h2>Notifications at Every Step</h2>
-    <p>Both the retailer and vendor receive notifications throughout the process. Emails are sent when a memo is created, when the vendor responds, when a counter-proposal is submitted, when a credit is approved or voided, and when auto-approval triggers. In-app notifications appear in each party's portal dashboard. See <a href="/docs/vendor-portal/disputes">responding to credits</a> for the vendor's perspective.</p>
+    <p>Both the retailer and vendor receive notifications throughout the process. Emails are sent when a memo is created, when the vendor responds, when a counter-proposal is submitted, when a credit is approved or voided, and on every reminder cycle until the vendor replies. In-app notifications appear in each party's portal dashboard. See <a href="/docs/vendor-portal/disputes">responding to credits</a> for the vendor's perspective.</p>
 
     <!-- RELATED DOCS -->
     <div class="docs-related">
