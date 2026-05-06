@@ -32,12 +32,13 @@
   }
   @page {
     size: letter;
-    margin: 0.6in 0.55in 0.55in 0.55in;
+    margin: 0.5in 0.55in 0.45in 0.55in;
   }
   .page {
     page-break-after: always;
   }
   .page:last-child { page-break-after: auto; }
+  .takeaway, .email-thread { page-break-inside: avoid; break-inside: avoid; }
 
   /* ─── BRANDED HEADER (top of every page) ─── */
   .brand-bar {
@@ -95,17 +96,19 @@
   .deid-notice strong { color: var(--slate-700); }
 
   .cover-cta {
-    margin-top: 28px;
-    display: flex; gap: 18px; align-items: center;
-    padding: 18px 22px; background: var(--green-deep);
+    margin-top: 22px;
+    display: flex; gap: 16px; align-items: center;
+    padding: 14px 18px; background: var(--green-deep);
     border-radius: 10px;
+    page-break-inside: avoid;
+    break-inside: avoid;
   }
   .cover-cta-text {
-    flex: 1; font-size: 13px; line-height: 1.5; color: rgba(255,255,255,0.88);
+    flex: 1; font-size: 12px; line-height: 1.5; color: rgba(255,255,255,0.88);
   }
   .cover-cta-text strong { color: #fff; font-weight: 700; }
   .cover-cta-link {
-    font-size: 13px; font-weight: 700; color: var(--green-accent);
+    font-size: 12px; font-weight: 700; color: var(--green-accent);
     text-decoration: none; white-space: nowrap;
   }
 
@@ -181,8 +184,8 @@
 
   .takeaway {
     background: var(--green-ghost); border: 1px solid rgba(149,213,178,0.4);
-    border-radius: 8px; padding: 14px 18px; margin-top: 16px;
-    font-size: 12px; line-height: 1.6; color: var(--slate-700);
+    border-radius: 8px; padding: 12px 16px; margin-top: 14px;
+    font-size: 11.5px; line-height: 1.55; color: var(--slate-700);
   }
   .takeaway strong { color: var(--green-deep); font-weight: 700; }
 
@@ -354,7 +357,7 @@
   </div>
 
   <div class="cover-cta">
-    <div class="cover-cta-text"><strong>See your AP inbox handled like this.</strong> Free evaluation in 48 hours. We connect to your account, look at your vendor traffic, and show you what the threads would look like with us in the loop.</div>
+    <div class="cover-cta-text"><strong>See your AP inbox handled like this.</strong> Free evaluation in 48 hours — no commitment.</div>
     <a class="cover-cta-link" href="https://shelfspace.pro/contact">Get my free evaluation &rsaquo;</a>
   </div>
 </section>
