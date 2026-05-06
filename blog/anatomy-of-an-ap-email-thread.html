@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anatomy of a ShelfSpace AP Email Thread — ShelfSpace</title>
+<meta name="description" content="See how we answer vendor AP emails — payment status pulled live, account changes done in one minute. Download the full de-identified thread (PDF).">
+<link rel="canonical" href="https://shelfspace.pro/blog/anatomy-of-an-ap-email-thread">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://shelfspace.pro/blog/anatomy-of-an-ap-email-thread">
+<meta property="og:title" content="Anatomy of a ShelfSpace AP Email Thread — ShelfSpace">
+<meta property="og:description" content="See how we answer vendor AP emails — payment status pulled live, account changes done in one minute. Download the full de-identified thread (PDF).">
+<meta property="og:image" content="https://shelfspace.pro/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Anatomy of a ShelfSpace AP Email Thread — ShelfSpace">
+<meta name="twitter:description" content="See how we answer vendor AP emails — payment status pulled live, account changes done in one minute. Download the full de-identified thread (PDF).">
+<meta name="twitter:image" content="https://shelfspace.pro/og-image.png">
+<meta name="apple-mobile-web-app-title" content="ShelfSpace">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+<style>
+  @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-12px); } }
+
+  /* ─── HERO ENHANCEMENTS ─── */
+  .page-hero { padding-bottom: 40px; }
+  .hero-bg-gradient { position: absolute; top: -30%; right: -20%; width: 700px; height: 700px; background: radial-gradient(circle, rgba(149,213,178,0.18) 0%, rgba(149,213,178,0) 70%); animation: float 8s ease-in-out infinite; pointer-events: none; }
+  .hero-bg-gradient-2 { position: absolute; bottom: -20%; left: -15%; width: 550px; height: 550px; background: radial-gradient(circle, rgba(27,67,50,0.06) 0%, rgba(27,67,50,0) 70%); animation: float 10s ease-in-out infinite; animation-delay: -3s; pointer-events: none; }
+  .hero-grid-lines { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 1200px; height: 100%; opacity: 0.035; background-image: linear-gradient(var(--green-deep) 1px, transparent 1px), linear-gradient(90deg, var(--green-deep) 1px, transparent 1px); background-size: 80px 80px; pointer-events: none; }
+  .page-hero .section-label,
+  .page-hero .section-title,
+  .page-hero .section-desc { opacity: 0; transform: translateY(30px); }
+  .page-hero .section-label { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1); }
+  .page-hero .section-title { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s, transform 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s; }
+  .page-hero .section-desc { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1) 0.25s, transform 0.8s cubic-bezier(0.22,1,0.36,1) 0.25s; }
+  .page-hero.hero-loaded .section-label,
+  .page-hero.hero-loaded .section-title,
+  .page-hero.hero-loaded .section-desc { opacity: 1; transform: translateY(0); }
+
+  /* ─── REVEAL ─── */
+  .reveal {
+    opacity: 0; transform: translateY(40px);
+    transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .reveal.is-visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.2s; }
+  .reveal-delay-2 { transition-delay: 0.4s; }
+
+  /* ─── ARTICLE BODY ─── */
+  .article-body { max-width: 720px; margin: 0 auto; padding: 0 48px 80px; }
+  .article-body h2 { font-size: 24px; font-weight: 700; color: var(--green-deep); margin: 48px 0 16px; letter-spacing: -0.5px; line-height: 1.3; }
+  .article-body h3 { font-size: 19px; font-weight: 700; color: var(--green-deep); margin: 32px 0 12px; letter-spacing: -0.3px; line-height: 1.35; }
+  .article-body p { font-size: 17px; line-height: 1.85; color: var(--slate-600); margin-bottom: 24px; }
+  .article-body ul, .article-body ol { margin-bottom: 24px; padding-left: 24px; }
+  .article-body li { font-size: 17px; line-height: 1.85; color: var(--slate-600); margin-bottom: 8px; }
+  .article-body strong { color: var(--green-deep); font-weight: 600; }
+  .article-body a { color: var(--green-mid); font-weight: 500; text-decoration: none; }
+  .article-body a:hover { color: var(--green-deep); text-decoration: underline; }
+  .article-body code { font-family: var(--font-mono); font-size: 0.92em; background: var(--green-ghost); padding: 1px 6px; border-radius: 4px; color: var(--green-dark); }
+  .article-body blockquote { border-left: 3px solid var(--green-accent); padding: 16px 24px; margin: 32px 0; background: var(--green-ghost); border-radius: 0 8px 8px 0; }
+  .article-body blockquote p { font-style: italic; color: var(--green-dark); margin-bottom: 0; }
+
+  /* ─── AT A GLANCE ─── */
+  .article-glance {
+    max-width: 720px; margin: 0 auto 40px; padding: 24px 28px;
+    background: var(--green-ghost); border: 1px solid rgba(149,213,178,0.3);
+    border-radius: 12px;
+  }
+  .article-glance h2 {
+    font-size: 14px; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--green-mid); margin: 0 0 12px;
+  }
+  .article-glance ul { list-style: none; padding: 0; margin: 0; }
+  .article-glance li {
+    font-size: 15px; line-height: 1.6; color: var(--slate-600);
+    padding: 4px 0 4px 20px; position: relative;
+  }
+  .article-glance li::before {
+    content: ''; position: absolute; left: 0; top: 12px;
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--green-accent);
+  }
+
+  /* ─── DOWNLOAD STRIP ─── */
+  .download-strip {
+    max-width: 720px; margin: 32px auto 0; padding: 20px 28px;
+    background: var(--green-deep); border-radius: 12px;
+    display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  .download-strip-text { color: rgba(255,255,255,0.85); font-size: 15px; line-height: 1.5; }
+  .download-strip-text strong { color: var(--white); font-weight: 700; }
+  .download-strip a {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 12px 20px; background: var(--green-accent);
+    color: var(--green-deep); border-radius: 10px;
+    font-size: 14px; font-weight: 700; text-decoration: none;
+    flex-shrink: 0;
+  }
+  .download-strip a:hover { background: var(--white); }
+  @media (max-width: 600px) {
+    .download-strip { padding: 18px 20px; gap: 14px; }
+  }
+
+  /* ─── EMAIL THREAD PRIMITIVE ─── */
+  .email-thread {
+    max-width: 720px; margin: 0 auto 36px;
+    border: 1px solid var(--slate-200); border-radius: 12px;
+    overflow: hidden; background: var(--white);
+  }
+  .email-thread-header {
+    padding: 14px 20px; background: var(--green-deep);
+    display: flex; align-items: center; gap: 8px;
+    font-variant-ligatures: none;
+  }
+  .email-thread-header svg { flex-shrink: 0; }
+  .email-thread-header-label {
+    font-size: 11px; font-weight: 700; letter-spacing: 1.5px;
+    color: var(--green-accent); text-transform: uppercase;
+  }
+  .email-thread-msg { padding: 20px 20px 4px; display: flex; }
+  .email-thread-msg:last-of-type { padding-bottom: 4px; }
+  .email-thread-msg.vendor { justify-content: flex-start; }
+  .email-thread-msg.shelfiq { justify-content: flex-end; }
+  .email-thread-bubble {
+    border-radius: 10px; padding: 16px 20px; max-width: 92%;
+  }
+  .email-thread-msg.vendor .email-thread-bubble {
+    background: var(--slate-50); border: 1px solid var(--slate-200); max-width: 88%;
+  }
+  .email-thread-msg.shelfiq .email-thread-bubble {
+    background: var(--green-ghost); border: 1px solid rgba(149,213,178,0.4);
+  }
+  .email-thread-meta {
+    font-size: 11px; font-weight: 600; color: var(--slate-600);
+    margin-bottom: 10px; letter-spacing: 0.3px;
+  }
+  .email-thread-msg.shelfiq .email-thread-meta {
+    color: var(--green-dark); font-weight: 700;
+    display: flex; align-items: center; gap: 6px;
+    font-variant-ligatures: none;
+  }
+  .email-thread-bubble p {
+    margin: 0 0 10px; font-size: 14px; line-height: 1.65; color: var(--slate-700);
+  }
+  .email-thread-bubble p:last-child { margin-bottom: 0; }
+  .email-thread-bubble ul {
+    margin: 0 0 10px; padding-left: 20px; font-size: 14px; line-height: 1.7; color: var(--slate-700);
+  }
+  .email-thread-bubble ul li { margin-bottom: 4px; }
+  .email-thread-bubble .mono {
+    font-family: var(--font-mono); font-weight: 700;
+    color: var(--green-deep);
+  }
+  .email-thread-bubble .status-pill {
+    font-family: var(--font-mono); font-weight: 700; color: var(--green-dark);
+    background: rgba(149,213,178,0.25); padding: 1px 6px; border-radius: 4px;
+  }
+  .email-thread-footer {
+    padding: 14px 20px 16px;
+    display: flex; align-items: center; gap: 6px;
+    border-top: 1px solid var(--slate-200);
+  }
+  .email-thread-footer-time {
+    font-size: 12px; font-weight: 600; color: var(--green-dark); letter-spacing: 0.2px;
+  }
+  .email-thread-footer-time .mono {
+    font-family: var(--font-mono);
+  }
+  @media (max-width: 600px) {
+    .email-thread-msg.vendor .email-thread-bubble,
+    .email-thread-msg.shelfiq .email-thread-bubble { max-width: 100%; }
+  }
+
+  /* ─── FAQ ─── */
+  .faq-section { max-width: 720px; margin: 0 auto; padding: 0 48px 60px; }
+  .faq-header { margin-bottom: 24px; }
+  .faq-header h2 { font-size: 24px; font-weight: 700; color: var(--green-deep); letter-spacing: -0.5px; line-height: 1.3; margin: 0; }
+  .faq-list { margin: 0; }
+  .faq-list details { border-bottom: 1px solid var(--slate-200); }
+  .faq-list details:first-child { border-top: 1px solid var(--slate-200); }
+  .faq-list summary { padding: 20px 0; font-size: 17px; font-weight: 600; color: var(--green-deep); cursor: pointer; list-style: none; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+  .faq-list summary::-webkit-details-marker { display: none; }
+  .faq-list summary::after { content: '+'; font-size: 22px; font-weight: 400; color: var(--slate-400); flex-shrink: 0; }
+  .faq-list details[open] summary::after { content: '\2212'; }
+  .faq-list details p { padding: 0 0 20px; margin: 0; font-size: 15px; line-height: 1.7; color: var(--slate-500); }
+
+  /* ─── CTA PARALLAX ─── */
+  .cta-section::before { transform: translate(-50%,-50%) translateY(var(--parallax-y, 0)); will-change: transform; }
+
+  /* ─── FOOTER 5-COL ─── */
+  .footer-top { grid-template-columns: 2fr 1fr 1fr 1fr 1fr; }
+  @media (max-width: 900px) { .footer-top { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px) { .footer-top { grid-template-columns: 1fr; } }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    .article-body { padding: 0 24px 60px; }
+    .article-body h2 { margin-top: 36px; }
+    .faq-section { padding: 0 24px 40px; }
+    section [style*="grid-template-columns"] { grid-template-columns: 1fr !important; gap: 12px !important; }
+  }
+
+  /* ─── REDUCED MOTION ─── */
+  @media (prefers-reduced-motion: reduce) {
+    .reveal {
+      opacity: 1; transform: none; transition: none;
+    }
+    .page-hero .section-label,
+    .page-hero .section-title,
+    .page-hero .section-desc {
+      opacity: 1; transform: none; transition: none;
+    }
+    .hero-bg-gradient, .hero-bg-gradient-2 { animation: none; }
+  }
+</style>
+<noscript><style>.reveal,.page-hero .section-label,.page-hero .section-title,.page-hero .section-desc{opacity:1;transform:none;transition:none;}</style></noscript>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-H2LBJT03WE"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-H2LBJT03WE');</script>
+<script>function initApollo(){var n=Math.random().toString(36).substring(7),o=document.createElement("script");
+o.src="https://assets.apollo.io/micro/website-tracker/tracker.iife.js?nocache="+n,o.async=!0,o.defer=!0,
+o.onload=function(){window.trackingFunctions.onLoad({appId:"69c141b32234890011a43849"})},
+document.head.appendChild(o)}initApollo();</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Anatomy of a ShelfSpace AP Email Thread",
+  "description": "See how we answer vendor AP emails — payment status pulled live, account changes done in one minute. Download the full de-identified thread (PDF).",
+  "author": {
+    "@type": "Person",
+    "name": "Chris Mitchem"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "ShelfSpace",
+    "url": "https://shelfspace.pro"
+  },
+  "datePublished": "2026-05-06",
+  "url": "https://shelfspace.pro/blog/anatomy-of-an-ap-email-thread",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://shelfspace.pro/blog/anatomy-of-an-ap-email-thread"
+  },
+  "image": "https://shelfspace.pro/og-image.png"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Does ShelfiQ ever guess on numbers?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Every figure in a ShelfiQ reply comes from the live system at the moment of response. If the data isn't there, ShelfiQ flags it for human review rather than answering."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What if a vendor asks for something more sensitive — like changing payment terms?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "ShelfiQ routes anything outside routine status and access changes to a human. Disputes, term changes, and pricing questions never get a ShelfiQ-only reply; they land on our team's desk for the retailer's review."
+      }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://shelfspace.pro/" },
+    { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://shelfspace.pro/blog" },
+    { "@type": "ListItem", "position": 3, "name": "Anatomy of a ShelfSpace AP Email Thread" }
+  ]
+}
+</script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="/" class="nav-logo">
+    <div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div>
+    <span class="nav-logo-text">ShelfSpace</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="/consignment">Consignment</a></li>
+    <li><a href="/accounts-payable">Accounts Payable</a></li>
+    <li><a href="/credit-recovery">Credit Recovery</a></li>
+    <li><a href="/pricing">Pricing</a></li>
+    <li><a href="/about">About</a></li>
+    <li><a href="/contact" class="nav-cta">Get Started <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a></li>
+  </ul>
+  <div class="nav-hamburger" onclick="document.querySelector('.nav-links').classList.toggle('mobile-open'); event.stopPropagation();"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="hero-bg-gradient"></div>
+  <div class="hero-bg-gradient-2"></div>
+  <div class="hero-grid-lines"></div>
+  <div class="section-label">Guide · Accounts Payable</div>
+  <h1 class="section-title">Anatomy of a ShelfSpace AP Email Thread</h1>
+  <p class="section-desc">A real vendor AR reminder. Two replies, one minute apart, zero human at the retailer in the loop. Walk through the thread line by line.</p>
+</div>
+
+<!-- AT A GLANCE -->
+<div class="article-glance">
+  <h2>At a glance</h2>
+  <ul>
+    <li>A real vendor AR reminder, answered with a paid/unpaid invoice breakdown in seconds</li>
+    <li>Two exchanges, the second reply went out one minute after the request landed</li>
+    <li>Account-change request — adding a Treasury contact — handled inside the same thread</li>
+    <li>No human at the retailer in the loop on routine requests; escalation always available</li>
+    <li>The full de-identified thread is downloadable as a PDF below</li>
+  </ul>
+</div>
+
+<!-- DOWNLOAD STRIP -->
+<div class="download-strip">
+  <div class="download-strip-text"><strong>The full de-identified email thread.</strong> Real ShelfSpace customer thread — names, amounts, and reference IDs altered. Free, no email required.</div>
+  <a href="/ShelfSpace_Sample_AP_Email_Thread.pdf" target="_blank" rel="noopener" download>Download the sample <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></a>
+</div>
+
+<!-- ARTICLE BODY -->
+<div class="article-body reveal">
+
+  <h2>What you're looking at</h2>
+
+  <p>Every dispensary that uses ShelfSpace gets a per-location AP inbox in the format <code>ap-{store}-{location}-{hash}@shelfspace.pro</code>. Vendors email that address — payment questions, statements, account requests — and ShelfiQ replies with live data from the retailer's account. Anything routine gets answered in seconds. Anything that needs judgment lands on our team's desk.</p>
+
+  <p>This post walks through a real thread, page by page. The retailer is a multi-location dispensary chain. The vendor is a cultivator's AR team chasing payment status on six invoices. The names, amounts, invoice numbers, and reference IDs have been altered for de-identification — the structure and timing of the exchange are exactly as it happened. <a href="/ShelfSpace_Sample_AP_Email_Thread.pdf" target="_blank" rel="noopener">Download the sample (PDF)</a> to follow along.</p>
+
+  <h2>Exchange 1 — Payment status</h2>
+
+  <p>The vendor's AR team sent a "friendly reminder" email with a statement attached, asking for payment status on six open invoices. The reply they got back wasn't a manual lookup — it was the live status of every invoice they'd asked about, broken into paid and unpaid, with check amounts net of returns credits already applied.</p>
+
+  <div class="email-thread" role="figure" aria-label="Email exchange 1 — vendor AR reminder and ShelfSpace reply">
+    <div class="email-thread-header">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#95d5b2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      <span class="email-thread-header-label">Exchange 1 · Payment Status</span>
+    </div>
+    <div class="email-thread-msg vendor">
+      <div class="email-thread-bubble">
+        <div class="email-thread-meta">From: ar@vendor.example &middot; Apr 22, 2026 &middot; 7:05 AM</div>
+        <p>Hello,</p>
+        <p>We hope you're doing well. This is a friendly reminder that your account currently has an outstanding balance. For your convenience, your most recent statement is attached. If payment has already been made, please disregard this message. Otherwise, kindly let us know when we can expect to receive payment on the balance due.</p>
+        <p style="font-size:12px;color:var(--slate-500);font-style:italic;">[ACH banking details, statement attachment]</p>
+      </div>
+    </div>
+    <div class="email-thread-msg shelfiq">
+      <div class="email-thread-bubble">
+        <div class="email-thread-meta">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#2d6a4f" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+          ShelfiQ Response &middot; Apr 22, 2026 &middot; 7:05 AM
+        </div>
+        <p>Here's the status of each invoice you listed:</p>
+        <p><strong>Paid invoices:</strong></p>
+        <ul>
+          <li>Invoice <span class="mono">#1205207</span> (<span class="mono">$9,184.20</span>) — Paid on <span class="mono">03/24/2026</span>. Your check was <span class="mono">$9,072.20</span> after <span class="mono">$112</span> in returns credits (<span class="mono">CM-72</span>, <span class="mono">CM-153</span>, <span class="mono">CM-138</span>) were applied. This was for Northshore North.</li>
+          <li>Invoice <span class="mono">#1218492</span> (<span class="mono">$18,847.00</span>) — Paid on <span class="mono">04/06/2026</span>. Full amount, Northshore Downtown.</li>
+          <li>Invoice <span class="mono">#1234628</span> (<span class="mono">$18,432.95</span>) — Paid on <span class="mono">04/27/2026</span>. Full amount, Northshore North.</li>
+          <li>Invoice <span class="mono">#1234547</span> (<span class="mono">$14,978.40</span>) — Paid on <span class="mono">04/27/2026</span>. Full amount, Northshore Downtown.</li>
+        </ul>
+        <p><strong>Unpaid invoices:</strong></p>
+        <ul>
+          <li>Invoice <span class="mono">#1230914</span> (<span class="mono">$13,584.10</span>) — Due <span class="mono">05/14/2026</span>, Northshore Downtown</li>
+          <li>Invoice <span class="mono">#1252533</span> (<span class="mono">$7,062.50</span>) — Due <span class="mono">05/18/2026</span>, Northshore North</li>
+        </ul>
+        <p>The unpaid balance in our system is <span class="status-pill">$20,646.60</span> for the two remaining invoices. The other four totaling <span class="mono">$61,442.55</span> have already been paid through your ShelfSpace portal at <a href="https://ourshelf.space" target="_blank" rel="noopener" style="color:var(--green-mid);">ourshelf.space</a>.</p>
+        <p>For the two unpaid invoices that are due this month, you'll receive checks through the portal once the due dates arrive.</p>
+      </div>
+    </div>
+    <div class="email-thread-footer">
+      <span style="font-size:14px;line-height:1;">&#9889;</span>
+      <span class="email-thread-footer-time">Responded in <span class="mono">under a minute</span></span>
+    </div>
+  </div>
+
+  <p>The reply does five things in one pass. It cites every invoice the vendor asked about, separates paid from unpaid, names the entity (which location each invoice was billed to), surfaces the returns credits already applied to one of the checks (<code>CM-72</code>, <code>CM-153</code>, <code>CM-138</code>), and points the vendor at the portal where the actual checks live as <a href="/checks">Check 21–compliant digital checks</a>.</p>
+
+  <p>None of this is a saved snippet. If a check had cleared an hour later, the next reply on this thread would have shown the new status. The data lives in the system; ShelfiQ just translates it into the answer the vendor was looking for.</p>
+
+  <h2>Exchange 2 — Adding a user</h2>
+
+  <p>The next morning, the vendor's AP manager replied with a different ask: add their Treasury contact to the account so he can pull checks and receive payment notifications. This wasn't a question about money — it was an account change. ShelfiQ handled it inside the same thread, no portal login required on the retailer's side.</p>
+
+  <div class="email-thread" role="figure" aria-label="Email exchange 2 — vendor request to add a Treasury user and ShelfSpace confirmation">
+    <div class="email-thread-header">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#95d5b2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>
+      <span class="email-thread-header-label">Exchange 2 · User Access</span>
+    </div>
+    <div class="email-thread-msg vendor">
+      <div class="email-thread-bubble">
+        <div class="email-thread-meta">From: ar@vendor.example &middot; Apr 23, 2026 &middot; 7:17 AM</div>
+        <p>Hello,</p>
+        <p>Can you please add our Treasury team (James, <span class="mono">treasury@vendor.example</span>) to our ShelfSpace account? Treasury should be receiving all payment notifications and should also have the ability to pull checks so they can deposit them in the bank.</p>
+        <p>Thank you,<br>Maria<br><em style="font-style:italic;color:var(--slate-500);">Accounts Payable Manager</em></p>
+      </div>
+    </div>
+    <div class="email-thread-msg shelfiq">
+      <div class="email-thread-bubble">
+        <div class="email-thread-meta">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#2d6a4f" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+          ShelfiQ Response &middot; Apr 23, 2026 &middot; 7:18 AM
+        </div>
+        <p>Hi Maria,</p>
+        <p>Done — I've added James (<span class="mono">treasury@vendor.example</span>) to your payment notification contacts as Treasury / Accounts Receivable. Future payment notifications will be sent to him along with your existing contacts.</p>
+        <p>James will be able to log into your ShelfSpace portal at <a href="https://ourshelf.space" target="_blank" rel="noopener" style="color:var(--green-mid);">ourshelf.space</a> to access and download all payment checks. All payments are delivered as <a href="/checks" style="color:var(--green-mid);">Check 21–compliant digital checks</a> through the secure portal.</p>
+      </div>
+    </div>
+    <div class="email-thread-msg vendor">
+      <div class="email-thread-bubble">
+        <div class="email-thread-meta">From: ar@vendor.example &middot; Apr 23, 2026 &middot; 7:24 AM</div>
+        <p>Thank you!</p>
+      </div>
+    </div>
+    <div class="email-thread-footer">
+      <span style="font-size:14px;line-height:1;">&#9889;</span>
+      <span class="email-thread-footer-time">Responded in <span class="mono">1 minute</span></span>
+    </div>
+  </div>
+
+  <p>The request was specific: a named role, a named email, and two distinct permissions (notifications + check access). The reply mirrored the request, confirmed both permissions explicitly, and pointed the new user at the place they'd actually use them. The vendor's AP manager closed the thread with a thank-you. No follow-up needed.</p>
+
+  <p>The change happened entirely in the inbox. The retailer's owner didn't see this email. Their controller didn't see this email. Nobody at the retailer logged into a portal to add a user. The vendor got a faster answer than they would have gotten from any human AP team.</p>
+
+  <h2>The speed</h2>
+
+  <p>The second exchange is the one that's hard to fake. <strong>The vendor's request landed at 7:17 AM. The reply went out at 7:18.</strong> One minute, including an account change.</p>
+
+  <blockquote>
+    <p>Vendors don't expect a same-minute reply from an AP team. They expect 24 to 48 hours. Once they realize the thread answers in seconds, the relationship changes.</p>
+  </blockquote>
+
+  <p>This isn't about being impressive. It's about pushing the back-and-forth into a single sitting. When a vendor asks at 7:17 and gets the answer at 7:18, the issue closes that morning instead of dragging into the week. Multiply that across 40 vendors and the inbox stops being a weight on the retailer's day.</p>
+
+  <h2>Why this works</h2>
+
+  <p>Three reasons:</p>
+
+  <ul>
+    <li><strong>Live data, not canned templates.</strong> Every paid/unpaid figure came from the live system at the moment of response. The same query an hour later would return different numbers if a check had moved. Nothing in the reply is a saved snippet.</li>
+    <li><strong>Identity-aware routing.</strong> The thread address, <code>ap-{store}-{location}-{hash}@shelfspace.pro</code>, tells us exactly which retailer and which location the vendor is writing about. No guesswork. No risk of replying with another retailer's data.</li>
+    <li><strong>Account changes inside the inbox.</strong> Adding a Treasury contact didn't require the retailer's owner to log into a portal. It happened in the email thread, the same channel the vendor was already using. One conversation, one closed loop.</li>
+  </ul>
+
+  <h2>What this means for retailers</h2>
+
+  <p>Most dispensaries are still answering these emails by hand, in someone's personal inbox. The owner. The controller. The bookkeeper. The same five questions in different wrappers, every week, eating a workday across the team.</p>
+
+  <p>The thread you just walked through happened without anyone at the retailer touching it. The owner didn't see the AR reminder. The controller didn't approve the user add. ShelfiQ pulled the live data, answered, made the change, and confirmed back — all inside the channel the vendor was already using.</p>
+
+  <blockquote>
+    <p>Your vendors get instant answers. Your team gets zero AP emails.</p>
+  </blockquote>
+
+  <p>If your inbox looks like the one the vendor was emailing into — owner cc'd, controller cc'd, bookkeeper cc'd, all of you scrambling to look up the same answer — <a href="/contact">talk to us</a>. The first month of evaluation shows what your <a href="/accounts-payable">managed AP inbox</a> would look like with these threads handled the way the one above was.</p>
+
+</div>
+
+<!-- FAQ -->
+<div class="faq-section reveal">
+  <div class="faq-header">
+    <h2>Frequently asked questions</h2>
+  </div>
+  <div class="faq-list">
+    <details>
+      <summary>Does ShelfiQ ever guess on numbers?</summary>
+      <p>No. Every figure in a ShelfiQ reply comes from the live system at the moment of response. If the data isn't there, ShelfiQ flags it for human review rather than answering.</p>
+    </details>
+    <details>
+      <summary>What if a vendor asks for something more sensitive — like changing payment terms?</summary>
+      <p>ShelfiQ routes anything outside routine status and access changes to a human. Disputes, term changes, and pricing questions never get a ShelfiQ-only reply; they land on our team's desk for the retailer's review.</p>
+    </details>
+  </div>
+</div>
+
+<!-- RELATED CASE STUDIES -->
+<section style="max-width:720px;margin:0 auto;padding:0 48px 60px;">
+  <h2 style="font-size:22px;font-weight:700;color:var(--green-deep);margin-bottom:24px;letter-spacing:-0.5px;">Related case studies</h2>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;">
+    <a href="/blog/case-study-shelfiq-vendor-emails" style="text-decoration:none;padding:20px;border:1px solid var(--slate-200);border-radius:12px;transition:all 0.2s;">
+      <span style="display:block;font-size:11px;font-weight:600;letter-spacing:0.5px;color:#7c3aed;margin-bottom:8px;">OPERATIONS</span>
+      <span style="display:block;font-family:var(--font-mono);font-size:20px;font-weight:700;color:var(--green-deep);letter-spacing:-1px;margin-bottom:4px;">47 emails</span>
+      <span style="display:block;font-size:14px;font-weight:500;color:var(--slate-700);line-height:1.4;">ShelfiQ handled vendor emails in week one</span>
+    </a>
+    <a href="/blog/case-study-vendor-portal" style="text-decoration:none;padding:20px;border:1px solid var(--slate-200);border-radius:12px;transition:all 0.2s;">
+      <span style="display:block;font-size:11px;font-weight:600;letter-spacing:0.5px;color:#7c3aed;margin-bottom:8px;">OPERATIONS</span>
+      <span style="display:block;font-family:var(--font-mono);font-size:20px;font-weight:700;color:var(--green-deep);letter-spacing:-1px;margin-bottom:4px;">90% fewer calls</span>
+      <span style="display:block;font-size:14px;font-weight:500;color:var(--slate-700);line-height:1.4;">Vendor portal ended payment-status calls</span>
+    </a>
+    <a href="/blog/case-study-ap-time-savings" style="text-decoration:none;padding:20px;border:1px solid var(--slate-200);border-radius:12px;transition:all 0.2s;">
+      <span style="display:block;font-size:11px;font-weight:600;letter-spacing:0.5px;color:#7c3aed;margin-bottom:8px;">OPERATIONS</span>
+      <span style="display:block;font-family:var(--font-mono);font-size:20px;font-weight:700;color:var(--green-deep);letter-spacing:-1px;margin-bottom:4px;">98% less time</span>
+      <span style="display:block;font-size:14px;font-weight:500;color:var(--slate-700);line-height:1.4;">From 15 hours a week to one approve button</span>
+    </a>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-content">
+    <div class="section-label reveal">Get Started</div>
+    <h2 class="section-title reveal">See your AP inbox handled like this.</h2>
+    <p class="section-desc reveal">Free evaluation in 48 hours. We connect to your account, look at your vendor traffic, and show you what the threads would look like with us in the loop. You only pay if we deliver.</p>
+    <div class="cta-actions reveal">
+      <a href="/contact" class="btn-primary">
+        Get My Free Evaluation
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+      <a href="/ShelfSpace_Sample_AP_Email_Thread.pdf" target="_blank" rel="noopener" download class="btn-secondary">Download the sample (PDF)</a>
+    </div>
+    <figure class="cta-founder reveal" style="display:flex;align-items:center;gap:16px;justify-content:center;margin:32px 0 0;">
+      <img src="/chris-mitchem.jpg" alt="Chris Mitchem" style="width:48px;height:48px;border-radius:50%;object-fit:cover;">
+      <blockquote style="margin:0;border:none;padding:0;background:none;">
+        <p style="font-size:14px;color:rgba(255,255,255,0.85);max-width:520px;line-height:1.5;margin:0;font-style:normal;">"I built ShelfiQ because I sent a thousand of these emails myself. The reply that gets paid is the reply that answers in seconds with the right numbers."</p>
+        <figcaption style="font-size:13px;color:rgba(255,255,255,0.7);margin-top:6px;">— Chris Mitchem, Founder</figcaption>
+      </blockquote>
+    </figure>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="/" class="nav-logo"><div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div><span class="nav-logo-text">ShelfSpace</span></a>
+      <p>Every Vendor. Every Payment. One Engine.</p>
+    </div>
+    <div class="footer-col"><h3>Services</h3><ul><li><a href="/accounts-payable">Accounts Payable</a></li><li><a href="/consignment">Consignment</a></li><li><a href="/credit-recovery">Credit Recovery</a></li><li><a href="/checks">Check Payments</a></li><li><a href="/shelfiq">ShelfiQ</a></li></ul></div>
+    <div class="footer-col"><h3>Platform</h3><ul><li><a href="/features">Features</a></li><li><a href="/how-it-works">How It Works</a></li><li><a href="/pricing">Pricing</a></li><li><a href="/about">About</a></li><li><a href="/blog">Blog</a></li><li><a href="/docs">Docs</a></li></ul></div>
+    <div class="footer-col"><h3>Access</h3><ul><li><a href="https://ourshelf.space">Login</a></li><li><a href="/contact">Sign Up</a></li><li><a href="/contact">Contact</a></li><li><a href="/vendors">For Vendors</a></li><li><a href="/for-bookkeepers">For Bookkeepers</a></li></ul></div>
+    <div class="footer-col"><h3>Company</h3><ul><li><a href="mailto:chris@shelfspace.pro">Email</a></li><li><a href="mailto:support@shelfspace.pro">Support</a></li><li><a href="https://linkedin.com/company/shelfspace-pro" target="_blank" rel="noopener" class="footer-social-link"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> LinkedIn</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><p>&copy; 2026 ShelfSpace Technologies Inc.</p><div style="display:flex;align-items:center;gap:8px;justify-content:center;margin-top:12px;"><img src="/metrc-logo.png" alt="METRC" style="height:18px;opacity:0.4;filter:brightness(0) invert(1);"><span style="font-size:11px;color:rgba(255,255,255,0.35);">Certified METRC Third-Party Vendor</span></div><div class="footer-bottom-links"><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div></div>
+</footer>
+
+<script>
+(function() {
+  var nav = document.getElementById('nav');
+  var pageHero = document.querySelector('.page-hero');
+  var parallaxSections = [
+    document.querySelector('.cta-section')
+  ];
+
+  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var isMobile = window.innerWidth < 900;
+  var ticking = false;
+
+  /* Hero entrance */
+  requestAnimationFrame(function() {
+    nav.classList.toggle('scrolled', window.scrollY > 20);
+    if (pageHero) pageHero.classList.add('hero-loaded');
+  });
+
+  /* Reveals */
+  var revealObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(function(el) { revealObserver.observe(el); });
+
+  function onScroll() {
+    var scrollY = window.scrollY;
+    nav.classList.toggle('scrolled', scrollY > 20);
+    if (prefersReduced || isMobile) return;
+    var wh = window.innerHeight;
+    parallaxSections.forEach(function(section) {
+      if (!section) return;
+      var rect = section.getBoundingClientRect();
+      if (rect.bottom < 0 || rect.top > wh) return;
+      var center = rect.top + rect.height / 2 - wh / 2;
+      section.style.setProperty('--parallax-y', (center * 0.08) + 'px');
+    });
+  }
+
+  window.addEventListener('scroll', function() {
+    if (!ticking) {
+      requestAnimationFrame(function() {
+        onScroll();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, { passive: true });
+
+  onScroll();
+
+  window.addEventListener('resize', function() {
+    isMobile = window.innerWidth < 900;
+    if (isMobile) {
+      parallaxSections.forEach(function(section) {
+        if (section) section.style.setProperty('--parallax-y', '0px');
+      });
+    }
+  });
+
+  document.addEventListener('click', function() {
+    var navLinks = document.querySelector('.nav-links');
+    if (navLinks && navLinks.classList.contains('mobile-open')) {
+      navLinks.classList.remove('mobile-open');
+    }
+  });
+})();
+</script>
+<script src="/shelfiq-widget.js"></script>
+</body>
+</html>
