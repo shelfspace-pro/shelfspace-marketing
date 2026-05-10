@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ShelfSpace OG</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    width: 1200px; height: 630px;
+    margin: 0; padding: 0;
+    overflow: hidden;
+    font-family: 'DM Sans', -apple-system, sans-serif;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .canvas {
+    position: relative;
+    width: 1200px; height: 630px;
+    background:
+      radial-gradient(circle at 80% 20%, rgba(149,213,178,0.14) 0%, rgba(149,213,178,0) 55%),
+      linear-gradient(135deg, #1b4332 0%, #2d6a4f 100%);
+    overflow: hidden;
+  }
+
+  /* Subtle grid texture */
+  .canvas::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+  }
+
+  /* Top — logo, absolutely positioned */
+  .brand {
+    position: absolute;
+    top: 56px; left: 72px;
+    display: flex; align-items: center; gap: 14px;
+    z-index: 2;
+  }
+  .brand-icon {
+    width: 44px; height: 44px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(149,213,178,0.35);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .brand-name {
+    font-size: 26px; font-weight: 700;
+    color: #ffffff; letter-spacing: -0.5px;
+  }
+
+  /* Middle — mission */
+  .mission {
+    position: absolute;
+    top: 200px;
+    left: 72px; right: 72px;
+    z-index: 2;
+  }
+  .mission-eyebrow {
+    font-family: 'Space Mono', monospace;
+    font-size: 15px; font-weight: 700;
+    letter-spacing: 3px; text-transform: uppercase;
+    color: #95d5b2;
+    margin-bottom: 22px;
+  }
+  .mission-headline {
+    font-size: 80px; font-weight: 700;
+    color: #ffffff; line-height: 1.04;
+    letter-spacing: -3px;
+    margin-bottom: 24px;
+    max-width: 1000px;
+  }
+  .mission-rule {
+    width: 100px; height: 4px;
+    background: #95d5b2; border-radius: 2px;
+  }
+
+  /* Bottom — footer (absolute positioning from top, fully inside 630h canvas) */
+  .footer-row {
+    position: absolute;
+    top: 510px; left: 72px; right: 72px;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 32px;
+    z-index: 2;
+  }
+  .footer-tag {
+    font-size: 17px; font-weight: 500;
+    color: rgba(255,255,255,0.82);
+    max-width: 720px;
+    line-height: 1.4;
+  }
+  .footer-url {
+    font-family: 'Space Mono', monospace;
+    font-size: 17px; font-weight: 700;
+    color: #95d5b2;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+  }
+</style>
+</head>
+<body>
+  <div class="canvas">
+
+    <div class="brand">
+      <div class="brand-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#95d5b2" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="12" y1="3" x2="12" y2="21"/>
+          <line x1="8" y1="21" x2="16" y2="21"/>
+          <polyline points="5,7 12,3 19,7"/>
+          <polyline points="3,13 5,7 7,13"/>
+          <polyline points="17,13 19,7 21,13"/>
+          <path d="M3 13a2 2 0 0 0 4 0"/>
+          <path d="M17 13a2 2 0 0 0 4 0"/>
+        </svg>
+      </div>
+      <span class="brand-name">ShelfSpace</span>
+    </div>
+
+    <div class="mission">
+      <div class="mission-eyebrow">Cannabis SKU-Margin Discipline</div>
+      <h1 class="mission-headline">Your profit margin is our mission.</h1>
+      <div class="mission-rule"></div>
+    </div>
+
+    <div class="footer-row">
+      <div class="footer-tag">The financial discipline layer for cannabis retail — applied at the SKU level.</div>
+      <div class="footer-url">shelfspace.pro</div>
+    </div>
+
+  </div>
+</body>
+</html>
