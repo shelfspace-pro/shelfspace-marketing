@@ -226,6 +226,25 @@ footer::before { content: ''; position: absolute; bottom: -100px; right: -100px;
   .footer-top { grid-template-columns: 1fr; }
 }
 
+/* ─── BRAND TICKER — vendors paid through ShelfSpace (used sitewide) ─── */
+.brand-ticker { padding: 64px 0; background: var(--green-deep); overflow: hidden; position: relative; }
+.brand-ticker::before, .brand-ticker::after { content: ''; position: absolute; top: 0; bottom: 0; width: 120px; z-index: 2; pointer-events: none; }
+.brand-ticker::before { left: 0; background: linear-gradient(90deg, var(--green-deep), transparent); }
+.brand-ticker::after { right: 0; background: linear-gradient(270deg, var(--green-deep), transparent); }
+.brand-ticker-label { text-align: center; font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.55); margin-bottom: 36px; }
+.brand-ticker-track { display: flex; align-items: center; width: max-content; animation: ticker-scroll 45s linear infinite; }
+.brand-ticker-track:hover { animation-play-state: paused; }
+.brand-ticker-logo { height: 56px; padding: 0 56px; opacity: 0.85; transition: opacity 0.3s; flex-shrink: 0; }
+.brand-ticker-logo:hover { opacity: 1; }
+@media (max-width: 600px) {
+  .brand-ticker { padding: 48px 0; }
+  .brand-ticker-logo { height: 40px; padding: 0 32px; }
+  .brand-ticker::before, .brand-ticker::after { width: 60px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .brand-ticker-track { animation: none; }
+}
+
 /* ─── WHY-STRIP — The mission callout, used sitewide ─── */
 .why-strip {
   max-width: 760px;
