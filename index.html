@@ -304,16 +304,7 @@
 .pos-ticker-logo { height: 120px; padding: 0 48px; opacity: 0.45; filter: grayscale(100%); transition: opacity 0.3s, filter 0.3s; }
 .pos-ticker-logo:hover { opacity: 0.9; filter: grayscale(0%); }
 
-/* Brand Ticker — vendors actually paid through ShelfSpace */
-.brand-ticker { padding: 64px 0; background: var(--green-deep); overflow: hidden; position: relative; }
-.brand-ticker::before, .brand-ticker::after { content: ''; position: absolute; top: 0; bottom: 0; width: 120px; z-index: 2; pointer-events: none; }
-.brand-ticker::before { left: 0; background: linear-gradient(90deg, var(--green-deep), transparent); }
-.brand-ticker::after { right: 0; background: linear-gradient(270deg, var(--green-deep), transparent); }
-.brand-ticker-label { text-align: center; font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.55); margin-bottom: 36px; }
-.brand-ticker-track { display: flex; align-items: center; width: max-content; animation: ticker-scroll 45s linear infinite; }
-.brand-ticker-track:hover { animation-play-state: paused; }
-.brand-ticker-logo { height: 56px; padding: 0 56px; opacity: 0.85; transition: opacity 0.3s; flex-shrink: 0; }
-.brand-ticker-logo:hover { opacity: 1; }
+/* Brand-ticker base rules moved to styles.css */
 
 /* Footer 5-col */
 .footer-top { grid-template-columns: 2fr 1fr 1fr 1fr 1fr; }
@@ -472,14 +463,11 @@
 @media (max-width: 600px) {
   .footer-top { grid-template-columns: 1fr; }
   .pos-ticker-logo { height: 48px; padding: 0 24px; }
-  .brand-ticker { padding: 48px 0; }
-  .brand-ticker-logo { height: 40px; padding: 0 32px; }
-  .brand-ticker::before, .brand-ticker::after { width: 60px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .reveal, .hero h1, .hero-actions, .hero-founder-credit, .hero-trust,
   .hero-bg-gradient, .hero-bg-gradient-2, .hero-rotator { animation: none; opacity: 1; transform: none; transition: none; }
-  .pos-ticker-track, .brand-ticker-track { animation: none; }
+  .pos-ticker-track { animation: none; }
   .hero-rotator-slide { animation: none !important; opacity: 0 !important; transform: none !important; }
   .hero-rotator-slide:first-child { opacity: 1 !important; position: relative !important; inset: auto !important; }
   .hero-rotator-ghost { display: none !important; }
