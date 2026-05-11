@@ -104,6 +104,7 @@
 12. Nav: 7 items, no active state
 13. Footer: Blog in Platform column, Credit Recovery in Services column
 14. TechArticle JSON-LD schema
+15. For new pages in an existing section: **add the new page to every sibling page's `<div class="docs-related-links">` block.** The `/docs` section card routes to one article (usually `overview.html`), not a section index — without sibling Related links, discovery from the docs hub is broken. List the section dir, edit each sibling, ship in the same commit. Update the section card count on `docs/index.html` and bump `?v=N` on `docs-search.js` site-wide.
 
 ## Freshness Rules
 - Every doc has a last-synced date

@@ -91,6 +91,9 @@ The `/blog-post` and `/case-study` skills handle the full rollout. Manual checkl
 4. Add entry to `docs-manifest.json`
 5. Add entry to `sitemap.xml`
 6. Add entry to the DOCS array in `/docs-search.js` (title, description, section, url, optional synonym keywords) and bump `?v=N` on every `<script src="/docs-search.js?v=N">` reference site-wide
+7. **Link the new page from every sibling in the same `docs/<section>/` directory** — add it to each sibling's `<div class="docs-related-links">` block. The `/docs` section card routes to one article, not a section index; without sibling Related links the new page is invisible to anyone whose search-index cache is stale.
+8. Bump the section-card article count and description on `docs/index.html`
+9. Append a descriptive line under the matching section of `llms.txt`
 
 ## Repo Structure
 
