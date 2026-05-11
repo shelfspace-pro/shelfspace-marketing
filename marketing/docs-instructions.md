@@ -23,6 +23,7 @@
 ### Content Length
 - 400-800 words per doc page (concise, not blog-length)
 - If a topic needs more depth, split into multiple pages (more pages = more keyword targets)
+- **Exception — procedural SOPs:** Step-by-step training pages (e.g. "How to receive a delivery") are exempt; target ~1000-1500 words on a single URL. Splitting hurts the reader's workflow narrative and produces thin pages that don't rank.
 
 ### Internal Linking (every page)
 - At least 1 link to another doc page ("See also: Settlement Reports")
