@@ -1,0 +1,1241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ShelfSpace Savings Evaluation — Sample</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --green-deep: #1b4332;
+  --green-dark: #2d6a4f;
+  --green-mid: #40916c;
+  --green-accent: #95d5b2;
+  --green-ghost: #f0faf4;
+  --slate-50: #f8fafc;
+  --slate-100: #f1f5f9;
+  --slate-200: #e2e8f0;
+  --slate-300: #cbd5e1;
+  --slate-400: #94a3b8;
+  --slate-500: #64748b;
+  --slate-600: #475569;
+  --slate-700: #334155;
+  --slate-800: #1e293b;
+  --slate-900: #0f172a;
+  --white: #ffffff;
+}
+
+@page {
+  size: 8.5in 11in;
+  margin: 0;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+html, body {
+  font-family: 'DM Sans', -apple-system, sans-serif;
+  font-size: 11pt;
+  line-height: 1.5;
+  color: var(--slate-700);
+  background: var(--white);
+}
+
+.page {
+  width: 8.5in;
+  height: 11in;
+  position: relative;
+  page-break-after: always;
+  overflow: hidden;
+  background: var(--white);
+}
+.page:last-child { page-break-after: auto; }
+
+/* ─── COVER PAGE ─── */
+.cover {
+  background: var(--green-deep);
+  color: var(--white);
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0.75in;
+}
+.cover-mark { position: absolute; top: 4.2in; left: 0.75in; }
+.cover-brand { font-size: 32pt; font-weight: 700; letter-spacing: -1px; margin-bottom: 4px; }
+.cover-kicker { font-family: 'Space Mono', monospace; font-size: 8.5pt; font-weight: 700; letter-spacing: 2.5px; color: var(--green-accent); text-transform: uppercase; }
+.cover-client { position: absolute; top: 5.4in; left: 0.75in; }
+.cover-client-name { font-size: 22pt; font-weight: 700; letter-spacing: -0.5px; margin-bottom: 6px; }
+.cover-client-meta { font-size: 10pt; color: rgba(149,213,178,0.85); }
+.cover-meta-bottom { position: absolute; bottom: 0.75in; left: 0.75in; font-size: 9pt; color: rgba(255,255,255,0.7); line-height: 1.6; }
+
+/* ─── HEADER STRIP ─── */
+.header-strip {
+  background: var(--green-deep);
+  color: var(--white);
+  padding: 0.32in 0.6in;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.header-left { display: flex; flex-direction: column; }
+.header-brand { font-size: 14pt; font-weight: 700; letter-spacing: -0.3px; }
+.header-sub { font-family: 'Space Mono', monospace; font-size: 7pt; font-weight: 700; letter-spacing: 2px; color: var(--green-accent); text-transform: uppercase; margin-top: 2px; }
+.header-right { text-align: right; }
+.header-client { font-size: 11pt; font-weight: 700; }
+.header-period { font-size: 8.5pt; color: rgba(149,213,178,0.85); margin-top: 2px; }
+
+/* ─── FOOTER STRIP ─── */
+.footer-strip {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 0.3in 0.6in;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid var(--slate-200);
+}
+.footer-info { font-size: 7.5pt; color: var(--slate-400); }
+.footer-confidential { font-family: 'Space Mono', monospace; font-size: 8pt; font-weight: 700; letter-spacing: 1.5px; color: var(--slate-500); }
+
+/* ─── CONTENT WRAPPER ─── */
+.content {
+  padding: 0.45in 0.6in 1in;
+}
+
+/* ─── SECTION HEADERS ─── */
+.section-eyebrow-dash {
+  width: 28px;
+  height: 3px;
+  background: var(--green-accent);
+  border-radius: 2px;
+  margin-bottom: 10px;
+}
+.section-eyebrow {
+  font-family: 'Space Mono', monospace;
+  font-size: 9pt;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--green-mid);
+  margin-bottom: 14px;
+}
+.section-lede {
+  font-size: 10pt;
+  color: var(--slate-600);
+  line-height: 1.55;
+  margin-bottom: 18px;
+  max-width: 6.8in;
+}
+.section-lede strong { color: var(--green-deep); }
+.data-source {
+  text-align: center;
+  font-size: 8pt;
+  color: var(--slate-400);
+  font-style: italic;
+  margin-bottom: 14px;
+}
+
+/* ─── HERO STAT CARD ─── */
+.hero-card {
+  background: var(--white);
+  border: 1px solid var(--slate-200);
+  border-radius: 10px;
+  padding: 20px 24px;
+  text-align: center;
+  margin-bottom: 18px;
+}
+.hero-card-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 8.5pt;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--slate-500);
+  margin-bottom: 6px;
+}
+.hero-card-value {
+  font-size: 38pt;
+  font-weight: 700;
+  letter-spacing: -1.5px;
+  color: var(--green-deep);
+  line-height: 1.05;
+}
+
+/* ─── 3-COL SCENARIOS ─── */
+.scenarios {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+.scenario {
+  border: 1px solid var(--slate-200);
+  border-radius: 10px;
+  padding: 14px 16px;
+  text-align: center;
+}
+.scenario.baseline {
+  background: var(--green-ghost);
+  border-color: rgba(149,213,178,0.5);
+}
+.scenario-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 7.5pt;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--slate-500);
+  margin-bottom: 3px;
+}
+.scenario.baseline .scenario-label { color: var(--green-deep); }
+.scenario-sub {
+  font-size: 7.5pt;
+  color: var(--slate-500);
+  margin-bottom: 8px;
+}
+.scenario.baseline .scenario-sub { color: var(--green-dark); }
+.scenario-value {
+  font-size: 18pt;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  color: var(--slate-700);
+}
+.scenario.baseline .scenario-value { color: var(--green-deep); }
+.scenario-suffix {
+  font-size: 7.5pt;
+  color: var(--slate-500);
+  margin-top: 2px;
+}
+
+/* ─── 3-COL SERVICE BREAKDOWN ─── */
+.services-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 16px;
+  border: 1px solid var(--slate-200);
+  border-radius: 10px;
+  padding: 16px 0;
+}
+.service-cell {
+  text-align: center;
+  padding: 0 10px;
+  border-right: 1px solid var(--slate-200);
+}
+.service-cell:last-child { border-right: none; }
+.service-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--green-deep);
+  color: var(--white);
+  font-size: 9pt;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.service-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 8pt;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--slate-500);
+  margin-bottom: 4px;
+}
+.service-value {
+  font-size: 18pt;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  color: var(--green-deep);
+}
+.service-suffix {
+  font-size: 7.5pt;
+  color: var(--slate-500);
+  font-style: italic;
+  margin-top: 1px;
+}
+
+/* ─── EBITDA CALLOUT ─── */
+.ebitda {
+  background: var(--green-ghost);
+  border: 1px solid rgba(149,213,178,0.5);
+  border-radius: 10px;
+  padding: 18px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+.ebitda-left { max-width: 4.5in; }
+.ebitda-title { font-size: 13pt; font-weight: 700; color: var(--green-deep); margin-bottom: 2px; }
+.ebitda-sub { font-size: 9pt; color: var(--slate-600); }
+.ebitda-right { text-align: right; }
+.ebitda-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 7.5pt;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--green-mid);
+  margin-bottom: 2px;
+}
+.ebitda-value {
+  font-size: 24pt;
+  font-weight: 700;
+  letter-spacing: -1px;
+  color: var(--green-deep);
+  line-height: 1;
+}
+.ebitda-delta { font-size: 8.5pt; color: var(--green-dark); margin-top: 2px; }
+
+/* ─── FOOTNOTE ─── */
+.footnote {
+  font-size: 7.5pt;
+  color: var(--slate-400);
+  line-height: 1.55;
+  font-style: italic;
+  max-width: 7in;
+  margin-top: 10px;
+}
+
+/* ─── LEARN MORE CTA ─── */
+.learn-more {
+  display: block;
+  text-align: center;
+  background: var(--green-deep);
+  color: var(--white);
+  padding: 11px 32px;
+  border-radius: 8px;
+  font-size: 10pt;
+  font-weight: 700;
+  text-decoration: none;
+  margin: 22px auto 0;
+  width: fit-content;
+}
+
+/* ─── VENDOR TABLES ─── */
+.two-col-tables {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  margin-bottom: 18px;
+}
+.vtable-section { }
+.vtable-eyebrow {
+  font-family: 'Space Mono', monospace;
+  font-size: 9pt;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--green-mid);
+  margin-bottom: 4px;
+}
+.vtable-sub {
+  font-size: 8.5pt;
+  color: var(--slate-500);
+  margin-bottom: 8px;
+}
+.vtable {
+  width: 100%;
+  border: 1px solid var(--slate-200);
+  border-radius: 8px;
+  border-collapse: separate;
+  border-spacing: 0;
+  overflow: hidden;
+  font-size: 9pt;
+}
+.vtable thead th {
+  background: var(--green-ghost);
+  font-family: 'Space Mono', monospace;
+  font-size: 7.5pt;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--green-mid);
+  text-align: left;
+  padding: 8px 12px;
+}
+.vtable thead th.num { text-align: right; }
+.vtable tbody td {
+  padding: 8px 12px;
+  color: var(--slate-700);
+  border-top: 1px solid var(--slate-100);
+}
+.vtable tbody td.num {
+  text-align: right;
+  font-weight: 700;
+  color: var(--slate-800);
+}
+.vtable tbody tr:nth-child(even) td { background: var(--slate-50); }
+
+/* ─── BIG VENDOR TABLE (consignment) ─── */
+.big-table {
+  width: 100%;
+  border: 1px solid var(--slate-200);
+  border-radius: 8px;
+  border-collapse: separate;
+  border-spacing: 0;
+  overflow: hidden;
+  font-size: 9.5pt;
+  margin-bottom: 14px;
+}
+.big-table thead th {
+  background: var(--green-ghost);
+  font-family: 'Space Mono', monospace;
+  font-size: 7.5pt;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--green-mid);
+  text-align: left;
+  padding: 9px 14px;
+}
+.big-table thead th.num { text-align: right; }
+.big-table tbody td {
+  padding: 10px 14px;
+  color: var(--slate-700);
+  border-top: 1px solid var(--slate-100);
+}
+.big-table tbody td.num {
+  text-align: right;
+  font-weight: 700;
+  color: var(--slate-800);
+}
+.big-table .total-row td {
+  background: var(--green-deep);
+  color: var(--white);
+  font-weight: 700;
+}
+.big-table .total-row td.num { color: var(--white); }
+
+/* ─── CONVERT-X-PERCENT SCENARIOS (consignment) ─── */
+.convert-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+.convert-card {
+  border: 1px solid var(--slate-200);
+  border-radius: 10px;
+  padding: 14px 16px;
+  text-align: center;
+}
+.convert-card.baseline {
+  background: var(--green-ghost);
+  border-color: rgba(149,213,178,0.5);
+}
+.convert-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 7.5pt;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--slate-500);
+  margin-bottom: 2px;
+}
+.convert-card.baseline .convert-label { color: var(--green-deep); }
+.convert-sub { font-size: 7.5pt; color: var(--slate-500); margin-bottom: 6px; }
+.convert-value {
+  font-size: 18pt;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  color: var(--slate-700);
+}
+.convert-card.baseline .convert-value { color: var(--green-mid); }
+.convert-suffix { font-size: 8pt; color: var(--slate-500); margin-top: 2px; }
+
+/* ─── AP 4-stat header ─── */
+.ap-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 0;
+  border: 1px solid var(--slate-200);
+  border-radius: 10px;
+  padding: 16px 0;
+  margin-bottom: 14px;
+}
+.ap-stat {
+  text-align: center;
+  padding: 0 10px;
+  border-right: 1px solid var(--slate-200);
+}
+.ap-stat:last-child { border-right: none; }
+.ap-stat-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 7.5pt;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--slate-500);
+  margin-bottom: 4px;
+}
+.ap-stat-value {
+  font-size: 22pt;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  color: var(--green-deep);
+  line-height: 1;
+}
+.ap-stat-sub {
+  font-size: 7.5pt;
+  color: var(--slate-500);
+  font-style: italic;
+  margin-top: 3px;
+}
+
+/* ─── AP 2-card row ─── */
+.ap-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+.ap-card {
+  border: 1px solid var(--slate-200);
+  border-radius: 10px;
+  padding: 14px 16px;
+  text-align: center;
+}
+.ap-card-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 8pt;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--slate-500);
+  margin-bottom: 4px;
+}
+.ap-card-value {
+  font-size: 22pt;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  color: var(--green-deep);
+  line-height: 1.05;
+}
+.ap-card-sub {
+  font-size: 7.5pt;
+  color: var(--slate-500);
+  font-style: italic;
+  margin-top: 3px;
+}
+
+/* ─── COMBINED AP CALLOUT ─── */
+.ap-combined {
+  background: var(--green-ghost);
+  border: 1px solid rgba(149,213,178,0.5);
+  border-radius: 10px;
+  padding: 16px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+.ap-combined-left { max-width: 4.5in; }
+.ap-combined-title { font-size: 12pt; font-weight: 700; color: var(--green-deep); margin-bottom: 2px; }
+.ap-combined-sub { font-size: 9pt; color: var(--slate-600); }
+.ap-combined-value {
+  font-size: 28pt;
+  font-weight: 700;
+  letter-spacing: -1px;
+  color: var(--green-deep);
+  line-height: 1;
+}
+
+/* ─── WHAT WE DO (page 6) ─── */
+.big-headline {
+  font-size: 28pt;
+  font-weight: 700;
+  letter-spacing: -1px;
+  line-height: 1.1;
+  color: var(--green-deep);
+  margin-bottom: 14px;
+}
+.what-lede {
+  font-size: 10.5pt;
+  color: var(--slate-600);
+  line-height: 1.55;
+  margin-bottom: 22px;
+  max-width: 6.8in;
+}
+.numbered-list { margin-bottom: 18px; }
+.numbered-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+  margin-bottom: 18px;
+}
+.numbered-circle {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--green-deep);
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10pt;
+  font-weight: 700;
+  margin-top: 1px;
+}
+.numbered-title {
+  font-size: 11pt;
+  font-weight: 700;
+  color: var(--green-deep);
+  margin-bottom: 4px;
+}
+.numbered-body {
+  font-size: 9.5pt;
+  color: var(--slate-600);
+  line-height: 1.55;
+}
+.bottom-line {
+  background: var(--green-ghost);
+  border: 1px solid rgba(149,213,178,0.5);
+  border-radius: 10px;
+  padding: 18px 24px;
+}
+.bottom-line-title { font-size: 11pt; font-weight: 700; color: var(--green-deep); margin-bottom: 6px; }
+.bottom-line-body { font-size: 9.5pt; color: var(--slate-600); line-height: 1.55; margin-bottom: 8px; }
+.bottom-line-stamp { font-size: 11pt; font-weight: 700; color: var(--green-deep); }
+
+/* ─── PRICING PAGE (page 7) ─── */
+.plan-card {
+  background: var(--green-ghost);
+  border: 1.5px solid rgba(149,213,178,0.5);
+  border-radius: 12px;
+  padding: 16px 22px;
+  margin-bottom: 10px;
+  position: relative;
+}
+.plan-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 8px;
+}
+.plan-eyebrow {
+  font-family: 'Space Mono', monospace;
+  font-size: 8pt;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--green-dark);
+  margin-bottom: 6px;
+}
+.plan-name { font-size: 15pt; font-weight: 700; color: var(--green-deep); letter-spacing: -0.3px; margin-bottom: 2px; }
+.plan-pricing { font-size: 9.5pt; color: var(--green-dark); line-height: 1.4; }
+.plan-pricing-add { font-size: 8pt; color: var(--slate-500); margin-top: 1px; }
+.plan-right { text-align: right; flex-shrink: 0; }
+.plan-net-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 7.5pt;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--green-mid);
+  margin-bottom: 2px;
+}
+.plan-net-value {
+  font-size: 22pt;
+  font-weight: 700;
+  letter-spacing: -1px;
+  color: var(--green-deep);
+  line-height: 1;
+}
+.plan-net-sub { font-size: 7.5pt; color: var(--slate-500); margin-top: 2px; }
+.plan-math {
+  font-size: 8pt;
+  color: var(--slate-500);
+  margin-bottom: 8px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(149,213,178,0.4);
+}
+.plan-bullets { list-style: none; padding: 0; margin: 0; }
+.plan-bullets li {
+  font-size: 8.5pt;
+  color: var(--slate-700);
+  line-height: 1.5;
+  margin-bottom: 4px;
+  padding-left: 13px;
+  position: relative;
+}
+.plan-bullets li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 7px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--green-mid);
+}
+.plan-bullets li strong { color: var(--green-deep); font-weight: 700; }
+.plan-fineprint {
+  text-align: center;
+  font-size: 8pt;
+  color: var(--slate-500);
+  font-style: italic;
+  margin-top: 6px;
+}
+
+.alt-plan {
+  border: 1px solid var(--slate-200);
+  border-radius: 10px;
+  padding: 12px 18px;
+  margin-bottom: 10px;
+}
+.alt-plan-eyebrow {
+  font-family: 'Space Mono', monospace;
+  font-size: 7.5pt;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--slate-500);
+  margin-bottom: 6px;
+}
+.alt-plan-body { font-size: 8.5pt; color: var(--slate-600); line-height: 1.5; margin-bottom: 6px; }
+.alt-plan-body strong { color: var(--green-deep); font-weight: 700; }
+.compare-title { font-size: 8.5pt; font-weight: 700; color: var(--green-deep); margin-bottom: 5px; }
+.compare-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 9pt;
+  border: 1px solid var(--slate-200);
+  border-radius: 6px;
+  overflow: hidden;
+}
+.compare-table thead th {
+  background: var(--slate-50);
+  font-family: 'Space Mono', monospace;
+  font-size: 7.5pt;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--slate-500);
+  padding: 8px 12px;
+  text-align: right;
+}
+.compare-table thead th:first-child { text-align: left; }
+.compare-table tbody td {
+  padding: 6px 12px;
+  border-top: 1px solid var(--slate-100);
+  color: var(--slate-700);
+  text-align: right;
+  font-size: 8.5pt;
+}
+.compare-table tbody td:first-child { text-align: left; font-weight: 600; color: var(--slate-700); }
+.compare-table .net-row td { background: var(--slate-50); font-weight: 700; color: var(--slate-800); }
+.compare-after {
+  font-size: 8.5pt;
+  color: var(--slate-600);
+  margin-top: 8px;
+  line-height: 1.5;
+}
+.compare-after strong { color: var(--green-deep); font-weight: 700; }
+
+.founder-note {
+  border: 1px solid var(--slate-200);
+  border-radius: 10px;
+  padding: 14px 18px;
+  margin-top: 8px;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+.founder-eyebrow {
+  font-family: 'Space Mono', monospace;
+  font-size: 7.5pt;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--green-mid);
+  margin-bottom: 6px;
+}
+.founder-photo {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--slate-200);
+  flex-shrink: 0;
+  overflow: hidden;
+}
+.founder-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.founder-text { flex: 1; }
+.founder-name { font-size: 10.5pt; font-weight: 700; color: var(--green-deep); margin-bottom: 1px; }
+.founder-title { font-size: 8.5pt; color: var(--slate-500); margin-bottom: 6px; }
+.founder-quote { font-size: 9pt; color: var(--slate-700); line-height: 1.55; font-style: italic; }
+
+</style>
+</head>
+<body>
+
+<!-- ════════════════════ PAGE 1: COVER ════════════════════ -->
+<div class="page cover">
+  <div class="cover-mark">
+    <div class="cover-brand">ShelfSpace</div>
+    <div class="cover-kicker">Savings Evaluation Report</div>
+  </div>
+  <div class="cover-client">
+    <div class="cover-client-name">Sample Retailer</div>
+    <div class="cover-client-meta">Sample document — illustrative only</div>
+  </div>
+  <div class="cover-meta-bottom">
+    Sample period: trailing 90 days<br>
+    Generated for prospective client review
+  </div>
+</div>
+
+<!-- ════════════════════ PAGE 2: TOTAL OPPORTUNITY ════════════════════ -->
+<div class="page">
+  <div class="header-strip">
+    <div class="header-left">
+      <div class="header-brand">ShelfSpace</div>
+      <div class="header-sub">Savings Evaluation</div>
+    </div>
+    <div class="header-right">
+      <div class="header-client">Sample Retailer</div>
+      <div class="header-period">Sample period · trailing 90 days</div>
+    </div>
+  </div>
+  <div class="content">
+    <div class="section-eyebrow-dash"></div>
+    <div class="section-eyebrow">Total Opportunity</div>
+    <div class="data-source">Data source: POS exports · 90-day rolling window</div>
+    <div class="section-lede">We do three things. Here's what you'd make in your first year if you used all three. The first column is our <strong>conservative baseline — that's what we plan around</strong>. The other two are upside as your adoption deepens.</div>
+
+    <div class="hero-card">
+      <div class="hero-card-label">Year 1 financial impact at the conservative scenario</div>
+      <div class="hero-card-value">$149,505</div>
+    </div>
+
+    <div class="scenarios">
+      <div class="scenario baseline">
+        <div class="scenario-label">Conservative · Our Baseline</div>
+        <div class="scenario-sub">25% CR · 25% consign · 1% AP</div>
+        <div class="scenario-value">$149,505</div>
+      </div>
+      <div class="scenario">
+        <div class="scenario-label">Moderate</div>
+        <div class="scenario-sub">50% CR · 50% consign · 2% AP</div>
+        <div class="scenario-value">$295,530</div>
+      </div>
+      <div class="scenario">
+        <div class="scenario-label">Best Case</div>
+        <div class="scenario-sub">75% CR · 75% consign · 3% AP</div>
+        <div class="scenario-value">$441,555</div>
+      </div>
+    </div>
+
+    <div class="services-row">
+      <div class="service-cell">
+        <div class="service-num">1</div>
+        <div class="service-label">Credit Recovery</div>
+        <div class="service-value">$67,750/yr</div>
+        <div class="service-suffix">recurring</div>
+      </div>
+      <div class="service-cell">
+        <div class="service-num">2</div>
+        <div class="service-label">Consignment Working Capital</div>
+        <div class="service-value">$54,336</div>
+        <div class="service-suffix">one-time</div>
+      </div>
+      <div class="service-cell">
+        <div class="service-num">3</div>
+        <div class="service-label">AP Management</div>
+        <div class="service-value">$27,419/yr</div>
+        <div class="service-suffix">recurring</div>
+      </div>
+    </div>
+
+    <div class="ebitda">
+      <div class="ebitda-left">
+        <div class="ebitda-title">Bottom-Line Impact</div>
+        <div class="ebitda-sub">What that combined number is worth as a % of your annual revenue.</div>
+      </div>
+      <div class="ebitda-right">
+        <div class="ebitda-label">EBITDA Improvement</div>
+        <div class="ebitda-value">+22.3%</div>
+        <div class="ebitda-delta">from 15% to 18.3%</div>
+      </div>
+    </div>
+
+    <div class="footnote">*The Year 1 number adds three things: yearly credit recovery + yearly AP savings + a one-time cash recovery from moving half your inventory to consignment. The yearly stuff repeats every year. The consignment piece is a one-time cash bump. EBITDA math assumes a 15% baseline — typical for cannabis retail. Numbers are before our fees (see pricing page on the back).</div>
+
+    <a href="#" class="learn-more">Learn More</a>
+  </div>
+  <div class="footer-strip">
+    <div class="footer-info">ShelfSpace Technologies Inc. &middot; support@shelfspace.pro &middot; shelfspace.pro &middot; Official Metrc Partner</div>
+    <div class="footer-confidential">CONFIDENTIAL</div>
+  </div>
+</div>
+
+<!-- ════════════════════ PAGE 3: CREDIT RECOVERY ════════════════════ -->
+<div class="page">
+  <div class="header-strip">
+    <div class="header-left">
+      <div class="header-brand">ShelfSpace</div>
+      <div class="header-sub">Savings Evaluation</div>
+    </div>
+    <div class="header-right">
+      <div class="header-client">Sample Retailer</div>
+      <div class="header-period">Sample period · trailing 90 days</div>
+    </div>
+  </div>
+  <div class="content">
+    <div class="section-eyebrow-dash"></div>
+    <div class="section-eyebrow">1. Credit Recovery</div>
+    <div class="section-lede">Two ways we get money back from your vendors. First: every time you sold their product below target margin (sale, discount, slow mover), they help cover the gap. Second: every time their product was returned, expired, or had to be tossed, they cover the cost. Both end up on one monthly credit memo we send to each vendor.</div>
+
+    <div class="hero-card">
+      <div class="hero-card-label">Annualized Credit Recovery Opportunity</div>
+      <div class="hero-card-value">$271,000</div>
+    </div>
+
+    <div class="two-col-tables">
+      <div class="vtable-section">
+        <div class="vtable-eyebrow">Co-marketing</div>
+        <div class="vtable-sub">7,865 of 20,761 txns (37.9%) closed below your 50% target.</div>
+        <table class="vtable">
+          <thead><tr><th>Vendor</th><th class="num">Annual Upside</th></tr></thead>
+          <tbody>
+            <tr><td>Vendor A</td><td class="num">$65,364</td></tr>
+            <tr><td>Vendor B</td><td class="num">$51,210</td></tr>
+            <tr><td>Vendor C</td><td class="num">$36,931</td></tr>
+            <tr><td>Vendor D</td><td class="num">$22,721</td></tr>
+            <tr><td>Vendor E</td><td class="num">$12,312</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="vtable-section">
+        <div class="vtable-eyebrow">Returns &amp; waste</div>
+        <div class="vtable-sub">116 return / waste events · $3,250 cost basis</div>
+        <table class="vtable">
+          <thead><tr><th>Vendor</th><th class="num">Annual Credit</th></tr></thead>
+          <tbody>
+            <tr><td>Vendor C</td><td class="num">$3,425</td></tr>
+            <tr><td>Vendor A</td><td class="num">$2,882</td></tr>
+            <tr><td>Vendor B</td><td class="num">$1,851</td></tr>
+            <tr><td>Vendor D</td><td class="num">$1,338</td></tr>
+            <tr><td>Vendor F</td><td class="num">$913</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="scenarios">
+      <div class="scenario baseline">
+        <div class="scenario-label">25% Approval · Baseline</div>
+        <div class="scenario-value">$67,750/yr</div>
+      </div>
+      <div class="scenario">
+        <div class="scenario-label">50% Approval · Moderate</div>
+        <div class="scenario-value">$135,500/yr</div>
+      </div>
+      <div class="scenario">
+        <div class="scenario-label">75% Approval · Best Case</div>
+        <div class="scenario-value">$203,250/yr</div>
+      </div>
+    </div>
+
+    <div class="footnote">*Vendors don't have to say yes — but they almost always do, because they want to keep their spot on your shelf. Plan 1 is performance-only: no recovery, no fee.</div>
+  </div>
+  <div class="footer-strip">
+    <div class="footer-info">ShelfSpace Technologies Inc. &middot; support@shelfspace.pro &middot; shelfspace.pro &middot; Official Metrc Partner</div>
+    <div class="footer-confidential">CONFIDENTIAL</div>
+  </div>
+</div>
+
+<!-- ════════════════════ PAGE 4: CONSIGNMENT ════════════════════ -->
+<div class="page">
+  <div class="header-strip">
+    <div class="header-left">
+      <div class="header-brand">ShelfSpace</div>
+      <div class="header-sub">Savings Evaluation</div>
+    </div>
+    <div class="header-right">
+      <div class="header-client">Sample Retailer</div>
+      <div class="header-period">Sample period · trailing 90 days</div>
+    </div>
+  </div>
+  <div class="content">
+    <div class="section-eyebrow-dash"></div>
+    <div class="section-eyebrow">2. Consignment Conversion Opportunity</div>
+    <div class="section-lede">Right now you've sunk $217,342 into product sitting on your shelves across 35 vendors you stock today. Consignment flips that — the vendor owns the product until you sell it, so you only pay when it rings up at the register. Convert some of your vendors and the cash you've already spent on their inventory comes back to your bank account.</div>
+
+    <div class="hero-card">
+      <div class="hero-card-label">Working Capital Tied Up in Inventory Today</div>
+      <div class="hero-card-value">$217,342</div>
+    </div>
+
+    <div class="convert-row">
+      <div class="convert-card baseline">
+        <div class="convert-label">Convert 25% · Baseline</div>
+        <div class="convert-sub">of inventory</div>
+        <div class="convert-value">$54,336</div>
+        <div class="convert-suffix">back to bank</div>
+      </div>
+      <div class="convert-card">
+        <div class="convert-label">Convert 50% · Moderate</div>
+        <div class="convert-sub">of inventory</div>
+        <div class="convert-value">$108,671</div>
+        <div class="convert-suffix">back to bank</div>
+      </div>
+      <div class="convert-card">
+        <div class="convert-label">Convert 75% · Best Case</div>
+        <div class="convert-sub">of inventory</div>
+        <div class="convert-value">$163,007</div>
+        <div class="convert-suffix">back to bank</div>
+      </div>
+    </div>
+
+    <div class="vtable-eyebrow" style="margin-bottom:8px;">Where the cash is concentrated — your top 3 vendors by inventory value</div>
+    <table class="big-table">
+      <thead>
+        <tr>
+          <th>Vendor</th>
+          <th class="num">Inventory on Hand</th>
+          <th class="num">% of Total</th>
+          <th class="num">Bank Impact</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Vendor C</td><td class="num">$45,822</td><td class="num">21.1%</td><td class="num">$45,822</td></tr>
+        <tr><td>Vendor B</td><td class="num">$31,811</td><td class="num">14.6%</td><td class="num">$31,811</td></tr>
+        <tr><td>Vendor F</td><td class="num">$24,525</td><td class="num">11.3%</td><td class="num">$24,525</td></tr>
+        <tr class="total-row"><td>Top 3 combined</td><td class="num">$102,159</td><td class="num">47.0%</td><td class="num">$102,159</td></tr>
+      </tbody>
+    </table>
+
+    <p style="font-size:9.5pt;color:var(--slate-600);line-height:1.55;margin-top:14px;">Your buyer talks to the vendors — those relationships are theirs. We give them the data and the consignment software underneath. We run the weekly math (category splits, aging discounts, returns) so you and the vendor see the same numbers and there's nothing to argue about.</p>
+
+    <div class="footnote">*The cash comes back over your normal restocking cycle (usually 30-60 days) as you stop buying new inventory wholesale and start receiving it on consignment. Some vendors might take their existing inventory back right away, but don't count on it.</div>
+  </div>
+  <div class="footer-strip">
+    <div class="footer-info">ShelfSpace Technologies Inc. &middot; support@shelfspace.pro &middot; shelfspace.pro &middot; Official Metrc Partner</div>
+    <div class="footer-confidential">CONFIDENTIAL</div>
+  </div>
+</div>
+
+<!-- ════════════════════ PAGE 5: AP MANAGEMENT ════════════════════ -->
+<div class="page">
+  <div class="header-strip">
+    <div class="header-left">
+      <div class="header-brand">ShelfSpace</div>
+      <div class="header-sub">Savings Evaluation</div>
+    </div>
+    <div class="header-right">
+      <div class="header-client">Sample Retailer</div>
+      <div class="header-period">Sample period · trailing 90 days</div>
+    </div>
+  </div>
+  <div class="content">
+    <div class="section-eyebrow-dash"></div>
+    <div class="section-eyebrow">3. Accounts Payable Management</div>
+    <div class="section-lede">Right now, every invoice eats your team's time. Open the email, match it to what actually showed up, hunt down the missing manifest, key it into QuickBooks, get it approved, cut the check, answer the vendor's follow-up email a week later. We replace all of that. The invoice gets parsed when it lands. We check it against Metrc line by line. You click approve. We pay. The vendor checks their own portal for status — your team doesn't field the call.</div>
+
+    <div class="ap-stats">
+      <div class="ap-stat">
+        <div class="ap-stat-label">Vendors</div>
+        <div class="ap-stat-value">29</div>
+        <div class="ap-stat-sub">sold to 90d</div>
+      </div>
+      <div class="ap-stat">
+        <div class="ap-stat-label">Products</div>
+        <div class="ap-stat-value">879</div>
+        <div class="ap-stat-sub">unique SKUs</div>
+      </div>
+      <div class="ap-stat">
+        <div class="ap-stat-label">Monthly Invoices</div>
+        <div class="ap-stat-value">58</div>
+        <div class="ap-stat-sub">est.</div>
+      </div>
+      <div class="ap-stat">
+        <div class="ap-stat-label">Monthly Emails</div>
+        <div class="ap-stat-value">~116</div>
+        <div class="ap-stat-sub">est. AP volume</div>
+      </div>
+    </div>
+
+    <div class="ap-cards">
+      <div class="ap-card">
+        <div class="ap-card-label">Hours Saved Year 1</div>
+        <div class="ap-card-value">$3,480</div>
+        <div class="ap-card-sub">116 hrs at $30/hr</div>
+      </div>
+      <div class="ap-card">
+        <div class="ap-card-label">Error / Overpayment Savings</div>
+        <div class="ap-card-value">$23,939</div>
+        <div class="ap-card-sub">1% of $2,393,946/yr volume · baseline</div>
+      </div>
+    </div>
+
+    <div class="ap-combined">
+      <div class="ap-combined-left">
+        <div class="ap-combined-title">Combined Year 1 AP Impact</div>
+        <div class="ap-combined-sub">Hours your team gets back + dollars you stop overpaying.</div>
+      </div>
+      <div class="ap-combined-value">$27,419</div>
+    </div>
+
+    <div class="scenarios">
+      <div class="scenario baseline">
+        <div class="scenario-label">1% Capture · Baseline</div>
+        <div class="scenario-value">$27,419/yr</div>
+      </div>
+      <div class="scenario">
+        <div class="scenario-label">2% Capture · Moderate</div>
+        <div class="scenario-value">$51,359/yr</div>
+      </div>
+      <div class="scenario">
+        <div class="scenario-label">3% Capture · Best Case</div>
+        <div class="scenario-value">$75,298/yr</div>
+      </div>
+    </div>
+
+    <div class="footnote">*Hours saved math: $30/hr AP labor × 10 minutes saved per invoice (industry standard — manual flow vs one-click). Error savings: industry research shows 2-5% of invoice dollars are wrong (pricing errors, quantity errors, items billed but never shipped). Metrc line-by-line catches them. Your buyer still owns vendor relationships — we give them the parsed invoice and the Metrc proof, they have the conversation.</div>
+  </div>
+  <div class="footer-strip">
+    <div class="footer-info">ShelfSpace Technologies Inc. &middot; support@shelfspace.pro &middot; shelfspace.pro &middot; Official Metrc Partner</div>
+    <div class="footer-confidential">CONFIDENTIAL</div>
+  </div>
+</div>
+
+<!-- ════════════════════ PAGE 6: WHAT WE DO ════════════════════ -->
+<div class="page">
+  <div class="header-strip">
+    <div class="header-left">
+      <div class="header-brand">ShelfSpace</div>
+      <div class="header-sub">Savings Evaluation</div>
+    </div>
+    <div class="header-right">
+      <div class="header-client">Sample Retailer</div>
+      <div class="header-period">Sample period · trailing 90 days</div>
+    </div>
+  </div>
+  <div class="content">
+    <div class="section-eyebrow-dash"></div>
+    <div class="section-eyebrow">What We Do</div>
+    <h2 class="big-headline">We do the work. You keep the profits.</h2>
+    <p class="what-lede">ShelfSpace isn't another portal to log into. It isn't another dashboard your team has to learn. We're a small team of humans — armed with strong software and AI — actually doing the work for you. Three big burdens, off your plate:</p>
+
+    <div class="numbered-list">
+      <div class="numbered-item">
+        <div class="numbered-circle">1</div>
+        <div>
+          <div class="numbered-title">Accounts Payable, off your plate.</div>
+          <div class="numbered-body">We field every vendor invoice. Match it to Metrc. Catch the errors. Cut the check. Answer the vendor follow-up emails. You click approve — that's it. Your AP person stops being a full-time AP person.</div>
+        </div>
+      </div>
+      <div class="numbered-item">
+        <div class="numbered-circle">2</div>
+        <div>
+          <div class="numbered-title">Credit Recovery, off your plate.</div>
+          <div class="numbered-body">Every month we comb through your sales, returns, expirations, and discount activity. We build a credit memo for each vendor with line-item proof. We send it. We negotiate. Approved credits land back on your books — applied to your next payment if you're on Core AP + Credit Recovery.</div>
+        </div>
+      </div>
+      <div class="numbered-item">
+        <div class="numbered-circle">3</div>
+        <div>
+          <div class="numbered-title">Consignment, off your plate.</div>
+          <div class="numbered-body">We handle the math, the splits, the aging discounts, the return credits, the weekly check to each vendor. Your buyer talks to vendors; we run the engine. No spreadsheets, no settlement disputes, no wondering if the vendor got paid.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bottom-line">
+      <div class="bottom-line-title">The bottom line:</div>
+      <div class="bottom-line-body">You make significantly more money. Your team gets their time back. Your books get cleaner. Your vendors get paid on time and stop calling. You get to focus on the parts of your business — and your life — that actually matter to you.</div>
+      <div class="bottom-line-stamp">It's a no-brainer.</div>
+    </div>
+  </div>
+  <div class="footer-strip">
+    <div class="footer-info">ShelfSpace Technologies Inc. &middot; support@shelfspace.pro &middot; shelfspace.pro &middot; Official Metrc Partner</div>
+    <div class="footer-confidential">CONFIDENTIAL</div>
+  </div>
+</div>
+
+<!-- ════════════════════ PAGE 7: PRICING & NEXT STEP ════════════════════ -->
+<div class="page">
+  <div class="header-strip">
+    <div class="header-left">
+      <div class="header-brand">ShelfSpace</div>
+      <div class="header-sub">Savings Evaluation</div>
+    </div>
+    <div class="header-right">
+      <div class="header-client">Sample Retailer</div>
+      <div class="header-period">Sample period · trailing 90 days</div>
+    </div>
+  </div>
+  <div class="content">
+    <div class="section-eyebrow-dash"></div>
+    <div class="section-eyebrow" style="margin-bottom:8px;">Pricing &amp; Next Step</div>
+    <p style="font-size:9pt;color:var(--slate-600);line-height:1.5;margin-bottom:10px;">We recommend Core AP + Credit Recovery. It's our most popular plan and almost always the best deal. Here's the whole picture:</p>
+
+    <div class="plan-card">
+      <div class="plan-top">
+        <div>
+          <div class="plan-eyebrow">Most Popular · Our Recommendation</div>
+          <div class="plan-name">Core AP + Credit Recovery</div>
+          <div class="plan-pricing">$2,500/mo first location · + 25% of recovered credits</div>
+          <div class="plan-pricing-add">+ $1,800/mo each additional location</div>
+        </div>
+        <div class="plan-right">
+          <div class="plan-net-label">Year 1 Net Benefit</div>
+          <div class="plan-net-value">$102,567</div>
+          <div class="plan-net-sub">conservative estimate</div>
+        </div>
+      </div>
+      <div class="plan-math">$149,505 conservative savings  –  $46,938 our fees ($30K/yr subscription + 25% of credits we recover).</div>
+      <ul class="plan-bullets">
+        <li><strong>Accounts Payable, handled.</strong> Vendor inbox with ShelfiQ AI replies, invoice accuracy verified against Metrc and POs, Check 21-compliant digital payments, free vendor portals, real-time QuickBooks sync.</li>
+        <li><strong>Credit Recovery, handled.</strong> Returns, expirations, and co-marketing recovered with line-item proof. Vendor approvals managed. Approved credits applied to your next vendor payment.</li>
+        <li><strong>Live AP dashboard.</strong> Every dollar in flight, every vendor's status, every credit waiting to apply — one screen, no spreadsheets.</li>
+        <li><strong>Your team focused where it matters.</strong> The hours your team spent chasing invoices, matching manifests, and fielding vendor calls go back to higher-leverage work — merchandising, smarter buying, customer experience, the things that actually grow your top line.</li>
+      </ul>
+      <div class="plan-fineprint">No contracts, cancel any time.</div>
+    </div>
+
+    <div class="alt-plan">
+      <div class="alt-plan-eyebrow">Or — Credit Recovery Only</div>
+      <div class="alt-plan-body"><strong>Prefer credit recovery alone?</strong> 30% of what we recover. No monthly fee. The trade-off: we earn the vendor approvals, but your team applies the approved credits to your bills.</div>
+      <div class="compare-title">Compare the numbers:</div>
+      <table class="compare-table">
+        <thead>
+          <tr><th></th><th>Plan 1 · CR Only</th><th>Plan 3 · Core AP + CR</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Total Year 1 fees</td><td>$20,325 (30% of credits)</td><td>$46,938 ($30K + 25%)</td></tr>
+          <tr><td>Less: AP savings (conservative)</td><td>—</td><td>$27,419</td></tr>
+          <tr class="net-row"><td>Net Year 1 cost to you</td><td>$20,325</td><td>$19,519</td></tr>
+        </tbody>
+      </table>
+      <div class="compare-after"><strong>Roughly the same cost — often less — for a lot more:</strong> your AP handled end-to-end, vendor calls answered for you, credits applied to your bills, and one live dashboard tracking every dollar in flight.</div>
+    </div>
+
+    <div class="founder-note">
+      <div class="founder-photo"><img src="https://shelfspace.pro/chris-mitchem.jpg" alt="Chris Mitchem"></div>
+      <div class="founder-text">
+        <div class="founder-eyebrow">A note from the founder</div>
+        <div class="founder-name">Chris Mitchem</div>
+        <div class="founder-title">Founder &amp; CEO</div>
+        <div class="founder-quote">I've been a cannabis operator since 2015, and I have the scars to prove it. ShelfSpace is the product of everything I learned the hard way. The savings here are real — give us a shot.</div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-strip">
+    <div class="footer-info">ShelfSpace Technologies Inc. &middot; support@shelfspace.pro &middot; shelfspace.pro &middot; Official Metrc Partner</div>
+    <div class="footer-confidential">CONFIDENTIAL</div>
+  </div>
+</div>
+
+</body>
+</html>
