@@ -388,10 +388,13 @@ document.head.appendChild(o)}initApollo();</script>
     <h3>We have multiple locations — does the promo apply to all of them?</h3>
     <p>Only the stores you select. Different locations routinely run different promotions, so pre-approval is per-store.</p>
     <ul>
-      <li><strong>Portal:</strong> the Request Promotion dialog shows a "Apply to" checkbox group when your account has more than one location. Your current store is checked by default. Check additional locations only when you want the same promo to run there too.</li>
+      <li><strong>Portal:</strong> the Request Promotion dialog shows a "Apply to" checkbox group when your account has more than one location. Your current store is checked by default. Check additional locations only when you want the same promo to run there too. You can also uncheck your current store if the promo runs only at a sibling location — the record will be scoped to whichever stores you check.</li>
       <li><strong>Email (AP bot):</strong> ShelfiQ asks you which store(s) before recording when your AP inbox covers more than one location. You can also name the store(s) in the original email ("...for the Worcester store" / "...at both Worcester and Lynn") and ShelfiQ extracts the scope.</li>
     </ul>
     <p>Sibling stores you don't select are not auto-included. Each location's monthly credit memo independently classifies its own sales against its own pre-approval records — a promo recorded only for Store A won't reattribute Store B's sales as pre-approved.</p>
+
+    <h3>What if I select a store that doesn't have an active partnership with the vendor?</h3>
+    <p>That store is silently dropped from the promotion's scope — the record is created for the stores that do qualify, and a warning lists the skipped store(s). On the portal, you'll see an amber toast naming the skipped location. In the email path, ShelfiQ's reply will name the skipped store ("Recorded for Store A — Store B doesn't have an active AP partnership with Acme so it was skipped"). If you need that partnership opened, reach out to ShelfSpace support.</p>
 
     <h3>How does ShelfiQ make sure it's the right vendor when I email it?</h3>
     <p>You write the vendor name the way you'd say it in conversation — ShelfiQ looks it up against the retailer's active AP partnerships and resolves to a single vendor only when the match is unambiguous (similarity ≥ 85% AND no near-tie with another partner). If two of your vendors have similar names (e.g., "Acme Botanicals" and "Acme Cannabis Co."), ShelfiQ replies asking which one you mean before recording anything. If the name doesn't match any active partner, ShelfiQ asks you to confirm — it won't invent a vendor UUID or pick the wrong partner silently. The lookup is scoped to your active partnerships only, so a vendor you don't have a relationship with can never be selected by accident.</p>
