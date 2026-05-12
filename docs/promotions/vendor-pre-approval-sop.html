@@ -10,14 +10,14 @@
 <meta property="og:url" content="https://shelfspace.pro/docs/promotions/vendor-pre-approval-sop">
 <meta property="og:title" content="Vendor Pre-Approval SOP for Promotions — ShelfSpace">
 <meta property="og:description" content="SOP for retailer admins running co-marketing promos: pre-approve with vendors via portal or email so credit memos clear without dispute.">
-<meta property="og:image" content="https://shelfspace.pro/og-image-v4.png">
+<meta property="og:image" content="https://shelfspace.pro/og-image-v5.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:type" content="image/png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Vendor Pre-Approval SOP for Promotions — ShelfSpace">
 <meta name="twitter:description" content="SOP for retailer admins running co-marketing promos: pre-approve with vendors via portal or email so credit memos clear without dispute.">
-<meta name="twitter:image" content="https://shelfspace.pro/og-image-v4.png">
+<meta name="twitter:image" content="https://shelfspace.pro/og-image-v5.png">
 <meta name="apple-mobile-web-app-title" content="ShelfSpace">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -297,6 +297,7 @@ document.head.appendChild(o)}initApollo();</script>
           <li><strong>Max budget</strong> (optional) — a dollar cap on the vendor's exposure.</li>
           <li><strong>Window</strong> — start and end date.</li>
           <li><strong>Scope</strong> — all products from this vendor, a category, or specific SKUs.</li>
+          <li><strong>Apply to</strong> (multi-location accounts only) — a checkbox group of your locations. Your current store is checked by default. Check additional stores when the same promo will run at those too. Stores you don't check are not included.</li>
           <li><strong>Note to vendor</strong> (optional) — a sentence on why you want to run this.</li>
         </ul>
       </li>
@@ -384,8 +385,16 @@ document.head.appendChild(o)}initApollo();</script>
       <li><strong>No pre-approval record exists for this promo.</strong> If the vendor genuinely approved out-of-band, create the record now using Path B (Record evidence). If the credit memo is still in admin QC (Pending Admin status), regenerating will pick up the new record and reattribute. Once admin has approved the credit memo (Draft, Pending Review, or beyond), the record is locked — your admin will need to void and regenerate it.</li>
     </ul>
 
-    <h3>We have multiple locations — do I have to set this up per store?</h3>
-    <p>No. When you create a promotion at one location, ShelfSpace propagates it automatically to your sibling locations that have an active AP partnership with the same vendor. The vendor receives one approval request email naming the originating location; once they approve, the same approval applies to every linked location behind the scenes. Each location's monthly credit memo will independently classify its sales as pre-approved under the same vendor record.</p>
+    <h3>We have multiple locations — does the promo apply to all of them?</h3>
+    <p>Only the stores you select. Different locations routinely run different promotions, so pre-approval is per-store.</p>
+    <ul>
+      <li><strong>Portal:</strong> the Request Promotion dialog shows a "Apply to" checkbox group when your account has more than one location. Your current store is checked by default. Check additional locations only when you want the same promo to run there too.</li>
+      <li><strong>Email (AP bot):</strong> ShelfiQ asks you which store(s) before recording when your AP inbox covers more than one location. You can also name the store(s) in the original email ("...for the Worcester store" / "...at both Worcester and Lynn") and ShelfiQ extracts the scope.</li>
+    </ul>
+    <p>Sibling stores you don't select are not auto-included. Each location's monthly credit memo independently classifies its own sales against its own pre-approval records — a promo recorded only for Store A won't reattribute Store B's sales as pre-approved.</p>
+
+    <h3>How does ShelfiQ make sure it's the right vendor when I email it?</h3>
+    <p>You write the vendor name the way you'd say it in conversation — ShelfiQ looks it up against the retailer's active AP partnerships and resolves to a single vendor only when the match is unambiguous (similarity ≥ 85% AND no near-tie with another partner). If two of your vendors have similar names (e.g., "Acme Botanicals" and "Acme Cannabis Co."), ShelfiQ replies asking which one you mean before recording anything. If the name doesn't match any active partner, ShelfiQ asks you to confirm — it won't invent a vendor UUID or pick the wrong partner silently. The lookup is scoped to your active partnerships only, so a vendor you don't have a relationship with can never be selected by accident.</p>
 
     <h3>Who at the vendor receives the approval email?</h3>
     <p>The vendor's primary AR contact in their ShelfSpace portal, plus any contacts they've marked to receive notifications. If they want to add or change recipients, they can do it themselves under their portal Settings → Contacts.</p>
