@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PlateIQ vs. ShelfSpace for Cannabis AP — Why Dispensaries Need a Cannabis-Native System</title>
+<meta name="description" content="PlateIQ was built for restaurants. ShelfSpace was built for cannabis dispensaries. Metrc integration, Check 21 payments, credit recovery, and consignment — none of it is on the menu in restaurant AP software.">
+<link rel="canonical" href="https://shelfspace.pro/blog/shelfspace-vs-plateiq-cannabis-ap">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://shelfspace.pro/blog/shelfspace-vs-plateiq-cannabis-ap">
+<meta property="og:title" content="PlateIQ vs. ShelfSpace for Cannabis AP">
+<meta property="og:description" content="PlateIQ was built for restaurants. ShelfSpace was built for cannabis. Metrc, Check 21, credit recovery, consignment — none of it is on the menu in restaurant AP software.">
+<meta property="og:image" content="https://shelfspace.pro/og-image-v5.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="PlateIQ vs. ShelfSpace for Cannabis AP">
+<meta name="twitter:description" content="PlateIQ was built for restaurants. ShelfSpace was built for cannabis dispensaries.">
+<meta name="twitter:image" content="https://shelfspace.pro/og-image-v5.png">
+<meta name="apple-mobile-web-app-title" content="ShelfSpace">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+<style>
+  .page-hero { padding-bottom: 40px; }
+  .hero-bg-gradient { position: absolute; top: -30%; right: -20%; width: 700px; height: 700px; background: radial-gradient(circle, rgba(149,213,178,0.18) 0%, rgba(149,213,178,0) 70%); animation: float 8s ease-in-out infinite; pointer-events: none; }
+  .hero-bg-gradient-2 { position: absolute; bottom: -20%; left: -15%; width: 550px; height: 550px; background: radial-gradient(circle, rgba(27,67,50,0.06) 0%, rgba(27,67,50,0) 70%); animation: float 10s ease-in-out infinite; animation-delay: -3s; pointer-events: none; }
+  .hero-grid-lines { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 1200px; height: 100%; opacity: 0.035; background-image: linear-gradient(var(--green-deep) 1px, transparent 1px), linear-gradient(90deg, var(--green-deep) 1px, transparent 1px); background-size: 80px 80px; pointer-events: none; }
+  .page-hero .section-label, .page-hero .section-title, .page-hero .section-desc { opacity: 0; transform: translateY(30px); }
+  .page-hero .section-label { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1); }
+  .page-hero .section-title { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s, transform 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s; }
+  .page-hero .section-desc { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1) 0.25s, transform 0.8s cubic-bezier(0.22,1,0.36,1) 0.25s; }
+  .page-hero.hero-loaded .section-label, .page-hero.hero-loaded .section-title, .page-hero.hero-loaded .section-desc { opacity: 1; transform: translateY(0); }
+  .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1); }
+  .reveal.is-visible { opacity: 1; transform: translateY(0); }
+  .article-body { max-width: 720px; margin: 0 auto; padding: 0 48px 80px; }
+  .article-body h2 { font-size: 24px; font-weight: 700; color: var(--green-deep); margin: 48px 0 16px; letter-spacing: -0.5px; line-height: 1.3; }
+  .article-body p { font-size: 17px; line-height: 1.85; color: var(--slate-600); margin-bottom: 24px; }
+  .article-body ul, .article-body ol { margin-bottom: 24px; padding-left: 24px; }
+  .article-body li { font-size: 17px; line-height: 1.85; color: var(--slate-600); margin-bottom: 8px; }
+  .article-body strong { color: var(--green-deep); font-weight: 600; }
+  .article-body a { color: var(--green-mid); font-weight: 500; text-decoration: none; }
+  .article-body a:hover { color: var(--green-deep); text-decoration: underline; }
+  .article-body blockquote { border-left: 3px solid var(--green-accent); padding: 16px 24px; margin: 32px 0; background: var(--green-ghost); border-radius: 0 8px 8px 0; }
+  .article-body blockquote p { font-style: italic; color: var(--green-dark); margin-bottom: 0; }
+  .article-glance { max-width: 720px; margin: 0 auto 40px; padding: 24px 28px; background: var(--green-ghost); border: 1px solid rgba(149,213,178,0.3); border-radius: 12px; }
+  .article-glance h2 { font-size: 14px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--green-mid); margin: 0 0 12px; }
+  .article-glance ul { list-style: none; padding: 0; margin: 0; }
+  .article-glance li { font-size: 15px; line-height: 1.6; color: var(--slate-600); padding: 4px 0 4px 20px; position: relative; }
+  .article-glance li::before { content: ''; position: absolute; left: 0; top: 12px; width: 8px; height: 8px; border-radius: 50%; background: var(--green-accent); }
+  .compare-table { width: 100%; border-collapse: collapse; margin: 32px 0; border-radius: 12px; overflow: hidden; border: 1px solid var(--slate-200); }
+  .compare-table th { padding: 14px 16px; font-size: 14px; font-weight: 700; text-align: left; border-bottom: 2px solid var(--slate-200); }
+  .compare-table th:first-child { color: var(--slate-500); background: var(--white); width: 40%; }
+  .compare-table th:nth-child(2) { color: var(--slate-400); background: var(--slate-50); }
+  .compare-table th:nth-child(3) { color: var(--green-deep); background: var(--green-ghost); }
+  .compare-table td { padding: 12px 16px; font-size: 14px; border-bottom: 1px solid var(--slate-100); }
+  .compare-table td:first-child { color: var(--slate-600); font-weight: 500; }
+  .compare-table td:nth-child(2) { background: var(--slate-50); color: var(--slate-500); }
+  .compare-table td:nth-child(3) { background: rgba(240,250,244,0.5); }
+  .compare-table tr:last-child td { border-bottom: none; }
+  .compare-check { color: var(--green-mid); font-weight: 700; }
+  .compare-x { color: #c0392b; font-weight: 700; }
+  .compare-plus { color: var(--green-deep); font-size: 13px; }
+  .cta-section::before { transform: translate(-50%,-50%) translateY(var(--parallax-y, 0)); will-change: transform; }
+  .footer-top { grid-template-columns: 2fr 1fr 1fr 1fr 1fr; }
+  @media (max-width: 900px) { .footer-top { grid-template-columns: 1fr 1fr; } .article-body { padding: 0 24px 60px; } .article-body h2 { margin-top: 36px; } .compare-table { font-size: 13px; } .compare-table th, .compare-table td { padding: 10px 12px; } }
+  @media (max-width: 600px) { .footer-top { grid-template-columns: 1fr; } }
+  @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } .page-hero .section-label, .page-hero .section-title, .page-hero .section-desc { opacity: 1; transform: none; transition: none; } .hero-bg-gradient, .hero-bg-gradient-2 { animation: none; } }
+</style>
+<noscript><style>.reveal,.page-hero .section-label,.page-hero .section-title,.page-hero .section-desc{opacity:1;transform:none;transition:none;}</style></noscript>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-H2LBJT03WE"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-H2LBJT03WE');</script>
+<script>function initApollo(){var n=Math.random().toString(36).substring(7),o=document.createElement("script");o.src="https://assets.apollo.io/micro/website-tracker/tracker.iife.js?nocache="+n,o.async=!0,o.defer=!0,o.onload=function(){window.trackingFunctions.onLoad({appId:"69c141b32234890011a43849"})},document.head.appendChild(o)}initApollo();</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "PlateIQ vs. ShelfSpace for Cannabis AP — Why Dispensaries Need a Cannabis-Native System",
+  "description": "PlateIQ was built for restaurants. ShelfSpace was built for cannabis dispensaries. Metrc integration, Check 21 payments, credit recovery, and consignment — none of it is on the menu in restaurant AP software.",
+  "author": { "@type": "Person", "name": "Chris Mitchem" },
+  "publisher": { "@type": "Organization", "name": "ShelfSpace", "url": "https://shelfspace.pro" },
+  "datePublished": "2026-05-13",
+  "url": "https://shelfspace.pro/blog/shelfspace-vs-plateiq-cannabis-ap",
+  "image": "https://shelfspace.pro/og-image-v5.png"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "Does PlateIQ work for cannabis dispensaries?", "acceptedAnswer": { "@type": "Answer", "text": "PlateIQ was built for restaurants and doesn't integrate with Metrc, generate Check 21 payments, automate cannabis credit recovery, or settle consignment. It can record invoices and process payments to vendors that accept ACH, but the cannabis-specific layers aren't there." } },
+    { "@type": "Question", "name": "Why does Metrc integration matter for cannabis AP?", "acceptedAnswer": { "@type": "Answer", "text": "Every cannabis invoice needs to be verified against the Metrc transfer that delivered the product. Without that match, you can't catch quantity discrepancies, wrong package IDs, or pricing changes between manifest and invoice. That gap is where most vendor overpayments happen." } },
+    { "@type": "Question", "name": "Can PlateIQ pay cannabis vendors?", "acceptedAnswer": { "@type": "Answer", "text": "PlateIQ pays primarily via ACH. Most cannabis vendors can't accept ACH because of banking restrictions, so the payment workflow falls back to manual checks or wires — which means the AP automation stops at the point of payment." } }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://shelfspace.pro/" },
+    { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://shelfspace.pro/blog" },
+    { "@type": "ListItem", "position": 3, "name": "PlateIQ vs. ShelfSpace for Cannabis AP" }
+  ]
+}
+</script>
+</head>
+<body>
+
+<nav id="nav">
+  <a href="/" class="nav-logo">
+    <div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div>
+    <span class="nav-logo-text">ShelfSpace</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="/consignment">Consignment</a></li>
+    <li><a href="/accounts-payable">Accounts Payable</a></li>
+    <li><a href="/credit-recovery">Credit Recovery</a></li>
+    <li><a href="/pricing">Pricing</a></li>
+    <li><a href="/about">About</a></li>
+    <li><a href="/contact" class="nav-cta">Get Started <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a></li>
+  </ul>
+  <div class="nav-hamburger" onclick="document.querySelector('.nav-links').classList.toggle('mobile-open'); event.stopPropagation();"><span></span><span></span><span></span></div>
+</nav>
+
+<div class="page-hero">
+  <div class="hero-bg-gradient"></div>
+  <div class="hero-bg-gradient-2"></div>
+  <div class="hero-grid-lines"></div>
+  <div class="section-label">Accounts Payable</div>
+  <h1 class="section-title">PlateIQ Was Built for Restaurants. Cannabis AP Needs Something Different.</h1>
+  <p class="section-desc">PlateIQ is great at what it does — restaurant AP automation. Cannabis dispensaries need Metrc-verified invoices, Check 21 payments, automated credit recovery, and consignment settlement. None of that is on the menu in restaurant software.</p>
+</div>
+
+<div class="article-glance">
+  <h2>At a glance</h2>
+  <ul>
+    <li>PlateIQ is restaurant AP software — built for food and beverage suppliers, not cannabis</li>
+    <li>No Metrc integration means no way to verify invoices against the regulatory record of what was actually delivered</li>
+    <li>No Check 21 generation means payments to most cannabis vendors (who can't accept ACH) fall back to manual checks</li>
+    <li>No automated credit recovery, no consignment settlement, no vendor-portal layer — the cannabis-specific work is missing</li>
+    <li>ShelfSpace is the cannabis-native equivalent: invoice verification, credit recovery, consignment, Check 21, and a managed-service team running it</li>
+  </ul>
+</div>
+
+<div style="max-width: 720px; margin: 0 auto; padding: 0 48px;" class="reveal">
+<table class="compare-table">
+  <thead>
+    <tr>
+      <th>Feature</th>
+      <th>PlateIQ</th>
+      <th>ShelfSpace</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>OCR invoice capture</td><td><span class="compare-check">&#10003;</span></td><td><span class="compare-check">&#10003;</span> <span class="compare-plus">Cannabis-tuned parser</span></td></tr>
+    <tr><td>Metrc integration</td><td><span class="compare-x">&#10007;</span></td><td><span class="compare-check">&#10003;</span> <span class="compare-plus">Official 3rd-party</span></td></tr>
+    <tr><td>Invoice vs. Metrc manifest match</td><td><span class="compare-x">&#10007;</span></td><td><span class="compare-check">&#10003;</span></td></tr>
+    <tr><td>Check 21 vendor payments</td><td><span class="compare-x">&#10007;</span></td><td><span class="compare-check">&#10003;</span> <span class="compare-plus">Print at home, mobile deposit</span></td></tr>
+    <tr><td>Cannabis-vendor banking awareness</td><td><span class="compare-x">&#10007;</span></td><td><span class="compare-check">&#10003;</span></td></tr>
+    <tr><td>Credit recovery (returns, expirations, co-marketing)</td><td><span class="compare-x">&#10007;</span></td><td><span class="compare-check">&#10003;</span> <span class="compare-plus">$8K–$25K/mo recovered</span></td></tr>
+    <tr><td>Consignment settlements</td><td><span class="compare-x">&#10007;</span></td><td><span class="compare-check">&#10003;</span> <span class="compare-plus">Weekly, to the penny</span></td></tr>
+    <tr><td>AI vendor communication</td><td><span class="compare-x">&#10007;</span></td><td><span class="compare-check">&#10003;</span> <span class="compare-plus">ShelfiQ handles 95%</span></td></tr>
+    <tr><td>Vendor portal</td><td><span class="compare-x">&#10007;</span></td><td><span class="compare-check">&#10003;</span> <span class="compare-plus">Free for every vendor</span></td></tr>
+    <tr><td>QuickBooks sync</td><td><span class="compare-check">&#10003;</span></td><td><span class="compare-check">&#10003;</span></td></tr>
+    <tr><td>Managed service</td><td><span class="compare-x">&#10007;</span> Software</td><td><span class="compare-check">&#10003;</span> <span class="compare-plus">Team does the work</span></td></tr>
+    <tr><td>Restaurant inventory + recipes</td><td><span class="compare-check">&#10003;</span></td><td><span class="compare-x">&#10007;</span> <span class="compare-plus">Not our market</span></td></tr>
+  </tbody>
+</table>
+</div>
+
+<div class="article-body reveal">
+
+  <h2>PlateIQ solves a real problem — just not yours.</h2>
+
+  <p>PlateIQ is a credible product. Restaurants use it to OCR vendor invoices, route them for approval, and pay suppliers. If you run a restaurant group, it's a sensible choice. The pain points it was designed for — beverage distributor invoices, food cost tracking, recipe-level inventory — are real pain points in food service.</p>
+
+  <p>Cannabis dispensaries have a completely different operating model. Your inventory is regulated under track-and-trace. Your vendors can't accept ACH. You're owed credits for returns and below-keystone promotions that nobody is tracking. Your wholesale partners often work consignment, which requires a weekly settlement workflow that no restaurant ever runs. A restaurant AP product can't see any of that — not because it's bad software, but because it was designed for an industry where those problems don't exist.</p>
+
+  <h2>The four things PlateIQ can't do for a cannabis dispensary</h2>
+
+  <p>Let's name them concretely:</p>
+
+  <ol>
+    <li><strong>Verify invoices against Metrc.</strong> Every cannabis invoice corresponds to a Metrc transfer manifest that says exactly what packages, in what quantities, were delivered. If the invoice says 50 units and the manifest shows 47, you should pay for 47. PlateIQ has no Metrc connection, so this match never happens. The cost of skipping it is documented in our <a href="/blog/dispensaries-overpay-vendors">study of dispensary overpayments</a>: $50K–$100K per year at a typical multi-location retailer.</li>
+    <li><strong>Pay vendors via Check 21.</strong> Most cannabis vendors can't accept ACH — their banks won't process it because of federal regulatory status. <a href="/blog/what-is-check-21">Check 21</a> digital checks (which vendors print and mobile-deposit) are how a huge portion of cannabis payments actually move. PlateIQ pays via ACH primarily. When ACH isn't an option, the workflow falls back to manual paper checks, which defeats the AP automation. ShelfSpace generates Check 21 checks natively for any vendor.</li>
+    <li><strong>Recover vendor credits.</strong> Customer returns processed in Metrc, product destroyed under track-and-trace, below-keystone promotional pricing — these all generate vendor credits that someone is supposed to claim. In practice, most dispensaries leave them on the table because tracking them manually is impossibly tedious. We built <a href="/credit-recovery">credit recovery</a> as a first-class module: it pulls returns, waste, and promotional discounts from Metrc and your POS each month and generates a credit memo per vendor. We routinely find <a href="/blog/case-study-vendor-credit-recovery">$8K–$25K per month</a> in recoverable credits on the first evaluation.</li>
+    <li><strong>Settle consignment.</strong> If your vendors place product on consignment (also called scan-based trading), you don't owe them anything until the product sells through. Each week, you owe the agreed split on the prior week's sales, plus or minus aging discounts and returns. That's a settlement workflow — calculate the math from POS data, generate a settlement report, and cut a Check 21 check. <a href="/consignment">ShelfSpace runs the math</a> automatically. PlateIQ has no concept of it because restaurants don't work that way.</li>
+  </ol>
+
+  <h2>Software vs. managed service</h2>
+
+  <p>The other axis of difference: PlateIQ is software you operate. ShelfSpace is a managed service that operates the software for you. We do the invoice review, we handle the vendor email back-and-forth, we generate the credit memos, we run the weekly settlements. Your AP team's job shrinks to the decisions that actually need a human — which credits to apply, which vendors to escalate, which payment terms to renegotiate.</p>
+
+  <p>For a single-location dispensary with one person doing AP part-time, the managed-service difference is the difference between AP being a 20-hour-a-week job and a 3-hour-a-week job. For a multi-location group, it's the difference between hiring a dedicated AP person and not having to.</p>
+
+  <h2>Where PlateIQ wins</h2>
+
+  <p>Be honest about this: if you ALSO run a restaurant or hospitality operation alongside your dispensary, PlateIQ is the right tool for that side of your business. ShelfSpace doesn't do restaurant inventory, recipe costing, or beverage distributor reconciliation — that's not our market.</p>
+
+  <p>The right setup for a hybrid operator is: PlateIQ for the restaurant side, ShelfSpace for the cannabis side. We sync to the same QuickBooks instance, so your books stay clean across both.</p>
+
+  <h2>The real question</h2>
+
+  <p>The question isn't "which software has more features." It's: <strong>where does the cannabis-specific work happen?</strong> Who matches your invoices to Metrc? Who tracks the credits you're owed? Who generates the Check 21 checks? Who settles consignment? Who answers the vendor's email when they ask where their payment is?</p>
+
+  <p>If the answer is "nobody, currently" — that's the gap PlateIQ won't close, and that ShelfSpace was built to.</p>
+
+  <blockquote>
+    <p>We'll run a free evaluation and show you exactly what's leaking out of your cannabis AP today. No commitment.</p>
+  </blockquote>
+
+</div>
+
+<section style="max-width: 720px; margin: 0 auto; padding: 0 48px 60px;">
+  <h2 style="font-size: 22px; font-weight: 700; color: var(--green-deep); margin-bottom: 24px; letter-spacing: -0.5px;">Frequently asked questions</h2>
+  <div class="faq-list">
+    <details>
+      <summary>Does PlateIQ work for cannabis dispensaries?</summary>
+      <p>PlateIQ was built for restaurants and doesn't integrate with Metrc, generate Check 21 payments, automate cannabis credit recovery, or settle consignment. It can record invoices and process payments to vendors that accept ACH, but the cannabis-specific layers aren't there.</p>
+    </details>
+    <details>
+      <summary>Why does Metrc integration matter for cannabis AP?</summary>
+      <p>Every cannabis invoice needs to be verified against the Metrc transfer that delivered the product. Without that match, you can't catch quantity discrepancies, wrong package IDs, or pricing changes between manifest and invoice. That gap is where most vendor overpayments happen.</p>
+    </details>
+    <details>
+      <summary>Can PlateIQ pay cannabis vendors?</summary>
+      <p>PlateIQ pays primarily via ACH. Most cannabis vendors can't accept ACH because of banking restrictions, so the payment workflow falls back to manual checks or wires — which means the AP automation stops at the point of payment.</p>
+    </details>
+    <details>
+      <summary>What if I run both a restaurant and a dispensary?</summary>
+      <p>Use both. PlateIQ for the restaurant side, ShelfSpace for the cannabis side. They sync to the same QuickBooks, so your books stay clean across both operations.</p>
+    </details>
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="cta-content">
+    <div class="section-label reveal">Get Started</div>
+    <h2 class="section-title reveal">Get My Free Evaluation</h2>
+    <p class="section-desc reveal">We'll show you what cannabis-specific work is falling through the gap — missed credits, unverified invoices, manual checks, and vendor overpayments that restaurant AP software can't see.</p>
+    <div class="cta-actions reveal">
+      <a href="/contact" class="btn-primary">
+        Get My Free Evaluation
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+      <a href="/contact" class="btn-secondary">Talk to Chris</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="/" class="nav-logo"><div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div><span class="nav-logo-text">ShelfSpace</span></a>
+      <p>Every Vendor. Every Payment. One Engine.</p>
+    </div>
+    <div class="footer-col"><h4>Services</h4><ul><li><a href="/consignment">Consignment</a></li><li><a href="/accounts-payable">Accounts Payable</a></li><li><a href="/credit-recovery">Credit Recovery</a></li><li><a href="/checks">Check Payments</a></li><li><a href="/shelfiq">ShelfiQ</a></li></ul></div>
+    <div class="footer-col"><h4>Platform</h4><ul><li><a href="/features">Features</a></li><li><a href="/how-it-works">How It Works</a></li><li><a href="/pricing">Pricing</a></li><li><a href="/about">About</a></li><li><a href="/blog">Blog</a></li><li><a href="/docs">Docs</a></li></ul></div>
+    <div class="footer-col"><h4>Access</h4><ul><li><a href="https://ourshelf.space">Login</a></li><li><a href="/contact">Sign Up</a></li><li><a href="/contact">Contact</a></li><li><a href="/vendors">For Vendors</a></li><li><a href="/for-bookkeepers">For Bookkeepers</a></li></ul></div>
+    <div class="footer-col"><h4>Company</h4><ul><li><a href="mailto:chris@shelfspace.pro">Email</a></li><li><a href="mailto:support@shelfspace.pro">Support</a></li><li><a href="https://linkedin.com/company/shelfspace-pro" target="_blank" rel="noopener" class="footer-social-link"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> LinkedIn</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><p>&copy; 2026 ShelfSpace Technologies Inc.</p><div class="footer-bottom-links"><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div></div>
+</footer>
+
+<script>
+(function() {
+  var nav = document.getElementById('nav');
+  var pageHero = document.querySelector('.page-hero');
+  var parallaxSections = [ document.querySelector('.cta-section') ];
+  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var isMobile = window.innerWidth < 900;
+  var ticking = false;
+  requestAnimationFrame(function() {
+    nav.classList.toggle('scrolled', window.scrollY > 20);
+    if (pageHero) pageHero.classList.add('hero-loaded');
+  });
+  var revealObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(function(el) { revealObserver.observe(el); });
+  function onScroll() {
+    var scrollY = window.scrollY;
+    nav.classList.toggle('scrolled', scrollY > 20);
+    if (prefersReduced || isMobile) return;
+    var wh = window.innerHeight;
+    parallaxSections.forEach(function(section) {
+      if (!section) return;
+      var rect = section.getBoundingClientRect();
+      if (rect.bottom < 0 || rect.top > wh) return;
+      var center = rect.top + rect.height / 2 - wh / 2;
+      section.style.setProperty('--parallax-y', (center * 0.08) + 'px');
+    });
+  }
+  window.addEventListener('scroll', function() {
+    if (!ticking) { requestAnimationFrame(function() { onScroll(); ticking = false; }); ticking = true; }
+  }, { passive: true });
+  onScroll();
+  window.addEventListener('resize', function() {
+    isMobile = window.innerWidth < 900;
+    if (isMobile) { parallaxSections.forEach(function(section) { if (section) section.style.setProperty('--parallax-y', '0px'); }); }
+  });
+  document.addEventListener('click', function() {
+    var navLinks = document.querySelector('.nav-links');
+    if (navLinks && navLinks.classList.contains('mobile-open')) { navLinks.classList.remove('mobile-open'); }
+  });
+})();
+</script>
+<script src="/shelfiq-widget.js"></script>
+</body>
+</html>
