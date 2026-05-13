@@ -5,51 +5,69 @@
   window.__shelfDocsSearchLoaded = true;
 
   var DOCS = [
-    { t: "Getting Started with ShelfSpace", d: "Setup for dispensaries — live in under a week. What to expect during onboarding and what we handle for you.", s: "Getting Started", u: "/docs/getting-started", k: "onboarding setup live week" },
-    { t: "How Consignment Works", d: "Vendor-owned inventory, weekly settlements, profit splits. We handle the math and the checks.", s: "Consignment", u: "/docs/consignment/overview", k: "consigned model pay after sale" },
-    { t: "Weekly Consignment Settlements", d: "How weekly payouts are calculated from POS data, category splits, aging discounts, and credits. Penny-precise.", s: "Consignment", u: "/docs/consignment/settlements", k: "payout weekly settlement remittance vendor pay weekly check consignment payment accrual week sell-through" },
-    { t: "Reading Your Settlement Report", d: "Payout table, returns, discounts, inventory snapshot, and final check. How to read every section.", s: "Consignment", u: "/docs/consignment/settlement-reports", k: "report PDF read settlement review breakdown sections payout sheet six-page report sample" },
-    { t: "Consignment Contracts and Terms", d: "Profit splits, shrinkage, discounts, and payment terms. We draft it, you review.", s: "Consignment", u: "/docs/consignment/contracts", k: "agreement contract terms consignment terms payment terms Net 30 Net 45 amendment partnership amend renegotiate" },
-    { t: "Category Splits and Profit Sharing", d: "How category-level splits are negotiated, configured, and applied in weekly settlements.", s: "Consignment", u: "/docs/consignment/profit-splits", k: "split percentage margin gross category split profit share revenue share keystone vendor share retailer share" },
-    { t: "Aging Discounts and Inventory Markdowns", d: "How aging discounts work for expiring product, why they exist, and how they affect settlements.", s: "Consignment", u: "/docs/consignment/aging-discounts", k: "markdown expiring stale dead stock shrinkage aging tiers shelf age discount tier sell-through deep discount" },
-    { t: "How Credit Recovery Works", d: "We track returns, expirations, and co-marketing credits so dispensaries recover what they're owed.", s: "Credit Recovery", u: "/docs/credit-recovery/overview", k: "credit memo recovery vendor credit claw back return expiration co-marketing monthly statement waste destruction" },
-    { t: "Credit Recovery Onboarding — Getting Started", d: "Step-by-step onboarding from signing on to your first monthly credit memos. Vendor list, buyer kickoff, monthly cycle.", s: "Credit Recovery", u: "/docs/credit-recovery/onboarding-sop", k: "credit recovery onboarding credit recovery setup get started credit recovery new credit recovery customer onboard credit recovery first month credit recovery vendor list upload monthly review setup buyer notification template kickoff email partnership rollout new retailer signup credit memo lifecycle" },
-    { t: "Return Credits", d: "We track returned cannabis products in METRC and generate credit memos against vendor payments.", s: "Credit Recovery", u: "/docs/credit-recovery/returns", k: "returns return to vendor RTV defective broken seal metrc return rejected product customer return refund" },
-    { t: "Expiration Credits", d: "We monitor expiration dates, flag aging inventory, and generate credit memos for you.", s: "Credit Recovery", u: "/docs/credit-recovery/expirations", k: "expired expiration best by aging product stale out of date expired inventory credit short-dated near expiry waste" },
-    { t: "Co-Marketing Credits", d: "We track vendor-funded promotions and generate credit memos so you collect what was agreed to.", s: "Credit Recovery", u: "/docs/credit-recovery/co-marketing", k: "co-op marketing MDF promotional credit vendor funded promo below keystone keystone pricing market development funds" },
-    { t: "Credit Memo Approval Process", d: "Each status from Draft to Applied, how vendors respond, and what happens when the 16-day window closes.", s: "Credit Recovery", u: "/docs/credit-recovery/approval-workflow", k: "approval workflow status Draft Pending Vendor Approved Applied 16-day window vendor response in discussion dispute" },
-    { t: "How Managed AP Works", d: "Cannabis dispensary accounts payable end-to-end. We pay vendors, verify invoices, handle questions, and sync QuickBooks.", s: "Accounts Payable", u: "/docs/accounts-payable/overview", k: "AP managed accounts payable vendor payment pay vendor outsource bookkeeper invoice processing AP service AP outsourcing" },
-    { t: "Vendor Onboarding", d: "Onboard cannabis vendor partners in minutes. Email invite, portal setup, cannabis and non-cannabis vendors.", s: "Accounts Payable", u: "/docs/accounts-payable/vendor-onboarding", k: "invite vendor add vendor new vendor onboard vendor vendor signup supplier onboarding invite supplier non-cannabis vendor W9 partnership" },
-    { t: "Invoice Verification and Delivery Matching", d: "Verify cannabis vendor invoice accuracy before payment. We match invoices to deliveries and resolve issues.", s: "Accounts Payable", u: "/docs/accounts-payable/invoice-verification", k: "invoice match verify invoice three-way match PO match invoice review wholesale invoice invoice parsing buyer mismatch line item check" },
-    { t: "Payments and Check Generation", d: "Cannabis vendor check payment processing with Check 21. We create payments, generate checks, and sync QuickBooks.", s: "Accounts Payable", u: "/docs/accounts-payable/creating-payments", k: "create payment pay vendor issue check schedule payment vendor check send check check run pay run batch payment vendor pay" },
-    { t: "Manage Cannabis Deliveries by Email", d: "AP workflow by email — send invoices, update deliveries, attach COAs, and add receiving notes through one inbox.", s: "Accounts Payable", u: "/docs/accounts-payable/email-deliveries", k: "email inbox COA forward invoice ShelfiQ email AP bot send via email email-driven delivery email ingestion email AP" },
-    { t: "QuickBooks Integration", d: "Settlements, bills, vendor lists, and payment records sync to QuickBooks Online with no manual data entry.", s: "QuickBooks", u: "/docs/quickbooks/overview", k: "QBO sync QuickBooks Online accounting integration bill sync payment sync vendor sync intuit chart of accounts cleared status" },
-    { t: "Cannabis Dispensary QuickBooks Setup", d: "Connect QBO, pick accounts, set per-vendor overrides, watch Bookkeeper Match Health. Every settlement and AP payment becomes a Bill + Check.", s: "QuickBooks", u: "/docs/quickbooks/setup", k: "QuickBooks Setup Guide OAuth GL mapping bookkeeper match health backfill checks cleared status sync expense account bank account per-vendor override" },
-    { t: "Cannabis Vendor QuickBooks Setup", d: "Vendor-side QBO setup. Connect QBO, map customers and items, backfill history. Every settlement becomes an Invoice plus a matching Payment.", s: "QuickBooks", u: "/docs/vendor-portal/quickbooks-setup", k: "vendor qbo invoice payment received OAuth mapping refresh token closed period" },
-    { t: "Check 21 Payments", d: "Why cannabis needs Check 21, how digital checks work, and how vendors deposit them.", s: "Checks", u: "/docs/checks/overview", k: "digital check check 21 RCC remote check IRD image replacement document mailed check paper check substitute check" },
-    { t: "How to Deposit a ShelfSpace Check", d: "Deposit via mobile deposit, print at home, or branch visit. Compatible with every major U.S. bank.", s: "Checks", u: "/docs/checks/depositing", k: "deposit mobile bank ACH wire substitute check IRD remote deposit cash check vendor check branch deposit print at home" },
-    { t: "Deposit with a Check Scanner", d: "Print the Settle Report check page, cut, endorse, and run it through your desktop scanner. Works with RDM, Digital Check, Panini, and other RDC hardware.", s: "Checks", u: "/docs/checks/check-scanner", k: "RDM scanner Digital Check Panini Epson Burroughs desktop scanner RDC remote deposit capture MICR hand key endorse Settle Report tear off cut substitute check magnetic ink TellerScan CheXpress Vision X mI:Deal TM-S EC-series check scanner workflow" },
-    { t: "Voiding and Reissuing Checks", d: "Cannabis vendor payment void and reissue in one step. Maintain a full audit trail.", s: "Checks", u: "/docs/checks/void-reissue", k: "void reissue cancel stop payment lost check replacement check reissue void check cancel check check problems" },
-    { t: "Cannabis Vendor Portal", d: "Where every vendor checks downloads, payment history, and credit memos across all retailer partners — free.", s: "Vendor Portal", u: "/docs/vendor-portal/overview", k: "vendor portal vendor login supplier portal vendor sign in partner portal ourshelf.space free vendor access supplier login" },
-    { t: "Downloading Vendor Checks", d: "How vendors access, download, and deposit Check 21-compliant payment checks through the secure portal.", s: "Vendor Portal", u: "/docs/vendor-portal/downloading-checks", k: "download check print check save PDF retrieve check get check vendor check PDF mobile deposit download payment" },
-    { t: "Vendor Payment History", d: "View all payments, filter by date and retailer, export data, and track every dollar through the portal.", s: "Vendor Portal", u: "/docs/vendor-portal/payment-history", k: "history export csv 1099 statement payment history past payments filter payments year-end vendor statement" },
-    { t: "Vendor Dispute Credit Memo", d: "How vendors review credit memos, accept or dispute charges, and upload documentation through the portal.", s: "Vendor Portal", u: "/docs/vendor-portal/disputes", k: "dispute reject decline disagree push back contest in discussion challenge credit memo dispute vendor disagree dispute charges" },
-    { t: "ShelfiQ — Cannabis AI Assistant", d: "ShelfiQ answers vendor questions, parses invoices, manages AP, and exports data through a simple chat.", s: "ShelfiQ", u: "/docs/shelfiq/overview", k: "AI chat assistant ShelfiQ ask question email AP helper invoice parsing AP bot vendor query LLM agent" },
-    { t: "ShelfiQ Tools", d: "AI invoice parsing, vendor matching, payment queries, data exports, and AP management — everything ShelfiQ can do.", s: "ShelfiQ", u: "/docs/shelfiq/tools", k: "tools invoice parsing AI capability email parsing vendor matching payment query export ask question AP bot tool calling" },
-    { t: "Co-Op Promotions", d: "How retailers and vendors run joint promotions, track impact, and generate credits.", s: "Promotions", u: "/docs/promotions/overview", k: "co-op promo promotion BOGO deal discount vendor promotion joint promo MDF promo overview vendor-funded promotion" },
-    { t: "Creating a Promotion", d: "How to create a co-op promotion, get vendor approval, track performance, and generate credits.", s: "Promotions", u: "/docs/promotions/creating", k: "create promo setup new promo promo setup MDF setup vendor approval performance tracking joint promo create promotion" },
-    { t: "Vendor Pre-Approval SOP for Promotions", d: "Step-by-step SOP for buyers and marketing staff: get every promotion pre-approved before it runs so co-marketing credits clear without dispute at month-end.", s: "Promotions", u: "/docs/promotions/vendor-pre-approval-sop", k: "pre-approval pre approval preapproval promotion approval SOP buyer marketing dispensary promo signoff vendor signoff vendor approval workflow ask vendor record evidence portal email AP bot ShelfiQ promotion creation exact POS wording promotion name match credit memo pre-approved promotions without prior approval split co-marketing approval before run Tincture Tuesday how to pre-approve" },
-    { t: "Insights and Analytics", d: "Track sales velocity, dead inventory, vendor performance, and cash liberation in real time.", s: "Insights", u: "/docs/insights/overview", k: "analytics dashboard KPI metric performance sales velocity sell-through dead inventory cash insights chart report" },
-    { t: "Vendor Scorecards", d: "Grade suppliers on volume, velocity, growth, and reliability with real sell-through data.", s: "Insights", u: "/docs/insights/vendor-scorecards", k: "scorecard supplier rank grade supplier rating vendor evaluation reliability volume velocity growth vendor performance" },
-    { t: "POS Integration", d: "Works with any system. CSV upload or API sync with Dutchie, Flowhub, BLAZE, and more. No IT team required.", s: "Integrations", u: "/docs/integrations/pos", k: "Dutchie Flowhub BLAZE point of sale POS Treez Cova Meadow IndicaOnline MJ Freeway Greenbits CSV upload API sync" },
-    { t: "METRC Integration", d: "Official Metrc third-party vendor. Read-only connection to power settlements, credit recovery, and AP.", s: "Integrations", u: "/docs/integrations/metrc", k: "Metrc compliance track and trace state compliance Metrc API Metrc manifest seed to sale read-only Metrc connection" },
-    { t: "Delivery Tracking and Receiving", d: "Track incoming shipments, receive inventory, reconcile to purchase orders, and move deliveries to payment.", s: "Deliveries", u: "/docs/deliveries/overview", k: "receiving shipment PO purchase order incoming delivery track delivery vendor delivery wholesale order dock receiving" },
-    { t: "Delivery Reconciliation", d: "Match what was ordered to what arrived, catch discrepancies, and approve deliveries for payment.", s: "Deliveries", u: "/docs/deliveries/reconciliation", k: "reconcile match invoice delivery match verify delivery short shipment discrepancy hold delivery on hold partial delivery" },
-    { t: "How to Receive Cannabis Deliveries — Inventory Team SOP", d: "Step-by-step receiving SOP for dispensary inventory teams. Upload manifest, confirm what arrived, and adjust before payment.", s: "Deliveries", u: "/docs/deliveries/receiving-sop", k: "receiving inventory clerk dock SOP physical receipt manifest short damaged not compliant receive delivery how to receive" },
-    { t: "Users, Roles, and Permissions", d: "Three roles per portal, email invites, and location-scoped access for your team.", s: "User Management", u: "/docs/user-management/overview", k: "role permission user invite team member retailer admin viewer inventory employee access location scoped add user" },
-    { t: "Multi-Factor Authentication (MFA)", d: "Enable SMS, TOTP, or email multi-factor authentication to protect your accounts and stay compliant.", s: "User Management", u: "/docs/user-management/mfa", k: "MFA 2FA TOTP SMS authenticator two factor multi factor authenticator app login security enroll" },
-    { t: "Security and Data Protection", d: "Row-level security, multi-tenant isolation, encryption at rest and in transit, and zero hard deletes.", s: "Security", u: "/docs/security/overview", k: "encryption RLS data protection multi tenant isolation soft delete row level security GDPR SOC2 data security" },
-    { t: "Audit Trail and Compliance", d: "Every action is logged in an immutable record for regulatory audits and internal accountability.", s: "Security", u: "/docs/security/audit-trail", k: "audit log compliance history change log immutable activity trail who did when did regulator state inspection" }
+    { t: "Getting Started with ShelfSpace", n: "Onboarding", d: "Setup for dispensaries — live in under a week. What to expect during onboarding and what we handle for you.", s: "Getting Started", u: "/docs/getting-started", k: "onboarding setup live week" },
+    { t: "How Consignment Works", n: "Overview", d: "Vendor-owned inventory, weekly settlements, profit splits. We handle the math and the checks.", s: "Consignment", u: "/docs/consignment/overview", k: "consigned model pay after sale" },
+    { t: "Weekly Consignment Settlements", n: "Weekly Settlements", d: "How weekly payouts are calculated from POS data, category splits, aging discounts, and credits. Penny-precise.", s: "Consignment", u: "/docs/consignment/settlements", k: "payout weekly settlement remittance vendor pay weekly check consignment payment accrual week sell-through" },
+    { t: "Reading Your Settlement Report", n: "Settlement Reports", d: "Payout table, returns, discounts, inventory snapshot, and final check. How to read every section.", s: "Consignment", u: "/docs/consignment/settlement-reports", k: "report PDF read settlement review breakdown sections payout sheet six-page report sample" },
+    { t: "Consignment Contracts and Terms", n: "Contracts & Terms", d: "Profit splits, shrinkage, discounts, and payment terms. We draft it, you review.", s: "Consignment", u: "/docs/consignment/contracts", k: "agreement contract terms consignment terms payment terms Net 30 Net 45 amendment partnership amend renegotiate" },
+    { t: "Category Splits and Profit Sharing", n: "Profit Splits", d: "How category-level splits are negotiated, configured, and applied in weekly settlements.", s: "Consignment", u: "/docs/consignment/profit-splits", k: "split percentage margin gross category split profit share revenue share keystone vendor share retailer share" },
+    { t: "Aging Discounts and Inventory Markdowns", n: "Aging Discounts", d: "How aging discounts work for expiring product, why they exist, and how they affect settlements.", s: "Consignment", u: "/docs/consignment/aging-discounts", k: "markdown expiring stale dead stock shrinkage aging tiers shelf age discount tier sell-through deep discount" },
+    { t: "How Credit Recovery Works", n: "Overview", d: "We track returns, expirations, and co-marketing credits so dispensaries recover what they're owed.", s: "Credit Recovery", u: "/docs/credit-recovery/overview", k: "credit memo recovery vendor credit claw back return expiration co-marketing monthly statement waste destruction" },
+    { t: "Credit Recovery Onboarding — Getting Started", n: "Onboarding SOP", d: "Step-by-step onboarding from signing on to your first monthly credit memos. Vendor list, buyer kickoff, monthly cycle.", s: "Credit Recovery", u: "/docs/credit-recovery/onboarding-sop", k: "credit recovery onboarding credit recovery setup get started credit recovery new credit recovery customer onboard credit recovery first month credit recovery vendor list upload monthly review setup buyer notification template kickoff email partnership rollout new retailer signup credit memo lifecycle" },
+    { t: "Return Credits", n: "Return Credits", d: "We track returned cannabis products in METRC and generate credit memos against vendor payments.", s: "Credit Recovery", u: "/docs/credit-recovery/returns", k: "returns return to vendor RTV defective broken seal metrc return rejected product customer return refund" },
+    { t: "Expiration Credits", n: "Expiration Credits", d: "We monitor expiration dates, flag aging inventory, and generate credit memos for you.", s: "Credit Recovery", u: "/docs/credit-recovery/expirations", k: "expired expiration best by aging product stale out of date expired inventory credit short-dated near expiry waste" },
+    { t: "Co-Marketing Credits", n: "Co-Marketing Credits", d: "We track vendor-funded promotions and generate credit memos so you collect what was agreed to.", s: "Credit Recovery", u: "/docs/credit-recovery/co-marketing", k: "co-op marketing MDF promotional credit vendor funded promo below keystone keystone pricing market development funds" },
+    { t: "Credit Memo Approval Process", n: "Approval Workflow", d: "Each status from Draft to Applied, how vendors respond, and what happens when the 16-day window closes.", s: "Credit Recovery", u: "/docs/credit-recovery/approval-workflow", k: "approval workflow status Draft Pending Vendor Approved Applied 16-day window vendor response in discussion dispute" },
+    { t: "How Managed AP Works", n: "Overview", d: "Cannabis dispensary accounts payable end-to-end. We pay vendors, verify invoices, handle questions, and sync QuickBooks.", s: "Accounts Payable", u: "/docs/accounts-payable/overview", k: "AP managed accounts payable vendor payment pay vendor outsource bookkeeper invoice processing AP service AP outsourcing" },
+    { t: "Vendor Onboarding", n: "Vendor Onboarding", d: "Onboard cannabis vendor partners in minutes. Email invite, portal setup, cannabis and non-cannabis vendors.", s: "Accounts Payable", u: "/docs/accounts-payable/vendor-onboarding", k: "invite vendor add vendor new vendor onboard vendor vendor signup supplier onboarding invite supplier non-cannabis vendor W9 partnership" },
+    { t: "Invoice Verification and Delivery Matching", n: "Invoice Verification", d: "Verify cannabis vendor invoice accuracy before payment. We match invoices to deliveries and resolve issues.", s: "Accounts Payable", u: "/docs/accounts-payable/invoice-verification", k: "invoice match verify invoice three-way match PO match invoice review wholesale invoice invoice parsing buyer mismatch line item check" },
+    { t: "Payments and Check Generation", n: "Creating Payments", d: "Cannabis vendor check payment processing with Check 21. We create payments, generate checks, and sync QuickBooks.", s: "Accounts Payable", u: "/docs/accounts-payable/creating-payments", k: "create payment pay vendor issue check schedule payment vendor check send check check run pay run batch payment vendor pay" },
+    { t: "Manage Cannabis Deliveries by Email", n: "Email Workflow", d: "AP workflow by email — send invoices, update deliveries, attach COAs, and add receiving notes through one inbox.", s: "Accounts Payable", u: "/docs/accounts-payable/email-deliveries", k: "email inbox COA forward invoice ShelfiQ email AP bot send via email email-driven delivery email ingestion email AP" },
+    { t: "QuickBooks Integration", n: "Overview", d: "Settlements, bills, vendor lists, and payment records sync to QuickBooks Online with no manual data entry.", s: "QuickBooks", u: "/docs/quickbooks/overview", k: "QBO sync QuickBooks Online accounting integration bill sync payment sync vendor sync intuit chart of accounts cleared status" },
+    { t: "Cannabis Dispensary QuickBooks Setup", n: "Setup Guide", d: "Connect QBO, pick accounts, set per-vendor overrides, watch Bookkeeper Match Health. Every settlement and AP payment becomes a Bill + Check.", s: "QuickBooks", u: "/docs/quickbooks/setup", k: "QuickBooks Setup Guide OAuth GL mapping bookkeeper match health backfill checks cleared status sync expense account bank account per-vendor override" },
+    { t: "Cannabis Vendor QuickBooks Setup", n: "Vendor QuickBooks Setup", d: "Vendor-side QBO setup. Connect QBO, map customers and items, backfill history. Every settlement becomes an Invoice plus a matching Payment.", s: "Vendor Portal", u: "/docs/vendor-portal/quickbooks-setup", k: "vendor qbo invoice payment received OAuth mapping refresh token closed period" },
+    { t: "Check 21 Payments", n: "Overview (Check 21)", d: "Why cannabis needs Check 21, how digital checks work, and how vendors deposit them.", s: "Checks", u: "/docs/checks/overview", k: "digital check check 21 RCC remote check IRD image replacement document mailed check paper check substitute check" },
+    { t: "How to Deposit a ShelfSpace Check", n: "How to Deposit", d: "Deposit via mobile deposit, print at home, or branch visit. Compatible with every major U.S. bank.", s: "Checks", u: "/docs/checks/depositing", k: "deposit mobile bank ACH wire substitute check IRD remote deposit cash check vendor check branch deposit print at home" },
+    { t: "Deposit with a Check Scanner", n: "Check Scanner Workflow", d: "Print the Settle Report check page, cut, endorse, and run it through your desktop scanner. Works with RDM, Digital Check, Panini, and other RDC hardware.", s: "Checks", u: "/docs/checks/check-scanner", k: "RDM scanner Digital Check Panini Epson Burroughs desktop scanner RDC remote deposit capture MICR hand key endorse Settle Report tear off cut substitute check magnetic ink TellerScan CheXpress Vision X mI:Deal TM-S EC-series check scanner workflow" },
+    { t: "Voiding and Reissuing Checks", n: "Void & Reissue", d: "Cannabis vendor payment void and reissue in one step. Maintain a full audit trail.", s: "Checks", u: "/docs/checks/void-reissue", k: "void reissue cancel stop payment lost check replacement check reissue void check cancel check check problems" },
+    { t: "Cannabis Vendor Portal", n: "Overview", d: "Where every vendor checks downloads, payment history, and credit memos across all retailer partners — free.", s: "Vendor Portal", u: "/docs/vendor-portal/overview", k: "vendor portal vendor login supplier portal vendor sign in partner portal ourshelf.space free vendor access supplier login" },
+    { t: "Downloading Vendor Checks", n: "Downloading Checks", d: "How vendors access, download, and deposit Check 21-compliant payment checks through the secure portal.", s: "Vendor Portal", u: "/docs/vendor-portal/downloading-checks", k: "download check print check save PDF retrieve check get check vendor check PDF mobile deposit download payment" },
+    { t: "Vendor Payment History", n: "Payment History", d: "View all payments, filter by date and retailer, export data, and track every dollar through the portal.", s: "Vendor Portal", u: "/docs/vendor-portal/payment-history", k: "history export csv 1099 statement payment history past payments filter payments year-end vendor statement" },
+    { t: "Vendor Dispute Credit Memo", n: "Disputes", d: "How vendors review credit memos, accept or dispute charges, and upload documentation through the portal.", s: "Vendor Portal", u: "/docs/vendor-portal/disputes", k: "dispute reject decline disagree push back contest in discussion challenge credit memo dispute vendor disagree dispute charges" },
+    { t: "ShelfiQ — Cannabis AI Assistant", n: "Overview", d: "ShelfiQ answers vendor questions, parses invoices, manages AP, and exports data through a simple chat.", s: "ShelfiQ", u: "/docs/shelfiq/overview", k: "AI chat assistant ShelfiQ ask question email AP helper invoice parsing AP bot vendor query LLM agent" },
+    { t: "ShelfiQ Tools", n: "Tools", d: "AI invoice parsing, vendor matching, payment queries, data exports, and AP management — everything ShelfiQ can do.", s: "ShelfiQ", u: "/docs/shelfiq/tools", k: "tools invoice parsing AI capability email parsing vendor matching payment query export ask question AP bot tool calling" },
+    { t: "Co-Op Promotions", n: "Overview", d: "How retailers and vendors run joint promotions, track impact, and generate credits.", s: "Promotions", u: "/docs/promotions/overview", k: "co-op promo promotion BOGO deal discount vendor promotion joint promo MDF promo overview vendor-funded promotion" },
+    { t: "Creating a Promotion", n: "Creating a Promotion", d: "How to create a co-op promotion, get vendor approval, track performance, and generate credits.", s: "Promotions", u: "/docs/promotions/creating", k: "create promo setup new promo promo setup MDF setup vendor approval performance tracking joint promo create promotion" },
+    { t: "Vendor Pre-Approval SOP for Promotions", n: "Pre-Approval SOP", d: "Step-by-step SOP for buyers and marketing staff: get every promotion pre-approved before it runs so co-marketing credits clear without dispute at month-end.", s: "Promotions", u: "/docs/promotions/vendor-pre-approval-sop", k: "pre-approval pre approval preapproval promotion approval SOP buyer marketing dispensary promo signoff vendor signoff vendor approval workflow ask vendor record evidence portal email AP bot ShelfiQ promotion creation exact POS wording promotion name match credit memo pre-approved promotions without prior approval split co-marketing approval before run Tincture Tuesday how to pre-approve" },
+    { t: "Insights and Analytics", n: "Overview", d: "Track sales velocity, dead inventory, vendor performance, and cash liberation in real time.", s: "Insights", u: "/docs/insights/overview", k: "analytics dashboard KPI metric performance sales velocity sell-through dead inventory cash insights chart report" },
+    { t: "Vendor Scorecards", n: "Vendor Scorecards", d: "Grade suppliers on volume, velocity, growth, and reliability with real sell-through data.", s: "Insights", u: "/docs/insights/vendor-scorecards", k: "scorecard supplier rank grade supplier rating vendor evaluation reliability volume velocity growth vendor performance" },
+    { t: "POS Integration", n: "POS Integration", d: "Works with any system. CSV upload or API sync with Dutchie, Flowhub, BLAZE, and more. No IT team required.", s: "Integrations", u: "/docs/integrations/pos", k: "Dutchie Flowhub BLAZE point of sale POS Treez Cova Meadow IndicaOnline MJ Freeway Greenbits CSV upload API sync" },
+    { t: "METRC Integration", n: "METRC", d: "Official Metrc third-party vendor. Read-only connection to power settlements, credit recovery, and AP.", s: "Integrations", u: "/docs/integrations/metrc", k: "Metrc compliance track and trace state compliance Metrc API Metrc manifest seed to sale read-only Metrc connection" },
+    { t: "Delivery Tracking and Receiving", n: "Overview", d: "Track incoming shipments, receive inventory, reconcile to purchase orders, and move deliveries to payment.", s: "Deliveries", u: "/docs/deliveries/overview", k: "receiving shipment PO purchase order incoming delivery track delivery vendor delivery wholesale order dock receiving" },
+    { t: "Delivery Reconciliation", n: "Reconciliation", d: "Match what was ordered to what arrived, catch discrepancies, and approve deliveries for payment.", s: "Deliveries", u: "/docs/deliveries/reconciliation", k: "reconcile match invoice delivery match verify delivery short shipment discrepancy hold delivery on hold partial delivery" },
+    { t: "How to Receive Cannabis Deliveries — Inventory Team SOP", n: "Receiving SOP", d: "Step-by-step receiving SOP for dispensary inventory teams. Upload manifest, confirm what arrived, and adjust before payment.", s: "Deliveries", u: "/docs/deliveries/receiving-sop", k: "receiving inventory clerk dock SOP physical receipt manifest short damaged not compliant receive delivery how to receive" },
+    { t: "Users, Roles, and Permissions", n: "Roles & Permissions", d: "Three roles per portal, email invites, and location-scoped access for your team.", s: "User Management", u: "/docs/user-management/overview", k: "role permission user invite team member retailer admin viewer inventory employee access location scoped add user" },
+    { t: "Multi-Factor Authentication (MFA)", n: "MFA", d: "Enable SMS, TOTP, or email multi-factor authentication to protect your accounts and stay compliant.", s: "User Management", u: "/docs/user-management/mfa", k: "MFA 2FA TOTP SMS authenticator two factor multi factor authenticator app login security enroll" },
+    { t: "Security and Data Protection", n: "Overview", d: "Row-level security, multi-tenant isolation, encryption at rest and in transit, and zero hard deletes.", s: "Security", u: "/docs/security/overview", k: "encryption RLS data protection multi tenant isolation soft delete row level security GDPR SOC2 data security" },
+    { t: "Audit Trail and Compliance", n: "Audit Trail", d: "Every action is logged in an immutable record for regulatory audits and internal accountability.", s: "Security", u: "/docs/security/audit-trail", k: "audit log compliance history change log immutable activity trail who did when did regulator state inspection" }
+  ];
+
+  /* Section order for sidebar TOC + hub layout */
+  var SECTION_ORDER = [
+    "Getting Started",
+    "Consignment",
+    "Accounts Payable",
+    "Credit Recovery",
+    "Vendor Portal",
+    "Checks",
+    "QuickBooks",
+    "ShelfiQ",
+    "Promotions",
+    "Deliveries",
+    "Insights",
+    "Integrations",
+    "User Management",
+    "Security"
   ];
 
   var CSS = [
@@ -107,7 +125,7 @@
 
   function score(doc, terms) {
     var hay = (doc.t + ' ' + doc.s + ' ' + doc.d + ' ' + (doc.k || '')).toLowerCase();
-    var titleHay = (doc.t + ' ' + doc.s).toLowerCase();
+    var titleHay = (doc.t + ' ' + doc.s + ' ' + (doc.n || '')).toLowerCase();
     var total = 0;
     for (var i = 0; i < terms.length; i++) {
       var t = terms[i];
@@ -125,15 +143,17 @@
       .map(function(d) { return { d: d, s: score(d, terms) }; })
       .filter(function(r) { return r.s > 0; })
       .sort(function(a, b) { return b.s - a.s; })
-      .slice(0, 8)
+      .slice(0, 10)
       .map(function(r) { return r.d; });
   }
 
   function mountInto(host) {
     var floating = host.hasAttribute('data-floating');
+    var prominent = host.hasAttribute('data-prominent');
     host.classList.add('docs-search-wrap');
     if (floating) host.classList.add('is-floating');
-    var placeholder = host.getAttribute('data-placeholder') || 'Search the docs — payments, settlements, METRC...';
+    if (prominent) host.classList.add('is-prominent');
+    var placeholder = host.getAttribute('data-placeholder') || 'Search the docs — settlements, vendor portal, credit memo...';
 
     host.innerHTML =
       '<label class="docs-search" for="docs-search">' +
@@ -272,11 +292,138 @@
     });
   }
 
+  /* ─── SIDEBAR (article pages) ─── */
+  function renderSidebar(host) {
+    var path = window.location.pathname.replace(/\.html$/, '').replace(/\/$/, '');
+    var groups = {};
+    DOCS.forEach(function(d) {
+      if (!groups[d.s]) groups[d.s] = [];
+      groups[d.s].push(d);
+    });
+
+    var html = '';
+    html += '<button class="docs-sidebar-mobile" type="button" aria-expanded="false" aria-controls="docs-sidebar-nav">';
+    html += '<span>Browse all docs</span>';
+    html += '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>';
+    html += '</button>';
+
+    html += '<nav id="docs-sidebar-nav" aria-label="Documentation sections">';
+    SECTION_ORDER.forEach(function(section) {
+      var items = groups[section] || [];
+      if (!items.length) return;
+      html += '<div class="docs-sidebar-group">';
+      html += '<div class="docs-sidebar-group-label">' + escapeHtml(section) + '</div>';
+      items.forEach(function(d) {
+        var isActive = (d.u === path);
+        html += '<a href="' + d.u + '" class="docs-sidebar-link' + (isActive ? ' is-active' : '') + '"'
+              + (isActive ? ' aria-current="page"' : '') + '>'
+              + escapeHtml(d.n || d.t) + '</a>';
+      });
+      html += '</div>';
+    });
+
+    html += '<button class="docs-sidebar-search-hint" type="button" aria-label="Focus search input">';
+    html += '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>';
+    html += '<span>Search docs</span>';
+    html += '<kbd>/</kbd>';
+    html += '</button>';
+    html += '</nav>';
+
+    host.innerHTML = html;
+
+    var mobileBtn = host.querySelector('.docs-sidebar-mobile');
+    if (mobileBtn) {
+      mobileBtn.addEventListener('click', function() {
+        var isOpen = host.classList.toggle('is-mobile-open');
+        mobileBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      });
+    }
+
+    var searchHint = host.querySelector('.docs-sidebar-search-hint');
+    if (searchHint) {
+      searchHint.addEventListener('click', function() {
+        var input = document.getElementById('docs-search');
+        if (input) {
+          input.focus();
+          input.scrollIntoView({ block: 'center', behavior: 'smooth' });
+        }
+      });
+    }
+  }
+
+  function slugify(text) {
+    return String(text).toLowerCase()
+      .replace(/[^a-z0-9\s-]/g, '')
+      .trim()
+      .replace(/\s+/g, '-')
+      .replace(/-+/g, '-');
+  }
+
+  /* ─── ON THIS PAGE (right rail) ─── */
+  function renderOnThisPage(host) {
+    var main = document.querySelector('.docs-content');
+    if (!main) { host.classList.add('is-hidden'); return; }
+
+    var allH2s = main.querySelectorAll('h2');
+    var contentH2s = [];
+    Array.prototype.forEach.call(allH2s, function(h2) {
+      /* skip h2s inside the at-a-glance label box */
+      if (h2.closest && h2.closest('.docs-glance')) return;
+      contentH2s.push(h2);
+    });
+
+    if (contentH2s.length < 3) {
+      host.classList.add('is-hidden');
+      return;
+    }
+
+    var html = '<div class="docs-otp-label">On this page</div>';
+    html += '<ul class="docs-otp-list">';
+    contentH2s.forEach(function(h2) {
+      if (!h2.id) {
+        var baseId = slugify(h2.textContent);
+        var id = baseId;
+        var i = 2;
+        while (document.getElementById(id)) {
+          id = baseId + '-' + i;
+          i++;
+        }
+        h2.id = id;
+      }
+      html += '<li><a href="#' + h2.id + '" class="docs-otp-link" data-target="' + h2.id + '">' + escapeHtml(h2.textContent) + '</a></li>';
+    });
+    html += '</ul>';
+    host.innerHTML = html;
+
+    var links = host.querySelectorAll('.docs-otp-link');
+    if (!('IntersectionObserver' in window)) return;
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          var id = entry.target.id;
+          links.forEach(function(link) {
+            link.classList.toggle('is-active', link.getAttribute('data-target') === id);
+          });
+        }
+      });
+    }, { rootMargin: '-90px 0px -60% 0px', threshold: 0 });
+    contentH2s.forEach(function(h2) { observer.observe(h2); });
+  }
+
   function init() {
-    var host = document.querySelector('[data-docs-search]');
-    if (!host) return;
-    injectStyles();
-    mountInto(host);
+    var searchHost = document.querySelector('[data-docs-search]');
+    if (searchHost) {
+      injectStyles();
+      mountInto(searchHost);
+    }
+    var sidebarHost = document.querySelector('[data-docs-sidebar]');
+    if (sidebarHost) {
+      renderSidebar(sidebarHost);
+    }
+    var otpHost = document.querySelector('[data-on-this-page]');
+    if (otpHost) {
+      renderOnThisPage(otpHost);
+    }
   }
 
   if (document.readyState === 'loading') {

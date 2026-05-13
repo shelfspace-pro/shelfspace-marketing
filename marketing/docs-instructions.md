@@ -76,7 +76,8 @@
 ## Visual Design
 - Same fonts (DM Sans + Space Mono), colors, nav, footer as marketing site
 - 720px max-width content area
-- Left sidebar navigation (all doc sections/pages), sticky on scroll, collapses to dropdown on mobile
+- Left sidebar TOC (all 14 sections + 45 articles), sticky on scroll, collapses to `<details>` dropdown on mobile. Rendered client-side by `docs-search.js` from the DOCS array — single source of truth. Mount point: `<aside class="docs-sidebar" data-docs-sidebar>` placed inside `<div class="docs-layout docs-with-sidebar">` BEFORE `<main class="docs-content">`.
+- Right rail "On this page" anchor list, auto-built from `<h2>` elements in `.docs-content`. Gates on ≥3 H2s (shorter pages hide it). Mount point: `<aside class="docs-on-this-page" data-on-this-page></aside>` placed AFTER `</main>` inside the layout div. Hidden ≤1199px viewport.
 - More whitespace than marketing pages
 - var(--green-ghost) for callout boxes
 - var(--slate-50) for technical blocks
@@ -104,7 +105,8 @@
 12. Nav: 7 items, no active state
 13. Footer: Blog in Platform column, Credit Recovery in Services column
 14. TechArticle JSON-LD schema
-15. For new pages in an existing section: **add the new page to every sibling page's `<div class="docs-related-links">` block.** The `/docs` section card routes to one article (usually `overview.html`), not a section index — without sibling Related links, discovery from the docs hub is broken. List the section dir, edit each sibling, ship in the same commit. Update the section card count on `docs/index.html` and bump `?v=N` on `docs-search.js` site-wide.
+15. For new pages in an existing section: **add the new page to every sibling page's `<div class="docs-related-links">` block.** The sidebar TOC is rendered from the DOCS array in `docs-search.js`, so adding the page there populates the sidebar everywhere — but the contextual `.docs-related-links` pill row is still hand-authored per article. Ship in the same commit. Update the section card count + add a new compact row in the relevant section of `docs/index.html`. Bump `?v=N` on `docs-search.js` site-wide.
+16. **Source of truth sync (every new doc):** add to (a) DOCS array in `docs-search.js` with `t` (full SEO title), `n` (short sidebar nickname), `d`, `s`, `u`, `k` fields; (b) the appropriate section's `.docs-section-list` in `docs/index.html` as a new `.docs-row`; (c) sitemap.xml; (d) llms.txt Docs Articles block; (e) `<div data-docs-sidebar>` and `<div data-on-this-page>` mount points in the new article's layout (matches existing articles).
 
 ## Freshness Rules
 - Every doc has a last-synced date

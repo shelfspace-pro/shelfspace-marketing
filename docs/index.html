@@ -28,7 +28,7 @@
 <style>
   @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-12px); } }
 
-  /* ── Hero Enhancements ── */
+  .page-hero { padding-bottom: 32px; }
   .hero-bg-gradient { position: absolute; top: -30%; right: -20%; width: 700px; height: 700px; background: radial-gradient(circle, rgba(149,213,178,0.18) 0%, rgba(149,213,178,0) 70%); animation: float 8s ease-in-out infinite; pointer-events: none; }
   .hero-bg-gradient-2 { position: absolute; bottom: -20%; left: -15%; width: 550px; height: 550px; background: radial-gradient(circle, rgba(27,67,50,0.06) 0%, rgba(27,67,50,0) 70%); animation: float 10s ease-in-out infinite; animation-delay: -3s; pointer-events: none; }
   .hero-grid-lines { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 1200px; height: 100%; opacity: 0.035; background-image: linear-gradient(var(--green-deep) 1px, transparent 1px), linear-gradient(90deg, var(--green-deep) 1px, transparent 1px); background-size: 80px 80px; pointer-events: none; }
@@ -42,71 +42,21 @@
   .page-hero.hero-loaded .section-title,
   .page-hero.hero-loaded .section-desc { opacity: 1; transform: translateY(0); }
 
-  /* ── Docs Index Grid ── */
-  .docs-index-grid {
-    max-width: 1100px; margin: 0 auto;
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
-    padding: 0 48px 80px;
-  }
-  .docs-index-card {
-    background: var(--white); border: 1px solid var(--slate-200);
-    border-radius: 16px; padding: 32px 28px;
-    text-decoration: none; display: block;
-    transition: all 0.3s cubic-bezier(0.22,1,0.36,1);
-    position: relative; overflow: hidden;
-    opacity: 0; transform: translateY(30px);
-  }
-  .docs-index-card.is-visible {
-    opacity: 1; transform: translateY(0);
-    transition: all 0.3s cubic-bezier(0.22,1,0.36,1), opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1);
-  }
-  .docs-index-card::before {
-    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
-    background: linear-gradient(90deg, var(--green-accent), var(--green-mid));
-    opacity: 0; transition: opacity 0.3s;
-  }
-  .docs-index-card:hover {
-    transform: translateY(-4px); border-color: var(--green-accent);
-    box-shadow: 0 12px 40px rgba(27,67,50,0.08);
-  }
-  .docs-index-card.is-visible:hover {
-    transform: translateY(-4px);
-  }
-  .docs-index-card:hover::before { opacity: 1; }
-  .docs-index-card h3 {
-    font-size: 18px; font-weight: 700; color: var(--green-deep);
-    margin-bottom: 6px; letter-spacing: -0.3px;
-  }
-  .docs-index-card .docs-card-count {
-    font-size: 12px; font-weight: 600; color: var(--green-mid);
-    letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px;
-  }
-  .docs-index-card p {
-    font-size: 14px; line-height: 1.5; color: var(--slate-500);
-  }
+  .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1); }
+  .reveal.is-visible { opacity: 1; transform: translateY(0); }
 
-  /* ── Footer 5-col ── */
   .footer-top { grid-template-columns: 2fr 1fr 1fr 1fr 1fr; }
+  @media (max-width: 900px) { .footer-top { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px) { .footer-top { grid-template-columns: 1fr; } }
 
-  /* ── Responsive ── */
-  @media (max-width: 900px) {
-    .docs-index-grid { grid-template-columns: repeat(2, 1fr); padding: 0 24px 60px; }
-    .footer-top { grid-template-columns: 1fr 1fr; }
-  }
-  @media (max-width: 600px) {
-    .docs-index-grid { grid-template-columns: 1fr; }
-    .footer-top { grid-template-columns: 1fr; }
-  }
   @media (prefers-reduced-motion: reduce) {
-    .docs-index-card { opacity: 1; transform: none; transition: none; }
     .page-hero .section-label,
     .page-hero .section-title,
-    .page-hero .section-desc { opacity: 1; transform: none; transition: none; }
-    .hero-bg-gradient, .hero-bg-gradient-2 { animation: none; }
+    .page-hero .section-desc,
     .reveal { opacity: 1; transform: none; transition: none; }
+    .hero-bg-gradient, .hero-bg-gradient-2 { animation: none; }
   }
 </style>
-<!-- SCHEMA -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -114,10 +64,20 @@
   "name": "ShelfSpace Documentation",
   "description": "Guides for every feature of the ShelfSpace platform.",
   "datePublished": "2026-03-25",
-  "dateModified": "2026-04-27",
+  "dateModified": "2026-05-13",
   "author": { "@type": "Organization", "name": "ShelfSpace", "url": "https://shelfspace.pro" },
   "publisher": { "@type": "Organization", "name": "ShelfSpace" },
   "url": "https://shelfspace.pro/docs"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://shelfspace.pro/" },
+    { "@type": "ListItem", "position": 2, "name": "Documentation" }
+  ]
 }
 </script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-H2LBJT03WE"></script>
@@ -126,12 +86,12 @@
 o.src="https://assets.apollo.io/micro/website-tracker/tracker.iife.js?nocache="+n,o.async=!0,o.defer=!0,
 o.onload=function(){window.trackingFunctions.onLoad({appId:"69c141b32234890011a43849"})},
 document.head.appendChild(o)}initApollo();</script>
-<noscript><style>.docs-index-card,.reveal,.page-hero .section-label,.page-hero .section-title,.page-hero .section-desc{opacity:1;transform:none;transition:none;}</style></noscript>
+<noscript><style>.reveal,.page-hero .section-label,.page-hero .section-title,.page-hero .section-desc{opacity:1;transform:none;transition:none;}.docs-filters{display:none;}</style></noscript>
 </head>
 <body>
-<!-- last-synced: 2026-04-27 -->
+<!-- last-synced: 2026-05-13 -->
 
-<!-- NAV (no active state) -->
+<!-- NAV -->
 <nav id="nav">
   <a href="/" class="nav-logo">
     <div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div>
@@ -154,101 +114,534 @@ document.head.appendChild(o)}initApollo();</script>
   <div class="hero-bg-gradient-2"></div>
   <div class="hero-grid-lines"></div>
   <div class="section-label">Documentation</div>
-  <h1 class="section-title">ShelfSpace Documentation</h1>
-  <p class="section-desc">Guides for every feature of the ShelfSpace platform</p>
+  <h1 class="section-title">Documentation</h1>
+  <p class="section-desc">45 guides across consignment, AP, credit recovery, vendor portal, and every part of the platform.</p>
 </div>
 
-<!-- SEARCH -->
-<div data-docs-search data-floating><noscript><a href="/docs">Browse the docs index</a></noscript></div>
+<!-- PROMINENT SEARCH -->
+<div data-docs-search data-prominent data-placeholder="Search the docs — settlements, vendor portal, credit memo..."><noscript><a href="/docs">Browse the docs index</a></noscript></div>
 
-<!-- SECTION CARDS -->
-<div class="docs-index-grid">
+<!-- HUB -->
+<section class="docs-hub">
+  <div class="docs-hub-inner">
 
-  <a href="/docs/getting-started" class="docs-index-card" style="transition-delay: 0s;">
-    <h3>Getting Started</h3>
-    <div class="docs-card-count">2 articles</div>
-    <p>Platform overview and onboarding</p>
-  </a>
+    <!-- FEATURED -->
+    <div class="docs-featured reveal">
+      <a href="/docs/getting-started" class="docs-featured-card">
+        <div class="docs-featured-meta">
+          <span class="docs-featured-label">Start here</span>
+        </div>
+        <h2 class="docs-featured-title">Getting Started with ShelfSpace</h2>
+        <p class="docs-featured-desc">Live in under a week. What we handle during onboarding, what you do, and what to expect every step of the way.</p>
+        <span class="docs-featured-cta">Read the guide <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg></span>
+      </a>
+    </div>
 
-  <a href="/docs/consignment/overview" class="docs-index-card" style="transition-delay: 0.06s;">
-    <h3>Consignment</h3>
-    <div class="docs-card-count">6 articles</div>
-    <p>Settlements, contracts, splits</p>
-  </a>
+    <!-- QUICK PATHS -->
+    <div class="docs-quick-paths reveal" role="group" aria-label="Quick paths by role">
+      <a href="#section-consignment" class="docs-quick-path">
+        <div class="docs-quick-path-label">For dispensary owners <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg></div>
+        <div class="docs-quick-path-desc">Consignment, AP, credit recovery, vendor portal.</div>
+      </a>
+      <a href="#section-quickbooks" class="docs-quick-path">
+        <div class="docs-quick-path-label">For bookkeepers <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg></div>
+        <div class="docs-quick-path-desc">QuickBooks sync, settlement reports, audit trail.</div>
+      </a>
+      <a href="#section-vendor-portal" class="docs-quick-path">
+        <div class="docs-quick-path-label">For vendors <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg></div>
+        <div class="docs-quick-path-desc">Vendor portal, check downloads, dispute responses.</div>
+      </a>
+    </div>
 
-  <a href="/docs/credit-recovery/onboarding-sop" class="docs-index-card" style="transition-delay: 0.12s;">
-    <h3>Credit Recovery</h3>
-    <div class="docs-card-count">6 articles</div>
-    <p>Getting started, returns, expirations, co-marketing, approval workflow</p>
-  </a>
+    <!-- FILTER PILLS -->
+    <div class="docs-filters reveal" role="group" aria-label="Filter docs by topic">
+      <button class="docs-filter is-active" data-filter="all">All</button>
+      <button class="docs-filter" data-filter="Consignment">Consignment</button>
+      <button class="docs-filter" data-filter="Accounts Payable">Accounts Payable</button>
+      <button class="docs-filter" data-filter="Credit Recovery">Credit Recovery</button>
+      <button class="docs-filter" data-filter="Vendor Portal">Vendor Portal</button>
+      <button class="docs-filter" data-filter="Setup">Setup &amp; Tools</button>
+    </div>
 
-  <a href="/docs/accounts-payable/overview" class="docs-index-card" style="transition-delay: 0.18s;">
-    <h3>Accounts Payable</h3>
-    <div class="docs-card-count">5 articles</div>
-    <p>Payments, email workflow, verification</p>
-  </a>
+    <!-- NO RESULTS -->
+    <div class="docs-no-results" id="docs-no-results">No docs match. Try "settlement", "METRC", or "vendor portal" — or clear the filter.</div>
 
-  <a href="/docs/quickbooks/overview" class="docs-index-card" style="transition-delay: 0.24s;">
-    <h3>QuickBooks</h3>
-    <div class="docs-card-count">2 articles</div>
-    <p>Integration and setup</p>
-  </a>
+    <!-- TOPIC SECTIONS -->
 
-  <a href="/docs/checks/overview" class="docs-index-card" style="transition-delay: 0.30s;">
-    <h3>Checks</h3>
-    <div class="docs-card-count">4 articles</div>
-    <p>Depositing, scanners, voiding, compliance</p>
-  </a>
+    <section class="docs-section reveal" id="section-getting-started" data-section-cat="Getting Started" data-filter-bucket="Setup">
+      <div class="docs-section-header">
+        <h2>Getting Started <span class="docs-section-count">1</span></h2>
+      </div>
+      <div class="docs-section-list">
+        <a href="/docs/getting-started" class="docs-row" data-category="Getting Started" data-bucket="Setup">
+          <span class="docs-row-tag">Getting Started</span>
+          <div class="docs-row-content">
+            <div class="docs-row-title">Getting Started with ShelfSpace</div>
+            <div class="docs-row-desc">Setup for dispensaries — live in under a week. What to expect during onboarding and what we handle for you.</div>
+          </div>
+          <svg class="docs-row-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+      </div>
+    </section>
 
-  <a href="/docs/vendor-portal/overview" class="docs-index-card" style="transition-delay: 0.36s;">
-    <h3>Vendor Portal</h3>
-    <div class="docs-card-count">5 articles</div>
-    <p>Checks, history, QuickBooks, disputes</p>
-  </a>
+    <section class="docs-section reveal" id="section-consignment" data-section-cat="Consignment" data-filter-bucket="Consignment">
+      <div class="docs-section-header">
+        <h2>Consignment <span class="docs-section-count">6</span></h2>
+      </div>
+      <div class="docs-section-list">
+        <a href="/docs/consignment/overview" class="docs-row" data-category="Consignment" data-bucket="Consignment">
+          <span class="docs-row-tag">Consignment</span>
+          <div class="docs-row-content">
+            <div class="docs-row-title">How Consignment Works</div>
+            <div class="docs-row-desc">Vendor-owned inventory, weekly settlements, profit splits. We handle the math and the checks.</div>
+          </div>
+          <svg class="docs-row-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+        <a href="/docs/consignment/settlements" class="docs-row" data-category="Consignment" data-bucket="Consignment">
+          <span class="docs-row-tag">Consignment</span>
+          <div class="docs-row-content">
+            <div class="docs-row-title">Weekly Consignment Settlements</div>
+            <div class="docs-row-desc">How weekly payouts are calculated from POS data, category splits, aging discounts, and credits.</div>
+          </div>
+          <svg class="docs-row-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+        <a href="/docs/consignment/settlement-reports" class="docs-row" data-category="Consignment" data-bucket="Consignment">
+          <span class="docs-row-tag">Consignment</span>
+          <div class="docs-row-content">
+            <div class="docs-row-title">Reading Your Settlement Report</div>
+            <div class="docs-row-desc">Payout table, returns, discounts, inventory snapshot, and final check. How to read every section.</div>
+          </div>
+          <svg class="docs-row-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+        <a href="/docs/consignment/profit-splits" class="docs-row" data-category="Consignment" data-bucket="Consignment">
+          <span class="docs-row-tag">Consignment</span>
+          <div class="docs-row-content">
+            <div class="docs-row-title">Category Splits and Profit Sharing</div>
+            <div class="docs-row-desc">How category-level splits are negotiated, configured, and applied in weekly settlements.</div>
+          </div>
+          <svg class="docs-row-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+        <a href="/docs/consignment/aging-discounts" class="docs-row" data-category="Consignment" data-bucket="Consignment">
+          <span class="docs-row-tag">Consignment</span>
+          <div class="docs-row-content">
+            <div class="docs-row-title">Aging Discounts and Inventory Markdowns</div>
+            <div class="docs-row-desc">How aging discounts work for expiring product, why they exist, and how they affect settlements.</div>
+          </div>
+          <svg class="docs-row-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+        <a href="/docs/consignment/contracts" class="docs-row" data-category="Consignment" data-bucket="Consignment">
+          <span class="docs-row-tag">Consignment</span>
+          <div class="docs-row-content">
+            <div class="docs-row-title">Consignment Contracts and Terms</div>
+            <div class="docs-row-desc">Profit splits, shrinkage, discounts, and payment terms. We draft it, you review.</div>
+          </div>
+          <svg class="docs-row-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+      </div>
+    </section>
 
-  <a href="/docs/shelfiq/overview" class="docs-index-card" style="transition-delay: 0.42s;">
-    <h3>ShelfiQ</h3>
-    <div class="docs-card-count">2 articles</div>
-    <p>AI assistant and tools</p>
-  </a>
+    <section class="docs-section reveal" id="section-accounts-payable" data-section-cat="Accounts Payable" data-filter-bucket="Accounts Payable">
+      <div class="docs-section-header">
+        <h2>Accounts Payable <span class="docs-section-count">5</span></h2>
+      </div>
+      <div class="docs-section-list">
+        <a href="/docs/accounts-payable/overview" class="docs-row" data-category="Accounts Payable" data-bucket="Accounts Payable">
+          <span class="docs-row-tag">Accounts Payable</span>
+          <div class="docs-row-content">
+            <div class="docs-row-title">How Managed AP Works</div>
+            <div class="docs-row-desc">Cannabis dispensary AP end-to-end. We pay vendors, verify invoices, handle questions, and sync QuickBooks.</div>
+          </div>
+          <svg class="docs-row-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+        <a href="/docs/accounts-payable/vendor-onboarding" class="docs-row" data-category="Accounts Payable" data-bucket="Accounts Payable">
+          <span class="docs-row-tag">Accounts Payable</span>
+          <div class="docs-row-content">
+            <div class="docs-row-title">Vendor Onboarding</div>
+            <div class="docs-row-desc">Onboard cannabis vendor partners in minutes. Email invite, portal setup, cannabis and non-cannabis vendors.</div>
+          </div>
+          <svg class="docs-row-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+        <a href="/docs/accounts-payable/invoice-verification" class="docs-row" data-category="Accounts Payable" data-bucket="Accounts Payable">
+          <span class="docs-row-tag">Accounts Payable</span>
+          <div class="docs-row-content">
+            <div class="docs-row-title">Invoice Verification and Delivery Matching</div>
+            <div class="docs-row-desc">Verify cannabis vendor invoice accuracy before payment. We match invoices to deliveries and resolve issues.</div>
+          </div>
+          <svg class="docs-row-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+        <a href="/docs/accounts-payable/creating-payments" class="docs-row" data-category="Accounts Payable" data-bucket="Accounts Payable">
+          <span class="docs-row-tag">Accounts Payable</span>
+          <div class="docs-row-content">
+            <div class="docs-row-title">Payments and Check Generation</div>
+            <div class="docs-row-desc">Cannabis vendor check payment processing with Check 21. We create payments, generate checks, and sync QuickBooks.</div>
+          </div>
+          <svg class="docs-row-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+        <a href="/docs/accounts-payable/email-deliveries" class="docs-row" data-category="Accounts Payable" data-bucket="Accounts Payable">
+          <span class="docs-row-tag">Accounts Payable</span>
+          <div class="docs-row-content">
+            <div class="docs-row-title">Manage Cannabis Deliveries by Email</div>
+            <div class="docs-row-desc">AP workflow by email — send invoices, update deliveries, attach COAs, and add receiving notes through one inbox.</div>
+          </div>
+          <svg class="docs-row-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+      </div>
+    </section>
 
-  <a href="/docs/promotions/overview" class="docs-index-card" style="transition-delay: 0.48s;">
-    <h3>Promotions</h3>
-    <div class="docs-card-count">3 articles</div>
-    <p>Co-marketing campaigns</p>
-  </a>
+    <section class="docs-section reveal" id="section-credit-recovery" data-section-cat="Credit Recovery" data-filter-bucket="Credit Recovery">
+      <div class="docs-section-header">
+        <h2>Credit Recovery <span class="docs-section-count">6</span></h2>
+      </div>
+      <div class="docs-section-list">
+        <a href="/docs/credit-recovery/overview" class="docs-row" data-category="Credit Recovery" data-bucket="Credit Recovery">
+          <span class="docs-row-tag">Credit Recovery</span>
+          <div class="docs-row-content">
+            <div class="docs-row-title">How Credit Recovery Works</div>
+            <div class="docs-row-desc">We track returns, expirations, and co-marketing credits so dispensaries recover what they're owed.</div>
+          </div>
+          <svg class="docs-row-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+        <a href="/docs/credit-recovery/onboarding-sop" class="docs-row" data-category="Credit Recovery" data-bucket="Credit Recovery">
+          <span class="docs-row-tag">Credit Recovery</span>
+          <div class="docs-row-content">
+            <div class="docs-row-title">Credit Recovery Onboarding — Getting Started</div>
+            <div class="docs-row-desc">Step-by-step onboarding from signing on to your first monthly credit memos. Vendor list, buyer kickoff, monthly cycle.</div>
+          </div>
+          <svg class="docs-row-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+        <a href="/docs/credit-recovery/returns" class="docs-row" data-category="Credit Recovery" data-bucket="Credit Recovery">
+          <span class="docs-row-tag">Credit Recovery</span>
+          <div class="docs-row-content">
+            <div class="docs-row-title">Return Credits</div>
+            <div class="docs-row-desc">We track returned cannabis products in METRC and generate credit memos against vendor payments.</div>
+          </div>
+          <svg class="docs-row-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+        <a href="/docs/credit-recovery/expirations" class="docs-row" data-category="Credit Recovery" data-bucket="Credit Recovery">
+          <span class="docs-row-tag">Credit Recovery</span>
+          <div class="docs-row-content">
+            <div class="docs-row-title">Expiration Credits</div>
+            <div class="docs-row-desc">We monitor expiration dates, flag aging inventory, and generate credit memos for you.</div>
+          </div>
+          <svg class="docs-row-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+        <a href="/docs/credit-recovery/co-marketing" class="docs-row" data-category="Credit Recovery" data-bucket="Credit Recovery">
+          <span class="docs-row-tag">Credit Recovery</span>
+          <div class="docs-row-content">
+            <div class="docs-row-title">Co-Marketing Credits</div>
+            <div class="docs-row-desc">We track vendor-funded promotions and generate credit memos so you collect what was agreed to.</div>
+          </div>
+          <svg class="docs-row-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+        <a href="/docs/credit-recovery/approval-workflow" class="docs-row" data-category="Credit Recovery" data-bucket="Credit Recovery">
+          <span class="docs-row-tag">Credit Recovery</span>
+          <div class="docs-row-content">
+            <div class="docs-row-title">Credit Memo Approval Process</div>
+            <div class="docs-row-desc">Each status from Draft to Applied, how vendors respond, and what happens when the 16-day window closes.</div>
+          </div>
+          <svg class="docs-row-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+      </div>
+    </section>
 
-  <a href="/docs/insights/overview" class="docs-index-card" style="transition-delay: 0.54s;">
-    <h3>Insights</h3>
-    <div class="docs-card-count">2 articles</div>
-    <p>Analytics and scorecards</p>
-  </a>
+    <section class="docs-section reveal" id="section-vendor-portal" data-section-cat="Vendor Portal" data-filter-bucket="Vendor Portal">
+      <div class="docs-section-header">
+        <h2>Vendor Portal <span class="docs-section-count">5</span></h2>
+      </div>
+      <div class="docs-section-list">
+        <a href="/docs/vendor-portal/overview" class="docs-row" data-category="Vendor Portal" data-bucket="Vendor Portal">
+          <span class="docs-row-tag">Vendor Portal</span>
+          <div class="docs-row-content">
+            <div class="docs-row-title">Cannabis Vendor Portal</div>
+            <div class="docs-row-desc">Where every vendor checks downloads, payment history, and credit memos across all retailer partners — free.</div>
+          </div>
+          <svg class="docs-row-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+        <a href="/docs/vendor-portal/downloading-checks" class="docs-row" data-category="Vendor Portal" data-bucket="Vendor Portal">
+          <span class="docs-row-tag">Vendor Portal</span>
+          <div class="docs-row-content">
+            <div class="docs-row-title">Downloading Vendor Checks</div>
+            <div class="docs-row-desc">How vendors access, download, and deposit Check 21-compliant payment checks through the secure portal.</div>
+          </div>
+          <svg class="docs-row-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+        <a href="/docs/vendor-portal/payment-history" class="docs-row" data-category="Vendor Portal" data-bucket="Vendor Portal">
+          <span class="docs-row-tag">Vendor Portal</span>
+          <div class="docs-row-content">
+            <div class="docs-row-title">Vendor Payment History</div>
+            <div class="docs-row-desc">View all payments, filter by date and retailer, export data, and track every dollar through the portal.</div>
+          </div>
+          <svg class="docs-row-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+        <a href="/docs/vendor-portal/disputes" class="docs-row" data-category="Vendor Portal" data-bucket="Vendor Portal">
+          <span class="docs-row-tag">Vendor Portal</span>
+          <div class="docs-row-content">
+            <div class="docs-row-title">Vendor Dispute Credit Memo</div>
+            <div class="docs-row-desc">How vendors review credit memos, accept or dispute charges, and upload documentation through the portal.</div>
+          </div>
+          <svg class="docs-row-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+        <a href="/docs/vendor-portal/quickbooks-setup" class="docs-row" data-category="Vendor Portal" data-bucket="Vendor Portal">
+          <span class="docs-row-tag">Vendor Portal</span>
+          <div class="docs-row-content">
+            <div class="docs-row-title">Cannabis Vendor QuickBooks Setup</div>
+            <div class="docs-row-desc">Vendor-side QBO setup. Connect QBO, map customers and items, backfill history.</div>
+          </div>
+          <svg class="docs-row-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+      </div>
+    </section>
 
-  <a href="/docs/integrations/pos" class="docs-index-card" style="transition-delay: 0.60s;">
-    <h3>Integrations</h3>
-    <div class="docs-card-count">2 articles</div>
-    <p>POS and METRC</p>
-  </a>
+    <section class="docs-section reveal" id="section-checks" data-section-cat="Checks" data-filter-bucket="Setup">
+      <div class="docs-section-header">
+        <h2>Checks <span class="docs-section-count">4</span></h2>
+      </div>
+      <div class="docs-section-list">
+        <a href="/docs/checks/overview" class="docs-row" data-category="Checks" data-bucket="Setup">
+          <span class="docs-row-tag">Checks</span>
+          <div class="docs-row-content">
+            <div class="docs-row-title">Check 21 Payments</div>
+            <div class="docs-row-desc">Why cannabis needs Check 21, how digital checks work, and how vendors deposit them.</div>
+          </div>
+          <svg class="docs-row-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+        <a href="/docs/checks/depositing" class="docs-row" data-category="Checks" data-bucket="Setup">
+          <span class="docs-row-tag">Checks</span>
+          <div class="docs-row-content">
+            <div class="docs-row-title">How to Deposit a ShelfSpace Check</div>
+            <div class="docs-row-desc">Deposit via mobile deposit, print at home, or branch visit. Compatible with every major U.S. bank.</div>
+          </div>
+          <svg class="docs-row-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+        <a href="/docs/checks/check-scanner" class="docs-row" data-category="Checks" data-bucket="Setup">
+          <span class="docs-row-tag">Checks</span>
+          <div class="docs-row-content">
+            <div class="docs-row-title">Deposit with a Check Scanner</div>
+            <div class="docs-row-desc">Print the Settle Report check page, cut, endorse, and run it through your desktop scanner. Works with RDM, Digital Check, Panini.</div>
+          </div>
+          <svg class="docs-row-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+        <a href="/docs/checks/void-reissue" class="docs-row" data-category="Checks" data-bucket="Setup">
+          <span class="docs-row-tag">Checks</span>
+          <div class="docs-row-content">
+            <div class="docs-row-title">Voiding and Reissuing Checks</div>
+            <div class="docs-row-desc">Cannabis vendor payment void and reissue in one step. Maintain a full audit trail.</div>
+          </div>
+          <svg class="docs-row-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+      </div>
+    </section>
 
-  <a href="/docs/deliveries/overview" class="docs-index-card" style="transition-delay: 0.66s;">
-    <h3>Deliveries</h3>
-    <div class="docs-card-count">3 articles</div>
-    <p>Tracking, reconciliation, and receiving</p>
-  </a>
+    <section class="docs-section reveal" id="section-quickbooks" data-section-cat="QuickBooks" data-filter-bucket="Setup">
+      <div class="docs-section-header">
+        <h2>QuickBooks <span class="docs-section-count">2</span></h2>
+      </div>
+      <div class="docs-section-list">
+        <a href="/docs/quickbooks/overview" class="docs-row" data-category="QuickBooks" data-bucket="Setup">
+          <span class="docs-row-tag">QuickBooks</span>
+          <div class="docs-row-content">
+            <div class="docs-row-title">QuickBooks Integration</div>
+            <div class="docs-row-desc">Settlements, bills, vendor lists, and payment records sync to QuickBooks Online with no manual data entry.</div>
+          </div>
+          <svg class="docs-row-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+        <a href="/docs/quickbooks/setup" class="docs-row" data-category="QuickBooks" data-bucket="Setup">
+          <span class="docs-row-tag">QuickBooks</span>
+          <div class="docs-row-content">
+            <div class="docs-row-title">Cannabis Dispensary QuickBooks Setup</div>
+            <div class="docs-row-desc">Connect QBO, pick accounts, set per-vendor overrides, watch Bookkeeper Match Health. Every settlement and AP payment becomes a Bill + Check.</div>
+          </div>
+          <svg class="docs-row-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+      </div>
+    </section>
 
-  <a href="/docs/user-management/overview" class="docs-index-card" style="transition-delay: 0.72s;">
-    <h3>User Management</h3>
-    <div class="docs-card-count">2 articles</div>
-    <p>Roles, permissions, MFA</p>
-  </a>
+    <section class="docs-section reveal" id="section-shelfiq" data-section-cat="ShelfiQ" data-filter-bucket="Setup">
+      <div class="docs-section-header">
+        <h2>ShelfiQ <span class="docs-section-count">2</span></h2>
+      </div>
+      <div class="docs-section-list">
+        <a href="/docs/shelfiq/overview" class="docs-row" data-category="ShelfiQ" data-bucket="Setup">
+          <span class="docs-row-tag">ShelfiQ</span>
+          <div class="docs-row-content">
+            <div class="docs-row-title">ShelfiQ — Cannabis AI Assistant</div>
+            <div class="docs-row-desc">ShelfiQ answers vendor questions, parses invoices, manages AP, and exports data through a simple chat.</div>
+          </div>
+          <svg class="docs-row-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+        <a href="/docs/shelfiq/tools" class="docs-row" data-category="ShelfiQ" data-bucket="Setup">
+          <span class="docs-row-tag">ShelfiQ</span>
+          <div class="docs-row-content">
+            <div class="docs-row-title">ShelfiQ Tools</div>
+            <div class="docs-row-desc">AI invoice parsing, vendor matching, payment queries, data exports, and AP management — everything ShelfiQ can do.</div>
+          </div>
+          <svg class="docs-row-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+      </div>
+    </section>
 
-  <a href="/docs/security/overview" class="docs-index-card" style="transition-delay: 0.78s;">
-    <h3>Security</h3>
-    <div class="docs-card-count">2 articles</div>
-    <p>Data protection and audit trail</p>
-  </a>
+    <section class="docs-section reveal" id="section-promotions" data-section-cat="Promotions" data-filter-bucket="Setup">
+      <div class="docs-section-header">
+        <h2>Promotions <span class="docs-section-count">3</span></h2>
+      </div>
+      <div class="docs-section-list">
+        <a href="/docs/promotions/overview" class="docs-row" data-category="Promotions" data-bucket="Setup">
+          <span class="docs-row-tag">Promotions</span>
+          <div class="docs-row-content">
+            <div class="docs-row-title">Co-Op Promotions</div>
+            <div class="docs-row-desc">How retailers and vendors run joint promotions, track impact, and generate credits.</div>
+          </div>
+          <svg class="docs-row-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+        <a href="/docs/promotions/creating" class="docs-row" data-category="Promotions" data-bucket="Setup">
+          <span class="docs-row-tag">Promotions</span>
+          <div class="docs-row-content">
+            <div class="docs-row-title">Creating a Promotion</div>
+            <div class="docs-row-desc">How to create a co-op promotion, get vendor approval, track performance, and generate credits.</div>
+          </div>
+          <svg class="docs-row-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+        <a href="/docs/promotions/vendor-pre-approval-sop" class="docs-row" data-category="Promotions" data-bucket="Setup">
+          <span class="docs-row-tag">Promotions</span>
+          <div class="docs-row-content">
+            <div class="docs-row-title">Vendor Pre-Approval SOP for Promotions</div>
+            <div class="docs-row-desc">Step-by-step SOP for buyers and marketing staff: get every promotion pre-approved before it runs.</div>
+          </div>
+          <svg class="docs-row-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+      </div>
+    </section>
 
-</div>
+    <section class="docs-section reveal" id="section-deliveries" data-section-cat="Deliveries" data-filter-bucket="Setup">
+      <div class="docs-section-header">
+        <h2>Deliveries <span class="docs-section-count">3</span></h2>
+      </div>
+      <div class="docs-section-list">
+        <a href="/docs/deliveries/overview" class="docs-row" data-category="Deliveries" data-bucket="Setup">
+          <span class="docs-row-tag">Deliveries</span>
+          <div class="docs-row-content">
+            <div class="docs-row-title">Delivery Tracking and Receiving</div>
+            <div class="docs-row-desc">Track incoming shipments, receive inventory, reconcile to purchase orders, and move deliveries to payment.</div>
+          </div>
+          <svg class="docs-row-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+        <a href="/docs/deliveries/reconciliation" class="docs-row" data-category="Deliveries" data-bucket="Setup">
+          <span class="docs-row-tag">Deliveries</span>
+          <div class="docs-row-content">
+            <div class="docs-row-title">Delivery Reconciliation</div>
+            <div class="docs-row-desc">Match what was ordered to what arrived, catch discrepancies, and approve deliveries for payment.</div>
+          </div>
+          <svg class="docs-row-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+        <a href="/docs/deliveries/receiving-sop" class="docs-row" data-category="Deliveries" data-bucket="Setup">
+          <span class="docs-row-tag">Deliveries</span>
+          <div class="docs-row-content">
+            <div class="docs-row-title">How to Receive Cannabis Deliveries — Inventory Team SOP</div>
+            <div class="docs-row-desc">Step-by-step receiving SOP for dispensary inventory teams. Upload manifest, confirm what arrived, adjust before payment.</div>
+          </div>
+          <svg class="docs-row-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+      </div>
+    </section>
+
+    <section class="docs-section reveal" id="section-insights" data-section-cat="Insights" data-filter-bucket="Setup">
+      <div class="docs-section-header">
+        <h2>Insights <span class="docs-section-count">2</span></h2>
+      </div>
+      <div class="docs-section-list">
+        <a href="/docs/insights/overview" class="docs-row" data-category="Insights" data-bucket="Setup">
+          <span class="docs-row-tag">Insights</span>
+          <div class="docs-row-content">
+            <div class="docs-row-title">Insights and Analytics</div>
+            <div class="docs-row-desc">Track sales velocity, dead inventory, vendor performance, and cash liberation in real time.</div>
+          </div>
+          <svg class="docs-row-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+        <a href="/docs/insights/vendor-scorecards" class="docs-row" data-category="Insights" data-bucket="Setup">
+          <span class="docs-row-tag">Insights</span>
+          <div class="docs-row-content">
+            <div class="docs-row-title">Vendor Scorecards</div>
+            <div class="docs-row-desc">Grade suppliers on volume, velocity, growth, and reliability with real sell-through data.</div>
+          </div>
+          <svg class="docs-row-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+      </div>
+    </section>
+
+    <section class="docs-section reveal" id="section-integrations" data-section-cat="Integrations" data-filter-bucket="Setup">
+      <div class="docs-section-header">
+        <h2>Integrations <span class="docs-section-count">2</span></h2>
+      </div>
+      <div class="docs-section-list">
+        <a href="/docs/integrations/pos" class="docs-row" data-category="Integrations" data-bucket="Setup">
+          <span class="docs-row-tag">Integrations</span>
+          <div class="docs-row-content">
+            <div class="docs-row-title">POS Integration</div>
+            <div class="docs-row-desc">Works with any system. CSV upload or API sync with Dutchie, Flowhub, BLAZE, and more. No IT team required.</div>
+          </div>
+          <svg class="docs-row-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+        <a href="/docs/integrations/metrc" class="docs-row" data-category="Integrations" data-bucket="Setup">
+          <span class="docs-row-tag">Integrations</span>
+          <div class="docs-row-content">
+            <div class="docs-row-title">METRC Integration</div>
+            <div class="docs-row-desc">Official Metrc third-party vendor. Read-only connection to power settlements, credit recovery, and AP.</div>
+          </div>
+          <svg class="docs-row-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+      </div>
+    </section>
+
+    <section class="docs-section reveal" id="section-user-management" data-section-cat="User Management" data-filter-bucket="Setup">
+      <div class="docs-section-header">
+        <h2>User Management <span class="docs-section-count">2</span></h2>
+      </div>
+      <div class="docs-section-list">
+        <a href="/docs/user-management/overview" class="docs-row" data-category="User Management" data-bucket="Setup">
+          <span class="docs-row-tag">User Management</span>
+          <div class="docs-row-content">
+            <div class="docs-row-title">Users, Roles, and Permissions</div>
+            <div class="docs-row-desc">Three roles per portal, email invites, and location-scoped access for your team.</div>
+          </div>
+          <svg class="docs-row-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+        <a href="/docs/user-management/mfa" class="docs-row" data-category="User Management" data-bucket="Setup">
+          <span class="docs-row-tag">User Management</span>
+          <div class="docs-row-content">
+            <div class="docs-row-title">Multi-Factor Authentication (MFA)</div>
+            <div class="docs-row-desc">Enable SMS, TOTP, or email multi-factor authentication to protect your accounts and stay compliant.</div>
+          </div>
+          <svg class="docs-row-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+      </div>
+    </section>
+
+    <section class="docs-section reveal" id="section-security" data-section-cat="Security" data-filter-bucket="Setup">
+      <div class="docs-section-header">
+        <h2>Security <span class="docs-section-count">2</span></h2>
+      </div>
+      <div class="docs-section-list">
+        <a href="/docs/security/overview" class="docs-row" data-category="Security" data-bucket="Setup">
+          <span class="docs-row-tag">Security</span>
+          <div class="docs-row-content">
+            <div class="docs-row-title">Security and Data Protection</div>
+            <div class="docs-row-desc">Row-level security, multi-tenant isolation, encryption at rest and in transit, and zero hard deletes.</div>
+          </div>
+          <svg class="docs-row-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+        <a href="/docs/security/audit-trail" class="docs-row" data-category="Security" data-bucket="Setup">
+          <span class="docs-row-tag">Security</span>
+          <div class="docs-row-content">
+            <div class="docs-row-title">Audit Trail and Compliance</div>
+            <div class="docs-row-desc">Every action is logged in an immutable record for regulatory audits and internal accountability.</div>
+          </div>
+          <svg class="docs-row-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+      </div>
+    </section>
+
+  </div>
+</section>
 
 <!-- CTA -->
 <section class="cta-section">
@@ -286,24 +679,13 @@ document.head.appendChild(o)}initApollo();</script>
   var nav = document.getElementById('nav');
   var pageHero = document.querySelector('.page-hero');
 
-  /* ── Hero entrance ── */
+  /* Hero entrance */
   requestAnimationFrame(function() {
     nav.classList.toggle('scrolled', window.scrollY > 20);
     if (pageHero) pageHero.classList.add('hero-loaded');
   });
 
-  /* ── Scroll-Triggered Card Reveals (with staggered delays) ── */
-  var cardObserver = new IntersectionObserver(function(entries) {
-    entries.forEach(function(entry) {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('is-visible');
-        cardObserver.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.1 });
-  document.querySelectorAll('.docs-index-card').forEach(function(el) { cardObserver.observe(el); });
-
-  /* ── Scroll-Triggered Reveals for CTA ── */
+  /* Reveal observer */
   var revealObserver = new IntersectionObserver(function(entries) {
     entries.forEach(function(entry) {
       if (entry.isIntersecting) {
@@ -311,17 +693,42 @@ document.head.appendChild(o)}initApollo();</script>
         revealObserver.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.1 });
+  }, { threshold: 0.08 });
   document.querySelectorAll('.reveal').forEach(function(el) { revealObserver.observe(el); });
 
-  /* ── Nav scroll ── */
+  /* Nav scroll */
   window.addEventListener('scroll', function() {
     nav.classList.toggle('scrolled', window.scrollY > 20);
   }, { passive: true });
+
+  /* Filter pills */
+  var filters = document.querySelectorAll('.docs-filter');
+  var sections = document.querySelectorAll('.docs-section');
+  var noResults = document.getElementById('docs-no-results');
+
+  function applyFilter(value) {
+    var anyVisible = false;
+    sections.forEach(function(sec) {
+      var bucket = sec.getAttribute('data-filter-bucket');
+      var cat = sec.getAttribute('data-section-cat');
+      var match = (value === 'all') || (bucket === value) || (cat === value);
+      sec.classList.toggle('is-empty', !match);
+      if (match) anyVisible = true;
+    });
+    if (noResults) noResults.classList.toggle('is-visible', !anyVisible);
+  }
+
+  filters.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      filters.forEach(function(b) { b.classList.remove('is-active'); });
+      btn.classList.add('is-active');
+      applyFilter(btn.getAttribute('data-filter'));
+    });
+  });
 })();
 </script>
 
-<script src="/docs-search.js?v=9" defer></script>
+<script src="/docs-search.js?v=10" defer></script>
 <script src="/shelfiq-widget.js"></script>
 </body>
 </html>
