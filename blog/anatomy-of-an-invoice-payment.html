@@ -4,19 +4,19 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Anatomy of a Cannabis Vendor Invoice Payment — ShelfSpace</title>
-<meta name="description" content="See what a cannabis vendor invoice payment looks like — the remittance summary, line-item order detail, and the Check 21 check your vendor deposits. Sample PDF.">
+<meta name="description" content="See what a cannabis vendor invoice payment looks like — the remittance summary, line-item order detail, and the Check 21 check your vendor deposits.">
 <link rel="canonical" href="https://shelfspace.pro/blog/anatomy-of-an-invoice-payment">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://shelfspace.pro/blog/anatomy-of-an-invoice-payment">
 <meta property="og:title" content="Anatomy of a Cannabis Vendor Invoice Payment — ShelfSpace">
-<meta property="og:description" content="See what a cannabis vendor invoice payment looks like — the remittance summary, line-item order detail, and the Check 21 check your vendor deposits. Sample PDF.">
+<meta property="og:description" content="See what a cannabis vendor invoice payment looks like — the remittance summary, line-item order detail, and the Check 21 check your vendor deposits.">
 <meta property="og:image" content="https://shelfspace.pro/og-image-v5.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:type" content="image/png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Anatomy of a Cannabis Vendor Invoice Payment — ShelfSpace">
-<meta name="twitter:description" content="See what a cannabis vendor invoice payment looks like — the remittance summary, line-item order detail, and the Check 21 check your vendor deposits. Sample PDF.">
+<meta name="twitter:description" content="See what a cannabis vendor invoice payment looks like — the remittance summary, line-item order detail, and the Check 21 check your vendor deposits.">
 <meta name="twitter:image" content="https://shelfspace.pro/og-image-v5.png">
 <meta name="apple-mobile-web-app-title" content="ShelfSpace">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -145,7 +145,8 @@
   .pay-doc-desc-label { font-size: 9px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--green-mid); margin-bottom: 4px; }
   .pay-doc-desc-text { font-size: 13px; color: var(--slate-700); }
   .pay-doc-desc-text .mono { font-family: var(--font-mono); font-weight: 700; color: var(--green-deep); }
-  .pay-doc-table { width: 100%; border-collapse: collapse; }
+  .pay-doc-table-scroll { overflow-x: auto; }
+  .pay-doc-table { width: 100%; min-width: 460px; border-collapse: collapse; }
   .pay-doc-table caption {
     text-align: left; padding: 14px 22px 8px;
     font-size: 9px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--green-mid);
@@ -315,7 +316,7 @@ document.head.appendChild(o)}initApollo();</script>
   "@context": "https://schema.org",
   "@type": "Article",
   "headline": "Anatomy of a Cannabis Vendor Invoice Payment",
-  "description": "See what a cannabis vendor invoice payment looks like — the remittance summary, line-item order detail, and the Check 21 check your vendor deposits. Sample PDF.",
+  "description": "See what a cannabis vendor invoice payment looks like — the remittance summary, line-item order detail, and the Check 21 check your vendor deposits.",
   "author": {
     "@type": "Person",
     "name": "Chris Mitchem"
@@ -453,6 +454,7 @@ document.head.appendChild(o)}initApollo();</script>
       <div class="pay-doc-desc-label">Payment Description</div>
       <div class="pay-doc-desc-text">Payment for <span class="mono">PO-1042</span> (Invoice <span class="mono">#10024501</span>)</div>
     </div>
+    <div class="pay-doc-table-scroll">
     <table class="pay-doc-table">
       <caption>Order Details · Invoice #10024501</caption>
       <thead>
@@ -469,6 +471,7 @@ document.head.appendChild(o)}initApollo();</script>
         <tr><td>North Ridge Flower 14g — Northern Tide</td><td class="num">32</td><td class="num">$32.50</td><td class="num total">$1,040.00</td></tr>
       </tbody>
     </table>
+    </div>
     <div class="pay-doc-totals">
       <div class="pay-doc-total-row"><span>Subtotal</span><span>$8,000.00</span></div>
       <div class="pay-doc-total-row"><span>Payment Amount</span><span>$8,000.00</span></div>
@@ -485,7 +488,7 @@ document.head.appendChild(o)}initApollo();</script>
 
   <p>The order-details table is the line-item proof — every SKU, quantity, unit price, and line total, the same way it appeared on the vendor's invoice. Subtotal, payment amount, and check amount all read <code>$8,000.00</code> here because this invoice had no credits or deductions applied. When a return credit or a short-delivery adjustment <em>does</em> apply, the check amount reflects it, and the math is shown the same way — nothing is hidden in a footnote.</p>
 
-  <p>One quiet line near the bottom: the service fee reads <code>$0</code> — no platform fee on this payment. The vendor receives the full invoice amount.</p>
+  <p>One quiet line near the bottom: the service-fee note says no platform fee applies to this payment. The vendor receives the full invoice amount.</p>
 
   <h2>Page 2 is blank — on purpose</h2>
 
@@ -509,7 +512,7 @@ document.head.appendChild(o)}initApollo();</script>
       <div class="check-doc-words">Eight Thousand and 00/100 Dollars</div>
       <div class="check-doc-void">Void After 90 Days</div>
       <div class="check-doc-for">For: <span class="mono">PM-1042 | Payment for PO-1042 (Invoice #10024501)</span></div>
-      <div class="check-doc-micr">&#x2802;1001&#x2802;&nbsp;&nbsp;&#x2832;211300000&#x2832;&nbsp;&nbsp;00012345&#x2802;</div>
+      <div class="check-doc-micr" aria-hidden="true">&#x2802;1001&#x2802;&nbsp;&nbsp;&#x2832;211300000&#x2832;&nbsp;&nbsp;00012345&#x2802;</div>
       <div class="check-doc-badges">
         <span class="check-doc-badge"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> Security Features Included</span>
         <span class="check-doc-badge"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12" y2="18"/></svg> Mobile Deposit Ready</span>
@@ -564,12 +567,13 @@ document.head.appendChild(o)}initApollo();</script>
 
   <h2>Why one document beats a check in an envelope</h2>
 
-  <p>Three reasons this format gets paid cleanly:</p>
+  <p>Four reasons this format gets paid cleanly:</p>
 
   <ul>
     <li><strong>One document, both jobs.</strong> The remittance advice and the negotiable instrument travel together. The vendor never has to ask what the payment covers — it's on page 1, line by line.</li>
     <li><strong>It reconciles three ways.</strong> PM number, PO number, invoice number — all printed on both the summary and the check. The vendor's AR team matches it without emailing anyone.</li>
     <li><strong>The vendor controls the deposit.</strong> Print it, deposit from a phone, or walk it into a branch. No ACH enrollment, no waiting on mail, compatible with any U.S. bank.</li>
+    <li><strong>It can't be lifted from a mailbox.</strong> A mailed check is exposed — mail theft and check washing are real, and a stolen check has the payer's bank account and routing numbers printed right on the front. This one is delivered digitally, behind a login: the vendor downloads it when they're ready, so it never sits in an envelope where it can be intercepted. More on <a href="/blog/is-shelfspace-safe-for-vendors">why digital checks are safer for vendors</a>.</li>
   </ul>
 
   <blockquote>
