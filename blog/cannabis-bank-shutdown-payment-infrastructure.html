@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>When Your Cannabis Bank Drops You — ShelfSpace</title>
+<meta name="description" content="Main Street Bank just cut off its cannabis clients. If you pay vendors by ACH, a bank closure means rebuilding your whole payment system. Here's the fix.">
+<link rel="canonical" href="https://shelfspace.pro/blog/cannabis-bank-shutdown-payment-infrastructure">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://shelfspace.pro/blog/cannabis-bank-shutdown-payment-infrastructure">
+<meta property="og:title" content="When Your Cannabis Bank Drops You — ShelfSpace">
+<meta property="og:description" content="Main Street Bank just cut off its cannabis clients. If you pay vendors by ACH, a bank closure means rebuilding your whole payment system. Here's the fix.">
+<meta property="og:image" content="https://shelfspace.pro/og-image-v5.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="When Your Cannabis Bank Drops You — ShelfSpace">
+<meta name="twitter:description" content="Main Street Bank just cut off its cannabis clients. If you pay vendors by ACH, a bank closure means rebuilding your whole payment system. Here's the fix.">
+<meta name="twitter:image" content="https://shelfspace.pro/og-image-v5.png">
+<meta name="apple-mobile-web-app-title" content="ShelfSpace">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+<style>
+  /* ─── HERO ENHANCEMENTS ─── */
+  .page-hero { padding-bottom: 40px; }
+  .hero-bg-gradient { position: absolute; top: -30%; right: -20%; width: 700px; height: 700px; background: radial-gradient(circle, rgba(149,213,178,0.18) 0%, rgba(149,213,178,0) 70%); animation: float 8s ease-in-out infinite; pointer-events: none; }
+  .hero-bg-gradient-2 { position: absolute; bottom: -20%; left: -15%; width: 550px; height: 550px; background: radial-gradient(circle, rgba(27,67,50,0.06) 0%, rgba(27,67,50,0) 70%); animation: float 10s ease-in-out infinite; animation-delay: -3s; pointer-events: none; }
+  .hero-grid-lines { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 1200px; height: 100%; opacity: 0.035; background-image: linear-gradient(var(--green-deep) 1px, transparent 1px), linear-gradient(90deg, var(--green-deep) 1px, transparent 1px); background-size: 80px 80px; pointer-events: none; }
+  @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-12px); } }
+  .page-hero .section-label,
+  .page-hero .section-title,
+  .page-hero .section-desc { opacity: 0; transform: translateY(30px); }
+  .page-hero .section-label { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1); }
+  .page-hero .section-title { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s, transform 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s; }
+  .page-hero .section-desc { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1) 0.25s, transform 0.8s cubic-bezier(0.22,1,0.36,1) 0.25s; }
+  .page-hero.hero-loaded .section-label,
+  .page-hero.hero-loaded .section-title,
+  .page-hero.hero-loaded .section-desc { opacity: 1; transform: translateY(0); }
+
+  /* ─── REVEAL ─── */
+  .reveal {
+    opacity: 0; transform: translateY(40px);
+    transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .reveal.is-visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.2s; }
+  .reveal-delay-2 { transition-delay: 0.4s; }
+
+  /* ─── ARTICLE BODY ─── */
+  .article-body { max-width: 720px; margin: 0 auto; padding: 0 48px 80px; }
+  .article-body h2 { font-size: 24px; font-weight: 700; color: var(--green-deep); margin: 48px 0 16px; letter-spacing: -0.5px; line-height: 1.3; }
+  .article-body p { font-size: 17px; line-height: 1.85; color: var(--slate-600); margin-bottom: 24px; }
+  .article-body ul, .article-body ol { margin-bottom: 24px; padding-left: 24px; }
+  .article-body li { font-size: 17px; line-height: 1.85; color: var(--slate-600); margin-bottom: 8px; }
+  .article-body strong { color: var(--green-deep); font-weight: 600; }
+  .article-body a { color: var(--green-mid); font-weight: 500; text-decoration: none; }
+  .article-body a:hover { color: var(--green-deep); text-decoration: underline; }
+  .article-body blockquote { border-left: 3px solid var(--green-accent); padding: 16px 24px; margin: 32px 0; background: var(--green-ghost); border-radius: 0 8px 8px 0; }
+  .article-body blockquote p { font-style: italic; color: var(--green-dark); margin-bottom: 0; }
+
+  /* ─── AT A GLANCE ─── */
+  .article-glance {
+    max-width: 720px; margin: 0 auto 40px; padding: 24px 28px;
+    background: var(--green-ghost); border: 1px solid rgba(149,213,178,0.3);
+    border-radius: 12px;
+  }
+  .article-glance h2 {
+    font-size: 14px; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--green-mid); margin: 0 0 12px;
+  }
+  .article-glance ul { list-style: none; padding: 0; margin: 0; }
+  .article-glance li {
+    font-size: 15px; line-height: 1.6; color: var(--slate-600);
+    padding: 4px 0 4px 20px; position: relative;
+  }
+  .article-glance li::before {
+    content: ''; position: absolute; left: 0; top: 12px;
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--green-accent);
+  }
+
+  /* ─── COMPARISON TABLE ─── */
+  .compare-table { width: 100%; border-collapse: collapse; margin: 32px 0; border-radius: 12px; overflow: hidden; border: 1px solid var(--slate-200); }
+  .compare-table th { padding: 14px 16px; font-size: 14px; font-weight: 700; text-align: left; border-bottom: 2px solid var(--slate-200); }
+  .compare-table th:first-child { color: var(--slate-500); background: var(--white); width: 34%; }
+  .compare-table th:nth-child(2) { color: var(--slate-400); background: var(--slate-50); }
+  .compare-table th:nth-child(3) { color: var(--green-deep); background: var(--green-ghost); }
+  .compare-table td { padding: 12px 16px; font-size: 14px; border-bottom: 1px solid var(--slate-100); vertical-align: top; }
+  .compare-table td:first-child { color: var(--slate-600); font-weight: 500; }
+  .compare-table td:nth-child(2) { background: var(--slate-50); color: var(--slate-500); }
+  .compare-table td:nth-child(3) { background: rgba(240,250,244,0.5); }
+  .compare-table tr:last-child td { border-bottom: none; }
+  .compare-check { color: var(--green-mid); font-weight: 700; }
+  .compare-x { color: #c0392b; font-weight: 700; }
+  .compare-plus { color: var(--green-deep); font-size: 13px; }
+
+  /* ─── FAQ ─── */
+  .faq-section { max-width: 720px; margin: 0 auto; padding: 0 48px 60px; }
+  .faq-header { margin-bottom: 24px; }
+  .faq-header h2 { font-size: 24px; font-weight: 700; color: var(--green-deep); letter-spacing: -0.5px; line-height: 1.3; margin: 0; }
+  .faq-list { margin: 0; }
+  .faq-list details { border-bottom: 1px solid var(--slate-200); }
+  .faq-list details:first-child { border-top: 1px solid var(--slate-200); }
+  .faq-list summary { padding: 20px 0; font-size: 17px; font-weight: 600; color: var(--green-deep); cursor: pointer; list-style: none; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+  .faq-list summary::-webkit-details-marker { display: none; }
+  .faq-list summary::after { content: '+'; font-size: 22px; font-weight: 400; color: var(--slate-400); flex-shrink: 0; }
+  .faq-list details[open] summary::after { content: '\2212'; }
+  .faq-list details p { padding: 0 0 20px; margin: 0; font-size: 15px; line-height: 1.7; color: var(--slate-500); }
+
+  /* ─── CTA PARALLAX ─── */
+  .cta-section::before { transform: translate(-50%,-50%) translateY(var(--parallax-y, 0)); will-change: transform; }
+
+  /* ─── FOOTER 5-COL ─── */
+  .footer-top { grid-template-columns: 2fr 1fr 1fr 1fr 1fr; }
+  @media (max-width: 900px) { .footer-top { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px) { .footer-top { grid-template-columns: 1fr; } }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    .article-body { padding: 0 24px 60px; }
+    .article-body h2 { margin-top: 36px; }
+    .faq-section { padding: 0 24px 40px; }
+    .compare-table { font-size: 13px; }
+    .compare-table th, .compare-table td { padding: 10px 12px; }
+  }
+
+  /* ─── REDUCED MOTION ─── */
+  @media (prefers-reduced-motion: reduce) {
+    .reveal {
+      opacity: 1; transform: none; transition: none;
+    }
+    .page-hero .section-label,
+    .page-hero .section-title,
+    .page-hero .section-desc {
+      opacity: 1; transform: none; transition: none;
+    }
+    .hero-bg-gradient, .hero-bg-gradient-2 { animation: none; }
+  }
+</style>
+<noscript><style>.reveal,.page-hero .section-label,.page-hero .section-title,.page-hero .section-desc{opacity:1;transform:none;transition:none;}</style></noscript>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-H2LBJT03WE"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-H2LBJT03WE');</script>
+<script>function initApollo(){var n=Math.random().toString(36).substring(7),o=document.createElement("script");
+o.src="https://assets.apollo.io/micro/website-tracker/tracker.iife.js?nocache="+n,o.async=!0,o.defer=!0,
+o.onload=function(){window.trackingFunctions.onLoad({appId:"69c141b32234890011a43849"})},
+document.head.appendChild(o)}initApollo();</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "When Your Cannabis Bank Drops You",
+  "description": "Main Street Bank just cut off its cannabis clients. If you pay vendors by ACH, a bank closure means rebuilding your whole payment system. Here's the fix.",
+  "author": {
+    "@type": "Person",
+    "name": "Chris Mitchem"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "ShelfSpace",
+    "url": "https://shelfspace.pro"
+  },
+  "datePublished": "2026-05-14",
+  "url": "https://shelfspace.pro/blog/cannabis-bank-shutdown-payment-infrastructure",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://shelfspace.pro/blog/cannabis-bank-shutdown-payment-infrastructure"
+  },
+  "image": "https://shelfspace.pro/og-image-v5.png"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Does ShelfSpace replace my bank?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. You still need a cannabis-compliant bank account. ShelfSpace pays your vendors with Check 21 checks drawn on that account — so if the bank ever changes, your payment system doesn't."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What happens to my ShelfSpace payments if my bank closes?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "You open a new account and update your bank details in ShelfSpace. Your next vendor payments draw on the new account. There is no vendor re-enrollment and no rebuilt approvals — the change takes minutes, not months."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do my vendors have to do anything when I switch banks?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Vendors receive the same Check 21 check they always have. The bank behind it changing is invisible to them — nothing about how they get paid or deposit the check changes."
+      }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://shelfspace.pro/" },
+    { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://shelfspace.pro/blog" },
+    { "@type": "ListItem", "position": 3, "name": "When Your Cannabis Bank Drops You" }
+  ]
+}
+</script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="/" class="nav-logo">
+    <div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div>
+    <span class="nav-logo-text">ShelfSpace</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="/consignment">Consignment</a></li>
+    <li><a href="/accounts-payable">Accounts Payable</a></li>
+    <li><a href="/credit-recovery">Credit Recovery</a></li>
+    <li><a href="/pricing">Pricing</a></li>
+    <li><a href="/about">About</a></li>
+    <li><a href="/contact" class="nav-cta">Get Started <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a></li>
+  </ul>
+  <div class="nav-hamburger" onclick="document.querySelector('.nav-links').classList.toggle('mobile-open'); event.stopPropagation();"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="hero-bg-gradient"></div>
+  <div class="hero-bg-gradient-2"></div>
+  <div class="hero-grid-lines"></div>
+  <div class="section-label">Accounts Payable</div>
+  <h1 class="section-title">When Your Cannabis Bank Drops You</h1>
+  <p class="section-desc">Main Street Bank just ended its cannabis banking program. If you pay vendors by ACH, that means rebuilding your entire payment system — again. It doesn't have to.</p>
+</div>
+
+<!-- AT A GLANCE -->
+<div class="article-glance">
+  <h2>At a glance</h2>
+  <ul>
+    <li>Main Street Bank, a Massachusetts bank, has ended its cannabis banking program — the latest in a long pattern</li>
+    <li>For dispensaries paying vendors by ACH, a bank closure means re-enrolling every vendor and rebuilding approvals at a new bank</li>
+    <li>That migration takes weeks to months, and it's where costly payment errors happen</li>
+    <li>ShelfSpace pays vendors with Check 21 digital checks — the payment system works with any U.S. bank</li>
+    <li>When your bank changes, it's a quick update to your ShelfSpace account, not a months-long rebuild</li>
+  </ul>
+</div>
+
+<!-- ARTICLE BODY -->
+<div class="article-body reveal">
+
+  <h2>Another bank just closed its doors to cannabis</h2>
+
+  <p>Main Street Bank, a Massachusetts bank, has ended its cannabis banking program. Dispensaries that ran their deposits and payments through it now have to find a new home for their money.</p>
+
+  <p>It's hard to blame the bank. Holding cannabis deposits is expensive. The compliance burden is real — heavy reporting, constant audits, federal risk that never fully goes away. For a lot of banks, the math just stops working, and they step back.</p>
+
+  <p>But for the operators left scrambling, this isn't an abstract policy story. It's the second or third time they've had to move their entire financial life to a new institution. And in cannabis, it keeps happening.</p>
+
+  <h2>When the bank goes, your whole payment system goes with it</h2>
+
+  <p>If you pay your vendors by ACH, your payment system isn't really yours. It's bolted to one specific bank.</p>
+
+  <p>The routing and account numbers, every vendor's banking details on file, the approval templates, the accounting integration — all of it lives at that bank. When the bank closes the door, you don't just open a new account. You rebuild the whole thing somewhere else.</p>
+
+  <p>And it's not just you. Your operations team, your finance team, and every vendor you pay all get pulled into the move. Vendors have to re-submit and re-verify their banking details. Your finance people rebuild approvals and re-key data. The cutover is slow, and it's exactly where things break — misrouted payments, a missed payment run, a vendor paid twice or not at all.</p>
+
+  <p>None of that work makes you a dollar. It's pure cost, and you eat it every time a bank changes its mind.</p>
+
+  <h2>You can't build a business on infrastructure that keeps disappearing</h2>
+
+  <p>A growing dispensary builds processes. You hire people, set up approvals, train your team, build vendor relationships — all of it sitting on top of how money moves out the door.</p>
+
+  <p>If that foundation gets ripped out every couple of years, you're not building. You're rebuilding. There's a real difference between a business that compounds its systems over time and one that keeps starting the financial plumbing over from scratch.</p>
+
+  <p>Sustainable operations need sustainable infrastructure. The payment system shouldn't be the part that keeps collapsing underneath you.</p>
+
+  <table class="compare-table">
+    <thead>
+      <tr>
+        <th>When your bank closes</th>
+        <th>Paying by ACH / bank bill pay</th>
+        <th>Paying with ShelfSpace</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>The payment rail</td>
+        <td><span class="compare-x">&#10007;</span> Tied to that one bank</td>
+        <td><span class="compare-check">&#10003;</span> <span class="compare-plus">Check 21 — works with any U.S. bank</span></td>
+      </tr>
+      <tr>
+        <td>Switching banks</td>
+        <td><span class="compare-x">&#10007;</span> Re-enroll every vendor in new ACH</td>
+        <td><span class="compare-check">&#10003;</span> <span class="compare-plus">Update your account details once</span></td>
+      </tr>
+      <tr>
+        <td>Your vendors</td>
+        <td><span class="compare-x">&#10007;</span> Re-submit and re-verify banking details</td>
+        <td><span class="compare-check">&#10003;</span> <span class="compare-plus">Nothing changes — they still get a check</span></td>
+      </tr>
+      <tr>
+        <td>Your finance team</td>
+        <td><span class="compare-x">&#10007;</span> Rebuild templates, approvals, integrations</td>
+        <td><span class="compare-check">&#10003;</span> <span class="compare-plus">No change to the workflow</span></td>
+      </tr>
+      <tr>
+        <td>Timeline</td>
+        <td><span class="compare-x">&#10007;</span> Weeks to months</td>
+        <td><span class="compare-check">&#10003;</span> <span class="compare-plus">Minutes</span></td>
+      </tr>
+      <tr>
+        <td>Error risk during the switch</td>
+        <td><span class="compare-x">&#10007;</span> High — misrouted and missed payments</td>
+        <td><span class="compare-check">&#10003;</span> <span class="compare-plus">Low — one config change</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>Digital checks don't care which bank you use</h2>
+
+  <p>ShelfSpace pays your vendors with <a href="/blog/what-is-check-21">Check 21 digital checks</a> drawn on your bank account. A Check 21 check is valid for deposit at any U.S. bank — your vendor prints it, deposits it from a phone or at a teller, and moves on.</p>
+
+  <p>Here's the part that matters when a bank closes: the check format is the constant. The bank behind it is just a field in your ShelfSpace account. Your vendors are paid through ShelfSpace, not through a specific bank's ACH system — so the institution can change without your payment system changing at all.</p>
+
+  <h2>What changing banks actually looks like on ShelfSpace</h2>
+
+  <p>When a dispensary on ShelfSpace has to move banks, the whole process is three steps:</p>
+
+  <ol>
+    <li><strong>Open your new bank account.</strong> The one part of this nobody can take off your plate — you still need a cannabis-compliant bank.</li>
+    <li><strong>Update the bank details in your ShelfSpace account.</strong> New routing and account numbers, entered once.</li>
+    <li><strong>That's it.</strong> Your next vendor checks draw on the new account. Your vendors do nothing differently. Your finance team's workflow doesn't change.</li>
+  </ol>
+
+  <p>Minutes, not months. No vendor re-enrollment, no rebuilt approvals, no slow cutover where payments fall through the cracks.</p>
+
+  <h2>Sustainable operations need sustainable infrastructure</h2>
+
+  <p>You can't control whether your bank stays in cannabis. You can control whether a bank change costs you a quarter of rebuilding or thirty seconds of data entry.</p>
+
+  <p>That's the whole idea behind how <a href="/accounts-payable">ShelfSpace runs your AP</a>: a payment system that belongs to you, not to whichever bank is still comfortable with cannabis this year. The bank is a relationship you'll keep replacing. The payment system shouldn't be.</p>
+
+  <p>To see exactly what a bank-agnostic payment looks like, walk through the <a href="/blog/anatomy-of-an-invoice-payment">anatomy of a cannabis vendor invoice payment</a> — the remittance summary and the Check 21 check your vendor actually receives, page by page. And if you're weighing this against your current setup, <a href="/blog/shelfspace-vs-bank-bill-pay-cannabis">bank bill pay vs. ShelfSpace</a> covers the rest of the gap: your bank moves money, but it doesn't manage AP — and when the bank disappears, bank-rails AP disappears with it.</p>
+
+  <blockquote>
+    <p>I've watched operators rebuild their entire payment system because a bank changed its mind. Your infrastructure shouldn't be that fragile. With ShelfSpace, a bank change is a 30-second update — not a three-month ordeal.</p>
+  </blockquote>
+
+</div>
+
+<!-- FAQ -->
+<div class="faq-section reveal">
+  <div class="faq-header">
+    <h2>Frequently asked questions</h2>
+  </div>
+  <div class="faq-list">
+    <details>
+      <summary>Does ShelfSpace replace my bank?</summary>
+      <p>No. You still need a cannabis-compliant bank account. ShelfSpace pays your vendors with Check 21 checks drawn on that account — so if the bank ever changes, your payment system doesn't.</p>
+    </details>
+    <details>
+      <summary>What happens to my ShelfSpace payments if my bank closes?</summary>
+      <p>You open a new account and update your bank details in ShelfSpace. Your next vendor payments draw on the new account. There is no vendor re-enrollment and no rebuilt approvals — the change takes minutes, not months.</p>
+    </details>
+    <details>
+      <summary>Do my vendors have to do anything when I switch banks?</summary>
+      <p>No. Vendors receive the same Check 21 check they always have. The bank behind it changing is invisible to them — nothing about how they get paid or deposit the check changes.</p>
+    </details>
+  </div>
+</div>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-content">
+    <div class="section-label reveal">Get Started</div>
+    <h2 class="section-title reveal">Build your AP on infrastructure that stays put.</h2>
+    <p class="section-desc reveal">Free evaluation in 48 hours. We look at how you pay vendors today and show you what a bank-agnostic payment system would look like for your operation. You only pay if we deliver.</p>
+    <div class="cta-actions reveal">
+      <a href="/contact" class="btn-primary">
+        Get My Free Evaluation
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+      <a href="/contact" class="btn-secondary">Talk to Chris</a>
+    </div>
+    <figure class="cta-founder reveal" style="display:flex;align-items:center;gap:16px;justify-content:center;margin:32px 0 0;">
+      <img src="/chris-mitchem.jpg" alt="Chris Mitchem" style="width:48px;height:48px;border-radius:50%;object-fit:cover;">
+      <blockquote style="margin:0;border:none;padding:0;background:none;">
+        <p style="font-size:14px;color:var(--slate-600);max-width:520px;line-height:1.5;margin:0;font-style:normal;">"Banks will keep coming and going from cannabis. The point is that you stop having to rebuild around them every time."</p>
+        <figcaption style="font-size:13px;color:var(--slate-500);margin-top:6px;">— Chris Mitchem, Founder</figcaption>
+      </blockquote>
+    </figure>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="/" class="nav-logo"><div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div><span class="nav-logo-text">ShelfSpace</span></a>
+      <p>Every Vendor. Every Payment. One Engine.</p>
+    </div>
+    <div class="footer-col"><h3>Services</h3><ul><li><a href="/accounts-payable">Accounts Payable</a></li><li><a href="/consignment">Consignment</a></li><li><a href="/credit-recovery">Credit Recovery</a></li><li><a href="/checks">Check Payments</a></li><li><a href="/shelfiq">ShelfiQ</a></li></ul></div>
+    <div class="footer-col"><h3>Platform</h3><ul><li><a href="/features">Features</a></li><li><a href="/how-it-works">How It Works</a></li><li><a href="/pricing">Pricing</a></li><li><a href="/about">About</a></li><li><a href="/blog">Blog</a></li><li><a href="/docs">Docs</a></li></ul></div>
+    <div class="footer-col"><h3>Access</h3><ul><li><a href="https://ourshelf.space">Login</a></li><li><a href="/contact">Sign Up</a></li><li><a href="/contact">Contact</a></li><li><a href="/vendors">For Vendors</a></li><li><a href="/for-bookkeepers">For Bookkeepers</a></li></ul></div>
+    <div class="footer-col"><h3>Company</h3><ul><li><a href="mailto:chris@shelfspace.pro">Email</a></li><li><a href="mailto:support@shelfspace.pro">Support</a></li><li><a href="https://linkedin.com/company/shelfspace-pro" target="_blank" rel="noopener" class="footer-social-link"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> LinkedIn</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><p>&copy; 2026 ShelfSpace Technologies Inc.</p><div style="display:flex;align-items:center;gap:8px;justify-content:center;margin-top:12px;"><img src="/metrc-logo.png" alt="METRC" style="height:18px;opacity:0.4;filter:brightness(0) invert(1);"><span style="font-size:11px;color:rgba(255,255,255,0.35);">Certified METRC Third-Party Vendor</span></div><div class="footer-bottom-links"><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div></div>
+</footer>
+
+<script>
+(function() {
+  var nav = document.getElementById('nav');
+  var pageHero = document.querySelector('.page-hero');
+  var parallaxSections = [
+    document.querySelector('.cta-section')
+  ];
+
+  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var isMobile = window.innerWidth < 900;
+  var ticking = false;
+
+  /* Hero entrance */
+  requestAnimationFrame(function() {
+    nav.classList.toggle('scrolled', window.scrollY > 20);
+    if (pageHero) pageHero.classList.add('hero-loaded');
+  });
+
+  /* Reveals */
+  var revealObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(function(el) { revealObserver.observe(el); });
+
+  function onScroll() {
+    var scrollY = window.scrollY;
+    nav.classList.toggle('scrolled', scrollY > 20);
+    if (prefersReduced || isMobile) return;
+    var wh = window.innerHeight;
+    parallaxSections.forEach(function(section) {
+      if (!section) return;
+      var rect = section.getBoundingClientRect();
+      if (rect.bottom < 0 || rect.top > wh) return;
+      var center = rect.top + rect.height / 2 - wh / 2;
+      section.style.setProperty('--parallax-y', (center * 0.08) + 'px');
+    });
+  }
+
+  window.addEventListener('scroll', function() {
+    if (!ticking) {
+      requestAnimationFrame(function() {
+        onScroll();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, { passive: true });
+
+  onScroll();
+
+  window.addEventListener('resize', function() {
+    isMobile = window.innerWidth < 900;
+    if (isMobile) {
+      parallaxSections.forEach(function(section) {
+        if (section) section.style.setProperty('--parallax-y', '0px');
+      });
+    }
+  });
+
+  document.addEventListener('click', function() {
+    var navLinks = document.querySelector('.nav-links');
+    if (navLinks && navLinks.classList.contains('mobile-open')) {
+      navLinks.classList.remove('mobile-open');
+    }
+  });
+})();
+</script>
+<script src="/shelfiq-widget.js"></script>
+</body>
+</html>
