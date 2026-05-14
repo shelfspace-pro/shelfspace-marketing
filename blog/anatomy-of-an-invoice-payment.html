@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anatomy of a Cannabis Vendor Invoice Payment — ShelfSpace</title>
+<meta name="description" content="See what a cannabis vendor invoice payment looks like — the remittance summary, line-item order detail, and the Check 21 check your vendor deposits. Sample PDF.">
+<link rel="canonical" href="https://shelfspace.pro/blog/anatomy-of-an-invoice-payment">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://shelfspace.pro/blog/anatomy-of-an-invoice-payment">
+<meta property="og:title" content="Anatomy of a Cannabis Vendor Invoice Payment — ShelfSpace">
+<meta property="og:description" content="See what a cannabis vendor invoice payment looks like — the remittance summary, line-item order detail, and the Check 21 check your vendor deposits. Sample PDF.">
+<meta property="og:image" content="https://shelfspace.pro/og-image-v5.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Anatomy of a Cannabis Vendor Invoice Payment — ShelfSpace">
+<meta name="twitter:description" content="See what a cannabis vendor invoice payment looks like — the remittance summary, line-item order detail, and the Check 21 check your vendor deposits. Sample PDF.">
+<meta name="twitter:image" content="https://shelfspace.pro/og-image-v5.png">
+<meta name="apple-mobile-web-app-title" content="ShelfSpace">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+<style>
+  @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-12px); } }
+
+  /* ─── HERO ENHANCEMENTS ─── */
+  .page-hero { padding-bottom: 40px; }
+  .hero-bg-gradient { position: absolute; top: -30%; right: -20%; width: 700px; height: 700px; background: radial-gradient(circle, rgba(149,213,178,0.18) 0%, rgba(149,213,178,0) 70%); animation: float 8s ease-in-out infinite; pointer-events: none; }
+  .hero-bg-gradient-2 { position: absolute; bottom: -20%; left: -15%; width: 550px; height: 550px; background: radial-gradient(circle, rgba(27,67,50,0.06) 0%, rgba(27,67,50,0) 70%); animation: float 10s ease-in-out infinite; animation-delay: -3s; pointer-events: none; }
+  .hero-grid-lines { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 1200px; height: 100%; opacity: 0.035; background-image: linear-gradient(var(--green-deep) 1px, transparent 1px), linear-gradient(90deg, var(--green-deep) 1px, transparent 1px); background-size: 80px 80px; pointer-events: none; }
+  .page-hero .section-label,
+  .page-hero .section-title,
+  .page-hero .section-desc { opacity: 0; transform: translateY(30px); }
+  .page-hero .section-label { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1); }
+  .page-hero .section-title { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s, transform 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s; }
+  .page-hero .section-desc { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1) 0.25s, transform 0.8s cubic-bezier(0.22,1,0.36,1) 0.25s; }
+  .page-hero.hero-loaded .section-label,
+  .page-hero.hero-loaded .section-title,
+  .page-hero.hero-loaded .section-desc { opacity: 1; transform: translateY(0); }
+
+  /* ─── REVEAL ─── */
+  .reveal {
+    opacity: 0; transform: translateY(40px);
+    transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+  /* ─── ARTICLE BODY ─── */
+  .article-body { max-width: 720px; margin: 0 auto; padding: 0 48px 80px; }
+  .article-body h2 { font-size: 24px; font-weight: 700; color: var(--green-deep); margin: 48px 0 16px; letter-spacing: -0.5px; line-height: 1.3; }
+  .article-body h3 { font-size: 19px; font-weight: 700; color: var(--green-deep); margin: 32px 0 12px; letter-spacing: -0.3px; line-height: 1.35; }
+  .article-body p { font-size: 17px; line-height: 1.85; color: var(--slate-600); margin-bottom: 24px; }
+  .article-body ul, .article-body ol { margin-bottom: 24px; padding-left: 24px; }
+  .article-body li { font-size: 17px; line-height: 1.85; color: var(--slate-600); margin-bottom: 8px; }
+  .article-body strong { color: var(--green-deep); font-weight: 600; }
+  .article-body a { color: var(--green-mid); font-weight: 500; text-decoration: none; }
+  .article-body a:hover { color: var(--green-deep); text-decoration: underline; }
+  .article-body code { font-family: var(--font-mono); font-size: 0.92em; background: var(--green-ghost); padding: 1px 6px; border-radius: 4px; color: var(--green-dark); }
+  .article-body blockquote { border-left: 3px solid var(--green-accent); padding: 16px 24px; margin: 32px 0; background: var(--green-ghost); border-radius: 0 8px 8px 0; }
+  .article-body blockquote p { font-style: italic; color: var(--green-dark); margin-bottom: 0; }
+
+  /* ─── AT A GLANCE ─── */
+  .article-glance {
+    max-width: 720px; margin: 0 auto 40px; padding: 24px 28px;
+    background: var(--green-ghost); border: 1px solid rgba(149,213,178,0.3);
+    border-radius: 12px;
+  }
+  .article-glance h2 {
+    font-size: 14px; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--green-mid); margin: 0 0 12px;
+  }
+  .article-glance ul { list-style: none; padding: 0; margin: 0; }
+  .article-glance li {
+    font-size: 15px; line-height: 1.6; color: var(--slate-600);
+    padding: 4px 0 4px 20px; position: relative;
+  }
+  .article-glance li::before {
+    content: ''; position: absolute; left: 0; top: 12px;
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--green-accent);
+  }
+
+  /* ─── DOWNLOAD STRIP ─── */
+  .download-strip {
+    max-width: 720px; margin: 32px auto 0; padding: 20px 28px;
+    background: var(--green-deep); border-radius: 12px;
+    display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  .download-strip-text { color: rgba(255,255,255,0.85); font-size: 15px; line-height: 1.5; }
+  .download-strip-text strong { color: var(--white); font-weight: 700; }
+  .download-strip a {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 12px 20px; background: var(--green-accent);
+    color: var(--green-deep); border-radius: 10px;
+    font-size: 14px; font-weight: 700; text-decoration: none;
+    flex-shrink: 0;
+  }
+  .download-strip a:hover { background: var(--white); }
+  @media (max-width: 600px) {
+    .download-strip { padding: 18px 20px; gap: 14px; }
+  }
+
+  /* ─── PAYMENT SUMMARY DOC (page 1 recreation) ─── */
+  .pay-doc {
+    max-width: 720px; margin: 0 auto 36px;
+    border: 1px solid var(--slate-200); border-radius: 12px;
+    overflow: hidden; background: var(--white);
+    font-variant-ligatures: none;
+  }
+  .pay-doc-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 22px; background: var(--green-deep); gap: 12px;
+  }
+  .pay-doc-brand { font-size: 15px; font-weight: 700; color: var(--white); letter-spacing: -0.3px; }
+  .pay-doc-brand span {
+    display: block; font-size: 9px; font-weight: 700; letter-spacing: 2px;
+    color: var(--green-accent); text-transform: uppercase; margin-top: 2px;
+  }
+  .pay-doc-id { text-align: right; }
+  .pay-doc-id strong { display: block; font-family: var(--font-mono); font-size: 14px; font-weight: 700; color: var(--white); }
+  .pay-doc-id span { font-size: 11px; color: rgba(255,255,255,0.6); }
+  .pay-doc-amount {
+    text-align: center; padding: 24px 20px;
+    background: var(--green-ghost); border-bottom: 1px solid var(--slate-200);
+  }
+  .pay-doc-amount-label { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--green-mid); margin-bottom: 6px; }
+  .pay-doc-amount-value { font-family: var(--font-mono); font-size: 34px; font-weight: 700; color: var(--green-deep); letter-spacing: -1px; }
+  .pay-doc-parties {
+    display: grid; grid-template-columns: 1fr 1fr;
+    border-bottom: 1px solid var(--slate-200);
+  }
+  .pay-doc-party { padding: 16px 22px; }
+  .pay-doc-party:first-child { border-right: 1px solid var(--slate-200); }
+  .pay-doc-party-label { font-size: 9px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--green-mid); margin-bottom: 6px; }
+  .pay-doc-party-name { font-size: 14px; font-weight: 700; color: var(--green-deep); margin-bottom: 2px; }
+  .pay-doc-party-addr { font-size: 12px; color: var(--slate-500); line-height: 1.5; }
+  .pay-doc-desc { padding: 14px 22px; border-bottom: 1px solid var(--slate-200); }
+  .pay-doc-desc-label { font-size: 9px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--green-mid); margin-bottom: 4px; }
+  .pay-doc-desc-text { font-size: 13px; color: var(--slate-700); }
+  .pay-doc-desc-text .mono { font-family: var(--font-mono); font-weight: 700; color: var(--green-deep); }
+  .pay-doc-table { width: 100%; border-collapse: collapse; }
+  .pay-doc-table caption {
+    text-align: left; padding: 14px 22px 8px;
+    font-size: 9px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--green-mid);
+  }
+  .pay-doc-table th {
+    text-align: left; padding: 6px 22px; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.5px; text-transform: uppercase; color: var(--slate-500);
+    border-bottom: 1px solid var(--slate-200);
+  }
+  .pay-doc-table th.num, .pay-doc-table td.num { text-align: right; }
+  .pay-doc-table td {
+    padding: 8px 22px; font-size: 13px; color: var(--slate-700);
+    border-bottom: 1px solid var(--slate-100);
+  }
+  .pay-doc-table td.num { font-family: var(--font-mono); }
+  .pay-doc-table td.total { font-weight: 700; color: var(--green-deep); }
+  .pay-doc-totals { padding: 12px 22px; }
+  .pay-doc-total-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 8px 14px; font-size: 13px; margin-bottom: 6px;
+    border: 1px solid var(--slate-200); border-radius: 8px;
+  }
+  .pay-doc-total-row span:first-child { color: var(--slate-600); }
+  .pay-doc-total-row span:last-child { font-family: var(--font-mono); font-weight: 700; color: var(--green-deep); }
+  .pay-doc-total-row.check {
+    background: var(--green-deep); border-color: var(--green-deep); margin-bottom: 0;
+  }
+  .pay-doc-total-row.check span:first-child { color: rgba(255,255,255,0.8); font-weight: 600; }
+  .pay-doc-total-row.check span:last-child { color: var(--white); }
+  .pay-doc-fee {
+    padding: 12px 22px; font-size: 12px; color: var(--slate-500);
+    background: var(--slate-50); border-top: 1px solid var(--slate-200); line-height: 1.55;
+  }
+  .pay-doc-fee strong { color: var(--green-dark); }
+
+  /* ─── CHECK DOC (page 3 recreation) ─── */
+  .check-scroll { max-width: 720px; margin: 0 auto 12px; overflow-x: auto; }
+  .check-doc {
+    min-width: 520px;
+    border: 1px solid rgba(149,213,178,0.6);
+    border-radius: 10px; background: var(--green-ghost);
+    padding: 22px 24px; font-variant-ligatures: none;
+  }
+  .check-doc-top {
+    display: flex; justify-content: space-between; align-items: flex-start; gap: 16px;
+    margin-bottom: 18px;
+  }
+  .check-doc-payer { font-size: 13px; font-weight: 700; color: var(--green-deep); line-height: 1.5; }
+  .check-doc-payer span { display: block; font-size: 11px; font-weight: 400; color: var(--slate-500); }
+  .check-doc-bank { text-align: center; font-size: 13px; font-weight: 700; color: var(--green-deep); }
+  .check-doc-num { font-family: var(--font-mono); font-size: 14px; font-weight: 700; color: var(--green-deep); }
+  .check-doc-date { font-size: 12px; color: var(--slate-600); margin-bottom: 14px; }
+  .check-doc-date .mono { font-family: var(--font-mono); font-weight: 700; color: var(--green-deep); }
+  .check-doc-payline {
+    display: flex; align-items: flex-end; gap: 12px; margin-bottom: 12px;
+  }
+  .check-doc-payline-label { font-size: 9px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--green-mid); flex-shrink: 0; line-height: 1.4; }
+  .check-doc-payline-name { flex: 1; font-size: 14px; font-weight: 700; color: var(--green-deep); border-bottom: 1px solid var(--green-accent); padding-bottom: 4px; }
+  .check-doc-amount-box {
+    font-family: var(--font-mono); font-size: 15px; font-weight: 700; color: var(--green-deep);
+    border: 1px solid var(--green-mid); border-radius: 6px; padding: 4px 12px; flex-shrink: 0;
+  }
+  .check-doc-words {
+    font-size: 13px; color: var(--green-deep); font-weight: 600;
+    border-bottom: 1px solid var(--green-accent); padding-bottom: 4px; margin-bottom: 4px;
+  }
+  .check-doc-void { font-size: 10px; font-weight: 700; letter-spacing: 0.5px; color: var(--green-dark); text-align: right; margin-bottom: 14px; }
+  .check-doc-for {
+    font-size: 11px; color: var(--slate-600); margin-bottom: 16px;
+  }
+  .check-doc-for .mono { font-family: var(--font-mono); color: var(--green-deep); }
+  .check-doc-micr {
+    font-family: var(--font-mono); font-size: 14px; letter-spacing: 2px;
+    color: var(--green-deep); padding-top: 12px; border-top: 1px dashed rgba(149,213,178,0.7);
+    margin-bottom: 12px;
+  }
+  .check-doc-badges { display: flex; gap: 16px; flex-wrap: wrap; }
+  .check-doc-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 10px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; color: var(--green-dark);
+  }
+  .check-doc-badge svg { flex-shrink: 0; }
+  .check-caption { max-width: 720px; margin: 0 auto 36px; font-size: 13px; color: var(--slate-500); text-align: center; }
+
+  /* ─── DEPOSIT STEPS (4-step recipient instructions) ─── */
+  .deposit-steps {
+    max-width: 720px; margin: 0 auto 36px;
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 0;
+    border: 1px solid var(--slate-200); border-radius: 12px; overflow: hidden;
+  }
+  .deposit-step {
+    padding: 20px 22px; display: flex; gap: 14px;
+    border-bottom: 1px solid var(--slate-200);
+  }
+  .deposit-step:nth-child(odd) { border-right: 1px solid var(--slate-200); }
+  .deposit-step:nth-child(3), .deposit-step:nth-child(4) { border-bottom: none; }
+  .deposit-step-icon {
+    width: 36px; height: 36px; flex-shrink: 0;
+    background: var(--green-ghost); border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .deposit-step-icon svg { width: 18px; height: 18px; color: var(--green-deep); }
+  .deposit-step-num { font-family: var(--font-mono); font-size: 10px; font-weight: 700; color: var(--green-mid); margin-bottom: 2px; }
+  .deposit-step-label { font-size: 14px; font-weight: 700; color: var(--green-deep); margin-bottom: 4px; }
+  .deposit-step-desc { font-size: 13px; line-height: 1.55; color: var(--slate-500); }
+
+  /* ─── FAQ ─── */
+  .faq-section { max-width: 720px; margin: 0 auto; padding: 0 48px 60px; }
+  .faq-header { margin-bottom: 24px; }
+  .faq-header h2 { font-size: 24px; font-weight: 700; color: var(--green-deep); letter-spacing: -0.5px; line-height: 1.3; margin: 0; }
+  .faq-list { margin: 0; }
+  .faq-list details { border-bottom: 1px solid var(--slate-200); }
+  .faq-list details:first-child { border-top: 1px solid var(--slate-200); }
+  .faq-list summary { padding: 20px 0; font-size: 17px; font-weight: 600; color: var(--green-deep); cursor: pointer; list-style: none; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+  .faq-list summary::-webkit-details-marker { display: none; }
+  .faq-list summary::after { content: '+'; font-size: 22px; font-weight: 400; color: var(--slate-400); flex-shrink: 0; }
+  .faq-list details[open] summary::after { content: '\2212'; }
+  .faq-list details p { padding: 0 0 20px; margin: 0; font-size: 15px; line-height: 1.7; color: var(--slate-500); }
+
+  /* ─── CTA PARALLAX ─── */
+  .cta-section::before { transform: translate(-50%,-50%) translateY(var(--parallax-y, 0)); will-change: transform; }
+
+  /* ─── FOOTER 5-COL ─── */
+  .footer-top { grid-template-columns: 2fr 1fr 1fr 1fr 1fr; }
+  @media (max-width: 900px) { .footer-top { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px) { .footer-top { grid-template-columns: 1fr; } }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    .article-body { padding: 0 24px 60px; }
+    .article-body h2 { margin-top: 36px; }
+    .faq-section { padding: 0 24px 40px; }
+    section [style*="grid-template-columns"] { grid-template-columns: 1fr !important; gap: 12px !important; }
+  }
+  @media (max-width: 600px) {
+    .pay-doc-amount-value { font-size: 27px; }
+    .pay-doc-table th, .pay-doc-table td { padding-left: 14px; padding-right: 14px; font-size: 12px; }
+    .pay-doc-parties { grid-template-columns: 1fr; }
+    .pay-doc-party:first-child { border-right: none; border-bottom: 1px solid var(--slate-200); }
+    .deposit-steps { grid-template-columns: 1fr; }
+    .deposit-step:nth-child(odd) { border-right: none; }
+    .deposit-step:nth-child(3) { border-bottom: 1px solid var(--slate-200); }
+  }
+
+  /* ─── REDUCED MOTION ─── */
+  @media (prefers-reduced-motion: reduce) {
+    .reveal {
+      opacity: 1; transform: none; transition: none;
+    }
+    .page-hero .section-label,
+    .page-hero .section-title,
+    .page-hero .section-desc {
+      opacity: 1; transform: none; transition: none;
+    }
+    .hero-bg-gradient, .hero-bg-gradient-2 { animation: none; }
+  }
+</style>
+<noscript><style>.reveal,.page-hero .section-label,.page-hero .section-title,.page-hero .section-desc{opacity:1;transform:none;transition:none;}</style></noscript>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-H2LBJT03WE"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-H2LBJT03WE');</script>
+<script>function initApollo(){var n=Math.random().toString(36).substring(7),o=document.createElement("script");
+o.src="https://assets.apollo.io/micro/website-tracker/tracker.iife.js?nocache="+n,o.async=!0,o.defer=!0,
+o.onload=function(){window.trackingFunctions.onLoad({appId:"69c141b32234890011a43849"})},
+document.head.appendChild(o)}initApollo();</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Anatomy of a Cannabis Vendor Invoice Payment",
+  "description": "See what a cannabis vendor invoice payment looks like — the remittance summary, line-item order detail, and the Check 21 check your vendor deposits. Sample PDF.",
+  "author": {
+    "@type": "Person",
+    "name": "Chris Mitchem"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "ShelfSpace",
+    "url": "https://shelfspace.pro"
+  },
+  "datePublished": "2026-05-14",
+  "url": "https://shelfspace.pro/blog/anatomy-of-an-invoice-payment",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://shelfspace.pro/blog/anatomy-of-an-invoice-payment"
+  },
+  "image": "https://shelfspace.pro/og-image-v5.png"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Can a vendor actually deposit this check?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. It's a Check 21-compliant substitute check, valid for deposit under federal law. Vendors deposit it by mobile app or at a teller, the same as any business check — just not at an ATM. The check carries a 90-day void window, so it's meant to be deposited promptly."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does the vendor see what they're being paid for?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Every payment carries the full line-item order detail, the invoice number, and the PO number — on both the summary page and the check's memo line. The vendor's AR team can reconcile the payment to their own invoice without contacting anyone."
+      }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://shelfspace.pro/" },
+    { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://shelfspace.pro/blog" },
+    { "@type": "ListItem", "position": 3, "name": "Anatomy of a Cannabis Vendor Invoice Payment" }
+  ]
+}
+</script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="/" class="nav-logo">
+    <div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div>
+    <span class="nav-logo-text">ShelfSpace</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="/consignment">Consignment</a></li>
+    <li><a href="/accounts-payable">Accounts Payable</a></li>
+    <li><a href="/credit-recovery">Credit Recovery</a></li>
+    <li><a href="/pricing">Pricing</a></li>
+    <li><a href="/about">About</a></li>
+    <li><a href="/contact" class="nav-cta">Get Started <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a></li>
+  </ul>
+  <div class="nav-hamburger" onclick="document.querySelector('.nav-links').classList.toggle('mobile-open'); event.stopPropagation();"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="hero-bg-gradient"></div>
+  <div class="hero-bg-gradient-2"></div>
+  <div class="hero-grid-lines"></div>
+  <div class="section-label">Guide · Accounts Payable</div>
+  <h1 class="section-title">Anatomy of a Cannabis Vendor Invoice Payment</h1>
+  <p class="section-desc">One document does two jobs — the remittance summary that says what's being paid, and the Check 21 check the vendor deposits. Walk through a real one, page by page.</p>
+</div>
+
+<!-- AT A GLANCE -->
+<div class="article-glance">
+  <h2>At a glance</h2>
+  <ul>
+    <li>A real ShelfSpace invoice payment — the remittance summary and the Check 21 check, in one document</li>
+    <li>Page 1: the payment summary — PM and PO numbers, the paying and receiving entities, line-item order detail, the check amount</li>
+    <li>Page 3: a deposit-ready Check 21 check — print it, deposit it from a phone, or take it to a teller</li>
+    <li>Every reference ties together — the PM number, the PO number, and the invoice number appear on both the summary and the check</li>
+    <li>The full de-identified document is downloadable as a PDF below</li>
+  </ul>
+</div>
+
+<!-- DOWNLOAD STRIP -->
+<div class="download-strip">
+  <div class="download-strip-text"><strong>The full sample invoice payment.</strong> A complete ShelfSpace payment document — names, amounts, and reference IDs are fictional. Free, no email required.</div>
+  <a href="/ShelfSpace_Sample_Invoice_Payment.pdf" target="_blank" rel="noopener" download>Download the sample <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></a>
+</div>
+
+<!-- ARTICLE BODY -->
+<div class="article-body reveal">
+
+  <h2>What you're looking at</h2>
+
+  <p>When ShelfSpace pays one of your vendors, this is what the vendor gets. It's one PDF that does two jobs at once: the first page is the remittance summary — what's being paid, against which invoice, line by line — and the last page is a Check 21 check the vendor can deposit like any other check. No separate "what is this for?" email. No memo line they can't decode. The payment and the explanation travel together.</p>
+
+  <p>This post walks through a real document, page by page. Pinegrove Cannabis Co., North Ridge Cultivators, and Evergreen Community Bank are all fictional — this is a sample, not a real payment — but the structure, the math, and the format are exactly what ships. <a href="/ShelfSpace_Sample_Invoice_Payment.pdf" target="_blank" rel="noopener">Download the sample (PDF)</a> to follow along.</p>
+
+  <h2>Page 1 — The payment summary</h2>
+
+  <div class="pay-doc" role="figure" aria-label="Page 1 of a ShelfSpace invoice payment — the remittance summary">
+    <div class="pay-doc-header">
+      <div class="pay-doc-brand">ShelfSpace<span>Invoice Payment</span></div>
+      <div class="pay-doc-id"><strong>PM-1042</strong><span>Payment date 2026-05-14</span></div>
+    </div>
+    <div class="pay-doc-amount">
+      <div class="pay-doc-amount-label">Payment Amount</div>
+      <div class="pay-doc-amount-value">$8,000.00</div>
+    </div>
+    <div class="pay-doc-parties">
+      <div class="pay-doc-party">
+        <div class="pay-doc-party-label">From</div>
+        <div class="pay-doc-party-name">Pinegrove Cannabis Co.</div>
+        <div class="pay-doc-party-addr">200 Main Street<br>Springfield, MA, 01103</div>
+      </div>
+      <div class="pay-doc-party">
+        <div class="pay-doc-party-label">To</div>
+        <div class="pay-doc-party-name">North Ridge Cultivators, LLC</div>
+        <div class="pay-doc-party-addr">MA</div>
+      </div>
+    </div>
+    <div class="pay-doc-desc">
+      <div class="pay-doc-desc-label">Payment Description</div>
+      <div class="pay-doc-desc-text">Payment for <span class="mono">PO-1042</span> (Invoice <span class="mono">#10024501</span>)</div>
+    </div>
+    <table class="pay-doc-table">
+      <caption>Order Details · Invoice #10024501</caption>
+      <thead>
+        <tr><th>Product</th><th class="num">Qty</th><th class="num">Unit Price</th><th class="num">Total</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>North Ridge Flower 14g — Aurora Mist</td><td class="num">32</td><td class="num">$32.50</td><td class="num total">$1,040.00</td></tr>
+        <tr><td>North Ridge Flower 14g — Aurora Mist</td><td class="num">32</td><td class="num">$32.50</td><td class="num total">$1,040.00</td></tr>
+        <tr><td>North Ridge Flower 14g — Velvet Dawn</td><td class="num">32</td><td class="num">$30.00</td><td class="num total">$960.00</td></tr>
+        <tr><td>North Ridge Flower 14g — Velvet Dawn</td><td class="num">32</td><td class="num">$30.00</td><td class="num total">$960.00</td></tr>
+        <tr><td>North Ridge Flower 14g — Cedar Hollow</td><td class="num">32</td><td class="num">$30.00</td><td class="num total">$960.00</td></tr>
+        <tr><td>North Ridge Flower 14g — Cedar Hollow</td><td class="num">32</td><td class="num">$30.00</td><td class="num total">$960.00</td></tr>
+        <tr><td>North Ridge Flower 14g — Northern Tide</td><td class="num">32</td><td class="num">$32.50</td><td class="num total">$1,040.00</td></tr>
+        <tr><td>North Ridge Flower 14g — Northern Tide</td><td class="num">32</td><td class="num">$32.50</td><td class="num total">$1,040.00</td></tr>
+      </tbody>
+    </table>
+    <div class="pay-doc-totals">
+      <div class="pay-doc-total-row"><span>Subtotal</span><span>$8,000.00</span></div>
+      <div class="pay-doc-total-row"><span>Payment Amount</span><span>$8,000.00</span></div>
+      <div class="pay-doc-total-row check"><span>Check Amount</span><span>$8,000.00</span></div>
+    </div>
+    <div class="pay-doc-fee"><strong>Service Fee:</strong> No platform fee applies to this invoice payment (fee waiver active).</div>
+  </div>
+
+  <p>The top of the page carries the payment's own ID — <code>PM-1042</code> — and a payment date. Below it, the amount, big and unmissable: <code>$8,000.00</code>.</p>
+
+  <p>Then the two parties, side by side. <strong>From:</strong> Pinegrove Cannabis Co., the dispensary paying the bill. <strong>To:</strong> North Ridge Cultivators, the vendor getting paid. For a multi-location retailer, this is the line that says exactly which entity the money came from — no guessing.</p>
+
+  <p>The payment description ties it to the paperwork the vendor already has: <code>Payment for PO-1042 (Invoice #10024501)</code>. Their AR team can match it to their own invoice in seconds.</p>
+
+  <p>The order-details table is the line-item proof — every SKU, quantity, unit price, and line total, the same way it appeared on the vendor's invoice. Subtotal, payment amount, and check amount all read <code>$8,000.00</code> here because this invoice had no credits or deductions applied. When a return credit or a short-delivery adjustment <em>does</em> apply, the check amount reflects it, and the math is shown the same way — nothing is hidden in a footnote.</p>
+
+  <p>One quiet line near the bottom: the service fee reads <code>$0</code> — no platform fee on this payment. The vendor receives the full invoice amount.</p>
+
+  <h2>Page 2 is blank — on purpose</h2>
+
+  <p>Page 2 is a deliberate spacer. It pushes the check onto its own sheet so the vendor can run the whole page through a printer and cut the check out clean — exactly what the recipient instructions on page 3 tell them to do.</p>
+
+  <h2>Page 3 — The check</h2>
+
+  <div class="check-scroll" role="figure" aria-label="Page 3 of a ShelfSpace invoice payment — the Check 21 check">
+    <div class="check-doc">
+      <div class="check-doc-top">
+        <div class="check-doc-payer">Pinegrove Cannabis Co.<span>200 Main Street</span><span>Springfield, MA, 01103</span></div>
+        <div class="check-doc-bank">Evergreen Community Bank</div>
+        <div class="check-doc-num">1001</div>
+      </div>
+      <div class="check-doc-date">Date <span class="mono">05/14/2026</span></div>
+      <div class="check-doc-payline">
+        <div class="check-doc-payline-label">Pay to the<br>order of</div>
+        <div class="check-doc-payline-name">North Ridge Cultivators, LLC</div>
+        <div class="check-doc-amount-box">$8,000.00</div>
+      </div>
+      <div class="check-doc-words">Eight Thousand and 00/100 Dollars</div>
+      <div class="check-doc-void">Void After 90 Days</div>
+      <div class="check-doc-for">For: <span class="mono">PM-1042 | Payment for PO-1042 (Invoice #10024501)</span></div>
+      <div class="check-doc-micr">&#x2802;1001&#x2802;&nbsp;&nbsp;&#x2832;211300000&#x2832;&nbsp;&nbsp;00012345&#x2802;</div>
+      <div class="check-doc-badges">
+        <span class="check-doc-badge"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> Security Features Included</span>
+        <span class="check-doc-badge"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12" y2="18"/></svg> Mobile Deposit Ready</span>
+        <span class="check-doc-badge"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg> Check 21 Compliant</span>
+      </div>
+    </div>
+  </div>
+  <p class="check-caption">A stylized recreation of page 3. The downloadable PDF is the full, print-ready check.</p>
+
+  <p>This is a real, depositable check — a Check 21 substitute check, valid for deposit under federal law. Not a screenshot, not a placeholder, not an "ACH coming soon."</p>
+
+  <p>It carries the same references as the summary: the FOR line reads <code>PM-1042 | Payment for PO-1042 (Invoice #10024501)</code>. The check reconciles to page 1, and page 1 reconciles to the vendor's invoice. Three numbers, one paper trail.</p>
+
+  <p>The rest is standard check anatomy, built for fast deposit: a high-contrast MICR line bank software can read, "Void After 90 Days" so stale checks don't linger, and a "Mobile Deposit Ready" layout.</p>
+
+  <div class="deposit-steps" role="figure" aria-label="The four-step recipient instructions printed below the check">
+    <div class="deposit-step">
+      <div class="deposit-step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg></div>
+      <div>
+        <div class="deposit-step-num">Step 1</div>
+        <div class="deposit-step-label">Print</div>
+        <div class="deposit-step-desc">Any printer, plain white paper, color or black-and-white. No special stock or ink.</div>
+      </div>
+    </div>
+    <div class="deposit-step">
+      <div class="deposit-step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="20" y1="4" x2="8.12" y2="15.88"/><line x1="14.47" y1="14.48" x2="20" y2="20"/><line x1="8.12" y1="8.12" x2="12" y2="12"/></svg></div>
+      <div>
+        <div class="deposit-step-num">Step 2</div>
+        <div class="deposit-step-label">Cut and endorse</div>
+        <div class="deposit-step-desc">Cut along the dashed line for mobile deposit, or take the whole page to a teller. Sign the back.</div>
+      </div>
+    </div>
+    <div class="deposit-step">
+      <div class="deposit-step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg></div>
+      <div>
+        <div class="deposit-step-num">Step 3</div>
+        <div class="deposit-step-label">Deposit</div>
+        <div class="deposit-step-desc">Deposit it like a standard check — your bank's mobile app or a teller. Not an ATM.</div>
+      </div>
+    </div>
+    <div class="deposit-step">
+      <div class="deposit-step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg></div>
+      <div>
+        <div class="deposit-step-num">Step 4</div>
+        <div class="deposit-step-label">Verify</div>
+        <div class="deposit-step-desc">If a bank wants to confirm it, scan the QR code or check the payment status at shelfspace.pro/verify.</div>
+      </div>
+    </div>
+  </div>
+
+  <p>Below the check, four steps tell the vendor exactly what to do: print it on any printer with plain paper, cut and endorse it, deposit it by mobile app or at a teller (not an ATM), and — if their bank wants to confirm it — verify authenticity by QR code. Full deposit mechanics live in <a href="/docs/checks/depositing">how to deposit a ShelfSpace check</a> and the <a href="/checks">Check 21 explainer</a>.</p>
+
+  <h2>Why one document beats a check in an envelope</h2>
+
+  <p>Three reasons this format gets paid cleanly:</p>
+
+  <ul>
+    <li><strong>One document, both jobs.</strong> The remittance advice and the negotiable instrument travel together. The vendor never has to ask what the payment covers — it's on page 1, line by line.</li>
+    <li><strong>It reconciles three ways.</strong> PM number, PO number, invoice number — all printed on both the summary and the check. The vendor's AR team matches it without emailing anyone.</li>
+    <li><strong>The vendor controls the deposit.</strong> Print it, deposit from a phone, or walk it into a branch. No ACH enrollment, no waiting on mail, compatible with any U.S. bank.</li>
+  </ul>
+
+  <blockquote>
+    <p>Most vendors get a check with a memo line they can't read. This tells them what it paid, down to the line item — before they have to ask.</p>
+  </blockquote>
+
+  <h2>What this means for retailers</h2>
+
+  <p>This is what "we run your AP" actually produces. You approve the payment; we generate this document; your vendor receives it. You never format a remittance, never print a check, never field a "what's this deposit for?" email.</p>
+
+  <p>And it's a better deal for the vendor than the Net 60 wholesale norm — a clean, documented payment they can reconcile in seconds and deposit from their phone. Faster cash, less back-and-forth. Both sides win.</p>
+
+  <p>The <a href="/blog/anatomy-of-an-ap-email-thread">AP email thread</a> that often precedes a payment like this — the vendor asking "where's my check?" — gets answered the same way: with live data, in seconds. Walk through that one too.</p>
+
+  <blockquote>
+    <p>You approve the payment. We produce this. Your vendor deposits it from a phone. Nobody emails anybody.</p>
+  </blockquote>
+
+  <p>If your AP still means hand-cut checks and a stack of remittance emails, <a href="/contact">talk to us</a>. The free evaluation shows what your <a href="/accounts-payable">managed AP</a> would produce — payments like the one above, handled end to end.</p>
+
+</div>
+
+<!-- FAQ -->
+<div class="faq-section reveal">
+  <div class="faq-header">
+    <h2>Frequently asked questions</h2>
+  </div>
+  <div class="faq-list">
+    <details>
+      <summary>Can a vendor actually deposit this check?</summary>
+      <p>Yes. It's a Check 21-compliant substitute check, valid for deposit under federal law. Vendors deposit it by mobile app or at a teller, the same as any business check — just not at an ATM. The check carries a 90-day void window, so it's meant to be deposited promptly.</p>
+    </details>
+    <details>
+      <summary>Does the vendor see what they're being paid for?</summary>
+      <p>Yes. Every payment carries the full line-item order detail, the invoice number, and the PO number — on both the summary page and the check's memo line. The vendor's AR team can reconcile the payment to their own invoice without contacting anyone.</p>
+    </details>
+  </div>
+</div>
+
+<!-- RELATED CASE STUDIES -->
+<section style="max-width:720px;margin:0 auto;padding:0 48px 60px;">
+  <h2 style="font-size:22px;font-weight:700;color:var(--green-deep);margin-bottom:24px;letter-spacing:-0.5px;">Related case studies</h2>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;">
+    <a href="/blog/case-study-metrc-invoice-accuracy" style="text-decoration:none;padding:20px;border:1px solid var(--slate-200);border-radius:12px;transition:all 0.2s;">
+      <span style="display:block;font-size:11px;font-weight:600;letter-spacing:0.5px;color:var(--green-mid);margin-bottom:8px;">ACCOUNTS PAYABLE</span>
+      <span style="display:block;font-family:var(--font-mono);font-size:20px;font-weight:700;color:var(--green-deep);letter-spacing:-1px;margin-bottom:4px;">$7,340</span>
+      <span style="display:block;font-size:14px;font-weight:500;color:var(--slate-700);line-height:1.4;">We caught 12 wrong invoices in one month using Metrc</span>
+    </a>
+    <a href="/blog/case-study-quickbooks-sync" style="text-decoration:none;padding:20px;border:1px solid var(--slate-200);border-radius:12px;transition:all 0.2s;">
+      <span style="display:block;font-size:11px;font-weight:600;letter-spacing:0.5px;color:#7c3aed;margin-bottom:8px;">OPERATIONS</span>
+      <span style="display:block;font-family:var(--font-mono);font-size:20px;font-weight:700;color:var(--green-deep);letter-spacing:-1px;margin-bottom:4px;">Real-time books</span>
+      <span style="display:block;font-size:14px;font-weight:500;color:var(--slate-700);line-height:1.4;">Cannabis AP to QuickBooks — real-time sync</span>
+    </a>
+    <a href="/blog/case-study-ap-time-savings" style="text-decoration:none;padding:20px;border:1px solid var(--slate-200);border-radius:12px;transition:all 0.2s;">
+      <span style="display:block;font-size:11px;font-weight:600;letter-spacing:0.5px;color:#7c3aed;margin-bottom:8px;">OPERATIONS</span>
+      <span style="display:block;font-family:var(--font-mono);font-size:20px;font-weight:700;color:var(--green-deep);letter-spacing:-1px;margin-bottom:4px;">98% less time</span>
+      <span style="display:block;font-size:14px;font-weight:500;color:var(--slate-700);line-height:1.4;">From 15 hours a week to one approve button</span>
+    </a>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-content">
+    <div class="section-label reveal">Get Started</div>
+    <h2 class="section-title reveal">See your AP handled like this.</h2>
+    <p class="section-desc reveal">Free evaluation in 48 hours. We connect to your account, look at your vendor payments, and show you exactly what your vendors would receive. You only pay if we deliver.</p>
+    <div class="cta-actions reveal">
+      <a href="/contact" class="btn-primary">
+        Get My Free Evaluation
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+      <a href="/ShelfSpace_Sample_Invoice_Payment.pdf" target="_blank" rel="noopener" download class="btn-secondary">Download the sample (PDF)</a>
+    </div>
+    <figure class="cta-founder reveal" style="display:flex;align-items:center;gap:16px;justify-content:center;margin:32px 0 0;">
+      <img src="/chris-mitchem.jpg" alt="Chris Mitchem" style="width:48px;height:48px;border-radius:50%;object-fit:cover;">
+      <blockquote style="margin:0;border:none;padding:0;background:none;">
+        <p style="font-size:14px;color:var(--slate-600);max-width:520px;line-height:1.5;margin:0;font-style:normal;">"I've watched vendors hold a check for a week because they couldn't tell what it paid. The document should answer that before anyone has to ask."</p>
+        <figcaption style="font-size:13px;color:var(--slate-500);margin-top:6px;">— Chris Mitchem, Founder</figcaption>
+      </blockquote>
+    </figure>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="/" class="nav-logo"><div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div><span class="nav-logo-text">ShelfSpace</span></a>
+      <p>Every Vendor. Every Payment. One Engine.</p>
+    </div>
+    <div class="footer-col"><h3>Services</h3><ul><li><a href="/accounts-payable">Accounts Payable</a></li><li><a href="/consignment">Consignment</a></li><li><a href="/credit-recovery">Credit Recovery</a></li><li><a href="/checks">Check Payments</a></li><li><a href="/shelfiq">ShelfiQ</a></li></ul></div>
+    <div class="footer-col"><h3>Platform</h3><ul><li><a href="/features">Features</a></li><li><a href="/how-it-works">How It Works</a></li><li><a href="/pricing">Pricing</a></li><li><a href="/about">About</a></li><li><a href="/blog">Blog</a></li><li><a href="/docs">Docs</a></li></ul></div>
+    <div class="footer-col"><h3>Access</h3><ul><li><a href="https://ourshelf.space">Login</a></li><li><a href="/contact">Sign Up</a></li><li><a href="/contact">Contact</a></li><li><a href="/vendors">For Vendors</a></li><li><a href="/for-bookkeepers">For Bookkeepers</a></li></ul></div>
+    <div class="footer-col"><h3>Company</h3><ul><li><a href="mailto:chris@shelfspace.pro">Email</a></li><li><a href="mailto:support@shelfspace.pro">Support</a></li><li><a href="https://linkedin.com/company/shelfspace-pro" target="_blank" rel="noopener" class="footer-social-link"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> LinkedIn</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><p>&copy; 2026 ShelfSpace Technologies Inc.</p><div style="display:flex;align-items:center;gap:8px;justify-content:center;margin-top:12px;"><img src="/metrc-logo.png" alt="METRC" style="height:18px;opacity:0.4;filter:brightness(0) invert(1);"><span style="font-size:11px;color:rgba(255,255,255,0.35);">Certified METRC Third-Party Vendor</span></div><div class="footer-bottom-links"><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div></div>
+</footer>
+
+<script>
+(function() {
+  var nav = document.getElementById('nav');
+  var pageHero = document.querySelector('.page-hero');
+  var parallaxSections = [
+    document.querySelector('.cta-section')
+  ];
+
+  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var isMobile = window.innerWidth < 900;
+  var ticking = false;
+
+  /* Hero entrance */
+  requestAnimationFrame(function() {
+    nav.classList.toggle('scrolled', window.scrollY > 20);
+    if (pageHero) pageHero.classList.add('hero-loaded');
+  });
+
+  /* Reveals */
+  var revealObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(function(el) { revealObserver.observe(el); });
+
+  function onScroll() {
+    var scrollY = window.scrollY;
+    nav.classList.toggle('scrolled', scrollY > 20);
+    if (prefersReduced || isMobile) return;
+    var wh = window.innerHeight;
+    parallaxSections.forEach(function(section) {
+      if (!section) return;
+      var rect = section.getBoundingClientRect();
+      if (rect.bottom < 0 || rect.top > wh) return;
+      var center = rect.top + rect.height / 2 - wh / 2;
+      section.style.setProperty('--parallax-y', (center * 0.08) + 'px');
+    });
+  }
+
+  window.addEventListener('scroll', function() {
+    if (!ticking) {
+      requestAnimationFrame(function() {
+        onScroll();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, { passive: true });
+
+  onScroll();
+
+  window.addEventListener('resize', function() {
+    isMobile = window.innerWidth < 900;
+    if (isMobile) {
+      parallaxSections.forEach(function(section) {
+        if (section) section.style.setProperty('--parallax-y', '0px');
+      });
+    }
+  });
+
+  document.addEventListener('click', function() {
+    var navLinks = document.querySelector('.nav-links');
+    if (navLinks && navLinks.classList.contains('mobile-open')) {
+      navLinks.classList.remove('mobile-open');
+    }
+  });
+})();
+</script>
+<script src="/shelfiq-widget.js"></script>
+</body>
+</html>
