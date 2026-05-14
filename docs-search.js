@@ -331,6 +331,16 @@
 
     host.innerHTML = html;
 
+    /* Scroll the active sidebar link into view inside the sticky aside */
+    var activeLink = host.querySelector('.docs-sidebar-link.is-active');
+    if (activeLink) {
+      var linkTop = activeLink.offsetTop;
+      var hostHeight = host.clientHeight;
+      if (linkTop > hostHeight * 0.6) {
+        host.scrollTop = linkTop - hostHeight * 0.3;
+      }
+    }
+
     var mobileBtn = host.querySelector('.docs-sidebar-mobile');
     if (mobileBtn) {
       mobileBtn.addEventListener('click', function() {
