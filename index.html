@@ -360,14 +360,88 @@
 .svc-chat-msg--ai { background: var(--white); color: var(--green-deep); align-self: flex-start; border-bottom-left-radius: 4px; }
 .svc-chat-msg--ai strong { color: var(--green-deep); font-family: var(--font-mono); }
 
+/* ════════════════════════════════════════════════════════════════════
+   TOUR VISUAL SCALING — bigger cards, more readable type
+   Mirrors /accounts-payable. Override block applies to desktop;
+   mobile reset at the end pulls things back.
+   ════════════════════════════════════════════════════════════════════ */
+.svc-section .svc-visual { max-width: 780px; }
+
+/* AP invoice */
+.svc-invoice-head { padding: 22px 28px; }
+.svc-invoice-id { font-size: 14px; }
+.svc-invoice-vendor { font-size: 15px; margin-top: 4px; }
+.svc-invoice-badge { font-size: 12px; padding: 6px 14px; }
+.svc-invoice-row { font-size: 17px; padding: 18px 28px; grid-template-columns: 1.3fr 0.9fr 0.9fr 32px; }
+.svc-invoice-qty { font-size: 14px; }
+.svc-invoice-status svg { width: 22px; height: 22px; }
+.svc-invoice-foot { padding: 18px 28px; font-size: 14px; }
+
+/* Credit memo */
+.svc-memo-head { padding: 22px 28px; }
+.svc-memo-title { font-size: 13px; }
+.svc-memo-vendor { font-size: 17px; margin-top: 4px; }
+.svc-memo-line { font-size: 17px; padding: 18px 28px; }
+.svc-memo-desc small { font-size: 13px; margin-top: 3px; }
+.svc-memo-amt { font-size: 17px; }
+.svc-memo-stamp { font-size: 16px; padding: 8px 16px; margin: 12px 28px 0 auto; }
+
+/* Consignment visualizer */
+.svc-consign-pane { padding: 28px; gap: 18px; }
+.svc-consign-label { font-size: 12px; }
+.svc-consign-row { gap: 10px; }
+.svc-consign-row-label { font-size: 11px; gap: 8px; }
+.svc-consign-row-label svg { width: 14px; height: 14px; }
+.svc-consign-row-badge { font-size: 10px; padding: 3px 8px; }
+.svc-consign-row-badge svg { width: 10px; height: 10px; }
+.svc-consign-stack { min-height: 42px; padding: 12px; gap: 4px; }
+.svc-consign-bill { width: 26px; height: 12px; }
+.svc-consign-empty-text { font-size: 13px; }
+.svc-consign-headline { font-size: 18px; padding-top: 6px; }
+.svc-consign-sub { font-size: 13px; }
+.svc-consign-arrow svg { width: 36px; height: 36px; }
+
+/* Check thumbnail */
+.svc-check { max-width: 580px; padding: 38px 40px; }
+.svc-check-brand { font-size: 17px; }
+.svc-check-brand-sub { font-size: 12px; }
+.svc-check-num { font-size: 14px; }
+.svc-check-payee-label { font-size: 12px; }
+.svc-check-payee-name { font-size: 22px; }
+.svc-check-amount-num { font-size: 30px; }
+.svc-check-amount-pill { font-size: 13px; padding: 7px 14px; }
+.svc-check-memo { font-size: 13px; }
+.svc-check-micr { font-size: 15px; letter-spacing: 2.5px; padding-top: 16px; }
+
+/* ShelfiQ chat */
+.svc-chat { max-width: 620px; gap: 10px; }
+.svc-chat-label { font-size: 12px; }
+.svc-chat-msg { font-size: 17px; padding: 18px 22px; border-radius: 20px; line-height: 1.55; }
+
 /* Mobile rules for homepage-specific visual mockups
    (structural .svc-section / .svc-headline mobile rules live in styles.css) */
 @media (max-width: 700px) {
-  .svc-invoice-row { grid-template-columns: 1.1fr 0.8fr 0.8fr 24px; padding: 12px 16px; }
+  .svc-section .svc-visual { max-width: 100%; }
+  .svc-check, .svc-chat { max-width: 100%; }
+
+  .svc-invoice-row { grid-template-columns: 1.1fr 0.8fr 0.8fr 24px; padding: 12px 16px; font-size: 15px; }
   .svc-invoice-head, .svc-invoice-foot { padding: 14px 16px; }
-  .svc-memo-head, .svc-memo-line { padding: 12px 16px; }
-  .svc-memo-stamp { margin-right: 16px; }
-  .svc-check { padding: 20px 22px; }
+  .svc-invoice-foot { font-size: 13px; }
+
+  .svc-memo-head, .svc-memo-line { padding: 12px 16px; font-size: 15px; }
+  .svc-memo-amt { font-size: 15px; }
+  .svc-memo-stamp { margin: 8px 16px 0 auto; font-size: 14px; }
+
+  .svc-consign-pane { padding: 20px; gap: 14px; }
+  .svc-consign-headline { font-size: 16px; }
+  .svc-consign-bill { width: 22px; height: 10px; }
+
+  .svc-check { padding: 24px 22px; }
+  .svc-check-amount-num { font-size: 24px; }
+  .svc-check-payee-name { font-size: 18px; }
+  .svc-check-micr { font-size: 13px; letter-spacing: 2px; }
+
+  .svc-chat-msg { font-size: 15.5px; padding: 14px 18px; border-radius: 16px; }
 }
 
 /* Footer 5-col */
