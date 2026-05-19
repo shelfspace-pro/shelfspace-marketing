@@ -398,12 +398,14 @@
 .svc-check-micr { font-family: var(--font-mono); font-size: 13px; color: var(--slate-400); letter-spacing: 2px; padding-top: 12px; border-top: 1px dashed var(--slate-300); }
 
 /* ShelfiQ chat */
-.svc-chat { text-align: left; max-width: 460px; margin: 0 auto; }
-.svc-chat-msg { padding: 14px 18px; border-radius: 14px; font-size: 14px; line-height: 1.55; margin-bottom: 10px; max-width: 88%; }
-.svc-chat-msg--user { background: rgba(255,255,255,0.1); color: var(--white); border: 1px solid rgba(255,255,255,0.18); margin-left: auto; border-bottom-right-radius: 4px; }
-.svc-chat-msg--ai { background: var(--white); color: var(--green-deep); border-bottom-left-radius: 4px; }
+.svc-chat { max-width: 440px; margin: 0 auto; display: flex; flex-direction: column; gap: 6px; text-align: left; }
+.svc-chat-label { font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; padding: 0 4px; }
+.svc-chat-label--user { color: rgba(255,255,255,0.55); align-self: flex-end; }
+.svc-chat-label--ai { color: var(--green-accent); align-self: flex-start; margin-top: 6px; }
+.svc-chat-msg { padding: 14px 18px; border-radius: 16px; font-size: 14.5px; line-height: 1.55; max-width: 86%; box-shadow: 0 6px 20px rgba(0,0,0,0.18); }
+.svc-chat-msg--user { background: var(--green-accent); color: var(--green-deep); align-self: flex-end; border-bottom-right-radius: 4px; font-weight: 500; }
+.svc-chat-msg--ai { background: var(--white); color: var(--green-deep); align-self: flex-start; border-bottom-left-radius: 4px; }
 .svc-chat-msg--ai strong { color: var(--green-deep); font-family: var(--font-mono); }
-.svc-chat-trail { font-family: var(--font-mono); font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,0.45); margin-top: 14px; text-align: center; }
 
 @media (max-width: 700px) {
   .svc-section { padding: 80px 24px; }
@@ -948,13 +950,14 @@ document.head.appendChild(o)}initApollo();</script>
 <section class="svc-section svc-section--dark" id="shelfiq">
   <div class="svc-inner">
     <div class="svc-eyebrow reveal">Shelf<span style="font-variant-ligatures:none;">iQ</span></div>
-    <h2 class="svc-headline reveal">The eyes that see what your team can't.</h2>
+    <h2 class="svc-headline reveal">AI that doesn't suck</h2>
     <p class="svc-sub reveal">Knows every SKU's margin. Answers vendor emails in seconds. Flags drift the moment it starts.</p>
     <div class="svc-visual reveal reveal-delay-1">
       <div class="svc-chat" aria-hidden="true">
+        <div class="svc-chat-label svc-chat-label--user">You</div>
         <div class="svc-chat-msg svc-chat-msg--user">What's my total consignment liability right now?</div>
+        <div class="svc-chat-label svc-chat-label--ai">ShelfiQ &middot; 4s</div>
         <div class="svc-chat-msg svc-chat-msg--ai">Your current consignment liability is <strong>$47,832.40</strong> &mdash; down 12% from last month. Sunrise Extracts has the largest position at $12,450.</div>
-        <div class="svc-chat-trail">Asked &middot; answered in 4 seconds</div>
       </div>
     </div>
     <p class="svc-why reveal">A vendor emails asking where their check is &mdash; ShelfiQ answers in seconds. Your buyer wants to know which SKUs are bleeding &mdash; ShelfiQ has the answer before you finish asking.</p>
