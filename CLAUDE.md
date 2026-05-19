@@ -12,14 +12,14 @@ ShelfSpace marketing site — static HTML/CSS deployed on Vercel at shelfspace.p
 
 ## Key Rules
 
-- **No "managed service" / "we cut the check" / "we run your AP" framing**: As of 2026-05-19 ShelfSpace is a cannabis-specific software platform, not a managed service. Retailers drive AP on the platform; ShelfiQ handles first-line vendor email. "Automate/automated" is now acceptable when describing what the platform or ShelfiQ does. See `memory/project_software_platform_pivot.md`. Note: Consignment and Credit Recovery framing is still under review; do NOT propagate this rule to those pages without a follow-up spec.
+- **No "managed service" / "we cut the check" / "we run your AP" framing**: As of 2026-05-19 ShelfSpace is a cannabis-specific software platform, not a managed service. AP, consignment, and credit recovery are all software-positioned: retailers drive the platform; ShelfiQ handles first-line vendor email on AP; retailer owns vendor outreach, contracts, and disputes on consignment; the platform pulls data + builds and sends credit memos and reminders on credit recovery, retailer team handles vendor negotiations. "Automate/automated" is now acceptable when describing what the platform or ShelfiQ does. See `memory/project_software_platform_pivot.md` and `memory/project_consignment_positioning.md`.
 - **No "scan-based trading" or "SBT"**: Use "consignment" instead. Exception: terms.html and privacy.html (legal docs, don't touch).
 - **No "Diem Cannabis"**: Removed from site, don't reintroduce.
 - **No demo-modal**: Deleted. Don't reference or recreate.
 - **No `<br>` in headings**: Let text flow and wrap naturally.
 - **All CTAs → /contact**: Every signup button goes to the contact page.
 - **No pilot/trial language**: Never use "60-day pilot" or any pilot/trial framing. The model is free evaluation → paid on results.
-- **"We" voice**: Use "we" for ShelfSpace in body copy, not "ShelfSpace does" or "the platform does."
+- **Verb split**: Use "we" for brand-level statements ("we work in every state," "we're allergic to subscriptions"). Use "the platform" / "ShelfiQ" verbs for software-action descriptions ("the platform three-way matches every invoice," "ShelfiQ answers vendor emails in seconds"). Use 2nd-person "you" for retailer actions on the platform ("you cut the check," "you approve and send"). Never say "ShelfSpace does X" — pick "we" or "the platform" based on context.
 
 ## Design System
 
