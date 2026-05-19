@@ -79,6 +79,27 @@
   }
   .pricing-hero-eval a { color: var(--green-dark); font-weight: 600; text-decoration: none; }
   .pricing-hero-eval a:hover { color: var(--green-deep); text-decoration: underline; text-underline-offset: 3px; }
+  .pricing-hero-quote {
+    display: flex; align-items: center; gap: 20px;
+    max-width: 620px; margin: 48px auto 0;
+    padding-top: 36px; border-top: 1px solid var(--slate-200);
+    text-align: left;
+  }
+  .pricing-hero-quote img {
+    width: 64px; height: 64px;
+    border-radius: 50%; object-fit: cover; flex-shrink: 0;
+  }
+  .pricing-hero-quote-body {
+    font-size: 15px; line-height: 1.6;
+    color: var(--slate-700); font-style: italic;
+    margin: 0 0 6px;
+  }
+  .pricing-hero-quote-byline {
+    font-size: 13px; color: var(--slate-500); margin: 0;
+  }
+  @media (max-width: 600px) {
+    .pricing-hero-quote { flex-direction: column; text-align: center; gap: 16px; }
+  }
 
   /* ── 3-PILLAR — How we price each service ── */
   .price-pillars {
@@ -373,16 +394,13 @@ document.head.appendChild(o)}initApollo();</script>
     <h1 class="reveal">We can't wait to be your hero.</h1>
     <p class="pricing-hero-sub reveal">You're not paying for software. You're paying us to find profits for you.</p>
     <p class="pricing-hero-eval reveal">Free evaluation first — <a href="/contact">see how much we can boost your profitability</a>.</p>
-  </div>
-</section>
-
-<!-- WHY-STRIP — Why we don't price like software (dark variant, founder voice) -->
-<section style="padding:64px 24px 0;">
-  <div class="why-strip reveal" aria-label="Why we don't price like software" style="background:var(--green-deep);border-color:rgba(149,213,178,0.25);box-shadow:0 4px 24px rgba(27,67,50,0.15);">
-    <div class="why-strip-eyebrow" style="color:var(--green-accent);">The model</div>
-    <h2 class="why-strip-headline" style="color:#fff;">No seats. No subscriptions. No surprises.</h2>
-    <p class="why-strip-body" style="color:rgba(255,255,255,0.85);">I've been a cannabis operator since 2015. I'm SUPER tired of monthly subscriptions. ShelfSpace is different. You only pay for what you use, and we guarantee you will PROFIT from this relationship.</p>
-    <p style="font-size:13px;color:rgba(255,255,255,0.6);font-style:italic;margin-top:8px;">— Chris Mitchem, Founder</p>
+    <div class="pricing-hero-quote reveal">
+      <img src="/chris-mitchem.jpg" alt="Chris Mitchem">
+      <div>
+        <p class="pricing-hero-quote-body">"I've been a cannabis operator since 2015. I'm SUPER tired of monthly subscriptions. ShelfSpace is different. You only pay for what you use, and we guarantee you will PROFIT from this relationship."</p>
+        <p class="pricing-hero-quote-byline">— Chris Mitchem, Founder</p>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -431,17 +449,6 @@ document.head.appendChild(o)}initApollo();</script>
       <a href="/ShelfSpace_Sample_Evaluation.pdf" target="_blank" rel="noopener" class="price-guarantee-sample">See a sample evaluation <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
     </div>
     <p class="price-guarantee-note reveal">No credit card. No commitment. Free.</p>
-  </div>
-</section>
-
-<!-- FOUNDER STRIP -->
-<section style="padding:48px 24px 0;">
-  <div class="reveal" style="max-width:680px;margin:0 auto;display:flex;align-items:center;gap:20px;justify-content:center;">
-    <img src="/chris-mitchem.jpg" alt="Chris Mitchem" style="width:64px;height:64px;border-radius:50%;object-fit:cover;flex-shrink:0;">
-    <div style="text-align:left;">
-      <p style="font-size:15px;color:var(--slate-700);line-height:1.55;margin:0 0 6px;font-style:italic;">"I've been a cannabis operator since 2015, and I have the scars to prove it. ShelfSpace is the product of everything I learned the hard way."</p>
-      <p style="font-size:13px;color:var(--slate-500);margin:0;">— Chris Mitchem, Founder &amp; CEO</p>
-    </div>
   </div>
 </section>
 
