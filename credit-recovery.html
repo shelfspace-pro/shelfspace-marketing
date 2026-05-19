@@ -4,19 +4,21 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Cannabis Vendor Credit Recovery — ShelfSpace</title>
-<meta name="description" content="Your profitability is our mission. You bought product expecting a 50% margin. The real margin is lower. We recover what the vendor owes you, line by line.">
+<meta name="description" content="We recover the credits your vendors owe you — returns, expirations, and promo costs. Commission-based on what we find. Free evaluation.">
 <link rel="canonical" href="https://shelfspace.pro/credit-recovery">
 <meta property="og:type" content="website">
+<meta property="og:site_name" content="ShelfSpace">
+<meta property="og:locale" content="en_US">
 <meta property="og:url" content="https://shelfspace.pro/credit-recovery">
 <meta property="og:title" content="Cannabis Vendor Credit Recovery — ShelfSpace">
-<meta property="og:description" content="Your profitability is our mission. You bought product expecting a 50% margin. The real margin is lower. We recover what the vendor owes you, line by line.">
+<meta property="og:description" content="We recover the credits your vendors owe you — returns, expirations, and promo costs. Commission-based on what we find. Free evaluation.">
 <meta property="og:image" content="https://shelfspace.pro/og-image-v5.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:type" content="image/png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Cannabis Vendor Credit Recovery — ShelfSpace">
-<meta name="twitter:description" content="Your profitability is our mission. You bought product expecting a 50% margin. The real margin is lower. We recover what the vendor owes you, line by line.">
+<meta name="twitter:description" content="We recover the credits your vendors owe you — returns, expirations, and promo costs. Commission-based on what we find. Free evaluation.">
 <meta name="twitter:image" content="https://shelfspace.pro/og-image-v5.png">
 <meta name="apple-mobile-web-app-title" content="ShelfSpace">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -28,121 +30,200 @@
 <style>
   @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-12px); } }
 
-  /* ─── HERO ENHANCEMENTS ─── */
-  .page-hero { padding-bottom: 40px; }
+  /* ─── HERO (slim, no rotator) ─── */
+  .page-hero { display: flex; align-items: center; justify-content: center; padding: 140px 48px 60px; min-height: auto; position: relative; overflow: hidden; background: var(--white); }
   .hero-bg-gradient { position: absolute; top: -30%; right: -20%; width: 700px; height: 700px; background: radial-gradient(circle, rgba(149,213,178,0.18) 0%, rgba(149,213,178,0) 70%); animation: float 8s ease-in-out infinite; pointer-events: none; }
   .hero-bg-gradient-2 { position: absolute; bottom: -20%; left: -15%; width: 550px; height: 550px; background: radial-gradient(circle, rgba(27,67,50,0.06) 0%, rgba(27,67,50,0) 70%); animation: float 10s ease-in-out infinite; animation-delay: -3s; pointer-events: none; }
   .hero-grid-lines { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 1200px; height: 100%; opacity: 0.035; background-image: linear-gradient(var(--green-deep) 1px, transparent 1px), linear-gradient(90deg, var(--green-deep) 1px, transparent 1px); background-size: 80px 80px; pointer-events: none; }
-  .page-hero .section-label,
-  .page-hero .section-title,
-  .page-hero .section-desc { opacity: 0; transform: translateY(30px); }
-  .page-hero .section-label { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1); }
-  .page-hero .section-title { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s, transform 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s; }
-  .page-hero .section-desc { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1) 0.25s, transform 0.8s cubic-bezier(0.22,1,0.36,1) 0.25s; }
-  .page-hero.hero-loaded .section-label,
-  .page-hero.hero-loaded .section-title,
-  .page-hero.hero-loaded .section-desc { opacity: 1; transform: translateY(0); }
-
-  /* ─── HERO ROTATOR (replaces hero-demo) ─── */
-  .page-hero { display: flex; align-items: center; justify-content: center; padding: 160px 48px 80px; min-height: 100vh; }
-  .hero-text--solo { flex: 1; max-width: 880px; margin: 0 auto; text-align: center; }
+  .hero-text--solo { flex: 1; max-width: 880px; margin: 0 auto; text-align: center; position: relative; z-index: 2; }
   .hero-text--solo .section-label { display: inline-flex; }
-  .page-hero .hero-rotator {
-    position: relative; display: block;
-    margin: 0 0 28px;
-    font-size: clamp(36px, 6vw, 72px);
-    line-height: 1.05;
-    letter-spacing: -2px;
-    font-weight: 700;
-    color: var(--green-deep);
-    max-width: none;
-  }
-  .hero-rotator-ghost {
-    display: block;
-    visibility: hidden;
-    pointer-events: none;
-    user-select: none;
-  }
-  .hero-rotator-slide {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    opacity: 0;
-    transform: translateY(14px);
-    will-change: opacity, transform;
-  }
-  @keyframes heroRotate {
-    0%   { opacity: 0; transform: translateY(14px); }
-    2%   { opacity: 1; transform: translateY(0); }
-    14%  { opacity: 1; transform: translateY(0); }
-    16%  { opacity: 0; transform: translateY(-14px); }
-    100% { opacity: 0; transform: translateY(-14px); }
-  }
-  .hero-rotator-slide:nth-child(1) { animation: heroRotate 21s ease-out infinite; }
-  .hero-rotator-slide:nth-child(2) { animation: heroRotate 21s ease-out infinite; animation-delay: 3s; }
-  .hero-rotator-slide:nth-child(3) { animation: heroRotate 21s ease-out infinite; animation-delay: 6s; }
-  .hero-rotator-slide:nth-child(4) { animation: heroRotate 21s ease-out infinite; animation-delay: 9s; }
-  .hero-rotator-slide:nth-child(5) { animation: heroRotate 21s ease-out infinite; animation-delay: 12s; }
-  .hero-rotator-slide:nth-child(6) { animation: heroRotate 21s ease-out infinite; animation-delay: 15s; }
-  .hero-rotator-slide:nth-child(7) { animation: heroRotate 21s ease-out infinite; animation-delay: 18s; }
-  .hero-lede { font-size: 17px; color: var(--slate-600); line-height: 1.5; margin: 0 auto 28px; max-width: 560px; }
+  .page-hero .hero-h1 { font-size: clamp(36px, 6vw, 72px); line-height: 1.05; letter-spacing: -2px; font-weight: 700; color: var(--green-deep); margin: 16px 0 24px; }
+  .hero-lede { font-size: 17px; color: var(--slate-600); line-height: 1.5; margin: 0 auto 28px; max-width: 580px; }
   .hero-actions-centered { display: flex; justify-content: center; }
+  .page-hero .section-label,
+  .page-hero .hero-h1,
+  .page-hero .hero-lede,
+  .page-hero .hero-actions-centered { opacity: 0; transform: translateY(30px); }
+  .page-hero .section-label { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1); }
+  .page-hero .hero-h1 { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s, transform 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s; }
+  .page-hero .hero-lede { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1) 0.25s, transform 0.8s cubic-bezier(0.22,1,0.36,1) 0.25s; }
+  .page-hero .hero-actions-centered { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1) 0.4s, transform 0.8s cubic-bezier(0.22,1,0.36,1) 0.4s; }
+  .page-hero.hero-loaded .section-label,
+  .page-hero.hero-loaded .hero-h1,
+  .page-hero.hero-loaded .hero-lede,
+  .page-hero.hero-loaded .hero-actions-centered { opacity: 1; transform: translateY(0); }
 
   /* ─── REVEAL ─── */
-  .reveal {
-    opacity: 0; transform: translateY(40px);
-    transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
-                transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
-  }
+  .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1); }
   .reveal.is-visible { opacity: 1; transform: translateY(0); }
   .reveal-delay-1 { transition-delay: 0.2s; }
   .reveal-delay-2 { transition-delay: 0.4s; }
   .reveal-delay-3 { transition-delay: 0.6s; }
 
-  /* ─── PAIN SECTION ─── */
-  .pain-section { background: var(--white); padding: 80px 48px; text-align: center; }
-  .pain-monthly { margin-bottom: 40px; }
-  .pain-monthly-number {
-    font-family: var(--font-mono); font-size: clamp(40px, 6vw, 72px);
-    font-weight: 700; color: var(--green-deep); letter-spacing: -3px;
-    line-height: 1;
-  }
-  .pain-monthly-qualifier {
-    font-size: 0.42em; font-weight: 700; letter-spacing: -1px;
-    color: var(--green-dark); margin-left: 6px;
-  }
-  .pain-monthly-sub {
-    font-size: 18px; color: var(--slate-500); margin-top: 14px;
-    max-width: 520px; margin-left: auto; margin-right: auto; line-height: 1.5;
-  }
-  .pain-monthly-sub strong { color: var(--green-deep); font-weight: 700; }
-  .pain-lines {
-    display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;
-    margin-bottom: 40px;
-  }
-  .pain-pill {
-    display: inline-flex; align-items: center; gap: 10px;
-    padding: 12px 24px; border-radius: 12px;
-    background: rgba(149,213,178,0.12); border: 1px solid rgba(149,213,178,0.45);
-    font-size: 15px; font-weight: 600; color: var(--green-deep);
-    transition: all 0.3s;
-  }
-  .pain-pill:hover { border-color: rgba(149,213,178,0.7); background: rgba(149,213,178,0.2); }
-  .pain-pill svg { flex-shrink: 0; color: var(--green-deep); }
-  .pain-pivot {
-    font-size: clamp(20px, 2.5vw, 28px); font-weight: 700;
-    color: var(--green-deep); letter-spacing: -0.5px;
+  /* ─── CR TOUR · NUMERAL WATERMARK ─── */
+  .cr-tour-numeral { position: absolute; top: -20px; left: 50%; transform: translateX(-50%); font-family: var(--font-display); font-weight: 700; font-size: clamp(180px, 28vw, 320px); line-height: 1; color: var(--green-ghost); z-index: -1; pointer-events: none; user-select: none; letter-spacing: -0.05em; }
+  .svc-section--slate .cr-tour-numeral { color: var(--white); }
+  .svc-section--dark .cr-tour-numeral { color: rgba(149,213,178,0.06); }
+  .svc-section--ghost .cr-tour-numeral { color: var(--white); }
+  .cr-tour-numeral--two { letter-spacing: -0.08em; }
+  @media (max-width: 700px) { .cr-tour-numeral { font-size: clamp(140px, 38vw, 240px); top: -8px; } }
+
+  /* ─── CR TOUR · INLINE PDF / DOC LINK ─── */
+  .cr-tour-pdf-link { display: inline-flex; align-items: center; gap: 4px; font-weight: 700; color: var(--green-dark); text-decoration: none; border-bottom: 1px dotted var(--green-mid); padding-bottom: 1px; }
+  .cr-tour-pdf-link:hover { color: var(--green-deep); border-bottom-color: var(--green-deep); }
+  .svc-section--dark .cr-tour-pdf-link { color: var(--green-accent); border-bottom-color: rgba(149,213,178,0.5); }
+  .svc-section--dark .cr-tour-pdf-link:hover { color: var(--white); border-bottom-color: var(--white); }
+
+  /* ─── S1 · CATEGORY EXPLAINER CARDS ─── */
+  .cr-tour-categories { display: flex; flex-direction: column; gap: 10px; max-width: 520px; margin: 0 auto; text-align: left; }
+  .cr-tour-cat { position: relative; display: grid; grid-template-columns: 48px 1fr; gap: 16px; align-items: center; padding: 18px 22px 18px 30px; background: var(--white); border: 1px solid var(--slate-200); border-radius: 14px; box-shadow: 0 8px 24px rgba(27,67,50,0.05); overflow: hidden; }
+  .cr-tour-cat::before { content: ''; position: absolute; top: 0; bottom: 0; left: 0; width: 4px; background: linear-gradient(180deg, var(--green-accent), var(--green-mid)); }
+  .cr-tour-cat-icon { width: 44px; height: 44px; border-radius: 50%; background: var(--green-ghost); display: flex; align-items: center; justify-content: center; color: var(--green-deep); flex-shrink: 0; }
+  .cr-tour-cat-icon svg { width: 22px; height: 22px; }
+  .cr-tour-cat-body { min-width: 0; }
+  .cr-tour-cat-label { font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--green-dark); margin-bottom: 3px; }
+  .cr-tour-cat-text { font-size: 14px; color: var(--slate-700); line-height: 1.45; }
+
+  /* ─── S2 · MANAGED-SERVICE ENGINE ─── */
+  .cr-tour-engine { display: flex; align-items: stretch; justify-content: center; gap: 10px; flex-wrap: nowrap; }
+  .cr-tour-engine-col { display: flex; flex-direction: column; gap: 8px; flex: 0 1 auto; min-width: 0; justify-content: center; }
+  .cr-tour-engine-pill { padding: 11px 14px; background: var(--white); border: 1px solid var(--slate-200); border-radius: 10px; font-size: 12px; font-weight: 600; color: var(--green-deep); text-align: center; box-shadow: 0 4px 12px rgba(27,67,50,0.04); }
+  .cr-tour-engine-pill--dest { background: linear-gradient(155deg, var(--green-deep) 0%, var(--green-dark) 100%); color: var(--white); border-color: var(--green-deep); padding: 16px 18px; font-size: 13px; font-weight: 700; }
+  .cr-tour-engine-pill--dest small { display: block; font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 1.5px; opacity: 0.7; margin-top: 4px; }
+  .cr-tour-engine-arrow { display: flex; align-items: center; color: var(--green-mid); flex-shrink: 0; }
+  .cr-tour-engine-arrow svg { width: 22px; height: 22px; }
+  .cr-tour-engine-core { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 18px 14px; background: var(--green-ghost); border: 1.5px solid rgba(149,213,178,0.5); border-radius: 14px; flex-shrink: 0; min-width: 110px; }
+  .cr-tour-engine-core-mark { width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; color: var(--green-deep); }
+  .cr-tour-engine-core-mark svg { width: 32px; height: 32px; }
+  .cr-tour-engine-core-name { font-size: 12px; font-weight: 700; color: var(--green-deep); }
+  .cr-tour-engine-core-sub { font-family: var(--font-mono); font-size: 9px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--green-dark); }
+  @media (max-width: 640px) {
+    .cr-tour-engine { flex-direction: column; align-items: stretch; gap: 8px; }
+    .cr-tour-engine-arrow { transform: rotate(90deg); justify-content: center; padding: 2px 0; }
+    .cr-tour-engine-col { gap: 8px; }
   }
 
+  /* ─── S3 · DATA SOURCES (Metrc + POS) ─── */
+  .cr-tour-sources { display: flex; flex-direction: column; gap: 14px; align-items: center; max-width: 520px; margin: 0 auto; }
+  .cr-tour-sources-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; width: 100%; }
+  .cr-tour-source { padding: 16px 18px; background: var(--white); border: 1px solid var(--slate-200); border-radius: 14px; box-shadow: 0 8px 24px rgba(27,67,50,0.06); text-align: left; }
+  .cr-tour-source-head { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
+  .cr-tour-source-logo { height: 18px; }
+  .cr-tour-source-badge { font-family: var(--font-mono); font-size: 9px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--green-dark); background: var(--green-ghost); padding: 4px 8px; border-radius: 100px; border: 1px solid rgba(149,213,178,0.5); }
+  .cr-tour-source-title { font-size: 13px; font-weight: 700; color: var(--green-deep); }
+  .cr-tour-source-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 5px; }
+  .cr-tour-source-list li { font-size: 12px; color: var(--slate-600); display: flex; align-items: center; gap: 6px; }
+  .cr-tour-source-list li::before { content: ''; width: 4px; height: 4px; border-radius: 50%; background: var(--green-mid); flex-shrink: 0; }
+  .cr-tour-sources-arrow { color: var(--green-mid); display: flex; align-items: center; justify-content: center; }
+  .cr-tour-sources-arrow svg { width: 26px; height: 26px; transform: rotate(90deg); }
+  .cr-tour-unified { width: 100%; padding: 16px 20px; background: linear-gradient(155deg, var(--white) 0%, var(--green-ghost) 100%); border: 1.5px solid rgba(149,213,178,0.5); border-radius: 14px; text-align: left; }
+  .cr-tour-unified-label { font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--green-dark); margin-bottom: 8px; }
+  .cr-tour-unified-rows { display: flex; flex-direction: column; gap: 4px; }
+  .cr-tour-unified-rows li { font-size: 13px; color: var(--slate-700); list-style: none; display: flex; align-items: center; gap: 8px; }
+  .cr-tour-unified-rows li svg { color: var(--green-mid); flex-shrink: 0; }
+  @media (max-width: 540px) {
+    .cr-tour-sources-row { grid-template-columns: 1fr; }
+  }
+
+  /* ─── S5 · EMAIL OUTREACH CARD ─── */
+  .cr-tour-mail { background: var(--white); border: 1px solid var(--slate-200); border-radius: 14px; box-shadow: 0 20px 50px rgba(27,67,50,0.08); text-align: left; overflow: hidden; max-width: 520px; margin: 0 auto; }
+  .cr-tour-mail-head { padding: 14px 20px; border-bottom: 1px solid var(--slate-100); background: var(--slate-50); font-size: 12px; color: var(--slate-600); line-height: 1.6; }
+  .cr-tour-mail-head strong { color: var(--green-deep); font-weight: 600; }
+  .cr-tour-mail-attach { display: flex; flex-direction: column; gap: 6px; padding: 12px 20px; border-bottom: 1px solid var(--slate-100); }
+  .cr-tour-mail-attach-chip { display: inline-flex; align-items: center; gap: 8px; padding: 8px 12px; background: var(--green-ghost); border: 1px solid rgba(149,213,178,0.45); border-radius: 8px; font-family: var(--font-mono); font-size: 11px; font-weight: 600; color: var(--green-deep); width: fit-content; }
+  .cr-tour-mail-attach-chip svg { width: 14px; height: 14px; flex-shrink: 0; }
+  .cr-tour-mail-body { padding: 16px 20px; font-size: 13px; color: var(--slate-700); line-height: 1.6; }
+  .cr-tour-mail-body p { margin: 0 0 10px; }
+  .cr-tour-mail-body p:last-child { margin-bottom: 0; }
+  .cr-tour-mail-foot { padding: 12px 20px; background: var(--green-deep); display: flex; justify-content: space-between; align-items: center; font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: 1px; color: rgba(255,255,255,0.85); }
+  .cr-tour-mail-foot-pill { background: var(--green-accent); color: var(--green-deep); padding: 3px 10px; border-radius: 100px; font-size: 10px; }
+
+  /* ─── S6 · DASHBOARD LIFECYCLE + REPLY ─── */
+  .cr-tour-dash { background: var(--white); border: 1px solid var(--slate-200); border-radius: 14px; box-shadow: 0 20px 50px rgba(27,67,50,0.08); text-align: left; overflow: hidden; max-width: 520px; margin: 0 auto; }
+  .cr-tour-dash-head { padding: 16px 22px; border-bottom: 1px solid var(--slate-100); background: var(--slate-50); display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+  .cr-tour-dash-id { font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: 1.5px; color: var(--green-dark); }
+  .cr-tour-dash-vendor { font-size: 14px; font-weight: 600; color: var(--green-deep); margin-top: 2px; }
+  .cr-tour-dash-amt { font-family: var(--font-mono); font-size: 16px; font-weight: 700; color: var(--green-deep); letter-spacing: -0.5px; }
+  .cr-tour-dash-track { display: flex; align-items: center; padding: 22px 22px 18px; gap: 0; }
+  .cr-tour-dash-step { display: flex; flex-direction: column; align-items: center; gap: 6px; flex: 1; min-width: 0; }
+  .cr-tour-dash-dot { width: 14px; height: 14px; border-radius: 50%; background: var(--slate-200); border: 2px solid var(--white); position: relative; z-index: 1; }
+  .cr-tour-dash-step--done .cr-tour-dash-dot { background: var(--green-mid); }
+  .cr-tour-dash-step--current .cr-tour-dash-dot { background: var(--green-accent); border-color: var(--green-deep); box-shadow: 0 0 0 4px rgba(149,213,178,0.3); }
+  .cr-tour-dash-label { font-family: var(--font-mono); font-size: 9px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--slate-500); text-align: center; line-height: 1.3; }
+  .cr-tour-dash-step--done .cr-tour-dash-label,
+  .cr-tour-dash-step--current .cr-tour-dash-label { color: var(--green-deep); }
+  .cr-tour-dash-line { flex-shrink: 0; height: 2px; background: var(--slate-200); flex: 0 1 18px; margin-top: -16px; }
+  .cr-tour-dash-line--done { background: var(--green-mid); }
+  .cr-tour-dash-reply { padding: 16px 22px; border-top: 1px solid var(--slate-100); background: var(--slate-50); }
+  .cr-tour-dash-reply-label { font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--slate-500); margin-bottom: 8px; }
+  .cr-tour-dash-reply-body { font-size: 13px; color: var(--slate-700); line-height: 1.55; font-style: italic; }
+  .cr-tour-dash-reply-meta { font-family: var(--font-mono); font-size: 10px; color: var(--slate-500); margin-top: 6px; }
+  @media (max-width: 540px) {
+    .cr-tour-dash-track { padding: 18px 16px 14px; }
+    .cr-tour-dash-label { font-size: 8px; }
+  }
+
+  /* ─── S7 · VENDOR DECISION CARDS ─── */
+  .cr-tour-decision { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; max-width: 520px; margin: 0 auto; }
+  .cr-tour-decision-card { display: flex; flex-direction: column; gap: 10px; padding: 22px 18px; background: var(--white); border: 1px solid var(--slate-200); border-radius: 14px; text-align: left; box-shadow: 0 8px 24px rgba(27,67,50,0.05); position: relative; overflow: hidden; }
+  .cr-tour-decision-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--slate-300); }
+  .cr-tour-decision-card--approve::before { background: linear-gradient(90deg, var(--green-accent), var(--green-mid)); }
+  .cr-tour-decision-card--discuss::before { background: linear-gradient(90deg, var(--slate-400), var(--slate-500)); }
+  .cr-tour-decision-icon { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+  .cr-tour-decision-card--approve .cr-tour-decision-icon { background: var(--green-ghost); color: var(--green-deep); }
+  .cr-tour-decision-card--discuss .cr-tour-decision-icon { background: var(--slate-100); color: var(--slate-700); }
+  .cr-tour-decision-title { font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--green-dark); }
+  .cr-tour-decision-card--discuss .cr-tour-decision-title { color: var(--slate-600); }
+  .cr-tour-decision-head { font-size: 15px; font-weight: 700; color: var(--green-deep); }
+  .cr-tour-decision-body { font-size: 13px; color: var(--slate-600); line-height: 1.5; }
+  @media (max-width: 540px) {
+    .cr-tour-decision { grid-template-columns: 1fr; }
+  }
+
+  /* ─── S8 · TEAM NOTIFICATION FEED ─── */
+  .cr-tour-team { display: flex; flex-direction: column; gap: 8px; max-width: 480px; margin: 0 auto; text-align: left; }
+  .cr-tour-team-row { display: grid; grid-template-columns: 40px 1fr auto; gap: 14px; align-items: center; padding: 14px 18px; background: var(--white); border: 1px solid var(--slate-200); border-radius: 12px; box-shadow: 0 4px 12px rgba(27,67,50,0.04); }
+  .cr-tour-team-avatar { width: 36px; height: 36px; border-radius: 50%; background: var(--green-ghost); color: var(--green-deep); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; font-family: var(--font-mono); letter-spacing: -0.5px; }
+  .cr-tour-team-text { min-width: 0; }
+  .cr-tour-team-role { font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--slate-500); }
+  .cr-tour-team-msg { font-size: 13px; color: var(--green-deep); font-weight: 500; margin-top: 2px; }
+  .cr-tour-team-time { font-family: var(--font-mono); font-size: 10px; color: var(--slate-500); flex-shrink: 0; }
+
+  /* ─── S9 · SETTLEMENT WITH CREDIT APPLIED ─── */
+  .cr-tour-settle { background: var(--white); border: 1px solid var(--slate-200); border-radius: 14px; box-shadow: 0 20px 50px rgba(27,67,50,0.08); text-align: left; overflow: hidden; max-width: 460px; margin: 0 auto; }
+  .cr-tour-settle-head { padding: 16px 22px; border-bottom: 1px solid var(--slate-100); background: var(--slate-50); }
+  .cr-tour-settle-title { font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--slate-500); }
+  .cr-tour-settle-vendor { font-size: 14px; font-weight: 600; color: var(--green-deep); margin-top: 4px; }
+  .cr-tour-settle-rows { padding: 14px 22px; }
+  .cr-tour-settle-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; font-size: 14px; color: var(--slate-700); }
+  .cr-tour-settle-row + .cr-tour-settle-row { border-top: 1px dashed var(--slate-100); }
+  .cr-tour-settle-row--credit { color: var(--green-dark); font-weight: 600; }
+  .cr-tour-settle-row--credit svg { width: 14px; height: 14px; color: var(--green-mid); }
+  .cr-tour-settle-row-label { display: flex; align-items: center; gap: 8px; }
+  .cr-tour-settle-amt { font-family: var(--font-mono); font-weight: 600; color: var(--slate-700); }
+  .cr-tour-settle-row--credit .cr-tour-settle-amt { color: var(--green-dark); }
+  .cr-tour-settle-foot { padding: 14px 22px; background: var(--green-deep); display: flex; justify-content: space-between; align-items: center; }
+  .cr-tour-settle-foot-label { font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,0.7); }
+  .cr-tour-settle-foot-amt { font-family: var(--font-mono); font-size: 18px; font-weight: 700; color: var(--white); letter-spacing: -0.5px; }
+
+  /* ─── S10 · EBITDA LIFT CARD (dark) ─── */
+  .cr-tour-pnl { display: flex; flex-direction: column; gap: 14px; max-width: 520px; margin: 0 auto; }
+  .cr-tour-pnl-card { padding: 36px 32px; background: rgba(255,255,255,0.04); border: 1px solid rgba(149,213,178,0.18); border-radius: 18px; backdrop-filter: blur(4px); text-align: center; }
+  .cr-tour-pnl-label { font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--green-accent); margin-bottom: 18px; }
+  .cr-tour-pnl-jump { display: flex; align-items: center; justify-content: center; gap: 18px; flex-wrap: wrap; }
+  .cr-tour-pnl-num { font-family: var(--font-mono); font-size: clamp(36px, 5vw, 56px); font-weight: 700; letter-spacing: -2px; color: var(--white); line-height: 1; }
+  .cr-tour-pnl-num--after { color: var(--green-accent); }
+  .cr-tour-pnl-arrow { color: rgba(149,213,178,0.6); display: flex; align-items: center; }
+  .cr-tour-pnl-arrow svg { width: 36px; height: 36px; }
+  .cr-tour-pnl-delta { margin-top: 16px; display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; background: var(--green-accent); color: var(--green-deep); border-radius: 100px; font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: 1.5px; }
+  .cr-tour-pnl-anchor { font-family: var(--font-mono); font-size: 11px; letter-spacing: 1.5px; color: rgba(255,255,255,0.55); text-align: center; }
+
   /* ─── CALCULATOR ─── */
-  .calc-section { background: var(--slate-50); }
-  .calc-header { text-align: center; max-width: 600px; margin: 0 auto 64px; }
+  .calc-section { background: var(--slate-50); padding: 100px 48px; }
+  .calc-header { text-align: center; max-width: 640px; margin: 0 auto 56px; }
   .calc-header .section-desc { margin: 0 auto; }
   .calc-container { max-width: 640px; margin: 0 auto; }
-  .calc-slider-wrapper { margin-bottom: 40px; }
+  .calc-slider-wrapper { margin-bottom: 36px; }
   .calc-revenue-display { text-align: center; font-family: var(--font-mono); font-size: clamp(32px, 4vw, 48px); font-weight: 700; color: var(--green-deep); letter-spacing: -1px; margin-bottom: 16px; }
   .calc-slider { width: 100%; -webkit-appearance: none; appearance: none; height: 8px; border-radius: 4px; background: var(--slate-200); outline: none; }
   .calc-slider::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 28px; height: 28px; border-radius: 50%; background: var(--green-deep); cursor: pointer; box-shadow: 0 2px 8px rgba(27,67,50,0.3); }
@@ -167,76 +248,28 @@
   .calc-margin-row span:last-child { font-family: var(--font-mono); font-size: 20px; font-weight: 700; color: var(--white); }
   @media (max-width: 600px) {
     .calc-range { grid-template-columns: 1fr; }
-    .calc-range-col {
-      border-right: none;
-      border-bottom: 1px solid var(--slate-100);
-      padding: 18px 24px;
-    }
+    .calc-range-col { border-right: none; border-bottom: 1px solid var(--slate-100); padding: 18px 24px; }
     .calc-range-col:last-child { border-bottom: none; }
     .calc-range-col--mid { background: transparent; }
     .calc-range-year { font-size: 22px; }
   }
-  .calc-proof { text-align: center; margin-top: 32px; font-size: 14px; color: var(--slate-500); font-style: italic; }
-  .calc-guarantee {
-    text-align: center; max-width: 540px; margin: 32px auto 24px;
-    padding: 16px 24px; background: var(--green-ghost);
-    border: 1px solid rgba(149,213,178,0.3); border-radius: 12px;
-  }
-  .calc-guarantee p { font-size: 15px; color: var(--slate-600); margin: 0; }
+  .calc-guarantee { text-align: center; max-width: 540px; margin: 28px auto 20px; padding: 16px 24px; background: var(--green-ghost); border: 1px solid rgba(149,213,178,0.3); border-radius: 12px; }
+  .calc-guarantee p { font-size: 15px; color: var(--slate-700); margin: 0; }
   .calc-guarantee strong { color: var(--green-deep); }
   .calc-cta-wrap { text-align: center; margin-top: 24px; }
 
-  /* ─── PROOF TIMELINE ─── */
-  .proof-timeline { background: var(--green-deep); padding: 100px 48px; position: relative; overflow: hidden; }
-  .proof-timeline::before { content: ''; position: absolute; top: -200px; right: -200px; width: 500px; height: 500px; background: radial-gradient(circle, rgba(149,213,178,0.08), transparent 70%); }
-  .proof-timeline-header { text-align: center; max-width: 500px; margin: 0 auto 64px; position: relative; }
-  .proof-timeline-header .section-label { color: var(--green-accent); }
-  .proof-timeline-header .section-title { color: var(--white); }
-  .timeline-track { max-width: 600px; margin: 0 auto 64px; position: relative; padding-left: 32px; border-left: 2px solid rgba(149,213,178,0.3); }
-  .timeline-step { padding: 0 0 48px 32px; position: relative; }
-  .timeline-step:last-child { padding-bottom: 0; }
-  .timeline-step::before { content: ''; position: absolute; left: -9px; top: 4px; width: 16px; height: 16px; border-radius: 50%; background: var(--green-accent); border: 3px solid var(--green-deep); }
-  .timeline-day { font-family: var(--font-mono); font-size: 14px; font-weight: 700; color: var(--green-accent); margin-bottom: 4px; letter-spacing: 1px; }
-  .timeline-text { font-size: 16px; line-height: 1.6; color: rgba(255,255,255,0.7); }
-  .timeline-step:last-child .timeline-text { color: var(--white); font-weight: 600; }
-  .proof-stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; max-width: 760px; margin: 0 auto 24px; text-align: center; position: relative; }
-  .proof-stat-num { font-family: var(--font-mono); font-size: clamp(22px, 2.5vw, 28px); font-weight: 700; color: var(--white); letter-spacing: -0.5px; margin-bottom: 8px; }
-  .proof-stat-desc { font-size: 13px; color: rgba(255,255,255,0.85); }
-  .proof-note { text-align: center; font-size: 13px; color: rgba(255,255,255,0.7); font-style: italic; position: relative; }
-
   /* ─── FAQ ─── */
-  .faq-section {
-    background: var(--white); padding: 80px 48px;
-  }
+  .faq-section { background: var(--white); padding: 80px 48px; }
   .faq-header { text-align: center; max-width: 600px; margin: 0 auto 48px; }
   .faq-header .section-desc { margin: 0 auto; }
-  .faq-list {
-    max-width: 680px; margin: 0 auto;
-  }
-  .faq-list details {
-    border-bottom: 1px solid var(--slate-200);
-  }
-  .faq-list details:first-child {
-    border-top: 1px solid var(--slate-200);
-  }
-  .faq-list summary {
-    padding: 20px 0; font-size: 17px; font-weight: 600;
-    color: var(--green-deep); cursor: pointer; list-style: none;
-    display: flex; align-items: center; justify-content: space-between; gap: 16px;
-  }
+  .faq-list { max-width: 680px; margin: 0 auto; }
+  .faq-list details { border-bottom: 1px solid var(--slate-200); }
+  .faq-list details:first-child { border-top: 1px solid var(--slate-200); }
+  .faq-list summary { padding: 20px 0; font-size: 17px; font-weight: 600; color: var(--green-deep); cursor: pointer; list-style: none; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
   .faq-list summary::-webkit-details-marker { display: none; }
-  .faq-list summary::after {
-    content: '+'; font-size: 22px; font-weight: 400;
-    color: var(--slate-500); transition: transform 0.2s;
-    flex-shrink: 0;
-  }
-  .faq-list details[open] summary::after {
-    content: '\2212';
-  }
-  .faq-list details p {
-    padding: 0 0 20px; margin: 0; font-size: 15px;
-    line-height: 1.7; color: var(--slate-500);
-  }
+  .faq-list summary::after { content: '+'; font-size: 22px; font-weight: 400; color: var(--slate-500); transition: transform 0.2s; flex-shrink: 0; }
+  .faq-list details[open] summary::after { content: '\2212'; }
+  .faq-list details p { padding: 0 0 20px; margin: 0; font-size: 15px; line-height: 1.7; color: var(--slate-500); }
 
   /* ─── CTA PARALLAX ─── */
   .cta-section::before { transform: translate(-50%,-50%) translateY(var(--parallax-y, 0)); will-change: transform; }
@@ -248,70 +281,41 @@
 
   /* ─── RESPONSIVE ─── */
   @media (max-width: 900px) {
-    .page-hero { padding: 100px 24px 48px; min-height: auto; }
+    .page-hero { padding: 100px 24px 48px; }
     .hero-grid-lines { width: 100%; }
-    .page-hero .hero-rotator { letter-spacing: -1px; }
-    .pain-section { padding: 60px 24px; }
-    .proof-timeline { padding: 80px 24px; }
-    .proof-stats-row { grid-template-columns: 1fr; gap: 20px; }
+    .calc-section { padding: 70px 24px; }
     .faq-section { padding: 60px 24px; }
-    .sample-eval-grid { grid-template-columns: 1fr !important; gap: 32px !important; max-width: 480px !important; }
   }
 
   /* ─── REDUCED MOTION ─── */
   @media (prefers-reduced-motion: reduce) {
-    .reveal {
-      opacity: 1; transform: none; transition: none;
-    }
+    .reveal { opacity: 1; transform: none; transition: none; }
     .page-hero .section-label,
-    .page-hero .section-title,
-    .page-hero .section-desc {
-      opacity: 1; transform: none; transition: none;
-    }
+    .page-hero .hero-h1,
+    .page-hero .hero-lede,
+    .page-hero .hero-actions-centered { opacity: 1; transform: none; transition: none; }
     .hero-bg-gradient, .hero-bg-gradient-2 { animation: none; }
-    .hero-rotator-slide { animation: none !important; opacity: 0 !important; transform: none !important; }
-    .hero-rotator-slide:first-child { opacity: 1 !important; position: relative !important; inset: auto !important; }
-    .hero-rotator-ghost { display: none !important; }
   }
 
-  /* ─── MOBILE COLLAPSE PATTERN (matches homepage d03212a) ─── */
+  /* ─── MOBILE COLLAPSE PATTERN (calc gate) ─── */
   .m-collapse-cb { position: absolute; opacity: 0; pointer-events: none; height: 0; width: 0; }
   .m-collapse-trigger { display: none; }
   .m-collapse-body { display: block; }
   .uc-mobile-fallback-cta { display: none; }
-
   @media (max-width: 700px) {
     .m-collapse-body { display: none; }
     .m-collapse-cb:checked ~ .m-collapse-body { display: block; }
-    .m-collapse-cb:checked ~ .m-collapse-body .reveal {
-      opacity: 1 !important; transform: none !important;
-    }
-    .calc-section .m-collapse-trigger,
-    .sample-eval-section .m-collapse-trigger {
-      display: inline-flex; cursor: pointer;
-      align-items: center; justify-content: center; gap: 8px;
-      margin: 8px auto 0;
-      padding: 14px 28px;
-      background: var(--green-deep); color: var(--white);
-      border-radius: 12px;
-      font-family: var(--font-mono); font-size: 13px; font-weight: 700;
-      letter-spacing: 1px; text-transform: uppercase;
-    }
-    .calc-section .m-collapse-trigger::after,
-    .sample-eval-section .m-collapse-trigger::after { content: '↓'; font-size: 16px; line-height: 1; }
-    .calc-section .m-collapse-cb:checked ~ .m-collapse-trigger::after,
-    .sample-eval-section .m-collapse-cb:checked ~ .m-collapse-trigger::after { content: '↑'; }
-    .calc-section .m-collapse-cb:checked ~ .m-collapse-body,
-    .sample-eval-section .m-collapse-cb:checked ~ .m-collapse-body { margin-top: 28px; }
-    .calc-section, .sample-eval-section { text-align: center; }
-    .calc-section .m-collapse-body,
-    .sample-eval-section .m-collapse-body { text-align: left; }
-    .calc-section .m-collapse-cb:not(:checked) ~ .uc-mobile-fallback-cta {
-      display: flex; justify-content: center; padding: 20px 24px 0; margin: 0;
-    }
+    .m-collapse-cb:checked ~ .m-collapse-body .reveal { opacity: 1 !important; transform: none !important; }
+    .calc-section .m-collapse-trigger { display: inline-flex; cursor: pointer; align-items: center; justify-content: center; gap: 8px; margin: 8px auto 0; padding: 14px 28px; background: var(--green-deep); color: var(--white); border-radius: 12px; font-family: var(--font-mono); font-size: 13px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
+    .calc-section .m-collapse-trigger::after { content: '↓'; font-size: 16px; line-height: 1; }
+    .calc-section .m-collapse-cb:checked ~ .m-collapse-trigger::after { content: '↑'; }
+    .calc-section .m-collapse-cb:checked ~ .m-collapse-body { margin-top: 28px; }
+    .calc-section { text-align: center; }
+    .calc-section .m-collapse-body { text-align: left; }
+    .calc-section .m-collapse-cb:not(:checked) ~ .uc-mobile-fallback-cta { display: flex; justify-content: center; padding: 20px 24px 0; margin: 0; }
   }
 </style>
-<noscript><style>.reveal,.page-hero .section-label,.page-hero .section-title,.page-hero .section-desc{opacity:1;transform:none;transition:none;}</style></noscript>
+<noscript><style>.reveal,.page-hero .section-label,.page-hero .hero-h1,.page-hero .hero-lede,.page-hero .hero-actions-centered{opacity:1;transform:none;transition:none;}</style></noscript>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-H2LBJT03WE"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-H2LBJT03WE');</script>
 <script>function initApollo(){var n=Math.random().toString(36).substring(7),o=document.createElement("script");
@@ -325,38 +329,6 @@ document.head.appendChild(o)}initApollo();</script>
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "Do my vendors have to agree to credits?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes, but we handle the entire approval process. We send the credit memo to the vendor, manage any questions or disputes, and track it to resolution. Vendors appreciate the structure — it's transparent and fair for both sides."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What does credit recovery cost?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "The evaluation is free. Standalone Credit Recovery is commission-based on what we recover, no monthly fee — pay only when we recover. Bundle with Core AP and the commission drops further. At our Massachusetts client, we identified unrecovered credits in the $8,000–$25,000/month range."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "How quickly will I see results?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "First credits are typically identified within two weeks of data analysis. Vendor approvals follow within 30 days."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "How is this different from a collection agency?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "We're not collecting debts. We're recovering credits you're already owed under existing vendor agreements — returns, expirations, and co-marketing adjustments. Vendors actually prefer the structure because it's transparent and fair. It also makes approval easier on the vendor side — credit memos arrive with line-item Metrc backup, so there's documentation to confirm instead of invoicing back-and-forth."
-      }
-    },
-    {
-      "@type": "Question",
       "name": "What credits do you actually recover?",
       "acceptedAnswer": {
         "@type": "Answer",
@@ -365,10 +337,42 @@ document.head.appendChild(o)}initApollo();</script>
     },
     {
       "@type": "Question",
+      "name": "Do my vendors have to agree to credits?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Every credit memo we send waits for the vendor to reply Approved or Let's discuss. We don't auto-apply on silence — we follow up every few business days until they respond, and we work through any line they want to question. Vendors prefer the structure because it's transparent: every line is cited to Metrc."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How quickly will I see results?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "First credits identified within two weeks of data analysis. Vendor approvals follow over the next 30 days. Approved credits apply on the next settlement to that vendor."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How is this different from a collection agency?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We're not collecting debts. We're recovering credits you're already owed under existing vendor agreements — returns, expirations, and co-marketing adjustments. Vendors prefer the structure because credit memos arrive with line-item Metrc backup, so there's documentation to confirm instead of invoicing back-and-forth."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What does credit recovery cost?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Commission-based on what we recover. No monthly fee. No recovery, no fee. Bundle with managed AP and the commission rate drops further. At our Massachusetts client, we identified unrecovered credits in the $8,000–$25,000/month range."
+      }
+    },
+    {
+      "@type": "Question",
       "name": "Can I use credit recovery without your AP service?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes. Credit recovery is standalone. It also pairs with our AP service if you want one team across vendor finances — same Metrc connection, same vendor relationships."
+        "text": "Yes. Credit recovery is standalone. It pairs naturally with our managed AP if you want one team across vendor finances — same Metrc connection, same vendor relationships, lower commission rate when bundled."
       }
     }
   ]
@@ -390,7 +394,7 @@ document.head.appendChild(o)}initApollo();</script>
   "@type": "Service",
   "name": "Cannabis Vendor Credit Recovery",
   "provider": { "@type": "Organization", "name": "ShelfSpace", "url": "https://shelfspace.pro" },
-  "description": "$200K+/year in vendor credits go untracked. We recover them on success — commission-based on what we find, no monthly fee. Lower commission when bundled with Core AP.",
+  "description": "We recover credits cannabis dispensaries are owed from their vendors — returns, expirations, and co-marketing costs. Commission-based on what we recover. No recovery, no fee. Free evaluation. Lower commission rate when bundled with managed AP.",
   "areaServed": "US",
   "url": "https://shelfspace.pro/credit-recovery"
 }
@@ -415,31 +419,22 @@ document.head.appendChild(o)}initApollo();</script>
   <div class="nav-hamburger" onclick="document.querySelector('.nav-links').classList.toggle('mobile-open'); event.stopPropagation();"><span></span><span></span><span></span></div>
 </nav>
 
-<!-- SECTION 1: PAGE HERO -->
+<!-- PAGE HERO (slim) -->
 <div class="page-hero">
   <div class="hero-bg-gradient"></div>
   <div class="hero-bg-gradient-2"></div>
   <div class="hero-grid-lines"></div>
-  <div class="hero-text hero-text--solo">
+  <div class="hero-text--solo">
     <div class="section-label">Recover credits from your vendors</div>
-    <h1 class="hero-rotator section-title" aria-label="Your profitability is our mission — your gross margin data is lying to you, you are bleeding cash without knowing it, you eat the cost of most product returns, you eat the cost of running product promotions, you pay for products that expire, we ask vendors to help foot the bill">
-      <span class="hero-rotator-slide">Your profitability is our mission.</span>
-      <span class="hero-rotator-slide">Your gross margin data is lying to you.</span>
-      <span class="hero-rotator-slide">You are bleeding cash without knowing it.</span>
-      <span class="hero-rotator-slide">You eat the cost of most product returns.</span>
-      <span class="hero-rotator-slide">You eat the cost of running product promotions.</span>
-      <span class="hero-rotator-slide">You pay for products that expire.</span>
-      <span class="hero-rotator-slide">We ask vendors to help foot the bill.</span>
-      <span class="hero-rotator-ghost" aria-hidden="true">You eat the cost of running product promotions.</span>
-    </h1>
-    <p class="hero-lede">You bought product assuming a 50% margin. After the promotions you run, product returns, and inventory aging, the REAL margin is much lower. What do you do?</p>
+    <h1 class="hero-h1">The vendor owes you money. We make sure you get it.</h1>
+    <p class="hero-lede">Returns, expirations, and promo costs — credited line by line, every month. Most retailers never ask. We do.</p>
     <div class="hero-actions-centered">
       <a href="/contact" class="btn-primary">Get My Free Evaluation <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
     </div>
   </div>
 </div>
 
-<!-- SECTION 1.5: BRAND TICKER — vendors we recover credits from -->
+<!-- BRAND TICKER -->
 <section class="brand-ticker">
   <div class="brand-ticker-label">Recovering credits from brands you know</div>
   <div class="brand-ticker-track">
@@ -466,268 +461,437 @@ document.head.appendChild(o)}initApollo();</script>
   </div>
 </section>
 
-<!-- SECTION 2: PAIN -->
-<section class="pain-section">
-  <div class="pain-monthly reveal">
-    <div class="pain-monthly-number">+$17,000<span class="pain-monthly-qualifier">/month in cash</span></div>
-    <div class="pain-monthly-sub"><strong>Straight to the bottom line.</strong> That's what vendor credits can do for you.</div>
+<!-- SERVICE TOUR · S1 · The Basics -->
+<section class="svc-section svc-section--white" id="cr-tour-1">
+  <div class="svc-inner">
+    <div class="cr-tour-numeral" aria-hidden="true">1</div>
+    <div class="svc-eyebrow reveal">Step 1 / 10 &middot; The Basics</div>
+    <h2 class="svc-headline reveal">You're owed money. You just haven't asked.</h2>
+    <p class="svc-sub reveal">Every vendor contract owes you a credit when things go wrong. Three categories. Every month.</p>
+    <div class="svc-visual reveal reveal-delay-1">
+      <div class="cr-tour-categories" aria-hidden="true">
+        <div class="cr-tour-cat">
+          <div class="cr-tour-cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg></div>
+          <div class="cr-tour-cat-body">
+            <div class="cr-tour-cat-label">Returns</div>
+            <div class="cr-tour-cat-text">Product came back. You ate the cost. The vendor owes the credit.</div>
+          </div>
+        </div>
+        <div class="cr-tour-cat">
+          <div class="cr-tour-cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+          <div class="cr-tour-cat-body">
+            <div class="cr-tour-cat-label">Expirations</div>
+            <div class="cr-tour-cat-text">Inventory aged out before sale. The vendor owes the credit.</div>
+          </div>
+        </div>
+        <div class="cr-tour-cat">
+          <div class="cr-tour-cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+          <div class="cr-tour-cat-body">
+            <div class="cr-tour-cat-label">Promos &amp; co-marketing</div>
+            <div class="cr-tour-cat-text">Discounted vendor product to move it. The vendor owes the credit.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="svc-why reveal">Most operators take the hit and move on. The credits are real. Most vendor contracts already cover them. Most retailers never ask.</p>
+    <a class="svc-link reveal" href="/docs/credit-recovery/overview">How vendor credits work <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
   </div>
-  <div class="pain-lines reveal">
-    <span class="pain-pill"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg> Product Returns</span>
-    <span class="pain-pill"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Expired Products</span>
-    <span class="pain-pill"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg> Deals and Promotions</span>
-  </div>
-  <p class="pain-pivot reveal">We ask vendors for credits on your behalf.</p>
 </section>
 
-<!-- WHY-STRIP -->
-<section class="why-strip reveal" aria-label="The mission behind credit recovery">
-  <div class="why-strip-eyebrow">Why we recover credits</div>
-  <h2 class="why-strip-headline">The vendor owes you money. They're not going to volunteer it.</h2>
-  <p class="why-strip-body">You bought a $40 product expecting to sell it at $80. Then it expired. Or you discounted it. Or it came back broken. Most vendor contracts owe you a credit on each one. Most retailers never ask. We do.</p>
-  <a href="/about#mission" class="why-strip-link">The full thesis <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+<!-- SERVICE TOUR · S2 · Managed Service -->
+<section class="svc-section svc-section--slate" id="cr-tour-2">
+  <div class="svc-inner">
+    <div class="cr-tour-numeral" aria-hidden="true">2</div>
+    <div class="svc-eyebrow reveal">Step 2 / 10 &middot; Managed Service</div>
+    <h2 class="svc-headline reveal">We run the whole program.</h2>
+    <p class="svc-sub reveal">Not a tool. Not a dashboard you log in to. A managed team doing the work.</p>
+    <div class="svc-visual reveal reveal-delay-1">
+      <div class="cr-tour-engine" aria-hidden="true">
+        <div class="cr-tour-engine-col">
+          <div class="cr-tour-engine-pill">Returns</div>
+          <div class="cr-tour-engine-pill">Expirations</div>
+          <div class="cr-tour-engine-pill">Promos</div>
+        </div>
+        <div class="cr-tour-engine-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+        <div class="cr-tour-engine-core">
+          <div class="cr-tour-engine-core-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div>
+          <div class="cr-tour-engine-core-name">ShelfSpace</div>
+          <div class="cr-tour-engine-core-sub">Managed</div>
+        </div>
+        <div class="cr-tour-engine-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+        <div class="cr-tour-engine-col">
+          <div class="cr-tour-engine-pill cr-tour-engine-pill--dest">Recovered credits<small>To your bottom line</small></div>
+        </div>
+      </div>
+    </div>
+    <p class="svc-why reveal">We connect to Metrc. We pull the data. We talk to the vendor. We track every conversation. We apply credits when they're approved. Your team approves. The rest is ours.</p>
+    <a class="svc-link reveal" href="/docs/credit-recovery/onboarding-sop">The full credit-recovery playbook <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+  </div>
 </section>
 
-<!-- SECTION 3: CALCULATOR + INLINE GUARANTEE + CTA -->
+<!-- SERVICE TOUR · S3 · Data Sources -->
+<section class="svc-section svc-section--white" id="cr-tour-3">
+  <div class="svc-inner">
+    <div class="cr-tour-numeral" aria-hidden="true">3</div>
+    <div class="svc-eyebrow reveal">Step 3 / 10 &middot; Data Sources</div>
+    <h2 class="svc-headline reveal">Metrc and your POS, working for you.</h2>
+    <p class="svc-sub reveal">Read-only sync. The same source of truth your inventory team already uses.</p>
+    <div class="svc-visual reveal reveal-delay-1">
+      <div class="cr-tour-sources" aria-hidden="true">
+        <div class="cr-tour-sources-row">
+          <div class="cr-tour-source">
+            <div class="cr-tour-source-head">
+              <img src="/metrc-logo.png" alt="" class="cr-tour-source-logo" loading="lazy">
+              <span class="cr-tour-source-badge">Read-only</span>
+            </div>
+            <div class="cr-tour-source-title">Metrc</div>
+            <ul class="cr-tour-source-list">
+              <li>Transfer manifests</li>
+              <li>Package waste records</li>
+              <li>Expiration dates</li>
+            </ul>
+          </div>
+          <div class="cr-tour-source">
+            <div class="cr-tour-source-head">
+              <div class="cr-tour-source-title">Your POS</div>
+              <span class="cr-tour-source-badge">Read-only</span>
+            </div>
+            <ul class="cr-tour-source-list">
+              <li>Sell-through</li>
+              <li>Discount tracking</li>
+              <li>Return transactions</li>
+            </ul>
+          </div>
+        </div>
+        <div class="cr-tour-sources-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+        <div class="cr-tour-unified">
+          <div class="cr-tour-unified-label">Unified credit-recovery feed</div>
+          <ul class="cr-tour-unified-rows">
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Returns trail &middot; Metrc</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Expirations &middot; Metrc + POS</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Promo costs &middot; POS discounts</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <p class="svc-why reveal">The platform you already trust for compliance, doing real work for you. No CSVs. No exports. No manual recon. Read-only means we can see, not change.</p>
+    <a class="svc-link reveal" href="/docs/integrations/metrc">How the Metrc integration works <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+  </div>
+</section>
+
+<!-- SERVICE TOUR · S4 · The Credit Memo -->
+<section class="svc-section svc-section--slate" id="cr-tour-4">
+  <div class="svc-inner">
+    <div class="cr-tour-numeral" aria-hidden="true">4</div>
+    <div class="svc-eyebrow reveal">Step 4 / 10 &middot; The Credit Memo</div>
+    <h2 class="svc-headline reveal">Every month, one memo per vendor.</h2>
+    <p class="svc-sub reveal">A 7-page review. Returns, expirations, promos &mdash; each one traced back to the Metrc record.</p>
+    <div class="svc-visual reveal reveal-delay-1">
+      <div class="svc-memo" aria-hidden="true">
+        <div class="svc-memo-head">
+          <div class="svc-memo-title">Credit Memo &middot; April</div>
+          <div class="svc-memo-vendor">Pacific Roots</div>
+        </div>
+        <div class="svc-memo-line">
+          <span class="svc-memo-desc">Returns<small>Flower, 8 units</small></span>
+          <span class="svc-memo-amt">$312</span>
+        </div>
+        <div class="svc-memo-line">
+          <span class="svc-memo-desc">Expired product<small>Gummies, 3 units</small></span>
+          <span class="svc-memo-amt">$189</span>
+        </div>
+        <div class="svc-memo-line">
+          <span class="svc-memo-desc">Promo cost<small>BOGO weekend, vendor-owed</small></span>
+          <span class="svc-memo-amt">$97</span>
+        </div>
+        <span class="svc-memo-stamp">Total &middot; $598</span>
+      </div>
+    </div>
+    <p class="svc-why reveal">Every line cited and formatted for the vendor's AP team to co-sign. <a class="cr-tour-pdf-link" href="/ShelfSpace_Sample_Monthly_Review.pdf" target="_blank" rel="noopener" aria-label="See the full 7-page monthly review sample, PDF, opens in new tab">See the 7-page sample (PDF)</a>.</p>
+    <a class="svc-link reveal" href="/blog/anatomy-of-a-vendor-credit-memo">Anatomy of a vendor credit memo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+  </div>
+</section>
+
+<!-- SERVICE TOUR · S5 · Outreach -->
+<section class="svc-section svc-section--white" id="cr-tour-5">
+  <div class="svc-inner">
+    <div class="cr-tour-numeral" aria-hidden="true">5</div>
+    <div class="svc-eyebrow reveal">Step 5 / 10 &middot; Outreach</div>
+    <h2 class="svc-headline reveal">Then we send it. And handle the reply.</h2>
+    <p class="svc-sub reveal">We email the vendor's AP team. We follow up every few business days until they respond. You stay out of it.</p>
+    <div class="svc-visual reveal reveal-delay-1">
+      <div class="cr-tour-mail" aria-hidden="true">
+        <div class="cr-tour-mail-head">
+          <div><strong>To</strong> ap@pacificroots.com</div>
+          <div><strong>From</strong> ShelfSpace &middot; on behalf of Greenbrook Retail</div>
+          <div><strong>Subject</strong> Credit Memo CM-1042 &middot; April</div>
+        </div>
+        <div class="cr-tour-mail-attach">
+          <span class="cr-tour-mail-attach-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.44 11.05l-9.19 9.19a6 6 0 01-8.49-8.49l9.19-9.19a4 4 0 015.66 5.66l-9.2 9.19a2 2 0 01-2.83-2.83l8.49-8.48"/></svg> CM-1042 &middot; Monthly Review.pdf</span>
+          <span class="cr-tour-mail-attach-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.44 11.05l-9.19 9.19a6 6 0 01-8.49-8.49l9.19-9.19a4 4 0 015.66 5.66l-9.2 9.19a2 2 0 01-2.83-2.83l8.49-8.48"/></svg> CM-1042 &middot; Co-signable.pdf</span>
+        </div>
+        <div class="cr-tour-mail-body">
+          <p>Pacific Roots team &mdash;</p>
+          <p>April credit memo attached. Total $598, with line-item Metrc backup. Reply Approved or open any line for discussion.</p>
+        </div>
+        <div class="cr-tour-mail-foot">
+          <span>SENT &middot; 9:14 AM</span>
+          <span class="cr-tour-mail-foot-pill">FOLLOW-UP QUEUED</span>
+        </div>
+      </div>
+    </div>
+    <p class="svc-why reveal">Vendor AP teams don't ignore us. They get a clean memo with backup they can verify in five minutes. We follow up. Your inbox stays quiet.</p>
+    <a class="svc-link reveal" href="/vendors">How we run vendor comms <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+  </div>
+</section>
+
+<!-- SERVICE TOUR · S6 · Visibility -->
+<section class="svc-section svc-section--slate" id="cr-tour-6">
+  <div class="svc-inner">
+    <div class="cr-tour-numeral" aria-hidden="true">6</div>
+    <div class="svc-eyebrow reveal">Step 6 / 10 &middot; Visibility</div>
+    <h2 class="svc-headline reveal">You see everything. No black box.</h2>
+    <p class="svc-sub reveal">Every memo, every reply, every approval &mdash; on a single dashboard.</p>
+    <div class="svc-visual reveal reveal-delay-1">
+      <div class="cr-tour-dash" aria-hidden="true">
+        <div class="cr-tour-dash-head">
+          <div>
+            <div class="cr-tour-dash-id">CM-1042</div>
+            <div class="cr-tour-dash-vendor">Pacific Roots</div>
+          </div>
+          <div class="cr-tour-dash-amt">$598</div>
+        </div>
+        <div class="cr-tour-dash-track">
+          <div class="cr-tour-dash-step cr-tour-dash-step--done">
+            <div class="cr-tour-dash-dot"></div>
+            <div class="cr-tour-dash-label">Sent</div>
+          </div>
+          <div class="cr-tour-dash-line cr-tour-dash-line--done"></div>
+          <div class="cr-tour-dash-step cr-tour-dash-step--current">
+            <div class="cr-tour-dash-dot"></div>
+            <div class="cr-tour-dash-label">Pending<br>Vendor</div>
+          </div>
+          <div class="cr-tour-dash-line"></div>
+          <div class="cr-tour-dash-step">
+            <div class="cr-tour-dash-dot"></div>
+            <div class="cr-tour-dash-label">Approved</div>
+          </div>
+          <div class="cr-tour-dash-line"></div>
+          <div class="cr-tour-dash-step">
+            <div class="cr-tour-dash-dot"></div>
+            <div class="cr-tour-dash-label">Applied</div>
+          </div>
+        </div>
+        <div class="cr-tour-dash-reply">
+          <div class="cr-tour-dash-reply-label">Latest reply &middot; Pacific Roots</div>
+          <div class="cr-tour-dash-reply-body">&ldquo;Approved on returns + expirations. Let's discuss the promo line.&rdquo;</div>
+          <div class="cr-tour-dash-reply-meta">Apr 18 &middot; 11:32 AM</div>
+        </div>
+      </div>
+    </div>
+    <p class="svc-why reveal">When the buyer asks &ldquo;did Pacific Roots ever approve that memo?&rdquo; &mdash; you have the answer in one click. Every doc. Every word. Every approval. One pane.</p>
+    <a class="svc-link reveal" href="/docs/credit-recovery/approval-workflow">The credit memo lifecycle <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+  </div>
+</section>
+
+<!-- SERVICE TOUR · S7 · Vendor Decision -->
+<section class="svc-section svc-section--ghost" id="cr-tour-7">
+  <div class="svc-inner">
+    <div class="cr-tour-numeral" aria-hidden="true">7</div>
+    <div class="svc-eyebrow reveal">Step 7 / 10 &middot; Vendor Decision</div>
+    <h2 class="svc-headline reveal">Vendors approve. Or open discussion.</h2>
+    <p class="svc-sub reveal">One memo. Two answers. We handle whichever lands.</p>
+    <div class="svc-visual reveal reveal-delay-1">
+      <div class="cr-tour-decision" aria-hidden="true">
+        <div class="cr-tour-decision-card cr-tour-decision-card--approve">
+          <div class="cr-tour-decision-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div class="cr-tour-decision-title">Approved</div>
+          <div class="cr-tour-decision-head">Credit lands on next settlement.</div>
+          <div class="cr-tour-decision-body">Done. Posted to your books. The vendor's next check is smaller by the credit amount.</div>
+        </div>
+        <div class="cr-tour-decision-card cr-tour-decision-card--discuss">
+          <div class="cr-tour-decision-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+          <div class="cr-tour-decision-title">Let's discuss</div>
+          <div class="cr-tour-decision-head">Goes to In Discussion.</div>
+          <div class="cr-tour-decision-body">We work the line in question. The rest of the memo can still approve while one line negotiates.</div>
+        </div>
+      </div>
+    </div>
+    <p class="svc-why reveal">Silence is not approval. The memo waits until the vendor responds. If they ask questions, we answer them. If they push back on a line, we negotiate that one line and approve the rest. The retailer doesn't sit in those emails.</p>
+    <a class="svc-link reveal" href="/docs/credit-recovery/approval-workflow">The approval workflow <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+  </div>
+</section>
+
+<!-- SERVICE TOUR · S8 · Internal Sign-off -->
+<section class="svc-section svc-section--white" id="cr-tour-8">
+  <div class="svc-inner">
+    <div class="cr-tour-numeral" aria-hidden="true">8</div>
+    <div class="svc-eyebrow reveal">Step 8 / 10 &middot; Internal Sign-off</div>
+    <h2 class="svc-headline reveal">When it lands, your team sees it.</h2>
+    <p class="svc-sub reveal">Owner, buyer, bookkeeper &mdash; whoever should know, knows.</p>
+    <div class="svc-visual reveal reveal-delay-1">
+      <div class="cr-tour-team" aria-hidden="true">
+        <div class="cr-tour-team-row">
+          <div class="cr-tour-team-avatar">OW</div>
+          <div class="cr-tour-team-text">
+            <div class="cr-tour-team-role">Owner</div>
+            <div class="cr-tour-team-msg">Pacific Roots &middot; $598 &middot; approved</div>
+          </div>
+          <div class="cr-tour-team-time">2:13 PM</div>
+        </div>
+        <div class="cr-tour-team-row">
+          <div class="cr-tour-team-avatar">BY</div>
+          <div class="cr-tour-team-text">
+            <div class="cr-tour-team-role">Buyer</div>
+            <div class="cr-tour-team-msg">Pacific Roots &middot; $598 &middot; approved</div>
+          </div>
+          <div class="cr-tour-team-time">2:13 PM</div>
+        </div>
+        <div class="cr-tour-team-row">
+          <div class="cr-tour-team-avatar">BK</div>
+          <div class="cr-tour-team-text">
+            <div class="cr-tour-team-role">Bookkeeper</div>
+            <div class="cr-tour-team-msg">Posted to QuickBooks &middot; ready for close</div>
+          </div>
+          <div class="cr-tour-team-time">2:14 PM</div>
+        </div>
+      </div>
+    </div>
+    <p class="svc-why reveal">Your buyer can hold the vendor accountable on the next allocation. Your bookkeeper closes the month with a clean journal entry. Nobody hears about a credit three weeks later from accounting.</p>
+    <a class="svc-link reveal" href="/for-bookkeepers">How this works for cannabis bookkeepers <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+  </div>
+</section>
+
+<!-- SERVICE TOUR · S9 · Settlement -->
+<section class="svc-section svc-section--slate" id="cr-tour-9">
+  <div class="svc-inner">
+    <div class="cr-tour-numeral" aria-hidden="true">9</div>
+    <div class="svc-eyebrow reveal">Step 9 / 10 &middot; Settlement</div>
+    <h2 class="svc-headline reveal">The next check to that vendor goes out smaller.</h2>
+    <p class="svc-sub reveal">Approved memo applies as a line on the next settlement. Cash never leaves your account.</p>
+    <div class="svc-visual reveal reveal-delay-1">
+      <div class="cr-tour-settle" aria-hidden="true">
+        <div class="cr-tour-settle-head">
+          <div class="cr-tour-settle-title">Settlement &middot; Week of Apr 22</div>
+          <div class="cr-tour-settle-vendor">Pacific Roots</div>
+        </div>
+        <div class="cr-tour-settle-rows">
+          <div class="cr-tour-settle-row">
+            <span class="cr-tour-settle-row-label">Invoices</span>
+            <span class="cr-tour-settle-amt">$3,840.00</span>
+          </div>
+          <div class="cr-tour-settle-row cr-tour-settle-row--credit">
+            <span class="cr-tour-settle-row-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Credit memo CM-1042</span>
+            <span class="cr-tour-settle-amt">&minus;$598.00</span>
+          </div>
+        </div>
+        <div class="cr-tour-settle-foot">
+          <span class="cr-tour-settle-foot-label">Net check</span>
+          <span class="cr-tour-settle-foot-amt">$3,242.00</span>
+        </div>
+      </div>
+    </div>
+    <p class="svc-why reveal">This is the whole point. The credit you're owed comes out of the next check you'd be writing anyway. No collection call. No invoice chase. The math just gets right.</p>
+    <a class="svc-link reveal" href="/accounts-payable">How vendor payments work <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+  </div>
+</section>
+
+<!-- SERVICE TOUR · S10 · The Result (DARK · climax) -->
+<section class="svc-section svc-section--dark" id="cr-tour-10">
+  <div class="svc-inner">
+    <div class="cr-tour-numeral cr-tour-numeral--two" aria-hidden="true">10</div>
+    <div class="svc-eyebrow reveal">Step 10 / 10 &middot; The Result</div>
+    <h2 class="svc-headline reveal">Money you weren't going to get. On your P&amp;L.</h2>
+    <p class="svc-sub reveal">Every recovered credit drops straight to EBITDA. Same revenue. More profit.</p>
+    <div class="svc-visual reveal reveal-delay-1">
+      <div class="cr-tour-pnl" aria-hidden="true">
+        <div class="cr-tour-pnl-card">
+          <div class="cr-tour-pnl-label">EBITDA &middot; Massachusetts client</div>
+          <div class="cr-tour-pnl-jump">
+            <span class="cr-tour-pnl-num">15.0%</span>
+            <span class="cr-tour-pnl-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+            <span class="cr-tour-pnl-num cr-tour-pnl-num--after">17.3%</span>
+          </div>
+          <div><span class="cr-tour-pnl-delta">+2.3 PTS EBITDA</span></div>
+        </div>
+        <div class="cr-tour-pnl-anchor">$8K&ndash;$25K / month identified in unrecovered credits &middot; 2-location MA chain</div>
+      </div>
+    </div>
+    <p class="svc-why reveal">This is why we built the program. Profitability is the destination. Everything in steps 1&ndash;9 exists so this number moves.</p>
+    <a class="svc-link reveal" href="/blog/case-study-ebitda-credit-recovery">Read the case study <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+  </div>
+</section>
+
+<!-- CALCULATOR -->
 <section class="calc-section" id="calculator">
   <div class="calc-header">
     <div class="section-label reveal">Your Numbers</div>
-    <h2 class="section-title reveal">How much in vendor credits is going un-reconciled at your stores?</h2>
+    <h2 class="section-title reveal">How much is sitting unrecovered at your stores?</h2>
   </div>
   <input type="checkbox" id="m-collapse-cr-calc" class="m-collapse-cb">
   <label for="m-collapse-cr-calc" class="m-collapse-trigger">Run the numbers</label>
   <p class="uc-mobile-fallback-cta"><a href="/contact" class="btn-primary">Get My Free Evaluation</a></p>
   <div class="m-collapse-body">
-  <div class="calc-container reveal">
-    <div class="calc-slider-wrapper">
-      <div class="calc-revenue-display" id="calc-revenue">$3,000,000</div>
-      <input type="range" class="calc-slider" id="calc-slider" min="500000" max="10000000" step="100000" value="3000000" aria-label="Annual revenue">
-      <div class="calc-slider-labels">
-        <span>$500K</span>
-        <span>Annual Revenue</span>
-        <span>$10M</span>
-      </div>
-    </div>
-    <div class="calc-results">
-      <div class="calc-range">
-        <div class="calc-range-col calc-range-col--low">
-          <div class="calc-range-label">Conservative</div>
-          <div class="calc-range-year" id="calc-low-year">$36,000</div>
-          <div class="calc-range-month"><span id="calc-low-month">$3,000</span>/mo</div>
-        </div>
-        <div class="calc-range-col calc-range-col--mid">
-          <div class="calc-range-label">Typical</div>
-          <div class="calc-range-year" id="calc-mid-year">$60,000</div>
-          <div class="calc-range-month"><span id="calc-mid-month">$5,000</span>/mo</div>
-        </div>
-        <div class="calc-range-col calc-range-col--high">
-          <div class="calc-range-label">Aggressive</div>
-          <div class="calc-range-year" id="calc-high-year">$90,000</div>
-          <div class="calc-range-month"><span id="calc-high-month">$7,500</span>/mo</div>
+    <div class="calc-container reveal">
+      <div class="calc-slider-wrapper">
+        <div class="calc-revenue-display" id="calc-revenue">$3,000,000</div>
+        <input type="range" class="calc-slider" id="calc-slider" min="500000" max="10000000" step="100000" value="3000000" aria-label="Annual revenue">
+        <div class="calc-slider-labels">
+          <span>$500K</span>
+          <span>Annual Revenue</span>
+          <span>$10M</span>
         </div>
       </div>
-      <div class="calc-margin-row">
-        <span>EBITDA impact</span>
-        <span id="calc-margin">15.0% → 17.0%</span>
-      </div>
-    </div>
-    <p style="text-align:center;margin-top:12px;font-size:13px;color:var(--green-dark);font-weight:500;">Recovered credits go straight to the bottom line. Same revenue, higher EBITDA.</p>
-    <p style="text-align:center;margin-top:16px;font-size:11px;color:var(--slate-500);">*Estimates only — your actual numbers may vary.</p>
-    <div class="calc-guarantee reveal">
-      <p><strong>Zero risk: we only get paid when you get paid.</strong></p>
-    </div>
-    <div class="calc-cta-wrap">
-      <a href="/contact" class="btn-primary">Get My Free Evaluation <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
-      <p style="font-size:14px;color:var(--slate-500);margin-top:12px;">Minutes to connect. Report within days.</p>
-    </div>
-  </div>
-  </div>
-</section>
-
-<!-- METRC TRUST STRIP -->
-<div style="text-align:center;padding:32px 48px;background:var(--white);border-top:1px solid var(--slate-100);">
-  <div style="display:flex;justify-content:center;align-items:center;gap:12px;flex-wrap:wrap;">
-    <img src="/metrc-logo.png" alt="METRC" style="height:20px;opacity:0.6;">
-    <span style="font-size:14px;font-weight:600;color:var(--slate-500);">We connect directly to your Metrc account to find every unrecovered credit. Official integration. Read-only.</span>
-  </div>
-</div>
-
-<!-- SAMPLE EVALUATION PREVIEW -->
-<section class="sample-eval-section" style="background:var(--slate-50);padding:80px 48px;">
-  <input type="checkbox" id="m-collapse-cr-sample" class="m-collapse-cb">
-  <label for="m-collapse-cr-sample" class="m-collapse-trigger">See a sample report</label>
-  <div class="m-collapse-body">
-  <div class="sample-eval-grid reveal" style="max-width:960px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;">
-    <!-- Document mockup -->
-    <div style="background:var(--white);border:1px solid var(--slate-200);border-radius:12px;overflow:hidden;box-shadow:0 8px 40px rgba(27,67,50,0.08);">
-      <div style="background:var(--green-deep);padding:16px 24px;display:flex;justify-content:space-between;align-items:center;">
-        <div>
-          <div style="font-size:16px;font-weight:700;color:var(--white);">ShelfSpace</div>
-          <div style="font-size:11px;color:rgba(255,255,255,0.85);letter-spacing:1px;text-transform:uppercase;">Savings Evaluation</div>
-        </div>
-        <div style="font-size:11px;color:rgba(255,255,255,0.85);text-align:right;">Massachusetts Retailer</div>
-      </div>
-      <div style="padding:28px 24px;">
-        <div style="font-size:11px;font-weight:700;color:var(--green-dark);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:16px;">Executive Summary — Credit Recovery</div>
-        <div style="text-align:center;margin-bottom:20px;">
-          <div style="font-size:13px;color:var(--slate-500);margin-bottom:4px;">Based on 90 days of Metrc data, we found</div>
-          <div style="font-family:var(--font-mono);font-size:clamp(32px,4vw,42px);font-weight:700;color:var(--green-deep);letter-spacing:-2px;">$84,216 /yr</div>
-          <div style="font-size:13px;color:var(--slate-500);">in recoverable vendor credits</div>
-        </div>
-        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px;">
-          <div style="text-align:center;padding:12px 8px;border:1px solid var(--slate-200);border-radius:8px;">
-            <div style="font-size:10px;font-weight:700;color:var(--slate-500);letter-spacing:1px;text-transform:uppercase;margin-bottom:4px;">Year 1</div>
-            <div style="font-family:var(--font-mono);font-size:16px;font-weight:700;color:var(--green-deep);">$84K</div>
+      <div class="calc-results">
+        <div class="calc-range">
+          <div class="calc-range-col calc-range-col--low">
+            <div class="calc-range-label">Conservative</div>
+            <div class="calc-range-year" id="calc-low-year">$36,000</div>
+            <div class="calc-range-month"><span id="calc-low-month">$3,000</span>/mo</div>
           </div>
-          <div style="text-align:center;padding:12px 8px;border:1px solid rgba(149,213,178,0.3);border-radius:8px;background:var(--green-ghost);">
-            <div style="font-size:10px;font-weight:700;color:var(--green-dark);letter-spacing:1px;text-transform:uppercase;margin-bottom:4px;">Mature</div>
-            <div style="font-family:var(--font-mono);font-size:16px;font-weight:700;color:var(--green-deep);">$137K</div>
+          <div class="calc-range-col calc-range-col--mid">
+            <div class="calc-range-label">Typical</div>
+            <div class="calc-range-year" id="calc-mid-year">$60,000</div>
+            <div class="calc-range-month"><span id="calc-mid-month">$5,000</span>/mo</div>
           </div>
-          <div style="text-align:center;padding:12px 8px;border:1px solid var(--slate-200);border-radius:8px;">
-            <div style="font-size:10px;font-weight:700;color:var(--slate-500);letter-spacing:1px;text-transform:uppercase;margin-bottom:4px;">Best Case</div>
-            <div style="font-family:var(--font-mono);font-size:16px;font-weight:700;color:var(--green-deep);">$179K</div>
+          <div class="calc-range-col calc-range-col--high">
+            <div class="calc-range-label">Aggressive</div>
+            <div class="calc-range-year" id="calc-high-year">$90,000</div>
+            <div class="calc-range-month"><span id="calc-high-month">$7,500</span>/mo</div>
           </div>
         </div>
-        <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 16px;background:var(--green-deep);border-radius:8px;">
-          <span style="font-size:12px;font-weight:600;color:rgba(255,255,255,0.7);">EBITDA Impact</span>
-          <span style="font-family:var(--font-mono);font-size:18px;font-weight:700;color:var(--white);">+2.3%</span>
+        <div class="calc-margin-row">
+          <span>EBITDA impact</span>
+          <span id="calc-margin">15.0% &rarr; 17.0%</span>
         </div>
       </div>
-    </div>
-    <!-- Copy -->
-    <div>
-      <div class="section-label" style="justify-content:flex-start;">What You'll Receive</div>
-      <h2 style="font-size:clamp(24px,3vw,32px);font-weight:700;color:var(--green-deep);letter-spacing:-0.5px;margin-bottom:20px;">This is what your evaluation looks like.</h2>
-      <ul style="list-style:none;padding:0;margin:0 0 24px;">
-        <li style="display:flex;align-items:center;gap:10px;padding:8px 0;font-size:15px;color:var(--slate-600);"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--green-mid)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Executive summary with EBITDA impact</li>
-        <li style="display:flex;align-items:center;gap:10px;padding:8px 0;font-size:15px;color:var(--slate-600);"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--green-mid)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Vendor-by-vendor co-marketing breakdown</li>
-        <li style="display:flex;align-items:center;gap:10px;padding:8px 0;font-size:15px;color:var(--slate-600);"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--green-mid)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Waste and destruction credit opportunities</li>
-        <li style="display:flex;align-items:center;gap:10px;padding:8px 0;font-size:15px;color:var(--slate-600);"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--green-mid)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Three-tier recovery estimate (conservative → best case)</li>
-      </ul>
-      <a href="/ShelfSpace_Sample_Evaluation.pdf" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;font-size:15px;font-weight:600;color:var(--green-dark);text-decoration:none;transition:color 0.2s;">View Full Sample Report <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
-    </div>
-  </div>
-  </div>
-</section>
-
-<!-- MONTHLY REVIEW SAMPLE -->
-<section class="sample-eval-section" style="background:var(--white);padding:80px 48px;border-top:1px solid var(--slate-100);">
-  <input type="checkbox" id="m-collapse-cr-monthly" class="m-collapse-cb">
-  <label for="m-collapse-cr-monthly" class="m-collapse-trigger">See what your vendors receive</label>
-  <div class="m-collapse-body">
-  <div class="sample-eval-grid reveal" style="max-width:960px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;">
-    <!-- Document mockup -->
-    <div style="background:var(--white);border:1px solid var(--slate-200);border-radius:12px;overflow:hidden;box-shadow:0 8px 40px rgba(27,67,50,0.08);">
-      <div style="background:var(--green-deep);padding:16px 24px;display:flex;justify-content:space-between;align-items:center;">
-        <div>
-          <div style="font-size:16px;font-weight:700;color:var(--white);">Monthly Review · CM-1042</div>
-          <div style="font-size:11px;color:rgba(255,255,255,0.85);letter-spacing:1px;text-transform:uppercase;">Credit Memo · April 2026</div>
-        </div>
-        <div style="font-size:11px;color:rgba(255,255,255,0.85);text-align:right;">Sent monthly</div>
+      <p style="text-align:center;margin-top:14px;font-size:13px;color:var(--green-dark);font-weight:500;">Straight to your bottom line.</p>
+      <div class="calc-guarantee reveal">
+        <p><strong>No recovery, no fee. We only get paid when you do.</strong></p>
       </div>
-      <div style="padding:28px 24px;">
-        <div style="font-size:11px;font-weight:700;color:var(--green-dark);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:16px;">Total credit request</div>
-        <div style="text-align:center;margin-bottom:20px;">
-          <div style="font-family:var(--font-mono);font-size:clamp(32px,4vw,42px);font-weight:700;color:var(--green-deep);letter-spacing:-2px;">$1,147.53</div>
-          <div style="font-size:13px;color:var(--slate-500);">cited line-by-line to Metrc</div>
-        </div>
-        <div style="display:grid;grid-template-columns:1fr;gap:8px;margin-bottom:16px;">
-          <div style="display:flex;justify-content:space-between;padding:10px 14px;border:1px solid var(--slate-200);border-radius:8px;font-size:13px;">
-            <span style="color:var(--slate-600);">Customer returns</span>
-            <span style="font-family:var(--font-mono);font-weight:700;color:var(--green-deep);">$177.26</span>
-          </div>
-          <div style="display:flex;justify-content:space-between;padding:10px 14px;border:1px solid var(--slate-200);border-radius:8px;font-size:13px;">
-            <span style="color:var(--slate-600);">Destruction (Metrc Waste)</span>
-            <span style="font-family:var(--font-mono);font-weight:700;color:var(--green-deep);">$220.27</span>
-          </div>
-          <div style="display:flex;justify-content:space-between;padding:10px 14px;border:1px solid rgba(149,213,178,0.3);border-radius:8px;background:var(--green-ghost);font-size:13px;">
-            <span style="color:var(--green-dark);font-weight:600;">Co-marketing (50% of shortfall)</span>
-            <span style="font-family:var(--font-mono);font-weight:700;color:var(--green-deep);">$750.00</span>
-          </div>
-        </div>
-        <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 16px;background:var(--green-deep);border-radius:8px;">
-          <span style="font-size:12px;font-weight:600;color:rgba(255,255,255,0.7);">Vendor decision</span>
-          <span style="font-family:var(--font-mono);font-size:14px;font-weight:700;color:var(--white);">Approved or Let's discuss</span>
-        </div>
+      <div class="calc-cta-wrap">
+        <a href="/contact" class="btn-primary">Get My Free Evaluation <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        <p style="font-size:14px;color:var(--slate-500);margin-top:12px;">Free analysis in 48 hours.</p>
       </div>
-    </div>
-    <!-- Copy -->
-    <div>
-      <div class="section-label" style="justify-content:flex-start;">What Your Vendors Receive</div>
-      <h2 style="font-size:clamp(24px,3vw,32px);font-weight:700;color:var(--green-deep);letter-spacing:-0.5px;margin-bottom:20px;">A 7-page monthly review. Every credit cited to Metrc.</h2>
-      <ul style="list-style:none;padding:0;margin:0 0 24px;">
-        <li style="display:flex;align-items:center;gap:10px;padding:8px 0;font-size:15px;color:var(--slate-600);"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--green-mid)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Period summary, top sellers, inventory turnover</li>
-        <li style="display:flex;align-items:center;gap:10px;padding:8px 0;font-size:15px;color:var(--slate-600);"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--green-mid)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Returns, destruction, and co-marketing — line-item Metrc backup</li>
-        <li style="display:flex;align-items:center;gap:10px;padding:8px 0;font-size:15px;color:var(--slate-600);"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--green-mid)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Co-signable credit memo formatted for the vendor's AP team</li>
-        <li style="display:flex;align-items:center;gap:10px;padding:8px 0;font-size:15px;color:var(--slate-600);"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--green-mid)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> We drive the response — credits apply on Approved; "Let's discuss" replies escalate to humans</li>
-      </ul>
-      <div style="display:flex;gap:16px;flex-wrap:wrap;align-items:center;">
-        <a href="/ShelfSpace_Sample_Monthly_Review.pdf" target="_blank" rel="noopener" download style="display:inline-flex;align-items:center;gap:8px;padding:12px 22px;background:var(--green-deep);color:var(--white);border-radius:10px;font-size:14px;font-weight:600;text-decoration:none;">Download the sample (PDF) <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></a>
-        <a href="/blog/anatomy-of-a-vendor-credit-memo" style="display:inline-flex;align-items:center;gap:6px;font-size:15px;font-weight:600;color:var(--green-dark);text-decoration:none;">Read the page-by-page walkthrough <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
-      </div>
-      <p style="font-size:13px;color:var(--slate-500);margin:16px 0 0;">Also run consignment? <a href="/blog/anatomy-of-a-consignment-settlement-report" style="color:var(--green-dark);font-weight:600;text-decoration:none;">See the weekly settlement equivalent</a>.</p>
+      <p style="text-align:center;margin-top:16px;font-size:11px;color:var(--slate-500);">*Estimates only &mdash; your actual numbers may vary.</p>
     </div>
   </div>
-  </div>
-</section>
-
-<!-- SECTION 4: PROOF TIMELINE -->
-<section class="proof-timeline">
-  <div class="proof-timeline-header">
-    <div class="section-label reveal">Real Results</div>
-    <h2 class="section-title reveal">From data pull to recovered credits in 14 days</h2>
-  </div>
-  <div class="timeline-track">
-    <div class="timeline-step reveal">
-      <div class="timeline-day">Day 1</div>
-      <div class="timeline-text">Read-only Metrc connection. No exports, no CSVs, no manual work.</div>
-    </div>
-    <div class="timeline-step reveal reveal-delay-1">
-      <div class="timeline-day">Day 14</div>
-      <div class="timeline-text">First credits identified — returns, expirations, co-marketing — cross-referenced against your vendor agreements.</div>
-    </div>
-    <div class="timeline-step reveal reveal-delay-2">
-      <div class="timeline-day">Day 30</div>
-      <div class="timeline-text">Vendor approvals coming in. Credits applied to settlements.</div>
-    </div>
-    <div class="timeline-step reveal reveal-delay-3">
-      <div class="timeline-day">Day 60</div>
-      <div class="timeline-text">$200K+ documented and approved. Money back in your account.</div>
-    </div>
-  </div>
-  <div class="proof-stats-row">
-    <div class="proof-stat reveal">
-      <div class="proof-stat-num">$200K+/yr</div>
-      <div class="proof-stat-desc">in recoverable credits identified</div>
-    </div>
-    <div class="proof-stat reveal reveal-delay-1">
-      <div class="proof-stat-num">3–6%</div>
-      <div class="proof-stat-desc">of revenue in vendor-funded discounts</div>
-    </div>
-    <div class="proof-stat reveal reveal-delay-2">
-      <div class="proof-stat-num">14 days</div>
-      <div class="proof-stat-desc">to first credits identified</div>
-    </div>
-  </div>
-  <p class="proof-note reveal">Real results from a two-location Massachusetts dispensary chain.</p>
 </section>
 
 <!-- PRICING REVEAL -->
 <section style="background:var(--white);padding:80px 48px;border-top:1px solid var(--slate-100);">
   <div style="max-width:680px;margin:0 auto;text-align:center;">
-    <div class="section-label reveal">What it costs — and what you keep</div>
-    <h2 class="reveal" style="font-size:clamp(28px,3.5vw,40px);font-weight:700;color:var(--green-deep);letter-spacing:-1px;margin:8px 0 20px;">Commission-based. No monthly fee.</h2>
-    <p class="reveal" style="font-size:18px;line-height:1.7;color:var(--slate-700);max-width:560px;margin:0 auto 16px;font-weight:500;">No recovery, no fee. We make money only if you do.</p>
-    <p class="reveal" style="font-size:16px;line-height:1.7;color:var(--slate-600);max-width:560px;margin:0 auto 24px;">At our Massachusetts client, we identified unrecovered credits in the <strong style="color:var(--green-deep);">$8,000–$25,000/month</strong> range. You keep the lion's share — we take a small commission only on what actually lands in your account.</p>
-    <a href="/pricing" class="reveal" style="display:inline-flex;align-items:center;gap:6px;font-size:15px;font-weight:600;color:var(--green-dark);text-decoration:none;">See full pricing <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+    <div class="section-label reveal">What it costs</div>
+    <h2 class="reveal" style="font-size:clamp(28px,3.5vw,40px);font-weight:700;color:var(--green-deep);letter-spacing:-1.5px;margin:8px 0 16px;">No recovery, no fee.</h2>
+    <p class="reveal" style="font-size:17px;line-height:1.7;color:var(--slate-600);max-width:560px;margin:0 auto 20px;">We&rsquo;re allergic to subscriptions. You only pay when we recover. <a href="/pricing" style="color:var(--green-dark);font-weight:600;text-decoration:none;">See the ShelfSpace pricing model &rarr;</a></p>
   </div>
 </section>
 
-<!-- SECTION 5: FINAL CTA -->
+<!-- FINAL CTA -->
 <section class="cta-section">
   <div class="cta-content">
     <div class="section-label reveal">Get Started</div>
-    <h2 class="section-title reveal">Find out how much you're losing — free.</h2>
+    <h2 class="section-title reveal">Find out how much you're losing. Free.</h2>
     <p class="section-desc reveal">Free analysis in 48 hours. You only pay if we recover.</p>
     <div class="cta-actions reveal">
       <a href="/contact" class="btn-primary">
@@ -736,17 +900,17 @@ document.head.appendChild(o)}initApollo();</script>
       </a>
     </div>
     <div class="cta-founder reveal" style="display:flex;align-items:center;gap:20px;justify-content:center;margin:32px auto 0;max-width:680px;">
-      <img src="/chris-mitchem.jpg" alt="Chris Mitchem" style="width:56px;height:56px;border-radius:50%;object-fit:cover;flex-shrink:0;">
+      <img src="/chris-mitchem.jpg" alt="Chris Mitchem" loading="lazy" style="width:56px;height:56px;border-radius:50%;object-fit:cover;flex-shrink:0;">
       <div style="text-align:left;">
         <p style="font-size:14px;color:var(--slate-700);line-height:1.5;margin:0 0 6px;font-style:italic;">"I've been a cannabis operator since 2015, and I have the scars to prove it. ShelfSpace is the product of everything I learned the hard way."</p>
-        <p style="font-size:13px;color:var(--slate-500);margin:0;">— Chris Mitchem, Founder</p>
+        <p style="font-size:13px;color:var(--slate-500);margin:0;">&mdash; Chris Mitchem, Founder</p>
       </div>
     </div>
     <p class="cta-note reveal">No credit card. No commitment.</p>
   </div>
 </section>
 
-<!-- SECTION 6: FAQ -->
+<!-- FAQ -->
 <section class="faq-section">
   <div class="faq-header">
     <div class="section-label reveal">FAQ</div>
@@ -754,28 +918,28 @@ document.head.appendChild(o)}initApollo();</script>
   </div>
   <div class="faq-list">
     <details>
-      <summary>Do my vendors have to agree to credits?</summary>
-      <p>Yes, but we handle the entire approval process. We send the credit memo to the vendor, manage any questions or disputes, and track it to resolution. Vendors appreciate the structure — it's transparent and fair for both sides.</p>
-    </details>
-    <details>
-      <summary>What does credit recovery cost?</summary>
-      <p>The evaluation is free. Standalone Credit Recovery is <strong>commission-based on what we recover, no monthly fee</strong> — pay only when we recover. Bundle with Core AP and the commission drops further. At our Massachusetts client, we identified unrecovered credits in the $8,000–$25,000/month range. <a href="/pricing" style="color:var(--green-dark);font-weight:600;text-decoration:none;">See pricing</a>.</p>
-    </details>
-    <details>
-      <summary>How quickly will I see results?</summary>
-      <p>First credits are typically identified within two weeks of data analysis. Vendor approvals follow within 30 days.</p>
-    </details>
-    <details>
-      <summary>How is this different from a collection agency?</summary>
-      <p>We're not collecting debts. We're recovering credits you're already owed under existing vendor agreements — returns, expirations, and co-marketing adjustments. Vendors actually prefer the structure because it's transparent and fair. It also makes approval easier on the vendor side — credit memos arrive with line-item Metrc backup, so there's documentation to confirm instead of invoicing back-and-forth.</p>
-    </details>
-    <details>
       <summary>What credits do you actually recover?</summary>
       <p>Three documented categories: product returns that physically shipped back to the vendor (Metrc transfer trail), expiration credits when product expired before sale, and co-marketing credits when in-store promos went unbilled to the vendor agreement. Every credit memo cites the agreement and the Metrc backup.</p>
     </details>
     <details>
+      <summary>Do my vendors have to agree to credits?</summary>
+      <p>Yes. Every credit memo we send waits for the vendor to reply Approved or Let's discuss. We don't auto-apply on silence &mdash; we follow up every few business days until they respond, and we work through any line they want to question. Vendors prefer the structure because it's transparent: every line is cited to Metrc.</p>
+    </details>
+    <details>
+      <summary>How quickly will I see results?</summary>
+      <p>First credits identified within two weeks of data analysis. Vendor approvals follow over the next 30 days. Approved credits apply on the next settlement to that vendor.</p>
+    </details>
+    <details>
+      <summary>How is this different from a collection agency?</summary>
+      <p>We're not collecting debts. We're recovering credits you're already owed under existing vendor agreements &mdash; returns, expirations, and co-marketing adjustments. Vendors prefer the structure because credit memos arrive with line-item Metrc backup, so there's documentation to confirm instead of invoicing back-and-forth.</p>
+    </details>
+    <details>
+      <summary>What does credit recovery cost?</summary>
+      <p>Commission-based on what we recover. <strong>No monthly fee. No recovery, no fee.</strong> Bundle with managed AP and the commission rate drops further. At our Massachusetts client, we identified unrecovered credits in the $8,000&ndash;$25,000/month range. <a href="/pricing" style="color:var(--green-dark);font-weight:600;text-decoration:none;">See pricing</a>.</p>
+    </details>
+    <details>
       <summary>Can I use credit recovery without your AP service?</summary>
-      <p>Yes. Credit recovery is standalone. It also pairs with our AP service if you want one team across vendor finances — same Metrc connection, same vendor relationships.</p>
+      <p>Yes. Credit recovery is standalone. It pairs naturally with our managed AP if you want one team across vendor finances &mdash; same Metrc connection, same vendor relationships, lower commission rate when bundled.</p>
     </details>
   </div>
 </section>
@@ -792,29 +956,25 @@ document.head.appendChild(o)}initApollo();</script>
     <div class="footer-col"><h3>Access</h3><ul><li><a href="https://ourshelf.space">Login</a></li><li><a href="/contact">Sign Up</a></li><li><a href="/contact">Contact</a></li><li><a href="/vendors">For Vendors</a></li><li><a href="/for-bookkeepers">For Bookkeepers</a></li></ul></div>
     <div class="footer-col"><h3>Company</h3><ul><li><a href="mailto:chris@shelfspace.pro">Email</a></li><li><a href="mailto:support@shelfspace.pro">Support</a></li><li><a href="https://linkedin.com/company/shelfspace-pro" target="_blank" rel="noopener" class="footer-social-link"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> LinkedIn</a></li></ul></div>
   </div>
-  <div class="footer-bottom"><p>&copy; 2026 ShelfSpace Technologies Inc.</p><div style="display:flex;align-items:center;gap:8px;justify-content:center;margin-top:12px;"><img src="/metrc-logo.png" alt="METRC" style="height:18px;opacity:0.4;filter:brightness(0) invert(1);"><span style="font-size:11px;color:rgba(255,255,255,0.35);">Certified METRC Third-Party Vendor</span></div><div class="footer-bottom-links"><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div></div>
+  <div class="footer-bottom"><p>&copy; 2026 ShelfSpace Technologies Inc.</p><div style="display:flex;align-items:center;gap:8px;justify-content:center;margin-top:12px;"><img src="/metrc-logo.png" alt="METRC" loading="lazy" style="height:18px;opacity:0.4;filter:brightness(0) invert(1);"><span style="font-size:11px;color:rgba(255,255,255,0.35);">Certified METRC Third-Party Vendor</span></div><div class="footer-bottom-links"><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div></div>
 </footer>
 
 <script>
 (function() {
   var nav = document.getElementById('nav');
   var pageHero = document.querySelector('.page-hero');
-  var parallaxSections = [
-    document.querySelector('.proof-timeline'),
-    document.querySelector('.cta-section')
-  ];
-
+  var parallaxSections = [document.querySelector('.cta-section')];
   var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var isMobile = window.innerWidth < 900;
   var ticking = false;
 
-  /* ── Hero entrance ── */
+  /* Hero entrance */
   requestAnimationFrame(function() {
     nav.classList.toggle('scrolled', window.scrollY > 20);
     if (pageHero) pageHero.classList.add('hero-loaded');
   });
 
-  /* ── Scroll-Triggered Reveals (with unobserve for perf) ── */
+  /* Reveal observer */
   var revealObserver = new IntersectionObserver(function(entries) {
     entries.forEach(function(entry) {
       if (entry.isIntersecting) {
@@ -825,17 +985,11 @@ document.head.appendChild(o)}initApollo();</script>
   }, { threshold: 0.1 });
   document.querySelectorAll('.reveal').forEach(function(el) { revealObserver.observe(el); });
 
-  /* ── Scroll handler (rAF + ticking flag) ── */
+  /* Scroll */
   function onScroll() {
     var scrollY = window.scrollY;
-
-    /* Nav state */
     nav.classList.toggle('scrolled', scrollY > 20);
-
-    /* Skip parallax for reduced motion or mobile */
     if (prefersReduced || isMobile) return;
-
-    /* Section decorative parallax */
     var wh = window.innerHeight;
     parallaxSections.forEach(function(section) {
       if (!section) return;
@@ -845,33 +999,16 @@ document.head.appendChild(o)}initApollo();</script>
       section.style.setProperty('--parallax-y', (center * 0.08) + 'px');
     });
   }
-
   window.addEventListener('scroll', function() {
-    if (!ticking) {
-      requestAnimationFrame(function() {
-        onScroll();
-        ticking = false;
-      });
-      ticking = true;
-    }
+    if (!ticking) { requestAnimationFrame(function() { onScroll(); ticking = false; }); ticking = true; }
   }, { passive: true });
-
-  /* Initial call */
   onScroll();
-
-  /* ── Resize handler ── */
   window.addEventListener('resize', function() {
     isMobile = window.innerWidth < 900;
-    if (isMobile) {
-      parallaxSections.forEach(function(section) {
-        if (section) section.style.setProperty('--parallax-y', '0px');
-      });
-    }
+    if (isMobile) parallaxSections.forEach(function(s) { if (s) s.style.setProperty('--parallax-y', '0px'); });
   });
 
-  /* ══════════════════════════════════════════════════
-     Credit Recovery Calculator
-     ══════════════════════════════════════════════════ */
+  /* Credit Recovery Calculator */
   var slider = document.getElementById('calc-slider');
   var revenueDisplay = document.getElementById('calc-revenue');
   var lowYear = document.getElementById('calc-low-year');
@@ -882,9 +1019,7 @@ document.head.appendChild(o)}initApollo();</script>
   var highMonth = document.getElementById('calc-high-month');
   var marginVal = document.getElementById('calc-margin');
 
-  function formatCurrency(n) {
-    return '$' + Math.round(n).toLocaleString();
-  }
+  function formatCurrency(n) { return '$' + Math.round(n).toLocaleString(); }
 
   function updateCalc() {
     var rev = parseInt(slider.value, 10);
@@ -898,21 +1033,17 @@ document.head.appendChild(o)}initApollo();</script>
     midMonth.textContent = formatCurrency(mid / 12);
     highYear.textContent = formatCurrency(high);
     highMonth.textContent = formatCurrency(high / 12);
-    /* Credits drop straight to EBITDA — assume 15% baseline */
     var ebitdaBefore = 15;
     var ebitdaAfter = ((rev * 0.15 + mid) / rev * 100).toFixed(1);
     marginVal.textContent = ebitdaBefore + '% → ' + ebitdaAfter + '%';
   }
-
   slider.addEventListener('input', updateCalc);
   updateCalc();
 
-  /* ── Close mobile nav on outside click ── */
+  /* Close mobile nav on outside click */
   document.addEventListener('click', function() {
     var navLinks = document.querySelector('.nav-links');
-    if (navLinks && navLinks.classList.contains('mobile-open')) {
-      navLinks.classList.remove('mobile-open');
-    }
+    if (navLinks && navLinks.classList.contains('mobile-open')) navLinks.classList.remove('mobile-open');
   });
 })();
 </script>
