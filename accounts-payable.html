@@ -3,20 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Managed AP for Cannabis Dispensaries — ShelfSpace</title>
-<meta name="description" content="Your profitability is our mission. Outsourced AP for cannabis dispensaries — every dollar paid to a vendor maps to a specific SKU. Sized to your volume, set after a free evaluation.">
+<title>Cannabis Accounts Payable, Managed — ShelfSpace</title>
+<meta name="description" content="We run cannabis accounts payable end-to-end. Every invoice three-way matched against Metrc and your PO before any check goes out. Free evaluation.">
 <link rel="canonical" href="https://shelfspace.pro/accounts-payable">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://shelfspace.pro/accounts-payable">
-<meta property="og:title" content="Managed AP for Cannabis Dispensaries — ShelfSpace">
-<meta property="og:description" content="Your profitability is our mission. Outsourced AP for cannabis dispensaries — every dollar paid to a vendor maps to a specific SKU. Sized to your volume, set after a free evaluation.">
+<meta property="og:title" content="Cannabis Accounts Payable, Managed — ShelfSpace">
+<meta property="og:description" content="We run cannabis accounts payable end-to-end. Every invoice three-way matched against Metrc and your PO before any check goes out. Free evaluation.">
 <meta property="og:image" content="https://shelfspace.pro/og-image-v5.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:type" content="image/png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Managed AP for Cannabis Dispensaries — ShelfSpace">
-<meta name="twitter:description" content="Your profitability is our mission. Outsourced AP for cannabis dispensaries — every dollar paid to a vendor maps to a specific SKU. Sized to your volume, set after a free evaluation.">
+<meta name="twitter:title" content="Cannabis Accounts Payable, Managed — ShelfSpace">
+<meta name="twitter:description" content="We run cannabis accounts payable end-to-end. Every invoice three-way matched against Metrc and your PO before any check goes out. Free evaluation.">
 <meta name="twitter:image" content="https://shelfspace.pro/og-image-v5.png">
 <meta name="apple-mobile-web-app-title" content="ShelfSpace">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -28,135 +28,158 @@
 <style>
   @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-12px); } }
 
-  /* ─── HERO ENHANCEMENTS ─── */
-  .page-hero { padding-bottom: 40px; }
+  /* ─── HERO (slim, no rotator) ─── */
+  .page-hero { display: flex; align-items: center; justify-content: center; padding: 140px 48px 60px; min-height: auto; position: relative; overflow: hidden; background: var(--white); }
   .hero-bg-gradient { position: absolute; top: -30%; right: -20%; width: 700px; height: 700px; background: radial-gradient(circle, rgba(149,213,178,0.18) 0%, rgba(149,213,178,0) 70%); animation: float 8s ease-in-out infinite; pointer-events: none; }
   .hero-bg-gradient-2 { position: absolute; bottom: -20%; left: -15%; width: 550px; height: 550px; background: radial-gradient(circle, rgba(27,67,50,0.06) 0%, rgba(27,67,50,0) 70%); animation: float 10s ease-in-out infinite; animation-delay: -3s; pointer-events: none; }
   .hero-grid-lines { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 1200px; height: 100%; opacity: 0.035; background-image: linear-gradient(var(--green-deep) 1px, transparent 1px), linear-gradient(90deg, var(--green-deep) 1px, transparent 1px); background-size: 80px 80px; pointer-events: none; }
-  .page-hero .section-label,
-  .page-hero .section-title,
-  .page-hero .section-desc { opacity: 0; transform: translateY(30px); }
-  .page-hero .section-label { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1); }
-  .page-hero .section-title { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s, transform 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s; }
-  .page-hero .section-desc { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1) 0.25s, transform 0.8s cubic-bezier(0.22,1,0.36,1) 0.25s; }
-  .page-hero.hero-loaded .section-label,
-  .page-hero.hero-loaded .section-title,
-  .page-hero.hero-loaded .section-desc { opacity: 1; transform: translateY(0); }
-
-  /* ─── HERO ROTATOR (replaces hero-demo) ─── */
-  .page-hero { display: flex; align-items: center; justify-content: center; padding: 160px 48px 80px; min-height: 100vh; }
-  .hero-text--solo { flex: 1; max-width: 880px; margin: 0 auto; text-align: center; }
+  .hero-text--solo { flex: 1; max-width: 880px; margin: 0 auto; text-align: center; position: relative; z-index: 2; }
   .hero-text--solo .section-label { display: inline-flex; }
-  .page-hero .hero-rotator {
-    position: relative; display: block;
-    margin: 0 0 28px;
-    font-size: clamp(36px, 6vw, 72px);
-    line-height: 1.05;
-    letter-spacing: -2px;
-    font-weight: 700;
-    color: var(--green-deep);
-    max-width: none;
-  }
-  .hero-rotator-ghost {
-    display: block;
-    visibility: hidden;
-    pointer-events: none;
-    user-select: none;
-  }
-  .hero-rotator-slide {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    opacity: 0;
-    transform: translateY(14px);
-    will-change: opacity, transform;
-  }
-  @keyframes heroRotate {
-    0%   { opacity: 0; transform: translateY(14px); }
-    3%   { opacity: 1; transform: translateY(0); }
-    16%  { opacity: 1; transform: translateY(0); }
-    19%  { opacity: 0; transform: translateY(-14px); }
-    100% { opacity: 0; transform: translateY(-14px); }
-  }
-  .hero-rotator-slide:nth-child(1) { animation: heroRotate 18s ease-out infinite; }
-  .hero-rotator-slide:nth-child(2) { animation: heroRotate 18s ease-out infinite; animation-delay: 3s; }
-  .hero-rotator-slide:nth-child(3) { animation: heroRotate 18s ease-out infinite; animation-delay: 6s; }
-  .hero-rotator-slide:nth-child(4) { animation: heroRotate 18s ease-out infinite; animation-delay: 9s; }
-  .hero-rotator-slide:nth-child(5) { animation: heroRotate 18s ease-out infinite; animation-delay: 12s; }
-  .hero-rotator-slide:nth-child(6) { animation: heroRotate 18s ease-out infinite; animation-delay: 15s; }
+  .page-hero .hero-h1 { font-size: clamp(36px, 6vw, 72px); line-height: 1.05; letter-spacing: -2px; font-weight: 700; color: var(--green-deep); margin: 16px 0 24px; }
   .hero-lede { font-size: 17px; color: var(--slate-600); line-height: 1.5; margin: 0 auto 28px; max-width: 560px; }
   .hero-actions-centered { display: flex; justify-content: center; }
+  .page-hero .section-label,
+  .page-hero .hero-h1,
+  .page-hero .hero-lede,
+  .page-hero .hero-actions-centered { opacity: 0; transform: translateY(30px); }
+  .page-hero .section-label { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1); }
+  .page-hero .hero-h1 { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s, transform 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s; }
+  .page-hero .hero-lede { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1) 0.25s, transform 0.8s cubic-bezier(0.22,1,0.36,1) 0.25s; }
+  .page-hero .hero-actions-centered { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1) 0.4s, transform 0.8s cubic-bezier(0.22,1,0.36,1) 0.4s; }
+  .page-hero.hero-loaded .section-label,
+  .page-hero.hero-loaded .hero-h1,
+  .page-hero.hero-loaded .hero-lede,
+  .page-hero.hero-loaded .hero-actions-centered { opacity: 1; transform: translateY(0); }
 
   /* ─── REVEAL ─── */
-  .reveal {
-    opacity: 0; transform: translateY(40px);
-    transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
-                transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
-  }
+  .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1); }
   .reveal.is-visible { opacity: 1; transform: translateY(0); }
   .reveal-delay-1 { transition-delay: 0.2s; }
   .reveal-delay-2 { transition-delay: 0.4s; }
   .reveal-delay-3 { transition-delay: 0.6s; }
 
-  /* ─── SCOPE CLARITY GRID (2-up cards, mobile collapse) ─── */
-  .ap-scope-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 24px;
-    margin-bottom: 32px;
-  }
-  @media (max-width: 700px) {
-    .ap-scope-grid { grid-template-columns: 1fr; }
+  /* ─── AP TOUR · NUMERAL WATERMARK ─── */
+  .ap-tour-numeral { position: absolute; top: -20px; left: 50%; transform: translateX(-50%); font-family: var(--font-display); font-weight: 700; font-size: clamp(180px, 28vw, 320px); line-height: 1; color: var(--green-ghost); z-index: -1; pointer-events: none; user-select: none; letter-spacing: -0.05em; }
+  .svc-section--slate .ap-tour-numeral { color: var(--white); }
+  .svc-section--dark .ap-tour-numeral { color: rgba(255,255,255,0.045); }
+  .svc-section--ghost .ap-tour-numeral { color: var(--white); }
+  @media (max-width: 700px) { .ap-tour-numeral { font-size: clamp(140px, 38vw, 240px); top: -8px; } }
+
+  /* ─── AP TOUR · INLINE SAMPLE PDF LINK ─── */
+  .ap-tour-pdf-link { display: inline-flex; align-items: center; gap: 4px; font-weight: 700; color: var(--green-dark); text-decoration: none; border-bottom: 1px dotted var(--green-mid); padding-bottom: 1px; }
+  .ap-tour-pdf-link:hover { color: var(--green-deep); border-bottom-color: var(--green-deep); }
+  .svc-section--dark .ap-tour-pdf-link { color: var(--green-accent); border-bottom-color: rgba(149,213,178,0.5); }
+  .svc-section--dark .ap-tour-pdf-link:hover { color: var(--white); border-bottom-color: var(--white); }
+
+  /* ─── S1 · INVOICE CARD ─── */
+  .ap-tour-invoice { background: var(--white); border: 1px solid var(--slate-200); border-radius: 14px; box-shadow: 0 20px 50px rgba(27,67,50,0.08); text-align: left; overflow: hidden; }
+  .ap-tour-invoice-head { padding: 18px 22px; border-bottom: 1px solid var(--slate-100); background: var(--slate-50); display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .ap-tour-invoice-id { font-family: var(--font-mono); font-size: 12px; font-weight: 700; letter-spacing: 1px; color: var(--slate-700); }
+  .ap-tour-invoice-vendor { font-size: 13px; color: var(--slate-500); margin-top: 2px; }
+  .ap-tour-invoice-badge { font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 1px; background: var(--green-ghost); color: var(--green-deep); padding: 5px 10px; border-radius: 100px; border: 1px solid rgba(149,213,178,0.5); flex-shrink: 0; }
+  .ap-tour-invoice-row { display: grid; grid-template-columns: 1.3fr 0.9fr 0.9fr 28px; align-items: center; padding: 14px 22px; border-bottom: 1px solid var(--slate-100); font-size: 14px; gap: 8px; }
+  .ap-tour-invoice-row:last-of-type { border-bottom: none; }
+  .ap-tour-invoice-sku { font-weight: 600; color: var(--green-deep); }
+  .ap-tour-invoice-qty { font-family: var(--font-mono); font-size: 12px; color: var(--slate-600); text-align: center; }
+  .ap-tour-invoice-qty--bad { color: var(--green-dark); font-weight: 700; }
+  .ap-tour-invoice-status { display: flex; justify-content: center; }
+  .ap-tour-invoice-status svg { width: 18px; height: 18px; }
+  .ap-tour-invoice-foot { padding: 14px 22px; background: var(--slate-50); font-family: var(--font-mono); font-size: 12px; font-weight: 700; letter-spacing: 0.5px; color: var(--green-dark); text-align: right; }
+
+  /* ─── S2 · INGESTION 3-STEP FLOW ─── */
+  .ap-tour-flow { display: flex; align-items: stretch; justify-content: center; gap: 8px; }
+  .ap-tour-flow-step { display: flex; flex-direction: column; align-items: center; justify-content: flex-start; gap: 12px; padding: 28px 16px; background: var(--white); border: 1px solid var(--slate-200); border-radius: 14px; flex: 1 1 0; min-width: 0; text-align: center; box-shadow: 0 6px 20px rgba(27,67,50,0.06); }
+  .ap-tour-flow-step:nth-child(5) { background: linear-gradient(155deg, var(--white) 0%, var(--green-ghost) 100%); border-color: rgba(149,213,178,0.5); }
+  .ap-tour-flow-icon { width: 40px; height: 40px; border-radius: 50%; background: var(--green-ghost); display: flex; align-items: center; justify-content: center; color: var(--green-dark); flex-shrink: 0; }
+  .ap-tour-flow-step:nth-child(5) .ap-tour-flow-icon { background: var(--green-deep); color: var(--white); }
+  .ap-tour-flow-label { font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--slate-500); }
+  .ap-tour-flow-title { font-size: 13px; font-weight: 600; color: var(--green-deep); line-height: 1.3; }
+  .ap-tour-flow-arrow { display: flex; align-items: center; color: var(--green-mid); font-size: 22px; flex-shrink: 0; padding: 0 4px; }
+  @media (max-width: 640px) {
+    .ap-tour-flow { flex-wrap: wrap; gap: 12px; }
+    .ap-tour-flow-arrow { display: none; }
+    .ap-tour-flow-step { min-width: 100%; flex: 1 1 100%; flex-direction: row; gap: 16px; padding: 18px 20px; text-align: left; justify-content: flex-start; }
   }
 
-  /* ─── PAIN SECTION ─── */
-  .pain-section { background: var(--white); padding: 80px 48px; text-align: center; }
-  .pain-cards {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
-    max-width: 760px; margin: 0 auto 48px;
+  /* ─── S3 · METRC DELIVERY MATCH ─── */
+  .ap-tour-match { background: var(--white); border: 1px solid var(--slate-200); border-radius: 14px; box-shadow: 0 20px 50px rgba(27,67,50,0.08); text-align: left; overflow: hidden; }
+  .ap-tour-match-head { padding: 18px 22px; border-bottom: 1px solid var(--slate-100); background: var(--slate-50); display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .ap-tour-match-title { font-family: var(--font-mono); font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--slate-500); font-weight: 700; }
+  .ap-tour-match-vendor { font-size: 14px; color: var(--green-deep); font-weight: 600; margin-top: 4px; }
+  .ap-tour-match-logo { height: 16px; opacity: 0.75; flex-shrink: 0; }
+  .ap-tour-match-row { display: grid; grid-template-columns: 1.5fr 1fr 1fr 28px; align-items: center; padding: 12px 22px; border-bottom: 1px solid var(--slate-100); font-size: 14px; gap: 8px; }
+  .ap-tour-match-row:last-of-type { border-bottom: none; }
+  .ap-tour-match-sku { font-weight: 600; color: var(--green-deep); }
+  .ap-tour-match-qty { font-family: var(--font-mono); font-size: 12px; color: var(--slate-600); text-align: center; }
+  .ap-tour-match-qty--bad { color: #c0392b; font-weight: 700; }
+  .ap-tour-match-status { display: flex; justify-content: center; }
+  .ap-tour-match-status svg { width: 18px; height: 18px; }
+  .ap-tour-match-foot { padding: 14px 22px; background: var(--green-deep); color: var(--white); font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: 1px; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+  .ap-tour-match-foot-pill { background: var(--green-accent); color: var(--green-deep); padding: 3px 10px; border-radius: 100px; font-size: 10px; }
+
+  /* ─── S4 · STOPPED CHECK (on dark bg) ─── */
+  .ap-tour-check { background: var(--white); border: 1px solid var(--slate-300); border-radius: 8px; box-shadow: 0 24px 60px rgba(0,0,0,0.4); text-align: left; padding: 28px 32px; position: relative; overflow: hidden; max-width: 460px; margin: 0 auto; }
+  .ap-tour-check::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, #c0392b, #e74c3c, #c0392b); }
+  .ap-tour-check-watermark { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-18deg); font-family: var(--font-mono); font-size: 56px; font-weight: 700; letter-spacing: 6px; color: rgba(192,57,43,0.16); border: 5px solid rgba(192,57,43,0.16); border-radius: 10px; padding: 8px 22px; pointer-events: none; user-select: none; white-space: nowrap; }
+  .ap-tour-check-head { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 24px; position: relative; }
+  .ap-tour-check-brand { font-size: 14px; font-weight: 700; color: var(--green-deep); }
+  .ap-tour-check-brand-sub { font-family: var(--font-mono); font-size: 10px; color: var(--slate-500); margin-top: 2px; letter-spacing: 0.5px; }
+  .ap-tour-check-num { font-family: var(--font-mono); font-size: 12px; color: var(--slate-500); text-align: right; line-height: 1.4; }
+  .ap-tour-check-payee-row { display: flex; align-items: flex-end; gap: 12px; margin-bottom: 14px; position: relative; }
+  .ap-tour-check-payee-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 1px; text-transform: uppercase; color: var(--slate-500); padding-bottom: 6px; flex-shrink: 0; }
+  .ap-tour-check-payee-name { flex: 1; font-size: 17px; font-weight: 600; color: var(--green-deep); padding-bottom: 4px; border-bottom: 1px solid var(--slate-300); }
+  .ap-tour-check-line { font-family: var(--font-mono); font-size: 14px; color: var(--slate-500); text-decoration: line-through; margin-bottom: 4px; position: relative; }
+  .ap-tour-check-line-corrected { font-family: var(--font-mono); font-size: 22px; font-weight: 700; color: var(--green-deep); margin-bottom: 16px; position: relative; letter-spacing: -0.5px; }
+  .ap-tour-check-pill { display: inline-flex; align-items: center; gap: 8px; padding: 7px 14px; background: var(--green-ghost); color: var(--green-deep); border-radius: 100px; font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: 1px; position: relative; }
+  .ap-tour-check-pill::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--green-dark); }
+
+  /* ─── S5 · VENDOR EMAIL THREAD ─── */
+  .ap-tour-thread { max-width: 480px; margin: 0 auto; display: flex; flex-direction: column; gap: 8px; text-align: left; }
+  .ap-tour-thread-label { font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; padding: 0 4px; color: var(--slate-500); }
+  .ap-tour-thread-label--us { color: var(--green-dark); align-self: flex-end; margin-top: 6px; }
+  .ap-tour-thread-msg { padding: 14px 18px; border-radius: 16px; font-size: 14.5px; line-height: 1.55; max-width: 88%; box-shadow: 0 4px 16px rgba(27,67,50,0.06); }
+  .ap-tour-thread-msg--vendor { background: var(--white); color: var(--slate-700); border: 1px solid var(--slate-200); border-bottom-left-radius: 4px; align-self: flex-start; }
+  .ap-tour-thread-msg--us { background: var(--green-deep); color: rgba(255,255,255,0.95); border-bottom-right-radius: 4px; align-self: flex-end; }
+  .ap-tour-thread-time { font-family: var(--font-mono); font-size: 10px; color: var(--slate-500); letter-spacing: 0.5px; padding: 4px 4px 0; align-self: flex-end; display: flex; align-items: center; gap: 6px; }
+  .ap-tour-thread-time::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--green-accent); }
+
+  /* ─── S6 · BEFORE / AFTER HOURS ─── */
+  .ap-tour-hours { display: grid; grid-template-columns: 1fr auto 1fr; gap: 18px; align-items: stretch; text-align: left; }
+  .ap-tour-hours-pane { background: var(--white); border: 1px solid var(--slate-200); border-radius: 14px; padding: 28px 24px; box-shadow: 0 20px 50px rgba(27,67,50,0.06); display: flex; flex-direction: column; justify-content: center; }
+  .ap-tour-hours-pane--after { background: linear-gradient(155deg, var(--white) 0%, var(--green-ghost) 100%); border-color: rgba(149,213,178,0.5); }
+  .ap-tour-hours-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--slate-500); font-weight: 700; margin-bottom: 14px; }
+  .ap-tour-hours-pane--after .ap-tour-hours-label { color: var(--green-dark); }
+  .ap-tour-hours-big { font-family: var(--font-mono); font-size: clamp(24px, 3vw, 32px); font-weight: 700; color: var(--slate-700); letter-spacing: -1px; line-height: 1.1; margin-bottom: 10px; }
+  .ap-tour-hours-pane--after .ap-tour-hours-big { color: var(--green-deep); }
+  .ap-tour-hours-sub { font-size: 13px; color: var(--slate-500); line-height: 1.45; }
+  .ap-tour-hours-pane--after .ap-tour-hours-sub { color: var(--green-dark); }
+  .ap-tour-hours-arrow { display: flex; align-items: center; justify-content: center; color: var(--green-mid); }
+  .ap-tour-hours-arrow svg { width: 32px; height: 32px; }
+  @media (max-width: 640px) {
+    .ap-tour-hours { grid-template-columns: 1fr; gap: 12px; }
+    .ap-tour-hours-arrow { transform: rotate(90deg); padding: 4px 0; }
   }
-  .pain-card {
-    background: var(--slate-50); border: 1px solid var(--slate-200);
-    border-radius: 16px; padding: 32px 28px; text-align: left;
-    position: relative; overflow: hidden;
-  }
-  .pain-card::before {
-    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
-    background: linear-gradient(90deg, #e74c3c, #c0392b);
-  }
-  .pain-card-label {
-    font-size: 11px; font-weight: 700; letter-spacing: 1.5px;
-    text-transform: uppercase; color: var(--slate-500); margin-bottom: 16px;
-  }
-  .pain-card-row {
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 10px 0; border-bottom: 1px solid var(--slate-100);
-  }
-  .pain-card-row:last-child { border-bottom: none; }
-  .pain-card-row-label { font-size: 14px; color: var(--slate-500); }
-  .pain-card-row-value {
-    font-family: var(--font-mono); font-size: 18px; font-weight: 700;
-  }
-  .pain-card-row-value.invoice { color: var(--slate-600); }
-  .pain-card-row-value.mismatch { color: #e74c3c; }
-  .pain-card-row-value.paid { color: var(--slate-600); }
-  .pain-card-loss {
-    margin-top: 16px; padding-top: 12px; border-top: 2px solid #e74c3c;
-    font-size: 14px; font-weight: 600; color: #c0392b; text-align: center;
-  }
-  .pain-multiplier {
-    font-size: clamp(20px, 2.5vw, 28px); font-weight: 700;
-    color: var(--green-deep); letter-spacing: -0.5px;
-    max-width: 600px; margin: 0 auto;
-  }
-  @media (max-width: 600px) { .pain-cards { grid-template-columns: 1fr; max-width: 380px; } }
+
+  /* ─── S7 · VENDOR PORTAL CARD ─── */
+  .ap-tour-portal { background: var(--white); border: 1px solid var(--slate-200); border-radius: 16px; box-shadow: 0 20px 50px rgba(27,67,50,0.08); text-align: left; overflow: hidden; max-width: 440px; margin: 0 auto; }
+  .ap-tour-portal-head { padding: 22px 24px; border-bottom: 1px solid var(--slate-100); background: linear-gradient(155deg, var(--white) 0%, var(--green-ghost) 100%); display: flex; align-items: center; gap: 14px; }
+  .ap-tour-portal-avatar { width: 44px; height: 44px; border-radius: 50%; background: var(--green-deep); color: var(--white); display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 14px; font-weight: 700; letter-spacing: 1px; flex-shrink: 0; }
+  .ap-tour-portal-name { font-size: 16px; font-weight: 700; color: var(--green-deep); }
+  .ap-tour-portal-sub { font-family: var(--font-mono); font-size: 10px; letter-spacing: 1px; text-transform: uppercase; color: var(--slate-500); margin-top: 2px; }
+  .ap-tour-portal-rows { padding: 4px 24px 12px; }
+  .ap-tour-portal-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 0; border-bottom: 1px solid var(--slate-100); font-size: 14px; }
+  .ap-tour-portal-row:last-child { border-bottom: none; }
+  .ap-tour-portal-row-label { color: var(--slate-600); }
+  .ap-tour-portal-row-val { font-family: var(--font-mono); font-weight: 700; color: var(--green-deep); font-size: 13px; }
+  .ap-tour-portal-pill { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 100px; font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
+  .ap-tour-portal-pill--green { background: var(--green-ghost); color: var(--green-dark); }
+  .ap-tour-portal-pill--slate { background: var(--slate-100); color: var(--slate-600); }
+  .ap-tour-portal-pill--amber { background: rgba(217,119,6,0.1); color: #b45309; }
+  .ap-tour-portal-pill::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
 
   /* ─── AP CALCULATOR ─── */
-  .calc-section { background: var(--slate-50); }
-  .calc-header { text-align: center; max-width: 600px; margin: 0 auto 64px; }
+  .calc-section { background: var(--slate-50); padding: 100px 48px; }
+  .calc-header { text-align: center; max-width: 600px; margin: 0 auto 48px; }
   .calc-header .section-desc { margin: 0 auto; }
   .calc-container { max-width: 640px; margin: 0 auto; }
   .calc-slider-wrapper { margin-bottom: 40px; }
@@ -186,116 +209,28 @@
   .calc-ebitda span:last-child { font-family: var(--font-mono); font-size: 20px; font-weight: 700; color: var(--white); }
   @media (max-width: 600px) {
     .calc-range { grid-template-columns: 1fr; }
-    .calc-range-col {
-      border-right: none;
-      border-bottom: 1px solid var(--slate-100);
-      padding: 18px 24px;
-    }
+    .calc-range-col { border-right: none; border-bottom: 1px solid var(--slate-100); padding: 18px 24px; }
     .calc-range-col:last-child { border-bottom: none; }
     .calc-range-col--mid { background: transparent; }
     .calc-range-value { font-size: 22px; }
   }
-  .calc-guarantee {
-    text-align: center; max-width: 540px; margin: 32px auto 24px;
-    padding: 16px 24px; background: var(--green-ghost);
-    border: 1px solid rgba(149,213,178,0.3); border-radius: 12px;
-  }
+  .calc-guarantee { text-align: center; max-width: 540px; margin: 32px auto 24px; padding: 16px 24px; background: var(--green-ghost); border: 1px solid rgba(149,213,178,0.3); border-radius: 12px; }
   .calc-guarantee p { font-size: 15px; color: var(--slate-600); margin: 0; }
   .calc-guarantee strong { color: var(--green-deep); }
   .calc-cta-wrap { text-align: center; margin-top: 24px; }
 
-  /* ─── PROOF TIMELINE ─── */
-  .proof-timeline { background: var(--green-deep); padding: 100px 48px; position: relative; overflow: hidden; }
-  .proof-timeline::before { content: ''; position: absolute; top: -200px; right: -200px; width: 500px; height: 500px; background: radial-gradient(circle, rgba(149,213,178,0.08), transparent 70%); transform: translateY(var(--parallax-y, 0)); will-change: transform; }
-  .proof-timeline-header { text-align: center; max-width: 500px; margin: 0 auto 64px; position: relative; }
-  .proof-timeline-header .section-label { color: var(--green-accent); }
-  .proof-timeline-header .section-title { color: var(--white); }
-  .timeline-track { max-width: 600px; margin: 0 auto 64px; position: relative; padding-left: 32px; border-left: 2px solid rgba(149,213,178,0.3); }
-  .timeline-step { padding: 0 0 48px 32px; position: relative; }
-  .timeline-step:last-child { padding-bottom: 0; }
-  .timeline-step::before { content: ''; position: absolute; left: -9px; top: 4px; width: 16px; height: 16px; border-radius: 50%; background: var(--green-accent); border: 3px solid var(--green-deep); }
-  .timeline-day { font-family: var(--font-mono); font-size: 14px; font-weight: 700; color: var(--green-accent); margin-bottom: 4px; letter-spacing: 1px; }
-  .timeline-text { font-size: 16px; line-height: 1.6; color: rgba(255,255,255,0.7); }
-  .timeline-step:last-child .timeline-text { color: var(--white); font-weight: 600; }
-  .proof-stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; max-width: 600px; margin: 0 auto 24px; text-align: center; position: relative; }
-  .proof-stat-num { font-family: var(--font-mono); font-size: clamp(24px, 3vw, 32px); font-weight: 700; color: var(--white); letter-spacing: -1px; margin-bottom: 4px; }
-  .proof-stat-desc { font-size: 13px; color: rgba(255,255,255,0.5); }
-  .proof-note { text-align: center; font-size: 13px; color: rgba(255,255,255,0.35); font-style: italic; position: relative; }
-
-  /* ─── PORTAL COMPACT ─── */
-  /* ─── SHELFIQ VENDOR COMMS ─── */
-  .shelfiq-ap { background: var(--white); padding: 80px 48px; border-top: 1px solid var(--slate-100); }
-  .shelfiq-ap-content { max-width: 640px; margin: 0 auto; text-align: center; }
-  .shelfiq-ap-body { font-size: 17px; line-height: 1.7; color: var(--slate-500); margin-bottom: 32px; }
-  .shelfiq-ap-body strong { color: var(--green-deep); }
-  .shelfiq-ap-example {
-    max-width: 520px; margin: 0 auto 32px; text-align: left;
-  }
-  .shelfiq-msg {
-    padding: 16px 20px; border-radius: 12px; margin-bottom: 12px;
-    font-size: 15px; line-height: 1.5;
-  }
-  .shelfiq-msg.vendor {
-    background: var(--white); border: 1px solid var(--slate-200);
-    border-radius: 12px 12px 12px 4px;
-  }
-  .shelfiq-msg.ai {
-    background: var(--green-deep); color: rgba(255,255,255,0.9);
-    border-radius: 12px 12px 4px 12px;
-  }
-  .shelfiq-msg-label {
-    font-size: 11px; font-weight: 700; letter-spacing: 1px;
-    text-transform: uppercase; margin-bottom: 6px;
-  }
-  .shelfiq-msg.vendor .shelfiq-msg-label { color: var(--slate-500); }
-  .shelfiq-msg.ai .shelfiq-msg-label { color: var(--green-accent); }
-  .shelfiq-msg-text { font-size: 15px; }
-  .shelfiq-msg.vendor .shelfiq-msg-text { color: var(--slate-600); }
-  .shelfiq-ap-bottom {
-    font-size: 16px; font-weight: 600; color: var(--green-deep);
-  }
-  .portal-pills { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
-  .portal-pill {
-    display: inline-flex; align-items: center; gap: 8px;
-    padding: 10px 20px; border-radius: 100px;
-    background: var(--white); border: 1px solid var(--slate-200);
-    font-size: 14px; font-weight: 500; color: var(--slate-600);
-  }
-  .portal-pill svg { color: var(--green-dark); }
-
   /* ─── FAQ ─── */
-  .faq-section {
-    background: var(--slate-50); padding: 80px 48px;
-  }
+  .faq-section { background: var(--slate-50); padding: 80px 48px; }
   .faq-header { text-align: center; max-width: 600px; margin: 0 auto 48px; }
   .faq-header .section-desc { margin: 0 auto; }
-  .faq-list {
-    max-width: 680px; margin: 0 auto;
-  }
-  .faq-list details {
-    border-bottom: 1px solid var(--slate-200);
-  }
-  .faq-list details:first-child {
-    border-top: 1px solid var(--slate-200);
-  }
-  .faq-list summary {
-    padding: 20px 0; font-size: 17px; font-weight: 600;
-    color: var(--green-deep); cursor: pointer; list-style: none;
-    display: flex; align-items: center; justify-content: space-between; gap: 16px;
-  }
+  .faq-list { max-width: 680px; margin: 0 auto; }
+  .faq-list details { border-bottom: 1px solid var(--slate-200); }
+  .faq-list details:first-child { border-top: 1px solid var(--slate-200); }
+  .faq-list summary { padding: 20px 0; font-size: 17px; font-weight: 600; color: var(--green-deep); cursor: pointer; list-style: none; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
   .faq-list summary::-webkit-details-marker { display: none; }
-  .faq-list summary::after {
-    content: '+'; font-size: 22px; font-weight: 400;
-    color: var(--slate-500); transition: transform 0.2s;
-    flex-shrink: 0;
-  }
-  .faq-list details[open] summary::after {
-    content: '\2212';
-  }
-  .faq-list details p {
-    padding: 0 0 20px; margin: 0; font-size: 15px;
-    line-height: 1.7; color: var(--slate-500);
-  }
+  .faq-list summary::after { content: '+'; font-size: 22px; font-weight: 400; color: var(--slate-500); transition: transform 0.2s; flex-shrink: 0; }
+  .faq-list details[open] summary::after { content: '\2212'; }
+  .faq-list details p { padding: 0 0 20px; margin: 0; font-size: 15px; line-height: 1.7; color: var(--slate-500); }
 
   /* ─── CTA PARALLAX ─── */
   .cta-section::before { transform: translate(-50%,-50%) translateY(var(--parallax-y, 0)); will-change: transform; }
@@ -305,61 +240,17 @@
   @media (max-width: 900px) { .footer-top { grid-template-columns: 1fr 1fr; } }
   @media (max-width: 600px) { .footer-top { grid-template-columns: 1fr; } }
 
-  /* ─── RESPONSIVE ─── */
-  @media (max-width: 900px) {
-    .page-hero { padding: 100px 24px 48px; min-height: auto; }
-    .hero-grid-lines { width: 100%; }
-    .page-hero .hero-rotator { letter-spacing: -1px; }
-    .pain-section { padding: 60px 24px; }
-    .calc-section { padding: 60px 24px; }
-    .proof-timeline { padding: 80px 24px; }
-    .proof-stats-row { grid-template-columns: 1fr; gap: 20px; }
-    .faq-section { padding: 60px 24px; }
-  }
-  @media (max-width: 600px) {
-    .shelfiq-ap { padding: 60px 24px; }
-  }
-
-  /* ─── REDUCED MOTION ─── */
-  @media (prefers-reduced-motion: reduce) {
-    .reveal {
-      opacity: 1; transform: none; transition: none;
-    }
-    .page-hero .section-label,
-    .page-hero .section-title,
-    .page-hero .section-desc {
-      opacity: 1; transform: none; transition: none;
-    }
-    .hero-bg-gradient, .hero-bg-gradient-2 { animation: none; }
-    .hero-rotator-slide { animation: none !important; opacity: 0 !important; transform: none !important; }
-    .hero-rotator-slide:first-child { opacity: 1 !important; position: relative !important; inset: auto !important; }
-    .hero-rotator-ghost { display: none !important; }
-  }
-
-  /* ─── SHELFIQ INVOICE FLOW ─── */
-  .shelfiq-flow-steps { display: flex; align-items: stretch; justify-content: center; gap: 6px; margin: 0 auto; max-width: 800px; }
-  .shelfiq-flow-step { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; padding: 16px 10px; background: var(--slate-50); border: 1px solid var(--slate-200); border-radius: 10px; flex: 1 1 0; min-width: 0; text-align: center; }
-  .shelfiq-flow-icon { color: var(--green-dark); }
-  .shelfiq-flow-step span { font-size: 12px; color: var(--slate-600); font-weight: 500; line-height: 1.3; }
-  .shelfiq-flow-arrow { font-size: 16px; color: var(--slate-300); flex-shrink: 0; }
-  @media (max-width: 600px) { .shelfiq-flow-steps { flex-wrap: wrap; } .shelfiq-flow-arrow { display: none; } .shelfiq-flow-step { min-width: 140px; } }
-
-  /* ─── MOBILE COLLAPSE PATTERN (matches homepage d03212a) ─── */
+  /* ─── MOBILE COLLAPSE (calc only) ─── */
   .m-collapse-cb { position: absolute; opacity: 0; pointer-events: none; height: 0; width: 0; }
   .m-collapse-trigger { display: none; }
   .m-collapse-body { display: block; }
   .uc-mobile-fallback-cta { display: none; }
 
   @media (max-width: 700px) {
-    .m-collapse-body { display: none; }
-    .m-collapse-cb:checked ~ .m-collapse-body { display: block; }
-    .m-collapse-cb:checked ~ .m-collapse-body .reveal {
-      opacity: 1 !important; transform: none !important;
-    }
-    .ap-runs-section .m-collapse-trigger,
-    .ap-scope-section .m-collapse-trigger,
-    .calc-section .m-collapse-trigger,
-    .shelfiq-ap .m-collapse-trigger {
+    .calc-section .m-collapse-body { display: none; }
+    .calc-section .m-collapse-cb:checked ~ .m-collapse-body { display: block; }
+    .calc-section .m-collapse-cb:checked ~ .m-collapse-body .reveal { opacity: 1 !important; transform: none !important; }
+    .calc-section .m-collapse-trigger {
       display: inline-flex; cursor: pointer;
       align-items: center; justify-content: center; gap: 8px;
       margin: 8px auto 0;
@@ -369,34 +260,38 @@
       font-family: var(--font-mono); font-size: 13px; font-weight: 700;
       letter-spacing: 1px; text-transform: uppercase;
     }
-    .ap-runs-section .m-collapse-trigger::after,
-    .ap-scope-section .m-collapse-trigger::after,
-    .calc-section .m-collapse-trigger::after,
-    .shelfiq-ap .m-collapse-trigger::after {
-      content: '↓'; font-size: 16px; line-height: 1;
-    }
-    .ap-runs-section .m-collapse-cb:checked ~ .m-collapse-trigger::after,
-    .ap-scope-section .m-collapse-cb:checked ~ .m-collapse-trigger::after,
-    .calc-section .m-collapse-cb:checked ~ .m-collapse-trigger::after,
-    .shelfiq-ap .m-collapse-cb:checked ~ .m-collapse-trigger::after {
-      content: '↑';
-    }
-    .ap-runs-section .m-collapse-cb:checked ~ .m-collapse-body,
-    .ap-scope-section .m-collapse-cb:checked ~ .m-collapse-body,
-    .calc-section .m-collapse-cb:checked ~ .m-collapse-body,
-    .shelfiq-ap .m-collapse-cb:checked ~ .m-collapse-body {
-      margin-top: 28px;
-    }
-    .ap-runs-section, .ap-scope-section, .calc-section { text-align: center; }
-    .ap-runs-section .m-collapse-body,
-    .ap-scope-section .m-collapse-body,
+    .calc-section .m-collapse-trigger::after { content: '↓'; font-size: 16px; line-height: 1; }
+    .calc-section .m-collapse-cb:checked ~ .m-collapse-trigger::after { content: '↑'; }
+    .calc-section .m-collapse-cb:checked ~ .m-collapse-body { margin-top: 28px; }
+    .calc-section { text-align: center; }
     .calc-section .m-collapse-body { text-align: left; }
     .calc-section .m-collapse-cb:not(:checked) ~ .uc-mobile-fallback-cta {
       display: flex; justify-content: center; padding: 20px 24px 0; margin: 0;
     }
   }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    .page-hero { padding: 100px 24px 48px; }
+    .hero-grid-lines { width: 100%; }
+    .calc-section { padding: 60px 24px; }
+    .faq-section { padding: 60px 24px; }
+  }
+  @media (max-width: 700px) {
+    .hero-bg-gradient, .hero-bg-gradient-2 { display: none; }
+  }
+
+  /* ─── REDUCED MOTION ─── */
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; transition: none; }
+    .page-hero .section-label,
+    .page-hero .hero-h1,
+    .page-hero .hero-lede,
+    .page-hero .hero-actions-centered { opacity: 1; transform: none; transition: none; }
+    .hero-bg-gradient, .hero-bg-gradient-2 { animation: none; }
+  }
 </style>
-<noscript><style>.reveal,.page-hero .section-label,.page-hero .section-title,.page-hero .section-desc{opacity:1;transform:none;transition:none;}</style></noscript>
+<noscript><style>.reveal,.page-hero .section-label,.page-hero .hero-h1,.page-hero .hero-lede,.page-hero .hero-actions-centered{opacity:1;transform:none;transition:none;}</style></noscript>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-H2LBJT03WE"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-H2LBJT03WE');</script>
 <script>function initApollo(){var n=Math.random().toString(36).substring(7),o=document.createElement("script");
@@ -407,9 +302,9 @@ document.head.appendChild(o)}initApollo();</script>
 {
   "@context": "https://schema.org",
   "@type": "Service",
-  "name": "Managed Accounts Payable for Cannabis",
+  "name": "Cannabis Accounts Payable Management",
   "provider": { "@type": "Organization", "name": "ShelfSpace", "url": "https://shelfspace.pro" },
-  "description": "Outsourced AP for cannabis dispensaries. Three-way matching (invoice ↔ delivery ↔ PO), vendor inbox handled, per-vendor payment terms (COD, Net 15/30/60, consignment), QuickBooks sync, Metrc integration. Custom-priced after free evaluation; sized to client volume. Month-to-month, no contracts.",
+  "description": "Outsourced cannabis accounts payable for dispensaries. We parse invoices, three-way match against Metrc and your PO, handle the vendor inbox, cut Check 21 payments, and sync QuickBooks. Custom-priced after free evaluation; usage-based, no contracts.",
   "areaServed": "US",
   "url": "https://shelfspace.pro/accounts-payable"
 }
@@ -516,23 +411,15 @@ document.head.appendChild(o)}initApollo();</script>
   <div class="nav-hamburger" onclick="document.querySelector('.nav-links').classList.toggle('mobile-open'); event.stopPropagation();"><span></span><span></span><span></span></div>
 </nav>
 
-<!-- PAGE HERO -->
+<!-- PAGE HERO (slim) -->
 <div class="page-hero">
   <div class="hero-bg-gradient"></div>
   <div class="hero-bg-gradient-2"></div>
   <div class="hero-grid-lines"></div>
-  <div class="hero-text hero-text--solo">
-    <div class="section-label">World class accounts payable management</div>
-    <h1 class="hero-rotator section-title" aria-label="Your profitability is our mission — your accounts payable system is leaking money, 95% of dispensaries over-pay without knowing it, we triple-check every SKU, we manage your AP end to end, free your team while boosting profitability">
-      <span class="hero-rotator-slide">Your profitability is our mission.</span>
-      <span class="hero-rotator-slide">Your accounts payable system is leaking money.</span>
-      <span class="hero-rotator-slide">95% of dispensaries over-pay on invoices without knowing it.</span>
-      <span class="hero-rotator-slide">We triple-check every SKU before we pay.</span>
-      <span class="hero-rotator-slide">We manage your entire AP system from end to end.</span>
-      <span class="hero-rotator-slide">Free your team while boosting profitability.</span>
-      <span class="hero-rotator-ghost" aria-hidden="true">95% of dispensaries over-pay on invoices without knowing it.</span>
-    </h1>
-    <p class="hero-lede">Inventory is your biggest expense, and your biggest opportunity.</p>
+  <div class="hero-text--solo">
+    <div class="section-label">Cannabis Accounts Payable, Managed</div>
+    <h1 class="hero-h1">Cannabis accounts payable, managed by us.</h1>
+    <p class="hero-lede">We run the AP function for cannabis dispensaries. You approve. We do the rest.</p>
     <div class="hero-actions-centered">
       <a href="/contact" class="btn-primary">Get My Free AP Evaluation <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
     </div>
@@ -566,144 +453,241 @@ document.head.appendChild(o)}initApollo();</script>
   </div>
 </section>
 
-<!-- PAIN STORY -->
-<section class="pain-section">
-  <div class="pain-cards">
-    <div class="pain-card reveal">
-      <div class="pain-card-label">Scenario 1: Short Delivery</div>
-      <div class="pain-card-row">
-        <span class="pain-card-row-label">Invoice says</span>
-        <span class="pain-card-row-value invoice">24 units</span>
+<!-- SERVICE TOUR · S1 · What We Do -->
+<section class="svc-section svc-section--white" id="ap-tour-1">
+  <div class="svc-inner">
+    <div class="ap-tour-numeral" aria-hidden="true">1</div>
+    <div class="svc-eyebrow reveal">Step 1 / 7 · What We Do</div>
+    <h2 class="svc-headline reveal">We run your accounts payable.</h2>
+    <p class="svc-sub reveal">The whole function — from vendor list to QuickBooks entry. You approve. We do the rest.</p>
+    <div class="svc-visual reveal reveal-delay-1">
+      <div class="ap-tour-invoice" aria-hidden="true">
+        <div class="ap-tour-invoice-head">
+          <div>
+            <div class="ap-tour-invoice-id">INVOICE #INV-4827</div>
+            <div class="ap-tour-invoice-vendor">Sunrise Extracts</div>
+          </div>
+          <span class="ap-tour-invoice-badge">METRC ✓</span>
+        </div>
+        <div class="ap-tour-invoice-row">
+          <span class="ap-tour-invoice-sku">GG #4 · 3.5g</span>
+          <span class="ap-tour-invoice-qty">24 ordered</span>
+          <span class="ap-tour-invoice-qty">24 received</span>
+          <span class="ap-tour-invoice-status"><svg viewBox="0 0 24 24" fill="none" stroke="#1b4332" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+        </div>
+        <div class="ap-tour-invoice-row">
+          <span class="ap-tour-invoice-sku">Blue Dream · 1g</span>
+          <span class="ap-tour-invoice-qty">24 ordered</span>
+          <span class="ap-tour-invoice-qty ap-tour-invoice-qty--bad">22 received</span>
+          <span class="ap-tour-invoice-status"><svg viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+        </div>
+        <div class="ap-tour-invoice-row">
+          <span class="ap-tour-invoice-sku">Pineapple Express</span>
+          <span class="ap-tour-invoice-qty">12 ordered</span>
+          <span class="ap-tour-invoice-qty">12 received</span>
+          <span class="ap-tour-invoice-status"><svg viewBox="0 0 24 24" fill="none" stroke="#1b4332" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+        </div>
+        <div class="ap-tour-invoice-foot">HOLD &middot; CREDIT MEMO REQUESTED &rarr;</div>
       </div>
-      <div class="pain-card-row">
-        <span class="pain-card-row-label">Actually received</span>
-        <span class="pain-card-row-value mismatch">22 units</span>
-      </div>
-      <div class="pain-card-row">
-        <span class="pain-card-row-label">You paid for</span>
-        <span class="pain-card-row-value paid">24 units</span>
-      </div>
-      <div class="pain-card-loss">You paid for 2 units that never showed up.</div>
     </div>
-    <div class="pain-card reveal reveal-delay-1">
-      <div class="pain-card-label">Scenario 2: Invoice Mismatch</div>
-      <div class="pain-card-row">
-        <span class="pain-card-row-label">Invoice total</span>
-        <span class="pain-card-row-value invoice">$4,800</span>
-      </div>
-      <div class="pain-card-row">
-        <span class="pain-card-row-label">Correct amount</span>
-        <span class="pain-card-row-value mismatch">$4,400</span>
-      </div>
-      <div class="pain-card-row">
-        <span class="pain-card-row-label">You paid</span>
-        <span class="pain-card-row-value paid">$4,800</span>
-      </div>
-      <div class="pain-card-loss">$400 paid in error. Reconciling was harder than overpaying.</div>
-    </div>
-  </div>
-  <p class="pain-multiplier reveal">Multiply that across 20 vendors. 52 weeks a year. We catch every one before the check goes out. HUGE savings.</p>
-  <div style="display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:24px;" class="reveal">
-    <span style="display:inline-flex;align-items:center;gap:6px;padding:8px 20px;border-radius:100px;background:var(--green-ghost);border:1px solid rgba(149,213,178,0.3);font-size:14px;font-weight:500;color:var(--green-dark);">Cannabis vendors</span>
-    <span style="display:inline-flex;align-items:center;gap:6px;padding:8px 20px;border-radius:100px;background:var(--green-ghost);border:1px solid rgba(149,213,178,0.3);font-size:14px;font-weight:500;color:var(--green-dark);">Non-cannabis vendors</span>
-    <span style="display:inline-flex;align-items:center;gap:6px;padding:8px 20px;border-radius:100px;background:var(--green-ghost);border:1px solid rgba(149,213,178,0.3);font-size:14px;font-weight:500;color:var(--green-dark);">Landlords & agencies</span>
-    <span style="display:inline-flex;align-items:center;gap:6px;padding:8px 20px;border-radius:100px;background:var(--green-ghost);border:1px solid rgba(149,213,178,0.3);font-size:14px;font-weight:500;color:var(--green-dark);">Anyone you pay</span>
+    <p class="svc-why reveal">Inventory is your biggest expense. We make sure every dollar paid to a vendor maps to a SKU you actually got. <a class="ap-tour-pdf-link" href="/ShelfSpace_Sample_Invoice_Payment.pdf" target="_blank" rel="noopener">See a real payment (PDF)</a>.</p>
+    <a class="svc-link reveal" href="/docs/accounts-payable/overview">See how managed AP works <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
   </div>
 </section>
 
-<!-- WHAT OUR AP RUNS (three-way matching + per-vendor terms, merged credibility block) -->
-<section class="ap-runs-section" style="background:var(--slate-50);padding:80px 48px;">
-  <div style="max-width:780px;margin:0 auto;">
-    <div style="text-align:center;margin-bottom:48px;">
-      <section class="why-strip reveal" aria-label="The mission behind this">
-        <div class="why-strip-eyebrow">Why AP matters</div>
-        <h2 class="why-strip-headline">You're paying for product you didn't get.</h2>
-        <p class="why-strip-body">Short deliveries. Duplicated invoices. Wrong prices on the line item. Small per invoice, thousands a year. We check every invoice against the delivery and the PO before any check goes out.</p>
-        <a href="/about#mission" class="why-strip-link">The full thesis <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
-      </section>
-
-      <div class="section-label reveal">Where the inventory dollars leak</div>
-      <h2 class="section-title reveal" style="margin-top:8px;">How every other industry has done AP for thirty years.</h2>
-    </div>
-    <input type="checkbox" id="m-collapse-ap-runs" class="m-collapse-cb">
-    <label for="m-collapse-ap-runs" class="m-collapse-trigger">What our AP runs</label>
-    <div class="m-collapse-body">
-    <div style="display:grid;grid-template-columns:1fr;gap:32px;">
-      <div class="reveal" style="background:var(--white);border:1px solid var(--slate-200);border-radius:16px;padding:32px;">
-        <div style="font-family:var(--font-mono);font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--green-dark);margin-bottom:12px;">Three-way matching</div>
-        <h3 style="font-size:22px;font-weight:700;color:var(--green-deep);letter-spacing:-0.5px;margin-bottom:12px;">Invoice ↔ Delivery ↔ PO.</h3>
-        <p style="font-size:16px;line-height:1.7;color:var(--slate-600);margin:0;">We don't pay until all three line up. Mismatches flagged before the check clears.</p>
-      </div>
-      <div class="reveal reveal-delay-1" style="background:var(--white);border:1px solid var(--slate-200);border-radius:16px;padding:32px;">
-        <div style="font-family:var(--font-mono);font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--green-dark);margin-bottom:12px;">Payment terms, your call</div>
-        <h3 style="font-size:22px;font-weight:700;color:var(--green-deep);letter-spacing:-0.5px;margin-bottom:16px;">COD, Net 30, Net 60, consignment — per vendor.</h3>
-        <div style="display:flex;gap:8px;flex-wrap:wrap;">
-          <span style="display:inline-flex;align-items:center;padding:6px 14px;border-radius:100px;background:var(--green-ghost);border:1px solid rgba(149,213,178,0.3);font-family:var(--font-mono);font-size:12px;font-weight:600;color:var(--green-dark);letter-spacing:0.5px;">COD</span>
-          <span style="display:inline-flex;align-items:center;padding:6px 14px;border-radius:100px;background:var(--green-ghost);border:1px solid rgba(149,213,178,0.3);font-family:var(--font-mono);font-size:12px;font-weight:600;color:var(--green-dark);letter-spacing:0.5px;">NET 30</span>
-          <span style="display:inline-flex;align-items:center;padding:6px 14px;border-radius:100px;background:var(--green-ghost);border:1px solid rgba(149,213,178,0.3);font-family:var(--font-mono);font-size:12px;font-weight:600;color:var(--green-dark);letter-spacing:0.5px;">NET 60</span>
-          <span style="display:inline-flex;align-items:center;padding:6px 14px;border-radius:100px;background:var(--green-ghost);border:1px solid rgba(149,213,178,0.3);font-family:var(--font-mono);font-size:12px;font-weight:600;color:var(--green-dark);letter-spacing:0.5px;">CONSIGNMENT</span>
+<!-- SERVICE TOUR · S2 · Ingestion -->
+<section class="svc-section svc-section--slate" id="ap-tour-2">
+  <div class="svc-inner">
+    <div class="ap-tour-numeral" aria-hidden="true">2</div>
+    <div class="svc-eyebrow reveal">Step 2 / 7 · Ingestion</div>
+    <h2 class="svc-headline reveal">Every invoice in the system, the moment it lands.</h2>
+    <p class="svc-sub reveal">Vendor emails it. ShelfiQ parses it. Lined up against the PO and the delivery.</p>
+    <div class="svc-visual reveal reveal-delay-1">
+      <div class="ap-tour-flow" aria-hidden="true">
+        <div class="ap-tour-flow-step">
+          <div class="ap-tour-flow-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+          <div class="ap-tour-flow-label">Inbox</div>
+          <div class="ap-tour-flow-title">Vendor emails the invoice</div>
+        </div>
+        <div class="ap-tour-flow-arrow">&rarr;</div>
+        <div class="ap-tour-flow-step">
+          <div class="ap-tour-flow-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="13" y2="17"/></svg></div>
+          <div class="ap-tour-flow-label">Parse</div>
+          <div class="ap-tour-flow-title">ShelfiQ reads every line</div>
+        </div>
+        <div class="ap-tour-flow-arrow">&rarr;</div>
+        <div class="ap-tour-flow-step">
+          <div class="ap-tour-flow-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg></div>
+          <div class="ap-tour-flow-label">Ready</div>
+          <div class="ap-tour-flow-title">Queued for your approval</div>
         </div>
       </div>
     </div>
-    </div>
+    <p class="svc-why reveal">No paper to chase. No spreadsheet to update. The invoice is in the queue before you knew it arrived.</p>
+    <a class="svc-link reveal" href="/docs/accounts-payable/email-deliveries">Invoice-by-email workflow <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
   </div>
 </section>
 
-<!-- SCOPE CLARITY + VENDOR-SIDE PROOF CLOSER -->
-<section class="ap-scope-section" style="background:var(--white);padding:80px 48px;">
-  <div style="max-width:900px;margin:0 auto;">
-    <div style="text-align:center;margin-bottom:48px;">
-      <div class="section-label reveal">Who does what</div>
-      <h2 class="section-title reveal" style="margin-top:8px;">We run the AP. Your team focuses on what they're hired for.</h2>
-    </div>
-    <input type="checkbox" id="m-collapse-ap-scope" class="m-collapse-cb">
-    <label for="m-collapse-ap-scope" class="m-collapse-trigger">See who does what</label>
-    <div class="m-collapse-body">
-    <div class="reveal ap-scope-grid">
-      <div style="background:var(--slate-50);border:1px solid var(--slate-200);border-radius:16px;padding:28px;">
-        <div style="font-family:var(--font-mono);font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--green-deep);margin-bottom:16px;">ShelfSpace handles</div>
-        <ul style="list-style:none;padding:0;margin:0;font-size:15px;line-height:1.9;color:var(--slate-700);">
-          <li style="display:flex;gap:10px;"><span style="color:var(--green-deep);flex-shrink:0;">✓</span><span>Invoice ingestion and parsing</span></li>
-          <li style="display:flex;gap:10px;"><span style="color:var(--green-deep);flex-shrink:0;">✓</span><span>Three-way matching (invoice ↔ delivery ↔ PO)</span></li>
-          <li style="display:flex;gap:10px;"><span style="color:var(--green-deep);flex-shrink:0;">✓</span><span>Per-vendor payment terms (COD, Net, consignment)</span></li>
-          <li style="display:flex;gap:10px;"><span style="color:var(--green-deep);flex-shrink:0;">✓</span><span>Vendor payment generation</span></li>
-          <li style="display:flex;gap:10px;"><span style="color:var(--green-deep);flex-shrink:0;">✓</span><span>Credit recovery cycles</span></li>
-          <li style="display:flex;gap:10px;"><span style="color:var(--green-deep);flex-shrink:0;">✓</span><span>Consignment settlements</span></li>
-          <li style="display:flex;gap:10px;"><span style="color:var(--green-deep);flex-shrink:0;">✓</span><span>Vendor inquiry handling (via ShelfiQ)</span></li>
-          <li style="display:flex;gap:10px;"><span style="color:var(--green-deep);flex-shrink:0;">✓</span><span>QuickBooks sync</span></li>
-        </ul>
-      </div>
-      <div style="background:var(--slate-50);border:1px solid var(--slate-200);border-radius:16px;padding:28px;">
-        <div style="font-family:var(--font-mono);font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--slate-600);margin-bottom:16px;">Your team focuses on</div>
-        <div style="font-family:var(--font-mono);font-size:11px;font-weight:600;letter-spacing:0.5px;color:var(--slate-500);margin-bottom:8px;">YOUR BUYER</div>
-        <ul style="list-style:none;padding:0;margin:0 0 20px;font-size:15px;line-height:1.9;color:var(--slate-700);">
-          <li style="display:flex;gap:10px;"><span style="color:var(--slate-500);flex-shrink:0;">✓</span><span>Product selection &amp; vendor negotiation</span></li>
-          <li style="display:flex;gap:10px;"><span style="color:var(--slate-500);flex-shrink:0;">✓</span><span>Sell-through analysis &amp; promo planning</span></li>
-          <li style="display:flex;gap:10px;"><span style="color:var(--slate-500);flex-shrink:0;">✓</span><span>New vendor sourcing</span></li>
-        </ul>
-        <div style="border-top:1px solid var(--slate-200);padding-top:16px;">
-          <div style="font-family:var(--font-mono);font-size:11px;font-weight:600;letter-spacing:0.5px;color:var(--slate-500);margin-bottom:8px;">YOUR BOOKKEEPER OR FIRM <a href="/for-bookkeepers" style="color:var(--green-dark);text-decoration:underline;text-decoration-color:rgba(64,145,108,0.5);text-underline-offset:2px;font-weight:700;">(for firms →)</a></div>
-          <ul style="list-style:none;padding:0;margin:0;font-size:15px;line-height:1.9;color:var(--slate-700);">
-            <li style="display:flex;gap:10px;"><span style="color:var(--slate-500);flex-shrink:0;">✓</span><span>Month-end close &amp; reconciliations</span></li>
-            <li style="display:flex;gap:10px;"><span style="color:var(--slate-500);flex-shrink:0;">✓</span><span>Payroll, JEs, financial statements</span></li>
-            <li style="display:flex;gap:10px;"><span style="color:var(--slate-500);flex-shrink:0;">✓</span><span>Tax prep &amp; 280E compliance</span></li>
-          </ul>
+<!-- SERVICE TOUR · S3 · Metrc Verification -->
+<section class="svc-section svc-section--white" id="ap-tour-3">
+  <div class="svc-inner">
+    <div class="ap-tour-numeral" aria-hidden="true">3</div>
+    <div class="svc-eyebrow reveal">Step 3 / 7 · Metrc Verification</div>
+    <h2 class="svc-headline reveal">Inventory amounts verified in Metrc.</h2>
+    <p class="svc-sub reveal">Read-only sync with your state compliance system. The same source of truth your inventory team uses.</p>
+    <div class="svc-visual reveal reveal-delay-1">
+      <div class="ap-tour-match" aria-hidden="true">
+        <div class="ap-tour-match-head">
+          <div>
+            <div class="ap-tour-match-title">Delivery Match</div>
+            <div class="ap-tour-match-vendor">Sunrise Extracts &middot; Manifest #M2C-9821</div>
+          </div>
+          <img src="/metrc-logo.png" alt="" class="ap-tour-match-logo">
+        </div>
+        <div class="ap-tour-match-row">
+          <span class="ap-tour-match-sku">GG #4 · 3.5g</span>
+          <span class="ap-tour-match-qty">24 invoiced</span>
+          <span class="ap-tour-match-qty">24 received</span>
+          <span class="ap-tour-match-status"><svg viewBox="0 0 24 24" fill="none" stroke="#1b4332" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+        </div>
+        <div class="ap-tour-match-row">
+          <span class="ap-tour-match-sku">Blue Dream · 1g</span>
+          <span class="ap-tour-match-qty">24 invoiced</span>
+          <span class="ap-tour-match-qty ap-tour-match-qty--bad">22 received</span>
+          <span class="ap-tour-match-status"><svg viewBox="0 0 24 24" fill="none" stroke="#c0392b" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg></span>
+        </div>
+        <div class="ap-tour-match-row">
+          <span class="ap-tour-match-sku">Pineapple Express</span>
+          <span class="ap-tour-match-qty">12 invoiced</span>
+          <span class="ap-tour-match-qty">12 received</span>
+          <span class="ap-tour-match-status"><svg viewBox="0 0 24 24" fill="none" stroke="#1b4332" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+        </div>
+        <div class="ap-tour-match-foot">
+          <span>MATCHED · 2 OF 3 LINES</span>
+          <span class="ap-tour-match-foot-pill">1 SHORT</span>
         </div>
       </div>
     </div>
+    <p class="svc-why reveal">Cannabis is the one industry with a court-of-record for what was delivered. We use it. No more "we shipped 24, you signed for 22, here's an invoice for 24."</p>
+    <a class="svc-link reveal" href="/docs/integrations/metrc">How Metrc verification works <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+  </div>
+</section>
 
-    <div class="reveal" style="max-width:680px;margin:36px auto 0;padding:22px 26px;background:var(--green-ghost);border:1px solid rgba(149,213,178,0.4);border-radius:12px;display:flex;flex-wrap:wrap;align-items:center;gap:18px;justify-content:space-between;">
-      <div style="flex:1;min-width:260px;">
-        <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--green-mid);margin-bottom:6px;">See it in action</div>
-        <div style="font-size:16px;font-weight:600;color:var(--green-deep);line-height:1.4;margin-bottom:4px;">The payment your vendor actually receives.</div>
-        <div style="font-size:14px;color:var(--slate-600);line-height:1.55;">A real ShelfSpace invoice payment — a line-item remittance summary plus a Check 21 check, deposit-ready. De-identified, downloadable.</div>
-      </div>
-      <div style="display:flex;flex-direction:column;gap:8px;flex-shrink:0;">
-        <a href="/blog/anatomy-of-an-invoice-payment" style="display:inline-flex;align-items:center;gap:6px;padding:10px 16px;background:var(--green-deep);color:var(--white);border-radius:8px;font-size:13px;font-weight:700;text-decoration:none;">Read the walkthrough <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg></a>
-        <a href="/ShelfSpace_Sample_Invoice_Payment.pdf" target="_blank" rel="noopener" download style="display:inline-flex;align-items:center;gap:6px;padding:10px 16px;background:transparent;color:var(--green-deep);border:1px solid var(--green-deep);border-radius:8px;font-size:13px;font-weight:700;text-decoration:none;">Download the sample (PDF)</a>
+<!-- SERVICE TOUR · S4 · Protection (dark — emotional peak) -->
+<section class="svc-section svc-section--dark" id="ap-tour-4">
+  <div class="svc-inner">
+    <div class="ap-tour-numeral" aria-hidden="true">4</div>
+    <div class="svc-eyebrow reveal">Step 4 / 7 · Protection</div>
+    <h2 class="svc-headline reveal">So you never over-pay.</h2>
+    <p class="svc-sub reveal">The check doesn't go out until the math holds.</p>
+    <div class="svc-visual reveal reveal-delay-1">
+      <div class="ap-tour-check" aria-hidden="true">
+        <span class="ap-tour-check-watermark">HELD</span>
+        <div class="ap-tour-check-head">
+          <div>
+            <div class="ap-tour-check-brand">ShelfSpace</div>
+            <div class="ap-tour-check-brand-sub">PAID ON BEHALF OF: GREENBROOK RETAIL LLC</div>
+          </div>
+          <div class="ap-tour-check-num">No. 04827<br>Apr 14, 2026</div>
+        </div>
+        <div class="ap-tour-check-payee-row">
+          <span class="ap-tour-check-payee-label">Pay to</span>
+          <span class="ap-tour-check-payee-name">Sunrise Extracts</span>
+        </div>
+        <div class="ap-tour-check-line">Invoice $4,800.00</div>
+        <div class="ap-tour-check-line-corrected">Verified $4,400.00</div>
+        <span class="ap-tour-check-pill">$400 SAVED · AWAITING CREDIT MEMO</span>
       </div>
     </div>
+    <p class="svc-why reveal">Short deliveries. Wrong prices. Duplicate invoices. Small per check, thousands a year. We catch them before the money leaves.</p>
+    <a class="svc-link reveal" href="/blog/dispensaries-overpay-vendors">How dispensaries lose money to vendors <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+  </div>
+</section>
+
+<!-- SERVICE TOUR · S5 · Vendor Comms -->
+<section class="svc-section svc-section--slate" id="ap-tour-5">
+  <div class="svc-inner">
+    <div class="ap-tour-numeral" aria-hidden="true">5</div>
+    <div class="svc-eyebrow reveal">Step 5 / 7 · Vendor Comms</div>
+    <h2 class="svc-headline reveal">We answer your vendor AP emails.</h2>
+    <p class="svc-sub reveal">Payment status. Balance questions. Missing checks. Credit memo follow-ups. All of it.</p>
+    <div class="svc-visual reveal reveal-delay-1">
+      <div class="ap-tour-thread" aria-hidden="true">
+        <div class="ap-tour-thread-label">Vendor</div>
+        <div class="ap-tour-thread-msg ap-tour-thread-msg--vendor">Why was this invoice paid $400 short?</div>
+        <div class="ap-tour-thread-label ap-tour-thread-label--us">ShelfSpace</div>
+        <div class="ap-tour-thread-msg ap-tour-thread-msg--us">Invoice #4827 — Blue Dream came in 22 of 24 per Metrc. Payment reflects 22 units at the contracted rate. Full breakdown attached.</div>
+        <div class="ap-tour-thread-time">Replied · 47 seconds</div>
+      </div>
     </div>
+    <p class="svc-why reveal">Your operations team gets their inbox back. Vendors get an answer in under a minute, not a week. <a class="ap-tour-pdf-link" href="/ShelfSpace_Sample_AP_Email_Thread.pdf" target="_blank" rel="noopener">See a real thread (PDF)</a>.</p>
+    <a class="svc-link reveal" href="/blog/anatomy-of-an-ap-email-thread">A real vendor email thread <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+  </div>
+</section>
+
+<!-- SERVICE TOUR · S6 · Labor Savings -->
+<section class="svc-section svc-section--white" id="ap-tour-6">
+  <div class="svc-inner">
+    <div class="ap-tour-numeral" aria-hidden="true">6</div>
+    <div class="svc-eyebrow reveal">Step 6 / 7 · Labor Savings</div>
+    <h2 class="svc-headline reveal">Save thousands on labor.</h2>
+    <p class="svc-sub reveal">A bookkeeper spends 10–15 hours a week on AP. That's $1,000–$1,500 a month, per location.</p>
+    <div class="svc-visual reveal reveal-delay-1">
+      <div class="ap-tour-hours" aria-hidden="true">
+        <div class="ap-tour-hours-pane">
+          <div class="ap-tour-hours-label">Before</div>
+          <div class="ap-tour-hours-big">10–15 hrs / wk</div>
+          <div class="ap-tour-hours-sub">$1,000–$1,500 / mo per location, in bookkeeper hours.</div>
+        </div>
+        <div class="ap-tour-hours-arrow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </div>
+        <div class="ap-tour-hours-pane ap-tour-hours-pane--after">
+          <div class="ap-tour-hours-label">After</div>
+          <div class="ap-tour-hours-big">~0 hrs / wk</div>
+          <div class="ap-tour-hours-sub">Bookkeeper redirected to close, reporting, strategy.</div>
+        </div>
+      </div>
+    </div>
+    <p class="svc-why reveal">We don't replace your bookkeeper. We give them their week back. The work they were hired for, finally.</p>
+    <a class="svc-link reveal" href="/for-bookkeepers">For bookkeepers <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+  </div>
+</section>
+
+<!-- SERVICE TOUR · S7 · Vendor Experience -->
+<section class="svc-section svc-section--ghost" id="ap-tour-7">
+  <div class="svc-inner">
+    <div class="ap-tour-numeral" aria-hidden="true">7</div>
+    <div class="svc-eyebrow reveal">Step 7 / 7 · Vendor Experience</div>
+    <h2 class="svc-headline reveal">Vendors love it.</h2>
+    <p class="svc-sub reveal">Their own portal. Live payment status. Credit memos when due. Answers in seconds.</p>
+    <div class="svc-visual reveal reveal-delay-1">
+      <div class="ap-tour-portal" aria-hidden="true">
+        <div class="ap-tour-portal-head">
+          <div class="ap-tour-portal-avatar">SX</div>
+          <div>
+            <div class="ap-tour-portal-name">Sunrise Extracts</div>
+            <div class="ap-tour-portal-sub">Vendor Portal</div>
+          </div>
+        </div>
+        <div class="ap-tour-portal-rows">
+          <div class="ap-tour-portal-row">
+            <span class="ap-tour-portal-row-label">Last payment</span>
+            <span class="ap-tour-portal-row-val">$3,245 <span class="ap-tour-portal-pill ap-tour-portal-pill--green">Cleared</span></span>
+          </div>
+          <div class="ap-tour-portal-row">
+            <span class="ap-tour-portal-row-label">Outstanding</span>
+            <span class="ap-tour-portal-row-val">$0 <span class="ap-tour-portal-pill ap-tour-portal-pill--slate">Current</span></span>
+          </div>
+          <div class="ap-tour-portal-row">
+            <span class="ap-tour-portal-row-label">Credit memos</span>
+            <span class="ap-tour-portal-row-val">1 <span class="ap-tour-portal-pill ap-tour-portal-pill--amber">Pending</span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="svc-why reveal">Happy vendors prioritize you. Better terms, better allocation, fewer collection calls. AP is half the vendor relationship. Run it clean and the rest gets easier.</p>
+    <a class="svc-link reveal" href="/vendors">See the vendor view <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
   </div>
 </section>
 
@@ -765,107 +749,15 @@ document.head.appendChild(o)}initApollo();</script>
   </div>
 </section>
 
-<!-- VENDOR COMMUNICATIONS -->
-<section class="shelfiq-ap" id="vendor-communications">
-  <div class="shelfiq-ap-content">
-    <div class="section-label reveal">Vendor Communication</div>
-    <h2 class="section-title reveal">Vendors get instant answers. Your team gets zero AP emails.</h2>
-    <input type="checkbox" id="m-collapse-ap-comms" class="m-collapse-cb">
-    <label for="m-collapse-ap-comms" class="m-collapse-trigger">How vendor comms works</label>
-    <div class="m-collapse-body">
-    <p class="shelfiq-ap-body reveal">Every vendor email — payment status, balances, missing checks, credit memos, settlements — comes to us. ShelfiQ replies in seconds with live Metrc data. The 5% that need a human judgment call land on our desk, never yours.</p>
-    <div class="shelfiq-ap-example reveal">
-      <div class="shelfiq-msg vendor">
-        <div class="shelfiq-msg-label">Vendor asks:</div>
-        <div class="shelfiq-msg-text">"Why was this invoice paid $400 short?"</div>
-      </div>
-      <div class="shelfiq-msg ai">
-        <div class="shelfiq-msg-label">We respond:</div>
-        <div class="shelfiq-msg-text">"Invoice #4821 was adjusted because we received 22 of 24 units on delivery. The payment reflects the 22 units at the contracted rate. Full breakdown attached."</div>
-      </div>
-    </div>
-    <div class="shelfiq-ap-flow reveal">
-      <h3 style="font-size:18px;font-weight:700;color:var(--green-deep);margin:32px 0 20px;text-align:center;">Invoice parsing — upload or email</h3>
-      <div class="shelfiq-flow-steps">
-        <div class="shelfiq-flow-step">
-          <div class="shelfiq-flow-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
-          <span>Vendor emails invoice</span>
-        </div>
-        <div class="shelfiq-flow-arrow">&rarr;</div>
-        <div class="shelfiq-flow-step">
-          <div class="shelfiq-flow-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
-          <span>We parse it</span>
-        </div>
-        <div class="shelfiq-flow-arrow">&rarr;</div>
-        <div class="shelfiq-flow-step">
-          <div class="shelfiq-flow-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
-          <span>Matches to Metrc delivery</span>
-        </div>
-        <div class="shelfiq-flow-arrow">&rarr;</div>
-        <div class="shelfiq-flow-step">
-          <div class="shelfiq-flow-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg></div>
-          <span>Ready for approval</span>
-        </div>
-      </div>
-    </div>
-    <p class="shelfiq-ap-bottom reveal">Your vendors get instant answers. Your team gets zero AP emails.</p>
-
-    <div class="reveal" style="max-width:680px;margin:36px auto 0;padding:22px 26px;background:var(--green-ghost);border:1px solid rgba(149,213,178,0.4);border-radius:12px;display:flex;flex-wrap:wrap;align-items:center;gap:18px;justify-content:space-between;">
-      <div style="flex:1;min-width:260px;">
-        <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--green-mid);margin-bottom:6px;">See it in action</div>
-        <div style="font-size:16px;font-weight:600;color:var(--green-deep);line-height:1.4;margin-bottom:4px;">A real vendor AR thread, page by page.</div>
-        <div style="font-size:14px;color:var(--slate-600);line-height:1.55;">Two replies, one minute apart — payment status answered, a Treasury contact added. De-identified, downloadable.</div>
-      </div>
-      <div style="display:flex;flex-direction:column;gap:8px;flex-shrink:0;">
-        <a href="/blog/anatomy-of-an-ap-email-thread" style="display:inline-flex;align-items:center;gap:6px;padding:10px 16px;background:var(--green-deep);color:#fff;border-radius:8px;font-size:13px;font-weight:700;text-decoration:none;">Read the walkthrough <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg></a>
-        <a href="/ShelfSpace_Sample_AP_Email_Thread.pdf" target="_blank" rel="noopener" download style="display:inline-flex;align-items:center;gap:6px;padding:10px 16px;background:transparent;color:var(--green-deep);border:1px solid var(--green-deep);border-radius:8px;font-size:13px;font-weight:700;text-decoration:none;">Download the sample (PDF)</a>
-      </div>
-    </div>
-    </div>
+<!-- PRICING REVEAL -->
+<section style="background:var(--white);padding:80px 48px;border-top:1px solid var(--slate-100);">
+  <div style="max-width:680px;margin:0 auto;text-align:center;">
+    <div class="section-label reveal">What it costs</div>
+    <h2 class="reveal" style="font-size:clamp(28px,3.5vw,40px);font-weight:700;color:var(--green-deep);letter-spacing:-1.5px;margin:8px 0 16px;">Priced on usage.</h2>
+    <p class="reveal" style="font-size:17px;line-height:1.7;color:var(--slate-600);max-width:560px;margin:0 auto 20px;">Three-way matching, per-vendor terms, vendor payments, vendor inbox, QuickBooks sync. Your fee scales with what we actually run for you — invoices processed, vendors paid, inbox handled. Set after the free evaluation, locked month-to-month — no software seats, no recurring inflation.</p>
+    <p class="reveal" style="font-size:13px;color:var(--slate-500);font-style:italic;">5+ locations get custom Enterprise pricing. <a href="/pricing" style="color:var(--green-dark);font-weight:600;text-decoration:none;">See pricing →</a></p>
   </div>
 </section>
-
-<!-- PROOF TIMELINE -->
-<section class="proof-timeline">
-  <div class="proof-timeline-header">
-    <div class="section-label reveal">What Happens Next</div>
-    <h2 class="section-title reveal">From vendor list to managed AP in 30 days</h2>
-  </div>
-  <div class="timeline-track">
-    <div class="timeline-step reveal">
-      <div class="timeline-day">Day 1</div>
-      <div class="timeline-text">Hand us your vendor list — cannabis or not.</div>
-    </div>
-    <div class="timeline-step reveal reveal-delay-1">
-      <div class="timeline-day">Day 14</div>
-      <div class="timeline-text">Every vendor onboarded. First payments verified against deliveries.</div>
-    </div>
-    <div class="timeline-step reveal reveal-delay-2">
-      <div class="timeline-day">Day 30</div>
-      <div class="timeline-text">Vendors email us, not you. QuickBooks stays in sync.</div>
-    </div>
-    <div class="timeline-step reveal reveal-delay-3">
-      <div class="timeline-day">Day 60</div>
-      <div class="timeline-text">$45K+ saved. You forgot AP was a thing.</div>
-    </div>
-  </div>
-  <div class="proof-stats-row">
-    <div class="proof-stat reveal">
-      <div class="proof-stat-num">$45K/yr</div>
-      <div class="proof-stat-desc">saved on AP operations</div>
-    </div>
-    <div class="proof-stat reveal reveal-delay-1">
-      <div class="proof-stat-num">40+</div>
-      <div class="proof-stat-desc">vendors managed</div>
-    </div>
-    <div class="proof-stat reveal reveal-delay-2">
-      <div class="proof-stat-num">Verified</div>
-      <div class="proof-stat-desc">every invoice, every payment</div>
-    </div>
-  </div>
-  <p class="proof-note reveal">Real results from a two-location Massachusetts dispensary chain.</p>
-</section>
-
 
 <!-- CTA -->
 <section class="cta-section">
@@ -887,16 +779,6 @@ document.head.appendChild(o)}initApollo();</script>
       </div>
     </div>
     <p class="cta-note reveal">No credit card. No commitment.</p>
-  </div>
-</section>
-
-<!-- PRICING REVEAL -->
-<section style="background:var(--white);padding:80px 48px;border-top:1px solid var(--slate-100);">
-  <div style="max-width:680px;margin:0 auto;text-align:center;">
-    <div class="section-label reveal">What it costs</div>
-    <h2 class="reveal" style="font-size:clamp(28px,3.5vw,40px);font-weight:700;color:var(--green-deep);letter-spacing:-1.5px;margin:8px 0 16px;">Priced on usage.</h2>
-    <p class="reveal" style="font-size:17px;line-height:1.7;color:var(--slate-600);max-width:560px;margin:0 auto 20px;">Three-way matching, per-vendor terms, vendor payments, vendor inbox, QuickBooks sync. Your fee scales with what we actually run for you — invoices processed, vendors paid, inbox handled. Set after the free evaluation, locked month-to-month — no software seats, no recurring inflation.</p>
-    <p class="reveal" style="font-size:13px;color:var(--slate-500);font-style:italic;">5+ locations get custom Enterprise pricing. <a href="/pricing" style="color:var(--green-dark);font-weight:600;text-decoration:none;">See pricing →</a></p>
   </div>
 </section>
 
@@ -961,10 +843,7 @@ document.head.appendChild(o)}initApollo();</script>
 (function() {
   var nav = document.getElementById('nav');
   var pageHero = document.querySelector('.page-hero');
-  var parallaxSections = [
-    document.querySelector('.proof-timeline'),
-    document.querySelector('.cta-section')
-  ];
+  var ctaSection = document.querySelector('.cta-section');
 
   var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var isMobile = window.innerWidth < 900;
@@ -990,45 +869,31 @@ document.head.appendChild(o)}initApollo();</script>
   /* ── Scroll handler (rAF + ticking flag) ── */
   function onScroll() {
     var scrollY = window.scrollY;
-
-    /* Nav state */
     nav.classList.toggle('scrolled', scrollY > 20);
 
-    /* Skip parallax for reduced motion or mobile */
     if (prefersReduced || isMobile) return;
 
-    /* Section decorative parallax */
     var wh = window.innerHeight;
-    parallaxSections.forEach(function(section) {
-      if (!section) return;
-      var rect = section.getBoundingClientRect();
-      if (rect.bottom < 0 || rect.top > wh) return;
-      var center = rect.top + rect.height / 2 - wh / 2;
-      section.style.setProperty('--parallax-y', (center * 0.08) + 'px');
-    });
+    if (ctaSection) {
+      var rect = ctaSection.getBoundingClientRect();
+      if (rect.bottom >= 0 && rect.top <= wh) {
+        var center = rect.top + rect.height / 2 - wh / 2;
+        ctaSection.style.setProperty('--parallax-y', (center * 0.08) + 'px');
+      }
+    }
   }
 
   window.addEventListener('scroll', function() {
     if (!ticking) {
-      requestAnimationFrame(function() {
-        onScroll();
-        ticking = false;
-      });
+      requestAnimationFrame(function() { onScroll(); ticking = false; });
       ticking = true;
     }
   }, { passive: true });
-
-  /* Initial call */
   onScroll();
 
-  /* ── Resize handler ── */
   window.addEventListener('resize', function() {
     isMobile = window.innerWidth < 900;
-    if (isMobile) {
-      parallaxSections.forEach(function(section) {
-        if (section) section.style.setProperty('--parallax-y', '0px');
-      });
-    }
+    if (isMobile && ctaSection) ctaSection.style.setProperty('--parallax-y', '0px');
   });
 
   /* ── Close mobile nav on outside click ── */
@@ -1051,9 +916,7 @@ document.head.appendChild(o)}initApollo();</script>
     var highMonthEl = document.getElementById('ap-high-month');
     var ebitdaEl = document.getElementById('ap-ebitda');
 
-    function formatCurrency(n) {
-      return '$' + Math.round(n).toLocaleString();
-    }
+    function formatCurrency(n) { return '$' + Math.round(n).toLocaleString(); }
 
     function updateSliderTrack(slider) {
       var pct = ((slider.value - slider.min) / (slider.max - slider.min)) * 100;
@@ -1062,7 +925,6 @@ document.head.appendChild(o)}initApollo();</script>
 
     function updateAPCalc() {
       var revenue = parseInt(revSlider.value, 10);
-
       revVal.textContent = formatCurrency(revenue);
       updateSliderTrack(revSlider);
 
@@ -1083,10 +945,8 @@ document.head.appendChild(o)}initApollo();</script>
     }
 
     revSlider.addEventListener('input', updateAPCalc);
-
     updateAPCalc();
   }
-
 })();
 </script>
 <script src="/shelfiq-widget.js"></script>
