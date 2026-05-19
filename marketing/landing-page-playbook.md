@@ -129,7 +129,7 @@ Seven sections. That's the max. If you need more sections, you're over-explainin
 - Short sentences. Short paragraphs. If a sentence doesn't make someone FEEL something, cut it.
 
 ### Forbidden
-- No "managed service / we cut the check / we run your AP end-to-end" — as of 2026-05-19 ShelfSpace is a software platform; retailers drive the work. See CLAUDE.md and memory/project_software_platform_pivot.md.
+- No "managed service / we cut the check / we run your AP end-to-end" — as of 2026-05-19 ShelfSpace is a system; retailers drive the work. See CLAUDE.md and memory/project_software_platform_pivot.md.
 - No "scan-based trading" or "SBT"
 - No "Diem Cannabis"
 - No `<br>` tags in headings

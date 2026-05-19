@@ -4,7 +4,7 @@ This file provides guidance to Claude Code when working with code in this reposi
 
 ## Project Overview
 
-ShelfSpace marketing site — static HTML/CSS deployed on Vercel at shelfspace.pro. Serves as the public-facing website for ShelfSpace, a cannabis-specific software platform for profit optimization — AP, consignment, and credit recovery workflows for cannabis dispensaries.
+ShelfSpace marketing site — static HTML/CSS deployed on Vercel at shelfspace.pro. Serves as the public-facing website for ShelfSpace, a cannabis-specific system for profit optimization — AP, consignment, and credit recovery workflows for cannabis dispensaries.
 
 ## Workflow
 
@@ -12,7 +12,7 @@ ShelfSpace marketing site — static HTML/CSS deployed on Vercel at shelfspace.p
 
 ## Key Rules
 
-- **No "managed service" / "we cut the check" / "we run your AP" framing**: As of 2026-05-19 ShelfSpace is a cannabis-specific software platform, not a managed service. AP, consignment, and credit recovery are all software-positioned: retailers drive the platform; ShelfiQ handles first-line vendor email on AP; retailer owns vendor outreach, contracts, and disputes on consignment; the platform pulls data + builds and sends credit memos and reminders on credit recovery, retailer team handles vendor negotiations. "Automate/automated" is now acceptable when describing what the platform or ShelfiQ does. See `memory/project_software_platform_pivot.md` and `memory/project_consignment_positioning.md`.
+- **No "managed service" / "we cut the check" / "we run your AP" framing**: As of 2026-05-19 ShelfSpace is a cannabis-specific system, not a managed service. AP, consignment, and credit recovery all run on a system retailers drive: ShelfiQ handles first-line vendor email on AP; retailer owns vendor outreach, contracts, and disputes on consignment; the platform pulls data + builds and sends credit memos and reminders on credit recovery, retailer team handles vendor negotiations. Customer-facing copy uses "system" as the brand noun; "software" stays for competitor/category references and the "software seats" pricing idiom. "Automate/automated" is now acceptable when describing what the platform or ShelfiQ does. See `memory/project_software_platform_pivot.md` and `memory/project_consignment_positioning.md`.
 - **No "scan-based trading" or "SBT"**: Use "consignment" instead. Exception: terms.html and privacy.html (legal docs, don't touch).
 - **No "Diem Cannabis"**: Removed from site, don't reintroduce.
 - **No demo-modal**: Deleted. Don't reference or recreate.
