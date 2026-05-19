@@ -75,14 +75,19 @@
   .svc-section--dark .cr-tour-pdf-link:hover { color: var(--white); border-bottom-color: var(--white); }
 
   /* ─── S1 · CATEGORY EXPLAINER CARDS ─── */
-  .cr-tour-categories { display: flex; flex-direction: column; gap: 10px; max-width: 520px; margin: 0 auto; text-align: left; }
-  .cr-tour-cat { position: relative; display: grid; grid-template-columns: 48px 1fr; gap: 16px; align-items: center; padding: 18px 22px 18px 30px; background: var(--white); border: 1px solid var(--slate-200); border-radius: 14px; box-shadow: 0 8px 24px rgba(27,67,50,0.05); overflow: hidden; }
-  .cr-tour-cat::before { content: ''; position: absolute; top: 0; bottom: 0; left: 0; width: 4px; background: linear-gradient(180deg, var(--green-accent), var(--green-mid)); }
-  .cr-tour-cat-icon { width: 44px; height: 44px; border-radius: 50%; background: var(--green-ghost); display: flex; align-items: center; justify-content: center; color: var(--green-deep); flex-shrink: 0; }
-  .cr-tour-cat-icon svg { width: 22px; height: 22px; }
+  .cr-tour-categories { display: flex; flex-direction: column; gap: 12px; max-width: 560px; margin: 0 auto; text-align: left; }
+  .cr-tour-cat { position: relative; display: grid; grid-template-columns: 56px 1fr; gap: 20px; align-items: center; padding: 22px 26px 22px 34px; background: var(--white); border: 1px solid var(--slate-200); border-radius: 16px; box-shadow: 0 8px 24px rgba(27,67,50,0.05); overflow: hidden; }
+  .cr-tour-cat::before { content: ''; position: absolute; top: 0; bottom: 0; left: 0; width: 5px; background: linear-gradient(180deg, var(--green-accent), var(--green-mid)); }
+  .cr-tour-cat-icon { width: 52px; height: 52px; border-radius: 50%; background: var(--green-ghost); display: flex; align-items: center; justify-content: center; color: var(--green-deep); flex-shrink: 0; }
+  .cr-tour-cat-icon svg { width: 26px; height: 26px; }
   .cr-tour-cat-body { min-width: 0; }
-  .cr-tour-cat-label { font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--green-dark); margin-bottom: 3px; }
-  .cr-tour-cat-text { font-size: 14px; color: var(--slate-700); line-height: 1.45; }
+  .cr-tour-cat-label { font-family: var(--font-display); font-size: clamp(20px, 2.4vw, 24px); font-weight: 700; letter-spacing: -0.5px; color: var(--green-deep); line-height: 1.15; margin-bottom: 4px; }
+  .cr-tour-cat-text { font-size: 15px; color: var(--slate-600); line-height: 1.5; }
+  @media (max-width: 540px) {
+    .cr-tour-cat { grid-template-columns: 44px 1fr; gap: 14px; padding: 18px 20px 18px 26px; }
+    .cr-tour-cat-icon { width: 44px; height: 44px; }
+    .cr-tour-cat-icon svg { width: 22px; height: 22px; }
+  }
 
   /* ─── S2 · MANAGED-SERVICE ENGINE ─── */
   .cr-tour-engine { display: flex; align-items: stretch; justify-content: center; gap: 10px; flex-wrap: nowrap; }
@@ -474,21 +479,21 @@ document.head.appendChild(o)}initApollo();</script>
           <div class="cr-tour-cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg></div>
           <div class="cr-tour-cat-body">
             <div class="cr-tour-cat-label">Returns</div>
-            <div class="cr-tour-cat-text">Product came back. You ate the cost. The vendor owes the credit.</div>
+            <div class="cr-tour-cat-text">Product came back. You ate the cost.</div>
           </div>
         </div>
         <div class="cr-tour-cat">
           <div class="cr-tour-cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
           <div class="cr-tour-cat-body">
             <div class="cr-tour-cat-label">Expirations</div>
-            <div class="cr-tour-cat-text">Inventory aged out before sale. The vendor owes the credit.</div>
+            <div class="cr-tour-cat-text">Inventory aged out before sale.</div>
           </div>
         </div>
         <div class="cr-tour-cat">
           <div class="cr-tour-cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
           <div class="cr-tour-cat-body">
             <div class="cr-tour-cat-label">Promos &amp; co-marketing</div>
-            <div class="cr-tour-cat-text">Discounted vendor product to move it. The vendor owes the credit.</div>
+            <div class="cr-tour-cat-text">You discounted vendor product to move it.</div>
           </div>
         </div>
       </div>
