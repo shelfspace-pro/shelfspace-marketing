@@ -4,7 +4,7 @@ This file provides guidance to Claude Code when working with code in this reposi
 
 ## Project Overview
 
-ShelfSpace marketing site — static HTML/CSS deployed on Vercel at shelfspace.pro. Serves as the public-facing website for ShelfSpace, a managed AP, consignment, and credit recovery service for cannabis dispensaries.
+ShelfSpace marketing site — static HTML/CSS deployed on Vercel at shelfspace.pro. Serves as the public-facing website for ShelfSpace, a cannabis-specific software platform for profit optimization — AP, consignment, and credit recovery workflows for cannabis dispensaries.
 
 ## Workflow
 
@@ -12,7 +12,7 @@ ShelfSpace marketing site — static HTML/CSS deployed on Vercel at shelfspace.p
 
 ## Key Rules
 
-- **No "automate" language**: Never use automate, automated, automatically, automation. Use "handles," "runs," "manages," "takes care of" instead. ShelfSpace is a managed service, not software.
+- **No "managed service" / "we cut the check" / "we run your AP" framing**: As of 2026-05-19 ShelfSpace is a cannabis-specific software platform, not a managed service. Retailers drive AP on the platform; ShelfiQ handles first-line vendor email. "Automate/automated" is now acceptable when describing what the platform or ShelfiQ does. See `memory/project_software_platform_pivot.md`. Note: Consignment and Credit Recovery framing is still under review; do NOT propagate this rule to those pages without a follow-up spec.
 - **No "scan-based trading" or "SBT"**: Use "consignment" instead. Exception: terms.html and privacy.html (legal docs, don't touch).
 - **No "Diem Cannabis"**: Removed from site, don't reintroduce.
 - **No demo-modal**: Deleted. Don't reference or recreate.
