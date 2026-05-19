@@ -696,3 +696,55 @@ footer::before { content: ''; position: absolute; bottom: -100px; right: -100px;
   }
   .docs-featured-card:hover, .docs-quick-path:hover, .docs-row:hover { transform: none; }
 }
+
+/* ─── SERVICE-TOUR SECTIONS ───────────────────────────────────────────────
+   Big-font full-bleed section pattern. Originated on /index service tour
+   (AP / Credit Recovery / Consignment / Checks / ShelfiQ), reusable on any
+   page where you want to walk a reader through a few beats with one
+   giant headline + one visual centerpiece per beat.
+
+   Anatomy (top → bottom inside .svc-inner):
+     .svc-eyebrow    — mono tag, ~12px, green-dark
+     .svc-headline   — clamp(40, 6.8vw, 80)px H2, green-deep, letter-spacing -2.5px
+     .svc-sub        — 17–20px slate-600, max-width 640px
+     .svc-visual     — your centerpiece (max-width 560px)
+     .svc-why        — 16px slate-700 supporting copy
+     .svc-link       — "See how X works →" deeper-page link
+
+   Backgrounds (pick one modifier on .svc-section):
+     --white   alternates with --slate; bordered top
+     --slate   alternates with --white; no border
+     --ghost   --green-ghost tint, for accent beats
+     --dark    --green-deep with white text; use SPARINGLY (max 1–2 per page)
+
+   See marketing/service-tour-style.md for full usage + example markup.
+   ─────────────────────────────────────────────────────────────────────── */
+.svc-section { padding: 140px 48px; text-align: center; position: relative; overflow: hidden; }
+.svc-section--white { background: var(--white); border-top: 1px solid var(--slate-100); }
+.svc-section--slate { background: var(--slate-50); }
+.svc-section--ghost { background: var(--green-ghost); }
+.svc-section--dark { background: var(--green-deep); color: var(--white); }
+.svc-section--dark::before { content: ''; position: absolute; top: -200px; left: -200px; width: 500px; height: 500px; background: radial-gradient(circle, rgba(149,213,178,0.08), transparent 70%); pointer-events: none; }
+.svc-section--dark::after { content: ''; position: absolute; bottom: -200px; right: -200px; width: 500px; height: 500px; background: radial-gradient(circle, rgba(149,213,178,0.06), transparent 70%); pointer-events: none; }
+.svc-inner { max-width: 980px; margin: 0 auto; position: relative; }
+.svc-eyebrow { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 12px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--green-dark); margin-bottom: 24px; }
+.svc-eyebrow::before { content: ''; width: 24px; height: 2px; border-radius: 2px; background: var(--green-accent); }
+.svc-section--dark .svc-eyebrow { color: var(--green-accent); font-variant-ligatures: none; }
+.svc-section--dark .svc-eyebrow::before { background: var(--green-accent); }
+.svc-headline { font-size: clamp(40px, 6.8vw, 80px); font-weight: 700; line-height: 1.05; letter-spacing: -2.5px; color: var(--green-deep); margin: 0 auto 24px; max-width: 880px; }
+.svc-section--dark .svc-headline { color: var(--white); }
+.svc-sub { font-size: clamp(17px, 1.6vw, 20px); line-height: 1.5; color: var(--slate-600); margin: 0 auto 56px; max-width: 640px; }
+.svc-section--dark .svc-sub { color: rgba(255,255,255,0.75); }
+.svc-visual { margin: 0 auto 56px; max-width: 560px; }
+.svc-why { font-size: 16px; line-height: 1.7; color: var(--slate-700); margin: 0 auto 28px; max-width: 600px; }
+.svc-section--dark .svc-why { color: rgba(255,255,255,0.7); }
+.svc-link { display: inline-flex; align-items: center; gap: 6px; font-size: 16px; font-weight: 700; color: var(--green-deep); text-decoration: none; border-bottom: 1px solid var(--green-mid); padding-bottom: 2px; transition: color 0.15s, border-color 0.15s; }
+.svc-link:hover { color: var(--green-dark); border-bottom-color: var(--green-dark); }
+.svc-section--dark .svc-link { color: var(--white); border-bottom-color: rgba(255,255,255,0.5); }
+.svc-section--dark .svc-link:hover { color: var(--green-accent); border-bottom-color: var(--green-accent); }
+.svc-link svg { transition: transform 0.2s; }
+.svc-link:hover svg { transform: translateX(3px); }
+@media (max-width: 700px) {
+  .svc-section { padding: 80px 24px; }
+  .svc-headline { letter-spacing: -1.5px; }
+}

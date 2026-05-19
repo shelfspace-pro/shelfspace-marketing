@@ -270,32 +270,9 @@
 
 /* Brand-ticker base rules moved to styles.css */
 
-/* ─── SERVICE TOUR ─── */
-.svc-section { padding: 140px 48px; text-align: center; position: relative; overflow: hidden; }
-.svc-section--white { background: var(--white); border-top: 1px solid var(--slate-100); }
-.svc-section--slate { background: var(--slate-50); }
-.svc-section--ghost { background: var(--green-ghost); }
-.svc-section--dark { background: var(--green-deep); color: var(--white); }
-.svc-section--dark::before { content: ''; position: absolute; top: -200px; left: -200px; width: 500px; height: 500px; background: radial-gradient(circle, rgba(149,213,178,0.08), transparent 70%); pointer-events: none; }
-.svc-section--dark::after { content: ''; position: absolute; bottom: -200px; right: -200px; width: 500px; height: 500px; background: radial-gradient(circle, rgba(149,213,178,0.06), transparent 70%); pointer-events: none; }
-.svc-inner { max-width: 980px; margin: 0 auto; position: relative; }
-.svc-eyebrow { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 12px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--green-dark); margin-bottom: 24px; }
-.svc-eyebrow::before { content: ''; width: 24px; height: 2px; border-radius: 2px; background: var(--green-accent); }
-.svc-section--dark .svc-eyebrow { color: var(--green-accent); font-variant-ligatures: none; }
-.svc-section--dark .svc-eyebrow::before { background: var(--green-accent); }
-.svc-headline { font-size: clamp(40px, 6.8vw, 80px); font-weight: 700; line-height: 1.05; letter-spacing: -2.5px; color: var(--green-deep); margin: 0 auto 24px; max-width: 880px; }
-.svc-section--dark .svc-headline { color: var(--white); }
-.svc-sub { font-size: clamp(17px, 1.6vw, 20px); line-height: 1.5; color: var(--slate-600); margin: 0 auto 56px; max-width: 640px; }
-.svc-section--dark .svc-sub { color: rgba(255,255,255,0.75); }
-.svc-visual { margin: 0 auto 56px; max-width: 560px; }
-.svc-why { font-size: 16px; line-height: 1.7; color: var(--slate-700); margin: 0 auto 28px; max-width: 600px; }
-.svc-section--dark .svc-why { color: rgba(255,255,255,0.7); }
-.svc-link { display: inline-flex; align-items: center; gap: 6px; font-size: 16px; font-weight: 700; color: var(--green-deep); text-decoration: none; border-bottom: 1px solid var(--green-mid); padding-bottom: 2px; transition: color 0.15s, border-color 0.15s; }
-.svc-link:hover { color: var(--green-dark); border-bottom-color: var(--green-dark); }
-.svc-section--dark .svc-link { color: var(--white); border-bottom-color: rgba(255,255,255,0.5); }
-.svc-section--dark .svc-link:hover { color: var(--green-accent); border-bottom-color: var(--green-accent); }
-.svc-link svg { transition: transform 0.2s; }
-.svc-link:hover svg { transform: translateX(3px); }
+/* Service-tour structural primitives (.svc-section/.svc-eyebrow/.svc-headline/
+   .svc-sub/.svc-visual/.svc-why/.svc-link + modifiers) now live in styles.css —
+   see marketing/service-tour-style.md. Visual-mockup CSS below is homepage-specific. */
 
 /* AP invoice mockup */
 .svc-invoice { background: var(--white); border: 1px solid var(--slate-200); border-radius: 14px; box-shadow: 0 20px 50px rgba(27,67,50,0.08); text-align: left; overflow: hidden; }
@@ -368,9 +345,9 @@
 .svc-chat-msg--ai { background: var(--white); color: var(--green-deep); align-self: flex-start; border-bottom-left-radius: 4px; }
 .svc-chat-msg--ai strong { color: var(--green-deep); font-family: var(--font-mono); }
 
+/* Mobile rules for homepage-specific visual mockups
+   (structural .svc-section / .svc-headline mobile rules live in styles.css) */
 @media (max-width: 700px) {
-  .svc-section { padding: 80px 24px; }
-  .svc-headline { letter-spacing: -1.5px; }
   .svc-invoice-row { grid-template-columns: 1.1fr 0.8fr 0.8fr 24px; padding: 12px 16px; }
   .svc-invoice-head, .svc-invoice-foot { padding: 14px 16px; }
   .svc-memo-head, .svc-memo-line { padding: 12px 16px; }
