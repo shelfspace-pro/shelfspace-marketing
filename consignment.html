@@ -28,68 +28,28 @@
 <style>
   @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-12px); } }
 
-  /* ─── HERO ENHANCEMENTS ─── */
-  .page-hero { padding-bottom: 40px; }
+  /* ─── HERO (fixed, slim) ─── */
+  .page-hero { display: flex; align-items: center; justify-content: center; padding: 140px 48px 60px; min-height: auto; position: relative; overflow: hidden; background: var(--white); }
   .hero-bg-gradient { position: absolute; top: -30%; right: -20%; width: 700px; height: 700px; background: radial-gradient(circle, rgba(149,213,178,0.18) 0%, rgba(149,213,178,0) 70%); animation: float 8s ease-in-out infinite; pointer-events: none; }
   .hero-bg-gradient-2 { position: absolute; bottom: -20%; left: -15%; width: 550px; height: 550px; background: radial-gradient(circle, rgba(27,67,50,0.06) 0%, rgba(27,67,50,0) 70%); animation: float 10s ease-in-out infinite; animation-delay: -3s; pointer-events: none; }
   .hero-grid-lines { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 1200px; height: 100%; opacity: 0.035; background-image: linear-gradient(var(--green-deep) 1px, transparent 1px), linear-gradient(90deg, var(--green-deep) 1px, transparent 1px); background-size: 80px 80px; pointer-events: none; }
-  .page-hero .section-label,
-  .page-hero .section-title,
-  .page-hero .section-desc { opacity: 0; transform: translateY(30px); }
-  .page-hero .section-label { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1); }
-  .page-hero .section-title { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s, transform 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s; }
-  .page-hero .section-desc { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1) 0.25s, transform 0.8s cubic-bezier(0.22,1,0.36,1) 0.25s; }
-  .page-hero.hero-loaded .section-label,
-  .page-hero.hero-loaded .section-title,
-  .page-hero.hero-loaded .section-desc { opacity: 1; transform: translateY(0); }
-
-  /* ─── HERO ROTATOR (replaces hero-demo) ─── */
-  .page-hero { display: flex; align-items: center; justify-content: center; padding: 160px 48px 80px; min-height: 100vh; }
-  .hero-text--solo { flex: 1; max-width: 880px; margin: 0 auto; text-align: center; }
+  .hero-text--solo { flex: 1; max-width: 880px; margin: 0 auto; text-align: center; position: relative; z-index: 2; }
   .hero-text--solo .section-label { display: inline-flex; }
-  .page-hero .hero-rotator {
-    position: relative; display: block;
-    margin: 0 0 28px;
-    font-size: clamp(36px, 6vw, 72px);
-    line-height: 1.05;
-    letter-spacing: -2px;
-    font-weight: 700;
-    color: var(--green-deep);
-    max-width: none;
-  }
-  .hero-rotator-ghost {
-    display: block;
-    visibility: hidden;
-    pointer-events: none;
-    user-select: none;
-  }
-  .hero-rotator-slide {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    opacity: 0;
-    transform: translateY(14px);
-    will-change: opacity, transform;
-  }
-  @keyframes heroRotate {
-    0%   { opacity: 0; transform: translateY(14px); }
-    2%   { opacity: 1; transform: translateY(0); }
-    14%  { opacity: 1; transform: translateY(0); }
-    16%  { opacity: 0; transform: translateY(-14px); }
-    100% { opacity: 0; transform: translateY(-14px); }
-  }
-  .hero-rotator-slide:nth-child(1) { animation: heroRotate 21s ease-out infinite; }
-  .hero-rotator-slide:nth-child(2) { animation: heroRotate 21s ease-out infinite; animation-delay: 3s; }
-  .hero-rotator-slide:nth-child(3) { animation: heroRotate 21s ease-out infinite; animation-delay: 6s; }
-  .hero-rotator-slide:nth-child(4) { animation: heroRotate 21s ease-out infinite; animation-delay: 9s; }
-  .hero-rotator-slide:nth-child(5) { animation: heroRotate 21s ease-out infinite; animation-delay: 12s; }
-  .hero-rotator-slide:nth-child(6) { animation: heroRotate 21s ease-out infinite; animation-delay: 15s; }
-  .hero-rotator-slide:nth-child(7) { animation: heroRotate 21s ease-out infinite; animation-delay: 18s; }
-  .hero-lede { font-size: 17px; color: var(--slate-600); line-height: 1.5; margin: 0 auto 28px; max-width: 560px; }
+  .page-hero .hero-h1 { font-size: clamp(36px, 6vw, 72px); line-height: 1.05; letter-spacing: -2px; font-weight: 700; color: var(--green-deep); margin: 16px 0 24px; }
+  .hero-lede { font-size: 17px; color: var(--slate-600); line-height: 1.5; margin: 0 auto 28px; max-width: 580px; }
   .hero-actions-centered { display: flex; justify-content: center; }
+  .page-hero .section-label,
+  .page-hero .hero-h1,
+  .page-hero .hero-lede,
+  .page-hero .hero-actions-centered { opacity: 0; transform: translateY(30px); }
+  .page-hero .section-label { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1); }
+  .page-hero .hero-h1 { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s, transform 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s; }
+  .page-hero .hero-lede { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1) 0.25s, transform 0.8s cubic-bezier(0.22,1,0.36,1) 0.25s; }
+  .page-hero .hero-actions-centered { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1) 0.4s, transform 0.8s cubic-bezier(0.22,1,0.36,1) 0.4s; }
+  .page-hero.hero-loaded .section-label,
+  .page-hero.hero-loaded .hero-h1,
+  .page-hero.hero-loaded .hero-lede,
+  .page-hero.hero-loaded .hero-actions-centered { opacity: 1; transform: translateY(0); }
 
   /* ─── CASH BOOST CALCULATOR ─── */
   .boost-section { background: var(--slate-50); }
@@ -189,10 +149,12 @@
 
   /* ─── RESPONSIVE ─── */
   @media (max-width: 900px) {
-    .page-hero { padding: 100px 24px 48px; min-height: auto; }
+    .page-hero { padding: 100px 24px 48px; }
     .hero-grid-lines { width: 100%; }
-    .page-hero .hero-rotator { letter-spacing: -1px; }
     .faq-section { padding: 60px 24px; }
+  }
+  @media (max-width: 700px) {
+    .hero-bg-gradient, .hero-bg-gradient-2 { display: none; }
   }
   @media (max-width: 600px) {
     .boost-range { grid-template-columns: 1fr; }
@@ -212,14 +174,12 @@
       opacity: 1; transform: none; transition: none;
     }
     .page-hero .section-label,
-    .page-hero .section-title,
-    .page-hero .section-desc {
+    .page-hero .hero-h1,
+    .page-hero .hero-lede,
+    .page-hero .hero-actions-centered {
       opacity: 1; transform: none; transition: none;
     }
     .hero-bg-gradient, .hero-bg-gradient-2 { animation: none; }
-    .hero-rotator-slide { animation: none !important; opacity: 0 !important; transform: none !important; }
-    .hero-rotator-slide:first-child { opacity: 1 !important; position: relative !important; inset: auto !important; }
-    .hero-rotator-ghost { display: none !important; }
   }
 
   /* ─── MOBILE COLLAPSE PATTERN (matches homepage d03212a) ─── */
@@ -584,7 +544,7 @@
     .con-tour-cash-pane { padding: 32px 24px; }
   }
 </style>
-<noscript><style>.reveal,.page-hero .section-label,.page-hero .section-title,.page-hero .section-desc{opacity:1;transform:none;transition:none;}</style></noscript>
+<noscript><style>.reveal,.page-hero .section-label,.page-hero .hero-h1,.page-hero .hero-lede,.page-hero .hero-actions-centered{opacity:1;transform:none;transition:none;}</style></noscript>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-H2LBJT03WE"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-H2LBJT03WE');</script>
 <script>function initApollo(){var n=Math.random().toString(36).substring(7),o=document.createElement("script");
@@ -703,17 +663,8 @@ document.head.appendChild(o)}initApollo();</script>
   <div class="hero-grid-lines"></div>
   <div class="hero-text hero-text--solo">
     <div class="section-label">Carry inventory on consignment</div>
-    <h1 class="hero-rotator section-title" aria-label="Your profitability is our mission — huge sums trapped as inventory, some inventory expires on the shelf, some sells for low margins, consignment means the vendor owns the inventory, add cash back to your bank account, lock in a profit margin on your sales">
-      <span class="hero-rotator-slide">Your profitability is our mission.</span>
-      <span class="hero-rotator-slide">You have huge sums of money trapped as inventory.</span>
-      <span class="hero-rotator-slide">Some of your inventory will expire on the shelf.</span>
-      <span class="hero-rotator-slide">Some of your inventory will sell for low margins.</span>
-      <span class="hero-rotator-slide">Consignment means the vendor owns the inventory.</span>
-      <span class="hero-rotator-slide">Add cash back to your bank account.</span>
-      <span class="hero-rotator-slide">Lock in a fixed profit margin on your sales.</span>
-      <span class="hero-rotator-ghost" aria-hidden="true">You have huge sums of money trapped as inventory.</span>
-    </h1>
-    <p class="hero-lede">Major retailers like Home Depot sell on consignment — why is that?</p>
+    <h1 class="hero-h1">Cannabis consignment, settled every week.</h1>
+    <p class="hero-lede">Pulled from Metrc and your POS. Paid by Check 21. Every vendor, every week. You bring the vendors; we run the math.</p>
     <div class="hero-actions-centered">
       <a href="/contact" class="btn-primary">Get My Free Evaluation <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
     </div>
