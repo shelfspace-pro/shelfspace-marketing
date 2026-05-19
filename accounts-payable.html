@@ -193,28 +193,25 @@
   .calc-slider::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 28px; height: 28px; border-radius: 50%; background: var(--green-deep); cursor: pointer; box-shadow: 0 2px 8px rgba(27,67,50,0.3); }
   .calc-slider::-moz-range-thumb { width: 28px; height: 28px; border-radius: 50%; background: var(--green-deep); cursor: pointer; border: none; box-shadow: 0 2px 8px rgba(27,67,50,0.3); }
   .calc-results { background: var(--white); border: 1px solid var(--slate-200); border-radius: 16px; overflow: hidden; }
-  .calc-range { display: grid; grid-template-columns: repeat(3, 1fr); }
-  .calc-range-col { padding: 24px 20px; text-align: center; border-right: 1px solid var(--slate-100); }
-  .calc-range-col:last-child { border-right: none; }
-  .calc-range-label { font-size: 12px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 12px; }
-  .calc-range-col--low .calc-range-label { color: var(--slate-500); }
-  .calc-range-col--mid .calc-range-label { color: var(--green-dark); }
-  .calc-range-col--high .calc-range-label { color: var(--green-deep); }
-  .calc-range-value { font-family: var(--font-mono); font-size: clamp(20px, 2.5vw, 28px); font-weight: 700; letter-spacing: -1px; margin-bottom: 4px; }
-  .calc-range-col--low .calc-range-value { color: var(--slate-600); }
-  .calc-range-col--mid .calc-range-value { color: var(--green-dark); }
-  .calc-range-col--high .calc-range-value { color: var(--green-deep); }
-  .calc-range-sub { font-size: 13px; color: var(--slate-600); }
-  .calc-range-col--mid { background: var(--green-ghost); }
+  .calc-breakdown-row { display: flex; justify-content: space-between; align-items: center; padding: 20px 24px; border-bottom: 1px solid var(--slate-100); gap: 16px; }
+  .calc-breakdown-row:last-of-type { border-bottom: none; }
+  .calc-breakdown-label { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+  .calc-breakdown-name { font-size: 15px; font-weight: 600; color: var(--green-deep); }
+  .calc-breakdown-sub { font-size: 12px; color: var(--slate-500); }
+  .calc-breakdown-value { text-align: right; flex-shrink: 0; }
+  .calc-breakdown-year { display: block; font-family: var(--font-mono); font-size: clamp(18px, 2vw, 22px); font-weight: 700; color: var(--green-deep); letter-spacing: -0.5px; }
+  .calc-breakdown-month { display: block; font-size: 12px; color: var(--slate-500); margin-top: 3px; font-family: var(--font-mono); }
+  .calc-breakdown-row--total { background: var(--green-ghost); border-top: 1px solid rgba(149,213,178,0.4); }
+  .calc-breakdown-row--total .calc-breakdown-name { color: var(--green-deep); font-size: 16px; font-weight: 700; }
+  .calc-breakdown-row--total .calc-breakdown-year { font-size: clamp(22px, 2.6vw, 28px); }
+  .calc-breakdown-row--total .calc-breakdown-month { color: var(--green-dark); }
   .calc-ebitda { display: flex; justify-content: space-between; align-items: center; padding: 16px 24px; background: var(--green-deep); }
   .calc-ebitda span:first-child { font-size: 14px; font-weight: 600; color: rgba(255,255,255,0.7); }
   .calc-ebitda span:last-child { font-family: var(--font-mono); font-size: 20px; font-weight: 700; color: var(--white); }
   @media (max-width: 600px) {
-    .calc-range { grid-template-columns: 1fr; }
-    .calc-range-col { border-right: none; border-bottom: 1px solid var(--slate-100); padding: 18px 24px; }
-    .calc-range-col:last-child { border-bottom: none; }
-    .calc-range-col--mid { background: transparent; }
-    .calc-range-value { font-size: 22px; }
+    .calc-breakdown-row { padding: 16px 20px; gap: 12px; }
+    .calc-breakdown-year { font-size: 18px; }
+    .calc-breakdown-row--total .calc-breakdown-year { font-size: 22px; }
   }
   .calc-guarantee { text-align: center; max-width: 540px; margin: 32px auto 24px; padding: 16px 24px; background: var(--green-ghost); border: 1px solid rgba(149,213,178,0.3); border-radius: 12px; }
   .calc-guarantee p { font-size: 15px; color: var(--slate-600); margin: 0; }
@@ -708,21 +705,33 @@ document.head.appendChild(o)}initApollo();</script>
       </div>
     </div>
     <div class="calc-results">
-      <div class="calc-range">
-        <div class="calc-range-col calc-range-col--low">
-          <div class="calc-range-label">Conservative</div>
-          <div class="calc-range-value" id="ap-low-year">$21,000</div>
-          <div class="calc-range-sub"><span id="ap-low-month">$1,750</span>/mo</div>
+      <div class="calc-breakdown-row">
+        <div class="calc-breakdown-label">
+          <span class="calc-breakdown-name">Labor saved</span>
+          <span class="calc-breakdown-sub">Bookkeeper hours freed for close, reporting, strategy</span>
         </div>
-        <div class="calc-range-col calc-range-col--mid">
-          <div class="calc-range-label">Typical</div>
-          <div class="calc-range-value" id="ap-mid-year">$39,000</div>
-          <div class="calc-range-sub"><span id="ap-mid-month">$3,250</span>/mo</div>
+        <div class="calc-breakdown-value">
+          <span class="calc-breakdown-year" id="ap-labor-year">$15,000</span>
+          <span class="calc-breakdown-month"><span id="ap-labor-month">$1,250</span>/mo</span>
         </div>
-        <div class="calc-range-col calc-range-col--high">
-          <div class="calc-range-label">Aggressive</div>
-          <div class="calc-range-value" id="ap-high-year">$63,000</div>
-          <div class="calc-range-sub"><span id="ap-high-month">$5,250</span>/mo</div>
+      </div>
+      <div class="calc-breakdown-row">
+        <div class="calc-breakdown-label">
+          <span class="calc-breakdown-name">Invoice errors caught</span>
+          <span class="calc-breakdown-sub">Short deliveries, wrong prices, duplicates prevented</span>
+        </div>
+        <div class="calc-breakdown-value">
+          <span class="calc-breakdown-year" id="ap-errors-year">$24,000</span>
+          <span class="calc-breakdown-month"><span id="ap-errors-month">$2,000</span>/mo</span>
+        </div>
+      </div>
+      <div class="calc-breakdown-row calc-breakdown-row--total">
+        <div class="calc-breakdown-label">
+          <span class="calc-breakdown-name">Total savings</span>
+        </div>
+        <div class="calc-breakdown-value">
+          <span class="calc-breakdown-year" id="ap-total-year">$39,000</span>
+          <span class="calc-breakdown-month"><span id="ap-total-month">$3,250</span>/mo</span>
         </div>
       </div>
       <div class="calc-ebitda">
@@ -898,12 +907,12 @@ document.head.appendChild(o)}initApollo();</script>
   var revSlider = document.getElementById('ap-revenue');
   if (revSlider) {
     var revVal = document.getElementById('ap-revenue-val');
-    var lowYearEl = document.getElementById('ap-low-year');
-    var lowMonthEl = document.getElementById('ap-low-month');
-    var midYearEl = document.getElementById('ap-mid-year');
-    var midMonthEl = document.getElementById('ap-mid-month');
-    var highYearEl = document.getElementById('ap-high-year');
-    var highMonthEl = document.getElementById('ap-high-month');
+    var laborYearEl = document.getElementById('ap-labor-year');
+    var laborMonthEl = document.getElementById('ap-labor-month');
+    var errorsYearEl = document.getElementById('ap-errors-year');
+    var errorsMonthEl = document.getElementById('ap-errors-month');
+    var totalYearEl = document.getElementById('ap-total-year');
+    var totalMonthEl = document.getElementById('ap-total-month');
     var ebitdaEl = document.getElementById('ap-ebitda');
 
     function formatCurrency(n) { return '$' + Math.round(n).toLocaleString(); }
@@ -918,19 +927,19 @@ document.head.appendChild(o)}initApollo();</script>
       revVal.textContent = formatCurrency(revenue);
       updateSliderTrack(revSlider);
 
-      var low = revenue * 0.007;
-      var mid = revenue * 0.013;
-      var high = revenue * 0.021;
+      var laborYear = revenue * 0.005;
+      var errorsYear = revenue * 0.008;
+      var totalYear = laborYear + errorsYear;
 
-      lowYearEl.textContent = formatCurrency(low);
-      lowMonthEl.textContent = formatCurrency(low / 12);
-      midYearEl.textContent = formatCurrency(mid);
-      midMonthEl.textContent = formatCurrency(mid / 12);
-      highYearEl.textContent = formatCurrency(high);
-      highMonthEl.textContent = formatCurrency(high / 12);
+      laborYearEl.textContent = formatCurrency(laborYear);
+      laborMonthEl.textContent = formatCurrency(laborYear / 12);
+      errorsYearEl.textContent = formatCurrency(errorsYear);
+      errorsMonthEl.textContent = formatCurrency(errorsYear / 12);
+      totalYearEl.textContent = formatCurrency(totalYear);
+      totalMonthEl.textContent = formatCurrency(totalYear / 12);
 
       var baselineEbitda = 0.15;
-      var newEbitda = ((revenue * baselineEbitda + mid) / revenue) * 100;
+      var newEbitda = ((revenue * baselineEbitda + totalYear) / revenue) * 100;
       ebitdaEl.innerHTML = baselineEbitda * 100 + '.0% &rarr; ' + newEbitda.toFixed(1) + '%';
     }
 
