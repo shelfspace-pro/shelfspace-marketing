@@ -179,6 +179,102 @@
   .ap-tour-portal-pill--amber { background: rgba(217,119,6,0.1); color: #b45309; }
   .ap-tour-portal-pill::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
 
+  /* ════════════════════════════════════════════════════════════════════
+     TOUR VISUAL SCALING — bigger cards, more readable type
+     Overrides the lean defaults above. Targets desktop primarily;
+     mobile reverts to compact at the end. Mirrors /consignment pattern.
+     ════════════════════════════════════════════════════════════════════ */
+  .svc-section .svc-visual { max-width: 780px; }
+
+  /* S1 — invoice */
+  .ap-tour-invoice-head { padding: 22px 28px; }
+  .ap-tour-invoice-id { font-size: 14px; }
+  .ap-tour-invoice-vendor { font-size: 15px; margin-top: 4px; }
+  .ap-tour-invoice-badge { font-size: 12px; padding: 6px 14px; }
+  .ap-tour-invoice-row { font-size: 17px; padding: 18px 28px; grid-template-columns: 1.3fr 0.9fr 0.9fr 32px; }
+  .ap-tour-invoice-qty { font-size: 14px; }
+  .ap-tour-invoice-status svg { width: 22px; height: 22px; }
+  .ap-tour-invoice-foot { padding: 18px 28px; font-size: 14px; }
+
+  /* S2 — flow */
+  .ap-tour-flow-step { padding: 34px 18px; gap: 16px; }
+  .ap-tour-flow-icon { width: 56px; height: 56px; }
+  .ap-tour-flow-icon svg { width: 26px; height: 26px; }
+  .ap-tour-flow-label { font-size: 12px; }
+  .ap-tour-flow-title { font-size: 17px; line-height: 1.35; }
+  .ap-tour-flow-arrow { font-size: 28px; }
+
+  /* S3 — metrc match */
+  .ap-tour-match-head { padding: 22px 28px; }
+  .ap-tour-match-title { font-size: 13px; }
+  .ap-tour-match-vendor { font-size: 17px; margin-top: 4px; }
+  .ap-tour-match-logo { height: 20px; }
+  .ap-tour-match-row { font-size: 17px; padding: 16px 28px; grid-template-columns: 1.5fr 1fr 1fr 32px; }
+  .ap-tour-match-qty { font-size: 14px; }
+  .ap-tour-match-status svg { width: 22px; height: 22px; }
+  .ap-tour-match-foot { padding: 18px 28px; font-size: 13px; }
+  .ap-tour-match-foot-pill { font-size: 12px; padding: 4px 12px; }
+
+  /* S4 — stopped check (dark) */
+  .ap-tour-check { max-width: 580px; padding: 38px 40px; }
+  .ap-tour-check-watermark { font-size: 72px; letter-spacing: 8px; padding: 10px 28px; border-width: 6px; }
+  .ap-tour-check-head { margin-bottom: 28px; }
+  .ap-tour-check-brand { font-size: 17px; }
+  .ap-tour-check-brand-sub { font-size: 12px; }
+  .ap-tour-check-num { font-size: 14px; }
+  .ap-tour-check-payee-label { font-size: 12px; }
+  .ap-tour-check-payee-name { font-size: 22px; }
+  .ap-tour-check-line { font-size: 18px; margin-bottom: 6px; }
+  .ap-tour-check-line-corrected { font-size: 30px; margin-bottom: 20px; }
+  .ap-tour-check-pill { font-size: 13px; padding: 9px 18px; }
+
+  /* S5 — vendor email thread */
+  .ap-tour-thread { max-width: 620px; gap: 10px; }
+  .ap-tour-thread-label { font-size: 12px; }
+  .ap-tour-thread-msg { font-size: 17px; padding: 18px 22px; border-radius: 20px; }
+  .ap-tour-thread-time { font-size: 12px; padding-top: 6px; }
+
+  /* S6 — before/after hours */
+  .ap-tour-hours-pane { padding: 36px 30px; }
+  .ap-tour-hours-label { font-size: 12px; margin-bottom: 16px; }
+  .ap-tour-hours-big { font-size: clamp(32px, 4vw, 44px); margin-bottom: 14px; }
+  .ap-tour-hours-sub { font-size: 16px; }
+  .ap-tour-hours-arrow svg { width: 40px; height: 40px; }
+
+  /* S7 — vendor portal */
+  .ap-tour-portal { max-width: 560px; }
+  .ap-tour-portal-head { padding: 26px 28px; }
+  .ap-tour-portal-avatar { width: 54px; height: 54px; font-size: 17px; }
+  .ap-tour-portal-name { font-size: 19px; }
+  .ap-tour-portal-sub { font-size: 12px; }
+  .ap-tour-portal-rows { padding: 8px 28px 16px; }
+  .ap-tour-portal-row { font-size: 16px; padding: 18px 0; }
+  .ap-tour-portal-row-val { font-size: 15px; }
+  .ap-tour-portal-pill { font-size: 12px; padding: 5px 12px; }
+
+  /* Mobile — pull paddings back so cards fit; type stays readable */
+  @media (max-width: 700px) {
+    .svc-section .svc-visual { max-width: 100%; }
+    .ap-tour-check, .ap-tour-thread, .ap-tour-portal { max-width: 100%; }
+    .ap-tour-check { padding: 28px 22px; }
+    .ap-tour-check-watermark { font-size: 56px; letter-spacing: 6px; padding: 8px 22px; border-width: 5px; }
+    .ap-tour-check-line-corrected { font-size: 24px; }
+    .ap-tour-invoice-head,
+    .ap-tour-invoice-row,
+    .ap-tour-invoice-foot,
+    .ap-tour-match-head,
+    .ap-tour-match-row,
+    .ap-tour-match-foot,
+    .ap-tour-portal-head,
+    .ap-tour-portal-rows { padding-left: 20px; padding-right: 20px; }
+    .ap-tour-invoice-row { font-size: 15px; }
+    .ap-tour-match-row { font-size: 15px; }
+    .ap-tour-thread-msg { font-size: 15.5px; padding: 14px 18px; }
+    .ap-tour-hours-pane { padding: 28px 22px; }
+    .ap-tour-hours-big { font-size: 28px; }
+    .ap-tour-hours-sub { font-size: 14px; }
+  }
+
   /* ─── AP CALCULATOR ─── */
   .calc-section { background: var(--slate-50); padding: 100px 48px; }
   .calc-header { text-align: center; max-width: 600px; margin: 0 auto 48px; }
