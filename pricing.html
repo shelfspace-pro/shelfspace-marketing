@@ -106,50 +106,61 @@
   .price-pillar {
     display: flex; flex-direction: column;
     background: var(--white); border: 1px solid var(--slate-200);
-    border-radius: 16px; padding: 32px 28px;
-    position: relative;
+    border-radius: 16px; padding: 36px 28px 28px;
+    position: relative; overflow: hidden;
     transition: transform 0.3s cubic-bezier(0.22,1,0.36,1), box-shadow 0.3s, border-color 0.3s;
   }
-  .price-pillar:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(27,67,50,0.06); border-color: var(--green-accent); }
+  .price-pillar::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+    background: linear-gradient(90deg, var(--green-deep), var(--green-mid), var(--green-accent));
+    border-radius: 16px 16px 0 0;
+  }
+  .price-pillar::after {
+    content: attr(data-num); position: absolute; top: 4px; right: 18px;
+    font-family: var(--font-display); font-size: 92px; font-weight: 800;
+    color: var(--green-ghost); line-height: 1; letter-spacing: -3px;
+    pointer-events: none; z-index: 0;
+  }
+  .price-pillar > * { position: relative; z-index: 1; }
+  .price-pillar:hover { transform: translateY(-3px); box-shadow: 0 16px 40px rgba(27,67,50,0.10); border-color: var(--green-accent); }
   .price-pillar--featured {
     border: 2px solid var(--green-deep);
     box-shadow: 0 20px 48px rgba(27,67,50,0.14);
     background: linear-gradient(180deg, var(--green-ghost) 0%, var(--white) 12%);
   }
-  .price-pillar--featured::before {
-    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
-    background: linear-gradient(90deg, var(--green-deep), var(--green-mid), var(--green-accent));
-    border-radius: 14px 14px 0 0;
+  .price-pillar--featured:hover { transform: translateY(-3px); box-shadow: 0 24px 56px rgba(27,67,50,0.18); }
+  .price-pillar-name {
+    font-size: 28px; font-weight: 700;
+    color: var(--green-deep); letter-spacing: -0.8px; line-height: 1.15;
+    margin: 0 0 14px;
   }
-  .price-pillar--featured:hover { transform: translateY(-2px); box-shadow: 0 24px 56px rgba(27,67,50,0.18); }
-  .price-pillar-num {
-    position: absolute; top: 24px; right: 24px;
-    font-family: var(--font-mono); font-size: 12px; font-weight: 700;
-    color: var(--slate-400); letter-spacing: 1px;
-  }
-  .price-pillar--featured .price-pillar-num { color: var(--green-mid); }
-  .price-pillar-eyebrow {
+  .price-pillar-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 6px 12px 6px 10px;
+    background: var(--green-ghost); border: 1px solid var(--green-light);
+    border-radius: 999px;
     font-family: var(--font-mono); font-size: 11px; font-weight: 700;
-    color: var(--green-deep); letter-spacing: 1.2px; text-transform: uppercase;
-    margin-bottom: 12px;
+    color: var(--green-dark); letter-spacing: 1px; text-transform: uppercase;
+    margin-bottom: 18px; align-self: flex-start;
   }
-  .price-pillar-headline {
-    font-size: 22px; font-weight: 700;
-    color: var(--green-deep); letter-spacing: -0.5px; line-height: 1.25;
-    margin: 0 0 16px;
+  .price-pillar-badge::before {
+    content: ''; width: 6px; height: 6px; border-radius: 50%;
+    background: var(--green-mid);
+    box-shadow: 0 0 0 3px rgba(64,145,108,0.15);
   }
   .price-pillar-body {
     font-size: 15px; line-height: 1.65; color: var(--slate-600);
-    margin: 0 0 20px; flex-grow: 1;
+    margin: 0 0 24px; flex-grow: 1;
   }
   .price-pillar-link {
     font-family: var(--font-mono); font-size: 12px; font-weight: 700;
-    color: var(--green-deep); letter-spacing: 1px; text-transform: uppercase;
-    text-decoration: none; display: inline-flex; align-items: center; gap: 6px;
+    color: var(--green-dark); letter-spacing: 1px; text-transform: uppercase;
+    text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
+    padding-top: 18px; border-top: 1px solid var(--slate-100);
     transition: gap 0.2s ease, color 0.2s ease;
   }
-  .price-pillar-link:hover { color: var(--green-mid); gap: 10px; }
-  .price-pillar-link::after { content: '→'; font-family: var(--font-display); font-size: 14px; }
+  .price-pillar-link:hover { color: var(--green-deep); gap: 12px; }
+  .price-pillar-link::after { content: '→'; font-family: var(--font-display); font-size: 16px; }
   .price-pillar-foot {
     font-size: 13px; line-height: 1.55; color: var(--slate-500);
     padding-top: 16px; border-top: 1px solid var(--slate-100);
@@ -223,7 +234,8 @@
   @media (max-width: 700px) {
     .pricing-hero::before, .pricing-hero::after,
     .price-pillars::before { display: none; }
-    .price-pillar-headline { font-size: 20px; }
+    .price-pillar-name { font-size: 24px; }
+    .price-pillar::after { font-size: 72px; }
   }
   @media (max-width: 600px) {
     .footer-top { grid-template-columns: 1fr; }
@@ -382,26 +394,23 @@ document.head.appendChild(o)}initApollo();</script>
   </div>
   <div class="price-pillars-grid">
 
-    <article class="price-pillar reveal">
-      <div class="price-pillar-num">01</div>
-      <div class="price-pillar-eyebrow">Accounts Payable</div>
-      <h3 class="price-pillar-headline">Priced on usage.</h3>
+    <article class="price-pillar reveal" data-num="01">
+      <h3 class="price-pillar-name">Accounts Payable</h3>
+      <span class="price-pillar-badge">Priced on usage</span>
       <p class="price-pillar-body">Slow month? Smaller bill. You only pay for the work we actually run for you.</p>
       <a class="price-pillar-link" href="/accounts-payable">What it includes</a>
     </article>
 
-    <article class="price-pillar reveal reveal-delay-1">
-      <div class="price-pillar-num">02</div>
-      <div class="price-pillar-eyebrow">Consignment</div>
-      <h3 class="price-pillar-headline">Priced on usage.</h3>
+    <article class="price-pillar reveal reveal-delay-1" data-num="02">
+      <h3 class="price-pillar-name">Consignment</h3>
+      <span class="price-pillar-badge">Priced on usage</span>
       <p class="price-pillar-body">If you don't use it, you don't pay for it.</p>
       <a class="price-pillar-link" href="/consignment">What it includes</a>
     </article>
 
-    <article class="price-pillar reveal reveal-delay-2">
-      <div class="price-pillar-num">03</div>
-      <div class="price-pillar-eyebrow">Credit Recovery</div>
-      <h3 class="price-pillar-headline">Commission-based.</h3>
+    <article class="price-pillar reveal reveal-delay-2" data-num="03">
+      <h3 class="price-pillar-name">Credit Recovery</h3>
+      <span class="price-pillar-badge">Commission-based</span>
       <p class="price-pillar-body">We only get paid when you do. Nothing recovered, nothing owed.</p>
       <a class="price-pillar-link" href="/credit-recovery">What it includes</a>
     </article>
