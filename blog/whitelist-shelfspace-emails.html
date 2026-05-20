@@ -96,6 +96,7 @@
   .send-table td { padding: 15px 18px; font-size: 14px; line-height: 1.6; color: var(--slate-600); border-top: 1px solid var(--slate-100); }
   .send-table tr:first-child th, .send-table tr:first-child td { border-top: none; }
   .send-table strong { color: var(--green-deep); font-weight: 700; }
+  .send-table-wrap { overflow-x: auto; }
 
   /* ─── GATEWAY CARDS ─── */
   .gw-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
@@ -118,7 +119,7 @@
   /* ─── DOWNLOAD BLOCK ─── */
   .dl-block { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px; background: var(--green-deep); border-radius: 16px; padding: 28px 32px; }
   .dl-copy-label { font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--green-accent); margin-bottom: 8px; }
-  .dl-copy h2 { font-size: 20px; font-weight: 700; color: var(--white); margin: 0 0 6px; letter-spacing: -0.3px; }
+  .dl-copy-title { font-size: 20px; font-weight: 700; color: var(--white); margin: 0 0 6px; letter-spacing: -0.3px; }
   .dl-copy p { font-size: 14px; line-height: 1.55; color: rgba(255,255,255,0.78); margin: 0; max-width: 420px; }
   .dl-btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 22px; background: var(--white); color: var(--green-deep); border-radius: 10px; font-size: 15px; font-weight: 700; text-decoration: none; flex-shrink: 0; }
   .dl-btn svg { width: 16px; height: 16px; }
@@ -126,6 +127,17 @@
   /* ─── FAQ ─── */
   .faq-wrap { max-width: 720px; margin: 0 auto; padding: 8px 48px 60px; }
   .faq-wrap > h2 { font-size: 24px; font-weight: 700; color: var(--green-deep); margin: 0 0 24px; letter-spacing: -0.5px; }
+  .faq-list details { border-bottom: 1px solid var(--slate-200); }
+  .faq-list details:first-child { border-top: 1px solid var(--slate-200); }
+  .faq-list summary { padding: 22px 0; font-size: 17px; font-weight: 600; color: var(--green-deep); cursor: pointer; list-style: none; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+  .faq-list summary::-webkit-details-marker { display: none; }
+  .faq-list summary::after { content: '+'; font-size: 22px; font-weight: 400; color: var(--slate-500); flex-shrink: 0; }
+  .faq-list details[open] summary::after { content: '\2212'; }
+  .faq-list details p { padding: 0 0 22px; margin: 0; font-size: 15px; line-height: 1.7; color: var(--slate-500); }
+  .faq-list a { color: var(--green-mid); font-weight: 500; text-decoration: none; }
+  .faq-list a:hover { color: var(--green-deep); text-decoration: underline; }
+  .faq-list strong { color: var(--green-deep); font-weight: 700; }
+  .faq-list code, .cta-content code { font-family: var(--font-mono); font-size: 0.86em; background: var(--green-ghost); color: var(--green-dark); padding: 1px 6px; border-radius: 4px; }
 
   /* ─── CTA PARALLAX ─── */
   .cta-section::before { transform: translate(-50%,-50%) translateY(var(--parallax-y, 0)); will-change: transform; }
@@ -221,7 +233,7 @@ document.head.appendChild(o)}initApollo();</script>
       "name": "Is email from shelfspace.pro legitimate?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes. shelfspace.pro is the sending domain for ShelfSpace, the cannabis-specific payments system your retail partner uses to send payment notifications, settlement reports, and account invitations. Every message is authenticated — SPF, DKIM (selector resend._domainkey), and DMARC all pass — so you can verify the sender cryptographically rather than trusting the display name."
+        "text": "Yes. shelfspace.pro is the sending domain for ShelfSpace, the cannabis-specific system your retail partner uses to send payment notifications, settlement reports, and account invitations. Every message is authenticated — SPF, DKIM (selector resend._domainkey), and DMARC all pass — so you can verify the sender cryptographically rather than trusting the display name. If you want the longer version, here's whether ShelfSpace is safe for vendors."
       }
     },
     {
@@ -229,7 +241,7 @@ document.head.appendChild(o)}initApollo();</script>
       "name": "Will allowlisting ShelfSpace weaken our email security?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "No. Add the allow entry with DMARC = pass required. Because every legitimate ShelfSpace message passes DMARC, the rule lets real mail through while a spoofed message that fails DMARC is still blocked. You are trusting a domain that proves who it is on every message, not a static IP, so there is no security trade-off."
+        "text": "No. Add the allow entry with DMARC = pass required. Because every legitimate ShelfSpace message passes DMARC, the rule lets real mail through while a spoofed message that fails DMARC is still blocked. You're trusting a domain that proves who it is on every message, not a static IP, so there's no security trade-off."
       }
     },
     {
@@ -277,7 +289,7 @@ document.head.appendChild(o)}initApollo();</script>
 <div class="article-glance">
   <h2>At a glance</h2>
   <ul>
-    <li>ShelfSpace sends from one domain: <strong>shelfspace.pro</strong> — allowlist the domain, not an IP address</li>
+    <li>We send from one domain: <strong>shelfspace.pro</strong> — allowlist the domain, not an IP address</li>
     <li>The mail is fully authenticated — <strong>SPF, DKIM (selector <code>resend._domainkey</code>), and DMARC all pass</strong> — so you can safely require <strong>DMARC = pass</strong> on the allow rule</li>
     <li>It's being delivered, then filtered tenant-side to quarantine or junk — the fix lives in <strong>your</strong> gateway console, not on our end</li>
     <li>Step-by-step entries below for <strong>Microsoft 365 / Defender, Google Workspace, Proofpoint, and Mimecast</strong></li>
@@ -287,7 +299,7 @@ document.head.appendChild(o)}initApollo();</script>
 
 <!-- INTRO PROSE -->
 <article class="article-body">
-  <p class="reveal">If you're reading this, someone at your organization gets email from ShelfSpace — payment notifications, settlement reports, or an invite to a vendor account — and it's landing in quarantine or the junk folder instead of the inbox. This is a quick, one-time fix, and it doesn't require lowering anyone's security.</p>
+  <p class="reveal">If you're reading this, someone at your organization gets email from ShelfSpace — payment notifications, settlement reports, or an invite to a vendor account — and it keeps landing in quarantine or the junk folder instead of the inbox. This is a quick, one-time fix, and it doesn't require lowering anyone's security.</p>
 
   <p class="reveal">Here's what's happening. Our mail is fully authenticated — SPF, DKIM, and DMARC all pass — so enterprise gateways like Microsoft 365, Google Workspace, Proofpoint, and Mimecast accept the message, and our logs show it "delivered." Your tenant then applies its own filtering and routes it to quarantine or junk. That second decision lives in your console, which is why it can only be resolved on your side.</p>
 
@@ -297,6 +309,7 @@ document.head.appendChild(o)}initApollo();</script>
 <!-- SENDING DETAILS -->
 <section class="guide-section reveal">
   <h2>Our sending details</h2>
+  <div class="send-table-wrap">
   <table class="send-table">
     <tbody>
       <tr>
@@ -321,6 +334,7 @@ document.head.appendChild(o)}initApollo();</script>
       </tr>
     </tbody>
   </table>
+  </div>
 </section>
 
 <!-- HOW TO ALLOWLIST -->
@@ -399,7 +413,7 @@ document.head.appendChild(o)}initApollo();</script>
   <div class="dl-block">
     <div class="dl-copy">
       <div class="dl-copy-label">One-page guide</div>
-      <h2>Hand it to your IT team</h2>
+      <div class="dl-copy-title">Hand it to your IT team</div>
       <p>The same instructions on a single printable page — sending details, the four gateway walkthroughs, and the confirmation test.</p>
     </div>
     <a href="/ShelfSpace_Email_Deliverability_Guide.pdf" target="_blank" rel="noopener" download class="dl-btn" aria-label="Download the ShelfSpace email deliverability guide, PDF, opens in new tab">
@@ -423,7 +437,7 @@ document.head.appendChild(o)}initApollo();</script>
     </details>
     <details>
       <summary>Is email from shelfspace.pro legitimate?</summary>
-      <p>Yes. <code>shelfspace.pro</code> is the sending domain for ShelfSpace, <a href="/vendors">the cannabis-specific payments system your retail partner uses</a> to send payment notifications, settlement reports, and account invitations. Every message is authenticated — SPF, DKIM (selector <code>resend._domainkey</code>), and DMARC all pass — so you can verify the sender cryptographically rather than trusting the display name. If you want the longer version, here's <a href="/blog/is-shelfspace-safe-for-vendors">whether ShelfSpace is safe for vendors</a>.</p>
+      <p>Yes. <code>shelfspace.pro</code> is the sending domain for ShelfSpace, <a href="/vendors">the cannabis-specific system your retail partner uses</a> to send payment notifications, settlement reports, and account invitations. Every message is authenticated — SPF, DKIM (selector <code>resend._domainkey</code>), and DMARC all pass — so you can verify the sender cryptographically rather than trusting the display name. If you want the longer version, here's <a href="/blog/is-shelfspace-safe-for-vendors">whether ShelfSpace is safe for vendors</a>.</p>
     </details>
     <details>
       <summary>Will allowlisting ShelfSpace weaken our email security?</summary>
@@ -445,7 +459,7 @@ document.head.appendChild(o)}initApollo();</script>
     <div class="cta-actions reveal">
       <a href="mailto:support@shelfspace.pro" class="btn-primary">
         Email Support
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
       </a>
       <a href="/vendors" class="btn-secondary">See what ShelfSpace is</a>
     </div>
