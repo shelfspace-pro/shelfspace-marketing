@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to Whitelist ShelfSpace Emails | IT Setup Guide</title>
+<meta name="description" content="Whitelist ShelfSpace emails so payment notifications reach inboxes. Allowlist shelfspace.pro in Microsoft 365, Google Workspace, Proofpoint &amp; Mimecast.">
+<link rel="canonical" href="https://shelfspace.pro/blog/whitelist-shelfspace-emails">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://shelfspace.pro/blog/whitelist-shelfspace-emails">
+<meta property="og:title" content="How to Whitelist ShelfSpace Emails | IT Setup Guide">
+<meta property="og:description" content="Whitelist ShelfSpace emails so payment notifications reach inboxes. Allowlist shelfspace.pro in Microsoft 365, Google Workspace, Proofpoint &amp; Mimecast.">
+<meta property="og:image" content="https://shelfspace.pro/og-image-v7.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta property="og:site_name" content="ShelfSpace">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="How to Whitelist ShelfSpace Emails | IT Setup Guide">
+<meta name="twitter:description" content="Whitelist ShelfSpace emails so payment notifications reach inboxes. Allowlist shelfspace.pro in Microsoft 365, Google Workspace, Proofpoint &amp; Mimecast.">
+<meta name="twitter:image" content="https://shelfspace.pro/og-image-v7.png">
+<meta name="apple-mobile-web-app-title" content="ShelfSpace">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+<style>
+  @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-12px); } }
+
+  /* ─── HERO ─── */
+  .page-hero { padding-bottom: 40px; }
+  .hero-bg-gradient { position: absolute; top: -30%; right: -20%; width: 700px; height: 700px; background: radial-gradient(circle, rgba(149,213,178,0.18) 0%, rgba(149,213,178,0) 70%); animation: float 8s ease-in-out infinite; pointer-events: none; }
+  .hero-bg-gradient-2 { position: absolute; bottom: -20%; left: -15%; width: 550px; height: 550px; background: radial-gradient(circle, rgba(27,67,50,0.06) 0%, rgba(27,67,50,0) 70%); animation: float 10s ease-in-out infinite; animation-delay: -3s; pointer-events: none; }
+  .hero-grid-lines { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 1200px; height: 100%; opacity: 0.035; background-image: linear-gradient(var(--green-deep) 1px, transparent 1px), linear-gradient(90deg, var(--green-deep) 1px, transparent 1px); background-size: 80px 80px; pointer-events: none; }
+  .page-hero .section-label,
+  .page-hero .section-title,
+  .page-hero .section-desc { opacity: 0; transform: translateY(30px); }
+  .page-hero .section-label { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1); }
+  .page-hero .section-title { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s, transform 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s; max-width: 760px; margin-left: auto; margin-right: auto; }
+  .page-hero .section-desc { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1) 0.25s, transform 0.8s cubic-bezier(0.22,1,0.36,1) 0.25s; max-width: 620px; margin-left: auto; margin-right: auto; }
+  .page-hero.hero-loaded .section-label,
+  .page-hero.hero-loaded .section-title,
+  .page-hero.hero-loaded .section-desc { opacity: 1; transform: translateY(0); }
+
+  /* ─── REVEAL ─── */
+  .reveal {
+    opacity: 0; transform: translateY(40px);
+    transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+  /* ─── ARTICLE BODY (intro prose only) ─── */
+  .article-body { max-width: 720px; margin: 0 auto; padding: 0 48px 32px; }
+  .article-body p { font-size: 17px; line-height: 1.85; color: var(--slate-600); margin-bottom: 22px; }
+  .article-body strong { color: var(--green-deep); font-weight: 600; }
+  .article-body a { color: var(--green-mid); font-weight: 500; text-decoration: none; }
+  .article-body a:hover { color: var(--green-deep); text-decoration: underline; }
+  .article-body code { font-family: var(--font-mono); font-size: 0.86em; background: var(--green-ghost); color: var(--green-dark); padding: 1px 6px; border-radius: 4px; }
+
+  /* ─── AT A GLANCE ─── */
+  .article-glance {
+    max-width: 720px; margin: 0 auto 40px; padding: 24px 28px;
+    background: var(--green-ghost); border: 1px solid rgba(149,213,178,0.3);
+    border-radius: 12px;
+  }
+  .article-glance h2 {
+    font-size: 14px; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--green-mid); margin: 0 0 12px;
+  }
+  .article-glance ul { list-style: none; padding: 0; margin: 0; }
+  .article-glance li {
+    font-size: 15px; line-height: 1.6; color: var(--slate-600);
+    padding: 5px 0 5px 20px; position: relative;
+  }
+  .article-glance li::before {
+    content: ''; position: absolute; left: 0; top: 13px;
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--green-accent);
+  }
+  .article-glance strong { color: var(--green-deep); font-weight: 700; }
+  .article-glance code { font-family: var(--font-mono); font-size: 0.86em; background: var(--white); color: var(--green-dark); padding: 1px 5px; border-radius: 4px; }
+
+  /* ─── GUIDE SECTIONS ─── */
+  .guide-section { max-width: 720px; margin: 0 auto; padding: 0 48px 48px; }
+  .guide-section h2 { font-size: 24px; font-weight: 700; color: var(--green-deep); margin: 0 0 16px; letter-spacing: -0.5px; line-height: 1.3; }
+  .guide-section > p { font-size: 16px; line-height: 1.7; color: var(--slate-600); margin: 0 0 20px; }
+  .guide-section code { font-family: var(--font-mono); font-size: 0.86em; background: var(--green-ghost); color: var(--green-dark); padding: 1px 6px; border-radius: 4px; }
+
+  /* ─── SENDING DETAILS TABLE ─── */
+  .send-table { width: 100%; border-collapse: collapse; border: 1px solid var(--slate-200); border-radius: 12px; overflow: hidden; }
+  .send-table th { width: 32%; text-align: left; vertical-align: top; padding: 15px 18px; background: var(--slate-50); color: var(--green-deep); font-size: 13px; font-weight: 700; letter-spacing: 0.3px; border-top: 1px solid var(--slate-100); }
+  .send-table td { padding: 15px 18px; font-size: 14px; line-height: 1.6; color: var(--slate-600); border-top: 1px solid var(--slate-100); }
+  .send-table tr:first-child th, .send-table tr:first-child td { border-top: none; }
+  .send-table strong { color: var(--green-deep); font-weight: 700; }
+
+  /* ─── GATEWAY CARDS ─── */
+  .gw-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .gw-card { background: var(--white); border: 1px solid var(--slate-200); border-radius: 14px; padding: 22px 22px 18px; }
+  .gw-card-head { display: flex; align-items: baseline; gap: 10px; margin-bottom: 14px; flex-wrap: wrap; }
+  .gw-card-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--green-accent); flex-shrink: 0; align-self: center; }
+  .gw-card h3 { font-size: 16px; font-weight: 700; color: var(--green-deep); margin: 0; letter-spacing: -0.2px; }
+  .gw-card-sub { font-family: var(--font-mono); font-size: 11px; color: var(--slate-500); letter-spacing: 0.3px; }
+  .gw-card ol { margin: 0; padding-left: 20px; }
+  .gw-card li { font-size: 14px; line-height: 1.6; color: var(--slate-600); margin-bottom: 9px; }
+  .gw-card li:last-child { margin-bottom: 0; }
+  .gw-card strong { color: var(--green-deep); font-weight: 600; }
+
+  /* ─── CONFIRM CALLOUT ─── */
+  .confirm-callout { background: var(--green-ghost); border: 1px solid rgba(149,213,178,0.4); border-radius: 14px; padding: 24px 28px; }
+  .confirm-callout h2 { font-size: 20px; margin: 0 0 10px; }
+  .confirm-callout p { font-size: 15px; line-height: 1.7; color: var(--slate-600); margin: 0; }
+  .confirm-callout strong { color: var(--green-deep); font-weight: 700; }
+
+  /* ─── DOWNLOAD BLOCK ─── */
+  .dl-block { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px; background: var(--green-deep); border-radius: 16px; padding: 28px 32px; }
+  .dl-copy-label { font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--green-accent); margin-bottom: 8px; }
+  .dl-copy h2 { font-size: 20px; font-weight: 700; color: var(--white); margin: 0 0 6px; letter-spacing: -0.3px; }
+  .dl-copy p { font-size: 14px; line-height: 1.55; color: rgba(255,255,255,0.78); margin: 0; max-width: 420px; }
+  .dl-btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 22px; background: var(--white); color: var(--green-deep); border-radius: 10px; font-size: 15px; font-weight: 700; text-decoration: none; flex-shrink: 0; }
+  .dl-btn svg { width: 16px; height: 16px; }
+
+  /* ─── FAQ ─── */
+  .faq-wrap { max-width: 720px; margin: 0 auto; padding: 8px 48px 60px; }
+  .faq-wrap > h2 { font-size: 24px; font-weight: 700; color: var(--green-deep); margin: 0 0 24px; letter-spacing: -0.5px; }
+
+  /* ─── CTA PARALLAX ─── */
+  .cta-section::before { transform: translate(-50%,-50%) translateY(var(--parallax-y, 0)); will-change: transform; }
+
+  /* ─── FOOTER 5-COL ─── */
+  .footer-top { grid-template-columns: 2fr 1fr 1fr 1fr 1fr; }
+  @media (max-width: 900px) { .footer-top { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px) { .footer-top { grid-template-columns: 1fr; } }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    .article-body { padding: 0 24px 28px; }
+    .guide-section { padding: 0 24px 40px; }
+    .faq-wrap { padding: 8px 24px 48px; }
+    .dl-block { padding: 24px; }
+  }
+  @media (max-width: 760px) {
+    .gw-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ─── REDUCED MOTION ─── */
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; transition: none; }
+    .page-hero .section-label,
+    .page-hero .section-title,
+    .page-hero .section-desc { opacity: 1; transform: none; transition: none; }
+    .hero-bg-gradient, .hero-bg-gradient-2 { animation: none; }
+  }
+</style>
+<noscript><style>.reveal,.page-hero .section-label,.page-hero .section-title,.page-hero .section-desc{opacity:1;transform:none;transition:none;}</style></noscript>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-H2LBJT03WE"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-H2LBJT03WE');</script>
+<script>function initApollo(){var n=Math.random().toString(36).substring(7),o=document.createElement("script");
+o.src="https://assets.apollo.io/micro/website-tracker/tracker.iife.js?nocache="+n,o.async=!0,o.defer=!0,
+o.onload=function(){window.trackingFunctions.onLoad({appId:"69c141b32234890011a43849"})},
+document.head.appendChild(o)}initApollo();</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "How to Whitelist ShelfSpace Emails (Allowlist Guide for IT)",
+  "description": "Whitelist ShelfSpace emails so payment notifications, settlement reports, and account invites reach inboxes. Step-by-step allowlist guide for Microsoft 365, Google Workspace, Proofpoint, and Mimecast.",
+  "author": {
+    "@type": "Organization",
+    "name": "ShelfSpace",
+    "url": "https://shelfspace.pro"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "ShelfSpace",
+    "url": "https://shelfspace.pro"
+  },
+  "datePublished": "2026-05-20",
+  "dateModified": "2026-05-20",
+  "url": "https://shelfspace.pro/blog/whitelist-shelfspace-emails",
+  "image": "https://shelfspace.pro/og-image-v7.png"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://shelfspace.pro/" },
+    { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://shelfspace.pro/blog" },
+    { "@type": "ListItem", "position": 3, "name": "How to Whitelist ShelfSpace Emails" }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Why are ShelfSpace emails going to spam or quarantine?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Because the mail is accepted and then filtered tenant-side. ShelfSpace email passes SPF, DKIM, and DMARC, so your gateway accepts it and the delivery logs read \"delivered\" — then your tenant applies its own filtering and routes it to quarantine or junk. That second decision lives in your console, so the fix is a domain-level allow entry for shelfspace.pro, ideally gated on DMARC = pass."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What do I allowlist for ShelfSpace — a domain or an IP address?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Allowlist the domain shelfspace.pro, never an IP address. Every ShelfSpace message is sent from the shelfspace.pro domain, so a single domain entry covers all of them. The mail is sent through Resend over Amazon SES on shared IPs that rotate, so an IP-based rule will break and isn't safe to scope to."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is email from shelfspace.pro legitimate?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. shelfspace.pro is the sending domain for ShelfSpace, the cannabis-specific payments system your retail partner uses to send payment notifications, settlement reports, and account invitations. Every message is authenticated — SPF, DKIM (selector resend._domainkey), and DMARC all pass — so you can verify the sender cryptographically rather than trusting the display name."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Will allowlisting ShelfSpace weaken our email security?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Add the allow entry with DMARC = pass required. Because every legitimate ShelfSpace message passes DMARC, the rule lets real mail through while a spoofed message that fails DMARC is still blocked. You are trusting a domain that proves who it is on every message, not a static IP, so there is no security trade-off."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "ShelfSpace email is still being filtered after I allowlisted it — what now?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Confirm the allow entry is on the domain (shelfspace.pro) and that an earlier block, quarantine, or content/DLP rule isn't overriding it — most gateways apply block rules before allow rules. Release any held messages and choose \"allow sender,\" then send a test. If it still doesn't arrive, email support@shelfspace.pro and we'll help you find the rule that's catching it."
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="/" class="nav-logo">
+    <div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div>
+    <span class="nav-logo-text">ShelfSpace</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="/consignment">Consignment</a></li>
+    <li><a href="/accounts-payable">Accounts Payable</a></li>
+    <li><a href="/credit-recovery">Credit Recovery</a></li>
+    <li><a href="/pricing">Pricing</a></li>
+    <li><a href="/about">About</a></li>
+    <li><a href="/contact" class="nav-cta">Get Started <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a></li>
+  </ul>
+  <div class="nav-hamburger" onclick="document.querySelector('.nav-links').classList.toggle('mobile-open'); event.stopPropagation();"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="hero-bg-gradient"></div>
+  <div class="hero-bg-gradient-2"></div>
+  <div class="hero-grid-lines"></div>
+  <div class="section-label">For IT &amp; Email Administrators</div>
+  <h1 class="section-title">How to Whitelist ShelfSpace Emails (Allowlist Guide for IT)</h1>
+  <p class="section-desc">ShelfSpace mail — payment notifications, settlement reports, account invites — is landing in quarantine or junk. Here's the one-time fix, with no security trade-off.</p>
+</div>
+
+<!-- AT A GLANCE -->
+<div class="article-glance">
+  <h2>At a glance</h2>
+  <ul>
+    <li>ShelfSpace sends from one domain: <strong>shelfspace.pro</strong> — allowlist the domain, not an IP address</li>
+    <li>The mail is fully authenticated — <strong>SPF, DKIM (selector <code>resend._domainkey</code>), and DMARC all pass</strong> — so you can safely require <strong>DMARC = pass</strong> on the allow rule</li>
+    <li>It's being delivered, then filtered tenant-side to quarantine or junk — the fix lives in <strong>your</strong> gateway console, not on our end</li>
+    <li>Step-by-step entries below for <strong>Microsoft 365 / Defender, Google Workspace, Proofpoint, and Mimecast</strong></li>
+    <li>Sent via <strong>Resend over Amazon SES</strong> on shared, rotating IPs — <strong>don't allowlist by IP</strong></li>
+  </ul>
+</div>
+
+<!-- INTRO PROSE -->
+<article class="article-body">
+  <p class="reveal">If you're reading this, someone at your organization gets email from ShelfSpace — payment notifications, settlement reports, or an invite to a vendor account — and it's landing in quarantine or the junk folder instead of the inbox. This is a quick, one-time fix, and it doesn't require lowering anyone's security.</p>
+
+  <p class="reveal">Here's what's happening. Our mail is fully authenticated — SPF, DKIM, and DMARC all pass — so enterprise gateways like Microsoft 365, Google Workspace, Proofpoint, and Mimecast accept the message, and our logs show it "delivered." Your tenant then applies its own filtering and routes it to quarantine or junk. That second decision lives in your console, which is why it can only be resolved on your side.</p>
+
+  <p class="reveal">The fix is a domain-level allow entry for <strong>shelfspace.pro</strong>, gated on <strong>DMARC = pass</strong> so it can't be spoofed. That's spoof-safe and future-proof: you're trusting a domain that proves who it is on every message, not a static IP that can rotate.</p>
+</article>
+
+<!-- SENDING DETAILS -->
+<section class="guide-section reveal">
+  <h2>Our sending details</h2>
+  <table class="send-table">
+    <tbody>
+      <tr>
+        <th>Sending domain</th>
+        <td><code>shelfspace.pro</code> — allowlist by <strong>domain</strong>, not IP</td>
+      </tr>
+      <tr>
+        <th>From addresses</th>
+        <td>Every message is sent from the <code>shelfspace.pro</code> domain — allowlisting the domain covers all of them, so there's no need to list individual mailboxes.</td>
+      </tr>
+      <tr>
+        <th>Authentication</th>
+        <td>SPF + DKIM (<code>d=shelfspace.pro</code>, selector <code>resend._domainkey</code>) + DMARC — all passing</td>
+      </tr>
+      <tr>
+        <th>Email service</th>
+        <td>Resend, sending over Amazon SES (shared IPs — please <strong>do not</strong> allowlist by IP; they rotate)</td>
+      </tr>
+      <tr>
+        <th>Recommended rule</th>
+        <td>Allow <code>shelfspace.pro</code> with <strong>DMARC = pass required</strong> — spoof-safe and future-proof</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- HOW TO ALLOWLIST -->
+<section class="guide-section reveal">
+  <h2>How to allowlist ShelfSpace</h2>
+  <p>Pick your mail security gateway below. Each takes a couple of minutes in the admin console.</p>
+  <div class="gw-grid">
+
+    <div class="gw-card">
+      <div class="gw-card-head">
+        <span class="gw-card-dot"></span>
+        <h3>Microsoft 365 / Exchange Online</h3>
+        <span class="gw-card-sub">EOP &amp; Defender</span>
+      </div>
+      <ol>
+        <li>Defender portal → <strong>Policies &amp; rules → Threat policies → Tenant Allow/Block Lists → Domains &amp; addresses</strong>.</li>
+        <li>Add <code>shelfspace.pro</code> as an <strong>Allow</strong>.</li>
+        <li>Have a user open a quarantined message → <strong>Report → Not junk → Allow sender</strong>.</li>
+        <li>Optional: a mail-flow rule — if sender domain is <code>shelfspace.pro</code> and DMARC = pass → set <strong>SCL to -1</strong>.</li>
+      </ol>
+    </div>
+
+    <div class="gw-card">
+      <div class="gw-card-head">
+        <span class="gw-card-dot"></span>
+        <h3>Proofpoint</h3>
+        <span class="gw-card-sub">Essentials &amp; PPS</span>
+      </div>
+      <ol>
+        <li>Add <code>shelfspace.pro</code> to the <strong>Safe Senders / allowed-sender list</strong> (Essentials: <strong>Administration → Account Management → Features → Sender Lists</strong>).</li>
+        <li>PPS: create a <strong>Sender List / allow rule</strong> keyed on the From domain <code>shelfspace.pro</code>.</li>
+        <li>Release the quarantined ShelfSpace messages and choose <strong>"Allow sender"</strong>.</li>
+        <li>If a content/DLP rule is holding them, add an exception for <code>shelfspace.pro</code>.</li>
+      </ol>
+    </div>
+
+    <div class="gw-card">
+      <div class="gw-card-head">
+        <span class="gw-card-dot"></span>
+        <h3>Google Workspace</h3>
+        <span class="gw-card-sub">Gmail admin</span>
+      </div>
+      <ol>
+        <li>Admin console → <strong>Apps → Google Workspace → Gmail → Spam, phishing and malware</strong>.</li>
+        <li>Under <strong>Approved senders</strong>, add a list containing <code>shelfspace.pro</code> and enable bypassing spam for it.</li>
+        <li>Ask end users to mark a filtered message <strong>Not spam</strong> and add the sender to Contacts.</li>
+      </ol>
+    </div>
+
+    <div class="gw-card">
+      <div class="gw-card-head">
+        <span class="gw-card-dot"></span>
+        <h3>Mimecast / Other gateways</h3>
+        <span class="gw-card-sub">generic</span>
+      </div>
+      <ol>
+        <li>Add <code>shelfspace.pro</code> to <strong>Permitted Senders / a managed-sender allow policy</strong>.</li>
+        <li>Require <strong>DMARC = pass</strong> on the allow entry so it can't be spoofed.</li>
+        <li>Release / permit any currently held ShelfSpace messages.</li>
+      </ol>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONFIRM IT WORKED -->
+<section class="guide-section reveal">
+  <div class="confirm-callout">
+    <h2>Confirm it worked</h2>
+    <p><strong>Send a test.</strong> Reply to whoever shared this guide and ask them to trigger a test notification to any mailbox you choose. It should now arrive in the inbox. If it's still filtered, double-check the allow entry is on the <strong>domain</strong> (<code>shelfspace.pro</code>) and that an earlier block or quarantine rule isn't overriding it.</p>
+  </div>
+</section>
+
+<!-- DOWNLOAD -->
+<section class="guide-section reveal">
+  <div class="dl-block">
+    <div class="dl-copy">
+      <div class="dl-copy-label">One-page guide</div>
+      <h2>Hand it to your IT team</h2>
+      <p>The same instructions on a single printable page — sending details, the four gateway walkthroughs, and the confirmation test.</p>
+    </div>
+    <a href="/ShelfSpace_Email_Deliverability_Guide.pdf" target="_blank" rel="noopener" download class="dl-btn" aria-label="Download the ShelfSpace email deliverability guide, PDF, opens in new tab">
+      Download the guide (PDF)
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+    </a>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-wrap reveal">
+  <h2>Frequently asked questions</h2>
+  <div class="faq-list">
+    <details>
+      <summary>Why are ShelfSpace emails going to spam or quarantine?</summary>
+      <p>Because the mail is accepted and then filtered tenant-side. ShelfSpace email passes SPF, DKIM, and DMARC, so your gateway accepts it and the delivery logs read "delivered" — then your tenant applies its own filtering and routes it to quarantine or junk. That second decision lives in your console, so the fix is a domain-level allow entry for <code>shelfspace.pro</code>, ideally gated on DMARC = pass.</p>
+    </details>
+    <details>
+      <summary>What do I allowlist for ShelfSpace — a domain or an IP address?</summary>
+      <p>Allowlist the domain <code>shelfspace.pro</code>, never an IP address. Every ShelfSpace message is sent from the <code>shelfspace.pro</code> domain, so a single domain entry covers all of them. The mail is sent through Resend over Amazon SES on shared IPs that rotate, so an IP-based rule will break and isn't safe to scope to.</p>
+    </details>
+    <details>
+      <summary>Is email from shelfspace.pro legitimate?</summary>
+      <p>Yes. <code>shelfspace.pro</code> is the sending domain for ShelfSpace, <a href="/vendors">the cannabis-specific payments system your retail partner uses</a> to send payment notifications, settlement reports, and account invitations. Every message is authenticated — SPF, DKIM (selector <code>resend._domainkey</code>), and DMARC all pass — so you can verify the sender cryptographically rather than trusting the display name. If you want the longer version, here's <a href="/blog/is-shelfspace-safe-for-vendors">whether ShelfSpace is safe for vendors</a>.</p>
+    </details>
+    <details>
+      <summary>Will allowlisting ShelfSpace weaken our email security?</summary>
+      <p>No. Add the allow entry with <strong>DMARC = pass required</strong>. Because every legitimate ShelfSpace message passes DMARC, the rule lets real mail through while a spoofed message that fails DMARC is still blocked. You're trusting a domain that proves who it is on every message, not a static IP, so there's no security trade-off.</p>
+    </details>
+    <details>
+      <summary>ShelfSpace email is still being filtered after I allowlisted it — what now?</summary>
+      <p>Confirm the allow entry is on the domain (<code>shelfspace.pro</code>) and that an earlier block, quarantine, or content/DLP rule isn't overriding it — most gateways apply block rules before allow rules. Release any held messages and choose "allow sender," then send a test. If it still doesn't arrive, email <a href="mailto:support@shelfspace.pro">support@shelfspace.pro</a> and we'll help you find the rule that's catching it.</p>
+    </details>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-content">
+    <div class="section-label reveal">Questions?</div>
+    <h2 class="section-title reveal">Still not seeing our email?</h2>
+    <p class="section-desc reveal">Allowlist <code>shelfspace.pro</code> at the domain level with DMARC = pass, then run a test send. If it's still filtered, we'll help you track down the rule that's catching it.</p>
+    <div class="cta-actions reveal">
+      <a href="mailto:support@shelfspace.pro" class="btn-primary">
+        Email Support
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+      <a href="/vendors" class="btn-secondary">See what ShelfSpace is</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="/" class="nav-logo"><div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div><span class="nav-logo-text">ShelfSpace</span></a>
+      <p>Every Vendor. Every Payment. One Engine.</p>
+    </div>
+    <div class="footer-col"><h4>Services</h4><ul><li><a href="/consignment">Consignment</a></li><li><a href="/accounts-payable">Accounts Payable</a></li><li><a href="/credit-recovery">Credit Recovery</a></li><li><a href="/checks">Check Payments</a></li><li><a href="/shelfiq">ShelfiQ</a></li></ul></div>
+    <div class="footer-col"><h4>Platform</h4><ul><li><a href="/features">Features</a></li><li><a href="/how-it-works">How It Works</a></li><li><a href="/pricing">Pricing</a></li><li><a href="/about">About</a></li><li><a href="/blog">Blog</a></li><li><a href="/docs">Docs</a></li></ul></div>
+    <div class="footer-col"><h4>Access</h4><ul><li><a href="https://ourshelf.space">Login</a></li><li><a href="/contact">Sign Up</a></li><li><a href="/contact">Contact</a></li><li><a href="/vendors">For Vendors</a></li><li><a href="/for-bookkeepers">For Bookkeepers</a></li></ul></div>
+    <div class="footer-col"><h4>Company</h4><ul><li><a href="mailto:chris@shelfspace.pro">Email</a></li><li><a href="mailto:support@shelfspace.pro">Support</a></li><li><a href="https://linkedin.com/company/shelfspace-pro" target="_blank" rel="noopener" class="footer-social-link"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> LinkedIn</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><p>&copy; 2026 ShelfSpace Technologies Inc.</p><div style="display:flex;align-items:center;gap:8px;justify-content:center;margin-top:12px;"><img src="/metrc-logo.png" alt="METRC" style="height:18px;opacity:0.4;filter:brightness(0) invert(1);"><span style="font-size:11px;color:rgba(255,255,255,0.35);">Certified METRC Third-Party Vendor</span></div><div class="footer-bottom-links"><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div></div>
+</footer>
+
+<script>
+(function() {
+  var nav = document.getElementById('nav');
+  var pageHero = document.querySelector('.page-hero');
+  var parallaxSections = [
+    document.querySelector('.cta-section')
+  ];
+
+  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var isMobile = window.innerWidth < 900;
+  var ticking = false;
+
+  /* ── Hero entrance ── */
+  requestAnimationFrame(function() {
+    nav.classList.toggle('scrolled', window.scrollY > 20);
+    if (pageHero) pageHero.classList.add('hero-loaded');
+  });
+
+  /* ── Scroll-triggered reveals ── */
+  var revealObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(function(el) { revealObserver.observe(el); });
+
+  /* ── Scroll handler (rAF + ticking flag) ── */
+  function onScroll() {
+    var scrollY = window.scrollY;
+    nav.classList.toggle('scrolled', scrollY > 20);
+    if (prefersReduced || isMobile) return;
+    var wh = window.innerHeight;
+    parallaxSections.forEach(function(section) {
+      if (!section) return;
+      var rect = section.getBoundingClientRect();
+      if (rect.bottom < 0 || rect.top > wh) return;
+      var center = rect.top + rect.height / 2 - wh / 2;
+      section.style.setProperty('--parallax-y', (center * 0.08) + 'px');
+    });
+  }
+
+  window.addEventListener('scroll', function() {
+    if (!ticking) {
+      requestAnimationFrame(function() {
+        onScroll();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, { passive: true });
+
+  onScroll();
+
+  window.addEventListener('resize', function() {
+    isMobile = window.innerWidth < 900;
+    if (isMobile) {
+      parallaxSections.forEach(function(section) {
+        if (section) section.style.setProperty('--parallax-y', '0px');
+      });
+    }
+  });
+
+  /* ── Close mobile nav on outside click ── */
+  document.addEventListener('click', function() {
+    var navLinks = document.querySelector('.nav-links');
+    if (navLinks && navLinks.classList.contains('mobile-open')) {
+      navLinks.classList.remove('mobile-open');
+    }
+  });
+})();
+</script>
+<script src="/shelfiq-widget.js"></script>
+</body>
+</html>
