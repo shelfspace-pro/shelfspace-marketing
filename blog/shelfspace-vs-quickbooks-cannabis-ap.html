@@ -281,7 +281,30 @@ document.head.appendChild(o)}initApollo();</script>
 
   <p>When dispensaries "use QuickBooks for AP," what they actually mean is: an invoice arrives, someone enters it into QBO, someone approves a check, and the payment gets recorded. No verification. No credit check. No delivery matching. No duplicate detection.</p>
 
+  <div class="blog-callout">
+    <svg class="blog-callout-ico" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    <p class="blog-callout-text">A ledger without a verification layer in front of it is just a really well-organized record of how much you overpaid.</p>
+  </div>
+
   <p>The cost of this gap is staggering. We typically find <a href="/blog/dispensaries-overpay-vendors">$50,000 to $100,000 per year</a> in vendor overpayments, missed credits, and duplicate invoices at dispensaries running this workflow. A vendor bills you for 50 units, but Metrc shows 47 were received — QuickBooks has no way to know that. A credit memo sits in an email thread that nobody applied to the next payment. The same invoice gets entered twice because it came from two different email addresses. We recently <a href="/blog/case-study-duplicate-invoice">caught a $4,873 duplicate invoice</a> at a multi-location retailer — the kind of cross-entity billing error that's invisible when your only system is a ledger.</p>
+
+  <div class="stat-trio reveal">
+    <div class="stat-trio-item is-loss">
+      <svg class="stat-trio-ico" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"/><polyline points="17 18 23 18 23 12"/></svg>
+      <p class="stat-trio-num">$50K&ndash;$100K</p>
+      <p class="stat-trio-label">per year lost to overpayments, missed credits, and duplicates</p>
+    </div>
+    <div class="stat-trio-item is-loss">
+      <svg class="stat-trio-ico" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+      <p class="stat-trio-num">$4,873</p>
+      <p class="stat-trio-label">duplicate invoice a ledger can't see</p>
+    </div>
+    <div class="stat-trio-item">
+      <svg class="stat-trio-ico" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+      <p class="stat-trio-num">$8K&ndash;$25K</p>
+      <p class="stat-trio-label">in recoverable credits found per month on first evaluation</p>
+    </div>
+  </div>
 
   <p>None of this is QuickBooks' fault. QuickBooks was designed to record what happened, not to control what happens. It's an excellent ledger. But a ledger without a verification layer in front of it is just a really well-organized record of how much you overpaid.</p>
 
@@ -302,6 +325,23 @@ document.head.appendChild(o)}initApollo();</script>
   <p>This is the key point: ShelfSpace is not a replacement for QuickBooks. We sync every payment to your QuickBooks in real time — vendor, amount, invoice number, account coding. Your books are always current without manual entry.</p>
 
   <p>The division of labor is clean. ShelfSpace handles the AP workflow: verify invoices, recover credits, settle consignment, manage vendors, generate payments. QuickBooks handles the accounting: general ledger, financial reporting, tax prep. Clean data flows from ShelfSpace into QBO. Your CPA gets clean books. Everyone wins.</p>
+
+  <div class="vs-split reveal">
+    <div class="vs-col vs-neg">
+      <div class="vs-head">
+        <svg class="vs-ico" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <p class="vs-tag">QuickBooks</p>
+      </div>
+      <p class="vs-text">Records transactions after they happen. It tells you what you paid, when, and which account it hit, but never checks an invoice against the delivery before the money goes out.</p>
+    </div>
+    <div class="vs-col vs-pos">
+      <div class="vs-head">
+        <svg class="vs-ico" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        <p class="vs-tag">ShelfSpace</p>
+      </div>
+      <p class="vs-text">Works the gap before payment: verifies invoices against Metrc, recovers credits, settles consignment, then syncs every clean payment back into QBO in real time.</p>
+    </div>
+  </div>
 
   <p>You don't choose between them. You use both — and each one does what it was designed to do.</p>
 

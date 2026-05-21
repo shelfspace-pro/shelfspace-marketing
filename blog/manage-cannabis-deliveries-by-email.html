@@ -295,11 +295,29 @@ document.head.appendChild(o)}initApollo();</script>
 
   <p>When a buyer forwards a vendor invoice to that address, three things happen in seconds:</p>
 
-  <ol>
-    <li>We parse the PDF — vendor, invoice number, line items, total.</li>
-    <li>We match the vendor to your existing partner list.</li>
-    <li>We create a delivery record in <strong>Ordered</strong> status and reply with a permanent <strong>DEL-XX</strong> ID.</li>
-  </ol>
+  <div class="flow-steps reveal">
+    <div class="flow-step">
+      <div class="flow-step-num">1</div>
+      <div class="flow-step-body">
+        <p class="flow-step-title">Parse the PDF</p>
+        <p class="flow-step-desc">ShelfiQ reads the vendor, invoice number, line items, and total off the attachment.</p>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-step-num">2</div>
+      <div class="flow-step-body">
+        <p class="flow-step-title">Match the vendor</p>
+        <p class="flow-step-desc">The platform matches the vendor to your existing partner list.</p>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-step-num">3</div>
+      <div class="flow-step-body">
+        <p class="flow-step-title">Create the delivery</p>
+        <p class="flow-step-desc">A delivery record is created in <strong>Ordered</strong> status and ShelfiQ replies with a permanent <strong>DEL-XX</strong> ID.</p>
+      </div>
+    </div>
+  </div>
 
   <p>That DEL-XX ID lives in the subject line for the rest of the conversation. Every reply in the same Gmail thread updates the same delivery — no second portal, no second source of truth.</p>
 
@@ -392,6 +410,11 @@ document.head.appendChild(o)}initApollo();</script>
   <h2>Why It Matters</h2>
 
   <p>The dispensaries we work with don't have time to retrain a buying team to use a new tool. They have time to forward an email. By meeting buyers where they already work, we get something most procurement systems never get: actual usage. Deliveries that get logged. Notes that get captured. ETAs that stay current. A clean record of every order from "here's the invoice" to "we received 24 of 24."</p>
+
+  <div class="blog-callout">
+    <svg class="blog-callout-ico" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+    <p class="blog-callout-text">By meeting buyers where they already work, we get something most procurement systems never get: actual usage. Deliveries that get logged, notes that get captured, ETAs that stay current.</p>
+  </div>
 
   <blockquote>
     <p>The best system is the one your team already uses every day. For most dispensary buyers, that's their inbox.</p>

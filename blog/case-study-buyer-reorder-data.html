@@ -271,17 +271,57 @@ document.head.appendChild(o)}initApollo();</script>
 
   <p>Instead of reordering the same 50 units of everything, they started ordering 80 of the fast movers and cutting the slow ones entirely.</p>
 
+  <div class="vs-split reveal">
+    <div class="vs-col vs-neg">
+      <div class="vs-head">
+        <svg class="vs-ico" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        <p class="vs-tag">Reorder by gut</p>
+      </div>
+      <p class="vs-text">Call the vendor, order what they ordered last time, maybe adjust a SKU if something was obviously sitting. No data. No velocity metrics.</p>
+    </div>
+    <div class="vs-col vs-pos">
+      <div class="vs-head">
+        <svg class="vs-ico" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+        <p class="vs-tag">Reorder by data</p>
+      </div>
+      <p class="vs-text">Velocity, days-in-inventory, margin per SKU, and aging status on every product. Order 80 of the fast movers, cut the slow ones entirely.</p>
+    </div>
+  </div>
+
   <h2>How It Works</h2>
 
   <p>We generate this data as a byproduct of running consignment settlements and verifying invoices. The buyer doesn't log into a separate analytics tool — the data lives in the settlement reports and the <a href="/docs/insights/overview">retailer dashboard</a>. It's already there because we're already managing the vendor payments.</p>
 
   <p>The key metric was days-in-inventory adjusted for velocity. A SKU with 10 units and 3 days of inventory is healthy. A SKU with 10 units and 45 days of inventory is a problem. The raw unit count doesn't tell you anything — velocity does.</p>
 
+  <div class="blog-callout">
+    <svg class="blog-callout-ico" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+    <p class="blog-callout-text">A SKU with 10 units and 3 days of inventory is healthy. A SKU with 10 units and 45 days of inventory is a problem.</p>
+  </div>
+
   <p>The buyer started walking into vendor meetings with numbers instead of guesses. "Your top two SKUs are selling 40 units a week. Your bottom three haven't moved in 30 days. I want more of the first and none of the second." Vendors respond to that.</p>
 
   <h2>The Result</h2>
 
   <p>In the first 60 days of using the data, the buyer cut 8 underperforming SKUs and doubled orders on 5 top performers. Waste — inventory past 60 days — dropped 23%. Cash freed up went back into the products that were actually selling.</p>
+
+  <div class="stat-trio reveal">
+    <div class="stat-trio-item is-loss">
+      <svg class="stat-trio-ico" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"/><polyline points="17 18 23 18 23 12"/></svg>
+      <p class="stat-trio-num">23%</p>
+      <p class="stat-trio-label">drop in waste (inventory past 60 days)</p>
+    </div>
+    <div class="stat-trio-item">
+      <svg class="stat-trio-ico" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+      <p class="stat-trio-num">5 SKUs</p>
+      <p class="stat-trio-label">top performers, orders doubled</p>
+    </div>
+    <div class="stat-trio-item">
+      <svg class="stat-trio-ico" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+      <p class="stat-trio-num">8 SKUs</p>
+      <p class="stat-trio-label">underperformers cut from reorders</p>
+    </div>
+  </div>
 
   <p>The vendor conversations changed too. When a buyer shows up with sell-through data and velocity metrics, the negotiation shifts. Vendors start proposing solutions instead of pushing product. Both sides make better decisions.</p>
 
