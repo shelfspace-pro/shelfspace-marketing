@@ -274,13 +274,60 @@ document.head.appendChild(o)}initApollo();</script>
 
   <p>Total overpayment prevented: <strong>$7,340</strong>. That's 15% of invoices with errors in a single month.</p>
 
+  <div class="stat-trio reveal">
+    <div class="stat-trio-item">
+      <svg class="stat-trio-ico" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+      <p class="stat-trio-num">80+</p>
+      <p class="stat-trio-label">invoices matched in 30 days</p>
+    </div>
+    <div class="stat-trio-item is-loss">
+      <svg class="stat-trio-ico" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      <p class="stat-trio-num">12</p>
+      <p class="stat-trio-label">invoices didn't match</p>
+    </div>
+    <div class="stat-trio-item">
+      <svg class="stat-trio-ico" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+      <p class="stat-trio-num">$7,340</p>
+      <p class="stat-trio-label">overpayment stopped before payment</p>
+    </div>
+  </div>
+
   <h2>How We Caught It</h2>
 
   <p>We pull delivery data directly from Metrc. When an invoice comes in — uploaded or emailed — <a href="/shelfiq">ShelfiQ</a> parses it and we match every line item against the corresponding Metrc delivery. Quantities, unit costs, package IDs, receiving location. If something doesn't match, it gets flagged before payment is approved.</p>
 
   <p>This isn't sampling. It's every invoice, every line item, every time. The <a href="/accounts-payable">invoice verification process</a> runs on every payment before a check goes out.</p>
 
+  <div class="flow-steps reveal">
+    <div class="flow-step">
+      <div class="flow-step-num">1</div>
+      <div class="flow-step-body">
+        <p class="flow-step-title">Pull delivery data from Metrc</p>
+        <p class="flow-step-desc">We pull delivery records directly from Metrc, manifest by manifest, for every store.</p>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-step-num">2</div>
+      <div class="flow-step-body">
+        <p class="flow-step-title">ShelfiQ parses every invoice</p>
+        <p class="flow-step-desc">When an invoice comes in, uploaded or emailed, ShelfiQ parses it and the platform matches every line item against the corresponding Metrc delivery: quantities, unit costs, package IDs, receiving location.</p>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-step-num">3</div>
+      <div class="flow-step-body">
+        <p class="flow-step-title">Flag before the check goes out</p>
+        <p class="flow-step-desc">If something doesn't match, it gets flagged before payment is approved. This isn't sampling. It's every invoice, every line item, every time.</p>
+      </div>
+    </div>
+  </div>
+
   <p>The errors weren't malicious — vendors make mistakes too. Quantities get transposed. Prices don't get updated after a negotiation. Deliveries get logged to the wrong store. These are normal mistakes that become real money when nobody's checking.</p>
+
+  <div class="blog-callout">
+    <svg class="blog-callout-ico" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+    <p class="blog-callout-text">The errors weren't malicious. Vendors make mistakes too. These are normal mistakes that become real money when nobody's checking.</p>
+  </div>
 
   <h2>The Result</h2>
 

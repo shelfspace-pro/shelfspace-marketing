@@ -288,7 +288,56 @@ document.head.appendChild(o)}initApollo();</script>
 
   <p>Cannabis dispensary QuickBooks setup is a one-time, ~5-minute flow that connects your retailer portal to QBO. Once it's done, every settlement and <a href="/accounts-payable">AP payment</a> lands in your books on its own — Bill, matching Check, vendor lookup, account coding, the works. When checks clear in your bank feed, we flip ShelfSpace status to Cleared within 24 hours. The result: month-end reconciliation collapses from hours to minutes.</p>
 
+  <div class="stat-trio reveal">
+    <div class="stat-trio-item">
+      <svg class="stat-trio-ico" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      <p class="stat-trio-num">~5 min</p>
+      <p class="stat-trio-label">one-time setup to connect your portal to QBO</p>
+    </div>
+    <div class="stat-trio-item">
+      <svg class="stat-trio-ico" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+      <p class="stat-trio-num">24 hrs</p>
+      <p class="stat-trio-label">for cleared checks to flip to Cleared in ShelfSpace</p>
+    </div>
+    <div class="stat-trio-item">
+      <svg class="stat-trio-ico" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+      <p class="stat-trio-num">3am ET</p>
+      <p class="stat-trio-label">daily clearing-sync reads your QBO bank feed</p>
+    </div>
+  </div>
+
   <p>This guide walks the whole setup. If you're mid-setup and stuck, jump to <a href="#troubleshooting">Troubleshooting</a> at the bottom. Most retailers never do this themselves — we handle the connection during onboarding — but if your bookkeeper or controller wants to know what we're pushing and why, this is the reference.</p>
+
+  <div class="flow-steps reveal">
+    <div class="flow-step">
+      <div class="flow-step-num">1</div>
+      <div class="flow-step-body">
+        <p class="flow-step-title">Connect QuickBooks</p>
+        <p class="flow-step-desc">Open Settings &rarr; QuickBooks Online and click Connect to QuickBooks. Authorize ShelfSpace at Intuit and land back on a "Connected" badge.</p>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-step-num">2</div>
+      <div class="flow-step-body">
+        <p class="flow-step-title">Pick your Expense and Bank accounts</p>
+        <p class="flow-step-desc">Choose where consignment and AP charges post (typically a Cost of Goods Sold account) and the bank account your checks draw from. Click Save Account.</p>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-step-num">3</div>
+      <div class="flow-step-body">
+        <p class="flow-step-title">Backfill historical settlements and payments</p>
+        <p class="flow-step-desc">If you connected after running settlements, click Sync Historical Transactions to push the past ones into QBO.</p>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-step-num">4</div>
+      <div class="flow-step-body">
+        <p class="flow-step-title">Watch Bookkeeper Match Health</p>
+        <p class="flow-step-desc">When Missing, Skipped, and Failed all read zero, the panel shows "All caught up." After that, you don't touch anything.</p>
+      </div>
+    </div>
+  </div>
 
   <h2>What ShelfSpace pushes to your QBO</h2>
 
@@ -331,6 +380,11 @@ document.head.appendChild(o)}initApollo();</script>
 
   <h2>6. Done — what happens next</h2>
   <p>Once setup is complete, you do not need to touch anything. Each settlement creates a Bill within seconds of approval. Each AP payment creates a Bill + Bill Payment together at payment creation. The Recent Sync Activity panel shows status badges. Failed rows retry every 10 minutes on their own. Daily at 3am ET, the clearing-sync reads cleared and reconciled Bill Payments from your QBO bank feed and flips matching ShelfSpace payments to <strong>Cleared</strong>.</p>
+
+  <div class="blog-callout">
+    <svg class="blog-callout-ico" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+    <p class="blog-callout-text">The reconciliation that doesn't happen is the highest praise you can give an accounting integration.</p>
+  </div>
 
   <blockquote>
     <p>Most retailers hand this off to their bookkeeper or controller and stop thinking about it. The reconciliation that doesn't happen is the highest praise you can give an accounting integration.</p>

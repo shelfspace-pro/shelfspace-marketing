@@ -243,11 +243,53 @@ document.head.appendChild(o)}initApollo();</script>
 
   <p>During the first two weeks of onboarding, we pulled the dispensary's Metrc data and identified every product that had expired or been destroyed in the prior 90 days. Cross-referenced each against the vendor agreements on file. For one vendor, 31 units had expired — total wholesale value of $4,240. The agreement specified a 75% credit rate. That's $3,180 the vendor owed, per their own agreement, that nobody had asked for. <a href="/credit-recovery">See how credit recovery works</a>.</p>
 
+  <div class="stat-trio reveal">
+    <div class="stat-trio-item is-loss">
+      <svg class="stat-trio-ico" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+      <p class="stat-trio-num">31</p>
+      <p class="stat-trio-label">units expired over 90 days</p>
+    </div>
+    <div class="stat-trio-item is-loss">
+      <svg class="stat-trio-ico" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+      <p class="stat-trio-num">$4,240</p>
+      <p class="stat-trio-label">total wholesale value</p>
+    </div>
+    <div class="stat-trio-item">
+      <svg class="stat-trio-ico" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+      <p class="stat-trio-num">$3,180</p>
+      <p class="stat-trio-label">owed at the 75% credit rate</p>
+    </div>
+  </div>
+
   <h2>How We Recovered It</h2>
 
   <p>Built a credit memo with the math: each expired SKU, package ID from Metrc, wholesale price, expiration date, and the 75% credit calculation. Attached the relevant clause from the vendor agreement. Sent it to the vendor's AP team.</p>
 
   <p>The vendor reviewed, confirmed the expirations against their own Metrc records, and approved the credit. We applied $3,180 against their next open invoice and paid the net balance. One cycle. Done.</p>
+
+  <div class="flow-steps reveal">
+    <div class="flow-step">
+      <div class="flow-step-num">1</div>
+      <div class="flow-step-body">
+        <p class="flow-step-title">Build the memo with the math</p>
+        <p class="flow-step-desc">Each expired SKU, package ID from Metrc, wholesale price, expiration date, and the 75% credit calculation, with the relevant clause from the vendor agreement attached.</p>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-step-num">2</div>
+      <div class="flow-step-body">
+        <p class="flow-step-title">Vendor reviews and approves</p>
+        <p class="flow-step-desc">The vendor confirmed the expirations against their own Metrc records and approved the credit. The terms were in their own agreement.</p>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-step-num">3</div>
+      <div class="flow-step-body">
+        <p class="flow-step-title">Apply it to the next invoice</p>
+        <p class="flow-step-desc">We applied $3,180 against their next open invoice and paid the net balance. One cycle. Done.</p>
+      </div>
+    </div>
+  </div>
 
   <h2>Why Expiration Credits Go Unclaimed</h2>
 
@@ -260,6 +302,11 @@ document.head.appendChild(o)}initApollo();</script>
   </ul>
 
   <p>For a typical dispensary, unclaimed expiration credits represent 1-2% of annual COGS.</p>
+
+  <div class="blog-callout">
+    <svg class="blog-callout-ico" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+    <p class="blog-callout-text">The credit terms were there but invisible. Agreements get filed and forgotten while product expires on the shelf. The clause exists; the money doesn't, until someone builds the memo.</p>
+  </div>
 
   <h2>The Result</h2>
 

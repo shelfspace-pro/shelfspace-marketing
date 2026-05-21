@@ -261,6 +261,24 @@ document.head.appendChild(o)}initApollo();</script>
 
   <p>The invoice said 50 units. The Metrc manifest said 42. Eight units missing. $1,140 difference.</p>
 
+  <div class="stat-trio reveal">
+    <div class="stat-trio-item is-loss">
+      <svg class="stat-trio-ico" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+      <p class="stat-trio-num">50</p>
+      <p class="stat-trio-label">units the invoice billed for</p>
+    </div>
+    <div class="stat-trio-item">
+      <svg class="stat-trio-ico" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+      <p class="stat-trio-num">42</p>
+      <p class="stat-trio-label">packages Metrc actually confirmed delivered</p>
+    </div>
+    <div class="stat-trio-item">
+      <svg class="stat-trio-ico" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+      <p class="stat-trio-num">$1,140</p>
+      <p class="stat-trio-label">caught before the check went out</p>
+    </div>
+  </div>
+
   <p>We flagged it before payment went out. We pulled the manifest data, lined it up against the invoice, and showed the vendor the discrepancy. Eight package IDs on the invoice had no corresponding transfer in Metrc. The product was never delivered.</p>
 
   <p>This is what <a href="/accounts-payable">managed accounts payable</a> catches — the gap between what a vendor says they delivered and what actually showed up.</p>
@@ -268,6 +286,30 @@ document.head.appendChild(o)}initApollo();</script>
   <h2>How We Caught It</h2>
 
   <p>Metrc delivery matching. Every invoice gets cross-referenced against the Metrc transfer data before payment goes out. Package IDs, quantities, transfer dates. Not memory. Not a spreadsheet. The state tracking system.</p>
+
+  <div class="flow-steps reveal">
+    <div class="flow-step">
+      <div class="flow-step-num">1</div>
+      <div class="flow-step-body">
+        <p class="flow-step-title">Match the invoice to Metrc</p>
+        <p class="flow-step-desc">Every invoice gets cross-referenced against the Metrc transfer data, package ID by package ID, before any payment is scheduled.</p>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-step-num">2</div>
+      <div class="flow-step-body">
+        <p class="flow-step-title">Flag the gap</p>
+        <p class="flow-step-desc">The manifest showed 42 transferred packages. The invoice listed 50. The math didn't work, so the check didn't go out.</p>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-step-num">3</div>
+      <div class="flow-step-body">
+        <p class="flow-step-title">Resolve before money moves</p>
+        <p class="flow-step-desc">We pulled the data, showed the vendor the discrepancy, and the corrected invoice was paid on time.</p>
+      </div>
+    </div>
+  </div>
 
   <p>This happens on every single invoice. When the numbers match, payment goes out on schedule. When they don't, we flag it, pull the data, and resolve the discrepancy before any money moves. In this case, the manifest showed 42 transferred packages. The invoice listed 50. The math didn't work, so the check didn't go out.</p>
 
@@ -288,6 +330,11 @@ document.head.appendChild(o)}initApollo();</script>
   <p>$1,140 saved on one delivery. The vendor confirmed the shortage, corrected their records, and adjusted the invoice. No drama, no relationship damage — just data. The Metrc manifest said 42. The invoice said 50. We showed them the numbers, they agreed, and the corrected invoice was paid on time. Shorted deliveries are just one way dispensaries end up <a href="/blog/cannabis-accounts-payable-cost">overpaying on accounts payable</a>.</p>
 
   <p>Annualized across all vendors, Metrc matching typically catches <strong>$7,000-$12,000 per year</strong> in shorted deliveries. That's money that would have gone out the door on invoices that looked perfectly legitimate. Not fraud — just errors that nobody was catching because nobody was checking the manifests against the invoices on every single delivery.</p>
+
+  <div class="blog-callout">
+    <svg class="blog-callout-ico" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+    <p class="blog-callout-text">A correct-looking invoice and a correct invoice are not the same thing. The only way to know which one you're paying is to check it against what Metrc says actually transferred, every single time.</p>
+  </div>
 
   <blockquote>
     <p>The invoice looked right. Metrc said otherwise. That's the difference between paying what you owe and paying what you're told.</p>

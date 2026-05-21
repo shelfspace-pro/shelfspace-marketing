@@ -303,7 +303,30 @@ document.head.appendChild(o)}initApollo();</script>
 
   <p class="reveal">Here's what's happening. Our mail is fully authenticated — SPF, DKIM, and DMARC all pass — so enterprise gateways like Microsoft 365, Google Workspace, Proofpoint, and Mimecast accept the message, and our logs show it "delivered." Your tenant then applies its own filtering and routes it to quarantine or junk. That second decision lives in your console, which is why it can only be resolved on your side.</p>
 
+  <div class="stat-trio reveal">
+    <div class="stat-trio-item">
+      <svg class="stat-trio-ico" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+      <p class="stat-trio-num">1</p>
+      <p class="stat-trio-label">sending domain: shelfspace.pro. Allowlist the domain</p>
+    </div>
+    <div class="stat-trio-item">
+      <svg class="stat-trio-ico" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+      <p class="stat-trio-num">3</p>
+      <p class="stat-trio-label">checks pass: SPF, DKIM, and DMARC</p>
+    </div>
+    <div class="stat-trio-item is-loss">
+      <svg class="stat-trio-ico" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
+      <p class="stat-trio-num">0</p>
+      <p class="stat-trio-label">IPs to allowlist. They're shared and rotate</p>
+    </div>
+  </div>
+
   <p class="reveal">The fix is a domain-level allow entry for <strong>shelfspace.pro</strong>, gated on <strong>DMARC = pass</strong> so it can't be spoofed. That's spoof-safe and future-proof: you're trusting a domain that proves who it is on every message, not a static IP that can rotate.</p>
+
+  <div class="blog-callout">
+    <svg class="blog-callout-ico" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+    <p class="blog-callout-text">Add the allow entry with DMARC = pass required. Real mail gets through, a spoofed message that fails DMARC is still blocked. No security trade-off.</p>
+  </div>
 </article>
 
 <!-- SENDING DETAILS -->
