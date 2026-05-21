@@ -748,3 +748,92 @@ footer::before { content: ''; position: absolute; bottom: -100px; right: -100px;
   .svc-section { padding: 80px 24px; }
   .svc-headline { letter-spacing: -1.5px; }
 }
+
+/* ════════════════════════════════════════════════════════════
+   BLOG VISUAL KIT
+   Reusable, on-brand visual primitives for blog posts.
+   All inner selectors are scoped under their primitive class
+   (specificity 0,2,0) so they beat `.article-body p` (0,1,1).
+   Animations play on load via `... both` so they need no per-page
+   JS; prefers-reduced-motion disables them to final state.
+   ════════════════════════════════════════════════════════════ */
+
+@keyframes blog-meter-fill { from { width: 0; } to { width: var(--fill, 100%); } }
+@keyframes blog-wisp {
+  0%   { opacity: 0; transform: translateY(0) scaleX(1); }
+  25%  { opacity: 0.75; }
+  100% { opacity: 0; transform: translateY(-26px) scaleX(1.35); }
+}
+@keyframes blog-pop { from { opacity: 0; transform: translateY(8px) scale(0.96); } to { opacity: 1; transform: translateY(0) scale(1); } }
+
+/* ── Figure wrapper + caption ── */
+.blog-figure { max-width: 760px; margin: 40px auto; }
+.blog-figure .blog-figure-cap { font-size: 13px; line-height: 1.5; color: var(--slate-500); text-align: center; margin: 14px 0 0; }
+.blog-figure .blog-figure-cap strong { color: var(--green-dark); font-weight: 600; }
+
+/* ── Stat trio (icon + big number + label) ── */
+.stat-trio { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 36px auto; }
+.stat-trio .stat-trio-item { background: var(--green-ghost); border: 1px solid rgba(149,213,178,0.4); border-radius: 14px; padding: 26px 22px; text-align: center; animation: blog-pop 0.6s cubic-bezier(0.22,1,0.36,1) both; }
+.stat-trio .stat-trio-item:nth-child(2) { animation-delay: 0.1s; }
+.stat-trio .stat-trio-item:nth-child(3) { animation-delay: 0.2s; }
+.stat-trio .stat-trio-ico { width: 30px; height: 30px; stroke: var(--green-mid); fill: none; stroke-width: 2; margin: 0 auto 12px; display: block; }
+.stat-trio .stat-trio-num { font-family: var(--font-mono); font-size: 36px; font-weight: 700; color: var(--green-deep); letter-spacing: -1.5px; line-height: 1; margin: 0 0 8px; }
+.stat-trio .stat-trio-item.is-loss .stat-trio-num { color: var(--slate-700); }
+.stat-trio .stat-trio-label { font-size: 14px; line-height: 1.45; color: var(--slate-600); margin: 0; }
+
+/* ── Versus split (two-column comparison; .vs-neg = old/slate, .vs-pos = green) ── */
+.vs-split { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 36px auto; }
+.vs-split .vs-col { padding: 26px 24px 28px; border-radius: 14px; }
+.vs-split .vs-neg { background: var(--slate-100); border: 1px solid var(--slate-200); }
+.vs-split .vs-pos { background: var(--green-ghost); border: 1px solid rgba(149,213,178,0.5); }
+.vs-split .vs-head { display: flex; align-items: center; gap: 9px; margin: 0 0 14px; }
+.vs-split .vs-ico { width: 20px; height: 20px; stroke-width: 2; fill: none; flex-shrink: 0; }
+.vs-split .vs-neg .vs-ico { stroke: var(--slate-500); }
+.vs-split .vs-pos .vs-ico { stroke: var(--green-mid); }
+.vs-split .vs-tag { font-size: 12px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; margin: 0; }
+.vs-split .vs-neg .vs-tag { color: var(--slate-500); }
+.vs-split .vs-pos .vs-tag { color: var(--green-mid); }
+.vs-split .vs-num { font-family: var(--font-mono); font-size: 30px; font-weight: 700; letter-spacing: -1px; line-height: 1; margin: 0 0 10px; }
+.vs-split .vs-neg .vs-num { color: var(--slate-700); }
+.vs-split .vs-pos .vs-num { color: var(--green-deep); }
+.vs-split .vs-text { font-size: 14.5px; line-height: 1.55; color: var(--slate-600); margin: 0; }
+
+/* ── Meter bar (animated; set --fill per instance, optional loss tail) ── */
+.meter { margin: 30px auto; }
+.meter .meter-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin: 0 0 10px; }
+.meter .meter-head-label { font-size: 14px; font-weight: 600; color: var(--green-deep); margin: 0; }
+.meter .meter-head-val { font-family: var(--font-mono); font-size: 14px; color: var(--slate-500); margin: 0; }
+.meter .meter-track { position: relative; height: 22px; background: var(--slate-100); border-radius: 11px; overflow: hidden; border: 1px solid var(--slate-200); }
+.meter .meter-fill { position: absolute; inset: 0 auto 0 0; height: 100%; width: var(--fill, 100%); background: linear-gradient(90deg, var(--green-mid), var(--green-dark)); border-radius: 11px; animation: blog-meter-fill 1.2s cubic-bezier(0.22,1,0.36,1) both; }
+.meter .meter-loss { position: absolute; inset: 0 0 0 auto; height: 100%; width: var(--loss, 10%); background: repeating-linear-gradient(45deg, #cbd5e1 0 6px, var(--slate-200) 6px 12px); border-radius: 0 11px 11px 0; }
+.meter .meter-cap { font-size: 13px; line-height: 1.5; color: var(--slate-500); margin: 10px 0 0; }
+.meter .meter-cap strong { color: var(--slate-700); font-weight: 600; }
+
+/* ── Flow steps (numbered process timeline) ── */
+.flow-steps { display: grid; gap: 0; margin: 36px auto; }
+.flow-steps .flow-step { position: relative; display: grid; grid-template-columns: 44px 1fr; gap: 18px; padding: 0 0 28px; }
+.flow-steps .flow-step:last-child { padding-bottom: 0; }
+.flow-steps .flow-step::before { content: ''; position: absolute; left: 21px; top: 44px; bottom: 0; width: 2px; background: var(--green-light); }
+.flow-steps .flow-step:last-child::before { display: none; }
+.flow-steps .flow-step-num { width: 44px; height: 44px; border-radius: 50%; background: var(--green-deep); color: var(--green-accent); font-family: var(--font-mono); font-size: 18px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; z-index: 1; }
+.flow-steps .flow-step-body { padding-top: 8px; }
+.flow-steps .flow-step-title { font-size: 17px; font-weight: 700; color: var(--green-deep); margin: 0 0 4px; letter-spacing: -0.3px; }
+.flow-steps .flow-step-desc { font-size: 15px; line-height: 1.6; color: var(--slate-600); margin: 0; }
+
+/* ── Callout (icon + emphasis statement) ── */
+.blog-callout { display: flex; gap: 16px; align-items: flex-start; background: var(--green-ghost); border-left: 3px solid var(--green-accent); border-radius: 0 12px 12px 0; padding: 22px 26px; margin: 32px auto; }
+.blog-callout .blog-callout-ico { width: 26px; height: 26px; stroke: var(--green-mid); fill: none; stroke-width: 2; flex-shrink: 0; margin-top: 2px; }
+.blog-callout .blog-callout-text { font-size: 16px; line-height: 1.6; color: var(--green-dark); font-weight: 500; margin: 0; }
+
+/* ── Responsive ── */
+@media (max-width: 600px) {
+  .stat-trio { grid-template-columns: 1fr; gap: 12px; }
+  .stat-trio .stat-trio-item { padding: 22px 20px; }
+  .vs-split { grid-template-columns: 1fr; }
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .stat-trio .stat-trio-item, .meter .meter-fill { animation: none; }
+  .meter .meter-fill { width: var(--fill, 100%); }
+}
