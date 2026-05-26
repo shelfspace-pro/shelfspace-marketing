@@ -446,6 +446,31 @@
   .svc-chat-msg { font-size: 15.5px; padding: 14px 18px; border-radius: 16px; }
 }
 
+/* ── Profit map — system at-a-glance overview (dark) ── */
+.profit-map { background: var(--green-deep); color: var(--white); padding: 120px 48px; position: relative; overflow: hidden; }
+.profit-map::before { content: ''; position: absolute; top: -200px; left: -180px; width: 500px; height: 500px; background: radial-gradient(circle, rgba(149,213,178,0.10), transparent 70%); pointer-events: none; }
+.profit-map::after { content: ''; position: absolute; bottom: -220px; right: -180px; width: 520px; height: 520px; background: radial-gradient(circle, rgba(149,213,178,0.07), transparent 70%); pointer-events: none; }
+.profit-map-inner { max-width: 1140px; margin: 0 auto; position: relative; text-align: center; }
+.pm-eyebrow { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 12px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--green-accent); margin-bottom: 24px; }
+.pm-eyebrow::before { content: ''; width: 24px; height: 2px; border-radius: 2px; background: var(--green-accent); }
+.pm-headline { font-size: clamp(32px, 5vw, 52px); font-weight: 700; line-height: 1.08; letter-spacing: -1.5px; color: var(--white); margin: 0 auto 20px; max-width: 760px; }
+.pm-sub { font-size: clamp(16px, 1.5vw, 19px); line-height: 1.55; color: rgba(255,255,255,0.75); margin: 0 auto; max-width: 620px; }
+.pm-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; margin-top: 56px; }
+.pm-card { flex: 1 1 210px; max-width: 250px; min-width: 200px; display: flex; flex-direction: column; gap: 14px; text-align: left; text-decoration: none; color: inherit; padding: 30px 26px; border-radius: 18px; background: rgba(255,255,255,0.045); border: 1px solid rgba(149,213,178,0.18); transition: transform 0.3s cubic-bezier(0.22,1,0.36,1), box-shadow 0.3s, border-color 0.3s, background 0.3s, opacity 0.3s; }
+.pm-card:hover { transform: translateY(-6px); border-color: rgba(149,213,178,0.55); background: rgba(255,255,255,0.075); box-shadow: 0 18px 40px rgba(0,0,0,0.28); }
+.pm-card:focus-visible { outline: 2px solid var(--green-accent); outline-offset: 3px; }
+.pm-icon { width: 50px; height: 50px; border-radius: 13px; background: rgba(149,213,178,0.12); border: 1px solid rgba(149,213,178,0.22); display: flex; align-items: center; justify-content: center; }
+.pm-icon svg { width: 26px; height: 26px; stroke: var(--green-accent); }
+.pm-name { font-size: 19px; font-weight: 700; letter-spacing: -0.3px; color: var(--white); }
+.pm-what { font-size: 14px; line-height: 1.55; color: rgba(255,255,255,0.72); }
+.pm-profit { margin-top: auto; display: flex; gap: 8px; align-items: flex-start; font-size: 13.5px; font-weight: 600; line-height: 1.45; color: var(--green-accent); }
+.pm-profit svg { width: 16px; height: 16px; stroke: var(--green-accent); flex-shrink: 0; margin-top: 1px; }
+@media (max-width: 700px) {
+  .profit-map { padding: 72px 24px; }
+  .pm-grid { gap: 14px; margin-top: 40px; }
+  .pm-card { flex: 1 1 100%; max-width: 420px; padding: 24px 22px; gap: 12px; }
+}
+
 /* Footer 5-col */
 .footer-top { grid-template-columns: 2fr 1fr 1fr 1fr 1fr; }
 
@@ -798,6 +823,47 @@ document.head.appendChild(o)}initApollo();</script>
       </div>
       <a href="/about" class="founder-strip-link">More about Chris <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
       <a href="/blog/what-is-shelfspace" class="founder-strip-link" style="margin-left:18px;">What ShelfSpace actually is <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 1.6: SYSTEM AT-A-GLANCE (PROFIT MAP) -->
+<section class="profit-map" aria-labelledby="pm-heading">
+  <div class="profit-map-inner">
+    <div class="pm-eyebrow reveal">How it all adds up</div>
+    <h2 class="pm-headline reveal" id="pm-heading">Your margin is hiding all over your shop.</h2>
+    <p class="pm-sub reveal">ShelfSpace is one system that works every corner of it. Five tools, each one pulling money back to your bottom line.</p>
+    <div class="pm-grid">
+      <a href="#ap" class="pm-card reveal">
+        <span class="pm-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><polyline points="9 15 11.5 17.5 16 13"/></svg></span>
+        <span class="pm-name">Accounts Payable</span>
+        <span class="pm-what">Every invoice matched against Metrc and your PO before you cut the check.</span>
+        <span class="pm-profit"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>Stop overpaying for product you never received.</span>
+      </a>
+      <a href="#credit-recovery" class="pm-card reveal reveal-delay-1">
+        <span class="pm-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg></span>
+        <span class="pm-name">Credit Recovery</span>
+        <span class="pm-what">Returns, expirations, and promo costs, caught line by line.</span>
+        <span class="pm-profit"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>Margin you already earned, back on your books.</span>
+      </a>
+      <a href="#consignment" class="pm-card reveal reveal-delay-2">
+        <span class="pm-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="16.5" y1="9.4" x2="7.5" y2="4.21"/><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg></span>
+        <span class="pm-name">Consignment</span>
+        <span class="pm-what">Stock your shelves with inventory you don't pay for until it sells.</span>
+        <span class="pm-profit"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>Cash off your shelves and back in your bank.</span>
+      </a>
+      <a href="#checks" class="pm-card reveal reveal-delay-3">
+        <span class="pm-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/><line x1="6" y1="9" x2="6" y2="9.01"/><line x1="18" y1="15" x2="18" y2="15.01"/></svg></span>
+        <span class="pm-name">Vendor Payments</span>
+        <span class="pm-what">Check 21 digital checks, drawn on your bank and signed by you.</span>
+        <span class="pm-profit"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>Pay every vendor without the cannabis-banking headache.</span>
+      </a>
+      <a href="#shelfiq" class="pm-card reveal reveal-delay-4">
+        <span class="pm-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12a2 2 0 0 1-2 2H8l-4 4V5a2 2 0 0 1 2-2h11a2 2 0 0 1 2 2z"/><path d="M20 2.5l.6 1.6 1.6.6-1.6.6-.6 1.6-.6-1.6-1.6-.6 1.6-.6z" fill="var(--green-accent)" stroke="none"/></svg></span>
+        <span class="pm-name" style="font-variant-ligatures:none;">Shelf<span style="color:var(--green-accent);">iQ</span></span>
+        <span class="pm-what">AI that answers vendor emails and flags margin drift in seconds.</span>
+        <span class="pm-profit"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>Save your team hours and catch leaks the day they start.</span>
+      </a>
     </div>
   </div>
 </section>
