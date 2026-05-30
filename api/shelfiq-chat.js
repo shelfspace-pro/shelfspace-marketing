@@ -1,6 +1,73 @@
 import Anthropic from '@anthropic-ai/sdk';
+import { Ratelimit } from '@upstash/ratelimit';
+import { Redis } from '@upstash/redis';
 
 const client = new Anthropic();
+
+// --- Rate limiter (graceful degradation if Upstash env vars aren't set yet) ---
+// Vercel Marketplace's Upstash integration provisions UPSTASH_REDIS_REST_URL +
+// UPSTASH_REDIS_REST_TOKEN automatically. Until those exist this falls through
+// to the in-app validation only.
+let burstLimiter = null;
+let dailyLimiter = null;
+try {
+  if (process.env.UPSTASH_REDIS_REST_URL && process.env.UPSTASH_REDIS_REST_TOKEN) {
+    const redis = Redis.fromEnv();
+    burstLimiter = new Ratelimit({
+      redis,
+      limiter: Ratelimit.slidingWindow(10, '1 m'),
+      prefix: 'shelfiq:burst',
+      analytics: true,
+    });
+    dailyLimiter = new Ratelimit({
+      redis,
+      limiter: Ratelimit.slidingWindow(60, '1 d'),
+      prefix: 'shelfiq:day',
+      analytics: true,
+    });
+  }
+} catch (err) {
+  console.warn('ShelfiQ rate limiter not initialized:', err.message);
+}
+
+// --- Origin allowlist ---
+const ALLOWED_ORIGINS = new Set([
+  'https://shelfspace.pro',
+  'https://www.shelfspace.pro',
+]);
+// Allow Vercel preview deployments (*-shelfspace.vercel.app) so previews work.
+const ORIGIN_HOST_SUFFIXES = ['.vercel.app'];
+
+function isOriginAllowed(origin) {
+  // Same-origin POSTs from some mobile browsers omit Origin — let the Referer
+  // check below catch those. If neither header is present, allow (covers
+  // server-to-server health checks during deploy).
+  if (!origin) return true;
+  if (ALLOWED_ORIGINS.has(origin)) return true;
+  try {
+    const url = new URL(origin);
+    return ORIGIN_HOST_SUFFIXES.some(suffix => url.hostname.endsWith(suffix));
+  } catch {
+    return false;
+  }
+}
+
+function getClientIp(req) {
+  const xff = req.headers['x-forwarded-for'];
+  if (typeof xff === 'string' && xff.length) {
+    return xff.split(',')[0].trim();
+  }
+  if (typeof req.headers['x-real-ip'] === 'string') {
+    return req.headers['x-real-ip'];
+  }
+  return 'unknown';
+}
+
+// --- Validation constants ---
+const MAX_USER_MESSAGES = 10;        // total user turns per conversation
+const MAX_TOTAL_MESSAGES = 20;       // user + assistant entries in the array
+const MAX_MESSAGE_CHARS = 1000;      // per-entry text cap
+const MAX_TOTAL_CHARS = 6000;        // entire conversation cap (defends token bombs)
 
 const SYSTEM_PROMPT = `You are ShelfiQ, the AI assistant for ShelfSpace — the payment and operations platform for cannabis. You help website visitors learn about ShelfSpace by answering questions accurately and concisely.
 
@@ -139,17 +206,63 @@ ShelfiQ knows about: sales & inventory (sell-through rates, velocity by SKU, on-
 - Never discuss competitors by name
 - If asked about pricing, explain the three modules and the free evaluation. Never quote specific percentages or dollar amounts for pricing. Emphasize that the evaluation is free and credit recovery has zero risk — you only pay when we find money. Direct them to shelfspace.pro/pricing.`;
 
-const MAX_USER_MESSAGES = 10;
-
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const { messages } = req.body;
+  // 1. Origin gate — blocks naive curl scripts that forget to forge an Origin.
+  const origin = req.headers.origin;
+  if (origin && !isOriginAllowed(origin)) {
+    return res.status(403).json({ error: 'Forbidden' });
+  }
 
-  if (!messages || !Array.isArray(messages)) {
+  // 2. Per-IP rate limiting (Upstash). Burst first so a burst-blocked attacker
+  //    doesn't also burn through their daily quota.
+  const ip = getClientIp(req);
+  if (burstLimiter) {
+    const burst = await burstLimiter.limit(ip);
+    if (!burst.success) {
+      res.setHeader('Retry-After', '60');
+      return res.status(429).json({
+        error: "You're sending messages too quickly. Try again in a minute.",
+      });
+    }
+  }
+  if (dailyLimiter) {
+    const daily = await dailyLimiter.limit(ip);
+    if (!daily.success) {
+      return res.status(429).json({
+        error: "You've hit today's chat limit. Sign up at shelfspace.pro/signup to keep exploring.",
+      });
+    }
+  }
+
+  // 3. Body shape validation — every field server-trustable, no client cap.
+  const { messages } = req.body || {};
+  if (!Array.isArray(messages) || messages.length === 0) {
     return res.status(400).json({ error: 'messages array is required' });
+  }
+  if (messages.length > MAX_TOTAL_MESSAGES) {
+    return res.status(400).json({ error: 'Conversation too long' });
+  }
+
+  let totalChars = 0;
+  for (const m of messages) {
+    if (
+      !m ||
+      (m.role !== 'user' && m.role !== 'assistant') ||
+      typeof m.content !== 'string'
+    ) {
+      return res.status(400).json({ error: 'Invalid message shape' });
+    }
+    if (m.content.length > MAX_MESSAGE_CHARS) {
+      return res.status(400).json({ error: 'Message too long' });
+    }
+    totalChars += m.content.length;
+  }
+  if (totalChars > MAX_TOTAL_CHARS) {
+    return res.status(400).json({ error: 'Conversation too long' });
   }
 
   const userMessageCount = messages.filter(m => m.role === 'user').length;
@@ -157,7 +270,8 @@ export default async function handler(req, res) {
     return res.status(429).json({ error: 'Message limit reached' });
   }
 
-  const MODELS = ['claude-haiku-4-5-20251001', 'claude-sonnet-4-5-20241022'];
+  // 4. Call the model. Sonnet 4.6 primary; Haiku 4.5 fallback on overload/rate-limit.
+  const MODELS = ['claude-sonnet-4-6', 'claude-haiku-4-5-20251001'];
 
   for (const model of MODELS) {
     for (let attempt = 0; attempt < 2; attempt++) {
@@ -166,7 +280,7 @@ export default async function handler(req, res) {
           model,
           max_tokens: 300,
           system: SYSTEM_PROMPT,
-          messages: messages,
+          messages,
         });
 
         const text = response.content
