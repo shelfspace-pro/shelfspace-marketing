@@ -34,6 +34,10 @@ try {
 const ALLOWED_ORIGINS = new Set([
   'https://shelfspace.pro',
   'https://www.shelfspace.pro',
+  // Local dev (vercel dev / static server) so the widget works on localhost.
+  'http://localhost:3000',
+  'http://localhost:5173',
+  'http://127.0.0.1:3000',
 ]);
 // Allow Vercel preview deployments (*-shelfspace.vercel.app) so previews work.
 const ORIGIN_HOST_SUFFIXES = ['.vercel.app'];
