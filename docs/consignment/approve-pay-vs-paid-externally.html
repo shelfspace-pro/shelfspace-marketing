@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Approve &amp; Pay vs Mark as Paid Externally — ShelfSpace</title>
+<meta name="description" content="Two ways to resolve a cannabis consignment settlement on ShelfSpace — when to have the platform cut a Check 21 versus record an off-platform payment.">
+<link rel="canonical" href="https://shelfspace.pro/docs/consignment/approve-pay-vs-paid-externally">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://shelfspace.pro/docs/consignment/approve-pay-vs-paid-externally">
+<meta property="og:title" content="Approve &amp; Pay vs Mark as Paid Externally — ShelfSpace">
+<meta property="og:description" content="Two ways to resolve a cannabis consignment settlement on ShelfSpace — when to have the platform cut a Check 21 versus record an off-platform payment.">
+<meta property="og:image" content="https://shelfspace.pro/og-image-v7.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Approve &amp; Pay vs Mark as Paid Externally — ShelfSpace">
+<meta name="twitter:description" content="Two ways to resolve a cannabis consignment settlement on ShelfSpace — when to have the platform cut a Check 21 versus record an off-platform payment.">
+<meta name="twitter:image" content="https://shelfspace.pro/og-image-v7.png">
+<meta name="apple-mobile-web-app-title" content="ShelfSpace">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+<style>
+  /* ── Docs Hero ── */
+  .docs-hero {
+    padding: 120px 48px 40px; text-align: center;
+    background: var(--white); position: relative; overflow: hidden; z-index: 2;
+  }
+  .docs-hero::before {
+    content: ''; position: absolute; top: -200px; right: -200px;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(149,213,178,0.12), transparent 70%);
+  }
+  .docs-hero-content { position: relative; max-width: 720px; margin: 0 auto; }
+  .docs-hero-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 6px 16px; border-radius: 100px;
+    background: var(--green-ghost); border: 1px solid rgba(149,213,178,0.3);
+    font-size: 13px; font-weight: 600; color: var(--green-dark);
+    text-decoration: none; margin-bottom: 16px; transition: all 0.2s;
+  }
+  .docs-hero-badge:hover { background: var(--green-light); }
+  .docs-hero-title {
+    font-size: clamp(28px, 3.5vw, 40px); font-weight: 700;
+    color: var(--green-deep); letter-spacing: -1.5px; line-height: 1.2;
+  }
+  @media (max-width: 900px) {
+    .docs-hero { padding: 100px 24px 32px; }
+  }
+  /* ── Docs Layout ── */
+  .docs-layout {
+    max-width: 760px; margin: 0 auto;
+    padding: 40px 48px 0;
+  }
+
+  /* ── Docs Content ── */
+  .docs-content { max-width: 720px; padding-bottom: 80px; }
+  .docs-breadcrumb {
+    font-size: 13px; color: var(--slate-400); margin-bottom: 24px;
+  }
+  .docs-breadcrumb a { color: var(--slate-400); text-decoration: none; }
+  .docs-breadcrumb a:hover { color: var(--green-mid); }
+  .docs-category {
+    font-size: 11px; font-weight: 700; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--green-mid); margin-bottom: 12px;
+  }
+  .docs-content h1 {
+    font-size: clamp(28px, 3.5vw, 36px); font-weight: 700;
+    color: var(--green-deep); letter-spacing: -1px; line-height: 1.2;
+    margin-bottom: 24px;
+  }
+  .docs-content h2 {
+    font-size: 22px; font-weight: 700; color: var(--green-deep);
+    margin: 40px 0 16px; letter-spacing: -0.5px; line-height: 1.3;
+    padding-top: 24px; border-top: 1px solid var(--slate-100);
+  }
+  .docs-content h2:first-of-type { border-top: none; padding-top: 0; }
+  .docs-content p {
+    font-size: 16px; line-height: 1.8; color: var(--slate-600); margin-bottom: 20px;
+  }
+  .docs-content ul, .docs-content ol { margin-bottom: 20px; padding-left: 24px; }
+  .docs-content li {
+    font-size: 16px; line-height: 1.8; color: var(--slate-600); margin-bottom: 6px;
+  }
+  .docs-content strong { color: var(--green-deep); font-weight: 600; }
+  .docs-content a { color: var(--green-mid); font-weight: 500; text-decoration: none; }
+  .docs-content a:hover { color: var(--green-deep); text-decoration: underline; }
+  .docs-content code {
+    font-family: var(--font-mono); font-size: 14px;
+    background: var(--slate-100); color: var(--green-deep);
+    padding: 2px 7px; border-radius: 5px;
+  }
+
+  /* ── At a Glance Box ── */
+  .docs-glance {
+    padding: 24px 28px; margin-bottom: 32px;
+    background: var(--green-ghost); border: 1px solid rgba(149,213,178,0.3);
+    border-radius: 12px;
+  }
+  .docs-glance h2 {
+    font-size: 13px; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--green-mid);
+    margin: 0 0 12px; border: none; padding: 0;
+  }
+  .docs-glance ul { list-style: none; padding: 0; margin: 0; }
+  .docs-glance li {
+    font-size: 15px; line-height: 1.6; color: var(--slate-600);
+    padding: 4px 0 4px 20px; position: relative;
+  }
+  .docs-glance li::before {
+    content: ''; position: absolute; left: 0; top: 12px;
+    width: 8px; height: 8px; border-radius: 50%; background: var(--green-accent);
+  }
+
+  /* ── Highlight Box ── */
+  .docs-highlight {
+    background: var(--green-ghost); border: 1px solid rgba(149,213,178,0.3);
+    border-radius: 12px; padding: 20px 24px; margin: 24px 0;
+    font-size: 15px; line-height: 1.7; color: var(--green-dark);
+  }
+  .docs-highlight strong { color: var(--green-deep); }
+
+  /* ── Decision Table ── */
+  .decision-table {
+    margin: 28px 0; width: 100%;
+    border-collapse: separate; border-spacing: 0;
+    border: 1px solid var(--slate-200); border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(27,67,50,0.04);
+    background: var(--white);
+  }
+  .decision-table thead th {
+    padding: 16px 18px; text-align: left;
+    font: 700 13px/1.2 var(--font-mono); letter-spacing: 1.4px; text-transform: uppercase;
+    background: var(--slate-50); color: var(--slate-500);
+    border-bottom: 1px solid var(--slate-200);
+  }
+  .decision-table thead th.col-primary {
+    background: var(--green-deep); color: var(--green-accent);
+  }
+  .decision-table thead th.col-secondary {
+    background: var(--white); color: var(--green-mid);
+    border-left: 1px solid var(--slate-200);
+  }
+  .decision-table tbody td {
+    padding: 14px 18px; vertical-align: top;
+    font-size: 14.5px; line-height: 1.55; color: var(--slate-600);
+    border-top: 1px solid var(--slate-100);
+  }
+  .decision-table tbody tr:first-child td { border-top: 0; }
+  .decision-table tbody td.col-label {
+    font: 600 14px var(--font-display); color: var(--green-deep);
+    background: var(--slate-50); width: 30%;
+  }
+  .decision-table tbody td.col-primary {
+    background: var(--green-ghost); color: var(--green-dark);
+  }
+  .decision-table tbody td.col-secondary {
+    background: var(--white); border-left: 1px solid var(--slate-100);
+  }
+  .decision-table .yes { color: var(--green-mid); font-weight: 700; }
+  .decision-table .no { color: var(--slate-500); font-weight: 500; }
+  .decision-table strong { color: var(--green-deep); }
+  @media (max-width: 720px) {
+    .decision-table { font-size: 13px; display: block; overflow-x: auto; }
+    .decision-table tbody td.col-label { width: auto; }
+  }
+
+  /* ── Related Docs ── */
+  .docs-related {
+    margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--slate-100);
+  }
+  .docs-related h3 {
+    font-size: 13px; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--slate-400); margin-bottom: 12px;
+  }
+  .docs-related-links { display: flex; flex-wrap: wrap; gap: 12px; }
+  .docs-related-links a {
+    padding: 8px 16px; font-size: 14px; font-weight: 500;
+    color: var(--green-mid); background: var(--slate-50);
+    border-radius: 8px; text-decoration: none; transition: all 0.2s;
+  }
+  .docs-related-links a:hover { background: var(--green-ghost); color: var(--green-deep); }
+
+  /* ── Docs CTA ── */
+  .docs-cta {
+    margin-top: 48px; padding: 32px; text-align: center;
+    background: var(--green-deep); border-radius: 16px;
+  }
+  .docs-cta p { color: rgba(255,255,255,0.8); font-size: 16px; margin-bottom: 16px; }
+  .docs-cta p strong { color: var(--white); }
+  .docs-cta a {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 12px 28px; background: var(--white); color: var(--green-deep);
+    border-radius: 10px; font-size: 15px; font-weight: 600;
+    text-decoration: none; transition: all 0.3s;
+  }
+  .docs-cta a:hover { background: var(--slate-50); transform: translateY(-1px); }
+  .docs-cta-note { margin-top: 12px; font-size: 13px; color: rgba(255,255,255,0.5); }
+
+  /* ── Footer 5-col ── */
+  .footer-top { grid-template-columns: 2fr 1fr 1fr 1fr 1fr; }
+
+  /* ── Responsive ── */
+  @media (max-width: 900px) {
+    .docs-layout { padding: 24px 24px 0; }
+    .footer-top { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 600px) {
+    .footer-top { grid-template-columns: 1fr; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+  }
+</style>
+<!-- ARTICLE SCHEMA -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "Approve & Pay vs Mark as Paid Externally — Choosing How to Resolve a Consignment Settlement",
+  "description": "Two paths to resolve a cannabis consignment settlement on ShelfSpace — when to have the platform cut a Check 21 from your bank versus record an off-platform payment. QuickBooks sync, fees, vendor experience, and reversibility compared.",
+  "datePublished": "2026-06-01",
+  "dateModified": "2026-06-01",
+  "author": { "@type": "Organization", "name": "ShelfSpace", "url": "https://shelfspace.pro" },
+  "publisher": { "@type": "Organization", "name": "ShelfSpace" },
+  "url": "https://shelfspace.pro/docs/consignment/approve-pay-vs-paid-externally"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://shelfspace.pro/" },
+    { "@type": "ListItem", "position": 2, "name": "Documentation", "item": "https://shelfspace.pro/docs" },
+    { "@type": "ListItem", "position": 3, "name": "Consignment", "item": "https://shelfspace.pro/docs/consignment/overview" },
+    { "@type": "ListItem", "position": 4, "name": "Approve & Pay vs Mark as Paid Externally" }
+  ]
+}
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-H2LBJT03WE"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-H2LBJT03WE');</script>
+<script>function initApollo(){var n=Math.random().toString(36).substring(7),o=document.createElement("script");
+o.src="https://assets.apollo.io/micro/website-tracker/tracker.iife.js?nocache="+n,o.async=!0,o.defer=!0,
+o.onload=function(){window.trackingFunctions.onLoad({appId:"69c141b32234890011a43849"})},
+document.head.appendChild(o)}initApollo();</script>
+</head>
+<body>
+<!-- last-synced: 2026-06-01 -->
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="/" class="nav-logo">
+    <div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div>
+    <span class="nav-logo-text">ShelfSpace</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="/consignment">Consignment</a></li>
+    <li><a href="/accounts-payable">Accounts Payable</a></li>
+    <li><a href="/credit-recovery">Credit Recovery</a></li>
+    <li><a href="/pricing">Pricing</a></li>
+    <li><a href="/about">About</a></li>
+    <li><a href="/contact" class="nav-cta">Get Started <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a></li>
+  </ul>
+  <div class="nav-hamburger" onclick="document.querySelector('.nav-links').classList.toggle('mobile-open'); event.stopPropagation();"><span></span><span></span><span></span></div>
+</nav>
+
+
+<!-- DOCS HERO -->
+<div class="docs-hero">
+  <div class="docs-hero-content">
+    <a href="/docs" class="docs-hero-badge">Documentation</a>
+    <h1 class="docs-hero-title">Approve &amp; Pay vs Mark as Paid Externally</h1>
+  </div>
+</div>
+
+<div data-docs-search><noscript><a href="/docs">Browse the docs index</a></noscript></div>
+
+<!-- DOCS LAYOUT -->
+<div class="docs-layout docs-with-sidebar">
+
+  <!-- SIDEBAR -->
+  <aside class="docs-sidebar" data-docs-sidebar><noscript><a href="/docs">Browse all docs &rarr;</a></noscript></aside>
+
+  <!-- CONTENT -->
+  <main class="docs-content">
+    <div class="docs-breadcrumb">
+      <a href="/docs">Docs</a> / <a href="/docs/consignment/overview">Consignment</a> / Approve &amp; Pay vs Mark as Paid Externally
+    </div>
+    <div class="docs-category">Consignment</div>
+
+    <!-- AT A GLANCE -->
+    <div class="docs-glance">
+      <h2>At a Glance</h2>
+      <ul>
+        <li>Every approved cannabis consignment settlement resolves through one of two buttons: <strong>Approve &amp; Pay</strong> or <strong>Mark as paid externally</strong>.</li>
+        <li><strong>Approve &amp; Pay</strong> — the platform cuts a Check 21 from your bank account, syncs the bill and payment to QuickBooks, and emails the vendor a settlement report ending with the printable check.</li>
+        <li><strong>Mark as paid externally</strong> — you paid the vendor your own way (own check, ACH from your bank, or cash). The platform records the resolution; no Check 21 is cut, no QuickBooks sync runs, and the vendor's settlement report ends with a "PAID EXTERNALLY" stamp.</li>
+        <li>The decision is per-settlement, not per-vendor. You can use Approve &amp; Pay one week and Mark as paid externally the next on the same vendor.</li>
+        <li>Both paths produce the same first five pages of settlement context for the vendor (Sales Detail, Margin Analysis, Waste &amp; Credits, Remaining Inventory). Only the final page differs.</li>
+      </ul>
+    </div>
+
+    <!-- BODY -->
+    <p>Resolving a cannabis consignment settlement on ShelfSpace is the last step in the weekly cycle. The platform has already pulled your POS sales, reconciled inventory against Metrc, applied profit splits and aging-discount tiers, and netted any returns or waste credits. The settlement is sitting in your <strong>Payments &rarr; Consignment Payments</strong> tab with a calculated net payout amount and a ready-to-send PDF report. The only thing left is your call on how the money moves.</p>
+
+    <p>Two buttons present that choice. Both are equally valid; the right one for any given settlement depends on your accounting workflow, your banking setup, and your relationship with the vendor.</p>
+
+    <h2>Side-by-side comparison</h2>
+
+    <p>The mechanics differ across five dimensions worth knowing before you decide.</p>
+
+    <table class="decision-table">
+      <thead>
+        <tr>
+          <th></th>
+          <th class="col-primary">Approve &amp; Pay</th>
+          <th class="col-secondary">Mark as paid externally</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="col-label">Check 21 cut</td>
+          <td class="col-primary"><span class="yes">Yes</span> — drawn from your bank account, mailed/emailed to the vendor, valid for mobile deposit or any U.S. bank app</td>
+          <td class="col-secondary"><span class="no">No</span> — you handled the payment off-platform; the platform just records that it happened</td>
+        </tr>
+        <tr>
+          <td class="col-label">QuickBooks sync</td>
+          <td class="col-primary"><span class="yes">Yes</span> — the bill posts and the check posts automatically through your QBO connection, ready for bank reconciliation</td>
+          <td class="col-secondary"><span class="no">No</span> — your bookkeeper enters the bill and payment manually in QBO from whatever you used (bank bill-pay, ACH, paper check, cash)</td>
+        </tr>
+        <tr>
+          <td class="col-label">Per-check platform fee</td>
+          <td class="col-primary"><span class="yes">Applies</span> — set during your free evaluation, in line with the usage-based pricing model</td>
+          <td class="col-secondary"><span class="no">Does not apply</span> — no check was cut, no fee charged</td>
+        </tr>
+        <tr>
+          <td class="col-label">What the vendor receives</td>
+          <td class="col-primary">Settlement report PDF, six pages, ending with a printable Check 21 check page. Identical to the demo at <a href="/assets/ShelfSpace_Sample_Consignment_Settlement_SR-464.pdf" target="_blank" rel="noopener">SR-464</a>.</td>
+          <td class="col-secondary">Settlement report PDF, six pages, ending with a "PAID EXTERNALLY" stamp page instead of a check. Vendor sees the same payout math; the resolution is just stamped as off-platform.</td>
+        </tr>
+        <tr>
+          <td class="col-label">Reversibility</td>
+          <td class="col-primary">The Check 21 has a 90-day void window; you can <a href="/docs/checks/void-reissue">void and reissue</a> if it was cut in error. The QuickBooks entries reverse with it.</td>
+          <td class="col-secondary">Reverting the platform's "Paid" status requires support — you'd typically just process a new settlement to make the vendor whole if a mistake was made off-platform.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>When to pick Approve &amp; Pay</h2>
+
+    <p>This is the default path and the one the platform was designed around. Pick it when any of these are true:</p>
+
+    <ul>
+      <li><strong>You want the QuickBooks entries handled for you.</strong> Approve &amp; Pay posts both the bill and the payment automatically through your QBO connection. Your bookkeeper opens QBO and sees a clean, reconciled entry — no manual data entry, no missing memo lines.</li>
+      <li><strong>You want one place that knows what was paid.</strong> The Check 21 ID, the settlement ID, the package-level sell-through data, the vendor's portal record — all tied to one resolution. Two months later, when a vendor asks <em>"why was the check for $557.27?"</em>, the answer is one click away in their portal.</li>
+      <li><strong>You have bank info on file in ShelfSpace.</strong> Approve &amp; Pay requires a connected bank account so the platform can draw the Check 21. Most retailers connect during onboarding; if yours isn't connected yet, this path waits for that step.</li>
+      <li><strong>The vendor prefers a mailed/emailed printable check.</strong> Many cannabis vendors specifically request Check 21 because their own bank treats it cleaner than an ACH from a dispensary's account. The vendor mobile-deposits or prints and takes it to a teller.</li>
+    </ul>
+
+    <h2>When to pick Mark as paid externally</h2>
+
+    <p>This is the alternate path for retailers who'd rather route the payment themselves. Pick it when any of these are true:</p>
+
+    <ul>
+      <li><strong>You already paid the vendor off-platform before approving.</strong> A vendor called Friday and asked for the check early; you cut a paper check Friday night; the settlement only ran Monday. Mark as paid externally records the resolution so the platform doesn't double-pay.</li>
+      <li><strong>You prefer to pay via your bank's bill-pay or ACH.</strong> Some retailers route all vendor payments through their primary bank's bill-pay system for reconciliation reasons. The platform doesn't object — pay your way, record the resolution.</li>
+      <li><strong>The vendor specifically requested a non-Check 21 payment method.</strong> Rare, but some vendors require ACH only. Pay them off-platform and mark externally so the settlement record stays accurate.</li>
+      <li><strong>The settlement was small enough to settle in cash on the spot</strong>, or you want to keep a particular vendor's payments out of the platform's check pipeline for any other operational reason.</li>
+    </ul>
+
+    <div class="docs-highlight">
+      <strong>The tooltip on the Mark as paid externally button says this verbatim:</strong> <em>"Record an external payment (your own check / ACH / cash). ShelfSpace will not cut a check or charge a check fee."</em> No surprises. The platform is explicit that it stops doing anything beyond bookkeeping at this point.
+    </div>
+
+    <h2>What the vendor sees, either way</h2>
+
+    <p>Vendor transparency is the same on both paths. The vendor receives an email notification within minutes of your approval, with the full multi-page Settlement Report PDF attached. The first five pages are identical regardless of which path you picked — they cover the period's settlement summary, the line-by-line sales detail, the margin analysis (showing any discount-budget true-up), the waste and credits reconciliation against Metrc, and the remaining inventory on shelf at period end.</p>
+
+    <p>The difference is only on page six. Approve &amp; Pay ends with a Check 21 compliant printable check ready for mobile deposit. Mark as paid externally ends with a "PAID EXTERNALLY" stamp page that confirms the settlement is resolved without surfacing a check. The vendor sees the same payout math, the same package-level sell-through data, and the same authorized discount budget in either case — the resolution method is the only thing that changes.</p>
+
+    <p>For the page-by-page walkthrough of what's on the report, see <a href="/blog/anatomy-of-a-consignment-settlement-report">Anatomy of a Consignment Settlement Report</a> or download the demo PDF above.</p>
+
+    <h2>Switching back and forth</h2>
+
+    <p>The choice is per-settlement, not per-vendor. You can run a vendor on Approve &amp; Pay all year, then mark one settlement externally if you happened to pay it early, then go back to Approve &amp; Pay the following week. The platform doesn't lock you in. The vendor record stays the same; only the resolution-method history accumulates over time. If you're trying to standardize across all vendors, you can — but the system doesn't require it.</p>
+
+    <h2>QuickBooks implications worth flagging</h2>
+
+    <p>This is the operational gotcha that catches bookkeepers off-guard if it isn't called out: Approve &amp; Pay does the QBO sync; Mark as paid externally does not. If you handle AP entirely on ShelfSpace and approve every settlement through Approve &amp; Pay, your QBO file stays auto-reconciled. If you mix in Mark as paid externally settlements, those need manual entry on the bookkeeper's side — pay the bill, then in QBO post the corresponding bill and payment to keep the books aligned. Not a bug, just the consequence of telling the platform <em>"I handled this off-platform."</em></p>
+
+    <p>For retailers whose accounting firm is on the <a href="/for-bookkeepers">For Bookkeepers</a> partnership track, flag externally-paid settlements during your weekly handoff so the manual entries don't get missed.</p>
+
+    <!-- RELATED DOCS -->
+    <div class="docs-related">
+      <h3>Related</h3>
+      <div class="docs-related-links">
+        <a href="/docs/consignment/receiving-and-payout">Receiving &amp; Payout SOP</a>
+        <a href="/docs/consignment/settlements">Weekly Settlements</a>
+        <a href="/docs/consignment/settlement-reports">Reading the Settlement Report</a>
+        <a href="/docs/checks/overview">Check 21 Payments</a>
+        <a href="/docs/checks/void-reissue">Voiding &amp; Reissuing Checks</a>
+        <a href="/docs/quickbooks/overview">QuickBooks Integration</a>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="docs-cta">
+      <p><strong>Ready to free up your capital? Let's talk.</strong></p>
+      <a href="/contact">Talk to Us <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a>
+      <div class="docs-cta-note">Free evaluation. We handle setup.</div>
+    </div>
+  </main>
+
+  <!-- ON THIS PAGE -->
+  <aside class="docs-on-this-page" data-on-this-page></aside>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="/" class="nav-logo"><div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div><span class="nav-logo-text">ShelfSpace</span></a>
+      <p>Every Vendor. Every Payment. One Engine.</p>
+    </div>
+    <div class="footer-col"><h4>Services</h4><ul><li><a href="/consignment">Consignment</a></li><li><a href="/accounts-payable">Accounts Payable</a></li><li><a href="/credit-recovery">Credit Recovery</a></li><li><a href="/checks">Check Payments</a></li><li><a href="/shelfiq">ShelfiQ</a></li></ul></div>
+    <div class="footer-col"><h4>Platform</h4><ul><li><a href="/features">Features</a></li><li><a href="/how-it-works">How It Works</a></li><li><a href="/pricing">Pricing</a></li><li><a href="/about">About</a></li><li><a href="/blog">Blog</a></li><li><a href="/docs">Docs</a></li></ul></div>
+    <div class="footer-col"><h4>Access</h4><ul><li><a href="https://ourshelf.space">Login</a></li><li><a href="/contact">Sign Up</a></li><li><a href="/contact">Contact</a></li><li><a href="/vendors">For Vendors</a></li><li><a href="/for-bookkeepers">For Bookkeepers</a></li></ul></div>
+    <div class="footer-col"><h4>Company</h4><ul><li><a href="mailto:chris@shelfspace.pro">Email</a></li><li><a href="mailto:support@shelfspace.pro">Support</a></li><li><a href="https://linkedin.com/company/shelfspace-pro" target="_blank" rel="noopener" class="footer-social-link"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> LinkedIn</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><p>&copy; 2026 ShelfSpace Technologies Inc.</p><div class="footer-bottom-links"><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div></div>
+</footer>
+
+<script>
+(function() {
+  var nav = document.getElementById('nav');
+  nav.classList.toggle('scrolled', window.scrollY > 20);
+  window.addEventListener('scroll', function() {
+    nav.classList.toggle('scrolled', window.scrollY > 20);
+  }, { passive: true });
+})();
+</script>
+<script src="/docs-search.js?v=17" defer></script>
+<script src="/shelfiq-widget.js"></script>
+</body>
+</html>

@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Add Consignment to an Existing Cannabis Vendor — ShelfSpace</title>
+<meta name="description" content="Adding consignment to a wholesale vendor you already love — the conversation, the splits, and three scenarios where mixed-mode beats forcing a binary conversion.">
+<link rel="canonical" href="https://shelfspace.pro/blog/add-consignment-to-existing-cannabis-vendor">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://shelfspace.pro/blog/add-consignment-to-existing-cannabis-vendor">
+<meta property="og:title" content="Add Consignment to an Existing Cannabis Vendor — ShelfSpace">
+<meta property="og:description" content="Adding consignment to a wholesale vendor you already love — the conversation, the splits, and three scenarios where mixed-mode beats forcing a binary conversion.">
+<meta property="og:image" content="https://shelfspace.pro/og-image-v7.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Add Consignment to an Existing Cannabis Vendor — ShelfSpace">
+<meta name="twitter:description" content="Adding consignment to a wholesale vendor you already love — the conversation, the splits, and three scenarios where mixed-mode beats forcing a binary conversion.">
+<meta name="twitter:image" content="https://shelfspace.pro/og-image-v7.png">
+<meta name="apple-mobile-web-app-title" content="ShelfSpace">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+<style>
+  @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-12px); } }
+
+  /* ─── HERO ENHANCEMENTS ─── */
+  .page-hero { padding-bottom: 40px; }
+  .hero-bg-gradient { position: absolute; top: -30%; right: -20%; width: 700px; height: 700px; background: radial-gradient(circle, rgba(149,213,178,0.18) 0%, rgba(149,213,178,0) 70%); animation: float 8s ease-in-out infinite; pointer-events: none; }
+  .hero-bg-gradient-2 { position: absolute; bottom: -20%; left: -15%; width: 550px; height: 550px; background: radial-gradient(circle, rgba(27,67,50,0.06) 0%, rgba(27,67,50,0) 70%); animation: float 10s ease-in-out infinite; animation-delay: -3s; pointer-events: none; }
+  .hero-grid-lines { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 1200px; height: 100%; opacity: 0.035; background-image: linear-gradient(var(--green-deep) 1px, transparent 1px), linear-gradient(90deg, var(--green-deep) 1px, transparent 1px); background-size: 80px 80px; pointer-events: none; }
+  .page-hero .section-label,
+  .page-hero .section-title,
+  .page-hero .section-desc { opacity: 0; transform: translateY(30px); }
+  .page-hero .section-label { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1); }
+  .page-hero .section-title { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s, transform 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s; }
+  .page-hero .section-desc { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1) 0.25s, transform 0.8s cubic-bezier(0.22,1,0.36,1) 0.25s; }
+  .page-hero.hero-loaded .section-label,
+  .page-hero.hero-loaded .section-title,
+  .page-hero.hero-loaded .section-desc { opacity: 1; transform: translateY(0); }
+
+  /* ─── REVEAL ─── */
+  .reveal {
+    opacity: 0; transform: translateY(40px);
+    transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+  /* ─── ARTICLE BODY ─── */
+  .article-body { max-width: 720px; margin: 0 auto; padding: 0 48px 80px; }
+  .article-body h2 { font-size: 24px; font-weight: 700; color: var(--green-deep); margin: 48px 0 16px; letter-spacing: -0.5px; line-height: 1.3; }
+  .article-body h3 { font-size: 19px; font-weight: 700; color: var(--green-deep); margin: 32px 0 12px; letter-spacing: -0.3px; line-height: 1.3; }
+  .article-body p { font-size: 17px; line-height: 1.85; color: var(--slate-600); margin-bottom: 24px; }
+  .article-body ul, .article-body ol { margin-bottom: 24px; padding-left: 24px; }
+  .article-body li { font-size: 17px; line-height: 1.85; color: var(--slate-600); margin-bottom: 8px; }
+  .article-body strong { color: var(--green-deep); font-weight: 600; }
+  .article-body a { color: var(--green-mid); font-weight: 500; text-decoration: none; }
+  .article-body a:hover { color: var(--green-deep); text-decoration: underline; }
+  .article-body blockquote { border-left: 3px solid var(--green-accent); padding: 16px 24px; margin: 32px 0; background: var(--green-ghost); border-radius: 0 8px 8px 0; }
+  .article-body blockquote p { font-style: italic; color: var(--green-dark); margin-bottom: 0; }
+
+  /* ─── SCENARIO CARDS ─── */
+  .scenario {
+    margin: 28px 0; padding: 24px 28px;
+    background: var(--white); border: 1px solid var(--slate-200);
+    border-left: 4px solid var(--green-mid); border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(27,67,50,0.04);
+  }
+  .scenario-eyebrow {
+    font: 700 11px/1 var(--font-mono); letter-spacing: 1.4px;
+    text-transform: uppercase; color: var(--green-mid); margin-bottom: 8px;
+  }
+  .scenario h3 { margin-top: 0; }
+  .scenario p:last-child { margin-bottom: 0; }
+  .scenario .scenario-split {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+    margin: 16px 0; padding: 14px 16px;
+    background: var(--slate-50); border-radius: 8px;
+    font: 600 13px/1.4 var(--font-mono); color: var(--slate-600);
+  }
+  .scenario .scenario-split > div { padding: 2px 0; }
+  .scenario .scenario-split strong { color: var(--green-deep); display: block; font-size: 11px; letter-spacing: 1.2px; text-transform: uppercase; margin-bottom: 4px; }
+  @media (max-width: 600px) {
+    .scenario .scenario-split { grid-template-columns: 1fr; }
+  }
+
+  /* ─── AT A GLANCE ─── */
+  .article-glance {
+    max-width: 720px; margin: 0 auto 40px; padding: 24px 28px;
+    background: var(--green-ghost); border: 1px solid rgba(149,213,178,0.3);
+    border-radius: 12px;
+  }
+  .article-glance h2 {
+    font-size: 14px; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--green-mid); margin: 0 0 12px;
+  }
+  .article-glance ul { list-style: none; padding: 0; margin: 0; }
+  .article-glance li {
+    font-size: 15px; line-height: 1.6; color: var(--slate-600);
+    padding: 4px 0 4px 20px; position: relative;
+  }
+  .article-glance li::before {
+    content: ''; position: absolute; left: 0; top: 12px;
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--green-accent);
+  }
+
+  /* ─── CTA PARALLAX ─── */
+  .cta-section::before { transform: translate(-50%,-50%) translateY(var(--parallax-y, 0)); will-change: transform; }
+
+  /* ─── FAQ ACCORDION (per-page, not global) ─── */
+  .faq-list details {
+    border: 1px solid var(--slate-200); border-radius: 10px;
+    margin-bottom: 12px; background: var(--white);
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .faq-list details[open] { background: var(--green-ghost); border-color: rgba(149,213,178,0.45); }
+  .faq-list summary {
+    list-style: none; cursor: pointer;
+    padding: 16px 20px;
+    font: 600 16px/1.4 var(--font-display); color: var(--green-deep);
+    display: flex; justify-content: space-between; align-items: center; gap: 12px;
+  }
+  .faq-list summary::-webkit-details-marker { display: none; }
+  .faq-list summary::after {
+    content: '+'; flex-shrink: 0;
+    font: 400 22px/1 var(--font-mono); color: var(--green-mid);
+    transition: transform 0.2s;
+  }
+  .faq-list details[open] summary::after { content: '−'; }
+  .faq-list details p {
+    padding: 0 20px 18px; margin: 0;
+    font-size: 15px; line-height: 1.7; color: var(--slate-600);
+  }
+
+  /* ─── FOOTER 5-COL ─── */
+  .footer-top { grid-template-columns: 2fr 1fr 1fr 1fr 1fr; }
+  @media (max-width: 900px) { .footer-top { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px) { .footer-top { grid-template-columns: 1fr; } }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    .article-body { padding: 0 24px 60px; }
+  }
+
+  /* ─── REDUCED MOTION ─── */
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; transition: none; }
+    .page-hero .section-label,
+    .page-hero .section-title,
+    .page-hero .section-desc { opacity: 1; transform: none; transition: none; }
+    .hero-bg-gradient, .hero-bg-gradient-2 { animation: none; }
+  }
+</style>
+<noscript><style>.reveal,.page-hero .section-label,.page-hero .section-title,.page-hero .section-desc{opacity:1;transform:none;transition:none;}</style></noscript>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-H2LBJT03WE"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-H2LBJT03WE');</script>
+<script>function initApollo(){var n=Math.random().toString(36).substring(7),o=document.createElement("script");
+o.src="https://assets.apollo.io/micro/website-tracker/tracker.iife.js?nocache="+n,o.async=!0,o.defer=!0,
+o.onload=function(){window.trackingFunctions.onLoad({appId:"69c141b32234890011a43849"})},
+document.head.appendChild(o)}initApollo();</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Don't ask your cannabis vendor to convert. Ask them to add.",
+  "description": "Adding consignment to a wholesale vendor you already love — the conversation, the splits, and three scenarios where mixed-mode beats forcing a binary conversion.",
+  "author": { "@type": "Person", "name": "Chris Mitchem" },
+  "publisher": { "@type": "Organization", "name": "ShelfSpace", "url": "https://shelfspace.pro" },
+  "datePublished": "2026-06-01",
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://shelfspace.pro/blog/add-consignment-to-existing-cannabis-vendor" },
+  "url": "https://shelfspace.pro/blog/add-consignment-to-existing-cannabis-vendor",
+  "image": "https://shelfspace.pro/og-image-v7.png"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://shelfspace.pro/" },
+    { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://shelfspace.pro/blog" },
+    { "@type": "ListItem", "position": 3, "name": "Don't ask your cannabis vendor to convert. Ask them to add." }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Won't my cannabis vendor say no if I ask them to add consignment on top of wholesale?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Most don't, once the ask is framed as additive. You're not threatening their wholesale revenue; you're adding a track for SKUs that wouldn't otherwise move through your store. The vendors most likely to say yes are the ones with experimental product lines, slow-moving long-tail SKUs, or new launches they want shelf-tested. Lead the conversation with what stays the same (your wholesale relationship, their flagship terms) before introducing what gets added."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How should I structure consignment splits when wholesale terms are already going well?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Anchor the consignment split to the vendor's wholesale margin economics, not to a generic 50/50 default. If the vendor sells you wholesale at a price that already leaves them a healthy margin, the consignment split for that vendor can sit closer to their preferred number — 55/45 or 60/40 vendor-favorable — because the consignment SKUs are the ones with more risk on their side. The platform supports per-category splits, so you can negotiate one number for their flagship line on wholesale and a different number for the experimental line on consignment."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What if the consigned SKU starts selling better than the wholesale flagship?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "This is the happy problem. If the consigned line is moving faster than expected, the conversation naturally evolves: the vendor may want to convert it to wholesale terms to capture more margin, or you may want to add another consignment SKU from them because the model is working. Either way, the platform handles the transition cleanly — re-designating an existing SKU or adding a new one is a settings change on the vendor record, not a contract rewrite. The relationship gets stronger, not strained."
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="/" class="nav-logo">
+    <div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div>
+    <span class="nav-logo-text">ShelfSpace</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="/consignment">Consignment</a></li>
+    <li><a href="/accounts-payable">Accounts Payable</a></li>
+    <li><a href="/credit-recovery">Credit Recovery</a></li>
+    <li><a href="/pricing">Pricing</a></li>
+    <li><a href="/about">About</a></li>
+    <li><a href="/contact" class="nav-cta">Get Started <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a></li>
+  </ul>
+  <div class="nav-hamburger" onclick="document.querySelector('.nav-links').classList.toggle('mobile-open'); event.stopPropagation();"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="hero-bg-gradient"></div>
+  <div class="hero-bg-gradient-2"></div>
+  <div class="hero-grid-lines"></div>
+  <div class="section-label">Consignment</div>
+  <h1 class="section-title">Don't ask your vendor to convert. Ask them to add.</h1>
+  <p class="section-desc">Adding consignment to a wholesale relationship you already love — the conversation, the splits, and three scenarios where mixed-mode beats forcing a binary.</p>
+</div>
+
+<!-- AT A GLANCE -->
+<div class="article-glance">
+  <h2>At a glance</h2>
+  <ul>
+    <li>Most retailers frame consignment as a vendor-relationship change ("we're moving you to consignment"). That framing makes the vendor defensive.</li>
+    <li>The reframe: consignment isn't replacing wholesale — it's adding a second track for SKUs that need different terms from the same brand.</li>
+    <li>The platform supports both modes on one vendor record. Each delivery picks Order Type at the dock; each settlement runs through its own track.</li>
+    <li>Three scenarios where mixed-mode beats forcing a binary: flagship-plus-experimental, high-volume-plus-long-tail, and reciprocal buying inside a vertically integrated group.</li>
+    <li>Per-category splits let you negotiate one number for the wholesale flagship and a different number for the consignment SKUs — without renegotiating the whole relationship.</li>
+  </ul>
+</div>
+
+<!-- ARTICLE BODY -->
+<article class="article-body">
+
+  <p class="reveal">Most operators I talk to think about consignment in binary terms. Either a vendor sells you wholesale — flagship products, established trust, net-30 terms — or you move that vendor to consignment, and now you're telling them the relationship is changing. That framing is doing a lot of damage.</p>
+
+  <p class="reveal">When you tell a vendor <em>"we want to move you to consignment,"</em> they hear <em>"we're going to stop buying your flagship outright."</em> Their head goes immediately to revenue protection, not to opportunity. They get defensive, ask for terms that protect their downside, and the conversation either stalls or ends with you on stricter wholesale terms than you started with. Nobody wins.</p>
+
+  <p class="reveal">There's a better conversation. Don't ask the vendor to convert. Ask them to <strong>add</strong>. The wholesale relationship stays exactly where it is. The flagship keeps moving on the terms you've already negotiated. What changes is that you've opened a second track on the same vendor record — a track where SKUs that need different economics can live on consignment without disturbing the wholesale rhythm.</p>
+
+  <div class="vs-split reveal">
+    <div class="vs-col vs-neg">
+      <div class="vs-head">
+        <svg class="vs-ico" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6l3 12 6-12 6 12 3-12"/></svg>
+        <p class="vs-tag">Ask to Convert</p>
+      </div>
+      <p class="vs-text">"We want to move you to consignment." Vendor hears: we're cutting your wholesale revenue. Defensive. Slow. Often blocks. Trust takes a hit even if the deal goes through.</p>
+    </div>
+    <div class="vs-col vs-pos">
+      <div class="vs-head">
+        <svg class="vs-ico" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        <p class="vs-tag">Ask to Add</p>
+      </div>
+      <p class="vs-text">"Wholesale stays the same. We want to add consignment for [specific SKUs]." Vendor hears: more shelf space, more sell-through data, more relationship. Additive. Fast. Both sides win.</p>
+    </div>
+  </div>
+
+  <h2 class="reveal">The platform makes this real</h2>
+
+  <p class="reveal">Mixed-mode isn't a hack or a workaround. It's a first-class feature on every vendor record in <a href="/consignment">ShelfSpace</a>. When you open the vendor's Settings tab, you'll see two panels stacked on one screen — <strong>Wholesale Settings</strong> and <strong>Consignment Settings</strong>. Either one can sit empty when you only run one mode. Both can be configured when you run both.</p>
+
+  <p class="reveal">At the dock, each delivery picks its <strong>Order Type</strong>. The vendor brings two invoices and two Metrc manifests on the same trip — one Wholesale, one Consignment. You create two deliveries in the platform. From that point forward, the wholesale delivery feeds the AP queue on the vendor's payment terms; the consignment delivery feeds the weekly settlement engine for that vendor. Two tracks, one vendor relationship.</p>
+
+  <p class="reveal">The full operational walkthrough lives in <a href="/docs/consignment/receiving-and-payout">our docs</a>. The same-vendor-two-modes thesis lives in our <a href="/blog/cannabis-consignment-wholesale-same-vendor">explainer post</a>. This piece is about the conversation that gets you there — and the three scenarios where the mixed-mode ask works.</p>
+
+  <h2 class="reveal">Three scenarios where mixed-mode beats binary</h2>
+
+  <div class="scenario reveal">
+    <div class="scenario-eyebrow">Scenario 1</div>
+    <h3>Flagship on wholesale, experimental line on consignment</h3>
+    <p>A vendor you've been buying wholesale for a year is launching a new infused-pre-roll line. You like the brand, but you're not sure whether the new line will pull the same way as their flagship flower. Asking them to wholesale the experimental line means you eat the loss if it sits. Asking them to convert the whole relationship to consignment threatens revenue they're counting on from the flagship.</p>
+    <p>Instead: wholesale stays as-is on the flagship. The new infused-pre-roll line ships on consignment, with a split anchored to the vendor's margin expectations. You give the experimental line a real chance to prove itself on your shelf without taking the inventory risk yourself. The vendor gets shelf space they wouldn't have gotten if you'd only said yes to wholesale.</p>
+    <div class="scenario-split">
+      <div><strong>Wholesale</strong>Flagship flower, Net 30, locked in</div>
+      <div><strong>Consignment</strong>Infused pre-roll line, 55/45 split, weekly settle</div>
+    </div>
+  </div>
+
+  <div class="scenario reveal">
+    <div class="scenario-eyebrow">Scenario 2</div>
+    <h3>High-volume vendor with slow-moving long-tail SKUs</h3>
+    <p>Some vendors have a few SKUs that move every week and a long tail of SKUs that take 30 to 60 days to sell through. Buying the whole catalog wholesale traps your capital on the long tail. Asking the vendor to give you better wholesale terms across the board is a hard conversation because their economics depend on the volume of the fast movers. Asking them to convert the whole vendor to consignment makes them defensive about the volume SKUs.</p>
+    <p>The mixed-mode ask: keep the fast movers on wholesale at the terms you already have. Move just the long-tail SKUs to consignment, with shrinkage and aging-discount terms in the consignment settings. You stop tying up capital on product that may not move. The vendor stops sending you product you weren't going to sell through fast enough anyway. Both sides save on dead inventory friction.</p>
+    <div class="scenario-split">
+      <div><strong>Wholesale</strong>Top 5 SKUs by velocity, Net 30</div>
+      <div><strong>Consignment</strong>Long-tail SKUs, vendor-favorable split, aging discount tiered</div>
+    </div>
+  </div>
+
+  <div class="scenario reveal">
+    <div class="scenario-eyebrow">Scenario 3</div>
+    <h3>Reciprocal buying inside a vertically integrated group</h3>
+    <p>Vertically integrated cannabis companies face a unique version of this problem. Your production entity ships product to your retail entity. Internally, the buy is a transfer — but the accounting still has to clear, and intercompany cash should reflect actual sell-through, not a theoretical wholesale invoice. Forcing the buy to be wholesale ties up cash inside the group when it could be working elsewhere.</p>
+    <p>Mixed-mode lets your production entity wholesale its tested SKUs (the ones with proven sell-through on the retail side) and consign its newer launches or one-off drops. The retail entity settles weekly on consignment SKUs based on actual POS data, not a forecast. Cash that would have been frozen as intercompany payable freed up for whichever entity needs it. See <a href="/blog/cannabis-reciprocal-buying-consignment">reciprocal buying on consignment</a> for the deeper version.</p>
+    <div class="scenario-split">
+      <div><strong>Wholesale</strong>Production-side proven SKUs, intercompany Net 30</div>
+      <div><strong>Consignment</strong>New launches, one-off drops, weekly settle on actual sales</div>
+    </div>
+  </div>
+
+  <h2 class="reveal">The conversation, in one paragraph</h2>
+
+  <p class="reveal">When you sit down with a vendor — call, email, trade show, doesn't matter — the structure is the same. Lead with what stays the same. Name the specific SKUs you want to add on consignment. Be explicit that the wholesale relationship and the flagship terms aren't changing. Propose a starting split that's anchored to the vendor's margin economics, not a generic 50/50. Offer to revisit in 60 to 90 days when there's real sell-through data on the consignment SKUs.</p>
+
+  <div class="blog-callout reveal">
+    <svg class="blog-callout-ico" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+    <p class="blog-callout-text">"Your wholesale stays exactly where it is. We want to <em>add</em> consignment for [specific SKUs]." That sentence does more work than any other in this conversation.</p>
+  </div>
+
+  <h2 class="reveal">Setting splits without renegotiating the relationship</h2>
+
+  <p class="reveal">Splits are where this conversation usually gets stuck if you don't think about them ahead of time. The mistake is anchoring on a generic 50/50 default. That number signals nothing about the actual economics of the SKUs going on consignment, and it gives the vendor no reason to engage with the proposal as a real business deal.</p>
+
+  <p class="reveal">A better anchor: the vendor's wholesale margin on the same product. If the vendor sells you the SKU wholesale at $10 with a $4 margin on their side, the consignment split should leave them at or near that $4 per unit — adjusted for the fact that on consignment they're carrying the inventory risk until it sells. That usually means a vendor-favorable split: 55/45 or 60/40, depending on how risky the SKU is for them. The platform supports <a href="/docs/consignment/profit-splits">per-category splits</a>, so you can negotiate one number for flower-on-consignment and a different number for edibles-on-consignment from the same vendor.</p>
+
+  <p class="reveal">Discount-cap settings are the other place this conversation lands. The <a href="/docs/consignment/aging-discounts">aging-discount tiers</a> tell the vendor what happens to their share if their product sits too long without moving — they get marked down per the tier schedule, and the vendor's settlement share reflects that. This is a feature for both sides: it incentivizes the vendor to send product that actually sells through, and it gives you a structured way to clear slow movers without eating the loss yourself.</p>
+
+  <h2 class="reveal">What changes operationally — and what doesn't</h2>
+
+  <p class="reveal">Operationally, almost nothing changes for your team. The receive flow at the dock is identical whether the delivery is Wholesale or Consignment — same three steps, same signed-invoice-and-Metrc-manifest upload, same line-item disposition picker. <a href="/docs/consignment/receiving-and-payout">The full SOP</a> walks the click-by-click. The only meaningful new step is picking Order Type at delivery creation, which is one button click before you click <strong>Create Delivery</strong>.</p>
+
+  <p class="reveal">What does change is how each delivery resolves downstream. Wholesale deliveries land in the AP queue and pay on whatever payment terms you set. Consignment deliveries feed the weekly settlement engine and pay based on actual POS sell-through. Two tracks, one vendor relationship, zero spreadsheet reconciliation.</p>
+
+  <h2 class="reveal">When the conversation doesn't work</h2>
+
+  <p class="reveal">Not every vendor will say yes, and that's fine. Vendors with very thin wholesale margins may not have room to take on consignment risk on top. Vendors whose products move so fast that consignment doesn't free up meaningful capital — your top three vendors moving weekly volume, for example — those relationships stay on wholesale because that's where the economics actually work. The mixed-mode ask is the right move for vendors where it solves a real problem: slow movers, experimental SKUs, new launches, intercompany transfers, brands you want to give a fair test without taking inventory risk.</p>
+
+  <blockquote class="reveal">
+    <p>The binary frame ("convert or don't") makes you eat decisions you don't have to eat. The mixed-mode frame ("add when it fits") gives both sides a path that protects what's working.</p>
+  </blockquote>
+
+  <p class="reveal">Ready to run mixed-mode with your vendors? <a href="/contact">Reach out</a> and I'll walk through how the first 60 days look for your specific vendor list.</p>
+
+</article>
+
+<!-- FAQ -->
+<section style="max-width: 720px; margin: 0 auto; padding: 0 48px 60px;">
+  <h2 style="font-size: 22px; font-weight: 700; color: #1b4332; margin-bottom: 24px; letter-spacing: -0.5px;">Frequently asked questions</h2>
+  <div class="faq-list">
+    <details>
+      <summary>Won't my cannabis vendor say no if I ask them to add consignment on top of wholesale?</summary>
+      <p>Most don't, once the ask is framed as additive. You're not threatening their wholesale revenue; you're adding a track for SKUs that wouldn't otherwise move through your store. The vendors most likely to say yes are the ones with experimental product lines, slow-moving long-tail SKUs, or new launches they want shelf-tested. Lead the conversation with what stays the same (your wholesale relationship, their flagship terms) before introducing what gets added.</p>
+    </details>
+    <details>
+      <summary>How should I structure consignment splits when wholesale terms are already going well?</summary>
+      <p>Anchor the consignment split to the vendor's wholesale margin economics, not to a generic 50/50 default. If the vendor sells you wholesale at a price that already leaves them a healthy margin, the consignment split for that vendor can sit closer to their preferred number — 55/45 or 60/40 vendor-favorable — because the consignment SKUs are the ones with more risk on their side. The platform supports per-category splits, so you can negotiate one number for their flagship line on wholesale and a different number for the experimental line on consignment.</p>
+    </details>
+    <details>
+      <summary>What if the consigned SKU starts selling better than the wholesale flagship?</summary>
+      <p>This is the happy problem. If the consigned line is moving faster than expected, the conversation naturally evolves: the vendor may want to convert it to wholesale terms to capture more margin, or you may want to add another consignment SKU from them because the model is working. Either way, the platform handles the transition cleanly — re-designating an existing SKU or adding a new one is a settings change on the vendor record, not a contract rewrite. The relationship gets stronger, not strained.</p>
+    </details>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-content">
+    <div class="section-label reveal">Get Started</div>
+    <h2 class="section-title reveal">Run mixed-mode without rewriting the relationship.</h2>
+    <p class="section-desc reveal">Free evaluation. We look at your existing vendor list, identify the candidates for mixed-mode, and configure the splits. You keep the wholesale conversations you've already won.</p>
+    <div class="cta-actions reveal">
+      <a href="/contact" class="btn-primary">
+        Get a Demo
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+      <a href="/contact" class="btn-secondary">Talk to Chris</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="/" class="nav-logo"><div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div><span class="nav-logo-text">ShelfSpace</span></a>
+      <p>Every Vendor. Every Payment. One Engine.</p>
+    </div>
+    <div class="footer-col"><h4>Services</h4><ul><li><a href="/consignment">Consignment</a></li><li><a href="/accounts-payable">Accounts Payable</a></li><li><a href="/credit-recovery">Credit Recovery</a></li><li><a href="/checks">Check Payments</a></li><li><a href="/shelfiq">ShelfiQ</a></li></ul></div>
+    <div class="footer-col"><h4>Platform</h4><ul><li><a href="/features">Features</a></li><li><a href="/how-it-works">How It Works</a></li><li><a href="/pricing">Pricing</a></li><li><a href="/about">About</a></li><li><a href="/blog">Blog</a></li><li><a href="/docs">Docs</a></li></ul></div>
+    <div class="footer-col"><h4>Access</h4><ul><li><a href="https://ourshelf.space">Login</a></li><li><a href="/contact">Sign Up</a></li><li><a href="/contact">Contact</a></li><li><a href="/vendors">For Vendors</a></li><li><a href="/for-bookkeepers">For Bookkeepers</a></li></ul></div>
+    <div class="footer-col"><h4>Company</h4><ul><li><a href="mailto:chris@shelfspace.pro">Email</a></li><li><a href="mailto:support@shelfspace.pro">Support</a></li><li><a href="https://linkedin.com/company/shelfspace-pro" target="_blank" rel="noopener" class="footer-social-link"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> LinkedIn</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><p>&copy; 2026 ShelfSpace Technologies Inc.</p><div class="footer-bottom-links"><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div></div>
+</footer>
+
+<script>
+(function() {
+  var nav = document.getElementById('nav');
+  var pageHero = document.querySelector('.page-hero');
+  var parallaxSections = [ document.querySelector('.cta-section') ];
+
+  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var isMobile = window.innerWidth < 900;
+  var ticking = false;
+
+  requestAnimationFrame(function() {
+    nav.classList.toggle('scrolled', window.scrollY > 20);
+    if (pageHero) pageHero.classList.add('hero-loaded');
+  });
+
+  var revealObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(function(el) { revealObserver.observe(el); });
+
+  function onScroll() {
+    var scrollY = window.scrollY;
+    nav.classList.toggle('scrolled', scrollY > 20);
+    if (prefersReduced || isMobile) return;
+    var wh = window.innerHeight;
+    parallaxSections.forEach(function(section) {
+      if (!section) return;
+      var rect = section.getBoundingClientRect();
+      if (rect.bottom < 0 || rect.top > wh) return;
+      var center = rect.top + rect.height / 2 - wh / 2;
+      section.style.setProperty('--parallax-y', (center * 0.08) + 'px');
+    });
+  }
+
+  window.addEventListener('scroll', function() {
+    if (!ticking) { requestAnimationFrame(function() { onScroll(); ticking = false; }); ticking = true; }
+  }, { passive: true });
+
+  onScroll();
+
+  window.addEventListener('resize', function() {
+    isMobile = window.innerWidth < 900;
+    if (isMobile) { parallaxSections.forEach(function(section) { if (section) section.style.setProperty('--parallax-y', '0px'); }); }
+  });
+
+  document.addEventListener('click', function() {
+    var navLinks = document.querySelector('.nav-links');
+    if (navLinks && navLinks.classList.contains('mobile-open')) { navLinks.classList.remove('mobile-open'); }
+  });
+})();
+</script>
+<script src="/shelfiq-widget.js"></script>
+</body>
+</html>
