@@ -400,7 +400,7 @@ document.head.appendChild(o)}initApollo();</script>
       <ul>
         <li><strong>Cannabis consignment receiving</strong> in ShelfSpace happens at delivery creation. Pick <code>Order Type = Consignment</code> to send the delivery through the consignment settlement engine.</li>
         <li>The same vendor can ship a consignment delivery and a wholesale delivery on the same day. Each one is its own invoice, its own Metrc manifest, its own Order Type.</li>
-        <li>Configure the vendor once: Master Vendor Split, Operational Discount Cap, and per-category splits. Every consignment delivery from that vendor inherits those settings.</li>
+        <li>Configure the vendor once: Master Vendor Split, Operational Discount Budget, per-category splits, and Settlement Frequency. Every consignment delivery and settlement from that vendor inherits those settings.</li>
         <li>Receiving is the same three-step flow on every delivery: upload signed invoice and Metrc manifest, confirm physical line items, confirm invoice total.</li>
         <li>Payday is one click on the Consignment Payments tab. <strong>Approve &amp; Pay</strong> tells the platform to cut a Check 21 from your bank. <strong>Mark as paid externally</strong> records that you paid the vendor your own way.</li>
       </ul>
@@ -433,13 +433,13 @@ document.head.appendChild(o)}initApollo();</script>
               <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 19 8 19 16 12 22 5 16 5 8"/><line x1="12" y1="2" x2="12" y2="22"/><line x1="5" y1="8" x2="19" y2="16"/><line x1="19" y1="8" x2="5" y2="16"/></svg>
               Consignment Settings
             </div>
-            <div class="vendor-panel-title">Profit Split &amp; Discount Cap</div>
+            <div class="vendor-panel-title">Profit Split &amp; Discount Budget</div>
             <div class="vendor-panel-row">
               <span class="vendor-panel-row-key">Master Vendor Split</span>
               <span class="vendor-panel-row-val">50% / 50%</span>
             </div>
             <div class="vendor-panel-row">
-              <span class="vendor-panel-row-key">Operational Discount Cap</span>
+              <span class="vendor-panel-row-key">Operational Discount Budget</span>
               <span class="vendor-panel-row-val">12.5%</span>
             </div>
             <div class="vendor-panel-row">
@@ -459,10 +459,12 @@ document.head.appendChild(o)}initApollo();</script>
 
     <ul>
       <li><strong>Master Vendor Split</strong> — the default percentage of net sales the vendor keeps, expressed as vendor% / retailer%. This is the fallback applied to any category that doesn't have its own split. A 50/50 split is where most relationships start; you and the vendor negotiate up or down from there based on category, volume, and how hard the brand is to source.</li>
-      <li><strong>Operational Discount Cap</strong> — the daily-discount budget the vendor is willing to fund. Discounts you run at the register (manager comps, happy hour, customer loyalty pricing) eat into the vendor's share up to this cap. Anything beyond the cap is on you. ShelfSpace ships with a 12.5% default, which is roughly the day-to-day discounting most stores run; adjust per vendor as your conversations unfold.</li>
+      <li><strong>Operational Discount Budget</strong> — the daily-discount budget the vendor is willing to fund. Discounts you run at the register (manager comps, happy hour, customer loyalty pricing) eat into the vendor's share up to this budget. Anything beyond the budget is on you. ShelfSpace ships with a 12.5% default, which is roughly the day-to-day discounting most stores run; adjust per vendor as your conversations unfold.</li>
     </ul>
 
     <p>Below those, the <strong>per-category splits</strong> let you negotiate one number for Flower, a different number for Pre-Rolls, a different number for Concentrates, and so on. This matters because a vendor's margin economics aren't the same across their catalog. If a brand sells a flagship flower at razor-thin wholesale margin but ships an infused pre-roll at a healthier margin, your splits should reflect that.</p>
+
+    <p>One more setting lives on its own card on the same Settings tab: <strong>Settlement Frequency</strong> — how often the platform runs this vendor's settlement. Pick <strong>Weekly</strong> (prior Mon–Sun), <strong>Biweekly</strong> (14 days), or <strong>Monthly</strong> (prior calendar month). Weekly is the default, and a change applies to future runs only — an open period finishes on its current cadence.</p>
 
     <div class="docs-highlight">
       <strong>If anything in either panel doesn't match what you and the vendor agreed to, edit before the delivery arrives.</strong> Hover any field for the in-product definition, ask ShelfiQ to explain it, or reach out to your ShelfSpace rep. The settings live on the partnership record, so once you set them, every consignment delivery from this vendor inherits them automatically. For deeper detail on configuration, see <a href="/docs/consignment/profit-splits">category splits and profit sharing</a> and <a href="/docs/consignment/contracts">consignment contracts and terms</a>.
@@ -483,6 +485,8 @@ document.head.appendChild(o)}initApollo();</script>
     <h2>Step 3 — Create the delivery and designate Order Type</h2>
 
     <p>When the vendor arrives at the dock, click <strong>Deliveries</strong> in the left nav, then click the <strong>+ Create Delivery</strong> button in the top right of the Deliveries page.</p>
+
+    <p>A delivery can also arrive on its own — ShelfiQ ingests a vendor's emailed invoice and pre-fills a delivery for you to review on the <strong>Incoming</strong> tab. This SOP covers the manual <strong>+ Create Delivery</strong> path; the fields are the same either way.</p>
 
     <figure class="docs-figure">
       <img src="/screenshots/deliveries-incoming-tab.png"
@@ -512,9 +516,9 @@ document.head.appendChild(o)}initApollo();</script>
       </div>
     </div>
 
-    <p>Click <strong>Consignment</strong>, verify the rest of the fields, and click <strong>Create Delivery</strong>. The new delivery lands in the <strong>Incoming</strong> tab with an Order Type flag of Consignment and a Docs column that shows yellow dots for the documents still to upload during receipt.</p>
+    <p>Click <strong>Consignment</strong>, verify the rest of the fields, and click <strong>Create Delivery</strong>. The new delivery lands in the <strong>Incoming</strong> tab tagged with a blue <strong>C</strong> (wholesale rows show a <strong>W</strong>), and a Docs column shows yellow dots for the documents still to upload during receipt.</p>
 
-    <h2>Step 4 — Receive the delivery (three steps inside the Receive flow)</h2>
+    <h2>Step 4 — Receive the delivery (three steps in the Receive flow, then mark it complete)</h2>
 
     <p>When the physical delivery is sitting at the dock, find the row in the Incoming tab and click <strong>Receive</strong> on the right side of the row.</p>
 
@@ -544,9 +548,11 @@ document.head.appendChild(o)}initApollo();</script>
 
     <p>The next screen shows every line item from the vendor's invoice next to a disposition picker and a received-quantity field.</p>
 
+    <p>If every line matches the invoice, click <strong>All match</strong> to accept them all in one click. If anything is short or damaged, set that line's disposition instead and <strong>Confirm</strong>.</p>
+
     <figure class="docs-figure">
       <img src="/screenshots/deliveries-receive-confirm-lines.png"
-           alt="Confirm Physical Receipt dialog showing three line items, each with disposition buttons (Received, Short, Damaged, Not Compliant) and a Received quantity field, plus a green Confirm-all button at the bottom."
+           alt="Confirm Physical Receipt dialog showing three line items, each with disposition buttons (Received, Short, Damaged, Not Compliant) and a Received quantity field, plus a green All match button at the bottom."
            width="1345" height="728" loading="lazy">
       <figcaption>For each line, pick a disposition and confirm the quantity that arrived in good condition. The screenshot above is from a sample wholesale receipt; on a consignment delivery you'll see your vendor's SKUs in the same layout.</figcaption>
     </figure>
@@ -579,13 +585,21 @@ document.head.appendChild(o)}initApollo();</script>
 
     <p>Click <strong>Yes</strong> if the screen total matches the signed paper invoice. The delivery flips to <strong>Received</strong>, and your role at the dock is done. Click <strong>No, edit total</strong> if there's still a mismatch — for example, the vendor's printed total is wrong, or there's a discount or promo line on the paper invoice the platform didn't catch upstream. You can edit the total directly, or step back to line items to fix dispositions you may have missed.</p>
 
+    <h3>4d — Mark the consignment delivery complete</h3>
+
+    <p>Confirming the invoice total flips the delivery to <strong>Received</strong> — but a consignment delivery has one more click. Open the delivery, click <strong>Review</strong>, then <strong>Mark Complete</strong>. You'll see <strong>"Marked as complete."</strong> (On a wholesale delivery that same button reads <em>Mark as Reviewed</em>; consignment is the one that says <em>Mark Complete</em>.) The delivery now feeds the settlement engine.</p>
+
+    <div class="docs-highlight">
+      <strong>No payment at receipt.</strong> Consignment deliveries finish at <strong>Complete</strong> — nothing is owed when the product lands. You pay later, per settlement cycle, from the settlement the platform builds as the product sells.
+    </div>
+
     <p>If a different person on your team is handling AP review rather than the dock receiver, the operator-facing role-based version of this SOP lives at <a href="/docs/deliveries/receiving-sop">How to Receive Cannabis Deliveries — Inventory Team SOP</a>. The flow is the same; the SOP version has role-permission notes for stores where receiving and payment are separated.</p>
 
-    <h2>Step 5 — From receipt to weekly settlement</h2>
+    <h2>Step 5 — From receipt to settlement</h2>
 
     <p>Once the consignment delivery is received, every SKU on it is now tracked individually in the platform. Every time a customer rings one of those SKUs at the register, the POS sale is matched back to the consignment delivery it came from. The platform handles the matching — there's nothing for you to reconcile.</p>
 
-    <p>At the end of each weekly settlement window, the platform pulls all consignment-tagged POS sales for that vendor, applies your configured profit split per category, deducts any aging-discount markdown for product that has been sitting on shelf past its tier threshold, reconciles waste and returns reported in Metrc, calculates the vendor's net payout, and generates a settlement report. The math is documented in detail in <a href="/docs/consignment/settlements">weekly consignment settlements</a> and <a href="/docs/consignment/aging-discounts">aging discounts and inventory markdowns</a>.</p>
+    <p>At the end of each settlement cycle (weekly by default; biweekly or monthly per vendor), the platform pulls all consignment-tagged POS sales for that vendor, applies your configured profit split per category, deducts any aging-discount markdown for product that has been sitting on shelf past its tier threshold, reconciles waste and returns reported in Metrc, calculates the vendor's net payout, and generates a settlement report. The math is documented in detail in <a href="/docs/consignment/settlements">weekly consignment settlements</a> and <a href="/docs/consignment/aging-discounts">aging discounts and inventory markdowns</a>.</p>
 
     <p>The settlement lands in <strong>Payments &rarr; Consignment Payments</strong> on your dashboard, waiting for your approval.</p>
 
@@ -629,6 +643,8 @@ document.head.appendChild(o)}initApollo();</script>
 
     <p><strong>Mark as paid externally</strong> is the alternate path for retailers who'd rather route the payment themselves — through their bank's bill-pay, an ACH from their accounting system, or a paper check off-platform. The tooltip on the button reads: <em>"Record an external payment (your own check / ACH / cash). ShelfSpace will not cut a check or charge a check fee."</em> The platform records the resolution; the vendor's settlement report ends with a "PAID EXTERNALLY" stamp instead of a check page, so they know it's been paid even though no Check 21 was issued.</p>
 
+    <p><strong>Recording your own check.</strong> Click <strong>Mark as Paid (External)</strong>. In the <strong>"Mark settlement as paid externally"</strong> dialog, set <strong>Payment Method</strong> to Check and enter your check number in <strong>Reference</strong> — for a check the field even labels itself <em>Reference (check #)</em>. Click <strong>Mark as Paid</strong>: the settlement flips to <strong>Paid</strong>, no Check 21 is cut and no check fee is charged, and the vendor's report ends with a "PAID EXTERNALLY" stamp. Changed your mind? <strong>Undo — mark as unpaid</strong> sends it back to Payments Due. Full detail: <a href="/docs/consignment/approve-pay-vs-paid-externally">Approve &amp; Pay vs Paid Externally</a>.</p>
+
     <p>Either path, the vendor receives the same five pages of settlement context — Settlement Summary, Sales Detail, Margin Analysis, Waste &amp; Credits, Remaining Inventory — before the final check or stamp page. Same record, same numbers, same transparency. The difference is who routes the dollars.</p>
 
     <h2>Step 7 — The settlement report the vendor receives</h2>
@@ -651,7 +667,7 @@ document.head.appendChild(o)}initApollo();</script>
     <ul>
       <li><strong>Cover page</strong> — Settlement ID (e.g., <code>SR-464</code>), retailer name, vendor name, settlement period, and a Settlement Summary block showing Net Sales, Gross Vendor Payout, Waste Credits, Margin True-Up, and Net Vendor Payout side by side. Also a Remaining Inventory snippet showing how much vendor-owned product is still on shelf.</li>
       <li><strong>Sales Detail</strong> — the line-by-line breakdown of every SKU that sold in the period, with package ID, quantity, sale price, split percentage, and per-line payout. This is the page that answers <em>"why am I getting paid this amount?"</em></li>
-      <li><strong>Margin Analysis</strong> — the discount reconciliation. Shows the Authorized Discount Budget (calculated from your Operational Discount Cap), the Total Margin Shortfall (the actual discounts you ran at the register), and the Margin True-Up (the deduction from the vendor's share if you discounted past the cap, or $0 if you stayed within budget).</li>
+      <li><strong>Margin Analysis</strong> — the discount reconciliation. Shows the Authorized Discount Budget (derived from your vendor's Operational Discount Budget setting), the Total Margin Shortfall (the actual discounts you ran at the register), and the Margin True-Up (the deduction from the vendor's share if you discounted past the cap, or $0 if you stayed within budget).</li>
       <li><strong>Waste &amp; Credits</strong> — any product reported as waste in Metrc during the period, plus return credits, with a Total Waste Credit deducted from or added to the payout.</li>
       <li><strong>Remaining Inventory</strong> — SKU-by-SKU rundown of what's still on shelf at period end, with on-hand quantity, inventory value at wholesale, days on shelf, and days until the next aging tier kicks in.</li>
       <li><strong>Check page (Approve &amp; Pay only)</strong> — a Check 21 compliant digital check, ready to print, with recipient instructions for mobile-deposit, teller deposit, and authenticity verification via QR code at <code>shelfspace.pro/verify</code>. If you marked the settlement paid externally instead, this page is replaced with a "PAID EXTERNALLY" stamp.</li>
