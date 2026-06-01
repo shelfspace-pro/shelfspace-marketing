@@ -219,7 +219,7 @@ o.onload=function(){window.trackingFunctions.onLoad({appId:"69c141b32234890011a4
 document.head.appendChild(o)}initApollo();</script>
 </head>
 <body>
-<!-- last-synced: 2026-04-27 -->
+<!-- last-synced: 2026-06-01 -->
 
 <!-- NAV -->
 <nav id="nav">
@@ -266,8 +266,8 @@ document.head.appendChild(o)}initApollo();</script>
     <div class="docs-glance">
       <h2>At a Glance</h2>
       <ul>
-        <li>35+ tools for vendors — ShelfSpace AI handles invoice parsing, payment queries, and data export</li>
-        <li>17 tools for retailer AP — vendor matching, statement reconciliation, contact management</li>
+        <li>40+ tools for vendors — ShelfSpace AI handles invoice parsing, payment queries, and data export</li>
+        <li>30+ tools for retailer AP — vendor matching, statement reconciliation, delivery handling, contact management</li>
         <li>Read-only queries and write actions (approve, dispute, export, propose)</li>
         <li>Email ingestion — ShelfiQ processes inbound vendor emails and replies on your behalf</li>
       </ul>
@@ -280,7 +280,7 @@ document.head.appendChild(o)}initApollo();</script>
     <p>Below is the complete list of what ShelfiQ can do, organized by category. Every tool works in the <a href="/docs/vendor-portal/overview">vendor portal</a> chat and through the <a href="/accounts-payable">retailer AP email bot</a>.</p>
 
     <div class="docs-highlight">
-      <strong>What we handle:</strong> Every tool is pre-configured and ready to use. There is no setup, no API keys, no training. ShelfiQ connects to your live ShelfSpace data and acts on it securely.
+      <strong>What the platform runs:</strong> every tool is pre-configured and ready to use — no setup, no API keys, no training. ShelfiQ connects to your live ShelfSpace data and acts on it securely.
     </div>
 
     <h2>Payment and Settlement Queries</h2>
@@ -306,6 +306,7 @@ document.head.appendChild(o)}initApollo();</script>
       <li><strong>Dispute credit memos</strong> — Decline a credit with a reason; the dispute is escalated to the ShelfSpace team</li>
       <li><strong>File settlement disputes</strong> — Dispute an entire settlement calculation with a written reason</li>
       <li><strong>Mark checks deposited</strong> — Confirm that a check has been deposited at your bank</li>
+      <li><strong>Monthly Account Review</strong> — Pull your monthly statement, then approve it at full amount or open a discussion on any line; substantive questions route to a mediated back-and-forth before anything is finalized</li>
     </ul>
 
     <h2>Promotion Negotiation</h2>
@@ -331,6 +332,18 @@ document.head.appendChild(o)}initApollo();</script>
       <li><strong>Metrc delivery matching</strong> — Cross-references parsed invoices against delivery records</li>
       <li><strong>Vendor email auto-response</strong> — Handles incoming vendor emails about payments, invoices, disputes</li>
     </ul>
+
+    <h2>For Retailer AP — the Email Bot</h2>
+    <p>On the retailer side, ShelfiQ works your inbound vendor email first-line. When a vendor writes in, it reads the thread, pulls the live data, and answers — routing only the messages that need a human decision to your AP person. The retailer-AP toolset covers:</p>
+    <ul>
+      <li><strong>Answer payment email</strong> — outstanding balances, payment schedules, settlement breakdowns, and check status, pulled from live data</li>
+      <li><strong>Reconcile vendor statements</strong> — match a vendor's statement against what the platform shows and flag the gaps</li>
+      <li><strong>Look up the vendor record</strong> — deliveries, purchase orders, payments, invoices, terms, inventory, sales, and returns for the vendor on the thread</li>
+      <li><strong>Handle deliveries from email</strong> — create a vendor and delivery from an inbound invoice, attach or replace delivery documents, add delivery notes, and check delivery completeness against Metrc</li>
+      <li><strong>Promotions</strong> — create a promotion or record out-of-band pre-approval evidence on the vendor's behalf</li>
+      <li><strong>Keep records current</strong> — update vendor contacts, request a missing invoice copy, resend a check notification, and CC the right team members</li>
+    </ul>
+    <p>See <a href="/docs/accounts-payable/email-deliveries">Manage Deliveries by Email</a> for the buyer-facing workflow.</p>
 
     <h2>Safety and Escalation</h2>
     <p>Some actions have elevated security requirements. Banking information changes always require portal login with MFA — ShelfiQ cannot process them over email. If a conversation becomes contentious or falls outside its capabilities, ShelfiQ escalates to a human with full context preserved.</p>
