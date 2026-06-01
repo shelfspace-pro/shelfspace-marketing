@@ -2,12 +2,12 @@
 # Every agent writing docs MUST follow these rules.
 
 ## Voice & Tone
-- Write as ShelfSpace explaining what we do for the customer, not as a software manual
-- "Here's how we handle your weekly settlements" not "Click Generate Settlement"
-- Use "we" for ShelfSpace, "you" for the reader
+- Write retailer-voiced — these docs are for cannabis dispensary owners and GMs driving ShelfSpace day-to-day
+- Verb split (per CLAUDE.md L22): "we" for brand-level statements ("we're allergic to subscriptions"); "the platform" / "ShelfiQ" for software actions ("the platform pulls POS data," "ShelfiQ answers vendor email"); "you" for retailer actions on the platform ("you approve the settlement"). Never "ShelfSpace does X" — pick "we" or "the platform" based on context
+- Frame: ShelfSpace is a cannabis-specific system the retailer drives. The platform runs the data, the math, the payments, and the reports; you own the vendor relationship. NOT a managed service
+- "Here's how the platform runs your weekly settlements" — not "Here's how we handle your weekly settlements"
 - Assume the reader is a cannabis dispensary owner or GM
 - Short sentences, short paragraphs, no filler
-- Managed service framing: emphasize what WE handle vs. what the retailer does (almost nothing)
 
 ## SEO Rules
 
@@ -51,7 +51,7 @@
    - H2 subheadings (scannable sections)
    - Short paragraphs (2-4 sentences)
    - Bullet lists for 3+ items
-   - Highlight boxes (green-ghost) for "what we handle" emphasis
+   - Highlight boxes (green-ghost) for "what the platform runs" / "what you own" emphasis
    - NO AI-generated images
    - Subtle visual elements: dividers, callout boxes, bold, inline SVG icons
 
@@ -64,7 +64,7 @@
    - Copy varies by section:
      - Consignment: "Ready to free up your capital? Let's talk."
      - Credit Recovery: "Ready to start recovering what you're owed? Let's talk."
-     - AP: "Ready to hand off your AP? Let's talk."
+     - AP: "Ready to upgrade your AP? Let's talk."
      - Vendor Portal: "Want your vendors on a portal? Let's talk."
      - Integrations: "Ready to connect your systems? Let's talk."
      - Generic: "Ready for a free evaluation? Let's talk."
@@ -84,11 +84,14 @@
 - Subtle 1px borders between sections
 
 ## Forbidden Content
-- No "automate/automated/automatically/automation"
+- No "managed service" / "we cut the check" / "we run your AP" / "we handle the math" framing — ShelfSpace is a cannabis-specific system retailers drive on (see CLAUDE.md L15)
 - No "scan-based trading" or "SBT"
 - No "demo-modal" references
 - No "Diem Cannabis"
 - No `<br>` tags in headings — let text flow and wrap naturally
+
+## Allowed (post-pivot, prior bans retired)
+- "Automate / automated / automatically / automation" are OK when describing what the platform or ShelfiQ does (the 2026-05-19 pivot retired the prior ban; see CLAUDE.md L15)
 
 ## Required Elements (checklist)
 1. Primary keyword in title, H1, meta description, first paragraph, at least one H2
