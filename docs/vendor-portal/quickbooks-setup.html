@@ -231,7 +231,7 @@ o.onload=function(){window.trackingFunctions.onLoad({appId:"69c141b32234890011a4
 document.head.appendChild(o)}initApollo();</script>
 </head>
 <body>
-<!-- last-synced: 2026-04-28 -->
+<!-- last-synced: 2026-06-01 -->
 
 <!-- NAV -->
 <nav id="nav">
@@ -282,7 +282,7 @@ document.head.appendChild(o)}initApollo();</script>
         <li>Every weekly settlement becomes an Invoice in your QBO with the settlement PDF attached.</li>
         <li>The matching PaymentReceived posts when the check is cut, deposit-routed to the bank account you choose.</li>
         <li>Pick your Income and Bank accounts once, map customers and items, and you are done.</li>
-        <li>We handle book-closed weeks, transient API errors, and refresh tokens for you.</li>
+        <li>The platform handles book-closed weeks, transient API errors, and refresh tokens for you.</li>
       </ul>
     </div>
 
@@ -305,7 +305,7 @@ document.head.appendChild(o)}initApollo();</script>
     <p>Click <strong>Save Account</strong>.</p>
 
     <h2>Map your customers</h2>
-    <p>Click <strong>Manage Customers</strong>. You will see one row per ShelfSpace retailer you have settlements with. Each row's <strong>QBO Customer</strong> column shows either the QBO Customer we matched on a prior sync, or empty if no settlement has synced against that retailer yet.</p>
+    <p>Click <strong>Manage Customers</strong>. You will see one row per ShelfSpace retailer you have settlements with. Each row's <strong>QBO Customer</strong> column shows either the QBO Customer the platform matched on a prior sync, or empty if no settlement has synced against that retailer yet.</p>
 
     <figure class="docs-figure">
       <img src="/screenshots/qbo-vendor-customer-mapping.png"
@@ -355,7 +355,7 @@ document.head.appendChild(o)}initApollo();</script>
     </ul>
 
     <div class="docs-highlight">
-      <strong>What we handle:</strong> book-closed weeks, transient QBO API errors (10-minute retry), and OAuth refresh tokens. You do not need to reopen closed periods or manage tokens.
+      <strong>What the platform runs:</strong> book-closed weeks, transient QBO API errors (10-minute retry), and OAuth refresh tokens. You do not need to reopen closed periods or manage tokens.
     </div>
 
     <h2>ShelfSpace-managed line items</h2>
@@ -372,7 +372,7 @@ document.head.appendChild(o)}initApollo();</script>
     <h2>Troubleshooting</h2>
     <ul>
       <li><strong>Settlement shows "Failed":</strong> click <strong>Retry</strong> on that row. Most failures recover. Failed rows also retry every 10 minutes on their own.</li>
-      <li><strong>"Account Period Closed":</strong> we handle it. We retry with today's TxnDate. The DocNumber stays as the settlement reference and the check number stays on the PaymentReceived's <code>PaymentRefNum</code>, so your bank-feed match still works.</li>
+      <li><strong>"Account Period Closed":</strong> the platform handles it — it retries with today's TxnDate. The DocNumber stays as the settlement reference and the check number stays on the PaymentReceived's <code>PaymentRefNum</code>, so your bank-feed match still works.</li>
       <li><strong>Wrong customer on a posted Invoice:</strong> open <strong>Manage Customers</strong>, click <strong>Change</strong>, and pick the right one. Future settlements use the new mapping. To re-route the existing Invoice, edit it directly in QBO.</li>
       <li><strong>New QBO item or customer not in the dropdown:</strong> click <strong>Refresh from QBO</strong>.</li>
       <li><strong>Connection expired banner:</strong> click <strong>Reconnect to QuickBooks</strong>. QBO refresh tokens expire after 100 days of inactivity. Reconnecting takes 10 seconds and resumes everything.</li>
