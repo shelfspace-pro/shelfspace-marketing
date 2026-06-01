@@ -31,10 +31,16 @@ Founded by Chris Mitchem, a 10-year cannabis operator who built ShelfSpace to so
 - One of the payment terms the platform runs — vendors carry inventory on a retailer's shelves with zero upfront cost; the retailer pays only when product sells at the register
 - The platform runs the weekly settlement cycle: pulls POS data, reconciles against Metrc, calculates profit splits, generates six-page settlement reports (sales, margin analysis, waste, remaining inventory, plus the check itself), and queues Check 21 compliant checks for every vendor — the retailer approves and sends
 - Role split: the platform runs the settlement engine (POS ingest, Metrc reconciliation, math, payments, vendor portal, reports, QuickBooks sync); the retailer owns vendor outreach, contracts, and disputes
+- Vendor setup: each vendor record holds two settings panels — Wholesale Settings (AP payment terms) and Consignment Settings (Master Vendor Split, Operational Discount Cap, per-category splits). Configure once; every consignment delivery from that vendor inherits the settings.
+- Same vendor, two modes: the same brand can ship a retailer a consignment delivery and a wholesale delivery on the same day. Each delivery is one Order Type, one invoice, one Metrc manifest. Two manifests at the dock is a Metrc chain-of-custody discipline as well as a platform discipline.
+- Order Type designation at delivery creation is the differentiator: tap Wholesale or Consignment on the Create Delivery form. Consignment-tagged deliveries get every SKU tracked individually for per-delivery payout; wholesale-tagged deliveries feed AP on the vendor's payment terms.
+- Receive flow is identical whichever Order Type: upload signed paper invoice + Metrc manifest, confirm physical line-item dispositions (Received/Short/Damaged/Not Compliant), confirm the dollar total. Short/damaged/non-compliant adjustments flow into the settlement.
+- Two-path payday: Approve & Pay tells the platform to cut a Check 21 from the retailer's bank, sync QuickBooks, and email the vendor a settlement report ending with the printable check. Mark as paid externally records that the retailer paid the vendor outside ShelfSpace (own check / ACH / cash); the platform records the resolution, no Check 21 cut, and the vendor's settlement report ends with a PAID EXTERNALLY stamp instead of a check page.
 - Frees up approximately $250,000 in capital for the average dispensary (based on $2M annual revenue, 50% COGS, 90-day inventory on hand)
 - The vendor owns inventory until it's sold — zero inventory risk for the retailer
 - Unsold product can be returned to the vendor at no cost
 - Priced on usage — your consignment fee scales with settlements processed, vendors active, and consignment dollars moved. No flat fee, no minimums. Pairs naturally with AP but is billed separately.
+- Full step-by-step receiving and payout SOP: https://shelfspace.pro/docs/consignment/receiving-and-payout
 
 ### Credit Recovery (https://shelfspace.pro/credit-recovery)
 - ShelfSpace identified $200,000+/year in vendor credits at a two-location chain
