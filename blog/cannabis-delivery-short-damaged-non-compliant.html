@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Short, Damaged, Non-Compliant Cannabis Deliveries — ShelfSpace</title>
+<meta name="description" content="What to do when a cannabis delivery arrives short, damaged, or non-compliant — the four dispositions, what flows downstream, and the vendor conversation.">
+<link rel="canonical" href="https://shelfspace.pro/blog/cannabis-delivery-short-damaged-non-compliant">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://shelfspace.pro/blog/cannabis-delivery-short-damaged-non-compliant">
+<meta property="og:title" content="Short, Damaged, Non-Compliant Cannabis Deliveries — ShelfSpace">
+<meta property="og:description" content="What to do when a cannabis delivery arrives short, damaged, or non-compliant — the four dispositions, what flows downstream, and the vendor conversation.">
+<meta property="og:image" content="https://shelfspace.pro/og-image-v7.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Short, Damaged, Non-Compliant Cannabis Deliveries — ShelfSpace">
+<meta name="twitter:description" content="What to do when a cannabis delivery arrives short, damaged, or non-compliant — the four dispositions, what flows downstream, and the vendor conversation.">
+<meta name="twitter:image" content="https://shelfspace.pro/og-image-v7.png">
+<meta name="apple-mobile-web-app-title" content="ShelfSpace">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+<style>
+  @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-12px); } }
+
+  /* ─── HERO ENHANCEMENTS ─── */
+  .page-hero { padding-bottom: 40px; }
+  .hero-bg-gradient { position: absolute; top: -30%; right: -20%; width: 700px; height: 700px; background: radial-gradient(circle, rgba(149,213,178,0.18) 0%, rgba(149,213,178,0) 70%); animation: float 8s ease-in-out infinite; pointer-events: none; }
+  .hero-bg-gradient-2 { position: absolute; bottom: -20%; left: -15%; width: 550px; height: 550px; background: radial-gradient(circle, rgba(27,67,50,0.06) 0%, rgba(27,67,50,0) 70%); animation: float 10s ease-in-out infinite; animation-delay: -3s; pointer-events: none; }
+  .hero-grid-lines { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 1200px; height: 100%; opacity: 0.035; background-image: linear-gradient(var(--green-deep) 1px, transparent 1px), linear-gradient(90deg, var(--green-deep) 1px, transparent 1px); background-size: 80px 80px; pointer-events: none; }
+  .page-hero .section-label,
+  .page-hero .section-title,
+  .page-hero .section-desc { opacity: 0; transform: translateY(30px); }
+  .page-hero .section-label { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1); }
+  .page-hero .section-title { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s, transform 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s; }
+  .page-hero .section-desc { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1) 0.25s, transform 0.8s cubic-bezier(0.22,1,0.36,1) 0.25s; }
+  .page-hero.hero-loaded .section-label,
+  .page-hero.hero-loaded .section-title,
+  .page-hero.hero-loaded .section-desc { opacity: 1; transform: translateY(0); }
+
+  /* ─── REVEAL ─── */
+  .reveal {
+    opacity: 0; transform: translateY(40px);
+    transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+  /* ─── ARTICLE BODY ─── */
+  .article-body { max-width: 720px; margin: 0 auto; padding: 0 48px 80px; }
+  .article-body h2 { font-size: 24px; font-weight: 700; color: var(--green-deep); margin: 48px 0 16px; letter-spacing: -0.5px; line-height: 1.3; }
+  .article-body h3 { font-size: 19px; font-weight: 700; color: var(--green-deep); margin: 32px 0 12px; letter-spacing: -0.3px; line-height: 1.3; }
+  .article-body p { font-size: 17px; line-height: 1.85; color: var(--slate-600); margin-bottom: 24px; }
+  .article-body ul, .article-body ol { margin-bottom: 24px; padding-left: 24px; }
+  .article-body li { font-size: 17px; line-height: 1.85; color: var(--slate-600); margin-bottom: 8px; }
+  .article-body strong { color: var(--green-deep); font-weight: 600; }
+  .article-body a { color: var(--green-mid); font-weight: 500; text-decoration: none; }
+  .article-body a:hover { color: var(--green-deep); text-decoration: underline; }
+  .article-body blockquote { border-left: 3px solid var(--green-accent); padding: 16px 24px; margin: 32px 0; background: var(--green-ghost); border-radius: 0 8px 8px 0; }
+  .article-body blockquote p { font-style: italic; color: var(--green-dark); margin-bottom: 0; }
+  .article-body code { font-family: var(--font-mono); font-size: 15px; background: var(--slate-100); color: var(--green-deep); padding: 2px 7px; border-radius: 5px; }
+
+  /* ─── AT A GLANCE ─── */
+  .article-glance {
+    max-width: 720px; margin: 0 auto 40px; padding: 24px 28px;
+    background: var(--green-ghost); border: 1px solid rgba(149,213,178,0.3);
+    border-radius: 12px;
+  }
+  .article-glance h2 {
+    font-size: 14px; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--green-mid); margin: 0 0 12px;
+  }
+  .article-glance ul { list-style: none; padding: 0; margin: 0; }
+  .article-glance li {
+    font-size: 15px; line-height: 1.6; color: var(--slate-600);
+    padding: 4px 0 4px 20px; position: relative;
+  }
+  .article-glance li::before {
+    content: ''; position: absolute; left: 0; top: 12px;
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--green-accent);
+  }
+
+  /* ─── DISPOSITION CARDS (4-up grid + detail cards) ─── */
+  .disp-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;
+    margin: 28px 0;
+  }
+  @media (max-width: 720px) { .disp-grid { grid-template-columns: repeat(2, 1fr); } }
+  .disp-pill {
+    padding: 14px 12px; text-align: center;
+    border: 1px solid var(--slate-200); border-radius: 10px;
+    background: var(--white);
+    font: 600 14px var(--font-display); color: var(--slate-600);
+  }
+  .disp-pill.is-received { background: var(--green-deep); color: var(--green-accent); border-color: var(--green-deep); }
+  .disp-pill.is-short    { background: #fef3c7; color: #92400e; border-color: #fde68a; }
+  .disp-pill.is-damaged  { background: #fed7aa; color: #9a3412; border-color: #fdba74; }
+  .disp-pill.is-noncomp  { background: #fecaca; color: #991b1b; border-color: #fca5a5; }
+  .disp-pill .disp-pill-sub { display: block; font: 400 11px/1.3 var(--font-mono); letter-spacing: 1px; text-transform: uppercase; margin-top: 4px; opacity: 0.85; }
+
+  .disp-detail {
+    margin: 28px 0; padding: 24px 28px;
+    background: var(--white); border: 1px solid var(--slate-200);
+    border-left: 4px solid var(--green-mid); border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(27,67,50,0.04);
+  }
+  .disp-detail.is-short { border-left-color: #f59e0b; }
+  .disp-detail.is-damaged { border-left-color: #ea580c; }
+  .disp-detail.is-noncomp { border-left-color: #dc2626; }
+  .disp-detail-eyebrow {
+    font: 700 11px/1 var(--font-mono); letter-spacing: 1.4px;
+    text-transform: uppercase; color: var(--green-mid); margin-bottom: 8px;
+  }
+  .disp-detail.is-short .disp-detail-eyebrow { color: #b45309; }
+  .disp-detail.is-damaged .disp-detail-eyebrow { color: #c2410c; }
+  .disp-detail.is-noncomp .disp-detail-eyebrow { color: #b91c1c; }
+  .disp-detail h3 { margin-top: 0; }
+  .disp-detail p:last-child { margin-bottom: 0; }
+  .disp-detail .disp-flow {
+    margin: 14px 0; padding: 12px 16px;
+    background: var(--slate-50); border-radius: 8px;
+    font: 600 13px/1.55 var(--font-mono); color: var(--slate-700);
+  }
+  .disp-detail .disp-flow strong { color: var(--green-deep); font-size: 11px; letter-spacing: 1.2px; text-transform: uppercase; display: block; margin-bottom: 6px; }
+
+  /* ─── CTA PARALLAX ─── */
+  .cta-section::before { transform: translate(-50%,-50%) translateY(var(--parallax-y, 0)); will-change: transform; }
+
+  /* ─── FAQ ACCORDION ─── */
+  .faq-list details {
+    border: 1px solid var(--slate-200); border-radius: 10px;
+    margin-bottom: 12px; background: var(--white);
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .faq-list details[open] { background: var(--green-ghost); border-color: rgba(149,213,178,0.45); }
+  .faq-list summary {
+    list-style: none; cursor: pointer;
+    padding: 16px 20px;
+    font: 600 16px/1.4 var(--font-display); color: var(--green-deep);
+    display: flex; justify-content: space-between; align-items: center; gap: 12px;
+  }
+  .faq-list summary::-webkit-details-marker { display: none; }
+  .faq-list summary::after {
+    content: '+'; flex-shrink: 0;
+    font: 400 22px/1 var(--font-mono); color: var(--green-mid);
+    transition: transform 0.2s;
+  }
+  .faq-list details[open] summary::after { content: '−'; }
+  .faq-list details p {
+    padding: 0 20px 18px; margin: 0;
+    font-size: 15px; line-height: 1.7; color: var(--slate-600);
+  }
+
+  /* ─── FOOTER 5-COL ─── */
+  .footer-top { grid-template-columns: 2fr 1fr 1fr 1fr 1fr; }
+  @media (max-width: 900px) { .footer-top { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px) { .footer-top { grid-template-columns: 1fr; } }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    .article-body { padding: 0 24px 60px; }
+  }
+
+  /* ─── REDUCED MOTION ─── */
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; transition: none; }
+    .page-hero .section-label,
+    .page-hero .section-title,
+    .page-hero .section-desc { opacity: 1; transform: none; transition: none; }
+    .hero-bg-gradient, .hero-bg-gradient-2 { animation: none; }
+  }
+</style>
+<noscript><style>.reveal,.page-hero .section-label,.page-hero .section-title,.page-hero .section-desc{opacity:1;transform:none;transition:none;}</style></noscript>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-H2LBJT03WE"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-H2LBJT03WE');</script>
+<script>function initApollo(){var n=Math.random().toString(36).substring(7),o=document.createElement("script");
+o.src="https://assets.apollo.io/micro/website-tracker/tracker.iife.js?nocache="+n,o.async=!0,o.defer=!0,
+o.onload=function(){window.trackingFunctions.onLoad({appId:"69c141b32234890011a43849"})},
+document.head.appendChild(o)}initApollo();</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "What to Do When a Cannabis Delivery Comes In Short, Damaged, or Non-Compliant",
+  "description": "The four dispositions you pick at the dock — Received, Short, Damaged, Not Compliant — and what flows downstream from each through settlements, Metrc, and the vendor conversation.",
+  "author": { "@type": "Person", "name": "Chris Mitchem" },
+  "publisher": { "@type": "Organization", "name": "ShelfSpace", "url": "https://shelfspace.pro" },
+  "datePublished": "2026-06-01",
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://shelfspace.pro/blog/cannabis-delivery-short-damaged-non-compliant" },
+  "url": "https://shelfspace.pro/blog/cannabis-delivery-short-damaged-non-compliant",
+  "image": "https://shelfspace.pro/og-image-v7.png"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://shelfspace.pro/" },
+    { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://shelfspace.pro/blog" },
+    { "@type": "ListItem", "position": 3, "name": "What to Do When a Cannabis Delivery Comes In Short, Damaged, or Non-Compliant" }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Can I refuse the whole cannabis delivery if too many items are damaged or non-compliant?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. If a meaningful portion of the delivery is unsellable, refuse the delivery in full and have the driver take it back. Mark every line item as Damaged or Not Compliant in the Receive flow with detailed notes about the condition, and the entire dollar amount flows to a return-to-vendor credit memo instead of being paid. The Metrc manifest stays with the vendor, who handles the disposition on their end. This is rare but valid — the dock is the only place you can cleanly refuse a delivery, so use the right disposition pick the first time."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What happens to the Metrc inventory when I mark cannabis product as Damaged or Not Compliant?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It depends on whether the product physically stays with you or goes back with the driver. If the damaged or non-compliant product leaves with the driver before receipt, it never enters your Metrc inventory — the disposition is handled vendor-side per your state's Metrc rules for refused or incomplete deliveries. If you accept it and quarantine it (because the driver already left, for example), the product enters your Metrc inventory as damaged or quarantined and gets disposed through Metrc's waste workflow per state rules. Either way, the platform tracks what you marked at receipt so the audit trail matches Metrc."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Will marking a delivery short or damaged on ShelfSpace damage the vendor relationship?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Not if the notes you write are detailed and the dispositions are accurate. Vendors react to surprise short-payments. They don't react to a documented, in-the-moment record of what arrived and what didn't. The platform pushes your detailed notes to the vendor's portal alongside the reduced payout so the conversation is grounded in facts, not memory. Most short or damaged deliveries are handled in one email exchange and resolved in days, not weeks."
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="/" class="nav-logo">
+    <div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div>
+    <span class="nav-logo-text">ShelfSpace</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="/consignment">Consignment</a></li>
+    <li><a href="/accounts-payable">Accounts Payable</a></li>
+    <li><a href="/credit-recovery">Credit Recovery</a></li>
+    <li><a href="/pricing">Pricing</a></li>
+    <li><a href="/about">About</a></li>
+    <li><a href="/contact" class="nav-cta">Get Started <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a></li>
+  </ul>
+  <div class="nav-hamburger" onclick="document.querySelector('.nav-links').classList.toggle('mobile-open'); event.stopPropagation();"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="hero-bg-gradient"></div>
+  <div class="hero-bg-gradient-2"></div>
+  <div class="hero-grid-lines"></div>
+  <div class="section-label">Consignment</div>
+  <h1 class="section-title">What to do when a cannabis delivery comes in short, damaged, or non-compliant</h1>
+  <p class="section-desc">The four dispositions at the dock, what each one flows into downstream, and the vendor conversation that follows.</p>
+</div>
+
+<!-- AT A GLANCE -->
+<div class="article-glance">
+  <h2>At a glance</h2>
+  <ul>
+    <li>Every line item on a cannabis delivery resolves to one of four dispositions at the dock: <strong>Received</strong>, <strong>Short</strong>, <strong>Damaged</strong>, or <strong>Not Compliant</strong>.</li>
+    <li>The choice is consequential — each disposition routes the line through a different downstream pipeline (settlement adjustment, Metrc disposition, credit memo, vendor portal notification).</li>
+    <li>The most important moment is the notes field. Detailed in-the-moment notes about what happened are the difference between a quick vendor email and a multi-week dispute.</li>
+    <li>The dock is the only place you can cleanly catch a discrepancy. Once product is comingled with your inventory, the receipt window is closed.</li>
+    <li>This applies the same way for Wholesale and Consignment deliveries — the dispositions are universal.</li>
+  </ul>
+</div>
+
+<!-- ARTICLE BODY -->
+<article class="article-body">
+
+  <p class="reveal">Cannabis deliveries don't always arrive the way the invoice says they will. A vendor packs 24 jars and ships 22. A pre-roll case gets crushed in transit. A batch arrives with a COA that doesn't match the manifest. The driver's already in your parking lot. You have a few minutes to decide what to do, and that decision sets the entire downstream — what gets paid, what gets disposed in Metrc, what conversation you have with the vendor next week, and whether your audit trail will hold up to a state inspector six months from now.</p>
+
+  <p class="reveal">Here's the operational breakdown of the four dispositions you pick at the dock, what each one flows into, and how to handle the vendor conversation when you've reduced what you're paying them.</p>
+
+  <h2 class="reveal">The four dispositions</h2>
+
+  <p class="reveal">When you click <strong>Receive</strong> on a delivery in the platform, the second step of the Receive flow surfaces every line item from the vendor's invoice next to a disposition picker — four chips, one received-quantity field. Mark each line for what actually happened. The full mechanics live in the <a href="/docs/consignment/receiving-and-payout">receiving SOP</a>; this post covers what each pick means downstream.</p>
+
+  <div class="disp-grid reveal">
+    <div class="disp-pill is-received">Received<span class="disp-pill-sub">Default</span></div>
+    <div class="disp-pill is-short">Short<span class="disp-pill-sub">Qty &lt; invoice</span></div>
+    <div class="disp-pill is-damaged">Damaged<span class="disp-pill-sub">Unsellable</span></div>
+    <div class="disp-pill is-noncomp">Not Compliant<span class="disp-pill-sub">Quarantine</span></div>
+  </div>
+
+  <p class="reveal">All four chips are universal — they work the same way on a Wholesale delivery and a Consignment delivery. What differs is which payment track the adjusted total feeds into downstream (AP queue for wholesale, weekly settlement engine for consignment). The disposition decision at the dock is mode-agnostic.</p>
+
+  <div class="disp-detail reveal">
+    <div class="disp-detail-eyebrow">Disposition 1</div>
+    <h3>Received — the default state</h3>
+    <p>The exact invoiced quantity arrived in good condition. The line item carries the invoice quantity unchanged. This is by far the most common disposition — most deliveries from established vendors arrive complete and intact.</p>
+    <div class="disp-flow">
+      <strong>Downstream flow:</strong>
+      Line carries invoice quantity → invoice total holds → vendor paid full amount per the settlement (consignment) or AP terms (wholesale). No notes field opens. No follow-up conversation needed.
+    </div>
+  </div>
+
+  <div class="disp-detail is-short reveal">
+    <div class="disp-detail-eyebrow">Disposition 2</div>
+    <h3>Short — fewer units arrived than invoiced</h3>
+    <p>You counted 22 jars. The invoice says 24. Drop the received quantity to 22 and pick <strong>Short</strong>. The notes field opens — write what happened. Was the box obviously light? Was a sealed case missing entirely? Did the driver mention it themselves? Did you count with the driver present, or after they left? Detail matters.</p>
+    <div class="disp-flow">
+      <strong>Downstream flow:</strong>
+      Line quantity drops to received qty → invoice total reduces proportionally → vendor payout reflects only what you actually received → vendor portal shows the reduced quantity + your notes → vendor sees the reduction with context, not as a surprise short-payment two weeks later.
+    </div>
+    <p>What arrived enters your Metrc inventory; what didn't, doesn't. If the vendor disputes the short later, the signed paper invoice plus your notes plus the timestamped Receive record on the platform is the document trail that settles it.</p>
+  </div>
+
+  <div class="disp-detail is-damaged reveal">
+    <div class="disp-detail-eyebrow">Disposition 3</div>
+    <h3>Damaged — units arrived unsellable</h3>
+    <p>Two jars shattered in transit. A vape cartridge case got punctured. A pre-roll case crushed under another pallet. Drop the received quantity to good units only and pick <strong>Damaged</strong> on the line. Write a detailed note: how many units, what kind of damage, whether the damage was visible through the packaging or only after opening, whether the driver acknowledged it, whether you took photos with a shift manager.</p>
+    <div class="disp-flow">
+      <strong>Downstream flow:</strong>
+      Line quantity drops to undamaged qty → invoice total reduces → if the damaged units leave with the driver before receipt, they never enter your Metrc inventory (the disposition is handled vendor-side per your state's Metrc rules); if you accept and quarantine them, they enter your Metrc inventory and get disposed through Metrc's waste workflow per state rules → vendor portal flags the damage with your notes → conversation with the vendor next week typically becomes a credit memo for the damaged units depending on terms.
+    </div>
+    <p>The trickiest call is in-transit damage on consignment product — was it damaged at the vendor's facility (their problem), damaged in the driver's vehicle (the vendor's logistics company's problem), or damaged during your dock receipt (gray area)? Notes that document <em>when</em> the damage was discovered are the difference between the vendor absorbing the cost and a dispute. Photograph everything before you sign.</p>
+  </div>
+
+  <div class="disp-detail is-noncomp reveal">
+    <div class="disp-detail-eyebrow">Disposition 4</div>
+    <h3>Not Compliant — anything that fails compliance</h3>
+    <p>Mislabeled product. Wrong batch on the COA. Mismatched Metrc tag. THC percentage outside the labeled range. Suspected contamination. Anything that would put your license at risk if it ended up on the sales floor. Pick <strong>Not Compliant</strong>, drop the received quantity, and quarantine the affected units immediately. If the driver is still on-site, refuse the line and have them take it back. If they've already left, quarantine in a sealed container and get it returned to the vendor or destroyed through Metrc waste per state rules.</p>
+    <div class="disp-flow">
+      <strong>Downstream flow:</strong>
+      Line quantity drops to compliant qty → invoice total reduces by the full value of the non-compliant units (vendor doesn't get paid for product you can't legally sell) → Metrc inventory is adjusted to reflect the disposition path you took (return to vendor or waste disposition) → vendor portal flags the non-compliance with your detailed notes → conversation with vendor is typically immediate, not next-week — non-compliant cannabis product is a regulatory issue, not just a financial one.
+    </div>
+    <p>Most non-compliant deliveries become a full credit memo for the affected line because the vendor needs to remediate at their end (relabel, retest, recall). Your notes should be exact — package tag IDs, what specifically was non-compliant, who witnessed it, and what disposition the product took (back to driver, quarantined to be picked up, destroyed via Metrc with reference to the disposal record).</p>
+  </div>
+
+  <h2 class="reveal">The notes field is where this gets won or lost</h2>
+
+  <p class="reveal">Every disposition other than <strong>Received</strong> opens a notes field. Most operators undervalue it. They type "short two jars" and move on. That's the difference between a quick vendor email and a multi-week dispute.</p>
+
+  <p class="reveal">A good note answers: <em>What was the discrepancy?</em> (line item, quantity, condition). <em>How was it discovered?</em> (during receipt with driver present, during put-away after driver left, during a recount). <em>Who witnessed it?</em> (shift manager, second receiver, the driver themselves). <em>What did you do with the affected product?</em> (refused at dock, quarantined to be picked up, accepted with reduced quantity, destroyed via Metrc with disposal record reference). <em>What evidence exists?</em> (photos taken, paper invoice annotated, Metrc manifest noted).</p>
+
+  <div class="blog-callout reveal">
+    <svg class="blog-callout-ico" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+    <p class="blog-callout-text">"Three jars shattered, damage visible through outer carton at unload, driver acknowledged, returned with driver, photo taken with shift manager McNeil at 10:42 AM." That's the note that resolves the conversation in a day.</p>
+  </div>
+
+  <p class="reveal">Detailed notes flow to the vendor's portal alongside the reduced payout. The vendor reads the same record you wrote, on the same page that shows them the dollar reduction. The conversation that follows is grounded in shared facts, not in memory or accusation.</p>
+
+  <h2 class="reveal">The vendor conversation</h2>
+
+  <p class="reveal">A reduced settlement or AP payment lands in the vendor's inbox with a settlement report or invoice attached. If you wrote good notes, the conversation is short — they email you within a day to acknowledge or to ask for the photo, the credit memo gets generated for the disputed lines if applicable, and the next settlement squares up.</p>
+
+  <p class="reveal">If you wrote thin notes, the conversation is long. The vendor remembers shipping 24, your record says 22, neither party has a paper trail that survives the exchange. Now you're on a phone call, dragging through a memory of a delivery that happened three weeks ago, and someone is going to walk away unhappy. That's the conversation the notes field is designed to prevent.</p>
+
+  <p class="reveal">For damaged or non-compliant lines that warrant credit memos, the credit recovery system picks up the line automatically — Metrc reports the waste or quarantine, your delivery record references the disposition, and a monthly credit memo gets built and sent to the vendor for the appropriate amount. See <a href="/credit-recovery">credit recovery</a> for how that compounds across a year of catching this stuff at the dock.</p>
+
+  <h2 class="reveal">Why this matters beyond one delivery</h2>
+
+  <p class="reveal">One short delivery costs you whatever you didn't get. Forty short deliveries across a year of buying without a system to catch them costs you tens of thousands of dollars in overpayment — money you sent to vendors for product that never made it to your shelf, never sold, never showed up anywhere. The compliance side is worse. One non-compliant unit that slips through receiving and lands on the sales floor is a license-risk event. The dispositions exist because the dock is the only place to catch all of this cleanly, and the cost of missing it scales with how many vendors you have.</p>
+
+  <blockquote class="reveal">
+    <p>Receiving is the gate. Everything downstream — AP review, payment, Metrc reconciliation, credit memos, compliance reporting — depends on what gets logged here being accurate. The disposition pick at the dock is one button click that does a lot of work.</p>
+  </blockquote>
+
+  <p class="reveal">For the click-by-click walkthrough of the Receive flow itself, see the <a href="/docs/consignment/receiving-and-payout">receiving SOP</a>. For the inventory-team-role version with permission notes for stores where receiving is separated from AP, see <a href="/docs/deliveries/receiving-sop">How to Receive Cannabis Deliveries — Inventory Team SOP</a>. For a real example of a shorted delivery caught at the dock, see the <a href="/blog/case-study-shorted-delivery">case study</a>.</p>
+
+  <p class="reveal">Ready to stop paying for product that never arrived? <a href="/contact">Reach out</a> and we'll look at your last 90 days of vendor activity to size what you've been losing.</p>
+
+</article>
+
+<!-- FAQ -->
+<section style="max-width: 720px; margin: 0 auto; padding: 0 48px 60px;">
+  <h2 style="font-size: 22px; font-weight: 700; color: #1b4332; margin-bottom: 24px; letter-spacing: -0.5px;">Frequently asked questions</h2>
+  <div class="faq-list">
+    <details>
+      <summary>Can I refuse the whole cannabis delivery if too many items are damaged or non-compliant?</summary>
+      <p>Yes. If a meaningful portion of the delivery is unsellable, refuse the delivery in full and have the driver take it back. Mark every line item as Damaged or Not Compliant in the Receive flow with detailed notes about the condition, and the entire dollar amount flows to a return-to-vendor credit memo instead of being paid. The Metrc manifest stays with the vendor, who handles the disposition on their end. This is rare but valid — the dock is the only place you can cleanly refuse a delivery, so use the right disposition pick the first time.</p>
+    </details>
+    <details>
+      <summary>What happens to the Metrc inventory when I mark cannabis product as Damaged or Not Compliant?</summary>
+      <p>It depends on whether the product physically stays with you or goes back with the driver. If the damaged or non-compliant product leaves with the driver before receipt, it never enters your Metrc inventory — the disposition is handled vendor-side per your state's Metrc rules for refused or incomplete deliveries. If you accept it and quarantine it (because the driver already left, for example), the product enters your Metrc inventory as damaged or quarantined and gets disposed through Metrc's waste workflow per state rules. Either way, the platform tracks what you marked at receipt so the audit trail matches Metrc.</p>
+    </details>
+    <details>
+      <summary>Will marking a delivery short or damaged on ShelfSpace damage the vendor relationship?</summary>
+      <p>Not if the notes you write are detailed and the dispositions are accurate. Vendors react to surprise short-payments. They don't react to a documented, in-the-moment record of what arrived and what didn't. The platform pushes your detailed notes to the vendor's portal alongside the reduced payout so the conversation is grounded in facts, not memory. Most short or damaged deliveries are handled in one email exchange and resolved in days, not weeks.</p>
+    </details>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-content">
+    <div class="section-label reveal">Get Started</div>
+    <h2 class="section-title reveal">Stop paying for product that never arrived.</h2>
+    <p class="section-desc reveal">Free evaluation. We look at your last 90 days of vendor activity and size what you've been losing on short, damaged, and non-compliant deliveries.</p>
+    <div class="cta-actions reveal">
+      <a href="/contact" class="btn-primary">
+        Get a Demo
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+      <a href="/contact" class="btn-secondary">Talk to Chris</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="/" class="nav-logo"><div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div><span class="nav-logo-text">ShelfSpace</span></a>
+      <p>Every Vendor. Every Payment. One Engine.</p>
+    </div>
+    <div class="footer-col"><h4>Services</h4><ul><li><a href="/consignment">Consignment</a></li><li><a href="/accounts-payable">Accounts Payable</a></li><li><a href="/credit-recovery">Credit Recovery</a></li><li><a href="/checks">Check Payments</a></li><li><a href="/shelfiq">ShelfiQ</a></li></ul></div>
+    <div class="footer-col"><h4>Platform</h4><ul><li><a href="/features">Features</a></li><li><a href="/how-it-works">How It Works</a></li><li><a href="/pricing">Pricing</a></li><li><a href="/about">About</a></li><li><a href="/blog">Blog</a></li><li><a href="/docs">Docs</a></li></ul></div>
+    <div class="footer-col"><h4>Access</h4><ul><li><a href="https://ourshelf.space">Login</a></li><li><a href="/contact">Sign Up</a></li><li><a href="/contact">Contact</a></li><li><a href="/vendors">For Vendors</a></li><li><a href="/for-bookkeepers">For Bookkeepers</a></li></ul></div>
+    <div class="footer-col"><h4>Company</h4><ul><li><a href="mailto:chris@shelfspace.pro">Email</a></li><li><a href="mailto:support@shelfspace.pro">Support</a></li><li><a href="https://linkedin.com/company/shelfspace-pro" target="_blank" rel="noopener" class="footer-social-link"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> LinkedIn</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><p>&copy; 2026 ShelfSpace Technologies Inc.</p><div class="footer-bottom-links"><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div></div>
+</footer>
+
+<script>
+(function() {
+  var nav = document.getElementById('nav');
+  var pageHero = document.querySelector('.page-hero');
+  var parallaxSections = [ document.querySelector('.cta-section') ];
+
+  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var isMobile = window.innerWidth < 900;
+  var ticking = false;
+
+  requestAnimationFrame(function() {
+    nav.classList.toggle('scrolled', window.scrollY > 20);
+    if (pageHero) pageHero.classList.add('hero-loaded');
+  });
+
+  var revealObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(function(el) { revealObserver.observe(el); });
+
+  function onScroll() {
+    var scrollY = window.scrollY;
+    nav.classList.toggle('scrolled', scrollY > 20);
+    if (prefersReduced || isMobile) return;
+    var wh = window.innerHeight;
+    parallaxSections.forEach(function(section) {
+      if (!section) return;
+      var rect = section.getBoundingClientRect();
+      if (rect.bottom < 0 || rect.top > wh) return;
+      var center = rect.top + rect.height / 2 - wh / 2;
+      section.style.setProperty('--parallax-y', (center * 0.08) + 'px');
+    });
+  }
+
+  window.addEventListener('scroll', function() {
+    if (!ticking) { requestAnimationFrame(function() { onScroll(); ticking = false; }); ticking = true; }
+  }, { passive: true });
+
+  onScroll();
+
+  window.addEventListener('resize', function() {
+    isMobile = window.innerWidth < 900;
+    if (isMobile) { parallaxSections.forEach(function(section) { if (section) section.style.setProperty('--parallax-y', '0px'); }); }
+  });
+
+  document.addEventListener('click', function() {
+    var navLinks = document.querySelector('.nav-links');
+    if (navLinks && navLinks.classList.contains('mobile-open')) { navLinks.classList.remove('mobile-open'); }
+  });
+})();
+</script>
+<script src="/shelfiq-widget.js"></script>
+</body>
+</html>

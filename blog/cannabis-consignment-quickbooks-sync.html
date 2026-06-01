@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cannabis Consignment Settlements in QuickBooks — ShelfSpace</title>
+<meta name="description" content="How consignment settlements post to QuickBooks Online from ShelfSpace — the Bill, the Payment, the close-period exception, and the one button click that breaks the sync.">
+<link rel="canonical" href="https://shelfspace.pro/blog/cannabis-consignment-quickbooks-sync">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://shelfspace.pro/blog/cannabis-consignment-quickbooks-sync">
+<meta property="og:title" content="Cannabis Consignment Settlements in QuickBooks — ShelfSpace">
+<meta property="og:description" content="How consignment settlements post to QuickBooks Online from ShelfSpace — the Bill, the Payment, the close-period exception, and the one button click that breaks the sync.">
+<meta property="og:image" content="https://shelfspace.pro/og-image-v7.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Cannabis Consignment Settlements in QuickBooks — ShelfSpace">
+<meta name="twitter:description" content="How consignment settlements post to QuickBooks Online from ShelfSpace — the Bill, the Payment, the close-period exception, and the one button click that breaks the sync.">
+<meta name="twitter:image" content="https://shelfspace.pro/og-image-v7.png">
+<meta name="apple-mobile-web-app-title" content="ShelfSpace">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+<style>
+  @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-12px); } }
+
+  /* ─── HERO ENHANCEMENTS ─── */
+  .page-hero { padding-bottom: 40px; }
+  .hero-bg-gradient { position: absolute; top: -30%; right: -20%; width: 700px; height: 700px; background: radial-gradient(circle, rgba(149,213,178,0.18) 0%, rgba(149,213,178,0) 70%); animation: float 8s ease-in-out infinite; pointer-events: none; }
+  .hero-bg-gradient-2 { position: absolute; bottom: -20%; left: -15%; width: 550px; height: 550px; background: radial-gradient(circle, rgba(27,67,50,0.06) 0%, rgba(27,67,50,0) 70%); animation: float 10s ease-in-out infinite; animation-delay: -3s; pointer-events: none; }
+  .hero-grid-lines { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 1200px; height: 100%; opacity: 0.035; background-image: linear-gradient(var(--green-deep) 1px, transparent 1px), linear-gradient(90deg, var(--green-deep) 1px, transparent 1px); background-size: 80px 80px; pointer-events: none; }
+  .page-hero .section-label,
+  .page-hero .section-title,
+  .page-hero .section-desc { opacity: 0; transform: translateY(30px); }
+  .page-hero .section-label { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1); }
+  .page-hero .section-title { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s, transform 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s; }
+  .page-hero .section-desc { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1) 0.25s, transform 0.8s cubic-bezier(0.22,1,0.36,1) 0.25s; }
+  .page-hero.hero-loaded .section-label,
+  .page-hero.hero-loaded .section-title,
+  .page-hero.hero-loaded .section-desc { opacity: 1; transform: translateY(0); }
+
+  /* ─── REVEAL ─── */
+  .reveal {
+    opacity: 0; transform: translateY(40px);
+    transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+  /* ─── ARTICLE BODY ─── */
+  .article-body { max-width: 720px; margin: 0 auto; padding: 0 48px 80px; }
+  .article-body h2 { font-size: 24px; font-weight: 700; color: var(--green-deep); margin: 48px 0 16px; letter-spacing: -0.5px; line-height: 1.3; }
+  .article-body h3 { font-size: 19px; font-weight: 700; color: var(--green-deep); margin: 32px 0 12px; letter-spacing: -0.3px; line-height: 1.3; }
+  .article-body p { font-size: 17px; line-height: 1.85; color: var(--slate-600); margin-bottom: 24px; }
+  .article-body ul, .article-body ol { margin-bottom: 24px; padding-left: 24px; }
+  .article-body li { font-size: 17px; line-height: 1.85; color: var(--slate-600); margin-bottom: 8px; }
+  .article-body strong { color: var(--green-deep); font-weight: 600; }
+  .article-body a { color: var(--green-mid); font-weight: 500; text-decoration: none; }
+  .article-body a:hover { color: var(--green-deep); text-decoration: underline; }
+  .article-body blockquote { border-left: 3px solid var(--green-accent); padding: 16px 24px; margin: 32px 0; background: var(--green-ghost); border-radius: 0 8px 8px 0; }
+  .article-body blockquote p { font-style: italic; color: var(--green-dark); margin-bottom: 0; }
+  .article-body code { font-family: var(--font-mono); font-size: 15px; background: var(--slate-100); color: var(--green-deep); padding: 2px 7px; border-radius: 5px; }
+
+  /* ─── AT A GLANCE ─── */
+  .article-glance {
+    max-width: 720px; margin: 0 auto 40px; padding: 24px 28px;
+    background: var(--green-ghost); border: 1px solid rgba(149,213,178,0.3);
+    border-radius: 12px;
+  }
+  .article-glance h2 {
+    font-size: 14px; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--green-mid); margin: 0 0 12px;
+  }
+  .article-glance ul { list-style: none; padding: 0; margin: 0; }
+  .article-glance li {
+    font-size: 15px; line-height: 1.6; color: var(--slate-600);
+    padding: 4px 0 4px 20px; position: relative;
+  }
+  .article-glance li::before {
+    content: ''; position: absolute; left: 0; top: 12px;
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--green-accent);
+  }
+
+  /* ─── QBO POST MOCKUP ─── */
+  .qbo-post {
+    margin: 28px 0; padding: 20px 24px;
+    background: var(--white); border: 1px solid var(--slate-200);
+    border-radius: 12px; box-shadow: 0 4px 16px rgba(27,67,50,0.04);
+  }
+  .qbo-post-head {
+    font: 700 12px/1 var(--font-mono); letter-spacing: 1.4px;
+    text-transform: uppercase; color: var(--slate-500);
+    padding-bottom: 12px; margin-bottom: 14px;
+    border-bottom: 1px solid var(--slate-100);
+  }
+  .qbo-post-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 8px 0; font: 500 14px var(--font-display); color: var(--slate-600);
+    border-top: 1px solid var(--slate-100);
+  }
+  .qbo-post-row:first-of-type { border-top: 0; }
+  .qbo-post-row-val { font: 700 14px var(--font-mono); color: var(--green-deep); }
+  .qbo-post-row.is-total { font-weight: 700; color: var(--green-deep); margin-top: 6px; padding-top: 12px; border-top: 2px solid var(--green-deep); }
+
+  /* ─── CTA PARALLAX ─── */
+  .cta-section::before { transform: translate(-50%,-50%) translateY(var(--parallax-y, 0)); will-change: transform; }
+
+  /* ─── FAQ ACCORDION ─── */
+  .faq-list details {
+    border: 1px solid var(--slate-200); border-radius: 10px;
+    margin-bottom: 12px; background: var(--white);
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .faq-list details[open] { background: var(--green-ghost); border-color: rgba(149,213,178,0.45); }
+  .faq-list summary {
+    list-style: none; cursor: pointer;
+    padding: 16px 20px;
+    font: 600 16px/1.4 var(--font-display); color: var(--green-deep);
+    display: flex; justify-content: space-between; align-items: center; gap: 12px;
+  }
+  .faq-list summary::-webkit-details-marker { display: none; }
+  .faq-list summary::after {
+    content: '+'; flex-shrink: 0;
+    font: 400 22px/1 var(--font-mono); color: var(--green-mid);
+    transition: transform 0.2s;
+  }
+  .faq-list details[open] summary::after { content: '−'; }
+  .faq-list details p {
+    padding: 0 20px 18px; margin: 0;
+    font-size: 15px; line-height: 1.7; color: var(--slate-600);
+  }
+
+  /* ─── FOOTER 5-COL ─── */
+  .footer-top { grid-template-columns: 2fr 1fr 1fr 1fr 1fr; }
+  @media (max-width: 900px) { .footer-top { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px) { .footer-top { grid-template-columns: 1fr; } }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    .article-body { padding: 0 24px 60px; }
+  }
+
+  /* ─── REDUCED MOTION ─── */
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; transition: none; }
+    .page-hero .section-label,
+    .page-hero .section-title,
+    .page-hero .section-desc { opacity: 1; transform: none; transition: none; }
+    .hero-bg-gradient, .hero-bg-gradient-2 { animation: none; }
+  }
+</style>
+<noscript><style>.reveal,.page-hero .section-label,.page-hero .section-title,.page-hero .section-desc{opacity:1;transform:none;transition:none;}</style></noscript>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-H2LBJT03WE"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-H2LBJT03WE');</script>
+<script>function initApollo(){var n=Math.random().toString(36).substring(7),o=document.createElement("script");
+o.src="https://assets.apollo.io/micro/website-tracker/tracker.iife.js?nocache="+n,o.async=!0,o.defer=!0,
+o.onload=function(){window.trackingFunctions.onLoad({appId:"69c141b32234890011a43849"})},
+document.head.appendChild(o)}initApollo();</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Cannabis Consignment Settlements in QuickBooks — What Posts Automatically and What Doesn't",
+  "description": "How consignment settlements post to QuickBooks Online from ShelfSpace — the Bill, the Payment, the close-period exception, and the one button click that breaks the sync.",
+  "author": { "@type": "Person", "name": "Chris Mitchem" },
+  "publisher": { "@type": "Organization", "name": "ShelfSpace", "url": "https://shelfspace.pro" },
+  "datePublished": "2026-06-01",
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://shelfspace.pro/blog/cannabis-consignment-quickbooks-sync" },
+  "url": "https://shelfspace.pro/blog/cannabis-consignment-quickbooks-sync",
+  "image": "https://shelfspace.pro/og-image-v7.png"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://shelfspace.pro/" },
+    { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://shelfspace.pro/blog" },
+    { "@type": "ListItem", "position": 3, "name": "Cannabis Consignment Settlements in QuickBooks" }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What posts to QuickBooks when I approve a cannabis consignment settlement on ShelfSpace?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Two entries: a Bill (the vendor's net payout from the settlement, against the Expense Account you mapped) and a Bill Payment (the Check 21 against your Bank Account). Both post automatically through your QuickBooks Online connection within seconds of approval. The DocNumber, Amount, and Vendor are intact for bank-feed reconciliation, and the close gets faster because the work is already done before the bookkeeper opens the file."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why doesn't Mark as paid externally sync to QuickBooks?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Because the platform didn't generate the payment instrument. Mark as paid externally is for retailers who paid the vendor outside ShelfSpace — own check, ACH from their bank, cash. The platform records the settlement as resolved on its side but has no payment object to push to QuickBooks. The bookkeeper enters the corresponding Bill and Bill Payment manually based on whatever the retailer used. It's not a bug — it's the logical consequence of telling the platform you handled the payment yourself."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What happens when a consignment settlement posts to a closed QuickBooks period?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The platform handles it. If the original transaction date falls in a closed period, the Bill posts with the current date as the TxnDate instead. The DocNumber, Amount, and Vendor stay intact so the entry still reconciles cleanly against the bank feed. Only the posting date shifts. The bookkeeper doesn't need to reopen anything."
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="/" class="nav-logo">
+    <div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div>
+    <span class="nav-logo-text">ShelfSpace</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="/consignment">Consignment</a></li>
+    <li><a href="/accounts-payable">Accounts Payable</a></li>
+    <li><a href="/credit-recovery">Credit Recovery</a></li>
+    <li><a href="/pricing">Pricing</a></li>
+    <li><a href="/about">About</a></li>
+    <li><a href="/contact" class="nav-cta">Get Started <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a></li>
+  </ul>
+  <div class="nav-hamburger" onclick="document.querySelector('.nav-links').classList.toggle('mobile-open'); event.stopPropagation();"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="hero-bg-gradient"></div>
+  <div class="hero-bg-gradient-2"></div>
+  <div class="hero-grid-lines"></div>
+  <div class="section-label">Consignment</div>
+  <h1 class="section-title">Cannabis consignment in QuickBooks: what posts automatically, and the one exception that doesn't.</h1>
+  <p class="section-desc">How weekly settlements push to QuickBooks Online, what your bookkeeper sees, and the single button click that breaks the auto-sync.</p>
+</div>
+
+<!-- AT A GLANCE -->
+<div class="article-glance">
+  <h2>At a glance</h2>
+  <ul>
+    <li>Every cannabis consignment settlement you Approve &amp; Pay on ShelfSpace posts two entries to QuickBooks Online: a <strong>Bill</strong> against the vendor and a <strong>Bill Payment</strong> against your bank account.</li>
+    <li>The sync runs automatically through your QBO connection within seconds of approval. No manual data entry, no missing memo lines, no late-week catch-up.</li>
+    <li>If the QuickBooks period is already closed when the settlement posts, the entry uses today's date as the TxnDate instead of the original. DocNumber, Amount, and Vendor stay intact so bank-feed reconciliation still works.</li>
+    <li>The exception: <strong>Mark as paid externally</strong> does NOT push to QuickBooks. The bookkeeper enters the Bill and Payment manually based on whatever the retailer used (own check, ACH from their bank, cash).</li>
+    <li>Bookkeepers managing cannabis retail clients can watch the <strong>Bookkeeper Match Health</strong> indicator on the QuickBooks Setup page to spot drift early.</li>
+  </ul>
+</div>
+
+<!-- ARTICLE BODY -->
+<article class="article-body">
+
+  <p class="reveal">Cannabis bookkeeping is its own discipline. Three-way matching against Metrc, per-vendor terms across COD / Net 30 / consignment, settlement reports that need to land in the right Expense Account on the right date — none of this is what your accounting platform was built for, and none of it survives "we'll just enter it from the spreadsheet on Friday." If you're a bookkeeper or accounting firm with cannabis retail clients running consignment on ShelfSpace, the QuickBooks side of the integration is where you'll spend most of your time. Or, if it's working right, almost none of your time.</p>
+
+  <p class="reveal">Here's exactly what posts to QuickBooks Online when a consignment settlement resolves on ShelfSpace, what you have to enter manually, and the close-discipline gotcha that catches firms off-guard the first time.</p>
+
+  <h2 class="reveal">The standard path: Approve &amp; Pay</h2>
+
+  <p class="reveal">Every week, the platform pulls your client's POS sales, reconciles inventory against Metrc, applies the per-category profit splits and aging discounts, and produces a net payout amount for each consignment vendor. The retailer reviews the settlement in their dashboard and clicks <a href="/docs/consignment/approve-pay-vs-paid-externally"><strong>Approve &amp; Pay</strong></a>.</p>
+
+  <p class="reveal">At that moment, two things happen on the QuickBooks side, both automatic, both within seconds.</p>
+
+  <h3 class="reveal">Entry 1 — the Bill posts</h3>
+
+  <p class="reveal">A Bill is created in QuickBooks against the vendor, with the consignment settlement's net payout as the amount and the Expense Account mapped during your <a href="/docs/quickbooks/setup">QuickBooks Setup</a>. The Bill carries the Settlement ID as its DocNumber so the audit trail is traceable both ways — you can click from the Bill in QBO back to the original settlement record on the platform.</p>
+
+  <div class="qbo-post reveal">
+    <div class="qbo-post-head">QBO Entry · Bill · Auto-Posted</div>
+    <div class="qbo-post-row"><span>Vendor</span><span class="qbo-post-row-val">[Consignment vendor name]</span></div>
+    <div class="qbo-post-row"><span>DocNumber</span><span class="qbo-post-row-val">SR-### (Settlement ID)</span></div>
+    <div class="qbo-post-row"><span>TxnDate</span><span class="qbo-post-row-val">Settlement period end date</span></div>
+    <div class="qbo-post-row"><span>Account</span><span class="qbo-post-row-val">Mapped Expense Account (COGS or category-specific)</span></div>
+    <div class="qbo-post-row is-total"><span>Amount</span><span class="qbo-post-row-val">Net vendor payout</span></div>
+  </div>
+
+  <h3 class="reveal">Entry 2 — the Bill Payment posts</h3>
+
+  <p class="reveal">A Bill Payment posts against the Bank Account mapped in QBO setup, applied to the Bill from Entry 1. This is the Check 21 the platform cuts from the retailer's bank — the same check the vendor receives as the last page of their settlement report PDF. The check number on the QBO entry matches the check number on the vendor's Check 21.</p>
+
+  <div class="qbo-post reveal">
+    <div class="qbo-post-head">QBO Entry · Bill Payment · Auto-Posted</div>
+    <div class="qbo-post-row"><span>Vendor</span><span class="qbo-post-row-val">[Consignment vendor name]</span></div>
+    <div class="qbo-post-row"><span>Check Number</span><span class="qbo-post-row-val">[Check 21 number]</span></div>
+    <div class="qbo-post-row"><span>TxnDate</span><span class="qbo-post-row-val">Approval date</span></div>
+    <div class="qbo-post-row"><span>Bank Account</span><span class="qbo-post-row-val">Mapped Bank Account (retailer's primary)</span></div>
+    <div class="qbo-post-row"><span>Applied To</span><span class="qbo-post-row-val">Bill SR-### (from Entry 1)</span></div>
+    <div class="qbo-post-row is-total"><span>Amount</span><span class="qbo-post-row-val">Net vendor payout</span></div>
+  </div>
+
+  <p class="reveal">Both entries land in QBO before the bookkeeper opens the client file. Bank reconciliation works on autopilot because the Check 21 hits the retailer's bank feed with the same check number that's on the Bill Payment record. Match Health on your QBO Setup page shows green. Close is faster because the work was already done as the settlements ran.</p>
+
+  <h2 class="reveal">The close-period exception</h2>
+
+  <p class="reveal">Bookkeepers ask this one the first month: <em>"What happens if a settlement posts to QuickBooks but the period is closed?"</em> This is a real edge case — a settlement runs for a period ending three days into the previous month, but by the time the retailer gets around to approving it, the month is closed in QBO.</p>
+
+  <p class="reveal">The platform handles it. If the original TxnDate falls in a closed period, the Bill posts with today's date as the TxnDate instead. The DocNumber (Settlement ID), Amount, and Vendor stay intact so the entry reconciles cleanly against the bank feed. Only the posting date shifts to a current open period. The bookkeeper doesn't need to reopen anything — the entry lands in the current period, the bank-feed match still works, and the settlement period dates remain visible on the original Bill memo for audit purposes.</p>
+
+  <h2 class="reveal">The exception that breaks the sync: Mark as paid externally</h2>
+
+  <p class="reveal">There's one button click that breaks the auto-sync, and bookkeepers need to know about it before it happens or they spend hours hunting for the missing Bill.</p>
+
+  <p class="reveal">When the retailer clicks <strong>Mark as paid externally</strong> instead of <strong>Approve &amp; Pay</strong>, the platform records the settlement as resolved on its side — payment status moves to Paid, the vendor gets the settlement report with a "PAID EXTERNALLY" stamp on the last page instead of a Check 21 — but no QuickBooks entries post. Not the Bill, not the Bill Payment, nothing.</p>
+
+  <p class="reveal">The reason: ShelfSpace didn't generate the payment instrument. The retailer told the platform <em>"I handled this off-platform"</em> (own check, ACH from their bank, cash). The platform has no payment object to push to QBO. It's not a bug; it's the logical consequence of the retailer choosing the off-platform resolution path. Full breakdown of when to pick each path lives on the <a href="/docs/consignment/approve-pay-vs-paid-externally">Approve &amp; Pay vs Mark as Paid Externally</a> doc.</p>
+
+  <h3 class="reveal">What the bookkeeper has to do manually</h3>
+
+  <p class="reveal">For every settlement marked paid externally, the bookkeeper enters two corresponding entries in QBO from whatever the retailer used:</p>
+
+  <ul>
+    <li><strong>Bill</strong> — against the vendor, for the net payout amount. Use the Settlement ID as the DocNumber to preserve the link back to the platform record. The TxnDate should reflect the original settlement period.</li>
+    <li><strong>Bill Payment</strong> — against whichever Bank Account the retailer actually paid from. If they used their bank's bill-pay, look up the check number from the bank feed. If they sent an ACH, use the ACH reference. If they paid cash, the Bill Payment is from a cash account, no check number.</li>
+  </ul>
+
+  <p class="reveal">The retailer should flag externally-paid settlements during the weekly handoff so the manual entries don't get missed. ShelfSpace doesn't currently send a separate notification for these — the visibility comes from the retailer's own discipline or from the bookkeeper noticing that a Bill is missing for a vendor that the platform shows as having a Paid settlement.</p>
+
+  <div class="blog-callout reveal">
+    <svg class="blog-callout-ico" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    <p class="blog-callout-text">Bookkeeper rule of thumb: if a vendor settlement shows Paid on the platform but no corresponding Bill exists in QBO, the retailer used Mark as paid externally. Enter the Bill and Payment manually based on the retailer's payment method.</p>
+  </div>
+
+  <h2 class="reveal">Spotting sync drift with Bookkeeper Match Health</h2>
+
+  <p class="reveal">The QuickBooks Setup page on ShelfSpace surfaces a <strong>Bookkeeper Match Health</strong> indicator that shows the percentage of Bills + Bill Payments that have synced cleanly versus those that have errored or stalled. For retailers running consignment on Approve &amp; Pay end-to-end, this number should sit at or very near 100% across any rolling window.</p>
+
+  <p class="reveal">The number drops when something interrupts the sync — most commonly an expired OAuth token (the retailer needs to reconnect QBO from My Account), a vendor that exists on the platform but hasn't been mapped to a QBO vendor (the Setup screen flags these for manual mapping), or a closed-period exception that the platform handled but you'd want to verify cleared. The indicator is a fast way to catch drift before it shows up at month-end close.</p>
+
+  <p class="reveal">For the full QuickBooks setup walkthrough, see <a href="/blog/cannabis-retailer-quickbooks-setup">the QBO setup blog</a> or <a href="/docs/quickbooks/setup">the docs version</a>. For the broader bookkeeper partnership model, see <a href="/for-bookkeepers">For Bookkeepers</a>.</p>
+
+  <h2 class="reveal">What this means for the close</h2>
+
+  <p class="reveal">If your cannabis retail client runs every settlement through Approve &amp; Pay, your QBO file stays auto-reconciled and your close gets faster every month. The Bills and Payments are in the file before you open it. Bank rec lines up because the check numbers match the bank feed. The only manual work is whatever happens outside the consignment cycle (AP for non-cannabis vendors, payroll, owner draws — the work your firm does anyway).</p>
+
+  <p class="reveal">If your client mixes in Mark as paid externally for some settlements, those need manual entry on your side. Flag them during your weekly handoff. The platform's Settlement detail page makes the resolution path visible (it'll say "Paid externally" instead of showing a check number), so the audit trail is intact — you just need to make sure QBO catches up.</p>
+
+  <blockquote class="reveal">
+    <p>Cannabis bookkeeping doesn't have to live in a spreadsheet. With the consignment sync running clean, the work is done before you log in to QuickBooks. Your close stops being a catch-up exercise and becomes a review exercise.</p>
+  </blockquote>
+
+  <p class="reveal">If you're a bookkeeping or accounting firm with cannabis retail clients, the <a href="/for-bookkeepers">For Bookkeepers</a> page covers the partnership track in depth. If your retailer is your own dispensary and you want to see how the QBO sync compounds against your monthly close discipline, <a href="/contact">reach out for an evaluation</a>.</p>
+
+</article>
+
+<!-- FAQ -->
+<section style="max-width: 720px; margin: 0 auto; padding: 0 48px 60px;">
+  <h2 style="font-size: 22px; font-weight: 700; color: #1b4332; margin-bottom: 24px; letter-spacing: -0.5px;">Frequently asked questions</h2>
+  <div class="faq-list">
+    <details>
+      <summary>What posts to QuickBooks when I approve a cannabis consignment settlement on ShelfSpace?</summary>
+      <p>Two entries: a Bill (the vendor's net payout from the settlement, against the Expense Account you mapped) and a Bill Payment (the Check 21 against your Bank Account). Both post automatically through your QuickBooks Online connection within seconds of approval. The DocNumber, Amount, and Vendor are intact for bank-feed reconciliation, and the close gets faster because the work is already done before the bookkeeper opens the file.</p>
+    </details>
+    <details>
+      <summary>Why doesn't Mark as paid externally sync to QuickBooks?</summary>
+      <p>Because the platform didn't generate the payment instrument. Mark as paid externally is for retailers who paid the vendor outside ShelfSpace — own check, ACH from their bank, cash. The platform records the settlement as resolved on its side but has no payment object to push to QuickBooks. The bookkeeper enters the corresponding Bill and Bill Payment manually based on whatever the retailer used. It's not a bug — it's the logical consequence of telling the platform you handled the payment yourself.</p>
+    </details>
+    <details>
+      <summary>What happens when a consignment settlement posts to a closed QuickBooks period?</summary>
+      <p>The platform handles it. If the original transaction date falls in a closed period, the Bill posts with the current date as the TxnDate instead. The DocNumber, Amount, and Vendor stay intact so the entry still reconciles cleanly against the bank feed. Only the posting date shifts. The bookkeeper doesn't need to reopen anything.</p>
+    </details>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-content">
+    <div class="section-label reveal">Get Started</div>
+    <h2 class="section-title reveal">Stop closing cannabis books from a spreadsheet.</h2>
+    <p class="section-desc reveal">Free evaluation. We show you how consignment settlements land in QuickBooks pre-reconciled, every Bill and Payment auto-posted, every Check 21 matched to the bank feed.</p>
+    <div class="cta-actions reveal">
+      <a href="/contact" class="btn-primary">
+        Get a Demo
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+      <a href="/contact" class="btn-secondary">Talk to Chris</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="/" class="nav-logo"><div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div><span class="nav-logo-text">ShelfSpace</span></a>
+      <p>Every Vendor. Every Payment. One Engine.</p>
+    </div>
+    <div class="footer-col"><h4>Services</h4><ul><li><a href="/consignment">Consignment</a></li><li><a href="/accounts-payable">Accounts Payable</a></li><li><a href="/credit-recovery">Credit Recovery</a></li><li><a href="/checks">Check Payments</a></li><li><a href="/shelfiq">ShelfiQ</a></li></ul></div>
+    <div class="footer-col"><h4>Platform</h4><ul><li><a href="/features">Features</a></li><li><a href="/how-it-works">How It Works</a></li><li><a href="/pricing">Pricing</a></li><li><a href="/about">About</a></li><li><a href="/blog">Blog</a></li><li><a href="/docs">Docs</a></li></ul></div>
+    <div class="footer-col"><h4>Access</h4><ul><li><a href="https://ourshelf.space">Login</a></li><li><a href="/contact">Sign Up</a></li><li><a href="/contact">Contact</a></li><li><a href="/vendors">For Vendors</a></li><li><a href="/for-bookkeepers">For Bookkeepers</a></li></ul></div>
+    <div class="footer-col"><h4>Company</h4><ul><li><a href="mailto:chris@shelfspace.pro">Email</a></li><li><a href="mailto:support@shelfspace.pro">Support</a></li><li><a href="https://linkedin.com/company/shelfspace-pro" target="_blank" rel="noopener" class="footer-social-link"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> LinkedIn</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><p>&copy; 2026 ShelfSpace Technologies Inc.</p><div class="footer-bottom-links"><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div></div>
+</footer>
+
+<script>
+(function() {
+  var nav = document.getElementById('nav');
+  var pageHero = document.querySelector('.page-hero');
+  var parallaxSections = [ document.querySelector('.cta-section') ];
+
+  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var isMobile = window.innerWidth < 900;
+  var ticking = false;
+
+  requestAnimationFrame(function() {
+    nav.classList.toggle('scrolled', window.scrollY > 20);
+    if (pageHero) pageHero.classList.add('hero-loaded');
+  });
+
+  var revealObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(function(el) { revealObserver.observe(el); });
+
+  function onScroll() {
+    var scrollY = window.scrollY;
+    nav.classList.toggle('scrolled', scrollY > 20);
+    if (prefersReduced || isMobile) return;
+    var wh = window.innerHeight;
+    parallaxSections.forEach(function(section) {
+      if (!section) return;
+      var rect = section.getBoundingClientRect();
+      if (rect.bottom < 0 || rect.top > wh) return;
+      var center = rect.top + rect.height / 2 - wh / 2;
+      section.style.setProperty('--parallax-y', (center * 0.08) + 'px');
+    });
+  }
+
+  window.addEventListener('scroll', function() {
+    if (!ticking) { requestAnimationFrame(function() { onScroll(); ticking = false; }); ticking = true; }
+  }, { passive: true });
+
+  onScroll();
+
+  window.addEventListener('resize', function() {
+    isMobile = window.innerWidth < 900;
+    if (isMobile) { parallaxSections.forEach(function(section) { if (section) section.style.setProperty('--parallax-y', '0px'); }); }
+  });
+
+  document.addEventListener('click', function() {
+    var navLinks = document.querySelector('.nav-links');
+    if (navLinks && navLinks.classList.contains('mobile-open')) { navLinks.classList.remove('mobile-open'); }
+  });
+})();
+</script>
+<script src="/shelfiq-widget.js"></script>
+</body>
+</html>
