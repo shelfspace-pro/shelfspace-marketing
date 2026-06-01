@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Multi-Location Cannabis Consignment Rollout — ShelfSpace</title>
+<meta name="description" content="Rolling out cannabis consignment across multiple dispensary locations on ShelfSpace — shared vendor records, three rollout patterns, group-level reporting.">
+<link rel="canonical" href="https://shelfspace.pro/blog/multi-location-cannabis-consignment-rollout">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://shelfspace.pro/blog/multi-location-cannabis-consignment-rollout">
+<meta property="og:title" content="Multi-Location Cannabis Consignment Rollout — ShelfSpace">
+<meta property="og:description" content="Rolling out cannabis consignment across multiple dispensary locations on ShelfSpace — shared vendor records, three rollout patterns, group-level reporting.">
+<meta property="og:image" content="https://shelfspace.pro/og-image-v7.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Multi-Location Cannabis Consignment Rollout — ShelfSpace">
+<meta name="twitter:description" content="Rolling out cannabis consignment across multiple dispensary locations on ShelfSpace — shared vendor records, three rollout patterns, group-level reporting.">
+<meta name="twitter:image" content="https://shelfspace.pro/og-image-v7.png">
+<meta name="apple-mobile-web-app-title" content="ShelfSpace">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+<style>
+  @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-12px); } }
+
+  /* ─── HERO ENHANCEMENTS ─── */
+  .page-hero { padding-bottom: 40px; }
+  .hero-bg-gradient { position: absolute; top: -30%; right: -20%; width: 700px; height: 700px; background: radial-gradient(circle, rgba(149,213,178,0.18) 0%, rgba(149,213,178,0) 70%); animation: float 8s ease-in-out infinite; pointer-events: none; }
+  .hero-bg-gradient-2 { position: absolute; bottom: -20%; left: -15%; width: 550px; height: 550px; background: radial-gradient(circle, rgba(27,67,50,0.06) 0%, rgba(27,67,50,0) 70%); animation: float 10s ease-in-out infinite; animation-delay: -3s; pointer-events: none; }
+  .hero-grid-lines { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 1200px; height: 100%; opacity: 0.035; background-image: linear-gradient(var(--green-deep) 1px, transparent 1px), linear-gradient(90deg, var(--green-deep) 1px, transparent 1px); background-size: 80px 80px; pointer-events: none; }
+  .page-hero .section-label,
+  .page-hero .section-title,
+  .page-hero .section-desc { opacity: 0; transform: translateY(30px); }
+  .page-hero .section-label { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1); }
+  .page-hero .section-title { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s, transform 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s; }
+  .page-hero .section-desc { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1) 0.25s, transform 0.8s cubic-bezier(0.22,1,0.36,1) 0.25s; }
+  .page-hero.hero-loaded .section-label,
+  .page-hero.hero-loaded .section-title,
+  .page-hero.hero-loaded .section-desc { opacity: 1; transform: translateY(0); }
+
+  /* ─── REVEAL ─── */
+  .reveal {
+    opacity: 0; transform: translateY(40px);
+    transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+  /* ─── ARTICLE BODY ─── */
+  .article-body { max-width: 720px; margin: 0 auto; padding: 0 48px 80px; }
+  .article-body h2 { font-size: 24px; font-weight: 700; color: var(--green-deep); margin: 48px 0 16px; letter-spacing: -0.5px; line-height: 1.3; }
+  .article-body h3 { font-size: 19px; font-weight: 700; color: var(--green-deep); margin: 32px 0 12px; letter-spacing: -0.3px; line-height: 1.3; }
+  .article-body p { font-size: 17px; line-height: 1.85; color: var(--slate-600); margin-bottom: 24px; }
+  .article-body ul, .article-body ol { margin-bottom: 24px; padding-left: 24px; }
+  .article-body li { font-size: 17px; line-height: 1.85; color: var(--slate-600); margin-bottom: 8px; }
+  .article-body strong { color: var(--green-deep); font-weight: 600; }
+  .article-body a { color: var(--green-mid); font-weight: 500; text-decoration: none; }
+  .article-body a:hover { color: var(--green-deep); text-decoration: underline; }
+  .article-body blockquote { border-left: 3px solid var(--green-accent); padding: 16px 24px; margin: 32px 0; background: var(--green-ghost); border-radius: 0 8px 8px 0; }
+  .article-body blockquote p { font-style: italic; color: var(--green-dark); margin-bottom: 0; }
+
+  /* ─── AT A GLANCE ─── */
+  .article-glance {
+    max-width: 720px; margin: 0 auto 40px; padding: 24px 28px;
+    background: var(--green-ghost); border: 1px solid rgba(149,213,178,0.3);
+    border-radius: 12px;
+  }
+  .article-glance h2 {
+    font-size: 14px; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--green-mid); margin: 0 0 12px;
+  }
+  .article-glance ul { list-style: none; padding: 0; margin: 0; }
+  .article-glance li {
+    font-size: 15px; line-height: 1.6; color: var(--slate-600);
+    padding: 4px 0 4px 20px; position: relative;
+  }
+  .article-glance li::before {
+    content: ''; position: absolute; left: 0; top: 12px;
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--green-accent);
+  }
+
+  /* ─── STORE-CHAIN VISUAL ─── */
+  .chain-mock {
+    margin: 36px 0; padding: 24px 28px;
+    background: var(--white); border: 1px solid var(--slate-200);
+    border-radius: 14px; box-shadow: 0 4px 16px rgba(27,67,50,0.04);
+  }
+  .chain-mock-head {
+    font: 700 11px/1 var(--font-mono); letter-spacing: 1.4px;
+    text-transform: uppercase; color: var(--slate-500);
+    margin-bottom: 18px;
+  }
+  .chain-mock-body { display: grid; grid-template-columns: 1fr; gap: 14px; }
+  .chain-row {
+    display: grid; grid-template-columns: auto 1fr;
+    align-items: center; gap: 16px;
+    padding: 12px 16px;
+    border: 1px solid var(--slate-200); border-radius: 10px;
+    background: var(--white);
+  }
+  .chain-row.is-vendor {
+    background: var(--green-deep); color: var(--white);
+    border-color: var(--green-deep);
+  }
+  .chain-row.is-vendor .chain-row-tag {
+    background: var(--green-accent); color: var(--green-deep);
+  }
+  .chain-row-tag {
+    padding: 6px 10px; border-radius: 7px;
+    font: 700 11px/1 var(--font-mono); letter-spacing: 1.2px;
+    text-transform: uppercase; background: var(--green-ghost); color: var(--green-mid);
+    text-align: center; min-width: 80px;
+  }
+  .chain-row-body { font: 500 14px/1.4 var(--font-display); }
+  .chain-row.is-vendor .chain-row-body { color: var(--green-accent); }
+  .chain-row-body strong { color: var(--green-deep); font-weight: 700; }
+  .chain-row.is-vendor .chain-row-body strong { color: var(--white); }
+  .chain-arrows {
+    display: flex; justify-content: center; align-items: center;
+    margin: -4px 0;
+    color: var(--green-mid); font-family: var(--font-mono); font-size: 18px;
+  }
+
+  /* ─── PATTERN CARDS ─── */
+  .pattern {
+    margin: 28px 0; padding: 24px 28px;
+    background: var(--white); border: 1px solid var(--slate-200);
+    border-left: 4px solid var(--green-mid); border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(27,67,50,0.04);
+  }
+  .pattern-eyebrow {
+    font: 700 11px/1 var(--font-mono); letter-spacing: 1.4px;
+    text-transform: uppercase; color: var(--green-mid); margin-bottom: 8px;
+  }
+  .pattern h3 { margin-top: 0; }
+  .pattern p:last-child { margin-bottom: 0; }
+  .pattern-when {
+    margin: 14px 0 0; padding: 12px 16px;
+    background: var(--green-ghost); border-radius: 8px;
+    font: 500 14px/1.55 var(--font-display); color: var(--green-dark);
+  }
+  .pattern-when strong { color: var(--green-deep); font-size: 11px; letter-spacing: 1.2px; text-transform: uppercase; display: block; margin-bottom: 4px; }
+
+  /* ─── CTA PARALLAX ─── */
+  .cta-section::before { transform: translate(-50%,-50%) translateY(var(--parallax-y, 0)); will-change: transform; }
+
+  /* ─── FAQ ACCORDION ─── */
+  .faq-list details {
+    border: 1px solid var(--slate-200); border-radius: 10px;
+    margin-bottom: 12px; background: var(--white);
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .faq-list details[open] { background: var(--green-ghost); border-color: rgba(149,213,178,0.45); }
+  .faq-list summary {
+    list-style: none; cursor: pointer;
+    padding: 16px 20px;
+    font: 600 16px/1.4 var(--font-display); color: var(--green-deep);
+    display: flex; justify-content: space-between; align-items: center; gap: 12px;
+  }
+  .faq-list summary::-webkit-details-marker { display: none; }
+  .faq-list summary::after {
+    content: '+'; flex-shrink: 0;
+    font: 400 22px/1 var(--font-mono); color: var(--green-mid);
+    transition: transform 0.2s;
+  }
+  .faq-list details[open] summary::after { content: '−'; }
+  .faq-list details p {
+    padding: 0 20px 18px; margin: 0;
+    font-size: 15px; line-height: 1.7; color: var(--slate-600);
+  }
+
+  /* ─── FOOTER 5-COL ─── */
+  .footer-top { grid-template-columns: 2fr 1fr 1fr 1fr 1fr; }
+  @media (max-width: 900px) { .footer-top { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px) { .footer-top { grid-template-columns: 1fr; } }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    .article-body { padding: 0 24px 60px; }
+    .chain-row { grid-template-columns: 1fr; text-align: center; }
+  }
+
+  /* ─── REDUCED MOTION ─── */
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; transition: none; }
+    .page-hero .section-label,
+    .page-hero .section-title,
+    .page-hero .section-desc { opacity: 1; transform: none; transition: none; }
+    .hero-bg-gradient, .hero-bg-gradient-2 { animation: none; }
+  }
+</style>
+<noscript><style>.reveal,.page-hero .section-label,.page-hero .section-title,.page-hero .section-desc{opacity:1;transform:none;transition:none;}</style></noscript>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-H2LBJT03WE"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-H2LBJT03WE');</script>
+<script>function initApollo(){var n=Math.random().toString(36).substring(7),o=document.createElement("script");
+o.src="https://assets.apollo.io/micro/website-tracker/tracker.iife.js?nocache="+n,o.async=!0,o.defer=!0,
+o.onload=function(){window.trackingFunctions.onLoad({appId:"69c141b32234890011a43849"})},
+document.head.appendChild(o)}initApollo();</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Rolling Out Cannabis Consignment Across Multiple Dispensary Locations",
+  "description": "How a multi-location cannabis retailer rolls out consignment across stores on ShelfSpace — shared vendor records, three rollout patterns, group-level reporting.",
+  "author": { "@type": "Person", "name": "Chris Mitchem" },
+  "publisher": { "@type": "Organization", "name": "ShelfSpace", "url": "https://shelfspace.pro" },
+  "datePublished": "2026-06-01",
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://shelfspace.pro/blog/multi-location-cannabis-consignment-rollout" },
+  "url": "https://shelfspace.pro/blog/multi-location-cannabis-consignment-rollout",
+  "image": "https://shelfspace.pro/og-image-v7.png"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://shelfspace.pro/" },
+    { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://shelfspace.pro/blog" },
+    { "@type": "ListItem", "position": 3, "name": "Rolling Out Cannabis Consignment Across Multiple Dispensary Locations" }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Do I have to set up each consignment vendor separately at every store in my cannabis retail group?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. When you add a vendor at one store in your retailer group, the platform propagates the partnership to every other store in the same group automatically. Stores that already have an active partnership with that vendor are skipped (no duplicates). You configure the vendor relationship once; the platform makes the vendor available across every location that should carry their product."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I run different consignment splits at different stores in the same retail chain?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Each store-vendor partnership has its own settings — Master Vendor Split, Operational Discount Cap, per-category splits. The defaults propagate when the partnership is created, but each store can adjust independently. Two stores in the same group can run the same vendor on 50/50 at one location and 55/45 at another if the local economics warrant it. The settlement engine respects per-store terms."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do consignment settlements roll up across multiple cannabis dispensary locations for accounting?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Each store's consignment settlements post to that store's QuickBooks file separately, since each location typically has its own legal entity, bank account, and QBO file for tax and compliance reasons. The platform doesn't automatically consolidate across entities. For group-level reporting, your bookkeeper or accounting firm consolidates at the parent level using the per-location settlement data, the same way they handle any other multi-entity consolidation."
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="/" class="nav-logo">
+    <div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div>
+    <span class="nav-logo-text">ShelfSpace</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="/consignment">Consignment</a></li>
+    <li><a href="/accounts-payable">Accounts Payable</a></li>
+    <li><a href="/credit-recovery">Credit Recovery</a></li>
+    <li><a href="/pricing">Pricing</a></li>
+    <li><a href="/about">About</a></li>
+    <li><a href="/contact" class="nav-cta">Get Started <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a></li>
+  </ul>
+  <div class="nav-hamburger" onclick="document.querySelector('.nav-links').classList.toggle('mobile-open'); event.stopPropagation();"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="hero-bg-gradient"></div>
+  <div class="hero-bg-gradient-2"></div>
+  <div class="hero-grid-lines"></div>
+  <div class="section-label">Consignment</div>
+  <h1 class="section-title">Rolling out cannabis consignment across multiple dispensary locations</h1>
+  <p class="section-desc">What changes (and what doesn't) when you bring 2, 5, or more stores onto consignment under one retailer group.</p>
+</div>
+
+<!-- AT A GLANCE -->
+<div class="article-glance">
+  <h2>At a glance</h2>
+  <ul>
+    <li>Multi-store cannabis retailers are one <strong>retailer group</strong> on ShelfSpace — multiple store IDs under one parent, with vendor relationships that propagate across stores automatically.</li>
+    <li>Add a vendor at one store; the platform creates the same partnership at every other store in the group. Stores already running that vendor are skipped (no duplicates).</li>
+    <li>Each store-vendor partnership has its own settings. Defaults propagate at creation; per-store adjustments stay store-specific.</li>
+    <li>Three rollout patterns: <strong>sequential</strong> (store-by-store, learning compounds), <strong>synchronized</strong> (all stores at once), and <strong>pilot then expand</strong> (one store tested fully, then propagated).</li>
+    <li>Settlement and QuickBooks reporting stay per-location because each store typically has its own legal entity and QBO file. Group-level rollups happen at the bookkeeper or accounting-firm level.</li>
+  </ul>
+</div>
+
+<!-- ARTICLE BODY -->
+<article class="article-body">
+
+  <p class="reveal">Single-store consignment is one set of operational problems. Multi-location consignment is a different set, but it's not the operational nightmare most multi-store operators assume it will be. The trap is to imagine that bringing consignment to a second, third, or fifth store means doing all the vendor onboarding work N times. It doesn't have to. The platform was designed around multi-location retailers from day one, and the rollout work scales with the number of vendor relationships you have, not with the number of stores you have.</p>
+
+  <p class="reveal">Here's how rolling out consignment across multiple cannabis dispensary locations actually works on <a href="/consignment">ShelfSpace</a>, the three patterns that work in practice, and what changes operationally when you go from one store to many.</p>
+
+  <h2 class="reveal">The retailer group: one business, multiple stores</h2>
+
+  <p class="reveal">If you run more than one cannabis dispensary under common ownership, your business sits on the platform as one <strong>retailer group</strong> — a parent that holds multiple store records. Each store has its own retailer ID, its own Metrc license, its own POS connection, its own bank account, and almost always its own legal entity for tax purposes. But the platform knows they're part of one group, and operations that should reach across stores — user permissions, vendor partnerships, group-level reporting — are aware of the group relationship.</p>
+
+  <div class="chain-mock reveal" aria-label="Retailer-group structure showing one parent group containing three store locations and a shared vendor partnership.">
+    <div class="chain-mock-head">RETAILER GROUP · MULTI-STORE STRUCTURE</div>
+    <div class="chain-mock-body">
+      <div class="chain-row">
+        <div class="chain-row-tag">Group</div>
+        <div class="chain-row-body"><strong>Cannabis Retail Group, LLC</strong> — parent organization, one retailer_group_id</div>
+      </div>
+      <div class="chain-arrows">↓</div>
+      <div class="chain-row">
+        <div class="chain-row-tag">Store 1</div>
+        <div class="chain-row-body"><strong>Downtown</strong> — own Metrc license, POS, bank, QBO file</div>
+      </div>
+      <div class="chain-row">
+        <div class="chain-row-tag">Store 2</div>
+        <div class="chain-row-body"><strong>Westside</strong> — own Metrc license, POS, bank, QBO file</div>
+      </div>
+      <div class="chain-row">
+        <div class="chain-row-tag">Store 3</div>
+        <div class="chain-row-body"><strong>Northgate</strong> — own Metrc license, POS, bank, QBO file</div>
+      </div>
+      <div class="chain-arrows">↓</div>
+      <div class="chain-row is-vendor">
+        <div class="chain-row-tag">Vendor</div>
+        <div class="chain-row-body">One partnership record at Downtown <strong>propagates</strong> to Westside + Northgate automatically</div>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="reveal">One vendor onboarding, every store covered</h2>
+
+  <p class="reveal">The mechanics: when you add a new consignment vendor at any one store in your group, the platform looks up the retailer group ID, finds every sibling store in the group, and creates the same partnership at each one. Stores that already have an active partnership with that vendor are skipped — no duplicates, no overwrites. Defaults like payment terms, return policy, and co-marketing discount carry through from each store's own configured defaults so the propagation respects per-store customization where it already exists.</p>
+
+  <p class="reveal">What this means for the rollout: you do the vendor conversation once. You negotiate the splits and discount cap with the vendor once. You configure the partnership at one store once. Two minutes later, every other store in your group has the same vendor ready to ship — same splits, same discount cap, same defaults — without you logging into each store separately.</p>
+
+  <div class="blog-callout reveal">
+    <svg class="blog-callout-ico" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+    <p class="blog-callout-text">Onboarding effort scales with the number of <em>vendor relationships</em>, not the number of <em>stores</em>. One vendor conversation covers your whole group.</p>
+  </div>
+
+  <h2 class="reveal">Per-store vs uniform terms — when each makes sense</h2>
+
+  <p class="reveal">The default behavior is uniform: when a partnership propagates, every store gets the same starting terms. That's the right answer most of the time. Your vendor expects to be paid the same way at every one of your locations, and your accounting is easier when the settlement math is consistent across stores.</p>
+
+  <p class="reveal">But the platform doesn't lock you into uniformity. Each store-vendor partnership is its own record with its own settings — Master Vendor Split, Operational Discount Cap, per-category splits. You can adjust any of them at any store independently. Two reasons this matters in practice:</p>
+
+  <ul class="reveal">
+    <li><strong>Local economics differ.</strong> A vendor whose product moves at premium pricing at your downtown flagship may not move the same at a suburban location. Different sell-through velocity can justify different splits without renegotiating the whole relationship — the downtown store keeps the original split, the suburban store gets a vendor-favorable adjustment to keep the product on shelf.</li>
+    <li><strong>One store needs aging-discount latitude the others don't.</strong> If your downtown store turns inventory faster than your slower-velocity locations, the aging-discount tiers on slower stores might need to kick in earlier. Per-store aging tiers handle this without affecting how the same vendor's product is settled at the faster store.</li>
+  </ul>
+
+  <p class="reveal">For details on the splits + tiers + caps mechanics, see <a href="/docs/consignment/profit-splits">Category Splits and Profit Sharing</a> and <a href="/docs/consignment/aging-discounts">Aging Discounts and Inventory Markdowns</a>. The takeaway for multi-location: configure once, adjust per-store only where the economics genuinely differ.</p>
+
+  <h2 class="reveal">Three rollout patterns that work in practice</h2>
+
+  <div class="pattern reveal">
+    <div class="pattern-eyebrow">Pattern 1</div>
+    <h3>Sequential — store by store, learning compounds</h3>
+    <p>Roll out consignment at one store completely — first vendor, first settlements, first month of operational rhythm — before bringing the next store online. The first store absorbs the learning curve. By the time the second store goes live, your team has worked through the vendor conversations, the receiving SOP, and the payday flow at scale.</p>
+    <div class="pattern-when">
+      <strong>When to use</strong>
+      You have a clear "first store" with the strongest operations team, you're not in a rush, and you want to perfect the playbook before scaling. Most retailer groups starting fresh on consignment land here naturally.
+    </div>
+  </div>
+
+  <div class="pattern reveal">
+    <div class="pattern-eyebrow">Pattern 2</div>
+    <h3>Synchronized — every store goes live at once</h3>
+    <p>The vendor record propagates to all stores in the group at the moment of partnership creation. If you want all stores to start receiving consignment from a vendor on the same day, you don't have to do anything special — the propagation is already automatic. Just coordinate the vendor's first deliveries to land at every store within the same window.</p>
+    <div class="pattern-when">
+      <strong>When to use</strong>
+      A vendor is ready to ship at scale and your operations are mature enough across all stores to handle simultaneous receipt. Common for established multi-store retailers adding their first consignment vendor — when the operational risk is low and the cash-flow benefit at scale is compelling.
+    </div>
+  </div>
+
+  <div class="pattern reveal">
+    <div class="pattern-eyebrow">Pattern 3</div>
+    <h3>Pilot then expand — one store fully tested, then group-wide</h3>
+    <p>A hybrid. Configure the vendor only at the pilot store first (decline the auto-propagation prompt, or manually scope the initial onboarding). Run the full cycle — receipt, settlement, payday — for a month at that one store. When the rhythm is proven, propagate to the other stores in the group.</p>
+    <div class="pattern-when">
+      <strong>When to use</strong>
+      You're working with a new vendor where the product-market fit on your shelves is uncertain, or your operations team is conservative about rolling out unproven workflows. Lower-risk than synchronized, faster to scale than sequential.
+    </div>
+  </div>
+
+  <h2 class="reveal">The vendor conversation at scale</h2>
+
+  <p class="reveal">The conversation with a vendor about consignment changes when you're bringing them onto multiple stores at once. You're not negotiating shelf space at one store — you're negotiating across two, five, or fifteen. That shifts the leverage. Vendors care about distribution. A single-store consignment ask is a "let's test this together" conversation; a multi-store ask is a "this is meaningful distribution for your brand" conversation.</p>
+
+  <p class="reveal">A few things to lead with when the conversation is at the group level:</p>
+
+  <ul class="reveal">
+    <li><strong>Total shelf space being offered.</strong> Three stores carrying their flagship pre-roll is a different deal than one store carrying it. Lead with the aggregate distribution number, not the per-store one.</li>
+    <li><strong>Settlement consistency.</strong> Vendors hate per-retailer custom payment terms. Telling a vendor that all three of your stores will pay them on the same weekly settlement cycle, through the same Check 21 instrument, is a serious selling point compared to chasing three separate AP teams.</li>
+    <li><strong>Reporting they get back.</strong> Each store sends them its own settlement report and sell-through data. The vendor gets a real-time view of which of your locations moves their product fastest — useful intel for them, evidence for you that the relationship is transparent.</li>
+  </ul>
+
+  <p class="reveal">For the broader negotiation playbook (whether to ask vendors to add consignment vs convert their wholesale to it), see <a href="/blog/add-consignment-to-existing-cannabis-vendor">Don't ask your vendor to convert. Ask them to add.</a></p>
+
+  <h2 class="reveal">Reporting and accounting at the group level</h2>
+
+  <p class="reveal">Multi-store accounting in cannabis is its own discipline. Each store typically has its own legal entity (one LLC per license, often), its own bank account, its own QuickBooks file, and its own state tax filings. The platform respects that boundary — each store's consignment settlements post to that store's QBO file separately. No automatic cross-entity rollup, because the entities don't share a chart of accounts and shouldn't for compliance reasons.</p>
+
+  <p class="reveal">What does happen at the group level: your bookkeeper or accounting firm consolidates the per-location settlement data at the parent for ownership-level reporting, the same way they'd handle any other multi-entity consolidation. The platform makes their job easier because the source data is already structured, the Bills and Bill Payments are already posted to each store's QBO, and the bank-feed match works on every store independently. See <a href="/blog/cannabis-consignment-quickbooks-sync">how consignment settlements hit QuickBooks</a> for the per-store QBO sync mechanics that compound across multi-location groups.</p>
+
+  <p class="reveal">For the broader bookkeeper partnership model that multi-store retailers usually run through, <a href="/for-bookkeepers">For Bookkeepers</a> covers how the accounting firm stays in the loop on every location.</p>
+
+  <blockquote class="reveal">
+    <p>The cleanest multi-store consignment rollouts I've seen weren't the ones with the most ambitious vendor lists. They were the ones with the clearest first-store playbook. Once it runs at one store, the propagation does the work everywhere else.</p>
+  </blockquote>
+
+  <h2 class="reveal">What the first 30 days look like</h2>
+
+  <p class="reveal">For most multi-store retailers, the first 30 days of consignment go something like this. Week one: pick the pilot store and the first vendor or two. Configure the partnerships, the splits, the aging tiers. Week two: first deliveries land at the pilot store; the receiving team runs through the SOP for the first time, and you absorb the learning. Week three: first weekly settlement runs at the pilot store; the vendor gets their first payout; the vendor portal lights up with their sell-through data. Week four: review the rhythm, decide if you're ready to propagate. If yes, propagation is one click on the partnership record — and now your other stores are live too.</p>
+
+  <p class="reveal">Forty-five days in, you have real settlement data from multiple stores on multiple vendors, your QBO is reconciled, your vendors have a track record with you, and you've stopped tying up working capital on inventory you used to pre-purchase. The mechanics aren't the hard part. The conversations are. The platform handles the mechanics.</p>
+
+  <p class="reveal">Ready to roll out consignment across your retail group? <a href="/contact">Get in touch</a> for an evaluation — we'll look at your store-by-store vendor activity over the last 90 days and identify the candidates that benefit most from a group-level rollout.</p>
+
+</article>
+
+<!-- FAQ -->
+<section style="max-width: 720px; margin: 0 auto; padding: 0 48px 60px;">
+  <h2 style="font-size: 22px; font-weight: 700; color: #1b4332; margin-bottom: 24px; letter-spacing: -0.5px;">Frequently asked questions</h2>
+  <div class="faq-list">
+    <details>
+      <summary>Do I have to set up each consignment vendor separately at every store in my cannabis retail group?</summary>
+      <p>No. When you add a vendor at one store in your retailer group, the platform propagates the partnership to every other store in the same group automatically. Stores that already have an active partnership with that vendor are skipped (no duplicates). You configure the vendor relationship once; the platform makes the vendor available across every location that should carry their product.</p>
+    </details>
+    <details>
+      <summary>Can I run different consignment splits at different stores in the same retail chain?</summary>
+      <p>Yes. Each store-vendor partnership has its own settings — Master Vendor Split, Operational Discount Cap, per-category splits. The defaults propagate when the partnership is created, but each store can adjust independently. Two stores in the same group can run the same vendor on 50/50 at one location and 55/45 at another if the local economics warrant it. The settlement engine respects per-store terms.</p>
+    </details>
+    <details>
+      <summary>How do consignment settlements roll up across multiple cannabis dispensary locations for accounting?</summary>
+      <p>Each store's consignment settlements post to that store's QuickBooks file separately, since each location typically has its own legal entity, bank account, and QBO file for tax and compliance reasons. The platform doesn't automatically consolidate across entities. For group-level reporting, your bookkeeper or accounting firm consolidates at the parent level using the per-location settlement data, the same way they handle any other multi-entity consolidation.</p>
+    </details>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-content">
+    <div class="section-label reveal">Get Started</div>
+    <h2 class="section-title reveal">One rollout. Every store covered.</h2>
+    <p class="section-desc reveal">Free evaluation. We look at your store-by-store vendor activity, identify the candidates that benefit most from a group-level consignment rollout, and configure the propagation.</p>
+    <div class="cta-actions reveal">
+      <a href="/contact" class="btn-primary">
+        Get a Demo
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+      <a href="/contact" class="btn-secondary">Talk to Chris</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="/" class="nav-logo"><div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div><span class="nav-logo-text">ShelfSpace</span></a>
+      <p>Every Vendor. Every Payment. One Engine.</p>
+    </div>
+    <div class="footer-col"><h4>Services</h4><ul><li><a href="/consignment">Consignment</a></li><li><a href="/accounts-payable">Accounts Payable</a></li><li><a href="/credit-recovery">Credit Recovery</a></li><li><a href="/checks">Check Payments</a></li><li><a href="/shelfiq">ShelfiQ</a></li></ul></div>
+    <div class="footer-col"><h4>Platform</h4><ul><li><a href="/features">Features</a></li><li><a href="/how-it-works">How It Works</a></li><li><a href="/pricing">Pricing</a></li><li><a href="/about">About</a></li><li><a href="/blog">Blog</a></li><li><a href="/docs">Docs</a></li></ul></div>
+    <div class="footer-col"><h4>Access</h4><ul><li><a href="https://ourshelf.space">Login</a></li><li><a href="/contact">Sign Up</a></li><li><a href="/contact">Contact</a></li><li><a href="/vendors">For Vendors</a></li><li><a href="/for-bookkeepers">For Bookkeepers</a></li></ul></div>
+    <div class="footer-col"><h4>Company</h4><ul><li><a href="mailto:chris@shelfspace.pro">Email</a></li><li><a href="mailto:support@shelfspace.pro">Support</a></li><li><a href="https://linkedin.com/company/shelfspace-pro" target="_blank" rel="noopener" class="footer-social-link"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> LinkedIn</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><p>&copy; 2026 ShelfSpace Technologies Inc.</p><div class="footer-bottom-links"><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div></div>
+</footer>
+
+<script>
+(function() {
+  var nav = document.getElementById('nav');
+  var pageHero = document.querySelector('.page-hero');
+  var parallaxSections = [ document.querySelector('.cta-section') ];
+
+  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var isMobile = window.innerWidth < 900;
+  var ticking = false;
+
+  requestAnimationFrame(function() {
+    nav.classList.toggle('scrolled', window.scrollY > 20);
+    if (pageHero) pageHero.classList.add('hero-loaded');
+  });
+
+  var revealObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(function(el) { revealObserver.observe(el); });
+
+  function onScroll() {
+    var scrollY = window.scrollY;
+    nav.classList.toggle('scrolled', scrollY > 20);
+    if (prefersReduced || isMobile) return;
+    var wh = window.innerHeight;
+    parallaxSections.forEach(function(section) {
+      if (!section) return;
+      var rect = section.getBoundingClientRect();
+      if (rect.bottom < 0 || rect.top > wh) return;
+      var center = rect.top + rect.height / 2 - wh / 2;
+      section.style.setProperty('--parallax-y', (center * 0.08) + 'px');
+    });
+  }
+
+  window.addEventListener('scroll', function() {
+    if (!ticking) { requestAnimationFrame(function() { onScroll(); ticking = false; }); ticking = true; }
+  }, { passive: true });
+
+  onScroll();
+
+  window.addEventListener('resize', function() {
+    isMobile = window.innerWidth < 900;
+    if (isMobile) { parallaxSections.forEach(function(section) { if (section) section.style.setProperty('--parallax-y', '0px'); }); }
+  });
+
+  document.addEventListener('click', function() {
+    var navLinks = document.querySelector('.nav-links');
+    if (navLinks && navLinks.classList.contains('mobile-open')) { navLinks.classList.remove('mobile-open'); }
+  });
+})();
+</script>
+<script src="/shelfiq-widget.js"></script>
+</body>
+</html>
