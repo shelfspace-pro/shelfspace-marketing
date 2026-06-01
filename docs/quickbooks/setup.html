@@ -246,7 +246,7 @@ o.onload=function(){window.trackingFunctions.onLoad({appId:"69c141b32234890011a4
 document.head.appendChild(o)}initApollo();</script>
 </head>
 <body>
-<!-- last-synced: 2026-04-28 -->
+<!-- last-synced: 2026-06-01 -->
 
 <!-- NAV -->
 <nav id="nav">
@@ -380,7 +380,7 @@ document.head.appendChild(o)}initApollo();</script>
     <p>If a check cleared with a different DocNumber due to a manual edit in QBO, you can manually mark a payment as cleared from the payment detail screen.</p>
 
     <div class="docs-highlight">
-      <strong>What we handle:</strong> closed-period weeks, transient QBO API errors (10-minute retry), OAuth refresh tokens, vendor matching, daily check-clearing sync, and void cascade (Bill Payment voids before Bill, in the order QBO requires).
+      <strong>What the platform runs:</strong> closed-period weeks, transient QBO API errors (10-minute retry), OAuth refresh tokens, vendor matching, daily check-clearing sync, and void cascade (Bill Payment voids before Bill, in the order QBO requires).
     </div>
 
     <h2>Adjusting after the fact</h2>
@@ -404,7 +404,7 @@ document.head.appendChild(o)}initApollo();</script>
     <h2>Troubleshooting</h2>
     <ul>
       <li><strong>A row shows "Failed":</strong> click <strong>Retry</strong>. Most failures recover. Failed rows also retry every 10 minutes on their own.</li>
-      <li><strong>"Account Period Closed":</strong> we handle it. We retry with today's TxnDate. The DocNumber + Amount + Vendor still match for bank-feed reconciliation; only the posting date shifts. The Recent Sync Activity panel also shows a <strong>Post to Today</strong> button per row and a <strong>Post All to Today</strong> bulk action when closed-period rows exist.</li>
+      <li><strong>"Account Period Closed":</strong> the platform handles it — it retries with today's TxnDate. The DocNumber + Amount + Vendor still match for bank-feed reconciliation; only the posting date shifts. The Recent Sync Activity panel also shows a <strong>Post to Today</strong> button per row and a <strong>Post All to Today</strong> bulk action when closed-period rows exist.</li>
       <li><strong>Bill posted under the wrong QBO Vendor:</strong> QBO's name match can land on a similarly-named record (e.g. "Transfer To/From Acme LLC" vs. "Acme LLC"). Edit the Bill directly in QBO to repoint it, and email Chris if you want the cached mapping updated for future Bills.</li>
       <li><strong>Bookkeeper Match Health shows missing checks:</strong> click <strong>Backfill checks</strong> on the Match Health panel. The button loops through batches of 50 until missing reaches zero.</li>
       <li><strong>No Bill Payments are pushing at all:</strong> check that you set a Bank Account in step 2. Without it, every Bill Payment is skipped with reason "QBO bank account not mapped." Set the bank account, then click <strong>Backfill checks</strong> to fill the gap.</li>
@@ -470,7 +470,7 @@ document.head.appendChild(o)}initApollo();</script>
   }, { passive: true });
 })();
 </script>
-<script src="/docs-search.js?v=17" defer></script>
+<script src="/docs-search.js?v=18" defer></script>
 <script src="/shelfiq-widget.js"></script>
 </body>
 </html>
