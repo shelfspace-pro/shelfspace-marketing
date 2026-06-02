@@ -54,8 +54,12 @@ for doc in $(jq -r 'keys[]' "$MANIFEST"); do
       continue
     fi
 
-    # Check if source file changed since lastSynced
-    CHANGES=$(git -C "$PLATFORM_DIR" log --since="$LAST_SYNCED" --oneline -- "$src" 2>/dev/null | head -5)
+    # Check if source file changed AFTER lastSynced. Use end-of-day so that a
+    # platform commit made the SAME day a doc was synced (against that very
+    # commit) doesn't false-flag — `--since="<date>"` alone resolves to midnight
+    # and counts same-day commits as newer. Manifest stores date-only, so
+    # "synced on day D" means current through the end of day D.
+    CHANGES=$(git -C "$PLATFORM_DIR" log --since="$LAST_SYNCED 23:59:59" --oneline -- "$src" 2>/dev/null | head -5)
     if [ -n "$CHANGES" ]; then
       STALE_REPORT="$STALE_REPORT\n  📝 $doc (synced: $LAST_SYNCED)\n     Changed: $src"
       STALE_COUNT=$((STALE_COUNT + 1))
