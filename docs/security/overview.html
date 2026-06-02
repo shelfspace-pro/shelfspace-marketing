@@ -213,7 +213,7 @@ o.onload=function(){window.trackingFunctions.onLoad({appId:"69c141b32234890011a4
 document.head.appendChild(o)}initApollo();</script>
 </head>
 <body>
-<!-- last-synced: 2026-03-25 -->
+<!-- last-synced: 2026-06-02 -->
 
 <!-- NAV -->
 <nav id="nav">
@@ -275,7 +275,7 @@ document.head.appendChild(o)}initApollo();</script>
     <p>Cannabis businesses handle uniquely sensitive data: vendor payment details, bank account numbers, inventory tied to state-tracked packages, and financial records that regulators can request at any time. We built ShelfSpace with that reality in mind. Every design decision — from how we store data to how we delete it — is shaped by the compliance requirements of the cannabis industry.</p>
 
     <div class="docs-highlight">
-      <strong>What we handle:</strong> the entire security infrastructure: encryption, access control, tenant isolation, backups, and audit logging are all run by ShelfSpace. You manage your users and roles; the platform handles everything else.
+      <strong>What the platform runs:</strong> the entire security infrastructure — encryption, access control, tenant isolation, backups, and audit logging. You manage your users and roles; the platform handles everything else.
     </div>
 
     <h2>Row-Level Security and Tenant Isolation</h2>
@@ -291,7 +291,7 @@ document.head.appendChild(o)}initApollo();</script>
     <h2>Zero Hard Deletes</h2>
     <p>ShelfSpace never permanently deletes records. Every table uses soft deletes — when a record is "deleted," we set an <strong>is_deleted</strong> flag to true and exclude it from normal queries. The underlying data remains in the database, preserving the complete history for compliance audits.</p>
 
-    <p>This matters in cannabis because regulators may ask for historical records going back years. If a vendor was removed, a payment was voided, or a user was deactivated, the full history of those actions is preserved and traceable. See <a href="/docs/security/audit-trail">Audit Trail</a> for how we log every action.</p>
+    <p>This matters in cannabis because regulators may ask for historical records going back years. If a vendor was removed, a payment was voided, or a user was deactivated, the full history of those actions is preserved and traceable. See <a href="/docs/security/audit-trail">Audit Trail</a> for how the platform logs every action.</p>
 
     <h2>Infrastructure</h2>
     <p>ShelfSpace runs on enterprise-grade cloud infrastructure with daily backups, point-in-time recovery, and geographic redundancy. Our hosting providers maintain SOC 2 compliance, and we follow security best practices for dependency management, secret handling, and deployment pipelines. The platform is deployed through <a href="/features">Vercel</a> with Supabase (PostgreSQL) as the data layer, both of which maintain their own security certifications.</p>
