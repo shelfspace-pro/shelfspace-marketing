@@ -183,7 +183,7 @@ document.head.appendChild(o)}initApollo();</script>
     <li><a href="/credit-recovery">Credit Recovery</a></li>
     <li><a href="/pricing">Pricing</a></li>
     <li><a href="/about">About</a></li>
-    <li class="nav-login-mobile"><a href="https://ourshelf.space">Login</a></li>
+    <li class="nav-login-mobile"><a href="https://ourshelf.space/login">Login</a></li>
     <li><a href="/contact" class="nav-cta">Get Started <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a></li>
   </ul>
   <div class="nav-hamburger" onclick="document.querySelector('.nav-links').classList.toggle('mobile-open'); event.stopPropagation();"><span></span><span></span><span></span></div>
@@ -366,11 +366,11 @@ document.head.appendChild(o)}initApollo();</script>
       <div class="form-success" id="formSuccess">
         <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
         <h3>Account created</h3>
-        <p>You're all set. <a href="https://ourshelf.space" style="color: var(--green-dark); font-weight: 600; text-decoration: none;">Log in to get started.</a></p>
+        <p>You're all set. <a href="https://ourshelf.space/login" style="color: var(--green-dark); font-weight: 600; text-decoration: none;">Log in to get started.</a></p>
       </div>
     </div>
 
-    <p class="login-link">Already have an account? <a href="https://ourshelf.space">Log in</a></p>
+    <p class="login-link">Already have an account? <a href="https://ourshelf.space/login">Log in</a></p>
   </div>
 </section>
 
@@ -383,7 +383,7 @@ document.head.appendChild(o)}initApollo();</script>
     </div>
     <div class="footer-col"><h3>Services</h3><ul><li><a href="/accounts-payable">Accounts Payable</a></li><li><a href="/consignment">Consignment</a></li><li><a href="/credit-recovery">Credit Recovery</a></li><li><a href="/checks">Check Payments</a></li><li><a href="/shelfiq">ShelfiQ</a></li></ul></div>
     <div class="footer-col"><h3>Platform</h3><ul><li><a href="/features">Features</a></li><li><a href="/how-it-works">How It Works</a></li><li><a href="/pricing">Pricing</a></li><li><a href="/about">About</a></li><li><a href="/blog">Blog</a></li><li><a href="/docs">Docs</a></li></ul></div>
-    <div class="footer-col"><h3>Access</h3><ul><li><a href="https://ourshelf.space">Login</a></li><li><a href="/contact">Sign Up</a></li><li><a href="/contact">Contact</a></li><li><a href="/vendors">For Vendors</a></li><li><a href="/for-bookkeepers">For Bookkeepers</a></li></ul></div>
+    <div class="footer-col"><h3>Access</h3><ul><li><a href="https://ourshelf.space/login">Login</a></li><li><a href="/contact">Sign Up</a></li><li><a href="/contact">Contact</a></li><li><a href="/vendors">For Vendors</a></li><li><a href="/for-bookkeepers">For Bookkeepers</a></li></ul></div>
     <div class="footer-col"><h3>Company</h3><ul><li><a href="mailto:chris@shelfspace.pro">Email</a></li><li><a href="mailto:support@shelfspace.pro">Support</a></li><li><a href="https://linkedin.com/company/shelfspace-pro" target="_blank" rel="noopener" class="footer-social-link"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> LinkedIn</a></li></ul></div>
   </div>
   <div class="footer-bottom"><p>&copy; 2026 ShelfSpace Technologies Inc.</p><div style="display:flex;align-items:center;gap:8px;justify-content:center;margin-top:12px;"><img src="/metrc-logo.png" alt="METRC" style="height:18px;opacity:0.4;filter:brightness(0) invert(1);"><span style="font-size:11px;color:rgba(255,255,255,0.35);">Certified METRC Third-Party Vendor</span></div><div class="footer-bottom-links"><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div></div>
@@ -464,14 +464,14 @@ document.head.appendChild(o)}initApollo();</script>
       if (!res.ok) {
         const data = await res.json().catch(() => null);
         if (data?.code === 'EMAIL_EXISTS') {
-          errorEl.innerHTML = 'A user with that email already exists. <a href="https://ourshelf.space" style="color:var(--green-dark);font-weight:600;text-decoration:none;">Log in instead &rarr;</a>';
+          errorEl.innerHTML = 'A user with that email already exists. <a href="https://ourshelf.space/login" style="color:var(--green-dark);font-weight:600;text-decoration:none;">Log in instead &rarr;</a>';
           errorEl.style.display = 'block';
           btn.disabled = false;
           btn.innerHTML = 'Create Account <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>';
           return;
         }
         if (data?.code === 'BUSINESS_EXISTS') {
-          errorEl.innerHTML = 'This business already exists on ShelfSpace. Ask your account admin to add you as a user, or <a href="https://ourshelf.space" style="color:var(--green-dark);font-weight:600;text-decoration:none;">log in here &rarr;</a><br><br>If this seems like an error, email us at <a href="mailto:support@shelfspace.pro" style="color:var(--green-dark);font-weight:600;text-decoration:none;">support@shelfspace.pro</a>.';
+          errorEl.innerHTML = 'This business already exists on ShelfSpace. Ask your account admin to add you as a user, or <a href="https://ourshelf.space/login" style="color:var(--green-dark);font-weight:600;text-decoration:none;">log in here &rarr;</a><br><br>If this seems like an error, email us at <a href="mailto:support@shelfspace.pro" style="color:var(--green-dark);font-weight:600;text-decoration:none;">support@shelfspace.pro</a>.';
           errorEl.style.display = 'block';
           btn.disabled = false;
           btn.innerHTML = 'Create Account <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>';
