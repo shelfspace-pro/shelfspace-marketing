@@ -97,8 +97,8 @@
   .bo-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin: 36px 0; }
   .bo-card { background: var(--green-ghost); border: 1px solid rgba(149,213,178,0.45); border-radius: 14px; padding: 20px 20px 22px; }
   .bo-card-ico { width: 30px; height: 30px; stroke: var(--green-mid); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; margin-bottom: 12px; display: block; }
-  .bo-card-title { font-size: 16px; font-weight: 700; color: var(--green-deep); margin: 0 0 6px; }
-  .bo-card-desc { font-size: 14px; line-height: 1.55; color: var(--slate-600); margin: 0; }
+  .bo-card .bo-card-title { font-size: 16px; font-weight: 700; color: var(--green-deep); margin: 0 0 6px; line-height: 1.3; }
+  .bo-card .bo-card-desc { font-size: 14px; line-height: 1.55; color: var(--slate-600); margin: 0; }
   @media (max-width: 600px) { .bo-grid { grid-template-columns: 1fr; } }
 
   /* ─── BEFORE / AFTER ─── */
@@ -106,7 +106,7 @@
   .ba-col { border-radius: 14px; padding: 22px 22px 24px; }
   .ba-before { background: var(--slate-100); border: 1px solid var(--slate-200); }
   .ba-after { background: var(--green-ghost); border: 1px solid rgba(149,213,178,0.5); }
-  .ba-tag { font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; margin: 0 0 14px; }
+  .ba .ba-tag { font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; margin: 0 0 14px; line-height: 1.2; }
   .ba-before .ba-tag { color: var(--slate-500); }
   .ba-after .ba-tag { color: var(--green-mid); }
   .ba ul { list-style: none; padding: 0; margin: 0; }
@@ -120,7 +120,7 @@
   .fs-ico { width: 18px; height: 18px; vertical-align: -3px; margin-right: 7px; stroke: var(--green-mid); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 
   /* ─── CHECK LIST ─── */
-  .bo-checklist { list-style: none; padding: 0; margin: 32px 0; }
+  .article-body ul.bo-checklist { list-style: none; padding: 0; margin: 32px 0; }
   .bo-checklist li { font-size: 16px; line-height: 1.55; color: var(--slate-600); padding: 12px 0 12px 34px; position: relative; border-bottom: 1px solid var(--slate-200); margin: 0; }
   .bo-checklist li:first-child { border-top: 1px solid var(--slate-200); }
   .bo-checklist li::before { content: '\2713'; position: absolute; left: 4px; top: 12px; color: var(--green-mid); font-weight: 700; font-size: 16px; }
@@ -450,7 +450,7 @@ document.head.appendChild(o)}initApollo();</script>
 
   <ul class="bo-checklist reveal">
     <li><strong>Built for cannabis, not adapted to it.</strong> Generic AP software bolts on a cannabis page; real back office software is designed around Metrc and dispensary workflows.</li>
-    <li><strong>Metrc reconciliation.</strong> Invoices matched against the Metrc manifest and the physical delivery, not just the PO.</li>
+    <li><strong>Metrc reconciliation.</strong> Invoices matched against the Metrc manifest and the physical delivery, not the PO alone.</li>
     <li><strong>Check 21 payments.</strong> Digital checks that work even when cannabis banking doesn't, so a bank change is an account update, not a migration.</li>
     <li><strong>Vendor credit recovery.</strong> Returns, expirations, and co-marketing recovered every month — the credits most operators leave on the table.</li>
     <li><strong>Consignment settlement.</strong> Per-vendor weekly settlements, because consignment is how dispensaries free up trapped cash.</li>
