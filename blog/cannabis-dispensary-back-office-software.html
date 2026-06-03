@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cannabis Dispensary Back Office Software — ShelfSpace</title>
+<meta name="description" content="Cannabis dispensary back office software runs the money side of your store — vendor payments, AP, credit recovery, and consignment on one Metrc-verified platform.">
+<link rel="canonical" href="https://shelfspace.pro/blog/cannabis-dispensary-back-office-software">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://shelfspace.pro/blog/cannabis-dispensary-back-office-software">
+<meta property="og:title" content="Cannabis Dispensary Back Office Software — ShelfSpace">
+<meta property="og:description" content="Cannabis dispensary back office software runs the money side of your store — vendor payments, AP, credit recovery, and consignment on one Metrc-verified platform.">
+<meta property="og:image" content="https://shelfspace.pro/og-image-v7.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Cannabis Dispensary Back Office Software — ShelfSpace">
+<meta name="twitter:description" content="Cannabis dispensary back office software runs the money side of your store — vendor payments, AP, credit recovery, and consignment on one Metrc-verified platform.">
+<meta name="twitter:image" content="https://shelfspace.pro/og-image-v7.png">
+<meta name="apple-mobile-web-app-title" content="ShelfSpace">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+<style>
+  @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-12px); } }
+
+  /* ─── HERO ENHANCEMENTS ─── */
+  .page-hero { padding-bottom: 40px; }
+  .hero-bg-gradient { position: absolute; top: -30%; right: -20%; width: 700px; height: 700px; background: radial-gradient(circle, rgba(149,213,178,0.18) 0%, rgba(149,213,178,0) 70%); animation: float 8s ease-in-out infinite; pointer-events: none; }
+  .hero-bg-gradient-2 { position: absolute; bottom: -20%; left: -15%; width: 550px; height: 550px; background: radial-gradient(circle, rgba(27,67,50,0.06) 0%, rgba(27,67,50,0) 70%); animation: float 10s ease-in-out infinite; animation-delay: -3s; pointer-events: none; }
+  .hero-grid-lines { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 1200px; height: 100%; opacity: 0.035; background-image: linear-gradient(var(--green-deep) 1px, transparent 1px), linear-gradient(90deg, var(--green-deep) 1px, transparent 1px); background-size: 80px 80px; pointer-events: none; }
+  .page-hero .section-label,
+  .page-hero .section-title,
+  .page-hero .section-desc { opacity: 0; transform: translateY(30px); }
+  .page-hero .section-label { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1); }
+  .page-hero .section-title { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s, transform 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s; }
+  .page-hero .section-desc { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1) 0.25s, transform 0.8s cubic-bezier(0.22,1,0.36,1) 0.25s; }
+  .page-hero.hero-loaded .section-label,
+  .page-hero.hero-loaded .section-title,
+  .page-hero.hero-loaded .section-desc { opacity: 1; transform: translateY(0); }
+
+  /* ─── REVEAL ─── */
+  .reveal {
+    opacity: 0; transform: translateY(40px);
+    transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+  /* ─── ARTICLE BODY ─── */
+  .article-body { max-width: 720px; margin: 0 auto; padding: 0 48px 80px; }
+  .article-body h2 { font-size: 24px; font-weight: 700; color: var(--green-deep); margin: 48px 0 16px; letter-spacing: -0.5px; line-height: 1.3; }
+  .article-body p { font-size: 17px; line-height: 1.85; color: var(--slate-600); margin-bottom: 24px; }
+  .article-body ul, .article-body ol { margin-bottom: 24px; padding-left: 24px; }
+  .article-body li { font-size: 17px; line-height: 1.85; color: var(--slate-600); margin-bottom: 8px; }
+  .article-body strong { color: var(--green-deep); font-weight: 600; }
+  .article-body a { color: var(--green-mid); font-weight: 500; text-decoration: none; }
+  .article-body a:hover { color: var(--green-deep); text-decoration: underline; }
+  .article-body blockquote { border-left: 3px solid var(--green-accent); padding: 16px 24px; margin: 32px 0; background: var(--green-ghost); border-radius: 0 8px 8px 0; }
+  .article-body blockquote p { font-style: italic; color: var(--green-dark); margin-bottom: 0; }
+
+  /* ─── AT A GLANCE ─── */
+  .article-glance {
+    max-width: 720px; margin: 0 auto 40px; padding: 24px 28px;
+    background: var(--green-ghost); border: 1px solid rgba(149,213,178,0.3);
+    border-radius: 12px;
+  }
+  .article-glance h2 {
+    font-size: 14px; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--green-mid); margin: 0 0 12px;
+  }
+  .article-glance ul { list-style: none; padding: 0; margin: 0; }
+  .article-glance li {
+    font-size: 15px; line-height: 1.6; color: var(--slate-600);
+    padding: 4px 0 4px 20px; position: relative;
+  }
+  .article-glance li::before {
+    content: ''; position: absolute; left: 0; top: 12px;
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--green-accent);
+  }
+
+  /* ─── HERO ENGINE SVG ─── */
+  .bo-engine { display: block; width: 100%; max-width: 560px; height: auto; margin: 0 auto; }
+  .bo-engine text { font-family: var(--font-mono); }
+  .bo-engine .flowline { stroke: var(--green-accent); stroke-width: 2.5; fill: none; stroke-dasharray: 5 7; animation: bo-dash 1.1s linear infinite; }
+  .bo-engine .flowline.out { animation-duration: 1.4s; }
+  .bo-engine .hub-glow { fill: var(--green-accent); animation: bo-pulse 3.4s ease-in-out infinite; }
+  @keyframes bo-dash { to { stroke-dashoffset: -24; } }
+  @keyframes bo-pulse { 0%, 100% { opacity: 0.10; } 50% { opacity: 0.26; } }
+
+  /* ─── BACK-OFFICE MODULE GRID ─── */
+  .bo-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin: 36px 0; }
+  .bo-card { background: var(--green-ghost); border: 1px solid rgba(149,213,178,0.45); border-radius: 14px; padding: 20px 20px 22px; }
+  .bo-card-ico { width: 30px; height: 30px; stroke: var(--green-mid); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; margin-bottom: 12px; display: block; }
+  .bo-card-title { font-size: 16px; font-weight: 700; color: var(--green-deep); margin: 0 0 6px; }
+  .bo-card-desc { font-size: 14px; line-height: 1.55; color: var(--slate-600); margin: 0; }
+  @media (max-width: 600px) { .bo-grid { grid-template-columns: 1fr; } }
+
+  /* ─── BEFORE / AFTER ─── */
+  .ba { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 36px 0; }
+  .ba-col { border-radius: 14px; padding: 22px 22px 24px; }
+  .ba-before { background: var(--slate-100); border: 1px solid var(--slate-200); }
+  .ba-after { background: var(--green-ghost); border: 1px solid rgba(149,213,178,0.5); }
+  .ba-tag { font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; margin: 0 0 14px; }
+  .ba-before .ba-tag { color: var(--slate-500); }
+  .ba-after .ba-tag { color: var(--green-mid); }
+  .ba ul { list-style: none; padding: 0; margin: 0; }
+  .ba .ba-li { font-size: 14.5px; line-height: 1.5; color: var(--slate-600); padding: 6px 0 6px 24px; position: relative; margin: 0; }
+  .ba .ba-li::before { position: absolute; left: 0; top: 6px; font-size: 14px; font-weight: 700; }
+  .ba-before .ba-li::before { content: '\2717'; color: var(--slate-400); }
+  .ba-after .ba-li::before { content: '\2713'; color: var(--green-mid); }
+  @media (max-width: 600px) { .ba { grid-template-columns: 1fr; } }
+
+  /* ─── FLOW-STEP TITLE ICON ─── */
+  .fs-ico { width: 18px; height: 18px; vertical-align: -3px; margin-right: 7px; stroke: var(--green-mid); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+  /* ─── CHECK LIST ─── */
+  .bo-checklist { list-style: none; padding: 0; margin: 32px 0; }
+  .bo-checklist li { font-size: 16px; line-height: 1.55; color: var(--slate-600); padding: 12px 0 12px 34px; position: relative; border-bottom: 1px solid var(--slate-200); margin: 0; }
+  .bo-checklist li:first-child { border-top: 1px solid var(--slate-200); }
+  .bo-checklist li::before { content: '\2713'; position: absolute; left: 4px; top: 12px; color: var(--green-mid); font-weight: 700; font-size: 16px; }
+  .bo-checklist strong { color: var(--green-deep); font-weight: 600; }
+
+  /* ─── FAQ (not global — copied from vendors.html) ─── */
+  .faq-list { max-width: 720px; margin: 0 auto; }
+  .faq-list details { border-bottom: 1px solid var(--slate-200); }
+  .faq-list details:first-child { border-top: 1px solid var(--slate-200); }
+  .faq-list summary {
+    padding: 22px 0; font-size: 17px; font-weight: 600;
+    color: var(--green-deep); cursor: pointer; list-style: none;
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  }
+  .faq-list summary::-webkit-details-marker { display: none; }
+  .faq-list summary::after {
+    content: '+'; font-size: 22px; font-weight: 400;
+    color: var(--slate-500); flex-shrink: 0;
+  }
+  .faq-list details[open] summary::after { content: '\2212'; }
+  .faq-list details p {
+    padding: 0 0 22px; margin: 0; font-size: 15px;
+    line-height: 1.7; color: var(--slate-500);
+  }
+
+  /* ─── CTA PARALLAX ─── */
+  .cta-section::before { transform: translate(-50%,-50%) translateY(var(--parallax-y, 0)); will-change: transform; }
+
+  /* ─── FOOTER 5-COL ─── */
+  .footer-top { grid-template-columns: 2fr 1fr 1fr 1fr 1fr; }
+  @media (max-width: 900px) { .footer-top { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px) { .footer-top { grid-template-columns: 1fr; } }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    .article-body { padding: 0 24px 60px; }
+  }
+
+  /* ─── REDUCED MOTION ─── */
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; transition: none; }
+    .page-hero .section-label,
+    .page-hero .section-title,
+    .page-hero .section-desc { opacity: 1; transform: none; transition: none; }
+    .hero-bg-gradient, .hero-bg-gradient-2 { animation: none; }
+    .bo-engine .flowline, .bo-engine .hub-glow { animation: none; }
+  }
+</style>
+<noscript><style>.reveal,.page-hero .section-label,.page-hero .section-title,.page-hero .section-desc{opacity:1;transform:none;transition:none;}</style></noscript>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-H2LBJT03WE"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-H2LBJT03WE');</script>
+<script>function initApollo(){var n=Math.random().toString(36).substring(7),o=document.createElement("script");
+o.src="https://assets.apollo.io/micro/website-tracker/tracker.iife.js?nocache="+n,o.async=!0,o.defer=!0,
+o.onload=function(){window.trackingFunctions.onLoad({appId:"69c141b32234890011a43849"})},
+document.head.appendChild(o)}initApollo();</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Cannabis Dispensary Back Office Software",
+  "description": "Cannabis dispensary back office software runs the money side of your store — vendor payments, AP, credit recovery, and consignment on one Metrc-verified platform.",
+  "author": {
+    "@type": "Person",
+    "name": "Chris Mitchem"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "ShelfSpace",
+    "url": "https://shelfspace.pro"
+  },
+  "datePublished": "2026-06-03",
+  "url": "https://shelfspace.pro/blog/cannabis-dispensary-back-office-software",
+  "image": "https://shelfspace.pro/og-image-v7.png"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://shelfspace.pro/" },
+    { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://shelfspace.pro/blog" },
+    { "@type": "ListItem", "position": 3, "name": "Cannabis Dispensary Back Office Software" }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is cannabis dispensary back office software?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Cannabis dispensary back office software runs the money side of a dispensary — paying vendors, reconciling invoices, recovering credits, and settling consignment — on one platform. ShelfSpace is back office software built only for cannabis: it connects to your POS and Metrc and handles the work your POS was never built for."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is back office software the same as a dispensary POS?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. A POS runs the front of house — it rings sales and tracks inventory against Metrc. Back office software runs the money behind the counter: vendor payments, accounts payable, credit recovery, and consignment. ShelfSpace connects to your existing POS rather than replacing it."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What should I look for in cannabis back office software?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Look for software built for cannabis specifically: Metrc integration, three-way invoice matching, Check 21 vendor payments, a vendor portal, vendor credit recovery, consignment settlement, and a QuickBooks sync. Generic AP tools and bookkeeping software miss the cannabis-specific work like Metrc reconciliation and consignment."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does cannabis back office software replace my bookkeeper?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. ShelfSpace runs the vendor-facing money work — payments, AP, credits, consignment — and syncs to QuickBooks. Your bookkeeper or accounting firm still owns month-end close, bank reconciliations, payroll, financial statements, and 280E tax compliance."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How does ShelfSpace back office software connect to my systems?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "ShelfSpace is integrated with Metrc and compatible with every major cannabis POS, and it syncs to QuickBooks. The platform pulls your POS and Metrc data, matches it against vendor invoices, and keeps your books current — you keep ringing sales the way you already do."
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="/" class="nav-logo">
+    <div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div>
+    <span class="nav-logo-text">ShelfSpace</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="/consignment">Consignment</a></li>
+    <li><a href="/accounts-payable">Accounts Payable</a></li>
+    <li><a href="/credit-recovery">Credit Recovery</a></li>
+    <li><a href="/pricing">Pricing</a></li>
+    <li><a href="/about">About</a></li>
+    <li><a href="/contact" class="nav-cta">Get Started <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a></li>
+  </ul>
+  <div class="nav-hamburger" onclick="document.querySelector('.nav-links').classList.toggle('mobile-open'); event.stopPropagation();"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="hero-bg-gradient"></div>
+  <div class="hero-bg-gradient-2"></div>
+  <div class="hero-grid-lines"></div>
+  <div class="section-label">Back Office Software</div>
+  <h1 class="section-title">Cannabis Dispensary Back Office Software</h1>
+  <p class="section-desc">Your POS rings the sale. Back office software runs everything that happens after it — paying vendors, matching invoices, recovering credits, settling consignment. ShelfSpace is the back office, built only for cannabis.</p>
+</div>
+
+<!-- HERO FIGURE: the back-office engine -->
+<div class="blog-figure reveal">
+  <svg class="bo-engine" viewBox="0 0 560 230" role="img" aria-labelledby="boe-ttl boe-desc">
+    <title id="boe-ttl">How cannabis back office software works</title>
+    <desc id="boe-desc">Vendor email, invoices, and deliveries flow into the ShelfSpace platform, which outputs Check 21 payments, credit memos, and consignment settlements, all reconciled to Metrc.</desc>
+
+    <!-- flow lines: inputs to hub -->
+    <path class="flowline" d="M128 53 H200 Q224 53 232 86"/>
+    <path class="flowline" d="M128 116 H232"/>
+    <path class="flowline" d="M128 179 H200 Q224 179 232 146"/>
+    <!-- flow lines: hub to outputs -->
+    <path class="flowline out" d="M328 86 Q336 53 360 53 H432"/>
+    <path class="flowline out" d="M328 116 H432"/>
+    <path class="flowline out" d="M328 146 Q336 179 360 179 H432"/>
+
+    <!-- input cards -->
+    <g>
+      <rect x="24" y="34" width="104" height="38" rx="9" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+      <text x="76" y="58" text-anchor="middle" font-size="10.5" font-weight="700" fill="#475569">VENDOR EMAIL</text>
+      <rect x="24" y="97" width="104" height="38" rx="9" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+      <text x="76" y="121" text-anchor="middle" font-size="10.5" font-weight="700" fill="#475569">INVOICE</text>
+      <rect x="24" y="160" width="104" height="38" rx="9" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+      <text x="76" y="184" text-anchor="middle" font-size="10.5" font-weight="700" fill="#475569">DELIVERY</text>
+    </g>
+
+    <!-- hub -->
+    <ellipse class="hub-glow" cx="280" cy="116" rx="74" ry="74"/>
+    <rect x="232" y="66" width="96" height="100" rx="16" fill="#1b4332"/>
+    <g transform="translate(264,84) scale(1.35)" fill="none" stroke="#95d5b2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/>
+      <polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/>
+      <path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/>
+    </g>
+    <text x="280" y="152" text-anchor="middle" font-size="11" font-weight="700" fill="#95d5b2">ShelfSpace</text>
+
+    <!-- output cards -->
+    <g>
+      <rect x="432" y="34" width="104" height="38" rx="9" fill="#f0faf4" stroke="#95d5b2" stroke-width="1.5"/>
+      <text x="484" y="58" text-anchor="middle" font-size="10.5" font-weight="700" fill="#1b4332">CHECK 21</text>
+      <rect x="432" y="97" width="104" height="38" rx="9" fill="#f0faf4" stroke="#95d5b2" stroke-width="1.5"/>
+      <text x="484" y="121" text-anchor="middle" font-size="10.5" font-weight="700" fill="#1b4332">CREDIT MEMO</text>
+      <rect x="432" y="160" width="104" height="38" rx="9" fill="#f0faf4" stroke="#95d5b2" stroke-width="1.5"/>
+      <text x="484" y="184" text-anchor="middle" font-size="10.5" font-weight="700" fill="#1b4332">SETTLEMENT</text>
+    </g>
+  </svg>
+  <p class="blog-figure-cap"><strong>The back office, on one platform.</strong> Vendor email, invoices, and deliveries go in. Payments, credit memos, and settlements come out — all reconciled to Metrc.</p>
+</div>
+
+<!-- AT A GLANCE -->
+<div class="article-glance">
+  <h2>At a glance</h2>
+  <ul>
+    <li>Cannabis dispensary back office software runs the money side of a store: vendor payments, accounts payable, credit recovery, and consignment</li>
+    <li>It's the half your POS was never built for — your POS rings sales; back office software runs the money going out to vendors</li>
+    <li>ShelfSpace is back office software built only for cannabis: Metrc-verified, three-way invoice matching, Check 21 payments, a vendor portal, and the ShelfiQ AI on vendor email</li>
+    <li>It connects to your existing POS and syncs to QuickBooks — it replaces neither your POS nor your bookkeeper</li>
+    <li>Built by a 10-year cannabis operator. Compatible with every major cannabis POS</li>
+  </ul>
+</div>
+
+<!-- ARTICLE BODY -->
+<article class="article-body">
+
+  <p class="reveal">Every dispensary has a back office, whether or not it has back office software. It's the place vendor invoices pile up, checks get cut, credits get chased, and consignment gets reconciled. For most stores it isn't software at all — it's one stressed person, an email inbox, and a spreadsheet that only they understand.</p>
+
+  <p class="reveal"><strong>Cannabis dispensary back office software</strong> turns that into a system. It runs the money side of the store on one platform: paying vendors, matching invoices, recovering credits, and settling consignment. This is the part of the business your POS doesn't touch, and it's where margin quietly leaks. If you want the wider category map first, start with <a href="/blog/cannabis-retail-management">cannabis retail management</a>, then come back here for the software itself.</p>
+
+  <h2 class="reveal">What lives in a dispensary back office</h2>
+
+  <p class="reveal">Strip it down and a cannabis back office is four jobs. Good back office software does all four in one place instead of four inboxes.</p>
+
+  <!-- MODULE GRID -->
+  <div class="bo-grid reveal">
+    <div class="bo-card">
+      <svg class="bo-card-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2h9l5 5v15a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1z"/><path d="M14 2v6h6"/><line x1="9" y1="13" x2="16" y2="13"/><line x1="9" y1="17" x2="16" y2="17"/></svg>
+      <p class="bo-card-title">Accounts payable</p>
+      <p class="bo-card-desc">Invoices ingested, three-way matched against Metrc and the delivery, paid by Check 21 once the math holds.</p>
+    </div>
+    <div class="bo-card">
+      <svg class="bo-card-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7"/><polyline points="3 4 3 9 8 9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="12" x2="15" y2="13.5"/></svg>
+      <p class="bo-card-title">Credit recovery</p>
+      <p class="bo-card-desc">Returns, expirations, and co-marketing built into monthly memos and sent to vendors, line by line.</p>
+    </div>
+    <div class="bo-card">
+      <svg class="bo-card-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 16V8a2 2 0 0 0-1-1.7l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.7l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.3 7 12 12 20.7 7"/><line x1="12" y1="22" x2="12" y2="12"/></svg>
+      <p class="bo-card-title">Consignment</p>
+      <p class="bo-card-desc">Weekly settlements per vendor: POS pulled, reconciled to Metrc, split calculated, check queued for your sign-off.</p>
+    </div>
+    <div class="bo-card">
+      <svg class="bo-card-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 9.5 9.5 0 0 1-3.6-.7L3 21l1.3-4.1A8.3 8.3 0 0 1 3 11.5 8.4 8.4 0 0 1 12 3a8.4 8.4 0 0 1 9 8.5z"/><line x1="8.5" y1="11.5" x2="8.5" y2="11.5"/><line x1="12" y1="11.5" x2="12" y2="11.5"/><line x1="15.5" y1="11.5" x2="15.5" y2="11.5"/></svg>
+      <p class="bo-card-title">Vendor communication</p>
+      <p class="bo-card-desc">ShelfiQ answers first-line vendor email in seconds; a vendor portal shows payments and history without a phone call.</p>
+    </div>
+  </div>
+
+  <h2 class="reveal">The back office most dispensaries run today</h2>
+
+  <p class="reveal">Before software, the back office runs on memory and goodwill. It works right up until the person who holds it all in their head takes a week off, or a vendor double-bills, or a promotion credit slips through. Here's the difference software makes.</p>
+
+  <!-- BEFORE / AFTER -->
+  <div class="ba reveal" role="img" aria-label="Before: the back office runs on an inbox, a spreadsheet, and one person's memory, with credits missed and duplicate invoices paid. After, on ShelfSpace: invoices matched against Metrc, credits built automatically, payments on Check 21, vendors self-serve on a portal, and the books stay current.">
+    <div class="ba-col ba-before">
+      <p class="ba-tag">Inbox &amp; spreadsheet</p>
+      <ul>
+        <li class="ba-li">Invoices live in one person's email</li>
+        <li class="ba-li">Duplicate invoices get paid twice</li>
+        <li class="ba-li">Promotion credits never get filed</li>
+        <li class="ba-li">Vendors call to ask where their check is</li>
+        <li class="ba-li">The books are a month behind</li>
+      </ul>
+    </div>
+    <div class="ba-col ba-after">
+      <p class="ba-tag">On ShelfSpace</p>
+      <ul>
+        <li class="ba-li">Every invoice matched against Metrc</li>
+        <li class="ba-li">Duplicates caught before money moves</li>
+        <li class="ba-li">Credit memos built every month</li>
+        <li class="ba-li">Vendors self-serve on their portal</li>
+        <li class="ba-li">QuickBooks stays current</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2 class="reveal">How cannabis back office software actually works</h2>
+
+  <p class="reveal">Good back office software is mostly invisible once it's running. You connect it, it does the reconciling, and you approve the things that need a human. Four steps.</p>
+
+  <!-- FLOW STEPS -->
+  <div class="flow-steps reveal">
+    <div class="flow-step">
+      <div class="flow-step-num">1</div>
+      <div class="flow-step-body">
+        <p class="flow-step-title"><svg class="fs-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7V5a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v2"/><rect x="3" y="7" width="18" height="13" rx="2"/><line x1="3" y1="11" x2="21" y2="11"/></svg>Connect your POS and Metrc</p>
+        <p class="flow-step-desc">The platform pulls sales and inventory data from your existing POS and your Metrc account. Nothing about how you ring a sale changes.</p>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-step-num">2</div>
+      <div class="flow-step-body">
+        <p class="flow-step-title"><svg class="fs-ico" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>The platform reconciles the money</p>
+        <p class="flow-step-desc">Every invoice gets <a href="/accounts-payable">three-way matched</a> against the Metrc manifest and what your team received. <a href="/credit-recovery">Credit memos</a> and <a href="/consignment">consignment settlements</a> build themselves.</p>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-step-num">3</div>
+      <div class="flow-step-body">
+        <p class="flow-step-title"><svg class="fs-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>You approve what needs you</p>
+        <p class="flow-step-desc">Payments and memos queue for your sign-off. You stay in control of every dollar; ShelfiQ handles the routine vendor email so you don't have to.</p>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-step-num">4</div>
+      <div class="flow-step-body">
+        <p class="flow-step-title"><svg class="fs-ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="6" width="20" height="12" rx="2"/><line x1="6" y1="10" x2="6" y2="10"/><line x1="10" y1="14" x2="18" y2="14"/></svg>Vendors get paid, books stay current</p>
+        <p class="flow-step-desc"><a href="/checks">Check 21 payments</a> go out, vendors see them in their portal, and every transaction syncs to QuickBooks. Your back office runs itself.</p>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="reveal">What to look for in cannabis back office software</h2>
+
+  <p class="reveal">Plenty of generic AP and bookkeeping tools will technically "do the back office." Almost none of them speak cannabis. When you evaluate software, the difference is in the cannabis-specific work:</p>
+
+  <ul class="bo-checklist reveal">
+    <li><strong>Built for cannabis, not adapted to it.</strong> Generic AP software bolts on a cannabis page; real back office software is designed around Metrc and dispensary workflows.</li>
+    <li><strong>Metrc reconciliation.</strong> Invoices matched against the Metrc manifest and the physical delivery, not just the PO.</li>
+    <li><strong>Check 21 payments.</strong> Digital checks that work even when cannabis banking doesn't, so a bank change is an account update, not a migration.</li>
+    <li><strong>Vendor credit recovery.</strong> Returns, expirations, and co-marketing recovered every month — the credits most operators leave on the table.</li>
+    <li><strong>Consignment settlement.</strong> Per-vendor weekly settlements, because consignment is how dispensaries free up trapped cash.</li>
+    <li><strong>A vendor portal and a sync to QuickBooks.</strong> So vendors self-serve and your bookkeeper isn't re-keying anything.</li>
+  </ul>
+
+  <h2 class="reveal">ShelfSpace is built for exactly this</h2>
+
+  <p class="reveal">ShelfSpace is a cannabis-specific system for the back office, and only the back office. The platform pulls data from your POS and Metrc, three-way matches your invoices, builds the credit memos and consignment settlements, and queues the vendor payments. You approve what needs your sign-off and own every vendor relationship. ShelfiQ, an assistant that knows your store, answers first-line vendor email in plain English.</p>
+
+  <p class="reveal">It connects to your existing POS, syncs to QuickBooks, and stays out of the way of the people who already do their jobs well — your buyer keeps buying, your bookkeeper keeps closing the month. For the full picture of where this fits, read <a href="/blog/cannabis-retail-management">cannabis retail management</a> or <a href="/blog/what-is-shelfspace">what ShelfSpace is, layer by layer</a>.</p>
+
+  <blockquote class="reveal">
+    <p>A POS tells you what sold. Back office software makes sure selling it actually put money in your account.</p>
+  </blockquote>
+
+  <p class="reveal">If your back office is one person and a spreadsheet, <a href="/contact">the free evaluation</a> will show you exactly what a real system recovers.</p>
+
+</article>
+
+<!-- FAQ -->
+<section style="max-width: 720px; margin: 0 auto; padding: 0 48px 60px;">
+  <h2 style="font-size: 22px; font-weight: 700; color: #1b4332; margin-bottom: 24px; letter-spacing: -0.5px;">Frequently asked questions</h2>
+  <div class="faq-list">
+    <details>
+      <summary>What is cannabis dispensary back office software?</summary>
+      <p>Cannabis dispensary back office software runs the money side of a dispensary — paying vendors, reconciling invoices, recovering credits, and settling consignment — on one platform. ShelfSpace is back office software built only for cannabis: it connects to your POS and Metrc and handles the work your POS was never built for.</p>
+    </details>
+    <details>
+      <summary>Is back office software the same as a dispensary POS?</summary>
+      <p>No. A POS runs the front of house — it rings sales and tracks inventory against Metrc. Back office software runs the money behind the counter: vendor payments, accounts payable, credit recovery, and consignment. ShelfSpace connects to your existing POS rather than replacing it.</p>
+    </details>
+    <details>
+      <summary>What should I look for in cannabis back office software?</summary>
+      <p>Look for software built for cannabis specifically: Metrc integration, three-way invoice matching, Check 21 vendor payments, a vendor portal, vendor credit recovery, consignment settlement, and a QuickBooks sync. Generic AP tools and bookkeeping software miss the cannabis-specific work like Metrc reconciliation and consignment.</p>
+    </details>
+    <details>
+      <summary>Does cannabis back office software replace my bookkeeper?</summary>
+      <p>No. ShelfSpace runs the vendor-facing money work — payments, AP, credits, consignment — and syncs to QuickBooks. Your bookkeeper or accounting firm still owns month-end close, bank reconciliations, payroll, financial statements, and 280E tax compliance.</p>
+    </details>
+    <details>
+      <summary>How does ShelfSpace back office software connect to my systems?</summary>
+      <p>ShelfSpace is integrated with Metrc and compatible with every major cannabis POS, and it syncs to QuickBooks. The platform pulls your POS and Metrc data, matches it against vendor invoices, and keeps your books current — you keep ringing sales the way you already do.</p>
+    </details>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-content">
+    <div class="section-label reveal">Get Started</div>
+    <h2 class="section-title reveal">Give your back office a system.</h2>
+    <p class="section-desc reveal">Free evaluation. We'll show you what one platform across AP, credit recovery, and consignment recovers — and how fast your back office stops running on a spreadsheet.</p>
+    <div class="cta-actions reveal">
+      <a href="/contact" class="btn-primary">
+        Get a Demo
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+      <a href="/contact" class="btn-secondary">Talk to Chris</a>
+    </div>
+    <figure class="cta-founder reveal" style="display:flex;align-items:center;gap:16px;justify-content:center;margin:32px 0 0;">
+      <img src="/chris-mitchem.jpg" alt="Chris Mitchem" style="width:48px;height:48px;border-radius:50%;object-fit:cover;" loading="lazy">
+      <blockquote style="margin:0;border:none;padding:0;background:none;">
+        <p style="font-size:14px;color:var(--slate-600);max-width:520px;line-height:1.5;margin:0;font-style:normal;">"I ran my back office on spreadsheets for years. ShelfSpace is the software I wish I'd had the whole time."</p>
+        <figcaption style="font-size:13px;color:var(--slate-500);margin-top:6px;">— Chris Mitchem, Founder</figcaption>
+      </blockquote>
+    </figure>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="/" class="nav-logo"><div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div><span class="nav-logo-text">ShelfSpace</span></a>
+      <p>Every Vendor. Every Payment. One Engine.</p>
+    </div>
+    <div class="footer-col"><h3>Services</h3><ul><li><a href="/accounts-payable">Accounts Payable</a></li><li><a href="/consignment">Consignment</a></li><li><a href="/credit-recovery">Credit Recovery</a></li><li><a href="/checks">Check Payments</a></li><li><a href="/shelfiq">ShelfiQ</a></li></ul></div>
+    <div class="footer-col"><h3>Platform</h3><ul><li><a href="/features">Features</a></li><li><a href="/how-it-works">How It Works</a></li><li><a href="/pricing">Pricing</a></li><li><a href="/about">About</a></li><li><a href="/blog">Blog</a></li><li><a href="/docs">Docs</a></li></ul></div>
+    <div class="footer-col"><h3>Access</h3><ul><li><a href="https://ourshelf.space">Login</a></li><li><a href="/contact">Sign Up</a></li><li><a href="/contact">Contact</a></li><li><a href="/vendors">For Vendors</a></li><li><a href="/for-bookkeepers">For Bookkeepers</a></li></ul></div>
+    <div class="footer-col"><h3>Company</h3><ul><li><a href="mailto:chris@shelfspace.pro">Email</a></li><li><a href="mailto:support@shelfspace.pro">Support</a></li><li><a href="https://linkedin.com/company/shelfspace-pro" target="_blank" rel="noopener" class="footer-social-link"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> LinkedIn</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><p>&copy; 2026 ShelfSpace Technologies Inc.</p><div style="display:flex;align-items:center;gap:8px;justify-content:center;margin-top:12px;"><img src="/metrc-logo.png" alt="METRC" style="height:18px;opacity:0.4;filter:brightness(0) invert(1);"><span style="font-size:11px;color:rgba(255,255,255,0.35);">Certified METRC Third-Party Vendor</span></div><div class="footer-bottom-links"><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div></div>
+</footer>
+
+<script>
+(function() {
+  var nav = document.getElementById('nav');
+  var pageHero = document.querySelector('.page-hero');
+  var parallaxSections = [
+    document.querySelector('.cta-section')
+  ];
+
+  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var isMobile = window.innerWidth < 900;
+  var ticking = false;
+
+  /* ── Hero entrance ── */
+  requestAnimationFrame(function() {
+    nav.classList.toggle('scrolled', window.scrollY > 20);
+    if (pageHero) pageHero.classList.add('hero-loaded');
+  });
+
+  /* ── Scroll-Triggered Reveals (with unobserve for perf) ── */
+  var revealObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(function(el) { revealObserver.observe(el); });
+
+  /* ── Scroll handler (rAF + ticking flag) ── */
+  function onScroll() {
+    var scrollY = window.scrollY;
+    nav.classList.toggle('scrolled', scrollY > 20);
+    if (prefersReduced || isMobile) return;
+    var wh = window.innerHeight;
+    parallaxSections.forEach(function(section) {
+      if (!section) return;
+      var rect = section.getBoundingClientRect();
+      if (rect.bottom < 0 || rect.top > wh) return;
+      var center = rect.top + rect.height / 2 - wh / 2;
+      section.style.setProperty('--parallax-y', (center * 0.08) + 'px');
+    });
+  }
+
+  window.addEventListener('scroll', function() {
+    if (!ticking) {
+      requestAnimationFrame(function() {
+        onScroll();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, { passive: true });
+
+  onScroll();
+
+  window.addEventListener('resize', function() {
+    isMobile = window.innerWidth < 900;
+    if (isMobile) {
+      parallaxSections.forEach(function(section) {
+        if (section) section.style.setProperty('--parallax-y', '0px');
+      });
+    }
+  });
+
+  document.addEventListener('click', function() {
+    var navLinks = document.querySelector('.nav-links');
+    if (navLinks && navLinks.classList.contains('mobile-open')) {
+      navLinks.classList.remove('mobile-open');
+    }
+  });
+})();
+</script>
+<script src="/shelfiq-widget.js"></script>
+</body>
+</html>

@@ -85,7 +85,7 @@
   }
 
   /* ─── RM HALVES (front of house vs back office) ─── */
-  .rm-halves { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 36px 0; }
+  .rm-halves { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 36px 0; position: relative; }
   .rm-half { border-radius: 14px; padding: 24px 24px 26px; }
   .rm-front { background: var(--slate-100); border: 1px solid var(--slate-200); }
   .rm-back { background: var(--green-ghost); border: 1px solid rgba(149,213,178,0.5); }
@@ -98,7 +98,12 @@
   .rm-half .rm-li::before { content: ''; position: absolute; left: 0; top: 12px; width: 6px; height: 6px; border-radius: 50%; }
   .rm-front .rm-li::before { background: var(--slate-400); }
   .rm-back .rm-li::before { background: var(--green-accent); }
-  @media (max-width: 600px) { .rm-halves { grid-template-columns: 1fr; } }
+  .rm-half .rm-ico { width: 26px; height: 26px; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; margin-bottom: 10px; display: block; }
+  .rm-front .rm-ico { stroke: var(--slate-500); }
+  .rm-back .rm-ico { stroke: var(--green-mid); }
+  .rm-vs { position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); width: 42px; height: 42px; border-radius: 50%; background: var(--white); border: 1.5px solid var(--green-accent); display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 12px; font-weight: 700; letter-spacing: 0.5px; color: var(--green-deep); box-shadow: 0 2px 12px rgba(27,67,50,0.12); z-index: 2; }
+  .fs-ico { width: 18px; height: 18px; vertical-align: -3px; margin-right: 7px; stroke: var(--green-mid); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  @media (max-width: 600px) { .rm-halves { grid-template-columns: 1fr; } .rm-vs { display: none; } }
 
   /* ─── COMPARE TABLE ─── */
   .compare-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 36px 0; }
@@ -300,6 +305,7 @@ document.head.appendChild(o)}initApollo();</script>
   <!-- RM HALVES VISUAL -->
   <div class="rm-halves reveal" role="img" aria-label="Cannabis retail management has two halves. Front of house, run by your POS: rings sales, tracks Metrc inventory, runs your menu and loyalty. Back office, run by ShelfSpace: pays vendors, reconciles invoices, recovers credits, settles consignment.">
     <div class="rm-half rm-front">
+      <svg class="rm-ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="4" width="20" height="13" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
       <p class="rm-tag">Front of house</p>
       <p class="rm-name">Your POS</p>
       <ul>
@@ -309,6 +315,7 @@ document.head.appendChild(o)}initApollo();</script>
       </ul>
     </div>
     <div class="rm-half rm-back">
+      <svg class="rm-ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="14" cy="12" r="3"/><line x1="14" y1="7" x2="14" y2="9"/><line x1="7" y1="12" x2="9" y2="12"/></svg>
       <p class="rm-tag">Back office</p>
       <p class="rm-name">ShelfSpace</p>
       <ul>
@@ -318,6 +325,7 @@ document.head.appendChild(o)}initApollo();</script>
         <li class="rm-li">Settles consignment</li>
       </ul>
     </div>
+    <div class="rm-vs" aria-hidden="true">vs</div>
   </div>
 
   <h2 class="reveal">Your POS rings sales. Something has to run the money.</h2>
@@ -399,35 +407,35 @@ document.head.appendChild(o)}initApollo();</script>
 
   <h2 class="reveal">The four jobs of cannabis retail management</h2>
 
-  <p class="reveal">Run the money side well and it comes down to four jobs. ShelfSpace runs all four on one platform.</p>
+  <p class="reveal">Run the money side well and it comes down to four jobs. ShelfSpace runs all four on one platform — the kind of <a href="/blog/cannabis-dispensary-back-office-software">cannabis dispensary back office software</a> built only for this.</p>
 
   <!-- FLOW STEPS -->
   <div class="flow-steps reveal">
     <div class="flow-step">
       <div class="flow-step-num">1</div>
       <div class="flow-step-body">
-        <p class="flow-step-title">Pay your vendors</p>
+        <p class="flow-step-title"><svg class="fs-ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="6" width="20" height="12" rx="2"/><line x1="6" y1="10" x2="6" y2="10"/><line x1="10" y1="14" x2="18" y2="14"/></svg>Pay your vendors</p>
         <p class="flow-step-desc">One-click <a href="/checks">Check 21 payments</a>. The vendor watches it land in their own portal, and it syncs straight to your books. See the close-up in <a href="/accounts-payable">accounts payable</a>.</p>
       </div>
     </div>
     <div class="flow-step">
       <div class="flow-step-num">2</div>
       <div class="flow-step-body">
-        <p class="flow-step-title">Pay only for what you got</p>
+        <p class="flow-step-title"><svg class="fs-ico" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>Pay only for what you got</p>
         <p class="flow-step-desc">The platform three-way matches every invoice against the Metrc manifest and what your team actually received, so shorts and duplicate invoices get caught before money goes out. More in <a href="/blog/cannabis-accounts-payable-cost">the real cost of cannabis AP</a>.</p>
       </div>
     </div>
     <div class="flow-step">
       <div class="flow-step-num">3</div>
       <div class="flow-step-body">
-        <p class="flow-step-title">Recover what vendors owe you</p>
+        <p class="flow-step-title"><svg class="fs-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7"/><polyline points="3 4 3 9 8 9"/></svg>Recover what vendors owe you</p>
         <p class="flow-step-desc">Returns, expirations, and the promotions you ran together — the platform builds the <a href="/credit-recovery">credit memos</a> line by line and ShelfiQ handles first-line vendor email. Start with <a href="/blog/track-returns-credits-cannabis">tracking returns and credits</a>.</p>
       </div>
     </div>
     <div class="flow-step">
       <div class="flow-step-num">4</div>
       <div class="flow-step-body">
-        <p class="flow-step-title">Free the cash trapped on your shelf</p>
+        <p class="flow-step-title"><svg class="fs-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 16V8a2 2 0 0 0-1-1.7l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.7l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.3 7 12 12 20.7 7"/></svg>Free the cash trapped on your shelf</p>
         <p class="flow-step-desc">Move a vendor to <a href="/consignment">consignment</a> and that inventory comes off your books as cash, while it sells exactly the same. The platform settles per vendor, every week; you approve and send. Here's <a href="/blog/how-cannabis-consignment-works">how cannabis consignment works</a>.</p>
       </div>
     </div>
