@@ -76,6 +76,15 @@ for dir in "app/api" "lib" "app/(retailer)" "app/(vendor)" "app/(admin)"; do
   if [ -d "$PLATFORM_DIR/$dir" ]; then
     while IFS= read -r file; do
       REL_PATH="${file#$PLATFORM_DIR/}"
+      # Skip internal / never-documented surfaces so the 🆕 list stays
+      # actionable: admin tooling (excluded from docs by design), tests,
+      # crons, demo seeds, and internal engine libs whose customer-facing
+      # behavior is already covered by a dir-mapped doc (metrc, enrichment).
+      case "$REL_PATH" in
+        *"/__tests__/"*|*.test.ts|*.test.tsx) continue ;;
+        "app/(admin)/"*|"app/api/admin/"*|"app/api/cron/"*) continue ;;
+        "lib/demo/"*|"lib/metrc/"*|"lib/enrichment/"*) continue ;;
+      esac
       if ! echo "$ALL_MANIFEST_SOURCES" | grep -qF "$REL_PATH"; then
         # Check if file is newer than 7 days (recently added)
         if [ "$(find "$file" -mtime -7 2>/dev/null)" ]; then
