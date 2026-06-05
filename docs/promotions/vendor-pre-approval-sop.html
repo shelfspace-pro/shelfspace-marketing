@@ -371,7 +371,7 @@ document.head.appendChild(o)}initApollo();</script>
     <p>One subtlety: the email path falls back to "Ask vendor to approve" if the sender's role isn't admin or owner. So if your buyer (without admin rights) emails the AP bot citing a vendor approval, ShelfiQ creates the promo as <em>Proposed</em> and waits for the vendor to click approve in the portal — the buyer's word alone doesn't unlock the evidence path.</p>
 
     <h2 id="exact-wording">The exact-wording rule</h2>
-    <p>The <strong>Promotion Name</strong> field on every path is the bridge between what the vendor approved and what the credit memo charges them for. At month-end, ShelfSpace looks at every promotion ShelfiQ extracted from Dutchie POS data and tries to match each one to a pre-approved promotion record. The match works on the promotion name.</p>
+    <p>The <strong>Promotion Name</strong> field on every path is the bridge between what the vendor approved and what the credit memo charges them for. At month-end, the platform looks at every promotion ShelfiQ extracted from Dutchie POS data and tries to match each one to a pre-approved promotion record. The match works on the promotion name.</p>
 
     <div class="docs-warning">
       <strong>Match the wording exactly.</strong> When you build the promotion in Dutchie, type the same name you entered in ShelfSpace. The matcher tolerates small typos and casing differences, but anything more than minor drift can leave the row in the "Without prior approval" section of the credit memo even though the vendor did say yes.
@@ -387,7 +387,7 @@ document.head.appendChild(o)}initApollo();</script>
     </ul>
 
     <h2>What happens after the promotion runs</h2>
-    <p>When ShelfSpace runs your monthly credit recovery cycle, every promotional discount Dutchie applied to this vendor's products gets classified into one of three buckets on the credit memo PDF:</p>
+    <p>When the platform runs your monthly credit recovery cycle, every promotional discount Dutchie applied to this vendor's products gets classified into one of three buckets on the credit memo PDF:</p>
 
     <ul>
       <li><strong>Pre-approved promotions.</strong> Matched to a Promotion record where the vendor approved either in the portal or via evidence on file. The vendor's approval channel and date are printed next to the line. These almost never get disputed.</li>
