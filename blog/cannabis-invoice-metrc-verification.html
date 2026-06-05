@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How ShelfSpace Checks Invoices Against Metrc Before You Pay</title>
+<meta name="description" content="ShelfSpace checks every cannabis invoice against your Metrc manifests before you pay — ShelfiQ reviews each line and recommends the safest next step.">
+<link rel="canonical" href="https://shelfspace.pro/blog/cannabis-invoice-metrc-verification">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://shelfspace.pro/blog/cannabis-invoice-metrc-verification">
+<meta property="og:title" content="How ShelfSpace Checks Invoices Against Metrc Before You Pay">
+<meta property="og:description" content="ShelfSpace checks every cannabis invoice against your Metrc manifests before you pay — ShelfiQ reviews each line and recommends the safest next step.">
+<meta property="og:image" content="https://shelfspace.pro/og-image-v7.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="How ShelfSpace Checks Invoices Against Metrc Before You Pay">
+<meta name="twitter:description" content="ShelfSpace checks every cannabis invoice against your Metrc manifests before you pay — ShelfiQ reviews each line and recommends the safest next step.">
+<meta name="twitter:image" content="https://shelfspace.pro/og-image-v7.png">
+<meta name="apple-mobile-web-app-title" content="ShelfSpace">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+<style>
+  @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-12px); } }
+
+  /* ─── HERO ENHANCEMENTS ─── */
+  .page-hero { padding-bottom: 40px; }
+  .hero-bg-gradient { position: absolute; top: -30%; right: -20%; width: 700px; height: 700px; background: radial-gradient(circle, rgba(149,213,178,0.18) 0%, rgba(149,213,178,0) 70%); animation: float 8s ease-in-out infinite; pointer-events: none; }
+  .hero-bg-gradient-2 { position: absolute; bottom: -20%; left: -15%; width: 550px; height: 550px; background: radial-gradient(circle, rgba(27,67,50,0.06) 0%, rgba(27,67,50,0) 70%); animation: float 10s ease-in-out infinite; animation-delay: -3s; pointer-events: none; }
+  .hero-grid-lines { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 1200px; height: 100%; opacity: 0.035; background-image: linear-gradient(var(--green-deep) 1px, transparent 1px), linear-gradient(90deg, var(--green-deep) 1px, transparent 1px); background-size: 80px 80px; pointer-events: none; }
+  .page-hero .section-label,
+  .page-hero .section-title,
+  .page-hero .section-desc { opacity: 0; transform: translateY(30px); }
+  .page-hero .section-label { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1); }
+  .page-hero .section-title { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s, transform 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s; }
+  .page-hero .section-desc { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1) 0.25s, transform 0.8s cubic-bezier(0.22,1,0.36,1) 0.25s; }
+  .page-hero.hero-loaded .section-label,
+  .page-hero.hero-loaded .section-title,
+  .page-hero.hero-loaded .section-desc { opacity: 1; transform: translateY(0); }
+
+  /* ─── REVEAL ─── */
+  .reveal {
+    opacity: 0; transform: translateY(40px);
+    transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+  /* ─── ARTICLE BODY ─── */
+  .article-body { max-width: 720px; margin: 0 auto; padding: 0 48px 80px; }
+  .article-body h2 { font-size: 24px; font-weight: 700; color: var(--green-deep); margin: 48px 0 16px; letter-spacing: -0.5px; line-height: 1.3; }
+  .article-body h3 { font-size: 19px; font-weight: 700; color: var(--green-deep); margin: 32px 0 12px; letter-spacing: -0.3px; line-height: 1.3; }
+  .article-body p { font-size: 17px; line-height: 1.85; color: var(--slate-600); margin-bottom: 24px; }
+  .article-body ul, .article-body ol { margin-bottom: 24px; padding-left: 24px; }
+  .article-body li { font-size: 17px; line-height: 1.85; color: var(--slate-600); margin-bottom: 8px; }
+  .article-body strong { color: var(--green-deep); font-weight: 600; }
+  .article-body a { color: var(--green-mid); font-weight: 500; text-decoration: none; }
+  .article-body a:hover { color: var(--green-deep); text-decoration: underline; }
+  .article-body blockquote { border-left: 3px solid var(--green-accent); padding: 16px 24px; margin: 32px 0; background: var(--green-ghost); border-radius: 0 8px 8px 0; }
+  .article-body blockquote p { font-style: italic; color: var(--green-dark); margin-bottom: 0; }
+
+  /* ─── AT A GLANCE ─── */
+  .article-glance {
+    max-width: 720px; margin: 0 auto 40px; padding: 24px 28px;
+    background: var(--green-ghost); border: 1px solid rgba(149,213,178,0.3);
+    border-radius: 12px;
+  }
+  .article-glance h2 {
+    font-size: 14px; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--green-mid); margin: 0 0 12px;
+  }
+  .article-glance ul { list-style: none; padding: 0; margin: 0; }
+  .article-glance li {
+    font-size: 15px; line-height: 1.6; color: var(--slate-600);
+    padding: 4px 0 4px 20px; position: relative;
+  }
+  .article-glance li::before {
+    content: ''; position: absolute; left: 0; top: 12px;
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--green-accent);
+  }
+
+  /* ─── APPROVE-FOR-PAYMENT MODAL MOCKUP ─── */
+  @keyframes afp-bounce { 0%,80%,100% { transform: translateY(0); opacity:0.5; } 40% { transform: translateY(-4px); opacity:1; } }
+  .afp-seq { max-width: 470px; margin: 40px auto; }
+  .afp { background: #fff; border: 1px solid var(--slate-200); border-radius: 18px; box-shadow: 0 10px 34px rgba(27,67,50,0.10); padding: 22px 22px 18px; }
+  .afp-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+  .afp-title { font: 700 16px/1.3 var(--font-display); color: var(--green-deep); margin: 0; letter-spacing: -0.3px; }
+  .afp-x { font: 400 18px/1 var(--font-mono); color: var(--slate-300); flex-shrink: 0; }
+  .afp-sub { font: 400 12px/1.5 var(--font-mono); color: var(--slate-500); margin: 5px 0 0; }
+  .afp-banner { border-radius: 13px; padding: 14px 16px; margin: 16px 0 14px; }
+  .afp-banner.is-analyzing { background: linear-gradient(135deg, #f0faf4, #e9f7ef); border: 1px solid rgba(149,213,178,0.6); }
+  .afp-banner.is-rec { background: #fffbeb; border: 1px solid #fde68a; }
+  .afp-bh { display: flex; align-items: center; gap: 8px; font: 700 13.5px/1.3 var(--font-display); color: var(--green-deep); margin: 0 0 7px; }
+  .afp-spark { width: 16px; height: 16px; stroke: var(--green-deep); fill: none; stroke-width: 2; flex-shrink: 0; }
+  .afp-dots { display: inline-flex; gap: 3px; align-items: flex-end; padding-bottom: 1px; }
+  .afp-dots span { width: 4px; height: 4px; border-radius: 50%; background: var(--green-deep); animation: afp-bounce 1.2s infinite; }
+  .afp-dots span:nth-child(2) { animation-delay: 0.15s; }
+  .afp-dots span:nth-child(3) { animation-delay: 0.3s; }
+  .afp-bb { font: 400 13px/1.55 var(--font-display); margin: 0; }
+  .is-analyzing .afp-bb { color: #2d6a4f; }
+  .is-rec .afp-bb { color: #92400e; }
+  .afp-reason { font: 400 11.5px/1.45 var(--font-display); color: #2d6a4f; margin: 7px 0 0; }
+  .afp-todo { background: rgba(254,243,199,0.75); border-radius: 8px; padding: 9px 11px; margin: 10px 0 0; font: 500 12.5px/1.45 var(--font-display); color: #78350f; }
+  .afp-recheck { font: 400 11px/1.45 var(--font-display); color: #92400e; margin: 9px 0 0; }
+  .afp-po { font: 400 12.5px/1.5 var(--font-display); color: var(--slate-600); margin: 0; }
+  .afp-po b { font-family: var(--font-mono); font-weight: 500; color: var(--slate-700); }
+  .afp-btns { display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-end; margin: 15px 0 0; }
+  .afp-btn { font: 600 12px/1 var(--font-display); padding: 9px 13px; border-radius: 9px; border: 1px solid var(--slate-200); color: var(--slate-600); background: #fff; white-space: nowrap; }
+  .afp-btn.is-ghost { color: var(--green-deep); border-color: rgba(149,213,178,0.7); }
+  .afp-btn.is-wait { color: var(--green-deep); border-color: rgba(149,213,178,0.7); opacity: 0.8; }
+  .afp-btn.is-primary { background: var(--green-deep); color: #fff; border-color: var(--green-deep); }
+  .afp-conn { text-align: center; font: 400 11.5px/1 var(--font-mono); letter-spacing: 0.5px; color: var(--slate-400); padding: 12px 0; }
+  @media (max-width: 600px) {
+    .afp { padding: 18px 16px 16px; }
+    .afp-btns { justify-content: stretch; }
+    .afp-btn { flex: 1 1 auto; text-align: center; }
+  }
+
+  /* kit callout text guard against .article-body p cascade */
+  .blog-callout .blog-callout-text { margin: 0; }
+
+  /* ─── FAQ ACCORDION ─── */
+  .faq-list details {
+    border: 1px solid var(--slate-200); border-radius: 10px;
+    margin-bottom: 12px; background: var(--white);
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .faq-list details[open] { background: var(--green-ghost); border-color: rgba(149,213,178,0.45); }
+  .faq-list summary {
+    list-style: none; cursor: pointer;
+    padding: 16px 20px;
+    font: 600 16px/1.4 var(--font-display); color: var(--green-deep);
+    display: flex; justify-content: space-between; align-items: center; gap: 12px;
+  }
+  .faq-list summary::-webkit-details-marker { display: none; }
+  .faq-list summary::after {
+    content: '+'; flex-shrink: 0;
+    font: 400 22px/1 var(--font-mono); color: var(--green-mid);
+    transition: transform 0.2s;
+  }
+  .faq-list details[open] summary::after { content: '−'; }
+  .faq-list details p {
+    padding: 0 20px 18px; margin: 0;
+    font-size: 15px; line-height: 1.7; color: var(--slate-600);
+  }
+
+  /* ─── FOOTER 5-COL ─── */
+  .footer-top { grid-template-columns: 2fr 1fr 1fr 1fr 1fr; }
+  @media (max-width: 900px) { .footer-top { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px) { .footer-top { grid-template-columns: 1fr; } }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    .article-body { padding: 0 24px 60px; }
+  }
+
+  /* ─── REDUCED MOTION ─── */
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; transition: none; }
+    .page-hero .section-label,
+    .page-hero .section-title,
+    .page-hero .section-desc { opacity: 1; transform: none; transition: none; }
+    .hero-bg-gradient, .hero-bg-gradient-2 { animation: none; }
+    .afp-dots span { animation: none; opacity: 1; }
+  }
+</style>
+<noscript><style>.reveal,.page-hero .section-label,.page-hero .section-title,.page-hero .section-desc{opacity:1;transform:none;transition:none;}</style></noscript>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-H2LBJT03WE"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-H2LBJT03WE');</script>
+<script>function initApollo(){var n=Math.random().toString(36).substring(7),o=document.createElement("script");
+o.src="https://assets.apollo.io/micro/website-tracker/tracker.iife.js?nocache="+n,o.async=!0,o.defer=!0,
+o.onload=function(){window.trackingFunctions.onLoad({appId:"69c141b32234890011a43849"})},
+document.head.appendChild(o)}initApollo();</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "How ShelfSpace Checks Invoices Against Metrc Before You Pay",
+  "description": "ShelfSpace checks every wholesale cannabis invoice against your Metrc manifests before you pay. ShelfiQ reviews each line, recommends the safest next step with a confidence level, and the platform re-checks live before a check is cut.",
+  "author": { "@type": "Person", "name": "Chris Mitchem" },
+  "publisher": { "@type": "Organization", "name": "ShelfSpace", "url": "https://shelfspace.pro" },
+  "datePublished": "2026-06-05",
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://shelfspace.pro/blog/cannabis-invoice-metrc-verification" },
+  "url": "https://shelfspace.pro/blog/cannabis-invoice-metrc-verification",
+  "image": "https://shelfspace.pro/og-image-v7.png"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://shelfspace.pro/" },
+    { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://shelfspace.pro/blog" },
+    { "@type": "ListItem", "position": 3, "name": "How ShelfSpace Checks Invoices Against Metrc Before You Pay" }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Does ShelfiQ block me from paying a cannabis invoice?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. ShelfiQ is advisory. When you move a wholesale delivery toward payment, it compares the invoice against your Metrc manifests, recommends the safest next step, and shows its confidence level — but you make the call. The one hard backstop is a live re-check the instant a check is cut: if the order doesn't reconcile against its Metrc manifest, the platform flags it and you have to acknowledge before any money moves. Even then, you can acknowledge and pay, and the decision is logged."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What happens if Metrc hasn't synced the transfer yet?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "ShelfiQ tells you instead of guessing. If no synced Metrc transfer matches the invoice, it says so, notes that the sync looks stale, lowers its confidence, and recommends the safest step — usually acknowledging the missing manifest and paying, since there's nothing to reconcile against. You see the confidence level on screen, so you're never paying blind. Anything you approve is re-checked against Metrc before a check is cut, which closes the gap if the transfer syncs later."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does the Metrc check run on consignment deliveries too?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The Metrc pay-check runs on wholesale deliveries — the path from a received delivery to a cut check, where you're paying the vendor for product you bought. Consignment settles on a different cycle, because you pay the vendor as the product sells rather than approving an invoice up front. The invoice-versus-Metrc reconciliation described here is part of the wholesale accounts payable flow."
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="/" class="nav-logo">
+    <div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div>
+    <span class="nav-logo-text">ShelfSpace</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="/consignment">Consignment</a></li>
+    <li><a href="/accounts-payable">Accounts Payable</a></li>
+    <li><a href="/credit-recovery">Credit Recovery</a></li>
+    <li><a href="/pricing">Pricing</a></li>
+    <li><a href="/about">About</a></li>
+    <li><a href="/contact" class="nav-cta">Get Started <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a></li>
+  </ul>
+  <div class="nav-hamburger" onclick="document.querySelector('.nav-links').classList.toggle('mobile-open'); event.stopPropagation();"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="hero-bg-gradient"></div>
+  <div class="hero-bg-gradient-2"></div>
+  <div class="hero-grid-lines"></div>
+  <div class="section-label">Invoice Verification</div>
+  <h1 class="section-title">Nothing gets paid until it matches Metrc</h1>
+  <p class="section-desc">How ShelfiQ checks every cannabis invoice against your Metrc manifests before a check is ever cut — and tells you, in plain English, whether it's safe to pay.</p>
+</div>
+
+<!-- AT A GLANCE -->
+<div class="article-glance">
+  <h2>At a glance</h2>
+  <ul>
+    <li>Every wholesale delivery gets checked against your Metrc manifests before you can approve it for payment.</li>
+    <li>Click toward payment and <strong>ShelfiQ reads every line of the invoice</strong> against what Metrc says actually arrived.</li>
+    <li>You get a plain-English recommendation, <strong>with a confidence level</strong>, on the safest next step.</li>
+    <li>Four outcomes: it reconciles, link the right manifest, take a closer look, or approve with your eyes open.</li>
+    <li>Nothing is paid blind — anything you approve is <strong>re-checked against Metrc, live, before a check is cut.</strong></li>
+    <li>ShelfiQ advises. You always make the call.</li>
+  </ul>
+</div>
+
+<!-- ARTICLE BODY -->
+<article class="article-body">
+
+  <p class="reveal">Every week, deliveries roll into your back room and the invoices stack up behind them. You receive the boxes, you check the count looks about right, and at some point you sit down to pay. The invoice tells you what you owe, so you cut the check. Most of the time that's the whole story, and most of the time it's fine.</p>
+
+  <p class="reveal">But the invoice is the one document in that whole chain that nobody outside the vendor's office actually verified. It's the vendor's count of what they say they shipped and what they say you owe. <a href="/blog/dispensaries-overpay-vendors">Pay straight off it</a> and you're trusting a number against boxes you glanced at, not against the record of what the state says crossed your door. In cannabis, you have that record. It's Metrc.</p>
+
+  <p class="reveal">This is about the one check ShelfSpace runs before a single dollar moves: every wholesale invoice gets compared against your Metrc manifests, and ShelfiQ tells you whether it's safe to pay. Here's how it works, and why it means you never pay an invoice nobody checked.</p>
+
+  <h2 class="reveal">The invoice is just the vendor's word</h2>
+
+  <p class="reveal">An invoice is a claim. It's a count someone in the vendor's office typed up: these products, these quantities, this total. Metrc is the other side of the same delivery — the state's record of which packages actually transferred to your license, logged at the source and locked once it's there. When the two agree, you're paying for exactly what arrived. When they don't, the invoice is the version that's easy to get wrong.</p>
+
+  <div class="vs-split reveal">
+    <div class="vs-col vs-neg">
+      <div class="vs-head">
+        <svg class="vs-ico" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        <p class="vs-tag">The invoice</p>
+      </div>
+      <p class="vs-text">What the vendor says you owe. A line-item count typed up by hand. Usually right. Sometimes a package short, a line doubled, or the wrong manifest stapled to it.</p>
+    </div>
+    <div class="vs-col vs-pos">
+      <div class="vs-head">
+        <svg class="vs-ico" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        <p class="vs-tag">Metrc</p>
+      </div>
+      <p class="vs-text">What actually arrived. The packages the state recorded moving to your shelf — the one count of the delivery that can't be quietly edited after the fact.</p>
+    </div>
+  </div>
+
+  <p class="reveal">None of this means your vendor is cheating you. Deliveries are messy. A package gets left on the truck, a transfer gets created late and hasn't synced yet, a line gets keyed twice, a driver grabs the wrong manifest. The point isn't suspicion. The point is that you and your vendor both want to settle on what really showed up, and Metrc is the shared record that settles it. Checking the invoice against it protects both sides from an honest mistake becoming a payment you can't claw back.</p>
+
+  <h2 class="reveal">The moment you click "Approve for Payment"</h2>
+
+  <p class="reveal">On a wholesale delivery, moving it toward payment is a deliberate step. You mark it reviewed, then you approve it for payment, and that approval is what creates the purchase order the check pays against. The instant you reach for that button, ShelfiQ doesn't just flip a status. It launches an investigation against your Metrc manifests and holds the approve button until it has an answer.</p>
+
+  <figure class="afp-seq reveal">
+    <div class="afp">
+      <div class="afp-head">
+        <p class="afp-title">Approve for Payment?</p>
+        <span class="afp-x" aria-hidden="true">✕</span>
+      </div>
+      <p class="afp-sub">Acme Distribution · Invoice #10428 · 9 packages · $2,847.50</p>
+      <div class="afp-banner is-analyzing">
+        <p class="afp-bh">
+          <svg class="afp-spark" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l1.9 5.8L20 10l-6.1 1.2L12 17l-1.9-5.8L4 10l6.1-1.2z"/></svg>
+          ShelfiQ is analyzing this delivery
+          <span class="afp-dots" aria-hidden="true"><span></span><span></span><span></span></span>
+        </p>
+        <p class="afp-bb">Checking it against your Metrc manifests to recommend the safest next step. This takes a few seconds — hang tight, don't close this window.</p>
+        <p class="afp-reason">Couldn't match this order to a Metrc manifest yet — the transfer may not have synced, or it's ambiguous.</p>
+      </div>
+      <p class="afp-po">This will auto-create a purchase order for <b>$2,847.50</b>.</p>
+      <div class="afp-btns" aria-hidden="true">
+        <span class="afp-btn">Cancel</span>
+        <span class="afp-btn is-ghost">Troubleshoot with ShelfiQ</span>
+        <span class="afp-btn">Put on Hold</span>
+        <span class="afp-btn is-wait">ShelfiQ is reviewing…</span>
+      </div>
+    </div>
+
+    <p class="afp-conn" aria-hidden="true">a few seconds later ↓</p>
+
+    <div class="afp">
+      <div class="afp-head">
+        <p class="afp-title">Approve for Payment?</p>
+        <span class="afp-x" aria-hidden="true">✕</span>
+      </div>
+      <p class="afp-sub">Acme Distribution · Invoice #10428 · 9 packages · $2,847.50</p>
+      <div class="afp-banner is-rec">
+        <p class="afp-bh">
+          <svg class="afp-spark" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l1.9 5.8L20 10l-6.1 1.2L12 17l-1.9-5.8L4 10l6.1-1.2z"/></svg>
+          ShelfiQ recommends approving for payment
+        </p>
+        <p class="afp-bb">About 70% confident — acknowledge the missing manifest and pay. No synced Metrc transfer matches this invoice, and your Metrc sync is stale (0 transfers in the last 24 hours). Approve the proposal below to apply.</p>
+        <p class="afp-todo">What to do: approve it for payment below — ShelfiQ thinks it's safe.</p>
+        <p class="afp-recheck">Anything you approve is re-checked against Metrc before a check is ever cut.</p>
+      </div>
+      <p class="afp-po">This will auto-create a purchase order for <b>$2,847.50</b>.</p>
+      <div class="afp-btns" aria-hidden="true">
+        <span class="afp-btn">Cancel</span>
+        <span class="afp-btn is-ghost">Troubleshoot with ShelfiQ</span>
+        <span class="afp-btn">Put on Hold</span>
+        <span class="afp-btn is-primary">Approve for Payment</span>
+      </div>
+    </div>
+    <figcaption class="afp-cap" style="font-size:13px;line-height:1.5;color:var(--slate-500);text-align:center;margin:14px 0 0;">The Approve-for-Payment review: ShelfiQ checks the invoice against Metrc, then comes back with a recommendation and a confidence level. Example figures shown.</figcaption>
+  </figure>
+
+  <p class="reveal">Here's the whole pipeline, from the click to the cleared check:</p>
+
+  <div class="flow-steps reveal">
+    <div class="flow-step">
+      <div class="flow-step-num">1</div>
+      <div class="flow-step-body">
+        <p class="flow-step-title">You move it toward payment</p>
+        <p class="flow-step-desc">On a wholesale delivery, you mark it reviewed and approve it for payment. That approval creates the purchase order.</p>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-step-num">2</div>
+      <div class="flow-step-body">
+        <p class="flow-step-title">ShelfiQ reads every line</p>
+        <p class="flow-step-desc">It pulls your Metrc manifests and compares them, line by line, against the invoice in front of you.</p>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-step-num">3</div>
+      <div class="flow-step-body">
+        <p class="flow-step-title">It hands you a recommendation</p>
+        <p class="flow-step-desc">A plain-English call with a confidence level: reconciles, link the right manifest, look closer, or approve with your eyes open.</p>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-step-num">4</div>
+      <div class="flow-step-body">
+        <p class="flow-step-title">You decide</p>
+        <p class="flow-step-desc">Approve, link the correct manifest, or put it on hold. The buttons follow the advice, but the choice is yours.</p>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-step-num">5</div>
+      <div class="flow-step-body">
+        <p class="flow-step-title">The check is re-checked</p>
+        <p class="flow-step-desc">The instant a check is cut, the platform re-runs the Metrc check, live, before any money leaves your account.</p>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="reveal">A recommendation, not a roadblock</h2>
+
+  <p class="reveal">ShelfiQ reads the delivery and comes back with one of four answers. Each one names a next step, so you're never left staring at a wall of manifest jargon trying to figure out what to do:</p>
+
+  <ol class="reveal">
+    <li><strong>Reconciles with Metrc.</strong> The invoice lines up with the manifest. Green light, safe to approve.</li>
+    <li><strong>Link the right manifest.</strong> ShelfiQ found the correct transfer that should be bound to this order. One click links it, the check re-runs in place, and then you approve.</li>
+    <li><strong>Take a closer look.</strong> There's a real mismatch — a line on the invoice that isn't on any manifest, for instance. Put it on hold, or open Troubleshoot with ShelfiQ to dig in. Don't approve until it's sorted.</li>
+    <li><strong>Approve with your eyes open.</strong> There's no clean manifest to check against, usually because a transfer hasn't synced. ShelfiQ tells you that, shows its confidence, and recommends the safe move.</li>
+  </ol>
+
+  <p class="reveal">That fourth case is the one in the screen above, and it's the one that shows what makes this trustworthy. ShelfiQ couldn't find a matching transfer, and the sync looked stale: zero transfers in 24 hours. It didn't pretend the invoice was verified, and it didn't freeze you out either. It told you it was about 70% confident, explained why, and recommended acknowledging the gap and paying. It won't act certain when it isn't, and it won't hide the doubt from you to look smarter.</p>
+
+  <h2 class="reveal">You always make the call</h2>
+
+  <p class="reveal">ShelfiQ never pays anything on its own. It reviews, it recommends, and it shows its work. What's nice is that the buttons agree with the advice. When ShelfiQ says it's safe, "Approve for Payment" sits there as the primary button. When it says don't pay yet, the loudest button quietly becomes "Put on Hold," and approving demotes to a muted "Approve anyway." You can still override it — it's your money and your vendor relationship — but you'd be doing it against the recommendation, on the record, not by accident.</p>
+
+  <p class="reveal">If ShelfiQ found the correct manifest, the primary button turns into a one-click "Link to manifest" instead. Link it, the check re-runs against Metrc on the spot, and if it goes green you approve from the clean state. Linking and approving stay two separate steps on purpose, so you never pay your way past a discrepancy without seeing it resolve first.</p>
+
+  <h2 class="reveal">The check gets checked again</h2>
+
+  <p class="reveal">Approving for payment isn't the end of the verification. It's the first of two passes. When you actually cut the check, the platform re-runs the Metrc check from scratch — not the cached verdict from when you reviewed, a fresh comparison at the moment of payment. If the order doesn't reconcile against its Metrc manifest right then, the payment stops and asks you to acknowledge before it lets the money move.</p>
+
+  <p class="reveal">Why run it twice? Because time passes between review and payment. A transfer that hadn't synced when you approved might have landed an hour later. The live re-check catches that, so a delivery you waved through on a stale sync gets a second, current look before the check leaves your account. Two passes, two different moments, one shared record.</p>
+
+  <div class="blog-callout reveal">
+    <svg class="blog-callout-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 12l2 2 4-4"/><path d="M21 12c-1 0-3-1-3-3s2-3 3-3-1-3-3-3-3 2-3 3 1-3-3-3-3 2-3 3 2 3 3 3-3 1-3 3 2 3 3 3-1 3 3 3 3-2 3-3-2-3-3-3 3-1 3-3z"/></svg>
+    <p class="blog-callout-text">Anything you approve is re-checked against Metrc before a check is ever cut. The recommendation helps you decide; the live gate makes sure the decision still holds when the money actually moves.</p>
+  </div>
+
+  <p class="reveal">Once a payment clears the gate, the vendor gets a clean, itemized check they can deposit. If you want to see what lands on their end, walk through the <a href="/blog/anatomy-of-an-invoice-payment">anatomy of a vendor invoice payment</a> — the remittance summary and the Check 21 check that comes out the other side.</p>
+
+  <h2 class="reveal">Paying an invoice versus paying the right invoice</h2>
+
+  <p class="reveal">Over a year, a single store approves thousands of invoices. The $2,847.50 in the example is one delivery. Even if the invoice is right 99 times out of 100, the hundredth — the short package, the doubled line, the transfer that never came — is the one that quietly costs you, because there was never a moment in your old workflow where anything compared the bill to the boxes. We've seen exactly that play out: in one month at a single client, the Metrc check surfaced a stack of <a href="/blog/case-study-metrc-invoice-accuracy">invoices that didn't match what arrived</a>.</p>
+
+  <p class="reveal">This isn't about distrusting your vendors. It's about giving every payment a moment of verification it never used to get, run by something that reads every line in seconds and tells you what it found. The invoice tells you what to pay. Metrc tells you what arrived. We make sure you never confuse the two. It's one piece of how the <a href="/accounts-payable">accounts payable system</a> keeps you from overpaying without adding a single step to your week.</p>
+
+  <p class="reveal">If you're paying cannabis invoices today without anything checking them against Metrc first, <a href="/contact">grab a few minutes with me</a> and I'll show you exactly where the gaps tend to hide.</p>
+
+</article>
+
+<!-- FAQ -->
+<section style="max-width: 720px; margin: 0 auto; padding: 0 48px 60px;">
+    <h2 class="reveal" style="font-size:24px;font-weight:700;color:var(--green-deep);margin:0 0 16px;letter-spacing:-0.5px;line-height:1.3;">Common questions</h2>
+    <div class="faq-list reveal">
+      <details>
+        <summary>Does ShelfiQ block me from paying a cannabis invoice?</summary>
+        <p>No. ShelfiQ is advisory. When you move a wholesale delivery toward payment, it compares the invoice against your Metrc manifests, recommends the safest next step, and shows its confidence level — but you make the call. The one hard backstop is a live re-check the instant a check is cut: if the order doesn't reconcile against its Metrc manifest, the platform flags it and you have to acknowledge before any money moves. Even then, you can acknowledge and pay, and the decision is logged.</p>
+      </details>
+      <details>
+        <summary>What happens if Metrc hasn't synced the transfer yet?</summary>
+        <p>ShelfiQ tells you instead of guessing. If no synced Metrc transfer matches the invoice, it says so, notes that the sync looks stale, lowers its confidence, and recommends the safest step — usually acknowledging the missing manifest and paying, since there's nothing to reconcile against. You see the confidence level on screen, so you're never paying blind. Anything you approve is re-checked against Metrc before a check is cut, which closes the gap if the transfer syncs later.</p>
+      </details>
+      <details>
+        <summary>Does the Metrc check run on consignment deliveries too?</summary>
+        <p>The Metrc pay-check runs on wholesale deliveries — the path from a received delivery to a cut check, where you're paying the vendor for product you bought. Consignment settles on a different cycle, because you pay the vendor as the product sells rather than approving an invoice up front. The invoice-versus-Metrc reconciliation described here is part of the wholesale accounts payable flow.</p>
+      </details>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-content">
+    <div class="section-label reveal">Get Started</div>
+    <h2 class="section-title reveal">See where your invoices and Metrc don't line up.</h2>
+    <p class="section-desc reveal">Free evaluation. We look at how you're paying vendors today and show you where a payment could go out for more than actually arrived — before it does.</p>
+    <div class="cta-actions reveal">
+      <a href="/contact" class="btn-primary">
+        Get a Demo
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+      <a href="/contact" class="btn-secondary">Talk to Chris</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="/" class="nav-logo"><div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div><span class="nav-logo-text">ShelfSpace</span></a>
+      <p>Every Vendor. Every Payment. One Engine.</p>
+    </div>
+    <div class="footer-col"><h4>Services</h4><ul><li><a href="/consignment">Consignment</a></li><li><a href="/accounts-payable">Accounts Payable</a></li><li><a href="/credit-recovery">Credit Recovery</a></li><li><a href="/checks">Check Payments</a></li><li><a href="/shelfiq">ShelfiQ</a></li></ul></div>
+    <div class="footer-col"><h4>Platform</h4><ul><li><a href="/features">Features</a></li><li><a href="/how-it-works">How It Works</a></li><li><a href="/pricing">Pricing</a></li><li><a href="/about">About</a></li><li><a href="/blog">Blog</a></li><li><a href="/docs">Docs</a></li></ul></div>
+    <div class="footer-col"><h4>Access</h4><ul><li><a href="https://ourshelf.space/login">Login</a></li><li><a href="/contact">Sign Up</a></li><li><a href="/contact">Contact</a></li><li><a href="/vendors">For Vendors</a></li><li><a href="/for-bookkeepers">For Bookkeepers</a></li></ul></div>
+    <div class="footer-col"><h4>Company</h4><ul><li><a href="mailto:chris@shelfspace.pro">Email</a></li><li><a href="mailto:support@shelfspace.pro">Support</a></li><li><a href="https://linkedin.com/company/shelfspace-pro" target="_blank" rel="noopener" class="footer-social-link"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> LinkedIn</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><p>&copy; 2026 ShelfSpace Technologies Inc.</p><div class="footer-bottom-links"><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div></div>
+</footer>
+
+<script>
+(function() {
+  var nav = document.getElementById('nav');
+  var pageHero = document.querySelector('.page-hero');
+  var parallaxSections = [ document.querySelector('.cta-section') ];
+
+  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var isMobile = window.innerWidth < 900;
+  var ticking = false;
+
+  requestAnimationFrame(function() {
+    nav.classList.toggle('scrolled', window.scrollY > 20);
+    if (pageHero) pageHero.classList.add('hero-loaded');
+  });
+
+  var revealObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(function(el) { revealObserver.observe(el); });
+
+  function onScroll() {
+    var scrollY = window.scrollY;
+    nav.classList.toggle('scrolled', scrollY > 20);
+    if (prefersReduced || isMobile) return;
+    var wh = window.innerHeight;
+    parallaxSections.forEach(function(section) {
+      if (!section) return;
+      var rect = section.getBoundingClientRect();
+      if (rect.bottom < 0 || rect.top > wh) return;
+      var center = rect.top + rect.height / 2 - wh / 2;
+      section.style.setProperty('--parallax-y', (center * 0.08) + 'px');
+    });
+  }
+
+  window.addEventListener('scroll', function() {
+    if (!ticking) { requestAnimationFrame(function() { onScroll(); ticking = false; }); ticking = true; }
+  }, { passive: true });
+
+  onScroll();
+
+  window.addEventListener('resize', function() {
+    isMobile = window.innerWidth < 900;
+    if (isMobile) { parallaxSections.forEach(function(section) { if (section) section.style.setProperty('--parallax-y', '0px'); }); }
+  });
+
+  document.addEventListener('click', function() {
+    var navLinks = document.querySelector('.nav-links');
+    if (navLinks && navLinks.classList.contains('mobile-open')) { navLinks.classList.remove('mobile-open'); }
+  });
+})();
+</script>
+<script src="/shelfiq-widget.js"></script>
+</body>
+</html>
