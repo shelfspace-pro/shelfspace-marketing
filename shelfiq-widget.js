@@ -296,3 +296,26 @@
     }
   } catch (e) {}
 })();
+
+/* ── Platform nav dropdown: ARIA sync + click toggle (desktop hover/focus open via CSS) ── */
+(function () {
+  var dd = document.querySelector('.nav-dropdown');
+  if (!dd) return;
+  var toggle = dd.querySelector('.nav-dropdown-toggle');
+  if (!toggle) return;
+  function setExpanded(v) { toggle.setAttribute('aria-expanded', v ? 'true' : 'false'); }
+  toggle.addEventListener('click', function (e) {
+    e.preventDefault();
+    setExpanded(dd.classList.toggle('open'));
+  });
+  dd.addEventListener('mouseenter', function () { setExpanded(true); });
+  dd.addEventListener('mouseleave', function () { if (!dd.classList.contains('open')) setExpanded(false); });
+  dd.addEventListener('focusin', function () { setExpanded(true); });
+  dd.addEventListener('focusout', function () { if (!dd.classList.contains('open')) setExpanded(false); });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && dd.classList.contains('open')) { dd.classList.remove('open'); setExpanded(false); }
+  });
+  document.addEventListener('click', function (e) {
+    if (!dd.contains(e.target) && dd.classList.contains('open')) { dd.classList.remove('open'); setExpanded(false); }
+  });
+})();
