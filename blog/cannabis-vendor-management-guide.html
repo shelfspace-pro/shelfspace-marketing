@@ -8,6 +8,8 @@
 <link rel="canonical" href="https://shelfspace.pro/blog/cannabis-vendor-management-guide">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://shelfspace.pro/blog/cannabis-vendor-management-guide">
+<meta property="og:site_name" content="ShelfSpace">
+<meta property="og:locale" content="en_US">
 <meta property="og:title" content="Cannabis Dispensary Vendor Management Guide">
 <meta property="og:description" content="Everything a dispensary operator needs to know about managing vendor relationships — payments, credits, consignment, and communication.">
 <meta property="og:image" content="https://shelfspace.pro/og-image-v7.png">
@@ -109,6 +111,27 @@
     }
     .hero-bg-gradient, .hero-bg-gradient-2 { animation: none; }
   }
+
+  /* ─── WHO-DOES-WHAT COMPARE TABLE ─── */
+  .wdw-wrap { max-width: 720px; margin: 32px auto 40px; overflow-x: auto; }
+  .compare-table { width: 100%; border-collapse: collapse; min-width: 560px; }
+  .compare-table caption { caption-side: top; text-align: left; font-size: 13px; color: var(--slate-500); padding: 0 0 14px; }
+  .compare-table th, .compare-table td { padding: 11px 12px; text-align: center; border-bottom: 1px solid var(--slate-200); }
+  .compare-table thead th { font-size: 12px; font-weight: 700; letter-spacing: 0.3px; color: var(--slate-500); }
+  .compare-table tbody th { text-align: left; font-weight: 600; color: var(--green-deep); font-size: 14px; }
+  .compare-table td { font-size: 14px; color: var(--slate-600); }
+  .compare-table .col-ss { background: var(--green-ghost); }
+  .compare-table thead th.col-ss { color: var(--green-mid); }
+  .compare-table .yes { color: var(--green-deep); font-weight: 700; }
+  .compare-table .no { color: var(--slate-300); }
+  .compare-table .sub { font-size: 11px; color: var(--slate-400); display: block; font-weight: 400; }
+
+  /* ─── SPOKE CARDS ─── */
+  .spoke-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+  .spoke-card { text-decoration: none; padding: 20px; border: 1px solid var(--slate-200); border-radius: 12px; transition: border-color 0.2s, transform 0.2s; display: block; }
+  .spoke-card:hover { border-color: var(--green-accent); transform: translateY(-2px); }
+  .spoke-card .spoke-tag { display: block; font-size: 11px; font-weight: 700; letter-spacing: 0.5px; color: var(--green-mid); margin-bottom: 8px; }
+  .spoke-card .spoke-desc { display: block; font-size: 15px; font-weight: 600; color: var(--green-deep); line-height: 1.4; }
 </style>
 <noscript><style>.reveal,.page-hero .section-label,.page-hero .section-title,.page-hero .section-desc{opacity:1;transform:none;transition:none;}</style></noscript>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-H2LBJT03WE"></script>
@@ -133,6 +156,7 @@ document.head.appendChild(o)}initApollo();</script>
     "url": "https://shelfspace.pro"
   },
   "datePublished": "2026-03-24",
+  "dateModified": "2026-06-08",
   "url": "https://shelfspace.pro/blog/cannabis-vendor-management-guide",
   "image": "https://shelfspace.pro/og-image-v7.png"
 }
@@ -166,7 +190,7 @@ document.head.appendChild(o)}initApollo();</script>
       "name": "What is vendor management in cannabis?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Cannabis vendor management covers everything involved in maintaining supplier relationships: tracking invoices, processing payments, recovering credits for returns and expirations, managing consignment settlements, and handling vendor communication. It's more complex than traditional retail because cannabis businesses face limited banking options, heavy compliance requirements through Metrc, and the need to manage both wholesale and consignment relationships with different workflows."
+        "text": "Cannabis vendor management covers everything involved in maintaining vendor relationships: tracking invoices, processing payments, recovering credits for returns and expirations, managing consignment settlements, and handling vendor communication. It's more complex than traditional retail because cannabis businesses face limited banking options, heavy compliance requirements through Metrc, and the need to manage both wholesale and consignment relationships with different workflows."
       }
     },
     {
@@ -217,7 +241,7 @@ document.head.appendChild(o)}initApollo();</script>
     <li>Cannabis vendor management covers two relationship types: wholesale (buy upfront) and consignment (pay when it sells)</li>
     <li>Key challenges: tracking what you owe, paying on time, recovering credits, and managing vendor communication</li>
     <li>Every vendor should have a clear payment schedule, documented terms, and a way to check payment status</li>
-    <li>Credit recovery is often the most overlooked aspect — most multi-location dispensaries lose $200K+/year in untracked credits</li>
+    <li>Credit recovery is often the most overlooked aspect — we've seen multi-location dispensaries leave $200K+/year in untracked credits</li>
     <li>A cannabis-specific system handles all of this without the dispensary needing to build internal tooling</li>
   </ul>
 </div>
@@ -230,6 +254,40 @@ document.head.appendChild(o)}initApollo();</script>
   <p class="reveal">Vendor management in cannabis isn't like vendor management in other industries. The banking is harder. The compliance is heavier. The payment methods are limited. And most of the tools that exist in traditional retail don't work here. So operators end up cobbling together spreadsheets, text threads, and mental notes — and things fall through the cracks.</p>
 
   <p class="reveal">This guide covers everything I've learned about cannabis vendor management from working with dispensaries across the country. Not theory. Not what a textbook says. What actually works on the ground.</p>
+
+  <h2 class="reveal">Who actually runs vendor management</h2>
+
+  <p class="reveal">Cannabis vendor management is everything it takes to keep 30 to 60 vendor relationships healthy: ordering, paying, reconciling, recovering credits, and keeping the conversation straight. It isn't one job, and it isn't one person's job. The buyer picks the products and cuts the deals. Your POS rings the sales and tracks Metrc. Your bookkeeper closes the month. ShelfSpace runs the money in between — the part that quietly leaks when nobody owns it.</p>
+
+  <p class="reveal">You might hear this called vendor management software, or VRM. The enterprise world has SRM, supplier relationship management, built for procurement teams sourcing suppliers. ShelfSpace isn't that — your buyer still picks the products and negotiates the deals. Think of it as the CRM for your vendors: the system that runs the money behind every vendor relationship after the deal is done.</p>
+
+  <figure class="wdw-wrap reveal" role="figure" aria-label="Who runs each part of cannabis vendor management">
+    <table class="compare-table">
+      <caption>Who runs each part of vendor management</caption>
+      <thead>
+        <tr>
+          <th scope="col">Job</th>
+          <th scope="col">Your buyer</th>
+          <th scope="col">Your POS</th>
+          <th scope="col">Bookkeeper</th>
+          <th scope="col" class="col-ss">ShelfSpace</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><th scope="row">Pick products, negotiate terms</th><td class="yes">&#10003;</td><td class="no">&mdash;</td><td class="no">&mdash;</td><td class="no col-ss">&mdash;</td></tr>
+        <tr><th scope="row">Ring sales, track Metrc inventory</th><td class="no">&mdash;</td><td class="yes">&#10003;</td><td class="no">&mdash;</td><td class="no col-ss">&mdash;</td></tr>
+        <tr><th scope="row">Receive &amp; verify deliveries vs Metrc</th><td class="no">&mdash;</td><td>Reads it</td><td class="no">&mdash;</td><td class="yes col-ss">&#10003;</td></tr>
+        <tr><th scope="row">Three-way match every invoice</th><td class="no">&mdash;</td><td class="no">&mdash;</td><td class="no">&mdash;</td><td class="yes col-ss">&#10003;</td></tr>
+        <tr><th scope="row">Pay vendors on Check 21</th><td class="no">&mdash;</td><td class="no">&mdash;</td><td class="no">&mdash;</td><td class="yes col-ss">&#10003;<span class="sub">you sign &amp; send</span></td></tr>
+        <tr><th scope="row">Recover credits (returns, expirations, co-marketing)</th><td class="no">&mdash;</td><td class="no">&mdash;</td><td class="no">&mdash;</td><td class="yes col-ss">&#10003;</td></tr>
+        <tr><th scope="row">Settle consignment every week</th><td class="no">&mdash;</td><td class="no">&mdash;</td><td class="no">&mdash;</td><td class="yes col-ss">&#10003;</td></tr>
+        <tr><th scope="row">Answer routine vendor email</th><td class="no">&mdash;</td><td class="no">&mdash;</td><td class="no">&mdash;</td><td class="yes col-ss">&#10003;<span class="sub">ShelfiQ, first-line</span></td></tr>
+        <tr><th scope="row">Month-end close, taxes, 280E</th><td class="no">&mdash;</td><td class="no">&mdash;</td><td class="yes">&#10003;</td><td class="no col-ss">&mdash;</td></tr>
+      </tbody>
+    </table>
+  </figure>
+
+  <p class="reveal">That bottom-right column is what ShelfSpace is. Not the buyer's job, not the POS, not the bookkeeper — the financial back office that runs the money behind every vendor. The rest of this guide walks each piece of it.</p>
 
   <h2 class="reveal">Understanding Your Vendor Relationships</h2>
 
@@ -289,11 +347,11 @@ document.head.appendChild(o)}initApollo();</script>
 
   <h2 class="reveal">Credit Recovery: The Money Nobody Tracks</h2>
 
-  <p class="reveal">Here's a number that surprises every operator I talk to: <strong>the average multi-location dispensary leaves $200,000+ per year on the table in unclaimed vendor credits.</strong> That's not a typo. Two hundred thousand dollars.</p>
+  <p class="reveal">Here's a number that surprises every operator I talk to: <strong>we've seen multi-location dispensaries leave $200,000+ per year on the table in unclaimed vendor credits.</strong> That's not a typo. Two hundred thousand dollars.</p>
 
   <div class="blog-callout">
     <svg class="blog-callout-ico" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-    <p class="blog-callout-text">The average multi-location dispensary leaves $200,000+ per year on the table in unclaimed vendor credits. Returns, expirations, co-marketing spend, money already owed to you.</p>
+    <p class="blog-callout-text">Multi-location dispensaries can leave $200,000+ per year on the table in unclaimed vendor credits. Returns, expirations, co-marketing spend, money already owed to you.</p>
   </div>
 
   <p class="reveal">Where does it come from? Three places:</p>
@@ -304,7 +362,7 @@ document.head.appendChild(o)}initApollo();</script>
     <li><strong><a href="/blog/case-study-vendor-credit-recovery">Co-marketing spend</a></strong> — when you run a vendor's promotion and absorb the discount, you're owed a credit for that spend. Most operators never track it.</li>
   </ul>
 
-  <p class="reveal"><a href="/credit-recovery">Credit recovery</a> is one of the highest-ROI activities in cannabis retail because the money is already owed to you. It's not new revenue — it's revenue you earned and never collected. At ShelfSpace, we pull your POS and Metrc data, generate every credit memo, send them to your vendors, and handle the entire approval process. You don't do any of the work.</p>
+  <p class="reveal"><a href="/credit-recovery">Credit recovery</a> is one of the highest-ROI activities in cannabis retail because the money is already owed to you. It's not new revenue — it's revenue you earned and never collected. The platform pulls your POS and Metrc data and builds every credit memo for returns, expirations, and co-marketing. ShelfiQ answers first-line vendor questions, and your AP person takes the line-by-line negotiations.</p>
 
   <h2 class="reveal">Vendor Communication</h2>
 
@@ -386,7 +444,7 @@ document.head.appendChild(o)}initApollo();</script>
   <ul class="reveal">
     <li>A single system for all vendor invoices, payments, and communications</li>
     <li>Separate workflows for wholesale and consignment</li>
-    <li>Managed credit tracking and recovery</li>
+    <li>Built-in credit tracking and recovery</li>
     <li>A vendor portal for self-service access</li>
     <li><a href="/checks">Check 21 compliant payment delivery</a></li>
     <li>Weekly reporting on what's owed, what's been paid, and what's been recovered</li>
@@ -402,6 +460,30 @@ document.head.appendChild(o)}initApollo();</script>
 
 </article>
 
+<!-- THE FOUR JOBS / SPOKES -->
+<section style="max-width:720px;margin:0 auto;padding:0 48px 20px;">
+  <h2 style="font-size:22px;font-weight:700;color:var(--green-deep);margin-bottom:8px;letter-spacing:-0.5px;">The jobs of vendor management, in depth</h2>
+  <p style="font-size:15px;color:var(--slate-600);margin:0 0 24px;line-height:1.6;">Each piece of the system has its own breakdown.</p>
+  <div class="spoke-grid">
+    <a href="/accounts-payable" class="spoke-card">
+      <span class="spoke-tag">ACCOUNTS PAYABLE</span>
+      <span class="spoke-desc">Pay vendors and three-way match every invoice against Metrc</span>
+    </a>
+    <a href="/consignment" class="spoke-card">
+      <span class="spoke-tag">CONSIGNMENT</span>
+      <span class="spoke-desc">Pay when product sells, settled every week</span>
+    </a>
+    <a href="/credit-recovery" class="spoke-card">
+      <span class="spoke-tag">CREDIT RECOVERY</span>
+      <span class="spoke-desc">Recover credits on returns, expirations, and co-marketing</span>
+    </a>
+    <a href="/blog/cannabis-vendor-communication" class="spoke-card">
+      <span class="spoke-tag">VENDOR COMMUNICATION</span>
+      <span class="spoke-desc">Every vendor email in one place, ShelfiQ first-line</span>
+    </a>
+  </div>
+</section>
+
 <!-- FAQ -->
 <section style="max-width: 720px; margin: 0 auto; padding: 0 48px 60px;">
   <h2 style="font-size: 22px; font-weight: 700; color: #1b4332; margin-bottom: 24px; letter-spacing: -0.5px;">Frequently asked questions</h2>
@@ -412,7 +494,7 @@ document.head.appendChild(o)}initApollo();</script>
     </details>
     <details>
       <summary>What is vendor management in cannabis?</summary>
-      <p>Cannabis vendor management covers everything involved in maintaining supplier relationships: tracking invoices, processing payments, recovering credits for returns and expirations, managing consignment settlements, and handling vendor communication. It's more complex than traditional retail because cannabis businesses face limited banking options, heavy compliance requirements through Metrc, and the need to manage both wholesale and consignment relationships with different workflows.</p>
+      <p>Cannabis vendor management covers everything involved in maintaining vendor relationships: tracking invoices, processing payments, recovering credits for returns and expirations, managing consignment settlements, and handling vendor communication. It's more complex than traditional retail because cannabis businesses face limited banking options, heavy compliance requirements through Metrc, and the need to manage both wholesale and consignment relationships with different workflows.</p>
     </details>
     <details>
       <summary>How do dispensaries pay their vendors?</summary>
