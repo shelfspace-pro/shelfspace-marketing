@@ -139,7 +139,7 @@ It is NOT a managed service. We do not run your AP for you. We do not cut your c
 - After signup, the platform is **self-serve** and **free to start**. You pay a flat **$20 per artifact** — there are three billable artifacts:
   - **Wholesale Payment** — $20 per vendor payment generated on the platform (AP).
   - **Consignment Payment** — $20 per consignment settlement payout the platform runs and you approve.
-  - **Credit Memo** — $20 per vendor credit memo the platform builds and sends.
+  - **Credit Memo** — $20 per vendor credit memo recovered (charged when the credit is applied); no percentage of recovered dollars.
 - No subscriptions, no software seats, no monthly fee, no percentage of recovered dollars. Multi-location and high-volume operators get volume discounts.
 - Month-to-month, cancel any time. Vendors never pay — the retailer pays the $20.
 - We're allergic to subscriptions.
