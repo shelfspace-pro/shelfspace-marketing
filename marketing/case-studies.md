@@ -179,7 +179,7 @@ Add a one-line entry for the new case study under the blog section.
 **Amount recovered:** $2,340
 **Speed:** Found in 14 days
 
-**What happened:** A dispensary was running in-store promotions for a vendor's products — shelf placement, menu features, budtender recommendations. Standard industry practice: vendors reimburse a percentage of the promotional cost. Nobody was tracking it. We ran the numbers against keystone pricing and identified $2,340 in co-marketing credits owed by one vendor. We built the credit memo, sent it to the vendor for approval, the vendor signed off, and the credit was applied against an open invoice. We paid the net balance. Money the dispensary was owed but never asked for — recovered and applied in one cycle.
+**What happened:** A dispensary was running in-store promotions for a vendor's products — shelf placement, menu features, budtender recommendations. Standard industry practice: vendors reimburse a percentage of the promotional cost. Nobody was tracking it. The platform ran the numbers against keystone pricing and surfaced $2,340 in co-marketing credits owed by one vendor. It built the credit memo, sent it for approval, the vendor signed off, and the credit was netted against an open invoice — so the dispensary paid that much less on its next vendor check and kept 100% of the recovery. Money it was owed but never asked for, recovered and applied in one cycle.
 
 **Features used:**
 - Co-marketing calculation (comparing actual sell-through against keystone pricing benchmarks)
