@@ -101,7 +101,7 @@ It is NOT a managed service. We do not run your AP for you. We do not cut your c
 - ShelfiQ answers first-line vendor email: payment status, balance, missing check, delivery questions. About 95% of vendor emails on AP resolve without anyone on your team touching them.
 - The roughly 5% that need a human decision escalate to your AP person with the full thread and data.
 - Check 21 Act-compliant digital checks generate on the platform; you approve and send.
-- Vendors download checks from a secure portal at ourshelf.space. No mailed paper, no ACH, no wires.
+- Vendors download checks from a secure portal at ourshelf.space by default. For vendors who'd rather not print, the retailer can opt that vendor's account into a physical check mailed to them. No ACH, no wires.
 - Works for cannabis vendors (Metrc-verified) AND non-cannabis expense vendors (rent, utilities, software, insurance) on the same system.
 - QuickBooks sync — every payment hits your books in real time.
 
