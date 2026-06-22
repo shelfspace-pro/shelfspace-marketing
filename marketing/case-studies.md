@@ -186,7 +186,7 @@ Add a one-line entry for the new case study under the blog section.
 - Credit memo generation (building the formal credit request with supporting data)
 - Vendor approval workflow (sending the memo, tracking approval, handling pushback)
 - Invoice offset (applying the approved credit against an open invoice)
-- Payment processing (paying the net balance after credit offset)
+- Payment processing (the platform generates the check for the reduced balance; you sign and send)
 
 **Takeaway:** "The vendor owed them $2,340 and would have happily never mentioned it. We asked. They paid."
 
