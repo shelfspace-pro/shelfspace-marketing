@@ -375,9 +375,19 @@ document.head.appendChild(o)}initApollo();</script>
 
     <p>Adjustments flow straight to the dollar total. If you mark 2 of 8 units as Short, the invoice you'll pay drops by those 2 units' worth. This is how the platform prevents overpayment — paying for product you never actually got on shelf and would later have to destroy in Metrc anyway, which creates both a financial loss and a compliance footprint. Catching shorts at the dock is the only place to catch them cleanly.</p>
 
+    <p>If you mark any line <strong>Short</strong> on a delivery that's linked to Metrc packages, the dialog shows one extra checkbox: <strong>Push corrected quantities to Metrc</strong>. Leave it checked and the platform reduces the matching Metrc package quantities to what you actually received — a compliance change to your Metrc records, handled for you. Uncheck it to skip and adjust those packages in Metrc yourself. Short quantities write automatically; damaged units that need a waste-weight entry you still handle in Metrc. The checkbox only appears when there's a short line and the delivery has linked Metrc packages.</p>
+
     <div class="docs-highlight">
       <strong>Your adjustments flow through to the vendor.</strong> Every short, damaged, or non-compliant reduction lowers the invoice total the vendor sees on their statement, and your detailed notes stay on the delivery record for any follow-up conversation. No quiet short-pays.
     </div>
+
+    <h2>When the Metrc manifest doesn't match</h2>
+    <p>When you open a delivery for review, the platform shows a manifest verdict comparing the invoice lines to the Metrc transfer. Most read <strong>reconciled</strong> or <strong>match</strong> and need nothing from you. Two are worth a look:</p>
+    <ul>
+      <li><strong>Review</strong> — the Metrc transfer includes a package the invoice never billed. On a cannabis <strong>wholesale</strong> delivery, the review screen shows a <strong>Shipped but not on the invoice</strong> panel listing those packages, each with an <strong>Add free ($0)</strong> button. Adding one records the package as free / unbilled so your records reconcile with Metrc — it does not pay for it. If the item should actually be billed, use <strong>Ask the vendor</strong> to request a corrected invoice instead. The vendor is emailed either way.</li>
+      <li><strong>Unreconciled</strong> — the package count or dollar total doesn't line up. Re-attach a corrected invoice, short-pay the difference, or ask the vendor, depending on what's off.</li>
+    </ul>
+    <p><strong>Consignment self-heals.</strong> If a consignment delivery's Metrc transfer hasn't synced by the time you mark it complete, you don't have to match it by hand. The platform watches for a single unambiguous transfer from that vendor within a 21-day window and designates the delivery automatically, usually within a day — and escalates to you if one stays undesignated for more than a couple of days.</p>
 
     <h2>Step 3 — Confirm the signed invoice total</h2>
     <p>The last step is a single sanity check. ShelfSpace shows you the dollar total it will hand to the AP team — either the original invoice amount, or the reduced amount after your Step 2 adjustments.</p>
