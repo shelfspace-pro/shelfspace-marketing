@@ -18,6 +18,7 @@ Mandatory for: site-wide rollouts (≥5 HTML files), homepage edits, nav or foot
 # Pass 0 — Context Discovery (REQUIRED)
 
 1. **Memory**: open `~/.claude/projects/-Users-chrismitchem-shelfspace-marketing/memory/MEMORY.md`. Scan every entry. For each, ask "could this apply?" Read each candidate in full.
+   - **When the spec body defines Buckets / classification rules, defer to existing memory rules rather than relaxing them.** If a memory says "always X" or "the verb-subject is Y", the corresponding Bucket must REQUIRE X / Y — not propose "X or another option." Relaxing a rule in the spec creates compound errors during build, because each individual decision drifts within the relaxed range and the divergence only surfaces in `/audit`. Concrete failure: 2026-05-19 PM session — Bucket C said "Software <verb>" → "The platform <verb>" OR "The system <verb>", but CLAUDE.md L22 + `feedback_category_noun_system` require "the platform." The audit caught 3 violations on /credit-recovery that required a follow-up commit to revert.
 2. **Skills**: review every available skill in the session's system reminder. Invoke each relevant one via the Skill tool.
 3. **Marketing docs**: identify which apply, read each in full:
    - `CLAUDE.md` — voice rules, forbidden words, design system (always)
@@ -41,6 +42,7 @@ The spec body should cover:
 - **Voice + positioning**: does this respect CLAUDE.md voice rules and the playbook's 5-beat arc? If it deviates, why?
 - **SEO impact**: title, meta description, canonical, OG, schema, sitemap.xml, llms.txt
 - **Cross-link impact**: which existing pages link to / from the affected pages? Update or accept?
+- **Visuals**: when the user asks for "pics" or "visuals," default to inline SVG icons + pure CSS visual blocks matching site design tokens. Explicitly flag any proposal involving photos, AI-generated illustration, or third-party trademarked imagery (logos, screenshots of competitor products) — `marketing/docs-instructions.md` forbids AI imagery; trademarked product imagery carries IP risk. Existing reusable patterns: `.what-flow-item` icon-step blocks (`/checks.html`), stylized document/receipt visual idioms (`/blog/anatomy-of-*`).
 - **Edge cases**: mobile rendering, accessibility, awkward viewport widths
 - **Rollback plan** (if non-trivial): how to undo if it tanks
 
@@ -63,3 +65,11 @@ End with:
 > **Spec complete after Pass 0 + 3 audit passes.** Approve with "go" / "approved" / "build it" to build, or push back to refine.
 
 **DO NOT WRITE OR EDIT ANY FILES.** Wait for explicit approval before any Edit/Write.
+
+# After approval — verify the build
+
+A clean spec does not mean a clean built artifact. Once the user approves:
+- **New blog post:** build following the `/blog-post` skill's Steps 3–7. Do not skip Step 4's AI-residue scan (em-dash density + the cadences in `feedback_owner_grade_voice.md` — a forbidden-token grep alone misses these) or Step 6's `/audit`.
+- **Other change types** (page edits, rollouts): run the equivalent voice + SEO + accessibility check on every file you touched before committing.
+
+This exists because a /spec → "go" → build flow otherwise bypasses the verification that `/blog-post` and `/case-study` bake in.

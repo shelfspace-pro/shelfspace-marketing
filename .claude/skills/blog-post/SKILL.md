@@ -36,7 +36,7 @@ Required elements:
 - Hero with `section-label`, H1, optional subhead
 - "At a glance" green-ghost card (`article-glance` primitive — 4-6 bullets max)
 - Article body: ~1,500-2,500 words following the 5-beat arc where applicable. Educational posts: opening pain → claim → evidence → solution → CTA. Case studies: setup → problem → resolution → result → quote → CTA.
-- Inline visuals where they earn their place: deal cards, step-flow, compare-table, stat triplet
+- Visuals (REQUIRED — never ship a text-wall post): compose 2–4 on-brand visuals from the BLOG VISUAL KIT in styles.css — `stat-trio`, `vs-split`, `meter`, `flow-steps`, `blog-callout`, `blog-figure` — plus inline-SVG icons. Every number in a stat-trio/meter MUST be copied verbatim from the post's own copy (no fabricated figures, per `feedback_verify_product_claims`). A custom hero illustration (e.g. an animated SVG) goes in the page's own `<style>`. Reference: `feedback_blog_visual_kit` + /blog/cannabis-moisture-loss-consignment.
 - FAQ section (optional but recommended for SEO — AI search models pull FAQPage answers verbatim)
 - CTA section (existing primitive)
 - Footer (current standard, includes "For Vendors" link in Access column)
