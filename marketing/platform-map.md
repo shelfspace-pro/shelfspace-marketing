@@ -112,6 +112,11 @@
 - Key files: /app/api/uploads/, /lib/csv/
 - Tables: ingestion_jobs
 
+### Tax Documents (W-9 / Resale Certificates)
+- Vendor submits W-9 (EIN + federal tax classification) inside the vendor-intake wizard; retailer e-signs own IRS W-9 + state resale certificate (e.g. MA ST-4) auto-filled from business profile, typed-name signature per 28 U.S.C. § 1746, sign-once-across-group-locations; reveal-and-share with access logging + notification to the other party; EIN encrypted (AES-256-GCM) + masked. NOT a tax-filing service — no 1099 generation, no IRS TIN matching; vendor ST-4 upload deprecated (W-9 only). Shipped ~2026-06-27/29, verified live 2026-06-30.
+- Key files: /app/api/vendor-intake/, /lib/vendor-intake/, /app/api/retailer/tax-forms/, /app/api/retailer/vendor-docs/reveal/, /app/api/vendor/retailer-docs/reveal/, /lib/pdf/tax-forms/, /app/(retailer)/retailer/settings/tax-forms-section.tsx, /components/{vendor,retailer}-tax-docs-card.tsx
+- Tables: documents (document_type w9/st4/resale_cert), tax_form_attestations, sensitive_document_access_log; vendors.w9_status/ein_encrypted/ein_last4, retailers.resale_cert_status/sales_tax_registration
+
 ### Dispute Resolution
 - Unified disputes linked to settlements, credit_memos, payments, or shipments
 - Key files: /app/api/disputes/, /app/api/escalations/, /app/(admin)/admin/escalations/
