@@ -122,7 +122,7 @@ It is NOT a managed service. We do not run your AP for you. We do not cut your c
 - The platform pulls Metrc + POS data and builds monthly credit memos line by line for every vendor.
 - ShelfiQ sends each memo to the vendor and runs the conversation; the vendor has 10 calendar days from delivery to respond.
 - The vendor has three choices, all executed by ShelfiQ: approve, approve a specific amount (the memo adjusts down and approves in one step), or decline with a reason. ShelfiQ answers their questions with real data. A decline or a genuine relationship call routes to your buyer — ShelfiQ never negotiates on your behalf.
-- Documented credits (returns, destruction, pre-approved co-marketing) are approved automatically and applied if the vendor doesn't respond within the 10-calendar-day window. Un-pre-approved co-marketing still needs explicit vendor agreement. Vendors keep 60 days to dispute any applied credit.
+- Documented credits (returns, destruction, pre-approved co-marketing) move forward if the vendor doesn't respond within the 10-calendar-day window — applied automatically for vendors the retailer set to auto-approve on silence, or staged as Ready for Approval for the retailer's one-click sign-off otherwise (a per-vendor setting). Un-pre-approved co-marketing still needs explicit vendor agreement. Vendors keep 60 days to dispute any applied credit.
 - You apply approved credits to future payments.
 - Real anchor: at a two-location Massachusetts dispensary chain, the platform identified $200K+/year in credits — $8,000–$25,000 per month in the unrecovered range.
 
