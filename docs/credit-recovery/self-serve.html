@@ -3,20 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Vendor Onboarding — ShelfSpace</title>
-<meta name="description" content="Onboard cannabis vendor partners in minutes. Email invite, portal setup, cannabis and non-cannabis vendors, with the W-9 collected right in the invite.">
-<link rel="canonical" href="https://shelfspace.pro/docs/accounts-payable/vendor-onboarding">
+<title>Generate Credit Memos Yourself (Self-Serve) — ShelfSpace</title>
+<meta name="description" content="Generate credit memos yourself in ShelfSpace: pick a closed month, upload four Dutchie reports, clear pre-flight, and the platform drafts one credit memo per vendor to review and send.">
+<link rel="canonical" href="https://shelfspace.pro/docs/credit-recovery/self-serve">
 <meta property="og:type" content="article">
-<meta property="og:url" content="https://shelfspace.pro/docs/accounts-payable/vendor-onboarding">
-<meta property="og:title" content="Vendor Onboarding — ShelfSpace">
-<meta property="og:description" content="Onboard cannabis vendor partners in minutes. Email invite, portal setup, cannabis and non-cannabis vendors, with the W-9 collected right in the invite.">
+<meta property="og:url" content="https://shelfspace.pro/docs/credit-recovery/self-serve">
+<meta property="og:title" content="Generate Credit Memos Yourself (Self-Serve) — ShelfSpace">
+<meta property="og:description" content="Generate credit memos yourself in ShelfSpace: pick a closed month, upload four Dutchie reports, clear pre-flight, and the platform drafts one credit memo per vendor to review and send.">
 <meta property="og:image" content="https://shelfspace.pro/og-image-v7.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:type" content="image/png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Vendor Onboarding — ShelfSpace">
-<meta name="twitter:description" content="Onboard cannabis vendor partners in minutes. Email invite, portal setup, cannabis and non-cannabis vendors, with the W-9 collected right in the invite.">
+<meta name="twitter:title" content="Generate Credit Memos Yourself (Self-Serve) — ShelfSpace">
+<meta name="twitter:description" content="Generate credit memos yourself in ShelfSpace: pick a closed month, upload four Dutchie reports, clear pre-flight, and the platform drafts one credit memo per vendor to review and send.">
 <meta name="twitter:image" content="https://shelfspace.pro/og-image-v7.png">
 <meta name="apple-mobile-web-app-title" content="ShelfSpace">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -80,6 +80,10 @@
     padding-top: 24px; border-top: 1px solid var(--slate-100);
   }
   .docs-content h2:first-of-type { border-top: none; padding-top: 0; }
+  .docs-content h3 {
+    font-size: 17px; font-weight: 700; color: var(--green-deep);
+    margin: 28px 0 12px; letter-spacing: -0.3px; line-height: 1.35;
+  }
   .docs-content p {
     font-size: 16px; line-height: 1.8; color: var(--slate-600); margin-bottom: 20px;
   }
@@ -90,6 +94,11 @@
   .docs-content strong { color: var(--green-deep); font-weight: 600; }
   .docs-content a { color: var(--green-mid); font-weight: 500; text-decoration: none; }
   .docs-content a:hover { color: var(--green-deep); text-decoration: underline; }
+  .docs-content code {
+    font-family: var(--font-mono); font-size: 0.88em;
+    background: var(--slate-50); padding: 2px 7px; border-radius: 5px;
+    color: var(--green-dark); border: 1px solid var(--slate-100);
+  }
 
   /* ── At a Glance Box ── */
   .docs-glance {
@@ -119,6 +128,17 @@
     font-size: 15px; line-height: 1.7; color: var(--green-dark);
   }
   .docs-highlight strong { color: var(--green-deep); }
+
+  /* ── Report list ── */
+  .docs-reports { list-style: none; padding: 0; margin: 0 0 20px; }
+  .docs-reports li {
+    padding: 16px 18px; margin-bottom: 10px;
+    background: var(--slate-50); border: 1px solid var(--slate-100);
+    border-radius: 10px; line-height: 1.55;
+  }
+  .docs-reports li:last-child { margin-bottom: 0; }
+  .docs-reports .docs-report-name { font-weight: 600; color: var(--green-deep); }
+  .docs-reports .docs-report-where { display: block; font-size: 14px; color: var(--slate-500); margin-top: 3px; }
 
   /* ── Related Docs ── */
   .docs-related {
@@ -172,12 +192,12 @@
 {
   "@context": "https://schema.org",
   "@type": "TechArticle",
-  "headline": "Vendor Onboarding",
-  "datePublished": "2026-03-25",
-  "dateModified": "2026-06-05",
+  "headline": "How to Generate Your Monthly Credit Memos (Self-Serve)",
+  "datePublished": "2026-07-02",
+  "dateModified": "2026-07-02",
   "author": { "@type": "Organization", "name": "ShelfSpace", "url": "https://shelfspace.pro" },
   "publisher": { "@type": "Organization", "name": "ShelfSpace" },
-  "url": "https://shelfspace.pro/docs/accounts-payable/vendor-onboarding"
+  "url": "https://shelfspace.pro/docs/credit-recovery/self-serve"
 }
 </script>
 <script type="application/ld+json">
@@ -185,29 +205,9 @@
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position": 1,
-      "name": "Home",
-      "item": "https://shelfspace.pro/"
-    },
-    {
-      "@type": "ListItem",
-      "position": 2,
-      "name": "Documentation",
-      "item": "https://shelfspace.pro/docs"
-    },
-    {
-      "@type": "ListItem",
-      "position": 3,
-      "name": "Accounts Payable",
-      "item": "https://shelfspace.pro/docs/accounts-payable/overview"
-    },
-    {
-      "@type": "ListItem",
-      "position": 4,
-      "name": "Vendor Onboarding"
-    }
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://shelfspace.pro/" },
+    { "@type": "ListItem", "position": 2, "name": "Documentation", "item": "https://shelfspace.pro/docs" },
+    { "@type": "ListItem", "position": 3, "name": "Generate Credit Memos Yourself (Self-Serve)" }
   ]
 }
 </script>
@@ -219,9 +219,9 @@ o.onload=function(){window.trackingFunctions.onLoad({appId:"69c141b32234890011a4
 document.head.appendChild(o)}initApollo();</script>
 </head>
 <body>
-<!-- last-synced: 2026-06-05 -->
+<!-- last-synced: 2026-07-02 -->
 
-<!-- NAV -->
+<!-- NAV (same as all site pages) -->
 <nav id="nav">
   <a href="/" class="nav-logo">
     <div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div>
@@ -244,7 +244,7 @@ document.head.appendChild(o)}initApollo();</script>
 <div class="docs-hero">
   <div class="docs-hero-content">
     <a href="/docs" class="docs-hero-badge">Documentation</a>
-    <h1 class="docs-hero-title">Vendor Onboarding</h1>
+    <h1 class="docs-hero-title">Generate Credit Memos Yourself (Self-Serve)</h1>
   </div>
 </div>
 
@@ -259,65 +259,125 @@ document.head.appendChild(o)}initApollo();</script>
   <!-- CONTENT -->
   <main class="docs-content">
     <div class="docs-breadcrumb">
-      <a href="/docs">Docs</a> / <a href="/docs/accounts-payable/overview">Accounts Payable</a> / Vendor Onboarding
+      <a href="/docs">Docs</a> / Credit Recovery
     </div>
-    <div class="docs-category">Accounts Payable</div>
+    <div class="docs-category">Credit Recovery</div>
 
     <!-- AT A GLANCE -->
     <div class="docs-glance">
       <h2>At a Glance</h2>
       <ul>
-        <li>Onboard cannabis vendor partners in minutes -- one email invite is all it takes</li>
-        <li>Vendors set up their own portal account with their contact details and W-9</li>
-        <li>Works for both cannabis and non-cannabis vendors</li>
-        <li>The vendor's W-9 is collected right in the invite -- no chasing, no faxed forms, no back-and-forth</li>
+        <li>Self-serve generation lets you build a whole month of credit memos yourself, in your portal, in a few minutes</li>
+        <li>Six steps: Period &rarr; Upload reports &rarr; Pre-flight &rarr; Map vendors &rarr; Generate &rarr; Done</li>
+        <li>You upload four Dutchie report exports; a read-only pre-flight validates them before anything is written</li>
+        <li>The platform builds one credit memo per vendor and drops them in Credits &rarr; Drafts for you to review and send</li>
+        <li>Requires credit recovery enabled on your account and an admin-level role; runs on closed months only</li>
       </ul>
     </div>
 
     <!-- BODY CONTENT -->
-    <h2>How Cannabis Vendor Onboarding Works</h2>
-    <p>Getting a new vendor into your payment workflow should not take days of emails and paperwork. When you need to onboard a cannabis vendor on ShelfSpace, you add the vendor and the platform sends a single email invite. The vendor clicks the link, creates their portal account, and enters their contact and business information. That is the entire process.</p>
+    <p>Self-serve generation is the fastest way to turn a closed month into a stack of ready-to-send <a href="/credit-recovery">vendor credit memos</a>. You pick the month, upload four reports, and the platform reads the data, prices every line against Metrc, and drafts one credit memo per vendor — no waiting on a monthly cycle, no ShelfSpace admin in the loop. This guide walks the wizard end to end.</p>
 
-    <p>From your side, you provide the vendor name and email address. The platform handles the rest -- the invite, the follow-up if they have not responded, and the portal walkthrough if they need help. Most vendors complete setup in under ten minutes. Learn more about <a href="/accounts-payable">cannabis accounts payable</a> and how onboarding fits into the broader workflow.</p>
+    <p>You'll find it in your portal under <strong>Credits &rarr; Generate</strong>. The wizard has six steps, and the sidebar tracks where you are the whole way through.</p>
+
+    <h2>Before you start</h2>
+    <p>Two things need to be true for the generator to open:</p>
+    <ul>
+      <li><strong>Credit recovery is enabled on your account.</strong> If it isn't, you'll see a locked card instead of the wizard — <a href="/contact">talk to us</a> to switch it on.</li>
+      <li><strong>You have an admin-level role.</strong> Because generation writes to your money tables, it's limited to admin users on your team.</li>
+    </ul>
+    <p>Self-serve generation reads <strong>Dutchie</strong> report exports today. If you run a different POS, the report files won't verify — reach out and we'll run the monthly cycle for you instead. You'll also want your <a href="/docs/integrations/metrc">Metrc</a> sales synced, because the co-marketing math is priced against Metrc, not the uploaded files.</p>
+
+    <h2>Step 1 — Period</h2>
+    <p>Pick the month you're closing out. The generator only runs on months that have <strong>already ended</strong> — you can't generate for a month still in progress, because the data isn't final. Choose the most recently closed month for your regular monthly run, or reach back to catch up an earlier one.</p>
+
+    <h2>Step 2 — Upload reports</h2>
+    <p>Export these four reports from Dutchie and upload them exactly as they download — no reformatting, no cleanup, no edits. The platform reads each one the moment you drop it in, confirms it recognizes the format, counts the rows, and checks the date range:</p>
+
+    <ul class="docs-reports">
+      <li>
+        <span class="docs-report-name">Returns Report - Returned Products</span>
+        <span class="docs-report-where">Reports &rarr; Inventory &rarr; Reports tab &middot; date range = the month you selected</span>
+      </li>
+      <li>
+        <span class="docs-report-name">Discount Detail Report</span>
+        <span class="docs-report-where">Reports &rarr; Marketing &rarr; Reports tab &middot; date range = the month you selected</span>
+      </li>
+      <li>
+        <span class="docs-report-name">Inventory Receipt Report - Detail</span>
+        <span class="docs-report-where">Reports &rarr; Inventory &rarr; Reports tab &middot; use <strong>Detail</strong>, not Summary &middot; trailing six months ending at the month's close</span>
+      </li>
+      <li>
+        <span class="docs-report-name">Current Inventory</span>
+        <span class="docs-report-where">Reports &rarr; Inventory &rarr; Reports tab &middot; export it fresh today</span>
+      </li>
+    </ul>
+
+    <p>All four have to verify before you can move on. If a file comes back unrecognized, it's almost always the wrong report or the wrong export format — re-pull it from the location above.</p>
+
+    <h2>Step 3 — Pre-flight</h2>
+    <p>Pre-flight is a <strong>read-only</strong> pass over everything you uploaded. It writes nothing to your account — it just tells you whether the run is safe to build. It checks, among other things:</p>
+    <ul>
+      <li><strong>Vendor matching</strong> — how many return and discount rows resolved to a vendor on your list</li>
+      <li><strong>Cost data</strong> — whether the receiving report covers enough of your products to price co-marketing accurately</li>
+      <li><strong>Metrc sales</strong> — whether synced Metrc sales cover the period (co-marketing needs them)</li>
+      <li><strong>Report month</strong> — whether each file's dates actually fall in the month you picked</li>
+      <li><strong>File sanity &amp; store identity</strong> — catches a file from another location or a partial export</li>
+      <li><strong>Recovery settings</strong> — confirms you have active vendors with credit recovery turned on</li>
+    </ul>
 
     <div class="docs-highlight">
-      <strong>What the platform runs:</strong> Sending vendor invites, following up on incomplete signups, verifying portal accounts, mapping vendors to your QuickBooks file, and ShelfiQ answering vendor questions during setup.
+      <strong>Greens, yellows, and one hard stop.</strong> A green check means you're clear. A yellow flag is worth a look but you can proceed knowingly — the wizard asks you to check a box confirming you've reviewed the flags and want to build anyway. The one thing it won't let you wave through is a file whose dates don't overlap the month you selected: a wrong-month file is blocked outright, because it can't produce correct numbers.
     </div>
 
-    <h2>What Vendors See</h2>
-    <p>When a vendor receives your invite, they land on a branded setup page. They create a login, enter their business and contact details, and complete their W-9 right in the flow -- so their taxpayer information is on file from day one. There's no vendor bank account number to hand over: vendors are paid by a Check 21 check they download and deposit like any other, and the check draws on your bank account. The entire experience is self-service and guided. No phone calls. No faxed forms. See <a href="/docs/accounts-payable/tax-forms">vendor W-9 and tax forms</a> for how tax documents are collected, signed, and shared.</p>
+    <h2>Step 4 — Map vendors</h2>
+    <p>Dutchie's brand and distributor names don't always line up with your vendor list one-to-one. Any name that didn't resolve shows up here with its row count. For each one, either point it at an existing vendor from the dropdown or create a new vendor inline (name, email, and two-letter state, plus an optional Metrc license). Anything you leave unmapped is simply left out of this run.</p>
+    <p>Every mapping is <strong>remembered for next month</strong>, so the same brand resolves automatically on future runs. Note that changing a mapping resets the pre-flight — you'll run it once more before generating, which is expected.</p>
 
-    <p>Once onboarded, vendors get access to the <a href="/docs/vendor-portal/overview">vendor portal</a> where they can view payments, download checks, review invoices, and respond to credit memos. They see only what relates to your dispensary -- nothing from other retailers on the platform.</p>
+    <h2>Step 5 — Generate</h2>
+    <p>When pre-flight is clear (or you've acknowledged the flags), hit generate. The platform runs three passes you can watch in real time:</p>
+    <ol>
+      <li><strong>Loading your reports</strong> — the parsed data is written to your account</li>
+      <li><strong>Building credit memos</strong> — one memo per vendor is assembled and priced</li>
+      <li><strong>Moving to Drafts for review</strong> — each memo is placed in your Drafts queue</li>
+    </ol>
+    <p>Keep the tab open while it runs. A store with around fifty vendors takes roughly three minutes.</p>
 
-    <h2>Cannabis and Non-Cannabis Vendors</h2>
-    <p>The platform handles both cannabis and non-cannabis vendors through the same onboarding flow. Whether you are bringing on a flower distributor, an edibles brand, or your packaging supplier, the process is identical. Every vendor gets a portal, every vendor receives payments the same way, and every vendor shows up in your QuickBooks file with proper categorization.</p>
+    <h3>What each credit memo contains</h3>
+    <p>The generator builds <strong>one credit memo per vendor</strong> for the month, aggregating everything that vendor owes across three sources:</p>
+    <ul>
+      <li><strong>Returns</strong> — defensible customer returns, at 100% of your cost. See <a href="/docs/credit-recovery/returns">Return Credits</a>.</li>
+      <li><strong>Destruction</strong> — product recorded as Metrc Waste (expired or defective), at 100% of cost. See <a href="/docs/credit-recovery/expirations">Expiration Credits</a>.</li>
+      <li><strong>Co-marketing</strong> — below-keystone sales priced at the shared-marketing split, including aging markdowns and pre-approved promotions. See <a href="/docs/credit-recovery/co-marketing">Co-Marketing Credits</a>.</li>
+    </ul>
 
-    <h2>Bulk Onboarding</h2>
-    <p>If you are moving your entire vendor list to ShelfSpace, the platform supports bulk onboarding. Provide a CSV or spreadsheet with vendor names and email addresses, and the platform sends invites to the full list at once. It tracks who has completed setup and sends follow-up reminders to stragglers so you do not have to.</p>
+    <h2>Step 6 — Done: review your drafts and send</h2>
+    <p>Your credit memos are now in <strong>Credits &rarr; Drafts</strong>. Nothing has gone to a vendor. Open each one, spot-check the line items against the Metrc backup, and send it when you're happy — individually or in bulk. If a run turns up a vendor with no qualifying activity, or a row that couldn't be built, the Done step tells you so you can follow up.</p>
 
-    <p>For dispensaries with 20 or more vendors, this saves hours of individual outreach. Most vendors activate within one to two weeks of the initial bulk invite.</p>
+    <div class="docs-highlight">
+      <strong>What the platform does:</strong> parse your reports, price every line against Metrc, run the pre-flight checks, and draft one credit memo per vendor. <strong>What stays with you:</strong> reviewing the drafts and deciding what goes to which vendor. You are always the last set of eyes before a credit memo leaves your account — the platform never sends one on its own.
+    </div>
 
-    <h2>After Onboarding</h2>
-    <p>Once a vendor is active, they are immediately available for payments. Their profile syncs to <a href="/docs/quickbooks/overview">QuickBooks</a> and they appear in your AP dashboard. The next time you have an invoice from that vendor, the platform can verify it and generate a payment without any additional setup.</p>
+    <p>Once you send, each memo follows the standard <a href="/docs/credit-recovery/approval-workflow">approval workflow</a>: the vendor can approve, approve a specific amount, or decline, and ShelfiQ carries out the decision. If a vendor goes silent, documented credits move forward after the review window — applied automatically for vendors you've set to auto-approve, or staged for your one-click approval otherwise, per vendor.</p>
+
+    <h2>How this fits the monthly cycle</h2>
+    <p>Self-serve generation is the fast, retailer-driven path: you run it yourself whenever a month closes. It's the same engine described in the <a href="/docs/credit-recovery/onboarding-sop">credit recovery onboarding SOP</a> and produces the same credit memos — the difference is that you're in the driver's seat, on your own schedule.</p>
 
     <!-- RELATED DOCS -->
     <div class="docs-related">
       <h3>Related</h3>
       <div class="docs-related-links">
-        <a href="/docs/accounts-payable/managing-vendors">Managing Vendors</a>
-        <a href="/docs/accounts-payable/tax-forms">Vendor W-9 & Tax Forms</a>
-        <a href="/docs/accounts-payable/recurring-payments">Recurring Payments</a>
-        <a href="/docs/accounts-payable/overview">How the AP Platform Works</a>
-        <a href="/docs/vendor-portal/overview">Vendor Portal</a>
-        <a href="/docs/accounts-payable/creating-payments">Payments & Checks</a>
-        <a href="/docs/accounts-payable/email-deliveries">Manage Deliveries by Email</a>
-        <a href="/docs/accounts-payable/invoice-verification">Invoice Verification</a>
+        <a href="/docs/credit-recovery/overview">Credit Recovery Overview</a>
+        <a href="/docs/credit-recovery/onboarding-sop">Getting Started</a>
+        <a href="/docs/credit-recovery/approval-workflow">Approval Workflow</a>
+        <a href="/docs/credit-recovery/returns">Return Credits</a>
+        <a href="/docs/credit-recovery/co-marketing">Co-Marketing Credits</a>
       </div>
     </div>
 
     <!-- CTA -->
     <div class="docs-cta">
-      <p><strong>Ready to hand off your AP? Let's talk.</strong></p>
+      <p><strong>Ready to start recovering what you're owed? Let's talk.</strong></p>
       <a href="/contact">Talk to Us <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a>
       <div class="docs-cta-note">Free evaluation. No commitment.</div>
     </div>

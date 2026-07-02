@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Generate Vendor Credit Memos Yourself, in Minutes — ShelfSpace</title>
+<meta name="description" content="Self-serve credit recovery: close a month, upload four Dutchie reports, and the platform builds one Metrc-backed credit memo per vendor — drafted for you to review and send.">
+<link rel="canonical" href="https://shelfspace.pro/blog/self-serve-credit-memos-cannabis">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://shelfspace.pro/blog/self-serve-credit-memos-cannabis">
+<meta property="og:title" content="Generate Vendor Credit Memos Yourself, in Minutes — ShelfSpace">
+<meta property="og:description" content="Self-serve credit recovery: close a month, upload four Dutchie reports, and the platform builds one Metrc-backed credit memo per vendor — drafted for you to review and send.">
+<meta property="og:image" content="https://shelfspace.pro/og-image-v7.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Generate Vendor Credit Memos Yourself, in Minutes — ShelfSpace">
+<meta name="twitter:description" content="Self-serve credit recovery: close a month, upload four Dutchie reports, and the platform builds one Metrc-backed credit memo per vendor — drafted for you to review and send.">
+<meta name="twitter:image" content="https://shelfspace.pro/og-image-v7.png">
+<meta name="apple-mobile-web-app-title" content="ShelfSpace">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+<style>
+  @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-12px); } }
+
+  /* ─── HERO ENHANCEMENTS ─── */
+  .page-hero { padding-bottom: 40px; }
+  .hero-bg-gradient { position: absolute; top: -30%; right: -20%; width: 700px; height: 700px; background: radial-gradient(circle, rgba(149,213,178,0.18) 0%, rgba(149,213,178,0) 70%); animation: float 8s ease-in-out infinite; pointer-events: none; }
+  .hero-bg-gradient-2 { position: absolute; bottom: -20%; left: -15%; width: 550px; height: 550px; background: radial-gradient(circle, rgba(27,67,50,0.06) 0%, rgba(27,67,50,0) 70%); animation: float 10s ease-in-out infinite; animation-delay: -3s; pointer-events: none; }
+  .hero-grid-lines { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 1200px; height: 100%; opacity: 0.035; background-image: linear-gradient(var(--green-deep) 1px, transparent 1px), linear-gradient(90deg, var(--green-deep) 1px, transparent 1px); background-size: 80px 80px; pointer-events: none; }
+  .page-hero .section-label,
+  .page-hero .section-title,
+  .page-hero .section-desc { opacity: 0; transform: translateY(30px); }
+  .page-hero .section-label { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1); }
+  .page-hero .section-title { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s, transform 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s; }
+  .page-hero .section-desc { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1) 0.25s, transform 0.8s cubic-bezier(0.22,1,0.36,1) 0.25s; }
+  .page-hero.hero-loaded .section-label,
+  .page-hero.hero-loaded .section-title,
+  .page-hero.hero-loaded .section-desc { opacity: 1; transform: translateY(0); }
+
+  /* ─── REVEAL ─── */
+  .reveal {
+    opacity: 0; transform: translateY(40px);
+    transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .reveal.is-visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.2s; }
+  .reveal-delay-2 { transition-delay: 0.4s; }
+
+  /* ─── ARTICLE BODY ─── */
+  .article-body { max-width: 720px; margin: 0 auto; padding: 0 48px 80px; }
+  .article-body h2 { font-size: 24px; font-weight: 700; color: var(--green-deep); margin: 48px 0 16px; letter-spacing: -0.5px; line-height: 1.3; }
+  .article-body h3 { font-size: 19px; font-weight: 700; color: var(--green-deep); margin: 32px 0 12px; letter-spacing: -0.3px; line-height: 1.35; }
+  .article-body p { font-size: 17px; line-height: 1.85; color: var(--slate-600); margin-bottom: 24px; }
+  .article-body ul, .article-body ol { margin-bottom: 24px; padding-left: 24px; }
+  .article-body li { font-size: 17px; line-height: 1.85; color: var(--slate-600); margin-bottom: 8px; }
+  .article-body strong { color: var(--green-deep); font-weight: 600; }
+  .article-body a { color: var(--green-mid); font-weight: 500; text-decoration: none; }
+  .article-body a:hover { color: var(--green-deep); text-decoration: underline; }
+  .article-body code { font-family: var(--font-mono); font-size: 0.92em; background: var(--green-ghost); padding: 1px 6px; border-radius: 4px; color: var(--green-dark); }
+  .article-body blockquote { border-left: 3px solid var(--green-accent); padding: 16px 24px; margin: 32px 0; background: var(--green-ghost); border-radius: 0 8px 8px 0; }
+  .article-body blockquote p { font-style: italic; color: var(--green-dark); margin-bottom: 0; }
+
+  /* ─── AT A GLANCE ─── */
+  .article-glance {
+    max-width: 720px; margin: 0 auto 40px; padding: 24px 28px;
+    background: var(--green-ghost); border: 1px solid rgba(149,213,178,0.3);
+    border-radius: 12px;
+  }
+  .article-glance h2 {
+    font-size: 14px; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--green-mid); margin: 0 0 12px;
+  }
+  .article-glance ul { list-style: none; padding: 0; margin: 0; }
+  .article-glance li {
+    font-size: 15px; line-height: 1.6; color: var(--slate-600);
+    padding: 4px 0 4px 20px; position: relative;
+  }
+  .article-glance li::before {
+    content: ''; position: absolute; left: 0; top: 12px;
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--green-accent);
+  }
+
+  /* ─── SELF-SERVE VISUALS (scoped .ssg-*) ─── */
+  .ssg-figure { max-width: 720px; margin: 40px auto; }
+  .ssg-caption { font-size: 13px; color: var(--slate-500); text-align: center; margin-top: 14px; font-style: italic; }
+
+  .ssg-stepper { background: var(--green-deep); border-radius: 18px; padding: 30px 30px 12px; }
+  .ssg-stepper-head { display: flex; align-items: center; gap: 10px; padding-bottom: 18px; margin-bottom: 6px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+  .ssg-stepper-eyebrow { font-family: var(--font-mono); font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--green-accent); font-weight: 700; }
+  .ssg-step { display: flex; align-items: flex-start; gap: 16px; padding: 4px 0 16px; position: relative; }
+  .ssg-step:not(:last-child)::before { content: ''; position: absolute; left: 14px; top: 30px; bottom: 0; width: 1.5px; background: rgba(149,213,178,0.28); }
+  .ssg-step-num { width: 29px; height: 29px; border-radius: 50%; border: 1.5px solid rgba(149,213,178,0.45); color: var(--green-accent); display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 12px; font-weight: 700; flex-shrink: 0; background: var(--green-deep); position: relative; z-index: 1; }
+  .ssg-step--now .ssg-step-num { border-color: var(--green-accent); box-shadow: 0 0 0 4px rgba(149,213,178,0.15); }
+  .ssg-step-body { flex: 1; padding-top: 3px; }
+  .ssg-step-title { font-size: 15px; font-weight: 600; color: #fff; }
+  .ssg-step-desc { font-size: 13px; color: rgba(255,255,255,0.62); margin-top: 3px; line-height: 1.5; }
+
+  .ssg-preflight { background: var(--white); border: 1px solid var(--slate-200); border-radius: 16px; padding: 8px 24px; box-shadow: 0 2px 10px rgba(27,67,50,0.05); }
+  .ssg-pf-row { display: flex; align-items: center; gap: 13px; padding: 14px 0; border-bottom: 1px solid var(--slate-100); }
+  .ssg-pf-row:last-child { border-bottom: none; }
+  .ssg-pf-ico { width: 22px; height: 22px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+  .ssg-pf-ico svg { width: 13px; height: 13px; stroke-width: 3; }
+  .ssg-pf-ok { background: var(--green-ghost); color: var(--green-mid); }
+  .ssg-pf-warn { background: #fef3e2; color: #b45309; }
+  .ssg-pf-label { font-size: 14.5px; color: var(--slate-700); font-weight: 500; }
+  .ssg-pf-status { margin-left: auto; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.5px; text-transform: uppercase; font-weight: 700; }
+  .ssg-pf-status--ok { color: var(--green-mid); }
+  .ssg-pf-status--warn { color: #b45309; }
+
+  /* ─── FAQ ─── */
+  .faq-section { max-width: 720px; margin: 0 auto; padding: 0 48px 60px; }
+  .faq-header { margin-bottom: 24px; }
+  .faq-header h2 { font-size: 24px; font-weight: 700; color: var(--green-deep); letter-spacing: -0.5px; line-height: 1.3; margin: 0; }
+  .faq-list { margin: 0; }
+  .faq-list details { border-bottom: 1px solid var(--slate-200); }
+  .faq-list details:first-child { border-top: 1px solid var(--slate-200); }
+  .faq-list summary { padding: 20px 0; font-size: 17px; font-weight: 600; color: var(--green-deep); cursor: pointer; list-style: none; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+  .faq-list summary::-webkit-details-marker { display: none; }
+  .faq-list summary::after { content: '+'; font-size: 22px; font-weight: 400; color: var(--slate-400); flex-shrink: 0; }
+  .faq-list details[open] summary::after { content: '\2212'; }
+  .faq-list details p { padding: 0 0 20px; margin: 0; font-size: 15px; line-height: 1.7; color: var(--slate-500); }
+
+  /* ─── CTA PARALLAX ─── */
+  .cta-section::before { transform: translate(-50%,-50%) translateY(var(--parallax-y, 0)); will-change: transform; }
+
+  /* ─── FOOTER 5-COL ─── */
+  .footer-top { grid-template-columns: 2fr 1fr 1fr 1fr 1fr; }
+  @media (max-width: 900px) { .footer-top { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px) { .footer-top { grid-template-columns: 1fr; } }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    .article-body { padding: 0 24px 60px; }
+    .article-body h2 { margin-top: 36px; }
+    .faq-section { padding: 0 24px 40px; }
+    section [style*="grid-template-columns"] { grid-template-columns: 1fr !important; gap: 12px !important; }
+  }
+
+  /* ─── REDUCED MOTION ─── */
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; transition: none; }
+    .page-hero .section-label,
+    .page-hero .section-title,
+    .page-hero .section-desc { opacity: 1; transform: none; transition: none; }
+    .hero-bg-gradient, .hero-bg-gradient-2 { animation: none; }
+  }
+</style>
+<noscript><style>.reveal,.page-hero .section-label,.page-hero .section-title,.page-hero .section-desc{opacity:1;transform:none;transition:none;}</style></noscript>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-H2LBJT03WE"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-H2LBJT03WE');</script>
+<script>function initApollo(){var n=Math.random().toString(36).substring(7),o=document.createElement("script");
+o.src="https://assets.apollo.io/micro/website-tracker/tracker.iife.js?nocache="+n,o.async=!0,o.defer=!0,
+o.onload=function(){window.trackingFunctions.onLoad({appId:"69c141b32234890011a43849"})},
+document.head.appendChild(o)}initApollo();</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Generate Vendor Credit Memos Yourself, in Minutes",
+  "description": "Self-serve credit recovery: close a month, upload four Dutchie reports, and the platform builds one Metrc-backed credit memo per vendor — drafted for you to review and send.",
+  "author": { "@type": "Person", "name": "Chris Mitchem" },
+  "publisher": { "@type": "Organization", "name": "ShelfSpace", "url": "https://shelfspace.pro" },
+  "datePublished": "2026-07-02",
+  "url": "https://shelfspace.pro/blog/self-serve-credit-memos-cannabis",
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://shelfspace.pro/blog/self-serve-credit-memos-cannabis" },
+  "image": "https://shelfspace.pro/og-image-v7.png"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Which POS does self-serve credit memo generation support?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Self-serve generation reads Dutchie report exports today — four reports you download straight from Dutchie, no reformatting. For the co-marketing math it also uses the Metrc sales data already synced to your workspace. If you run a different POS, we run the monthly credit recovery cycle for you instead — start with a free evaluation and we'll set it up."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I break anything by clicking Generate?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. A read-only pre-flight checks your files first and writes nothing until it passes and you confirm. Every credit memo lands in your Drafts for review — nothing reaches a vendor until you open it, check the math, and hit Send. You are always the last set of eyes."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How much does a self-serve credit memo cost?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Generating drafts is free. You pay a flat $20 per credit memo only when the credit is recovered — no percentage, you keep the rest. It is free to start, so you can run a closed month and see the dollars on the table before you owe anything."
+      }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://shelfspace.pro/" },
+    { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://shelfspace.pro/blog" },
+    { "@type": "ListItem", "position": 3, "name": "Generate Vendor Credit Memos Yourself" }
+  ]
+}
+</script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="/" class="nav-logo">
+    <div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div>
+    <span class="nav-logo-text">ShelfSpace</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="/consignment">Consignment</a></li>
+    <li><a href="/accounts-payable">Accounts Payable</a></li>
+    <li><a href="/credit-recovery">Credit Recovery</a></li>
+    <li class="nav-dropdown"><button class="nav-dropdown-toggle" aria-haspopup="true" aria-expanded="false">Platform <svg class="dropdown-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></button><div class="nav-dropdown-menu"><a href="/vendor-management">Vendor Management</a><a href="/how-it-works">How It Works</a><a href="/features">Features</a><a href="/shelfiq">ShelfiQ</a><a href="/checks">Check Payments</a></div></li>
+    <li><a href="/pricing">Pricing</a></li>
+    <li><a href="/about">About</a></li>
+    <li><a href="/contact" class="nav-cta">Get Started <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a></li>
+  </ul>
+  <div class="nav-hamburger" onclick="document.querySelector('.nav-links').classList.toggle('mobile-open'); event.stopPropagation();"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="hero-bg-gradient"></div>
+  <div class="hero-bg-gradient-2"></div>
+  <div class="hero-grid-lines"></div>
+  <div class="section-label">Guide · Credit Recovery</div>
+  <h1 class="section-title">Generate a Month of Vendor Credit Memos Yourself</h1>
+  <p class="section-desc">Close the month, upload four reports, click generate. The platform builds one Metrc-backed credit memo per vendor and drops them in your drafts — you review and send. Self-serve credit recovery, start to finish.</p>
+</div>
+
+<!-- AT A GLANCE -->
+<div class="article-glance">
+  <h2>At a glance</h2>
+  <ul>
+    <li>A six-step wizard turns a closed month into one credit memo per vendor</li>
+    <li>You upload four reports straight from Dutchie — no reformatting, no spreadsheets</li>
+    <li>A read-only pre-flight checks your files before a single dollar is written</li>
+    <li>Every memo lands in Drafts — you review the math and send when you're happy</li>
+    <li>Free to run; $20 flat per credit memo, only when it's recovered</li>
+  </ul>
+</div>
+
+<!-- ARTICLE BODY -->
+<div class="article-body reveal">
+
+  <p>Credit recovery used to be the part everyone put off. The money is real — returns your vendors owe you for, product that expired before it sold, promo markdowns a brand agreed to share — but pulling it together meant reports, spreadsheets, and a running list of who owes what. So it slipped. Every month, a little more of it slipped.</p>
+
+  <p>Now it's a wizard. You pick a closed month, upload four reports, and the platform builds a Metrc-backed credit memo for every vendor with something owed — drafted, itemized, and waiting in your queue for you to review and send. Start to finish, it's a few minutes at your desk. This post walks through exactly how it works.</p>
+
+  <h2>The whole thing is six steps</h2>
+
+  <p>The self-serve generator lives in your ShelfSpace portal under <strong>Credits → Generate</strong>. It's a guided wizard — the same shape as the one you'd walk through setting up any account, except at the end you have a month of finished credit memos instead of a settings page.</p>
+
+  <div class="ssg-figure">
+    <div class="ssg-stepper" aria-hidden="true">
+      <div class="ssg-stepper-head">
+        <span class="ssg-stepper-eyebrow">Credits → Generate</span>
+      </div>
+      <div class="ssg-step ssg-step--done">
+        <div class="ssg-step-num">1</div>
+        <div class="ssg-step-body">
+          <div class="ssg-step-title">Period</div>
+          <div class="ssg-step-desc">Pick the month you're closing out.</div>
+        </div>
+      </div>
+      <div class="ssg-step ssg-step--done">
+        <div class="ssg-step-num">2</div>
+        <div class="ssg-step-body">
+          <div class="ssg-step-title">Upload reports</div>
+          <div class="ssg-step-desc">Four Dutchie exports — returns, discounts, receiving costs, current inventory.</div>
+        </div>
+      </div>
+      <div class="ssg-step ssg-step--done">
+        <div class="ssg-step-num">3</div>
+        <div class="ssg-step-body">
+          <div class="ssg-step-title">Pre-flight</div>
+          <div class="ssg-step-desc">A read-only check of your files. Nothing is written yet.</div>
+        </div>
+      </div>
+      <div class="ssg-step ssg-step--done">
+        <div class="ssg-step-num">4</div>
+        <div class="ssg-step-body">
+          <div class="ssg-step-title">Map vendors</div>
+          <div class="ssg-step-desc">Match any unrecognized brand to a vendor. Remembered next month.</div>
+        </div>
+      </div>
+      <div class="ssg-step ssg-step--now">
+        <div class="ssg-step-num">5</div>
+        <div class="ssg-step-body">
+          <div class="ssg-step-title">Generate</div>
+          <div class="ssg-step-desc">Loading reports → building credit memos → moving to Drafts.</div>
+        </div>
+      </div>
+      <div class="ssg-step">
+        <div class="ssg-step-num">6</div>
+        <div class="ssg-step-body">
+          <div class="ssg-step-title">Done</div>
+          <div class="ssg-step-desc">Your credit memos are in Drafts, ready to review and send.</div>
+        </div>
+      </div>
+    </div>
+    <div class="ssg-caption">The self-serve generator — six steps from a closed month to a stack of drafted credit memos.</div>
+  </div>
+
+  <h3>1 &amp; 2 — Pick a month, upload four reports</h3>
+
+  <p>You start by choosing a month that's already closed. Then you upload four reports, exported straight from Dutchie exactly as they download — no cleanup, no reformatting:</p>
+
+  <ul>
+    <li><strong>Returns Report</strong> — the returned products for the month</li>
+    <li><strong>Discount Detail Report</strong> — every discount and markdown that ran</li>
+    <li><strong>Inventory Receipt Report (Detail)</strong> — receiving costs, so the math knows what you paid</li>
+    <li><strong>Current Inventory</strong> — a fresh snapshot of what's on hand</li>
+  </ul>
+
+  <p>The platform reads each file the moment you drop it in — recognizing it, counting the rows, and checking the date range so you're not accidentally handing it last quarter's data. For the co-marketing math, it cross-references the <a href="/blog/track-returns-credits-cannabis">Metrc sales</a> already synced to your workspace, so below-keystone sales get priced against the regulator's ledger, not a number you typed.</p>
+
+  <h3>3 — Pre-flight: it checks the files before it touches a dollar</h3>
+
+  <p>This is the part I'm proudest of. Before anything is written, a <strong>read-only pre-flight</strong> runs a battery of checks and shows you exactly what it found. It confirms your vendors resolved, your cost data is complete, your Metrc sales cover the period, and — critically — that every file actually belongs to <em>this</em> store and <em>this</em> month. Upload another location's inventory by mistake and it catches it. Hand it a file with no overlap with the month you picked and it won't let the run proceed at all.</p>
+
+  <div class="ssg-figure">
+    <div class="ssg-preflight" aria-hidden="true">
+      <div class="ssg-pf-row">
+        <span class="ssg-pf-ico ssg-pf-ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg></span>
+        <span class="ssg-pf-label">Vendor matching</span>
+        <span class="ssg-pf-status ssg-pf-status--ok">Clear</span>
+      </div>
+      <div class="ssg-pf-row">
+        <span class="ssg-pf-ico ssg-pf-ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg></span>
+        <span class="ssg-pf-label">Cost data</span>
+        <span class="ssg-pf-status ssg-pf-status--ok">Clear</span>
+      </div>
+      <div class="ssg-pf-row">
+        <span class="ssg-pf-ico ssg-pf-ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg></span>
+        <span class="ssg-pf-label">Metrc sales coverage</span>
+        <span class="ssg-pf-status ssg-pf-status--ok">Clear</span>
+      </div>
+      <div class="ssg-pf-row">
+        <span class="ssg-pf-ico ssg-pf-warn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></svg></span>
+        <span class="ssg-pf-label">A few brands need mapping</span>
+        <span class="ssg-pf-status ssg-pf-status--warn">Review</span>
+      </div>
+      <div class="ssg-pf-row">
+        <span class="ssg-pf-ico ssg-pf-ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg></span>
+        <span class="ssg-pf-label">Report month &amp; file identity</span>
+        <span class="ssg-pf-status ssg-pf-status--ok">Clear</span>
+      </div>
+    </div>
+    <div class="ssg-caption">Pre-flight is read-only — it validates your files and flags anything worth a second look before a single credit memo is built.</div>
+  </div>
+
+  <p>Anything it flags in yellow, you can look at and wave through knowingly — the wizard asks you to check a box confirming you've reviewed the flags and want to build anyway. Anything genuinely wrong, like a file from the wrong month, it blocks outright. You never generate blind.</p>
+
+  <h3>4 — Map vendors (and it remembers)</h3>
+
+  <p>Dutchie's brand and distributor names don't always line up with your vendor list one-to-one. When a name doesn't resolve, pre-flight surfaces it and the map step lets you point it at the right vendor — or create a new one inline with a name, email, and state. The best part: every mapping is <strong>remembered for next month</strong>. Map a brand once, and future runs recognize it automatically. The tool gets faster every cycle.</p>
+
+  <h3>5 &amp; 6 — Generate, then review in Drafts</h3>
+
+  <p>Hit generate and the platform runs three passes you can watch in real time: <em>loading your reports</em>, <em>building credit memos</em>, and <em>moving to Drafts for review</em>. It builds one credit memo per vendor, aggregating everything that vendor owes for the month:</p>
+
+  <ul>
+    <li><strong>Returns</strong> — defensible customer returns, at 100% of your cost</li>
+    <li><strong>Destruction</strong> — product recorded as Metrc Waste, at 100% of cost</li>
+    <li><strong>Co-marketing</strong> — below-keystone sales, at the shared-marketing split</li>
+  </ul>
+
+  <p>A minute or two later — a store with fifty-odd vendors takes about three — every memo is sitting in <strong>Credits → Drafts</strong>. Nothing has gone to a vendor. There's no ShelfSpace admin in the loop and no queue to wait in. It's your data, your button, your drafts.</p>
+
+  <div class="blog-callout reveal">
+    <svg class="blog-callout-ico" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+    <p class="blog-callout-text">Pre-flight writes nothing. Generation writes drafts, not vendor emails. You are always the last set of eyes before a credit memo leaves the building.</p>
+  </div>
+
+  <h2>Then you send — and ShelfiQ takes the vendor side</h2>
+
+  <p>Open any draft, spot-check the line items against the Metrc backup, and send it to the vendor. From there it's the standard flow: the vendor gets a clean, co-signable <a href="/blog/anatomy-of-a-vendor-credit-memo">credit memo</a> and three ways to respond — approve, approve a specific amount, or decline — and <a href="/shelfiq">ShelfiQ</a> answers their questions with the underlying data and carries out whatever they choose.</p>
+
+  <p>If a vendor goes quiet, the documented credits don't stall: after the review window closes, returns, destruction, and pre-approved co-marketing move forward — applied automatically for vendors you've set to auto-approve, or staged for your one-click approval otherwise, per vendor. The mechanics of that are covered in <a href="/blog/cannabis-vendor-no-response-credit-memo">what happens when a vendor doesn't respond</a>.</p>
+
+  <h2>Why self-serve is the point</h2>
+
+  <p>Credit recovery only works if it actually happens — every month, on time, without waiting on anyone. The moment it depends on a person remembering, or a back-and-forth with a service team, it becomes the thing that slips again. Putting the generator in your hands means the month you just closed is the month you recover, at your desk, on your schedule.</p>
+
+  <p>You're not trading control for speed, either. The platform does the grinding part — parsing thousands of rows, pricing every line against Metrc, catching the wrong-store file before it costs you. You do the part that needs judgment: reviewing the drafts and deciding what goes to which vendor. That's the split we believe in across all of <a href="/credit-recovery">ShelfSpace credit recovery</a> — the system does the busy work, you own the relationship.</p>
+
+  <blockquote>
+    <p>The best version of a back-office tool is the one you don't have to ask anyone to run. You close the month, you click generate, the credits are drafted. That's it.</p>
+  </blockquote>
+
+  <p>Want to see it against your own numbers? <a href="/contact">Start with a free evaluation</a> — we'll get your workspace connected and run a closed month with you, so the first stack of drafts is real credit dollars sitting in your last 90 days.</p>
+
+</div>
+
+<!-- FAQ -->
+<div class="faq-section reveal">
+  <div class="faq-header">
+    <h2>Frequently asked questions</h2>
+  </div>
+  <div class="faq-list">
+    <details>
+      <summary>Which POS does self-serve credit memo generation support?</summary>
+      <p>Self-serve generation reads Dutchie report exports today — four reports you download straight from Dutchie, no reformatting. For the co-marketing math it also uses the Metrc sales data already synced to your workspace. If you run a different POS, we run the monthly credit recovery cycle for you instead — start with a free evaluation and we'll set it up.</p>
+    </details>
+    <details>
+      <summary>Can I break anything by clicking Generate?</summary>
+      <p>No. A read-only pre-flight checks your files first and writes nothing until it passes and you confirm. Every credit memo lands in your Drafts for review — nothing reaches a vendor until you open it, check the math, and hit Send. You are always the last set of eyes.</p>
+    </details>
+    <details>
+      <summary>How much does a self-serve credit memo cost?</summary>
+      <p>Generating drafts is free. You pay a flat $20 per credit memo only when the credit is recovered — no percentage, you keep the rest. It's free to start, so you can run a closed month and see the dollars on the table before you owe anything.</p>
+    </details>
+  </div>
+</div>
+
+<!-- RELATED -->
+<section style="max-width:720px;margin:0 auto;padding:0 48px 60px;">
+  <h2 style="font-size:22px;font-weight:700;color:var(--green-deep);margin-bottom:24px;letter-spacing:-0.5px;">Keep reading</h2>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;">
+    <a href="/blog/anatomy-of-a-vendor-credit-memo" style="text-decoration:none;padding:20px;border:1px solid var(--slate-200);border-radius:12px;transition:all 0.2s;">
+      <span style="display:block;font-size:11px;font-weight:600;letter-spacing:0.5px;color:#b45309;margin-bottom:8px;">CREDIT RECOVERY</span>
+      <span style="display:block;font-size:15px;font-weight:600;color:var(--green-deep);line-height:1.4;margin-bottom:4px;">Anatomy of a vendor credit memo</span>
+      <span style="display:block;font-size:13px;font-weight:500;color:var(--slate-600);line-height:1.5;">What each generated memo actually contains, page by page.</span>
+    </a>
+    <a href="/blog/cannabis-vendor-no-response-credit-memo" style="text-decoration:none;padding:20px;border:1px solid var(--slate-200);border-radius:12px;transition:all 0.2s;">
+      <span style="display:block;font-size:11px;font-weight:600;letter-spacing:0.5px;color:#b45309;margin-bottom:8px;">CREDIT RECOVERY</span>
+      <span style="display:block;font-size:15px;font-weight:600;color:var(--green-deep);line-height:1.4;margin-bottom:4px;">When a vendor doesn't respond</span>
+      <span style="display:block;font-size:13px;font-weight:500;color:var(--slate-600);line-height:1.5;">The review window, silence handling, and the 60-day dispute right.</span>
+    </a>
+    <a href="/blog/track-returns-credits-cannabis" style="text-decoration:none;padding:20px;border:1px solid var(--slate-200);border-radius:12px;transition:all 0.2s;">
+      <span style="display:block;font-size:11px;font-weight:600;letter-spacing:0.5px;color:#b45309;margin-bottom:8px;">CREDIT RECOVERY</span>
+      <span style="display:block;font-size:15px;font-weight:600;color:var(--green-deep);line-height:1.4;margin-bottom:4px;">Track returns &amp; credits</span>
+      <span style="display:block;font-size:13px;font-weight:500;color:var(--slate-600);line-height:1.5;">The three credit types every dispensary leaves on the table.</span>
+    </a>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-content">
+    <div class="section-label reveal">Get Started</div>
+    <h2 class="section-title reveal">Run your last closed month and see the drafts.</h2>
+    <p class="section-desc reveal">Free evaluation in 48 hours. We connect your workspace, walk a closed month with you, and show you the credit dollars sitting in your last 90 days. You only pay when a credit is recovered.</p>
+    <div class="cta-actions reveal">
+      <a href="/contact" class="btn-primary">
+        Get My Free Evaluation
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+      <a href="/ShelfSpace_Sample_Monthly_Review.pdf" target="_blank" rel="noopener" download class="btn-secondary">See a sample credit memo (PDF)</a>
+    </div>
+    <figure class="cta-founder reveal" style="display:flex;align-items:center;gap:16px;justify-content:center;margin:32px 0 0;">
+      <img src="/chris-mitchem.jpg" alt="Chris Mitchem" style="width:48px;height:48px;border-radius:50%;object-fit:cover;">
+      <blockquote style="margin:0;border:none;padding:0;background:none;">
+        <p style="font-size:14px;color:var(--slate-600);max-width:520px;line-height:1.5;margin:0;font-style:normal;">"I spent ten years meaning to chase vendor credits and running out of month. Self-serve generation is the fix I wish I'd had — close the month, click generate, review the drafts. The credits stop slipping."</p>
+        <figcaption style="font-size:13px;color:var(--slate-500);margin-top:6px;">— Chris Mitchem, Founder</figcaption>
+      </blockquote>
+    </figure>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="/" class="nav-logo"><div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div><span class="nav-logo-text">ShelfSpace</span></a>
+      <p>Every Vendor. Every Payment. One Engine.</p>
+    </div>
+    <div class="footer-col"><h3>Services</h3><ul><li><a href="/accounts-payable">Accounts Payable</a></li><li><a href="/consignment">Consignment</a></li><li><a href="/credit-recovery">Credit Recovery</a></li><li><a href="/checks">Check Payments</a></li><li><a href="/shelfiq">ShelfiQ</a></li></ul></div>
+    <div class="footer-col"><h3>Platform</h3><ul><li><a href="/features">Features</a></li><li><a href="/how-it-works">How It Works</a></li><li><a href="/pricing">Pricing</a></li><li><a href="/about">About</a></li><li><a href="/blog">Blog</a></li><li><a href="/docs">Docs</a></li></ul></div>
+    <div class="footer-col"><h3>Access</h3><ul><li><a href="https://ourshelf.space/login">Login</a></li><li><a href="/contact">Sign Up</a></li><li><a href="/contact">Contact</a></li><li><a href="/vendors">For Vendors</a></li><li><a href="/for-bookkeepers">For Bookkeepers</a></li></ul></div>
+    <div class="footer-col"><h3>Company</h3><ul><li><a href="mailto:chris@shelfspace.pro">Email</a></li><li><a href="mailto:support@shelfspace.pro">Support</a></li><li><a href="https://linkedin.com/company/shelfspace-pro" target="_blank" rel="noopener" class="footer-social-link"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> LinkedIn</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><p>&copy; 2026 ShelfSpace Technologies Inc.</p><div style="display:flex;align-items:center;gap:8px;justify-content:center;margin-top:12px;"><img src="/metrc-logo.png" alt="Metrc" style="height:18px;opacity:0.4;filter:brightness(0) invert(1);"><span style="font-size:11px;color:rgba(255,255,255,0.35);">Certified Metrc Third-Party Vendor</span></div><div class="footer-bottom-links"><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div></div>
+</footer>
+
+<script>
+(function() {
+  var nav = document.getElementById('nav');
+  var pageHero = document.querySelector('.page-hero');
+  var parallaxSections = [ document.querySelector('.cta-section') ];
+  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var isMobile = window.innerWidth < 900;
+  var ticking = false;
+
+  requestAnimationFrame(function() {
+    nav.classList.toggle('scrolled', window.scrollY > 20);
+    if (pageHero) pageHero.classList.add('hero-loaded');
+  });
+
+  var revealObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(function(el) { revealObserver.observe(el); });
+
+  function onScroll() {
+    var scrollY = window.scrollY;
+    nav.classList.toggle('scrolled', scrollY > 20);
+    if (prefersReduced || isMobile) return;
+    var wh = window.innerHeight;
+    parallaxSections.forEach(function(section) {
+      if (!section) return;
+      var rect = section.getBoundingClientRect();
+      if (rect.bottom < 0 || rect.top > wh) return;
+      var center = rect.top + rect.height / 2 - wh / 2;
+      section.style.setProperty('--parallax-y', (center * 0.08) + 'px');
+    });
+  }
+
+  window.addEventListener('scroll', function() {
+    if (!ticking) {
+      requestAnimationFrame(function() { onScroll(); ticking = false; });
+      ticking = true;
+    }
+  }, { passive: true });
+  onScroll();
+
+  window.addEventListener('resize', function() {
+    isMobile = window.innerWidth < 900;
+    if (isMobile) {
+      parallaxSections.forEach(function(section) {
+        if (section) section.style.setProperty('--parallax-y', '0px');
+      });
+    }
+  });
+
+  document.addEventListener('click', function() {
+    var navLinks = document.querySelector('.nav-links');
+    if (navLinks && navLinks.classList.contains('mobile-open')) {
+      navLinks.classList.remove('mobile-open');
+    }
+  });
+})();
+</script>
+<script src="/shelfiq-widget.js"></script>
+</body>
+</html>
