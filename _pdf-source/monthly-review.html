@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Monthly Review and Credit Request · CM-1042 · Sample</title>
+<!--
+  Source for /ShelfSpace_Sample_Monthly_Review.pdf (7-page sample linked from
+  /credit-recovery and /blog/anatomy-of-a-vendor-credit-memo).
+
+  Regenerate with:
+    "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless \
+      --print-to-pdf=ShelfSpace_Sample_Monthly_Review.pdf --no-pdf-header-footer \
+      --virtual-time-budget=10000 \
+      "file:///Users/chrismitchem/shelfspace-marketing/_pdf-source/monthly-review.html"
+
+  Fictional demo data (Pinegrove Cannabis Co. / North Ridge Cultivators, all
+  Pkg IDs start with 1ADEMO). Dollar figures are quoted verbatim by the blog
+  walkthrough and the OG image — do not change numbers without updating both.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --green-deep: #1b4332;
+  --green-dark: #2d6a4f;
+  --green-mid: #40916c;
+  --green-accent: #95d5b2;
+  --green-ghost: #f0faf4;
+  --white: #ffffff;
+  --slate-100: #f1f5f9;
+  --slate-200: #e2e8f0;
+  --slate-400: #94a3b8;
+  --slate-500: #64748b;
+  --slate-600: #475569;
+  --slate-700: #334155;
+}
+
+@page {
+  size: 8.5in 11in;
+  margin: 0.3in 0.65in 0.55in;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+html, body {
+  font-family: 'DM Sans', -apple-system, sans-serif;
+  font-size: 9.5pt;
+  line-height: 1.5;
+  color: var(--slate-700);
+  background: var(--white);
+}
+
+.page {
+  height: 10.15in;
+  position: relative;
+  page-break-after: always;
+}
+.page-break-before { page-break-before: always; }
+
+/* ── Header band (pages 1–2) ── */
+.band {
+  margin: 0 -0.65in;
+  padding: 16px 0.65in 13px;
+  background: var(--green-deep);
+  border-bottom: 3px solid var(--green-accent);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.band-title { font-size: 16.5pt; font-weight: 600; color: var(--white); letter-spacing: -0.2px; }
+.band-sub { font-size: 8.5pt; color: var(--green-accent); margin-top: 2px; }
+.band-ref { font-size: 13pt; font-weight: 600; color: var(--white); text-align: right; }
+.band-date { font-size: 7.5pt; color: rgba(255,255,255,0.8); text-align: right; margin-top: 1px; }
+
+/* ── Footer (pages 1, 6, 7) ── */
+.footer {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  display: flex;
+  justify-content: space-between;
+  font-size: 7pt;
+  color: var(--slate-400);
+}
+
+/* ── Page 1 letter ── */
+.letter { padding: 0.35in 0.15in 0; }
+.letter-greeting { font-size: 13pt; font-weight: 500; color: var(--slate-700); margin-bottom: 16px; }
+.letter p { font-size: 10pt; line-height: 1.65; margin-bottom: 13px; }
+.letter-quote {
+  border-left: 3px solid var(--green-mid);
+  padding: 2px 0 2px 14px;
+  margin: 16px 0 10px;
+  font-size: 10.5pt;
+  font-weight: 500;
+  color: var(--slate-700);
+}
+.letter-signoff { margin-top: 34px; color: var(--slate-600); font-size: 10pt; }
+
+/* ── Page 2 ── */
+.eyebrow {
+  font-family: 'Space Mono', monospace;
+  font-size: 7pt; font-weight: 700;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: var(--green-mid);
+}
+.party { margin-bottom: 16px; }
+.party-name { font-size: 11pt; font-weight: 600; color: var(--slate-700); margin-top: 3px; }
+.party-line { font-size: 8.5pt; color: var(--slate-600); line-height: 1.45; }
+
+.meta-row {
+  display: flex;
+  border: 1px solid var(--slate-200);
+  border-radius: 4px;
+  margin: 22px 0 26px;
+}
+.meta-cell { flex: 1; padding: 10px 14px; border-left: 1px solid var(--slate-200); }
+.meta-cell:first-child { border-left: none; }
+.meta-val { font-size: 9pt; color: var(--slate-700); margin-top: 3px; }
+
+.sales-card {
+  background: var(--green-ghost);
+  border: 1px solid rgba(149,213,178,0.55);
+  border-radius: 10px;
+  padding: 26px 30px 24px;
+  text-align: center;
+}
+.sales-card-label { font-size: 12pt; font-weight: 600; color: var(--slate-700); }
+.sales-card-amount {
+  font-family: 'Space Mono', monospace;
+  font-size: 23pt; font-weight: 700;
+  color: var(--green-deep);
+  letter-spacing: 1px;
+  margin: 6px 0 14px;
+}
+.sales-card-divider { border: none; border-top: 1px solid rgba(149,213,178,0.6); margin: 0 10px 14px; }
+.sales-card-carried { font-size: 11pt; font-weight: 500; color: var(--slate-700); margin-bottom: 14px; }
+.top5 { text-align: left; padding: 0 6px; }
+.top5 + .top5 { margin-top: 14px; }
+.top5 .eyebrow { font-size: 6.5pt; letter-spacing: 1.8px; }
+.top5-row { display: flex; gap: 12px; margin-top: 5px; font-size: 8pt; }
+.top5-val { font-family: 'Space Mono', monospace; font-weight: 700; color: var(--slate-700); width: 72px; text-align: right; flex-shrink: 0; }
+.top5-label { color: var(--slate-600); }
+
+/* ── Flow sections (pages 3–5) ── */
+.section { margin-bottom: 18px; }
+.section-desc { font-size: 8.5pt; color: var(--slate-600); line-height: 1.5; margin: 4px 0 8px; }
+
+.tbl { width: 100%; border-collapse: collapse; border: 1px solid var(--slate-200); }
+.tbl th {
+  font-family: 'Space Mono', monospace;
+  font-size: 6.5pt; font-weight: 700;
+  letter-spacing: 1.6px; text-transform: uppercase;
+  color: #6b8f7d;
+  background: #f4faf7;
+  text-align: left;
+  padding: 6px 12px;
+}
+.tbl th.num, .tbl td.num { text-align: right; }
+.tbl td {
+  font-size: 8.5pt;
+  color: var(--slate-700);
+  padding: 5.5px 12px;
+  border-top: 1px solid var(--slate-100);
+  vertical-align: top;
+}
+.tbl tr:nth-child(even) td { background: #fbfdfc; }
+.tbl tr { page-break-inside: avoid; }
+.row-title { font-size: 8.5pt; color: var(--slate-700); }
+.row-sub { font-size: 6.8pt; color: var(--slate-500); line-height: 1.35; margin-top: 1px; }
+.row-pkg { font-family: 'Space Mono', monospace; font-size: 6.2pt; color: var(--slate-400); margin-top: 1px; }
+.tbl .subtotal td { background: #f8fafc; color: var(--slate-600); font-weight: 500; }
+.tbl .more td { background: var(--white); color: var(--slate-500); font-size: 8pt; }
+
+.band-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--green-deep);
+  color: var(--white);
+  padding: 7px 12px;
+  font-size: 8.5pt;
+  font-weight: 600;
+  page-break-inside: avoid;
+}
+.band-total .bt-val { font-weight: 600; }
+
+/* ── Page 6 ── */
+.closing { font-size: 9.5pt; line-height: 1.7; color: var(--slate-700); margin-top: 30px; }
+.closing a { color: var(--slate-700); text-decoration: none; }
+
+/* ── Page 7 memo ── */
+.memo-frame {
+  border: 2px solid var(--green-deep);
+  border-radius: 12px;
+  padding: 0.42in 0.5in;
+  margin: 0.1in 0.15in 0;
+}
+.memo-head { display: flex; justify-content: space-between; align-items: flex-start; }
+.memo-retailer { font-size: 19pt; font-weight: 500; color: var(--green-deep); letter-spacing: 0.5px; }
+.memo-head-eyebrow { font-family: 'Space Mono', monospace; font-size: 7.5pt; font-weight: 700; letter-spacing: 2px; color: var(--green-mid); text-transform: uppercase; margin-top: 4px; }
+.memo-doctype { font-family: 'Space Mono', monospace; font-size: 12.5pt; font-weight: 700; letter-spacing: 3px; color: var(--green-deep); text-align: right; }
+.memo-ref { font-family: 'Space Mono', monospace; font-size: 11pt; color: var(--slate-700); text-align: right; margin-top: 3px; }
+.memo-hr { border: none; border-top: 1px solid var(--slate-700); margin: 18px 0; }
+.memo-hr-light { border: none; border-top: 1px solid var(--slate-200); margin: 14px 0; }
+.memo-meta { display: flex; }
+.memo-meta > div { flex: 1; }
+.memo-meta .eyebrow, .memo-parties .eyebrow { color: var(--green-mid); }
+.memo-meta-val { font-size: 10pt; color: var(--slate-700); margin-top: 4px; }
+.memo-parties { display: flex; }
+.memo-parties > div { flex: 1; }
+.memo-party-name { font-size: 11pt; font-weight: 500; color: var(--slate-700); margin-top: 4px; }
+.memo-party-line { font-size: 8.5pt; color: var(--slate-600); line-height: 1.5; }
+.memo-cols { display: flex; justify-content: space-between; }
+.memo-item { display: flex; justify-content: space-between; align-items: flex-start; }
+.memo-item-name { font-size: 11pt; font-weight: 500; color: var(--slate-700); }
+.memo-item-sub { font-size: 8pt; color: var(--slate-600); line-height: 1.5; margin-top: 4px; max-width: 4.6in; }
+.memo-item-amount { font-family: 'Space Mono', monospace; font-size: 11pt; font-weight: 700; color: var(--slate-700); }
+.memo-total-rule { border: none; border-top: 2px solid var(--green-deep); margin: 18px 0; }
+.memo-total { display: flex; justify-content: space-between; align-items: baseline; }
+.memo-total-label { font-size: 12pt; font-weight: 500; letter-spacing: 1.5px; color: var(--green-deep); }
+.memo-total-val { font-family: 'Space Mono', monospace; font-size: 19pt; font-weight: 700; color: var(--green-deep); }
+.memo-terms { margin-top: 22px; }
+.memo-terms-item { font-size: 8.5pt; color: var(--slate-700); line-height: 1.7; }
+.memo-questions { font-size: 8pt; color: var(--slate-500); }
+</style>
+</head>
+<body>
+
+<!-- ═══════════ PAGE 1 · Cover letter ═══════════ -->
+<div class="page">
+  <div class="band">
+    <div>
+      <div class="band-title">Monthly Review and Credit Request</div>
+      <div class="band-sub">Pinegrove Cannabis Co. | North Ridge Cultivators</div>
+    </div>
+    <div>
+      <div class="band-ref">CM-1042</div>
+      <div class="band-date">April 2026</div>
+    </div>
+  </div>
+
+  <div class="letter">
+    <div class="letter-greeting">Hey North R. Cultivators team,</div>
+
+    <p>We value your partnership, and we&rsquo;re rolling out these monthly reviews so we can both optimize for success. The cannabis market is dynamic, and regular working discussions help us move with it.</p>
+
+    <p>As a retailer, we&rsquo;re constantly fighting for customer attention &mdash; and to keep them coming back. To do that, we offer a 100% return policy and run a steady stream of discounts and promotions. All with one goal: keep customers happy, and move as much product as we can at a margin that lets us keep the doors open.</p>
+
+    <div class="letter-quote">That margin number is 50%. When we sell below it, the economics get tough fast.</div>
+
+    <p>We&rsquo;re starting to ask our vendors for help covering the cost of discounts and promotions that pull us below 50%, so we can keep moving your product at high velocity. Think of it as a shared marketing expense &mdash; much like splitting the cost of a billboard. We need your help to stay competitive in this market.</p>
+
+    <p>We&rsquo;re also asking for help on returns that turn out to be product issues, and on products that expire on the shelf.</p>
+
+    <p>All of this is collaborative &mdash; up for discussion, never forced. If anything in the data on the next pages doesn&rsquo;t sit right, just reply to the email this came on with your questions or the amount you&rsquo;d approve.</p>
+
+    <p>We value this partnership and want to grow with you.</p>
+
+    <div class="letter-signoff">&mdash; The AP team at Pinegrove Cannabis Co.</div>
+  </div>
+
+  <div class="footer">
+    <span>Pinegrove Cannabis Co. &nbsp;&middot;&nbsp; ap@pinegrovecannabis.example &nbsp;&middot;&nbsp; April 2026</span>
+    <span>CM-1042</span>
+  </div>
+</div>
+
+<!-- ═══════════ PAGE 2 · Period summary ═══════════ -->
+<div class="page">
+  <div class="band">
+    <div>
+      <div class="band-title">Monthly Review and Credit Request</div>
+      <div class="band-sub">Pinegrove Cannabis Co. | North Ridge Cultivators</div>
+    </div>
+    <div>
+      <div class="band-ref">CM-1042</div>
+      <div class="band-date">April 2026</div>
+    </div>
+  </div>
+
+  <div style="padding-top: 0.28in;">
+    <div class="party">
+      <div class="eyebrow">From (Retailer)</div>
+      <div class="party-name">Pinegrove Cannabis Co.</div>
+      <div class="party-line">200 Main Street<br>Springfield, MA, 01103</div>
+    </div>
+    <div class="party">
+      <div class="eyebrow">To (Vendor)</div>
+      <div class="party-name">North Ridge Cultivators</div>
+      <div class="party-line">MA</div>
+    </div>
+
+    <div class="meta-row">
+      <div class="meta-cell">
+        <div class="eyebrow">Generated</div>
+        <div class="meta-val">05/03/2026</div>
+      </div>
+      <div class="meta-cell">
+        <div class="eyebrow">Period</div>
+        <div class="meta-val">04/01/2026 &ndash; 04/30/2026</div>
+      </div>
+      <div class="meta-cell">
+        <div class="eyebrow">Status</div>
+        <div class="meta-val">Pending Admin</div>
+      </div>
+    </div>
+
+    <div class="sales-card">
+      <div class="sales-card-label">Net Retail Sales this month</div>
+      <div class="sales-card-amount">$38,184.11</div>
+      <hr class="sales-card-divider">
+      <div class="sales-card-carried">We carried 75 of your products this month</div>
+
+      <div class="top5">
+        <div class="eyebrow">Top 5 by Revenue</div>
+        <div class="top5-row"><span class="top5-val">$2,955.00</span><span class="top5-label">D00000001234: North Ridge-Aurora Mist-Flower-28.0g</span></div>
+        <div class="top5-row"><span class="top5-val">$2,080.00</span><span class="top5-label">D00000001235: Cascade Reserve-Velvet Dawn-Flower-28.0g</span></div>
+        <div class="top5-row"><span class="top5-val">$1,790.00</span><span class="top5-label">D00000001241: Cascade Reserve-Northern Tide-Flower-28.0g</span></div>
+        <div class="top5-row"><span class="top5-val">$1,646.50</span><span class="top5-label">D00000001242: Cascade Reserve-Snowbank-Flower-28.0g</span></div>
+        <div class="top5-row"><span class="top5-val">$1,462.00</span><span class="top5-label">D00000001243: Cascade Reserve-Slate Hill-Flower-28.0g</span></div>
+      </div>
+
+      <div class="top5">
+        <div class="eyebrow">Top 5 by Units Sold</div>
+        <div class="top5-row"><span class="top5-val">700.0g</span><span class="top5-label">D00000001234: North Ridge-Aurora Mist-Flower-28.0g</span></div>
+        <div class="top5-row"><span class="top5-val">644.0g</span><span class="top5-label">D00000001235: Cascade Reserve-Velvet Dawn-Flower-28.0g</span></div>
+        <div class="top5-row"><span class="top5-val">560.0g</span><span class="top5-label">D00000001241: Cascade Reserve-Northern Tide-Flower-28.0g</span></div>
+        <div class="top5-row"><span class="top5-val">504.0g</span><span class="top5-label">D00000001242: Cascade Reserve-Snowbank-Flower-28.0g</span></div>
+        <div class="top5-row"><span class="top5-val">448.0g</span><span class="top5-label">D00000004201: Cascade Reserve-River Bend-Ready to Roll-7.0g</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ PAGES 3–5 · Flow: turnover, promotions, returns, destruction, below-target margin ═══════════ -->
+<div>
+
+  <div class="section">
+    <div class="eyebrow">Inventory Turnover</div>
+    <p class="section-desc">How quickly your products moved off our shelves this month. Faster turnover puts cash in your pocket sooner. Average and median shelf age (days from receipt to sale) plus the share of units that sold within 30 days of arriving on our shelves.</p>
+    <table class="tbl">
+      <tr><th>Metric</th><th class="num">Value</th></tr>
+      <tr><td>Average shelf age at sale</td><td class="num">29 days</td></tr>
+      <tr><td>Median shelf age at sale</td><td class="num">24 days</td></tr>
+      <tr><td>Sold within 30 days of receipt</td><td class="num">61%</td></tr>
+      <tr><td>Sample size</td><td class="num">1,094 sales</td></tr>
+    </table>
+    <div class="band-total"><span>INVENTORY TURNOVER METRICS</span><span class="bt-val">1,094 sales observed</span></div>
+  </div>
+
+  <div class="section">
+    <div class="eyebrow">Promotions Run on Your Products</div>
+    <p class="section-desc">Customer-facing promotions we ran that included your products this month &mdash; vendor-specific promos we discussed with you, store-wide promos that swept in your products, and bulk / bundle deals (e.g. 5-for-$40). Customer loyalty, employee discounts, and POS adjustments are separated at the bottom &mdash; those are not promotions we ran on your behalf. The goal here is improved inventory velocity for you: more cash in your pocket per year, less inventory risk.</p>
+    <table class="tbl">
+      <tr><th>Promotion</th><th class="num">Orders</th></tr>
+      <tr><td>$90 Ounces: North Ridge</td><td class="num">59</td></tr>
+      <tr><td>20% Off Any 3 Grams Of Vapes V.3</td><td class="num">47</td></tr>
+      <tr><td>10 for $42: North Ridge 1g Singles</td><td class="num">44</td></tr>
+      <tr><td>5 for $100: Full Gram Vapes From Select Brands</td><td class="num">35</td></tr>
+      <tr><td>5 for $90: North Ridge and Cascade Reserve 1g Carts</td><td class="num">23</td></tr>
+      <tr><td>20% Off When You Spend $65+ On Edibles V.3</td><td class="num">6</td></tr>
+      <tr><td>Any 5 Pre-Rolls for $40</td><td class="num">5</td></tr>
+      <tr><td>Loyalty program</td><td class="num">126</td></tr>
+      <tr><td>POS adjustments</td><td class="num">18</td></tr>
+      <tr><td>Manual Discount</td><td class="num">4</td></tr>
+      <tr><td>Employee discount</td><td class="num">4</td></tr>
+      <tr class="subtotal"><td>Subtotal (7 promotions + 4 adjustments)</td><td class="num"></td></tr>
+    </table>
+    <div class="band-total"><span>TOTAL ORDERS WITH PROMOTIONS</span><span class="bt-val">369</span></div>
+  </div>
+
+  <div class="section">
+    <div class="eyebrow">Customer Returns</div>
+    <p class="section-desc">These products were returned to us by customers and the return reason indicates the issue was a vendor-side problem (defective product, improper hardware, or customer was unsatisfied).</p>
+    <table class="tbl">
+      <tr><th style="width:62%">Description</th><th class="num">Qty</th><th class="num">Inventory Cost</th></tr>
+      <tr><td>
+        <div class="row-title">Customer Return &mdash; Defective Product (2026-04-04)</div>
+        <div class="row-sub">POS: D00000001234: North Ridge-Aurora Mist-Flower-28.0g<br>Metrc: D00000001234: North Ridge-Aurora Mist-Flower-28.0g</div>
+        <div class="row-pkg">Pkg: 1ADEMO0000000000000000A1</div>
+      </td><td class="num">27.9994</td><td class="num">$60.00</td></tr>
+      <tr><td>
+        <div class="row-title">Customer Return &mdash; Customer was unsatisfied (2026-04-16)</div>
+        <div class="row-sub">POS: D00000001235: Cascade Reserve-Velvet Dawn-Flower-28.0g<br>Metrc: D00000001235: Cascade Reserve-Velvet Dawn-Flower-28.0g</div>
+        <div class="row-pkg">Pkg: 1ADEMO0000000000000000A2</div>
+      </td><td class="num">28</td><td class="num">$46.01</td></tr>
+      <tr><td>
+        <div class="row-title">Customer Return &mdash; Defective Product (2026-04-21)</div>
+        <div class="row-sub">POS: D00000002101: Ember Trail-Coastal Haze-Disposable Distillate Vape-1.0g<br>Metrc: D00000002101: Ember Trail-Coastal Haze-Disposable Distillate Vape-1.0g</div>
+        <div class="row-pkg">Pkg: 1ADEMO0000000000000000B1</div>
+      </td><td class="num">1</td><td class="num">$12.50</td></tr>
+      <tr><td>
+        <div class="row-title">Customer Return &mdash; Defective Product (2026-04-03)</div>
+        <div class="row-sub">POS: D00000002102: Ember Trail-Granite Peak-Disposable Distillate Vape-1.0g<br>Metrc: D00000002102: Ember Trail-Granite Peak-Disposable Distillate Vape-1.0g</div>
+        <div class="row-pkg">Pkg: 1ADEMO0000000000000000B2</div>
+      </td><td class="num">&mdash;</td><td class="num">$11.75</td></tr>
+      <tr><td>
+        <div class="row-title">Customer Return &mdash; Defective Product (2026-04-04)</div>
+        <div class="row-sub">POS: D00000003011: Quietwater Farms-Driftwood OG-Distillate Cart-1.0g<br>Metrc: D00000003011: Quietwater Farms-Driftwood OG-Distillate Cart-1.0g</div>
+        <div class="row-pkg">Pkg: 1ADEMO0000000000000000C1</div>
+      </td><td class="num">1</td><td class="num">$10.00</td></tr>
+      <tr><td>
+        <div class="row-title">Customer Return &mdash; Defective Product (2026-04-12)</div>
+        <div class="row-sub">POS: D00000003012: Quietwater Farms-Harbor Light-Distillate Cart-1.00g<br>Metrc: D00000003012: Quietwater Farms-Harbor Light-Distillate Cart-1.00g</div>
+        <div class="row-pkg">Pkg: 1ADEMO0000000000000000C2</div>
+      </td><td class="num">&mdash;</td><td class="num">$9.25</td></tr>
+      <tr><td>
+        <div class="row-title">Customer Return &mdash; Customer was unsatisfied (2026-04-24)</div>
+        <div class="row-sub">POS: D00000003013: Quietwater Farms-Saltwater Sage-Distillate Cart-1.00g<br>Metrc: D00000003013: Quietwater Farms-Saltwater Sage-Distillate Cart-1.00g</div>
+        <div class="row-pkg">Pkg: 1ADEMO0000000000000000C3</div>
+      </td><td class="num">&mdash;</td><td class="num">$9.25</td></tr>
+      <tr><td>
+        <div class="row-title">Customer Return &mdash; Defective Product (2026-04-05)</div>
+        <div class="row-sub">POS: D00000003014: Salt Marsh-Pinegrove Reserve-Distillate Cart-1.00g<br>Metrc: D00000003014: Salt Marsh-Pinegrove Reserve-Distillate Cart-1.00g</div>
+        <div class="row-pkg">Pkg: 1ADEMO0000000000000000D1</div>
+      </td><td class="num">1</td><td class="num">$9.25</td></tr>
+      <tr><td>
+        <div class="row-title">Customer Return &mdash; Defective Product (2026-04-20)</div>
+        <div class="row-sub">POS: D00000003015: Cascade Reserve-Cedar Hollow-Distillate Cart-1.00g<br>Metrc: D00000003015: Cascade Reserve-Cedar Hollow-Distillate Cart-1.00g</div>
+        <div class="row-pkg">Pkg: 1ADEMO0000000000000000E1</div>
+      </td><td class="num">1</td><td class="num">$9.25</td></tr>
+      <tr class="subtotal"><td>Subtotal (9 items)</td><td class="num"></td><td class="num">$177.26</td></tr>
+    </table>
+    <div class="band-total"><span>CUSTOMER RETURN CREDIT (100%)</span><span class="bt-val">$177.26</span></div>
+  </div>
+
+  <div class="section">
+    <div class="eyebrow">Destruction</div>
+    <p class="section-desc">These products were destroyed by us and recorded as Waste in Metrc because they were expired or defective on receipt.</p>
+    <table class="tbl">
+      <tr><th style="width:62%">Description</th><th class="num">Qty</th><th class="num">Inventory Cost</th></tr>
+      <tr><td>
+        <div class="row-title">Destruction &mdash; Waste (2026-04-09)</div>
+        <div class="row-sub">Metrc: D00000001234: North Ridge-Aurora Mist-Flower-28.0g</div>
+        <div class="row-pkg">Pkg: 1ADEMO0000000000000000F1</div>
+      </td><td class="num">27.9994</td><td class="num">$60.00</td></tr>
+      <tr><td>
+        <div class="row-title">Destruction &mdash; Waste (2026-04-17)</div>
+        <div class="row-sub">POS: D00000001235: Cascade Reserve-Velvet Dawn-Flower-28.0g<br>Metrc: D00000001235: Cascade Reserve-Velvet Dawn-Flower-28.0g</div>
+        <div class="row-pkg">Pkg: 1ADEMO0000000000000000F2</div>
+      </td><td class="num">28</td><td class="num">$46.01</td></tr>
+      <tr><td>
+        <div class="row-title">Destruction &mdash; Waste (2026-04-17)</div>
+        <div class="row-sub">Metrc: D00000001241: Cascade Reserve-Northern Tide-Flower-28.0g</div>
+        <div class="row-pkg">Pkg: 1ADEMO0000000000000000F3</div>
+      </td><td class="num">28</td><td class="num">$46.01</td></tr>
+      <tr><td>
+        <div class="row-title">Destruction &mdash; Waste (2026-04-09)</div>
+        <div class="row-sub">Metrc: D00000002102: Ember Trail-Granite Peak-Disposable Distillate Vape-1.0g</div>
+        <div class="row-pkg">Pkg: 1ADEMO0000000000000000G1</div>
+      </td><td class="num">1</td><td class="num">$12.50</td></tr>
+      <tr><td>
+        <div class="row-title">Destruction &mdash; Waste (2026-04-22)</div>
+        <div class="row-sub">Metrc: D00000002103: Ember Trail-Lantern Glow-Disposable Distillate Vape-1.0g</div>
+        <div class="row-pkg">Pkg: 1ADEMO0000000000000000G2</div>
+      </td><td class="num">1</td><td class="num">$12.50</td></tr>
+      <tr><td>
+        <div class="row-title">Destruction &mdash; Waste (2026-04-09)</div>
+        <div class="row-sub">Metrc: D00000003011: Quietwater Farms-Driftwood OG-Distillate Cart-1.0g</div>
+        <div class="row-pkg">Pkg: 1ADEMO0000000000000000H1</div>
+      </td><td class="num">1</td><td class="num">$10.00</td></tr>
+      <tr><td>
+        <div class="row-title">Destruction &mdash; Waste (2026-04-13)</div>
+        <div class="row-sub">POS: D00000003012: Quietwater Farms-Harbor Light-Distillate Cart-1.00g<br>Metrc: D00000003012: Quietwater Farms-Harbor Light-Distillate Cart-1.00g</div>
+        <div class="row-pkg">Pkg: 1ADEMO0000000000000000H2</div>
+      </td><td class="num">1</td><td class="num">$10.00</td></tr>
+      <tr><td>
+        <div class="row-title">Destruction &mdash; Waste (2026-04-18)</div>
+        <div class="row-sub">POS: D00000003021: Quietwater Farms-Marsh Reed-Distillate Cart-1.00g<br>Metrc: D00000003021: Quietwater Farms-Marsh Reed-Distillate Cart-1.00g</div>
+        <div class="row-pkg">Pkg: 1ADEMO0000000000000000H3</div>
+      </td><td class="num">1</td><td class="num">$10.00</td></tr>
+      <tr><td>
+        <div class="row-title">Destruction &mdash; Waste (2026-04-28)</div>
+        <div class="row-sub">Metrc: D00000003012: Quietwater Farms-Harbor Light-Distillate Cart-1.00g</div>
+        <div class="row-pkg">Pkg: 1ADEMO0000000000000000H4</div>
+      </td><td class="num">1</td><td class="num">$10.00</td></tr>
+      <tr><td>
+        <div class="row-title">Destruction &mdash; Waste (2026-04-28)</div>
+        <div class="row-sub">Metrc: D00000004101: North Ridge-Tidewater-Pre Rolls Single-1.0g</div>
+        <div class="row-pkg">Pkg: 1ADEMO0000000000000000J1</div>
+      </td><td class="num">1</td><td class="num">$3.25</td></tr>
+      <tr class="subtotal"><td>Subtotal (10 items)</td><td class="num"></td><td class="num">$220.27</td></tr>
+    </table>
+    <div class="band-total"><span>DESTRUCTION CREDIT (100%)</span><span class="bt-val">$220.27</span></div>
+  </div>
+
+  <div class="section">
+    <div class="eyebrow">Sales Below Target Margin</div>
+    <p class="section-desc">We target a 50% gross margin: for every dollar a product sells for, we aim to keep 50&cent; after paying you wholesale. The table below shows sales below that target &mdash; discounted via promotions we discussed with you and inventory turnover markdowns to move slow-moving stock. The Margin Shortfall column is the dollar gap between what we actually sold each product for and what we needed to sell it for to hit the target margin. The total below represents the dollars we left on the table to move your products.</p>
+    <table class="tbl">
+      <tr><th>Product</th><th class="num">Sales</th><th class="num">Shortfall</th></tr>
+      <tr><td>D00000005001: North Ridge-Lantern Glow-Flower-14.0g</td><td class="num">8</td><td class="num">$146.50</td></tr>
+      <tr><td>D00000005002: Cascade Reserve-Cedar Hollow-Flower-7.0g</td><td class="num">7</td><td class="num">$142.05</td></tr>
+      <tr><td>D00000005003: Cascade Reserve-Marsh Reed-Pre Rolls Single-1.0g</td><td class="num">9</td><td class="num">$136.80</td></tr>
+      <tr><td>D00000005004: Cascade Reserve-Northern Tide-Flower-3.5g</td><td class="num">25</td><td class="num">$129.65</td></tr>
+      <tr><td>D00000005005: Cascade Reserve-Tidewater-Pre Rolls Single-1.0g</td><td class="num">9</td><td class="num">$110.60</td></tr>
+      <tr><td>D00000005006: Cascade Reserve-Cedar Hollow-Pre Rolls Single-1.0g</td><td class="num">12</td><td class="num">$98.48</td></tr>
+      <tr><td>D00000005007: Cascade Reserve-Pebble Cove-Ready to Roll-7.0g</td><td class="num">10</td><td class="num">$88.95</td></tr>
+      <tr><td>D00000005008: Cascade Reserve-Grey Harbor-Pre Rolls Single-1.0g</td><td class="num">3</td><td class="num">$79.35</td></tr>
+      <tr><td>D00000001241: Cascade Reserve-Northern Tide-Flower-28.0g</td><td class="num">14</td><td class="num">$68.19</td></tr>
+      <tr><td>D00000001243: Cascade Reserve-Slate Hill-Flower-28.0g</td><td class="num">13</td><td class="num">$66.00</td></tr>
+      <tr><td>D00000001235: Cascade Reserve-Velvet Dawn-Flower-28.0g</td><td class="num">15</td><td class="num">$52.22</td></tr>
+      <tr><td>D00000005012: Cascade Reserve-Lighthouse OG-Distillate Cart-1.0g</td><td class="num">6</td><td class="num">$46.04</td></tr>
+      <tr><td>D00000001242: Cascade Reserve-Snowbank-Flower-28.0g</td><td class="num">5</td><td class="num">$42.59</td></tr>
+      <tr><td>D00000005014: Salt Marsh-Coastal Fog-Cannabis Infused Soft Chew-100mg</td><td class="num">4</td><td class="num">$34.00</td></tr>
+      <tr><td>D00000001234: North Ridge-Aurora Mist-Flower-28.0g</td><td class="num">4</td><td class="num">$30.07</td></tr>
+      <tr><td>D00000005016: North Ridge-Sand Dune-Flower-14.0g</td><td class="num">1</td><td class="num">$30.00</td></tr>
+      <tr><td>D00000002103: Ember Trail-Lantern Glow-Disposable Distillate Vape-1.0g</td><td class="num">4</td><td class="num">$29.51</td></tr>
+      <tr><td>D00000003021: Quietwater Farms-Marsh Reed-Distillate Cart-1.00g</td><td class="num">8</td><td class="num">$28.82</td></tr>
+      <tr><td>D00000005019: Salt Marsh-Sea Salt-Cannabis Infused Soft Chew-100mg</td><td class="num">5</td><td class="num">$26.62</td></tr>
+      <tr><td>D00000005020: Salt Marsh-Mountain Mint-Crumble and THCa Infused Pre Rolls Single-1.0g</td><td class="num">5</td><td class="num">$25.00</td></tr>
+      <tr class="more"><td>... and 5 more products</td><td class="num"></td><td class="num"></td></tr>
+      <tr class="subtotal"><td>Subtotal (25 products)</td><td class="num"></td><td class="num">$1,500.00</td></tr>
+    </table>
+    <div class="band-total"><span>TOTAL MARGIN SHORTFALL</span><span class="bt-val">$1,500.00</span></div>
+  </div>
+
+</div>
+
+<!-- ═══════════ PAGE 6 · Summary + credit request ═══════════ -->
+<div class="page page-break-before">
+  <div style="padding-top: 0.15in;">
+    <div class="section">
+      <div class="eyebrow">Summary</div>
+      <p class="section-desc">The dollar impact of returns, destruction, and below-target-margin sales on your products this month. Each row is the underlying dollar movement; the credit ask comes next.</p>
+      <table class="tbl">
+        <tr><th>Category</th><th class="num">Amount</th></tr>
+        <tr><td>Total Returns</td><td class="num">$177.26</td></tr>
+        <tr><td>Total Destruction Waste</td><td class="num">$220.27</td></tr>
+        <tr><td>Total Margin Shortfall</td><td class="num">$1,500.00</td></tr>
+        <tr class="subtotal"><td>Subtotal</td><td class="num">$1,897.53</td></tr>
+      </table>
+      <div class="band-total"><span>TOTAL FINANCIAL IMPACT ON RETAILER</span><span class="bt-val">$1,897.53</span></div>
+    </div>
+
+    <div class="section">
+      <div class="eyebrow">Credit Request</div>
+      <p class="section-desc">We humbly request a credit based on the data above. For returns and destruction, we've filtered to only product-related issues &mdash; defective product, expired stock, customer-unsatisfied &mdash; and ask you to cover 100% of those. For co-marketing, we worked hard to move your products, and we ask you to split the margin hit 50/50 with us as a partner.</p>
+      <table class="tbl">
+        <tr><th>Credit Request</th><th class="num">Amount</th></tr>
+        <tr><td>Returns (100% vendor coverage)</td><td class="num">$177.26</td></tr>
+        <tr><td>Destruction Waste (100% vendor coverage)</td><td class="num">$220.27</td></tr>
+        <tr><td>Co-Marketing (50% of margin shortfall)</td><td class="num">$750.00</td></tr>
+      </table>
+      <div class="band-total"><span>TOTAL CREDIT REQUEST</span><span class="bt-val">$1,147.53</span></div>
+    </div>
+
+    <p class="closing">We've generated and attached this credit memo for your accounting department. Reply Approved and the credit applies to your next invoice payable on account. Reply with a specific dollar amount and the memo adjusts to that figure and approves in one step. Or decline with a reason and our buyer will pick the conversation back up with you. You can also take any of these actions in your vendor portal at ourshelf.space. If anything in the data on the previous pages doesn't sit right, just reply with your questions or the amount you'd approve.</p>
+  </div>
+
+  <div class="footer">
+    <span>Pinegrove Cannabis Co. &nbsp;&middot;&nbsp; ap@pinegrovecannabis.example &nbsp;&middot;&nbsp; April 2026</span>
+    <span>CM-1042</span>
+  </div>
+</div>
+
+<!-- ═══════════ PAGE 7 · The credit memo ═══════════ -->
+<div class="page">
+  <div class="memo-frame">
+    <div class="memo-head">
+      <div>
+        <div class="memo-retailer">Pinegrove Cannabis Co.</div>
+        <div class="memo-head-eyebrow">April 2026</div>
+      </div>
+      <div>
+        <div class="memo-doctype">CREDIT MEMO</div>
+        <div class="memo-ref">CM-1042</div>
+      </div>
+    </div>
+
+    <hr class="memo-hr">
+
+    <div class="memo-meta">
+      <div>
+        <div class="eyebrow">Issue Date</div>
+        <div class="memo-meta-val">05/03/2026</div>
+      </div>
+      <div>
+        <div class="eyebrow">Period Covered</div>
+        <div class="memo-meta-val">April 2026</div>
+      </div>
+      <div>
+        <div class="eyebrow">Reference</div>
+        <div class="memo-meta-val">CM-1042</div>
+      </div>
+    </div>
+
+    <hr class="memo-hr-light">
+
+    <div class="memo-parties">
+      <div>
+        <div class="eyebrow">Issued By</div>
+        <div class="memo-party-name">Pinegrove Cannabis Co.</div>
+        <div class="memo-party-line">200 Main Street<br>Springfield, MA, 01103</div>
+        <div class="memo-party-line" style="margin-top:6px;">License: MR000000</div>
+      </div>
+      <div>
+        <div class="eyebrow">Issued To</div>
+        <div class="memo-party-name">North Ridge Cultivators</div>
+        <div class="memo-party-line">MA</div>
+        <div class="memo-party-line" style="margin-top:6px;">License: MP000000,MC000000</div>
+      </div>
+    </div>
+
+    <hr class="memo-hr-light">
+
+    <div class="memo-cols">
+      <div class="eyebrow" style="color: var(--slate-500);">Description</div>
+      <div class="eyebrow" style="color: var(--slate-500);">Amount</div>
+    </div>
+
+    <div class="memo-item" style="margin-top:16px;">
+      <div>
+        <div class="memo-item-name">Customer Returns</div>
+        <div class="memo-item-sub">100% vendor coverage per partnership agreement.<br>Defective product, improper hardware, or customer was unsatisfied. See preceding pages for line-item detail.</div>
+      </div>
+      <div class="memo-item-amount">$177.26</div>
+    </div>
+
+    <hr class="memo-hr-light">
+
+    <div class="memo-item">
+      <div>
+        <div class="memo-item-name">Destruction Waste</div>
+        <div class="memo-item-sub">100% vendor coverage per partnership agreement.<br>Products destroyed and recorded as Waste in Metrc (expired or defective on receipt).</div>
+      </div>
+      <div class="memo-item-amount">$220.27</div>
+    </div>
+
+    <hr class="memo-hr-light">
+
+    <div class="memo-item">
+      <div>
+        <div class="memo-item-name">Co-Marketing</div>
+        <div class="memo-item-sub">50% of margin shortfall on sales below target margin.<br>Promotions and pricing actions detailed in preceding pages.</div>
+      </div>
+      <div class="memo-item-amount">$750.00</div>
+    </div>
+
+    <hr class="memo-total-rule">
+
+    <div class="memo-total">
+      <div class="memo-total-label">TOTAL CREDIT MEMO</div>
+      <div class="memo-total-val">$1,147.53</div>
+    </div>
+
+    <div class="memo-terms">
+      <div class="eyebrow">Terms</div>
+      <div class="memo-terms-item" style="margin-top:6px;">&bull; Apply to next invoice payment.</div>
+      <div class="memo-terms-item">&bull; Reply within 10 calendar days of delivery &mdash; approve, approve a specific amount, or decline.</div>
+      <div class="memo-terms-item">&bull; On silence, documented credits (returns, destruction, and pre-approved promotions) move forward; you have 60 days to dispute any applied credit.</div>
+      <div class="memo-terms-item">&bull; Detailed line items provided in the preceding pages of this Monthly Account Review.</div>
+    </div>
+
+    <hr class="memo-hr-light" style="margin-top:20px;">
+
+    <div class="memo-questions">Questions: ap@pinegrovecannabis.example</div>
+  </div>
+
+  <div class="footer">
+    <span>Pinegrove Cannabis Co. &nbsp;&middot;&nbsp; ap@pinegrovecannabis.example &nbsp;&middot;&nbsp; April 2026</span>
+    <span>CM-1042</span>
+  </div>
+</div>
+
+</body>
+</html>
