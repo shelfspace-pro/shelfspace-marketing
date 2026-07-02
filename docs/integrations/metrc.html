@@ -4,19 +4,19 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Metrc Integration — ShelfSpace</title>
-<meta name="description" content="ShelfSpace is an official Metrc third-party vendor. Read-only Metrc connection powers settlements, credit recovery, and AP.">
+<meta name="description" content="ShelfSpace is an official Metrc third-party vendor. A read-mostly Metrc connection powers settlements, credit recovery, and AP.">
 <link rel="canonical" href="https://shelfspace.pro/docs/integrations/metrc">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://shelfspace.pro/docs/integrations/metrc">
 <meta property="og:title" content="Metrc Integration — ShelfSpace">
-<meta property="og:description" content="ShelfSpace is an official Metrc third-party vendor. Read-only Metrc connection powers settlements, credit recovery, and AP.">
+<meta property="og:description" content="ShelfSpace is an official Metrc third-party vendor. A read-mostly Metrc connection powers settlements, credit recovery, and AP.">
 <meta property="og:image" content="https://shelfspace.pro/og-image-v7.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:type" content="image/png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Metrc Integration — ShelfSpace">
-<meta name="twitter:description" content="ShelfSpace is an official Metrc third-party vendor. Read-only Metrc connection powers settlements, credit recovery, and AP.">
+<meta name="twitter:description" content="ShelfSpace is an official Metrc third-party vendor. A read-mostly Metrc connection powers settlements, credit recovery, and AP.">
 <meta name="twitter:image" content="https://shelfspace.pro/og-image-v7.png">
 <meta name="apple-mobile-web-app-title" content="ShelfSpace">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -268,8 +268,8 @@ document.head.appendChild(o)}initApollo();</script>
       <h2>At a Glance</h2>
       <ul>
         <li>ShelfSpace is a certified Metrc third-party vendor — your compliance workflow stays exactly the same</li>
-        <li>In supported Metrc states, connect your Metrc account yourself with a read-only API key</li>
-        <li>The connection is read-only — ShelfSpace reads transfers, sales, and inventory, and never writes to Metrc</li>
+        <li>In supported Metrc states, connect your Metrc account yourself with your Metrc API key</li>
+        <li>The connection is read-mostly — ShelfSpace reads your transfers, sales, and inventory; the only thing it writes back is an automated package-quantity adjustment when you receive short, to keep your Metrc counts accurate</li>
         <li>Metrc data powers your settlements, AP, credit recovery, and vendor identification</li>
         <li>Manifests, COAs, and package IDs are stored alongside each delivery record</li>
       </ul>
@@ -277,7 +277,7 @@ document.head.appendChild(o)}initApollo();</script>
 
     <!-- BODY -->
     <h2>How ShelfSpace Metrc Integration Works</h2>
-    <p>ShelfSpace is a certified Metrc third-party vendor. Metrc is the state-mandated seed-to-sale tracking system, and your team already knows how to use it. In supported Metrc states you connect your Metrc account to ShelfSpace with a read-only API key, and the platform reads your transfer, sales, and inventory data to handle the financial side — settlements, payments, and vendor management. The one thing it never does is change your compliance workflow: your Metrc processes stay exactly the same.</p>
+    <p>ShelfSpace is a certified Metrc third-party vendor. Metrc is the state-mandated seed-to-sale tracking system, and your team already knows how to use it. In supported Metrc states you connect your Metrc account to ShelfSpace with your Metrc API key, and the platform reads your transfer, sales, and inventory data to handle the financial side — settlements, payments, and vendor management. The one thing it never does is change your compliance workflow: your Metrc processes stay exactly the same.</p>
 
     <p>When a vendor ships product to your dispensary, the Metrc manifest travels with the delivery just like it always has. Your receiving team accepts the transfer in Metrc, verifies package IDs, and confirms quantities. The platform picks up that delivery data and uses it to track the shipment through our <a href="/docs/deliveries/overview">delivery dashboard</a>, but the compliance handshake between you and Metrc is untouched.</p>
 
@@ -286,8 +286,9 @@ document.head.appendChild(o)}initApollo();</script>
     </div>
 
     <h2>Connecting Your Metrc Account</h2>
-    <p>In a supported Metrc state, an admin connects your account from <strong>Settings &rarr; Metrc Integration</strong>. Paste your Metrc API key and the platform validates it and lists your licensed facilities. Pick the facilities you want to sync, and the platform connects read-only.</p>
-    <p>On connection, the platform runs a lightweight scan of your recent transfers to identify the vendors who have been shipping to you, then keeps reading new transfers, sales, and inventory as they post. The connection only ever reads — it never writes to Metrc or changes anything on the state's side. You can disconnect at any time, or reconnect with a new key.</p>
+    <p>In a supported Metrc state, an admin connects your account from <strong>Settings &rarr; Metrc Integration</strong>. Paste your Metrc API key and the platform validates it and lists your licensed facilities. Pick the facilities you want to sync, and the platform connects to your account.</p>
+    <p>On connection, the platform runs a lightweight scan of your recent transfers to identify the vendors who have been shipping to you, then keeps reading new transfers, sales, and inventory as they post. The connection is read-mostly: ShelfSpace reads your transfers, sales, and inventory, and the only thing it writes back is an automated package-quantity adjustment when you receive a package short — a targeted correction that keeps your Metrc counts accurate. You can disconnect at any time, or reconnect with a new key.</p>
+    <p>During onboarding, historical activity can also be loaded from a Metrc CSV export — a fully supported path when you want to backfill data from before you connected.</p>
 
     <h2>Manifests and Package IDs</h2>
     <p>Every incoming delivery in ShelfSpace can store the associated Metrc manifest as a document attachment. When your team receives a shipment, they can upload the manifest PDF, COA (certificate of analysis), and vendor invoice alongside the delivery record. This keeps all documentation in one place for audits and reference.</p>
@@ -306,7 +307,7 @@ document.head.appendChild(o)}initApollo();</script>
     <p>ShelfSpace adds a financial layer on top of this compliance layer: the platform runs the vendor payment, <a href="/consignment">consignment settlement</a>, and <a href="/credit-recovery">credit recovery</a> workflows that Metrc was never designed to manage. The two systems work in parallel, not in conflict.</p>
 
     <h2>State-by-State Compatibility</h2>
-    <p>Metrc operates in multiple states, each with slightly different rules and configurations. ShelfSpace works alongside Metrc in every Metrc state, and in supported states you can connect your account directly with the read-only key described above. Either way, your compliance workflow stays intact — Metrc remains your system of record while the platform handles the money side.</p>
+    <p>Metrc operates in multiple states, each with slightly different rules and configurations. ShelfSpace works alongside Metrc in every Metrc state, and in supported states you can connect your account directly with the Metrc API key described above. Either way, your compliance workflow stays intact — Metrc remains your system of record while the platform handles the money side.</p>
 
     <!-- RELATED DOCS -->
     <div class="docs-related">

@@ -4,19 +4,19 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Multi-Factor Authentication — ShelfSpace</title>
-<meta name="description" content="ShelfSpace MFA setup guide. Enable SMS, TOTP, or email multi-factor authentication to protect your cannabis dispensary accounts and stay compliant.">
+<meta name="description" content="ShelfSpace MFA setup guide. Enable an authenticator (TOTP) app or email multi-factor authentication to protect your cannabis dispensary accounts and stay compliant.">
 <link rel="canonical" href="https://shelfspace.pro/docs/user-management/mfa">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://shelfspace.pro/docs/user-management/mfa">
 <meta property="og:title" content="Multi-Factor Authentication — ShelfSpace">
-<meta property="og:description" content="ShelfSpace MFA setup guide. Enable SMS, TOTP, or email multi-factor authentication to protect your cannabis dispensary accounts and stay compliant.">
+<meta property="og:description" content="ShelfSpace MFA setup guide. Enable an authenticator (TOTP) app or email multi-factor authentication to protect your cannabis dispensary accounts and stay compliant.">
 <meta property="og:image" content="https://shelfspace.pro/og-image-v7.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:type" content="image/png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Multi-Factor Authentication — ShelfSpace">
-<meta name="twitter:description" content="ShelfSpace MFA setup guide. Enable SMS, TOTP, or email multi-factor authentication to protect your cannabis dispensary accounts and stay compliant.">
+<meta name="twitter:description" content="ShelfSpace MFA setup guide. Enable an authenticator (TOTP) app or email multi-factor authentication to protect your cannabis dispensary accounts and stay compliant.">
 <meta name="twitter:image" content="https://shelfspace.pro/og-image-v7.png">
 <meta name="apple-mobile-web-app-title" content="ShelfSpace">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -267,8 +267,8 @@ document.head.appendChild(o)}initApollo();</script>
     <div class="docs-glance">
       <h2>At a Glance</h2>
       <ul>
-        <li>ShelfSpace MFA setup supports three methods: SMS, TOTP app, and email</li>
-        <li>Every user is prompted to enable MFA during account creation</li>
+        <li>ShelfSpace MFA setup supports two methods today: email one-time codes (the default) and an authenticator (TOTP) app</li>
+        <li>MFA is required for every account — a second factor is verified on every login</li>
         <li>MFA protects financial data, payment workflows, and vendor relationships</li>
         <li>Required for cannabis compliance in many regulated markets</li>
       </ul>
@@ -285,13 +285,14 @@ document.head.appendChild(o)}initApollo();</script>
     </div>
 
     <h2>MFA Methods</h2>
-    <p>ShelfSpace supports three multi-factor authentication methods. Each user can choose the one that works best for them:</p>
+    <p>ShelfSpace supports two multi-factor authentication methods today. Each user can choose the one that works best for them:</p>
 
     <ul>
-      <li><strong>SMS</strong> — The platform sends a one-time code to your mobile phone via text message. Enter the code after your password to complete login. This is the simplest option and works on any phone.</li>
+      <li><strong>Email one-time code (default)</strong> — The platform sends a one-time code to your registered email address. Enter the code after your password to complete login. It is the default method and works for every user with no extra setup.</li>
       <li><strong>TOTP (Authenticator App)</strong> — Use an authenticator app like Google Authenticator, Authy, or 1Password to generate time-based one-time passwords. You scan a QR code once during setup, and the app generates a new six-digit code every 30 seconds. This is the most secure option.</li>
-      <li><strong>Email</strong> — The platform sends a one-time code to your registered email address. This is a fallback option for users who do not have access to their phone or authenticator app at login time.</li>
     </ul>
+
+    <p>SMS text-message codes are coming soon and will be offered as an additional method in a future update.</p>
 
     <h2>Why MFA Matters for Cannabis Compliance</h2>
     <p>Cannabis dispensaries handle sensitive data: vendor payment amounts, bank account details, inventory counts tied to state-tracked packages, and employee access logs. A compromised account could expose all of this. MFA ensures that even if someone obtains a user's password through phishing or a data breach elsewhere, they still cannot access your ShelfSpace account without the second factor.</p>
@@ -301,7 +302,7 @@ document.head.appendChild(o)}initApollo();</script>
     <h2>Managing MFA for Your Team</h2>
     <p>Admins can see which users on their team have MFA enabled. If a team member loses access to their MFA method — a lost phone, for example — an admin can request a reset through ShelfSpace support. We verify the request and re-enable the setup flow for that user.</p>
 
-    <p>For organizations that want to enforce MFA across all accounts, we can configure your ShelfSpace instance to require it. This means no user can access the platform without completing MFA setup first. Combined with the <a href="/docs/security/overview">security infrastructure</a> we have in place, this keeps your operation locked down without adding friction to daily workflows.</p>
+    <p>MFA is required on every ShelfSpace account — a second factor is verified on every login, so no user can access the platform with a password alone. Combined with the <a href="/docs/security/overview">security infrastructure</a> we have in place, this keeps your operation locked down without adding friction to daily workflows.</p>
 
     <!-- RELATED DOCS -->
     <div class="docs-related">

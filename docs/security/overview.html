@@ -282,7 +282,7 @@ document.head.appendChild(o)}initApollo();</script>
     <h2>Row-Level Security and Tenant Isolation</h2>
     <p>ShelfSpace is a multi-tenant platform, which means multiple dispensaries and vendors share the same infrastructure. Row-level security ensures that each organization can only see its own data. A retailer in Denver cannot see settlement data from a dispensary in Detroit, and a vendor can only see records from the locations they supply.</p>
 
-    <p>RLS policies are defined on every table in the database — approximately 88 tables. Each policy checks the authenticated user's organization ID against the row's organization ID before returning any data. This is not optional or configurable; it is always on. See <a href="/docs/user-management/overview">Roles & Permissions</a> for how user roles layer on top of RLS.</p>
+    <p>RLS policies are defined on every table in the database — 150+ tables. Each policy checks the authenticated user's organization ID against the row's organization ID before returning any data. This is not optional or configurable; it is always on. See <a href="/docs/user-management/overview">Roles & Permissions</a> for how user roles layer on top of RLS.</p>
 
     <h2>Encryption</h2>
     <p>All data is encrypted in transit using TLS 1.2+ for every connection between your browser and our servers. Data at rest is encrypted using AES-256, the same standard used by financial institutions. This applies to the database, file storage (invoices, manifests, check PDFs), and backups.</p>
