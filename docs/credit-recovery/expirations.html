@@ -174,7 +174,7 @@
   "@type": "TechArticle",
   "headline": "Expiration Credits",
   "datePublished": "2026-03-25",
-  "dateModified": "2026-06-02",
+  "dateModified": "2026-07-01",
   "author": { "@type": "Organization", "name": "ShelfSpace", "url": "https://shelfspace.pro" },
   "publisher": { "@type": "Organization", "name": "ShelfSpace" },
   "url": "https://shelfspace.pro/docs/credit-recovery/expirations"
@@ -219,7 +219,7 @@ o.onload=function(){window.trackingFunctions.onLoad({appId:"69c141b32234890011a4
 document.head.appendChild(o)}initApollo();</script>
 </head>
 <body>
-<!-- last-synced: 2026-06-02 -->
+<!-- last-synced: 2026-07-01 -->
 
 <!-- NAV -->
 <nav id="nav">
@@ -270,7 +270,8 @@ document.head.appendChild(o)}initApollo();</script>
         <li>A cannabis expired product credit reimburses you when inventory passes its sell-by date</li>
         <li>The platform monitors Metrc expiration dates daily and flags product before it expires</li>
         <li>Consignment and wholesale handle expiration credits differently</li>
-        <li>The platform generates the credit memo, attaches compliance data, and manages vendor approval</li>
+        <li>Expired or destroyed product is recovered as a credit; slow product that sells at a markdown is handled separately as an aging-markdown credit</li>
+        <li>The platform builds the credit memo and attaches compliance data; ShelfiQ handles delivery and vendor approval</li>
       </ul>
     </div>
 
@@ -286,7 +287,7 @@ document.head.appendChild(o)}initApollo();</script>
     <p>The memo includes the Metrc package tag, original cost, expiration date, and days on shelf. This gives vendors full visibility into what expired and why the credit is valid.</p>
 
     <div class="docs-highlight">
-      <strong>What the platform runs:</strong> The platform monitors Metrc expiration dates daily, flags aging inventory before it expires, generates the credit memo with package-level detail, and sends it to the vendor for approval. You do not need to track expiration dates or argue with vendors over expired product.
+      <strong>What the software does:</strong> monitors Metrc expiration dates daily, flags aging inventory before it expires, and builds the credit memo with package-level detail. ShelfiQ then delivers it and handles the vendor's response — approve, approve a set amount, or decline — and if a documented credit goes unanswered for 10 calendar days after delivery, it's approved automatically and applied. You do not need to track expiration dates or chase vendors over expired product.
     </div>
 
     <h2>Consignment vs. Wholesale Expirations</h2>
@@ -294,7 +295,7 @@ document.head.appendChild(o)}initApollo();</script>
 
     <ul>
       <li><strong>Consignment product</strong> — The vendor still owns the inventory. When consignment product expires, it is removed from the settlement calculation entirely. The vendor never gets paid for product that did not sell, so no credit memo is needed. The platform handles this within the weekly <a href="/docs/consignment/settlements">settlement process</a>.</li>
-      <li><strong>Wholesale product</strong> — You already paid the vendor. When wholesale product expires and your agreement includes expiration protection, a credit memo is generated against the original purchase cost. The credit is applied to the vendor's next AP payment.</li>
+      <li><strong>Wholesale product</strong> — You already paid the vendor. When wholesale product expires and your agreement includes expiration protection, a credit memo is generated against the original purchase cost — recorded as a destruction credit — and applied to the vendor's next AP payment.</li>
     </ul>
 
     <p>This distinction matters because consignment vendors sometimes dispute expiration credits, arguing the product should have been promoted more aggressively. The platform tracks days on shelf and sales velocity for every package, giving you data to back up the credit if a dispute arises. See the <a href="/docs/credit-recovery/approval-workflow">approval workflow</a> for how disputes are resolved.</p>
