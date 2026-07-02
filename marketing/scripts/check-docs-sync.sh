@@ -126,3 +126,7 @@ fi
 
 echo ""
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+
+# Fence: forbidden strings (trade-secret provider names, wrong login URL).
+# Non-blocking here (surfaces as a canary in the SessionStart report).
+bash "$(dirname "$0")/check-docs-forbidden.sh" || true
