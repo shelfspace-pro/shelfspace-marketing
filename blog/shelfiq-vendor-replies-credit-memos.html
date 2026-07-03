@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ShelfiQ Handles the Vendor Replies on Your Credit Memos — ShelfSpace</title>
+<meta name="description" content="When you send a credit memo, ShelfiQ answers the vendor's questions automatically and drives the memo to approved, a partial amount, or declined — with no AP inbox to set up.">
+<link rel="canonical" href="https://shelfspace.pro/blog/shelfiq-vendor-replies-credit-memos">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://shelfspace.pro/blog/shelfiq-vendor-replies-credit-memos">
+<meta property="og:title" content="ShelfiQ Handles the Vendor Replies on Your Credit Memos — ShelfSpace">
+<meta property="og:description" content="When you send a credit memo, ShelfiQ answers the vendor's questions automatically and drives the memo to approved, a partial amount, or declined — with no AP inbox to set up.">
+<meta property="og:image" content="https://shelfspace.pro/og-image-v7.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="ShelfiQ Handles the Vendor Replies on Your Credit Memos — ShelfSpace">
+<meta name="twitter:description" content="When you send a credit memo, ShelfiQ answers the vendor's questions automatically and drives the memo to approved, a partial amount, or declined — with no AP inbox to set up.">
+<meta name="twitter:image" content="https://shelfspace.pro/og-image-v7.png">
+<meta name="apple-mobile-web-app-title" content="ShelfSpace">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+<style>
+  @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-12px); } }
+
+  /* ─── HERO ENHANCEMENTS ─── */
+  .page-hero { padding-bottom: 40px; }
+  .hero-bg-gradient { position: absolute; top: -30%; right: -20%; width: 700px; height: 700px; background: radial-gradient(circle, rgba(149,213,178,0.18) 0%, rgba(149,213,178,0) 70%); animation: float 8s ease-in-out infinite; pointer-events: none; }
+  .hero-bg-gradient-2 { position: absolute; bottom: -20%; left: -15%; width: 550px; height: 550px; background: radial-gradient(circle, rgba(27,67,50,0.06) 0%, rgba(27,67,50,0) 70%); animation: float 10s ease-in-out infinite; animation-delay: -3s; pointer-events: none; }
+  .hero-grid-lines { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 1200px; height: 100%; opacity: 0.035; background-image: linear-gradient(var(--green-deep) 1px, transparent 1px), linear-gradient(90deg, var(--green-deep) 1px, transparent 1px); background-size: 80px 80px; pointer-events: none; }
+  .page-hero .section-label,
+  .page-hero .section-title,
+  .page-hero .section-desc { opacity: 0; transform: translateY(30px); }
+  .page-hero .section-label { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1); }
+  .page-hero .section-title { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s, transform 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s; }
+  .page-hero .section-desc { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1) 0.25s, transform 0.8s cubic-bezier(0.22,1,0.36,1) 0.25s; }
+  .page-hero.hero-loaded .section-label,
+  .page-hero.hero-loaded .section-title,
+  .page-hero.hero-loaded .section-desc { opacity: 1; transform: translateY(0); }
+
+  /* ─── REVEAL ─── */
+  .reveal {
+    opacity: 0; transform: translateY(40px);
+    transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+  /* ─── ARTICLE BODY ─── */
+  .article-body { max-width: 720px; margin: 0 auto; padding: 0 48px 80px; }
+  .article-body h2 { font-size: 24px; font-weight: 700; color: var(--green-deep); margin: 48px 0 16px; letter-spacing: -0.5px; line-height: 1.3; }
+  .article-body h3 { font-size: 19px; font-weight: 700; color: var(--green-deep); margin: 32px 0 12px; letter-spacing: -0.3px; line-height: 1.3; }
+  .article-body p { font-size: 17px; line-height: 1.85; color: var(--slate-600); margin-bottom: 24px; }
+  .article-body ul, .article-body ol { margin-bottom: 24px; padding-left: 24px; }
+  .article-body li { font-size: 17px; line-height: 1.85; color: var(--slate-600); margin-bottom: 8px; }
+  .article-body strong { color: var(--green-deep); font-weight: 600; }
+  .article-body a { color: var(--green-mid); font-weight: 500; text-decoration: none; }
+  .article-body a:hover { color: var(--green-deep); text-decoration: underline; }
+  .article-body blockquote { border-left: 3px solid var(--green-accent); padding: 16px 24px; margin: 32px 0; background: var(--green-ghost); border-radius: 0 8px 8px 0; }
+  .article-body blockquote p { font-style: italic; color: var(--green-dark); margin-bottom: 0; }
+
+  /* ─── AT A GLANCE ─── */
+  .article-glance {
+    max-width: 720px; margin: 0 auto 40px; padding: 24px 28px;
+    background: var(--green-ghost); border: 1px solid rgba(149,213,178,0.3);
+    border-radius: 12px;
+  }
+  .article-glance h2 {
+    font-size: 14px; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--green-mid); margin: 0 0 12px;
+  }
+  .article-glance ul { list-style: none; padding: 0; margin: 0; }
+  .article-glance li {
+    font-size: 15px; line-height: 1.6; color: var(--slate-600);
+    padding: 4px 0 4px 20px; position: relative;
+  }
+  .article-glance li::before {
+    content: ''; position: absolute; left: 0; top: 12px;
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--green-accent);
+  }
+
+  /* ─── STEP FLOW VISUAL ─── */
+  .cm-timeline {
+    margin: 36px 0; padding: 24px 28px;
+    background: var(--white); border: 1px solid var(--slate-200);
+    border-radius: 14px; box-shadow: 0 4px 16px rgba(27,67,50,0.04);
+  }
+  .cm-timeline-head {
+    font: 700 11px/1 var(--font-mono); letter-spacing: 1.4px;
+    text-transform: uppercase; color: var(--slate-500);
+    margin-bottom: 18px;
+  }
+  .cm-row {
+    display: grid; grid-template-columns: 88px 1fr;
+    align-items: center; gap: 14px;
+    padding: 12px 0; border-top: 1px solid var(--slate-100);
+  }
+  .cm-row:first-of-type { border-top: 0; }
+  .cm-row-day {
+    font: 700 12px/1 var(--font-mono); letter-spacing: 1px;
+    text-transform: uppercase; color: var(--green-mid);
+    text-align: right; padding-right: 12px;
+    border-right: 2px solid var(--green-accent);
+  }
+  .cm-row-body { font: 500 15px/1.5 var(--font-display); color: var(--slate-600); }
+  .cm-row-body strong { color: var(--green-deep); font-weight: 700; }
+  .cm-row.is-key { background: var(--green-ghost); margin: 6px -28px; padding: 14px 28px; border-radius: 8px; }
+  .cm-row.is-key .cm-row-body { color: var(--green-dark); }
+  @media (max-width: 600px) {
+    .cm-row { grid-template-columns: 1fr; }
+    .cm-row-day { text-align: left; padding-right: 0; padding-bottom: 6px; border-right: 0; border-bottom: 2px solid var(--green-accent); width: fit-content; padding-left: 0; }
+  }
+
+  /* ─── OUTCOME / COMPARISON CARDS ─── */
+  .path-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px;
+    margin: 28px 0;
+  }
+  .path-grid.is-two { grid-template-columns: repeat(2, 1fr); }
+  @media (max-width: 700px) { .path-grid, .path-grid.is-two { grid-template-columns: 1fr; } }
+  .path-card {
+    padding: 20px 22px; border: 1px solid var(--slate-200);
+    border-radius: 12px; background: var(--white);
+  }
+  .path-card.is-approve { border-left: 4px solid var(--green-mid); }
+  .path-card.is-counter { border-left: 4px solid #f59e0b; }
+  .path-card.is-dispute { border-left: 4px solid #f97316; }
+  .path-card.is-auto { border-left: 4px solid var(--green-mid); background: var(--green-ghost); border-color: rgba(149,213,178,0.45); }
+  .path-card.is-setup { border-left: 4px solid #6366f1; }
+  .path-card-eyebrow {
+    font: 700 11px/1 var(--font-mono); letter-spacing: 1.4px;
+    text-transform: uppercase; margin-bottom: 8px;
+  }
+  .path-card.is-approve .path-card-eyebrow { color: var(--green-mid); }
+  .path-card.is-counter .path-card-eyebrow { color: #b45309; }
+  .path-card.is-dispute .path-card-eyebrow { color: #c2410c; }
+  .path-card.is-auto .path-card-eyebrow { color: var(--green-mid); }
+  .path-card.is-setup .path-card-eyebrow { color: #4f46e5; }
+  .path-card h3 { font: 700 17px/1.3 var(--font-display); color: var(--green-deep); margin: 0 0 10px; letter-spacing: -0.3px; }
+  .path-card p { font: 400 14.5px/1.55 var(--font-display); color: var(--slate-600); margin: 0; }
+
+  /* ─── CTA PARALLAX ─── */
+  .cta-section::before { transform: translate(-50%,-50%) translateY(var(--parallax-y, 0)); will-change: transform; }
+
+  /* ─── FAQ ACCORDION ─── */
+  .faq-list details {
+    border: 1px solid var(--slate-200); border-radius: 10px;
+    margin-bottom: 12px; background: var(--white);
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .faq-list details[open] { background: var(--green-ghost); border-color: rgba(149,213,178,0.45); }
+  .faq-list summary {
+    list-style: none; cursor: pointer;
+    padding: 16px 20px;
+    font: 600 16px/1.4 var(--font-display); color: var(--green-deep);
+    display: flex; justify-content: space-between; align-items: center; gap: 12px;
+  }
+  .faq-list summary::-webkit-details-marker { display: none; }
+  .faq-list summary::after {
+    content: '+'; flex-shrink: 0;
+    font: 400 22px/1 var(--font-mono); color: var(--green-mid);
+    transition: transform 0.2s;
+  }
+  .faq-list details[open] summary::after { content: '−'; }
+  .faq-list details p {
+    padding: 0 20px 18px; margin: 0;
+    font-size: 15px; line-height: 1.7; color: var(--slate-600);
+  }
+
+  /* ─── FOOTER 5-COL ─── */
+  .footer-top { grid-template-columns: 2fr 1fr 1fr 1fr 1fr; }
+  @media (max-width: 900px) { .footer-top { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px) { .footer-top { grid-template-columns: 1fr; } }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    .article-body { padding: 0 24px 60px; }
+  }
+
+  /* ─── REDUCED MOTION ─── */
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; transition: none; }
+    .page-hero .section-label,
+    .page-hero .section-title,
+    .page-hero .section-desc { opacity: 1; transform: none; transition: none; }
+    .hero-bg-gradient, .hero-bg-gradient-2 { animation: none; }
+  }
+</style>
+<noscript><style>.reveal,.page-hero .section-label,.page-hero .section-title,.page-hero .section-desc{opacity:1;transform:none;transition:none;}</style></noscript>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-H2LBJT03WE"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-H2LBJT03WE');</script>
+<script>function initApollo(){var n=Math.random().toString(36).substring(7),o=document.createElement("script");
+o.src="https://assets.apollo.io/micro/website-tracker/tracker.iife.js?nocache="+n,o.async=!0,o.defer=!0,
+o.onload=function(){window.trackingFunctions.onLoad({appId:"69c141b32234890011a43849"})},
+document.head.appendChild(o)}initApollo();</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "ShelfiQ Handles the Vendor Replies on Your Credit Memos",
+  "description": "When you send a credit memo, ShelfiQ answers the vendor's questions automatically and drives the memo to approved, a partial amount, or declined — with no AP inbox to set up.",
+  "author": { "@type": "Person", "name": "Chris Mitchem" },
+  "publisher": { "@type": "Organization", "name": "ShelfSpace", "url": "https://shelfspace.pro" },
+  "datePublished": "2026-07-03",
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://shelfspace.pro/blog/shelfiq-vendor-replies-credit-memos" },
+  "url": "https://shelfspace.pro/blog/shelfiq-vendor-replies-credit-memos",
+  "image": "https://shelfspace.pro/og-image-v7.png"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://shelfspace.pro/" },
+    { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://shelfspace.pro/blog" },
+    { "@type": "ListItem", "position": 3, "name": "ShelfiQ Handles the Vendor Replies on Your Credit Memos" }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Does ShelfiQ answer vendor questions on my credit memos automatically?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. For every credit memo you send, replies route to ShelfiQ, which reads the vendor's message against your actual returns, destruction records, and memo amounts, answers the question accurately, and drives the memo to approved, a partial amount, or declined. It works out of the box and does not depend on having an AP email address or auto-responder configured."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need to set up an AP inbox for ShelfiQ to handle credit memo replies?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. The AP email address and auto-responder are a separate feature that stands up a dedicated inbox for your wholesale invoices. ShelfiQ answering credit memo replies happens automatically whether or not you configure the AP inbox. You can have one without the other, and set up the AP inbox only if you separately want automated wholesale-invoice handling."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Am I on the email thread when a vendor replies to a credit memo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. The memo goes out under your business name, but replies land with ShelfiQ, so you are not on the thread. The full conversation shows up in your portal and you get a notification when a memo resolves, so you stay informed without living in the inbox. When a conversation needs a human, you are notified and can step back in."
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="/" class="nav-logo">
+    <div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div>
+    <span class="nav-logo-text">ShelfSpace</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="/consignment">Consignment</a></li>
+    <li><a href="/accounts-payable">Accounts Payable</a></li>
+    <li><a href="/credit-recovery">Credit Recovery</a></li>
+    <li class="nav-dropdown"><button class="nav-dropdown-toggle" aria-haspopup="true" aria-expanded="false">Platform <svg class="dropdown-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></button><div class="nav-dropdown-menu"><a href="/vendor-management">Vendor Management</a><a href="/how-it-works">How It Works</a><a href="/features">Features</a><a href="/shelfiq">ShelfiQ</a><a href="/checks">Check Payments</a></div></li>
+    <li><a href="/pricing">Pricing</a></li>
+    <li><a href="/about">About</a></li>
+    <li><a href="/contact" class="nav-cta">Get Started <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a></li>
+  </ul>
+  <div class="nav-hamburger" onclick="document.querySelector('.nav-links').classList.toggle('mobile-open'); event.stopPropagation();"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="hero-bg-gradient"></div>
+  <div class="hero-bg-gradient-2"></div>
+  <div class="hero-grid-lines"></div>
+  <div class="section-label">Credit Recovery</div>
+  <h1 class="section-title">You send the credit memo. ShelfiQ handles the replies.</h1>
+  <p class="section-desc">Every credit memo you send goes out under your name — but the vendor's reply lands with ShelfiQ, which answers from your real data and closes the memo to approved, a partial amount, or declined. No AP inbox required.</p>
+</div>
+
+<!-- AT A GLANCE -->
+<div class="article-glance">
+  <h2>At a glance</h2>
+  <ul>
+    <li>Yes — ShelfiQ answers vendor questions on your credit memos <strong>automatically</strong>, for every memo you send.</li>
+    <li>It works with <strong>no setup</strong>. It does not depend on having an AP email address or auto-responder configured — that's a separate feature.</li>
+    <li>Replies route to ShelfiQ, which recognizes the vendor and the memo, then answers from your actual returns, destruction records, and amounts.</li>
+    <li>ShelfiQ drives every memo to one of three outcomes: <strong>approved</strong>, <strong>a partial amount</strong>, or <strong>declined</strong>.</li>
+    <li>You're not on the email thread, but the full conversation shows up in your portal and you're notified when a memo resolves.</li>
+  </ul>
+</div>
+
+<!-- ARTICLE BODY -->
+<article class="article-body">
+
+  <p class="reveal">There's a small hesitation a lot of operators feel right before they send a batch of vendor credit memos: <em>and now the replies start.</em> One vendor wants to know how you got to $312 on returns. Another swears the co-marketing rate was different. A third just wants to argue. Historically, that's a week of email you didn't budget for — and the reason a lot of legitimate credits never got sent in the first place.</p>
+
+  <p class="reveal">So the fair question is: <strong>does ShelfiQ answer vendor questions on my credit memos?</strong> Short answer — yes, automatically, for every credit memo you send, whether or not you've set up an AP inbox. Here's exactly how that works, and why the "AP inbox" thing trips people up.</p>
+
+  <h2 class="reveal">Yes — and you're not the one in the inbox</h2>
+
+  <p class="reveal">When you send your monthly <a href="/credit-recovery">credit memos</a>, each one goes out under your business name. But the reply-to address routes the vendor's response to ShelfiQ. So the moment a vendor hits "Reply" — with a question, a partial-approval offer, or a flat no — their message lands with ShelfiQ, not in your personal inbox. ShelfiQ reads the reply, answers using your actual returns and memo detail, and drives the memo to a resolution. You're not on the thread.</p>
+
+  <div class="cm-timeline reveal" aria-label="How a vendor reply to a credit memo flows through ShelfiQ, step by step.">
+    <div class="cm-timeline-head">HOW A VENDOR REPLY FLOWS</div>
+    <div class="cm-row">
+      <div class="cm-row-day">Step 1</div>
+      <div class="cm-row-body">The memo goes out <strong>under your name</strong>. The reply-to routes the vendor's response to ShelfiQ — no configuration on your end.</div>
+    </div>
+    <div class="cm-row">
+      <div class="cm-row-day">Step 2</div>
+      <div class="cm-row-body">ShelfiQ <strong>recognizes the vendor and the memo</strong>, then pulls the underlying detail — the returns, the destruction records, the amounts — so it answers accurately instead of guessing.</div>
+    </div>
+    <div class="cm-row is-key">
+      <div class="cm-row-day">Step 3</div>
+      <div class="cm-row-body">It <strong>drives to an outcome.</strong> If the vendor asks a question first, ShelfiQ answers it with your data, then guides them back to one of three choices: approved, a partial amount, or declined.</div>
+    </div>
+    <div class="cm-row">
+      <div class="cm-row-day">Step 4</div>
+      <div class="cm-row-body">You <strong>stay informed without being in the inbox.</strong> The full conversation shows up in your portal, and you get a notification when the memo resolves.</div>
+    </div>
+  </div>
+
+  <p class="reveal">The point isn't that a robot is emailing your vendors into submission — it isn't. ShelfiQ facilitates and executes; it never negotiates or advocates on your behalf. When a conversation needs a human, you're notified and can step back in. For the full mechanics of the outcomes and what happens on silence, the <a href="/docs/credit-recovery/approval-workflow">credit memo approval process</a> doc walks it line by line.</p>
+
+  <h2 class="reveal">The three outcomes ShelfiQ drives to</h2>
+
+  <p class="reveal">A vendor's reply always resolves to one of three things. A question isn't a fourth option — it's just part of the conversation on the way to one of these:</p>
+
+  <div class="path-grid reveal">
+    <div class="path-card is-approve">
+      <div class="path-card-eyebrow">Outcome 1</div>
+      <h3>Approved</h3>
+      <p>The vendor accepts the full credit memo. It moves to applied and is queued against their next payment.</p>
+    </div>
+    <div class="path-card is-counter">
+      <div class="path-card-eyebrow">Outcome 2</div>
+      <h3>A partial amount</h3>
+      <p>The vendor accepts a specific dollar figure. ShelfiQ adjusts the memo to that number and approves it in one step — you're notified.</p>
+    </div>
+    <div class="path-card is-dispute">
+      <div class="path-card-eyebrow">Outcome 3</div>
+      <h3>Declined</h3>
+      <p>The vendor explicitly declines, with a reason. It's recorded, you're notified, and your buyer can reopen the conversation.</p>
+    </div>
+  </div>
+
+  <blockquote class="reveal">
+    <p>Send your credit memos with confidence. ShelfiQ fields the vendor replies and closes each memo to approved, a partial amount, or declined — no AP inbox required.</p>
+  </blockquote>
+
+  <h2 class="reveal">"But I never set up an AP inbox"</h2>
+
+  <p class="reveal">This is the part that confuses people, so let's be precise. The <strong>AP email address and auto-responder</strong> stand up a dedicated inbox for your wholesale invoices — vendors and your team email invoices in, and the platform ingests and matches them. That's an accounts-payable feature. It has nothing to do with credit-memo conversations, and ShelfiQ answering your credit memo replies does not wait on it.</p>
+
+  <div class="path-grid is-two reveal">
+    <div class="path-card is-setup">
+      <div class="path-card-eyebrow">Separate feature</div>
+      <h3>AP inbox (auto-responder)</h3>
+      <p><strong>Purpose:</strong> ingest &amp; match wholesale invoices.<br><strong>Setup required?</strong> Yes — you configure it.<br><strong>Who emails in:</strong> vendors or your team sending invoices.</p>
+    </div>
+    <div class="path-card is-auto">
+      <div class="path-card-eyebrow">Automatic</div>
+      <h3>ShelfiQ on credit memos</h3>
+      <p><strong>Purpose:</strong> answer vendor questions on credit memos and resolve them.<br><strong>Setup required?</strong> No — works automatically.<br><strong>Who emails in:</strong> vendors replying to a memo you sent.</p>
+    </div>
+  </div>
+
+  <p class="reveal">You can have one without the other. Set up the AP inbox only if you separately want automated wholesale-invoice handling — see <a href="/docs/accounts-payable/email-deliveries">managing deliveries and invoices by email</a> for that side of the house. The credit-memo replies are handled either way.</p>
+
+  <h2 class="reveal">Good to know</h2>
+
+  <p class="reveal">Two small things worth keeping in mind so replies land cleanly:</p>
+
+  <ul class="reveal">
+    <li><strong>New vendor email addresses.</strong> ShelfiQ matches a replying vendor by their email. A reply from a brand-new, never-seen address may not be auto-recognized — keep your vendor contacts current so nothing falls through.</li>
+    <li><strong>Unsubscribed vendors.</strong> If a vendor previously unsubscribed, some automated messages can be suppressed. Direct replies inside an active conversation are generally still delivered.</li>
+  </ul>
+
+  <h2 class="reveal">The short version</h2>
+
+  <p class="reveal">You send the credit memo. The vendor's reply lands with ShelfiQ, which recognizes the memo, answers the question from your real returns and destruction data, and closes it to approved, a partial amount, or declined. You see the whole conversation in your portal and get pinged when it resolves — without living in the inbox, and without setting anything up. If you want the reference version of this with the AP-inbox comparison table, it lives in the docs: <a href="/docs/credit-recovery/shelfiq-credit-memo-replies">does ShelfiQ answer vendor questions on my credit memos?</a></p>
+
+  <p class="reveal">For related reading: what happens when a vendor <a href="/blog/cannabis-vendor-no-response-credit-memo">never responds to a credit memo</a>, the <a href="/blog/anatomy-of-a-vendor-credit-memo">anatomy of the credit memo</a> your vendors actually receive, and how <a href="/shelfiq">ShelfiQ</a> handles first-line vendor email across the rest of your operation. If credit-memo back-and-forth has been the reason you don't chase what you're owed, <a href="/contact">get in touch for an evaluation</a> — we'll size what's been sitting unrecovered in your last 90 days.</p>
+
+</article>
+
+<!-- FAQ -->
+<section style="max-width: 720px; margin: 0 auto; padding: 0 48px 60px;">
+  <h2 style="font-size: 22px; font-weight: 700; color: #1b4332; margin-bottom: 24px; letter-spacing: -0.5px;">Frequently asked questions</h2>
+  <div class="faq-list">
+    <details>
+      <summary>Does ShelfiQ answer vendor questions on my credit memos automatically?</summary>
+      <p>Yes. For every credit memo you send, replies route to ShelfiQ, which reads the vendor's message against your actual returns, destruction records, and memo amounts, answers the question accurately, and drives the memo to approved, a partial amount, or declined. It works out of the box and does not depend on having an AP email address or auto-responder configured.</p>
+    </details>
+    <details>
+      <summary>Do I need to set up an AP inbox for ShelfiQ to handle credit memo replies?</summary>
+      <p>No. The AP email address and auto-responder are a separate feature that stands up a dedicated inbox for your wholesale invoices. ShelfiQ answering credit memo replies happens automatically whether or not you configure the AP inbox. You can have one without the other, and set up the AP inbox only if you separately want automated wholesale-invoice handling.</p>
+    </details>
+    <details>
+      <summary>Am I on the email thread when a vendor replies to a credit memo?</summary>
+      <p>No. The memo goes out under your business name, but replies land with ShelfiQ, so you are not on the thread. The full conversation shows up in your portal and you get a notification when a memo resolves, so you stay informed without living in the inbox. When a conversation needs a human, you are notified and can step back in.</p>
+    </details>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-content">
+    <div class="section-label reveal">Get Started</div>
+    <h2 class="section-title reveal">Stop budgeting a week for vendor replies.</h2>
+    <p class="section-desc reveal">Free evaluation. We look at the last 90 days of vendor activity and size what's been sitting unrecovered — returns, expirations, and co-marketing dollars your vendors owe but never paid.</p>
+    <div class="cta-actions reveal">
+      <a href="/contact" class="btn-primary">
+        Get a Demo
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+      <a href="/contact" class="btn-secondary">Talk to Chris</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="/" class="nav-logo"><div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div><span class="nav-logo-text">ShelfSpace</span></a>
+      <p>Every Vendor. Every Payment. One Engine.</p>
+    </div>
+    <div class="footer-col"><h4>Services</h4><ul><li><a href="/consignment">Consignment</a></li><li><a href="/accounts-payable">Accounts Payable</a></li><li><a href="/credit-recovery">Credit Recovery</a></li><li><a href="/checks">Check Payments</a></li><li><a href="/shelfiq">ShelfiQ</a></li></ul></div>
+    <div class="footer-col"><h4>Platform</h4><ul><li><a href="/features">Features</a></li><li><a href="/how-it-works">How It Works</a></li><li><a href="/pricing">Pricing</a></li><li><a href="/about">About</a></li><li><a href="/blog">Blog</a></li><li><a href="/docs">Docs</a></li></ul></div>
+    <div class="footer-col"><h4>Access</h4><ul><li><a href="https://ourshelf.space/login">Login</a></li><li><a href="/contact">Sign Up</a></li><li><a href="/contact">Contact</a></li><li><a href="/vendors">For Vendors</a></li><li><a href="/for-bookkeepers">For Bookkeepers</a></li></ul></div>
+    <div class="footer-col"><h4>Company</h4><ul><li><a href="mailto:chris@shelfspace.pro">Email</a></li><li><a href="mailto:support@shelfspace.pro">Support</a></li><li><a href="https://linkedin.com/company/shelfspace-pro" target="_blank" rel="noopener" class="footer-social-link"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> LinkedIn</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><p>&copy; 2026 ShelfSpace Technologies Inc.</p><div class="footer-bottom-links"><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div></div>
+</footer>
+
+<script>
+(function() {
+  var nav = document.getElementById('nav');
+  var pageHero = document.querySelector('.page-hero');
+  var parallaxSections = [ document.querySelector('.cta-section') ];
+
+  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var isMobile = window.innerWidth < 900;
+  var ticking = false;
+
+  requestAnimationFrame(function() {
+    nav.classList.toggle('scrolled', window.scrollY > 20);
+    if (pageHero) pageHero.classList.add('hero-loaded');
+  });
+
+  var revealObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(function(el) { revealObserver.observe(el); });
+
+  function onScroll() {
+    var scrollY = window.scrollY;
+    nav.classList.toggle('scrolled', scrollY > 20);
+    if (prefersReduced || isMobile) return;
+    var wh = window.innerHeight;
+    parallaxSections.forEach(function(section) {
+      if (!section) return;
+      var rect = section.getBoundingClientRect();
+      if (rect.bottom < 0 || rect.top > wh) return;
+      var center = rect.top + rect.height / 2 - wh / 2;
+      section.style.setProperty('--parallax-y', (center * 0.08) + 'px');
+    });
+  }
+
+  window.addEventListener('scroll', function() {
+    if (!ticking) { requestAnimationFrame(function() { onScroll(); ticking = false; }); ticking = true; }
+  }, { passive: true });
+
+  onScroll();
+
+  window.addEventListener('resize', function() {
+    isMobile = window.innerWidth < 900;
+    if (isMobile) { parallaxSections.forEach(function(section) { if (section) section.style.setProperty('--parallax-y', '0px'); }); }
+  });
+
+  document.addEventListener('click', function() {
+    var navLinks = document.querySelector('.nav-links');
+    if (navLinks && navLinks.classList.contains('mobile-open')) { navLinks.classList.remove('mobile-open'); }
+  });
+})();
+</script>
+<script src="/shelfiq-widget.js"></script>
+</body>
+</html>
