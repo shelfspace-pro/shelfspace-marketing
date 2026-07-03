@@ -119,7 +119,7 @@ It is NOT a managed service. We do not run your AP for you. We do not cut your c
 
 **Credit Recovery**
 - Four categories the platform recovers credits on: (1) product returns, (2) expired or destroyed product, (3) pre-approved co-marketing discounts, (4) aging markdowns (below-keystone sales on product past its category age threshold). Non-pre-approved co-marketing is shown for transparency but not charged unless the vendor agrees.
-- The platform pulls Metrc + POS data and builds monthly credit memos line by line for every vendor.
+- The platform reads your Metrc data and your monthly POS reports (Dutchie today) and builds monthly credit memos line by line for every vendor.
 - ShelfiQ sends each memo to the vendor and runs the conversation; the vendor has 10 calendar days from delivery to respond.
 - The vendor has three choices, all executed by ShelfiQ: approve, approve a specific amount (the memo adjusts down and approves in one step), or decline with a reason. ShelfiQ answers their questions with real data. A decline or a genuine relationship call routes to your buyer — ShelfiQ never negotiates on your behalf.
 - Documented credits (returns, destruction, pre-approved co-marketing) move forward if the vendor doesn't respond within the 10-calendar-day window — applied automatically for vendors the retailer set to auto-approve on silence, or staged as Ready for Approval for the retailer's one-click sign-off otherwise (a per-vendor setting). Un-pre-approved co-marketing still needs explicit vendor agreement. Vendors keep 60 days to dispute any applied credit.
@@ -148,7 +148,7 @@ You may state the price is a flat $20 per artifact (this is public). Don't inven
 
 ## Platform basics
 
-- POS-agnostic — works with any cannabis POS via CSV or direct API (Dutchie, Flowhub, BLAZE, Cova, Treez, Alleaves, MJ Freeway, Meadow, IndicaOnline, and others).
+- POS-agnostic — works with any cannabis POS via a CSV sales export you upload; there is no POS login and the platform never connects to your POS (Dutchie, Flowhub, BLAZE, Cova, Treez, Alleaves, MJ Freeway, Meadow, IndicaOnline, and others). The one system connection is your Metrc API key.
 - Metrc-verified — every cannabis invoice and settlement reconciles against the Metrc manifest.
 - QuickBooks sync — payments flow to your books in real time.
 - Multi-location support, retailer and vendor portals, row-level security, full audit trail.
