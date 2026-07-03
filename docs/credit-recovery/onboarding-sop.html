@@ -78,7 +78,7 @@
   "@type": "TechArticle",
   "headline": "Credit Recovery Onboarding — Getting Started",
   "datePublished": "2026-05-13",
-  "dateModified": "2026-07-01",
+  "dateModified": "2026-07-03",
   "author": { "@type": "Organization", "name": "ShelfSpace", "url": "https://shelfspace.pro" },
   "publisher": { "@type": "Organization", "name": "ShelfSpace" },
   "url": "https://shelfspace.pro/docs/credit-recovery/onboarding-sop"
@@ -120,7 +120,7 @@
 <script>function initApollo(){var n=Math.random().toString(36).substring(7),o=document.createElement("script");o.src="https://assets.apollo.io/micro/website-tracker/tracker.iife.js?nocache="+n,o.async=!0,o.defer=!0,o.onload=function(){window.trackingFunctions.onLoad({appId:"69c141b32234890011a43849"})},document.head.appendChild(o)}initApollo();</script>
 </head>
 <body>
-<!-- last-synced: 2026-07-01 -->
+<!-- last-synced: 2026-07-03 -->
 
 <nav id="nav">
   <a href="/" class="nav-logo">
@@ -163,7 +163,7 @@
     <div class="docs-glance">
       <h2>At a Glance</h2>
       <ul>
-        <li>You connect read access to your POS (add admin@shelfspace.pro as a user) and confirm Metrc access</li>
+        <li>You connect Metrc with your API key and export your monthly Dutchie reports — there's no POS login and nothing to install</li>
         <li>You set up your workspace and add your team in the portal — a short wizard walks you through it</li>
         <li>You upload your vendor list (name, license number, AR contact, sales rep)</li>
         <li>Your buyer sends one kickoff notification to each vendor explaining what's about to change</li>
@@ -174,13 +174,13 @@
 
     <p>Credit recovery turns the events every dispensary already has — customer returns, expired or destroyed product, vendor-funded promotions, and below-keystone markdowns on aging inventory — into vendor credits that get applied against the next invoice you pay them. Credit recovery is a product you run yourself: you set it up, review the memos, and send them, while the platform does the math and ShelfiQ handles the vendor side. This page walks through what happens from the day you sign on to the day your first monthly credit memos go out. It's the setup, not the math (the math lives in <a href="/docs/credit-recovery/overview">Credit Recovery Overview</a>).</p>
 
-    <p>The whole approach is partnership-first. We're not trying to dictate to vendors, or pull a fast one. The idea is to use your data to optimize margins at the SKU level, and to ask vendors to participate so velocity stays strong and both sides come out ahead. Your existing buyer leads those relationships — the system pulls the data, builds the credit memos, and ShelfiQ handles the vendor communication. If you'd rather not set it up alone, our team can walk it with you, but nothing here requires us.</p>
+    <p>The whole approach is partnership-first. We're not trying to dictate to vendors, or pull a fast one. The idea is to use your data to optimize margins at the SKU level, and to ask vendors to participate so velocity stays strong and both sides come out ahead. Your existing buyer leads those relationships — the system does the math, builds the credit memos, and ShelfiQ handles the vendor communication. If you'd rather not set it up alone, our team can walk it with you, but nothing here requires us.</p>
 
     <h2>Step 0 — Data access (do this first)</h2>
-    <p>Before any credit memos can be generated, the platform needs read access to your numbers. Two things:</p>
+    <p>Before any credit memos can be generated, the platform needs to see your numbers. Two things — and neither one is a POS login:</p>
     <ul>
-      <li><strong>Add <code>admin@shelfspace.pro</code> as a user in your POS</strong> (Dutchie or Flowhub today; other POSes on request). The platform uses this to pull monthly returns, discounts, and inventory receipts. Admin-level role is fine; it only reads.</li>
-      <li><strong>Confirm Metrc API access</strong> in track-and-trace states. If you ran an evaluation, this is already wired up. If not, the portal walks you through generating an API key.</li>
+      <li><strong>Connect Metrc.</strong> In track-and-trace states, paste your <a href="/docs/integrations/metrc">Metrc API key</a> in Settings &rarr; Metrc Integration. If you ran an evaluation, this is already wired up; if not, the portal walks you through generating a key. The platform reads your sales and package data — your compliance workflow stays exactly the same. We never add a ShelfSpace user to your POS.</li>
+      <li><strong>Export your monthly Dutchie reports.</strong> Self-serve credit recovery reads Dutchie report exports today. Each month you upload four reports from Dutchie — returns, discounts, IR Detail (costs), and current inventory (menu) — into the credit-memo wizard, and the platform parses them for you. On Flowhub, Blaze, or another POS, self-serve isn't live yet — reach out and ShelfSpace runs the month for you.</li>
     </ul>
     <p>That's it for prerequisites. The rest of onboarding is a quick self-serve setup, up to your buyer's kickoff (Step 3).</p>
 
@@ -197,7 +197,7 @@
     <h2>Step 2 — Upload your vendor list</h2>
     <p>The bulk vendor upload screen takes a spreadsheet or manual entry. For each vendor you'll want:</p>
     <ul>
-      <li><strong>Legal name + DBA</strong> — so vendor names line up with what's in your POS and Metrc data.</li>
+      <li><strong>Legal name + DBA</strong> — so vendor names line up with what's in your Dutchie reports and Metrc data.</li>
       <li><strong>State license number</strong> — used to match Metrc package chains back to the right vendor.</li>
       <li><strong>AR contact</strong> (name + email) — this is who'll receive the monthly credit memo and the response thread.</li>
       <li><strong>Sales rep email</strong> (name optional) — this is your buyer's day-to-day person on the vendor side. The platform keeps them in the loop on kickoff and pre-approval requests. Email is the routing key; name is helpful context when you have it but not required.</li>
@@ -225,7 +225,7 @@
     </div>
 
     <h2>Step 4 — First week of every month, the platform runs the numbers</h2>
-    <p>Around the first three or four business days of every new month, the platform pulls the prior month's data from Metrc and your POS. It assembles one monthly review per vendor and produces a credit memo for each. By default the memo charges only the defensible base — returns, destruction, pre-approved co-marketing, and aging markdowns (below-keystone sales on product past its category age threshold). Non-pre-approved co-marketing is shown for transparency but isn't charged unless the vendor agrees.</p>
+    <p>Around the first three or four business days of every new month, you export the prior month's Dutchie reports and upload them, and the platform combines them with your Metrc data. It assembles one monthly review per vendor and produces a credit memo for each. By default the memo charges only the defensible base — returns, destruction, pre-approved co-marketing, and aging markdowns (below-keystone sales on product past its category age threshold). Non-pre-approved co-marketing is shown for transparency but isn't charged unless the vendor agrees.</p>
 
     <p>Before anything goes out to vendors, your team reviews the credit memos in your portal. You can spot-check the math on any vendor, void any memo that doesn't look right, or hold one back for review. When you're satisfied, you click <strong>Send to Vendor</strong> on each one (or in bulk).</p>
 
@@ -259,7 +259,7 @@
     <h2>Where the software stops and your team takes over</h2>
     <p>The simplest way to describe the split:</p>
 
-    <p><strong>The software handles:</strong> the big one — <strong>monthly credit memo generation</strong> (the math, the PDFs, all of it). Plus data aggregation across Metrc and POS, the vendor kickoff draft (sent under your identity), and — through ShelfiQ — delivering each memo, answering vendor questions with real data, executing the vendor's decision, and automatically approving and applying documented credits when a vendor goes silent after the response window.</p>
+    <p><strong>The software handles:</strong> the big one — <strong>monthly credit memo generation</strong> (the math, the PDFs, all of it). Plus data aggregation across Metrc and your uploaded Dutchie reports, the vendor kickoff draft (sent under your identity), and — through ShelfiQ — delivering each memo, answering vendor questions with real data, executing the vendor's decision, and automatically approving and applying documented credits when a vendor goes silent after the response window.</p>
 
     <p><strong>Your buyer handles:</strong> vendor relationship questions, a decline worth revisiting, anything that calls for a recognizable face. You own those conversations — that's how vendor trust survives the change. ShelfiQ facilitates and executes; it never negotiates on your behalf.</p>
 
@@ -270,7 +270,7 @@
     </div>
 
     <h2>What it looks like end to end</h2>
-    <p>Day 1: you sign on and set up your workspace — the wizard gets you through account, team, and POS access in an afternoon. Same week: you upload your vendor list and your buyer sends the kickoff. First week of the following month: the platform generates credit memos; your team reviews and sends them; ShelfiQ handles vendor responses. Approvals start landing within days — and documented credits are automatically approved and applied if a vendor goes quiet after the response window. Your AP team applies the first credits against open invoices that same month.</p>
+    <p>Day 1: you sign on and set up your workspace — the wizard gets you through account, team, and Metrc access in an afternoon. Same week: you upload your vendor list and your buyer sends the kickoff. First week of the following month: the platform generates credit memos; your team reviews and sends them; ShelfiQ handles vendor responses. Approvals start landing within days — and documented credits are automatically approved and applied if a vendor goes quiet after the response window. Your AP team applies the first credits against open invoices that same month.</p>
 
     <p>By month two, the cycle is running on rails. Your buyer is having pre-approval conversations on next month's promotions. Vendor relationships are stronger because the conversations are happening against shared data, not against memory.</p>
 
@@ -320,7 +320,7 @@
   }, { passive: true });
 })();
 </script>
-<script src="/docs-search.js?v=29" defer></script>
+<script src="/docs-search.js?v=30" defer></script>
 <script src="/shelfiq-widget.js"></script>
 </body>
 </html>
