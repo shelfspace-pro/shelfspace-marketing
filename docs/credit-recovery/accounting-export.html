@@ -3,20 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Managing Your Cannabis Vendors — ShelfSpace</title>
-<meta name="description" content="Manage cannabis vendors on ShelfSpace — one searchable list, a full profile per vendor, and auto-filled vendor details from public records and your own invoices.">
-<link rel="canonical" href="https://shelfspace.pro/docs/accounts-payable/managing-vendors">
+<title>Send Credit Memos to Your Accounting Team — ShelfSpace</title>
+<meta name="description" content="Send approved credit memos to your accounting team: a CSV summary plus memo PDFs, emailed automatically or on demand, and mark credits applied outside ShelfSpace.">
+<link rel="canonical" href="https://shelfspace.pro/docs/credit-recovery/accounting-export">
 <meta property="og:type" content="article">
-<meta property="og:url" content="https://shelfspace.pro/docs/accounts-payable/managing-vendors">
-<meta property="og:title" content="Managing Your Cannabis Vendors — ShelfSpace">
-<meta property="og:description" content="Manage cannabis vendors on ShelfSpace — one searchable list, a full profile per vendor, and auto-filled vendor details from public records and your own invoices.">
+<meta property="og:url" content="https://shelfspace.pro/docs/credit-recovery/accounting-export">
+<meta property="og:title" content="Send Credit Memos to Your Accounting Team — ShelfSpace">
+<meta property="og:description" content="Send approved credit memos to your accounting team: a CSV summary plus memo PDFs, emailed automatically or on demand, and mark credits applied outside ShelfSpace.">
 <meta property="og:image" content="https://shelfspace.pro/og-image-v7.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:type" content="image/png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Managing Your Cannabis Vendors — ShelfSpace">
-<meta name="twitter:description" content="Manage cannabis vendors on ShelfSpace — one searchable list, a full profile per vendor, and auto-filled vendor details for your review.">
+<meta name="twitter:title" content="Send Credit Memos to Your Accounting Team — ShelfSpace">
+<meta name="twitter:description" content="Send approved credit memos to your accounting team: a CSV summary plus memo PDFs, emailed automatically or on demand, and mark credits applied outside ShelfSpace.">
 <meta name="twitter:image" content="https://shelfspace.pro/og-image-v7.png">
 <meta name="apple-mobile-web-app-title" content="ShelfSpace">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -80,6 +80,10 @@
     padding-top: 24px; border-top: 1px solid var(--slate-100);
   }
   .docs-content h2:first-of-type { border-top: none; padding-top: 0; }
+  .docs-content h3 {
+    font-size: 17px; font-weight: 700; color: var(--green-deep);
+    margin: 28px 0 12px; letter-spacing: -0.3px; line-height: 1.35;
+  }
   .docs-content p {
     font-size: 16px; line-height: 1.8; color: var(--slate-600); margin-bottom: 20px;
   }
@@ -90,6 +94,11 @@
   .docs-content strong { color: var(--green-deep); font-weight: 600; }
   .docs-content a { color: var(--green-mid); font-weight: 500; text-decoration: none; }
   .docs-content a:hover { color: var(--green-deep); text-decoration: underline; }
+  .docs-content code {
+    font-family: var(--font-mono); font-size: 0.88em;
+    background: var(--slate-50); padding: 2px 7px; border-radius: 5px;
+    color: var(--green-dark); border: 1px solid var(--slate-100);
+  }
 
   /* ── At a Glance Box ── */
   .docs-glance {
@@ -119,6 +128,17 @@
     font-size: 15px; line-height: 1.7; color: var(--green-dark);
   }
   .docs-highlight strong { color: var(--green-deep); }
+
+  /* ── Steps / option list ── */
+  .docs-reports { list-style: none; padding: 0; margin: 0 0 20px; }
+  .docs-reports li {
+    padding: 16px 18px; margin-bottom: 10px;
+    background: var(--slate-50); border: 1px solid var(--slate-100);
+    border-radius: 10px; line-height: 1.55;
+  }
+  .docs-reports li:last-child { margin-bottom: 0; }
+  .docs-reports .docs-report-name { font-weight: 600; color: var(--green-deep); }
+  .docs-reports .docs-report-where { display: block; font-size: 14px; color: var(--slate-500); margin-top: 3px; }
 
   /* ── Related Docs ── */
   .docs-related {
@@ -172,12 +192,12 @@
 {
   "@context": "https://schema.org",
   "@type": "TechArticle",
-  "headline": "Managing Your Cannabis Vendors",
-  "datePublished": "2026-06-04",
-  "dateModified": "2026-06-04",
+  "headline": "Send Approved Credit Memos to Your Accounting Team",
+  "datePublished": "2026-07-03",
+  "dateModified": "2026-07-03",
   "author": { "@type": "Organization", "name": "ShelfSpace", "url": "https://shelfspace.pro" },
   "publisher": { "@type": "Organization", "name": "ShelfSpace" },
-  "url": "https://shelfspace.pro/docs/accounts-payable/managing-vendors"
+  "url": "https://shelfspace.pro/docs/credit-recovery/accounting-export"
 }
 </script>
 <script type="application/ld+json">
@@ -185,29 +205,9 @@
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position": 1,
-      "name": "Home",
-      "item": "https://shelfspace.pro/"
-    },
-    {
-      "@type": "ListItem",
-      "position": 2,
-      "name": "Documentation",
-      "item": "https://shelfspace.pro/docs"
-    },
-    {
-      "@type": "ListItem",
-      "position": 3,
-      "name": "Accounts Payable",
-      "item": "https://shelfspace.pro/docs/accounts-payable/overview"
-    },
-    {
-      "@type": "ListItem",
-      "position": 4,
-      "name": "Managing Vendors"
-    }
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://shelfspace.pro/" },
+    { "@type": "ListItem", "position": 2, "name": "Documentation", "item": "https://shelfspace.pro/docs" },
+    { "@type": "ListItem", "position": 3, "name": "Send Credit Memos to Your Accounting Team" }
   ]
 }
 </script>
@@ -219,9 +219,9 @@ o.onload=function(){window.trackingFunctions.onLoad({appId:"69c141b32234890011a4
 document.head.appendChild(o)}initApollo();</script>
 </head>
 <body>
-<!-- last-synced: 2026-06-04 -->
+<!-- last-synced: 2026-07-03 -->
 
-<!-- NAV -->
+<!-- NAV (same as all site pages) -->
 <nav id="nav">
   <a href="/" class="nav-logo">
     <div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div>
@@ -244,7 +244,7 @@ document.head.appendChild(o)}initApollo();</script>
 <div class="docs-hero">
   <div class="docs-hero-content">
     <a href="/docs" class="docs-hero-badge">Documentation</a>
-    <h1 class="docs-hero-title">Managing Your Vendors</h1>
+    <h1 class="docs-hero-title">Send Approved Credit Memos to Your Accounting Team</h1>
   </div>
 </div>
 
@@ -259,76 +259,84 @@ document.head.appendChild(o)}initApollo();</script>
   <!-- CONTENT -->
   <main class="docs-content">
     <div class="docs-breadcrumb">
-      <a href="/docs">Docs</a> / <a href="/docs/accounts-payable/overview">Accounts Payable</a> / Managing Vendors
+      <a href="/docs">Docs</a> / Credit Recovery
     </div>
-    <div class="docs-category">Accounts Payable</div>
+    <div class="docs-category">Credit Recovery</div>
 
     <!-- AT A GLANCE -->
     <div class="docs-glance">
       <h2>At a Glance</h2>
       <ul>
-        <li>Manage every vendor you work with from one searchable list — cannabis and non-cannabis</li>
-        <li>Open any vendor to see deliveries, payments, credits, SKUs, and settings in one place</li>
-        <li>The platform fills in missing vendor details from public licensing records and your own invoices</li>
-        <li>Review and accept suggested details, or leave them — you stay in control of the record</li>
-        <li>Invite vendors and send announcements to a whole group of vendors at once</li>
+        <li>The platform emails every approved credit memo to your accounting team automatically — a CSV summary plus the memo PDFs</li>
+        <li>Choose the timing: as each memo is approved, a weekly digest, or a monthly digest</li>
+        <li>Export or email any set of approved memos on demand from the <strong>Approved</strong> tab — no waiting for the next send</li>
+        <li><strong>Mark Applied</strong> records a credit you settled outside ShelfSpace, so your Credits list stays accurate</li>
+        <li>Recipients never need a ShelfSpace login; only admins change these settings or mark memos applied</li>
       </ul>
     </div>
 
     <!-- BODY CONTENT -->
-    <h2>Your Vendor List</h2>
-    <p>Every vendor you work with lives in one place. The vendor list is searchable and filterable, and it covers both your cannabis vendors and your non-cannabis ones — the flower distributor and the landlord sit in the same roster. You can see at a glance which vendors are active, which have recent deliveries, and which still need to finish setting up their account.</p>
+    <p>If you generate <a href="/credit-recovery">vendor credit memos</a> in ShelfSpace but do your bookkeeping somewhere else, this is how you get the paperwork to the people who need it. The platform sends every approved credit memo to your accounting team as a spreadsheet plus the memo PDFs, you can export them on demand, and you can mark a memo applied when you record the credit outside ShelfSpace — all without anyone else logging in.</p>
 
-    <p>This is the hub for the whole relationship. From the list you invite new vendors, send an announcement to a group of them at once, and open any vendor to manage everything tied to them. To bring a brand-new vendor onto the platform, see <a href="/docs/accounts-payable/vendor-onboarding">Vendor Onboarding</a>.</p>
+    <h2>Who this is for</h2>
+    <p>This is built for retailers who use ShelfSpace to recover credit memos but keep their books and vendor payments in another system — QuickBooks, Xero, a spreadsheet, or a bookkeeper. If your firm runs your close, see <a href="/for-bookkeepers">ShelfSpace for bookkeepers</a> for how the pieces fit together.</p>
+    <p>If you already pay your vendors through ShelfSpace, you don't need any of this — approved credits are deducted automatically the next time you pay that vendor's invoice, and they move to <strong>Applied</strong> on their own.</p>
 
-    <h2>The Vendor Detail View</h2>
-    <p>Open a vendor and you get their full picture across a set of tabs:</p>
-    <ul>
-      <li><strong>Info</strong> — the vendor's business details, brands, and contacts</li>
-      <li><strong>Deliveries</strong> — every delivery you have received from them</li>
-      <li><strong>Manifests</strong> — their Metrc manifest history, each one clickable for detail</li>
-      <li><strong>SKUs</strong> — the products you carry from this vendor</li>
-      <li><strong>Payments</strong> — what you have paid and what is scheduled</li>
-      <li><strong>Credits</strong> — credit memos raised against them</li>
-      <li><strong>Promotions</strong> — this vendor's co-op promotions and opportunities</li>
-      <li><strong>Price Drops</strong> — aged-inventory markdown requests for this vendor</li>
-      <li><strong>Settings</strong> — payment terms, consignment splits, and the rest of the configuration</li>
-    </ul>
-    <p>Instead of hunting across screens, everything about a vendor — money in, money out, product, and terms — is one click away.</p>
-
-    <h2>Auto-Filled Vendor Details</h2>
-    <p>Vendor records are usually half-empty: a name, maybe an email, and a lot of blanks. The platform fills those blanks for you. It pulls missing details — DBA name, license status, address, contacts — from <strong>public cannabis licensing records and your own invoices</strong>, and writes them into empty fields only. It never overwrites something you already entered.</p>
+    <h2>Turn on automatic sharing</h2>
+    <p>You switch this on once, in <strong>Credits &rarr; Settings</strong>, under the card <strong>"What to do with approved credit memos?"</strong> Add your accounting recipients (or use <strong>Add my email</strong>), turn on <strong>"Email approved credit memos to my team,"</strong> and choose when to send — as each memo is approved (within about three hours), a weekly digest on a weekday you pick, or a monthly digest on a day of the month (1–28). The full walkthrough, alongside your coverage rates and auto-approval defaults, lives in <a href="/docs/credit-recovery/settings">Configure your credit recovery settings</a>.</p>
 
     <div class="docs-highlight">
-      <strong>What the platform runs:</strong> matching each vendor to public licensing records and the details on invoices you have already received, filling only the empty fields, and presenting everything else as a suggestion for you to accept or ignore.
+      <strong>Sharing starts from now on.</strong> Memos approved before you switch it on are marked as already handled, so your accountant isn't flooded with your entire back-catalog. To send those earlier memos, use the on-demand export below.
     </div>
 
-    <p>Anything that is not a clean, high-confidence match shows up as a <strong>suggestion</strong> in the vendor's Settings tab, tagged with where it came from. You accept the ones you want and leave the rest. The vendor record is always yours — the platform just does the legwork of filling it in.</p>
+    <h2>What your accounting team receives</h2>
+    <p>Every share — automatic or on demand — includes a CSV summary spreadsheet with one row per memo (memo number, vendor, period, requested amount, approved amount, status, source, approval date, and — where it applies — whether it was applied outside ShelfSpace and your reference note), plus the memo PDFs.</p>
+    <p>For a single memo, the CSV and PDF are attached directly to the email. For a digest of several memos, the PDFs are bundled into a ZIP alongside the summary spreadsheet.</p>
 
-    <h2>Editing Vendor Details Yourself</h2>
-    <p>Some fields you can fill or correct directly, without waiting on the vendor. From a vendor's Settings, you can edit the <strong>DBA and legal name, product categories, brands, and mailing address</strong> — handy for clearing a "Needs Info" flag or keeping an address current for <a href="/docs/checks/mailing">mailed checks</a>. Sensitive fields — banking details, EIN, and the vendor's signature — stay vendor-only for security. The auto-fill still writes into empty fields only; it never overwrites something you typed.</p>
+    <div class="docs-highlight">
+      <strong>The PDF always matches the approved amount.</strong> Even when a memo's amount was adjusted during approval — for example, auto-approved at the documented amount after a vendor didn't respond — the attached PDF is rendered fresh to reflect the final approved figure, so the document and the spreadsheet always agree.
+    </div>
 
-    <h2>How Each Vendor Gets Paid</h2>
-    <p>Every vendor carries a default <strong>payment method</strong> you set on their record: their <a href="/docs/vendor-portal/downloading-checks">digital portal</a> (the default), a <a href="/docs/checks/mailing">physical check in the mail</a>, or paid externally — where you pay them your own way and record it, and the platform cuts no check. You can override the method on any individual payment when you send it.</p>
+    <h2>Export or email memos on demand</h2>
+    <p>You don't have to wait for the automatic send. On the <strong>Approved</strong> tab, select the memos you want with the checkboxes, then choose an action:</p>
+    <ul>
+      <li><strong>Download ZIP</strong> — get a ZIP containing the summary CSV and every selected memo's PDF, saved to your computer.</li>
+      <li><strong>Email to Accounting</strong> — send the same documents by email. The recipient box is pre-filled with your saved accounting addresses, and you can edit it for a one-off send (for example, to email just yourself).</li>
+    </ul>
+    <p>This is also how you send past memos that predate turning on automatic sharing.</p>
 
-    <h2>Inviting Vendors and Announcements</h2>
-    <p>From the vendor list you can invite a vendor by email and, once they are on the platform, send an announcement to a group of vendors at once — a payment-terms change, a new requirement, a holiday schedule. It beats forwarding the same email twenty times. Learn more about <a href="/accounts-payable">cannabis accounts payable</a> and how vendors fit into your payment workflow.</p>
+    <h2>Mark a credit memo applied</h2>
+    <p>When you settle a credit outside ShelfSpace — you paid the vendor directly, or you netted the credit against an invoice in your own accounting system — record it in ShelfSpace so your Credits list stays accurate. On the <strong>Approved</strong> tab, click <strong>Mark Applied</strong> on a memo (or select several and use the bulk action), optionally add the date applied and a reference note (e.g. "Vendor check #1234" or "Recorded in QuickBooks 7/3"), and confirm.</p>
+    <p>The memo moves to the <strong>Applied</strong> tab with an <strong>"Applied (outside ShelfSpace)"</strong> badge, and it drops out of the credits available to apply to a vendor payment. Changed your mind? Use <strong>Undo</strong> on the memo to move it back to Approved.</p>
+    <div class="docs-highlight">
+      <strong>The fee is the same either way.</strong> A flat <strong>$20 credit memo fee</strong> applies when you mark an auto-generated memo applied — the same per-memo fee charged when a credit is applied inside ShelfSpace, so settling outside the platform isn't a loophole. Manually created memos aren't billed, and grandfathered or fee-waived accounts pay nothing. Undo reverses the fee. This follows the same lifecycle as the <a href="/docs/credit-recovery/approval-workflow">credit memo approval workflow</a>.
+    </div>
+
+    <h2>Good to know</h2>
+    <ul>
+      <li><strong>Recipients don't need a login.</strong> Anyone you list receives the emails directly. The first address is the primary recipient; the rest are CC'd.</li>
+      <li><strong>Unsubscribing sticks.</strong> If a recipient uses the unsubscribe link, the platform stops sending to that address until you add them back.</li>
+      <li><strong>Digest timing is UTC.</strong> A weekly or monthly digest fires on your chosen day in UTC, and no memo is ever sent twice.</li>
+      <li><strong>Consignment-return credits aren't part of this.</strong> Those settle automatically through your <a href="/docs/consignment/settlements">weekly settlement</a>, so they can't be marked applied externally.</li>
+      <li><strong>Admins only.</strong> Changing these settings or marking memos applied is limited to admin users on your team.</li>
+    </ul>
+    <p>For a page-by-page tour of the finished document your accountant receives, read <a href="/blog/anatomy-of-a-vendor-credit-memo">Anatomy of a Cannabis Vendor Credit Memo</a>.</p>
 
     <!-- RELATED DOCS -->
     <div class="docs-related">
       <h3>Related</h3>
       <div class="docs-related-links">
-        <a href="/docs/accounts-payable/tax-forms">Vendor W-9 &amp; Tax Forms</a>
-        <a href="/docs/accounts-payable/vendor-onboarding">Vendor Onboarding</a>
-        <a href="/docs/accounts-payable/overview">How the AP Platform Works</a>
-        <a href="/docs/vendor-portal/overview">Vendor Portal</a>
-        <a href="/accounts-payable">Accounts Payable</a>
+        <a href="/docs/credit-recovery/settings">Settings &amp; Defaults</a>
+        <a href="/docs/credit-recovery/self-serve">Self-Serve Generation</a>
+        <a href="/docs/credit-recovery/approval-workflow">Approval Workflow</a>
+        <a href="/docs/credit-recovery/scorecard">Credit Recovery Scorecard</a>
+        <a href="/docs/credit-recovery/overview">Credit Recovery Overview</a>
       </div>
     </div>
 
     <!-- CTA -->
     <div class="docs-cta">
-      <p><strong>Ready to upgrade your AP? Let's talk.</strong></p>
+      <p><strong>Ready to start recovering what you're owed? Let's talk.</strong></p>
       <a href="/contact">Talk to Us <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a>
       <div class="docs-cta-note">Free evaluation. No commitment.</div>
     </div>
