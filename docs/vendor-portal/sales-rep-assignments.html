@@ -3,20 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cannabis Multi-Location Management — ShelfSpace</title>
-<meta name="description" content="Cannabis multi-location management on ShelfSpace — run every dispensary store under one account, add locations, invite per-store contacts, and switch between them.">
-<link rel="canonical" href="https://shelfspace.pro/docs/user-management/multi-location">
+<title>Sales Rep Assignments — ShelfSpace</title>
+<meta name="description" content="Sales rep assignments put the right vendor rep on every cannabis account automatically — by state coverage, with per-account overrides. No more manual CC'ing.">
+<link rel="canonical" href="https://shelfspace.pro/docs/vendor-portal/sales-rep-assignments">
 <meta property="og:type" content="article">
-<meta property="og:url" content="https://shelfspace.pro/docs/user-management/multi-location">
-<meta property="og:title" content="Cannabis Multi-Location Management — ShelfSpace">
-<meta property="og:description" content="Cannabis multi-location management on ShelfSpace — run every dispensary store under one account, add locations, invite per-store contacts, and switch between them.">
+<meta property="og:url" content="https://shelfspace.pro/docs/vendor-portal/sales-rep-assignments">
+<meta property="og:title" content="Sales Rep Assignments — ShelfSpace">
+<meta property="og:description" content="Sales rep assignments put the right vendor rep on every cannabis account automatically — by state coverage, with per-account overrides. No more manual CC'ing.">
 <meta property="og:image" content="https://shelfspace.pro/og-image-v7.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:type" content="image/png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Cannabis Multi-Location Management — ShelfSpace">
-<meta name="twitter:description" content="Cannabis multi-location management on ShelfSpace — run every dispensary store under one account, add locations, and switch between them.">
+<meta name="twitter:title" content="Sales Rep Assignments — ShelfSpace">
+<meta name="twitter:description" content="Sales rep assignments put the right vendor rep on every cannabis account automatically — by state coverage, with per-account overrides. No more manual CC'ing.">
 <meta name="twitter:image" content="https://shelfspace.pro/og-image-v7.png">
 <meta name="apple-mobile-web-app-title" content="ShelfSpace">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -120,6 +120,25 @@
   }
   .docs-highlight strong { color: var(--green-deep); }
 
+  /* ── Precedence steps ── */
+  .docs-steps {
+    list-style: none; padding: 0; margin: 24px 0;
+    counter-reset: step;
+  }
+  .docs-steps li {
+    position: relative; padding: 0 0 16px 44px; margin: 0;
+    font-size: 16px; line-height: 1.7; color: var(--slate-600);
+  }
+  .docs-steps li::before {
+    counter-increment: step; content: counter(step);
+    position: absolute; left: 0; top: 0;
+    width: 28px; height: 28px; border-radius: 8px;
+    background: var(--green-deep); color: var(--white);
+    font-size: 14px; font-weight: 700; font-family: 'Space Mono', monospace;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .docs-steps li:last-child { padding-bottom: 0; }
+
   /* ── Related Docs ── */
   .docs-related {
     margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--slate-100);
@@ -172,12 +191,12 @@
 {
   "@context": "https://schema.org",
   "@type": "TechArticle",
-  "headline": "Cannabis Multi-Location Management",
-  "datePublished": "2026-06-04",
-  "dateModified": "2026-06-04",
+  "headline": "Sales Rep Assignments",
+  "datePublished": "2026-07-03",
+  "dateModified": "2026-07-03",
   "author": { "@type": "Organization", "name": "ShelfSpace", "url": "https://shelfspace.pro" },
   "publisher": { "@type": "Organization", "name": "ShelfSpace" },
-  "url": "https://shelfspace.pro/docs/user-management/multi-location"
+  "url": "https://shelfspace.pro/docs/vendor-portal/sales-rep-assignments"
 }
 </script>
 <script type="application/ld+json">
@@ -200,13 +219,7 @@
     {
       "@type": "ListItem",
       "position": 3,
-      "name": "User Management",
-      "item": "https://shelfspace.pro/docs/user-management/overview"
-    },
-    {
-      "@type": "ListItem",
-      "position": 4,
-      "name": "Multiple Locations"
+      "name": "Sales Rep Assignments"
     }
   ]
 }
@@ -219,9 +232,9 @@ o.onload=function(){window.trackingFunctions.onLoad({appId:"69c141b32234890011a4
 document.head.appendChild(o)}initApollo();</script>
 </head>
 <body>
-<!-- last-synced: 2026-06-04 -->
+<!-- last-synced: 2026-07-03 -->
 
-<!-- NAV -->
+<!-- NAV (same as all site pages) -->
 <nav id="nav">
   <a href="/" class="nav-logo">
     <div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div>
@@ -244,7 +257,7 @@ document.head.appendChild(o)}initApollo();</script>
 <div class="docs-hero">
   <div class="docs-hero-content">
     <a href="/docs" class="docs-hero-badge">Documentation</a>
-    <h1 class="docs-hero-title">Managing Multiple Store Locations</h1>
+    <h1 class="docs-hero-title">Sales Rep Assignments</h1>
   </div>
 </div>
 
@@ -259,60 +272,83 @@ document.head.appendChild(o)}initApollo();</script>
   <!-- CONTENT -->
   <main class="docs-content">
     <div class="docs-breadcrumb">
-      <a href="/docs">Docs</a> / <a href="/docs/user-management/overview">User Management</a> / Multiple Locations
+      <a href="/docs">Docs</a> / Vendor Portal
     </div>
-    <div class="docs-category">User Management</div>
+    <div class="docs-category">Vendor Portal</div>
 
     <!-- AT A GLANCE -->
     <div class="docs-glance">
       <h2>At a Glance</h2>
       <ul>
-        <li>Run every store you operate under one ShelfSpace account, with a switcher to move between them</li>
-        <li>Add a location with its name and state, and invite a buyer and AP contact for that store</li>
-        <li>Buyer contacts carry over from your other stores, so you never re-enter them</li>
-        <li>Each location keeps its own vendors, settlements, payments, and verification status</li>
-        <li>Admin role required to add or remove a location</li>
+        <li>Sales rep assignments put the right vendor rep on every account — automatically</li>
+        <li>Vendors keep a roster of their reps and the states each one covers</li>
+        <li>By default, ShelfSpace matches a rep to a retailer by state coverage — zero setup</li>
+        <li>Retailers can assign a specific rep to override the default for any vendor</li>
+        <li>The primary rep is auto-CC'd on settlement and payment emails — no more manual forwarding</li>
       </ul>
     </div>
 
     <!-- BODY CONTENT -->
-    <h2>One Account, Every Store</h2>
-    <p>If you run more than one dispensary, you should not have to run more than one ShelfSpace. Cannabis multi-location management on ShelfSpace puts all of your stores under a single account. You sign in once and use a store switcher to move between locations — each with its own vendors, deliveries, settlements, payments, and books.</p>
+    <h2>What Are Sales Rep Assignments?</h2>
+    <p>Most cannabis vendors have more than one sales rep — often a different rep per state, and sometimes several reps in one state splitting up regions or accounts. Until now there was no clean way to say "this rep handles this specific retailer." <strong>Sales rep assignments</strong> fix that: they connect the right person to the right account so they stay in the loop on payment and settlement activity — without anyone manually CC'ing them.</p>
 
-    <p>The stores stay cleanly separated where it matters and shared where it helps. A vendor relationship, a settlement, or a check belongs to the specific location it was created under. Your team and your contacts can carry across the group so you set them up once.</p>
+    <p>The whole thing works on two levels: a <strong>roster</strong> the vendor maintains, and a <strong>per-account assignment</strong> that pins a specific rep to a specific retailer. If no one has pinned a rep, ShelfSpace figures it out from state coverage. So it just works out of the box, and you only reach for a manual override when you want one.</p>
 
+    <h2>How ShelfSpace Picks the Rep</h2>
+    <p>For any given retailer, the platform resolves the sales rep in this order:</p>
+    <ol class="docs-steps">
+      <li><strong>Explicit assignment</strong> — if a specific rep has been assigned to this retailer's account, that rep is used.</li>
+      <li><strong>State-coverage default</strong> — if there's no explicit assignment, ShelfSpace falls back to the rep (or reps) whose covered states include the retailer's state.</li>
+      <li><strong>None</strong> — if neither applies, the account simply has no rep attached, and nothing breaks.</li>
+    </ol>
     <div class="docs-highlight">
-      <strong>What the platform runs:</strong> creating each location's records, grouping your stores under one account, generating the store switcher, propagating shared buyer contacts across the group, and sending invite emails to any new contacts you add.
+      <strong>The takeaway:</strong> state coverage is the zero-effort path — set each rep's states once and the right person shows up everywhere they operate. An explicit assignment is the fine-grained override for when two reps cover the same state and you need to name which one owns a particular account.
     </div>
 
-    <h2>Adding a Location</h2>
-    <p>From your settings, an admin adds a location by entering its <strong>name and state</strong>. You can also add a <strong>buyer contact</strong> and an <strong>AP contact</strong> for that store — name and email — and the platform emails each one an invite to set up their login. The first time you add a second store, the platform groups your locations together automatically so they share one account.</p>
+    <h2>For Vendors: Build Your Sales Rep Roster</h2>
+    <p>If you're a vendor, open <strong>My Account</strong> in the vendor portal and find the <strong>Sales Reps</strong> section. This is your team's roster. For each rep you can record:</p>
+    <ul>
+      <li><strong>Name</strong> (required)</li>
+      <li><strong>Email</strong> — where account emails get CC'd</li>
+      <li><strong>Phone</strong></li>
+      <li><strong>Title</strong> — e.g. Territory Manager</li>
+      <li><strong>Covered States</strong> — the states this rep is responsible for</li>
+    </ul>
+    <p>Use <strong>Add Rep</strong> to add each person. Covered states are what power the default: any retailer in a state your rep covers will see that rep automatically, with no per-account work on your end. If two of your reps cover the same state, both show up by default until someone pins a specific one to an account.</p>
 
-    <p>Adding or removing a location requires the <strong>admin</strong> role. A new store starts unverified, the same as any new account.</p>
+    <h2>For Retailers: Assign the Rep You Actually Work With</h2>
+    <p>If you're a retailer, you don't manage anyone's roster — but you can control which of a vendor's reps is tied to <em>your</em> account. Open that vendor on its detail page in the retailer portal and look for the <strong>Your Sales Rep</strong> panel. It shows the rep ShelfSpace currently resolved for you, whether that came from an explicit assignment or the state-coverage default.</p>
+    <p>To change it, use <strong>Assign Rep</strong> and pick from the vendor's roster. You can add more than one rep, mark one as <strong>Primary</strong> (or <strong>Make primary</strong> on an existing one), and remove any rep you don't want on the account. Because an explicit assignment always beats the state default, this is how you say, plainly, "this is the person we deal with" — which makes sense, since you're the one who knows who you actually work with day to day.</p>
+    <div class="docs-highlight">
+      <strong>Only one primary per account.</strong> When more than one rep covers an account, the <strong>primary</strong> is the single name ShelfSpace uses for the account card and for email CC. Setting a new primary automatically clears the old one.
+    </div>
 
-    <h2>Switching Between Stores</h2>
-    <p>Once you have more than one location, a store switcher appears in your dashboard. Pick a store and everything you see — its vendors, deliveries, settlements, payments, and reports — scopes to that location. Switch to another and the data follows. There is no separate password, no separate portal, and no exporting between accounts.</p>
-
-    <h2>Contacts Carry Across Your Group</h2>
-    <p>The same buyer usually covers more than one of your stores. When you add a location, the platform <strong>propagates your existing buyer contacts</strong> to the new store so you do not re-enter the same people. You can still add a store-specific buyer or AP contact when a location is run by a different team. See <a href="/docs/user-management/overview">Users, Roles, and Permissions</a> for how roles work across your account.</p>
-
-    <h2>Verification Is Per Location</h2>
-    <p>Because each store is its own legal entity and pays its own vendors, <strong>verification happens per location</strong>. A new store verifies its business and banking details before it can send checks, independent of your other stores. This keeps each location's payments drawn on the right account. Learn more about <a href="/accounts-payable">cannabis accounts payable</a> and how payments work on ShelfSpace.</p>
+    <h2>What Happens Next</h2>
+    <p>Once a primary rep is in place, ShelfSpace automatically CC's them on the account's key emails, so they stay in the loop without anyone forwarding anything. Specifically, the primary rep is copied on:</p>
+    <ul>
+      <li><strong>The settlement notification</strong> — sent to the vendor when a new settlement is ready.</li>
+      <li><strong>The "You Got Paid" payment notification</strong> — sent to the vendor when a payment goes out.</li>
+    </ul>
+    <p>That's the entire point: the right rep, looped in automatically, on every account — no manual CC'ing, no wondering who owns the relationship.</p>
+    <div class="docs-highlight">
+      <strong>This is about visibility, not money.</strong> Sales rep assignments only change who gets copied on communication. They do <strong>not</strong> touch settlement math, splits, credits, or payouts in any way. Learn how those are calculated in <a href="/docs/consignment/settlement-reports">Settlement Reports</a>.
+    </div>
 
     <!-- RELATED DOCS -->
     <div class="docs-related">
       <h3>Related</h3>
       <div class="docs-related-links">
-        <a href="/docs/user-management/overview">Users, Roles &amp; Permissions</a>
-        <a href="/docs/user-management/mfa">Multi-Factor Authentication</a>
-        <a href="/docs/accounts-payable/overview">How the AP Platform Works</a>
-        <a href="/accounts-payable">Accounts Payable</a>
+        <a href="/docs/vendor-portal/overview">Vendor Portal Overview</a>
+        <a href="/docs/vendor-portal/payment-history">Payment History</a>
+        <a href="/docs/vendor-portal/downloading-checks">Downloading Checks</a>
+        <a href="/docs/accounts-payable/vendor-onboarding">Vendor Onboarding</a>
+        <a href="/vendor-management">Cannabis Vendor Management</a>
       </div>
     </div>
 
     <!-- CTA -->
     <div class="docs-cta">
-      <p><strong>Ready for a free evaluation? Let's talk.</strong></p>
+      <p><strong>Want the right rep looped in on every account? Let's talk.</strong></p>
       <a href="/contact">Talk to Us <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a>
       <div class="docs-cta-note">Free evaluation. No commitment.</div>
     </div>
@@ -346,7 +382,7 @@ document.head.appendChild(o)}initApollo();</script>
   }, { passive: true });
 })();
 </script>
-<script src="/docs-search.js?v=28" defer></script>
+<script src="/docs-search.js?v=29" defer></script>
 <script src="/shelfiq-widget.js"></script>
 </body>
 </html>

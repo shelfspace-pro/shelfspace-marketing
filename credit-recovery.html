@@ -300,6 +300,25 @@
   /* ─── CTA PARALLAX ─── */
   .cta-section::before { transform: translate(-50%,-50%) translateY(var(--parallax-y, 0)); will-change: transform; }
 
+  /* ─── SCORECARD REPRODUCTION (scoped .crs-*) ─── */
+  .cr-scorecard-dash { background: #f8fafc; border: 1px solid var(--slate-200); border-radius: 20px; padding: 24px; box-shadow: 0 20px 50px rgba(27,67,50,0.08); text-align: left; }
+  .crs-kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 16px; }
+  .crs-kpi { background: var(--white); border: 1px solid var(--slate-200); border-radius: 16px; padding: 18px; box-shadow: 0 2px 8px rgba(27,67,50,0.06); }
+  .crs-kpi-label { font-family: var(--font-mono); font-size: 10.5px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--slate-500); }
+  .crs-kpi-val { font-family: var(--font-mono); font-size: 26px; font-weight: 700; color: #0f172a; letter-spacing: -0.5px; margin: 6px 0 3px; }
+  .crs-kpi-val.is-rate-low { color: #dc2626; }
+  .crs-kpi-cap { font-size: 12px; color: var(--slate-500); line-height: 1.4; }
+  .crs-focus { display: flex; align-items: flex-start; gap: 14px; background: #fffbeb; border: 1px solid #fde68a; border-radius: 16px; padding: 18px 20px; box-shadow: 0 2px 8px rgba(27,67,50,0.05); }
+  .crs-focus-ico { flex-shrink: 0; width: 34px; height: 34px; border-radius: 10px; background: var(--white); display: flex; align-items: center; justify-content: center; }
+  .crs-focus-ico svg { width: 18px; height: 18px; color: #d97706; }
+  .crs-focus-title { font-size: 14.5px; font-weight: 700; color: #1e293b; margin-bottom: 3px; }
+  .crs-focus-body { font-size: 13.5px; line-height: 1.6; color: var(--slate-600); }
+  .crs-focus-link { font-weight: 700; color: var(--green-deep); white-space: nowrap; }
+  @media (max-width: 700px) {
+    .crs-kpis { grid-template-columns: 1fr 1fr; }
+    .crs-focus { flex-wrap: wrap; }
+  }
+
   /* ─── FOOTER 5-COL ─── */
   .footer-top { grid-template-columns: 2fr 1fr 1fr 1fr 1fr; }
   @media (max-width: 900px) { .footer-top { grid-template-columns: 1fr 1fr; } }
@@ -880,6 +899,50 @@ document.head.appendChild(o)}initApollo();</script>
     </div>
     <p class="svc-why reveal">No monthly cycle to wait on, no one to email. The platform does the grinding &mdash; parsing thousands of rows, pricing every line against Metrc, catching the wrong-store file before it costs you &mdash; and you stay the last set of eyes before anything reaches a vendor. Your data, your button, your drafts.</p>
     <a class="svc-link reveal" href="/blog/self-serve-credit-memos-cannabis">See how self-serve credit memos work <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+  </div>
+</section>
+
+<!-- SCORECARD · Visibility -->
+<section class="svc-section svc-section--white" id="cr-scorecard">
+  <div class="svc-inner">
+    <div class="svc-eyebrow reveal">Visibility</div>
+    <h2 class="svc-headline reveal">See exactly where to push next.</h2>
+    <p class="svc-sub reveal">The Credit Recovery Scorecard turns a year of credit memos into four numbers and one clear next move &mdash; identified, requested, approved, and the recovery rate you're actually hitting.</p>
+    <div class="svc-visual reveal reveal-delay-1">
+      <div class="cr-scorecard-dash" aria-hidden="true">
+        <div class="crs-kpis">
+          <div class="crs-kpi">
+            <div class="crs-kpi-label">Credit Identified</div>
+            <div class="crs-kpi-val">$87,384</div>
+            <div class="crs-kpi-cap">incl. $22,465 never requested (est.)</div>
+          </div>
+          <div class="crs-kpi">
+            <div class="crs-kpi-label">Credit Requested</div>
+            <div class="crs-kpi-val">$64,918</div>
+            <div class="crs-kpi-cap">130 credit memos</div>
+          </div>
+          <div class="crs-kpi">
+            <div class="crs-kpi-label">Credit Approved</div>
+            <div class="crs-kpi-val">$16,544</div>
+            <div class="crs-kpi-cap">$5,035 still pending decision</div>
+          </div>
+          <div class="crs-kpi">
+            <div class="crs-kpi-label">Recovery Rate</div>
+            <div class="crs-kpi-val is-rate-low">28%</div>
+            <div class="crs-kpi-cap">of decided credit approved</div>
+          </div>
+        </div>
+        <div class="crs-focus">
+          <div class="crs-focus-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5" fill="currentColor" stroke="none"/></svg></div>
+          <div>
+            <div class="crs-focus-title">Where to focus: Co-Marketing</div>
+            <div class="crs-focus-body">$65,332 of co-marketing credit went unrecovered &mdash; most of it was never billable because promotions weren't pre-approved. Get vendor sign-off before a promo runs to turn identified margin loss into recovered credit. <span class="crs-focus-link">Manage promotions &rarr;</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="svc-why reveal">The gap between what you're owed and what you collect stops being a guess. One screen shows the money still on the table, the trend month over month, and the single change that recovers the most. Sample view shown; your numbers, your vendors.</p>
+    <a class="svc-link reveal" href="/blog/credit-recovery-scorecard-cannabis">See how the Scorecard finds your next dollar <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
   </div>
 </section>
 
