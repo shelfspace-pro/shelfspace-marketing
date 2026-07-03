@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Getting Paid by ACH as a Cannabis Vendor — ShelfSpace</title>
+<meta name="description" content="Getting paid by ACH through ShelfSpace: it's optional, you link your own bank, your full account number isn't kept on file, and there are no vendor fees. Here's how it works.">
+<link rel="canonical" href="https://shelfspace.pro/ach">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://shelfspace.pro/ach">
+<meta property="og:title" content="Getting Paid by ACH as a Cannabis Vendor — ShelfSpace">
+<meta property="og:description" content="Getting paid by ACH through ShelfSpace: it's optional, you link your own bank, your full account number isn't kept on file, and there are no vendor fees. Here's how it works.">
+<meta property="og:image" content="https://shelfspace.pro/og-image-v7.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Getting Paid by ACH as a Cannabis Vendor — ShelfSpace">
+<meta name="twitter:description" content="Getting paid by ACH through ShelfSpace: it's optional, you link your own bank, your full account number isn't kept on file, and there are no vendor fees. Here's how it works.">
+<meta name="twitter:image" content="https://shelfspace.pro/og-image-v7.png">
+<meta name="apple-mobile-web-app-title" content="ShelfSpace">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+  /* ── Hero ── */
+  .checks-hero {
+    padding: 160px 48px 80px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    background: var(--white);
+  }
+  .checks-hero::before {
+    content: ''; position: absolute; top: -200px; right: -200px;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(149,213,178,0.15), transparent 70%);
+  }
+  .checks-hero::after {
+    content: ''; position: absolute; bottom: -120px; left: -120px;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(149,213,178,0.08), transparent 70%);
+  }
+  .checks-hero .section-title {
+    font-size: clamp(36px, 5vw, 56px);
+    max-width: 740px; margin: 0 auto 20px;
+  }
+  .checks-hero .section-desc {
+    max-width: 600px; margin: 0 auto;
+  }
+  .hero-icon {
+    width: 72px; height: 72px;
+    background: var(--green-ghost);
+    border: 1.5px solid rgba(149,213,178,0.4);
+    border-radius: 20px;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 28px;
+  }
+  .hero-icon svg { width: 36px; height: 36px; color: var(--green-deep); }
+  .hero-trust-row {
+    display: flex; justify-content: center; gap: 28px; flex-wrap: wrap;
+    margin-top: 32px;
+  }
+  .hero-trust-item {
+    display: flex; align-items: center; gap: 7px;
+    font-size: 13px; font-weight: 600; color: var(--slate-500);
+  }
+  .hero-trust-item svg { flex-shrink: 0; }
+
+  /* ── Generic section header centering ── */
+  .section-header {
+    text-align: center; max-width: 640px; margin: 0 auto 56px;
+  }
+  .section-header .section-desc { margin: 0 auto; }
+
+  /* ── What ACH means (2-col) ── */
+  .what-section { background: var(--white); padding-top: 80px; }
+  .what-grid {
+    max-width: 960px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 48px;
+    align-items: center;
+  }
+  .what-text h2 {
+    font-size: clamp(28px, 3.5vw, 40px); font-weight: 700;
+    line-height: 1.15; letter-spacing: -1px;
+    color: var(--green-deep); margin-bottom: 20px;
+  }
+  .what-text p {
+    font-size: 16px; line-height: 1.75; color: var(--slate-500);
+    margin-bottom: 16px;
+  }
+  .what-text p:last-child { margin-bottom: 0; }
+  .what-text strong { color: var(--slate-700); }
+  .what-visual {
+    background: var(--slate-50);
+    border: 1px solid var(--slate-200);
+    border-radius: 20px;
+    padding: 40px 32px;
+    position: relative;
+    overflow: hidden;
+  }
+  .what-visual::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--green-accent), var(--green-mid));
+  }
+  .what-flow-item {
+    display: flex; align-items: flex-start; gap: 16px;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--slate-100);
+  }
+  .what-flow-item:last-child { border-bottom: none; }
+  .what-flow-icon {
+    width: 40px; height: 40px; flex-shrink: 0;
+    background: var(--green-ghost); border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .what-flow-icon svg { width: 20px; height: 20px; color: var(--green-deep); }
+  .what-flow-label { font-size: 13px; font-weight: 700; color: var(--green-deep); margin-bottom: 2px; }
+  .what-flow-desc { font-size: 13px; line-height: 1.55; color: var(--slate-500); }
+  .what-flow-num {
+    width: 40px; height: 40px; flex-shrink: 0;
+    background: var(--green-ghost); border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-mono); font-size: 14px; font-weight: 700;
+    color: var(--green-deep);
+  }
+
+  /* ── ACH deposit mockup ── */
+  .ach-mock {
+    background: linear-gradient(135deg, #ffffff 0%, #f6faf7 100%);
+    border: 1.5px solid var(--slate-200);
+    border-radius: 14px;
+    padding: 26px 28px 24px;
+    position: relative;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 8px 32px rgba(27,67,50,0.06);
+  }
+  .ach-mock::before {
+    content: ''; position: absolute; top: 0; left: 0; bottom: 0; width: 5px;
+    background: linear-gradient(180deg, var(--green-accent), var(--green-mid));
+    border-radius: 14px 0 0 14px;
+  }
+  .ach-mock-head {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 22px;
+  }
+  .ach-mock-bank {
+    display: flex; align-items: center; gap: 8px;
+    font-family: var(--font-mono); font-size: 12px; font-weight: 700;
+    letter-spacing: 0.5px; color: var(--slate-600);
+  }
+  .ach-mock-dot {
+    width: 9px; height: 9px; border-radius: 50%;
+    background: var(--green-mid);
+  }
+  .ach-mock-pill {
+    display: inline-flex; align-items: center; gap: 5px;
+    padding: 4px 12px; border-radius: 100px;
+    font-family: var(--font-mono); font-size: 11px; font-weight: 700;
+    letter-spacing: 0.5px;
+    background: var(--green-ghost); color: var(--green-dark);
+  }
+  .ach-mock-label {
+    font-size: 12px; font-weight: 700; letter-spacing: 1px;
+    text-transform: uppercase; color: var(--slate-400);
+    margin-bottom: 6px;
+  }
+  .ach-mock-amount {
+    font-family: var(--font-mono); font-size: 34px; font-weight: 700;
+    color: var(--green-deep); letter-spacing: -1px; line-height: 1;
+    margin-bottom: 10px;
+  }
+  .ach-mock-from {
+    font-size: 14px; font-weight: 600; color: var(--slate-700);
+  }
+  .ach-mock-divider {
+    height: 1px; background: var(--slate-100);
+    margin: 18px 0 14px;
+  }
+  .ach-mock-memo {
+    font-family: var(--font-mono); font-size: 12px; color: var(--slate-500);
+    letter-spacing: 0.3px;
+  }
+
+  /* ── Three ways (3-col cards) ── */
+  .ways-section { background: var(--slate-50); border-top: 1px solid var(--slate-100); }
+  .ways-grid {
+    max-width: 1000px; margin: 0 auto;
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+    align-items: stretch;
+  }
+  .way-card {
+    background: var(--white);
+    border: 1px solid var(--slate-200);
+    border-radius: 20px;
+    padding: 32px 28px;
+    position: relative; overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.22,1,0.36,1);
+  }
+  .way-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 48px rgba(27,67,50,0.08);
+  }
+  .way-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--green-accent), var(--green-mid));
+  }
+  .way-card--featured {
+    border-color: var(--green-accent);
+    box-shadow: 0 8px 32px rgba(27,67,50,0.08);
+  }
+  .way-card--featured::before { height: 5px; }
+  .way-icon {
+    width: 48px; height: 48px;
+    background: var(--green-ghost);
+    border: 1px solid rgba(149,213,178,0.3);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 18px;
+  }
+  .way-icon svg { width: 24px; height: 24px; color: var(--green-deep); }
+  .way-tag {
+    font-family: var(--font-mono); font-size: 11px; font-weight: 700;
+    letter-spacing: 1px; text-transform: uppercase;
+    color: var(--green-dark); margin-bottom: 8px; display: block;
+  }
+  .way-card h3 {
+    font-size: 20px; font-weight: 700; color: var(--green-deep);
+    letter-spacing: -0.5px; margin-bottom: 10px;
+  }
+  .way-card p {
+    font-size: 14px; line-height: 1.7; color: var(--slate-500);
+  }
+
+  /* ── How it works (centered flow card) ── */
+  .flow-section { background: var(--white); }
+  .flow-card {
+    max-width: 640px; margin: 0 auto;
+    background: var(--slate-50);
+    border: 1px solid var(--slate-200);
+    border-radius: 20px;
+    padding: 20px 32px;
+    position: relative; overflow: hidden;
+  }
+  .flow-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--green-accent), var(--green-mid));
+  }
+
+  /* ── Control / safety (2-col) ── */
+  .better-section { background: var(--slate-50); border-top: 1px solid var(--slate-100); }
+  .better-grid {
+    max-width: 960px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+  }
+  .better-item {
+    display: flex; align-items: flex-start; gap: 16px;
+    padding: 24px;
+    background: var(--white);
+    border: 1px solid var(--slate-200);
+    border-radius: 14px;
+    transition: all 0.3s cubic-bezier(0.22,1,0.36,1);
+  }
+  .better-item:hover {
+    border-color: var(--green-accent);
+    box-shadow: 0 12px 36px rgba(27,67,50,0.07);
+  }
+  .better-icon {
+    width: 42px; height: 42px; flex-shrink: 0;
+    background: var(--green-ghost);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .better-icon svg { width: 20px; height: 20px; color: var(--green-deep); }
+  .better-item h3 {
+    font-size: 16px; font-weight: 700; color: var(--green-deep);
+    margin-bottom: 5px;
+  }
+  .better-item p {
+    font-size: 13px; line-height: 1.65; color: var(--slate-500);
+  }
+
+  /* ── FAQ ── */
+  .faq-section {
+    background: var(--white);
+    border-top: 1px solid var(--slate-100);
+  }
+  .faq-list {
+    max-width: 720px; margin: 0 auto;
+    display: flex; flex-direction: column; gap: 12px;
+  }
+  .faq-item {
+    background: var(--white);
+    border: 1px solid var(--slate-200);
+    border-radius: 14px;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+  .faq-item.open { border-color: var(--green-accent); }
+  .faq-question {
+    width: 100%; padding: 22px 28px;
+    display: flex; justify-content: space-between; align-items: center; gap: 16px;
+    font-family: var(--font-display); font-size: 16px; font-weight: 600;
+    color: var(--green-deep); text-align: left;
+    background: none; border: none; cursor: pointer;
+    transition: color 0.2s;
+  }
+  .faq-question:hover { color: var(--green-dark); }
+  .faq-question svg {
+    flex-shrink: 0; width: 18px; height: 18px; color: var(--slate-500);
+    transition: transform 0.3s cubic-bezier(0.22,1,0.36,1);
+  }
+  .faq-item.open .faq-question svg { transform: rotate(45deg); color: var(--green-dark); }
+  .faq-answer {
+    max-height: 0; overflow: hidden;
+    transition: max-height 0.4s cubic-bezier(0.22,1,0.36,1), padding 0.3s;
+  }
+  .faq-item.open .faq-answer { max-height: 320px; }
+  .faq-answer-inner {
+    padding: 0 28px 24px;
+    font-size: 15px; line-height: 1.7; color: var(--slate-500);
+  }
+  .faq-answer-inner a {
+    color: var(--green-dark); text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .faq-answer-inner a:hover { color: var(--green-deep); }
+
+  /* ── CTA ── */
+  .checks-cta {
+    background: var(--white); text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .checks-cta::before {
+    content: ''; position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(149,213,178,0.1), transparent 70%);
+  }
+
+  /* ── Footer 5-col ── */
+  .footer-top { grid-template-columns: 2fr 1fr 1fr 1fr 1fr; }
+  @media (max-width: 900px) { .footer-top { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px) { .footer-top { grid-template-columns: 1fr; } }
+
+  /* ── Responsive ── */
+  @media (max-width: 900px) {
+    .checks-hero { padding: 120px 24px 60px; }
+    .what-grid { grid-template-columns: 1fr; max-width: 520px; }
+    .ways-grid { grid-template-columns: 1fr; max-width: 440px; margin: 0 auto; }
+    .better-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
+    .hero-trust-row { gap: 16px; }
+  }
+  @media (max-width: 600px) {
+    .hero-trust-row { flex-direction: column; align-items: center; gap: 10px; }
+    .ach-mock-amount { font-size: 28px; }
+    .flow-card { padding: 12px 22px; }
+  }
+</style>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-H2LBJT03WE"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-H2LBJT03WE');
+</script>
+<script>function initApollo(){var n=Math.random().toString(36).substring(7),o=document.createElement("script");
+o.src="https://assets.apollo.io/micro/website-tracker/tracker.iife.js?nocache="+n,o.async=!0,o.defer=!0,
+o.onload=function(){window.trackingFunctions.onLoad({appId:"69c141b32234890011a43849"})},
+document.head.appendChild(o)}initApollo();</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://shelfspace.pro/" },
+    { "@type": "ListItem", "position": 2, "name": "ACH Payments", "item": "https://shelfspace.pro/ach" }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Do I have to be paid by ACH?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Check 21 checks are the default and never ask for your bank account. ACH is optional — it only happens if you'd rather receive a direct deposit and choose to link a bank yourself."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is my bank information safe with ShelfSpace ACH?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "You link your own bank through a secure connection in your vendor portal — your retailer never sees or enters it, and ShelfSpace does not keep your full account number on file. If that still makes you uneasy, don't link a bank and you'll keep receiving a Check 21 check as before."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "When does an ACH deposit arrive?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "An ACH deposit usually lands in your account within a few business days of the retailer approving the payment — no printing and no trip to the bank."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Are there any fees to me as a vendor?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. ShelfSpace is free for vendors — no fees, no percentage, and no per-deposit charge, whether you're paid by check or by ACH."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I switch back to receiving checks?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, anytime. Ask your retail partner to switch your account back to Check 21 checks. Nothing is locked in."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Who do I contact with questions?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "For questions about a payment or your ACH setup, email support@shelfspace.pro. For questions about a settlement amount or what sold, contact your retail partner directly — they have full visibility into the report that generated your payment."
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="/" class="nav-logo">
+    <div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div>
+    <span class="nav-logo-text">ShelfSpace</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="/accounts-payable">Accounts Payable</a></li>
+    <li><a href="/consignment">Consignment</a></li>
+    <li><a href="/credit-recovery">Credit Recovery</a></li>
+    <li class="nav-dropdown"><button class="nav-dropdown-toggle" aria-haspopup="true" aria-expanded="false">Platform <svg class="dropdown-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></button><div class="nav-dropdown-menu"><a href="/vendor-management">Vendor Management</a><a href="/how-it-works">How It Works</a><a href="/features">Features</a><a href="/shelfiq">ShelfiQ</a><a href="/checks">Check Payments</a></div></li>
+    <li><a href="/pricing">Pricing</a></li>
+    <li><a href="/about">About</a></li>
+    <li class="nav-login-mobile"><a href="https://ourshelf.space/login">Login</a></li>
+    <li><a href="/contact" class="nav-cta">Get Started <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a></li>
+  </ul>
+  <div class="nav-hamburger" onclick="document.querySelector('.nav-links').classList.toggle('mobile-open'); event.stopPropagation();"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- HERO -->
+<div class="checks-hero">
+  <div class="hero-icon reveal">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="3" y1="21" x2="21" y2="21"/>
+      <path d="M4 21V10l8-5 8 5v11"/>
+      <line x1="9" y1="21" x2="9" y2="13"/>
+      <line x1="15" y1="21" x2="15" y2="13"/>
+      <polyline points="9 8 12 6 15 8"/>
+    </svg>
+  </div>
+  <div class="section-label reveal">ShelfSpace ACH Payments</div>
+  <h1 class="section-title reveal reveal-delay-1">Getting paid by ACH through ShelfSpace</h1>
+  <p class="section-desc reveal reveal-delay-2">Some retailers pay their vendors by ACH — money straight to your bank, nothing to print, nothing to deposit. It's optional, you set it up yourself, and here's exactly how it works and what's kept on file.</p>
+  <div class="hero-trust-row reveal reveal-delay-3">
+    <span class="hero-trust-item">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      You link your own bank
+    </span>
+    <span class="hero-trust-item">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+      Optional — not required
+    </span>
+    <span class="hero-trust-item">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#40916c" stroke-width="2.5"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+      No vendor fees
+    </span>
+  </div>
+</div>
+
+<!-- WHAT ACH MEANS -->
+<section class="what-section">
+  <div class="what-grid">
+    <div class="what-text reveal">
+      <h2>Direct deposit, straight from your retailer</h2>
+      <p>When a retail partner pays you by ACH, the money moves <strong>straight from their bank into yours</strong> — the same way a payroll deposit or a bill payment lands. There's no check page to download, nothing to print, and no trip to the bank.</p>
+      <p>It's the same payment you'd get any other way — <strong>every dollar tied to the same settlement or invoice</strong> — just delivered as a deposit instead of a check.</p>
+      <p>ACH is one of a few ways ShelfSpace can deliver your payment. Your retail partner picks the method, and you decide whether to opt in.</p>
+    </div>
+    <div class="what-visual reveal reveal-delay-1">
+      <div class="ach-mock" aria-hidden="true">
+        <div class="ach-mock-head">
+          <span class="ach-mock-bank"><span class="ach-mock-dot"></span>YOUR BANK · ····4500</span>
+          <span class="ach-mock-pill">ACH &#10003;</span>
+        </div>
+        <div class="ach-mock-label">Deposit received</div>
+        <div class="ach-mock-amount">+$3,245.00</div>
+        <div class="ach-mock-from">From Greenbrook Retail LLC</div>
+        <div class="ach-mock-divider"></div>
+        <div class="ach-mock-memo">Settlement &middot; week of Apr 14</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- THREE WAYS -->
+<section class="ways-section">
+  <div class="section-header">
+    <div class="section-label reveal">Three ways to get paid</div>
+    <h2 class="section-title reveal">You choose how the money reaches you</h2>
+    <p class="section-desc reveal">Your retail partner sets your payment method. A Check 21 check is the default — ACH and mailed paper are yours to opt into.</p>
+  </div>
+  <div class="ways-grid">
+    <div class="way-card reveal">
+      <div class="way-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+      </div>
+      <span class="way-tag">Default</span>
+      <h3>Digital check</h3>
+      <p>A Check 21 check appears in your portal the moment it's ready. Print it and deposit from your phone or a teller. No bank info needed.</p>
+    </div>
+    <div class="way-card reveal reveal-delay-1">
+      <div class="way-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 6l-10 7L2 6"/></svg>
+      </div>
+      <span class="way-tag">Opt-in</span>
+      <h3>Mailed check</h3>
+      <p>Prefer paper in hand? Ask your retailer to mail your checks. It's the same Check 21 check, delivered to you by USPS.</p>
+    </div>
+    <div class="way-card way-card--featured reveal reveal-delay-2">
+      <div class="way-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="21" x2="21" y2="21"/><path d="M4 21V10l8-5 8 5v11"/><line x1="9" y1="21" x2="9" y2="15"/><line x1="15" y1="21" x2="15" y2="15"/></svg>
+      </div>
+      <span class="way-tag">Opt-in</span>
+      <h3>ACH direct deposit</h3>
+      <p>Link your bank once and payments land as a deposit — no printing, no depositing. You set it up yourself and can switch back anytime.</p>
+    </div>
+  </div>
+</section>
+
+<!-- HOW ACH WORKS -->
+<section class="flow-section">
+  <div class="section-header">
+    <div class="section-label reveal">How it works</div>
+    <h2 class="section-title reveal">Set it up once, then it just lands</h2>
+  </div>
+  <div class="flow-card reveal">
+    <div class="what-flow-item">
+      <div class="what-flow-num">1</div>
+      <div>
+        <div class="what-flow-label">Your retailer enables ACH</div>
+        <div class="what-flow-desc">Your retail partner turns on ACH direct deposit for your account. Until they do, you keep getting checks as usual.</div>
+      </div>
+    </div>
+    <div class="what-flow-item">
+      <div class="what-flow-num">2</div>
+      <div>
+        <div class="what-flow-label">You link your bank once</div>
+        <div class="what-flow-desc">You connect your bank yourself, right in your vendor portal. The retailer never sees or enters your account number.</div>
+      </div>
+    </div>
+    <div class="what-flow-item">
+      <div class="what-flow-num">3</div>
+      <div>
+        <div class="what-flow-label">Payment is sent as ACH</div>
+        <div class="what-flow-desc">When the retailer approves a payment, it goes straight to your linked bank instead of generating a check to download.</div>
+      </div>
+    </div>
+    <div class="what-flow-item">
+      <div class="what-flow-num">4</div>
+      <div>
+        <div class="what-flow-label">The money lands in your account</div>
+        <div class="what-flow-desc">The deposit arrives within a few business days — the same amount you'd have gotten by check, with nothing to print.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTROL / SAFETY -->
+<section class="better-section">
+  <div class="section-header">
+    <div class="section-label reveal">Your bank, your call</div>
+    <h2 class="section-title reveal">Nothing happens with your bank unless you choose it</h2>
+    <p class="section-desc reveal">ACH is opt-in by design. If you'd rather never share bank details, you don't have to — the check path is always there.</p>
+  </div>
+  <div class="better-grid">
+    <div class="better-item reveal">
+      <div class="better-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <div>
+        <h3>Optional, always</h3>
+        <p>Check 21 checks are the default. ACH only happens if you decide to link a bank — never automatically.</p>
+      </div>
+    </div>
+    <div class="better-item reveal reveal-delay-1">
+      <div class="better-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+      </div>
+      <div>
+        <h3>You link it, not the retailer</h3>
+        <p>You enter your own bank in your portal. Your retailer never sees or types your account number.</p>
+      </div>
+    </div>
+    <div class="better-item reveal">
+      <div class="better-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      </div>
+      <div>
+        <h3>Your full number isn't stored</h3>
+        <p>ShelfSpace keeps only enough to show you which account — never your full account number on file.</p>
+      </div>
+    </div>
+    <div class="better-item reveal reveal-delay-1">
+      <div class="better-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+      </div>
+      <div>
+        <h3>Free to you</h3>
+        <p>No vendor fees, no percentage, no per-deposit charge — the same as getting paid by check.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section">
+  <div class="section-header">
+    <div class="section-label reveal">Common Questions</div>
+    <h2 class="section-title reveal">Frequently asked questions</h2>
+  </div>
+  <div class="faq-list">
+    <div class="faq-item reveal">
+      <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+        Do I have to be paid by ACH?
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      </button>
+      <div class="faq-answer"><div class="faq-answer-inner">No. Check 21 checks are the default and never ask for your bank account. ACH is optional — it only happens if you'd rather receive a direct deposit and choose to link a bank yourself. Prefer paper? <a href="/checks">Here's how checks work</a>.</div></div>
+    </div>
+    <div class="faq-item reveal">
+      <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+        Is my bank information safe?
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      </button>
+      <div class="faq-answer"><div class="faq-answer-inner">You link your own bank through a secure connection in your vendor portal — your retailer never sees or enters it, and ShelfSpace doesn't keep your full account number on file. If that still makes you uneasy, don't link a bank and you'll keep receiving a Check 21 check as before. Here's <a href="/blog/is-shelfspace-safe-for-vendors">our honest answer on whether ShelfSpace is safe for vendors</a>.</div></div>
+    </div>
+    <div class="faq-item reveal">
+      <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+        When do I get the money?
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      </button>
+      <div class="faq-answer"><div class="faq-answer-inner">An ACH deposit usually lands in your account within a few business days of the retailer approving the payment — no printing and no trip to the bank.</div></div>
+    </div>
+    <div class="faq-item reveal">
+      <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+        Are there any fees to me?
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      </button>
+      <div class="faq-answer"><div class="faq-answer-inner">No. ShelfSpace is free for vendors — no fees, no percentage, and no per-deposit charge, whether you're paid by check or by ACH.</div></div>
+    </div>
+    <div class="faq-item reveal">
+      <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+        Can I go back to receiving checks?
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      </button>
+      <div class="faq-answer"><div class="faq-answer-inner">Yes, anytime. Ask your retail partner to switch your account back to <a href="/checks">Check 21 checks</a>. Nothing is locked in.</div></div>
+    </div>
+    <div class="faq-item reveal">
+      <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+        Who do I contact with questions?
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      </button>
+      <div class="faq-answer"><div class="faq-answer-inner">For questions about a payment or your ACH setup, email <a href="mailto:support@shelfspace.pro">support@shelfspace.pro</a>. For questions about a settlement amount or what sold, contact your retail partner directly — they have full visibility into the report that generated your payment.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="checks-cta">
+  <div class="cta-content">
+    <div class="section-label reveal">Questions About Getting Paid?</div>
+    <h2 class="section-title reveal">We're here to help</h2>
+    <p class="section-desc reveal">Whether you want to set up ACH, stick with checks, or just understand your options, reach out any time.</p>
+    <div class="cta-actions reveal">
+      <a href="mailto:support@shelfspace.pro" class="btn-primary">
+        Contact Support
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+      <a href="/checks" class="btn-secondary">How checks work</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="/" class="nav-logo"><div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div><span class="nav-logo-text">ShelfSpace</span></a>
+      <p>Every Vendor. Every Payment. One Engine.</p>
+    </div>
+    <div class="footer-col"><h3>Services</h3><ul><li><a href="/accounts-payable">Accounts Payable</a></li><li><a href="/consignment">Consignment</a></li><li><a href="/credit-recovery">Credit Recovery</a></li><li><a href="/checks">Check Payments</a></li><li><a href="/shelfiq">ShelfiQ</a></li></ul></div>
+    <div class="footer-col"><h3>Platform</h3><ul><li><a href="/features">Features</a></li><li><a href="/how-it-works">How It Works</a></li><li><a href="/pricing">Pricing</a></li><li><a href="/about">About</a></li><li><a href="/blog">Blog</a></li><li><a href="/docs">Docs</a></li></ul></div>
+    <div class="footer-col"><h3>Access</h3><ul><li><a href="https://ourshelf.space/login">Login</a></li><li><a href="/contact">Sign Up</a></li><li><a href="/contact">Contact</a></li><li><a href="/vendors">For Vendors</a></li><li><a href="/for-bookkeepers">For Bookkeepers</a></li></ul></div>
+    <div class="footer-col"><h3>Company</h3><ul><li><a href="mailto:chris@shelfspace.pro">Email</a></li><li><a href="mailto:support@shelfspace.pro">Support</a></li><li><a href="https://linkedin.com/company/shelfspace-pro" target="_blank" rel="noopener" class="footer-social-link"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> LinkedIn</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><p>&copy; 2026 ShelfSpace Technologies Inc.</p><div style="display:flex;align-items:center;gap:8px;justify-content:center;margin-top:12px;"><img src="/metrc-logo.png" alt="Metrc" style="height:18px;opacity:0.4;filter:brightness(0) invert(1);"><span style="font-size:11px;color:rgba(255,255,255,0.35);">Certified Metrc Third-Party Vendor</span></div><div class="footer-bottom-links"><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div></div>
+</footer>
+
+<script>
+  // Nav scroll behavior
+  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 20);
+  window.addEventListener('scroll', function() {
+    document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 20);
+  });
+
+  // Scroll-triggered reveal animations
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.style.animationPlayState = 'running';
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(function(el) {
+    el.style.animationPlayState = 'paused';
+    observer.observe(el);
+  });
+</script>
+<script src="/shelfiq-widget.js"></script>
+</body>
+</html>

@@ -25,7 +25,7 @@ Founded by Chris Mitchem, a 10-year cannabis operator who built ShelfSpace to so
 - Cannabis AP system — three-way matching on every invoice (invoice ↔ delivery ↔ PO), platform-generated Check 21 payments (retailer signs and sends), ShelfiQ vendor email handling, QuickBooks sync
 - Per-vendor payment terms: pay Vendor A on COD because they require it, Vendor B on Net 30 because the relationship is established, Vendor C on consignment because you want sell-through visibility. All configurable from one workflow, switchable when relationships change.
 - Cannabis and non-cannabis vendors — landlords, agencies, consultants, anyone
-- Onboard vendors by email — the W-9 is collected right in the invite (no chasing, no faxing); no bank account numbers needed
+- Onboard vendors by email — the W-9 is collected right in the invite (no chasing, no faxing); no bank account numbers needed for the default Check 21 check (ACH direct deposit is opt-in, and the vendor links their own bank)
 - Every vendor gets a free portal to download checks, view payment history, and track status; vendors who prefer paper can be opted in by the retailer to receive a physical check by mail instead of digital portal delivery
 - Retailers cut every check on the platform — nothing goes out without their sign-off
 - Vendors email the platform with questions; ShelfiQ answers first
@@ -57,8 +57,10 @@ Founded by Chris Mitchem, a 10-year cannabis operator who built ShelfSpace to so
 - Interactive calculator available at https://shelfspace.pro/credit-recovery to estimate recovery potential
 
 ## Payment System
-- All payments are Check 21 Act compliant — valid Substitute Checks under Federal Law
+- Three delivery methods, retailer picks per vendor: digital check (Check 21, portal download — the default), physical mailed paper check (opt-in), and ACH direct deposit (opt-in; the vendor links their own bank). All three deliver the same $20 payment artifact — ACH is not a separate charge and is free to vendors.
+- All checks are Check 21 Act compliant — valid Substitute Checks under Federal Law
 - Checks are print-at-home legal and mobile deposit ready
+- ACH is opt-in and vendor-controlled: the retailer enables it, the vendor links a bank themselves, and ShelfSpace does not keep the vendor's full account number on file; the "no bank info required" trust story holds because Check 21 stays the default (see https://shelfspace.pro/ach)
 - Every payment syncs to QuickBooks in real time — no manual journal entries
 - Full audit trail on every transaction — who created it, when issued, when downloaded, current status
 - Void a check and re-pay the order to issue a replacement with a fresh date and new check number
@@ -112,6 +114,8 @@ A two-shop dispensary chain in Massachusetts:
 - Blog: https://shelfspace.pro/blog
 - Vendor Management (cannabis vendor management pillar): https://shelfspace.pro/vendor-management
 - ShelfiQ: https://shelfspace.pro/shelfiq
+- Check Payments (vendor-facing: what a ShelfSpace Check 21 check is, why it's legal, how to deposit): https://shelfspace.pro/checks
+- ACH Payments (vendor-facing: getting paid by ACH — optional, vendor links their own bank, full account number not stored, no vendor fees): https://shelfspace.pro/ach
 
 ## Blog Articles
 - Cannabis Vendor W-9s and Resale Certificates, Without the Chase (the two tax forms that move between a cannabis retailer and vendor: the vendor's W-9 comes to you so you can pay and 1099 them, your state resale certificate / ST-4 goes to the vendor so they sell to you tax-free for resale; ShelfSpace collects the vendor W-9 in the onboarding invite, lets you e-sign your W-9 and resale certificate auto-filled from your profile, stores EINs encrypted and masked, and logs every reveal with notification to the other party; NOT a tax-filing service — no 1099 generation, no IRS TIN matching): https://shelfspace.pro/blog/cannabis-vendor-w9-tax-forms
