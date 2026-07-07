@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Get a Retailer's W-9 &amp; Resale Certificate — ShelfSpace</title>
+<meta name="description" content="How a vendor pulls a partner retailer's W-9 and resale/exemption certificate (ST-4) straight from the ShelfSpace portal — no email chasing, self-serve, and logged.">
+<link rel="canonical" href="https://shelfspace.pro/docs/vendor-portal/retailer-tax-documents">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://shelfspace.pro/docs/vendor-portal/retailer-tax-documents">
+<meta property="og:title" content="Get a Retailer's W-9 &amp; Resale Certificate — ShelfSpace">
+<meta property="og:description" content="How a vendor pulls a partner retailer's W-9 and resale/exemption certificate (ST-4) straight from the ShelfSpace portal — no email chasing, self-serve, and logged.">
+<meta property="og:image" content="https://shelfspace.pro/og-image-v7.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Get a Retailer's W-9 &amp; Resale Certificate — ShelfSpace">
+<meta name="twitter:description" content="How a vendor pulls a partner retailer's W-9 and resale/exemption certificate (ST-4) straight from the ShelfSpace portal — no email chasing, self-serve, and logged.">
+<meta name="twitter:image" content="https://shelfspace.pro/og-image-v7.png">
+<meta name="apple-mobile-web-app-title" content="ShelfSpace">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+<style>
+  /* ── Docs Hero ── */
+  .docs-hero {
+    padding: 120px 48px 40px; text-align: center;
+    background: var(--white); position: relative; overflow: hidden; z-index: 2;
+  }
+  .docs-hero::before {
+    content: ''; position: absolute; top: -200px; right: -200px;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(149,213,178,0.12), transparent 70%);
+  }
+  .docs-hero-content { position: relative; max-width: 640px; margin: 0 auto; }
+  .docs-hero-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 6px 16px; border-radius: 100px;
+    background: var(--green-ghost); border: 1px solid rgba(149,213,178,0.3);
+    font-size: 13px; font-weight: 600; color: var(--green-dark);
+    text-decoration: none; margin-bottom: 16px; transition: all 0.2s;
+  }
+  .docs-hero-badge:hover { background: var(--green-light); }
+  .docs-hero-title {
+    font-size: clamp(28px, 3.5vw, 40px); font-weight: 700;
+    color: var(--green-deep); letter-spacing: -1.5px; line-height: 1.2;
+  }
+  @media (max-width: 900px) {
+    .docs-hero { padding: 100px 24px 32px; }
+  }
+  /* ── Docs Layout ── */
+  .docs-layout {
+    max-width: 760px; margin: 0 auto;
+    padding: 40px 48px 0;
+  }
+
+  /* ── Docs Content ── */
+  .docs-content { max-width: 720px; padding-bottom: 80px; }
+  .docs-breadcrumb {
+    font-size: 13px; color: var(--slate-400); margin-bottom: 24px;
+  }
+  .docs-breadcrumb a { color: var(--slate-400); text-decoration: none; }
+  .docs-breadcrumb a:hover { color: var(--green-mid); }
+  .docs-category {
+    font-size: 11px; font-weight: 700; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--green-mid); margin-bottom: 12px;
+  }
+  .docs-content h1 {
+    font-size: clamp(28px, 3.5vw, 36px); font-weight: 700;
+    color: var(--green-deep); letter-spacing: -1px; line-height: 1.2;
+    margin-bottom: 24px;
+  }
+  .docs-content h2 {
+    font-size: 22px; font-weight: 700; color: var(--green-deep);
+    margin: 40px 0 16px; letter-spacing: -0.5px; line-height: 1.3;
+    padding-top: 24px; border-top: 1px solid var(--slate-100);
+  }
+  .docs-content h2:first-of-type { border-top: none; padding-top: 0; }
+  .docs-content p {
+    font-size: 16px; line-height: 1.8; color: var(--slate-600); margin-bottom: 20px;
+  }
+  .docs-content ul, .docs-content ol { margin-bottom: 20px; padding-left: 24px; }
+  .docs-content li {
+    font-size: 16px; line-height: 1.8; color: var(--slate-600); margin-bottom: 6px;
+  }
+  .docs-content strong { color: var(--green-deep); font-weight: 600; }
+  .docs-content a { color: var(--green-mid); font-weight: 500; text-decoration: none; }
+  .docs-content a:hover { color: var(--green-deep); text-decoration: underline; }
+
+  /* ── At a Glance Box ── */
+  .docs-glance {
+    padding: 24px 28px; margin-bottom: 32px;
+    background: var(--green-ghost); border: 1px solid rgba(149,213,178,0.3);
+    border-radius: 12px;
+  }
+  .docs-glance h2 {
+    font-size: 13px; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--green-mid);
+    margin: 0 0 12px; border: none; padding: 0;
+  }
+  .docs-glance ul { list-style: none; padding: 0; margin: 0; }
+  .docs-glance li {
+    font-size: 15px; line-height: 1.6; color: var(--slate-600);
+    padding: 4px 0 4px 20px; position: relative;
+  }
+  .docs-glance li::before {
+    content: ''; position: absolute; left: 0; top: 12px;
+    width: 8px; height: 8px; border-radius: 50%; background: var(--green-accent);
+  }
+
+  /* ── Highlight Box ── */
+  .docs-highlight {
+    background: var(--green-ghost); border: 1px solid rgba(149,213,178,0.3);
+    border-radius: 12px; padding: 20px 24px; margin: 24px 0;
+    font-size: 15px; line-height: 1.7; color: var(--green-dark);
+  }
+  .docs-highlight strong { color: var(--green-deep); }
+
+  /* ── Steps ── */
+  .docs-content ol.docs-steps { counter-reset: step; list-style: none; padding-left: 0; }
+  .docs-content ol.docs-steps > li {
+    position: relative; padding-left: 44px; margin-bottom: 18px;
+  }
+  .docs-content ol.docs-steps > li::before {
+    counter-increment: step; content: counter(step);
+    position: absolute; left: 0; top: 2px;
+    width: 28px; height: 28px; border-radius: 50%;
+    background: var(--green-deep); color: var(--white);
+    font-size: 14px; font-weight: 700; display: flex;
+    align-items: center; justify-content: center;
+  }
+
+  /* ── Related Docs ── */
+  .docs-related {
+    margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--slate-100);
+  }
+  .docs-related h3 {
+    font-size: 13px; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--slate-400); margin-bottom: 12px;
+  }
+  .docs-related-links { display: flex; flex-wrap: wrap; gap: 12px; }
+  .docs-related-links a {
+    padding: 8px 16px; font-size: 14px; font-weight: 500;
+    color: var(--green-mid); background: var(--slate-50);
+    border-radius: 8px; text-decoration: none; transition: all 0.2s;
+  }
+  .docs-related-links a:hover { background: var(--green-ghost); color: var(--green-deep); }
+
+  /* ── Docs CTA ── */
+  .docs-cta {
+    margin-top: 48px; padding: 32px; text-align: center;
+    background: var(--green-deep); border-radius: 16px;
+  }
+  .docs-cta p { color: rgba(255,255,255,0.8); font-size: 16px; margin-bottom: 16px; }
+  .docs-cta p strong { color: var(--white); }
+  .docs-cta a {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 12px 28px; background: var(--white); color: var(--green-deep);
+    border-radius: 10px; font-size: 15px; font-weight: 600;
+    text-decoration: none; transition: all 0.3s;
+  }
+  .docs-cta a:hover { background: var(--slate-50); transform: translateY(-1px); }
+  .docs-cta-note { margin-top: 12px; font-size: 13px; color: rgba(255,255,255,0.5); }
+
+  /* ── Footer 5-col ── */
+  .footer-top { grid-template-columns: 2fr 1fr 1fr 1fr 1fr; }
+
+  /* ── Responsive ── */
+  @media (max-width: 900px) {
+    .docs-layout { padding: 24px 24px 0; }
+    .footer-top { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 600px) {
+    .footer-top { grid-template-columns: 1fr; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+  }
+</style>
+<!-- ARTICLE SCHEMA -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "Getting a Retailer's W-9 & Resale Certificate",
+  "datePublished": "2026-07-07",
+  "dateModified": "2026-07-07",
+  "author": { "@type": "Organization", "name": "ShelfSpace", "url": "https://shelfspace.pro" },
+  "publisher": { "@type": "Organization", "name": "ShelfSpace" },
+  "url": "https://shelfspace.pro/docs/vendor-portal/retailer-tax-documents"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://shelfspace.pro/" },
+    { "@type": "ListItem", "position": 2, "name": "Documentation", "item": "https://shelfspace.pro/docs" },
+    { "@type": "ListItem", "position": 3, "name": "Vendor Portal", "item": "https://shelfspace.pro/docs/vendor-portal/overview" },
+    { "@type": "ListItem", "position": 4, "name": "Retailer Tax Documents" }
+  ]
+}
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-H2LBJT03WE"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-H2LBJT03WE');</script>
+<script>function initApollo(){var n=Math.random().toString(36).substring(7),o=document.createElement("script");
+o.src="https://assets.apollo.io/micro/website-tracker/tracker.iife.js?nocache="+n,o.async=!0,o.defer=!0,
+o.onload=function(){window.trackingFunctions.onLoad({appId:"69c141b32234890011a43849"})},
+document.head.appendChild(o)}initApollo();</script>
+</head>
+<body>
+<!-- last-synced: 2026-07-07 -->
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="/" class="nav-logo">
+    <div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div>
+    <span class="nav-logo-text">ShelfSpace</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="/consignment">Consignment</a></li>
+    <li><a href="/accounts-payable">Accounts Payable</a></li>
+    <li><a href="/credit-recovery">Credit Recovery</a></li>
+    <li class="nav-dropdown"><button class="nav-dropdown-toggle" aria-haspopup="true" aria-expanded="false">Platform <svg class="dropdown-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></button><div class="nav-dropdown-menu"><a href="/vendor-management">Vendor Management</a><a href="/how-it-works">How It Works</a><a href="/features">Features</a><a href="/shelfiq">ShelfiQ</a><a href="/checks">Check Payments</a></div></li>
+    <li><a href="/pricing">Pricing</a></li>
+    <li><a href="/about">About</a></li>
+    <li><a href="/contact" class="nav-cta">Get Started <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a></li>
+  </ul>
+  <div class="nav-hamburger" onclick="document.querySelector('.nav-links').classList.toggle('mobile-open'); event.stopPropagation();"><span></span><span></span><span></span></div>
+</nav>
+
+
+<!-- DOCS HERO -->
+<div class="docs-hero">
+  <div class="docs-hero-content">
+    <a href="/docs" class="docs-hero-badge">Documentation</a>
+    <h1 class="docs-hero-title">Getting a Retailer's W-9 &amp; Resale Certificate</h1>
+  </div>
+</div>
+
+<div data-docs-search><noscript><a href="/docs">Browse the docs index</a></noscript></div>
+
+<!-- DOCS LAYOUT -->
+<div class="docs-layout docs-with-sidebar">
+
+  <!-- SIDEBAR -->
+  <aside class="docs-sidebar" data-docs-sidebar><noscript><a href="/docs">Browse all docs &rarr;</a></noscript></aside>
+
+  <!-- CONTENT -->
+  <main class="docs-content">
+    <div class="docs-breadcrumb">
+      <a href="/docs">Docs</a> / <a href="/docs/vendor-portal/overview">Vendor Portal</a> / Retailer Tax Documents
+    </div>
+    <div class="docs-category">Vendor Portal</div>
+
+    <!-- AT A GLANCE -->
+    <div class="docs-glance">
+      <h2>At a Glance</h2>
+      <ul>
+        <li>Pull a partner retailer's W-9 and resale/exemption certificate (the ST-4 in Massachusetts) straight from the portal — no email chasing</li>
+        <li>Available on the retailer's page in your vendor portal, under their Tax Documents card</li>
+        <li>Open to any vendor admin on an active partnership — no verification step, nothing to unlock</li>
+        <li>Each view is logged and the retailer is notified — the same courtesy applies when they pull yours</li>
+      </ul>
+    </div>
+
+    <!-- BODY CONTENT -->
+    <h2>Why This Exists</h2>
+    <p>When you take on a new dispensary account, your own bookkeeper usually needs two documents from the retailer: their <strong>W-9</strong> (for your 1099 and vendor records) and their <strong>resale or exemption certificate</strong> — in Massachusetts, the <strong>ST-4</strong> — so you can sell to them tax-exempt for resale. Traditionally that means emailing the buyer, waiting, and re-asking when the file gets lost in a thread.</p>
+
+    <p>If your retailer is on ShelfSpace, you don't have to ask. When a retailer signs or uploads their tax forms on the platform, those documents become available to their partner vendors directly in the portal — self-serve, any time.</p>
+
+    <div class="docs-highlight">
+      <strong>It works both directions.</strong> The retailer can pull your W-9 from their side the same way, and you can pull theirs from yours. Every access is recorded and the document's owner is notified, so nothing moves quietly.
+    </div>
+
+    <h2>How to Download a Retailer's W-9 or Resale Certificate</h2>
+    <ol class="docs-steps">
+      <li>Log in to the vendor portal at <strong>ourshelf.space</strong>.</li>
+      <li>Open <strong>Retailers</strong> in the left navigation and click the retailer whose documents you need.</li>
+      <li>On that retailer's page, find the <strong>&ldquo;[Retailer]'s Tax Documents&rdquo;</strong> card. It lists their <strong>Resale Certificate</strong> and <strong>W-9</strong>, each marked <em>on file</em> or <em>not provided yet</em>.</li>
+      <li>Click <strong>View</strong> next to the document you want. A short confirmation appears — because your access is logged and the retailer is notified. Confirm to continue.</li>
+      <li>The document opens right in the portal preview. Use the <strong>Download</strong> button in the viewer to save the PDF for your records.</li>
+    </ol>
+
+    <h2>What You Need First</h2>
+    <p>There's nothing to sign up for or unlock — access is simply scoped so only the right people at the right companies can see a partner's documents:</p>
+    <ul>
+      <li><strong>An active partnership with that retailer.</strong> You'll only see documents for retailers you actually sell to on the platform. Your ShelfSpace vendor account is ready to view them from day one — there's no verification step to complete first.</li>
+      <li><strong>An admin role.</strong> Vendor team members with view-only access won't see the View button — ask your vendor admin to pull the file or to upgrade your role. See <a href="/docs/user-management/overview">Roles &amp; Permissions</a>.</li>
+    </ul>
+
+    <h2>If the Document Isn't There Yet</h2>
+    <p>A row marked <em>not provided yet</em> means the retailer hasn't added that form to ShelfSpace. Some retailers manage multiple locations, and a resale certificate can be specific to one location or state — so one storefront may have its documents on file while a newer location hasn't uploaded them yet.</p>
+
+    <p>When that happens, just ask the retailer's buyer or AP contact to sign or upload the form on their end. Once they do, it appears in your portal automatically — no follow-up needed from you.</p>
+
+    <h2>Is It Secure?</h2>
+    <p>Yes. Tax documents are never public and are never handed out anonymously. A download link is generated only after you confirm the view, and it's short-lived. Every access writes an audit record — who viewed it, when — and sends the retailer a notification that their document was viewed. That transparency protects both sides: the retailer always knows who has their information, and you have a record that you obtained the document properly.</p>
+
+    <!-- RELATED DOCS -->
+    <div class="docs-related">
+      <h3>Related</h3>
+      <div class="docs-related-links">
+        <a href="/docs/vendor-portal/overview">Vendor Portal Overview</a>
+        <a href="/docs/vendor-portal/downloading-checks">Downloading Your Checks</a>
+        <a href="/docs/vendor-portal/payment-history">Payment History</a>
+        <a href="/docs/accounts-payable/tax-forms">Retailer Tax Forms</a>
+        <a href="/docs/user-management/overview">Roles &amp; Permissions</a>
+        <a href="/docs/consignment/overview">Consignment Overview</a>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="docs-cta">
+      <p><strong>Selling to a ShelfSpace retailer?</strong> The vendor portal is free, forever.</p>
+      <a href="/vendors">For Vendors <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a>
+      <div class="docs-cta-note">No fees. No per-transaction charges. Ever.</div>
+    </div>
+  </main>
+
+  <!-- ON THIS PAGE -->
+  <aside class="docs-on-this-page" data-on-this-page></aside>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="/" class="nav-logo"><div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div><span class="nav-logo-text">ShelfSpace</span></a>
+      <p>Every Vendor. Every Payment. One Engine.</p>
+    </div>
+    <div class="footer-col"><h4>Services</h4><ul><li><a href="/consignment">Consignment</a></li><li><a href="/accounts-payable">Accounts Payable</a></li><li><a href="/credit-recovery">Credit Recovery</a></li><li><a href="/checks">Check Payments</a></li><li><a href="/shelfiq">ShelfiQ</a></li></ul></div>
+    <div class="footer-col"><h4>Platform</h4><ul><li><a href="/features">Features</a></li><li><a href="/how-it-works">How It Works</a></li><li><a href="/pricing">Pricing</a></li><li><a href="/about">About</a></li><li><a href="/blog">Blog</a></li><li><a href="/docs">Docs</a></li></ul></div>
+    <div class="footer-col"><h4>Access</h4><ul><li><a href="https://ourshelf.space/login">Login</a></li><li><a href="/contact">Sign Up</a></li><li><a href="/contact">Contact</a></li><li><a href="/vendors">For Vendors</a></li><li><a href="/for-bookkeepers">For Bookkeepers</a></li></ul></div>
+    <div class="footer-col"><h4>Company</h4><ul><li><a href="mailto:chris@shelfspace.pro">Email</a></li><li><a href="mailto:support@shelfspace.pro">Support</a></li><li><a href="https://linkedin.com/company/shelfspace-pro" target="_blank" rel="noopener" class="footer-social-link"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> LinkedIn</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><p>&copy; 2026 ShelfSpace Technologies Inc.</p><div class="footer-bottom-links"><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div></div>
+</footer>
+
+<script>
+(function() {
+  var nav = document.getElementById('nav');
+  nav.classList.toggle('scrolled', window.scrollY > 20);
+  window.addEventListener('scroll', function() {
+    nav.classList.toggle('scrolled', window.scrollY > 20);
+  }, { passive: true });
+})();
+</script>
+<script src="/docs-search.js?v=32" defer></script>
+<script src="/shelfiq-widget.js"></script>
+</body>
+</html>
