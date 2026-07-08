@@ -203,11 +203,15 @@ function notificationHtml(lead) {
   return emailShell({ preheader: `${lead.role} · ${lead.businessName}`, bodyHtml: body });
 }
 
-function autoReplyHtml(firstName) {
+function autoReplyHtml(firstName, role) {
   const greeting = firstName ? `Hi ${escapeHtml(firstName)},` : 'Hi there,';
+  const evalLine = role === 'Retailer'
+    ? `<p style="margin:0 0 24px;">Since you run a dispensary, this is where your <strong style="color:#1b4332;">free evaluation</strong> starts — we look at your last 90 days and show you exactly where margin is leaking. No cost, no commitment.</p>`
+    : '';
   const body = `
       <p style="margin:0 0 16px;">${greeting}</p>
       <p style="margin:0 0 16px;">Thanks for reaching out to ShelfSpace. We've got your details and someone from our team will be in touch, usually within a business day.</p>
+      ${evalLine}
       <p style="margin:0 0 24px;">If it's easier, just reply straight to this email and we'll pick it up.</p>
       <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:0 0 28px;"><tr>
         <td bgcolor="#1b4332" style="border-radius:10px;background:#1b4332;"><a href="https://shelfspace.pro/how-it-works" style="display:inline-block;padding:13px 26px;font-family:${FONT};font-size:14px;font-weight:600;color:#ffffff;text-decoration:none;border-radius:10px;">See how ShelfSpace works &rarr;</a></td>
@@ -318,7 +322,7 @@ export default async function handler(req, res) {
       to: email,
       replyTo: 'chris@shelfspace.pro',
       subject: 'Thanks for reaching out to ShelfSpace',
-      html: autoReplyHtml(firstName),
+      html: autoReplyHtml(firstName, role),
     });
   } catch (err) {
     console.error('Interest form: auto-response email failed (lead still captured):', err);
