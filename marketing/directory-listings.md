@@ -57,7 +57,7 @@ The company offers a free evaluation — you only pay when they produce results.
 - Funding Status: (leave blank or "Bootstrapped" if applicable)
 - Number of Employees: 1-10
 - Founder: Chris Mitchem (link to his Crunchbase profile if you create one, or his LinkedIn: linkedin.com/in/chris-mitchem-mba/)
-- Contact Email: chris@shelfspace.pro
+- Contact Email: support@shelfspace.pro
 
 **Founder Profile (create separately):**
 - Name: Chris Mitchem
