@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to Receive a Cannabis Delivery in ShelfSpace</title>
+<meta name="description" content="A two-minute walkthrough of receiving a cannabis delivery in ShelfSpace — upload the signed invoice and Metrc manifest, confirm each line, and reconcile a short shipment before anyone pays.">
+<link rel="canonical" href="https://shelfspace.pro/blog/how-to-receive-a-cannabis-delivery">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://shelfspace.pro/blog/how-to-receive-a-cannabis-delivery">
+<meta property="og:title" content="How to Receive a Cannabis Delivery in ShelfSpace">
+<meta property="og:description" content="A two-minute walkthrough of receiving a cannabis delivery in ShelfSpace — upload the signed invoice and Metrc manifest, confirm each line, and reconcile a short shipment before anyone pays.">
+<meta property="og:image" content="https://shelfspace.pro/og-image-v7.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="How to Receive a Cannabis Delivery in ShelfSpace">
+<meta name="twitter:description" content="A two-minute walkthrough of receiving a cannabis delivery in ShelfSpace — upload the signed invoice and Metrc manifest, confirm each line, and reconcile a short shipment before anyone pays.">
+<meta name="twitter:image" content="https://shelfspace.pro/og-image-v7.png">
+<meta name="apple-mobile-web-app-title" content="ShelfSpace">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+<style>
+  @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-12px); } }
+
+  /* ─── HERO ENHANCEMENTS ─── */
+  .page-hero { padding-bottom: 40px; }
+  .hero-bg-gradient { position: absolute; top: -30%; right: -20%; width: 700px; height: 700px; background: radial-gradient(circle, rgba(149,213,178,0.18) 0%, rgba(149,213,178,0) 70%); animation: float 8s ease-in-out infinite; pointer-events: none; }
+  .hero-bg-gradient-2 { position: absolute; bottom: -20%; left: -15%; width: 550px; height: 550px; background: radial-gradient(circle, rgba(27,67,50,0.06) 0%, rgba(27,67,50,0) 70%); animation: float 10s ease-in-out infinite; animation-delay: -3s; pointer-events: none; }
+  .hero-grid-lines { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 1200px; height: 100%; opacity: 0.035; background-image: linear-gradient(var(--green-deep) 1px, transparent 1px), linear-gradient(90deg, var(--green-deep) 1px, transparent 1px); background-size: 80px 80px; pointer-events: none; }
+  .page-hero .section-label,
+  .page-hero .section-title,
+  .page-hero .section-desc { opacity: 0; transform: translateY(30px); }
+  .page-hero .section-label { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1); }
+  .page-hero .section-title { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s, transform 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s; }
+  .page-hero .section-desc { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1) 0.25s, transform 0.8s cubic-bezier(0.22,1,0.36,1) 0.25s; }
+  .page-hero.hero-loaded .section-label,
+  .page-hero.hero-loaded .section-title,
+  .page-hero.hero-loaded .section-desc { opacity: 1; transform: translateY(0); }
+
+  /* ─── REVEAL ─── */
+  .reveal {
+    opacity: 0; transform: translateY(40px);
+    transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+  /* ─── ARTICLE BODY ─── */
+  .article-body { max-width: 720px; margin: 0 auto; padding: 0 48px 80px; }
+  .article-body h2 { font-size: 24px; font-weight: 700; color: var(--green-deep); margin: 48px 0 16px; letter-spacing: -0.5px; line-height: 1.3; }
+  .article-body h3 { font-size: 19px; font-weight: 700; color: var(--green-deep); margin: 32px 0 12px; letter-spacing: -0.3px; line-height: 1.3; }
+  .article-body p { font-size: 17px; line-height: 1.85; color: var(--slate-600); margin-bottom: 24px; }
+  .article-body ul, .article-body ol { margin-bottom: 24px; padding-left: 24px; }
+  .article-body li { font-size: 17px; line-height: 1.85; color: var(--slate-600); margin-bottom: 8px; }
+  .article-body strong { color: var(--green-deep); font-weight: 600; }
+  .article-body a { color: var(--green-mid); font-weight: 500; text-decoration: none; }
+  .article-body a:hover { color: var(--green-deep); text-decoration: underline; }
+  .article-body blockquote { border-left: 3px solid var(--green-accent); padding: 16px 24px; margin: 32px 0; background: var(--green-ghost); border-radius: 0 8px 8px 0; }
+  .article-body blockquote p { font-style: italic; color: var(--green-dark); margin-bottom: 0; }
+
+  /* ─── AT A GLANCE ─── */
+  .article-glance {
+    max-width: 720px; margin: 0 auto 40px; padding: 24px 28px;
+    background: var(--green-ghost); border: 1px solid rgba(149,213,178,0.3);
+    border-radius: 12px;
+  }
+  .article-glance h2 {
+    font-size: 14px; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--green-mid); margin: 0 0 12px;
+  }
+  .article-glance ul { list-style: none; padding: 0; margin: 0; }
+  .article-glance li {
+    font-size: 15px; line-height: 1.6; color: var(--slate-600);
+    padding: 4px 0 4px 20px; position: relative;
+  }
+  .article-glance li::before {
+    content: ''; position: absolute; left: 0; top: 12px;
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--green-accent);
+  }
+
+  /* ─── TWO-WAYS SPLIT (drag-drop vs phone) ─── */
+  .ways-split { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 32px 0; }
+  .ways-col { background: #fff; border: 1px solid var(--slate-200); border-radius: 16px; padding: 22px 22px; box-shadow: 0 10px 30px -18px rgba(27,67,50,0.28); }
+  .ways-kicker { font: 700 12px/1 var(--font-display); letter-spacing: 1.2px; text-transform: uppercase; color: var(--green-mid); margin: 0 0 8px; }
+  .ways-title { font: 700 18px/1.25 var(--font-display); color: var(--green-deep); margin: 0 0 8px; }
+  .ways-text { font-size: 14.5px; line-height: 1.6; color: var(--slate-600); margin: 0; }
+  @media (max-width: 600px) { .ways-split { grid-template-columns: 1fr; } }
+
+  /* kit callout text guard against .article-body p cascade */
+  .blog-callout .blog-callout-text { margin: 0; }
+
+  /* ─── FAQ ACCORDION ─── */
+  .faq-list details {
+    border: 1px solid var(--slate-200); border-radius: 10px;
+    margin-bottom: 12px; background: var(--white);
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .faq-list details[open] { background: var(--green-ghost); border-color: rgba(149,213,178,0.45); }
+  .faq-list summary {
+    list-style: none; cursor: pointer;
+    padding: 16px 20px;
+    font: 600 16px/1.4 var(--font-display); color: var(--green-deep);
+    display: flex; justify-content: space-between; align-items: center; gap: 12px;
+  }
+  .faq-list summary::-webkit-details-marker { display: none; }
+  .faq-list summary::after {
+    content: '+'; flex-shrink: 0;
+    font: 400 22px/1 var(--font-mono); color: var(--green-mid);
+    transition: transform 0.2s;
+  }
+  .faq-list details[open] summary::after { content: '−'; }
+  .faq-list details p {
+    padding: 0 20px 18px; margin: 0;
+    font-size: 15px; line-height: 1.7; color: var(--slate-600);
+  }
+
+  /* ─── FOOTER 5-COL ─── */
+  .footer-top { grid-template-columns: 2fr 1fr 1fr 1fr 1fr; }
+  @media (max-width: 900px) { .footer-top { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px) { .footer-top { grid-template-columns: 1fr; } }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    .article-body { padding: 0 24px 60px; }
+  }
+
+  /* ─── REDUCED MOTION ─── */
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; transition: none; }
+    .page-hero .section-label,
+    .page-hero .section-title,
+    .page-hero .section-desc { opacity: 1; transform: none; transition: none; }
+    .hero-bg-gradient, .hero-bg-gradient-2 { animation: none; }
+  }
+</style>
+<noscript><style>.reveal,.page-hero .section-label,.page-hero .section-title,.page-hero .section-desc{opacity:1;transform:none;transition:none;}</style></noscript>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-H2LBJT03WE"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-H2LBJT03WE');</script>
+<script>function initApollo(){var n=Math.random().toString(36).substring(7),o=document.createElement("script");
+o.src="https://assets.apollo.io/micro/website-tracker/tracker.iife.js?nocache="+n,o.async=!0,o.defer=!0,
+o.onload=function(){window.trackingFunctions.onLoad({appId:"69c141b32234890011a43849"})},
+document.head.appendChild(o)}initApollo();</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "How to Receive a Cannabis Delivery in ShelfSpace",
+  "description": "A step-by-step walkthrough of receiving a cannabis delivery in ShelfSpace: upload the signed invoice and Metrc manifest, confirm each line with the right disposition, reconcile a short shipment, and confirm the total — all before anyone approves a payment.",
+  "author": { "@type": "Person", "name": "Chris Mitchem" },
+  "publisher": { "@type": "Organization", "name": "ShelfSpace", "url": "https://shelfspace.pro" },
+  "datePublished": "2026-07-08",
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://shelfspace.pro/blog/how-to-receive-a-cannabis-delivery" },
+  "url": "https://shelfspace.pro/blog/how-to-receive-a-cannabis-delivery",
+  "image": "https://shelfspace.pro/og-image-v7.png"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://shelfspace.pro/" },
+    { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://shelfspace.pro/blog" },
+    { "@type": "ListItem", "position": 3, "name": "How to Receive a Cannabis Delivery in ShelfSpace" }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Can my inventory clerk receive deliveries without seeing payment amounts?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Receiving is designed for the person at the dock. Under the Retailer Inventory role, a clerk can open a delivery, upload the paperwork, and confirm what physically arrived — but they never see check amounts, run payments, or change AP settings. Receiving ends at the Received tab; approving and paying is a separate role for the office."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What happens if a delivery arrives short or damaged?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "On the line that came up short, tap Short and enter the quantity you actually received. ShelfSpace reduces the amount owed automatically, so the vendor only gets paid for what showed up. Damaged and Not Compliant work the same way, each with a note for your records, and the whole discrepancy is logged and visible in the vendor's portal — no side emails."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I receive consignment and wholesale deliveries differently?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. You receive them exactly the same way — upload the paperwork, confirm each line, confirm the total. Whether a delivery is wholesale or consignment only changes how the vendor gets paid later, never how your team checks the truck in at the dock."
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="/" class="nav-logo">
+    <div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div>
+    <span class="nav-logo-text">ShelfSpace</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="/consignment">Consignment</a></li>
+    <li><a href="/accounts-payable">Accounts Payable</a></li>
+    <li><a href="/credit-recovery">Credit Recovery</a></li>
+    <li class="nav-dropdown"><button class="nav-dropdown-toggle" aria-haspopup="true" aria-expanded="false">Platform <svg class="dropdown-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></button><div class="nav-dropdown-menu"><a href="/vendor-management">Vendor Management</a><a href="/how-it-works">How It Works</a><a href="/features">Features</a><a href="/shelfiq">ShelfiQ</a><a href="/checks">Check Payments</a></div></li>
+    <li><a href="/pricing">Pricing</a></li>
+    <li><a href="/about">About</a></li>
+    <li><a href="/contact" class="nav-cta">Get Started <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a></li>
+  </ul>
+  <div class="nav-hamburger" onclick="document.querySelector('.nav-links').classList.toggle('mobile-open'); event.stopPropagation();"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="hero-bg-gradient"></div>
+  <div class="hero-bg-gradient-2"></div>
+  <div class="hero-grid-lines"></div>
+  <div class="section-label">Receiving</div>
+  <h1 class="section-title">Check in every delivery in two minutes</h1>
+  <p class="section-desc">How your receiving team confirms what actually came off the truck — upload the paperwork, confirm each line, and catch a short shipment before anyone pays for it.</p>
+</div>
+
+<!-- AT A GLANCE -->
+<div class="article-glance">
+  <h2>At a glance</h2>
+  <ul>
+    <li>Open the delivery on the <strong>Incoming</strong> tab and click <strong>Receive Delivery</strong>.</li>
+    <li>Add the two documents that came with the shipment: the <strong>signed invoice</strong> and the <strong>Metrc transport manifest</strong>.</li>
+    <li>Two ways to add them — <strong>drag & drop at a computer, or use your phone's camera as the scanner</strong> out on the dock.</li>
+    <li>Confirm each line: <strong>Received, Short, Damaged, or Not Compliant.</strong> What you receive is what gets paid.</li>
+    <li>A short line <strong>drops the amount owed automatically</strong> — you never overpay for product that didn't arrive.</li>
+    <li>Confirm the total and it lands on <strong>Received</strong>, ready for the office to approve. <strong>Wholesale or consignment, it's the same job.</strong></li>
+  </ul>
+</div>
+
+<!-- ARTICLE BODY -->
+<article class="article-body">
+
+  <figure class="post-video" style="max-width:840px;margin:0 auto 2.75rem;">
+    <div style="position:relative;padding-bottom:56.25%;height:0;border-radius:16px;overflow:hidden;box-shadow:0 20px 44px -20px rgba(27,67,50,0.4);">
+      <iframe src="https://www.youtube-nocookie.com/embed/le66YdivrQk?rel=0&amp;modestbranding=1" title="Receiving a Delivery — ShelfSpace" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;border:0;" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+    <figcaption style="text-align:center;font-size:0.9rem;color:#5b7167;margin-top:0.75rem;">Watch: receiving a delivery end to end — the paperwork, confirming each line, and reconciling a short shipment before payment.</figcaption>
+  </figure>
+
+  <p class="reveal">A truck pulls up to your dock and a pallet comes off the back. Before anyone in the office pays a cent for it, someone on your team has to answer a simple question: is this actually what we ordered? Receiving is where that question gets answered — where the count on the invoice becomes the count that really arrived. In ShelfSpace it takes about two minutes, and this is the whole thing, start to finish.</p>
+
+  <h2 class="reveal">Receiving is the moment the count becomes real</h2>
+
+  <p class="reveal">By the time a delivery reaches your dock, it already exists in ShelfSpace — it's sitting on your <strong>Incoming</strong> tab with the vendor, the line items, the expected package count, and the dollar total, all filled in before product hit the floor. Nothing on that tab is paid yet. These are just the orders you're expecting. Receiving is the step where your team confirms what physically showed up, so the office never approves a payment for boxes nobody checked.</p>
+
+  <p class="reveal">Open the order that came in and you'll see everything you're checking against, including whether it's a <strong>wholesale</strong> or a <strong>consignment</strong> order. Here's the part that trips people up: it doesn't matter. You receive them the exact same way. That label only changes how the vendor gets paid later — as an invoice you approve, or as product settles when it sells — never how you check the truck in. One receiving flow covers both.</p>
+
+  <h2 class="reveal">Two ways to add the paperwork</h2>
+
+  <p class="reveal">Step one is proof of what arrived: the signed paper invoice, and the Metrc transport manifest that rode along with the shipment. Both attach right to the delivery, so the paper trail lives with the order instead of in a folder somewhere. And you've got two easy ways to get them on there — no scanner required.</p>
+
+  <div class="ways-split reveal">
+    <div class="ways-col">
+      <p class="ways-kicker">At your computer</p>
+      <p class="ways-title">Drag &amp; drop</p>
+      <p class="ways-text">At the front desk, drag the files straight into the delivery, or click to browse. PDFs and photos both work.</p>
+    </div>
+    <div class="ways-col">
+      <p class="ways-kicker">Out on the dock</p>
+      <p class="ways-title">Use your phone</p>
+      <p class="ways-text">No computer nearby? Log into ShelfSpace on your phone, tap the camera, and photograph the invoice and the manifest right there. Every page becomes a clean PDF, attached automatically.</p>
+    </div>
+  </div>
+
+  <p class="reveal">The phone option is the one receiving teams reach for most, because the person checking in the truck is rarely sitting at a desk. They're standing at the dock with the paperwork in hand. Snapping a photo is faster than walking paper back to the office and scanning it, and it lands in exactly the same place.</p>
+
+  <h2 class="reveal">Confirm each line — and catch what's short</h2>
+
+  <p class="reveal">With the documents in, you move to the line items. This is the real check. Every line starts marked <strong>Received</strong>, at the quantity the vendor invoiced, and you've got four ways to call each one:</p>
+
+  <ul class="reveal">
+    <li><strong>Received</strong> — it all showed up, exactly as billed.</li>
+    <li><strong>Short</strong> — fewer units arrived than the invoice says. Enter the quantity you actually got.</li>
+    <li><strong>Damaged</strong> — it arrived, but it's not sellable. Add a note and quarantine it for return.</li>
+    <li><strong>Not Compliant</strong> — it doesn't meet spec or labeling rules. Note it and set it aside.</li>
+  </ul>
+
+  <p class="reveal">Say the driver came up two units short on the first item. Tap <strong>Short</strong> and enter what actually came in. Watch the amount you owe the vendor: ShelfSpace drops it automatically, so you never pay for product that didn't show up. A four-unit line billed at twenty-four dollars each, received as two, quietly takes forty-eight dollars off the payable — no calculator, no follow-up call. Damaged and Not Compliant work the same way, each with a note that becomes part of the record.</p>
+
+  <p class="reveal">And it <em>is</em> a record. Every disposition, every adjusted quantity, every note is logged and visible in the vendor's own portal. There's no shadow spreadsheet and no side email about the shortage — the vendor sees the same reconciled delivery you do, which is how an honest mistake stays an honest mistake instead of turning into a dispute.</p>
+
+  <h2 class="reveal">Confirm the total, and it's done</h2>
+
+  <p class="reveal">One last gate before the delivery is checked in: the money. Because you came up short, ShelfSpace shows the vendor's full invoice and the reduced total it will actually pay, side by side. You check that reduced number against the signed paper in your hand and confirm. That's the FinTech backstop — the person receiving the boxes gets the last look at the dollar figure before it flows anywhere.</p>
+
+  <p class="reveal">Confirm it, and the delivery lands on <strong>Received</strong>, marked <strong>Receipt Verified</strong>, with the shortage on the record. It moves on to your office to approve and pay — but your receiving team is done. Here's the whole flow, from the dock to the handoff:</p>
+
+  <div class="flow-steps reveal">
+    <div class="flow-step">
+      <div class="flow-step-num">1</div>
+      <div class="flow-step-body">
+        <p class="flow-step-title">Open it and click Receive</p>
+        <p class="flow-step-desc">Find the order on the Incoming tab, open it, and click Receive Delivery to start.</p>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-step-num">2</div>
+      <div class="flow-step-body">
+        <p class="flow-step-title">Add the paperwork</p>
+        <p class="flow-step-desc">Drag in the signed invoice and Metrc manifest, or photograph them with your phone.</p>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-step-num">3</div>
+      <div class="flow-step-body">
+        <p class="flow-step-title">Confirm each line</p>
+        <p class="flow-step-desc">Received, Short, Damaged, or Not Compliant — the amount owed adjusts as you go.</p>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-step-num">4</div>
+      <div class="flow-step-body">
+        <p class="flow-step-title">Confirm the total</p>
+        <p class="flow-step-desc">Check the reconciled amount against the signed paper invoice and confirm.</p>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-step-num">5</div>
+      <div class="flow-step-body">
+        <p class="flow-step-title">It lands on Received</p>
+        <p class="flow-step-desc">Marked Receipt Verified and handed to the office to approve and pay.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="blog-callout reveal">
+    <svg class="blog-callout-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 12l2 2 4-4"/><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/></svg>
+    <p class="blog-callout-text">What you receive is what gets paid. A short line reduces the payable at the moment of receiving, so the discrepancy is settled before it ever reaches an invoice — not argued about after a check goes out.</p>
+  </div>
+
+  <p class="reveal">That's receiving, end to end. It's the same two minutes whether the delivery is wholesale or consignment, whether you're at a desk or on the dock, whether everything matched or a line came up short. For the office side of the story — how a received delivery gets approved and how ShelfSpace <a href="/blog/cannabis-invoice-metrc-verification">checks it against Metrc before a check is cut</a> — that's the next step in the <a href="/accounts-payable">accounts payable</a> flow.</p>
+
+  <p class="reveal">If you're still receiving deliveries on paper and reconciling shortages after the fact, <a href="/contact">grab a few minutes with me</a> and I'll show you how much of it disappears.</p>
+
+</article>
+
+<!-- FAQ -->
+<section style="max-width: 720px; margin: 0 auto; padding: 0 48px 60px;">
+    <h2 class="reveal" style="font-size:24px;font-weight:700;color:var(--green-deep);margin:0 0 16px;letter-spacing:-0.5px;line-height:1.3;">Common questions</h2>
+    <div class="faq-list reveal">
+      <details>
+        <summary>Can my inventory clerk receive deliveries without seeing payment amounts?</summary>
+        <p>Yes. Receiving is designed for the person at the dock. Under the Retailer Inventory role, a clerk can open a delivery, upload the paperwork, and confirm what physically arrived — but they never see check amounts, run payments, or change AP settings. Receiving ends at the Received tab; approving and paying is a separate role for the office.</p>
+      </details>
+      <details>
+        <summary>What happens if a delivery arrives short or damaged?</summary>
+        <p>On the line that came up short, tap Short and enter the quantity you actually received. ShelfSpace reduces the amount owed automatically, so the vendor only gets paid for what showed up. Damaged and Not Compliant work the same way, each with a note for your records, and the whole discrepancy is logged and visible in the vendor's portal — no side emails.</p>
+      </details>
+      <details>
+        <summary>Do I receive consignment and wholesale deliveries differently?</summary>
+        <p>No. You receive them exactly the same way — upload the paperwork, confirm each line, confirm the total. Whether a delivery is wholesale or consignment only changes how the vendor gets paid later, never how your team checks the truck in at the dock.</p>
+      </details>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-content">
+    <div class="section-label reveal">Get Started</div>
+    <h2 class="section-title reveal">Turn receiving into a two-minute job.</h2>
+    <p class="section-desc reveal">Free evaluation. We look at how your team checks in deliveries today and show you where the paperwork — and the overpayments — quietly pile up.</p>
+    <div class="cta-actions reveal">
+      <a href="/contact" class="btn-primary">
+        Get a Demo
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+      <a href="/contact" class="btn-secondary">Talk to Chris</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="/" class="nav-logo"><div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div><span class="nav-logo-text">ShelfSpace</span></a>
+      <p>Every Vendor. Every Payment. One Engine.</p>
+    </div>
+    <div class="footer-col"><h4>Services</h4><ul><li><a href="/consignment">Consignment</a></li><li><a href="/accounts-payable">Accounts Payable</a></li><li><a href="/credit-recovery">Credit Recovery</a></li><li><a href="/checks">Check Payments</a></li><li><a href="/shelfiq">ShelfiQ</a></li></ul></div>
+    <div class="footer-col"><h4>Platform</h4><ul><li><a href="/features">Features</a></li><li><a href="/how-it-works">How It Works</a></li><li><a href="/pricing">Pricing</a></li><li><a href="/about">About</a></li><li><a href="/blog">Blog</a></li><li><a href="/docs">Docs</a></li></ul></div>
+    <div class="footer-col"><h4>Access</h4><ul><li><a href="https://ourshelf.space/login">Login</a></li><li><a href="/contact">Sign Up</a></li><li><a href="/contact">Contact</a></li><li><a href="/vendors">For Vendors</a></li><li><a href="/for-bookkeepers">For Bookkeepers</a></li></ul></div>
+    <div class="footer-col"><h4>Company</h4><ul><li><a href="mailto:chris@shelfspace.pro">Email</a></li><li><a href="mailto:support@shelfspace.pro">Support</a></li><li><a href="https://linkedin.com/company/shelfspace-pro" target="_blank" rel="noopener" class="footer-social-link"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> LinkedIn</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><p>&copy; 2026 ShelfSpace Technologies Inc.</p><div class="footer-bottom-links"><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div></div>
+</footer>
+
+<script>
+(function() {
+  var nav = document.getElementById('nav');
+  var pageHero = document.querySelector('.page-hero');
+  var parallaxSections = [ document.querySelector('.cta-section') ];
+
+  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var isMobile = window.innerWidth < 900;
+  var ticking = false;
+
+  requestAnimationFrame(function() {
+    nav.classList.toggle('scrolled', window.scrollY > 20);
+    if (pageHero) pageHero.classList.add('hero-loaded');
+  });
+
+  var revealObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(function(el) { revealObserver.observe(el); });
+
+  function onScroll() {
+    var scrollY = window.scrollY;
+    nav.classList.toggle('scrolled', scrollY > 20);
+    if (prefersReduced || isMobile) return;
+    var wh = window.innerHeight;
+    parallaxSections.forEach(function(section) {
+      if (!section) return;
+      var rect = section.getBoundingClientRect();
+      if (rect.bottom < 0 || rect.top > wh) return;
+      var center = rect.top + rect.height / 2 - wh / 2;
+      section.style.setProperty('--parallax-y', (center * 0.08) + 'px');
+    });
+  }
+
+  window.addEventListener('scroll', function() {
+    if (!ticking) { requestAnimationFrame(function() { onScroll(); ticking = false; }); ticking = true; }
+  }, { passive: true });
+
+  onScroll();
+
+  window.addEventListener('resize', function() {
+    isMobile = window.innerWidth < 900;
+    if (isMobile) { parallaxSections.forEach(function(section) { if (section) section.style.setProperty('--parallax-y', '0px'); }); }
+  });
+
+  document.addEventListener('click', function() {
+    var navLinks = document.querySelector('.nav-links');
+    if (navLinks && navLinks.classList.contains('mobile-open')) { navLinks.classList.remove('mobile-open'); }
+  });
+})();
+</script>
+<script src="/shelfiq-widget.js"></script>
+</body>
+</html>
