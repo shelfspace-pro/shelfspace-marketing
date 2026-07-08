@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Troubleshooting Metrc Discrepancies — ShelfSpace Tutorial</title>
+<meta name="description" content="When an invoice doesn't match the Metrc manifest, see how ShelfiQ flags the problem and how to resolve it before you pay.">
+<link rel="canonical" href="https://shelfspace.pro/tutorials/troubleshooting-metrc-discrepancies">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://shelfspace.pro/tutorials/troubleshooting-metrc-discrepancies">
+<meta property="og:title" content="Troubleshooting Metrc Discrepancies — ShelfSpace Tutorial">
+<meta property="og:description" content="When an invoice doesn't match the Metrc manifest, see how ShelfiQ flags the problem and how to resolve it before you pay.">
+<meta property="og:image" content="https://shelfspace.pro/og-image-v7.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="apple-mobile-web-app-title" content="ShelfSpace">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+<style>
+  @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-12px); } }
+  .page-hero { padding-bottom: 40px; }
+  .hero-bg-gradient { position: absolute; top: -30%; right: -20%; width: 700px; height: 700px; background: radial-gradient(circle, rgba(149,213,178,0.18) 0%, rgba(149,213,178,0) 70%); animation: float 8s ease-in-out infinite; pointer-events: none; }
+  .hero-bg-gradient-2 { position: absolute; bottom: -20%; left: -15%; width: 550px; height: 550px; background: radial-gradient(circle, rgba(27,67,50,0.06) 0%, rgba(27,67,50,0) 70%); animation: float 10s ease-in-out infinite; animation-delay: -3s; pointer-events: none; }
+  .page-hero .section-label, .page-hero .section-title, .page-hero .section-desc { opacity: 0; transform: translateY(30px); }
+  .page-hero .section-label { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1); }
+  .page-hero .section-title { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s, transform 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s; }
+  .page-hero .section-desc { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1) 0.25s, transform 0.8s cubic-bezier(0.22,1,0.36,1) 0.25s; }
+  .page-hero.hero-loaded .section-label, .page-hero.hero-loaded .section-title, .page-hero.hero-loaded .section-desc { opacity: 1; transform: translateY(0); }
+  .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1); }
+  .reveal.is-visible { opacity: 1; transform: translateY(0); }
+  .tut-wrap { background: var(--white); padding: 64px 0 96px; }
+  .tut-series { max-width: 1180px; margin: 0 auto 56px; padding: 0 32px; }
+  .tut-series-head { margin-bottom: 24px; }
+  .tut-series-head h2 { font-size: 1.5rem; color: var(--green-deep); margin: 0 0 4px; }
+  .tut-series-head p { color: var(--green-mid); font-size: 0.95rem; margin: 0; }
+  .tut-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 28px; }
+  .tut-card { display: flex; flex-direction: column; background: var(--white); border: 1px solid var(--green-light); border-radius: 16px; overflow: hidden; text-decoration: none; box-shadow: 0 10px 30px -18px rgba(27,67,50,0.35); transition: transform .25s ease, box-shadow .25s ease; }
+  .tut-card:hover { transform: translateY(-4px); box-shadow: 0 22px 44px -20px rgba(27,67,50,0.45); }
+  .tut-thumb { position: relative; aspect-ratio: 16/9; background: var(--green-ghost); overflow: hidden; }
+  .tut-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .tut-badge { position: absolute; top: 10px; left: 10px; background: rgba(27,67,50,0.92); color: #fff; font-size: 11px; font-weight: 600; letter-spacing: .04em; padding: 4px 9px; border-radius: 999px; }
+  .tut-len { position: absolute; bottom: 10px; right: 10px; background: rgba(8,28,17,0.82); color: #fff; font-family: var(--font-mono); font-size: 12px; padding: 3px 8px; border-radius: 7px; }
+  .tut-play { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity .25s ease; }
+  .tut-card:hover .tut-play { opacity: 1; }
+  .tut-play span { width: 58px; height: 58px; border-radius: 50%; background: rgba(255,255,255,0.92); display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 24px rgba(27,67,50,0.4); }
+  .tut-body { padding: 18px 20px 22px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+  .tut-body h3 { font-size: 1.12rem; color: var(--green-deep); margin: 0; line-height: 1.3; }
+  .tut-body p { font-size: 0.92rem; color: #52616b; margin: 0; line-height: 1.5; flex: 1; }
+  .tut-cta { color: var(--green-mid); font-weight: 600; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 6px; margin-top: 4px; }
+  /* per-video page */
+  .tut-video-wrap { background: var(--white); padding: 40px 0 96px; }
+  .tut-video-inner { max-width: 860px; margin: 0 auto; padding: 0 24px; }
+  .tut-crumbs { font-size: 0.85rem; color: var(--green-mid); margin-bottom: 18px; }
+  .tut-crumbs a { color: var(--green-mid); text-decoration: none; }
+  .tut-crumbs a:hover { text-decoration: underline; }
+  .tut-embed { position: relative; padding-bottom: 56.25%; height: 0; border-radius: 16px; overflow: hidden; box-shadow: 0 20px 46px -20px rgba(27,67,50,0.4); margin-bottom: 24px; }
+  .tut-embed iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  .tut-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 32px; }
+  .tut-actions a { display: inline-flex; align-items: center; gap: 8px; padding: 11px 20px; border-radius: 12px; font-weight: 600; font-size: 0.92rem; text-decoration: none; }
+  .tut-actions .primary { background: var(--green-deep); color: #fff; }
+  .tut-actions .secondary { background: var(--green-ghost); color: var(--green-deep); border: 1px solid var(--green-light); }
+  .tut-chapters { margin: 0 0 28px; }
+  .tut-chapters h2, .tut-transcript-wrap summary { font-size: 1.15rem; color: var(--green-deep); }
+  .tut-chapters ol { list-style: none; padding: 0; margin: 12px 0 0; display: grid; gap: 6px; }
+  .tut-chapters li { display: flex; gap: 12px; font-size: 0.95rem; color: #334; }
+  .tut-chapters .at { font-family: var(--font-mono); color: var(--green-mid); min-width: 46px; }
+  .tut-transcript-wrap { border-top: 1px solid var(--green-light); padding-top: 20px; }
+  .tut-transcript-wrap summary { cursor: pointer; font-weight: 600; }
+  .tut-transcript { margin-top: 16px; color: #3d4a52; line-height: 1.7; }
+  .tut-transcript p { margin: 0 0 12px; }
+  @media (max-width: 640px) { .tut-actions { flex-direction: column; } .tut-actions a { justify-content: center; } }</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "VideoObject",
+  "name": "Troubleshooting Metrc Discrepancies",
+  "description": "When the invoice and the state's records don't line up — and what to do about it. Most deliveries reconcile cleanly and move straight to payment. But once in a while, a vendor's invoice and the state's Metrc records don't agree — and that's exactly when ShelfSpace earns its keep. Here's what happens when ShelfiQ flags a problem.",
+  "thumbnailUrl": [
+    "https://i.ytimg.com/vi/BaQeOirCTLk/maxresdefault.jpg",
+    "https://i.ytimg.com/vi/BaQeOirCTLk/hqdefault.jpg"
+  ],
+  "uploadDate": "2026-07-08",
+  "contentUrl": "https://youtu.be/BaQeOirCTLk",
+  "embedUrl": "https://www.youtube-nocookie.com/embed/BaQeOirCTLk?rel=0&modestbranding=1",
+  "publisher": {
+    "@type": "Organization",
+    "name": "ShelfSpace",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://ourshelf.space/email/icon-white.png"
+    }
+  },
+  "duration": "PT2M55S",
+  "hasPart": [
+    {
+      "@type": "Clip",
+      "name": "Intro",
+      "startOffset": 0,
+      "url": "https://www.youtube.com/watch?v=BaQeOirCTLk&t=0s",
+      "endOffset": 17
+    },
+    {
+      "@type": "Clip",
+      "name": "This is a wholesale delivery your team…",
+      "startOffset": 17,
+      "url": "https://www.youtube.com/watch?v=BaQeOirCTLk&t=17s",
+      "endOffset": 39
+    },
+    {
+      "@type": "Clip",
+      "name": "And ShelfiQ doesn't just say something's wrong",
+      "startOffset": 39,
+      "url": "https://www.youtube.com/watch?v=BaQeOirCTLk&t=39s",
+      "endOffset": 52
+    },
+    {
+      "@type": "Clip",
+      "name": "Here's what it found",
+      "startOffset": 52,
+      "url": "https://www.youtube.com/watch?v=BaQeOirCTLk&t=52s",
+      "endOffset": 71
+    },
+    {
+      "@type": "Clip",
+      "name": "So ShelfiQ recommends the safe move",
+      "startOffset": 71,
+      "url": "https://www.youtube.com/watch?v=BaQeOirCTLk&t=71s",
+      "endOffset": 89
+    },
+    {
+      "@type": "Clip",
+      "name": "You're the office, and this matches what you…",
+      "startOffset": 89,
+      "url": "https://www.youtube.com/watch?v=BaQeOirCTLk&t=89s",
+      "endOffset": 108
+    },
+    {
+      "@type": "Clip",
+      "name": "And there's the fix, in dollars",
+      "startOffset": 108,
+      "url": "https://www.youtube.com/watch?v=BaQeOirCTLk&t=108s",
+      "endOffset": 126
+    },
+    {
+      "@type": "Clip",
+      "name": "Click it, and ShelfSpace goes to work",
+      "startOffset": 126,
+      "url": "https://www.youtube.com/watch?v=BaQeOirCTLk&t=126s",
+      "endOffset": 150
+    },
+    {
+      "@type": "Clip",
+      "name": "And there it is",
+      "startOffset": 150,
+      "url": "https://www.youtube.com/watch?v=BaQeOirCTLk&t=150s",
+      "endOffset": 175
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<nav id="nav">
+  <a href="/" class="nav-logo">
+    <div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div>
+    <span class="nav-logo-text">ShelfSpace</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="/accounts-payable">Accounts Payable</a></li>
+    <li><a href="/consignment">Consignment</a></li>
+    <li><a href="/credit-recovery">Credit Recovery</a></li>
+    <li class="nav-dropdown"><button class="nav-dropdown-toggle" aria-haspopup="true" aria-expanded="false">Platform <svg class="dropdown-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></button><div class="nav-dropdown-menu"><a href="/vendor-management">Vendor Management</a><a href="/how-it-works">How It Works</a><a href="/features">Features</a><a href="/shelfiq">ShelfiQ</a><a href="/checks">Check Payments</a><a href="/tutorials">Tutorials</a></div></li>
+    <li><a href="/pricing">Pricing</a></li>
+    <li><a href="/about">About</a></li>
+    <li class="nav-login-mobile"><a href="https://ourshelf.space/login">Login</a></li>
+    <li><a href="/contact" class="nav-cta">Get Started <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a></li>
+  </ul>
+  <div class="nav-hamburger" onclick="document.querySelector('.nav-links').classList.toggle('mobile-open'); event.stopPropagation();"><span></span><span></span><span></span></div>
+</nav>
+<div class="page-hero" style="padding-bottom:24px;">
+  <div class="hero-bg-gradient"></div>
+  <div class="section-label">Tutorial · Episode 5</div>
+  <h1 class="section-title" style="font-size:2.2rem;">Troubleshooting Metrc Discrepancies</h1>
+  <p class="section-desc">When the invoice and the state's records don't line up — and what to do about it</p>
+</div>
+
+<div class="tut-video-wrap">
+  <div class="tut-video-inner">
+    <div class="tut-crumbs"><a href="/tutorials">Tutorials</a> &rsaquo; ShelfSpace Delivery Dashboard &rsaquo; Troubleshooting Metrc Discrepancies</div>
+
+    <div class="tut-embed">
+      <iframe src="https://www.youtube-nocookie.com/embed/BaQeOirCTLk?rel=0&amp;modestbranding=1" title="Troubleshooting Metrc Discrepancies — ShelfSpace" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+
+    <div class="tut-actions">
+      <a class="primary" href="https://ourshelf.space/retailer/deliveries">Open this screen in ShelfSpace <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a>
+      <a class="secondary" href="/blog/cannabis-delivery-short-damaged-non-compliant">Read the full guide</a>
+      <a class="secondary" href="https://youtu.be/BaQeOirCTLk">Watch on YouTube</a>
+    </div>
+
+    <div class="tut-chapters">
+      <h2>Chapters</h2>
+      <ol>
+        <li><span class="at">0:00</span><span>Intro</span></li>
+        <li><span class="at">0:17</span><span>This is a wholesale delivery your team…</span></li>
+        <li><span class="at">0:39</span><span>And ShelfiQ doesn't just say something's wrong</span></li>
+        <li><span class="at">0:52</span><span>Here's what it found</span></li>
+        <li><span class="at">1:11</span><span>So ShelfiQ recommends the safe move</span></li>
+        <li><span class="at">1:29</span><span>You're the office, and this matches what you…</span></li>
+        <li><span class="at">1:48</span><span>And there's the fix, in dollars</span></li>
+        <li><span class="at">2:06</span><span>Click it, and ShelfSpace goes to work</span></li>
+        <li><span class="at">2:30</span><span>And there it is</span></li>
+      </ol>
+    </div>
+    <div class="tut-transcript-wrap">
+      <details>
+        <summary>Full transcript</summary>
+        <div class="tut-transcript">
+<p>Most deliveries reconcile cleanly and move straight to payment. But once in a while, a vendor's invoice and the state's Metrc records don't agree — and that's exactly when ShelfSpace earns its keep. Here's what happens when ShelfiQ flags a problem.</p>
+<p>This is a wholesale delivery your team already checked in — it's marked Received and Receipt Verified, so the count is done, same as any other. But before it lets you pay, ShelfSpace checked the vendor's invoice against the state's Metrc transfer — and this time, the two don't line up. So instead of a green light, you get a flag.</p>
+<p>And ShelfiQ doesn't just say something's wrong — it tells you exactly what, in plain English, and how sure it is. It read the transfer, compared every line, and caught the mismatch for you.</p>
+<p>Here's what it found. Your vendor billed you for Live Rosin — a hundred and twenty-eight dollars of it — but that product shows up nowhere on the Metrc transfer the state has on record. Every other line matches; just that one doesn't. That's a phantom line: billed, but the data says it never shipped.</p>
+<p>So ShelfiQ recommends the safe move — short-pay it. Pay for the three lines Metrc confirms arrived, leave off the one it can't, and send the vendor a note explaining the deduction. You don't overpay for phantom product, and you don't quietly eat a bad line either.</p>
+<p>You're the office, and this matches what you can see — so you go to act. And watch: the moment you open the approval, it doesn't just trust that flag from a second ago. It re-runs the whole Metrc check, live, one more time, right before anything commits.</p>
+<p>And there's the fix, in dollars. Instead of the full two-eighty, you pay one fifty-two — for exactly what arrived. ShelfSpace takes the hundred-and-twenty-eight-dollar phantom off the top and queues an itemized note to the vendor, so they see just what came off, and why.</p>
+<p>Click it, and ShelfSpace goes to work. It drops the phantom line, corrects the payable, and sends the vendor an itemized deduction memo — all in one move. And be clear about what's happening here: this is reconciling the delivery, not paying it. No check is going out. Fixing the mismatch just makes the numbers honest, before you ever cut one.</p>
+<p>And there it is — reconciled. The invoice now matches what the state received, the phantom Live Rosin line is excluded, and the delivery is queued for payment at the corrected one fifty-two. The mismatch is sorted, before a dollar ever moved. That's how you troubleshoot a Metrc discrepancy in ShelfSpace.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <section class="tut-series" style="margin-top:16px;">
+    <div class="tut-series-head"><h2>More in ShelfSpace Delivery Dashboard</h2></div>
+    <div class="tut-grid">
+    <a class="tut-card reveal" href="/tutorials/deliveries-overview">
+      <div class="tut-thumb">
+        <img src="https://i.ytimg.com/vi/o1eJZWGAcF0/hqdefault.jpg" alt="The Delivery Dashboard — video thumbnail" loading="lazy" width="480" height="270">
+        <span class="tut-badge">Episode 1</span>
+        <span class="tut-len">2:45</span>
+        <span class="tut-play"><span><svg width="24" height="24" viewBox="0 0 24 24" fill="var(--green-deep)"><path d="M8 5v14l11-7z"/></svg></span></span>
+      </div>
+      <div class="tut-body">
+        <h3>The Delivery Dashboard</h3>
+        <p>Track every vendor order from arrival to payment — a tour of the delivery dashboard.</p>
+        <span class="tut-cta">Watch + transcript <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></span>
+      </div>
+    </a>
+    <a class="tut-card reveal" href="/tutorials/create-a-delivery">
+      <div class="tut-thumb">
+        <img src="https://i.ytimg.com/vi/8E6NI2O24G8/hqdefault.jpg" alt="Creating a Delivery — video thumbnail" loading="lazy" width="480" height="270">
+        <span class="tut-badge">Episode 2</span>
+        <span class="tut-len">3:35</span>
+        <span class="tut-play"><span><svg width="24" height="24" viewBox="0 0 24 24" fill="var(--green-deep)"><path d="M8 5v14l11-7z"/></svg></span></span>
+      </div>
+      <div class="tut-body">
+        <h3>Creating a Delivery</h3>
+        <p>Turn any vendor invoice into a tracked delivery — upload it, let AI fill in the details, and catch duplicates automatically.</p>
+        <span class="tut-cta">Watch + transcript <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></span>
+      </div>
+    </a>
+    <a class="tut-card reveal" href="/tutorials/receiving-a-delivery">
+      <div class="tut-thumb">
+        <img src="https://i.ytimg.com/vi/le66YdivrQk/hqdefault.jpg" alt="Receiving a Delivery — video thumbnail" loading="lazy" width="480" height="270">
+        <span class="tut-badge">Episode 3</span>
+        <span class="tut-len">3:15</span>
+        <span class="tut-play"><span><svg width="24" height="24" viewBox="0 0 24 24" fill="var(--green-deep)"><path d="M8 5v14l11-7z"/></svg></span></span>
+      </div>
+      <div class="tut-body">
+        <h3>Receiving a Delivery</h3>
+        <p>See how to receive a delivery and choose wholesale vs. consignment per order.</p>
+        <span class="tut-cta">Watch + transcript <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></span>
+      </div>
+    </a>
+    <a class="tut-card reveal" href="/tutorials/approving-a-delivery">
+      <div class="tut-thumb">
+        <img src="https://i.ytimg.com/vi/LesouiABf6k/hqdefault.jpg" alt="Approving a Delivery — video thumbnail" loading="lazy" width="480" height="270">
+        <span class="tut-badge">Episode 4</span>
+        <span class="tut-len">2:15</span>
+        <span class="tut-play"><span><svg width="24" height="24" viewBox="0 0 24 24" fill="var(--green-deep)"><path d="M8 5v14l11-7z"/></svg></span></span>
+      </div>
+      <div class="tut-body">
+        <h3>Approving a Delivery</h3>
+        <p>See how the office approves a received delivery — ShelfiQ checks the invoice against Metrc, then you approve it for payment.</p>
+        <span class="tut-cta">Watch + transcript <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></span>
+      </div>
+    </a>
+    <a class="tut-card reveal" href="/tutorials/troubleshooting-duplicate-payments">
+      <div class="tut-thumb">
+        <img src="https://i.ytimg.com/vi/mY2MEABHKu8/hqdefault.jpg" alt="Troubleshooting Duplicate Payments — video thumbnail" loading="lazy" width="480" height="270">
+        <span class="tut-badge">Episode 6</span>
+        <span class="tut-len">2:42</span>
+        <span class="tut-play"><span><svg width="24" height="24" viewBox="0 0 24 24" fill="var(--green-deep)"><path d="M8 5v14l11-7z"/></svg></span></span>
+      </div>
+      <div class="tut-body">
+        <h3>Troubleshooting Duplicate Payments</h3>
+        <p>When the same vendor invoice is about to be paid twice, see how ShelfSpace's Duplicate Police flags it and clears it before any money goes out.</p>
+        <span class="tut-cta">Watch + transcript <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></span>
+      </div>
+    </a>
+    </div>
+  </section>
+</div>
+
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="/" class="nav-logo"><div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div><span class="nav-logo-text">ShelfSpace</span></a>
+      <p>Every Vendor. Every Payment. One Engine.</p>
+    </div>
+    <div class="footer-col"><h3>Services</h3><ul><li><a href="/accounts-payable">Accounts Payable</a></li><li><a href="/consignment">Consignment</a></li><li><a href="/credit-recovery">Credit Recovery</a></li><li><a href="/checks">Check Payments</a></li><li><a href="/shelfiq">ShelfiQ</a></li></ul></div>
+    <div class="footer-col"><h3>Platform</h3><ul><li><a href="/features">Features</a></li><li><a href="/how-it-works">How It Works</a></li><li><a href="/pricing">Pricing</a></li><li><a href="/about">About</a></li><li><a href="/blog">Blog</a></li><li><a href="/docs">Docs</a></li><li><a href="/tutorials">Tutorials</a></li></ul></div>
+    <div class="footer-col"><h3>Access</h3><ul><li><a href="https://ourshelf.space/login">Login</a></li><li><a href="/contact">Sign Up</a></li><li><a href="/contact">Contact</a></li><li><a href="/vendors">For Vendors</a></li><li><a href="/for-bookkeepers">For Bookkeepers</a></li></ul></div>
+    <div class="footer-col"><h3>Company</h3><ul><li><a href="mailto:chris@shelfspace.pro">Email</a></li><li><a href="mailto:support@shelfspace.pro">Support</a></li><li><a href="https://linkedin.com/company/shelfspace-pro" target="_blank" rel="noopener" class="footer-social-link"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> LinkedIn</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><p>&copy; 2026 ShelfSpace Technologies Inc.</p><div style="display:flex;align-items:center;gap:8px;justify-content:center;margin-top:12px;"><img src="/metrc-logo.png" alt="Metrc" style="height:18px;opacity:0.4;filter:brightness(0) invert(1);"><span style="font-size:11px;color:rgba(255,255,255,0.35);">Certified Metrc Third-Party Vendor</span></div><div class="footer-bottom-links"><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div></div>
+</footer>
+<script>
+(function(){
+  var nav=document.getElementById('nav');
+  var pageHero=document.querySelector('.page-hero');
+  requestAnimationFrame(function(){ nav.classList.toggle('scrolled',window.scrollY>20); if(pageHero)pageHero.classList.add('hero-loaded'); });
+  window.addEventListener('scroll',function(){ nav.classList.toggle('scrolled',window.scrollY>20); },{passive:true});
+  var ro=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('is-visible');ro.unobserve(e.target);}})},{threshold:0.1});
+  document.querySelectorAll('.reveal').forEach(function(el){ro.observe(el);});
+})();
+</script>
+<script src="/shelfiq-widget.js"></script>
+</body>
+</html>
