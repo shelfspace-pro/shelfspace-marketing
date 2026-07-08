@@ -137,6 +137,44 @@ async function sendEmail({ from, to, replyTo, subject, html }) {
   return res.json().catch(() => ({}));
 }
 
+// Bulletproof table-based branded email shell. Live-text wordmark + table
+// bgcolors mean the branding survives even when a client blocks images.
+const FONT = "'Helvetica Neue',Helvetica,Arial,sans-serif";
+function emailShell({ preheader = '', bodyHtml }) {
+  return `<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="x-apple-disable-message-reformatting">
+<title>ShelfSpace</title>
+</head>
+<body style="margin:0;padding:0;background:#eef3f0;">
+  <span style="display:none!important;visibility:hidden;opacity:0;color:#eef3f0;height:0;width:0;font-size:1px;line-height:1px;overflow:hidden;">${escapeHtml(preheader)}</span>
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#eef3f0;">
+    <tr><td align="center" style="padding:32px 16px;">
+      <table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" style="width:600px;max-width:600px;background:#ffffff;border-radius:16px;overflow:hidden;border:1px solid #e2e8f0;font-family:${FONT};">
+        <tr><td bgcolor="#40916c" style="height:4px;line-height:4px;font-size:0;background:#40916c;">&nbsp;</td></tr>
+        <tr><td style="padding:22px 32px;border-bottom:1px solid #eef2f0;">
+          <table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr>
+            <td style="vertical-align:middle;padding-right:12px;"><img src="https://shelfspace.pro/shelfspace-logo.png" width="40" height="40" alt="ShelfSpace" style="display:block;border-radius:9px;"></td>
+            <td style="vertical-align:middle;font-family:${FONT};font-size:20px;font-weight:700;color:#1b4332;letter-spacing:-0.3px;">ShelfSpace</td>
+          </tr></table>
+        </td></tr>
+        <tr><td style="padding:32px;font-family:${FONT};color:#334155;font-size:15px;line-height:1.65;">${bodyHtml}</td></tr>
+        <tr><td bgcolor="#1b4332" style="background:#1b4332;padding:28px 32px;font-family:${FONT};">
+          <p style="margin:0 0 6px;font-size:15px;font-weight:700;color:#ffffff;">ShelfSpace</p>
+          <p style="margin:0 0 14px;font-size:13px;color:#95d5b2;font-style:italic;">Every Vendor. Every Payment. One Engine.</p>
+          <p style="margin:0 0 6px;font-size:13px;"><a href="https://shelfspace.pro" style="color:#d8f3dc;text-decoration:none;font-weight:600;">shelfspace.pro</a></p>
+          <p style="margin:0;font-size:11px;color:rgba(255,255,255,0.45);">Certified Metrc Third-Party Vendor &nbsp;&middot;&nbsp; &copy; 2026 ShelfSpace Technologies Inc.</p>
+        </td></tr>
+      </table>
+    </td></tr>
+  </table>
+</body>
+</html>`;
+}
+
 function notificationHtml(lead) {
   const rows = [
     ['Name', lead.name],
@@ -154,26 +192,28 @@ function notificationHtml(lead) {
   }
   const cells = rows
     .map(([k, v]) => `<tr>
-        <td style="padding:8px 16px 8px 0;color:#64748b;font-size:14px;vertical-align:top;white-space:nowrap;">${escapeHtml(k)}</td>
-        <td style="padding:8px 0;color:#1e293b;font-size:14px;font-weight:600;">${escapeHtml(v)}</td>
+        <td style="padding:10px 16px 10px 0;color:#64748b;font-size:14px;vertical-align:top;white-space:nowrap;border-bottom:1px solid #eef2f0;">${escapeHtml(k)}</td>
+        <td style="padding:10px 0;color:#1e293b;font-size:14px;font-weight:600;border-bottom:1px solid #eef2f0;">${escapeHtml(v)}</td>
       </tr>`)
     .join('');
-  return `<div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;max-width:520px;margin:0 auto;">
-      <h2 style="color:#1b4332;font-size:20px;margin:0 0 4px;">New interest form submission</h2>
-      <p style="color:#64748b;font-size:14px;margin:0 0 20px;">Reply to this email to respond to ${escapeHtml(lead.name)} directly.</p>
-      <table style="border-collapse:collapse;width:100%;">${cells}</table>
-    </div>`;
+  const body = `
+      <h1 style="margin:0 0 4px;font-size:19px;font-weight:700;color:#1b4332;">New interest form submission</h1>
+      <p style="margin:0 0 20px;font-size:14px;color:#64748b;">Reply to this email to respond to ${escapeHtml(lead.name)} directly.</p>
+      <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="border-collapse:collapse;width:100%;">${cells}</table>`;
+  return emailShell({ preheader: `${lead.role} · ${lead.businessName}`, bodyHtml: body });
 }
 
 function autoReplyHtml(firstName) {
   const greeting = firstName ? `Hi ${escapeHtml(firstName)},` : 'Hi there,';
-  return `<div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;max-width:520px;margin:0 auto;color:#334155;font-size:15px;line-height:1.65;">
+  const body = `
       <p style="margin:0 0 16px;">${greeting}</p>
       <p style="margin:0 0 16px;">Thanks for reaching out to ShelfSpace. We've got your details and someone from our team will be in touch, usually within a business day.</p>
-      <p style="margin:0 0 16px;">If it's easier, just reply straight to this email and we'll pick it up.</p>
-      <p style="margin:0 0 4px;">Talk soon,</p>
-      <p style="margin:0;font-weight:600;color:#1b4332;">The ShelfSpace Team</p>
-    </div>`;
+      <p style="margin:0 0 24px;">If it's easier, just reply straight to this email and we'll pick it up.</p>
+      <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:0 0 28px;"><tr>
+        <td bgcolor="#1b4332" style="border-radius:10px;background:#1b4332;"><a href="https://shelfspace.pro/how-it-works" style="display:inline-block;padding:13px 26px;font-family:${FONT};font-size:14px;font-weight:600;color:#ffffff;text-decoration:none;border-radius:10px;">See how ShelfSpace works &rarr;</a></td>
+      </tr></table>
+      <p style="margin:0;font-weight:700;color:#1b4332;">&mdash; The ShelfSpace Team</p>`;
+  return emailShell({ preheader: "We've got your details — we'll be in touch within a business day.", bodyHtml: body });
 }
 
 export default async function handler(req, res) {
