@@ -169,11 +169,10 @@ function autoReplyHtml(firstName) {
   const greeting = firstName ? `Hi ${escapeHtml(firstName)},` : 'Hi there,';
   return `<div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;max-width:520px;margin:0 auto;color:#334155;font-size:15px;line-height:1.65;">
       <p style="margin:0 0 16px;">${greeting}</p>
-      <p style="margin:0 0 16px;">Thanks for reaching out to ShelfSpace. I've got your details and I'll be in touch personally, usually within a business day.</p>
-      <p style="margin:0 0 16px;">If it's easier, just reply straight to this email &mdash; it comes right to me.</p>
+      <p style="margin:0 0 16px;">Thanks for reaching out to ShelfSpace. We've got your details and someone from our team will be in touch, usually within a business day.</p>
+      <p style="margin:0 0 16px;">If it's easier, just reply straight to this email and we'll pick it up.</p>
       <p style="margin:0 0 4px;">Talk soon,</p>
-      <p style="margin:0;font-weight:600;color:#1b4332;">Chris Mitchem</p>
-      <p style="margin:0;color:#64748b;font-size:14px;">Founder, ShelfSpace</p>
+      <p style="margin:0;font-weight:600;color:#1b4332;">The ShelfSpace Team</p>
     </div>`;
 }
 
@@ -275,7 +274,7 @@ export default async function handler(req, res) {
   // Auto-response to the prospect. Failure here shouldn't lose the lead.
   try {
     await sendEmail({
-      from: 'Chris Mitchem <chris@shelfspace.pro>',
+      from: 'ShelfSpace <chris@shelfspace.pro>',
       to: email,
       replyTo: 'chris@shelfspace.pro',
       subject: 'Thanks for reaching out to ShelfSpace',
