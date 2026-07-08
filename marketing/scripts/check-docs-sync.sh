@@ -130,3 +130,7 @@ echo "━━━━━━━━━━━━━━━━━━━━━━━━�
 # Fence: forbidden strings (trade-secret provider names, wrong login URL).
 # Non-blocking here (surfaces as a canary in the SessionStart report).
 bash "$(dirname "$0")/check-docs-forbidden.sh" || true
+
+echo ""
+# Fence: every embedded training video must carry VideoObject JSON-LD (SEO).
+bash "$(dirname "$0")/check-video-jsonld.sh" || true
