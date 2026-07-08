@@ -33,7 +33,7 @@ ShelfSpace marketing site — static HTML/CSS deployed on Vercel at shelfspace.p
 
 Accounts Payable | Consignment | Credit Recovery | Platform ▾ | Pricing | About | Login | Sign Up
 
-The **Platform ▾** dropdown (`<li class="nav-dropdown">`, primitive in styles.css) contains: Vendor Management (→ `/vendor-management` alias) · How It Works · Features · ShelfiQ · Check Payments. It's inserted in every page's nav between the Credit Recovery `<li>` and the Pricing `<li>` (139 files). Desktop = CSS hover + `:focus-within` (no JS); mobile = inline always-expanded accordion. To re-roll sitewide, anchor on the nav `Credit Recovery</a></li>`→`Pricing` adjacency (newline-separated = nav-only; the footer's identical CR link is single-line and safe).
+The **Platform ▾** dropdown (`<li class="nav-dropdown">`, primitive in styles.css) contains: Vendor Management (→ `/vendor-management` alias) · How It Works · Features · ShelfiQ · Check Payments · Tutorials (→ `/tutorials` — video training hub, see `memory/reference_tutorials_system.md`). It's inserted in every page's nav between the Credit Recovery `<li>` and the Pricing `<li>` (139 files). Desktop = CSS hover + `:focus-within` (no JS); mobile = inline always-expanded accordion. To re-roll sitewide, anchor on the nav `Credit Recovery</a></li>`→`Pricing` adjacency (newline-separated = nav-only; the footer's identical CR link is single-line and safe).
 
 ## Marketing & Copy
 
