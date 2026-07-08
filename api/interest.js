@@ -243,7 +243,7 @@ export default async function handler(req, res) {
   if (dailyLimiter) {
     const daily = await dailyLimiter.limit(ip);
     if (!daily.success) {
-      return res.status(429).json({ error: "You've reached today's limit. Email chris@shelfspace.pro and I'll take it from there." });
+      return res.status(429).json({ error: "You've reached today's limit. Email support@shelfspace.pro and we'll take it from there." });
     }
   }
 
@@ -312,15 +312,15 @@ export default async function handler(req, res) {
     });
   } catch (err) {
     console.error('Interest form: notification email failed:', err);
-    return res.status(500).json({ error: 'Something went wrong on our end. Please email chris@shelfspace.pro directly.' });
+    return res.status(500).json({ error: 'Something went wrong on our end. Please email support@shelfspace.pro directly.' });
   }
 
   // Auto-response to the prospect. Failure here shouldn't lose the lead.
   try {
     await sendEmail({
-      from: 'ShelfSpace <chris@shelfspace.pro>',
+      from: 'ShelfSpace <support@shelfspace.pro>',
       to: email,
-      replyTo: 'chris@shelfspace.pro',
+      replyTo: 'support@shelfspace.pro',
       subject: 'Thanks for reaching out to ShelfSpace',
       html: autoReplyHtml(firstName, role),
     });
