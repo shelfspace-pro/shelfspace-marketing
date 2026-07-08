@@ -3,20 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Book a Call with ShelfSpace</title>
-<meta name="description" content="Book a quick call with ShelfSpace founder Chris Mitchem. No pitch and no commitment, just a conversation about your dispensary's profitability.">
+<title>Get in Touch with ShelfSpace</title>
+<meta name="description" content="Tell ShelfSpace founder Chris Mitchem about your operation and he'll get back to you personally — a straight conversation about your dispensary's profitability.">
 <link rel="canonical" href="https://shelfspace.pro/contact">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://shelfspace.pro/contact">
-<meta property="og:title" content="Book a Call with ShelfSpace">
-<meta property="og:description" content="Book a quick call with ShelfSpace founder Chris Mitchem. No pitch and no commitment, just a conversation about your dispensary's profitability.">
+<meta property="og:title" content="Get in Touch with ShelfSpace">
+<meta property="og:description" content="Tell ShelfSpace founder Chris Mitchem about your operation and he'll get back to you personally — a straight conversation about your dispensary's profitability.">
 <meta property="og:image" content="https://shelfspace.pro/og-image-v7.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:type" content="image/png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Book a Call with ShelfSpace">
-<meta name="twitter:description" content="Book a quick call with ShelfSpace founder Chris Mitchem. No pitch and no commitment, just a conversation about your dispensary's profitability.">
+<meta name="twitter:title" content="Get in Touch with ShelfSpace">
+<meta name="twitter:description" content="Tell ShelfSpace founder Chris Mitchem about your operation and he'll get back to you personally — a straight conversation about your dispensary's profitability.">
 <meta name="twitter:image" content="https://shelfspace.pro/og-image-v7.png">
 <meta name="apple-mobile-web-app-title" content="ShelfSpace">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -94,14 +94,67 @@
   .contact-form-card h3 { font-size: 20px; font-weight: 700; color: var(--green-deep); margin-bottom: 8px; }
   .contact-form-card > p { font-size: 15px; color: var(--slate-500); line-height: 1.6; margin-bottom: 24px; }
 
-  .verify-step { text-align: center; }
-  .verify-step .cf-turnstile { display: flex; justify-content: center; }
+  /* ── FORM CONTROLS (page-local; styles.css has no form primitives) ── */
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .form-group { margin-bottom: 20px; }
+  .form-group label { display: block; font-size: 13px; font-weight: 600; color: var(--green-deep); margin-bottom: 6px; }
+  .form-group input:not([type="radio"]),
+  .form-group select {
+    width: 100%; padding: 12px 16px; border: 1px solid var(--slate-200);
+    border-radius: 10px; font-size: 15px; font-family: var(--font-display);
+    color: var(--slate-800); background: var(--white);
+    transition: border-color 0.2s, box-shadow 0.2s;
+    -webkit-appearance: none; appearance: none;
+  }
+  .form-group input::placeholder { color: var(--slate-500); }
+  .form-group input:not([type="radio"]):focus,
+  .form-group select:focus {
+    outline: none; border-color: var(--green-dark);
+    box-shadow: 0 0 0 3px rgba(64,145,108,0.1);
+  }
+  .form-group select {
+    background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: right 16px center;
+    padding-right: 40px; cursor: pointer;
+  }
+  .form-group select option[value=""] { color: var(--slate-500); }
 
-  .calendar-step { display: none; text-align: center; padding: 24px 0 0; }
-  .calendar-step .verified-icon { color: var(--green-dark); margin-bottom: 12px; }
-  .calendar-step p { font-size: 15px; color: var(--slate-500); line-height: 1.6; margin-bottom: 24px; }
-  .calendar-step .btn-primary { width: 100%; justify-content: center; }
-  .calendly-inline-widget { min-width: 280px; height: 580px; border: none; }
+  /* Segmented role picker */
+  .role-fieldset { border: none; padding: 0; margin: 0 0 20px; }
+  .role-fieldset legend { font-size: 13px; font-weight: 600; color: var(--green-deep); margin-bottom: 6px; padding: 0; }
+  .role-toggle { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .role-toggle input { position: absolute; opacity: 0; width: 0; height: 0; }
+  .role-toggle label {
+    display: flex; align-items: center; justify-content: center;
+    padding: 12px 8px; border: 1px solid var(--slate-200); border-radius: 10px;
+    font-size: 14px; font-weight: 600; color: var(--slate-600);
+    background: var(--white); cursor: pointer; text-align: center;
+    transition: all 0.2s;
+  }
+  .role-toggle label:hover { border-color: var(--green-accent); }
+  .role-toggle input:checked + label {
+    border-color: var(--green-dark); background: var(--green-ghost); color: var(--green-deep);
+    box-shadow: 0 0 0 3px rgba(64,145,108,0.1);
+  }
+  .role-toggle input:focus-visible + label { outline: 2px solid var(--green-dark); outline-offset: 2px; }
+
+  .conditional-fields { display: none; }
+  .conditional-fields.is-active { display: block; }
+
+  /* Status blocks */
+  .contact-form-card .btn-primary { width: 100%; justify-content: center; margin-top: 4px; }
+  .contact-form-card .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; transform: none; box-shadow: 0 4px 16px rgba(27,67,50,0.15); }
+  .turnstile-wrapper { display: flex; justify-content: center; margin-bottom: 20px; }
+  .form-error {
+    display: none; margin-top: 16px; padding: 12px 16px;
+    background: #fef2f2; border: 1px solid #fecaca; border-radius: 10px;
+    font-size: 14px; color: #991b1b; line-height: 1.5;
+  }
+  .form-success { display: none; text-align: center; padding: 24px 0; }
+  .form-success svg { color: var(--green-dark); margin-bottom: 12px; }
+  .form-success h3 { font-size: 20px; font-weight: 700; color: var(--green-deep); margin-bottom: 8px; }
+  .form-success p { font-size: 15px; color: var(--slate-500); line-height: 1.6; }
+  @keyframes spin { to { transform: rotate(360deg); } }
 
   /* ── TRUST BAR ── */
   .contact-trust { background: var(--slate-50); padding: 24px 48px; border-top: 1px solid var(--slate-100); }
@@ -115,6 +168,10 @@
     .contact-hero-steps { grid-template-columns: 1fr; gap: 12px; }
     .contact-section { padding: 60px 24px; }
     .contact-container { grid-template-columns: 1fr; gap: 48px; max-width: 520px; }
+  }
+  @media (max-width: 600px) {
+    .form-row { grid-template-columns: 1fr; }
+    .contact-form-card { padding: 28px 20px; }
   }
 
   /* Footer 5-col */
@@ -153,21 +210,21 @@ document.head.appendChild(o)}initApollo();</script>
 <!-- HERO (dark) -->
 <section class="contact-hero">
   <div class="contact-hero-content reveal">
-    <div class="section-label">Let's talk</div>
-    <h1>Grab 30 minutes with me.</h1>
-    <p class="contact-hero-sub">Book a quick call. I'll walk you through how ShelfSpace works and answer any questions you have.</p>
+    <div class="section-label">Get in touch</div>
+    <h1>Tell me about your operation.</h1>
+    <p class="contact-hero-sub">Tell me a bit about what you're running and I'll get back to you personally — usually within a business day.</p>
     <div class="contact-hero-steps">
       <div class="contact-step">
         <div class="contact-step-num">1</div>
-        <div class="contact-step-text"><strong>Pick a time</strong><br>Whatever works for you. Takes 30 seconds.</div>
+        <div class="contact-step-text"><strong>Tell me about your shop</strong>A few quick details. Takes 30 seconds.</div>
       </div>
       <div class="contact-step">
         <div class="contact-step-num">2</div>
-        <div class="contact-step-text"><strong>We hop on a call</strong><br>About 30 minutes. Screen-share if you want, or just talk.</div>
+        <div class="contact-step-text"><strong>I reach out personally</strong>Usually within a business day. Straight from me, not a sales rep.</div>
       </div>
       <div class="contact-step">
         <div class="contact-step-num">3</div>
-        <div class="contact-step-text"><strong>Ask me anything</strong><br>How it works, what it costs, whether it fits your shop.</div>
+        <div class="contact-step-text"><strong>We talk when it works</strong>A quick call or an email thread, whatever's easier for you.</div>
       </div>
     </div>
   </div>
@@ -186,7 +243,7 @@ document.head.appendChild(o)}initApollo();</script>
         </div>
       </div>
 
-      <p style="font-size:15px;color:var(--slate-600);line-height:1.65;margin-bottom:28px;">No sales team, no script. You book straight with me. Ask questions, see how it works, and decide for yourself.</p>
+      <p style="font-size:15px;color:var(--slate-600);line-height:1.65;margin-bottom:28px;">No sales team, no script. Your note comes straight to me. Ask questions, see how it works, and decide for yourself.</p>
 
       <div class="contact-methods">
         <div class="contact-method">
@@ -203,16 +260,91 @@ document.head.appendChild(o)}initApollo();</script>
     </div>
 
     <div class="contact-form-card reveal reveal-delay-1">
-      <!-- Step 1: Bot verification -->
-      <div class="verify-step" id="verifyStep">
-        <h3>Book a call with Chris</h3>
-        <p>One quick check, then pick a time that works.</p>
-        <div class="cf-turnstile" data-sitekey="0x4AAAAAACiEpqqSU9lohNi-" data-callback="onTurnstileSuccess"></div>
-      </div>
+      <h3>Tell me about your operation</h3>
+      <p>A few quick details — I'll take it from there.</p>
+      <form id="interestForm" novalidate>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" placeholder="Mary Jane" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="mary@example.com" required>
+          </div>
+        </div>
 
-      <!-- Step 2: Calendar booking (inline Calendly) -->
-      <div class="calendar-step" id="calendarStep">
-        <div class="calendly-inline-widget" data-url="https://calendly.com/chris-shelfspace/30min?hide_gdpr_banner=1&hide_event_type_details=1&background_color=ffffff&text_color=1b4332&primary_color=40916c"></div>
+        <div class="form-group">
+          <label for="businessName">Business name</label>
+          <input type="text" id="businessName" name="businessName" placeholder="Your business name" required>
+        </div>
+
+        <fieldset class="role-fieldset">
+          <legend>I'm a…</legend>
+          <div class="role-toggle" id="roleToggle">
+            <input type="radio" id="role-retailer" name="role" value="Retailer">
+            <label for="role-retailer">Retailer</label>
+            <input type="radio" id="role-vendor" name="role" value="Vendor">
+            <label for="role-vendor">Vendor</label>
+            <input type="radio" id="role-other" name="role" value="Other">
+            <label for="role-other">Other</label>
+          </div>
+        </fieldset>
+
+        <div class="conditional-fields" id="fields-retailer" aria-hidden="true">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="shops">Number of shops</label>
+              <select id="shops" name="shops" disabled>
+                <option value="" disabled selected>Select</option>
+                <option value="1">1</option>
+                <option value="2-5">2–5</option>
+                <option value="6-10">6–10</option>
+                <option value="11-20">11–20</option>
+                <option value="21+">21+</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="state-retailer">State</label>
+              <select id="state-retailer" name="state" disabled data-state-select>
+                <option value="" disabled selected>Select state</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="conditional-fields" id="fields-vendor" aria-hidden="true">
+          <div class="form-group">
+            <label for="state-vendor">State</label>
+            <select id="state-vendor" name="state" disabled data-state-select>
+              <option value="" disabled selected>Select state</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="conditional-fields" id="fields-other" aria-hidden="true">
+          <div class="form-group">
+            <label for="otherDescription">Tell me what you do</label>
+            <input type="text" id="otherDescription" name="otherDescription" placeholder="e.g. accounting firm, finance partner, consultant" disabled>
+          </div>
+        </div>
+
+        <div class="form-group turnstile-wrapper">
+          <div class="cf-turnstile" data-sitekey="0x4AAAAAACiEpqqSU9lohNi-" data-callback="onTurnstileSuccess" data-expired-callback="onTurnstileExpired"></div>
+        </div>
+
+        <button type="submit" class="btn-primary" id="submitBtn" disabled>
+          Send it over
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </button>
+        <div class="form-error" id="formError"></div>
+      </form>
+      <noscript><p style="font-size:14px;color:var(--slate-500);margin-top:16px;">Email me directly at <a href="mailto:chris@shelfspace.pro" style="color:var(--green-dark);font-weight:600;">chris@shelfspace.pro</a>.</p></noscript>
+
+      <div class="form-success" id="formSuccess">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        <h3>Got it.</h3>
+        <p>Thanks — I've got your details and I'll be in touch personally, usually within a business day. Talk soon. — Chris</p>
       </div>
     </div>
   </div>
@@ -221,7 +353,7 @@ document.head.appendChild(o)}initApollo();</script>
 <!-- TRUST BAR -->
 <section class="contact-trust">
   <div class="contact-trust-inner">
-    <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 30-minute call</span>
+    <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Reply within a business day</span>
     <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> No commitment</span>
     <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> Straight to the founder</span>
     <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg> Certified Metrc vendor</span>
@@ -247,18 +379,106 @@ document.head.appendChild(o)}initApollo();</script>
   document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 20);
   window.addEventListener('scroll', () => document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 20));
 
-  function onTurnstileSuccess(token) {
-    document.getElementById('verifyStep').style.display = 'none';
-    document.getElementById('calendarStep').style.display = 'block';
-  }
-
   // Reveal on scroll
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('is-visible'); observer.unobserve(entry.target); } });
   }, { threshold: 0.1 });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // ── Interest form ──
+  var turnstileToken = null;
+  function onTurnstileSuccess(token) { turnstileToken = token; document.getElementById('submitBtn').disabled = false; }
+  function onTurnstileExpired() { turnstileToken = null; document.getElementById('submitBtn').disabled = true; }
+
+  // Populate both state selects (avoids duplicating a 51-option list in markup)
+  var US_STATES = [['AL','Alabama'],['AK','Alaska'],['AZ','Arizona'],['AR','Arkansas'],['CA','California'],['CO','Colorado'],['CT','Connecticut'],['DE','Delaware'],['FL','Florida'],['GA','Georgia'],['HI','Hawaii'],['ID','Idaho'],['IL','Illinois'],['IN','Indiana'],['IA','Iowa'],['KS','Kansas'],['KY','Kentucky'],['LA','Louisiana'],['ME','Maine'],['MD','Maryland'],['MA','Massachusetts'],['MI','Michigan'],['MN','Minnesota'],['MS','Mississippi'],['MO','Missouri'],['MT','Montana'],['NE','Nebraska'],['NV','Nevada'],['NH','New Hampshire'],['NJ','New Jersey'],['NM','New Mexico'],['NY','New York'],['NC','North Carolina'],['ND','North Dakota'],['OH','Ohio'],['OK','Oklahoma'],['OR','Oregon'],['PA','Pennsylvania'],['RI','Rhode Island'],['SC','South Carolina'],['SD','South Dakota'],['TN','Tennessee'],['TX','Texas'],['UT','Utah'],['VT','Vermont'],['VA','Virginia'],['WA','Washington'],['WV','West Virginia'],['WI','Wisconsin'],['WY','Wyoming'],['DC','District of Columbia']];
+  document.querySelectorAll('[data-state-select]').forEach(function(sel) {
+    US_STATES.forEach(function(s) { var o = document.createElement('option'); o.value = s[0]; o.textContent = s[1]; sel.appendChild(o); });
+  });
+
+  // Show only the fields relevant to the selected role; disable the rest so
+  // hidden inputs never submit and never block validation.
+  var BLOCKS = { Retailer: 'fields-retailer', Vendor: 'fields-vendor', Other: 'fields-other' };
+  function selectRole(role) {
+    Object.keys(BLOCKS).forEach(function(key) {
+      var block = document.getElementById(BLOCKS[key]);
+      var on = key === role;
+      block.classList.toggle('is-active', on);
+      block.setAttribute('aria-hidden', on ? 'false' : 'true');
+      block.querySelectorAll('input, select').forEach(function(f) { f.disabled = !on; });
+    });
+  }
+  document.getElementById('roleToggle').addEventListener('change', function(e) {
+    if (e.target.name === 'role') selectRole(e.target.value);
+  });
+
+  // Preselect role from ?role= or the legacy ?subject=partner-call link
+  var params = new URLSearchParams(window.location.search);
+  var wanted = (params.get('role') || '').toLowerCase();
+  if (params.get('subject') === 'partner-call') wanted = 'other';
+  if (wanted === 'retailer' || wanted === 'vendor' || wanted === 'other') {
+    var radio = document.getElementById('role-' + wanted);
+    if (radio) { radio.checked = true; selectRole(radio.value); }
+  }
+
+  function showError(msg) {
+    var el = document.getElementById('formError');
+    el.textContent = msg; el.style.display = 'block';
+  }
+
+  document.getElementById('interestForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    var errorEl = document.getElementById('formError');
+    errorEl.style.display = 'none';
+    if (!turnstileToken) { showError('Please complete the verification check.'); return; }
+
+    var role = (document.querySelector('input[name="role"]:checked') || {}).value;
+    var name = document.getElementById('name').value.trim();
+    var email = document.getElementById('email').value.trim();
+    var businessName = document.getElementById('businessName').value.trim();
+    if (!name || !email || !businessName) { showError('Please fill in your name, email, and business name.'); return; }
+    if (!role) { showError('Let me know whether you’re a retailer, vendor, or something else.'); return; }
+
+    var payload = { name: name, email: email, businessName: businessName, role: role, 'cf-turnstile-response': turnstileToken };
+    if (role === 'Retailer') {
+      payload.shops = document.getElementById('shops').value;
+      payload.state = document.getElementById('state-retailer').value;
+      if (!payload.shops) { showError('Please select how many shops you run.'); return; }
+      if (!payload.state) { showError('Please select your state.'); return; }
+    } else if (role === 'Vendor') {
+      payload.state = document.getElementById('state-vendor').value;
+      if (!payload.state) { showError('Please select your state.'); return; }
+    } else if (role === 'Other') {
+      payload.otherDescription = document.getElementById('otherDescription').value.trim();
+      if (!payload.otherDescription) { showError('Tell me a bit about what you do.'); return; }
+    }
+
+    var btn = document.getElementById('submitBtn');
+    btn.disabled = true;
+    btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="animation:spin 1s linear infinite"><path d="M21 12a9 9 0 11-6.219-8.56"/></svg> Sending…';
+
+    try {
+      var res = await fetch('/api/interest', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      if (!res.ok) {
+        var data = await res.json().catch(function() { return null; });
+        throw new Error((data && data.error) || 'Something went wrong. Please try again.');
+      }
+      document.getElementById('interestForm').style.display = 'none';
+      document.getElementById('formSuccess').style.display = 'block';
+      if (window.gtag) gtag('event', 'generate_lead');
+    } catch (err) {
+      showError(err.message + ' You can also email chris@shelfspace.pro.');
+      if (window.turnstile) turnstile.reset();
+      turnstileToken = null;
+      btn.disabled = true;
+      btn.innerHTML = 'Send it over <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>';
+    }
+  });
 </script>
-<script src="https://assets.calendly.com/assets/external/widget.js" async></script>
 <script src="/shelfiq-widget.js"></script>
 </body>
 </html>

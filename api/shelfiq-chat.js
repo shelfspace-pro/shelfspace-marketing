@@ -165,7 +165,7 @@ You may state the price is a flat $20 per artifact (this is public). Don't inven
 ## Contact
 
 - Website: shelfspace.pro
-- Book a 30-minute call: shelfspace.pro/contact
+- Get in touch (interest form): shelfspace.pro/contact
 - Free evaluation: shelfspace.pro/contact
 - Email: chris@shelfspace.pro
 - Vendor support: support@shelfspace.pro
