@@ -842,3 +842,56 @@ footer::before { content: ''; position: absolute; bottom: -100px; right: -100px;
   .stat-trio .stat-trio-item, .meter .meter-fill { animation: none; }
   .meter .meter-fill { width: var(--fill, 100%); }
 }
+
+/* ════════════════════════════════════════════════════════════════════
+   VIDEO-PROOF BAND + CARDS (.vp-*) — tutorial facades surfaced on
+   / , /accounts-payable, /how-it-works. Thumbnail + play button linking
+   to the canonical /tutorials/<slug> page (which owns the real embed +
+   VideoObject schema). Facade only — no iframe here. Fully class-scoped.
+   ════════════════════════════════════════════════════════════════════ */
+.vp-band { padding: 100px 48px; }
+.vp-band--slate { background: var(--slate-50); }
+.vp-band--white { background: var(--white); }
+.vp-band--ghost { background: var(--green-ghost); }
+.vp-band-inner { max-width: 1140px; margin: 0 auto; }
+.vp-band-head { text-align: center; max-width: 700px; margin: 0 auto 48px; }
+.vp-band-eyebrow { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 12px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--green-dark); margin-bottom: 18px; }
+.vp-band-eyebrow::before { content: ''; width: 22px; height: 2px; border-radius: 2px; background: var(--green-mid); }
+.vp-band-head h2 { font-size: clamp(28px, 3.5vw, 44px); font-weight: 700; color: var(--green-deep); letter-spacing: -1.5px; line-height: 1.08; margin: 0 0 16px; overflow-wrap: break-word; }
+.vp-band-head p { font-size: 17px; line-height: 1.6; color: var(--slate-600); margin: 0; }
+.vp-band-foot { text-align: center; margin-top: 40px; }
+.vp-band-foot a { display: inline-flex; align-items: center; gap: 6px; font-size: 15px; font-weight: 600; color: var(--green-deep); text-decoration: none; border-bottom: 1px solid var(--green-mid); padding-bottom: 2px; transition: gap .2s; }
+.vp-band-foot a:hover { gap: 10px; }
+
+.vp-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+.vp-card { display: flex; flex-direction: column; background: var(--white); border: 1px solid var(--slate-200); border-radius: 16px; overflow: hidden; text-decoration: none; box-shadow: 0 10px 30px -18px rgba(27,67,50,0.35); transition: transform .25s cubic-bezier(.22,1,.36,1), box-shadow .25s; }
+.vp-card:hover { transform: translateY(-4px); box-shadow: 0 22px 44px -20px rgba(27,67,50,0.45); }
+.vp-card:focus-visible { outline: 2px solid var(--green-accent); outline-offset: 3px; }
+.vp-thumb { position: relative; aspect-ratio: 16 / 9; background: var(--green-ghost); overflow: hidden; }
+.vp-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.vp-thumb::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(8,28,17,0.30), rgba(8,28,17,0) 45%); pointer-events: none; }
+.vp-badge { position: absolute; top: 12px; left: 12px; z-index: 2; background: rgba(27,67,50,0.92); color: #fff; font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: .04em; padding: 4px 10px; border-radius: 999px; }
+.vp-len { position: absolute; bottom: 12px; right: 12px; z-index: 2; background: rgba(8,28,17,0.82); color: #fff; font-family: var(--font-mono); font-size: 12px; padding: 3px 8px; border-radius: 7px; }
+.vp-play { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; z-index: 2; }
+.vp-play > span { width: 58px; height: 58px; border-radius: 50%; background: rgba(255,255,255,0.94); display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 24px rgba(27,67,50,0.4); transition: transform .25s cubic-bezier(.22,1,.36,1), background .25s; }
+.vp-card:hover .vp-play > span { transform: scale(1.09); background: #fff; }
+.vp-play svg { width: 24px; height: 24px; fill: var(--green-deep); margin-left: 3px; }
+.vp-body { padding: 18px 20px 20px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+.vp-body h3 { font-size: 1.06rem; color: var(--green-deep); margin: 0; line-height: 1.3; }
+.vp-body p { font-size: .9rem; color: var(--slate-500); margin: 0; line-height: 1.5; flex: 1; }
+.vp-cta { color: var(--green-mid); font-weight: 600; font-size: .88rem; display: inline-flex; align-items: center; gap: 6px; margin-top: 2px; transition: gap .2s; }
+.vp-card:hover .vp-cta { gap: 9px; }
+
+/* Featured single facade (how-it-works) — one prominent centered card */
+.vp-featured { max-width: 720px; margin: 0 auto; }
+.vp-featured .vp-body { padding: 24px 26px 26px; }
+.vp-featured .vp-body h3 { font-size: 1.32rem; }
+.vp-featured .vp-body p { font-size: .98rem; }
+
+@media (max-width: 700px) {
+  .vp-band { padding: 64px 24px; }
+  .vp-band-head h2 { font-size: 26px; letter-spacing: -0.8px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .vp-card, .vp-card:hover, .vp-play > span, .vp-card:hover .vp-play > span { transition: none; transform: none; }
+}
