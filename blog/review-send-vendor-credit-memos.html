@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reviewing and Sending Draft Credit Memos — ShelfSpace</title>
+<meta name="description" content="Before a credit memo reaches a vendor, it's yours to review. What to check on each draft, how to adjust or delete one, what sending starts, and why to send the month as a single batch.">
+<link rel="canonical" href="https://shelfspace.pro/blog/review-send-vendor-credit-memos">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://shelfspace.pro/blog/review-send-vendor-credit-memos">
+<meta property="og:title" content="Reviewing and Sending Draft Credit Memos — ShelfSpace">
+<meta property="og:description" content="Before a credit memo reaches a vendor, it's yours to review. What to check on each draft, how to adjust or delete one, what sending starts, and why to send the month as a single batch.">
+<meta property="og:image" content="https://shelfspace.pro/og-image-v7.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Reviewing and Sending Draft Credit Memos — ShelfSpace">
+<meta name="twitter:description" content="Before a credit memo reaches a vendor, it's yours to review. What to check on each draft, how to adjust or delete one, what sending starts, and why to send the month as a single batch.">
+<meta name="apple-mobile-web-app-title" content="ShelfSpace">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+<style>
+  @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-12px); } }
+
+  /* ─── HERO ENHANCEMENTS ─── */
+  .page-hero { padding-bottom: 40px; }
+  .hero-bg-gradient { position: absolute; top: -30%; right: -20%; width: 700px; height: 700px; background: radial-gradient(circle, rgba(149,213,178,0.18) 0%, rgba(149,213,178,0) 70%); animation: float 8s ease-in-out infinite; pointer-events: none; }
+  .hero-bg-gradient-2 { position: absolute; bottom: -20%; left: -15%; width: 550px; height: 550px; background: radial-gradient(circle, rgba(27,67,50,0.06) 0%, rgba(27,67,50,0) 70%); animation: float 10s ease-in-out infinite; animation-delay: -3s; pointer-events: none; }
+  .hero-grid-lines { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 1200px; height: 100%; opacity: 0.035; background-image: linear-gradient(var(--green-deep) 1px, transparent 1px), linear-gradient(90deg, var(--green-deep) 1px, transparent 1px); background-size: 80px 80px; pointer-events: none; }
+  .page-hero .section-label,
+  .page-hero .section-title,
+  .page-hero .section-desc { opacity: 0; transform: translateY(30px); }
+  .page-hero .section-label { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1); }
+  .page-hero .section-title { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s, transform 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s; }
+  .page-hero .section-desc { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1) 0.25s, transform 0.8s cubic-bezier(0.22,1,0.36,1) 0.25s; }
+  .page-hero.hero-loaded .section-label,
+  .page-hero.hero-loaded .section-title,
+  .page-hero.hero-loaded .section-desc { opacity: 1; transform: translateY(0); }
+
+  /* ─── REVEAL ─── */
+  .reveal {
+    opacity: 0; transform: translateY(40px);
+    transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+  /* ─── ARTICLE BODY ─── */
+  .article-body { max-width: 720px; margin: 0 auto; padding: 0 48px 80px; }
+  .article-body h2 { font-size: 24px; font-weight: 700; color: var(--green-deep); margin: 48px 0 16px; letter-spacing: -0.5px; line-height: 1.3; }
+  .article-body h3 { font-size: 19px; font-weight: 700; color: var(--green-deep); margin: 32px 0 12px; letter-spacing: -0.3px; line-height: 1.35; }
+  .article-body p { font-size: 17px; line-height: 1.85; color: var(--slate-600); margin-bottom: 24px; }
+  .article-body ul, .article-body ol { margin-bottom: 24px; padding-left: 24px; }
+  .article-body li { font-size: 17px; line-height: 1.85; color: var(--slate-600); margin-bottom: 8px; }
+  .article-body strong { color: var(--green-deep); font-weight: 600; }
+  .article-body a { color: var(--green-mid); font-weight: 500; text-decoration: none; }
+  .article-body a:hover { color: var(--green-deep); text-decoration: underline; }
+  .article-body code { font-family: var(--font-mono); font-size: 0.92em; background: var(--green-ghost); padding: 1px 6px; border-radius: 4px; color: var(--green-dark); }
+  .article-body blockquote { border-left: 3px solid var(--green-accent); padding: 16px 24px; margin: 32px 0; background: var(--green-ghost); border-radius: 0 8px 8px 0; }
+  .article-body blockquote p { font-style: italic; color: var(--green-dark); margin-bottom: 0; }
+
+  /* ─── MATH BOX ─── */
+  .math-box { max-width: 720px; margin: 32px auto; padding: 22px 26px; background: var(--white); border: 1px solid var(--slate-200); border-left: 4px solid var(--green-mid); border-radius: 12px; box-shadow: 0 4px 16px rgba(27,67,50,0.04); }
+  .math-box h4 { font: 700 11px/1 var(--font-mono); letter-spacing: 1.4px; text-transform: uppercase; color: var(--green-mid); margin: 0 0 14px; }
+  .math-box .math-row { font-family: var(--font-mono); font-size: 14px; line-height: 1.7; color: var(--slate-600); }
+  .math-box .math-total { font-family: var(--font-mono); font-size: 15px; font-weight: 700; color: var(--green-deep); margin-top: 10px; padding-top: 10px; border-top: 1px dashed var(--slate-200); }
+
+  /* ─── RATE TABLE ─── */
+  .th-table { max-width: 720px; margin: 28px auto; border: 1px solid var(--slate-200); border-radius: 12px; overflow-x: auto; }
+  .th-table table { width: 100%; border-collapse: collapse; min-width: 560px; }
+  .th-table th, .th-table td { text-align: left; padding: 12px 18px; font-size: 15px; border-bottom: 1px solid var(--slate-100); vertical-align: top; }
+  .th-table th { background: var(--green-ghost); color: var(--green-deep); font-weight: 700; font-size: 13px; letter-spacing: 0.5px; }
+  .th-table td { color: var(--slate-600); }
+  .th-table td.rate-default { font-family: var(--font-mono); color: var(--green-deep); font-weight: 700; white-space: nowrap; }
+  .th-table tr:last-child td { border-bottom: none; }
+
+  /* ─── AT A GLANCE ─── */
+  .article-glance { max-width: 720px; margin: 0 auto 40px; padding: 24px 28px; background: var(--green-ghost); border: 1px solid rgba(149,213,178,0.3); border-radius: 12px; }
+  .article-glance h2 { font-size: 14px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--green-mid); margin: 0 0 12px; }
+  .article-glance ul { list-style: none; padding: 0; margin: 0; }
+  .article-glance li { font-size: 15px; line-height: 1.6; color: var(--slate-600); padding: 4px 0 4px 20px; position: relative; }
+  .article-glance li::before { content: ''; position: absolute; left: 0; top: 12px; width: 8px; height: 8px; border-radius: 50%; background: var(--green-accent); }
+
+  /* ─── FAQ ─── */
+  .faq-section { max-width: 720px; margin: 0 auto; padding: 0 48px 60px; }
+  .faq-header { margin-bottom: 24px; }
+  .faq-header h2 { font-size: 24px; font-weight: 700; color: var(--green-deep); letter-spacing: -0.5px; line-height: 1.3; margin: 0; }
+  .faq-list { margin: 0; }
+  .faq-list details { border-bottom: 1px solid var(--slate-200); }
+  .faq-list details:first-child { border-top: 1px solid var(--slate-200); }
+  .faq-list summary { padding: 20px 0; font-size: 17px; font-weight: 600; color: var(--green-deep); cursor: pointer; list-style: none; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+  .faq-list summary::-webkit-details-marker { display: none; }
+  .faq-list summary::after { content: '+'; font-size: 22px; font-weight: 400; color: var(--slate-400); flex-shrink: 0; }
+  .faq-list details[open] summary::after { content: '\2212'; }
+  .faq-list details p { padding: 0 0 20px; margin: 0; font-size: 15px; line-height: 1.7; color: var(--slate-500); }
+
+  /* ─── CTA PARALLAX ─── */
+  .cta-section::before { transform: translate(-50%,-50%) translateY(var(--parallax-y, 0)); will-change: transform; }
+
+  /* ─── FOOTER 5-COL ─── */
+  .footer-top { grid-template-columns: 2fr 1fr 1fr 1fr 1fr; }
+  @media (max-width: 900px) { .footer-top { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px) { .footer-top { grid-template-columns: 1fr; } }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    .article-body { padding: 0 24px 60px; }
+    .article-body h2 { margin-top: 36px; }
+    .faq-section { padding: 0 24px 40px; }
+  }
+
+  /* ─── REDUCED MOTION ─── */
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; transition: none; }
+    .page-hero .section-label,
+    .page-hero .section-title,
+    .page-hero .section-desc { opacity: 1; transform: none; transition: none; }
+    .hero-bg-gradient, .hero-bg-gradient-2 { animation: none; }
+  }
+</style>
+<noscript><style>.reveal,.page-hero .section-label,.page-hero .section-title,.page-hero .section-desc{opacity:1;transform:none;transition:none;}</style></noscript>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-H2LBJT03WE"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-H2LBJT03WE');</script>
+<script>function initApollo(){var n=Math.random().toString(36).substring(7),o=document.createElement("script");
+o.src="https://assets.apollo.io/micro/website-tracker/tracker.iife.js?nocache="+n,o.async=!0,o.defer=!0,
+o.onload=function(){window.trackingFunctions.onLoad({appId:"69c141b32234890011a43849"})},
+document.head.appendChild(o)}initApollo();</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Reviewing and Sending Draft Credit Memos",
+  "description": "Before a credit memo reaches a vendor, it's yours to review. What to check on each draft, how to adjust or delete one, what sending starts, and why to send the month as a single batch.",
+  "author": { "@type": "Person", "name": "Chris Mitchem" },
+  "publisher": { "@type": "Organization", "name": "ShelfSpace", "url": "https://shelfspace.pro" },
+  "datePublished": "2026-07-09",
+  "url": "https://shelfspace.pro/blog/review-send-vendor-credit-memos",
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://shelfspace.pro/blog/review-send-vendor-credit-memos" },
+  "image": "https://shelfspace.pro/og-image-v7.png"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://shelfspace.pro/" },
+    { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://shelfspace.pro/blog" },
+    { "@type": "ListItem", "position": 3, "name": "Reviewing and Sending Draft Credit Memos" }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Does sending a credit memo automatically charge the vendor?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Sending delivers the memo for the vendor to review — they can approve it in full, approve a partial amount, or decline, right up until the review window closes. Nothing is applied to a payment until a credit memo is approved. Sending starts the clock; it doesn't force the outcome."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Should I send each credit memo the moment it's ready, or wait?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Send the whole month as one batch once you've reviewed them. Sending each vendor's memo on the same day lines up every review window, so reminders and deemed-approval dates land together instead of scattering across the month — which keeps your follow-up predictable and your books clean at month close."
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="/" class="nav-logo">
+    <div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div>
+    <span class="nav-logo-text">ShelfSpace</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="/consignment">Consignment</a></li>
+    <li><a href="/accounts-payable">Accounts Payable</a></li>
+    <li><a href="/credit-recovery">Credit Recovery</a></li>
+    <li class="nav-dropdown"><button class="nav-dropdown-toggle" aria-haspopup="true" aria-expanded="false">Platform <svg class="dropdown-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></button><div class="nav-dropdown-menu"><a href="/vendor-management">Vendor Management</a><a href="/how-it-works">How It Works</a><a href="/features">Features</a><a href="/shelfiq">ShelfiQ</a><a href="/checks">Check Payments</a><a href="/tutorials">Tutorials</a></div></li>
+    <li><a href="/pricing">Pricing</a></li>
+    <li><a href="/about">About</a></li>
+    <li><a href="/contact" class="nav-cta">Get Started <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a></li>
+  </ul>
+  <div class="nav-hamburger" onclick="document.querySelector('.nav-links').classList.toggle('mobile-open'); event.stopPropagation();"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="hero-bg-gradient"></div>
+  <div class="hero-bg-gradient-2"></div>
+  <div class="hero-grid-lines"></div>
+  <div class="section-label">Guide · Credit Recovery</div>
+  <h1 class="section-title">Reviewing and sending draft credit memos</h1>
+  <p class="section-desc">Each month the platform builds a stack of credit memos from your own sales data. Before a single one reaches a vendor, it's yours to check. Here's how to review a draft and send the whole month with confidence.</p>
+</div>
+
+<!-- AT A GLANCE -->
+<div class="article-glance">
+  <h2>At a glance</h2>
+
+<!-- VIDEO: Reviewing & Sending Credit Memos -->
+<figure class="doc-video" style="max-width:760px;margin:0.5rem auto 2.5rem;">
+  <div style="position:relative;padding-bottom:56.25%;height:0;border-radius:14px;overflow:hidden;box-shadow:0 18px 40px -18px rgba(27,67,50,0.35);">
+    <iframe src="https://www.youtube-nocookie.com/embed/NmgbJMc7QCg?rel=0&amp;modestbranding=1" title="Reviewing & Sending Credit Memos — ShelfSpace" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;border:0;" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  </div>
+</figure>
+<!-- video-jsonld:NmgbJMc7QCg -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "VideoObject",
+  "name": "Reviewing & Sending Credit Memos",
+  "description": "Check every draft, then send the month as one clean batch. Every month, ShelfSpace builds a stack of credit memos from your own sales data. Before a single one reaches a vendor, it's yours to review. Here's how to check them and send them with confidence.",
+  "thumbnailUrl": [
+    "https://i.ytimg.com/vi/NmgbJMc7QCg/maxresdefault.jpg",
+    "https://i.ytimg.com/vi/NmgbJMc7QCg/hqdefault.jpg"
+  ],
+  "uploadDate": "2026-07-09",
+  "contentUrl": "https://youtu.be/NmgbJMc7QCg",
+  "embedUrl": "https://www.youtube-nocookie.com/embed/NmgbJMc7QCg?rel=0&modestbranding=1",
+  "publisher": {
+    "@type": "Organization",
+    "name": "ShelfSpace",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://ourshelf.space/email/icon-white.png"
+    }
+  },
+  "duration": "PT3M4S",
+  "hasPart": [
+    {
+      "@type": "Clip",
+      "name": "Intro",
+      "startOffset": 0,
+      "url": "https://www.youtube.com/watch?v=NmgbJMc7QCg&t=0s",
+      "endOffset": 13
+    },
+    {
+      "@type": "Clip",
+      "name": "Every month, ShelfSpace drops a fresh set of…",
+      "startOffset": 13,
+      "url": "https://www.youtube.com/watch?v=NmgbJMc7QCg&t=13s",
+      "endOffset": 31
+    },
+    {
+      "@type": "Clip",
+      "name": "Start with the number at the top",
+      "startOffset": 31,
+      "url": "https://www.youtube.com/watch?v=NmgbJMc7QCg&t=31s",
+      "endOffset": 50
+    },
+    {
+      "@type": "Clip",
+      "name": "Below that, every draft on its own line",
+      "startOffset": 50,
+      "url": "https://www.youtube.com/watch?v=NmgbJMc7QCg&t=50s",
+      "endOffset": 67
+    },
+    {
+      "@type": "Clip",
+      "name": "So let's do exactly that",
+      "startOffset": 67,
+      "url": "https://www.youtube.com/watch?v=NmgbJMc7QCg&t=67s",
+      "endOffset": 82
+    },
+    {
+      "@type": "Clip",
+      "name": "Here's what makes these credits defensible",
+      "startOffset": 82,
+      "url": "https://www.youtube.com/watch?v=NmgbJMc7QCg&t=82s",
+      "endOffset": 101
+    },
+    {
+      "@type": "Clip",
+      "name": "And if something does look off, you're in…",
+      "startOffset": 101,
+      "url": "https://www.youtube.com/watch?v=NmgbJMc7QCg&t=101s",
+      "endOffset": 118
+    },
+    {
+      "@type": "Clip",
+      "name": "Once your drafts check out, sending them is…",
+      "startOffset": 118,
+      "url": "https://www.youtube.com/watch?v=NmgbJMc7QCg&t=118s",
+      "endOffset": 145
+    },
+    {
+      "@type": "Clip",
+      "name": "So what actually lands on the vendor's side?…",
+      "startOffset": 145,
+      "url": "https://www.youtube.com/watch?v=NmgbJMc7QCg&t=145s",
+      "endOffset": 165
+    },
+    {
+      "@type": "Clip",
+      "name": "And that's the whole rhythm",
+      "startOffset": 165,
+      "url": "https://www.youtube.com/watch?v=NmgbJMc7QCg&t=165s",
+      "endOffset": 184
+    }
+  ]
+}
+</script>
+<!-- tutorial-link:review-send-drafts -->
+<p style="text-align:center;margin:-0.5rem 0 2.5rem;"><a href="/tutorials/review-send-drafts" style="color:#40916c;font-weight:600;text-decoration:none;">▶ Watch the full tutorial with transcript &rarr;</a></p>
+  <ul>
+    <li><strong>Drafts are built, not sent.</strong> Every credit memo lands in Drafts first — nothing reaches a vendor until you send it</li>
+    <li><strong>Check the total by source</strong> — returns, waste, co-marketing, aging — and scan the biggest line items for anything that looks off</li>
+    <li><strong>The PDF carries the provenance</strong> — every line traces to a real sale, return, or destruction, so you can defend the number before you ask for it</li>
+    <li><strong>Adjust, delete, or send.</strong> A draft you disagree with can be edited or removed; the rest go out untouched</li>
+    <li><strong>Sending starts the review clock</strong> — the vendor gets an email, the PDF, and a secure portal link, and their approval window opens</li>
+    <li><strong>Send the month as one batch</strong> so every vendor's review window lines up</li>
+  </ul>
+</div>
+
+<!-- ARTICLE BODY -->
+<article class="article-body">
+
+  <p class="reveal">There's a moment in the monthly credit cycle that decides how the whole thing feels to your vendors: the review. The platform has already done the heavy lifting — pulled your returns, your waste, your pre-approved promotions and aged markdowns, and turned them into a draft credit memo per vendor. But a draft is exactly that. Nothing has been sent, nothing has been asked for, and no vendor has seen a number. Before any of that happens, the drafts are yours to read. This post walks the Drafts view: what to check on each memo, when to adjust or delete one, what actually happens the moment you send, and why the whole month should go out as a single batch.</p>
+
+  <h2 class="reveal">Start on the Drafts tab</h2>
+
+  <p class="reveal">Everything begins at <code>/retailer/credits</code>, on the <strong>Drafts</strong> tab. Each row is one vendor's credit memo for the month, built from the data you loaded. This is a review desk, not an outbox — a memo sitting here has touched no one. Your job is to give each one a quick, honest read before it turns into an ask.</p>
+
+  <h2 class="reveal">What to check on each draft</h2>
+
+  <p class="reveal">You don't need to re-audit every line — the point of credit recovery is that the platform already did. But three glances catch almost everything worth catching:</p>
+
+  <ul class="reveal">
+    <li><strong>The total, by source.</strong> Each memo breaks down into returns, waste, co-marketing, and aging. A number that's wildly larger or smaller than last month is your cue to look closer — usually it's a real swing in the data, occasionally it's a report that didn't load cleanly.</li>
+    <li><strong>The biggest line items.</strong> Sort by amount and eyeball the top few. A single oversized return or a promo shortfall that doesn't match a promotion you remember running is exactly the kind of thing you want to catch before the vendor does.</li>
+    <li><strong>Anything that looks off, in the PDF.</strong> Open the memo's PDF and every line shows its provenance — the sale, return, or destruction it came from, with dates and quantities. That evidence is what makes the ask defensible. If a line can't be explained, it shouldn't be on the memo.</li>
+  </ul>
+
+  <blockquote class="reveal">
+    <p>A credit memo you can explain line by line gets approved. One you can't gets argued.</p>
+  </blockquote>
+
+  <h2 class="reveal">Adjust, delete, or send</h2>
+
+  <p class="reveal">Once you've read a draft, you have three moves:</p>
+
+  <ul class="reveal">
+    <li><strong>Send it</strong> as-is when the number holds up. This is the common case — a clean draft backed by clean data needs nothing from you but a click.</li>
+    <li><strong>Adjust it</strong> when a line is wrong or you've agreed something different with the vendor. Editing a draft changes the ask before it ever leaves; the vendor only ever sees the version you send.</li>
+    <li><strong>Delete it</strong> when a memo shouldn't go out at all — a vendor you've settled with separately, or a month where the data isn't worth an ask. A deleted draft simply never becomes a request.</li>
+  </ul>
+
+  <p class="reveal">The rates and thresholds behind these numbers are set once, per vendor, and covered in <a href="/blog/setting-credit-recovery-rates">setting your target margin and coverage rates</a>. If a whole category of credit looks wrong across every draft, the fix is usually a rate, not an edit.</p>
+
+  <h2 class="reveal">What sending actually does</h2>
+
+  <p class="reveal">Sending a credit memo does three things at once. The vendor gets an <strong>email</strong> announcing it, the <strong>PDF</strong> with every line and its evidence, and a <strong>secure portal link</strong> where they can review and respond — no login required. And it starts the <strong>review clock</strong>: the vendor now has a defined window to approve in full, approve a partial amount, or decline. Silence isn't a veto — once delivery is confirmed, a vendor who says nothing has the defensible portion of the memo deemed approved after the window lapses. Sending is the step that turns a private draft into a live, tracked ask.</p>
+
+  <div class="math-box reveal">
+    <h4>The moment you send</h4>
+    <div class="math-row">→ Email lands in the vendor's inbox</div>
+    <div class="math-row">→ PDF + secure review link attached</div>
+    <div class="math-row">→ Approve · approve partial · decline — their call</div>
+    <div class="math-total">The review window opens; the clock is running</div>
+  </div>
+
+  <h2 class="reveal">Send the month as one batch</h2>
+
+  <p class="reveal">Once the drafts are reviewed, send them together. It's tempting to fire each memo off the moment it looks right, but staggering them scatters every vendor's review window across the calendar — reminders and deemed-approval dates land on different days, and month-close turns into a game of tracking who's due when. Send the batch on one day and the windows line up: one wave out, one wave of responses, one clean reconciliation. Batch hygiene is the difference between a credit program that runs on rails and one you're forever chasing.</p>
+
+  <h2 class="reveal">What to do this month</h2>
+
+  <ul class="reveal">
+    <li>Open the Drafts tab and read each memo's total by source — flag anything that swung hard from last month.</li>
+    <li>Sort the biggest line items and open the PDF on anything you can't explain from memory.</li>
+    <li>Adjust the drafts that need it, delete the ones that shouldn't go out, and leave the clean ones alone.</li>
+    <li>Send the whole month in one batch so every review window opens together.</li>
+    <li>Then let the responses come in — the vendor's side of the review is covered in <a href="/blog/cannabis-vendor-no-response-credit-memo">what happens when a vendor doesn't respond</a>.</li>
+  </ul>
+
+  <p class="reveal">Reviewing drafts is the ten minutes a month that makes every vendor conversation easier. Send numbers you've read and can defend, and approvals follow. If you'd like a hand walking your first batch, <a href="/contact">start with a free evaluation</a> and we'll run your last month through it together.</p>
+
+</article>
+
+<!-- FAQ -->
+<div class="faq-section reveal">
+  <div class="faq-header">
+    <h2>Frequently asked questions</h2>
+  </div>
+  <div class="faq-list">
+    <details>
+      <summary>Does sending a credit memo automatically charge the vendor?</summary>
+      <p>No. Sending delivers the memo for the vendor to review — they can approve it in full, approve a partial amount, or decline, right up until the review window closes. Nothing is applied to a payment until a credit memo is approved. Sending starts the clock; it doesn't force the outcome.</p>
+    </details>
+    <details>
+      <summary>Should I send each credit memo the moment it's ready, or wait?</summary>
+      <p>Send the whole month as one batch once you've reviewed them. Sending each vendor's memo on the same day lines up every review window, so reminders and deemed-approval dates land together instead of scattering across the month — which keeps your follow-up predictable and your books clean at month close.</p>
+    </details>
+  </div>
+</div>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-content">
+    <div class="section-label reveal">Get Started</div>
+    <h2 class="section-title reveal">Send credit memos you can defend.</h2>
+    <p class="section-desc reveal">Free evaluation. We run your last month of returns, waste, promotions, and aged markdowns into draft credit memos, then walk the review with you.</p>
+    <div class="cta-actions reveal">
+      <a href="/contact" class="btn-primary">
+        Get My Free Evaluation
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+      <a href="/credit-recovery" class="btn-secondary">How credit recovery works</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="/" class="nav-logo"><div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div><span class="nav-logo-text">ShelfSpace</span></a>
+      <p>Every Vendor. Every Payment. One Engine.</p>
+    </div>
+    <div class="footer-col"><h3>Services</h3><ul><li><a href="/accounts-payable">Accounts Payable</a></li><li><a href="/consignment">Consignment</a></li><li><a href="/credit-recovery">Credit Recovery</a></li><li><a href="/checks">Check Payments</a></li><li><a href="/shelfiq">ShelfiQ</a></li></ul></div>
+    <div class="footer-col"><h3>Platform</h3><ul><li><a href="/features">Features</a></li><li><a href="/how-it-works">How It Works</a></li><li><a href="/pricing">Pricing</a></li><li><a href="/about">About</a></li><li><a href="/blog">Blog</a></li><li><a href="/docs">Docs</a></li><li><a href="/tutorials">Tutorials</a></li></ul></div>
+    <div class="footer-col"><h3>Access</h3><ul><li><a href="https://ourshelf.space/login">Login</a></li><li><a href="/contact">Sign Up</a></li><li><a href="/contact">Contact</a></li><li><a href="/vendors">For Vendors</a></li><li><a href="/for-bookkeepers">For Bookkeepers</a></li></ul></div>
+    <div class="footer-col"><h3>Company</h3><ul><li><a href="mailto:support@shelfspace.pro">Support</a></li><li><a href="https://linkedin.com/company/shelfspace-pro" target="_blank" rel="noopener" class="footer-social-link"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> LinkedIn</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><p>&copy; 2026 ShelfSpace Technologies Inc.</p><div style="display:flex;align-items:center;gap:8px;justify-content:center;margin-top:12px;"><img src="/metrc-logo.png" alt="Metrc" style="height:18px;opacity:0.4;filter:brightness(0) invert(1);"><span style="font-size:11px;color:rgba(255,255,255,0.35);">Certified Metrc Third-Party Vendor</span></div><div class="footer-bottom-links"><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div></div>
+</footer>
+
+<script>
+(function() {
+  var nav = document.getElementById('nav');
+  var pageHero = document.querySelector('.page-hero');
+  var parallaxSections = [ document.querySelector('.cta-section') ];
+
+  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var isMobile = window.innerWidth < 900;
+  var ticking = false;
+
+  requestAnimationFrame(function() {
+    nav.classList.toggle('scrolled', window.scrollY > 20);
+    if (pageHero) pageHero.classList.add('hero-loaded');
+  });
+
+  var revealObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(function(el) { revealObserver.observe(el); });
+
+  function onScroll() {
+    var scrollY = window.scrollY;
+    nav.classList.toggle('scrolled', scrollY > 20);
+    if (prefersReduced || isMobile) return;
+    var wh = window.innerHeight;
+    parallaxSections.forEach(function(section) {
+      if (!section) return;
+      var rect = section.getBoundingClientRect();
+      if (rect.bottom < 0 || rect.top > wh) return;
+      var center = rect.top + rect.height / 2 - wh / 2;
+      section.style.setProperty('--parallax-y', (center * 0.08) + 'px');
+    });
+  }
+
+  window.addEventListener('scroll', function() {
+    if (!ticking) { requestAnimationFrame(function() { onScroll(); ticking = false; }); ticking = true; }
+  }, { passive: true });
+
+  onScroll();
+
+  window.addEventListener('resize', function() {
+    isMobile = window.innerWidth < 900;
+    if (isMobile) { parallaxSections.forEach(function(section) { if (section) section.style.setProperty('--parallax-y', '0px'); }); }
+  });
+
+  document.addEventListener('click', function() {
+    var navLinks = document.querySelector('.nav-links');
+    if (navLinks && navLinks.classList.contains('mobile-open')) { navLinks.classList.remove('mobile-open'); }
+  });
+})();
+</script>
+<script src="/shelfiq-widget.js"></script>
+</body>
+</html>
