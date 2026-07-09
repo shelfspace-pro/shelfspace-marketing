@@ -102,6 +102,7 @@ It is NOT a managed service. We do not run your AP for you. We do not cut your c
 - The roughly 5% that need a human decision escalate to your AP person with the full thread and data.
 - Check 21 Act-compliant digital checks generate on the platform; you approve and send.
 - Vendors download checks from a secure portal at ourshelf.space by default. For vendors who'd rather not print, the retailer can opt that vendor's account into a physical check mailed to them, or into ACH direct deposit if the vendor links their own bank. Check 21 (digital or mailed) is the default; ACH is opt-in and the vendor sets it up. No wires.
+- ACH bank transfers: the retailer completes a one-time bank-transfer setup in the platform (business profile, owners, funding bank, compliance documents — most auto-generated from data the platform already holds, including state license records pulled live from Metrc). After the banking partner's compliance review approves (typically 1–3 weeks), the retailer can pay any vendor by ACH; vendors just link a bank account, no paperwork on their side.
 - Works for cannabis vendors (Metrc-verified) AND non-cannabis expense vendors (rent, utilities, software, insurance) on the same system.
 - QuickBooks sync — every payment hits your books in real time.
 
