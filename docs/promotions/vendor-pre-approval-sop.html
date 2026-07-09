@@ -191,7 +191,7 @@
   "@type": "TechArticle",
   "headline": "Vendor Pre-Approval SOP for Promotions",
   "datePublished": "2026-05-12",
-  "dateModified": "2026-06-05",
+  "dateModified": "2026-07-09",
   "author": { "@type": "Organization", "name": "ShelfSpace", "url": "https://shelfspace.pro" },
   "publisher": { "@type": "Organization", "name": "ShelfSpace" },
   "url": "https://shelfspace.pro/docs/promotions/vendor-pre-approval-sop"
@@ -236,7 +236,7 @@ o.onload=function(){window.trackingFunctions.onLoad({appId:"69c141b32234890011a4
 document.head.appendChild(o)}initApollo();</script>
 </head>
 <body>
-<!-- last-synced: 2026-06-05 -->
+<!-- last-synced: 2026-07-09 -->
 
 <!-- NAV -->
 <nav id="nav">
@@ -284,7 +284,7 @@ document.head.appendChild(o)}initApollo();</script>
     <div class="docs-glance">
       <h2>At a Glance</h2>
       <ul>
-        <li>Audience: buyer, marketing, or promotions lead with admin or owner role on the retailer portal</li>
+        <li>Audience: any buyer, marketing, or promotions lead with a login on the retailer portal</li>
         <li>Goal: get every vendor-funded promotion pre-approved before it runs in your POS</li>
         <li>Three ways to do it: portal "ask vendor," portal "record evidence," or email the AP bot</li>
         <li>The promotion name you type must match the exact POS wording you'll use in Dutchie</li>
@@ -297,7 +297,7 @@ document.head.appendChild(o)}initApollo();</script>
     <p>Many cannabis vendors expect a written record before honoring co-marketing credits. Without that record, every credit memo can turn into a negotiation: <em>"I never agreed to that 20% off, why are you charging me for it?"</em></p>
 
     <div class="docs-highlight">
-      <strong>Prerequisite:</strong> The portal paths below require <strong>retailer admin or retailer owner</strong> role on ShelfSpace. Buyers and marketing staff on a "viewer" role can read promotions but cannot create or record evidence — escalate to your admin, or use the email path which routes through your retailer admin's identity on the AP bot.
+      <strong>Who can do this:</strong> Any member of your retailer team with a login can create promotions and record evidence on ShelfSpace — the earlier admin/owner restriction on promotion actions was lifted. The safeguard is on the other side: the vendor is emailed a record of every approval you log and can dispute it in one click, so a mistaken entry never sticks silently. (Account-wide settings still sit with your admin.)
     </div>
 
     <p>The pre-approval workflow in ShelfSpace gives you that record. When you set up a promotion the right way <em>before</em> running it in your POS, the credits you generate at month-end land in a clearly labeled <strong>Pre-approved</strong> section of the credit memo PDF — with the vendor's approval timestamp printed on the line. Vendors stop pushing back, your AP team stops arguing, and the cycle closes faster.</p>
@@ -326,7 +326,7 @@ document.head.appendChild(o)}initApollo();</script>
           <li><strong>Vendor</strong> — pick from the dropdown.</li>
           <li><strong>Promotion Name</strong> — type the EXACT wording you'll use in Dutchie. See <a href="#exact-wording">the exact-wording rule</a> below — this is the single most important field on the form.</li>
           <li><strong>Discount</strong> — what the customer sees off retail (e.g., 20%).</li>
-          <li><strong>Co-marketing rate</strong> — the share of the shortfall the vendor will cover. Default is 100%; lower it if you've negotiated a split.</li>
+          <li><strong>Co-marketing rate</strong> — the share of the shortfall the vendor will cover. Leave it blank to use your standing partnership split; enter a number only if you've negotiated a different share for this promotion.</li>
           <li><strong>Max budget</strong> (optional) — a dollar cap on the vendor's exposure.</li>
           <li><strong>Window</strong> — start and end date.</li>
           <li><strong>Scope</strong> — all products from this vendor, a category, or specific SKUs.</li>
@@ -369,7 +369,7 @@ document.head.appendChild(o)}initApollo();</script>
 
     <p>ShelfiQ should reply referencing the <code>PROMO-N</code> number and confirm what it recorded. If you cited a clear out-of-band approval ("Sarah approved by text"), it logs the promotion as <strong>Active</strong> with the <em>"Evidence on file"</em> note on the detail page right away. If you didn't cite an approval, it defaults to the "Ask vendor to approve" path — the vendor gets the portal email and clicks approve. Either way, you have a record before the promo runs.</p>
 
-    <p>One subtlety: the email path falls back to "Ask vendor to approve" if the sender's role isn't admin or owner. So if your buyer (without admin rights) emails the AP bot citing a vendor approval, ShelfiQ creates the promo as <em>Proposed</em> and waits for the vendor to click approve in the portal — the buyer's word alone doesn't unlock the evidence path.</p>
+    <p>One subtlety: the email path only records evidence when ShelfiQ recognizes the sender as a member of your retailer team. If the email comes from an address that isn't on your ShelfSpace account, ShelfiQ can't trust the approval claim and falls back to "Ask vendor to approve" — the promo is created as <em>Proposed</em> and waits for the vendor to click approve in the portal.</p>
 
     <h2 id="exact-wording">The exact-wording rule</h2>
     <p>The <strong>Promotion Name</strong> field on every path is the bridge between what the vendor approved and what the credit memo charges them for. At month-end, the platform looks at every promotion ShelfiQ extracted from Dutchie POS data and tries to match each one to a pre-approved promotion record. The match works on the promotion name.</p>
@@ -403,7 +403,7 @@ document.head.appendChild(o)}initApollo();</script>
 
     <p>On the promotion detail page in ShelfSpace, click <strong>Record evidence after the fact</strong>. Add the same Channel + Notes fields you'd use for Path B. The promotion flips from <em>Awaiting Vendor</em> to <em>Approved (Evidence on file)</em>, and the vendor gets a confirmation email so they can flag any mismatch.</p>
 
-    <p>You can also do this from your inbox: email the AP bot the promotion's <code>PROMO-N</code> number and the approval evidence — for example, <em>"PROMO-123 — Sarah at Acme approved by text yesterday; record it as active."</em> ShelfiQ flips the existing promotion to <em>Approved (Evidence on file)</em> the same way the portal button does. Admin or owner role required.</p>
+    <p>You can also do this from your inbox: email the AP bot the promotion's <code>PROMO-N</code> number and the approval evidence — for example, <em>"PROMO-123 — Sarah at Acme approved by text yesterday; record it as active."</em> ShelfiQ flips the existing promotion to <em>Approved (Evidence on file)</em> the same way the portal button does. Any recognized member of your retailer team can do this from their inbox.</p>
 
     <h2>Consignment vendors: pre-approval raises your discount budget</h2>
     <p>The buckets above describe what pre-approval does on a wholesale vendor — it turns the discount into a co-marketing credit on the monthly memo. On a <strong>consignment vendor</strong>, the same pre-approval protects margin a different way: it lifts your discount budget.</p>

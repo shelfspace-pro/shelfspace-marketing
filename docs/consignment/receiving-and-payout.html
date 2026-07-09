@@ -325,7 +325,7 @@
   "headline": "How to Receive a Cannabis Consignment Order on ShelfSpace",
   "description": "Step-by-step guide to receiving a cannabis consignment delivery — vendor settings, Order Type designation, manifest upload, physical receipt confirmation, and payday flow.",
   "datePublished": "2026-06-01",
-  "dateModified": "2026-06-01",
+  "dateModified": "2026-07-09",
   "author": { "@type": "Organization", "name": "ShelfSpace", "url": "https://shelfspace.pro" },
   "publisher": { "@type": "Organization", "name": "ShelfSpace" },
   "url": "https://shelfspace.pro/docs/consignment/receiving-and-payout"
@@ -351,7 +351,7 @@ o.onload=function(){window.trackingFunctions.onLoad({appId:"69c141b32234890011a4
 document.head.appendChild(o)}initApollo();</script>
 </head>
 <body>
-<!-- last-synced: 2026-06-01 -->
+<!-- last-synced: 2026-07-09 -->
 
 <!-- NAV -->
 <nav id="nav">
@@ -403,7 +403,7 @@ document.head.appendChild(o)}initApollo();</script>
         <li>The same vendor can ship a consignment delivery and a wholesale delivery on the same day. Each one is its own invoice, its own Metrc manifest, its own Order Type.</li>
         <li>Configure the vendor once: Master Vendor Split, Operational Discount Budget, per-category splits, and Settlement Frequency. Every consignment delivery and settlement from that vendor inherits those settings.</li>
         <li>Receiving is the same three-step flow on every delivery: upload signed invoice and Metrc manifest, confirm physical line items, confirm invoice total.</li>
-        <li>Payday is one click on the Consignment Payments tab. <strong>Approve &amp; Pay</strong> tells the platform to cut a Check 21 from your bank. <strong>Mark as paid externally</strong> records that you paid the vendor your own way.</li>
+        <li>Payday is one click on the Consignment Payments tab. <strong>Approve &amp; Pay</strong> has the platform pay the vendor — a Check 21 from your bank by default, or an <a href="/ach">ACH bank transfer</a> when the vendor's opted into ACH. <strong>Mark as paid externally</strong> records that you paid the vendor your own way.</li>
       </ul>
     </div>
 
@@ -616,15 +616,15 @@ document.head.appendChild(o)}initApollo();</script>
         <div class="payday-mock">
           <div class="payday-card is-primary">
             <span class="payday-card-btn">Approve &amp; Pay</span>
-            <div class="payday-card-title">The platform cuts the check.</div>
-            <div class="payday-card-body">The platform issues a Check 21 from your bank account to the vendor and emails them a settlement report that ends with the printable check.</div>
+            <div class="payday-card-title">The platform pays the vendor.</div>
+            <div class="payday-card-body">The platform pays the vendor for you — a Check 21 from your bank by default, or an ACH bank transfer to their linked bank if they've opted into ACH — and emails them the settlement report.</div>
             <ul>
-              <li>Check 21 payment cut and emailed</li>
-              <li>QuickBooks sync — bill + check</li>
+              <li>Check 21 or ACH bank transfer</li>
+              <li>QuickBooks sync — bill + payment</li>
               <li>Vendor portal updated</li>
-              <li>Per-check platform fee applies</li>
+              <li>Flat $20 per-payment fee applies</li>
             </ul>
-            <div class="payday-card-foot">Vendor gets: report + check</div>
+            <div class="payday-card-foot">Vendor gets: report + payment</div>
           </div>
           <div class="payday-card is-secondary">
             <span class="payday-card-btn">Mark as paid externally</span>
@@ -642,7 +642,7 @@ document.head.appendChild(o)}initApollo();</script>
       </div>
     </div>
 
-    <p><strong>Approve &amp; Pay</strong> is the one-click path: the platform cuts a Check 21 from the bank account you have on file, syncs the bill and the payment to QuickBooks if you have QBO connected, posts the check to the vendor's portal, and emails the vendor a full settlement report ending with the printable check page. The check is Check 21 compliant — the vendor can mobile-deposit it through any bank app, take it to a teller, or run it through a desktop check scanner. Every step is logged on the settlement record.</p>
+    <p><strong>Approve &amp; Pay</strong> is the one-click path: the platform pays the vendor from the bank account you have on file, syncs the bill and the payment to QuickBooks if you have QBO connected, updates the vendor's portal, and emails the vendor a full settlement report. By default it cuts a Check 21 — the vendor can mobile-deposit it through any bank app, take it to a teller, or run it through a desktop check scanner. When you open the Approve &amp; Pay dialog and the vendor has <a href="/ach">opted into ACH bank transfer</a>, a <strong>Pay by ACH</strong> option appears that sends the payout straight to their linked bank instead (typically 1–3 business days, no check cut). The flat $20 per-payment fee is the same either way, and every step is logged on the settlement record.</p>
 
     <p><strong>Mark as paid externally</strong> is the alternate path for retailers who'd rather route the payment themselves — through their bank's bill-pay, an ACH from their accounting system, or a paper check off-platform. The tooltip on the button reads: <em>"Record an external payment (your own check / ACH / cash). ShelfSpace will not cut a check or charge a check fee."</em> The platform records the resolution; the vendor's settlement report ends with a "PAID EXTERNALLY" stamp instead of a check page, so they know it's been paid even though no Check 21 was issued.</p>
 
@@ -673,7 +673,7 @@ document.head.appendChild(o)}initApollo();</script>
       <li><strong>Margin Analysis</strong> — the discount reconciliation. Shows the Authorized Discount Budget (derived from your vendor's Operational Discount Budget setting), the Total Margin Shortfall (the actual discounts you ran at the register), and the Margin True-Up (the deduction from the vendor's share if you discounted past the budget, or $0 if you stayed within it).</li>
       <li><strong>Waste &amp; Credits</strong> — any product reported as waste in Metrc during the period, plus return credits, with a Total Waste Credit deducted from or added to the payout.</li>
       <li><strong>Remaining Inventory</strong> — SKU-by-SKU rundown of what's still on shelf at period end, with on-hand quantity, inventory value at wholesale, days on shelf, and days until the next aging tier kicks in.</li>
-      <li><strong>Check page (Approve &amp; Pay only)</strong> — a Check 21 compliant digital check, ready to print, with recipient instructions for mobile-deposit, teller deposit, and authenticity verification via QR code at <code>shelfspace.pro/verify</code>. If you marked the settlement paid externally instead, this page is replaced with a "PAID EXTERNALLY" stamp.</li>
+      <li><strong>Payment page (final page)</strong> — on a Check 21 payout, a Check 21 compliant digital check, ready to print, with recipient instructions for mobile-deposit, teller deposit, and authenticity verification via QR code at <code>shelfspace.pro/verify</code>. On an ACH payout, a bank-transfer remittance page confirming the payment instead. If you marked the settlement paid externally, this page is a "PAID EXTERNALLY" stamp.</li>
     </ul>
 
     <p>For a deeper walkthrough of each section page-by-page, including the calculations behind the Margin True-Up and the aging-tier logic, see <a href="/docs/consignment/settlement-reports">Reading Your Settlement Report</a> and the blog post <a href="/blog/anatomy-of-a-consignment-settlement-report">Anatomy of a Consignment Settlement Report</a>.</p>

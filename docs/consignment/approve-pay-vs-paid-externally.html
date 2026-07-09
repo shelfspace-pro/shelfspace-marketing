@@ -226,7 +226,7 @@
   "headline": "Approve & Pay vs Mark as Paid Externally — Choosing How to Resolve a Consignment Settlement",
   "description": "Two paths to resolve a cannabis consignment settlement on ShelfSpace — when to have the platform cut a Check 21 from your bank versus record an off-platform payment. QuickBooks sync, fees, vendor experience, and reversibility compared.",
   "datePublished": "2026-06-01",
-  "dateModified": "2026-06-01",
+  "dateModified": "2026-07-09",
   "author": { "@type": "Organization", "name": "ShelfSpace", "url": "https://shelfspace.pro" },
   "publisher": { "@type": "Organization", "name": "ShelfSpace" },
   "url": "https://shelfspace.pro/docs/consignment/approve-pay-vs-paid-externally"
@@ -252,7 +252,7 @@ o.onload=function(){window.trackingFunctions.onLoad({appId:"69c141b32234890011a4
 document.head.appendChild(o)}initApollo();</script>
 </head>
 <body>
-<!-- last-synced: 2026-06-01 -->
+<!-- last-synced: 2026-07-09 -->
 
 <!-- NAV -->
 <nav id="nav">
@@ -301,7 +301,7 @@ document.head.appendChild(o)}initApollo();</script>
       <h2>At a Glance</h2>
       <ul>
         <li>Every approved cannabis consignment settlement resolves through one of two buttons: <strong>Approve &amp; Pay</strong> or <strong>Mark as paid externally</strong>.</li>
-        <li><strong>Approve &amp; Pay</strong> — the platform cuts a Check 21 from your bank account, syncs the bill and payment to QuickBooks, and emails the vendor a settlement report ending with the printable check.</li>
+        <li><strong>Approve &amp; Pay</strong> — the platform moves the money for you: a Check 21 drawn from your bank by default, or an <a href="/ach">ACH bank transfer</a> to the vendor's linked bank when they've opted into ACH. Either way it syncs the bill and payment to QuickBooks and emails the vendor their settlement report.</li>
         <li><strong>Mark as paid externally</strong> — you paid the vendor your own way (own check, ACH from your bank, or cash). No Check 21 is cut, but the platform still syncs the payment to QuickBooks and stamps the vendor's settlement report "PAID EXTERNALLY".</li>
         <li>The decision is per-settlement, not per-vendor. You can use Approve &amp; Pay one week and Mark as paid externally the next on the same vendor.</li>
         <li>Both paths produce the same first five pages of settlement context for the vendor (Sales Detail, Margin Analysis, Waste &amp; Credits, Remaining Inventory). Only the final page differs.</li>
@@ -327,9 +327,9 @@ document.head.appendChild(o)}initApollo();</script>
       </thead>
       <tbody>
         <tr>
-          <td class="col-label">Check 21 cut</td>
-          <td class="col-primary"><span class="yes">Yes</span> — drawn from your bank account, mailed/emailed to the vendor, valid for mobile deposit or any U.S. bank app</td>
-          <td class="col-secondary"><span class="no">No</span> — you handled the payment off-platform; the platform just records that it happened</td>
+          <td class="col-label">How the payment moves</td>
+          <td class="col-primary"><span class="yes">The platform pays</span> — a Check 21 drawn from your bank by default (mailed or emailed, valid for mobile deposit or any U.S. bank app), or an ACH bank transfer to the vendor's linked bank when they've opted into ACH</td>
+          <td class="col-secondary"><span class="no">You pay</span> — you handled the payment off-platform; the platform just records that it happened</td>
         </tr>
         <tr>
           <td class="col-label">QuickBooks sync</td>
@@ -343,12 +343,12 @@ document.head.appendChild(o)}initApollo();</script>
         </tr>
         <tr>
           <td class="col-label">What the vendor receives</td>
-          <td class="col-primary">Settlement report PDF, six pages, ending with a printable Check 21 check page. Identical to the demo at <a href="/assets/ShelfSpace_Sample_Consignment_Settlement_SR-464.pdf" target="_blank" rel="noopener">SR-464</a>.</td>
+          <td class="col-primary">Settlement report PDF, six pages. On a check payout the final page is a printable Check 21 (see the demo at <a href="/assets/ShelfSpace_Sample_Consignment_Settlement_SR-464.pdf" target="_blank" rel="noopener">SR-464</a>); on an ACH payout it's a bank-transfer remittance page confirming the payment instead.</td>
           <td class="col-secondary">Settlement report PDF, six pages, ending with a "PAID EXTERNALLY" stamp page instead of a check. Vendor sees the same payout math; the resolution is just stamped as off-platform.</td>
         </tr>
         <tr>
           <td class="col-label">Reversibility</td>
-          <td class="col-primary">The Check 21 has a 90-day void window; you can <a href="/docs/checks/void-reissue">void and reissue</a> if it was cut in error. The QuickBooks entries reverse with it.</td>
+          <td class="col-primary">The Check 21 has a 90-day void window; you can <a href="/docs/checks/void-reissue">void and reissue</a> if it was cut in error, and the QuickBooks entries reverse with it. An ACH bank transfer can't be reversed from this screen once it's initiated — an admin voids the settlement to reverse it.</td>
           <td class="col-secondary">Self-serve — an <strong>Undo — mark as unpaid</strong> action returns the settlement to Payments Due, so you can re-record it or run Approve &amp; Pay instead.</td>
         </tr>
       </tbody>
@@ -357,6 +357,8 @@ document.head.appendChild(o)}initApollo();</script>
     <h2>When to pick Approve &amp; Pay</h2>
 
     <p>This is the default path and the one the platform was designed around. Pick it when any of these are true:</p>
+
+    <p>When you click Approve &amp; Pay, the dialog lets you choose how the money moves. The default is a ShelfSpace Check 21 — a digital check to the vendor's portal, or a printed check we mail. If the vendor has <a href="/ach">opted into ACH</a> and linked a bank account, a <strong>Pay by ACH bank transfer</strong> option also appears, sending the funds straight to their bank (typically 1–3 business days) with no check cut. The flat $20 per-payment fee is the same either way.</p>
 
     <ul>
       <li><strong>You want the QuickBooks entries handled for you.</strong> Approve &amp; Pay posts both the bill and the payment automatically through your QBO connection. Your bookkeeper opens QBO and sees a clean, reconciled entry — no manual data entry, no missing memo lines.</li>
@@ -372,7 +374,7 @@ document.head.appendChild(o)}initApollo();</script>
     <ul>
       <li><strong>You already paid the vendor off-platform before approving.</strong> A vendor called Friday and asked for the check early; you cut a paper check Friday night; the settlement only ran Monday. Mark as paid externally records the resolution so the platform doesn't double-pay.</li>
       <li><strong>You prefer to pay via your bank's bill-pay or ACH.</strong> Some retailers route all vendor payments through their primary bank's bill-pay system for reconciliation reasons. The platform doesn't object — pay your way, record the resolution.</li>
-      <li><strong>The vendor specifically requested a non-Check 21 payment method.</strong> Rare, but some vendors require ACH only. Pay them off-platform and mark externally so the settlement record stays accurate.</li>
+      <li><strong>The vendor wants a payment method you'd rather route yourself.</strong> If a vendor asks for ACH and has opted into ShelfSpace ACH, the cleaner path is Approve &amp; Pay's <a href="/ach">Pay by ACH</a> option. But if you'd rather send it through your own bank, pay off-platform and mark externally so the settlement record stays accurate.</li>
       <li><strong>The settlement was small enough to settle in cash on the spot</strong>, or you want to keep a particular vendor's payments out of the platform's check pipeline for any other operational reason.</li>
     </ul>
 

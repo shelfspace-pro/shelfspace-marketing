@@ -174,7 +174,7 @@
   "@type": "TechArticle",
   "headline": "Payments and Check Generation",
   "datePublished": "2026-03-25",
-  "dateModified": "2026-06-02",
+  "dateModified": "2026-07-09",
   "author": { "@type": "Organization", "name": "ShelfSpace", "url": "https://shelfspace.pro" },
   "publisher": { "@type": "Organization", "name": "ShelfSpace" },
   "url": "https://shelfspace.pro/docs/accounts-payable/creating-payments"
@@ -219,7 +219,7 @@ o.onload=function(){window.trackingFunctions.onLoad({appId:"69c141b32234890011a4
 document.head.appendChild(o)}initApollo();</script>
 </head>
 <body>
-<!-- last-synced: 2026-06-02 -->
+<!-- last-synced: 2026-07-09 -->
 
 <!-- NAV -->
 <nav id="nav">
@@ -270,6 +270,7 @@ document.head.appendChild(o)}initApollo();</script>
         <li>The platform creates cannabis vendor check payments after every invoice is verified</li>
         <li>Checks are generated using Check 21 (digitally cleared) and delivered to the vendor portal by default</li>
         <li>Vendors receive checks through their portal and deposit via mobile or print -- or, if the retailer opts a vendor in, the platform mails them a physical check</li>
+        <li>Once a retailer completes bank-transfer setup, any vendor can be paid by ACH direct deposit instead -- Check 21 stays the default</li>
         <li>Every payment syncs to QuickBooks as a bill payment with full detail</li>
       </ul>
     </div>
@@ -386,6 +387,9 @@ document.head.appendChild(o)}initApollo();</script>
       <strong>See a real one.</strong> Walk through a complete ShelfSpace invoice payment — the remittance summary and the Check 21 check — in <a href="/blog/anatomy-of-an-invoice-payment">Anatomy of a Cannabis Vendor Invoice Payment</a>, or <a href="/ShelfSpace_Sample_Invoice_Payment.pdf" target="_blank" rel="noopener">download the sample PDF</a>.
     </div>
 
+    <h2>Paying a Vendor by ACH Bank Transfer</h2>
+    <p>Check 21 is the default, but a retailer can also pay a vendor by ACH bank transfer — money moves straight from the retailer's funding account into the vendor's linked bank account, with no check to download or deposit. It's opt-in: an admin completes a one-time bank-transfer setup under <strong>Settings → ACH Payments</strong>, and once the retailer's account clears the banking partner's review, ACH becomes available as a payout method. Vendors fill out no paperwork — they simply link a bank account in their portal, and the platform emails a deposit confirmation when a payment lands. Until a retailer opts in, every payment goes out as a Check 21 check. See the <a href="/ach">vendor ACH overview</a> for the vendor-side details.</p>
+
     <h2>Payment Lifecycle</h2>
     <p>Every payment moves through a clear set of stages:</p>
     <ul>
@@ -395,6 +399,8 @@ document.head.appendChild(o)}initApollo();</script>
       <li><strong>Voided</strong> -- the check was cancelled before it cleared, ready to reissue if needed</li>
     </ul>
     <p>You can see every payment's current status in your dashboard. If a check has not been deposited within a reasonable window, the platform follows up with the vendor so nothing falls through the cracks.</p>
+
+    <p>ACH payments follow their own track instead of the check stages above. Once you send one, the platform shows it as <strong>in transit</strong>, then <strong>deposited</strong> when the funds settle in the vendor's bank — or <strong>failed</strong> / <strong>returned</strong> if the transfer can't complete. Those statuses appear in the <strong>Payment Register</strong> — the payments tab formerly called the Check Register — which lists your checks and your ACH payments side by side. A failed or returned ACH payment is actionable: the platform releases the order so you can re-issue it.</p>
 
     <h2>QuickBooks Sync</h2>
     <p>The moment a payment is processed, it syncs to your <a href="/docs/quickbooks/overview">QuickBooks Online</a> account as a bill payment. The vendor, amount, invoice reference, and check number are all mapped correctly. Your books stay current without any manual journal entries or data imports.</p>

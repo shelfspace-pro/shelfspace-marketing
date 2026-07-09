@@ -174,7 +174,7 @@
   "@type": "TechArticle",
   "headline": "Voiding and Reissuing Checks",
   "datePublished": "2026-03-25",
-  "dateModified": "2026-06-30",
+  "dateModified": "2026-07-09",
   "author": { "@type": "Organization", "name": "ShelfSpace", "url": "https://shelfspace.pro" },
   "publisher": { "@type": "Organization", "name": "ShelfSpace" },
   "url": "https://shelfspace.pro/docs/checks/void-reissue"
@@ -219,7 +219,7 @@ o.onload=function(){window.trackingFunctions.onLoad({appId:"69c141b32234890011a4
 document.head.appendChild(o)}initApollo();</script>
 </head>
 <body>
-<!-- last-synced: 2026-06-30 -->
+<!-- last-synced: 2026-07-09 -->
 
 <!-- NAV -->
 <nav id="nav">
@@ -272,6 +272,7 @@ document.head.appendChild(o)}initApollo();</script>
         <li>Void the original check, then re-pay the order to issue a replacement</li>
         <li>A mailed reissue gets a fresh date and a brand-new check number, so it won't be stale-dated again</li>
         <li>A check that has already cleared your bank can't be voided</li>
+        <li>Paid by ACH instead? A <strong>failed</strong> or <strong>returned</strong> ACH payment is re-issued the same way — the platform releases the order so you can re-pay it</li>
       </ul>
     </div>
 
@@ -314,6 +315,7 @@ document.head.appendChild(o)}initApollo();</script>
     <h2>Step 4 — Choose How to Pay</h2>
     <p>When you pay the order, you'll pick a method:</p>
     <ul>
+      <li><strong>Pay by ACH bank transfer</strong> — the platform sends the replacement straight to the vendor's linked bank account (typically 1–3 business days), with no check to download or deposit. This option appears only when the vendor has <a href="/ach">opted into ACH</a> and linked a bank.</li>
       <li><strong>Pay with ShelfSpace Digital Check</strong> — the vendor downloads the replacement from their portal and deposits it by mobile or print.</li>
       <li><strong>Pay with ShelfSpace Physical Mailed Check</strong> — a paper replacement is mailed to the address from Step 1.</li>
       <li><strong>Pay the Vendor Myself</strong> — record a payment you made outside ShelfSpace (cash, check, ACH, or card) so your books stay accurate without issuing a new check.</li>
@@ -322,6 +324,9 @@ document.head.appendChild(o)}initApollo();</script>
     <div class="docs-highlight">
       <strong>The reissue starts clean.</strong> A re-paid check is dated the day you send it — for example, a replacement issued on 07/15/2026 carries that date and a brand-new check number, not the old one. That's what keeps it from going stale a second time. The earlier voided check is dead: let the vendor know not to deposit it.
     </div>
+
+    <h2>When an ACH Payment Fails or Is Returned</h2>
+    <p>If you paid a vendor by <a href="/ach">ACH bank transfer</a> and the transfer can't complete — the bank <strong>fails</strong> or <strong>returns</strong> it — the vendor was never paid, so the payment is actionable rather than voided. The <strong>Payment Register</strong> flags the ACH payment with a failed or returned status badge, and the platform releases the order back to an unpaid state. Re-pay it the same way as any voided check (Step 3 above) and pick a method in Step 4 — you can retry ACH or fall back to a check.</p>
 
     <h2>Reissuing a Consignment Settlement Check</h2>
     <p>The flow above is for wholesale (AP) checks. Consignment <a href="/docs/consignment/settlements">settlement</a> checks are re-issued through a separate path tied to the settlement record, not the void-and-re-pay steps here. That workflow isn't documented yet — if you need to re-issue a settlement check, reach out to <a href="mailto:support@shelfspace.pro">support@shelfspace.pro</a> and we'll walk you through it.</p>

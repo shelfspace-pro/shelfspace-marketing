@@ -174,7 +174,7 @@
   "@type": "TechArticle",
   "headline": "Weekly Consignment Settlements",
   "datePublished": "2026-03-25",
-  "dateModified": "2026-06-02",
+  "dateModified": "2026-07-09",
   "author": { "@type": "Organization", "name": "ShelfSpace", "url": "https://shelfspace.pro" },
   "publisher": { "@type": "Organization", "name": "ShelfSpace" },
   "url": "https://shelfspace.pro/docs/consignment/settlements"
@@ -219,7 +219,7 @@ o.onload=function(){window.trackingFunctions.onLoad({appId:"69c141b32234890011a4
 document.head.appendChild(o)}initApollo();</script>
 </head>
 <body>
-<!-- last-synced: 2026-06-02 -->
+<!-- last-synced: 2026-07-09 -->
 
 <!-- NAV -->
 <nav id="nav">
@@ -270,7 +270,7 @@ document.head.appendChild(o)}initApollo();</script>
         <li>Consignment settlements run on each vendor's cadence — weekly by default, or biweekly/monthly set per vendor</li>
         <li>Calculation: net sales x category splits - aging discounts - credits = vendor payout</li>
         <li>All math uses integer-precision arithmetic, rounded to the penny</li>
-        <li>You review the summary — the platform generates the check and delivers it to the vendor</li>
+        <li>You review the summary and approve — the platform pays the vendor by Check 21 by default, or by ACH bank transfer when the vendor has opted into ACH</li>
       </ul>
     </div>
 
@@ -282,7 +282,7 @@ document.head.appendChild(o)}initApollo();</script>
     <p>The settlement engine is the core of the <a href="/consignment">ShelfSpace consignment</a> service. Here's how each step works.</p>
 
     <div class="docs-highlight">
-      <strong>What the platform runs:</strong> POS data ingestion, sale-by-sale split calculation, aging discount application, credit deductions, fee computation, report generation, and check creation. You review the final numbers and approve.
+      <strong>What the platform runs:</strong> POS data ingestion, sale-by-sale split calculation, aging discount application, credit deductions, fee computation, report generation, and payment issuance (a Check 21 by default, or an ACH bank transfer when the vendor's opted in). You review the final numbers and approve.
     </div>
 
     <h2>The Settlement Calculation, Step by Step</h2>
@@ -295,12 +295,12 @@ document.head.appendChild(o)}initApollo();</script>
 
     <p><strong>4. Subtract credits.</strong> Any outstanding <a href="/credit-recovery">credit memos</a> — returns, expirations, or co-marketing credits — are deducted from the vendor's gross payout.</p>
 
-    <p><strong>5. Arrive at the net payout.</strong> The vendor's net payout is their category share, plus or minus the discount true-up, minus returns and any conversion credit. That's the amount on the vendor's check. The platform fee is <strong>not</strong> part of this math — the flat $20 per consignment payment is billed to you, the retailer, when the check is cut, and never reduces the vendor's payout. No tiers, no percentage of your sales. Fees may be waived during your evaluation period.</p>
+    <p><strong>5. Arrive at the net payout.</strong> The vendor's net payout is their category share, plus or minus the discount true-up, minus returns and any conversion credit. That's the amount the vendor is paid. The platform fee is <strong>not</strong> part of this math — the flat $20 per consignment payment is billed to you, the retailer, when the check is cut, and never reduces the vendor's payout. No tiers, no percentage of your sales. Fees may be waived during your evaluation period.</p>
 
     <p><strong>6. Round and finalize.</strong> Every monetary calculation uses integer-precision math — the platform multiplies by 100, computes in whole cents, then converts back. This eliminates floating-point rounding errors that plague spreadsheet-based settlements. The final payout is rounded to the penny.</p>
 
     <h2>What Happens After Calculation</h2>
-    <p>Once the settlement is calculated, the platform generates a detailed <a href="/docs/consignment/settlement-reports">settlement report</a> and a Check 21 payment. The vendor receives both through the <a href="/docs/vendor-portal/overview">vendor portal</a>. You see a summary in your retailer dashboard with the option to review before the check is delivered.</p>
+    <p>Once the settlement is calculated, the platform generates a detailed <a href="/docs/consignment/settlement-reports">settlement report</a>. You see a summary in your retailer dashboard, and when you approve, the platform pays the vendor. The default is a Check 21 payment the vendor receives through the <a href="/docs/vendor-portal/overview">vendor portal</a>. When the vendor has opted into <a href="/ach">ACH bank transfer</a>, you can instead send the payout straight to their linked bank account — the vendor gets the same settlement report either way, plus an email confirmation once an ACH deposit lands. See <a href="/docs/consignment/approve-pay-vs-paid-externally">Approve &amp; Pay vs Paid Externally</a> for how the payout choice works at approval.</p>
 
     <p>Every calculation is backed by an audit trail that traces each line item back to the original POS transaction, so any question resolves against the source data.</p>
 
