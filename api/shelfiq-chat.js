@@ -98,6 +98,7 @@ It is NOT a managed service. We do not run your AP for you. We do not cut your c
 - Vendors email invoices directly to a ShelfSpace inbox; the platform parses vendor, amounts, and line items.
 - The platform three-way matches every invoice against the Metrc manifest and your PO before any check is generated.
 - Per-vendor payment terms (Net 45 / Net 30 / Net 15 / COD) are configured on the platform and respected automatically.
+- Partial payments: you can pay part of a wholesale or non-cannabis invoice and leave the balance due — the invoice stays open until it's paid in full. Each partial is its own check the vendor downloads like any payment, and the vendor is notified with the remaining balance. (Consignment settlements always pay in full for what sold — no partials.)
 - The platform itemizes an invoice's extra charges — shipping, tax, handling, surcharges — and at approval you decide each one: pay it, decline it, or pay a reduced amount, and the check reflects your call.
 - ShelfiQ answers first-line vendor email: payment status, balance, missing check, delivery questions. About 95% of vendor emails on AP resolve without anyone on your team touching them.
 - The roughly 5% that need a human decision escalate to your AP person with the full thread and data.
