@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Never Pay Full Price for Stale Cannabis Product</title>
+<meta name="description" content="Cannabis is perishable; your invoice charges full price anyway. The platform reads the packaged date on every Metrc package and flags stale product to reject before you pay.">
+<link rel="canonical" href="https://shelfspace.pro/blog/cannabis-inventory-freshness">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://shelfspace.pro/blog/cannabis-inventory-freshness">
+<meta property="og:title" content="Never Pay Full Price for Stale Cannabis Product">
+<meta property="og:description" content="Cannabis is perishable; your invoice charges full price anyway. The platform reads the packaged date on every Metrc package and flags stale product to reject before you pay.">
+<meta property="og:image" content="https://shelfspace.pro/og-image-v7.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Never Pay Full Price for Stale Cannabis Product">
+<meta name="twitter:description" content="Cannabis is perishable; your invoice charges full price anyway. The platform reads the packaged date on every Metrc package and flags stale product to reject before you pay.">
+<meta name="twitter:image" content="https://shelfspace.pro/og-image-v7.png">
+<meta name="apple-mobile-web-app-title" content="ShelfSpace">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+<style>
+  @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-12px); } }
+
+  /* ─── HERO ENHANCEMENTS ─── */
+  .page-hero { padding-bottom: 40px; }
+  .hero-bg-gradient { position: absolute; top: -30%; right: -20%; width: 700px; height: 700px; background: radial-gradient(circle, rgba(149,213,178,0.18) 0%, rgba(149,213,178,0) 70%); animation: float 8s ease-in-out infinite; pointer-events: none; }
+  .hero-bg-gradient-2 { position: absolute; bottom: -20%; left: -15%; width: 550px; height: 550px; background: radial-gradient(circle, rgba(27,67,50,0.06) 0%, rgba(27,67,50,0) 70%); animation: float 10s ease-in-out infinite; animation-delay: -3s; pointer-events: none; }
+  .hero-grid-lines { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 1200px; height: 100%; opacity: 0.035; background-image: linear-gradient(var(--green-deep) 1px, transparent 1px), linear-gradient(90deg, var(--green-deep) 1px, transparent 1px); background-size: 80px 80px; pointer-events: none; }
+  .page-hero .section-label,
+  .page-hero .section-title,
+  .page-hero .section-desc { opacity: 0; transform: translateY(30px); }
+  .page-hero .section-label { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1); }
+  .page-hero .section-title { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s, transform 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s; }
+  .page-hero .section-desc { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1) 0.25s, transform 0.8s cubic-bezier(0.22,1,0.36,1) 0.25s; }
+  .page-hero.hero-loaded .section-label,
+  .page-hero.hero-loaded .section-title,
+  .page-hero.hero-loaded .section-desc { opacity: 1; transform: translateY(0); }
+
+  /* ─── REVEAL ─── */
+  .reveal {
+    opacity: 0; transform: translateY(40px);
+    transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+  /* ─── ARTICLE BODY ─── */
+  .article-body { max-width: 720px; margin: 0 auto; padding: 0 48px 80px; }
+  .article-body h2 { font-size: 24px; font-weight: 700; color: var(--green-deep); margin: 48px 0 16px; letter-spacing: -0.5px; line-height: 1.3; }
+  .article-body h3 { font-size: 19px; font-weight: 700; color: var(--green-deep); margin: 32px 0 12px; letter-spacing: -0.3px; line-height: 1.3; }
+  .article-body p { font-size: 17px; line-height: 1.85; color: var(--slate-600); margin-bottom: 24px; }
+  .article-body ul, .article-body ol { margin-bottom: 24px; padding-left: 24px; }
+  .article-body li { font-size: 17px; line-height: 1.85; color: var(--slate-600); margin-bottom: 8px; }
+  .article-body strong { color: var(--green-deep); font-weight: 600; }
+  .article-body a { color: var(--green-mid); font-weight: 500; text-decoration: none; }
+  .article-body a:hover { color: var(--green-deep); text-decoration: underline; }
+  .article-body blockquote { border-left: 3px solid var(--green-accent); padding: 16px 24px; margin: 32px 0; background: var(--green-ghost); border-radius: 0 8px 8px 0; }
+  .article-body blockquote p { font-style: italic; color: var(--green-dark); margin-bottom: 0; }
+
+  /* ─── AT A GLANCE ─── */
+  .article-glance {
+    max-width: 720px; margin: 0 auto 40px; padding: 24px 28px;
+    background: var(--green-ghost); border: 1px solid rgba(149,213,178,0.3);
+    border-radius: 12px;
+  }
+  .article-glance h2 {
+    font-size: 14px; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--green-mid); margin: 0 0 12px;
+  }
+  .article-glance ul { list-style: none; padding: 0; margin: 0; }
+  .article-glance li {
+    font-size: 15px; line-height: 1.6; color: var(--slate-600);
+    padding: 4px 0 4px 20px; position: relative;
+  }
+  .article-glance li::before {
+    content: ''; position: absolute; left: 0; top: 12px;
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--green-accent);
+  }
+
+  /* ─── CONFIRM PHYSICAL RECEIPT MOCKUP ─── */
+  .rcv-seq { max-width: 470px; margin: 40px auto; }
+  .rcv { background: #fff; border: 1px solid var(--slate-200); border-radius: 18px; box-shadow: 0 10px 34px rgba(27,67,50,0.10); padding: 22px 22px 18px; }
+  .rcv-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+  .rcv-title { font: 700 16px/1.3 var(--font-display); color: var(--green-deep); margin: 0; letter-spacing: -0.3px; }
+  .rcv-x { font: 400 18px/1 var(--font-mono); color: var(--slate-300); flex-shrink: 0; }
+  .rcv-sub { font: 400 12px/1.5 var(--font-mono); color: var(--slate-500); margin: 5px 0 14px; }
+  .rcv-line { display: flex; gap: 12px; padding: 13px 0; border-top: 1px solid var(--slate-100); }
+  .rcv-line:first-of-type { border-top: none; padding-top: 4px; }
+  .rcv-dot { width: 10px; height: 10px; border-radius: 50%; margin-top: 5px; flex-shrink: 0; }
+  .rcv-dot.is-bad { background: #dc2626; }
+  .rcv-dot.is-warn { background: #f59e0b; }
+  .rcv-dot.is-ok { background: var(--green-accent); }
+  .rcv-prod { font: 600 13.5px/1.35 var(--font-display); color: var(--green-deep); margin: 0; }
+  .rcv-note { font: 400 12px/1.5 var(--font-display); margin: 4px 0 0; }
+  .rcv-note.is-bad { color: #b91c1c; }
+  .rcv-note.is-warn { color: #92400e; }
+  .rcv-note.is-ok { color: #2d6a4f; }
+  .rcv-strip { background: #fef2f2; border: 1px solid #fecaca; border-radius: 10px; padding: 11px 13px; margin: 15px 0 0; font: 500 12.5px/1.45 var(--font-display); color: #991b1b; }
+  .rcv-btns { display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-end; margin: 15px 0 0; }
+  .rcv-btn { font: 600 12px/1 var(--font-display); padding: 9px 13px; border-radius: 9px; border: 1px solid var(--slate-200); color: var(--slate-600); background: #fff; white-space: nowrap; }
+  .rcv-btn.is-primary { background: var(--green-deep); color: #fff; border-color: var(--green-deep); }
+  @media (max-width: 600px) {
+    .rcv { padding: 18px 16px 16px; }
+    .rcv-btns { justify-content: stretch; }
+    .rcv-btn { flex: 1 1 auto; text-align: center; }
+  }
+
+  /* kit callout text guard against .article-body p cascade */
+  .blog-callout .blog-callout-text { margin: 0; }
+
+  /* ─── FAQ ACCORDION ─── */
+  .faq-list details {
+    border: 1px solid var(--slate-200); border-radius: 10px;
+    margin-bottom: 12px; background: var(--white);
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .faq-list details[open] { background: var(--green-ghost); border-color: rgba(149,213,178,0.45); }
+  .faq-list summary {
+    list-style: none; cursor: pointer;
+    padding: 16px 20px;
+    font: 600 16px/1.4 var(--font-display); color: var(--green-deep);
+    display: flex; justify-content: space-between; align-items: center; gap: 12px;
+  }
+  .faq-list summary::-webkit-details-marker { display: none; }
+  .faq-list summary::after {
+    content: '+'; flex-shrink: 0;
+    font: 400 22px/1 var(--font-mono); color: var(--green-mid);
+    transition: transform 0.2s;
+  }
+  .faq-list details[open] summary::after { content: '−'; }
+  .faq-list details p {
+    padding: 0 20px 18px; margin: 0;
+    font-size: 15px; line-height: 1.7; color: var(--slate-600);
+  }
+
+  /* ─── FOOTER 5-COL ─── */
+  .footer-top { grid-template-columns: 2fr 1fr 1fr 1fr 1fr; }
+  @media (max-width: 900px) { .footer-top { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px) { .footer-top { grid-template-columns: 1fr; } }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    .article-body { padding: 0 24px 60px; }
+  }
+
+  /* ─── REDUCED MOTION ─── */
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; transition: none; }
+    .page-hero .section-label,
+    .page-hero .section-title,
+    .page-hero .section-desc { opacity: 1; transform: none; transition: none; }
+    .hero-bg-gradient, .hero-bg-gradient-2 { animation: none; }
+  }
+</style>
+<noscript><style>.reveal,.page-hero .section-label,.page-hero .section-title,.page-hero .section-desc{opacity:1;transform:none;transition:none;}</style></noscript>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-H2LBJT03WE"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-H2LBJT03WE');</script>
+<script>function initApollo(){var n=Math.random().toString(36).substring(7),o=document.createElement("script");
+o.src="https://assets.apollo.io/micro/website-tracker/tracker.iife.js?nocache="+n,o.async=!0,o.defer=!0,
+o.onload=function(){window.trackingFunctions.onLoad({appId:"69c141b32234890011a43849"})},
+document.head.appendChild(o)}initApollo();</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Never Pay Full Price for Stale Cannabis Product",
+  "description": "Cannabis is perishable, but the vendor's invoice charges full price whether product was packaged last week or last quarter. The platform matches every Metrc manifest to your delivery before you receive it, reads the packaged date on each package, and flags stale product for you to reject at the dock — before you pay.",
+  "author": { "@type": "Person", "name": "Chris Mitchem" },
+  "publisher": { "@type": "Organization", "name": "ShelfSpace", "url": "https://shelfspace.pro" },
+  "datePublished": "2026-07-11",
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://shelfspace.pro/blog/cannabis-inventory-freshness" },
+  "url": "https://shelfspace.pro/blog/cannabis-inventory-freshness",
+  "image": "https://shelfspace.pro/og-image-v7.png"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://shelfspace.pro/" },
+    { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://shelfspace.pro/blog" },
+    { "@type": "ListItem", "position": 3, "name": "Never Pay Full Price for Stale Cannabis Product" }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How does ShelfSpace know a cannabis product is too old?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It reads the packaged date Metrc records on every package and compares it to your freshness rule for that category. There is no reliance on expiration dates — those are rarely filled in on cannabis transfers — so the platform works from how long ago the product was actually packaged. Anything older than your limit is flagged on the line at the dock, in plain English, with the package tag to reject."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I set my own cannabis freshness limits?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Out of the box, the platform flags Flower and Pre-Rolls packaged more than 60 days ago, and Concentrates, Vapes, and Edibles more than 120 days ago. You can tune every threshold — by category, by vendor, or down to a specific SKU — so the rules match how your shelf actually moves."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What happens to cannabis product I reject at the dock?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "You reject the flagged package during Metrc acceptance and it goes back with the driver — it never enters your inventory. The amount comes off the invoice through the same receive-and-reconcile flow you already use, so you only pay for what you kept. The vendor gets an itemized notice showing which product was rejected, how old it was, and the amount coming off the invoice."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does the freshness check work on consignment deliveries too?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. The same freshness and mismatch checks run on consignment deliveries. Because you have not paid for consignment product up front, the conversation with the vendor is a swap or a pickup rather than a credit — but stale product still gets caught and rejected at the dock before it reaches your shelf."
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="/" class="nav-logo">
+    <div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div>
+    <span class="nav-logo-text">ShelfSpace</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="/consignment">Consignment</a></li>
+    <li><a href="/accounts-payable">Accounts Payable</a></li>
+    <li><a href="/credit-recovery">Credit Recovery</a></li>
+    <li class="nav-dropdown"><button class="nav-dropdown-toggle" aria-haspopup="true" aria-expanded="false">Platform <svg class="dropdown-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></button><div class="nav-dropdown-menu"><a href="/vendor-management">Vendor Management</a><a href="/how-it-works">How It Works</a><a href="/features">Features</a><a href="/shelfiq">ShelfiQ</a><a href="/checks">Check Payments</a><a href="/tutorials">Tutorials</a></div></li>
+    <li><a href="/pricing">Pricing</a></li>
+    <li><a href="/about">About</a></li>
+    <li><a href="/contact" class="nav-cta">Get Started <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a></li>
+  </ul>
+  <div class="nav-hamburger" onclick="document.querySelector('.nav-links').classList.toggle('mobile-open'); event.stopPropagation();"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="hero-bg-gradient"></div>
+  <div class="hero-bg-gradient-2"></div>
+  <div class="hero-grid-lines"></div>
+  <div class="section-label">Delivery Freshness</div>
+  <h1 class="section-title">Stop paying full price for product that's already aging out</h1>
+  <p class="section-desc">Cannabis is perishable, but your invoice doesn't know that. The platform matches every Metrc manifest to your delivery before you receive it — so product that's too old, short counts, and mismatches get caught at the dock, not after the check clears.</p>
+</div>
+
+<!-- AT A GLANCE -->
+<div class="article-glance">
+  <h2>At a glance</h2>
+  <ul>
+    <li>Cannabis is perishable — but the vendor's invoice charges full price whether product was packaged last week or last quarter.</li>
+    <li>The platform reads the <strong>packaged date</strong> on every Metrc package and flags anything older than <strong>your freshness rule</strong> for that category.</li>
+    <li>Out of the box: Flower and Pre-Rolls over <strong>60 days</strong>, Concentrates, Vapes, and Edibles over <strong>120</strong> — tune every threshold by category, vendor, or SKU.</li>
+    <li>At the dock you see the fail in plain English — <em>"packaged 108 days ago; your Flower rule is 60"</em> — and reject the package in Metrc. It goes back with the driver.</li>
+    <li>Rejected product <strong>comes off your invoice automatically</strong>, and the vendor gets an itemized notice grounded in the shared Metrc record.</li>
+    <li>The same check catches <strong>short counts and mismatches</strong> between the invoice and the manifest — so you never overpay for what didn't arrive.</li>
+  </ul>
+</div>
+
+<!-- ARTICLE BODY -->
+<article class="article-body">
+
+  <p class="reveal">You buy flower expecting it to move at a certain margin over the next few weeks. What you don't see on the invoice is the clock. Cannabis is perishable — flower dries out, cannabinoids degrade, and a jar packaged three months before it reached your dock is worth less the day it arrives than one packaged last week. You pay the same price for both.</p>
+
+  <p class="reveal">Every other part of the delivery gets a second look. Someone counts the boxes. The invoice gets matched to the order. But nothing in the old workflow ever asked the one question that decides whether product will actually sell before it ages out: <em>how old is this already?</em> That number lives in Metrc, on every package — and until now, nobody was reading it at the dock.</p>
+
+  <h2 class="reveal">The invoice charges full price. Metrc knows the age.</h2>
+
+  <p class="reveal">Here's the thing about a cannabis delivery: you already have the answer. Every package that transfers to your license carries a <strong>packaged date</strong> in Metrc, logged at the source. The invoice is the vendor's word on what you owe. Metrc is the shared record of what actually crossed your door — and how old it was when it did.</p>
+
+  <div class="vs-split reveal">
+    <div class="vs-col vs-neg">
+      <div class="vs-head">
+        <svg class="vs-ico" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        <p class="vs-tag">The invoice</p>
+      </div>
+      <p class="vs-text">What the vendor says you owe. Full price on every line — no mention of how long the product has been sitting since it was packaged.</p>
+    </div>
+    <div class="vs-col vs-pos">
+      <div class="vs-head">
+        <svg class="vs-ico" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        <p class="vs-tag">Metrc</p>
+      </div>
+      <p class="vs-text">What actually arrived — including the packaged date on every package. The record that tells you whether product is fresh enough to sell before it ages out.</p>
+    </div>
+  </div>
+
+  <p class="reveal">This isn't about distrusting your vendor. Old inventory piles up on everyone; a jar gets pushed to the back of a shelf and shipped a quarter later without anyone meaning any harm. The point is that you and your vendor both want to settle on product that will actually sell. Metrc is the record that settles it — so a bit of honest aging doesn't quietly become a loss you carry.</p>
+
+  <h2 class="reveal">The check moves to the dock</h2>
+
+  <p class="reveal">Most of ShelfSpace's over-pay protection already runs the moment you <a href="/blog/cannabis-invoice-metrc-verification">approve a delivery for payment</a> — the invoice gets checked against Metrc before a check is ever cut. Manifest-first receiving moves the first look even earlier: to the moment the truck is still at your door, when you can still do something about it.</p>
+
+  <p class="reveal">Before a cannabis delivery can be received, the platform <strong>matches its Metrc manifest</strong> to the delivery — automatically off the invoice, or in one click from a list of incoming manifests. That match is what unlocks receiving. (If Metrc is down, anyone on your team can override with a reason — it keeps the dock moving and leaves a record.)</p>
+
+  <p class="reveal">Once it's matched, receiving gets a lot smarter. When you open <strong>Confirm Physical Receipt</strong>, the platform has already compared the manifest to the invoice line by line and read the packaged date on every package. Anything that fails your freshness rules is called out in plain English, right on the line:</p>
+
+  <figure class="rcv-seq reveal">
+    <div class="rcv">
+      <div class="rcv-head">
+        <p class="rcv-title">Confirm Physical Receipt</p>
+        <span class="rcv-x" aria-hidden="true">✕</span>
+      </div>
+      <p class="rcv-sub">Fernway · Invoice #10428 · 9 packages · Metrc matched</p>
+      <div class="rcv-line">
+        <span class="rcv-dot is-bad" aria-hidden="true"></span>
+        <div>
+          <p class="rcv-prod">Flower · Blue Dream 3.5g × 24</p>
+          <p class="rcv-note is-bad">Fails freshness rules — packaged 03/23/2026 (108 days; your Flower rule is 60). Reject package …4821 in Metrc.</p>
+        </div>
+      </div>
+      <div class="rcv-line">
+        <span class="rcv-dot is-warn" aria-hidden="true"></span>
+        <div>
+          <p class="rcv-prod">Pre-Rolls · Sunset Sherbet 1g × 10</p>
+          <p class="rcv-note is-warn">Invoice qty 10 · Metrc manifest qty 8</p>
+        </div>
+      </div>
+      <div class="rcv-line">
+        <span class="rcv-dot is-ok" aria-hidden="true"></span>
+        <div>
+          <p class="rcv-prod">Vapes · Gelato 0.5g × 12</p>
+          <p class="rcv-note is-ok">Matches Metrc · packaged 41 days ago</p>
+        </div>
+      </div>
+      <p class="rcv-strip">1 package fails freshness rules — reject it during Metrc acceptance and it goes back with the driver.</p>
+      <div class="rcv-btns" aria-hidden="true">
+        <span class="rcv-btn">Cancel</span>
+        <span class="rcv-btn is-primary">Confirm receipt</span>
+      </div>
+    </div>
+    <figcaption style="font-size:13px;line-height:1.5;color:var(--slate-500);text-align:center;margin:14px 0 0;">The Confirm Physical Receipt dialog flags stale product and quantity mismatches before you accept. Example figures shown.</figcaption>
+  </figure>
+
+  <p class="reveal">You don't have to know Metrc package tags or do date math. The line tells you exactly what's wrong and exactly what to do: <strong>reject that package during Metrc acceptance.</strong> It goes back on the truck, and it never enters your inventory.</p>
+
+  <h2 class="reveal">And it comes off your invoice</h2>
+
+  <p class="reveal">Here's the whole pass, from the matched manifest to the adjusted invoice:</p>
+
+  <div class="flow-steps reveal">
+    <div class="flow-step">
+      <div class="flow-step-num">1</div>
+      <div class="flow-step-body">
+        <p class="flow-step-title">The manifest matches the delivery</p>
+        <p class="flow-step-desc">Automatically off the invoice, or one click from the incoming-manifests list. Matching is what unlocks receiving.</p>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-step-num">2</div>
+      <div class="flow-step-body">
+        <p class="flow-step-title">The platform reads every packaged date</p>
+        <p class="flow-step-desc">And flags anything older than your rule for that category, plus any short count or mismatch against the invoice.</p>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-step-num">3</div>
+      <div class="flow-step-body">
+        <p class="flow-step-title">You reject stale product in Metrc</p>
+        <p class="flow-step-desc">The flagged package goes back with the driver instead of onto your shelf.</p>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-step-num">4</div>
+      <div class="flow-step-body">
+        <p class="flow-step-title">It comes off your invoice</p>
+        <p class="flow-step-desc">The payable adjusts to what you actually kept, through the same receive-and-reconcile flow you already use. You never pay for what you sent back.</p>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-step-num">5</div>
+      <div class="flow-step-body">
+        <p class="flow-step-title">The vendor gets an itemized notice</p>
+        <p class="flow-step-desc">Which product, which tag, how old, and the amount coming off the invoice. Grounded in the shared Metrc record, so the conversation starts from facts.</p>
+      </div>
+    </div>
+  </div>
+
+  <p class="reveal">That fourth step is the one that matters on your P&amp;L. You're not eating the cost of aged-out product and hoping to argue it back later. It comes off the invoice the moment you reject it — you only pay for what you actually kept.</p>
+
+  <div class="blog-callout reveal">
+    <svg class="blog-callout-ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 14"/></svg>
+    <p class="blog-callout-text">The invoice charges full price whether product was packaged last week or last quarter. Metrc knows the difference. Manifest-first receiving reads it at the dock — while the truck is still there and you can still send it back.</p>
+  </div>
+
+  <h2 class="reveal">Know before the truck even shows up</h2>
+
+  <p class="reveal">Because the platform matches manifests while they're still in transit, it can warn you the night before. If tomorrow's delivery contains packages that fail your freshness rules, your team gets an email — so you walk up to the dock already knowing which packages to reject, instead of finding out after you've signed for them.</p>
+
+  <p class="reveal">Freshness is one number on the manifest. Short counts and lines that never made the truck are others. Manifest-first receiving reads all of them at the dock, so the two ways a delivery quietly costs you — <strong>paying for product that didn't arrive, and paying full price for product that's already aging out</strong> — both get caught in the same pass. It's one more piece of how the <a href="/accounts-payable">accounts payable system</a> keeps you from overpaying without adding a step to your week. Want the full mechanics? The <a href="/docs/deliveries/manifest-first-receiving">manifest-first receiving guide</a> walks through matching, freshness rules, and the Rejected tab.</p>
+
+  <p class="reveal">If you're receiving cannabis deliveries today without anything reading the packaged date before you sign, <a href="/contact">talk to us</a> — we'll show you how much of your shelf is older than you think.</p>
+
+</article>
+
+<!-- FAQ -->
+<section style="max-width: 720px; margin: 0 auto; padding: 0 48px 60px;">
+    <h2 class="reveal" style="font-size:24px;font-weight:700;color:var(--green-deep);margin:0 0 16px;letter-spacing:-0.5px;line-height:1.3;">Common questions</h2>
+    <div class="faq-list reveal">
+      <details>
+        <summary>How does ShelfSpace know a cannabis product is too old?</summary>
+        <p>It reads the packaged date Metrc records on every package and compares it to your freshness rule for that category. There is no reliance on expiration dates — those are rarely filled in on cannabis transfers — so the platform works from how long ago the product was actually packaged. Anything older than your limit is flagged on the line at the dock, in plain English, with the package tag to reject.</p>
+      </details>
+      <details>
+        <summary>Can I set my own cannabis freshness limits?</summary>
+        <p>Yes. Out of the box, the platform flags Flower and Pre-Rolls packaged more than 60 days ago, and Concentrates, Vapes, and Edibles more than 120 days ago. You can tune every threshold — by category, by vendor, or down to a specific SKU — so the rules match how your shelf actually moves.</p>
+      </details>
+      <details>
+        <summary>What happens to cannabis product I reject at the dock?</summary>
+        <p>You reject the flagged package during Metrc acceptance and it goes back with the driver — it never enters your inventory. The amount comes off the invoice through the same receive-and-reconcile flow you already use, so you only pay for what you kept. The vendor gets an itemized notice showing which product was rejected, how old it was, and the amount coming off the invoice.</p>
+      </details>
+      <details>
+        <summary>Does the freshness check work on consignment deliveries too?</summary>
+        <p>Yes. The same freshness and mismatch checks run on consignment deliveries. Because you have not paid for consignment product up front, the conversation with the vendor is a swap or a pickup rather than a credit — but stale product still gets caught and rejected at the dock before it reaches your shelf.</p>
+      </details>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-content">
+    <div class="section-label reveal">Get Started</div>
+    <h2 class="section-title reveal">See how much of your shelf is older than you think.</h2>
+    <p class="section-desc reveal">Free evaluation. We look at how you receive and pay for deliveries today, and show you where stale product and short counts are quietly costing you — before the next truck shows up.</p>
+    <div class="cta-actions reveal">
+      <a href="/contact" class="btn-primary">
+        Get a Demo
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+      <a href="/contact" class="btn-secondary">Talk to us</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="/" class="nav-logo"><div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div><span class="nav-logo-text">ShelfSpace</span></a>
+      <p>Every Vendor. Every Payment. One Engine.</p>
+    </div>
+    <div class="footer-col"><h4>Services</h4><ul><li><a href="/consignment">Consignment</a></li><li><a href="/accounts-payable">Accounts Payable</a></li><li><a href="/credit-recovery">Credit Recovery</a></li><li><a href="/checks">Check Payments</a></li><li><a href="/shelfiq">ShelfiQ</a></li></ul></div>
+    <div class="footer-col"><h4>Platform</h4><ul><li><a href="/features">Features</a></li><li><a href="/how-it-works">How It Works</a></li><li><a href="/pricing">Pricing</a></li><li><a href="/about">About</a></li><li><a href="/blog">Blog</a></li><li><a href="/docs">Docs</a></li><li><a href="/tutorials">Tutorials</a></li></ul></div>
+    <div class="footer-col"><h4>Access</h4><ul><li><a href="https://ourshelf.space/login">Login</a></li><li><a href="/contact">Sign Up</a></li><li><a href="/contact">Contact</a></li><li><a href="/vendors">For Vendors</a></li><li><a href="/for-bookkeepers">For Bookkeepers</a></li></ul></div>
+    <div class="footer-col"><h4>Company</h4><ul><li><a href="mailto:support@shelfspace.pro">Support</a></li><li><a href="https://linkedin.com/company/shelfspace-pro" target="_blank" rel="noopener" class="footer-social-link"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> LinkedIn</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><p>&copy; 2026 ShelfSpace Technologies Inc.</p><div class="footer-bottom-links"><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div></div>
+</footer>
+
+<script>
+(function() {
+  var nav = document.getElementById('nav');
+  var pageHero = document.querySelector('.page-hero');
+  var parallaxSections = [ document.querySelector('.cta-section') ];
+
+  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var isMobile = window.innerWidth < 900;
+  var ticking = false;
+
+  requestAnimationFrame(function() {
+    nav.classList.toggle('scrolled', window.scrollY > 20);
+    if (pageHero) pageHero.classList.add('hero-loaded');
+  });
+
+  var revealObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(function(el) { revealObserver.observe(el); });
+
+  function onScroll() {
+    var scrollY = window.scrollY;
+    nav.classList.toggle('scrolled', scrollY > 20);
+    if (prefersReduced || isMobile) return;
+    var wh = window.innerHeight;
+    parallaxSections.forEach(function(section) {
+      if (!section) return;
+      var rect = section.getBoundingClientRect();
+      if (rect.bottom < 0 || rect.top > wh) return;
+      var center = rect.top + rect.height / 2 - wh / 2;
+      section.style.setProperty('--parallax-y', (center * 0.08) + 'px');
+    });
+  }
+
+  window.addEventListener('scroll', function() {
+    if (!ticking) { requestAnimationFrame(function() { onScroll(); ticking = false; }); ticking = true; }
+  }, { passive: true });
+
+  onScroll();
+
+  window.addEventListener('resize', function() {
+    isMobile = window.innerWidth < 900;
+    if (isMobile) { parallaxSections.forEach(function(section) { if (section) section.style.setProperty('--parallax-y', '0px'); }); }
+  });
+
+  document.addEventListener('click', function() {
+    var navLinks = document.querySelector('.nav-links');
+    if (navLinks && navLinks.classList.contains('mobile-open')) { navLinks.classList.remove('mobile-open'); }
+  });
+})();
+</script>
+<script src="/shelfiq-widget.js"></script>
+</body>
+</html>
