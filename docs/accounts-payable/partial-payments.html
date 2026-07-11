@@ -3,20 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Consignment Contracts and Terms — ShelfSpace</title>
-<meta name="description" content="Cannabis consignment agreement terms: profit splits, shrinkage, discounts, payment terms. You set them with your vendor; the platform applies them.">
-<link rel="canonical" href="https://shelfspace.pro/docs/consignment/contracts">
+<title>Partial Invoice Payments — ShelfSpace</title>
+<meta name="description" content="Partial invoice payments let you pay part of a wholesale or non-cannabis vendor invoice, leave it open with a remaining balance, and notify the vendor automatically.">
+<link rel="canonical" href="https://shelfspace.pro/docs/accounts-payable/partial-payments">
 <meta property="og:type" content="article">
-<meta property="og:url" content="https://shelfspace.pro/docs/consignment/contracts">
-<meta property="og:title" content="Consignment Contracts and Terms — ShelfSpace">
-<meta property="og:description" content="Cannabis consignment agreement terms: profit splits, shrinkage, discounts, payment terms. You set them with your vendor; the platform applies them.">
+<meta property="og:url" content="https://shelfspace.pro/docs/accounts-payable/partial-payments">
+<meta property="og:title" content="Partial Invoice Payments — ShelfSpace">
+<meta property="og:description" content="Partial invoice payments let you pay part of a wholesale or non-cannabis vendor invoice, leave it open with a remaining balance, and notify the vendor automatically.">
 <meta property="og:image" content="https://shelfspace.pro/og-image-v7.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:type" content="image/png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Consignment Contracts and Terms — ShelfSpace">
-<meta name="twitter:description" content="Cannabis consignment agreement terms: profit splits, shrinkage, discounts, payment terms. You set them with your vendor; the platform applies them.">
+<meta name="twitter:title" content="Partial Invoice Payments — ShelfSpace">
+<meta name="twitter:description" content="Partial invoice payments let you pay part of a wholesale or non-cannabis vendor invoice, leave it open with a remaining balance, and notify the vendor automatically.">
 <meta name="twitter:image" content="https://shelfspace.pro/og-image-v7.png">
 <meta name="apple-mobile-web-app-title" content="ShelfSpace">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -120,6 +120,25 @@
   }
   .docs-highlight strong { color: var(--green-deep); }
 
+  /* ── Vendor Note Card ── */
+  .docs-note-card {
+    margin: 24px 0; border: 1px solid var(--slate-200); border-radius: 12px;
+    overflow: hidden; background: var(--white); font-variant-ligatures: none;
+  }
+  .docs-note-head {
+    padding: 12px 18px; background: var(--slate-50);
+    border-bottom: 1px solid var(--slate-200);
+    font-size: 13px; color: var(--slate-500);
+  }
+  .docs-note-head strong { color: var(--green-deep); font-weight: 600; }
+  .docs-note-body { padding: 18px 20px; }
+  .docs-note-subject { font-size: 15px; font-weight: 700; color: var(--green-deep); margin: 0 0 14px; }
+  .docs-note-table { width: 100%; border-collapse: collapse; font-family: var(--font-mono); font-size: 13px; }
+  .docs-note-table td { padding: 7px 0; border-bottom: 1px solid var(--slate-100); color: var(--slate-600); }
+  .docs-note-table td:last-child { text-align: right; color: var(--green-deep); font-weight: 700; }
+  .docs-note-table tr:last-child td { border-bottom: none; }
+  .docs-note-table tr.total td { padding-top: 10px; }
+
   /* ── Related Docs ── */
   .docs-related {
     margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--slate-100);
@@ -172,12 +191,12 @@
 {
   "@context": "https://schema.org",
   "@type": "TechArticle",
-  "headline": "Consignment Contracts and Terms",
-  "datePublished": "2026-03-25",
-  "dateModified": "2026-06-02",
+  "headline": "Partial Invoice Payments",
+  "datePublished": "2026-07-11",
+  "dateModified": "2026-07-11",
   "author": { "@type": "Organization", "name": "ShelfSpace", "url": "https://shelfspace.pro" },
   "publisher": { "@type": "Organization", "name": "ShelfSpace" },
-  "url": "https://shelfspace.pro/docs/consignment/contracts"
+  "url": "https://shelfspace.pro/docs/accounts-payable/partial-payments"
 }
 </script>
 <script type="application/ld+json">
@@ -200,13 +219,13 @@
     {
       "@type": "ListItem",
       "position": 3,
-      "name": "Consignment",
-      "item": "https://shelfspace.pro/docs/consignment/overview"
+      "name": "Accounts Payable",
+      "item": "https://shelfspace.pro/docs/accounts-payable/overview"
     },
     {
       "@type": "ListItem",
       "position": 4,
-      "name": "Consignment Contracts and Terms"
+      "name": "Partial Invoice Payments"
     }
   ]
 }
@@ -219,7 +238,7 @@ o.onload=function(){window.trackingFunctions.onLoad({appId:"69c141b32234890011a4
 document.head.appendChild(o)}initApollo();</script>
 </head>
 <body>
-<!-- last-synced: 2026-06-02 -->
+<!-- last-synced: 2026-07-11 -->
 
 <!-- NAV -->
 <nav id="nav">
@@ -244,7 +263,7 @@ document.head.appendChild(o)}initApollo();</script>
 <div class="docs-hero">
   <div class="docs-hero-content">
     <a href="/docs" class="docs-hero-badge">Documentation</a>
-    <h1 class="docs-hero-title">Partnership Setup &amp; Terms</h1>
+    <h1 class="docs-hero-title">Partial Invoice Payments</h1>
   </div>
 </div>
 
@@ -259,69 +278,96 @@ document.head.appendChild(o)}initApollo();</script>
   <!-- CONTENT -->
   <main class="docs-content">
     <div class="docs-breadcrumb">
-      <a href="/docs">Docs</a> / <a href="/docs/consignment/overview">Consignment</a> / Partnership Setup & Terms
+      <a href="/docs">Docs</a> / <a href="/docs/accounts-payable/overview">Accounts Payable</a> / Partial Payments
     </div>
-    <div class="docs-category">Consignment</div>
+    <div class="docs-category">Accounts Payable</div>
 
     <!-- AT A GLANCE -->
     <div class="docs-glance">
       <h2>At a Glance</h2>
       <ul>
-        <li>Adding a vendor automatically sets them up as <strong>both</strong> a consignment (scan-based) partner and a wholesale (AP) partner — no proposals, no opt-in, no bilateral approval</li>
-        <li>You, the retailer, set the terms — category splits, caps, payment terms, and settlement frequency — in the vendor's Settings tab</li>
-        <li>Whether a specific delivery is consignment or wholesale is your call per order, at receive time</li>
-        <li>Term changes take effect immediately, from the next cycle; there's no vendor sign-off gate in the platform</li>
+        <li>Partial invoice payments let you pay part of a wholesale or non-cannabis vendor invoice instead of the full balance</li>
+        <li>The invoice stays open with a remaining balance and keeps showing in Payments Due until it's paid in full</li>
+        <li>The vendor is notified automatically — partial amount paid, previously paid, and the balance still owed</li>
+        <li>Check rail only: partials go out as digital or mailed checks, one check per payment</li>
+        <li>Consignment settlements are excluded — partial payments are for wholesale and non-cannabis invoices</li>
       </ul>
     </div>
 
     <!-- BODY CONTENT -->
-    <h2>How Partnerships Work on ShelfSpace</h2>
-    <p>When you add a vendor, ShelfSpace automatically sets them up as <strong>both</strong> a consignment (scan-based / SBT) partner <strong>and</strong> a wholesale (AP) partner. There's nothing to propose, nothing to opt into, and no bilateral negotiation to run inside the platform — both partnership types are provisioned the moment the vendor is created, so you're ready to receive either kind of delivery right away.</p>
+    <h2>How Partial Invoice Payments Work</h2>
+    <p>A partial invoice payment lets you pay part of a vendor invoice now and the rest later, without splitting the invoice or losing track of what's left. You'll use it on the <strong>Wholesale Payments</strong> and <strong>Non-Cannabis Payments</strong> tabs of your <a href="/docs/accounts-payable/creating-payments">Payments</a> page — any PO-backed invoice sitting in Payments Due.</p>
 
-    <p>This is a deliberate design choice. ShelfSpace doesn't broker, negotiate, or store contracts between you and your vendors. Whatever commercial terms the two of you agree to, you arrange directly — a conversation, a handshake, a signed agreement in your own files. The platform's job is to run the <em>operations</em> those terms imply: settlements, accounts payable, credit recovery, payments, and data.</p>
+    <p>When you send a partial, the platform issues a check for the amount you chose and moves the invoice to <strong>Partially Paid</strong>. The invoice stays open, the remaining balance stays in Payments Due, and the vendor gets a notification that spells out exactly what was paid and what's still owed. Nothing about the invoice is marked settled until the balance reaches zero.</p>
 
     <div class="docs-highlight">
-      <strong>What the platform runs:</strong> Provisioning both partnership types on vendor creation, applying your configured terms to every settlement and payable automatically, and updating them the moment you change them. <strong>What you own:</strong> The vendor relationship and whatever commercial terms you agree on directly. ShelfSpace never sits between you and the vendor on the deal itself.
+      <strong>What the platform runs:</strong> the remaining-balance math, the check, the Partially Paid status, the vendor notification, and the QuickBooks sync for every partial. <strong>What you own:</strong> deciding how much to pay and when to close it out.
     </div>
 
-    <h2>You Set the Terms</h2>
-    <p>Terms live in the vendor's <strong>Settings</strong> tab in your retailer portal, and you set them unilaterally. There is no vendor-facing approval step and no negotiation log inside the platform — you configure the numbers, they take effect, and every change is captured in the audit trail.</p>
-
-    <p><strong>Category-level profit splits.</strong> Each product category (flower, concentrates, edibles, etc.) gets its own vendor/retailer revenue split. A vendor might receive 60% on flower but 55% on edibles. See <a href="/docs/consignment/profit-splits">profit splits</a> for how these work in practice.</p>
-
-    <p><strong>Discount caps and aging thresholds.</strong> You set the operational discount budget the vendor funds, and the aging thresholds at which slow-moving product gets marked down. See <a href="/docs/consignment/aging-discounts">aging discounts</a> for details.</p>
-
-    <p><strong>Payment terms and settlement frequency.</strong> For consignment, you pick each vendor's settlement cadence — weekly by default, or biweekly/monthly. For wholesale, you set the AP payment terms (COD, Net 30, Net 60, etc.). Both live on the same vendor record.</p>
-
-    <p>Changes take effect immediately — from the next cycle forward. Historical settlements are never retroactively recalculated; the terms that were active when a sale happened stay on that settlement's record.</p>
-
-    <h2>Consignment vs. Wholesale Is a Per-Order Choice</h2>
-    <p>Because every vendor is already set up for both modes, you don't decide "is this a consignment vendor or a wholesale vendor?" — you decide it <strong>per delivery, at receive time</strong>. Each delivery has a <strong>Wholesale | Consignment</strong> toggle, and that choice decides the payout path:</p>
-
+    <h2>Making a Partial Payment</h2>
+    <p>Open the order you want to pay from the Wholesale Payments or Non-Cannabis Payments tab, and start a payment as you normally would. In the amount section of the pay dialog you'll see two choices:</p>
     <ul>
-      <li><strong>Consignment</strong> — the delivery feeds the weekly settlement engine and pays out through a settlement.</li>
-      <li><strong>Wholesale</strong> — the delivery becomes an AP payable / purchase order you settle on your payment terms.</li>
+      <li><strong>Pay in full</strong> — the default, sized to the remaining balance</li>
+      <li><strong>Pay a partial amount</strong> — enter any dollar figure and the dialog shows the remaining balance after this payment</li>
+    </ul>
+    <p>Pick <strong>Pay a partial amount</strong>, type the amount, and the platform confirms the split before you send: how much goes out now and how much stays due on the invoice. Approve it and the check is generated like any other ShelfSpace payment. You can make as many partial payments against the same invoice as you need — the remaining balance updates each time.</p>
+
+    <h2>What the Vendor Sees</h2>
+    <p>Every partial payment notifies the vendor. The platform sends an email from your business — <em>"{Your DBA} via ShelfSpace"</em> — with a facts table that leaves no room for confusion about where the invoice stands:</p>
+
+    <div class="docs-note-card">
+      <div class="docs-note-head">Email to vendor — <strong>Partial payment from {Your DBA} — $X toward invoice #Y</strong></div>
+      <div class="docs-note-body">
+        <p class="docs-note-subject">A check for this payment has been issued — download it from your portal.</p>
+        <table class="docs-note-table">
+          <tr><td>Invoice total</td><td>$4,000.00</td></tr>
+          <tr><td>This payment</td><td>$2,766.00</td></tr>
+          <tr><td>Previously paid</td><td>$0.00</td></tr>
+          <tr class="total"><td>Remaining balance</td><td>$1,234.00</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <p>The check is downloadable from the vendor's portal like any other payment, and the vendor also sees the invoice marked <strong>Partially Paid</strong> with the remaining balance on their side. The language stays honest — a check has been <em>issued</em>, not "you've been paid," because a payment isn't confirmed received until it clears.</p>
+
+    <h2>Rules and Limits</h2>
+    <p>Partial payments are deliberately scoped so a balance can never be overpaid or lost:</p>
+    <ul>
+      <li><strong>Check rail only.</strong> Partials go out as Check 21 digital checks or mailed checks. <a href="/docs/accounts-payable/creating-payments">ACH bank transfers</a> aren't available for partial payments — pay in full to use ACH.</li>
+      <li><strong>Each partial is its own check.</strong> Every partial payment is a separate check and carries your standard <a href="/pricing">$20 per-check fee</a>, the same as any ShelfSpace payment.</li>
+      <li><strong>$1 minimum, and leave at least $1.</strong> A partial must be at least $1.00 and must leave at least $1.00 remaining. If your amount is within a dollar of the balance, the dialog steers you to pay in full instead.</li>
+      <li><strong>Credits apply at the close.</strong> You can't attach a <a href="/docs/credit-recovery/overview">credit memo</a> to a partial payment. Apply credits when you settle the remaining balance. Any order-level credits already applied still reduce what's owed.</li>
+      <li><strong>PO-backed invoices only.</strong> Partials work on regular invoice payments — not ad-hoc payments, recurring payments, or scheduled payments.</li>
     </ul>
 
-    <p>The same vendor can ship you a consignment order and a wholesale order on the same day; each is its own delivery with its own Order Type. See <a href="/docs/consignment/receiving-and-payout">receiving and payout</a> for the full receive flow. Visit our <a href="/consignment">consignment service page</a> for more on the overall model.</p>
+    <h2>Closing Out the Invoice</h2>
+    <p>When you're ready to finish, pay the exact remaining balance. That closing payment runs through the normal full-payment path: the invoice flips to <strong>Paid</strong>, the delivery completes, and any credit memos you've been holding can be applied. Until then, the invoice keeps surfacing in Payments Due so it never slips off your radar.</p>
+
+    <p>Voiding works the same way it does for any check. Void a partial before the invoice is settled and the remaining balance goes back up automatically. You can't void a partial after the invoice is fully paid — void the final payment first.</p>
+
+    <h2>QuickBooks Sync</h2>
+    <p>Each partial check syncs to your <a href="/docs/quickbooks/overview">QuickBooks Online</a> account as its own bill payment, sized to that check. An invoice paid in three checks shows up as three bill payments, each pre-matched in your bank feed. Your books stay accurate to the penny without a single manual journal entry, and the running balance in QuickBooks matches what ShelfSpace shows.</p>
+
+    <div class="docs-highlight">
+      <strong>See the full payment picture.</strong> Walk through what a vendor receives on a normal ShelfSpace payment — the remittance summary and the Check 21 check — in <a href="/blog/anatomy-of-an-invoice-payment">Anatomy of a Cannabis Vendor Invoice Payment</a>, or read <a href="/blog/partial-payments-vendor-invoices">why partial vendor payments matter for cannabis cash flow</a>.
+    </div>
 
     <!-- RELATED DOCS -->
     <div class="docs-related">
       <h3>Related</h3>
       <div class="docs-related-links">
-        <a href="/docs/consignment/overview">Consignment Overview</a>
-        <a href="/docs/consignment/receiving-and-payout">Receiving &amp; Payout</a>
-        <a href="/docs/consignment/approve-pay-vs-paid-externally">Approve &amp; Pay vs Paid Externally</a>
-        <a href="/docs/consignment/profit-splits">Profit Splits</a>
-        <a href="/docs/consignment/aging-discounts">Aging Discounts</a>
-        <a href="/docs/consignment/settlement-reports">Reading the Settlement Report</a>
-        <a href="/docs/consignment/settlements">Weekly Settlements</a>
+        <a href="/docs/accounts-payable/creating-payments">Payments &amp; Check Generation</a>
+        <a href="/docs/accounts-payable/invoice-verification">Invoice Verification</a>
+        <a href="/docs/checks/void-reissue">Void &amp; Reissue</a>
+        <a href="/docs/checks/overview">Check 21 Payments</a>
+        <a href="/docs/accounts-payable/recurring-payments">Recurring Payments</a>
+        <a href="/docs/accounts-payable/overview">Accounts Payable Overview</a>
       </div>
     </div>
 
     <!-- CTA -->
     <div class="docs-cta">
-      <p><strong>Ready to free up your capital? Let's talk.</strong></p>
+      <p><strong>Ready to upgrade your AP? Let's talk.</strong></p>
       <a href="/contact">Talk to Us <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a>
       <div class="docs-cta-note">Free evaluation. No commitment.</div>
     </div>

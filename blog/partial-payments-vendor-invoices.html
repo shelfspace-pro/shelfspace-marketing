@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Partial Payments to Cannabis Vendors — ShelfSpace</title>
+<meta name="description" content="Partial payments let you pay part of a cannabis vendor invoice now and the rest later — the invoice stays open, the vendor's notified with the balance, and your books stay square.">
+<link rel="canonical" href="https://shelfspace.pro/blog/partial-payments-vendor-invoices">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://shelfspace.pro/blog/partial-payments-vendor-invoices">
+<meta property="og:title" content="Partial Payments to Cannabis Vendors — ShelfSpace">
+<meta property="og:description" content="Partial payments let you pay part of a cannabis vendor invoice now and the rest later — the invoice stays open, the vendor's notified with the balance, and your books stay square.">
+<meta property="og:image" content="https://shelfspace.pro/og-image-v7.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Partial Payments to Cannabis Vendors — ShelfSpace">
+<meta name="twitter:description" content="Pay part of a cannabis vendor invoice now and the rest later. The invoice stays open, the vendor's notified with the remaining balance, and your books stay square.">
+<meta name="twitter:image" content="https://shelfspace.pro/og-image-v7.png">
+<meta name="apple-mobile-web-app-title" content="ShelfSpace">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+<style>
+  @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-12px); } }
+
+  /* ─── HERO ─── */
+  .page-hero { padding-bottom: 40px; }
+  .hero-bg-gradient { position: absolute; top: -30%; right: -20%; width: 700px; height: 700px; background: radial-gradient(circle, rgba(149,213,178,0.18) 0%, rgba(149,213,178,0) 70%); animation: float 8s ease-in-out infinite; pointer-events: none; }
+  .hero-bg-gradient-2 { position: absolute; bottom: -20%; left: -15%; width: 550px; height: 550px; background: radial-gradient(circle, rgba(27,67,50,0.06) 0%, rgba(27,67,50,0) 70%); animation: float 10s ease-in-out infinite; animation-delay: -3s; pointer-events: none; }
+  .hero-grid-lines { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 1200px; height: 100%; opacity: 0.035; background-image: linear-gradient(var(--green-deep) 1px, transparent 1px), linear-gradient(90deg, var(--green-deep) 1px, transparent 1px); background-size: 80px 80px; pointer-events: none; }
+  .page-hero .section-label,
+  .page-hero .section-title,
+  .page-hero .section-desc { opacity: 0; transform: translateY(30px); }
+  .page-hero .section-label { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1); }
+  .page-hero .section-title { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s, transform 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s; }
+  .page-hero .section-desc { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1) 0.25s, transform 0.8s cubic-bezier(0.22,1,0.36,1) 0.25s; }
+  .page-hero.hero-loaded .section-label,
+  .page-hero.hero-loaded .section-title,
+  .page-hero.hero-loaded .section-desc { opacity: 1; transform: translateY(0); }
+
+  /* ─── REVEAL ─── */
+  .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1); }
+  .reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+  /* ─── ARTICLE BODY ─── */
+  .article-body { max-width: 720px; margin: 0 auto; padding: 0 48px 80px; }
+  .article-body h2 { font-size: 24px; font-weight: 700; color: var(--green-deep); margin: 48px 0 16px; letter-spacing: -0.5px; line-height: 1.3; }
+  .article-body h3 { font-size: 19px; font-weight: 700; color: var(--green-deep); margin: 32px 0 12px; letter-spacing: -0.3px; line-height: 1.35; }
+  .article-body p { font-size: 17px; line-height: 1.85; color: var(--slate-600); margin-bottom: 24px; }
+  .article-body ul, .article-body ol { margin-bottom: 24px; padding-left: 24px; }
+  .article-body li { font-size: 17px; line-height: 1.85; color: var(--slate-600); margin-bottom: 8px; }
+  .article-body strong { color: var(--green-deep); font-weight: 600; }
+  .article-body a { color: var(--green-mid); font-weight: 500; text-decoration: none; }
+  .article-body a:hover { color: var(--green-deep); text-decoration: underline; }
+  .article-body code { font-family: var(--font-mono); font-size: 0.92em; background: var(--green-ghost); padding: 1px 6px; border-radius: 4px; color: var(--green-dark); }
+  .article-body blockquote { border-left: 3px solid var(--green-accent); padding: 16px 24px; margin: 32px 0; background: var(--green-ghost); border-radius: 0 8px 8px 0; }
+  .article-body blockquote p { font-style: italic; color: var(--green-dark); margin-bottom: 0; }
+
+  /* ─── AT A GLANCE ─── */
+  .article-glance { max-width: 720px; margin: 0 auto 40px; padding: 24px 28px; background: var(--green-ghost); border: 1px solid rgba(149,213,178,0.3); border-radius: 12px; }
+  .article-glance h2 { font-size: 14px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--green-mid); margin: 0 0 12px; }
+  .article-glance ul { list-style: none; padding: 0; margin: 0; }
+  .article-glance li { font-size: 15px; line-height: 1.6; color: var(--slate-600); padding: 4px 0 4px 20px; position: relative; }
+  .article-glance li::before { content: ''; position: absolute; left: 0; top: 12px; width: 8px; height: 8px; border-radius: 50%; background: var(--green-accent); }
+
+  /* ─── SPLIT FLOW (invoice → partial → remaining) ─── */
+  .pp-flow { max-width: 720px; margin: 8px auto 36px; display: grid; grid-template-columns: 1fr auto 1fr auto 1fr; align-items: stretch; gap: 0; }
+  .pp-flow-node { border: 1px solid var(--slate-200); border-radius: 12px; padding: 20px 18px; text-align: center; background: var(--white); font-variant-ligatures: none; }
+  .pp-flow-node.paid { background: var(--green-deep); border-color: var(--green-deep); }
+  .pp-flow-node.due { background: var(--green-ghost); border-color: rgba(149,213,178,0.5); }
+  .pp-flow-label { font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--green-mid); margin-bottom: 8px; }
+  .pp-flow-node.paid .pp-flow-label { color: var(--green-accent); }
+  .pp-flow-amount { font-family: var(--font-mono); font-size: 22px; font-weight: 700; color: var(--green-deep); letter-spacing: -1px; }
+  .pp-flow-node.paid .pp-flow-amount { color: var(--white); }
+  .pp-flow-sub { font-size: 12px; color: var(--slate-500); margin-top: 6px; line-height: 1.4; }
+  .pp-flow-node.paid .pp-flow-sub { color: rgba(255,255,255,0.75); }
+  .pp-flow-op { display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 20px; font-weight: 700; color: var(--slate-300); padding: 0 8px; }
+
+  /* ─── PAY DIALOG MOCK ─── */
+  .pp-dialog { max-width: 560px; margin: 8px auto 36px; border: 1px solid var(--slate-200); border-radius: 16px; overflow: hidden; background: var(--white); box-shadow: 0 18px 40px -22px rgba(27,67,50,0.3); font-variant-ligatures: none; }
+  .pp-dialog-head { padding: 16px 22px; border-bottom: 1px solid var(--slate-100); font-size: 15px; font-weight: 700; color: var(--green-deep); }
+  .pp-dialog-body { padding: 18px 22px 22px; }
+  .pp-card { border: 1px solid var(--slate-200); border-radius: 12px; padding: 14px 16px; margin-bottom: 10px; display: flex; align-items: center; gap: 12px; }
+  .pp-card.sel { border-color: var(--green-deep); background: var(--green-ghost); }
+  .pp-check { width: 18px; height: 18px; border-radius: 5px; border: 2px solid var(--slate-300); flex-shrink: 0; }
+  .pp-card.sel .pp-check { border-color: var(--green-deep); background: var(--green-deep); position: relative; }
+  .pp-card.sel .pp-check::after { content: ''; position: absolute; left: 4px; top: 1px; width: 5px; height: 9px; border: solid var(--white); border-width: 0 2px 2px 0; transform: rotate(45deg); }
+  .pp-card-label { font-size: 15px; font-weight: 600; color: var(--green-deep); }
+  .pp-card-amt { margin-left: auto; font-family: var(--font-mono); font-size: 15px; font-weight: 700; color: var(--green-deep); }
+  .pp-input { margin: 4px 0 0 30px; display: flex; align-items: center; gap: 10px; }
+  .pp-input-box { font-family: var(--font-mono); font-size: 18px; font-weight: 700; color: var(--green-deep); border: 1px solid var(--green-mid); border-radius: 10px; padding: 8px 14px; }
+  .pp-remaining { margin: 12px 0 0 30px; font-size: 13px; color: var(--slate-500); line-height: 1.5; }
+  .pp-remaining strong { color: var(--green-deep); font-weight: 700; }
+  .pp-send { margin-top: 18px; background: var(--green-deep); color: var(--white); text-align: center; padding: 13px; border-radius: 10px; font-size: 15px; font-weight: 600; }
+  .pp-caption { max-width: 560px; margin: -24px auto 36px; font-size: 13px; color: var(--slate-500); text-align: center; }
+
+  /* ─── VENDOR NOTE CARD ─── */
+  .pp-note { max-width: 560px; margin: 8px auto 12px; border: 1px solid var(--slate-200); border-radius: 12px; overflow: hidden; background: var(--white); font-variant-ligatures: none; }
+  .pp-note-head { padding: 12px 18px; background: var(--slate-50); border-bottom: 1px solid var(--slate-200); font-size: 13px; color: var(--slate-500); }
+  .pp-note-head strong { color: var(--green-deep); font-weight: 700; }
+  .pp-note-body { padding: 18px 20px; }
+  .pp-note-subject { font-size: 15px; font-weight: 700; color: var(--green-deep); margin: 0 0 14px; }
+  .pp-note-table { width: 100%; border-collapse: collapse; font-family: var(--font-mono); font-size: 13px; }
+  .pp-note-table td { padding: 8px 0; border-bottom: 1px solid var(--slate-100); color: var(--slate-600); }
+  .pp-note-table td:last-child { text-align: right; color: var(--green-deep); font-weight: 700; }
+  .pp-note-table tr.total td { border-bottom: none; padding-top: 11px; font-size: 14px; }
+  .pp-note-table tr.total td:first-child { color: var(--green-deep); font-weight: 700; }
+
+  /* ─── FAQ ─── */
+  .faq-section { max-width: 720px; margin: 0 auto; padding: 0 48px 60px; }
+  .faq-header { margin-bottom: 24px; }
+  .faq-header h2 { font-size: 24px; font-weight: 700; color: var(--green-deep); letter-spacing: -0.5px; line-height: 1.3; margin: 0; }
+  .faq-list { margin: 0; }
+  .faq-list details { border-bottom: 1px solid var(--slate-200); }
+  .faq-list details:first-child { border-top: 1px solid var(--slate-200); }
+  .faq-list summary { padding: 20px 0; font-size: 17px; font-weight: 600; color: var(--green-deep); cursor: pointer; list-style: none; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+  .faq-list summary::-webkit-details-marker { display: none; }
+  .faq-list summary::after { content: '+'; font-size: 22px; font-weight: 400; color: var(--slate-400); flex-shrink: 0; }
+  .faq-list details[open] summary::after { content: '\2212'; }
+  .faq-list details p { padding: 0 0 20px; margin: 0; font-size: 15px; line-height: 1.7; color: var(--slate-500); }
+
+  /* ─── CTA PARALLAX ─── */
+  .cta-section::before { transform: translate(-50%,-50%) translateY(var(--parallax-y, 0)); will-change: transform; }
+
+  /* ─── FOOTER 5-COL ─── */
+  .footer-top { grid-template-columns: 2fr 1fr 1fr 1fr 1fr; }
+  @media (max-width: 900px) { .footer-top { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px) { .footer-top { grid-template-columns: 1fr; } }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    .article-body { padding: 0 24px 60px; }
+    .article-body h2 { margin-top: 36px; }
+    .faq-section { padding: 0 24px 40px; }
+  }
+  @media (max-width: 620px) {
+    .pp-flow { grid-template-columns: 1fr; gap: 8px; }
+    .pp-flow-op { transform: rotate(90deg); padding: 2px 0; }
+    .pp-card-amt { font-size: 14px; }
+  }
+
+  /* ─── REDUCED MOTION ─── */
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; transition: none; }
+    .page-hero .section-label,
+    .page-hero .section-title,
+    .page-hero .section-desc { opacity: 1; transform: none; transition: none; }
+    .hero-bg-gradient, .hero-bg-gradient-2 { animation: none; }
+  }
+</style>
+<noscript><style>.reveal,.page-hero .section-label,.page-hero .section-title,.page-hero .section-desc{opacity:1;transform:none;transition:none;}</style></noscript>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-H2LBJT03WE"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-H2LBJT03WE');</script>
+<script>function initApollo(){var n=Math.random().toString(36).substring(7),o=document.createElement("script");
+o.src="https://assets.apollo.io/micro/website-tracker/tracker.iife.js?nocache="+n,o.async=!0,o.defer=!0,
+o.onload=function(){window.trackingFunctions.onLoad({appId:"69c141b32234890011a43849"})},
+document.head.appendChild(o)}initApollo();</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Partial Payments to Cannabis Vendors",
+  "description": "Partial payments let you pay part of a cannabis vendor invoice now and the rest later — the invoice stays open, the vendor's notified with the balance, and your books stay square.",
+  "author": { "@type": "Person", "name": "Chris Mitchem" },
+  "publisher": { "@type": "Organization", "name": "ShelfSpace", "url": "https://shelfspace.pro" },
+  "datePublished": "2026-07-11",
+  "url": "https://shelfspace.pro/blog/partial-payments-vendor-invoices",
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://shelfspace.pro/blog/partial-payments-vendor-invoices" },
+  "image": "https://shelfspace.pro/og-image-v7.png"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Does the vendor know it's only a partial payment?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes, automatically. Every partial payment sends the vendor an email that lays out the invoice total, this payment, anything previously paid, and the remaining balance still owed. The invoice shows as Partially Paid on their side too. Nothing about it is hidden." }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I make a partial payment by ACH bank transfer?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No. Partial payments go out on the check rail only — a Check 21 digital check or a mailed check. If you want to pay a vendor by ACH, pay the invoice in full." }
+    },
+    {
+      "@type": "Question",
+      "name": "Does a partial payment cost extra?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Each partial payment is a separate check, so it carries your standard $20 per-check fee — the same flat fee as any ShelfSpace payment. Paying an invoice in three checks means three $20 fees. There's no subscription and no percentage cut." }
+    },
+    {
+      "@type": "Question",
+      "name": "What happens to the invoice after a partial payment?",
+      "acceptedAnswer": { "@type": "Answer", "text": "It stays open. The invoice keeps showing in Payments Due with a Partially Paid status and the remaining balance, so it never slips off your radar. It's only marked Paid once the balance reaches zero." }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I apply a credit memo to a partial payment?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Not to a partial. Apply credit memos when you settle the remaining balance on the closing payment. Any order-level credits already applied still reduce what's owed." }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://shelfspace.pro/" },
+    { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://shelfspace.pro/blog" },
+    { "@type": "ListItem", "position": 3, "name": "Partial Payments to Cannabis Vendors" }
+  ]
+}
+</script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="/" class="nav-logo">
+    <div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div>
+    <span class="nav-logo-text">ShelfSpace</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="/consignment">Consignment</a></li>
+    <li><a href="/accounts-payable">Accounts Payable</a></li>
+    <li><a href="/credit-recovery">Credit Recovery</a></li>
+    <li class="nav-dropdown"><button class="nav-dropdown-toggle" aria-haspopup="true" aria-expanded="false">Platform <svg class="dropdown-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></button><div class="nav-dropdown-menu"><a href="/vendor-management">Vendor Management</a><a href="/how-it-works">How It Works</a><a href="/features">Features</a><a href="/shelfiq">ShelfiQ</a><a href="/checks">Check Payments</a><a href="/tutorials">Tutorials</a></div></li>
+    <li><a href="/pricing">Pricing</a></li>
+    <li><a href="/about">About</a></li>
+    <li><a href="/contact" class="nav-cta">Get Started <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a></li>
+  </ul>
+  <div class="nav-hamburger" onclick="document.querySelector('.nav-links').classList.toggle('mobile-open'); event.stopPropagation();"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="hero-bg-gradient"></div>
+  <div class="hero-bg-gradient-2"></div>
+  <div class="hero-grid-lines"></div>
+  <div class="section-label">Guide · Accounts Payable</div>
+  <h1 class="section-title">Partial Payments: Pay Part of a Vendor Invoice Now, the Rest Later</h1>
+  <p class="section-desc">Sometimes the cash isn't all there on payment day. Now you can send part of a wholesale or non-cannabis invoice, keep it open for the balance, and let the vendor know exactly where things stand — automatically.</p>
+</div>
+
+<!-- AT A GLANCE -->
+<div class="article-glance">
+  <h2>At a glance</h2>
+  <ul>
+    <li>Partial payments let you pay part of a wholesale or non-cannabis vendor invoice instead of the full balance</li>
+    <li>The invoice stays open and keeps showing in Payments Due until it's paid in full</li>
+    <li>The vendor is notified automatically — amount paid, previously paid, and the balance still owed</li>
+    <li>Check rail only, one check per payment, at the standard flat $20 per-check fee</li>
+    <li>Consignment settlements are excluded — this is for wholesale and non-cannabis invoices</li>
+  </ul>
+</div>
+
+<!-- ARTICLE -->
+<div class="article-body">
+
+  <p>Every dispensary operator has been here. A $4,000 wholesale invoice is due, the vendor's waiting, and this week's deposits don't quite cover it. You want to pay what you can now and keep the relationship healthy — but "pay the whole thing or pay nothing" was your only real option. So you'd send an email, promise the rest Friday, and hope everyone remembers the arrangement.</p>
+
+  <p><strong>Partial payments</strong> turn that side conversation into a real, tracked action. From your Payments page, you pay part of an invoice, the invoice stays open for the remainder, and the vendor gets a clean notice of exactly what was paid and what's left. No spreadsheet on the side. No "wait, how much did we still owe them?"</p>
+
+  <h2>What a partial payment actually does</h2>
+
+  <p>Say that $4,000 invoice, and today you can send $2,766. You pay the partial, and the platform splits the invoice into what moved and what's still due:</p>
+
+  <div class="pp-flow" role="figure" aria-label="A $4,000 invoice split into a $2,766 partial payment and a $1,234 remaining balance">
+    <div class="pp-flow-node">
+      <div class="pp-flow-label">Invoice</div>
+      <div class="pp-flow-amount">$4,000</div>
+      <div class="pp-flow-sub">Invoice #10024501</div>
+    </div>
+    <div class="pp-flow-op">−</div>
+    <div class="pp-flow-node paid">
+      <div class="pp-flow-label">You pay now</div>
+      <div class="pp-flow-amount">$2,766</div>
+      <div class="pp-flow-sub">Check issued to vendor</div>
+    </div>
+    <div class="pp-flow-op">=</div>
+    <div class="pp-flow-node due">
+      <div class="pp-flow-label">Still due</div>
+      <div class="pp-flow-amount">$1,234</div>
+      <div class="pp-flow-sub">Stays in Payments Due</div>
+    </div>
+  </div>
+
+  <p>A check for $2,766 goes out to the vendor. The invoice moves to <strong>Partially Paid</strong> — a status that deliberately still counts as due — and the remaining $1,234 keeps surfacing in Payments Due until you finish it off. The invoice is never marked settled until the balance hits zero.</p>
+
+  <h2>How you send one</h2>
+
+  <p>Open the order from the <strong>Wholesale Payments</strong> or <strong>Non-Cannabis Payments</strong> tab of your Payments page and start a payment the way you always do. In the amount step, you'll see two choices — pay in full, or pay a partial amount:</p>
+
+  <div class="pp-dialog" role="figure" aria-label="The pay dialog showing a partial amount selected, with the remaining balance calculated below">
+    <div class="pp-dialog-head">Pay — Invoice #10024501</div>
+    <div class="pp-dialog-body">
+      <div class="pp-card">
+        <div class="pp-check"></div>
+        <div class="pp-card-label">Pay in full</div>
+        <div class="pp-card-amt">$4,000.00</div>
+      </div>
+      <div class="pp-card sel">
+        <div class="pp-check"></div>
+        <div class="pp-card-label">Pay a partial amount</div>
+      </div>
+      <div class="pp-input">
+        <span style="font-family:var(--font-mono);font-size:18px;font-weight:700;color:var(--green-deep);">$</span>
+        <span class="pp-input-box">2,766.00</span>
+      </div>
+      <div class="pp-remaining">Remaining after this payment: <strong>$1,234.00</strong> — this invoice stays in Payments Due until it's fully paid.</div>
+      <div class="pp-send">Send $2,766.00 to Vendor →</div>
+    </div>
+  </div>
+  <p class="pp-caption">A stylized recreation of the pay dialog. The platform confirms the split before anything sends.</p>
+
+  <p>Pick <strong>Pay a partial amount</strong>, type the figure, and the dialog shows the remaining balance in real time before you commit. The confirmation restates the whole thing in plain language — how much goes out and how much stays due on the invoice. Approve it, and the check is generated like any other payment. You can pay against the same invoice as many times as you need; the balance updates every time.</p>
+
+  <h2>What the vendor sees</h2>
+
+  <p>This is the part that keeps the relationship clean. A partial payment isn't a silent under-payment the vendor has to catch — the platform emails them the moment it goes out, with a facts table that answers the only question that matters: where does this invoice stand now?</p>
+
+  <div class="pp-note" role="figure" aria-label="The email a vendor receives after a partial payment, showing invoice total, this payment, previously paid, and remaining balance">
+    <div class="pp-note-head">Email to vendor — <strong>Partial payment from Your Dispensary — $2,766 toward invoice #10024501</strong></div>
+    <div class="pp-note-body">
+      <p class="pp-note-subject">A check for this payment has been issued — download it from your portal.</p>
+      <table class="pp-note-table">
+        <tr><td>Invoice total</td><td>$4,000.00</td></tr>
+        <tr><td>This payment</td><td>$2,766.00</td></tr>
+        <tr><td>Previously paid</td><td>$0.00</td></tr>
+        <tr class="total"><td>Remaining balance</td><td>$1,234.00</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <p>The vendor downloads the check from their portal like any payment, and sees the invoice marked Partially Paid with the balance on their side too. The language stays honest — a check has been <em>issued</em>, not "you've been paid," because a payment isn't confirmed until it clears. Both sides are looking at the same number, so nobody has to reconcile a handshake.</p>
+
+  <blockquote>
+    <p>The vendor never has to ask "how much do we still have outstanding?" The email already answered it, and the invoice on their portal says the same thing.</p>
+  </blockquote>
+
+  <h2>The guardrails</h2>
+
+  <p>Partial payments are scoped so a balance can't be overpaid, double-paid, or lost track of. A few rules are worth knowing before you use it:</p>
+
+  <ul>
+    <li><strong>Check rail only.</strong> Partials go out as Check 21 digital checks or mailed checks. <a href="/ach">ACH bank transfers</a> aren't available for a partial — pay in full to use ACH.</li>
+    <li><strong>Each partial is its own check.</strong> Every partial payment is a separate check and carries your standard <a href="/pricing">$20 per-check fee</a>. Three checks against one invoice means three $20 fees — no subscription, no percentage of the payment.</li>
+    <li><strong>$1 minimum, and leave at least $1.</strong> A partial must be at least $1.00 and must leave at least $1.00 still due. If your amount lands within a dollar of the balance, the dialog steers you to just pay in full.</li>
+    <li><strong>Credits apply at the close.</strong> You can't attach a <a href="/credit-recovery">credit memo</a> to a partial. Apply credits when you settle the remaining balance. Order-level credits already applied still reduce what's owed.</li>
+    <li><strong>Wholesale and non-cannabis only.</strong> Partials work on regular PO-backed invoice payments across both tabs. <a href="/consignment">Consignment settlements</a> are excluded — those run on their own settlement schedule.</li>
+  </ul>
+
+  <h2>Closing it out — and your books</h2>
+
+  <p>When you're ready to finish, pay the exact remaining balance. That closing payment runs the normal full-payment path: the invoice flips to Paid, the delivery completes, and any credit memos you've been holding can be applied. Until then, it stays in Payments Due so it can't quietly fall off.</p>
+
+  <p>Your accountant sees the whole thing cleanly. Each partial check syncs to <a href="/blog/cannabis-retailer-quickbooks-setup">QuickBooks</a> as its own bill payment, sized to that check and pre-matched in your bank feed. An invoice paid in three checks shows up as three bill payments — the running balance in QuickBooks always matches what ShelfSpace shows. No manual journal entries, no reconciling a partial by hand.</p>
+
+  <h2>Why this matters for cannabis retailers</h2>
+
+  <p>Cannabis is a cash-timing business. Deposits land when they land, big invoices cluster, and the vendors you rely on most are the ones you can least afford to leave in the dark. Paying in full or not at all forced a bad choice: overextend, or stiff a partner and smooth it over later with an email nobody logged.</p>
+
+  <p>Partial payments give you the middle ground your cash flow actually lives in — pay what you can, keep the invoice honest, keep the vendor informed. It's the same principle behind everything else on the platform: <a href="/blog/anatomy-of-an-invoice-payment">the payment a vendor receives</a> should answer its own questions, and every dollar should tie back to an invoice, a check, and your books.</p>
+
+  <p>Want to see the full workflow, field by field? The <a href="/docs/accounts-payable/partial-payments">partial invoice payments documentation</a> walks through every step, limit, and status. Or if your AP still runs on hand-cut checks and side agreements, <a href="/contact">talk to us</a> — the free evaluation shows what your <a href="/accounts-payable">cannabis AP on the platform</a> would look like, partials and all.</p>
+
+</div>
+
+<!-- FAQ -->
+<div class="faq-section reveal">
+  <div class="faq-header">
+    <h2>Frequently asked questions</h2>
+  </div>
+  <div class="faq-list">
+    <details>
+      <summary>Does the vendor know it's only a partial payment?</summary>
+      <p>Yes, automatically. Every partial payment sends the vendor an email that lays out the invoice total, this payment, anything previously paid, and the remaining balance still owed. The invoice shows as Partially Paid on their side too. Nothing about it is hidden.</p>
+    </details>
+    <details>
+      <summary>Can I make a partial payment by ACH bank transfer?</summary>
+      <p>No. Partial payments go out on the check rail only — a Check 21 digital check or a mailed check. If you want to pay a vendor by ACH, pay the invoice in full.</p>
+    </details>
+    <details>
+      <summary>Does a partial payment cost extra?</summary>
+      <p>Each partial payment is a separate check, so it carries your standard $20 per-check fee — the same flat fee as any ShelfSpace payment. Paying an invoice in three checks means three $20 fees. There's no subscription and no percentage cut.</p>
+    </details>
+    <details>
+      <summary>What happens to the invoice after a partial payment?</summary>
+      <p>It stays open. The invoice keeps showing in Payments Due with a Partially Paid status and the remaining balance, so it never slips off your radar. It's only marked Paid once the balance reaches zero.</p>
+    </details>
+    <details>
+      <summary>Can I apply a credit memo to a partial payment?</summary>
+      <p>Not to a partial. Apply credit memos when you settle the remaining balance on the closing payment. Any order-level credits already applied still reduce what's owed.</p>
+    </details>
+  </div>
+</div>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-content">
+    <div class="section-label reveal">Get Started</div>
+    <h2 class="section-title reveal">Pay vendors on your cash flow, not against it.</h2>
+    <p class="section-desc reveal">Free evaluation in 48 hours. We look at your vendor payments and show you exactly what your AP would run like on the platform — partial payments, clean vendor notices, books that reconcile themselves. You only pay if we deliver.</p>
+    <div class="cta-actions reveal">
+      <a href="/contact" class="btn-primary">
+        Get My Free Evaluation
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+      <a href="/docs/accounts-payable/partial-payments" class="btn-secondary">Read the docs</a>
+    </div>
+    <figure class="cta-founder reveal" style="display:flex;align-items:center;gap:16px;justify-content:center;margin:32px 0 0;">
+      <img src="/chris-mitchem.jpg" alt="Chris Mitchem" style="width:48px;height:48px;border-radius:50%;object-fit:cover;">
+      <blockquote style="margin:0;border:none;padding:0;background:none;">
+        <p style="font-size:14px;color:var(--slate-600);max-width:520px;line-height:1.5;margin:0;font-style:normal;">"Partial payments happen in every dispensary — they were just happening in email and getting lost. The invoice should carry the memory, not your inbox."</p>
+        <figcaption style="font-size:13px;color:var(--slate-500);margin-top:6px;">— Chris Mitchem, Founder</figcaption>
+      </blockquote>
+    </figure>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="/" class="nav-logo"><div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div><span class="nav-logo-text">ShelfSpace</span></a>
+      <p>Every Vendor. Every Payment. One Engine.</p>
+    </div>
+    <div class="footer-col"><h3>Services</h3><ul><li><a href="/accounts-payable">Accounts Payable</a></li><li><a href="/consignment">Consignment</a></li><li><a href="/credit-recovery">Credit Recovery</a></li><li><a href="/checks">Check Payments</a></li><li><a href="/shelfiq">ShelfiQ</a></li></ul></div>
+    <div class="footer-col"><h3>Platform</h3><ul><li><a href="/features">Features</a></li><li><a href="/how-it-works">How It Works</a></li><li><a href="/pricing">Pricing</a></li><li><a href="/about">About</a></li><li><a href="/blog">Blog</a></li><li><a href="/docs">Docs</a></li><li><a href="/tutorials">Tutorials</a></li></ul></div>
+    <div class="footer-col"><h3>Access</h3><ul><li><a href="https://ourshelf.space/login">Login</a></li><li><a href="/contact">Sign Up</a></li><li><a href="/contact">Contact</a></li><li><a href="/vendors">For Vendors</a></li><li><a href="/for-bookkeepers">For Bookkeepers</a></li></ul></div>
+    <div class="footer-col"><h3>Company</h3><ul><li><a href="mailto:support@shelfspace.pro">Support</a></li><li><a href="https://linkedin.com/company/shelfspace-pro" target="_blank" rel="noopener" class="footer-social-link"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> LinkedIn</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><p>&copy; 2026 ShelfSpace Technologies Inc.</p><div style="display:flex;align-items:center;gap:8px;justify-content:center;margin-top:12px;"><img src="/metrc-logo.png" alt="Metrc" style="height:18px;opacity:0.4;filter:brightness(0) invert(1);"><span style="font-size:11px;color:rgba(255,255,255,0.35);">Certified Metrc Third-Party Vendor</span></div><div class="footer-bottom-links"><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div></div>
+</footer>
+
+<script>
+(function() {
+  var nav = document.getElementById('nav');
+  var pageHero = document.querySelector('.page-hero');
+  var parallaxSections = [ document.querySelector('.cta-section') ];
+
+  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var isMobile = window.innerWidth < 900;
+  var ticking = false;
+
+  requestAnimationFrame(function() {
+    nav.classList.toggle('scrolled', window.scrollY > 20);
+    if (pageHero) pageHero.classList.add('hero-loaded');
+  });
+
+  var revealObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(function(el) { revealObserver.observe(el); });
+
+  function onScroll() {
+    var scrollY = window.scrollY;
+    nav.classList.toggle('scrolled', scrollY > 20);
+    if (prefersReduced || isMobile) return;
+    var wh = window.innerHeight;
+    parallaxSections.forEach(function(section) {
+      if (!section) return;
+      var rect = section.getBoundingClientRect();
+      if (rect.bottom < 0 || rect.top > wh) return;
+      var center = rect.top + rect.height / 2 - wh / 2;
+      section.style.setProperty('--parallax-y', (center * 0.08) + 'px');
+    });
+  }
+
+  window.addEventListener('scroll', function() {
+    if (!ticking) {
+      requestAnimationFrame(function() { onScroll(); ticking = false; });
+      ticking = true;
+    }
+  }, { passive: true });
+
+  onScroll();
+
+  window.addEventListener('resize', function() {
+    isMobile = window.innerWidth < 900;
+    if (isMobile) {
+      parallaxSections.forEach(function(section) {
+        if (section) section.style.setProperty('--parallax-y', '0px');
+      });
+    }
+  });
+
+  document.addEventListener('click', function() {
+    var navLinks = document.querySelector('.nav-links');
+    if (navLinks && navLinks.classList.contains('mobile-open')) {
+      navLinks.classList.remove('mobile-open');
+    }
+  });
+})();
+</script>
+<script src="/shelfiq-widget.js"></script>
+</body>
+</html>
