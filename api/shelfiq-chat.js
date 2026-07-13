@@ -107,6 +107,7 @@ It is NOT a managed service. We do not run your AP for you. We do not cut your c
 - ACH bank transfers: the retailer completes a one-time bank-transfer setup in the platform (business profile, owners, funding bank, compliance documents — most auto-generated from data the platform already holds, including state license records pulled live from Metrc). After the banking partner's compliance review approves (typically 1–3 weeks), the retailer can pay any vendor by ACH; vendors just link a bank account, no paperwork on their side.
 - Works for cannabis vendors (Metrc-verified) AND non-cannabis expense vendors (rent, utilities, software, insurance) on the same system.
 - QuickBooks sync — every payment hits your books in real time.
+- Vendors who connect QuickBooks get two sync controls in their portal: turn off auto-created payments (push invoices only and record deposits themselves), and require item mapping before invoicing (a settlement with an unmapped product is held and the vendor is notified, then syncs automatically once they map the item).
 
 **Consignment settlements**
 - Vendor places inventory in your store; you only pay on what sells. Vendor carries the inventory risk, not you. $0 inventory on your books for consignment SKUs.
