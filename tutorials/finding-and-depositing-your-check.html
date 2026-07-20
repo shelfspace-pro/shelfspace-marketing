@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Finding and Depositing Your Check — ShelfSpace Tutorial</title>
+<meta name="description" content="Where your check lives in the portal, how to download and print it, and how to deposit it with your bank.">
+<link rel="canonical" href="https://shelfspace.pro/tutorials/finding-and-depositing-your-check">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://shelfspace.pro/tutorials/finding-and-depositing-your-check">
+<meta property="og:title" content="Finding and Depositing Your Check — ShelfSpace Tutorial">
+<meta property="og:description" content="Where your check lives in the portal, how to download and print it, and how to deposit it with your bank.">
+<meta property="og:image" content="https://shelfspace.pro/og-image-v7.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="apple-mobile-web-app-title" content="ShelfSpace">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+<style>
+  @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-12px); } }
+  .page-hero { padding-bottom: 40px; }
+  .hero-bg-gradient { position: absolute; top: -30%; right: -20%; width: 700px; height: 700px; background: radial-gradient(circle, rgba(149,213,178,0.18) 0%, rgba(149,213,178,0) 70%); animation: float 8s ease-in-out infinite; pointer-events: none; }
+  .hero-bg-gradient-2 { position: absolute; bottom: -20%; left: -15%; width: 550px; height: 550px; background: radial-gradient(circle, rgba(27,67,50,0.06) 0%, rgba(27,67,50,0) 70%); animation: float 10s ease-in-out infinite; animation-delay: -3s; pointer-events: none; }
+  .page-hero .section-label, .page-hero .section-title, .page-hero .section-desc { opacity: 0; transform: translateY(30px); }
+  .page-hero .section-label { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1); }
+  .page-hero .section-title { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s, transform 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s; }
+  .page-hero .section-desc { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1) 0.25s, transform 0.8s cubic-bezier(0.22,1,0.36,1) 0.25s; }
+  .page-hero.hero-loaded .section-label, .page-hero.hero-loaded .section-title, .page-hero.hero-loaded .section-desc { opacity: 1; transform: translateY(0); }
+  .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1); }
+  .reveal.is-visible { opacity: 1; transform: translateY(0); }
+  .tut-wrap { background: var(--white); padding: 64px 0 96px; }
+  .tut-series { max-width: 1180px; margin: 0 auto 56px; padding: 0 32px; }
+  .tut-series-head { margin-bottom: 24px; }
+  .tut-series-head h2 { font-size: 1.5rem; color: var(--green-deep); margin: 0 0 4px; }
+  .tut-series-head p { color: var(--green-mid); font-size: 0.95rem; margin: 0; }
+  .tut-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 28px; }
+  .tut-card { display: flex; flex-direction: column; background: var(--white); border: 1px solid var(--green-light); border-radius: 16px; overflow: hidden; text-decoration: none; box-shadow: 0 10px 30px -18px rgba(27,67,50,0.35); transition: transform .25s ease, box-shadow .25s ease; }
+  .tut-card:hover { transform: translateY(-4px); box-shadow: 0 22px 44px -20px rgba(27,67,50,0.45); }
+  .tut-thumb { position: relative; aspect-ratio: 16/9; background: var(--green-ghost); overflow: hidden; }
+  .tut-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .tut-badge { position: absolute; top: 10px; left: 10px; background: rgba(27,67,50,0.92); color: #fff; font-size: 11px; font-weight: 600; letter-spacing: .04em; padding: 4px 9px; border-radius: 999px; }
+  .tut-len { position: absolute; bottom: 10px; right: 10px; background: rgba(8,28,17,0.82); color: #fff; font-family: var(--font-mono); font-size: 12px; padding: 3px 8px; border-radius: 7px; }
+  .tut-play { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity .25s ease; }
+  .tut-card:hover .tut-play { opacity: 1; }
+  .tut-play span { width: 58px; height: 58px; border-radius: 50%; background: rgba(255,255,255,0.92); display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 24px rgba(27,67,50,0.4); }
+  .tut-body { padding: 18px 20px 22px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+  .tut-body h3 { font-size: 1.12rem; color: var(--green-deep); margin: 0; line-height: 1.3; }
+  .tut-body p { font-size: 0.92rem; color: #52616b; margin: 0; line-height: 1.5; flex: 1; }
+  .tut-cta { color: var(--green-mid); font-weight: 600; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 6px; margin-top: 4px; }
+  /* per-video page */
+  .tut-video-wrap { background: var(--white); padding: 40px 0 96px; }
+  .tut-video-inner { max-width: 860px; margin: 0 auto; padding: 0 24px; }
+  .tut-crumbs { font-size: 0.85rem; color: var(--green-mid); margin-bottom: 18px; }
+  .tut-crumbs a { color: var(--green-mid); text-decoration: none; }
+  .tut-crumbs a:hover { text-decoration: underline; }
+  .tut-embed { position: relative; padding-bottom: 56.25%; height: 0; border-radius: 16px; overflow: hidden; box-shadow: 0 20px 46px -20px rgba(27,67,50,0.4); margin-bottom: 24px; }
+  .tut-embed iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  .tut-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 32px; }
+  .tut-actions a { display: inline-flex; align-items: center; gap: 8px; padding: 11px 20px; border-radius: 12px; font-weight: 600; font-size: 0.92rem; text-decoration: none; }
+  .tut-actions .primary { background: var(--green-deep); color: #fff; }
+  .tut-actions .secondary { background: var(--green-ghost); color: var(--green-deep); border: 1px solid var(--green-light); }
+  .tut-chapters { margin: 0 0 28px; }
+  .tut-chapters h2, .tut-transcript-wrap summary { font-size: 1.15rem; color: var(--green-deep); }
+  .tut-chapters ol { list-style: none; padding: 0; margin: 12px 0 0; display: grid; gap: 6px; }
+  .tut-chapters li { display: flex; gap: 12px; font-size: 0.95rem; color: #334; }
+  .tut-chapters .at { font-family: var(--font-mono); color: var(--green-mid); min-width: 46px; }
+  .tut-transcript-wrap { border-top: 1px solid var(--green-light); padding-top: 20px; }
+  .tut-transcript-wrap summary { cursor: pointer; font-weight: 600; }
+  .tut-transcript { margin-top: 16px; color: #3d4a52; line-height: 1.7; }
+  .tut-transcript p { margin: 0 0 12px; }
+  @media (max-width: 640px) { .tut-actions { flex-direction: column; } .tut-actions a { justify-content: center; } }</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "VideoObject",
+  "name": "Finding and Depositing Your Check",
+  "description": "Getting paid in the ShelfSpace vendor portal. So a retailer sent you a check through ShelfSpace. Here's exactly how to find it, print it, and get that money into your bank account.",
+  "thumbnailUrl": [
+    "https://i.ytimg.com/vi/H3694yFb3Hs/maxresdefault.jpg",
+    "https://i.ytimg.com/vi/H3694yFb3Hs/hqdefault.jpg"
+  ],
+  "uploadDate": "2026-07-20",
+  "contentUrl": "https://youtu.be/H3694yFb3Hs",
+  "embedUrl": "https://www.youtube-nocookie.com/embed/H3694yFb3Hs?rel=0&modestbranding=1",
+  "publisher": {
+    "@type": "Organization",
+    "name": "ShelfSpace",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://ourshelf.space/email/icon-white.png"
+    }
+  },
+  "duration": "PT3M18S",
+  "hasPart": [
+    {
+      "@type": "Clip",
+      "name": "Intro",
+      "startOffset": 0,
+      "url": "https://www.youtube.com/watch?v=H3694yFb3Hs&t=0s",
+      "endOffset": 8
+    },
+    {
+      "@type": "Clip",
+      "name": "When a retailer pays you by check through…",
+      "startOffset": 8,
+      "url": "https://www.youtube.com/watch?v=H3694yFb3Hs&t=8s",
+      "endOffset": 28
+    },
+    {
+      "@type": "Clip",
+      "name": "Payments has a few tabs, and the one you want…",
+      "startOffset": 28,
+      "url": "https://www.youtube.com/watch?v=H3694yFb3Hs&t=28s",
+      "endOffset": 44
+    },
+    {
+      "@type": "Clip",
+      "name": "Here's one now",
+      "startOffset": 44,
+      "url": "https://www.youtube.com/watch?v=H3694yFb3Hs&t=44s",
+      "endOffset": 61
+    },
+    {
+      "@type": "Clip",
+      "name": "So you tap Download Check",
+      "startOffset": 61,
+      "url": "https://www.youtube.com/watch?v=H3694yFb3Hs&t=61s",
+      "endOffset": 90
+    },
+    {
+      "@type": "Clip",
+      "name": "Confirm it, and the check opens right here in…",
+      "startOffset": 90,
+      "url": "https://www.youtube.com/watch?v=H3694yFb3Hs&t=90s",
+      "endOffset": 108
+    },
+    {
+      "@type": "Clip",
+      "name": "The check itself is on page two",
+      "startOffset": 108,
+      "url": "https://www.youtube.com/watch?v=H3694yFb3Hs&t=108s",
+      "endOffset": 123
+    },
+    {
+      "@type": "Clip",
+      "name": "Print is the one you want",
+      "startOffset": 123,
+      "url": "https://www.youtube.com/watch?v=H3694yFb3Hs&t=123s",
+      "endOffset": 141
+    },
+    {
+      "@type": "Clip",
+      "name": "Download is right next to it, and that's the…",
+      "startOffset": 141,
+      "url": "https://www.youtube.com/watch?v=H3694yFb3Hs&t=141s",
+      "endOffset": 155
+    },
+    {
+      "@type": "Clip",
+      "name": "Close it, and ShelfSpace hands you the short…",
+      "startOffset": 155,
+      "url": "https://www.youtube.com/watch?v=H3694yFb3Hs&t=155s",
+      "endOffset": 166
+    },
+    {
+      "@type": "Clip",
+      "name": "Your bank's mobile app works",
+      "startOffset": 166,
+      "url": "https://www.youtube.com/watch?v=H3694yFb3Hs&t=166s",
+      "endOffset": 183
+    },
+    {
+      "@type": "Clip",
+      "name": "That's it",
+      "startOffset": 183,
+      "url": "https://www.youtube.com/watch?v=H3694yFb3Hs&t=183s",
+      "endOffset": 198
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<nav id="nav">
+  <a href="/" class="nav-logo">
+    <div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div>
+    <span class="nav-logo-text">ShelfSpace</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="/accounts-payable">Accounts Payable</a></li>
+    <li><a href="/consignment">Consignment</a></li>
+    <li><a href="/credit-recovery">Credit Recovery</a></li>
+    <li class="nav-dropdown"><button class="nav-dropdown-toggle" aria-haspopup="true" aria-expanded="false">Platform <svg class="dropdown-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></button><div class="nav-dropdown-menu"><a href="/vendor-management">Vendor Management</a><a href="/how-it-works">How It Works</a><a href="/features">Features</a><a href="/shelfiq">ShelfiQ</a><a href="/checks">Check Payments</a><a href="/tutorials">Tutorials</a></div></li>
+    <li><a href="/pricing">Pricing</a></li>
+    <li><a href="/about">About</a></li>
+    <li class="nav-login-mobile"><a href="https://ourshelf.space/login">Login</a></li>
+    <li><a href="/contact" class="nav-cta">Get Started <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a></li>
+  </ul>
+  <div class="nav-hamburger" onclick="document.querySelector('.nav-links').classList.toggle('mobile-open'); event.stopPropagation();"><span></span><span></span><span></span></div>
+</nav>
+<div class="page-hero" style="padding-bottom:24px;">
+  <div class="hero-bg-gradient"></div>
+  <div class="section-label">Tutorial · Episode 1</div>
+  <h1 class="section-title" style="font-size:2.2rem;">Finding and Depositing Your Check</h1>
+  <p class="section-desc">Getting paid in the ShelfSpace vendor portal</p>
+</div>
+
+<div class="tut-video-wrap">
+  <div class="tut-video-inner">
+    <div class="tut-crumbs"><a href="/tutorials">Tutorials</a> &rsaquo; ShelfSpace for Vendors &rsaquo; Finding and Depositing Your Check</div>
+
+    <div class="tut-embed">
+      <iframe src="https://www.youtube-nocookie.com/embed/H3694yFb3Hs?rel=0&amp;modestbranding=1" title="Finding and Depositing Your Check — ShelfSpace" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+
+    <div class="tut-actions">
+      <a class="primary" href="https://ourshelf.space">Open this screen in ShelfSpace <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a>
+      <a class="secondary" href="/blog/deposit-shelfspace-check-with-scanner">Read the full guide</a>
+      <a class="secondary" href="https://youtu.be/H3694yFb3Hs">Watch on YouTube</a>
+    </div>
+
+    <div class="tut-chapters">
+      <h2>Chapters</h2>
+      <ol>
+        <li><span class="at">0:00</span><span>Intro</span></li>
+        <li><span class="at">0:08</span><span>When a retailer pays you by check through…</span></li>
+        <li><span class="at">0:28</span><span>Payments has a few tabs, and the one you want…</span></li>
+        <li><span class="at">0:44</span><span>Here's one now</span></li>
+        <li><span class="at">1:01</span><span>So you tap Download Check</span></li>
+        <li><span class="at">1:30</span><span>Confirm it, and the check opens right here in…</span></li>
+        <li><span class="at">1:48</span><span>The check itself is on page two</span></li>
+        <li><span class="at">2:03</span><span>Print is the one you want</span></li>
+        <li><span class="at">2:21</span><span>Download is right next to it, and that's the…</span></li>
+        <li><span class="at">2:35</span><span>Close it, and ShelfSpace hands you the short…</span></li>
+        <li><span class="at">2:46</span><span>Your bank's mobile app works</span></li>
+        <li><span class="at">3:03</span><span>That's it</span></li>
+      </ol>
+    </div>
+    <div class="tut-transcript-wrap">
+      <details>
+        <summary>Full transcript</summary>
+        <div class="tut-transcript">
+<p>So a retailer sent you a check through ShelfSpace. Here's exactly how to find it, print it, and get that money into your bank account.</p>
+<p>When a retailer pays you by check through ShelfSpace, it can reach you one of two ways. Some retailers mail a paper check, and this page tracks that one on its way to you. Others send it digitally — and that check is waiting for you right here in the portal, under Payments. That's the one we're getting into your bank today.</p>
+<p>Payments has a few tabs, and the one you want depends on how the retailer bought from you. Consignment Payments holds your settlement checks. But when a retailer buys wholesale, on a purchase order, that check lands under Wholesale Payments.</p>
+<p>Here's one now. Twelve hundred and fifty dollars from Holistic Cannabis Co. Notice the status — it says Ready to deposit, and that's doing a lot of work. It means the check exists and it's yours to go get.</p>
+<p>So you tap Download Check. And this is the step that trips people up, so stay with me.</p>
+<p>ShelfSpace stops you here on purpose, to say the thing that matters most. This is a real check. Not a receipt, not a notification, not a record of something that already happened somewhere else. It's the actual negotiable instrument, and nothing moves until you take it to your bank.</p>
+<p>Confirm it, and the check opens right here in the portal. Give it a second to render. What comes up first is your remittance summary — the amount, who it's from, what it's for. That's page one. It's useful, but it is not the part you take to the bank.</p>
+<p>The check itself is on page two. And here's the part that catches people — opening it is not the same as having it. You still need to get it out of the browser. That's what these two buttons in the top corner are for.</p>
+<p>Print is the one you want. Tap it and the whole check goes to your printer — and plain white paper is completely fine. You don't need special check stock, you don't need magnetic ink, and you don't need to go buy anything. An ordinary sheet from an ordinary printer is a valid check.</p>
+<p>Download is right next to it, and that's the second tap people miss. It saves the PDF onto your computer, so you can keep a copy for your records or print it somewhere else later.</p>
+<p>Close it, and ShelfSpace hands you the short version of what's left. Print it, then deposit it — and you deposit it exactly the way you'd deposit any other paper check.</p>
+<p>Your bank's mobile app works. A check scanner works. Walking it into a branch and handing it to a teller works. And if you'd rather not print anything at all, you can ask the retailer to mail you a paper check instead — that option stays open to you.</p>
+<p>That's it — the check is with your bank now. ShelfSpace shows it as downloaded, but only your bank confirms when the funds actually land, usually a few business days later.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="/" class="nav-logo"><div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div><span class="nav-logo-text">ShelfSpace</span></a>
+      <p>Every Vendor. Every Payment. One Engine.</p>
+    </div>
+    <div class="footer-col"><h3>Services</h3><ul><li><a href="/accounts-payable">Accounts Payable</a></li><li><a href="/consignment">Consignment</a></li><li><a href="/credit-recovery">Credit Recovery</a></li><li><a href="/checks">Check Payments</a></li><li><a href="/shelfiq">ShelfiQ</a></li></ul></div>
+    <div class="footer-col"><h3>Platform</h3><ul><li><a href="/features">Features</a></li><li><a href="/how-it-works">How It Works</a></li><li><a href="/pricing">Pricing</a></li><li><a href="/about">About</a></li><li><a href="/blog">Blog</a></li><li><a href="/docs">Docs</a></li><li><a href="/tutorials">Tutorials</a></li></ul></div>
+    <div class="footer-col"><h3>Access</h3><ul><li><a href="https://ourshelf.space/login">Login</a></li><li><a href="/contact">Sign Up</a></li><li><a href="/contact">Contact</a></li><li><a href="/vendors">For Vendors</a></li><li><a href="/for-bookkeepers">For Bookkeepers</a></li></ul></div>
+    <div class="footer-col"><h3>Company</h3><ul><li><a href="mailto:support@shelfspace.pro">Support</a></li><li><a href="https://linkedin.com/company/shelfspace-pro" target="_blank" rel="noopener" class="footer-social-link"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> LinkedIn</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><p>&copy; 2026 ShelfSpace Technologies Inc.</p><div style="display:flex;align-items:center;gap:8px;justify-content:center;margin-top:12px;"><img src="/metrc-logo.png" alt="Metrc" style="height:18px;opacity:0.4;filter:brightness(0) invert(1);"><span style="font-size:11px;color:rgba(255,255,255,0.35);">Certified Metrc Third-Party Vendor</span></div><div class="footer-bottom-links"><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div></div>
+</footer>
+<script>
+(function(){
+  var nav=document.getElementById('nav');
+  var pageHero=document.querySelector('.page-hero');
+  requestAnimationFrame(function(){ nav.classList.toggle('scrolled',window.scrollY>20); if(pageHero)pageHero.classList.add('hero-loaded'); });
+  window.addEventListener('scroll',function(){ nav.classList.toggle('scrolled',window.scrollY>20); },{passive:true});
+  var ro=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('is-visible');ro.unobserve(e.target);}})},{threshold:0.1});
+  document.querySelectorAll('.reveal').forEach(function(el){ro.observe(el);});
+})();
+</script>
+<script src="/shelfiq-widget.js"></script>
+</body>
+</html>
