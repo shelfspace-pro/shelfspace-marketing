@@ -3,20 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Aged Inventory on Consignment — ShelfSpace</title>
-<meta name="description" content="Consignment settlements carry no aging deduction — the vendor's split of the actual sale price already shares every markdown. What replaced aging tiers, and the wholesale equivalent.">
-<link rel="canonical" href="https://shelfspace.pro/docs/consignment/aging-discounts">
+<title>Price Drops — ShelfSpace</title>
+<meta name="description" content="Ask a vendor to cover part of a markdown on aged wholesale inventory before you drop the price. Opportunities discovery, the approval workflow, and category-aware thresholds.">
+<link rel="canonical" href="https://shelfspace.pro/docs/credit-recovery/price-drops">
 <meta property="og:type" content="article">
-<meta property="og:url" content="https://shelfspace.pro/docs/consignment/aging-discounts">
-<meta property="og:title" content="Aged Inventory on Consignment — ShelfSpace">
-<meta property="og:description" content="Consignment settlements carry no aging deduction — the vendor's split of the actual sale price already shares every markdown. What replaced aging tiers, and the wholesale equivalent.">
+<meta property="og:url" content="https://shelfspace.pro/docs/credit-recovery/price-drops">
+<meta property="og:title" content="Price Drops — ShelfSpace">
+<meta property="og:description" content="Ask a vendor to cover part of a markdown on aged wholesale inventory before you drop the price. Opportunities discovery, the approval workflow, and category-aware thresholds.">
 <meta property="og:image" content="https://shelfspace.pro/og-image-v7.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:type" content="image/png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Aged Inventory on Consignment — ShelfSpace">
-<meta name="twitter:description" content="Consignment settlements carry no aging deduction — the vendor's split of the actual sale price already shares every markdown. What replaced aging tiers, and the wholesale equivalent.">
+<meta name="twitter:title" content="Price Drops — ShelfSpace">
+<meta name="twitter:description" content="Ask a vendor to cover part of a markdown on aged wholesale inventory before you drop the price. Opportunities discovery, the approval workflow, and category-aware thresholds.">
 <meta name="twitter:image" content="https://shelfspace.pro/og-image-v7.png">
 <meta name="apple-mobile-web-app-title" content="ShelfSpace">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -90,6 +90,7 @@
   .docs-content strong { color: var(--green-deep); font-weight: 600; }
   .docs-content a { color: var(--green-mid); font-weight: 500; text-decoration: none; }
   .docs-content a:hover { color: var(--green-deep); text-decoration: underline; }
+  .docs-content code { font-family: var(--font-mono); font-size: 0.9em; background: var(--green-ghost); padding: 1px 6px; border-radius: 4px; color: var(--green-dark); }
 
   /* ── At a Glance Box ── */
   .docs-glance {
@@ -119,6 +120,15 @@
     font-size: 15px; line-height: 1.7; color: var(--green-dark);
   }
   .docs-highlight strong { color: var(--green-deep); }
+
+  /* ── Threshold Table ── */
+  .docs-table { margin: 24px 0; border: 1px solid var(--slate-200); border-radius: 12px; overflow-x: auto; }
+  .docs-table table { width: 100%; border-collapse: collapse; min-width: 360px; }
+  .docs-table th, .docs-table td { text-align: left; padding: 11px 18px; font-size: 15px; border-bottom: 1px solid var(--slate-100); }
+  .docs-table th { background: var(--green-ghost); color: var(--green-deep); font-weight: 700; font-size: 13px; letter-spacing: 0.5px; }
+  .docs-table td { color: var(--slate-600); }
+  .docs-table td:last-child { font-family: var(--font-mono); color: var(--green-deep); font-weight: 700; }
+  .docs-table tr:last-child td { border-bottom: none; }
 
   /* ── Related Docs ── */
   .docs-related {
@@ -172,12 +182,12 @@
 {
   "@context": "https://schema.org",
   "@type": "TechArticle",
-  "headline": "Aged Inventory on Consignment",
-  "datePublished": "2026-03-25",
-  "dateModified": "2026-06-05",
+  "headline": "Price Drops",
+  "datePublished": "2026-07-28",
+  "dateModified": "2026-07-28",
   "author": { "@type": "Organization", "name": "ShelfSpace", "url": "https://shelfspace.pro" },
   "publisher": { "@type": "Organization", "name": "ShelfSpace" },
-  "url": "https://shelfspace.pro/docs/consignment/aging-discounts"
+  "url": "https://shelfspace.pro/docs/credit-recovery/price-drops"
 }
 </script>
 <script type="application/ld+json">
@@ -185,29 +195,10 @@
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position": 1,
-      "name": "Home",
-      "item": "https://shelfspace.pro/"
-    },
-    {
-      "@type": "ListItem",
-      "position": 2,
-      "name": "Documentation",
-      "item": "https://shelfspace.pro/docs"
-    },
-    {
-      "@type": "ListItem",
-      "position": 3,
-      "name": "Consignment",
-      "item": "https://shelfspace.pro/docs/consignment/overview"
-    },
-    {
-      "@type": "ListItem",
-      "position": 4,
-      "name": "Aged Inventory on Consignment"
-    }
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://shelfspace.pro/" },
+    { "@type": "ListItem", "position": 2, "name": "Documentation", "item": "https://shelfspace.pro/docs" },
+    { "@type": "ListItem", "position": 3, "name": "Credit Recovery", "item": "https://shelfspace.pro/docs/credit-recovery/overview" },
+    { "@type": "ListItem", "position": 4, "name": "Price Drops" }
   ]
 }
 </script>
@@ -240,11 +231,12 @@ document.head.appendChild(o)}initApollo();</script>
 </nav>
 
 
+
 <!-- DOCS HERO -->
 <div class="docs-hero">
   <div class="docs-hero-content">
     <a href="/docs" class="docs-hero-badge">Documentation</a>
-    <h1 class="docs-hero-title">Aged Inventory on Consignment</h1>
+    <h1 class="docs-hero-title">Price Drops</h1>
   </div>
 </div>
 
@@ -259,74 +251,124 @@ document.head.appendChild(o)}initApollo();</script>
   <!-- CONTENT -->
   <main class="docs-content">
     <div class="docs-breadcrumb">
-      <a href="/docs">Docs</a> / <a href="/docs/consignment/overview">Consignment</a> / Aged Inventory on Consignment
+      <a href="/docs">Docs</a> / <a href="/docs/credit-recovery/overview">Credit Recovery</a> / Price Drops
     </div>
-    <div class="docs-category">Consignment</div>
+    <div class="docs-category">Credit Recovery</div>
 
     <!-- AT A GLANCE -->
     <div class="docs-glance">
       <h2>At a Glance</h2>
       <ul>
-        <li>There is no aging deduction on a consignment settlement — and none is needed</li>
-        <li>The vendor is paid their split of what each item <em>actually rang up for</em>, so a markdown is shared the moment it sells</li>
-        <li>Mark aged consignment product down as far as you want; your split percentage never moves</li>
-        <li>Asking a vendor to cover part of a markdown is a <strong>wholesale</strong> idea — that's <a href="/docs/credit-recovery/price-drops">price drops</a></li>
-        <li>Shelf age is still tracked and reported on consignment; it just isn't a line item on the payout</li>
+        <li>A price drop is you asking a vendor, <em>before</em> you mark down their aged product, to cover part of the hit</li>
+        <li>Live at <strong>Price Drops</strong> in the retailer portal — Opportunities, Requests, and Aging Thresholds</li>
+        <li>The Opportunities tab finds the aged wholesale SKUs for you; one click sends the ask</li>
+        <li>A vendor's recorded yes moves the credit into "Price Drops Approved by Vendor" on the monthly credit memo</li>
+        <li>Silence still bills — an aged markdown is credited either way. Approval changes the label, and makes it far harder to argue with later</li>
+        <li>Wholesale only. On consignment the split already shares every markdown</li>
       </ul>
     </div>
 
     <!-- BODY CONTENT -->
-    <h2>Why Consignment Needs No Aging Deduction</h2>
-    <p>Cannabis inventory that sits too long loses potency, appeal, and value, and eventually you mark it down to move it. On wholesale that markdown hurts, because you already paid for the unit. On <a href="/consignment">consignment</a> it doesn't — and that is the single most useful thing to understand about aged consignment product.</p>
+    <h2>What a Price Drop Is</h2>
+    <p>A price drop is the conversation you were already having with your vendors, made routine and written down. A lot of their product has been on your shelf too long. You want to mark it down to move it, and you want them to cover part of that markdown — because clearing it protects both of you, and the alternative is that it sits there until it's worth nothing.</p>
 
-    <p>The vendor is paid their agreed split of whatever the item actually rings up for. Drop a $50 eighth to $30 to clear it, and on a 50/50 split you take $15 and the vendor takes $15. The markdown was shared automatically, in the same proportion as the split, at the register. There is no adjustment to calculate, no tier to match, and nothing to bill back — because the vendor never received the full-price half in the first place.</p>
+    <p>The difference between a price drop and an <a href="/docs/credit-recovery/aging">inventory aging credit</a> is <em>when</em> the vendor finds out. An aging credit is calculated after the fact: the product aged, you discounted it, and the credit recovery engine bills their share on the monthly memo. A price drop is the same dollar, asked for in advance. You send the request, the vendor says yes, and their yes is on the record before you touch the shelf price.</p>
 
     <div class="docs-highlight">
-      <strong>The practical version:</strong> your margin <em>percentage</em> on a consignment SKU is whatever split you set, at every price you ever sell it for. That's true on day one and on day 200. Clearing aged consignment product costs you proportionally less than clearing aged wholesale product, which is exactly why aged inventory is the easiest place to start using consignment.
+      <strong>Wholesale only.</strong> Price drops apply to product you bought outright. On a <a href="/consignment">consignment</a> order the vendor is paid their split of whatever the item actually rang up for — so a markdown is already shared the moment it rings, and there is nothing to ask for. Never send a consignment vendor a price-drop request.
     </div>
 
-    <h2>What This Replaces</h2>
-    <p>ShelfSpace used to run aging discount tiers on consignment settlements — a per-category schedule that deducted a percentage from the vendor's share once product crossed an age threshold, and tracked any overage as a margin deficit. That mechanism was removed in July 2026. It was doing the same job the split already does, and doing it twice produced payouts that didn't match a straight reading of the sale.</p>
-
-    <p>Consignment settlements now pay the pure split of the actual sale price. If you have an older settlement report showing an aging deduction or a margin-deficit line, that's why — the current engine doesn't produce them.</p>
-
-    <h2>The Wholesale Equivalent</h2>
-    <p>On product you bought outright, none of the above applies: you paid full cost, so a markdown is a real loss and asking the vendor to share it is reasonable. That's what these two are for:</p>
+    <h2>Why Bother Asking First</h2>
+    <p>Because the answer shows up on the credit memo. Aged markdowns are split into two sections on the monthly memo:</p>
 
     <div class="docs-table">
       <table>
-        <thead><tr><th>Tool</th><th>What it does</th></tr></thead>
+        <thead><tr><th>Section</th><th>What it means</th></tr></thead>
         <tbody>
-          <tr><td><a href="/docs/credit-recovery/price-drops">Price Drops</a></td><td>Ask the vendor <em>before</em> you mark down aged wholesale product, and get their yes on the record.</td></tr>
-          <tr><td><a href="/docs/credit-recovery/aging">Inventory Aging Credits</a></td><td>Bill the vendor's share of an aged wholesale markdown after the fact, on the monthly credit memo.</td></tr>
+          <tr><td><strong>Price Drops Approved by Vendor</strong></td><td>You asked, they said yes, and the platform recorded it with a date. This is a documented agreement.</td></tr>
+          <tr><td><strong>Price Drops Not Approved by Vendor</strong></td><td>The markdown qualified on age alone. Still credited — but it's the first thing a vendor pushes back on.</td></tr>
         </tbody>
       </table>
     </div>
 
-    <p>Both are wholesale-only, and both are deliberately excluded from consignment product. If you're looking at a vendor who ships you both ways — which is every vendor — the credit rules follow how each individual delivery was received, not the vendor.</p>
+    <p>Both are billed. The point of asking is not to unlock the credit — it's to stop the argument before it starts. A vendor who already told you in writing that they'd cover half of a markdown on a 90-day-old lot rarely disputes it sixty days later.</p>
 
-    <h2>Aging Is Still Tracked</h2>
-    <p>Nothing about this makes shelf age invisible. You still see days-on-shelf per package, the oldest lots per vendor, and sell-through velocity in the <a href="/docs/inventory/slots">slot analytics</a> and on the vendor's own portal view. Aged consignment product is still a problem worth solving — it's occupying a slot that could hold something faster. It just isn't a deduction on the check.</p>
+    <h2>Finding What to Ask About</h2>
+    <p>Open <strong>Price Drops</strong> in the retailer portal. It opens on the <strong>Opportunities</strong> tab, which does the hunting for you: every wholesale package across every vendor that has crossed its aging threshold and is still on your shelf, sorted so the worst offenders are on top. Packages already covered by an open request are filtered out, so you're never looking at the same lot twice.</p>
 
-    <p>For what a consignment payout <em>does</em> contain — category splits, returns, and any credit memo netted against it — see the <a href="/docs/consignment/settlement-reports">settlement report</a> breakdown.</p>
+    <p>From there, one click sends the ask. You can adjust the proposed shelf price and the share you're asking the vendor to cover before it goes out, or send it as-is.</p>
+
+    <div class="docs-highlight">
+      <strong>The proposed price is a proposal, not the math.</strong> The new shelf price you type — and the percentage-drop toggle — go into the request so the vendor can see what you're planning. Neither one sets the credit. The dollar is always the shortfall against your target margin multiplied by the coverage rate. If you want to change the money, change the vendor's share, not the proposed price.
+    </div>
+
+    <h2>What Happens After You Send</h2>
+    <p>The vendor gets an email with a direct link to review and approve — they don't need to go hunting through their portal for it. From there:</p>
+
+    <ol>
+      <li><strong>They approve.</strong> The request goes active and every qualifying sale from the effective date forward lands in the approved section of the memo.</li>
+      <li><strong>They decline.</strong> The request closes. Aged sales still qualify for the ordinary aging credit; you just don't have their yes.</li>
+      <li><strong>They go quiet.</strong> After five business days the platform sends one reminder — exactly one, never a drip campaign.</li>
+      <li><strong>They stay quiet.</strong> After ten business days the request moves to <em>awaiting your review</em> and shows up in your digest. You either confirm it yourself, which records the markdown as agreed on your authority, or you dismiss it.</li>
+    </ol>
+
+    <p>If a vendor belatedly replies after all that, their approval still wins and is recorded as theirs.</p>
+
+    <h2>When You Already Have Their Yes</h2>
+    <p>Most of these agreements happen in a text message or a hallway at a trade show, not in a portal. If your buyer already has the vendor's approval, record it directly instead of sending a request the vendor has to answer twice — note how they approved, and the request goes active immediately. The evidence path exists so the system matches how the deal actually got made.</p>
+
+    <h2>Setting Your Thresholds</h2>
+    <p>The <strong>Aging Thresholds</strong> tab controls when a package becomes old enough to count. Defaults are category-aware, because flower goes stale far faster than an edible:</p>
+
+    <div class="docs-table">
+      <table>
+        <thead><tr><th>Category</th><th>Default threshold</th></tr></thead>
+        <tbody>
+          <tr><td>Flower</td><td>60 days</td></tr>
+          <tr><td>Pre-Rolls</td><td>60 days</td></tr>
+          <tr><td>Concentrates</td><td>60 days</td></tr>
+          <tr><td>Vapes</td><td>120 days</td></tr>
+          <tr><td>Edibles</td><td>120 days</td></tr>
+          <tr><td>Everything else</td><td>120 days</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>Your own rules override the defaults, and the most specific rule wins:</p>
+
+    <p><code>SKU &gt; vendor &gt; category &gt; default</code></p>
+
+    <p>A rule on one SKU beats a rule on that vendor, which beats a rule on the whole category. Full detail on how the credit itself is calculated lives in <a href="/docs/credit-recovery/aging">Inventory Aging Credits</a>.</p>
+
+    <h2>Getting the Shelf Price Right</h2>
+    <p>The Opportunities tab shows what each SKU is currently selling for so you can judge how far to drop it. That price comes from your menu — use <strong>Refresh prices from Dutchie</strong> to upload a current inventory export and the list updates. Without it, the platform estimates from recent sales, which is fine for triage but worth refreshing before you send a batch of asks with specific prices in them.</p>
+
+    <h2>What You Control</h2>
+    <p>All of it, and it takes effect immediately. You set the thresholds, the target margin, and the coverage rate you're asking vendors to meet. A request can carry its own rate that overrides your default for that agreement specifically — and if you leave it blank, an approved request never recovers less than it would have if the vendor had ignored you.</p>
+
+    <p>ShelfSpace does not broker the arrangement. You and your vendor agree to whatever you agree to, directly. The platform finds the aged inventory, sends the ask, tracks the answer, does the math, and puts it on the memo. See the <a href="/docs/credit-recovery/approval-workflow">credit memo approval process</a> for how the vendor's response to the memo itself is handled.</p>
+
+    <h2>One Guardrail Worth Knowing</h2>
+    <p>An aged sale that carried one of <em>your</em> discounts — loyalty, employee, or another retailer-run POS program — is excluded from the unapproved aging credit. Vendors don't fund your loyalty program. A recorded price-drop agreement is different: the vendor agreed to cover that markdown, so the agreement holds regardless of what else was attached to the sale.</p>
 
     <!-- RELATED DOCS -->
     <div class="docs-related">
       <h3>Related</h3>
       <div class="docs-related-links">
-        <a href="/docs/consignment/receiving-and-payout">Receiving &amp; Payout</a>
-        <a href="/docs/consignment/approve-pay-vs-paid-externally">Approve &amp; Pay vs Paid Externally</a>
-        <a href="/docs/consignment/settlements">Weekly Settlements</a>
-        <a href="/docs/consignment/contracts">Contracts &amp; Terms</a>
-        <a href="/docs/consignment/settlement-reports">Settlement Reports</a>
-        <a href="/docs/consignment/overview">Consignment Overview</a>
-        <a href="/docs/consignment/profit-splits">Category Splits</a>
+        <a href="/docs/credit-recovery/aging">Inventory Aging Credits</a>
+        <a href="/docs/credit-recovery/co-marketing">Co-Marketing Credits</a>
+        <a href="/docs/credit-recovery/settings">Settings &amp; Defaults</a>
+        <a href="/docs/credit-recovery/approval-workflow">Approval Process</a>
+        <a href="/docs/credit-recovery/overview">Credit Recovery Overview</a>
+        <a href="/docs/promotions/vendor-pre-approval-sop">Vendor Pre-Approval</a>
+        <a href="/docs/inventory/slots">Shelf Slot Analytics</a>
+        <a href="/docs/consignment/aging-discounts">Aged Inventory on Consignment</a>
       </div>
     </div>
 
     <!-- CTA -->
     <div class="docs-cta">
-      <p><strong>Ready to free up your capital? Let's talk.</strong></p>
+      <p><strong>Sitting on stale inventory? Let's see what it's costing you.</strong></p>
       <a href="/contact">Talk to Us <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a>
       <div class="docs-cta-note">Free evaluation. No commitment.</div>
     </div>
