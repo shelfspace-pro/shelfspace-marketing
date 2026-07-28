@@ -73,6 +73,35 @@
 
   .contact-founder { display: flex; align-items: center; gap: 16px; margin-bottom: 32px; }
 
+  /* ── SAMPLE EVALUATION ── */
+  .contact-sample {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 20px; border: 1px solid var(--slate-200); border-radius: 16px;
+    background: var(--green-ghost); text-decoration: none;
+    transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+  }
+  .contact-sample:hover {
+    border-color: var(--green-accent);
+    box-shadow: 0 8px 24px rgba(27,67,50,0.08);
+    transform: translateY(-2px);
+  }
+  .contact-sample:focus-visible { outline: 2px solid var(--green-dark); outline-offset: 3px; }
+  .contact-sample-icon {
+    flex-shrink: 0; width: 40px; height: 40px; border-radius: 10px;
+    background: var(--white); border: 1px solid var(--slate-200);
+    display: flex; align-items: center; justify-content: center; color: var(--green-dark);
+  }
+  .contact-sample-body { flex: 1; }
+  .contact-sample-body strong {
+    display: flex; align-items: center; gap: 6px;
+    font-size: 15px; font-weight: 700; color: var(--green-deep); margin-bottom: 4px;
+  }
+  .contact-sample-body p { font-size: 14px; line-height: 1.55; color: var(--slate-600); margin: 0; }
+  .contact-sample-meta {
+    display: block; margin-top: 8px; font-family: var(--font-mono);
+    font-size: 11px; letter-spacing: 0.5px; text-transform: uppercase; color: var(--slate-500);
+  }
+
   .contact-form-card {
     background: var(--white); border: 1px solid var(--slate-200);
     border-radius: 16px; padding: 40px;
@@ -248,6 +277,19 @@ document.head.appendChild(o)}initApollo();</script>
       </div>
 
       <p style="font-size:15px;color:var(--slate-600);line-height:1.65;margin-bottom:28px;">No call center, no runaround. You'll hear back from people who've actually run dispensaries. Ask questions, see how it works, and decide for yourself.</p>
+
+      <a href="/ShelfSpace_Sample_Evaluation.pdf" target="_blank" rel="noopener" class="contact-sample" aria-label="See a sample evaluation, 7-page PDF, opens in a new tab">
+        <div class="contact-sample-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="13" y2="17"/></svg>
+        </div>
+        <div class="contact-sample-body">
+          <strong>See a sample evaluation
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </strong>
+          <p>This is what lands in your inbox: what your AP is leaking, what your vendors owe you, and what's trapped on your shelves — vendor by vendor, in dollars.</p>
+          <span class="contact-sample-meta">7 pages · PDF · Sample data</span>
+        </div>
+      </a>
     </div>
 
     <div class="contact-form-card reveal reveal-delay-1">
