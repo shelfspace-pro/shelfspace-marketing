@@ -108,6 +108,7 @@ It is NOT a managed service. We do not run your AP for you. We do not cut your c
 - Works for cannabis vendors (Metrc-verified) AND non-cannabis expense vendors (rent, utilities, software, insurance) on the same system.
 - QuickBooks sync — every payment hits your books in real time.
 - If your bookkeeper already entered a vendor bill in QuickBooks, the platform pays THAT bill instead of adding a second one, so the expense never posts twice and their account coding stays put. At setup you scan QuickBooks for open bills and confirm the matches — it's a one-time cleanup, and nothing is linked without you confirming it.
+- You don't have to re-key your open AP to get started. At onboarding the platform can carry your open QuickBooks bills straight over as bills to pay — no cutoff date, however old they are — and it can fill in each vendor's billing email, phone and remit-to address from your own QuickBooks vendor records. You preview both before anything is written.
 - Vendors who connect QuickBooks get two sync controls in their portal: turn off auto-created payments (push invoices only and record deposits themselves), and require item mapping before invoicing (a settlement with an unmapped product is held and the vendor is notified, then syncs automatically once they map the item).
 
 **Consignment settlements**
