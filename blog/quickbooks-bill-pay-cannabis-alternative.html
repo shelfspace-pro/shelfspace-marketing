@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QuickBooks Bill Pay Doesn't Serve Cannabis. Here's the Fix.</title>
+<meta name="description" content="QuickBooks Bill Pay runs on Melio, and Melio's restricted list names marijuana. Your books are fine. Your payment rail isn't. How to keep one and replace the other.">
+<link rel="canonical" href="https://shelfspace.pro/blog/quickbooks-bill-pay-cannabis-alternative">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://shelfspace.pro/blog/quickbooks-bill-pay-cannabis-alternative">
+<meta property="og:title" content="QuickBooks Bill Pay Doesn't Serve Cannabis. Here's the Fix.">
+<meta property="og:description" content="QuickBooks Bill Pay runs on Melio, and Melio's restricted list names marijuana. Your books are fine. Your payment rail isn't. How to keep one and replace the other.">
+<meta property="og:image" content="https://shelfspace.pro/og-image-v7.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="ShelfSpace">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="QuickBooks Bill Pay Doesn't Serve Cannabis. Here's the Fix.">
+<meta name="twitter:description" content="QuickBooks Bill Pay runs on Melio, and Melio's restricted list names marijuana. Your books are fine. Your payment rail isn't. How to keep one and replace the other.">
+<meta name="twitter:image" content="https://shelfspace.pro/og-image-v7.png">
+<meta name="apple-mobile-web-app-title" content="ShelfSpace">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+<style>
+  /* ─── HERO ENHANCEMENTS ─── */
+  .page-hero { padding-bottom: 40px; }
+  .hero-bg-gradient { position: absolute; top: -30%; right: -20%; width: 700px; height: 700px; background: radial-gradient(circle, rgba(149,213,178,0.18) 0%, rgba(149,213,178,0) 70%); animation: float 8s ease-in-out infinite; pointer-events: none; }
+  .hero-bg-gradient-2 { position: absolute; bottom: -20%; left: -15%; width: 550px; height: 550px; background: radial-gradient(circle, rgba(27,67,50,0.06) 0%, rgba(27,67,50,0) 70%); animation: float 10s ease-in-out infinite; animation-delay: -3s; pointer-events: none; }
+  .hero-grid-lines { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 1200px; height: 100%; opacity: 0.035; background-image: linear-gradient(var(--green-deep) 1px, transparent 1px), linear-gradient(90deg, var(--green-deep) 1px, transparent 1px); background-size: 80px 80px; pointer-events: none; }
+  .page-hero .section-label,
+  .page-hero .section-title,
+  .page-hero .section-desc { opacity: 0; transform: translateY(30px); }
+  .page-hero .section-label { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1); }
+  .page-hero .section-title { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s, transform 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s; }
+  .page-hero .section-desc { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1) 0.25s, transform 0.8s cubic-bezier(0.22,1,0.36,1) 0.25s; }
+  .page-hero.hero-loaded .section-label,
+  .page-hero.hero-loaded .section-title,
+  .page-hero.hero-loaded .section-desc { opacity: 1; transform: translateY(0); }
+
+  /* ─── REVEAL ─── */
+  .reveal {
+    opacity: 0; transform: translateY(40px);
+    transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .reveal.is-visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.2s; }
+  .reveal-delay-2 { transition-delay: 0.4s; }
+
+  /* ─── ARTICLE BODY ─── */
+  .article-body { max-width: 720px; margin: 0 auto; padding: 0 48px 80px; }
+  .article-body h2 { font-size: 24px; font-weight: 700; color: var(--green-deep); margin: 48px 0 16px; letter-spacing: -0.5px; line-height: 1.3; }
+  .article-body p { font-size: 17px; line-height: 1.85; color: var(--slate-600); margin-bottom: 24px; }
+  .article-body ul, .article-body ol { margin-bottom: 24px; padding-left: 24px; }
+  .article-body li { font-size: 17px; line-height: 1.85; color: var(--slate-600); margin-bottom: 8px; }
+  .article-body strong { color: var(--green-deep); font-weight: 600; }
+  .article-body a { color: var(--green-mid); font-weight: 500; text-decoration: none; }
+  .article-body a:hover { color: var(--green-deep); text-decoration: underline; }
+  .article-body blockquote { border-left: 3px solid var(--green-accent); padding: 16px 24px; margin: 32px 0; background: var(--green-ghost); border-radius: 0 8px 8px 0; }
+  .article-body blockquote p { font-style: italic; color: var(--green-dark); margin-bottom: 0; }
+
+  /* ─── AT A GLANCE ─── */
+  .article-glance {
+    max-width: 720px; margin: 0 auto 40px; padding: 24px 28px;
+    background: var(--green-ghost); border: 1px solid rgba(149,213,178,0.3);
+    border-radius: 12px;
+  }
+  .article-glance h2 {
+    font-size: 14px; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--green-mid); margin: 0 0 12px;
+  }
+  .article-glance ul { list-style: none; padding: 0; margin: 0; }
+  .article-glance li {
+    font-size: 15px; line-height: 1.6; color: var(--slate-600);
+    padding: 4px 0 4px 20px; position: relative;
+  }
+  .article-glance li::before {
+    content: ''; position: absolute; left: 0; top: 12px;
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--green-accent);
+  }
+
+  /* ─── REROUTE DIAGRAM (custom hero illustration, page-scoped) ─── */
+  .reroute { max-width: 720px; margin: 0 auto 48px; padding: 0 48px; }
+  .reroute-frame {
+    background: var(--white); border: 1px solid var(--slate-200);
+    border-radius: 16px; padding: 24px 20px 18px;
+    box-shadow: 0 4px 24px rgba(27,67,50,0.06);
+  }
+  .reroute svg { display: block; width: 100%; height: auto; }
+  .reroute-cap {
+    margin: 14px 0 0; text-align: center;
+    font-size: 13px; line-height: 1.6; color: var(--slate-500);
+  }
+  .reroute-cap strong { color: var(--green-deep); font-weight: 600; }
+  .rr-box-label { font-size: 14px; font-weight: 700; fill: var(--green-deep); }
+  .rr-box-sub { font-size: 11.5px; font-weight: 500; fill: var(--slate-500); }
+  .rr-box-label-dead { fill: #8a5a55; }
+  .rr-box-sub-dead { fill: #b08a85; }
+  .rr-edge-label { font-size: 11px; font-weight: 600; fill: var(--slate-400); letter-spacing: 0.3px; }
+  .rr-flow {
+    stroke-dasharray: 9 7;
+    animation: rrFlow 1.1s linear infinite;
+  }
+  @keyframes rrFlow { to { stroke-dashoffset: -32; } }
+
+  /* ─── COMPARISON TABLE ─── */
+  .compare-wrap { max-width: 720px; margin: 0 auto; padding: 0 48px; overflow-x: auto; }
+  .compare-table { width: 100%; border-collapse: collapse; margin: 32px 0; border-radius: 12px; overflow: hidden; border: 1px solid var(--slate-200); }
+  .compare-table th { padding: 14px 16px; font-size: 14px; font-weight: 700; text-align: left; border-bottom: 2px solid var(--slate-200); }
+  .compare-table th:first-child { color: var(--slate-500); background: var(--white); width: 34%; }
+  .compare-table th:nth-child(2) { color: var(--slate-400); background: var(--slate-50); }
+  .compare-table th:nth-child(3) { color: var(--slate-400); background: var(--slate-50); }
+  .compare-table th:nth-child(4) { color: var(--green-deep); background: var(--green-ghost); }
+  .compare-table td { padding: 12px 16px; font-size: 14px; border-bottom: 1px solid var(--slate-100); }
+  .compare-table td:first-child { color: var(--slate-600); font-weight: 500; }
+  .compare-table td:nth-child(2), .compare-table td:nth-child(3) { background: var(--slate-50); color: var(--slate-500); }
+  .compare-table td:nth-child(4) { background: rgba(240,250,244,0.5); }
+  .compare-table tr:last-child td { border-bottom: none; }
+  .compare-check { color: var(--green-mid); font-weight: 700; }
+  .compare-x { color: #c0392b; font-weight: 700; }
+  .compare-dash { color: var(--slate-400); font-weight: 700; }
+  .compare-plus { color: var(--green-deep); font-size: 13px; }
+
+  /* ─── FAQ ACCORDION (per-page primitive, mirrors vendors.html) ─── */
+  .faq-list { max-width: 720px; margin: 0 auto; }
+  .faq-list details { border-bottom: 1px solid var(--slate-200); }
+  .faq-list details:first-child { border-top: 1px solid var(--slate-200); }
+  .faq-list summary {
+    padding: 22px 0; font-size: 17px; font-weight: 600;
+    color: var(--green-deep); cursor: pointer; list-style: none;
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  }
+  .faq-list summary::-webkit-details-marker { display: none; }
+  .faq-list summary::after {
+    content: '+'; font-size: 22px; font-weight: 400;
+    color: var(--slate-500); flex-shrink: 0;
+  }
+  .faq-list details[open] summary::after { content: '\2212'; }
+  .faq-list details p {
+    padding: 0 0 22px; margin: 0; font-size: 15px;
+    line-height: 1.7; color: var(--slate-500);
+  }
+  .faq-list details p a { color: var(--green-mid); font-weight: 500; text-decoration: none; }
+  .faq-list details p a:hover { color: var(--green-deep); text-decoration: underline; }
+
+  /* ─── CTA PARALLAX ─── */
+  .cta-section::before { transform: translate(-50%,-50%) translateY(var(--parallax-y, 0)); will-change: transform; }
+
+  /* ─── FOOTER 5-COL ─── */
+  .footer-top { grid-template-columns: 2fr 1fr 1fr 1fr 1fr; }
+  @media (max-width: 900px) { .footer-top { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px) { .footer-top { grid-template-columns: 1fr; } }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    .article-body { padding: 0 24px 60px; }
+    .article-body h2 { margin-top: 36px; }
+    .reroute { padding: 0 24px; }
+    /* Scroll the diagram rather than shrink its labels below legibility.
+       Same pattern as .compare-wrap — narrow screens swipe, they don't squint. */
+    .reroute-frame { padding: 18px 12px 14px; overflow-x: auto; }
+    .reroute svg { min-width: 540px; }
+    .reroute-cap { position: sticky; left: 0; }
+    .compare-wrap { padding: 0 24px; }
+    .compare-table { font-size: 13px; }
+    .compare-table th, .compare-table td { padding: 10px 12px; }
+  }
+
+  /* ─── REDUCED MOTION ─── */
+  @media (prefers-reduced-motion: reduce) {
+    .reveal {
+      opacity: 1; transform: none; transition: none;
+    }
+    .page-hero .section-label,
+    .page-hero .section-title,
+    .page-hero .section-desc {
+      opacity: 1; transform: none; transition: none;
+    }
+    .hero-bg-gradient, .hero-bg-gradient-2 { animation: none; }
+    .rr-flow { animation: none; }
+  }
+</style>
+<noscript><style>.reveal,.page-hero .section-label,.page-hero .section-title,.page-hero .section-desc{opacity:1;transform:none;transition:none;}</style></noscript>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-H2LBJT03WE"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-H2LBJT03WE');</script>
+<script>function initApollo(){var n=Math.random().toString(36).substring(7),o=document.createElement("script");
+o.src="https://assets.apollo.io/micro/website-tracker/tracker.iife.js?nocache="+n,o.async=!0,o.defer=!0,
+o.onload=function(){window.trackingFunctions.onLoad({appId:"69c141b32234890011a43849"})},
+document.head.appendChild(o)}initApollo();</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "QuickBooks Bill Pay Doesn't Serve Cannabis. Here's the Fix.",
+  "description": "QuickBooks Bill Pay runs on Melio, and Melio's restricted list names marijuana. Your books are fine. Your payment rail isn't. How to keep one and replace the other.",
+  "author": {
+    "@type": "Person",
+    "name": "Chris Mitchem"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "ShelfSpace",
+    "url": "https://shelfspace.pro"
+  },
+  "datePublished": "2026-08-01",
+  "url": "https://shelfspace.pro/blog/quickbooks-bill-pay-cannabis-alternative",
+  "image": "https://shelfspace.pro/og-image-v7.png"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is QuickBooks shutting off my whole account, or just bill pay?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "In the cases we have seen, only the payments side. QuickBooks Online is accounting software and your subscription, your chart of accounts, and your history are not affected. What gets cut is the money-movement product: QuickBooks Bill Pay and QuickBooks Payments. Those run under Intuit's payments terms, which are separate from your accounting subscription. Read your notice carefully to confirm which product it names."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why does QuickBooks Bill Pay reject cannabis businesses?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "QuickBooks Bill Pay is powered by Melio, and the terms Melio publishes for QuickBooks Online users list payments in connection with the cannabis industry, including hemp and marijuana and related businesses and products, among the payments it will not process. Intuit's own payments policy draws the same line. Both companies move money through banking partners that will not underwrite a plant-touching business under federal law. It is a policy boundary, not a judgment about your business, and it is enforced account by account as underwriting catches up rather than by public announcement."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I use BILL, Melio, Ramp, or Tipalti instead?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Read each company's restricted-industries list before you sign anything. Melio publishes one that names marijuana, and Melio is what QuickBooks Bill Pay already runs on, so switching to it directly changes nothing. The others are payment facilitators that move money through sponsor banks, which is the same structural constraint that ended your bill pay. Most published lists of QuickBooks Bill Pay alternatives are written for general small business and do not account for cannabis at all."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I have to leave QuickBooks Online?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No, and you should not. QuickBooks is a good ledger and your CPA already knows it. Connect it to ShelfSpace and every vendor payment posts back as a Bill and a matching payment, coded to the accounts you choose. When the payment clears your bank, the bank feed read-back marks it cleared in ShelfSpace too. Month-end close does not change."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How fast can I be paying vendors again?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Checks are the fast path. ShelfSpace issues Check 21 checks drawn on your own bank account, so there is no processor underwriting to wait on and no new bank relationship to open. ACH is available as an option, but the banking partner's review of your business typically takes one to three weeks, so it is not the answer to a deadline this month. Until ACH approval lands, payouts go out as checks."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I pay my non-cannabis bills, like rent and utilities, through the same system?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. When you connect QuickBooks, your open bills import as payables regardless of who they are owed to, and you can add a non-cannabis payee such as a landlord, utility, or insurer directly from your QuickBooks vendor list. Cannabis vendors are deliberately not added that way, because a QuickBooks record carries no state license and the license is what establishes a cannabis vendor's identity."
+      }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://shelfspace.pro/" },
+    { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://shelfspace.pro/blog" },
+    { "@type": "ListItem", "position": 3, "name": "QuickBooks Bill Pay Doesn’t Serve Cannabis. Here’s the Fix." }
+  ]
+}
+</script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="/" class="nav-logo">
+    <div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div>
+    <span class="nav-logo-text">ShelfSpace</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="/consignment">Consignment</a></li>
+    <li><a href="/accounts-payable">Accounts Payable</a></li>
+    <li><a href="/credit-recovery">Credit Recovery</a></li>
+    <li class="nav-dropdown"><button class="nav-dropdown-toggle" aria-haspopup="true" aria-expanded="false">Platform <svg class="dropdown-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></button><div class="nav-dropdown-menu"><a href="/vendor-management">Vendor Management</a><a href="/how-it-works">How It Works</a><a href="/features">Features</a><a href="/shelfiq">ShelfiQ</a><a href="/checks">Check Payments</a><a href="/tutorials">Tutorials</a></div></li>
+    <li><a href="/pricing">Pricing</a></li>
+    <li><a href="/about">About</a></li>
+    <li><a href="/contact" class="nav-cta">Get Started <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a></li>
+  </ul>
+  <div class="nav-hamburger" onclick="document.querySelector('.nav-links').classList.toggle('mobile-open'); event.stopPropagation();"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="hero-bg-gradient"></div>
+  <div class="hero-bg-gradient-2"></div>
+  <div class="hero-grid-lines"></div>
+  <div class="section-label">Accounts Payable</div>
+  <h1 class="section-title">QuickBooks Bill Pay Doesn't Serve Cannabis. Here's How to Keep Paying Your Vendors.</h1>
+  <p class="section-desc">Your accounting is fine. It's Intuit's payment rail that can't serve a plant-touching business, and those are two different products. Keep one, replace the other, keep them in sync.</p>
+</div>
+
+<!-- AT A GLANCE -->
+<div class="article-glance">
+  <h2>At a glance</h2>
+  <ul>
+    <li>QuickBooks Bill Pay is powered by Melio, and Melio's terms for QuickBooks users name cannabis, hemp, and marijuana as payments it won't process</li>
+    <li>Intuit's payments policy draws the same line, and it's enforced account by account, so there's no announcement to find</li>
+    <li>Your QuickBooks Online subscription and your books aren't affected. This is the payments product, not the accounting product</li>
+    <li>Nearly every published list of "QuickBooks Bill Pay alternatives" recommends payment facilitators with the same restriction</li>
+    <li>The platform pays vendors with Check 21 checks drawn on your own bank account, then posts the bill and the payment straight back into QuickBooks</li>
+    <li>Your open QuickBooks bills, cannabis and overhead alike, import as payables the day you connect</li>
+  </ul>
+</div>
+
+<!-- REROUTE DIAGRAM -->
+<div class="reroute reveal">
+  <div class="reroute-frame">
+    <svg viewBox="0 0 640 372" role="img" aria-label="Diagram: QuickBooks Online splits into two payment paths. The Intuit Bill Pay path is blocked for cannabis. The ShelfSpace path pays the vendor by Check 21 and posts the bill and payment back into QuickBooks.">
+      <defs>
+        <marker id="rrArrowGreen" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M 0 0 L 10 5 L 0 10 z" fill="#40916c"/>
+        </marker>
+        <marker id="rrArrowGrey" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M 0 0 L 10 5 L 0 10 z" fill="#b4bec7"/>
+        </marker>
+      </defs>
+
+      <!-- return loop (drawn first so boxes sit on top) -->
+      <path d="M 565 316 H 612 V 52 H 414" fill="none" stroke="#95d5b2" stroke-width="2.5" stroke-linecap="round" marker-end="url(#rrArrowGreen)" class="rr-flow"/>
+      <text class="rr-edge-label" x="604" y="196" text-anchor="middle" transform="rotate(-90 604 196)">bill + payment posted back</text>
+
+      <!-- split from ledger -->
+      <path d="M 320 90 V 112" fill="none" stroke="#cbd5db" stroke-width="2.5" stroke-linecap="round"/>
+      <path d="M 320 112 H 152 V 152" fill="none" stroke="#dfc6c3" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="7 6" marker-end="url(#rrArrowGrey)"/>
+      <path d="M 320 112 H 488 V 152" fill="none" stroke="#40916c" stroke-width="2.5" stroke-linecap="round" marker-end="url(#rrArrowGreen)" class="rr-flow"/>
+
+      <!-- ShelfSpace to vendor -->
+      <path d="M 488 224 V 258" fill="none" stroke="#40916c" stroke-width="2.5" stroke-linecap="round" marker-end="url(#rrArrowGreen)" class="rr-flow"/>
+
+      <!-- LEDGER -->
+      <rect x="228" y="24" width="184" height="66" rx="13" fill="#ffffff" stroke="#95d5b2" stroke-width="2"/>
+      <text class="rr-box-label" x="320" y="52" text-anchor="middle">QuickBooks Online</text>
+      <text class="rr-box-sub" x="320" y="72" text-anchor="middle">your books, unchanged</text>
+
+      <!-- BLOCKED PATH -->
+      <rect x="60" y="152" width="184" height="72" rx="13" fill="#fbf5f4" stroke="#dfc6c3" stroke-width="2" stroke-dasharray="7 6"/>
+      <text class="rr-box-label rr-box-label-dead" x="152" y="180" text-anchor="middle">Intuit Bill Pay</text>
+      <text class="rr-box-sub rr-box-sub-dead" x="152" y="200" text-anchor="middle">powered by Melio</text>
+      <text class="rr-box-sub rr-box-sub-dead" x="152" y="216" text-anchor="middle">marijuana: restricted</text>
+      <circle cx="228" cy="160" r="15" fill="#c0392b"/>
+      <path d="M 222 154 L 234 166 M 234 154 L 222 166" stroke="#ffffff" stroke-width="2.6" stroke-linecap="round"/>
+
+      <!-- SHELFSPACE -->
+      <rect x="396" y="152" width="184" height="72" rx="13" fill="#f0faf4" stroke="#40916c" stroke-width="2"/>
+      <text class="rr-box-label" x="488" y="180" text-anchor="middle">ShelfSpace</text>
+      <text class="rr-box-sub" x="488" y="200" text-anchor="middle">Check 21, drawn on</text>
+      <text class="rr-box-sub" x="488" y="216" text-anchor="middle">your own bank account</text>
+
+      <!-- VENDOR -->
+      <rect x="396" y="258" width="184" height="58" rx="13" fill="#ffffff" stroke="#95d5b2" stroke-width="2"/>
+      <text class="rr-box-label" x="488" y="284" text-anchor="middle">Your vendor</text>
+      <text class="rr-box-sub" x="488" y="303" text-anchor="middle">paid</text>
+
+      <!-- dead-end marker under blocked box -->
+      <text class="rr-edge-label" x="152" y="252" text-anchor="middle">dead end</text>
+    </svg>
+    <p class="reroute-cap">Same ledger, different rail. <strong>You keep QuickBooks and swap out only the part that can't serve you.</strong></p>
+  </div>
+</div>
+
+<!-- ARTICLE BODY -->
+<div class="article-body reveal">
+
+  <h2>The notice isn't a mistake, and it isn't personal</h2>
+
+  <p>It usually arrives with no warning and very little explanation. Bill pay is being discontinued on your account. The reason given is vague, something about your business type or your business model, and nobody at support seems able to tell you more. If you run a dispensary, you already know what it means.</p>
+
+  <p>Here's the part worth knowing before you start shopping for a replacement: this is a policy boundary that was always there, and it usually surfaces when underwriting catches up with an account rather than on the day a rule changes. That's why you can't find an announcement about it, and why your accountant hasn't heard anything either. It happens one account at a time.</p>
+
+  <div class="blog-callout">
+    <svg class="blog-callout-ico" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+    <p class="blog-callout-text">Check which product your notice actually names. In the cases we've seen it's the payments side only, and the QuickBooks Online subscription your books live in carries on exactly as before.</p>
+  </div>
+
+  <h2>Why bill pay specifically</h2>
+
+  <p>QuickBooks sells two very different things that people file under one name. There's the accounting software, which records what happened. And there's the money-movement layer bolted onto it, which actually pushes dollars out the door. They run under separate terms, and only one of them has a problem with you.</p>
+
+  <p>Here's the part almost nobody knows: QuickBooks Bill Pay doesn't move your money itself. Melio does. And <a href="https://qbousers.meliopayments.com/terms.html" target="_blank" rel="noopener">the terms Melio publishes specifically for QuickBooks Online users</a> put it in writing, in a list of payments the service will not process:</p>
+
+  <blockquote>
+    <p>&hellip; payments in connection with the cannabis industry: cannabis (including hemp and marijuana) and related businesses and products &hellip;</p>
+  </blockquote>
+
+  <p>That isn't buried in some unrelated policy. It's the agreement governing bill pay inside QuickBooks, and it has been sitting there the whole time. Intuit's own Acceptable Use Policy for its payments products draws the same line. Worth noting that the clause says hemp as well, so a CBD-only operation isn't necessarily in the clear either.</p>
+
+  <p>The reason isn't that anyone at Intuit dislikes your business. Moving money for a federally illegal business means finding a sponsor bank willing to underwrite that risk, and companies building consumer-grade bill pay for millions of small businesses have no appetite for it. So the policy says no, and the enforcement finds you eventually.</p>
+
+  <h2>The alternatives list is a trap</h2>
+
+  <p>Search for a replacement and you'll land on the same article ten times: the top QuickBooks Bill Pay alternatives, featuring BILL, Melio, Tipalti, Ramp, and Corpay One. Those lists are written for general small business, and they're perfectly good lists for a landscaping company.</p>
+
+  <p>Two problems. Melio is what your bill pay already runs on, so switching to it directly gets you the same answer with an extra step. And every other name on that list is a payment facilitator moving money through sponsor banks, which is the exact structural constraint that ended your bill pay in the first place. Before you sign anything, find the company's restricted-industries or prohibited-businesses page and read it. It's usually linked in small type at the bottom of the terms.</p>
+
+  <div class="vs-split reveal">
+    <div class="vs-col vs-neg">
+      <div class="vs-head">
+        <svg class="vs-ico" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
+        <p class="vs-tag">A general bill pay tool</p>
+      </div>
+      <p class="vs-text">Holds your money in transit, so a sponsor bank has to underwrite your business to let the payment through. That underwriting is the step that says no, and it can say no again years into the relationship.</p>
+    </div>
+    <div class="vs-col vs-pos">
+      <div class="vs-head">
+        <svg class="vs-ico" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        <p class="vs-tag">A Check 21 check</p>
+      </div>
+      <p class="vs-text">Is drawn directly on your own bank account, the same as the checks in your desk drawer. Nobody stands between you and your vendor holding the funds, so there's no third party to withdraw permission later.</p>
+    </div>
+  </div>
+
+  <h2>Three jobs, and QuickBooks only ever had one of them</h2>
+
+  <p>It helps to separate what you actually need into three distinct jobs, because the confusion here comes from expecting one product to do all three.</p>
+
+  <p><strong>Recording the bill</strong> is accounting, and QuickBooks is genuinely good at it. <strong>Deciding whether the bill is right</strong> is accounts payable, and QuickBooks was never built for it. <strong>Moving the money</strong> is a payment rail, and that's the job Intuit's terms won't let you use theirs for. Losing bill pay only takes away the third one.</p>
+
+</div>
+
+<div class="compare-wrap reveal">
+<table class="compare-table">
+  <thead>
+    <tr>
+      <th>The job</th>
+      <th>QuickBooks Online</th>
+      <th>A general AP tool</th>
+      <th>ShelfSpace</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>Record the bill, run the P&amp;L</td><td><span class="compare-check">&#10003;</span> Its whole purpose</td><td><span class="compare-dash">&mdash;</span> Exports to your ledger</td><td><span class="compare-dash">&mdash;</span> <span class="compare-plus">Writes the Bill into QBO for you</span></td></tr>
+    <tr><td>Approvals and coding</td><td><span class="compare-check">&#10003;</span> Basic</td><td><span class="compare-check">&#10003;</span> Strong suit</td><td><span class="compare-check">&#10003;</span></td></tr>
+    <tr><td>Check the invoice against the Metrc manifest</td><td><span class="compare-x">&#10007;</span></td><td><span class="compare-x">&#10007;</span> No Metrc concept</td><td><span class="compare-check">&#10003;</span> <span class="compare-plus">Line by line, at the dock</span></td></tr>
+    <tr><td>Recover vendor credits</td><td><span class="compare-x">&#10007;</span></td><td><span class="compare-x">&#10007;</span></td><td><span class="compare-check">&#10003;</span> <span class="compare-plus">Returns, waste, markdowns</span></td></tr>
+    <tr><td>Settle consignment</td><td><span class="compare-x">&#10007;</span></td><td><span class="compare-x">&#10007;</span></td><td><span class="compare-check">&#10003;</span></td></tr>
+    <tr><td>Pay a plant-touching vendor</td><td><span class="compare-x">&#10007;</span> Restricted</td><td><span class="compare-x">&#10007;</span> Usually restricted</td><td><span class="compare-check">&#10003;</span> <span class="compare-plus">Check 21 or ACH</span></td></tr>
+    <tr><td>Pay rent, utilities, insurance</td><td><span class="compare-x">&#10007;</span> Restricted</td><td><span class="compare-check">&#10003;</span></td><td><span class="compare-check">&#10003;</span> <span class="compare-plus">Same queue as vendors</span></td></tr>
+    <tr><td>Mark the check cleared from the bank feed</td><td><span class="compare-check">&#10003;</span> In QBO</td><td><span class="compare-dash">&mdash;</span> Varies</td><td><span class="compare-check">&#10003;</span> <span class="compare-plus">Reads QBO back daily</span></td></tr>
+    <tr><td>File your taxes, handle 280E</td><td><span class="compare-check">&#10003;</span> With your CPA</td><td><span class="compare-x">&#10007;</span></td><td><span class="compare-x">&#10007;</span> <span class="compare-plus">That's your CPA's job</span></td></tr>
+  </tbody>
+</table>
+</div>
+
+<div class="article-body reveal">
+
+  <h2>What a cannabis-safe payment rail looks like</h2>
+
+  <p>The <a href="/blog/what-is-check-21">Check 21 Act</a> has been on the books since 2004. It's the federal law that lets a check exist as an image instead of a piece of paper, and it's why your bank's mobile deposit works at all. A ShelfSpace check is a substitute check under that law, drawn directly on your bank account and payable to your vendor.</p>
+
+  <p>That structure is the whole answer to "will this one drop me too." There's no processor sitting in the middle holding your money, so there's no underwriting decision about your business to reverse. Your vendor gets an email, logs into their portal, and either deposits it from their phone or prints it and walks it into a branch. If a vendor would rather have paper in the mail, you can switch their account to mailed checks, which typically arrive in three to five business days at no extra charge.</p>
+
+  <p>ACH is available too, as an option alongside checks rather than a replacement for them. Worth knowing before you plan around it: the banking partner reviews your business first, and that review typically takes one to three weeks. Until it clears, payouts go out as checks. If your deadline is this month, checks are the answer.</p>
+
+  <div class="stat-trio reveal">
+    <div class="stat-trio-item">
+      <svg class="stat-trio-ico" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+      <p class="stat-trio-num">$20</p>
+      <p class="stat-trio-label">per payment, check or ACH. No subscription, no per-location fee</p>
+    </div>
+    <div class="stat-trio-item">
+      <svg class="stat-trio-ico" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><polyline points="3 3 3 8 8 8"/></svg>
+      <p class="stat-trio-num">90 days</p>
+      <p class="stat-trio-label">of payment history backfilled into QuickBooks when you connect</p>
+    </div>
+    <div class="stat-trio-item">
+      <svg class="stat-trio-ico" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      <p class="stat-trio-num">2004</p>
+      <p class="stat-trio-label">the Check 21 Act, the federal law your substitute check runs on</p>
+    </div>
+  </div>
+
+  <h2>Best of both worlds: the part your bookkeeper cares about</h2>
+
+  <p>Replacing a payment rail usually means somebody re-keys every payment into the ledger by hand, which is how a two-week problem becomes a permanent one. That's the part worth solving properly.</p>
+
+  <p>Connect QuickBooks once and the sync runs both directions. Pay a vendor in ShelfSpace and the platform posts a Bill and a matching payment into QuickBooks, coded to the expense and bank accounts you picked, with the check number on the payment so your bank feed can match it. The remittance PDF is attached to the bill. Then it reads back: once the debit shows up in your QuickBooks bank feed, the check is marked cleared in ShelfSpace too, so your outstanding-check list is real rather than aspirational.</p>
+
+  <p>It reaches backwards as well. You can backfill the last 90 days of payment history into your books in one pass, so switching rails mid-quarter doesn't leave a hole in the ledger where the old bill pay stopped.</p>
+
+  <p>Your bookkeeper's month-end doesn't change. Same accounts, same reports, same reconciliation. The only difference is which system cut the check. If you want the mechanics, we've written up <a href="/blog/cannabis-retailer-quickbooks-setup">the QuickBooks setup step by step</a>, and there's a separate walkthrough of <a href="/blog/cannabis-consignment-quickbooks-sync">how consignment settlements post</a>.</p>
+
+  <h2>Moving over</h2>
+
+  <p>The migration is mostly a matter of pointing ShelfSpace at the QuickBooks you already have.</p>
+
+  <div class="flow-steps reveal">
+    <div class="flow-step">
+      <div class="flow-step-num">1</div>
+      <div class="flow-step-body">
+        <p class="flow-step-title">Connect QuickBooks</p>
+        <p class="flow-step-desc">Standard Intuit sign-in, then pick the expense and bank accounts payments should post to. Nothing is written to your books until you say so.</p>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-step-num">2</div>
+      <div class="flow-step-body">
+        <p class="flow-step-title">Your open bills come across</p>
+        <p class="flow-step-desc">Every unpaid bill sitting in QuickBooks imports as a payable at its current balance, not its original face, so a partly-paid bill arrives owing what it actually owes.</p>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-step-num">3</div>
+      <div class="flow-step-body">
+        <p class="flow-step-title">Your vendor book fills itself in</p>
+        <p class="flow-step-desc">Billing emails, phone numbers, and remit-to addresses copy over from your QuickBooks vendor records. You preview every change before anything is written.</p>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-step-num">4</div>
+      <div class="flow-step-body">
+        <p class="flow-step-title">Add the payees who aren't vendors</p>
+        <p class="flow-step-desc">Landlord, utility, insurer, anyone in your QuickBooks list who isn't a cannabis supplier gets added in a click so your whole payables queue lives in one place.</p>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-step-num">5</div>
+      <div class="flow-step-body">
+        <p class="flow-step-title">Pay, and watch it post back</p>
+        <p class="flow-step-desc">You approve and send. The bill and the payment land in QuickBooks, and the bank feed marks the check cleared when it hits your account.</p>
+      </div>
+    </div>
+  </div>
+
+  <p>One deliberate exception in step four: you can't add a <em>cannabis</em> vendor from your QuickBooks list. A QuickBooks record carries no state license, and the license is what establishes who a cannabis vendor actually is. Two records with different names are routinely the same licensee, and two identical names are routinely different companies. Cannabis vendors get matched against real licensing data instead, which is what keeps a brand name from quietly becoming a duplicate of the distributor who ships it.</p>
+
+  <h2>If you're not the one who got the notice</h2>
+
+  <p>Plenty of operators reading this still have working bill pay. Nothing here requires an emergency. But the policy has been in place the whole time, it's enforced when underwriting notices, and the worst moment to go looking for a new payment rail is the week you need to make payroll and pay six vendors.</p>
+
+  <p>This is the same shape of problem as <a href="/blog/cannabis-bank-shutdown-payment-infrastructure">a bank dropping its cannabis clients</a>, just arriving through your software instead of your bank. The fix in both cases is to stop depending on a middleman's willingness to underwrite you.</p>
+
+  <blockquote>
+    <p>Bring us your QuickBooks and your vendor list and we'll show you what your payables look like on the other side, before you commit to anything.</p>
+  </blockquote>
+
+</div>
+
+<!-- FAQ -->
+<section style="max-width: 720px; margin: 0 auto; padding: 0 48px 60px;">
+  <h2 style="font-size: 22px; font-weight: 700; color: var(--green-deep); margin-bottom: 24px; letter-spacing: -0.5px;">Frequently asked questions</h2>
+  <div class="faq-list">
+    <details>
+      <summary>Is QuickBooks shutting off my whole account, or just bill pay?</summary>
+      <p>In the cases we've seen, only the payments side. QuickBooks Online is accounting software, and your subscription, your chart of accounts, and your history aren't affected. What gets cut is the money-movement product: QuickBooks Bill Pay and QuickBooks Payments. Those run under Intuit's payments terms, separate from your accounting subscription. Read your notice carefully to confirm which product it names.</p>
+    </details>
+    <details>
+      <summary>Why does QuickBooks Bill Pay reject cannabis businesses?</summary>
+      <p>QuickBooks Bill Pay is powered by Melio, and <a href="https://qbousers.meliopayments.com/terms.html" target="_blank" rel="noopener">the terms Melio publishes for QuickBooks Online users</a> list "payments in connection with the cannabis industry: cannabis (including hemp and marijuana) and related businesses and products" among the payments it won't process. Intuit's own payments policy draws the same line. Both companies move money through banking partners that won't underwrite a plant-touching business under federal law. It's a policy boundary rather than a judgment about your business, and it's enforced account by account as underwriting catches up, not by public announcement.</p>
+    </details>
+    <details>
+      <summary>Can I use BILL, Melio, Ramp, or Tipalti instead?</summary>
+      <p>Read each company's restricted-industries list before you sign anything. Melio publishes one that names marijuana, and Melio is what QuickBooks Bill Pay already runs on, so switching to it directly changes nothing. The others are payment facilitators moving money through sponsor banks, which is the same structural constraint that ended your bill pay. Most published lists of QuickBooks Bill Pay alternatives are written for general small business and don't account for cannabis at all.</p>
+    </details>
+    <details>
+      <summary>Do I have to leave QuickBooks Online?</summary>
+      <p>No, and you shouldn't. QuickBooks is a good ledger and your CPA already knows it. Connect it to ShelfSpace and every vendor payment posts back as a Bill and a matching payment, coded to the accounts you choose. When the payment clears your bank, the bank feed read-back marks it cleared in ShelfSpace too. Month-end close doesn't change. <a href="/blog/cannabis-retailer-quickbooks-setup">Here's the setup, step by step</a>.</p>
+    </details>
+    <details>
+      <summary>How fast can I be paying vendors again?</summary>
+      <p>Checks are the fast path. The platform issues Check 21 checks drawn on your own bank account, so there's no processor underwriting to wait on and no new bank relationship to open. ACH is available as an option, but the banking partner's review of your business typically takes one to three weeks, so it isn't the answer to a deadline this month. Until ACH approval lands, payouts go out as checks.</p>
+    </details>
+    <details>
+      <summary>Can I pay my non-cannabis bills, like rent and utilities, through the same system?</summary>
+      <p>Yes. When you connect QuickBooks, your open bills import as payables regardless of who they're owed to, and you can add a non-cannabis payee such as a landlord, utility, or insurer directly from your QuickBooks vendor list. Cannabis vendors are deliberately not added that way, because a QuickBooks record carries no state license, and the license is what establishes a cannabis vendor's identity.</p>
+    </details>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-content">
+    <div class="section-label reveal">Get Started</div>
+    <h2 class="section-title reveal">Keep Paying Your Vendors</h2>
+    <p class="section-desc reveal">Bring us your QuickBooks and your vendor list. We'll show you what your payables look like on the other side, before you commit to anything.</p>
+    <div class="cta-actions reveal">
+      <a href="/contact" class="btn-primary">
+        Talk to us this week
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+      <a href="/accounts-payable" class="btn-secondary">See how AP works</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="/" class="nav-logo"><div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div><span class="nav-logo-text">ShelfSpace</span></a>
+      <p>Every Vendor. Every Payment. One Engine.</p>
+    </div>
+    <div class="footer-col"><h4>Services</h4><ul><li><a href="/consignment">Consignment</a></li><li><a href="/accounts-payable">Accounts Payable</a></li><li><a href="/credit-recovery">Credit Recovery</a></li><li><a href="/checks">Check Payments</a></li><li><a href="/shelfiq">ShelfiQ</a></li></ul></div>
+    <div class="footer-col"><h4>Platform</h4><ul><li><a href="/features">Features</a></li><li><a href="/how-it-works">How It Works</a></li><li><a href="/pricing">Pricing</a></li><li><a href="/about">About</a></li><li><a href="/blog">Blog</a></li><li><a href="/docs">Docs</a></li><li><a href="/tutorials">Tutorials</a></li></ul></div>
+    <div class="footer-col"><h4>Access</h4><ul><li><a href="https://ourshelf.space/login">Login</a></li><li><a href="/contact">Sign Up</a></li><li><a href="/contact">Contact</a></li><li><a href="/vendors">For Vendors</a></li><li><a href="/for-bookkeepers">For Bookkeepers</a></li></ul></div>
+    <div class="footer-col"><h4>Company</h4><ul><li><a href="mailto:support@shelfspace.pro">Support</a></li><li><a href="https://linkedin.com/company/shelfspace-pro" target="_blank" rel="noopener" class="footer-social-link"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> LinkedIn</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><p>&copy; 2026 ShelfSpace Technologies Inc.</p><div class="footer-bottom-links"><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div></div>
+</footer>
+
+<script>
+(function() {
+  var nav = document.getElementById('nav');
+  var pageHero = document.querySelector('.page-hero');
+  var parallaxSections = [
+    document.querySelector('.cta-section')
+  ];
+
+  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var isMobile = window.innerWidth < 900;
+  var ticking = false;
+
+  /* ── Hero entrance ── */
+  requestAnimationFrame(function() {
+    nav.classList.toggle('scrolled', window.scrollY > 20);
+    if (pageHero) pageHero.classList.add('hero-loaded');
+  });
+
+  /* ── Scroll-Triggered Reveals (with unobserve for perf) ── */
+  var revealObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(function(el) { revealObserver.observe(el); });
+
+  /* ── Scroll handler (rAF + ticking flag) ── */
+  function onScroll() {
+    var scrollY = window.scrollY;
+
+    /* Nav state */
+    nav.classList.toggle('scrolled', scrollY > 20);
+
+    /* Skip parallax for reduced motion or mobile */
+    if (prefersReduced || isMobile) return;
+
+    /* Section decorative parallax */
+    var wh = window.innerHeight;
+    parallaxSections.forEach(function(section) {
+      if (!section) return;
+      var rect = section.getBoundingClientRect();
+      if (rect.bottom < 0 || rect.top > wh) return;
+      var center = rect.top + rect.height / 2 - wh / 2;
+      section.style.setProperty('--parallax-y', (center * 0.08) + 'px');
+    });
+  }
+
+  window.addEventListener('scroll', function() {
+    if (!ticking) {
+      requestAnimationFrame(function() {
+        onScroll();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, { passive: true });
+
+  /* Initial call */
+  onScroll();
+
+  /* ── Resize handler ── */
+  window.addEventListener('resize', function() {
+    isMobile = window.innerWidth < 900;
+    if (isMobile) {
+      parallaxSections.forEach(function(section) {
+        if (section) section.style.setProperty('--parallax-y', '0px');
+      });
+    }
+  });
+
+  /* ── Close mobile nav on outside click ── */
+  document.addEventListener('click', function() {
+    var navLinks = document.querySelector('.nav-links');
+    if (navLinks && navLinks.classList.contains('mobile-open')) {
+      navLinks.classList.remove('mobile-open');
+    }
+  });
+})();
+</script>
+<script src="/shelfiq-widget.js"></script>
+</body>
+</html>
