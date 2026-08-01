@@ -1,4 +1,31 @@
 /**
+ * First-touch attribution capture.
+ * Records the landing page, referrer, and campaign params of a visitor's FIRST
+ * page view in this browser so the contact form can report where a lead
+ * actually came from. Rides along in this file because it's the one script
+ * included on every page — no new tag across 107 files. Written once and never
+ * overwritten, so an internal click-through can't clobber the search referrer.
+ */
+(function () {
+  var KEY = 'ss-first-touch';
+  try {
+    if (localStorage.getItem(KEY)) return;
+    var params = new URLSearchParams(location.search);
+    localStorage.setItem(KEY, JSON.stringify({
+      landing: (location.pathname + location.search).slice(0, 300),
+      referrer: (document.referrer || '').slice(0, 300),
+      utmSource: (params.get('utm_source') || '').slice(0, 100),
+      utmMedium: (params.get('utm_medium') || '').slice(0, 100),
+      utmCampaign: (params.get('utm_campaign') || '').slice(0, 100),
+      gclid: (params.get('gclid') || '').slice(0, 200),
+      at: new Date().toISOString(),
+    }));
+  } catch (err) {
+    /* private mode / storage disabled — attribution is best-effort, never blocking */
+  }
+})();
+
+/**
  * ShelfiQ Live Chat Widget
  * Self-contained: injects all HTML + CSS, manages chat state.
  * Include on any page via <script src="/shelfiq-widget.js"></script>

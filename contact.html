@@ -486,6 +486,25 @@ document.head.appendChild(o)}initApollo();</script>
       if (!payload.otherDescription) { showError('Tell us a bit about what you do.'); return; }
     }
 
+    // Where they came from: first-touch (captured site-wide by shelfiq-widget.js
+    // on their very first page view) plus this page's own referrer as a fallback.
+    payload.source = (function () {
+      var out = { referrer: (document.referrer || '').slice(0, 300) };
+      try {
+        var ft = JSON.parse(localStorage.getItem('ss-first-touch') || 'null');
+        if (ft && typeof ft === 'object') {
+          out.landing = ft.landing || '';
+          out.firstReferrer = ft.referrer || '';
+          out.utmSource = ft.utmSource || '';
+          out.utmMedium = ft.utmMedium || '';
+          out.utmCampaign = ft.utmCampaign || '';
+          out.gclid = ft.gclid || '';
+          out.firstSeen = ft.at || '';
+        }
+      } catch (err) { /* best effort — never block the lead */ }
+      return out;
+    })();
+
     var btn = document.getElementById('submitBtn');
     btn.disabled = true;
     btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="animation:spin 1s linear infinite"><path d="M21 12a9 9 0 11-6.219-8.56"/></svg> Sending…';

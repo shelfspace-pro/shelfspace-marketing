@@ -91,6 +91,96 @@ function cleanSubject(v) {
   return String(v).replace(/[\r\n]+/g, ' ').trim().slice(0, 140);
 }
 
+// --- Attribution ---------------------------------------------------------
+// The client sends a best-effort `source` object (first-touch landing page,
+// referrer, UTMs). Untrusted: every field is coerced to a short string and
+// HTML-escaped at render. Absent or malformed is normal — never fail the lead.
+const SOURCE_FIELDS = [
+  'referrer', 'landing', 'firstReferrer',
+  'utmSource', 'utmMedium', 'utmCampaign', 'gclid', 'firstSeen',
+];
+const MAX_SOURCE_FIELD = 300;
+
+function sanitizeSource(raw) {
+  if (!raw || typeof raw !== 'object' || Array.isArray(raw)) return {};
+  const out = {};
+  for (const key of SOURCE_FIELDS) {
+    const v = str(raw[key]);
+    if (v) out[key] = v.slice(0, MAX_SOURCE_FIELD);
+  }
+  return out;
+}
+
+const SEARCH_HOSTS = [
+  ['google', 'Google search'],
+  ['bing', 'Bing search'],
+  ['duckduckgo', 'DuckDuckGo search'],
+  ['yahoo', 'Yahoo search'],
+  ['ecosia', 'Ecosia search'],
+  ['brave', 'Brave search'],
+  ['perplexity', 'Perplexity'],
+  ['chatgpt', 'ChatGPT'],
+  ['openai', 'ChatGPT'],
+  ['claude.ai', 'Claude'],
+];
+const SOCIAL_HOSTS = [
+  ['linkedin', 'LinkedIn'],
+  ['facebook', 'Facebook'],
+  ['instagram', 'Instagram'],
+  ['reddit', 'Reddit'],
+  ['twitter', 'X/Twitter'],
+  ['x.com', 'X/Twitter'],
+  ['youtube', 'YouTube'],
+];
+
+function hostOf(url) {
+  try {
+    return new URL(url).hostname.replace(/^www\./, '');
+  } catch {
+    return '';
+  }
+}
+
+// Human-readable channel, e.g. "Organic — Google search" or "Direct / untracked".
+function describeChannel(source) {
+  if (source.gclid || (source.utmMedium || '').toLowerCase() === 'cpc') return 'Paid search';
+  if (source.utmSource) {
+    const medium = source.utmMedium ? ` / ${source.utmMedium}` : '';
+    return `Campaign — ${source.utmSource}${medium}`;
+  }
+  const ref = source.firstReferrer || source.referrer || '';
+  if (!ref) return 'Direct / untracked';
+  const host = hostOf(ref);
+  if (!host) return 'Unknown referrer';
+  if (host.endsWith('shelfspace.pro')) return 'Direct / untracked';
+  for (const [needle, label] of SEARCH_HOSTS) {
+    if (host.includes(needle)) return `Organic — ${label}`;
+  }
+  for (const [needle, label] of SOCIAL_HOSTS) {
+    if (host.includes(needle)) return `Social — ${label}`;
+  }
+  return `Referral — ${host}`;
+}
+
+// MM/DD/YYYY per the ShelfSpace date convention — never ISO in a human-facing surface.
+function formatDateMDY(iso) {
+  const d = new Date(iso);
+  if (Number.isNaN(d.getTime())) return '';
+  const mm = String(d.getMonth() + 1).padStart(2, '0');
+  const dd = String(d.getDate()).padStart(2, '0');
+  return `${mm}/${dd}/${d.getFullYear()}`;
+}
+
+function sourceRows(source) {
+  if (!Object.keys(source).length) return [];
+  const rows = [['Found us via', describeChannel(source)]];
+  if (source.landing) rows.push(['Landed on', source.landing]);
+  if (source.utmCampaign) rows.push(['Campaign', source.utmCampaign]);
+  const first = source.firstSeen ? formatDateMDY(source.firstSeen) : '';
+  if (first) rows.push(['First visit', first]);
+  return rows;
+}
+
 // --- Cloudflare Turnstile server-side verification ---
 // Graceful degrade: if TURNSTILE_SECRET_KEY isn't provisioned yet, skip the
 // check (logged) so the endpoint still works. Once the secret is set, an
@@ -190,6 +280,7 @@ function notificationHtml(lead) {
   } else if (lead.role === 'Other') {
     rows.push(['What they do', lead.otherDescription]);
   }
+  rows.push(...sourceRows(lead.source || {}));
   const cells = rows
     .map(([k, v]) => `<tr>
         <td style="padding:10px 16px 10px 0;color:#64748b;font-size:14px;vertical-align:top;white-space:nowrap;border-bottom:1px solid #eef2f0;">${escapeHtml(k)}</td>
@@ -200,7 +291,8 @@ function notificationHtml(lead) {
       <h1 style="margin:0 0 4px;font-size:19px;font-weight:700;color:#1b4332;">New interest form submission</h1>
       <p style="margin:0 0 20px;font-size:14px;color:#64748b;">Reply to this email to respond to ${escapeHtml(lead.name)} directly.</p>
       <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="border-collapse:collapse;width:100%;">${cells}</table>`;
-  return emailShell({ preheader: `${lead.role} · ${lead.businessName}`, bodyHtml: body });
+  const channel = Object.keys(lead.source || {}).length ? ` · ${describeChannel(lead.source)}` : '';
+  return emailShell({ preheader: `${lead.role} · ${lead.businessName}${channel}`, bodyHtml: body });
 }
 
 function autoReplyHtml(firstName, role) {
@@ -294,11 +386,13 @@ export default async function handler(req, res) {
   }
 
   // 5. Build the lead + send. Notify Chris FIRST — that send must not be lost.
+  const source = sanitizeSource(body.source);
   const lead = {
     name, email, businessName, role,
     shops: role === 'Retailer' ? shops : '',
     state: role === 'Retailer' || role === 'Vendor' ? state : '',
     otherDescription: role === 'Other' ? otherDescription : '',
+    source,
   };
   const firstName = name.split(/\s+/)[0];
 
@@ -314,6 +408,17 @@ export default async function handler(req, res) {
     console.error('Interest form: notification email failed:', err);
     return res.status(500).json({ error: 'Something went wrong on our end. Please email support@shelfspace.pro directly.' });
   }
+
+  // Structured line so leads can be aggregated by channel from the Vercel logs
+  // without standing up a CRM. One line per captured lead, JSON after the tag.
+  console.log('interest_lead ' + JSON.stringify({
+    role, state, shops, businessName,
+    channel: describeChannel(source),
+    landing: source.landing || '',
+    referrer: source.firstReferrer || source.referrer || '',
+    utmSource: source.utmSource || '',
+    utmCampaign: source.utmCampaign || '',
+  }));
 
   // Auto-response to the prospect. Failure here shouldn't lose the lead.
   try {
