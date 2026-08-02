@@ -4,19 +4,19 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Weekly Consignment Settlements — ShelfSpace</title>
-<meta name="description" content="Consignment settlement cannabis — how weekly payouts are calculated from POS data, category splits, aging discounts, and credits. Penny-precise.">
+<meta name="description" content="Consignment settlement cannabis — how weekly payouts are calculated from POS data, category splits, returns, and credits. Penny-precise.">
 <link rel="canonical" href="https://shelfspace.pro/docs/consignment/settlements">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://shelfspace.pro/docs/consignment/settlements">
 <meta property="og:title" content="Weekly Consignment Settlements — ShelfSpace">
-<meta property="og:description" content="Consignment settlement cannabis — how weekly payouts are calculated from POS data, category splits, aging discounts, and credits. Penny-precise.">
+<meta property="og:description" content="Consignment settlement cannabis — how weekly payouts are calculated from POS data, category splits, returns, and credits. Penny-precise.">
 <meta property="og:image" content="https://shelfspace.pro/og-image-v7.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:type" content="image/png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Weekly Consignment Settlements — ShelfSpace">
-<meta name="twitter:description" content="Consignment settlement cannabis — how weekly payouts are calculated from POS data, category splits, aging discounts, and credits. Penny-precise.">
+<meta name="twitter:description" content="Consignment settlement cannabis — how weekly payouts are calculated from POS data, category splits, returns, and credits. Penny-precise.">
 <meta name="twitter:image" content="https://shelfspace.pro/og-image-v7.png">
 <meta name="apple-mobile-web-app-title" content="ShelfSpace">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -268,8 +268,8 @@ document.head.appendChild(o)}initApollo();</script>
       <h2>At a Glance</h2>
       <ul>
         <li>Consignment settlements run on each vendor's cadence — weekly by default, or biweekly/monthly set per vendor</li>
-        <li>Calculation: net sales x category splits - aging discounts - credits = vendor payout</li>
-        <li>All math uses integer-precision arithmetic, rounded to the penny</li>
+        <li>Calculation: net sales x category splits - returns - credits = vendor payout</li>
+        <li>Every line item is rounded to the penny before it accumulates into a total</li>
         <li>You review the summary and approve — the platform pays the vendor by Check 21 by default, or by ACH bank transfer when the vendor has opted into ACH</li>
       </ul>
     </div>
@@ -282,7 +282,7 @@ document.head.appendChild(o)}initApollo();</script>
     <p>The settlement engine is the core of the <a href="/consignment">ShelfSpace consignment</a> service. Here's how each step works.</p>
 
     <div class="docs-highlight">
-      <strong>What the platform runs:</strong> POS data ingestion, sale-by-sale split calculation, aging discount application, credit deductions, fee computation, report generation, and payment issuance (a Check 21 by default, or an ACH bank transfer when the vendor's opted in). You review the final numbers and approve.
+      <strong>What the platform runs:</strong> POS data ingestion, sale-by-sale split calculation, returns reconciliation, credit deductions, fee computation, report generation, and payment issuance (a Check 21 by default, or an ACH bank transfer when the vendor's opted in). You review the final numbers and approve.
     </div>
 
     <h2>The Settlement Calculation, Step by Step</h2>
@@ -291,13 +291,13 @@ document.head.appendChild(o)}initApollo();</script>
 
     <p><strong>2. Apply category splits.</strong> For each sale, the platform looks up the vendor's percentage for that product category. If flower has a 60/40 vendor/retailer split, a $50 sale yields $30.00 to the vendor and $20.00 to the retailer. When no category-specific split exists, the contract's default split applies. If no default is set, the system falls back to 50/50. See <a href="/docs/consignment/profit-splits">category splits and profit sharing</a> for details.</p>
 
-    <p><strong>3. Calculate aging discounts.</strong> Products that have sat on the shelf past agreed thresholds receive <a href="/docs/consignment/aging-discounts">aging discounts</a>. The system checks each item's age in days against the vendor's aging tiers. For example, a tier might apply a 12.5% discount on flower aged 30–60 days. Aging deductions reduce the vendor's share.</p>
+    <p><strong>3. Markdowns need no separate step.</strong> The split is taken against what the item <em>actually rang up for</em>, so a discounted or aged-down sale is already shared between you and the vendor at the register. There is no aging deduction and no margin-deficit true-up on a consignment settlement — both were removed in July 2026. See <a href="/docs/consignment/aging-discounts">aged inventory on consignment</a> for what replaced them, and <a href="/price-drops">price drops</a> for the wholesale equivalent.</p>
 
     <p><strong>4. Subtract credits.</strong> Any outstanding <a href="/credit-recovery">credit memos</a> — returns, expirations, or co-marketing credits — are deducted from the vendor's gross payout.</p>
 
-    <p><strong>5. Arrive at the net payout.</strong> The vendor's net payout is their category share, plus or minus the discount true-up, minus returns and any conversion credit. That's the amount the vendor is paid. The platform fee is <strong>not</strong> part of this math — the flat $20 per consignment payment is billed to you, the retailer, when the check is cut, and never reduces the vendor's payout. No tiers, no percentage of your sales. Fees may be waived during your evaluation period.</p>
+    <p><strong>5. Arrive at the net payout.</strong> The vendor's net payout is their category share, minus returns, credits, and any conversion credit. That's the amount the vendor is paid. The platform fee is <strong>not</strong> part of this math — the flat $20 per consignment payment is billed to you, the retailer, when the check is cut, and never reduces the vendor's payout. No tiers, no percentage of your sales. Fees may be waived during your evaluation period.</p>
 
-    <p><strong>6. Round and finalize.</strong> Every monetary calculation uses integer-precision math — the platform multiplies by 100, computes in whole cents, then converts back. This eliminates floating-point rounding errors that plague spreadsheet-based settlements. The final payout is rounded to the penny.</p>
+    <p><strong>6. Round and finalize.</strong> Every line item is rounded to the penny <em>before</em> it accumulates into a total, so the report's totals always equal the sum of the lines printed above them — no drifting last cent, which is what breaks spreadsheet-based settlements. Amounts are stored to four decimal places, and the engine is locked by replay tests that re-run real historical settlements and fail on a one-cent difference.</p>
 
     <h2>What Happens After Calculation</h2>
     <p>Once the settlement is calculated, the platform generates a detailed <a href="/docs/consignment/settlement-reports">settlement report</a>. You see a summary in your retailer dashboard, and when you approve, the platform pays the vendor. The default is a Check 21 payment the vendor receives through the <a href="/docs/vendor-portal/overview">vendor portal</a>. When the vendor has opted into <a href="/ach">ACH bank transfer</a>, you can instead send the payout straight to their linked bank account — the vendor gets the same settlement report either way, plus an email confirmation once an ACH deposit lands. See <a href="/docs/consignment/approve-pay-vs-paid-externally">Approve &amp; Pay vs Paid Externally</a> for how the payout choice works at approval.</p>

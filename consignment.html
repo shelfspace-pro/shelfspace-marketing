@@ -275,6 +275,14 @@
   .con-tour-terms-pill--cod { background: var(--slate-100); color: var(--slate-600); }
   .con-tour-terms-pill::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
   .con-tour-terms-foot { padding: 12px 22px; background: var(--green-deep); color: var(--white); font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: 1px; text-align: center; }
+  /* Column-align the pills across rows — space-between alone lets the middle pill
+     wander with each vendor name's width. Flex above is the fallback. */
+  @supports (grid-template-columns: subgrid) {
+    .con-tour-terms { display: grid; grid-template-columns: minmax(0, 1fr) auto auto; }
+    .con-tour-terms-head, .con-tour-terms-foot { grid-column: 1 / -1; }
+    .con-tour-terms-row { display: grid; grid-template-columns: subgrid; grid-column: 1 / -1; }
+    .con-tour-terms-row > .con-tour-terms-pill:last-child { justify-self: end; }
+  }
 
   /* ─── S5 · SETTLEMENT REPORT CARD ─── */
   .con-tour-settlement { background: var(--white); border: 1px solid var(--slate-200); border-radius: 14px; overflow: hidden; box-shadow: 0 20px 50px rgba(27,67,50,0.08); text-align: left; max-width: 480px; margin: 0 auto; }
