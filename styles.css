@@ -843,6 +843,45 @@ footer::before { content: ''; position: absolute; bottom: -100px; right: -100px;
   .meter .meter-fill { width: var(--fill, 100%); }
 }
 
+/* ════════════════════════════════════════════════════════════
+   FAQ ACCORDION (.faq-list > details) — global fallback
+
+   Was a per-page copy/paste primitive, and 55 of 90 blog posts
+   shipped the markup with NO CSS at all — their FAQs rendered as
+   an unstyled <details> pile (native triangle, no rules, no
+   spacing) on live pages. This is the fallback so a post only
+   needs the markup.
+
+   Deliberately does NOT style the bare `.faq-list` container:
+   /checks and / define their own `.faq-list` as a flex wrapper
+   over `.faq-item` children (a different component, same class
+   name), and claiming the container here would reach into them.
+   Only the `details`/`summary` internals are set, which those
+   pages have none of.
+
+   Every page carrying its own inline `.faq-list` block still
+   wins — all 40 define it after the <link> to this file, so the
+   cascade hands them the override. Verified before shipping;
+   this changes nothing on any page that was already styled.
+   ════════════════════════════════════════════════════════════ */
+.faq-list details { border-bottom: 1px solid var(--slate-200); }
+.faq-list details:first-child { border-top: 1px solid var(--slate-200); }
+.faq-list summary {
+  padding: 20px 0; font-size: 17px; font-weight: 600;
+  color: var(--green-deep); cursor: pointer; list-style: none;
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+}
+.faq-list summary::-webkit-details-marker { display: none; }
+.faq-list summary::after {
+  content: '+'; font-size: 22px; font-weight: 400;
+  color: var(--slate-400); flex-shrink: 0;
+}
+.faq-list details[open] summary::after { content: '\2212'; }
+.faq-list details p {
+  padding: 0 0 20px; margin: 0; font-size: 15px;
+  line-height: 1.7; color: var(--slate-500);
+}
+
 /* ════════════════════════════════════════════════════════════════════
    VIDEO-PROOF BAND + CARDS (.vp-*) — tutorial facades surfaced on
    / , /accounts-payable, /how-it-works. Thumbnail + play button linking
