@@ -1113,8 +1113,10 @@ document.head.appendChild(o)}initApollo();</script>
 <style>
   .getpaid-home { padding: 100px 48px; background: linear-gradient(180deg, var(--white) 0%, var(--green-ghost) 100%); overflow: hidden; }
   .gph-inner { max-width: 960px; margin: 0 auto; }
-  .gph-head { text-align: center; max-width: 640px; margin: 0 auto 52px; }
-  .gph-head h2 { font-size: clamp(32px, 5vw, 52px); font-weight: 700; line-height: 1.08; color: var(--green-deep); letter-spacing: -1.5px; margin: 12px 0 14px; }
+  .gph-head { text-align: center; max-width: 880px; margin: 0 auto 52px; }
+  /* Match the .svc-headline scale exactly so this heading is the same size as
+     the ShelfIQ / AP / consignment section headlines (styles.css:739). */
+  .gph-head h2 { font-size: clamp(40px, 6.8vw, 80px); font-weight: 700; line-height: 1.05; color: var(--green-deep); letter-spacing: -2.5px; margin: 12px 0 14px; }
   .gph-sub { font-size: 17px; line-height: 1.6; color: var(--slate-600); margin: 0; }
 
   /* stage */
@@ -1190,6 +1192,7 @@ document.head.appendChild(o)}initApollo();</script>
 
   @media (max-width: 760px) {
     .getpaid-home { padding: 72px 24px; }
+    .gph-head h2 { letter-spacing: -1.5px; } /* mirror .svc-headline mobile (styles.css:754) */
     .gph-stage { flex-direction: column; gap: 0; }
     .gph-node { flex: 1 1 auto; width: 100%; max-width: 360px; margin: 0 auto; }
     .gph-node--retailer .gph-tag { text-align: left; }
