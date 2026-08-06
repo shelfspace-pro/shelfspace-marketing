@@ -1109,6 +1109,184 @@ document.head.appendChild(o)}initApollo();</script>
   </div>
 </section>
 
+<!-- SECTION 2.2: GET PAID — animated vendor→retailer showcase -->
+<style>
+  .getpaid-home { padding: 100px 48px; background: linear-gradient(180deg, var(--white) 0%, var(--green-ghost) 100%); overflow: hidden; }
+  .gph-inner { max-width: 960px; margin: 0 auto; }
+  .gph-head { text-align: center; max-width: 640px; margin: 0 auto 52px; }
+  .gph-head h2 { font-size: clamp(28px, 3.6vw, 42px); font-weight: 700; color: var(--green-deep); letter-spacing: -0.6px; margin: 12px 0 14px; }
+  .gph-sub { font-size: 17px; line-height: 1.6; color: var(--slate-600); margin: 0; }
+
+  /* stage */
+  .gph-stage { display: flex; align-items: stretch; gap: 0; }
+  .gph-node { flex: 0 0 300px; }
+  .gph-tag { font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--green-mid); margin-bottom: 10px; }
+  .gph-node--retailer .gph-tag { text-align: right; }
+  .gph-screen { position: relative; background: var(--white); border: 1px solid var(--slate-200); border-radius: 18px; padding: 22px 22px; min-height: 208px; box-shadow: 0 20px 48px rgba(27,67,50,0.10); }
+
+  /* vendor invoice */
+  .gph-invoice { transition: opacity 0.5s ease; }
+  .gph-inv-row { display: flex; justify-content: space-between; align-items: baseline; }
+  .gph-inv-row > span:first-child { font-size: 14px; font-weight: 600; color: var(--slate-800); }
+  .gph-amt { font-family: var(--font-mono); font-size: 20px; font-weight: 700; color: var(--green-deep); letter-spacing: -0.5px; font-variant-numeric: tabular-nums; }
+  .gph-inv-sub { font-size: 12px; color: #c2410c; margin: 6px 0 22px; font-weight: 600; }
+  .gph-send { display: inline-flex; align-items: center; gap: 7px; background: var(--green-deep); color: var(--white); border: none; border-radius: 11px; padding: 11px 16px; font-family: var(--font-sans); font-size: 14px; font-weight: 700; box-shadow: 0 0 0 0 rgba(45,106,79,0); transition: box-shadow 0.4s ease, transform 0.3s ease; }
+  .gph-send svg { width: 15px; height: 15px; }
+  .gph-stage[data-step="0"] .gph-send { box-shadow: 0 0 0 6px rgba(149,213,178,0.5); transform: translateY(-1px); }
+  .gph-stage[data-step="4"] .gph-invoice { opacity: 0; }
+  /* vendor paid overlay */
+  .gph-paid { position: absolute; inset: 22px; display: flex; align-items: center; gap: 14px; background: var(--white); border-radius: 12px; opacity: 0; transform: translateY(10px); transition: opacity 0.5s ease, transform 0.5s ease; }
+  .gph-paid-ico { width: 46px; height: 46px; border-radius: 50%; background: var(--green-ghost); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .gph-paid-ico svg { width: 24px; height: 24px; stroke: var(--green-deep); }
+  .gph-paid-amt { font-family: var(--font-mono); font-size: 22px; font-weight: 700; color: var(--green-deep); letter-spacing: -0.5px; font-variant-numeric: tabular-nums; }
+  .gph-paid-label { font-size: 13px; color: var(--slate-500); font-weight: 600; }
+  .gph-stage[data-step="4"] .gph-paid { opacity: 1; transform: translateY(0); }
+
+  /* rail */
+  .gph-rail { flex: 1 1 auto; position: relative; align-self: center; height: 3px; margin: 0 8px; background-image: linear-gradient(90deg, var(--green-mid) 40%, transparent 0); background-size: 12px 3px; background-repeat: repeat-x; border-radius: 2px; }
+  .gph-token { position: absolute; top: 50%; left: 0; transform: translate(-50%, -50%); display: inline-flex; align-items: center; gap: 6px; background: var(--green-deep); color: var(--white); font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: 0.5px; padding: 7px 12px; border-radius: 999px; white-space: nowrap; box-shadow: 0 8px 20px rgba(27,67,50,0.25); opacity: 0; transition: left 0.9s cubic-bezier(0.4,0,0.2,1), opacity 0.3s ease; }
+  .gph-token svg { width: 13px; height: 13px; }
+  .gph-token--chk { background: var(--green-accent); color: var(--green-deep); }
+  .gph-token--chk svg { stroke: var(--green-deep); }
+  .gph-stage[data-step="1"] .gph-token--inv { opacity: 1; left: 100%; }
+  .gph-stage[data-step="2"] .gph-token--inv { opacity: 0; left: 100%; }
+  .gph-stage[data-step="3"] .gph-token--chk { opacity: 1; left: 100%; }
+  .gph-stage[data-step="4"] .gph-token--chk { opacity: 1; left: 0; }
+
+  /* retailer pay-now */
+  .gph-paynow { transition: opacity 0.4s ease, transform 0.4s ease; opacity: 0.5; }
+  .gph-stage[data-step="2"] .gph-paynow,
+  .gph-stage[data-step="3"] .gph-paynow,
+  .gph-stage[data-step="4"] .gph-paynow { opacity: 1; }
+  .gph-pn-to { font-size: 12px; color: var(--slate-500); margin-bottom: 4px; }
+  .gph-pn-amt { font-family: var(--font-mono); font-size: 26px; font-weight: 700; color: var(--green-deep); letter-spacing: -1px; font-variant-numeric: tabular-nums; margin-bottom: 18px; }
+  .gph-paybtn { position: relative; width: 100%; height: 48px; border: none; border-radius: 12px; background: var(--green-deep); color: var(--white); font-family: var(--font-sans); font-size: 15px; font-weight: 700; overflow: visible; transition: transform 0.18s ease, background 0.3s ease; }
+  .gph-pb-label, .gph-pb-paid { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; gap: 7px; transition: opacity 0.3s ease; }
+  .gph-pb-paid { opacity: 0; }
+  .gph-pb-paid svg { width: 16px; height: 16px; }
+  .gph-stage[data-step="2"] .gph-paybtn { box-shadow: 0 0 0 5px rgba(149,213,178,0.5); }
+  .gph-stage[data-step="3"] .gph-paybtn { transform: scale(0.95); }
+  .gph-stage[data-step="4"] .gph-paybtn { background: var(--green-mid); }
+  .gph-stage[data-step="4"] .gph-pb-label { opacity: 0; }
+  .gph-stage[data-step="4"] .gph-pb-paid { opacity: 1; }
+  /* click ripple */
+  .gph-ripple { position: absolute; left: 50%; top: 50%; width: 20px; height: 20px; border-radius: 50%; border: 2px solid var(--green-accent); transform: translate(-50%,-50%) scale(0.4); opacity: 0; pointer-events: none; }
+  .gph-stage[data-step="3"] .gph-ripple { animation: gphRipple 0.6s ease-out; }
+  @keyframes gphRipple { 0% { opacity: 0.8; transform: translate(-50%,-50%) scale(0.4); } 100% { opacity: 0; transform: translate(-50%,-50%) scale(6); } }
+  /* cursor */
+  .gph-cursor { position: absolute; right: 30px; bottom: 24px; opacity: 0; transform: translate(0,0); transition: opacity 0.3s ease, transform 0.7s cubic-bezier(0.4,0,0.2,1); pointer-events: none; }
+  .gph-cursor svg { width: 22px; height: 22px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.25)); }
+  .gph-stage[data-step="2"] .gph-cursor { opacity: 1; transform: translate(-58px, -34px); }
+  .gph-stage[data-step="3"] .gph-cursor { opacity: 1; transform: translate(-58px, -34px) scale(0.82); }
+
+  /* captions */
+  .gph-caps { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; margin-top: 44px; }
+  .gph-cap { display: inline-flex; align-items: center; gap: 9px; font-size: 14px; font-weight: 600; color: var(--slate-400); background: var(--white); border: 1px solid var(--slate-200); border-radius: 999px; padding: 9px 18px; transition: color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease; }
+  .gph-cap-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--slate-300); transition: background 0.3s ease, box-shadow 0.3s ease; }
+  .gph-cap.is-active { color: var(--green-deep); border-color: var(--green-accent); box-shadow: 0 6px 18px rgba(27,67,50,0.10); }
+  .gph-cap.is-active .gph-cap-dot { background: var(--green-accent); box-shadow: 0 0 0 4px rgba(149,213,178,0.4); }
+
+  .gph-cta { text-align: center; margin-top: 44px; }
+
+  @media (max-width: 760px) {
+    .getpaid-home { padding: 72px 24px; }
+    .gph-stage { flex-direction: column; gap: 0; }
+    .gph-node { flex: 1 1 auto; width: 100%; max-width: 360px; margin: 0 auto; }
+    .gph-node--retailer .gph-tag { text-align: left; }
+    .gph-rail { width: 3px; min-height: 44px; align-self: center; margin: 6px 0; background-image: linear-gradient(180deg, var(--green-mid) 40%, transparent 0); background-size: 3px 12px; background-repeat: repeat-y; }
+    .gph-token { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .gph-token, .gph-cursor, .gph-ripple { transition: none !important; animation: none !important; }
+  }
+</style>
+<section class="getpaid-home" id="get-paid-home" aria-labelledby="gph-heading">
+  <div class="gph-inner">
+    <div class="gph-head reveal">
+      <div class="section-label" style="justify-content:center;">Get Paid · For vendors &amp; brands</div>
+      <h2 id="gph-heading">An invoice goes out. One click, and you're paid.</h2>
+      <p class="gph-sub">This is how a vendor collects on a retailer through ShelfSpace — no bank portals, no chasing, no processor in the middle.</p>
+    </div>
+
+    <div class="gph-stage reveal" data-step="0" role="img" aria-label="Animation: a vendor sends an invoice, the retailer pays it in one click, and a digital check lands in the vendor's account.">
+      <!-- Vendor -->
+      <div class="gph-node gph-node--vendor">
+        <div class="gph-tag">Vendor</div>
+        <div class="gph-screen">
+          <div class="gph-invoice">
+            <div class="gph-inv-row"><span>Invoice #1042</span><span class="gph-amt">$4,820.00</span></div>
+            <div class="gph-inv-sub">Net 30 · 41 days overdue</div>
+            <button class="gph-send" type="button" tabindex="-1" aria-hidden="true">Send invoice <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>
+          </div>
+          <div class="gph-paid">
+            <div class="gph-paid-ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div>
+              <div class="gph-paid-amt">+$4,820.00</div>
+              <div class="gph-paid-label">Paid · check deposited</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Rail -->
+      <div class="gph-rail">
+        <span class="gph-token gph-token--inv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Invoice</span>
+        <span class="gph-token gph-token--chk"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>Check</span>
+      </div>
+      <!-- Retailer -->
+      <div class="gph-node gph-node--retailer">
+        <div class="gph-tag">Retailer</div>
+        <div class="gph-screen gph-paynow">
+          <div class="gph-pn-to">Pay to Vendor</div>
+          <div class="gph-pn-amt">$4,820.00</div>
+          <button class="gph-paybtn" type="button" tabindex="-1" aria-hidden="true">
+            <span class="gph-pb-label">Pay Now</span>
+            <span class="gph-pb-paid"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Paid</span>
+            <span class="gph-ripple"></span>
+          </button>
+          <div class="gph-cursor"><svg viewBox="0 0 24 24" fill="var(--green-deep)" stroke="white" stroke-width="1.5"><path d="M5 3l14 7-6 2-2 6-6-15z"/></svg></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="gph-caps reveal">
+      <div class="gph-cap" data-cap="0"><span class="gph-cap-dot"></span>The vendor sends the invoice</div>
+      <div class="gph-cap" data-cap="1"><span class="gph-cap-dot"></span>The retailer pays in one click</div>
+      <div class="gph-cap" data-cap="2"><span class="gph-cap-dot"></span>A real check lands — you keep 99%</div>
+    </div>
+
+    <div class="gph-cta reveal">
+      <a href="/get-paid" class="btn-primary">See how Get Paid works <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+    </div>
+  </div>
+</section>
+<script>
+(function() {
+  var stage = document.querySelector('.gph-stage');
+  if (!stage) return;
+  var caps = Array.prototype.slice.call(document.querySelectorAll('.gph-cap'));
+  var stepToCap = [0, 0, 1, 1, 2];
+  function render(step) {
+    stage.setAttribute('data-step', step);
+    var ci = stepToCap[step];
+    caps.forEach(function(c) { c.classList.toggle('is-active', +c.getAttribute('data-cap') === ci); });
+  }
+  var params = new URLSearchParams(window.location.search);
+  var freeze = params.get('gpfreeze');
+  if (freeze !== null) { render(Math.max(0, Math.min(4, parseInt(freeze, 10) || 0))); return; }
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduce) { render(2); return; }
+  var step = 0, timer = null;
+  function tick() { step = (step + 1) % 5; render(step); }
+  function start() { if (timer) return; step = 0; render(0); timer = setInterval(tick, 1900); }
+  function stop() { if (timer) { clearInterval(timer); timer = null; } }
+  render(0);
+  var io = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) { if (e.isIntersecting) { start(); } else { stop(); } });
+  }, { threshold: 0.3 });
+  io.observe(stage);
+})();
+</script>
+
 <!-- SECTION 4.5: SEE IT RUN — video proof (facades → /tutorials) -->
 <section class="vp-band vp-band--slate" id="watch" aria-labelledby="watch-heading">
   <div class="vp-band-inner">
