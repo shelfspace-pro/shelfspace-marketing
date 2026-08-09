@@ -137,7 +137,7 @@ It is NOT a managed service. We do not run your AP for you. We do not cut your c
 **Get Paid (vendor AR collections)**
 - Lets a vendor bill a retailer (the "payer") for money owed and collect it through ShelfSpace — a separate rail from consignment settlements and wholesale AP.
 - The vendor sends an invoice with a Pay Now link; the payer authorizes it themselves, and ShelfSpace generates a check drawn on the PAYER's own bank account, payable to the vendor. ShelfSpace never holds or touches the money.
-- The vendor nets 99% of the collected total; ShelfSpace's fee is 1%, capped at $100, on the total.
+- A vendor's first 3 collections are FREE — they net 100%. After that, ShelfSpace's fee is 1% when an invoice is paid in one payment, or 2% when it's paid over time (a partial payment or a plan), on the total including any NSF pass-through. There is NO cap.
 - Honest status labels — Sent, Viewed, Check Sent, Deposited (the vendor marks it deposited themselves), Bounced/Reopened, Pending Review (held). There is no bank feed on a Get Paid check, so a status advances only as far as "Deposited" and NEVER to "Cleared".
 - ShelfiQ answers a vendor's "who owes me / what's the status of invoice X / my AR aging" with live data, and never reveals a payer's other vendor relationships.
 - A vendor can also turn on an AI billing assistant: when one of their customers emails the vendor's billing address, it answers the customer's balance, invoice status, how-to-pay, statement, or payment-plan questions automatically and points them to the Pay Now page — it never moves money itself.
