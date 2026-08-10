@@ -242,7 +242,10 @@ footer.site{background:var(--ground);padding:44px 0}
 .rv.in{opacity:1;transform:none}
 @media (prefers-reduced-motion: reduce){.rv{opacity:1;transform:none;transition:none}.btn,.btn .arw{transition:none}}
 :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
-
+.tm{font-size:.5em;font-weight:700;vertical-align:super;letter-spacing:.02em;margin-left:2px;color:var(--accent-text)}
+.prov{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin-top:44px}
+.prov .stepcard p{font-size:15.5px;line-height:1.62}
+@media(max-width:820px){.prov{grid-template-columns:1fr;gap:18px}}
 </style>
 </head>
 <body>
@@ -255,11 +258,12 @@ footer.site{background:var(--ground);padding:44px 0}
         <rect x="8" y="15" width="16" height="3" rx="1.5" fill="#40916c"/>
         <rect x="8" y="20.5" width="10" height="3" rx="1.5" fill="#d8f3dc"/>
       </svg>
-      <span>ShelfSpace</span>
+      <span>ShelfSpace<sup class="tm">&trade;</sup></span>
     </a>
     <nav class="nav-links">
       <a class="lnk" href="#services">Platform</a>
       <a class="lnk" href="#how">How it works</a>
+      <a class="lnk" href="https://ourshelf.space/login">Sign in</a>
       <a class="btn btn-primary btn-sm" href="#contact">Book a demo</a>
     </nav>
   </div>
@@ -270,9 +274,9 @@ footer.site{background:var(--ground);padding:44px 0}
   <section class="hero" style="padding:0">
     <div class="wrap hero-grid">
       <div class="hero-copy">
-        <p class="eyebrow">Accounts Payable · Receivable · Consignment Settlement</p>
+        <p class="eyebrow">Bill Payment · Accounts Payable · Accounts Receivable · Collections · Consignment Settlement</p>
         <h1 class="hl">Pay your vendors, collect what you're owed, and settle up &mdash; <span class="accent">in any industry.</span></h1>
-        <p class="sub">One platform for retailers and the suppliers who stock their shelves. We handle the money that moves between you.</p>
+        <p class="sub">ShelfSpace is the software-as-a-service platform for retailers and the suppliers who stock their shelves &mdash; bill payment, accounts payable and receivable, collections, and consignment settlement, all in one place.</p>
         <div class="hero-cta">
           <a class="btn btn-primary" href="#contact">Book a demo <svg class="arw" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9M8.5 4l4 4-4 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
           <a class="btn btn-ghost" href="#services">See what we do</a>
@@ -330,7 +334,7 @@ footer.site{background:var(--ground);padding:44px 0}
         <div class="svc-copy">
           <p class="eyebrow">Accounts Payable Automation</p>
           <h3>Stop keying invoices and chasing paperwork.</h3>
-          <p class="lede">Vendor invoices come in, we verify them against what was actually delivered, flag anything that doesn't match, and pay by check or ACH &mdash; then post it straight to your books.</p>
+          <p class="lede">Vendor invoices come in, we verify them against what was actually delivered, flag anything that doesn't match, and handle bill payment by check or ACH &mdash; processing and reconciling every invoice, then posting it straight to your books.</p>
           <ul class="blist">
             <li><span class="tick"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6.5l2.5 2.5L10 3" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Line-by-line match against deliveries &mdash; short-ships and phantom charges caught before you pay</li>
             <li><span class="tick"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6.5l2.5 2.5L10 3" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Duplicate-invoice detection so nobody gets paid twice</li>
@@ -353,9 +357,9 @@ footer.site{background:var(--ground);padding:44px 0}
         <div class="svc-copy">
           <p class="eyebrow">Accounts Receivable &amp; Collections</p>
           <h3>Get paid faster, without the awkward follow-ups.</h3>
-          <p class="lede">Send invoices, then let automated reminders do the chasing. Accept partial payments and installments so a big balance never stalls, and watch what you're owed shrink on its own.</p>
+          <p class="lede">Send invoices, then let automated reminders and debt-collection workflows do the chasing &mdash; the collection of invoices and payments, handled for you. Accept partial payments and installments so a big balance never stalls, and watch what you're owed shrink on its own.</p>
           <ul class="blist">
-            <li><span class="tick"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6.5l2.5 2.5L10 3" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Automated dunning that escalates on a schedule you set</li>
+            <li><span class="tick"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6.5l2.5 2.5L10 3" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Automated dunning and debt collection that escalates on a schedule you set</li>
             <li><span class="tick"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6.5l2.5 2.5L10 3" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Partial payments and installment plans, tracked to the penny</li>
             <li><span class="tick"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6.5l2.5 2.5L10 3" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>A live aging view so you always know who's behind</li>
           </ul>
@@ -376,7 +380,7 @@ footer.site{background:var(--ground);padding:44px 0}
         <div class="svc-copy">
           <p class="eyebrow">Consignment Settlement</p>
           <h3>Pay each supplier on exactly what sold.</h3>
-          <p class="lede">For scan-based-trading and consignment relationships, we calculate what every supplier is owed on the units that actually sold, split it by category, net out returns and credits, and cut the settlement &mdash; automatically, every cycle.</p>
+          <p class="lede">For scan-based-trading and consignment relationships, our financial settlement service calculates what every supplier is owed on the units that actually sold, splits it by category, nets out returns and credits, and cuts the settlement &mdash; automatically, every cycle.</p>
           <ul class="blist">
             <li><span class="tick"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6.5l2.5 2.5L10 3" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Category-level splits &mdash; a different rate per product line, applied cleanly</li>
             <li><span class="tick"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6.5l2.5 2.5L10 3" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Returns and credits netted before the check is cut</li>
@@ -399,7 +403,7 @@ footer.site{background:var(--ground);padding:44px 0}
         <div class="svc-copy">
           <p class="eyebrow">Vendor Payments &amp; Reconciliation</p>
           <h3>Every payment, tracked from issued to cleared.</h3>
-          <p class="lede">Issue payments and follow each one end-to-end. See exactly where a check or transfer stands, get a confirmation when the funds actually clear, and keep a complete audit trail behind every dollar.</p>
+          <p class="lede">Vendor payment processing from issued to cleared. Issue a payment and follow each one end-to-end &mdash; see exactly where a check or transfer stands, get a confirmation when the funds actually clear, and keep a complete audit trail behind every dollar.</p>
           <ul class="blist">
             <li><span class="tick"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6.5l2.5 2.5L10 3" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Real clearing confirmation &mdash; not just "sent," but settled at the bank</li>
             <li><span class="tick"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6.5l2.5 2.5L10 3" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Void and reissue without losing the paper trail</li>
@@ -441,6 +445,29 @@ footer.site{background:var(--ground);padding:44px 0}
           <span class="no">STEP 03</span>
           <h4>Settle &amp; pay</h4>
           <p>Consignment settlements calculate themselves and payments go out by check or ACH &mdash; every dollar reconciled back to the penny.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT SHELFSPACE PROVIDES -->
+  <section id="provides">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <p class="eyebrow">Everything ShelfSpace provides</p>
+        <h2>Financial operations, delivered as software.</h2>
+        <p>ShelfSpace is a software-as-a-service (SaaS) platform &mdash; the financial back office for retailers and the suppliers who stock their shelves.</p>
+      </div>
+      <div class="prov">
+        <div class="stepcard rv">
+          <span class="no">FINANCIAL SERVICES</span>
+          <h4>Money movement &amp; administration</h4>
+          <p>Bill payment services and the financial administration of accounts payable and accounts receivable &mdash; the processing, reconciliation, and collection of invoices and payments. Plus debt collection and financial settlement services in the field of consignment sales.</p>
+        </div>
+        <div class="stepcard rv">
+          <span class="no">SOFTWARE (SAAS)</span>
+          <h4>One platform, always on</h4>
+          <p>Software as a service (SaaS) featuring software for accounts payable and accounts receivable automation, invoice management, vendor payment processing, collections, and the reconciliation and settlement of consignment sales between retailers and their suppliers.</p>
         </div>
       </div>
     </div>
@@ -491,10 +518,10 @@ footer.site{background:var(--ground);padding:44px 0}
         <rect x="8" y="15" width="16" height="3" rx="1.5" fill="#40916c"/>
         <rect x="8" y="20.5" width="10" height="3" rx="1.5" fill="#d8f3dc"/>
       </svg>
-      <span>ShelfSpace</span>
+      <span>ShelfSpace<sup class="tm">&trade;</sup></span>
     </a>
     <div class="fmeta">
-      <span>The AP, AR &amp; consignment settlement platform for retailers and suppliers.</span>
+      <span>ShelfSpace is a software-as-a-service platform for bill payment, accounts payable and receivable, collections, and the financial settlement of consignment sales between retailers and their suppliers.</span>
       <a href="mailto:chris@shelfspace.pro">chris@shelfspace.pro</a>
     </div>
     <div class="fine">&copy; 2026 ShelfSpace. Built for retailers and the vendors who supply them &mdash; in any industry.</div>
