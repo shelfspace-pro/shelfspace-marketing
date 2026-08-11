@@ -112,7 +112,6 @@
   .aud-split-head p { font-size: 16px; color: var(--slate-600); line-height: 1.6; }
   .aud-split-grid { max-width: 940px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: stretch; }
   .aud-col { display: flex; flex-direction: column; background: var(--white); border: 1px solid var(--slate-200); border-radius: 16px; padding: 34px 30px 30px; box-shadow: 0 16px 40px rgba(27,67,50,0.06); }
-  .aud-col--vendor { border: 2px solid var(--green-deep); background: linear-gradient(180deg, var(--green-ghost) 0%, var(--white) 16%); box-shadow: 0 20px 48px rgba(27,67,50,0.13); }
   .aud-col .aud-badge { margin: 0 0 16px; }
   .aud-col h3 { font-size: 22px; font-weight: 700; color: var(--green-deep); letter-spacing: -0.6px; line-height: 1.22; margin: 0 0 22px; }
   .aud-feats { list-style: none; padding: 0; margin: 0 0 8px; display: flex; flex-direction: column; gap: 18px; flex-grow: 1; }
@@ -121,9 +120,13 @@
   .aud-feats li strong { display: block; color: var(--green-deep); font-size: 15px; margin-bottom: 3px; font-weight: 700; }
   .aud-feats li em { font-style: normal; color: var(--green-dark); font-weight: 600; }
   .aud-price { font-size: 14px; color: var(--slate-600); margin: 22px 0 18px; padding-top: 20px; border-top: 1px solid var(--slate-200); }
-  .aud-col--vendor .aud-price { border-top-color: rgba(149,213,178,0.5); }
   .aud-price b { font-family: var(--font-mono); font-size: 21px; color: var(--green-deep); letter-spacing: -0.5px; }
   .aud-col .tier-cta { width: 100%; }
+
+  /* ── two audience tables in the comparison matrix ── */
+  .tc-aud-label { text-align: center; margin: 0 auto 16px; }
+  .tc-aud-label--gap { margin-top: 52px; }
+  .tc-aud-label .aud-badge { margin: 0; }
 
   .footer-top { grid-template-columns: 2fr 1fr 1fr 1fr 1fr; }
 
@@ -317,7 +320,7 @@ document.head.appendChild(o)}initApollo();</script>
   </div>
   <div class="aud-split-grid">
 
-    <article class="aud-col aud-col--vendor reveal">
+    <article class="aud-col reveal">
       <span class="aud-badge aud-vendor">For vendors &amp; brands</span>
       <h3>Collect every dollar — without torching the relationship.</h3>
       <ul class="aud-feats">
@@ -340,7 +343,7 @@ document.head.appendChild(o)}initApollo();</script>
         <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><strong>Books close faster.</strong>Checks, ACH, and credits sync straight into QuickBooks — your bookkeeper sees clean entries.</li>
       </ul>
       <p class="aud-price">From <b>$749</b>/location — one bundled tier, everything included.</p>
-      <a href="https://ourshelf.space/signup" class="btn-secondary tier-cta">Start your free 30-day trial</a>
+      <a href="https://ourshelf.space/signup" class="btn-primary tier-cta">Start your free 30-day trial <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
     </article>
 
   </div>
@@ -442,27 +445,29 @@ document.head.appendChild(o)}initApollo();</script>
 <section class="tier-compare" id="compare">
   <div class="tier-compare-head reveal">
     <div class="section-label" style="justify-content:center;">What's free, what's paid</div>
-    <h2 class="tier-compare-title">Free = SEE and RECEIVE. Paid = AUTOMATE.</h2>
-    <p class="tier-compare-sub">Seeing what you're owed and getting paid is <strong>free forever</strong>. Automate unlocks the tools that act on it — verification, origination, collections, and QuickBooks.</p>
+    <h2 class="tier-compare-title">See the money for free. Pay only to move it.</h2>
+    <p class="tier-compare-sub">Seeing every dollar you're owed and receiving payments is <strong>free forever</strong>. Automate adds the tools that do the work — verification, collections, payments, and QuickBooks.</p>
   </div>
+  <!-- RETAILER TABLE -->
+  <div class="tc-aud-label reveal reveal-delay-1"><span class="aud-badge aud-retailer">For retailers</span></div>
   <div class="tier-compare-wrap reveal reveal-delay-1">
     <table class="tier-compare-table">
-      <caption class="sr-only">Comparison of the free Visibility tier and the paid Automate tier</caption>
+      <caption class="sr-only">Retailer capabilities on the free Visibility tier vs the paid Automate tier</caption>
       <thead>
         <tr>
-          <th scope="col"><span class="tc-cap">Capability</span></th>
+          <th scope="col"><span class="tc-cap">Retailer capability</span></th>
           <th scope="col" class="tc-col-free"><span class="tc-tier-name">Visibility</span><span class="tc-tier-price">Free forever</span></th>
           <th scope="col" class="tc-col-paid"><span class="tc-tier-name">Automate</span><span class="tc-tier-price">30-day free trial</span></th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <th scope="row">See money you're owed<span>Credits owed, overdue AR, settlement amounts</span></th>
+          <th scope="row">See what you owe &amp; what's owed to you<span>AP balances and the credits your vendors owe back</span></th>
           <td data-tier="Visibility"><span class="tc-yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span></td>
           <td class="tc-paid-cell" data-tier="Automate"><span class="tc-yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span></td>
         </tr>
         <tr>
-          <th scope="row">Receive payments<span>View &amp; download checks and settlement reports</span></th>
+          <th scope="row">Documents &amp; reports<span>Settlement reports, invoices, and credit memos — all downloadable</span></th>
           <td data-tier="Visibility"><span class="tc-yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span></td>
           <td class="tc-paid-cell" data-tier="Automate"><span class="tc-yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span></td>
         </tr>
@@ -482,12 +487,12 @@ document.head.appendChild(o)}initApollo();</script>
           <td class="tc-paid-cell" data-tier="Automate"><span class="tc-yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span></td>
         </tr>
         <tr>
-          <th scope="row">ShelfiQ Q&amp;A<span>Ask about your own data — what you owe, where's your check</span></th>
+          <th scope="row">ShelfiQ Q&amp;A<span>Ask about your own data — what you owe, where's a check</span></th>
           <td data-tier="Visibility"><span class="tc-note">25 / mo</span></td>
           <td class="tc-paid-cell" data-tier="Automate"><span class="tc-note">Unlimited</span></td>
         </tr>
         <tr>
-          <th scope="row">Invoice &#8596; Metrc verification<span>Every line matched against Metrc and your PO</span></th>
+          <th scope="row">Invoice &#8596; Metrc verification<span>Every vendor invoice matched line-by-line against Metrc and your PO</span></th>
           <td data-tier="Visibility"><span class="tc-no" aria-label="Not included">&mdash;</span></td>
           <td class="tc-paid-cell" data-tier="Automate"><span class="tc-yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span></td>
         </tr>
@@ -502,27 +507,99 @@ document.head.appendChild(o)}initApollo();</script>
           <td class="tc-paid-cell" data-tier="Automate"><span class="tc-yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span></td>
         </tr>
         <tr>
+          <th scope="row">AP bot<span>ShelfiQ answers vendor email and runs the first-line back-and-forth</span></th>
+          <td data-tier="Visibility"><span class="tc-no" aria-label="Not included">&mdash;</span></td>
+          <td class="tc-paid-cell" data-tier="Automate"><span class="tc-yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span></td>
+        </tr>
+        <tr>
           <th scope="row">Credit-recovery engine<span>Generate, send, and collect monthly vendor credit memos</span></th>
           <td data-tier="Visibility"><span class="tc-no" aria-label="Not included">&mdash;</span></td>
           <td class="tc-paid-cell" data-tier="Automate"><span class="tc-yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span></td>
         </tr>
         <tr>
-          <th scope="row">Proactive AP &amp; AR bots<span>ShelfiQ sends the dunning and follow-up for you</span></th>
+          <th scope="row">QuickBooks sync<span>Payments and credits flow into QuickBooks</span></th>
           <td data-tier="Visibility"><span class="tc-no" aria-label="Not included">&mdash;</span></td>
           <td class="tc-paid-cell" data-tier="Automate"><span class="tc-yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span></td>
         </tr>
         <tr>
-          <th scope="row">QuickBooks sync<span>Settlements and payments flow into QuickBooks</span></th>
-          <td data-tier="Visibility"><span class="tc-no" aria-label="Not included">&mdash;</span></td>
-          <td class="tc-paid-cell" data-tier="Automate"><span class="tc-yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span></td>
-        </tr>
-        <tr>
-          <th scope="row">Advanced analytics<span>Slots, demand planning, deep reporting</span></th>
+          <th scope="row">Demand-planning analytics<span>Slots, velocity, days-of-supply, reorder</span></th>
           <td data-tier="Visibility"><span class="tc-no" aria-label="Not included">&mdash;</span></td>
           <td class="tc-paid-cell" data-tier="Automate"><span class="tc-yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span></td>
         </tr>
         <tr>
           <th scope="row">Promotions &amp; price drops<span>Create and manage markdowns and vendor promotions</span></th>
+          <td data-tier="Visibility"><span class="tc-no" aria-label="Not included">&mdash;</span></td>
+          <td class="tc-paid-cell" data-tier="Automate"><span class="tc-yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- VENDOR TABLE -->
+  <div class="tc-aud-label tc-aud-label--gap reveal"><span class="aud-badge aud-vendor">For vendors &amp; brands</span></div>
+  <div class="tier-compare-wrap reveal">
+    <table class="tier-compare-table">
+      <caption class="sr-only">Vendor capabilities on the free Visibility tier vs the paid Automate tier</caption>
+      <thead>
+        <tr>
+          <th scope="col"><span class="tc-cap">Vendor capability</span></th>
+          <th scope="col" class="tc-col-free"><span class="tc-tier-name">Visibility</span><span class="tc-tier-price">Free forever</span></th>
+          <th scope="col" class="tc-col-paid"><span class="tc-tier-name">Automate</span><span class="tc-tier-price">30-day free trial</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">See every dollar you're owed<span>Open invoices and a live AR aging schedule across every retailer</span></th>
+          <td data-tier="Visibility"><span class="tc-yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span></td>
+          <td class="tc-paid-cell" data-tier="Automate"><span class="tc-yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span></td>
+        </tr>
+        <tr>
+          <th scope="row">Receive payments<span>View &amp; download the checks retailers send you</span></th>
+          <td data-tier="Visibility"><span class="tc-yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span></td>
+          <td class="tc-paid-cell" data-tier="Automate"><span class="tc-yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span></td>
+        </tr>
+        <tr>
+          <th scope="row">Data ingestion<span>Upload or forward invoices; Metrc sync</span></th>
+          <td data-tier="Visibility"><span class="tc-yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span></td>
+          <td class="tc-paid-cell" data-tier="Automate"><span class="tc-yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span></td>
+        </tr>
+        <tr>
+          <th scope="row">Get verified<span>KYC — the infrastructure that gates money movement</span></th>
+          <td data-tier="Visibility"><span class="tc-yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span></td>
+          <td class="tc-paid-cell" data-tier="Automate"><span class="tc-yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span></td>
+        </tr>
+        <tr>
+          <th scope="row">Disputes<span>File and track a dispute — a right, never gated</span></th>
+          <td data-tier="Visibility"><span class="tc-yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span></td>
+          <td class="tc-paid-cell" data-tier="Automate"><span class="tc-yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span></td>
+        </tr>
+        <tr>
+          <th scope="row">ShelfiQ Q&amp;A<span>Ask about your own data — who owes you, where's your check</span></th>
+          <td data-tier="Visibility"><span class="tc-note">25 / mo</span></td>
+          <td class="tc-paid-cell" data-tier="Automate"><span class="tc-note">Unlimited</span></td>
+        </tr>
+        <tr>
+          <th scope="row">Automated dunning<span>ShelfiQ sends the reminders and follow-up on a cadence, in your name</span></th>
+          <td data-tier="Visibility"><span class="tc-no" aria-label="Not included">&mdash;</span></td>
+          <td class="tc-paid-cell" data-tier="Automate"><span class="tc-yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span></td>
+        </tr>
+        <tr>
+          <th scope="row">One-click Pay Now links<span>Retailers pay from the email — no login, a digital check drawn on their bank</span></th>
+          <td data-tier="Visibility"><span class="tc-no" aria-label="Not included">&mdash;</span></td>
+          <td class="tc-paid-cell" data-tier="Automate"><span class="tc-yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span></td>
+        </tr>
+        <tr>
+          <th scope="row">Partial payments &amp; 0% installment plans<span>Let a slow-paying retailer clear the balance over time</span></th>
+          <td data-tier="Visibility"><span class="tc-no" aria-label="Not included">&mdash;</span></td>
+          <td class="tc-paid-cell" data-tier="Automate"><span class="tc-yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span></td>
+        </tr>
+        <tr>
+          <th scope="row">ACH collect<span>Pull payment straight bank-to-bank when a retailer opts in</span></th>
+          <td data-tier="Visibility"><span class="tc-no" aria-label="Not included">&mdash;</span></td>
+          <td class="tc-paid-cell" data-tier="Automate"><span class="tc-yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span></td>
+        </tr>
+        <tr>
+          <th scope="row">QuickBooks sync<span>Payments flow into QuickBooks</span></th>
           <td data-tier="Visibility"><span class="tc-no" aria-label="Not included">&mdash;</span></td>
           <td class="tc-paid-cell" data-tier="Automate"><span class="tc-yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span></td>
         </tr>
