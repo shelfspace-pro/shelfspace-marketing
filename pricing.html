@@ -3,20 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ShelfSpace Pricing — Flat $20 per Artifact | Cannabis AP</title>
-<meta name="description" content="Your profitability is our mission. Flat $20 per artifact — wholesale payments, consignment payments, credit memos. Free to start, no subscriptions.">
+<title>ShelfSpace Pricing — Free vs Automate | Cannabis AP, Consignment &amp; AR</title>
+<meta name="description" content="Free to see what you're owed and get paid. Automate unlocks payments, credit recovery, and QuickBooks — retailers from $749/location, vendors from $499/mo. 30-day free trial.">
 <link rel="canonical" href="https://shelfspace.pro/pricing">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://shelfspace.pro/pricing">
-<meta property="og:title" content="ShelfSpace Pricing — Flat $20 per Artifact | Cannabis AP">
-<meta property="og:description" content="Your profitability is our mission. Flat $20 per artifact — wholesale payments, consignment payments, credit memos. Free to start, no subscriptions.">
+<meta property="og:title" content="ShelfSpace Pricing — Free vs Automate | Cannabis AP, Consignment &amp; AR">
+<meta property="og:description" content="Free to see what you're owed and get paid. Automate unlocks payments, credit recovery, and QuickBooks. Retailers from $749/location, vendors from $499/mo. 30-day free trial.">
 <meta property="og:image" content="https://shelfspace.pro/og-image-v7.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:type" content="image/png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="ShelfSpace Pricing — Flat $20 per Artifact | Cannabis AP">
-<meta name="twitter:description" content="Your profitability is our mission. Flat $20 per artifact — wholesale payments, consignment payments, credit memos. Free to start, no subscriptions.">
+<meta name="twitter:title" content="ShelfSpace Pricing — Free vs Automate | Cannabis">
+<meta name="twitter:description" content="Free to see what you're owed and get paid. Automate unlocks payments, credit recovery, and QuickBooks. 30-day free trial.">
 <meta name="twitter:image" content="https://shelfspace.pro/og-image-v7.png">
 <meta name="apple-mobile-web-app-title" content="ShelfSpace">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -26,188 +26,70 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 <style>
-  /* ── Accessibility utilities ── */
   .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
 
-  /* ── Reveals ── */
   .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1); }
   .reveal.is-visible { opacity: 1; transform: translateY(0); }
   .reveal-delay-1 { transition-delay: 0.1s; }
   .reveal-delay-2 { transition-delay: 0.2s; }
-  .reveal-delay-3 { transition-delay: 0.3s; }
 
-  /* ── HERO (light, decorated) ── */
-  .pricing-hero {
-    background: var(--white); padding: 140px 48px 56px;
-    text-align: center; position: relative; overflow: hidden;
-  }
-  .pricing-hero::before {
-    content: ''; position: absolute; top: -200px; right: -160px;
-    width: 600px; height: 600px;
-    background: radial-gradient(circle, rgba(149,213,178,0.22) 0%, rgba(149,213,178,0) 70%);
-    pointer-events: none;
-  }
-  .pricing-hero::after {
-    content: ''; position: absolute; bottom: -180px; left: -160px;
-    width: 520px; height: 520px;
-    background: radial-gradient(circle, rgba(27,67,50,0.07) 0%, rgba(27,67,50,0) 70%);
-    pointer-events: none;
-  }
-  .pricing-hero-grid {
-    position: absolute; top: 0; left: 50%; transform: translateX(-50%);
-    width: 1200px; height: 100%; opacity: 0.04;
-    background-image:
-      linear-gradient(var(--green-deep) 1px, transparent 1px),
-      linear-gradient(90deg, var(--green-deep) 1px, transparent 1px);
-    background-size: 80px 80px;
-    pointer-events: none;
-    mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
-    -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
-  }
+  /* ── HERO ── */
+  .pricing-hero { background: var(--white); padding: 140px 48px 56px; text-align: center; position: relative; overflow: hidden; }
+  .pricing-hero::before { content: ''; position: absolute; top: -200px; right: -160px; width: 600px; height: 600px; background: radial-gradient(circle, rgba(149,213,178,0.22) 0%, rgba(149,213,178,0) 70%); pointer-events: none; }
+  .pricing-hero::after { content: ''; position: absolute; bottom: -180px; left: -160px; width: 520px; height: 520px; background: radial-gradient(circle, rgba(27,67,50,0.07) 0%, rgba(27,67,50,0) 70%); pointer-events: none; }
   .pricing-hero-content { max-width: 780px; margin: 0 auto; position: relative; z-index: 2; }
-  .pricing-hero h1 {
-    font-size: clamp(36px, 5vw, 56px); font-weight: 700;
-    color: var(--green-deep); letter-spacing: -2px; line-height: 1.1;
-    margin-bottom: 20px;
-  }
-  .pricing-hero-sub {
-    max-width: 620px; margin: 0 auto;
-    font-size: clamp(16px, 1.6vw, 19px); line-height: 1.6;
-    color: var(--slate-600);
-  }
+  .pricing-hero h1 { font-size: clamp(36px, 5vw, 56px); font-weight: 700; color: var(--green-deep); letter-spacing: -2px; line-height: 1.1; margin-bottom: 20px; }
+  .pricing-hero-sub { max-width: 640px; margin: 0 auto; font-size: clamp(16px, 1.6vw, 19px); line-height: 1.6; color: var(--slate-600); }
+  .pricing-hero-sub strong { color: var(--green-deep); font-weight: 700; }
 
-  /* ── 3-PILLAR — How we price each service ── */
-  .price-pillars {
-    background: var(--slate-50); padding: 80px 48px 96px;
-    position: relative;
-  }
-  .price-pillars::before {
-    content: ''; position: absolute; top: 50%; left: 50%;
-    transform: translate(-50%,-50%);
-    width: 800px; height: 600px;
-    background: radial-gradient(ellipse, rgba(149,213,178,0.18) 0%, rgba(149,213,178,0) 65%);
-    pointer-events: none; z-index: 0;
-  }
-  .price-pillars-header {
-    max-width: 680px; margin: 0 auto 48px;
-    text-align: center;
-    position: relative; z-index: 1;
-  }
-  .price-pillars-title {
-    font-size: clamp(28px, 3.5vw, 40px); font-weight: 700;
-    color: var(--green-deep); letter-spacing: -1.2px; line-height: 1.15;
-    margin: 8px 0 12px;
-  }
-  .price-pillars-sub {
-    font-size: 16px; line-height: 1.6; color: var(--slate-600);
-    max-width: 560px; margin: 0 auto;
-  }
-  .price-pillars-grid {
-    display: grid; grid-template-columns: repeat(3, 1fr);
-    gap: 24px; max-width: 1100px; margin: 0 auto;
-    align-items: stretch;
-    position: relative; z-index: 1;
-  }
-  .price-pillar {
-    display: flex; flex-direction: column;
-    background: var(--white); border: 1px solid var(--slate-200);
-    border-radius: 16px; padding: 36px 28px 28px;
-    position: relative; overflow: hidden;
-    transition: transform 0.3s cubic-bezier(0.22,1,0.36,1), box-shadow 0.3s, border-color 0.3s;
-  }
-  .price-pillar::before {
-    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
-    background: linear-gradient(90deg, var(--green-deep), var(--green-mid), var(--green-accent));
-    border-radius: 16px 16px 0 0;
-  }
-  .price-pillar::after {
-    content: attr(data-num); position: absolute; top: 4px; right: 18px;
-    font-family: var(--font-display); font-size: 92px; font-weight: 800;
-    color: var(--green-ghost); line-height: 1; letter-spacing: -3px;
-    pointer-events: none; z-index: 0;
-  }
-  .price-pillar > * { position: relative; z-index: 1; }
-  .price-pillar:hover { transform: translateY(-3px); box-shadow: 0 16px 40px rgba(27,67,50,0.10); border-color: var(--green-accent); }
-  .price-pillar--featured {
-    border: 2px solid var(--green-deep);
-    box-shadow: 0 20px 48px rgba(27,67,50,0.14);
-    background: linear-gradient(180deg, var(--green-ghost) 0%, var(--white) 12%);
-  }
-  .price-pillar--featured:hover { transform: translateY(-3px); box-shadow: 0 24px 56px rgba(27,67,50,0.18); }
-  .price-pillar-name {
-    font-size: 28px; font-weight: 700;
-    color: var(--green-deep); letter-spacing: -0.8px; line-height: 1.15;
-    margin: 0 0 14px;
-    min-height: 2.3em; /* reserve 2 lines so the $20 badge aligns across cards */
-  }
-  .price-pillar-badge {
-    display: inline-flex; align-items: center; gap: 8px;
-    padding: 6px 12px 6px 10px;
-    background: var(--green-ghost); border: 1px solid var(--green-light);
-    border-radius: 999px;
-    font-family: var(--font-mono); font-size: 11px; font-weight: 700;
-    color: var(--green-dark); letter-spacing: 1px; text-transform: uppercase;
-    margin-bottom: 18px; align-self: flex-start;
-  }
-  .price-pillar-badge::before {
-    content: ''; width: 6px; height: 6px; border-radius: 50%;
-    background: var(--green-mid);
-    box-shadow: 0 0 0 3px rgba(64,145,108,0.15);
-  }
-  .price-pillar-body {
-    font-size: 15px; line-height: 1.65; color: var(--slate-600);
-    margin: 0 0 24px; flex-grow: 1;
-  }
-  .price-pillar-link {
-    font-family: var(--font-mono); font-size: 12px; font-weight: 700;
-    color: var(--green-dark); letter-spacing: 1px; text-transform: uppercase;
-    text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
-    padding-top: 18px; border-top: 1px solid var(--slate-100);
-    transition: gap 0.2s ease, color 0.2s ease;
-  }
-  .price-pillar-link:hover { color: var(--green-deep); gap: 12px; }
-  .price-pillar-link::after { content: '→'; font-family: var(--font-display); font-size: 16px; }
-  .price-pillar-foot {
-    font-size: 13px; line-height: 1.55; color: var(--slate-500);
-    padding-top: 16px; border-top: 1px solid var(--slate-100);
-  }
-  .price-pillar-foot strong { color: var(--green-deep); font-weight: 600; }
-  .price-pillars-foot {
-    text-align: center; max-width: 720px; margin: 32px auto 0;
-    font-size: 14px; color: var(--slate-500); line-height: 1.65;
-    position: relative; z-index: 1;
-  }
+  /* ── TWO TIER CARDS ── */
+  .tiers { background: var(--slate-50); padding: 72px 48px 88px; position: relative; }
+  .tiers-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; max-width: 900px; margin: 0 auto; align-items: stretch; }
+  .tier-card { display: flex; flex-direction: column; background: var(--white); border: 1px solid var(--slate-200); border-radius: 16px; padding: 36px 32px 32px; position: relative; }
+  .tier-card--paid { border: 2px solid var(--green-deep); box-shadow: 0 20px 48px rgba(27,67,50,0.14); background: linear-gradient(180deg, var(--green-ghost) 0%, var(--white) 14%); }
+  .tier-flag { position: absolute; top: -13px; left: 32px; background: var(--green-deep); color: var(--white); font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 1.4px; text-transform: uppercase; padding: 6px 14px; border-radius: 999px; }
+  .tier-name { font-size: 26px; font-weight: 700; color: var(--green-deep); letter-spacing: -0.8px; margin: 0 0 4px; }
+  .tier-tag { font-family: var(--font-mono); font-size: 12px; font-weight: 700; letter-spacing: 0.5px; color: var(--slate-500); margin: 0 0 18px; }
+  .tier-card--paid .tier-tag { color: var(--green-dark); }
+  .tier-price { font-size: 15px; color: var(--slate-600); margin: 0 0 20px; line-height: 1.5; }
+  .tier-price b { font-family: var(--font-mono); font-size: 22px; color: var(--green-deep); letter-spacing: -0.5px; }
+  .tier-list { list-style: none; padding: 0; margin: 0 0 26px; display: flex; flex-direction: column; gap: 12px; flex-grow: 1; }
+  .tier-list li { display: flex; align-items: flex-start; gap: 10px; font-size: 14.5px; line-height: 1.5; color: var(--slate-700); }
+  .tier-list li svg { width: 18px; height: 18px; flex: none; margin-top: 1px; color: var(--green-mid); }
+  .tier-cta { display: inline-flex; align-items: center; justify-content: center; gap: 8px; width: 100%; }
 
-  /* ── GUARANTEE ── */
-  .price-guarantee {
-    background: var(--white); padding: 96px 48px;
-    text-align: center;
-    border-top: 1px solid var(--slate-100);
-  }
-  .price-guarantee-inner { max-width: 720px; margin: 0 auto; }
-  .price-guarantee-headline {
-    font-size: clamp(28px, 4vw, 44px); font-weight: 700;
-    color: var(--green-deep); letter-spacing: -1.5px; line-height: 1.15;
-    margin: 12px 0 24px;
-  }
-  .price-guarantee-body {
-    font-size: 17px; line-height: 1.7; color: var(--slate-700);
-    margin: 0 0 18px;
-  }
-  .price-guarantee-cta {
-    display: flex; align-items: center; justify-content: center; gap: 24px;
-    flex-wrap: wrap;
-    margin: 32px 0 12px;
-  }
-  .price-guarantee-sample {
-    display: inline-flex; align-items: center; gap: 6px;
-    font-size: 15px; font-weight: 600;
-    color: var(--green-dark); text-decoration: none;
-  }
-  .price-guarantee-sample:hover { color: var(--green-deep); text-decoration: underline; text-underline-offset: 3px; }
-  .price-guarantee-note {
-    font-size: 13px; color: var(--slate-500); margin-top: 8px;
-  }
+  /* ── PRICE TABLES ── */
+  .price-tables { background: var(--white); padding: 88px 48px; }
+  .price-tables-head { text-align: center; max-width: 680px; margin: 0 auto 44px; }
+  .price-tables-head h2 { font-size: clamp(26px,3.4vw,38px); font-weight: 700; color: var(--green-deep); letter-spacing: -1px; margin: 8px 0 10px; }
+  .price-tables-head p { font-size: 16px; color: var(--slate-600); line-height: 1.6; }
+  .ptable-wrap { max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+  .ptable-card { border: 1px solid var(--slate-200); border-radius: 16px; overflow: hidden; box-shadow: 0 16px 40px rgba(27,67,50,0.06); background: var(--white); display: flex; flex-direction: column; }
+  .ptable-card-head { padding: 22px 26px 18px; background: var(--slate-50); border-bottom: 1px solid var(--slate-200); }
+  .ptable-aud { font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: 1.4px; text-transform: uppercase; color: var(--green-dark); }
+  .ptable-card-head h3 { font-size: 20px; font-weight: 700; color: var(--green-deep); letter-spacing: -0.5px; margin: 6px 0 4px; }
+  .ptable-card-head p { font-size: 13px; color: var(--slate-500); margin: 0; }
+  .ptable { width: 100%; border-collapse: collapse; }
+  .ptable th, .ptable td { padding: 14px 26px; text-align: left; border-bottom: 1px solid var(--slate-100); font-size: 15px; }
+  .ptable thead th { font-family: var(--font-mono); font-size: 10.5px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--slate-400); background: var(--white); }
+  .ptable tbody th[scope="row"] { font-weight: 600; color: var(--green-deep); }
+  .ptable tbody th[scope="row"] span { display: block; font-weight: 400; font-size: 12px; color: var(--slate-500); margin-top: 2px; }
+  .ptable .ptable-rate { text-align: right; font-family: var(--font-mono); font-weight: 700; color: var(--green-deep); font-size: 16px; white-space: nowrap; }
+  .ptable tbody tr:last-child th, .ptable tbody tr:last-child td { border-bottom: none; }
+  .ptable-foot { padding: 16px 26px; font-size: 12.5px; color: var(--slate-500); line-height: 1.55; background: var(--green-ghost); border-top: 1px solid rgba(149,213,178,0.4); margin-top: auto; }
+  .ptable-foot strong { color: var(--green-deep); font-weight: 600; }
+
+  /* ── TRIAL / LEGAL ── */
+  .trial-band { background: var(--green-deep); padding: 84px 48px; text-align: center; }
+  .trial-band-inner { max-width: 720px; margin: 0 auto; }
+  .trial-band h2 { font-size: clamp(26px,3.4vw,40px); font-weight: 700; color: var(--white); letter-spacing: -1.2px; line-height: 1.18; margin: 12px 0 18px; }
+  .trial-band h2 .slug { color: var(--green-accent); white-space: nowrap; }
+  .trial-band-lede { font-size: 17px; line-height: 1.7; color: rgba(255,255,255,0.82); margin: 0 auto 28px; max-width: 600px; }
+  .trial-band .section-label { color: var(--green-accent); justify-content: center; }
+  .trial-cta { display: inline-flex; align-items: center; gap: 24px; flex-wrap: wrap; justify-content: center; }
+  .trial-secondary { display: inline-flex; align-items: center; gap: 6px; font-size: 15px; font-weight: 600; color: var(--green-accent); text-decoration: none; }
+  .trial-secondary:hover { color: var(--white); }
+  .trial-disclosure { max-width: 660px; margin: 26px auto 0; font-size: 12.5px; line-height: 1.6; color: rgba(255,255,255,0.55); }
 
   /* ── FAQ ── */
   .faq-section { background: var(--white); padding: 96px 48px; }
@@ -223,62 +105,28 @@
   .faq-list details p { padding: 0 0 22px; margin: 0; font-size: 15px; line-height: 1.7; color: var(--slate-600); }
   .faq-list details p strong { color: var(--green-deep); }
 
-  /* ── PROMISE ── */
-  .price-promise {
-    background: var(--green-deep); padding: 104px 48px; text-align: center;
-    position: relative; overflow: hidden;
-  }
-  .price-promise-inner { max-width: 760px; margin: 0 auto; position: relative; }
-  .price-promise .section-label { color: var(--green-accent); }
-  .price-promise-headline {
-    font-size: clamp(27px, 3.6vw, 42px); font-weight: 700;
-    color: var(--white); letter-spacing: -1.2px; line-height: 1.18;
-    margin: 0 0 22px;
-  }
-  .price-promise-headline .slug { color: var(--green-accent); white-space: nowrap; }
-  .price-promise-body {
-    font-size: 17px; line-height: 1.75; color: rgba(255,255,255,0.78);
-    max-width: 620px; margin: 0 auto;
-  }
-  .price-promise-sign {
-    margin-top: 32px; font-family: 'Space Mono', monospace;
-    font-size: 13px; letter-spacing: 0.5px; color: rgba(255,255,255,0.55);
-  }
-
-  /* Footer */
   .footer-top { grid-template-columns: 2fr 1fr 1fr 1fr 1fr; }
 
-  /* ── Responsive ── */
-  @media (max-width: 1080px) {
-    .price-pillars-grid { grid-template-columns: 1fr; max-width: 540px; gap: 24px; }
-    .price-pillar-name { min-height: 0; }
-  }
   @media (max-width: 900px) {
     .pricing-hero { padding: 120px 24px 40px; }
-    .price-pillars { padding: 64px 24px 80px; }
-    .price-guarantee { padding: 72px 24px; }
-    .price-promise { padding: 80px 24px; }
+    .tiers { padding: 60px 24px 72px; }
+    .tiers-grid { grid-template-columns: 1fr; max-width: 460px; }
+    .price-tables { padding: 64px 24px; }
+    .ptable-wrap { grid-template-columns: 1fr; max-width: 480px; }
+    .trial-band { padding: 64px 24px; }
     .faq-section { padding: 64px 24px; }
     .footer-top { grid-template-columns: 1fr 1fr; }
   }
   @media (max-width: 700px) {
-    .pricing-hero::before, .pricing-hero::after,
-    .price-pillars::before { display: none; }
-    .price-pillar-name { font-size: 24px; }
-    .price-pillar::after { font-size: 72px; }
+    .pricing-hero::before, .pricing-hero::after { display: none; }
+    .ptable th, .ptable td { padding: 13px 18px; }
   }
   @media (max-width: 600px) {
     .footer-top { grid-template-columns: 1fr; }
-    .price-pillar { padding: 28px 24px; }
-    .pricing-hero-grid { display: none; }
-    .price-guarantee-cta { flex-direction: column; gap: 16px; }
   }
   @media (prefers-reduced-motion: reduce) {
     .reveal { opacity: 1; transform: none; transition: none; }
-    .price-pillar { transition: none; }
-    .price-pillar:hover, .price-pillar--featured:hover { transform: none; }
   }
-
 </style>
 <noscript><style>.reveal{opacity:1;transform:none;transition:none;}</style></noscript>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-H2LBJT03WE"></script>
@@ -294,26 +142,34 @@ document.head.appendChild(o)}initApollo();</script>
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What does the free evaluation include?",
+      "name": "Is ShelfSpace free?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "We connect to your Metrc account, analyze your historical data, and deliver a detailed report on what your AP is leaking, what your vendors owe you, and what's trapped on your shelves. No commitment, no credit card."
+        "text": "Yes — the Visibility tier is free forever, for both retailers and vendors. You see every credit you're owed, every overdue invoice, and every settlement, receive checks and settlement reports, upload data and sync Metrc, get verified, and ask ShelfiQ up to 25 questions a month about your own data. Automate — the paid tier — unlocks the tools that act on all that. It starts with a 30-day free trial."
       }
     },
     {
       "@type": "Question",
-      "name": "What counts as an artifact?",
+      "name": "What does Automate cost?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Three things, $20 each: a wholesale payment (a vendor payment the platform generates for you to sign and send), a consignment payment (a settlement payout the platform runs and you approve), and a credit memo (a Metrc-backed vendor credit recovered through credit recovery). Free to start — you pay $20 only when one of these lands, and we never take a percentage. Multi-location and high-volume operators get volume discounts."
+        "text": "Retailers pay per billable location on a bulk-discount curve: $999 for one location, $899 each at 2–3, $799 each at 4–9, and $749 each at 10 or more — one bundled tier with everything included. Vendors are banded by how many retailers they collect from: $499/mo for 1–16, $899 for 17–50, $1,499 for 51–150, and custom pricing ($3,000–5,000+) for 150–500+. ACH is included; mailed checks are $5 each."
       }
     },
     {
       "@type": "Question",
-      "name": "Is there a subscription or monthly fee?",
+      "name": "Is there a free trial?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "No. Free to start, $20 per artifact, nothing recurring. No software seats, no per-location fee, no percentage of your money. Month-to-month, cancel any time. The free evaluation comes first — we show you the dollars on the table before you pay anything."
+        "text": "Yes. Automate is free for 30 days. We capture your payment method at trial start, and unless you cancel before day 30 the trial converts to a paid monthly subscription at the rate for your location count (retailers) or retailer reach (vendors). You can cancel anytime from your account before it renews."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What's included in the Automate subscription?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Everything that acts on the pain Visibility shows you: invoice-to-Metrc verification, short-pay and payable adjustments, cutting checks and ACH origination, the credit-recovery engine, proactive AP and AR bots plus unlimited ShelfiQ, QuickBooks sync, demand-planning analytics, and promotions and price-drop tools. One tier — no add-ons to chase."
       }
     },
     {
@@ -321,15 +177,7 @@ document.head.appendChild(o)}initApollo();</script>
       "name": "How does this work with my bookkeeper or accounting firm?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "The platform runs AP — invoice processing, three-way matching, per-vendor payment terms, vendor payments, credit recovery. ShelfiQ handles first-line vendor email; your AP person handles the judgment calls. Your bookkeeper or firm keeps month-end close, bank reconciliations, payroll, journal entries, financial statements, tax prep, and 280E compliance. The platform syncs to QuickBooks in real time, so your bookkeeper sees clean entries and closes faster."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Is my data secure?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes. We use read-only Metrc access — we never modify your compliance data. All data is encrypted and isolated per operator."
+        "text": "The platform runs AP — invoice processing, three-way matching, per-vendor payment terms, vendor payments, credit recovery. ShelfiQ handles first-line vendor email; your AP person handles the judgment calls. Your bookkeeper keeps month-end close, reconciliations, payroll, financial statements, tax prep, and 280E compliance. Automate syncs to QuickBooks in real time, so your bookkeeper sees clean entries and closes faster."
       }
     }
   ]
@@ -348,43 +196,44 @@ document.head.appendChild(o)}initApollo();</script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Service",
-  "name": "ShelfSpace Cannabis AP, Consignment & Credit Recovery System",
-  "provider": { "@type": "Organization", "name": "ShelfSpace", "url": "https://shelfspace.pro" },
-  "description": "System for cannabis dispensaries — AP, consignment, and credit recovery on one Metrc-verified platform. Flat $20 per artifact: wholesale payments, consignment payments, and credit memos. Free to start, no subscriptions, no software seats, no percentage. Volume discounts for multi-location operators. Month-to-month, cancel any time.",
-  "areaServed": "US",
+  "@type": "Product",
+  "name": "ShelfSpace Automate",
+  "description": "The paid tier of ShelfSpace — a cannabis AP, consignment, credit-recovery, and accounts-receivable system. Unlocks invoice-to-Metrc verification, check and ACH payments, the credit-recovery engine, proactive AP/AR bots, unlimited ShelfiQ, QuickBooks sync, and advanced analytics. Priced per location for retailers and by retailer reach for vendors. 30-day free trial, then a monthly subscription, cancel anytime before renewal.",
+  "brand": { "@type": "Organization", "name": "ShelfSpace", "url": "https://shelfspace.pro" },
   "url": "https://shelfspace.pro/pricing",
   "offers": [
     {
       "@type": "Offer",
-      "name": "Wholesale Payment",
-      "price": "20.00",
+      "name": "Retailer — Automate (per location)",
       "priceCurrency": "USD",
+      "price": "749",
+      "priceSpecification": {
+        "@type": "UnitPriceSpecification",
+        "priceCurrency": "USD",
+        "price": "749",
+        "minPrice": "749",
+        "maxPrice": "999",
+        "unitText": "per location per month",
+        "billingIncrement": "1"
+      },
       "availability": "https://schema.org/InStock",
-      "description": "$20 per wholesale payment generated on the platform — invoice ingestion, three-way matching against Metrc and your PO, Check 21 payment generation (the retailer signs and sends), ShelfiQ vendor email, QuickBooks sync. Free to start. Month-to-month, cancel any time."
+      "description": "Per billable location, bulk-discount curve: $999 (1) · $899 (2–3) · $799 (4–9) · $749 (10+). One bundled tier — AP bot, Metrc verification, ACH, credit recovery, QuickBooks, slots, promotions and price drops. ACH included; mailed checks $5 each. 30-day free trial."
     },
     {
       "@type": "Offer",
-      "name": "Consignment Payment",
-      "price": "20.00",
+      "name": "Vendor — Automate (by retailer reach)",
       "priceCurrency": "USD",
+      "price": "499",
+      "priceSpecification": {
+        "@type": "UnitPriceSpecification",
+        "priceCurrency": "USD",
+        "price": "499",
+        "minPrice": "499",
+        "unitText": "per month",
+        "billingIncrement": "1"
+      },
       "availability": "https://schema.org/InStock",
-      "description": "$20 per consignment settlement payout the platform runs and the retailer approves — weekly settlements, sell-through reporting, vendor portal. Retailer owns vendor contracts and outreach. Free to start. No flat fee, no minimums."
-    },
-    {
-      "@type": "Offer",
-      "name": "Credit Memo",
-      "price": "20.00",
-      "priceCurrency": "USD",
-      "availability": "https://schema.org/InStock",
-      "description": "$20 per vendor credit memo recovered — returns, expirations, and co-marketing with Metrc-backed line items, charged when the credit is applied. No percentage of recovered dollars. ShelfiQ handles basic vendor questions; escalations route to your AP team. Free to start."
-    },
-    {
-      "@type": "Offer",
-      "name": "Volume discount",
-      "priceCurrency": "USD",
-      "availability": "https://schema.org/InStock",
-      "description": "Multi-location and high-volume operators get volume discounts, set during onboarding. The free evaluation comes first — no commitment until you see the numbers."
+      "description": "Banded by the number of retailers a vendor collects from: Starter $499 (1–16) · Growth $899 (17–50) · Scale $1,499 (51–150) · Enterprise $3,000–5,000+ / custom (150–500+). 30-day free trial."
     }
   ]
 }
@@ -407,90 +256,212 @@ document.head.appendChild(o)}initApollo();</script>
     <li><a href="/pricing" class="active">Pricing</a></li>
     <li><a href="/about">About</a></li>
     <li class="nav-login-mobile"><a href="https://ourshelf.space/login">Login</a></li>
-    <li><a href="/contact" class="nav-cta">Get Started <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a></li>
+    <li><a href="https://ourshelf.space/signup" class="nav-cta">Start free trial <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a></li>
   </ul>
   <div class="nav-hamburger" onclick="document.querySelector('.nav-links').classList.toggle('mobile-open'); event.stopPropagation();"><span></span><span></span><span></span></div>
 </nav>
 
 <!-- HERO -->
 <section class="pricing-hero">
-  <div class="pricing-hero-grid"></div>
   <div class="pricing-hero-content">
-    <div class="aud-badge aud-retailer reveal">For Retailers</div>
-    <div class="section-label reveal" style="margin-bottom:6px;">Priced to ensure you profit</div>
-    <h1 class="reveal">We're allergic to subscriptions.</h1>
-    <p class="pricing-hero-sub reveal">We have no investors to please, so we won't hit you with aggressive monthly fees. We charge a simple, affordable, fair price based on what you actually use the platform for. You only pay for what you use.</p>
+    <div class="section-label reveal" style="justify-content:center;margin-bottom:6px;">Simple, honest pricing</div>
+    <h1 class="reveal">Free to see. Free to get paid.</h1>
+    <p class="pricing-hero-sub reveal"><strong>Visibility is free forever</strong> — every dollar you're owed, every payment you receive. <strong>Automate</strong> is the paid tier that acts on it: verification, payments, credit recovery, and QuickBooks. Start free for 30 days.</p>
   </div>
 </section>
 
-<!-- 3-PILLAR — How we price each service -->
-<section class="price-pillars">
-  <div class="price-pillars-header reveal">
-    <div class="section-label">How we price</div>
-    <h2 class="price-pillars-title">Three artifacts. One price.</h2>
-    <p class="price-pillars-sub">$20 each. Free until the platform makes one for you.</p>
+<!-- TWO TIERS -->
+<section class="tiers">
+  <div class="tiers-grid">
+
+    <article class="tier-card reveal">
+      <h2 class="tier-name">Visibility</h2>
+      <p class="tier-tag">Free forever · retailers &amp; vendors</p>
+      <p class="tier-price"><b>$0</b> / month</p>
+      <ul class="tier-list">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>See every credit owed, overdue invoice, and settlement</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Receive checks and settlement reports</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Upload data and sync Metrc</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Get verified</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Ask ShelfiQ about your own data — 25 messages a month</li>
+      </ul>
+      <a href="https://ourshelf.space/signup" class="btn-secondary tier-cta">Create a free account</a>
+    </article>
+
+    <article class="tier-card tier-card--paid reveal reveal-delay-1">
+      <span class="tier-flag">30-day free trial</span>
+      <h2 class="tier-name">Automate</h2>
+      <p class="tier-tag">Paid · everything that acts on the pain</p>
+      <p class="tier-price">Retailers from <b>$749</b>/location · vendors from <b>$499</b>/mo</p>
+      <ul class="tier-list">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Invoice-to-Metrc verification, short-pay &amp; adjust</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Cut checks and originate ACH payments</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>The credit-recovery engine</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Proactive AP &amp; AR bots and unlimited ShelfiQ</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>QuickBooks sync, demand-planning analytics, promotions &amp; price drops</li>
+      </ul>
+      <a href="https://ourshelf.space/signup" class="btn-primary tier-cta">Start your free 30-day trial <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+    </article>
+
   </div>
-  <div class="price-pillars-grid">
-
-    <article class="price-pillar reveal" data-num="01">
-      <h3 class="price-pillar-name">Wholesale Payments</h3>
-      <span class="price-pillar-badge">$20 each</span>
-      <p class="price-pillar-body">Every line item of every invoice checked against Metrc before you pay, saving you thousands.</p>
-      <a class="price-pillar-link" href="/accounts-payable">What it includes</a>
-    </article>
-
-    <article class="price-pillar reveal reveal-delay-1" data-num="02">
-      <h3 class="price-pillar-name">Consignment Payments</h3>
-      <span class="price-pillar-badge">$20 each</span>
-      <p class="price-pillar-body">Carry inventory for free, pay your vendor when it sells, automatically.</p>
-      <a class="price-pillar-link" href="/consignment">What it includes</a>
-    </article>
-
-    <article class="price-pillar reveal reveal-delay-2" data-num="03">
-      <h3 class="price-pillar-name">Credit Memos</h3>
-      <span class="price-pillar-badge">$20 each</span>
-      <p class="price-pillar-body">Get vendor credits for returns, waste, price drops, and promotions.</p>
-      <a class="price-pillar-link" href="/credit-recovery">What it includes</a>
-    </article>
-
-  </div>
-  <p class="price-pillars-foot reveal"><em>Multi-location or high-volume? Volume discounts kick in — let's talk. The free evaluation still comes first: we connect to Metrc, show you exactly what you're leaking, and personalize your setup. No commitment until you see the numbers.</em></p>
 </section>
 
-<!-- GUARANTEE -->
-<section class="price-guarantee">
-  <div class="price-guarantee-inner">
-    <div class="section-label reveal">The price</div>
-    <h2 class="price-guarantee-headline reveal">Twenty dollars. That's the whole price.</h2>
-    <p class="price-guarantee-body reveal">No subscriptions. No seats. No percentage of your money. Free to start — you pay $20 only when something lands: a wholesale payment sent, a consignment settlement paid, or a vendor credit recovered. Month-to-month, cancel any time.</p>
-    <div class="price-guarantee-cta reveal">
-      <a href="/contact" class="btn-primary">Get My Free Evaluation <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
-      <a href="/ShelfSpace_Sample_Evaluation.pdf" target="_blank" rel="noopener" class="price-guarantee-sample">See a sample evaluation <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+<!-- PRICE TABLES -->
+<section class="price-tables">
+  <div class="price-tables-head reveal">
+    <div class="section-label" style="justify-content:center;">Automate pricing</div>
+    <h2>One bundled tier. Priced to your scale.</h2>
+    <p>Retailers pay per location, with a bulk-discount curve. Vendors pay by how many retailers they collect from. Everything's included either way.</p>
+  </div>
+  <div class="ptable-wrap">
+
+    <div class="ptable-card reveal">
+      <div class="ptable-card-head">
+        <span class="ptable-aud">For retailers</span>
+        <h3>Per billable location</h3>
+        <p>Each shop billed at the rate for your total location count.</p>
+      </div>
+      <table class="ptable">
+        <caption class="sr-only">Retailer Automate pricing by number of billable locations</caption>
+        <thead><tr><th scope="col">Billable locations</th><th scope="col" style="text-align:right;">Rate / location</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">1</th><td class="ptable-rate">$999</td></tr>
+          <tr><th scope="row">2&ndash;3</th><td class="ptable-rate">$899</td></tr>
+          <tr><th scope="row">4&ndash;9</th><td class="ptable-rate">$799</td></tr>
+          <tr><th scope="row">10+</th><td class="ptable-rate">$749</td></tr>
+        </tbody>
+      </table>
+      <div class="ptable-foot">Billed <strong>per shop</strong> — every location in a chain gets the chain rate on its own invoice. AP bot, Metrc verification, ACH, credit recovery, QuickBooks, slots, and promotions all included.</div>
     </div>
-    <p class="price-guarantee-note reveal">No credit card. No commitment. Free.</p>
-  </div>
-</section>
 
-<!-- PROMISE -->
-<section class="price-promise">
-  <div class="price-promise-inner">
-    <div class="section-label reveal">Our promise</div>
-    <h2 class="price-promise-headline reveal">We personally guarantee ShelfSpace will make you more money than it costs — or we'll eat a <span class="slug">live banana slug</span>.</h2>
-    <p class="price-promise-body reveal">We mean it. The free evaluation puts the dollars on the table before you pay a cent, and you only owe $20 when something actually lands. If ShelfSpace doesn't earn its keep, we don't deserve yours.</p>
-    <p class="price-promise-sign reveal">— The ShelfSpace team (slug appetite fully at stake)</p>
-  </div>
-</section>
-
-<!-- VENDOR PRICING (Get Paid) -->
-<section style="padding:96px 48px;background:var(--slate-50);">
-  <div style="max-width:820px;margin:0 auto;text-align:center;">
-    <div class="section-label reveal" style="justify-content:center;">For vendors &amp; brands</div>
-    <h2 class="reveal" style="font-size:clamp(28px,3.4vw,40px);font-weight:700;color:var(--green-deep);letter-spacing:-0.6px;margin:12px 0 16px;">Getting paid costs 1%. Capped at $100.</h2>
-    <p class="reveal" style="font-size:17px;line-height:1.65;color:var(--slate-600);max-width:620px;margin:0 auto 32px;">Everything else is free to vendors — your portal, and being paid by a retailer who's already on ShelfSpace. <strong style="color:var(--green-deep);">Accounts Receivable</strong>, for collecting on invoices retailers haven't paid, is the one thing you'd ever pay for: you keep 99% of what you collect, and the fee never tops $100 per invoice. Nothing collected, nothing owed.</p>
-    <div class="reveal" style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;align-items:center;">
-      <a href="/contact" class="btn-primary">Start getting paid <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
-      <a href="/accounts-receivable" style="display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:700;color:var(--green-dark);text-decoration:none;">How Accounts Receivable works <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+    <div class="ptable-card reveal reveal-delay-1">
+      <div class="ptable-card-head">
+        <span class="ptable-aud">For vendors &amp; brands</span>
+        <h3>By retailer reach</h3>
+        <p>Banded by how many retailers you collect from through ShelfSpace.</p>
+      </div>
+      <table class="ptable">
+        <caption class="sr-only">Vendor Automate pricing by number of retailers</caption>
+        <thead><tr><th scope="col">Retailers</th><th scope="col" style="text-align:right;">Per month</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Starter<span>1&ndash;16 retailers</span></th><td class="ptable-rate">$499</td></tr>
+          <tr><th scope="row">Growth<span>17&ndash;50 retailers</span></th><td class="ptable-rate">$899</td></tr>
+          <tr><th scope="row">Scale<span>51&ndash;150 retailers</span></th><td class="ptable-rate">$1,499</td></tr>
+          <tr><th scope="row">Enterprise<span>150&ndash;500+ retailers</span></th><td class="ptable-rate">$3,000&ndash;5,000+</td></tr>
+        </tbody>
+      </table>
+      <div class="ptable-foot"><strong>ACH included</strong>; mailed checks $5 each. Your band rises automatically as you collect from more retailers — no renegotiation.</div>
     </div>
+
+  </div>
+</section>
+
+<!-- COMPARISON MATRIX -->
+<!-- FREE vs PAID COMPARISON MATRIX (reusable — /pricing, /vendors, /features) -->
+<section class="tier-compare" id="compare">
+  <div class="tier-compare-head reveal">
+    <div class="section-label" style="justify-content:center;">What's free, what's paid</div>
+    <h2 class="tier-compare-title">Free = SEE and RECEIVE. Paid = AUTOMATE.</h2>
+    <p class="tier-compare-sub">Seeing what you're owed and getting paid is <strong>free forever</strong>. Automate unlocks the tools that act on it — verification, origination, collections, and QuickBooks.</p>
+  </div>
+  <div class="tier-compare-wrap reveal reveal-delay-1">
+    <table class="tier-compare-table">
+      <caption class="sr-only">Comparison of the free Visibility tier and the paid Automate tier</caption>
+      <thead>
+        <tr>
+          <th scope="col"><span class="tc-cap">Capability</span></th>
+          <th scope="col" class="tc-col-free"><span class="tc-tier-name">Visibility</span><span class="tc-tier-price">Free forever</span></th>
+          <th scope="col" class="tc-col-paid"><span class="tc-tier-name">Automate</span><span class="tc-tier-price">30-day free trial</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">See money you're owed<span>Credits owed, overdue AR, settlement amounts</span></th>
+          <td data-tier="Visibility"><span class="tc-yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span></td>
+          <td class="tc-paid-cell" data-tier="Automate"><span class="tc-yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span></td>
+        </tr>
+        <tr>
+          <th scope="row">Receive payments<span>View &amp; download checks and settlement reports</span></th>
+          <td data-tier="Visibility"><span class="tc-yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span></td>
+          <td class="tc-paid-cell" data-tier="Automate"><span class="tc-yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span></td>
+        </tr>
+        <tr>
+          <th scope="row">Data ingestion<span>Uploads and Metrc sync</span></th>
+          <td data-tier="Visibility"><span class="tc-yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span></td>
+          <td class="tc-paid-cell" data-tier="Automate"><span class="tc-yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span></td>
+        </tr>
+        <tr>
+          <th scope="row">Get verified<span>KYC — the infrastructure that gates money movement</span></th>
+          <td data-tier="Visibility"><span class="tc-yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span></td>
+          <td class="tc-paid-cell" data-tier="Automate"><span class="tc-yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span></td>
+        </tr>
+        <tr>
+          <th scope="row">Disputes<span>File and track a dispute — a right, never gated</span></th>
+          <td data-tier="Visibility"><span class="tc-yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span></td>
+          <td class="tc-paid-cell" data-tier="Automate"><span class="tc-yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span></td>
+        </tr>
+        <tr>
+          <th scope="row">ShelfiQ Q&amp;A<span>Ask about your own data — what you owe, where's your check</span></th>
+          <td data-tier="Visibility"><span class="tc-note">25 / mo</span></td>
+          <td class="tc-paid-cell" data-tier="Automate"><span class="tc-note">Unlimited</span></td>
+        </tr>
+        <tr>
+          <th scope="row">Invoice &#8596; Metrc verification<span>Every line matched against Metrc and your PO</span></th>
+          <td data-tier="Visibility"><span class="tc-no" aria-label="Not included">&mdash;</span></td>
+          <td class="tc-paid-cell" data-tier="Automate"><span class="tc-yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span></td>
+        </tr>
+        <tr>
+          <th scope="row">Short-pay &amp; adjust payable<span>Reduce a payable when the delivery doesn't match</span></th>
+          <td data-tier="Visibility"><span class="tc-no" aria-label="Not included">&mdash;</span></td>
+          <td class="tc-paid-cell" data-tier="Automate"><span class="tc-yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span></td>
+        </tr>
+        <tr>
+          <th scope="row">Cut checks &amp; ACH origination<span>Pay vendors by digital check or bank transfer</span></th>
+          <td data-tier="Visibility"><span class="tc-no" aria-label="Not included">&mdash;</span></td>
+          <td class="tc-paid-cell" data-tier="Automate"><span class="tc-yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span></td>
+        </tr>
+        <tr>
+          <th scope="row">Credit-recovery engine<span>Generate, send, and collect monthly vendor credit memos</span></th>
+          <td data-tier="Visibility"><span class="tc-no" aria-label="Not included">&mdash;</span></td>
+          <td class="tc-paid-cell" data-tier="Automate"><span class="tc-yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span></td>
+        </tr>
+        <tr>
+          <th scope="row">Proactive AP &amp; AR bots<span>ShelfiQ sends the dunning and follow-up for you</span></th>
+          <td data-tier="Visibility"><span class="tc-no" aria-label="Not included">&mdash;</span></td>
+          <td class="tc-paid-cell" data-tier="Automate"><span class="tc-yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span></td>
+        </tr>
+        <tr>
+          <th scope="row">QuickBooks sync<span>Settlements and payments flow into QuickBooks</span></th>
+          <td data-tier="Visibility"><span class="tc-no" aria-label="Not included">&mdash;</span></td>
+          <td class="tc-paid-cell" data-tier="Automate"><span class="tc-yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span></td>
+        </tr>
+        <tr>
+          <th scope="row">Advanced analytics<span>Slots, demand planning, deep reporting</span></th>
+          <td data-tier="Visibility"><span class="tc-no" aria-label="Not included">&mdash;</span></td>
+          <td class="tc-paid-cell" data-tier="Automate"><span class="tc-yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span></td>
+        </tr>
+        <tr>
+          <th scope="row">Promotions &amp; price drops<span>Create and manage markdowns and vendor promotions</span></th>
+          <td data-tier="Visibility"><span class="tc-no" aria-label="Not included">&mdash;</span></td>
+          <td class="tc-paid-cell" data-tier="Automate"><span class="tc-yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="tier-compare-foot reveal"><strong>ACH is included</strong> in every Automate plan; mailed checks are $5 each. Start on Automate free for 30 days &mdash; cancel anytime before it renews.</p>
+</section>
+
+<!-- TRIAL / LEGAL -->
+<section class="trial-band">
+  <div class="trial-band-inner">
+    <div class="section-label reveal">Start free</div>
+    <h2 class="reveal">Free for 30 days, then <span class="slug">cancel anytime</span> before it renews.</h2>
+    <p class="trial-band-lede reveal">Turn on Automate and put it to work for a month. If it doesn't earn its keep, cancel before day 30 and you've paid nothing.</p>
+    <div class="trial-cta reveal">
+      <a href="https://ourshelf.space/signup" class="btn-primary" style="background:var(--white);color:var(--green-deep);">Start your free 30-day trial <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+      <a href="/contact" class="trial-secondary">Talk to us <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+    </div>
+    <p class="trial-disclosure reveal">Free for 30 days, then your plan's monthly rate — from $749/location for retailers or $499/mo for vendors. Your subscription auto-renews monthly. We capture your payment method when the trial starts, and unless you cancel before the 30-day trial ends it converts to a paid subscription at the rate for your location count (retailers) or retailer reach (vendors). Cancel anytime from your account before renewal.</p>
   </div>
 </section>
 
@@ -501,24 +472,24 @@ document.head.appendChild(o)}initApollo();</script>
   </div>
   <div class="faq-list">
     <details>
-      <summary>What does the free evaluation include?</summary>
-      <p>We connect to your Metrc account, analyze your historical data, and deliver a detailed report on what your AP is leaking, what your vendors owe you, and what's trapped on your shelves. No commitment, no credit card. <a href="/ShelfSpace_Sample_Evaluation.pdf" target="_blank" rel="noopener" style="color:var(--green-dark);font-weight:600;text-decoration:none;">See a sample evaluation</a>.</p>
+      <summary>Is ShelfSpace free?</summary>
+      <p>Yes — the <strong>Visibility</strong> tier is free forever, for retailers and vendors alike. You see every credit you're owed, every overdue invoice, and every settlement, receive checks and settlement reports, upload data and sync Metrc, get verified, and ask ShelfiQ up to 25 questions a month about your own data. <strong>Automate</strong> — the paid tier — unlocks the tools that act on all of it, and it starts with a 30-day free trial.</p>
     </details>
     <details>
-      <summary>What counts as an artifact?</summary>
-      <p>Three things, $20 each: a <strong>wholesale payment</strong> (a vendor payment the platform generates for you to sign and send), a <strong>consignment payment</strong> (a settlement payout the platform runs and you approve), and a <strong>credit memo</strong> (a Metrc-backed vendor credit recovered through credit recovery). Free to start — you pay $20 only when one of these lands, and we never take a percentage. Multi-location and high-volume operators get volume discounts.</p>
+      <summary>What does Automate cost?</summary>
+      <p><strong>Retailers</strong> pay per billable location on a bulk-discount curve: $999 for one, $899 each at 2&ndash;3, $799 each at 4&ndash;9, and $749 each at 10 or more — one bundled tier, everything included. <strong>Vendors</strong> are banded by how many retailers they collect from: $499/mo for 1&ndash;16, $899 for 17&ndash;50, $1,499 for 51&ndash;150, and custom pricing ($3,000&ndash;5,000+) for 150&ndash;500+. ACH is included; mailed checks are $5 each.</p>
     </details>
     <details>
-      <summary>Is there a subscription or monthly fee?</summary>
-      <p>No. <strong>Free to start, $20 per artifact, nothing recurring.</strong> No software seats, no per-location fee, no percentage of your money. Month-to-month, cancel any time. The free evaluation comes first — we show you the dollars on the table before you pay anything.</p>
+      <summary>Is there a free trial? What happens when it ends?</summary>
+      <p>Automate is <strong>free for 30 days</strong>. We capture your payment method at trial start, and unless you cancel before day 30 the trial converts to a paid monthly subscription at the rate for your location count (retailers) or retailer reach (vendors). It auto-renews monthly, and you can cancel anytime from your account before it renews.</p>
+    </details>
+    <details>
+      <summary>Do I have to pay to see what I'm owed?</summary>
+      <p>No. Seeing money you're owed, receiving payments, uploading data, getting verified, and reactive ShelfiQ are <strong>free forever</strong>. We only charge for the automation that acts on the pain — never for seeing it.</p>
     </details>
     <details>
       <summary>How does this work with my bookkeeper or accounting firm?</summary>
-      <p>The platform runs AP — invoice processing, three-way matching, per-vendor payment terms, vendor payments, credit recovery. ShelfiQ handles first-line vendor email; your AP person handles the judgment calls. Your bookkeeper or firm keeps month-end close, bank reconciliations, payroll, journal entries, financial statements, tax prep, and 280E compliance. The platform syncs to QuickBooks in real time, so your bookkeeper sees clean entries and closes faster. <a href="/for-bookkeepers" style="color:var(--green-dark);font-weight:600;text-decoration:none;">More for firms →</a></p>
-    </details>
-    <details>
-      <summary>Is my data secure?</summary>
-      <p>Yes. We use read-only Metrc access — we never modify your compliance data. All data encrypted and isolated per operator.</p>
+      <p>The platform runs AP — invoice processing, three-way matching, per-vendor payment terms, vendor payments, credit recovery. ShelfiQ handles first-line vendor email; your AP person handles the judgment calls. Your bookkeeper keeps month-end close, reconciliations, payroll, financial statements, tax prep, and 280E compliance. Automate syncs to QuickBooks in real time, so your bookkeeper sees clean entries and closes faster. <a href="/for-bookkeepers" style="color:var(--green-dark);font-weight:600;text-decoration:none;">More for firms &rarr;</a></p>
     </details>
   </div>
 </section>
@@ -532,7 +503,7 @@ document.head.appendChild(o)}initApollo();</script>
     </div>
     <div class="footer-col"><h3>Services</h3><ul><li><a href="/accounts-payable">Accounts Payable</a></li><li><a href="/consignment">Consignment</a></li><li><a href="/credit-recovery">Credit Recovery</a></li><li><a href="/checks">Check Payments</a></li><li><a href="/shelfiq">ShelfiQ</a></li></ul></div>
     <div class="footer-col"><h3>Platform</h3><ul><li><a href="/features">Features</a></li><li><a href="/how-it-works">How It Works</a></li><li><a href="/pricing">Pricing</a></li><li><a href="/about">About</a></li><li><a href="/blog">Blog</a></li><li><a href="/docs">Docs</a></li><li><a href="/tutorials">Tutorials</a></li></ul></div>
-    <div class="footer-col"><h3>Access</h3><ul><li><a href="https://ourshelf.space/login">Login</a></li><li><a href="/contact">Sign Up</a></li><li><a href="/contact">Contact</a></li><li><a href="/accounts-receivable">Accounts Receivable</a></li><li><a href="/vendors">For Vendors</a></li><li><a href="/for-bookkeepers">For Bookkeepers</a></li></ul></div>
+    <div class="footer-col"><h3>Access</h3><ul><li><a href="https://ourshelf.space/login">Login</a></li><li><a href="https://ourshelf.space/signup">Sign Up</a></li><li><a href="/contact">Contact</a></li><li><a href="/accounts-receivable">Accounts Receivable</a></li><li><a href="/vendors">For Vendors</a></li><li><a href="/for-bookkeepers">For Bookkeepers</a></li></ul></div>
     <div class="footer-col"><h3>Company</h3><ul><li><a href="mailto:support@shelfspace.pro">Support</a></li><li><a href="https://linkedin.com/company/shelfspace-pro" target="_blank" rel="noopener" class="footer-social-link"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> LinkedIn</a></li></ul></div>
   </div>
   <div class="footer-bottom"><p>&copy; 2026 ShelfSpace Technologies Inc.</p><div style="display:flex;align-items:center;gap:8px;justify-content:center;margin-top:12px;"><img src="/metrc-logo.png" alt="Metrc" style="height:18px;opacity:0.4;filter:brightness(0) invert(1);"><span style="font-size:11px;color:rgba(255,255,255,0.35);">Certified Metrc Third-Party Vendor</span></div><div class="footer-bottom-links"><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div></div>

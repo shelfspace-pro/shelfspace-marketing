@@ -945,3 +945,52 @@ footer::before { content: ''; position: absolute; bottom: -100px; right: -100px;
 @media (prefers-reduced-motion: reduce) {
   .vp-card, .vp-card:hover, .vp-play > span, .vp-card:hover .vp-play > span { transition: none; transform: none; }
 }
+
+/* ─────────────────────────────────────────────────────────────
+   TIER-COMPARE — reusable Free (Visibility) vs Paid (Automate)
+   comparison matrix. Used on /pricing, /vendors, /features.
+   Free = SEE and RECEIVE. Paid = AUTOMATE, INTEGRATE, ORIGINATE.
+   ───────────────────────────────────────────────────────────── */
+.tier-compare { background: var(--white); padding: 96px 48px; }
+.tier-compare-head { text-align: center; max-width: 680px; margin: 0 auto 48px; }
+.tier-compare-title { font-size: clamp(28px, 3.5vw, 40px); font-weight: 700; color: var(--green-deep); letter-spacing: -1.2px; line-height: 1.15; margin: 8px 0 12px; }
+.tier-compare-sub { font-size: 16px; line-height: 1.6; color: var(--slate-600); max-width: 560px; margin: 0 auto; }
+.tier-compare-sub strong { color: var(--green-deep); font-weight: 700; }
+.tier-compare-wrap { max-width: 940px; margin: 0 auto; border: 1px solid var(--slate-200); border-radius: 16px; overflow: hidden; box-shadow: 0 20px 50px rgba(27,67,50,0.07); }
+.tier-compare-table { width: 100%; border-collapse: collapse; font-size: 15px; }
+.tier-compare-table thead th { text-align: left; padding: 20px 22px; background: var(--slate-50); border-bottom: 1px solid var(--slate-200); vertical-align: bottom; }
+.tier-compare-table thead th.tc-col-free,
+.tier-compare-table thead th.tc-col-paid { text-align: center; width: 190px; }
+.tc-tier-name { display: block; font-size: 18px; font-weight: 700; color: var(--green-deep); letter-spacing: -0.4px; }
+.tc-tier-price { display: block; font-family: var(--font-mono); font-size: 12px; font-weight: 700; color: var(--slate-500); margin-top: 4px; letter-spacing: 0.3px; }
+.tier-compare-table thead th.tc-col-paid { background: var(--green-ghost); }
+.tier-compare-table thead th.tc-col-paid .tc-tier-price { color: var(--green-dark); }
+.tc-cap { font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: 1.4px; text-transform: uppercase; color: var(--slate-400); }
+.tier-compare-table tbody th[scope="row"] { text-align: left; font-weight: 600; color: var(--green-deep); padding: 16px 22px; border-bottom: 1px solid var(--slate-100); font-size: 15px; }
+.tier-compare-table tbody th[scope="row"] span { display: block; font-weight: 400; font-size: 12.5px; color: var(--slate-500); margin-top: 3px; }
+.tier-compare-table tbody td { text-align: center; padding: 16px 22px; border-bottom: 1px solid var(--slate-100); vertical-align: middle; }
+.tier-compare-table tbody tr:last-child th,
+.tier-compare-table tbody tr:last-child td { border-bottom: none; }
+.tier-compare-table tbody td.tc-paid-cell { background: rgba(240,250,244,0.5); }
+.tc-yes { display: inline-flex; align-items: center; justify-content: center; width: 26px; height: 26px; border-radius: 50%; background: var(--green-ghost); color: var(--green-dark); }
+.tc-yes svg { width: 15px; height: 15px; }
+.tc-no { color: var(--slate-300); font-size: 18px; line-height: 1; }
+.tc-note { font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: 0.3px; color: var(--green-dark); }
+.tier-compare-foot { text-align: center; max-width: 720px; margin: 28px auto 0; font-size: 14px; color: var(--slate-500); line-height: 1.65; }
+.tier-compare-foot strong { color: var(--green-deep); font-weight: 600; }
+
+/* Mobile — stack each row into a labeled two-column card */
+@media (max-width: 760px) {
+  .tier-compare { padding: 64px 22px; }
+  .tier-compare-wrap { border: none; box-shadow: none; }
+  .tier-compare-table, .tier-compare-table tbody, .tier-compare-table tr { display: block; }
+  .tier-compare-table thead { display: none; }
+  .tier-compare-table tbody tr { border: 1px solid var(--slate-200); border-radius: 14px; box-shadow: 0 8px 24px rgba(27,67,50,0.06); margin-bottom: 16px; overflow: hidden; }
+  .tier-compare-table tbody th[scope="row"] { display: block; background: var(--slate-50); border-bottom: 1px solid var(--slate-100); }
+  .tier-compare-table tbody td { display: flex; align-items: center; justify-content: space-between; text-align: right; padding: 13px 20px; }
+  .tier-compare-table tbody td.tc-paid-cell { background: rgba(240,250,244,0.6); }
+  .tier-compare-table tbody td::before { content: attr(data-tier); font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--slate-500); }
+}
+
+/* Visually-hidden utility (screen-reader only) — shared */
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
