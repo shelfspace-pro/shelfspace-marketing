@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ShelfSpace Pricing — Free vs Automate | Cannabis AP, Consignment &amp; AR</title>
-<meta name="description" content="Free to see what you're owed. Vendors collect from retailers without playing collections — a bot runs the dunning, retailers pay in one click, offer 0% payment plans. Retailers automate AP + credit recovery. Retailers from $749/location, vendors from $499/mo. 30-day free trial.">
+<meta name="description" content="If it doesn't pay for itself, it's free — our 90-day ROI guarantee. Free to see what you're owed. Retailers recover vendor credits; vendors collect receivables with a bot that runs the dunning and 0% payment plans. Retailers from $749/location, vendors from $499/mo. 30-day free trial.">
 <link rel="canonical" href="https://shelfspace.pro/pricing">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://shelfspace.pro/pricing">
@@ -128,12 +128,35 @@
   .tc-aud-label--gap { margin-top: 52px; }
   .tc-aud-label .aud-badge { margin: 0; }
 
+  /* ── ROI BAND + GUARANTEE ── */
+  .roi-band { background: linear-gradient(180deg, var(--white) 0%, var(--green-ghost) 100%); padding: 88px 48px; }
+  .roi-inner { max-width: 960px; margin: 0 auto; text-align: center; }
+  .roi-inner h2 { font-size: clamp(28px,3.6vw,42px); font-weight: 700; color: var(--green-deep); letter-spacing: -1.2px; line-height: 1.14; margin: 8px 0 14px; }
+  .roi-lede { max-width: 680px; margin: 0 auto 44px; font-size: 17px; line-height: 1.6; color: var(--slate-600); }
+  .roi-lede strong { color: var(--green-deep); }
+  .roi-proof { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; max-width: 820px; margin: 0 auto 44px; }
+  .roi-proof-card { background: var(--white); border: 1px solid var(--slate-200); border-radius: 16px; padding: 30px 28px; text-align: left; box-shadow: 0 16px 40px rgba(27,67,50,0.06); }
+  .roi-proof-card .aud-badge { margin: 0 0 16px; }
+  .roi-proof-num { font-size: 20px; font-weight: 700; color: var(--green-deep); letter-spacing: -0.5px; margin: 0 0 8px; line-height: 1.25; }
+  .roi-proof-card p { font-size: 14.5px; line-height: 1.55; color: var(--slate-600); margin: 0; }
+  .roi-proof-card p em { font-style: normal; color: var(--green-dark); font-weight: 600; }
+  .roi-guarantee { max-width: 780px; margin: 0 auto; background: var(--green-deep); border-radius: 20px; padding: 44px 44px 40px; box-shadow: 0 24px 60px rgba(27,67,50,0.24); position: relative; overflow: hidden; }
+  .roi-guarantee::before { content: ''; position: absolute; top: -120px; right: -100px; width: 340px; height: 340px; background: radial-gradient(circle, rgba(149,213,178,0.18) 0%, rgba(149,213,178,0) 70%); pointer-events: none; }
+  .roi-guarantee-tag { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: 1.6px; text-transform: uppercase; color: var(--green-accent); margin-bottom: 14px; }
+  .roi-guarantee-tag svg { width: 16px; height: 16px; }
+  .roi-guarantee h3 { font-size: clamp(24px,3vw,34px); font-weight: 700; color: var(--white); letter-spacing: -1px; line-height: 1.15; margin: 0 0 16px; position: relative; }
+  .roi-guarantee p { font-size: 16px; line-height: 1.65; color: rgba(255,255,255,0.85); margin: 0; max-width: 640px; position: relative; }
+  .roi-guarantee p strong { color: var(--white); font-weight: 700; }
+
   .footer-top { grid-template-columns: 2fr 1fr 1fr 1fr 1fr; }
 
   @media (max-width: 900px) {
     .pricing-hero { padding: 120px 24px 40px; }
     .aud-split { padding: 60px 24px 32px; }
     .aud-split-grid { grid-template-columns: 1fr; max-width: 480px; }
+    .roi-band { padding: 64px 24px; }
+    .roi-proof { grid-template-columns: 1fr; max-width: 440px; }
+    .roi-guarantee { padding: 36px 28px 32px; }
     .tiers { padding: 60px 24px 72px; }
     .tiers-grid { grid-template-columns: 1fr; max-width: 460px; }
     .price-tables { padding: 64px 24px; }
@@ -203,6 +226,14 @@ document.head.appendChild(o)}initApollo();</script>
       "acceptedAnswer": {
         "@type": "Answer",
         "text": "Yes. Automate is free for 30 days. We capture your payment method at trial start, and unless you cancel before day 30 the trial converts to a paid monthly subscription at the rate for your location count (retailers) or retailer reach (vendors). You can cancel anytime from your account before it renews."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What's the ROI guarantee?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Run Automate for 90 days after your 30-day free trial. If it hasn't put more back in your account than you paid — recovered vendor credits and short-pays for retailers, collected receivables for vendors — we refund your subscription for that period. Because every credit, payment, and collection runs on the platform, we measure the return directly. There is no fine print to argue about."
       }
     },
     {
@@ -307,7 +338,7 @@ document.head.appendChild(o)}initApollo();</script>
   <div class="pricing-hero-content">
     <div class="section-label reveal" style="justify-content:center;margin-bottom:6px;">Simple, honest pricing</div>
     <h1 class="reveal">Free to see. Free to get paid.</h1>
-    <p class="pricing-hero-sub reveal">Whether you're a <strong>retailer</strong> paying vendors and clawing back the credits you're owed, or a <strong>vendor</strong> collecting from the shops you sell to — seeing the money is <strong>free forever</strong>. <strong>Automate</strong> does the work: collections, payments, verification, and credit recovery. Start free for 30 days.</p>
+    <p class="pricing-hero-sub reveal">Whether you're a <strong>retailer</strong> paying vendors and clawing back the credits you're owed, or a <strong>vendor</strong> collecting from the shops you sell to — seeing the money is <strong>free forever</strong>. <strong>Automate</strong> does the work: collections, payments, verification, and credit recovery. Start free for 30 days — backed by our <strong>90-day ROI guarantee</strong>.</p>
   </div>
 </section>
 
@@ -346,6 +377,34 @@ document.head.appendChild(o)}initApollo();</script>
       <a href="https://ourshelf.space/signup" class="btn-primary tier-cta">Start your free 30-day trial <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
     </article>
 
+  </div>
+</section>
+
+<!-- ROI BAND + GUARANTEE -->
+<section class="roi-band">
+  <div class="roi-inner">
+    <div class="section-label reveal" style="justify-content:center;">Built for ROI</div>
+    <h2 class="reveal">The price is a rounding error against what it puts back.</h2>
+    <p class="roi-lede reveal">ShelfSpace isn't a cost line — it's a recovery engine. <strong>Retailers</strong> claw back the credits their vendors owe and stop overpaying on bad invoices. <strong>Vendors</strong> collect receivables that were quietly aging into write-offs. Automate is priced to be dwarfed by what it recovers.</p>
+
+    <div class="roi-proof reveal reveal-delay-1">
+      <article class="roi-proof-card">
+        <span class="aud-badge aud-retailer">For retailers</span>
+        <p class="roi-proof-num">Found money, every month.</p>
+        <p>Returns, expirations, and promo costs your vendors owe you back — recovered line by line. For most retailers the monthly credit haul <em>dwarfs the subscription</em>, before you even count the phantom charges short-pay catches.</p>
+      </article>
+      <article class="roi-proof-card">
+        <span class="aud-badge aud-vendor">For vendors &amp; brands</span>
+        <p class="roi-proof-num">One invoice pays for the year.</p>
+        <p>Pull a single aged receivable back from the brink — a $6,000 invoice sliding toward write-off — and you've <em>covered a full year</em> of Automate at $499/mo. Everything you collect after that is upside.</p>
+      </article>
+    </div>
+
+    <div class="roi-guarantee reveal reveal-delay-2">
+      <span class="roi-guarantee-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>The ShelfSpace ROI guarantee</span>
+      <h3>If it doesn't pay for itself, it's free.</h3>
+      <p>Run Automate for 90 days after your free trial. If it hasn't put more back in your account than you paid us — <strong>recovered credits and short-pays for retailers, collected receivables for vendors</strong> — we refund your subscription. Every credit, payment, and collection runs on the platform, so we can measure the return directly. No fine print.</p>
+    </div>
   </div>
 </section>
 
@@ -648,6 +707,10 @@ document.head.appendChild(o)}initApollo();</script>
     <details>
       <summary>Is there a free trial? What happens when it ends?</summary>
       <p>Automate is <strong>free for 30 days</strong>. We capture your payment method at trial start, and unless you cancel before day 30 the trial converts to a paid monthly subscription at the rate for your location count (retailers) or retailer reach (vendors). It auto-renews monthly, and you can cancel anytime from your account before it renews.</p>
+    </details>
+    <details>
+      <summary>What's the ROI guarantee?</summary>
+      <p>Run Automate for <strong>90 days</strong> after your 30-day free trial. If it hasn't put more back in your account than you paid — <strong>recovered vendor credits and short-pays</strong> for retailers, <strong>collected receivables</strong> for vendors — we refund your subscription for that period. Because every credit, payment, and collection runs on the platform, we measure the return directly. There's no fine print to argue about.</p>
     </details>
     <details>
       <summary>Do I have to pay to see what I'm owed?</summary>
