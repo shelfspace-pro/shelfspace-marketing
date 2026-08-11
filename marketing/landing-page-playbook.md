@@ -135,6 +135,32 @@ Seven sections. That's the max. If you need more sections, you're over-explainin
 - No `<br>` tags in headings
 - No questions as headlines (questions give permission to say "no")
 - No "learn more" as a CTA (it's a dead end, not an action)
+- **No retired pricing copy** — the "$20 per artifact / per check / per credit memo", "allergic to subscriptions", "1% capped at $100", and "free evaluation, not a trial / pay on results" framings are DEAD. The model is a two-tier subscription with a 30-day free trial (see Pricing & Tier Comparison below). `marketing/scripts/check-docs-forbidden.sh` blocks these phrases on the pricing-context pages.
+
+## Pricing & Tier Comparison
+
+The site sells ONE model: **Visibility (Free) vs Automate (Paid)** — a fixed monthly subscription with a 30-day free trial. Read `docs/specs/pricing-packaging-free-vs-paid.md` (platform repo) for the authoritative numbers and feature matrices before writing any pricing copy.
+
+### The one-line rule
+> **Free = SEE and RECEIVE. Paid = AUTOMATE, INTEGRATE, ORIGINATE.**
+
+Every paid feature has a free counterpart that **quantifies the pain** ("you're owed $X in credits", "$Y of your AR is overdue", "N invoices don't match Metrc"). Free makes the wound visible on every login; Automate is the bandage. This is the upsell engine — never gate seeing money owed, receiving payments, data ingestion, verification, or reactive ShelfiQ Q&A (metered 25 msgs/mo, not locked).
+
+### The two tiers
+- **Visibility (Free)** — track transactions, see money owed/stuck/overdue, receive checks + settlement reports, upload/Metrc sync, get verified, reactive ShelfiQ Q&A (25 msgs/mo).
+- **Automate (Paid)** — Metrc↔invoice verification, short-pay/adjust, cut checks + ACH origination, credit-recovery engine, proactive AP/AR bots + unlimited ShelfiQ, QuickBooks sync, slots, promotions + price-drop actions.
+
+### The numbers (fixed — do not round, rename, or invent bands)
+- **Retailer** — per billable location, one bundled Automate tier, bulk-discount curve: **1 = $999 · 2–3 = $899 · 4–9 = $799 · 10+ = $749** per location. Billed per shop/license; every shop in a chain gets the chain rate on its own invoice.
+- **Vendor** — banded by # of retailers collected from: **Starter 1–16 = $499 · Growth 17–50 = $899 · Scale 51–150 = $1,499 · Enterprise 150–500+ = $3,000–5,000+ / custom.**
+- **Rails** — ACH included; mailed checks $5 each.
+
+### Trial + CTA
+- Offer line: **"Free for 30 days, then $X/mo — cancel anytime before renewal."** Include an **auto-renewal disclosure** wherever the trial appears (legal — it auto-converts and the payment method is captured at trial start).
+- **Primary CTA = "Start your free 30-day trial" → the app signup.** "Talk to us" → `/contact` is the secondary CTA. (Routing every prospect to a contact form undercuts the self-serve trial + upgrade flow the platform ships.)
+
+### Comparison-matrix guidance
+When you build the Free-vs-Paid comparison block: two columns (Free / Paid), never-gate items stay on the Free side, mobile stacks the columns, use proper `<th scope>` for accessibility, and keep the split faithful to the feature matrices in the pricing spec.
 
 ### Headlines
 - Statements > questions
@@ -158,11 +184,11 @@ Seven sections. That's the max. If you need more sections, you're over-explainin
 
 ## CTA Rules
 
-- Primary button: "Get My Free Analysis" (first-person, specific)
-- Below button: explain what happens (48 hours, free, no commitment)
+- Primary button: "Start your free 30-day trial" → the app signup (first-person variants like "Start MY free trial" convert well)
+- Below button: reassure — "Free for 30 days, then $X/mo. Cancel anytime before renewal." + auto-renewal disclosure
 - Chris's photo next to CTA on bottom sections (humanize)
-- Every CTA links to /contact — one destination, no confusion
-- "Talk to Chris" as secondary only on pages where it adds value (not everywhere)
+- Secondary CTA: "Talk to us" → /contact — for prospects who want a conversation before signing up
+- Keep it to two destinations max (trial signup + /contact). No "learn more" dead ends.
 
 ## SEO Rules
 
