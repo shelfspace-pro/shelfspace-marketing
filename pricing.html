@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ShelfSpace Pricing — Free vs Automate | Cannabis AP, Consignment &amp; AR</title>
-<meta name="description" content="Free to see what you're owed and get paid. Automate unlocks payments, credit recovery, and QuickBooks — retailers from $749/location, vendors from $499/mo. 30-day free trial.">
+<meta name="description" content="Free to see what you're owed. Vendors collect from retailers without playing collections — a bot runs the dunning, retailers pay in one click, offer 0% payment plans. Retailers automate AP + credit recovery. Retailers from $749/location, vendors from $499/mo. 30-day free trial.">
 <link rel="canonical" href="https://shelfspace.pro/pricing">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://shelfspace.pro/pricing">
@@ -105,10 +105,32 @@
   .faq-list details p { padding: 0 0 22px; margin: 0; font-size: 15px; line-height: 1.7; color: var(--slate-600); }
   .faq-list details p strong { color: var(--green-deep); }
 
+  /* ── AUDIENCE SPLIT (both sides of the invoice) ── */
+  .aud-split { background: var(--white); padding: 88px 48px 40px; }
+  .aud-split-head { text-align: center; max-width: 700px; margin: 0 auto 44px; }
+  .aud-split-head h2 { font-size: clamp(26px,3.4vw,38px); font-weight: 700; color: var(--green-deep); letter-spacing: -1px; margin: 8px 0 10px; }
+  .aud-split-head p { font-size: 16px; color: var(--slate-600); line-height: 1.6; }
+  .aud-split-grid { max-width: 940px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: stretch; }
+  .aud-col { display: flex; flex-direction: column; background: var(--white); border: 1px solid var(--slate-200); border-radius: 16px; padding: 34px 30px 30px; box-shadow: 0 16px 40px rgba(27,67,50,0.06); }
+  .aud-col--vendor { border: 2px solid var(--green-deep); background: linear-gradient(180deg, var(--green-ghost) 0%, var(--white) 16%); box-shadow: 0 20px 48px rgba(27,67,50,0.13); }
+  .aud-col .aud-badge { margin: 0 0 16px; }
+  .aud-col h3 { font-size: 22px; font-weight: 700; color: var(--green-deep); letter-spacing: -0.6px; line-height: 1.22; margin: 0 0 22px; }
+  .aud-feats { list-style: none; padding: 0; margin: 0 0 8px; display: flex; flex-direction: column; gap: 18px; flex-grow: 1; }
+  .aud-feats li { font-size: 14.5px; line-height: 1.5; color: var(--slate-600); padding-left: 28px; position: relative; }
+  .aud-feats li svg { position: absolute; left: 0; top: 2px; width: 18px; height: 18px; color: var(--green-mid); }
+  .aud-feats li strong { display: block; color: var(--green-deep); font-size: 15px; margin-bottom: 3px; font-weight: 700; }
+  .aud-feats li em { font-style: normal; color: var(--green-dark); font-weight: 600; }
+  .aud-price { font-size: 14px; color: var(--slate-600); margin: 22px 0 18px; padding-top: 20px; border-top: 1px solid var(--slate-200); }
+  .aud-col--vendor .aud-price { border-top-color: rgba(149,213,178,0.5); }
+  .aud-price b { font-family: var(--font-mono); font-size: 21px; color: var(--green-deep); letter-spacing: -0.5px; }
+  .aud-col .tier-cta { width: 100%; }
+
   .footer-top { grid-template-columns: 2fr 1fr 1fr 1fr 1fr; }
 
   @media (max-width: 900px) {
     .pricing-hero { padding: 120px 24px 40px; }
+    .aud-split { padding: 60px 24px 32px; }
+    .aud-split-grid { grid-template-columns: 1fr; max-width: 480px; }
     .tiers { padding: 60px 24px 72px; }
     .tiers-grid { grid-template-columns: 1fr; max-width: 460px; }
     .price-tables { padding: 64px 24px; }
@@ -154,6 +176,22 @@ document.head.appendChild(o)}initApollo();</script>
       "acceptedAnswer": {
         "@type": "Answer",
         "text": "Retailers pay per billable location on a bulk-discount curve: $999 for one location, $899 each at 2–3, $799 each at 4–9, and $749 each at 10 or more — one bundled tier with everything included. Vendors are banded by how many retailers they collect from: $499/mo for 1–16, $899 for 17–50, $1,499 for 51–150, and custom pricing ($3,000–5,000+) for 150–500+. ACH is included; mailed checks are $5 each."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "I don't want to send my retailers to collections. Will this hurt the relationship?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "That's exactly why it exists. The reminders go out on a steady, professional cadence in your name — not a collections agency's — and every one ends in a one-click Pay Now link. When a shop is genuinely short, you can offer a 0% installment plan instead of an ultimatum. You collect the money and keep the account."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I let a slow-paying retailer pay over time?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. On Automate you can offer partial payments and 0% installment plans, so a retailer who can't clear the full balance today has a way to catch up instead of the invoice aging into a write-off. You set the terms; the platform tracks every payment and keeps the reminders going until it's cleared."
       }
     },
     {
@@ -266,12 +304,55 @@ document.head.appendChild(o)}initApollo();</script>
   <div class="pricing-hero-content">
     <div class="section-label reveal" style="justify-content:center;margin-bottom:6px;">Simple, honest pricing</div>
     <h1 class="reveal">Free to see. Free to get paid.</h1>
-    <p class="pricing-hero-sub reveal"><strong>Visibility is free forever</strong> — every dollar you're owed, every payment you receive. <strong>Automate</strong> is the paid tier that acts on it: verification, payments, credit recovery, and QuickBooks. Start free for 30 days.</p>
+    <p class="pricing-hero-sub reveal">Whether you're a <strong>retailer</strong> paying vendors and clawing back the credits you're owed, or a <strong>vendor</strong> collecting from the shops you sell to — seeing the money is <strong>free forever</strong>. <strong>Automate</strong> does the work: collections, payments, verification, and credit recovery. Start free for 30 days.</p>
+  </div>
+</section>
+
+<!-- AUDIENCE SPLIT — both sides of the invoice -->
+<section class="aud-split">
+  <div class="aud-split-head reveal">
+    <div class="section-label" style="justify-content:center;">Built for both sides of the invoice</div>
+    <h2>One system. Two ways to get paid.</h2>
+    <p>Retailers pay their vendors and recover the credits they're owed. Vendors collect from the shops they sell to — without ever playing collections agency. Here's what Automate does for each.</p>
+  </div>
+  <div class="aud-split-grid">
+
+    <article class="aud-col aud-col--vendor reveal">
+      <span class="aud-badge aud-vendor">For vendors &amp; brands</span>
+      <h3>Collect every dollar — without torching the relationship.</h3>
+      <ul class="aud-feats">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><strong>A bot runs your collections.</strong>ShelfiQ sends the reminders and the follow-up on a steady, professional cadence — in your name. You never type "just following up on this" again.</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><strong>Offer a payment plan, not an ultimatum.</strong>Partial payments and <em>0% installment plans</em> give a slow-paying shop a way to clear the balance — so you keep the money <em>and</em> the account.</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><strong>Retailers pay in one click.</strong>No login, no processor. A real digital check, drawn on their bank, lands in yours.</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><strong>Nothing in the middle.</strong>The platform never touches the money — it moves bank to bank, so there's no account to freeze or shut off.</li>
+      </ul>
+      <p class="aud-price">From <b>$499</b>/mo — banded by how many retailers you collect from.</p>
+      <a href="https://ourshelf.space/signup" class="btn-primary tier-cta">Start your free 30-day trial <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+    </article>
+
+    <article class="aud-col reveal reveal-delay-1">
+      <span class="aud-badge aud-retailer">For retailers</span>
+      <h3>Pay your vendors — and get back what they owe you.</h3>
+      <ul class="aud-feats">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><strong>An AP bot handles vendor email.</strong>ShelfiQ answers "where's my payment?" and runs the first-line vendor back-and-forth, so your team only touches the judgment calls.</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><strong>Every invoice checked against Metrc.</strong>Line by line, against your PO — catch a phantom charge and short-pay it before you cut the check.</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><strong>Your vendors owe you money.</strong>Returns, expirations, and promo costs — credited back every month. Most retailers never ask; the platform does.</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><strong>Books close faster.</strong>Checks, ACH, and credits sync straight into QuickBooks — your bookkeeper sees clean entries.</li>
+      </ul>
+      <p class="aud-price">From <b>$749</b>/location — one bundled tier, everything included.</p>
+      <a href="https://ourshelf.space/signup" class="btn-secondary tier-cta">Start your free 30-day trial</a>
+    </article>
+
   </div>
 </section>
 
 <!-- TWO TIERS -->
 <section class="tiers">
+  <div class="price-tables-head reveal" style="margin-bottom:40px;">
+    <div class="section-label" style="justify-content:center;">Free vs Automate</div>
+    <h2>See it for free. Pay only to automate it.</h2>
+    <p>Both tiers work the same for retailers and vendors: Visibility shows you the money for free, forever. Automate does the work.</p>
+  </div>
   <div class="tiers-grid">
 
     <article class="tier-card reveal">
@@ -478,6 +559,14 @@ document.head.appendChild(o)}initApollo();</script>
     <details>
       <summary>What does Automate cost?</summary>
       <p><strong>Retailers</strong> pay per billable location on a bulk-discount curve: $999 for one, $899 each at 2&ndash;3, $799 each at 4&ndash;9, and $749 each at 10 or more — one bundled tier, everything included. <strong>Vendors</strong> are banded by how many retailers they collect from: $499/mo for 1&ndash;16, $899 for 17&ndash;50, $1,499 for 51&ndash;150, and custom pricing ($3,000&ndash;5,000+) for 150&ndash;500+. ACH is included; mailed checks are $5 each.</p>
+    </details>
+    <details>
+      <summary>I don't want to send my retailers to collections. Will this hurt the relationship?</summary>
+      <p>That's exactly why it exists. The reminders go out on a steady, professional cadence <strong>in your name</strong> — not a collections agency's — and every one ends in a one-click Pay Now link. When a shop is genuinely short, you can offer a <strong>0% installment plan</strong> instead of an ultimatum. You collect the money and keep the account.</p>
+    </details>
+    <details>
+      <summary>Can I let a slow-paying retailer pay over time?</summary>
+      <p>Yes. On Automate you can offer <strong>partial payments and 0% installment plans</strong>, so a retailer who can't clear the full balance today has a way to catch up — instead of the invoice aging into a write-off. You set the terms; the platform tracks every payment and keeps the reminders going until it's cleared.</p>
     </details>
     <details>
       <summary>Is there a free trial? What happens when it ends?</summary>
