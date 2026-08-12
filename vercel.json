@@ -2,7 +2,10 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "rewrites": [
-    { "source": "/api/:path*", "destination": "https://ourshelf.space/api/:path*" }
+    { "source": "/api/:path*", "destination": "https://ourshelf.space/api/:path*" },
+    { "source": "/how-to", "destination": "https://ourshelf.space/how-to" },
+    { "source": "/how-to/:path*", "destination": "https://ourshelf.space/how-to/:path*" },
+    { "source": "/_next/:path*", "destination": "https://ourshelf.space/_next/:path*" }
   ],
   "redirects": [
     { "source": "/get-paid", "destination": "/accounts-receivable", "permanent": true },
@@ -13,7 +16,7 @@
   ],
   "headers": [
     {
-      "source": "/(.*)",
+      "source": "/((?!how-to|_next).*)",
       "headers": [
         { "key": "X-Frame-Options", "value": "DENY" },
         { "key": "X-Content-Type-Options", "value": "nosniff" },
