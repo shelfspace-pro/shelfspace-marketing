@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cannabis Perpetual Inventory in QuickBooks — ShelfSpace</title>
+<meta name="description" content="Perpetual vs periodic inventory for cannabis dispensaries in QuickBooks: when purchases become a balance-sheet asset instead of an expense, what ShelfSpace posts, what your accountant posts at close, and how to turn it on.">
+<link rel="canonical" href="https://shelfspace.pro/blog/cannabis-perpetual-inventory-quickbooks">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://shelfspace.pro/blog/cannabis-perpetual-inventory-quickbooks">
+<meta property="og:title" content="Cannabis Perpetual Inventory in QuickBooks — ShelfSpace">
+<meta property="og:description" content="Perpetual vs periodic inventory for cannabis dispensaries in QuickBooks: when purchases become a balance-sheet asset instead of an expense, what ShelfSpace posts, what your accountant posts at close, and how to turn it on.">
+<meta property="og:image" content="https://shelfspace.pro/og-image-v7.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Cannabis Perpetual Inventory in QuickBooks — ShelfSpace">
+<meta name="twitter:description" content="Perpetual vs periodic inventory for cannabis dispensaries in QuickBooks: when purchases become a balance-sheet asset, what ShelfSpace posts, and what your accountant posts at close.">
+<meta name="twitter:image" content="https://shelfspace.pro/og-image-v7.png">
+<meta name="apple-mobile-web-app-title" content="ShelfSpace">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+<style>
+  @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-12px); } }
+
+  /* ─── HERO ENHANCEMENTS ─── */
+  .page-hero { padding-bottom: 40px; }
+  .hero-bg-gradient { position: absolute; top: -30%; right: -20%; width: 700px; height: 700px; background: radial-gradient(circle, rgba(149,213,178,0.18) 0%, rgba(149,213,178,0) 70%); animation: float 8s ease-in-out infinite; pointer-events: none; }
+  .hero-bg-gradient-2 { position: absolute; bottom: -20%; left: -15%; width: 550px; height: 550px; background: radial-gradient(circle, rgba(27,67,50,0.06) 0%, rgba(27,67,50,0) 70%); animation: float 10s ease-in-out infinite; animation-delay: -3s; pointer-events: none; }
+  .hero-grid-lines { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 1200px; height: 100%; opacity: 0.035; background-image: linear-gradient(var(--green-deep) 1px, transparent 1px), linear-gradient(90deg, var(--green-deep) 1px, transparent 1px); background-size: 80px 80px; pointer-events: none; }
+  .page-hero .section-label,
+  .page-hero .section-title,
+  .page-hero .section-desc { opacity: 0; transform: translateY(30px); }
+  .page-hero .section-label { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1); }
+  .page-hero .section-title { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s, transform 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s; }
+  .page-hero .section-desc { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1) 0.25s, transform 0.8s cubic-bezier(0.22,1,0.36,1) 0.25s; }
+  .page-hero.hero-loaded .section-label,
+  .page-hero.hero-loaded .section-title,
+  .page-hero.hero-loaded .section-desc { opacity: 1; transform: translateY(0); }
+
+  /* ─── REVEAL ─── */
+  .reveal {
+    opacity: 0; transform: translateY(40px);
+    transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+  /* ─── ARTICLE BODY ─── */
+  .article-body { max-width: 720px; margin: 0 auto; padding: 0 48px 80px; }
+  .article-body h2 { font-size: 24px; font-weight: 700; color: var(--green-deep); margin: 48px 0 16px; letter-spacing: -0.5px; line-height: 1.3; }
+  .article-body h3 { font-size: 19px; font-weight: 700; color: var(--green-deep); margin: 32px 0 12px; letter-spacing: -0.3px; line-height: 1.3; }
+  .article-body p { font-size: 17px; line-height: 1.85; color: var(--slate-600); margin-bottom: 24px; }
+  .article-body ul, .article-body ol { margin-bottom: 24px; padding-left: 24px; }
+  .article-body li { font-size: 17px; line-height: 1.85; color: var(--slate-600); margin-bottom: 8px; }
+  .article-body strong { color: var(--green-deep); font-weight: 600; }
+  .article-body a { color: var(--green-mid); font-weight: 500; text-decoration: none; }
+  .article-body a:hover { color: var(--green-deep); text-decoration: underline; }
+  .article-body blockquote { border-left: 3px solid var(--green-accent); padding: 16px 24px; margin: 32px 0; background: var(--green-ghost); border-radius: 0 8px 8px 0; }
+  .article-body blockquote p { font-style: italic; color: var(--green-dark); margin-bottom: 0; }
+  .article-body code { font-family: var(--font-mono); font-size: 15px; background: var(--slate-100); color: var(--green-deep); padding: 2px 7px; border-radius: 5px; }
+
+  /* ─── AT A GLANCE ─── */
+  .article-glance {
+    max-width: 720px; margin: 0 auto 40px; padding: 24px 28px;
+    background: var(--green-ghost); border: 1px solid rgba(149,213,178,0.3);
+    border-radius: 12px;
+  }
+  .article-glance h2 {
+    font-size: 14px; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--green-mid); margin: 0 0 12px;
+  }
+  .article-glance ul { list-style: none; padding: 0; margin: 0; }
+  .article-glance li {
+    font-size: 15px; line-height: 1.6; color: var(--slate-600);
+    padding: 4px 0 4px 20px; position: relative;
+  }
+  .article-glance li::before {
+    content: ''; position: absolute; left: 0; top: 12px;
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--green-accent);
+  }
+
+  /* ─── JOURNAL ENTRY MOCKUP ─── */
+  .je {
+    margin: 28px 0; padding: 20px 24px;
+    background: var(--white); border: 1px solid var(--slate-200);
+    border-radius: 12px; box-shadow: 0 4px 16px rgba(27,67,50,0.04);
+  }
+  .je-head {
+    font: 700 12px/1 var(--font-mono); letter-spacing: 1.4px;
+    text-transform: uppercase; color: var(--slate-500);
+    padding-bottom: 12px; margin-bottom: 14px;
+    border-bottom: 1px solid var(--slate-100);
+  }
+  .je-row {
+    display: flex; justify-content: space-between; align-items: baseline;
+    padding: 8px 0; font: 500 15px var(--font-display); color: var(--slate-600);
+    border-top: 1px solid var(--slate-100); gap: 16px;
+  }
+  .je-row:first-of-type { border-top: 0; }
+  .je-dr { font: 700 13px var(--font-mono); color: var(--green-deep); }
+  .je-cr { font: 700 13px var(--font-mono); color: var(--slate-500); }
+  .je-acct { flex: 1; }
+  .je-when { font: 500 13px var(--font-display); color: var(--slate-400); white-space: nowrap; }
+
+  /* ─── ROLL-FORWARD ─── */
+  .rollforward {
+    margin: 28px 0; padding: 6px 24px 14px;
+    background: var(--green-deep); border-radius: 14px;
+  }
+  .rollforward-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 13px 0; gap: 16px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    font: 500 15px var(--font-display); color: rgba(255,255,255,0.92);
+  }
+  .rollforward-row:first-child { border-top: 0; }
+  .rollforward-row .rf-who { font-size: 12px; color: rgba(255,255,255,0.5); margin-left: 8px; }
+  .rf-tag {
+    font: 700 10px/1 var(--font-mono); letter-spacing: 0.8px;
+    text-transform: uppercase; padding: 4px 9px; border-radius: 100px;
+    white-space: nowrap;
+  }
+  .rf-bs { background: rgba(149,213,178,0.22); color: #b7e4c7; }
+  .rf-pl { background: rgba(116,169,255,0.18); color: #a9c7ff; }
+  .rollforward-row.is-result { font-weight: 700; color: #fff; }
+
+  /* ─── CTA PARALLAX ─── */
+  .cta-section::before { transform: translate(-50%,-50%) translateY(var(--parallax-y, 0)); will-change: transform; }
+
+  /* ─── FAQ ACCORDION ─── */
+  .faq-list details {
+    border: 1px solid var(--slate-200); border-radius: 10px;
+    margin-bottom: 12px; background: var(--white);
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .faq-list details[open] { background: var(--green-ghost); border-color: rgba(149,213,178,0.45); }
+  .faq-list summary {
+    list-style: none; cursor: pointer;
+    padding: 16px 20px;
+    font: 600 16px/1.4 var(--font-display); color: var(--green-deep);
+    display: flex; justify-content: space-between; align-items: center; gap: 12px;
+  }
+  .faq-list summary::-webkit-details-marker { display: none; }
+  .faq-list summary::after {
+    content: '+'; flex-shrink: 0;
+    font: 400 22px/1 var(--font-mono); color: var(--green-mid);
+    transition: transform 0.2s;
+  }
+  .faq-list details[open] summary::after { content: '−'; }
+  .faq-list details p {
+    padding: 0 20px 18px; margin: 0;
+    font-size: 15px; line-height: 1.7; color: var(--slate-600);
+  }
+
+  /* ─── FOOTER 5-COL ─── */
+  .footer-top { grid-template-columns: 2fr 1fr 1fr 1fr 1fr; }
+  @media (max-width: 900px) { .footer-top { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px) { .footer-top { grid-template-columns: 1fr; } }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    .article-body { padding: 0 24px 60px; }
+    .je-when { display: none; }
+  }
+
+  /* ─── REDUCED MOTION ─── */
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; transition: none; }
+    .page-hero .section-label,
+    .page-hero .section-title,
+    .page-hero .section-desc { opacity: 1; transform: none; transition: none; }
+    .hero-bg-gradient, .hero-bg-gradient-2 { animation: none; }
+  }
+</style>
+<noscript><style>.reveal,.page-hero .section-label,.page-hero .section-title,.page-hero .section-desc{opacity:1;transform:none;transition:none;}</style></noscript>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-H2LBJT03WE"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-H2LBJT03WE');</script>
+<script>function initApollo(){var n=Math.random().toString(36).substring(7),o=document.createElement("script");
+o.src="https://assets.apollo.io/micro/website-tracker/tracker.iife.js?nocache="+n,o.async=!0,o.defer=!0,
+o.onload=function(){window.trackingFunctions.onLoad({appId:"69c141b32234890011a43849"})},
+document.head.appendChild(o)}initApollo();</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Cannabis Perpetual Inventory in QuickBooks: When Purchases Become an Asset, Not an Expense",
+  "description": "Perpetual vs periodic inventory for cannabis dispensaries in QuickBooks — when purchases become a balance-sheet asset, what ShelfSpace posts, what your accountant posts at close, and how to turn it on.",
+  "author": { "@type": "Person", "name": "Chris Mitchem" },
+  "publisher": { "@type": "Organization", "name": "ShelfSpace", "url": "https://shelfspace.pro" },
+  "datePublished": "2026-08-21",
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://shelfspace.pro/blog/cannabis-perpetual-inventory-quickbooks" },
+  "url": "https://shelfspace.pro/blog/cannabis-perpetual-inventory-quickbooks",
+  "image": "https://shelfspace.pro/og-image-v7.png"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://shelfspace.pro/" },
+    { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://shelfspace.pro/blog" },
+    { "@type": "ListItem", "position": 3, "name": "Cannabis Perpetual Inventory in QuickBooks" }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is the difference between perpetual and periodic inventory for a cannabis dispensary?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Under periodic (expense at receipt), the cost of a wholesale purchase hits your profit & loss the moment you receive the product. Under perpetual (capitalize inventory), that same purchase is recorded as an inventory asset on your balance sheet and stays there until the product sells, at which point your accountant moves it to cost-of-goods-sold at month-end close. Periodic is simpler and fits most self-managed stores; perpetual is for books a bookkeeper or CPA closes each month."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What does ShelfSpace post to QuickBooks under perpetual inventory, and what do I post?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "ShelfSpace posts balance-sheet activity only: the receive-time bill debits your Inventory Asset account and credits Accounts Payable, vendor credits reduce the same Inventory Asset account, and the payment reduces cash. Cost-of-goods-sold — and the adjustment that ties your books to your point-of-sale ending count — is booked by you or your accountant at month-end close from your sell-through. ShelfSpace never books COGS automatically."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Should I use perpetual inventory if I do my own books?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Only if you will actually book cost-of-goods-sold at month-end close. Under perpetual, purchases sit on your balance sheet as an asset and never hit your profit & loss until someone relieves them to COGS from your point-of-sale sell-through. If no one does that step, your P&L understates cost. If you do your own books and won't be closing each month, pick Accrual — expense at receipt instead."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does perpetual inventory change how consignment settlements post?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. The accounting method only controls how wholesale purchases post. Consignment payouts are unaffected — you never take title to consigned product, so nothing posts when it arrives, and the weekly settlement always posts as the vendor's share of what actually sold, exactly as before."
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="/" class="nav-logo">
+    <div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div>
+    <span class="nav-logo-text">ShelfSpace</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="/consignment">Consignment</a></li>
+    <li><a href="/accounts-payable">Accounts Payable</a></li>
+    <li><a href="/credit-recovery">Credit Recovery</a></li>
+    <li><a href="/accounts-receivable">Accounts Receivable</a></li>
+    <li class="nav-dropdown"><button class="nav-dropdown-toggle" aria-haspopup="true" aria-expanded="false">Platform <svg class="dropdown-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></button><div class="nav-dropdown-menu"><a href="/vendor-management">Vendor Management</a><a href="/how-it-works">How It Works</a><a href="/features">Features</a><a href="/shelfiq">ShelfiQ</a><a href="/checks">Check Payments</a><a href="/collections">Collections</a><a href="/tutorials">Tutorials</a><a href="/how-to">Guides</a></div></li>
+    <li><a href="/pricing">Pricing</a></li>
+    <li><a href="/about">About</a></li>
+    <li><a href="/contact" class="nav-cta">Get Started <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a></li>
+  </ul>
+  <div class="nav-hamburger" onclick="document.querySelector('.nav-links').classList.toggle('mobile-open'); event.stopPropagation();"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="hero-bg-gradient"></div>
+  <div class="hero-bg-gradient-2"></div>
+  <div class="hero-grid-lines"></div>
+  <div class="section-label">QuickBooks</div>
+  <h1 class="section-title">Perpetual inventory in QuickBooks: when your purchases become an asset, not an expense.</h1>
+  <p class="section-desc">Cannabis dispensaries on CPA-managed books can now have wholesale purchases capitalize to inventory instead of expensing at receipt. Here's what changes, what ShelfSpace posts, and what your accountant posts at close.</p>
+</div>
+
+<!-- AT A GLANCE -->
+<div class="article-glance">
+  <h2>At a glance</h2>
+  <ul>
+    <li>There are three ways your wholesale purchases can hit your books: <strong>cash</strong> (expense when paid), <strong>accrual — expense at receipt</strong> (periodic, the default), and <strong>accrual — capitalize inventory</strong> (perpetual).</li>
+    <li>Under <strong>perpetual</strong>, a wholesale bill posts at receipt as an <strong>Inventory Asset</strong> on your balance sheet — it doesn't touch your profit &amp; loss until the product sells.</li>
+    <li>ShelfSpace posts <strong>balance-sheet activity only</strong>: Inventory, Accounts Payable, and cash. <strong>You (or your accountant) book cost-of-goods-sold at month-end close</strong> from your point-of-sale sell-through.</li>
+    <li>Vendor credits — returns, damage, shortages — reduce the same Inventory Asset account, so credits and bills stay matched.</li>
+    <li>It's <strong>opt-in per store</strong> (Settings → QuickBooks → Accounting method), requires accrual and a mapped Inventory Asset account, and only an accounting admin can switch it. <strong>Consignment is unchanged.</strong></li>
+  </ul>
+</div>
+
+<!-- ARTICLE BODY -->
+<article class="article-body">
+
+  <p class="reveal">Ask two cannabis bookkeepers how a wholesale purchase should hit the books and you'll get two answers. One expenses it the day the product lands on the dock. The other treats that product as an asset — it sits on the balance sheet until it sells, and only then becomes a cost. Both are correct. Which one is right for a given dispensary depends entirely on who closes the books and how.</p>
+
+  <p class="reveal">ShelfSpace now supports both. Every retailer starts on the simpler method, and nothing changes unless you deliberately switch. This post explains the two approaches in plain terms, shows exactly which entries ShelfSpace posts to QuickBooks Online versus which ones your accountant posts at month-end close, and walks through how to turn perpetual on if it fits your books.</p>
+
+  <h2 class="reveal">Three ways your purchases can hit your books</h2>
+
+  <p class="reveal">In Settings, under QuickBooks, ShelfSpace gives you one control — <strong>Accounting method</strong> — with three coherent choices. It governs one thing: how your <strong>wholesale</strong> purchases post. (Consignment is a separate path; more on that below.)</p>
+
+  <h3 class="reveal">Cash — expense when paid</h3>
+  <p class="reveal">When you pay a vendor, the cost is recorded. Nothing posts when the product arrives, and no accounts-payable balance builds up in between. This is the simplest option and a common fit if you reconcile mostly from your bank.</p>
+
+  <h3 class="reveal">Accrual — expense at receipt <span style="font-weight:400;color:var(--slate-400);">(periodic — what most self-managed stores use)</span></h3>
+  <p class="reveal">The moment you receive product, ShelfSpace records what you owe as a bill, and the cost lands right away. Your Accounts Payable reflects unpaid vendor bills in real time, and the cost hits your books in the period you received the product. The product is expensed immediately — it does <strong>not</strong> sit on your balance sheet as inventory. This is the default, and it's the right call for most operators doing their own books.</p>
+
+  <h3 class="reveal">Accrual — capitalize inventory <span style="font-weight:400;color:var(--slate-400);">(perpetual — for CPA-managed books)</span></h3>
+  <p class="reveal">ShelfSpace records the bill at receipt as an <strong>inventory asset</strong>, not an expense — purchased product sits on your balance sheet until it sells. The cost stays there and does <strong>not</strong> hit your profit &amp; loss when you receive it. Someone has to move it to cost-of-goods-sold at month-end close — typically your accountant, from your point-of-sale sell-through.</p>
+
+  <div class="blog-callout reveal">
+    <svg class="blog-callout-ico" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    <p class="blog-callout-text">Choose perpetual only if a bookkeeper or CPA closes your books each month. If you do your own books and won't be booking cost-of-goods-sold at close, pick <strong>Accrual — expense at receipt</strong> instead, or your P&amp;L will understate cost.</p>
+  </div>
+
+  <h2 class="reveal">Perpetual vs. periodic, plainly</h2>
+
+  <p class="reveal">The difference is <em>when the cost shows up on your profit &amp; loss</em>.</p>
+
+  <ul>
+    <li class="reveal"><strong>Periodic (expense at receipt):</strong> the cost lands on your P&amp;L when the product arrives. Fast, simple, and self-contained — the number is right without a monthly close step. The tradeoff is that your P&amp;L cost moves with your <em>buying</em>, not your <em>selling</em>: a big delivery late in the month shows up as cost that month even if none of it has sold yet.</li>
+    <li class="reveal"><strong>Perpetual (capitalize inventory):</strong> the cost lands on your P&amp;L when the product <em>sells</em>. Purchases park on the balance sheet as an asset; each month your accountant relieves the portion that sold to cost-of-goods-sold. This matches cost to revenue the way GAAP intends, but it only works if someone actually books that close entry.</li>
+  </ul>
+
+  <h2 class="reveal">The split: ShelfSpace posts the balance sheet, you post the P&amp;L</h2>
+
+  <p class="reveal">This is the one idea to hold onto. Under perpetual, ShelfSpace posts only <strong>balance-sheet</strong> activity — Inventory, Accounts Payable, and cash. It never books cost-of-goods-sold, because only your point-of-sale knows what actually sold. <strong>You, or your accountant, book COGS and the tie-out adjustment at month-end close.</strong></p>
+
+  <p class="reveal">Here's what ShelfSpace posts to QuickBooks as one wholesale bill moves through its life:</p>
+
+  <div class="je reveal">
+    <div class="je-head">Wholesale receipt · posted by ShelfSpace</div>
+    <div class="je-row"><span class="je-acct"><span class="je-dr">Dr</span> Inventory Asset</span><span class="je-when">at receipt</span></div>
+    <div class="je-row"><span class="je-acct"><span class="je-cr">Cr</span> Accounts Payable</span><span class="je-when">at receipt</span></div>
+  </div>
+
+  <div class="je reveal">
+    <div class="je-head">Vendor credit — return, damage, shortage · posted by ShelfSpace</div>
+    <div class="je-row"><span class="je-acct"><span class="je-dr">Dr</span> Accounts Payable</span><span class="je-when">when applied</span></div>
+    <div class="je-row"><span class="je-acct"><span class="je-cr">Cr</span> Inventory Asset</span><span class="je-when">when applied</span></div>
+  </div>
+
+  <div class="je reveal">
+    <div class="je-head">Vendor paid (check or ACH) · posted by ShelfSpace</div>
+    <div class="je-row"><span class="je-acct"><span class="je-dr">Dr</span> Accounts Payable</span><span class="je-when">net of credits</span></div>
+    <div class="je-row"><span class="je-acct"><span class="je-cr">Cr</span> Bank</span><span class="je-when">check / ACH sent</span></div>
+  </div>
+
+  <div class="je reveal">
+    <div class="je-head">Product sells · posted by YOU at close</div>
+    <div class="je-row"><span class="je-acct"><span class="je-dr">Dr</span> Cost of Goods Sold</span><span class="je-when">month-end close</span></div>
+    <div class="je-row"><span class="je-acct"><span class="je-cr">Cr</span> Inventory Asset</span><span class="je-when">from your POS</span></div>
+  </div>
+
+  <p class="reveal">Notice the vendor credit and the payment both draw down the same Accounts Payable that the bill created. The liability nets to zero once — never twice — and the bank is only ever reduced by what you actually paid.</p>
+
+  <h2 class="reveal">The inventory roll-forward</h2>
+
+  <p class="reveal">Put the whole month together and it reads as a clean roll-forward. ShelfSpace owns the balance-sheet rows; you own the two profit &amp; loss rows at close. Your point-of-sale supplies the beginning and ending counts that everything ties out to.</p>
+
+  <div class="rollforward reveal">
+    <div class="rollforward-row"><span>Beginning inventory <span class="rf-who">from POS</span></span><span class="rf-tag rf-bs">Balance sheet</span></div>
+    <div class="rollforward-row"><span>+ Purchases <span class="rf-who">ShelfSpace</span></span><span class="rf-tag rf-bs">Balance sheet</span></div>
+    <div class="rollforward-row"><span>− Cost of goods sold <span class="rf-who">you, at close</span></span><span class="rf-tag rf-pl">Profit &amp; loss</span></div>
+    <div class="rollforward-row"><span>± Credits — returns, damage <span class="rf-who">ShelfSpace</span></span><span class="rf-tag rf-bs">Balance sheet</span></div>
+    <div class="rollforward-row"><span>± Adjustment to tie to ending count <span class="rf-who">you, at close</span></span><span class="rf-tag rf-pl">Profit &amp; loss</span></div>
+    <div class="rollforward-row is-result"><span>Ending inventory <span class="rf-who" style="color:rgba(255,255,255,0.6);">from POS</span></span><span class="rf-tag rf-bs">Balance sheet</span></div>
+  </div>
+
+  <p class="reveal">The adjustment row is the reconciling step: it moves whatever's needed so your QuickBooks inventory balance equals the ending count your point-of-sale reports. Shrinkage, moisture loss, and miscounts all land there, on the P&amp;L, at close — which is exactly where a cannabis CPA wants them.</p>
+
+  <h2 class="reveal">Vendor credits stay matched to the bill</h2>
+
+  <p class="reveal">A worry with capitalizing inventory is that returns and damage credits drift away from the purchases they belong to. They don't here. When a vendor credit is applied, ShelfSpace posts it as a first-class Vendor Credit in QuickBooks, applied against the original bill, reducing the <em>same</em> Inventory Asset account the bill capitalized. The full liability and the credit against it are both on the books — nothing is hidden inside a quietly-shrunk bill amount, so the audit trail stays complete. If a credit is later reversed, ShelfSpace un-applies it and restores the bill's balance; the payment is never disturbed. Anything QuickBooks can't accept — a closed period, an unmatched vendor — is routed to a review queue, never posted wrong.</p>
+
+  <h2 class="reveal">Consignment is unchanged</h2>
+
+  <p class="reveal">The accounting method controls <strong>wholesale purchases only</strong>. Consignment is a different arrangement: the vendor keeps title to unsold product, so you never take it onto your balance sheet. Nothing posts when consigned product arrives, and the weekly settlement always posts as the vendor's share of what actually sold — the same Bill-plus-Payment it always has. Whether you're on periodic or perpetual, consignment behaves identically. For how consignment settlements post, see <a href="/blog/cannabis-consignment-quickbooks-sync">Cannabis Consignment Settlements in QuickBooks</a>.</p>
+
+  <h2 class="reveal">How to turn perpetual on</h2>
+
+  <p class="reveal">Perpetual is opt-in, per store, and reversible. In the retailer portal:</p>
+
+  <ol>
+    <li class="reveal">Open <strong>Settings → QuickBooks</strong>. Under a connected, configured QuickBooks connection you'll see the <strong>Accounting method</strong> card.</li>
+    <li class="reveal">Switch the card from <strong>Basic</strong> to <strong>Advanced</strong>. Basic shows the two self-serve choices (Cash and Accrual — expense at receipt); Advanced reveals the third, <strong>Accrual — capitalize inventory</strong>.</li>
+    <li class="reveal">Choose an <strong>Inventory Asset account</strong> from your QuickBooks chart of accounts — usually the one named "Inventory Asset" (an Other Current Asset in QuickBooks).</li>
+    <li class="reveal">Select <strong>Accrual — capitalize inventory</strong>. A confirmation dialog explains that new wholesale bills will post to your Inventory Asset account and your open, unpaid bills will re-sync to it — while paid bills, and bills covered by a live vendor credit, are left exactly as they are.</li>
+  </ol>
+
+  <p class="reveal">Two guardrails to know about. First, "capitalize inventory" stays greyed out until accrual is on and an Inventory Asset account is chosen — those are prerequisites, not options. Second, switching it is restricted to your <strong>accounting admin</strong>; anyone else sees the choice but can't change it. Both exist to keep an accounting decision in accounting hands. Switching back to expense-at-receipt is available the same way, any time.</p>
+
+  <blockquote class="reveal">
+    <p>Perpetual is a bookkeeping choice, not an upgrade. If a CPA closes your books each month and wants purchases on the balance sheet until they sell, it's exactly right. If you close your own books from the bank, expense-at-receipt is simpler and just as correct — and it's already what you're on.</p>
+  </blockquote>
+
+  <p class="reveal">For the full picture of what the QuickBooks integration posts across settlements, payments, and credits, see the <a href="/docs/quickbooks/accounting-method">Accounting method doc</a> and the <a href="/docs/quickbooks/overview">QuickBooks integration overview</a>. If you'd like a cannabis-savvy walkthrough for your own books, <a href="/contact">reach out for an evaluation</a>.</p>
+
+</article>
+
+<!-- FAQ -->
+<section style="max-width: 720px; margin: 0 auto; padding: 0 48px 60px;">
+  <h2 style="font-size: 22px; font-weight: 700; color: #1b4332; margin-bottom: 24px; letter-spacing: -0.5px;">Frequently asked questions</h2>
+  <div class="faq-list">
+    <details>
+      <summary>What is the difference between perpetual and periodic inventory for a cannabis dispensary?</summary>
+      <p>Under periodic (expense at receipt), the cost of a wholesale purchase hits your profit &amp; loss the moment you receive the product. Under perpetual (capitalize inventory), that same purchase is recorded as an inventory asset on your balance sheet and stays there until the product sells, at which point your accountant moves it to cost-of-goods-sold at month-end close. Periodic is simpler and fits most self-managed stores; perpetual is for books a bookkeeper or CPA closes each month.</p>
+    </details>
+    <details>
+      <summary>What does ShelfSpace post to QuickBooks under perpetual inventory, and what do I post?</summary>
+      <p>ShelfSpace posts balance-sheet activity only: the receive-time bill debits your Inventory Asset account and credits Accounts Payable, vendor credits reduce the same Inventory Asset account, and the payment reduces cash. Cost-of-goods-sold — and the adjustment that ties your books to your point-of-sale ending count — is booked by you or your accountant at month-end close from your sell-through. ShelfSpace never books COGS automatically.</p>
+    </details>
+    <details>
+      <summary>Should I use perpetual inventory if I do my own books?</summary>
+      <p>Only if you will actually book cost-of-goods-sold at month-end close. Under perpetual, purchases sit on your balance sheet as an asset and never hit your profit &amp; loss until someone relieves them to COGS from your point-of-sale sell-through. If no one does that step, your P&amp;L understates cost. If you do your own books and won't be closing each month, pick Accrual — expense at receipt instead.</p>
+    </details>
+    <details>
+      <summary>Does perpetual inventory change how consignment settlements post?</summary>
+      <p>No. The accounting method only controls how wholesale purchases post. Consignment payouts are unaffected — you never take title to consigned product, so nothing posts when it arrives, and the weekly settlement always posts as the vendor's share of what actually sold, exactly as before.</p>
+    </details>
+    <details>
+      <summary>Who can turn perpetual inventory on, and is it reversible?</summary>
+      <p>It's opt-in per store, under Settings → QuickBooks → Accounting method, and only your accounting admin can change it. It requires accrual and a mapped Inventory Asset account. Switching in re-syncs your open, unpaid wholesale bills to the Inventory Asset account; paid bills and credit-covered bills are left as they are. You can switch back to expense-at-receipt the same way at any time.</p>
+    </details>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-content">
+    <div class="section-label reveal">Get Started</div>
+    <h2 class="section-title reveal">Books that match your buying — or your selling. Your call.</h2>
+    <p class="section-desc reveal">Free evaluation. We'll show you how wholesale, consignment, and credits land in QuickBooks pre-reconciled — on whichever accounting method your books run on.</p>
+    <div class="cta-actions reveal">
+      <a href="/contact" class="btn-primary">
+        Get a Demo
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+      <a href="/contact" class="btn-secondary">Talk to us</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="/" class="nav-logo"><div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div><span class="nav-logo-text">ShelfSpace</span></a>
+      <p>Every Vendor. Every Payment. One Engine.</p>
+    </div>
+    <div class="footer-col"><h4>Services</h4><ul><li><a href="/consignment">Consignment</a></li><li><a href="/accounts-payable">Accounts Payable</a></li><li><a href="/credit-recovery">Credit Recovery</a></li><li><a href="/checks">Check Payments</a></li><li><a href="/shelfiq">ShelfiQ</a></li></ul></div>
+    <div class="footer-col"><h4>Platform</h4><ul><li><a href="/features">Features</a></li><li><a href="/how-it-works">How It Works</a></li><li><a href="/pricing">Pricing</a></li><li><a href="/about">About</a></li><li><a href="/blog">Blog</a></li><li><a href="/docs">Docs</a></li><li><a href="/how-to">Guides</a></li><li><a href="/tutorials">Tutorials</a></li></ul></div>
+    <div class="footer-col"><h4>Access</h4><ul><li><a href="https://ourshelf.space/login">Login</a></li><li><a href="/contact">Sign Up</a></li><li><a href="/contact">Contact</a></li><li><a href="/accounts-receivable">Accounts Receivable</a></li><li><a href="/vendors">For Vendors</a></li><li><a href="/for-bookkeepers">For Bookkeepers</a></li></ul></div>
+    <div class="footer-col"><h4>Company</h4><ul><li><a href="mailto:support@shelfspace.pro">Support</a></li><li><a href="https://linkedin.com/company/shelfspace-pro" target="_blank" rel="noopener" class="footer-social-link"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> LinkedIn</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><p>&copy; 2026 ShelfSpace Technologies Inc.</p><div class="footer-bottom-links"><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div></div>
+</footer>
+
+<script>
+(function() {
+  var nav = document.getElementById('nav');
+  var pageHero = document.querySelector('.page-hero');
+  var parallaxSections = [ document.querySelector('.cta-section') ];
+
+  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var isMobile = window.innerWidth < 900;
+  var ticking = false;
+
+  requestAnimationFrame(function() {
+    nav.classList.toggle('scrolled', window.scrollY > 20);
+    if (pageHero) pageHero.classList.add('hero-loaded');
+  });
+
+  var revealObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(function(el) { revealObserver.observe(el); });
+
+  function onScroll() {
+    var scrollY = window.scrollY;
+    nav.classList.toggle('scrolled', scrollY > 20);
+    if (prefersReduced || isMobile) return;
+    var wh = window.innerHeight;
+    parallaxSections.forEach(function(section) {
+      if (!section) return;
+      var rect = section.getBoundingClientRect();
+      if (rect.bottom < 0 || rect.top > wh) return;
+      var center = rect.top + rect.height / 2 - wh / 2;
+      section.style.setProperty('--parallax-y', (center * 0.08) + 'px');
+    });
+  }
+
+  window.addEventListener('scroll', function() {
+    if (!ticking) { requestAnimationFrame(function() { onScroll(); ticking = false; }); ticking = true; }
+  }, { passive: true });
+
+  onScroll();
+
+  window.addEventListener('resize', function() {
+    isMobile = window.innerWidth < 900;
+    if (isMobile) { parallaxSections.forEach(function(section) { if (section) section.style.setProperty('--parallax-y', '0px'); }); }
+  });
+
+  document.addEventListener('click', function() {
+    var navLinks = document.querySelector('.nav-links');
+    if (navLinks && navLinks.classList.contains('mobile-open')) { navLinks.classList.remove('mobile-open'); }
+  });
+})();
+</script>
+<script src="/shelfiq-widget.js"></script>
+</body>
+</html>
