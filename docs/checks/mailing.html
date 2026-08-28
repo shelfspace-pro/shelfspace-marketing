@@ -174,7 +174,7 @@
   "@type": "TechArticle",
   "headline": "Mailing Physical Checks to Vendors",
   "datePublished": "2026-06-23",
-  "dateModified": "2026-07-09",
+  "dateModified": "2026-08-28",
   "author": { "@type": "Organization", "name": "ShelfSpace", "url": "https://shelfspace.pro" },
   "publisher": { "@type": "Organization", "name": "ShelfSpace" },
   "url": "https://shelfspace.pro/docs/checks/mailing"
@@ -213,7 +213,7 @@ o.onload=function(){window.trackingFunctions.onLoad({appId:"69c141b32234890011a4
 document.head.appendChild(o)}initApollo();</script>
 </head>
 <body>
-<!-- last-synced: 2026-07-09 -->
+<!-- last-synced: 2026-08-28 -->
 
 <!-- NAV -->
 <nav id="nav">
@@ -263,10 +263,11 @@ document.head.appendChild(o)}initApollo();</script>
       <h2>At a Glance</h2>
       <ul>
         <li>Mail a physical vendor check instead of digital portal delivery: the same Check 21 check, printed on paper</li>
-        <li>Digital delivery is the default; mailing is opt-in per vendor, set by the retailer in vendor settings</li>
+        <li>Digital delivery is the default; mailing is a per-vendor setting — switch one vendor to paper and keep every other vendor on digital</li>
+        <li>Common trigger: an established distributor won't accept a digital check platform and only takes paper, ACH, or cash</li>
         <li>Mailed checks go out via USPS, typically arrive in 3–5 business days, and show tracking in the portal</li>
         <li>A non-negotiable copy stays in the portal; only the mailed paper check is depositable</li>
-        <li>Works for both AP vendor checks and consignment settlement checks, at no extra charge</li>
+        <li>Mailed checks are $5 each (printing plus postage); ACH and digital portal checks are included in your plan</li>
       </ul>
     </div>
 
@@ -274,21 +275,47 @@ document.head.appendChild(o)}initApollo();</script>
     <h2>Digital by Default, Paper When a Vendor Needs It</h2>
     <p>Every check generated through ShelfSpace is a <a href="/docs/checks/overview">Check 21</a> instrument — a bank-compliant digital check the vendor downloads from their <a href="/docs/vendor-portal/downloading-checks">vendor portal</a> and deposits the same day. That is the default, and for most vendors it is the fastest way to get paid. But some vendors would rather receive a paper check in the mail. Their AP team deposits at a teller with no mobile-deposit caps, or they only accept paper instruments. For those vendors, the platform prints the check on bank-grade stock and mails it via USPS. No portal, no printer needed on their end.</p>
 
+    <p>The most common trigger is one specific vendor. A large, established distributor tells your buyer their accounts-receivable team does not accept a digital check platform — only ACH, cash, or a physical paper check in the mail. You do not want to move your whole vendor list to paper over one supplier's policy. You want to switch that one vendor to mailed checks and leave everyone else on digital. Because mailing is a per-vendor setting, that is exactly what you do — the change lives on that one vendor's record and touches no other.</p>
+
     <div class="docs-highlight">
       <strong>Prefer no check at all?</strong> Mailing is one alternative to digital delivery; <a href="/ach">ACH bank transfer</a> is the other. If a vendor would rather skip the check entirely, the retailer can opt into ACH and the vendor links a bank account — the money then lands straight in that account with nothing to print, mail, or deposit. Check 21 stays the default, and mailing remains available for any vendor who wants paper.
     </div>
 
-    <p>Mailing runs on the same engine that powers your <a href="/accounts-payable">accounts payable</a> and <a href="/consignment">consignment settlements</a>, so it works for both AP vendor checks and settlement checks. There is no extra charge to mail a check instead of delivering it digitally.</p>
+    <p>Mailing runs on the same engine that powers your <a href="/accounts-payable">accounts payable</a> and <a href="/consignment">consignment settlements</a>, so it works for both AP vendor checks and settlement checks. ACH and digital portal checks are included in your plan; a mailed check is $5 each, which covers printing and postage. See <a href="/pricing">pricing</a> for the full breakdown.</p>
 
-    <h2>How to Mail a Vendor a Physical Check</h2>
-    <p>Mailing is a per-vendor setting you control. In a vendor's settings, open <strong>Default Payment Method</strong> and choose <strong>Physical (mailed) check</strong>. From then on, every check the platform generates for that vendor is printed and mailed instead of posted to the portal. You can switch back to digital, or override the method on a single payment, at any time.</p>
+    <h2>How to Switch a Vendor to Mailed Checks</h2>
+    <p>Switching is a per-vendor setting you control, and it takes under a minute. The whole change lives on one vendor's record, so it never affects how any other vendor gets paid.</p>
+
+    <ol>
+      <li>Open <strong>Vendors</strong>, then open the vendor you want to switch.</li>
+      <li>Go to the <strong>Settings</strong> tab and find the <strong>Payment</strong> section.</li>
+      <li>In the <strong>Default Payment Method</strong> card, choose <strong>Physical (mailed) check</strong>.</li>
+      <li>If there is no complete mailing address on file yet, a dialog opens for the vendor's <strong>street address, attention line</strong> (optional), <strong>city, state, and ZIP</strong>. Fill it in and click <strong>Save address &amp; enable mailed checks</strong>.</li>
+    </ol>
+
+    <p>The Default Payment Method card sets how you pay that vendor by default. Every Pay screen preselects it, and you can still switch the channel on any single payment. The card offers four options:</p>
+
+    <ul>
+      <li><strong>ACH bank transfer</strong> — the platform sends funds directly to the vendor's linked bank account, so no check is generated.</li>
+      <li><strong>Digital check</strong> (the default) — the platform generates a check the vendor downloads from the portal.</li>
+      <li><strong>Physical (mailed) check</strong> — USPS. The platform prints on bank-grade check stock and mails it, and a printed copy is saved to the portal.</li>
+      <li><strong>Manual payment</strong> — you pay the vendor directly (your own check, cash, wire). The platform records the payment but generates no check.</li>
+    </ul>
+
+    <p>When you pick Physical (mailed) check, the platform confirms the switch in plain terms:</p>
+
+    <div class="docs-highlight">
+      Future checks for that vendor will be printed on bank-grade stock and mailed by USPS. A non-negotiable copy will be saved to the portal so the vendor can see the check details, but only the mailed paper check is cashable. This typically takes 3–5 business days for the vendor to receive.
+    </div>
+
+    <p>From then on, the platform defaults to mailing paper checks to that vendor — every future check prints and mails without any extra steps. To go back, reopen the card and pick Digital check or ACH; to make a one-time exception, override the channel on that single payment.</p>
 
     <div class="docs-highlight">
       <strong>What the platform runs:</strong> check generation, printing on bank-grade stock, addressing, USPS mailing, and delivery tracking. <strong>What you own:</strong> the choice to mail, and keeping the vendor's mailing address current. The check is still drawn on your bank account, exactly like a digital one.
     </div>
 
     <h2>A Mailing Address Is Required</h2>
-    <p>A mailed check can only go where there is an address. Before mailing takes effect, the vendor's profile needs a complete mailing address (street, city, state, and ZIP), and the retailer keeps that address current. If any field is missing, the platform keeps that vendor on digital delivery so a check is never mailed into the void. Add the address and mailing takes effect on the next check.</p>
+    <p>A mailed check can only go where there is an address. Before mailing takes effect, the vendor's profile needs a complete mailing address (street, city, state, and ZIP), and you keep that address current. If any field is missing — or the account isn't provisioned for mail yet — the platform falls back to a digital portal check so a check is never mailed into the void or held up. Add the address and mailing takes effect on the next check. This fallback means switching a vendor to mailed checks is safe: the worst case is that a check lands in the portal the way it always has, never that a vendor goes unpaid.</p>
 
     <h2>For Your Vendors: Requesting a Mailed Check</h2>
     <p>Vendors can ask for paper without waiting to be offered it. From their portal, a vendor taps <strong>Request mailed paper checks</strong>, and the platform notifies you. You approve it from the vendor's settings — there is a one-tap <strong>Enable mailing</strong> prompt whenever a request is waiting. Until you enable it, the vendor keeps receiving digital portal checks as usual, and vendors who are happy with digital do not need to do anything.</p>
