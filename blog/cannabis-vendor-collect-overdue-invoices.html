@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Collect on Overdue Cannabis Invoices | ShelfSpace</title>
+<meta name="description" content="Stop chasing dispensaries that owe you. ShelfSpace's Get Paid sends a branded Pay Now email, follows up on a schedule, and the buyer pays from their own bank.">
+<link rel="canonical" href="https://shelfspace.pro/blog/cannabis-vendor-collect-overdue-invoices">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://shelfspace.pro/blog/cannabis-vendor-collect-overdue-invoices">
+<meta property="og:title" content="Collect on Overdue Cannabis Invoices | ShelfSpace">
+<meta property="og:description" content="Stop chasing dispensaries that owe you. ShelfSpace's Get Paid sends a branded Pay Now email, follows up on a schedule, and the buyer pays from their own bank — you get a check.">
+<meta property="og:image" content="https://shelfspace.pro/og-image-v7.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Collect on Overdue Cannabis Invoices | ShelfSpace">
+<meta name="twitter:description" content="One click sends the dispensary a Pay Now email. ShelfSpace follows up on a schedule. The buyer pays from their own bank, and you get a check — the money never passes through us.">
+<meta name="twitter:image" content="https://shelfspace.pro/og-image-v7.png">
+<meta name="apple-mobile-web-app-title" content="ShelfSpace">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+<style>
+  @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-12px); } }
+
+  /* ─── HERO ─── */
+  .page-hero { padding-bottom: 40px; }
+  .hero-bg-gradient { position: absolute; top: -30%; right: -20%; width: 700px; height: 700px; background: radial-gradient(circle, rgba(149,213,178,0.18) 0%, rgba(149,213,178,0) 70%); animation: float 8s ease-in-out infinite; pointer-events: none; }
+  .hero-bg-gradient-2 { position: absolute; bottom: -20%; left: -15%; width: 550px; height: 550px; background: radial-gradient(circle, rgba(27,67,50,0.06) 0%, rgba(27,67,50,0) 70%); animation: float 10s ease-in-out infinite; animation-delay: -3s; pointer-events: none; }
+  .hero-grid-lines { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 1200px; height: 100%; opacity: 0.035; background-image: linear-gradient(var(--green-deep) 1px, transparent 1px), linear-gradient(90deg, var(--green-deep) 1px, transparent 1px); background-size: 80px 80px; pointer-events: none; }
+  .page-hero .section-label,
+  .page-hero .section-title,
+  .page-hero .section-desc { opacity: 0; transform: translateY(30px); }
+  .page-hero .section-label { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1); }
+  .page-hero .section-title { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s, transform 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s; }
+  .page-hero .section-desc { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1) 0.25s, transform 0.8s cubic-bezier(0.22,1,0.36,1) 0.25s; }
+  .page-hero.hero-loaded .section-label,
+  .page-hero.hero-loaded .section-title,
+  .page-hero.hero-loaded .section-desc { opacity: 1; transform: translateY(0); }
+
+  /* ─── REVEAL ─── */
+  .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1); }
+  .reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+  /* ─── ARTICLE BODY ─── */
+  .article-body { max-width: 720px; margin: 0 auto; padding: 0 48px 80px; }
+  .article-body h2 { font-size: 24px; font-weight: 700; color: var(--green-deep); margin: 48px 0 16px; letter-spacing: -0.5px; line-height: 1.3; }
+  .article-body h3 { font-size: 19px; font-weight: 700; color: var(--green-deep); margin: 32px 0 12px; letter-spacing: -0.3px; line-height: 1.35; }
+  .article-body p { font-size: 17px; line-height: 1.85; color: var(--slate-600); margin-bottom: 24px; }
+  .article-body ul, .article-body ol { margin-bottom: 24px; padding-left: 24px; }
+  .article-body li { font-size: 17px; line-height: 1.85; color: var(--slate-600); margin-bottom: 8px; }
+  .article-body strong { color: var(--green-deep); font-weight: 600; }
+  .article-body a { color: var(--green-mid); font-weight: 500; text-decoration: none; }
+  .article-body a:hover { color: var(--green-deep); text-decoration: underline; }
+  .article-body blockquote { border-left: 3px solid var(--green-accent); padding: 16px 24px; margin: 32px 0; background: var(--green-ghost); border-radius: 0 8px 8px 0; }
+  .article-body blockquote p { font-style: italic; color: var(--green-dark); margin-bottom: 0; }
+
+  /* ─── AT A GLANCE ─── */
+  .article-glance { max-width: 720px; margin: 0 auto 40px; padding: 24px 28px; background: var(--green-ghost); border: 1px solid rgba(149,213,178,0.3); border-radius: 12px; }
+  .article-glance h2 { font-size: 14px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--green-mid); margin: 0 0 12px; }
+  .article-glance ul { list-style: none; padding: 0; margin: 0; }
+  .article-glance li { font-size: 15px; line-height: 1.6; color: var(--slate-600); padding: 4px 0 4px 20px; position: relative; }
+  .article-glance li::before { content: ''; position: absolute; left: 0; top: 12px; width: 8px; height: 8px; border-radius: 50%; background: var(--green-accent); }
+
+  /* ─── PAY-PAGE MOCK ─── */
+  .paypage { max-width: 420px; margin: 8px auto 8px; border: 1px solid var(--slate-200); border-radius: 16px; overflow: hidden; background: var(--white); box-shadow: 0 18px 40px -20px rgba(27,67,50,0.28); }
+  .paypage-head { background: var(--green-deep); color: var(--white); padding: 18px 22px; }
+  .paypage-from { font-size: 12px; letter-spacing: 1px; text-transform: uppercase; color: var(--green-accent); margin: 0 0 4px; }
+  .paypage-to { font-size: 16px; font-weight: 600; margin: 0; }
+  .paypage-body { padding: 20px 22px 22px; }
+  .paypage-amt { font-family: var(--font-mono); font-size: 34px; font-weight: 700; color: var(--green-deep); letter-spacing: -1.5px; margin: 0 0 4px; }
+  .paypage-amt-label { font-size: 13px; color: var(--slate-500); margin: 0 0 18px; }
+  .paypage-row { display: flex; justify-content: space-between; align-items: center; padding: 11px 0; border-top: 1px solid var(--slate-100); font-size: 14px; color: var(--slate-600); }
+  .paypage-row b { color: var(--green-deep); font-weight: 600; }
+  .paypage-legal { display: flex; gap: 9px; align-items: flex-start; margin: 14px 0 16px; font-size: 12.5px; line-height: 1.45; color: var(--slate-500); }
+  .paypage-check { width: 16px; height: 16px; border-radius: 4px; background: var(--green-mid); flex-shrink: 0; margin-top: 1px; position: relative; }
+  .paypage-check::after { content: ''; position: absolute; left: 5px; top: 2px; width: 4px; height: 8px; border: solid var(--white); border-width: 0 2px 2px 0; transform: rotate(45deg); }
+  .paypage-btn { display: block; text-align: center; background: var(--green-mid); color: var(--white); font-weight: 600; font-size: 15px; padding: 13px; border-radius: 11px; }
+  .paypage-cap { max-width: 420px; margin: 0 auto 40px; font-size: 13px; color: var(--slate-500); text-align: center; line-height: 1.6; }
+
+  /* ─── FAQ ─── */
+  .faq-section { max-width: 720px; margin: 0 auto; padding: 0 48px 60px; }
+  .faq-header { margin-bottom: 24px; }
+  .faq-header h2 { font-size: 24px; font-weight: 700; color: var(--green-deep); letter-spacing: -0.5px; line-height: 1.3; margin: 0; }
+  .faq-list { margin: 0; }
+  .faq-list details { border-bottom: 1px solid var(--slate-200); }
+  .faq-list details:first-child { border-top: 1px solid var(--slate-200); }
+  .faq-list summary { padding: 20px 0; font-size: 17px; font-weight: 600; color: var(--green-deep); cursor: pointer; list-style: none; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+  .faq-list summary::-webkit-details-marker { display: none; }
+  .faq-list summary::after { content: '+'; font-size: 22px; font-weight: 400; color: var(--slate-400); flex-shrink: 0; }
+  .faq-list details[open] summary::after { content: '\2212'; }
+  .faq-list details p { padding: 0 0 20px; margin: 0; font-size: 15px; line-height: 1.7; color: var(--slate-500); }
+
+  /* ─── CTA PARALLAX ─── */
+  .cta-section::before { transform: translate(-50%,-50%) translateY(var(--parallax-y, 0)); will-change: transform; }
+
+  /* ─── FOOTER 5-COL ─── */
+  .footer-top { grid-template-columns: 2fr 1fr 1fr 1fr 1fr; }
+  @media (max-width: 900px) { .footer-top { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px) { .footer-top { grid-template-columns: 1fr; } }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    .article-body { padding: 0 24px 60px; }
+    .article-body h2 { margin-top: 36px; }
+    .faq-section { padding: 0 24px 40px; }
+  }
+
+  /* ─── REDUCED MOTION ─── */
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; transition: none; }
+    .page-hero .section-label,
+    .page-hero .section-title,
+    .page-hero .section-desc { opacity: 1; transform: none; transition: none; }
+    .hero-bg-gradient, .hero-bg-gradient-2 { animation: none; }
+  }
+</style>
+<noscript><style>.reveal,.page-hero .section-label,.page-hero .section-title,.page-hero .section-desc{opacity:1;transform:none;transition:none;}</style></noscript>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-H2LBJT03WE"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-H2LBJT03WE');</script>
+<script>function initApollo(){var n=Math.random().toString(36).substring(7),o=document.createElement("script");
+o.src="https://assets.apollo.io/micro/website-tracker/tracker.iife.js?nocache="+n,o.async=!0,o.defer=!0,
+o.onload=function(){window.trackingFunctions.onLoad({appId:"69c141b32234890011a43849"})},
+document.head.appendChild(o)}initApollo();</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Collect on Overdue Cannabis Invoices",
+  "description": "How a cannabis vendor collects on a past-due dispensary invoice with ShelfSpace Get Paid: one click sends a branded Pay Now email, reminders go out on a schedule, and the buyer pays from their own bank. The money never passes through ShelfSpace.",
+  "author": { "@type": "Person", "name": "Chris Mitchem" },
+  "publisher": { "@type": "Organization", "name": "ShelfSpace", "url": "https://shelfspace.pro" },
+  "datePublished": "2026-08-30",
+  "url": "https://shelfspace.pro/blog/cannabis-vendor-collect-overdue-invoices",
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://shelfspace.pro/blog/cannabis-vendor-collect-overdue-invoices" },
+  "image": "https://shelfspace.pro/og-image-v7.png"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Does the dispensary need an account to pay me?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No. The buyer gets a Pay Now email with their business name and the amount owed, opens a one-screen pay page, enters their own bank account, and submits. There is no account to create, no app to download, and no login. It is closer to a card checkout than an onboarding." }
+    },
+    {
+      "@type": "Question",
+      "name": "Does ShelfSpace hold my money?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No. The payment is drawn on the buyer's own bank account and paid to you as a check. ShelfSpace never holds, touches, or has access to the funds — there is no processor account in the middle. That is exactly why it works in cannabis, where card processors and payment apps get shut off." }
+    },
+    {
+      "@type": "Question",
+      "name": "What happens if the buyer doesn't pay right away?",
+      "acceptedAnswer": { "@type": "Answer", "text": "ShelfSpace keeps following up for you. If the invoice is still open, a reminder goes out on day 3, another on day 7, then once a week after that until it's paid. You are not the one sending them — you set it in motion once and step back." }
+    },
+    {
+      "@type": "Question",
+      "name": "Can a buyer pay in installments?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes, but you stay in control. The buyer can propose paying part now or spreading it over time, and nothing is charged until you approve the plan. Once you say yes, the first payment goes out and the rest run on the schedule you approved." }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I know when I've been paid?",
+      "acceptedAnswer": { "@type": "Answer", "text": "ShelfSpace notifies you when a payment is on its way and your AR aging updates. A check is on its way once it's sent — only your own bank confirms when the funds actually land, the same as any check you deposit." }
+    },
+    {
+      "@type": "Question",
+      "name": "What does the buyer agree to before paying?",
+      "acceptedAnswer": { "@type": "Answer", "text": "On the pay page the buyer enters their own bank account, signs, and checks a required box confirming they own the account and have the funds. A confirm dialog then asks them to authorize the payment before anything is drawn. Nothing moves until they approve." }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://shelfspace.pro/" },
+    { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://shelfspace.pro/blog" },
+    { "@type": "ListItem", "position": 3, "name": "Collect on Overdue Cannabis Invoices" }
+  ]
+}
+</script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="/" class="nav-logo">
+    <div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div>
+    <span class="nav-logo-text">ShelfSpace</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="/consignment">Consignment</a></li>
+    <li><a href="/accounts-payable">Accounts Payable</a></li>
+    <li><a href="/credit-recovery">Credit Recovery</a></li>
+    <li><a href="/accounts-receivable">Accounts Receivable</a></li>
+    <li class="nav-dropdown"><button class="nav-dropdown-toggle" aria-haspopup="true" aria-expanded="false">Platform <svg class="dropdown-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></button><div class="nav-dropdown-menu"><a href="/vendor-management">Vendor Management</a><a href="/how-it-works">How It Works</a><a href="/features">Features</a><a href="/shelfiq">ShelfiQ</a><a href="/checks">Check Payments</a><a href="/collections">Collections</a><a href="/tutorials">Tutorials</a></div></li>
+    <li><a href="/pricing">Pricing</a></li>
+    <li><a href="/about">About</a></li>
+    <li><a href="/contact" class="nav-cta">Get Started <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a></li>
+  </ul>
+  <div class="nav-hamburger" onclick="document.querySelector('.nav-links').classList.toggle('mobile-open'); event.stopPropagation();"><span></span><span></span><span></span></div>
+</nav>
+
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="hero-bg-gradient"></div>
+  <div class="hero-bg-gradient-2"></div>
+  <div class="hero-grid-lines"></div>
+  <div class="section-label">Guide · For Vendors</div>
+  <h1 class="section-title">Collect on Overdue Cannabis Invoices Without Chasing</h1>
+  <p class="section-desc">You sold the product weeks ago and the dispensary still hasn't paid. Get Paid sends the buyer a clean Pay Now email, keeps following up on a schedule, and lets them pay from their own bank — so collecting stops being your second job.</p>
+</div>
+
+<!-- AT A GLANCE -->
+<div class="article-glance">
+  <h2>At a glance</h2>
+  <ul>
+    <li>One click sends the dispensary a branded email with your business name, the amount owed, and a Pay Now button — no account for them to create.</li>
+    <li>If they don't pay, ShelfSpace follows up for you: a reminder on day 3, another on day 7, then once a week until it's paid.</li>
+    <li>The buyer pays from a one-screen page: their own bank account, a signature, and a required box confirming they own the account and have the funds.</li>
+    <li>Payment is drawn on the buyer's bank and paid to you as a check. ShelfSpace never holds, touches, or has access to the money.</li>
+    <li>Payment plans are the buyer's to propose but yours to approve — nothing is charged until you say yes.</li>
+  </ul>
+</div>
+
+<!-- ARTICLE -->
+<div class="article-body">
+
+<p>Every cannabis vendor knows the second job. You sell the product, you hand over the manifest, and then — weeks later — you're still the one writing the "just following up on invoice #1043" email. Net 30 quietly becomes net 60. The buyer likes you, isn't disputing anything, and simply hasn't gotten to it. So the person who made the sale becomes the person who collects on it, one awkward reminder at a time.</p>
+
+<p>The reason it drags is not that dispensaries won't pay. It's that <strong>paying you is friction</strong> — someone has to cut a check, find your address, or log into a portal they've forgotten the password to. Every step you can remove is a day you get paid sooner. <a href="/docs/vendor-portal/get-paid">Get Paid</a> exists to remove all of them at once.</p>
+
+<h2>What Get Paid does</h2>
+
+<p>You pick the dispensary that owes you and click send. That's the whole action on your side. From there, three things happen without you touching them again:</p>
+
+<div class="flow-steps reveal">
+  <div class="flow-step">
+    <div class="flow-step-num">1</div>
+    <div class="flow-step-body">
+      <div class="flow-step-title">The buyer gets a clean Pay Now email</div>
+      <div class="flow-step-desc">Branded with your business name, the amount they owe, and a single Pay Now button. No account to create, no app, no login — just a link that opens on their phone.</div>
+    </div>
+  </div>
+  <div class="flow-step">
+    <div class="flow-step-num">2</div>
+    <div class="flow-step-body">
+      <div class="flow-step-title">Reminders go out on a schedule</div>
+      <div class="flow-step-desc">If the invoice is still open, ShelfSpace nudges them for you — day 3, day 7, then once a week — so you're not the one sending "still waiting" notes.</div>
+    </div>
+  </div>
+  <div class="flow-step">
+    <div class="flow-step-num">3</div>
+    <div class="flow-step-body">
+      <div class="flow-step-title">They pay, and a check comes to you</div>
+      <div class="flow-step-desc">The buyer pays from their own bank on a one-screen page. ShelfSpace tells you the payment is on its way and your AR aging updates.</div>
+    </div>
+  </div>
+</div>
+
+<p>The email doesn't read like a collections notice. It reads like an invoice from you, because that's what it is — your name on it, your amount, a button that gets the buyer paid up in about a minute.</p>
+
+<h2>The reminder cadence, so you don't have to remember it</h2>
+
+<p>Most overdue invoices aren't refusals — they're things that slipped. A steady, predictable rhythm of reminders clears the bulk of them without a single phone call. Get Paid runs that rhythm for you and stops the moment the invoice is paid.</p>
+
+<div class="stat-trio reveal">
+  <div class="stat-trio-item">
+    <svg class="stat-trio-ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 14"/></svg>
+    <p class="stat-trio-num">Day 3</p>
+    <p class="stat-trio-label">First gentle reminder, if the invoice is still open</p>
+  </div>
+  <div class="stat-trio-item">
+    <svg class="stat-trio-ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 14"/></svg>
+    <p class="stat-trio-num">Day 7</p>
+    <p class="stat-trio-label">A second nudge one week in</p>
+  </div>
+  <div class="stat-trio-item">
+    <svg class="stat-trio-ico" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 9-9"/><polyline points="3 4 3 9 8 9"/></svg>
+    <p class="stat-trio-num">Weekly</p>
+    <p class="stat-trio-label">Then once a week, until it's paid</p>
+  </div>
+</div>
+
+<p>You set it in motion once. The buyer stops getting reminders the instant they pay, and you stop being the one who has to keep track of who's been quiet for how long.</p>
+
+<h2>What the buyer sees when they click Pay Now</h2>
+
+<p>The Pay Now button opens a single screen — not a signup flow. The buyer sees who they're paying and how much, chooses how they want to pay, enters their own bank account, signs, and confirms. Nothing is hidden and nothing is pre-checked on their behalf.</p>
+
+<div class="paypage reveal">
+  <div class="paypage-head">
+    <p class="paypage-from">You're paying</p>
+    <p class="paypage-to">Evergreen Botanical Co.</p>
+  </div>
+  <div class="paypage-body">
+    <p class="paypage-amt">$4,180.00</p>
+    <p class="paypage-amt-label">Invoice #1043 · 34 days past due</p>
+    <div class="paypage-row"><span>Pay in full</span><b>$4,180.00</b></div>
+    <div class="paypage-row"><span>Pay part now</span><span>your choice</span></div>
+    <div class="paypage-row"><span>Pay over time</span><span>propose a plan</span></div>
+    <div class="paypage-legal"><span class="paypage-check"></span><span>I confirm I own this bank account and have the funds available to make this payment.</span></div>
+    <span class="paypage-btn">Authorize payment</span>
+  </div>
+</div>
+<p class="paypage-cap"><strong>The buyer's view.</strong> Amounts shown are an illustration. The buyer picks pay-in-full, pay-part, or pay-over-time, enters their own bank details, and checks the box before a branded confirm dialog asks them to authorize.</p>
+
+<p>That required checkbox — <em>I own this account and have the funds</em> — isn't decoration. It's the buyer putting their name to the payment before a branded confirm dialog asks them to authorize it. It protects them, and it protects you from a payment someone wasn't actually cleared to make.</p>
+
+<h2>The part that matters most: the money never passes through ShelfSpace</h2>
+
+<p>This is the question every cannabis vendor asks, and the answer is the reason Get Paid works where card processors don't. When the buyer authorizes, the payment is <strong>drawn on their own bank account and paid to you as a check</strong> — the same kind of check a dispensary would write by hand, just digital. There is no ShelfSpace account in the middle holding your funds.</p>
+
+<div class="blog-callout reveal">
+  <svg class="blog-callout-ico" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+  <p class="blog-callout-text">ShelfSpace never holds, touches, or has access to the money. It moves from the buyer's bank to you — nothing sits in a processor account that could get frozen or shut off.</p>
+</div>
+
+<p>Cannabis is why this design is the point, not a footnote. Card networks and payment apps regularly cut off plant-touching businesses, and anything that parks money in a middle account is a single point of failure. A check drawn on the buyer's own bank sidesteps all of it: it's a bank instrument between two businesses, and ShelfSpace is just the software that asked for it cleanly. If you want the longer version of the trust story, <a href="/blog/is-shelfspace-safe-for-vendors">is ShelfSpace safe for vendors</a> answers it straight.</p>
+
+<h2>Payment plans: proposed by the buyer, approved by you</h2>
+
+<p>Sometimes a buyer can't clear the whole balance at once. Instead of that turning into silence, Get Paid gives them a way to say so — they can propose paying part now, or spreading it over time. But a proposal is not a payment. <strong>Nothing is charged until you approve the plan.</strong></p>
+
+<p>You see what they're proposing and decide. Approve it and the first payment goes out, with the rest running on the schedule you agreed to. Decline it and the invoice stays open and keeps collecting reminders. Either way, the choice about your own receivable stays with you — a slow payer gets a path to clear the balance without you eating a loss or writing it off.</p>
+
+<blockquote><p>A buyer proposing $500 a week is a buyer telling you how they'll pay. That's a better position than a buyer who's gone quiet — and you're the one who says yes.</p></blockquote>
+
+<h2>Where you watch it come in</h2>
+
+<p>Once a collection is out, you don't manage it — you watch it. ShelfSpace notifies you when a payment is on its way, and your AR aging schedule updates so the invoice moves out of the overdue column. If you run collections across a stack of dispensaries, the <a href="/accounts-receivable">accounts receivable</a> view keeps every open invoice in one place, sorted by how far past due it is, so you always know who to send next.</p>
+
+<p>One honest note on timing, because it matters: a check is <strong>on its way</strong> the moment it's sent. Like any check you deposit, only your own bank confirms when the funds actually land. ShelfSpace won't tell you money has arrived that hasn't — it tells you a payment is coming and lets your bank do the confirming.</p>
+
+<h2>How this fits with the rest of getting paid</h2>
+
+<p>Get Paid is the outbound side of collecting. It sits next to the things dispensaries already use ShelfSpace for on the paying side — an <a href="/blog/cannabis-ap-aging-which-vendors-to-pay">AP aging report</a> that decides which vendors get paid this week, and <a href="/what-is-check-21">Check 21 digital checks</a> that make a bank check something you send in a click instead of a trip to the post office. You're on the receiving end of the same rails: the buyer pays by bank, you get a check, and nobody had to trust a middleman with the money.</p>
+
+<p>If you sell into cannabis and you're tired of being your own collections department, that's the whole pitch. You made the sale. Getting paid for it shouldn't take a second sale's worth of effort.</p>
+
+</div>
+
+<!-- FAQ -->
+<div class="faq-section reveal">
+  <div class="faq-header">
+    <h2>Frequently asked questions</h2>
+  </div>
+  <div class="faq-list">
+    <details>
+      <summary>Does the dispensary need an account to pay me?</summary>
+      <p>No. The buyer gets a Pay Now email with their business name and the amount owed, opens a one-screen pay page, enters their own bank account, and submits. There's no account to create, no app to download, and no login. It's closer to a card checkout than an onboarding.</p>
+    </details>
+    <details>
+      <summary>Does ShelfSpace hold my money?</summary>
+      <p>No. The payment is drawn on the buyer's own bank account and paid to you as a check. ShelfSpace never holds, touches, or has access to the funds — there's no processor account in the middle. That's exactly why it works in cannabis, where card processors and payment apps get shut off.</p>
+    </details>
+    <details>
+      <summary>What happens if the buyer doesn't pay right away?</summary>
+      <p>ShelfSpace keeps following up for you. If the invoice is still open, a reminder goes out on day 3, another on day 7, then once a week after that until it's paid. You're not the one sending them — you set it in motion once and step back.</p>
+    </details>
+    <details>
+      <summary>Can a buyer pay in installments?</summary>
+      <p>Yes, but you stay in control. The buyer can propose paying part now or spreading it over time, and nothing is charged until you approve the plan. Once you say yes, the first payment goes out and the rest run on the schedule you approved.</p>
+    </details>
+    <details>
+      <summary>How do I know when I've been paid?</summary>
+      <p>ShelfSpace notifies you when a payment is on its way and your AR aging updates. A check is on its way once it's sent — only your own bank confirms when the funds actually land, the same as any check you deposit.</p>
+    </details>
+    <details>
+      <summary>What does the buyer agree to before paying?</summary>
+      <p>On the pay page the buyer enters their own bank account, signs, and checks a required box confirming they own the account and have the funds. A confirm dialog then asks them to authorize the payment before anything is drawn. Nothing moves until they approve.</p>
+    </details>
+  </div>
+</div>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-content">
+    <div class="section-label reveal">Get Started</div>
+    <h2 class="section-title reveal">Stop being your own collections department.</h2>
+    <p class="section-desc reveal">Send a dispensary a Pay Now email, let ShelfSpace follow up on a schedule, and get paid by a check drawn on the buyer's own bank. The money never passes through us.</p>
+    <div class="cta-actions reveal">
+      <a href="https://ourshelf.space/signup" class="btn-primary">
+        Start collecting
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+      <a href="/accounts-receivable" class="btn-secondary">See how AR works</a>
+    </div>
+    <figure class="cta-founder reveal" style="display:flex;align-items:center;gap:16px;justify-content:center;margin:32px 0 0;">
+      <img src="/chris-mitchem.jpg" alt="Chris Mitchem" style="width:48px;height:48px;border-radius:50%;object-fit:cover;">
+      <blockquote style="margin:0;border:none;padding:0;background:none;">
+        <p style="font-size:14px;color:var(--slate-600);max-width:520px;line-height:1.5;margin:0;font-style:normal;">"The vendor made the sale already. Getting paid for it shouldn't be a second job — and it shouldn't mean handing your money to a middleman."</p>
+        <figcaption style="font-size:13px;color:var(--slate-500);margin-top:6px;">— Chris Mitchem, Founder</figcaption>
+      </blockquote>
+    </figure>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="/" class="nav-logo"><div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div><span class="nav-logo-text">ShelfSpace</span></a>
+      <p>Every Vendor. Every Payment. One Engine.</p>
+    </div>
+    <div class="footer-col"><h3>Services</h3><ul><li><a href="/accounts-payable">Accounts Payable</a></li><li><a href="/consignment">Consignment</a></li><li><a href="/credit-recovery">Credit Recovery</a></li><li><a href="/checks">Check Payments</a></li><li><a href="/shelfiq">ShelfiQ</a></li></ul></div>
+    <div class="footer-col"><h3>Platform</h3><ul><li><a href="/features">Features</a></li><li><a href="/how-it-works">How It Works</a></li><li><a href="/pricing">Pricing</a></li><li><a href="/about">About</a></li><li><a href="/blog">Blog</a></li><li><a href="/docs">Docs</a></li><li><a href="/tutorials">Tutorials</a></li></ul></div>
+    <div class="footer-col"><h3>Access</h3><ul><li><a href="https://ourshelf.space/login">Login</a></li><li><a href="/contact">Sign Up</a></li><li><a href="/contact">Contact</a></li><li><a href="/accounts-receivable">Accounts Receivable</a></li><li><a href="/vendors">For Vendors</a></li><li><a href="/for-bookkeepers">For Bookkeepers</a></li></ul></div>
+    <div class="footer-col"><h3>Company</h3><ul><li><a href="mailto:support@shelfspace.pro">Support</a></li><li><a href="https://linkedin.com/company/shelfspace-pro" target="_blank" rel="noopener" class="footer-social-link"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> LinkedIn</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><p>&copy; 2026 ShelfSpace Technologies Inc.</p><div style="display:flex;align-items:center;gap:8px;justify-content:center;margin-top:12px;"><img src="/metrc-logo.png" alt="Metrc" style="height:18px;opacity:0.4;filter:brightness(0) invert(1);"><span style="font-size:11px;color:rgba(255,255,255,0.35);">Certified Metrc Third-Party Vendor</span></div><div class="footer-bottom-links"><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div></div>
+</footer>
+
+<script>
+(function() {
+  var nav = document.getElementById('nav');
+  var pageHero = document.querySelector('.page-hero');
+  var parallaxSections = [ document.querySelector('.cta-section') ];
+
+  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var isMobile = window.innerWidth < 900;
+  var ticking = false;
+
+  requestAnimationFrame(function() {
+    nav.classList.toggle('scrolled', window.scrollY > 20);
+    if (pageHero) pageHero.classList.add('hero-loaded');
+  });
+
+  var revealObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(function(el) { revealObserver.observe(el); });
+
+  function onScroll() {
+    var scrollY = window.scrollY;
+    nav.classList.toggle('scrolled', scrollY > 20);
+    if (prefersReduced || isMobile) return;
+    var wh = window.innerHeight;
+    parallaxSections.forEach(function(section) {
+      if (!section) return;
+      var rect = section.getBoundingClientRect();
+      if (rect.bottom < 0 || rect.top > wh) return;
+      var center = rect.top + rect.height / 2 - wh / 2;
+      section.style.setProperty('--parallax-y', (center * 0.08) + 'px');
+    });
+  }
+
+  window.addEventListener('scroll', function() {
+    if (!ticking) {
+      requestAnimationFrame(function() { onScroll(); ticking = false; });
+      ticking = true;
+    }
+  }, { passive: true });
+
+  onScroll();
+
+  window.addEventListener('resize', function() {
+    isMobile = window.innerWidth < 900;
+    if (isMobile) {
+      parallaxSections.forEach(function(section) {
+        if (section) section.style.setProperty('--parallax-y', '0px');
+      });
+    }
+  });
+
+  document.addEventListener('click', function() {
+    var navLinks = document.querySelector('.nav-links');
+    if (navLinks && navLinks.classList.contains('mobile-open')) {
+      navLinks.classList.remove('mobile-open');
+    }
+  });
+})();
+</script>
+<script src="/shelfiq-widget.js"></script>
+</body>
+</html>
