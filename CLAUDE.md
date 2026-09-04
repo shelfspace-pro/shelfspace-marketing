@@ -35,11 +35,12 @@ The site sells the **OUTCOME**, stays agnostic on who does the work, and shows *
 
 ## Nav (all pages)
 
-Accounts Payable | Consignment | Credit Recovery | Platform ▾ | How We Work | About | Login | **Talk to us**
+Accounts Payable | Consignment | Credit Recovery | Accounts Receivable | About | Pricing | Platform ▾ | Login | **CTA**
 
-- **How We Work** replaces the old "Pricing" nav item. Its href stays **`/pricing`** — the repurposed numberless "How We Work With You" page, kept at that URL to preserve SEO equity.
-- **"Talk to us"** (primary button → `/contact`) replaces the old "Sign Up." **Login** stays (→ `ourshelf.space/login`).
-- The **Platform ▾** dropdown (`<li class="nav-dropdown">`, primitive in styles.css) contains: Vendor Management (→ `/vendor-management` alias) · How It Works · Features · ShelfiQ · Check Payments · Tutorials (→ `/tutorials`). It's inserted in every page's nav between the Credit Recovery `<li>` and the **How We Work** `<li>`. Desktop = CSS hover + `:focus-within` (no JS); mobile = inline always-expanded accordion. To re-roll sitewide, anchor on the nav `Credit Recovery</a></li>`→`How We Work` adjacency (newline-separated = nav-only; the footer's identical CR link is single-line and safe).
+- **Order (2026-09-04, Chris):** the four service links, then **About**, then **Pricing**, then **Platform ▾** as the RIGHTMOST content item (before Login + the CTA button). "Pricing" sits immediately left of Platform.
+- **Pricing** points at **`/pricing`** — the repurposed numberless "How We Work With You" page (URL kept for SEO). The label is **"Pricing"** (reverted from "How We Work" per Chris).
+- **Platform ▾** dropdown (`<li class="nav-dropdown">`, primitive in styles.css) contains: Vendor Management (→ `/vendor-management`) · How It Works · Features · ShelfiQ · Check Payments · Collections · Tutorials · Guides. It is now the LAST content `<li>`. Desktop = CSS hover + `:focus-within` (no JS); mobile = inline accordion. To re-roll sitewide, anchor on the `<li><a href="/about">About</a></li>` → `<li><a href="/pricing"…>Pricing</a></li>` → `<li class="nav-dropdown">` adjacency (the footer's `/pricing` "Pricing" link is single-line and untouched by the nav-triple reorder).
+- The primary **CTA** (→ `/contact`) and **Login** stay rightmost. CTA label varies by page ("Get Started" / "Talk to us"); both route to `/contact`.
 
 ## Marketing & Copy
 
