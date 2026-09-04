@@ -5,25 +5,23 @@
 #
 #   Scan A — customer docs (docs/, docs-search.js): trade-secret provider names
 #            + the wrong login URL must never surface to a retailer/vendor.
-#   Scan B — pricing-context pages ONLY: the RETIRED "$20-per-artifact /
-#            allergic-to-subscriptions / 1%-capped / free-evaluation-not-trial"
-#            model is forbidden. The current sanctioned model is the two-tier
-#            Visibility (free) vs Automate (paid, 30-day trial, subscription).
-#            See docs/specs/pricing-packaging-free-vs-paid.md in the platform
-#            repo and CLAUDE.md § Pricing.
+#   Scan B — pricing-context pages ONLY: as of the 2026-09-04 overhaul the site
+#            shows NO public pricing. The RETIRED subscription/trial model —
+#            "30-day free trial / subscription / cancel anytime / $999–$749 per
+#            location / $499+ vendor tiers / $20-per-artifact" — is forbidden.
+#            Engagements are custom, consult-first. See CLAUDE.md
+#            § Positioning & Voice and WEBSITE-OVERHAUL.md.
 #
-# WHY Scan B is file-scoped (LOW 32, Row 6.1): a bare `1%` / `per artifact`
-# grep false-positives across ~139 pages + blog content (blog posts legitimately
-# cite "1% of returns", etc.). So the retired-pricing blocklist is checked ONLY
-# in the pricing-context marketing pages listed in PRICING_FILES below — the
-# pages Phase 6 owns. Never widen this to the whole repo or to blog/ or docs/.
+# WHY Scan B is file-scoped: a bare `$749` / `subscription` grep would
+# false-positive across blog content + illustrative worked-example dollar amounts.
+# So the retired-pricing blocklist is checked ONLY in the pricing-context
+# marketing pages listed in PRICING_FILES below. Never widen this to the whole
+# repo or to blog/ or docs/. Tier-price patterns anchor on a literal `$` +
+# word-boundary so "$1,250" (an example amount) can't trip them.
 #
-# The `1%` pattern is `(^|[^0-9])1%` on purpose: it matches the retired AR fee
-# "costs 1%" but NOT "21%" / "11%" / "10%" so a legit discount figure can't trip it.
-#
-# EXPECTED STATE during the Phase 6 rollout: this check stays RED until the
-# pricing pages are rewritten (Rows 6.2 / 6.4 / 6.6). A red exit here before
-# those land is BY DESIGN, not a regression.
+# EXPECTED STATE during the 2026-09-04 overhaul rollout: this check stays RED
+# until every pricing page is swept of pricing/trial copy (WEBSITE-OVERHAUL.md
+# Rows 2–14). A red exit before those land is BY DESIGN, not a regression.
 #
 # Usage: bash marketing/scripts/check-docs-forbidden.sh   (exit 1 on any hit)
 
@@ -79,12 +77,14 @@ PRICING_FILES=(
 # regex:::human-readable reason (case-insensitive; ERE).
 # NOTE the ::: delimiter (not |) — the 1% regex itself contains a `|` alternation.
 PRICING_PATTERNS=(
-  "allergic to subscriptions:::retired anti-subscription framing — the model is now a 30-day free trial then a monthly subscription"
-  "per artifact:::retired \$20-per-artifact pricing — the model is a fixed monthly Automate subscription"
-  "\\\$20 per:::retired \$20-per-artifact pricing — use the tier prices (\$999/\$899/\$799/\$749 retailer, \$499+ vendor)"
-  "\\\$20/artifact:::retired \$20-per-artifact pricing — use the Automate subscription tiers"
-  "capped at \\\$100:::retired '1% capped at \$100' AR pricing — AR is now Free vs Automate"
-  "(^|[^0-9])1%:::retired '1% of collections' AR fee — AR is now Free (see overdue) vs Automate (paid)"
+  "free trial:::retired trial framing — the site is consult-first, no trial. Primary CTA → /contact"
+  "day trial:::retired 30-day-trial framing — consult-first, no trial"
+  "cancel anytime:::retired subscription/trial language — no public pricing"
+  "subscription:::retired subscription model — engagements are custom, scoped in the consult"
+  "per location:::retired per-location pricing — pricing is custom, no public numbers"
+  "\\\$(499|749|799|899|999)\\b:::retired Automate tier price — the site shows no public pricing"
+  "Start your free:::retired trial-signup CTA — the primary CTA is 'Talk to us' → /contact"
+  "per artifact:::retired \$20-per-artifact pricing — the site shows no public pricing"
 )
 
 # Build the list of pricing files that actually exist.
@@ -112,5 +112,5 @@ if [ "$HITS" -eq 0 ]; then
 fi
 echo ""
 echo "❌ $HITS forbidden pattern(s) present — remove before deploy."
-echo "   (A red exit on retired-pricing patterns is EXPECTED until Rows 6.2/6.4/6.6 rewrite the pricing pages.)"
+echo "   (A red exit on retired-pricing patterns is EXPECTED until WEBSITE-OVERHAUL.md Rows 2–14 sweep the pricing pages.)"
 exit 1

@@ -55,7 +55,7 @@ Blue-ocean keywords to target (very low cannabis-specific competition as of 2026
 
 5. **The Takeaway** — One punchy sentence. The kind of line someone screenshots and sends to their business partner.
 
-6. **CTA card** — "Get My Free Evaluation" with Chris's photo, risk reversal line.
+6. **CTA card** — consult-first: "See what you're owed" / "Talk to us" → `/contact`, with Chris's photo and a results-based risk-reversal line ("Free. No commitment."). No trial-signup, no pricing.
 
 **Writing rules:**
 - Follow ALL rules from `marketing/landing-page-playbook.md` (voice, copy rules, forbidden words)

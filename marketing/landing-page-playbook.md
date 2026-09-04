@@ -129,38 +129,26 @@ Seven sections. That's the max. If you need more sections, you're over-explainin
 - Short sentences. Short paragraphs. If a sentence doesn't make someone FEEL something, cut it.
 
 ### Forbidden
-- No "managed service / we cut the check / we run your AP end-to-end" — as of 2026-05-19 ShelfSpace is a system; retailers drive the work. See CLAUDE.md and memory/project_software_platform_pivot.md.
+- **No pricing, tiers, trial, or subscription copy** — no "$X/location," no "30-day free trial," no "cancel anytime," no plan names, no dollar plans. Engagements are custom, scoped in the consult. (Illustrative example dollar amounts inside worked examples are fine.) `marketing/scripts/check-docs-forbidden.sh` Scan B blocks the pricing/trial tokens.
+- **Managed-service framing is ALLOWED** — "we run your AP/AR," "done for you," "hands-off." Reverses the old 2026-05-19 "system, not a managed service" rule. Lead with the outcome; keep "automate/automation" out of heroes (AI is a supporting proof point, never the pitch).
 - No "scan-based trading" or "SBT"
-- No "Diem Cannabis"
+- **"Diem Cannabis" only in Chris's bio** — never as a ShelfSpace customer, reference, or testimonial. No other customer names anywhere; proof is anonymized case studies.
 - No `<br>` tags in headings
 - No questions as headlines (questions give permission to say "no")
 - No "learn more" as a CTA (it's a dead end, not an action)
-- **No retired pricing copy** — the "$20 per artifact / per check / per credit memo", "allergic to subscriptions", "1% capped at $100", and "free evaluation, not a trial / pay on results" framings are DEAD. The model is a two-tier subscription with a 30-day free trial (see Pricing & Tier Comparison below). `marketing/scripts/check-docs-forbidden.sh` blocks these phrases on the pricing-context pages.
 
-## Pricing & Tier Comparison
+## Pricing — custom, consult-first (NO public numbers)
 
-The site sells ONE model: **Visibility (Free) vs Automate (Paid)** — a fixed monthly subscription with a 30-day free trial. Read `docs/specs/pricing-packaging-free-vs-paid.md` (platform repo) for the authoritative numbers and feature matrices before writing any pricing copy.
+**The site shows no pricing.** No tiers, no plan names, no "$X/location," no trial, no subscription. Every operation is different — AP, AR, consignment, and credit recovery are scoped in the sales conversation, and delivered as software the operator drives OR done-for-you, decided per account. So the site sells the outcome and routes to a conversation.
 
-### The one-line rule
-> **Free = SEE and RECEIVE. Paid = AUTOMATE, INTEGRATE, ORIGINATE.**
+### The free on-ramp (keep it — it's the upsell engine, reframed)
+Keep the "see what you're owed" mechanic that makes the pain visible ("you're owed $X in credits," "$Y of your AR is overdue," "N invoices don't match Metrc"). It is now framed as the **first step of the conversation**, not a "Free plan": a free money-review that quantifies the leak, then → **Talk to us** to get it back. Never present it as a pricing tier or pair it with a paid tier.
 
-Every paid feature has a free counterpart that **quantifies the pain** ("you're owed $X in credits", "$Y of your AR is overdue", "N invoices don't match Metrc"). Free makes the wound visible on every login; Automate is the bandage. This is the upsell engine — never gate seeing money owed, receiving payments, data ingestion, verification, or reactive ShelfiQ Q&A (metered 25 msgs/mo, not locked).
+### The "How We Work" page (`/pricing`, repurposed)
+The old pricing page lives on at `/pricing` (URL kept for SEO) as **"How We Work With You"** — a numberless page: every operation is different → we scope your AP / AR / consignment / credit recovery → software or done-for-you → one CTA, Talk to us. A cost FAQ ("How much does ShelfSpace cost?") answers "custom, based on your operation — let's talk."
 
-### The two tiers
-- **Visibility (Free)** — track transactions, see money owed/stuck/overdue, receive checks + settlement reports, upload/Metrc sync, get verified, reactive ShelfiQ Q&A (25 msgs/mo).
-- **Automate (Paid)** — Metrc↔invoice verification, short-pay/adjust, cut checks + ACH origination, credit-recovery engine, proactive AP/AR bots + unlimited ShelfiQ, QuickBooks sync, slots, promotions + price-drop actions.
-
-### The numbers (fixed — do not round, rename, or invent bands)
-- **Retailer** — per billable location, one bundled Automate tier, bulk-discount curve: **1 = $999 · 2–3 = $899 · 4–9 = $799 · 10+ = $749** per location. Billed per shop/license; every shop in a chain gets the chain rate on its own invoice.
-- **Vendor** — banded by # of retailers collected from: **Starter 1–16 = $499 · Growth 17–50 = $899 · Scale 51–150 = $1,499 · Enterprise 150–500+ = $3,000–5,000+ / custom.**
-- **Rails** — ACH included; mailed checks $5 each.
-
-### Trial + CTA
-- Offer line: **"Free for 30 days, then $X/mo — cancel anytime before renewal."** Include an **auto-renewal disclosure** wherever the trial appears (legal — it auto-converts and the payment method is captured at trial start).
-- **Primary CTA = "Start your free 30-day trial" → the app signup.** "Talk to us" → `/contact` is the secondary CTA. (Routing every prospect to a contact form undercuts the self-serve trial + upgrade flow the platform ships.)
-
-### Comparison-matrix guidance
-When you build the Free-vs-Paid comparison block: two columns (Free / Paid), never-gate items stay on the Free side, mobile stacks the columns, use proper `<th scope>` for accessibility, and keep the split faithful to the feature matrices in the pricing spec.
+### Do NOT reintroduce
+The two-tier Visibility/Automate subscription, the 30-day trial, the tier numbers ($999/$899/$799/$749, $499+), "cancel anytime," and the "$20/artifact" model are all RETIRED from the site.
 
 ### Headlines
 - Statements > questions
@@ -184,11 +172,11 @@ When you build the Free-vs-Paid comparison block: two columns (Free / Paid), nev
 
 ## CTA Rules
 
-- Primary button: "Start your free 30-day trial" → the app signup (first-person variants like "Start MY free trial" convert well)
-- Below button: reassure — "Free for 30 days, then $X/mo. Cancel anytime before renewal." + auto-renewal disclosure
-- Chris's photo next to CTA on bottom sections (humanize)
-- Secondary CTA: "Talk to us" → /contact — for prospects who want a conversation before signing up
-- Keep it to two destinations max (trial signup + /contact). No "learn more" dead ends.
+- Primary button: "Talk to us" / "See what you're owed" / "Get started" → `/contact` (first-person variants like "Get MY free money-review" convert well)
+- Below button: reassure — "Free. No commitment. We'll show you what you're owed." (results-based, no pricing)
+- Chris's photo next to the CTA on bottom sections (humanize)
+- The free "see what you're owed" on-ramp is the soft entry; `/contact` is the destination. One primary action per screen.
+- No "learn more" dead ends. No trial-signup and no "Sign Up" as a primary CTA — the site is consult-first.
 
 ## SEO Rules
 

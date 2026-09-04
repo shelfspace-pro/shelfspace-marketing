@@ -4,52 +4,51 @@ This file provides guidance to Claude Code when working with code in this reposi
 
 ## Project Overview
 
-ShelfSpace marketing site — static HTML/CSS deployed on Vercel at shelfspace.pro. Serves as the public-facing website for ShelfSpace, a cannabis-specific system for profit optimization — AP, consignment, and credit recovery workflows for cannabis dispensaries.
+ShelfSpace marketing site — static HTML/CSS deployed on Vercel at shelfspace.pro. The public-facing website for ShelfSpace, a cannabis-specific back-office for the money side of the business — accounts payable, consignment, accounts receivable / collections, and vendor credit recovery for cannabis dispensaries and the brands that supply them.
 
 ## Workflow
 
 - **Always push to production**: After completing work, commit and push directly to `main`. Do not wait for confirmation.
 
-## Key Rules
+## Positioning & Voice (the current law — 2026-09-04 overhaul)
 
-- **No "managed service" / "we cut the check" / "we run your AP" framing**: As of 2026-05-19 ShelfSpace is a cannabis-specific system, not a managed service. AP, consignment, and credit recovery all run on a system retailers drive: ShelfiQ handles first-line vendor email on AP; retailer owns vendor outreach, contracts, and disputes on consignment; the platform pulls data + builds and sends credit memos and reminders on credit recovery, retailer team handles vendor negotiations. Customer-facing copy uses "system" as the brand noun; "software" stays for competitor/category references and the "software seats" pricing idiom. "Automate/automated" is now acceptable when describing what the platform or ShelfiQ does. See `memory/project_software_platform_pivot.md` and `memory/project_consignment_positioning.md`.
-- **No "scan-based trading" or "SBT"**: Use "consignment" instead. Exception: terms.html and privacy.html (legal docs, don't touch).
-- **No "Diem Cannabis"**: Removed from site, don't reintroduce.
-- **No demo-modal**: Deleted. Don't reference or recreate.
-- **No `<br>` in headings**: Let text flow and wrap naturally.
-- **CTAs — primary → free-trial signup, secondary → /contact**: The primary CTA on pricing/feature pages is "Start your free 30-day trial" → the app signup (the platform ships self-serve trial signup + self-serve upgrade). "Talk to us" → `/contact` is the SECONDARY CTA. (Legacy pages that still route every button to `/contact` are fine until re-templated, but new/rewritten pages lead with the trial signup.)
-- **Subscription + trial language is SANCTIONED (updated 2026-08-09)**: ShelfSpace pricing is a **two-tier subscription** model. Say "30-day free trial, then $X/mo — cancel anytime before renewal", and include an **auto-renewal disclosure** wherever the trial is offered (legal requirement — the trial auto-converts to paid and the payment method is captured at trial start). Do NOT reintroduce the retired "allergic to subscriptions", "$20 per artifact / per check / per credit memo", "1% capped at $100", or "free evaluation, not a trial / pay on results" framing — those are the OLD model and are now blocked by `marketing/scripts/check-docs-forbidden.sh`.
-- **Two-tier positioning (Visibility vs Automate)**: The one-line rule is **Free = SEE and RECEIVE; Paid = AUTOMATE, INTEGRATE, ORIGINATE.**
-  - **Visibility (Free)** — both retailers and vendors: track transactions, see money owed/stuck/overdue quantified on every login, receive checks/settlement reports, upload/Metrc sync, get verified, reactive ShelfiQ Q&A metered at **25 msgs/mo**.
-  - **Automate (Paid)** — a fixed monthly subscription that unlocks the tools that ACT on the pain: Metrc↔invoice verification, short-pay/adjust, cut checks + ACH origination, the credit-recovery engine, proactive AP/AR bots + unlimited ShelfiQ, QuickBooks sync, slots/demand planning, promotions + price-drop actions.
-  - **Retailer pricing** — per billable location, bulk-discount curve, **one bundled Automate tier** (everything included): **1 = $999 · 2–3 = $899 · 4–9 = $799 · 10+ = $749** per location. Billed **per shop/license** (each dispensary is its own LLC/bank), and every shop in a chain gets the chain rate on its own invoice (e.g. MedsCafe's 7 shops each bill at **$799**, the 4–9 band — **never $749**).
-  - **Vendor pricing** — banded by # of retailers the vendor collects from: **Starter 1–16 = $499 · Growth 17–50 = $899 · Scale 51–150 = $1,499 · Enterprise 150–500+ = $3,000–5,000+ / custom.**
-  - **Payment rails** — **ACH included** in the subscription; **mailed checks $5 each**.
-  - Canonical source of truth (numbers, feature matrices, never-gate rules): `docs/specs/pricing-packaging-free-vs-paid.md` in the platform repo. Do not round, rename, or invent bands.
-- **Verb split**: Use "we" for brand-level statements ("we work in every state"). Use "the platform" / "ShelfiQ" verbs for software-action descriptions ("the platform three-way matches every invoice," "ShelfiQ answers vendor emails in seconds"). Use 2nd-person "you" for retailer actions on the platform ("you cut the check," "you approve and send"). Never say "ShelfSpace does X" — pick "we" or "the platform" based on context.
+The site sells the **OUTCOME**, stays agnostic on who does the work, and shows **no public pricing**. Full rationale + build history: `WEBSITE-OVERHAUL.md`.
+
+- **Positioning — OUTCOME-FIRST, delivery-model-agnostic**: ShelfSpace sells the outcome — *"the money side of cannabis, handled."* Each account is scoped in the sales conversation and may be delivered as **software the operator drives** OR a **done-for-you managed service** — we do NOT force that choice on the website. **Managed-service framing is ALLOWED** ("we run your AP/AR," "done for you," "hands-off"). This deliberately **reverses** the 2026-05-19 "system, not a managed service" rule. Lead with results — *"Your vendors, paid. Credits recovered every month. Overdue invoices, collected."* — never with "the platform automates X." Keep "automate/automation" out of heroes; it's a supporting proof point at most.
+- **NO public pricing — anywhere**: no dollar plans, no tiers, no "$X/location," no "30-day free trial," no "subscription," no "cancel anytime," no "$20/artifact." Engagements are **custom, scoped per operation**. The retired two-tier Visibility/Automate subscription model and its numbers ($999/$899/$799/$749 retailer, $499+ vendor) are GONE from the site. **Illustrative example dollar amounts inside worked examples STAY** (a $1,250 settlement, a $7,200 overdue invoice) — only pricing-tier / plan / trial / subscription copy is removed. `marketing/scripts/check-docs-forbidden.sh` (Scan B) now blocks the pricing/trial tokens.
+- **Consult-first CTAs → `/contact`**: every PRIMARY CTA is "Talk to us" / "See what you're owed" / "Get started" → `/contact`. No trial-signup and no self-serve "Sign Up" as a primary action. Keep a **free "see what you're owed" on-ramp** as the first step of the conversation (a lead magnet, framed as a first step — not a plan) → `/contact`.
+- **Demote AI**: ShelfiQ/AI is HOW we deliver affordably, not WHAT we sell. Strip AI/robot iconography from heroes; keep the dedicated `/shelfiq` feature page. No hero leads with "our AI does X."
+- **Diem — Chris's BIO ONLY**: "Founder & CEO, Diem Cannabis" is permitted ONLY as Chris's personal background/credential (`about.html`, the one-pager). NEVER as a ShelfSpace customer, reference, testimonial, logo, or "ShelfSpace runs Diem" usage claim. (This is the one exception to the old blanket "no Diem" ban.)
+- **No customer names anywhere** — proof is anonymized case studies (`marketing/case-studies.md`, de-identified per its rules), the Metrc-certified badge, founder-as-operator credibility, aggregate numbers, and product sample renders (the "Holistic Cannabis Co." demo fiction is safe).
+- **No "scan-based trading" or "SBT"**: use "consignment." Exception: terms.html, privacy.html (legal docs, don't touch).
+- **No demo-modal** (deleted, don't recreate). **No `<br>` in headings** (let text wrap). **No questions as headlines** (they give permission to say "no"). **No "learn more" CTAs** (a dead end, not an action).
+- **Verb split**: use "we" for brand + managed-delivery statements ("we run your AP," "we recover your credits"); "the platform" / "ShelfiQ" for software-action descriptions ("the platform three-way matches every invoice"); 2nd-person "you" for operator-driven actions ("you approve, we execute"). **Outcome voice** ("your vendors get paid") sidesteps the who-does-it question — prefer it in heroes. Never "ShelfSpace does X" — pick "we" or "the platform."
 
 ## Design System
 
-- Fonts: DM Sans (display) + Space Mono (monospace)
-- Colors: --green-deep (#1b4332) through --green-ghost (#f0faf4), slate palette
+- Fonts: DM Sans (display) + Space Mono (monospace — the hero of every dollar/number moment)
+- Colors: `--green-deep` (#1b4332) through `--green-ghost` (#f0faf4), slate palette. **Design tokens only — never hardcoded hex.**
+- Shadows: green-tinted. Whitespace = confidence — let numbers breathe. **One dark (`--green-deep`) section per page, max**, reserved for the emotional peak.
 - ShelfiQ widget: `/shelfiq-widget.js` included on ALL pages as last script
 - Apollo tracking: `initApollo()` script before `</head>` on all pages
 - fi ligature fix: `font-variant-ligatures: none` when "Shelf" and "iQ" span split
 
 ## Nav (all pages)
 
-Accounts Payable | Consignment | Credit Recovery | Platform ▾ | Pricing | About | Login | Sign Up
+Accounts Payable | Consignment | Credit Recovery | Platform ▾ | How We Work | About | Login | **Talk to us**
 
-The **Platform ▾** dropdown (`<li class="nav-dropdown">`, primitive in styles.css) contains: Vendor Management (→ `/vendor-management` alias) · How It Works · Features · ShelfiQ · Check Payments · Tutorials (→ `/tutorials` — video training hub, see `memory/reference_tutorials_system.md`). It's inserted in every page's nav between the Credit Recovery `<li>` and the Pricing `<li>` (139 files). Desktop = CSS hover + `:focus-within` (no JS); mobile = inline always-expanded accordion. To re-roll sitewide, anchor on the nav `Credit Recovery</a></li>`→`Pricing` adjacency (newline-separated = nav-only; the footer's identical CR link is single-line and safe).
+- **How We Work** replaces the old "Pricing" nav item. Its href stays **`/pricing`** — the repurposed numberless "How We Work With You" page, kept at that URL to preserve SEO equity.
+- **"Talk to us"** (primary button → `/contact`) replaces the old "Sign Up." **Login** stays (→ `ourshelf.space/login`).
+- The **Platform ▾** dropdown (`<li class="nav-dropdown">`, primitive in styles.css) contains: Vendor Management (→ `/vendor-management` alias) · How It Works · Features · ShelfiQ · Check Payments · Tutorials (→ `/tutorials`). It's inserted in every page's nav between the Credit Recovery `<li>` and the **How We Work** `<li>`. Desktop = CSS hover + `:focus-within` (no JS); mobile = inline always-expanded accordion. To re-roll sitewide, anchor on the nav `Credit Recovery</a></li>`→`How We Work` adjacency (newline-separated = nav-only; the footer's identical CR link is single-line and safe).
 
 ## Marketing & Copy
 
-When writing or rewriting ANY marketing page, read `marketing/landing-page-playbook.md` first. It contains the full framework: 5-beat emotional arc, psychological triggers, visual design rules, copy rules, CTA rules, and page structure template. Every page should follow this playbook.
+When writing or rewriting ANY marketing page, read `marketing/landing-page-playbook.md` first — the full framework: 5-beat emotional arc, psychological triggers, visual design rules, copy rules, CTA rules, page structure template. Every page follows this playbook.
 
 Key references:
-- `marketing/landing-page-playbook.md` — The conversion playbook (5-beat emotional arc, design rules, copy rules)
-- `marketing/case-studies.md` — Case study system (de-identification rules, blog template, homepage cards, SEO targets)
-- `marketing/docs-instructions.md` — Writing rules for documentation pages (different from marketing pages)
+- `marketing/landing-page-playbook.md` — the conversion playbook (5-beat arc, design rules, copy rules, consult-first CTAs, SEO rules)
+- `marketing/case-studies.md` — case-study system (de-identification rules, blog template, homepage cards, SEO targets) — the names-free proof engine
+- `marketing/docs-instructions.md` — writing rules for documentation pages (different from marketing pages)
 
 ## Case Study System
 
@@ -108,11 +107,11 @@ The `/blog-post` and `/case-study` skills handle the full rollout. Manual checkl
 
 ```
 /                     — HTML pages (index.html, about.html, etc.)
-/blog/                — Blog articles (8 articles)
-/docs/                — Documentation pages (not yet created)
+/blog/                — Blog articles
+/docs/                — Documentation pages
 /api/                 — Serverless functions (shelfiq-chat.js)
 /logos/               — POS integration logos
-/marketing/           — Internal marketing files (platform-map, docs-plan, etc.)
+/marketing/           — Internal marketing files (playbook, case-studies, docs-plan, etc.)
 /styles.css           — Shared design system CSS
 /shelfiq-widget.js    — Chat widget (included on all pages)
 /docs-search.js       — Docs search (DOCS index + auto-mount; included on all /docs pages)
