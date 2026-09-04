@@ -23,6 +23,14 @@ Apply the playbook's 5-beat arc; **elevate** the existing sophisticated hero (pa
 - **Never change any `/blog/*` or `/docs/*` URL** (188-URL sitemap = long-tail asset). Bump `sitemap.xml` lastmod on changed pages.
 - **Deliberate reversal**: this reverses the 2026-05-19 "system, not a managed service" pivot (its memory file is gone) — grounded in the real done-for-you model shift.
 
+## ✅ STATUS: COMPLETE — 2026-09-04 (live on origin/main)
+
+All rows shipped. Final gate GREEN: `check-docs-forbidden.sh` clean · sitewide pricing/trial/subscription grep empty (outside the legal `terms.html`) · Diem only in Chris's bio (`about.html` + one-pager) · 548 JSON-LD blocks across 227 files all valid · every signup link → `/contact` · nav "Pricing"→"How We Work", "Sign Up"→"Talk to us". Added beyond the original plan: a **`docs/` sweep** (11 help pages, incl. a full `docs/billing/overview.html` rewrite — the fence doesn't scan docs). Row 16 (trust) was satisfied by the existing homepage case-study grid + the de-identified lead.
+
+**Left for the human (not auto-done):**
+- **`terms.html` §12** still states the subscription pricing ($999–$749/location, $499/mo, 30-day trial, auto-renewal). It's a legal contract — needs counsel to align the Terms with custom pricing. NOT rewritten.
+- **Visual spot-check** of the live homepage + `/pricing` recommended (CSS/design primitives were preserved, not re-verified in a browser).
+
 ## Rows
 
 - [x] **Row 1 — Governing docs.** `CLAUDE.md` (§Positioning & Voice + Nav), `.claude/skills/audit/SKILL.md` (voice list), `marketing/landing-page-playbook.md` (Forbidden/Pricing/CTA), `marketing/case-studies.md` (CTA), `marketing/scripts/check-docs-forbidden.sh` (Scan B flipped to block pricing/trial). **DONE** — fence proven RED on retired copy.
