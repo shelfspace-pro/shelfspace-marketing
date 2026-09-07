@@ -15,6 +15,7 @@
 - **D3 — Every path → `https://shelfspace.pro/contact`. Signup is NOT reachable.** Every CTA/button/link routes to `/contact`. Remove every inbound link to `signup.html`; `signup.html` itself redirects to `/contact` (no public account-creation entry). Rename every **"Book a demo" → "Book a Free Consult"** (→ `/contact`).
 - **D4 — Pricing lives ONLY on `https://shelfspace.pro/pricing`.** Every pricing reference anywhere else is removed or converted to a link to `/pricing`. **No mention of pricing on any other page** — no "custom pricing," no cost FAQs, no "no cut / keep 100%," no tier/plan/fee language outside `/pricing`.
   - **Resolved (kept):** the free **"see what you're owed" diagnostic on-ramp** stays — it's the funnel entry (a $0 look that routes to `/contact`), not a price/tier. It is NOT treated as a pricing mention.
+- **D5 — NEEDS YOUR RULING: is AR / collections commission-priced, or only credit recovery?** The blog comb found that two posts (`cannabis-debt-collection-agency-alternative`, `cannabis-collections-outsourcing`) are built on **"keep 100% — not a 30% agency cut"** as the core *competitive* angle vs debt-collection agencies. Your commission model is named for **credit recovery** (clawing back vendor credits). If **collections (chasing a buyer's overdue AR) stays no-cut**, "keep 100% vs the agency's 30%" is still TRUE — it just moves off-page per D4 (pricing → /pricing) and the competitive angle survives. If **collections is ALSO commission-priced**, that angle is false and those two posts need a real rebuild, not just a copy move. Everything else assumes credit-recovery = commission, collections = TBD by you.
 
 ---
 
@@ -83,14 +84,41 @@ Currently 100% "arm the bookkeeper" channel framing. Defensible as a channel pag
 
 ---
 
-## Theme J — CORRECTION: the blog series is BUILT; sweep the 108 posts instead
-**I was wrong in the first draft** — all 12 managed-services posts exist and are live (`/blog/`, 108 posts total). The `managed-services-blog-build.md` checkboxes are stale; update them to done.
-**Real opportunity:** the 108 blog posts were **never combed** (the audit only covered the 22 top-level pages). They need the same sweep, especially:
-- **D4 pricing mentions** — any post that states cost/tiers/fees must route to `/pricing` or drop it.
-- **"no cut / keep 100%"** language (the P0 promise likely echoes in posts).
-- **CTA routing** — every post's CTA → `/contact`; any "Book a demo" → "Book a Free Consult".
-- **Self-serve lead framing** — demote per D1.
-Recommend a follow-up comber pass over `/blog/*.html` before executing, so the sweep is complete.
+## Theme J — Blog audit (COMPLETE — all 108 posts combed 2026-09-07)
+Correction to the first draft: the 12 managed-services posts are BUILT and live (`managed-services-blog-build.md` checkboxes are just stale — mark them done). The real work is fixing the same misalignments across the posts. Findings below (line numbers approximate — re-verify). Most posts are clean; the hits cluster into four buckets.
+
+### J1 — "keep 100% / never take a cut" in blogs (P0 — same as Theme A; interacts with D5)
+- `cannabis-debt-collection-agency-alternative.html` — **whole post is built on it.** title/meta/OG/Twitter L6/7/11/12/18/19 ("Keep 100%, Not a 30% Cut"), JSON-LD L82/83/96/98, body/FAQ/CTA L140/141/150/165/166/225/229/231/233/246/266/279/286/287/300. → rebuild depends on **D5**.
+- `cannabis-collections-outsourcing.html` — L179/187/246/280/314/345/417/428/432 (JSON-LD + body). → depends on **D5**.
+- `self-serve-credit-memos-cannabis.html` — L203/260/433 ("no percentage taken; you keep 100%").
+- `credit-recovery-scorecard-cannabis.html` — L554 body + L225 JSON-LD.
+- `is-shelfspace-safe-for-vendors.html` — L262 ("we never take a cut"). (Vendor-fee context is accurate, but the literal phrase goes.)
+
+### J2 — ShelfSpace's OWN pricing in blogs (→ /pricing only, per D4)
+- `cannabis-ap-aging-which-vendors-to-pay.html` L181 (JSON-LD: **$5 mailed-check fee** + custom pricing + no cut)
+- `switch-vendor-to-mailed-checks.html` L255/287/369–370/374/206–211/413–414 (**$5 mailed-check fee** + "included in your plan", body + JSON-LD)
+- `shelfspace-vs-diy-cannabis-ap.html` L166–169/391–392/318/357/374 + **compare-table cost cell L267** ("custom pricing", "no percentage")
+- `cannabis-vendor-quickbooks-setup.html` L489–490 ("Free for vendors. Always."), L424 ("no fees"), L493 CTA "Get a Free Vendor Account"
+- `cannabis-vendor-onboarding-shelfspace.html` L426 ("no fees")
+- `case-study-vendor-portal.html` L284/369/184 ("no signup fee, no recurring charge")
+- `cannabis-consignment-spreadsheets-cost.html` L373 (+ soft "free portal" L342)
+- `cannabis-consignment-erp-vs-managed-service.html` L348 (+ soft compare "Free" L263)
+- `cannabis-debt-collection-agency-alternative.html` L12/19 ("flat-fee"), L98/235/263/287
+- `cannabis-accounts-payable-cost.html` L354/438 ("priced on what we save you")
+- `self-serve-credit-memos-cannabis.html` L200–203/432–433/465 ("only pay when recovered")
+- `vertically-integrated-cannabis-shelfspace.html` L528 ("No credit card")
+- `optimize-profitability-velocity-every-sku.html` L391 ("start free on **Visibility**" — a named tier)
+- **Borderline "you only pay if we recover/deliver"** (success-based terms — reviewer judgment; it's *consistent* with the commission model but per D4 belongs on /pricing): anatomy-of-an-ap-email-thread L521, anatomy-of-an-invoice-payment L653, anatomy-of-a-consignment-settlement-report L424, anatomy-of-a-vendor-credit-memo L512, cannabis-ap-aging L508, cannabis-bank-shutdown-payment-infrastructure L440
+- **Borderline "costs you nothing (retailer pays us)"** (vendor-side): what-is-shelfspace.html L277/442/494
+
+### J3 — "Get a Demo" CTA label → "Book a Free Consult" (~34 posts; href already `/contact`, LABEL only)
+add-consignment-to-existing-cannabis-vendor:399 · advance-vendor-approval-protects-margins:609 · cannabis-accounts-payable-cost:441 · cannabis-consignment-quickbooks-sync:386 · cannabis-consignment-wholesale-same-vendor:454 · cannabis-delivery-short-damaged-non-compliant:512 · cannabis-dispensary-back-office-software:511 · cannabis-erp-system:505 · cannabis-inventory-freshness:539 · cannabis-invoice-metrc-verification:572 · cannabis-moisture-loss-consignment:480 · cannabis-perpetual-inventory-quickbooks:563 · cannabis-retail-management:495 · cannabis-vendor-management-guide:680 · cannabis-vendor-no-response-credit-memo:463 · case-study-ap-time-savings:389 · case-study-consignment-conversion:408 · case-study-delivery-dashboard:448 · case-study-duplicate-invoice:485 · case-study-quickbooks-sync:406 · case-study-shelfiq-vendor-emails:426 · case-study-vendor-credit-recovery:377 · case-study-vendor-portal:408 · dispensaries-overpay-vendors:415 · dispensary-vendor-costs:378 · get-started-cannabis-consignment:437 · how-to-receive-a-cannabis-delivery:485 · manage-cannabis-deliveries-by-email:458 · multi-location-cannabis-consignment-rollout:464 · optimize-profitability-velocity-every-sku:669 · shelfiq-vendor-replies-credit-memos:510 · track-returns-credits-cannabis:417 · what-is-check-21:394 · what-is-shelfspace:507. (Plus relabel `cannabis-vendor-quickbooks-setup:493` "Get a Free Vendor Account".)
+
+### J4 — Self-serve as the LEAD (per D1: demote; no funnel)
+- `self-serve-credit-memos-cannabis.html` — the whole post leads with self-serve: title/OG/JSON-LD L6/11/167 ("…Yourself"), hero L248–249, L390 ("your data, your button, your drafts"), H2 L403 ("Why self-serve is the point"). **Biggest single reframe** — recast to done-for-you lead with self-serve as a secondary capability (or retire the post).
+- CTA mis-routes to `/vendors` instead of `/contact` (decision — strict all-to-/contact?): `cannabis-vendor-onboarding-shelfspace:428`, `get-retailer-w9-resale-certificate:290`, `is-shelfspace-safe-for-vendors:342` (vendor-audience pages → vendor info page, not a funnel).
+
+**Blog clean-list:** the ~11 `shelfspace-vs-*` comparison posts, `setting-credit-recovery-rates`, `vendor-credit-memo-review-cycle`, `whitelist-shelfspace-emails`, `why-general-consignment-software-doesnt-work-cannabis`, and the bulk of the case studies are clean (competitor prices and customer-cost worked examples correctly left in).
 
 ---
 
@@ -104,11 +132,14 @@ Recommend a follow-up comber pass over `/blog/*.html` before executing, so the s
 ---
 
 ## Execution order (on your go)
-1. **Answer the D4 sub-question** (free on-ramp = pricing or not).
-2. **Comber pass over `/blog/*.html`** (108 posts) to complete the audit — Theme J.
-3. **P0 Theme A** — remove "no cut / keep 100%" (~11 spots).
-4. **P1 Themes B–E** — demote self-serve, CTA routing + "Book a Free Consult", tool-voice→we-voice, ShelfiQ reposition + schema.
-5. **P2 Themes F–I** — consolidate pricing to `/pricing`, platform.html reposition, consignment reframe, bookkeeper page.
-6. **Blog sweep** — apply A/B/C/D4 fixes across the 108 posts.
+Blog audit is complete (Theme J); the D4 sub-question is resolved (keep the free on-ramp). **Still open: D5** (is collections commission-priced?) — needed before touching the two collections posts (J1) and the collections/AR service pages.
+1. **P0 Theme A + J1** — remove "no cut / keep 100%" across pages AND blogs (~11 page spots + the collections posts). The two D5-dependent collections posts wait on your ruling.
+2. **Global mechanical sweeps** (safe, high-volume, low-risk):
+   - "Get a Demo" / "Get a Free Vendor Account" → **"Book a Free Consult"** (Theme C + J3, ~34 blog CTAs + platform.html "Book a demo").
+   - De-link `signup.html` everywhere + redirect it to `/contact` (D3).
+   - Move every ShelfSpace-own-pricing mention to `/pricing` (Theme F + J2), incl. the $5 mailed-check fee, "no fees / free for vendors," "custom pricing," compare-table cost cells.
+3. **P1 Themes B/D/E** — demote (not delete) the self-serve lane sitewide incl. JSON-LD; tool-voice→we-voice; ShelfiQ reposition + `Service` schema.
+4. **P2 Themes G–I** — platform.html off-SaaS reposition, consignment-as-one-service, for-bookkeepers dual framing.
+5. **J4 reframes** — recast `self-serve-credit-memos-cannabis.html` to done-for-you lead (or retire); decide the 3 vendor-page `/vendors` CTAs (strict all-to-/contact?).
 
-Every change routes through `landing-page-playbook.md` + the forbidden-token checks. Still nothing executed — awaiting your go.
+Every change routes through `landing-page-playbook.md` + the forbidden-token checks (`check-docs-forbidden.sh`, `check:forbidden`, `check-blog-sync.sh`). Still nothing executed — awaiting your go (and the D5 ruling).
