@@ -1,6 +1,13 @@
 # Website Strategy-Alignment Opportunities — REVIEW (decisions locked 2026-09-07)
 
-**Status:** finalized review/plan, NOT yet executed. Nothing on the site has been changed. Line numbers were captured in an audit pass — re-verify before editing.
+**Status:** ✅ EXECUTED 2026-09-07 (commit `126f8a4`) across all marketing pages + all 108 blog posts, pushed live. Gate: `check-docs-forbidden.sh` + `check-blog-sync.sh` clean; grep-clean for keep-100%/no-cut/vendor-free/self-serve-leads/pricing outside `/pricing`.
+
+**STILL TODO — surfaces NOT covered by this pass (need a dedicated comb, own systems):**
+- `docs/**` — help docs carry pricing/"keep 100%": `docs/billing/overview.html` is literally a "keep 100% / no percentage" billing doc; also `docs/consignment/*`, `docs/vendor-portal/*`, `docs/getting-started.html`, `docs/checks/mailing.html`, `docs/index.html`. Editing needs care re: docs-search index + sibling related-links (see marketing/CLAUDE.md Documentation System). `docs/billing/overview.html` probably should redirect to `/pricing`.
+- `tutorials/free-dispensary-eval.html` — carries pricing language.
+- `_pdf-source/evaluation-sample.html` — contains the **RETIRED $20-per-artifact** model + "keep 100%"; feeds a sample PDF (don't drive-by edit — regenerate). `_pdf-source/one-pager.html` got only the CTA-label swap in this pass.
+
+_(Original plan preserved below for reference.)_
 
 **Source of truth:** `shelfspace-platform:docs/roadmap/00-strategy.md` (2026-09-07). ShelfSpace = an AI-driven **managed-services money rail** for cannabis retailer↔vendor money (AP, AR, payments, credit recovery, settlements). **Done-for-you** is the lead; self-serve stays an available option (D1). GTM = displace the ~$4k/mo manual AP/bookkeeping firm. Endgame (rail → finance the flow) stays **internal / silent on the site** (D2).
 
