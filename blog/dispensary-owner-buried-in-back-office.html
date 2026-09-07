@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>When the Dispensary Owner Is the Back Office</title>
+<meta name="description" content="You opened a dispensary to run a store, not to be the AP clerk chasing vendor credits at midnight. Here's the money pile ShelfSpace lifts off owner-operators.">
+<link rel="canonical" href="https://shelfspace.pro/blog/dispensary-owner-buried-in-back-office">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://shelfspace.pro/blog/dispensary-owner-buried-in-back-office">
+<meta property="og:title" content="When the Dispensary Owner Is the Back Office">
+<meta property="og:description" content="You opened a dispensary to run a store, not to be the AP clerk chasing vendor credits at midnight. Here's the money pile ShelfSpace lifts off owner-operators.">
+<meta property="og:image" content="https://shelfspace.pro/og-image-v7.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="When the Dispensary Owner Is the Back Office">
+<meta name="twitter:description" content="You opened a dispensary to run a store, not to be the AP clerk chasing vendor credits at midnight. Here's the money pile ShelfSpace lifts off owner-operators.">
+<meta name="twitter:image" content="https://shelfspace.pro/og-image-v7.png">
+<meta name="apple-mobile-web-app-title" content="ShelfSpace">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+<style>
+  /* ─── HERO ENHANCEMENTS ─── */
+  .page-hero { padding-bottom: 40px; }
+  .hero-bg-gradient { position: absolute; top: -30%; right: -20%; width: 700px; height: 700px; background: radial-gradient(circle, rgba(149,213,178,0.18) 0%, rgba(149,213,178,0) 70%); animation: float 8s ease-in-out infinite; pointer-events: none; }
+  .hero-bg-gradient-2 { position: absolute; bottom: -20%; left: -15%; width: 550px; height: 550px; background: radial-gradient(circle, rgba(27,67,50,0.06) 0%, rgba(27,67,50,0) 70%); animation: float 10s ease-in-out infinite; animation-delay: -3s; pointer-events: none; }
+  .hero-grid-lines { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 1200px; height: 100%; opacity: 0.035; background-image: linear-gradient(var(--green-deep) 1px, transparent 1px), linear-gradient(90deg, var(--green-deep) 1px, transparent 1px); background-size: 80px 80px; pointer-events: none; }
+  .page-hero .section-label,
+  .page-hero .section-title,
+  .page-hero .section-desc { opacity: 0; transform: translateY(30px); }
+  .page-hero .section-label { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1); }
+  .page-hero .section-title { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s, transform 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s; }
+  .page-hero .section-desc { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1) 0.25s, transform 0.8s cubic-bezier(0.22,1,0.36,1) 0.25s; }
+  .page-hero.hero-loaded .section-label,
+  .page-hero.hero-loaded .section-title,
+  .page-hero.hero-loaded .section-desc { opacity: 1; transform: translateY(0); }
+
+  /* ─── REVEAL ─── */
+  .reveal {
+    opacity: 0; transform: translateY(40px);
+    transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .reveal.is-visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.2s; }
+  .reveal-delay-2 { transition-delay: 0.4s; }
+
+  /* ─── ARTICLE BODY ─── */
+  .article-body { max-width: 720px; margin: 0 auto; padding: 0 48px 80px; }
+  .article-body h2 { font-size: 24px; font-weight: 700; color: var(--green-deep); margin: 48px 0 16px; letter-spacing: -0.5px; line-height: 1.3; }
+  .article-body p { font-size: 17px; line-height: 1.85; color: var(--slate-600); margin-bottom: 24px; }
+  .article-body ul, .article-body ol { margin-bottom: 24px; padding-left: 24px; }
+  .article-body li { font-size: 17px; line-height: 1.85; color: var(--slate-600); margin-bottom: 8px; }
+  .article-body strong { color: var(--green-deep); font-weight: 600; }
+  .article-body a { color: var(--green-mid); font-weight: 500; text-decoration: none; }
+  .article-body a:hover { color: var(--green-deep); text-decoration: underline; }
+  .article-body blockquote { border-left: 3px solid var(--green-accent); padding: 16px 24px; margin: 32px 0; background: var(--green-ghost); border-radius: 0 8px 8px 0; }
+  .article-body blockquote p { font-style: italic; color: var(--green-dark); margin-bottom: 0; }
+
+  /* ─── AT A GLANCE ─── */
+  .article-glance {
+    max-width: 720px; margin: 0 auto 40px; padding: 24px 28px;
+    background: var(--green-ghost); border: 1px solid rgba(149,213,178,0.3);
+    border-radius: 12px;
+  }
+  .article-glance h2 {
+    font-size: 14px; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--green-mid); margin: 0 0 12px;
+  }
+  .article-glance ul { list-style: none; padding: 0; margin: 0; }
+  .article-glance li {
+    font-size: 15px; line-height: 1.6; color: var(--slate-600);
+    padding: 4px 0 4px 20px; position: relative;
+  }
+  .article-glance li::before {
+    content: ''; position: absolute; left: 0; top: 12px;
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--green-accent);
+  }
+
+  /* ─── COMPARISON TABLE ─── */
+  .compare-table { width: 100%; border-collapse: collapse; margin: 32px 0; border-radius: 12px; overflow: hidden; border: 1px solid var(--slate-200); }
+  .compare-table th { padding: 14px 16px; font-size: 14px; font-weight: 700; text-align: left; border-bottom: 2px solid var(--slate-200); }
+  .compare-table th:first-child { color: var(--slate-500); background: var(--white); width: 40%; }
+  .compare-table th:nth-child(2) { color: var(--slate-400); background: var(--slate-50); }
+  .compare-table th:nth-child(3) { color: var(--green-deep); background: var(--green-ghost); }
+  .compare-table td { padding: 12px 16px; font-size: 14px; border-bottom: 1px solid var(--slate-100); }
+  .compare-table td:first-child { color: var(--slate-600); font-weight: 500; }
+  .compare-table td:nth-child(2) { background: var(--slate-50); color: var(--slate-500); }
+  .compare-table td:nth-child(3) { background: rgba(240,250,244,0.5); }
+  .compare-table tr:last-child td { border-bottom: none; }
+  .compare-check { color: var(--green-mid); font-weight: 700; }
+  .compare-x { color: #c0392b; font-weight: 700; }
+  .compare-plus { color: var(--green-deep); font-size: 13px; }
+
+  /* ─── CTA PARALLAX ─── */
+  .cta-section::before { transform: translate(-50%,-50%) translateY(var(--parallax-y, 0)); will-change: transform; }
+
+  /* ─── FOOTER 5-COL ─── */
+  .footer-top { grid-template-columns: 2fr 1fr 1fr 1fr 1fr; }
+  @media (max-width: 900px) { .footer-top { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px) { .footer-top { grid-template-columns: 1fr; } }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    .article-body { padding: 0 24px 60px; }
+    .article-body h2 { margin-top: 36px; }
+    .compare-table { font-size: 13px; }
+    .compare-table th, .compare-table td { padding: 10px 12px; }
+  }
+
+  /* ─── REDUCED MOTION ─── */
+  @media (prefers-reduced-motion: reduce) {
+    .reveal {
+      opacity: 1; transform: none; transition: none;
+    }
+    .page-hero .section-label,
+    .page-hero .section-title,
+    .page-hero .section-desc {
+      opacity: 1; transform: none; transition: none;
+    }
+    .hero-bg-gradient, .hero-bg-gradient-2 { animation: none; }
+  }
+</style>
+<noscript><style>.reveal,.page-hero .section-label,.page-hero .section-title,.page-hero .section-desc{opacity:1;transform:none;transition:none;}</style></noscript>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-H2LBJT03WE"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-H2LBJT03WE');</script>
+<script>function initApollo(){var n=Math.random().toString(36).substring(7),o=document.createElement("script");
+o.src="https://assets.apollo.io/micro/website-tracker/tracker.iife.js?nocache="+n,o.async=!0,o.defer=!0,
+o.onload=function(){window.trackingFunctions.onLoad({appId:"69c141b32234890011a43849"})},
+document.head.appendChild(o)}initApollo();</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "When the Dispensary Owner Is the Back Office",
+  "description": "You opened a dispensary to run a store, not to be the AP clerk chasing vendor credits at midnight. Here's the money pile ShelfSpace lifts off owner-operators.",
+  "author": {
+    "@type": "Person",
+    "name": "Chris Mitchem"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "ShelfSpace",
+    "url": "https://shelfspace.pro"
+  },
+  "datePublished": "2026-09-07",
+  "url": "https://shelfspace.pro/blog/dispensary-owner-buried-in-back-office",
+  "image": "https://shelfspace.pro/og-image-v7.png"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://shelfspace.pro/" },
+    { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://shelfspace.pro/blog" },
+    { "@type": "ListItem", "position": 3, "name": "When the Dispensary Owner Is the Back Office" }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "I'm a dispensary owner too busy doing the books to run the store. Where do I start?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Start with a number, not a demo. We connect to Metrc and your POS and show you what you're owed in unrecovered vendor credits, how much of your receivables is overdue, and where your invoices don't match Metrc. It's free and usually surfaces more money than it costs to fix. From there you decide whether you want the software to drive yourself or want us to run the whole money pile for you."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What exactly does ShelfSpace take off my plate?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Four jobs: paying your vendors (Check 21 checks, matched against Metrc and the delivery so you never overpay), consignment settlements (paying vendors for what actually sold), credit recovery (returns, expirations, and co-marketing dollars vendors owe you back), and collecting your overdue receivables if you also wholesale. ShelfiQ answers the routine vendor email so your inbox stops being the help desk. Your CPA and taxes stay where they are."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "I already pay a bookkeeper. Why isn't that enough?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A bookkeeper records what happened and keeps you defensible. They do not systematically chase the credits a vendor owes you back, reconcile a consignment settlement to the penny, or collect your overdue invoices. That's a different job. Most owners keep the bookkeeper for the ledger and use ShelfSpace to run the operational money work, which is the part quietly costing them hours and lost credits."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I have to hand everything off, or can I stay in control?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Your call. Some owners drive the software themselves and approve the week's payments and settlements in a few minutes. Others hand it off entirely and we run AP, settlements, credit recovery, and collections for them, done-for-you. The work and the numbers are identical. The only question is who touches the keyboard, and you can change your mind as your store grows."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How much of the lost money can I actually get back?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It depends on your volume and how long the credits have been slipping, but the pattern is consistent: untracked vendor credits run past $200,000 a year at a multi-location operator, and we've found $8,000 to $25,000 a month in recoverable credits at a single Massachusetts client. The money-review shows your specific number before you commit to anything."
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="/" class="nav-logo">
+    <div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div>
+    <span class="nav-logo-text">ShelfSpace</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="/consignment">Consignment</a></li>
+    <li><a href="/accounts-payable">Accounts Payable</a></li>
+    <li><a href="/credit-recovery">Credit Recovery</a></li>
+    <li><a href="/accounts-receivable">Accounts Receivable</a></li>
+    <li><a href="/about">About</a></li>
+    <li><a href="/pricing">Pricing</a></li>
+    <li class="nav-dropdown"><button class="nav-dropdown-toggle" aria-haspopup="true" aria-expanded="false">Platform <svg class="dropdown-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></button><div class="nav-dropdown-menu"><a href="/vendor-management">Vendor Management</a><a href="/how-it-works">How It Works</a><a href="/features">Features</a><a href="/shelfiq">ShelfiQ</a><a href="/checks">Check Payments</a><a href="/collections">Collections</a><a href="/tutorials">Tutorials</a></div></li>
+    <li><a href="/contact" class="nav-cta">Get Started <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a></li>
+  </ul>
+  <div class="nav-hamburger" onclick="document.querySelector('.nav-links').classList.toggle('mobile-open'); event.stopPropagation();"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="hero-bg-gradient"></div>
+  <div class="hero-bg-gradient-2"></div>
+  <div class="hero-grid-lines"></div>
+  <div class="section-label">Owner-Operators</div>
+  <h1 class="section-title">When the Dispensary Owner Is the Back Office</h1>
+  <p class="section-desc">The vendor invoices, the settlements, the credits nobody's chasing — lifted off your desk. Run for you, or as software you approve in a few minutes a week.</p>
+</div>
+
+<!-- AT A GLANCE -->
+<div class="article-glance">
+  <h2>At a glance</h2>
+  <ul>
+    <li>If you opened one to three stores and you're personally paying vendors, reconciling settlements, and chasing credits, you've become the unpaid AP clerk — and the store isn't getting your best hours</li>
+    <li>The real cost isn't just 10 to 15 hours a week; it's the assortment, the next location, and your own life that never get worked on — plus the vendor credits quietly lost because no one has time to chase them</li>
+    <li>Paying vendors, running settlements, recovering credits, and collecting overdue invoices is exactly the pile ShelfSpace lifts off you</li>
+    <li>Delivered your way: software you approve in a few minutes a week, or fully done-for-you</li>
+    <li>The first step is free — a money-review that shows the hours, the overdue receivables, and the credits you're not recovering, specific to your operation</li>
+  </ul>
+</div>
+
+<!-- ARTICLE BODY -->
+<div class="article-body reveal">
+
+  <p>You didn't open a dispensary to become a collections agent. You opened it to run a store — pick the menu, know the regulars, build something in a market most people are still afraid of. And for a while that's the job. Then the store finds its feet, the vendor count climbs, and one Sunday night you look up and realize you're not the owner anymore. You're the AP clerk. You're the credit chaser. You're the person a rep emails four times before you get to reply.</p>
+
+  <p>Here's the part nobody warns you about: the retail floor mostly runs itself once it's staffed. It's the money moving between you and your vendors that never stops needing you. Invoices to match. Settlements to reconcile. A credit from three months ago that never got applied. An overdue receivable that slid from net-30 to net-90 while you were doing everything else. That work has no closing time, and right now you're the one doing it — after hours, on your phone, in a spreadsheet you built and only you understand.</p>
+
+  <h2>The Sunday-night pile</h2>
+
+  <p>Strip away the accounting words and the pile on your desk is four jobs, running every week and every month, forever. When you're a one-to-three-store owner without a finance hire, every one of them lands on you.</p>
+
+  <div class="flow-steps reveal">
+    <div class="flow-step">
+      <div class="flow-step-num">1</div>
+      <div class="flow-step-body">
+        <p class="flow-step-title">Paying your vendors</p>
+        <p class="flow-step-desc">Match each invoice to what actually showed up, catch the duplicate line and the overcharge, and cut a check the vendor can deposit — in cannabis, almost always a paper check, because the card rails don't work.</p>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-step-num">2</div>
+      <div class="flow-step-body">
+        <p class="flow-step-title">Running consignment settlements</p>
+        <p class="flow-step-desc">Reconcile what sold against what each vendor put on your shelf, apply the split, and settle to the penny, with a report both sides trust. Do it wrong and you're arguing about it for a week.</p>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-step-num">3</div>
+      <div class="flow-step-body">
+        <p class="flow-step-title">Recovering the credits vendors owe you</p>
+        <p class="flow-step-desc">Returns, expired product, damaged units, co-marketing dollars promised in the agreement. This is money owed back to you — and it's the piece that goes uncollected, because chasing it is the first thing that falls off a busy owner's list.</p>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-step-num">4</div>
+      <div class="flow-step-body">
+        <p class="flow-step-title">Collecting what you're owed</p>
+        <p class="flow-step-desc">If you also wholesale, someone has to chase the buyers who drifted past terms. Left alone, your overdue invoices quietly become a second full-time job you never applied for.</p>
+      </div>
+    </div>
+  </div>
+
+  <p>None of it ever reaches a customer's bag. All of it decides whether the store actually makes money. And every hour you spend on it is an hour you're not spending on the two things only the owner can do: the assortment and the growth.</p>
+
+  <h2>What it's really costing you</h2>
+
+  <p>The hours are the cost you can feel. Ten to fifteen a week is normal for an owner-operator doing this by hand — a full workday, every week, gone to invoices and vendor email. But the hours aren't the expensive part. The expensive part is what those hours would have been worth spent somewhere else.</p>
+
+  <div class="stat-trio reveal">
+    <div class="stat-trio-item is-loss">
+      <svg class="stat-trio-ico" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      <p class="stat-trio-num">10&ndash;15 hrs</p>
+      <p class="stat-trio-label">of your week gone to vendor payments, settlements, and email</p>
+    </div>
+    <div class="stat-trio-item is-loss">
+      <svg class="stat-trio-ico" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+      <p class="stat-trio-num">$200K+</p>
+      <p class="stat-trio-label">a year in vendor credits left untracked at a multi-location operator</p>
+    </div>
+    <div class="stat-trio-item">
+      <svg class="stat-trio-ico" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+      <p class="stat-trio-num">$8K&ndash;$25K</p>
+      <p class="stat-trio-label">a month in recoverable credits found at one Massachusetts client</p>
+    </div>
+  </div>
+
+  <p>That third number is the one that stings, because it's real money that was always yours. At a single Massachusetts store we found $8,000 to $25,000 a month in credits the owner was owed and had never claimed — returns, expirations, and co-marketing dollars that a busy operator simply never had time to reconcile against Metrc. Scale that across a group and the untracked figure runs past $200,000 a year. It isn't that the money is hard to get. It's that chasing it competes with everything else on your plate, and everything else always wins.</p>
+
+  <div class="blog-callout">
+    <svg class="blog-callout-ico" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+    <p class="blog-callout-text">The credits you don't have time to chase don't disappear. They just stay in the vendor's pocket instead of yours.</p>
+  </div>
+
+  <p>And then there's the receivables side. When your own invoices go unpaid and you finally hand them to a collections firm, they take a 25% to 50% contingency cut of whatever they recover — so even the money you claw back comes back smaller. Every part of this pile has a price, and the owner pays all of it: in hours, in lost credits, and in the growth that never happened because you were reconciling a spreadsheet instead.</p>
+
+  <p>That last cost is the one that never shows up on any statement, and it's the biggest. The ten hours you spend cutting checks are ten hours you didn't spend deciding which strains to bring in for the next quarter, walking the floor to see what's actually moving, or scouting the second location you keep telling yourself you'll get to. Those are the decisions that grow a dispensary, and they're precisely the ones only the owner can make. Every week the back office wins that fight, the store stays exactly the size it is. You're working harder than you ever have, and the business isn't moving — because your best hours are going to data entry a system should be doing.</p>
+
+  <p>It also takes a toll that has nothing to do with the store. The Sunday nights add up. The half-answered rep emails sit in your head at dinner. The nagging sense that a credit slipped by and you'll never know which one. Owner burnout in this industry rarely comes from the retail floor; it comes from the admin that follows you home. When people say they're too busy doing the books to run the store, this is what they mean — and it's a solvable problem, not a personality flaw.</p>
+
+  <h2>What "handled" actually feels like</h2>
+
+  <p>Handing off the back office doesn't mean emailing a folder of invoices to a stranger and hoping. It means the four jobs above run on a system built for cannabis, and you get the outcome without doing the labor. The difference in your week is not subtle.</p>
+
+  <div class="vs-split reveal">
+    <div class="vs-col vs-neg">
+      <div class="vs-head">
+        <svg class="vs-ico" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        <p class="vs-tag">Your week now</p>
+      </div>
+      <p class="vs-num">10&ndash;15 hrs</p>
+      <p class="vs-text">Sunday night you export the POS, rebuild the settlement spreadsheet, match invoices, cut checks, hunt for credits nobody wrote down, and answer rep email one message at a time. The credits stay lost and the assortment waits.</p>
+    </div>
+    <div class="vs-col vs-pos">
+      <div class="vs-head">
+        <svg class="vs-ico" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+        <p class="vs-tag">Your week handled</p>
+      </div>
+      <p class="vs-num">A few minutes</p>
+      <p class="vs-text">The platform pulls POS and Metrc data, matches every invoice, runs the settlements, surfaces the credits vendors owe you, and drafts the vendor email. You open the portal, glance at the week, approve. Payments go out.</p>
+    </div>
+  </div>
+
+  <p>Under the hood, ShelfSpace connects to Metrc and reads your POS. It three-way matches every invoice against the manifest and the delivery, so you never pay a phantom line again. It runs your consignment settlements and generates a report you and the vendor can both read. It builds your monthly credit memos for returns, expirations, and co-marketing, and it chases your overdue receivables so you're not the one sending the third reminder. <a href="/shelfiq">ShelfiQ</a>, the AI layer, drafts and answers the routine vendor email so your inbox stops being the help desk. That AI is how the whole thing stays affordable — it's the engine, not the pitch. What you feel is simpler: the pile is gone, and the money that used to slip through it doesn't.</p>
+
+  <h2>Software you drive, or done for you</h2>
+
+  <p>The right delivery model is the one that fits where you are, and you pick it in the conversation. Some owners want the keys: they log in, review the week's settlements and payments, approve in a few minutes, and get back to the floor. Others want it off their plate completely — so we run your accounts payable, settlements, credit recovery, and collections for you, and you watch the results land in the portal and in QuickBooks. Same work, same numbers to the penny. The only question is who touches the keyboard, and the answer can change as you grow.</p>
+
+  <p>That flexibility is the whole point of thinking about the back office as a service instead of a hire. Hiring a finance person at one to three stores is usually more overhead than the job justifies, but doing it yourself is costing you the growth. If you're weighing that trade, it's worth reading our take on <a href="/blog/hire-vs-outsource-cannabis-finance">hiring versus outsourcing your cannabis finance work</a> and what a full <a href="/blog/outsourced-finance-team-cannabis">outsourced finance team for a cannabis operator</a> actually covers. This is the same idea, scoped to the money that moves between you and your vendors.</p>
+
+  <h2>Who this is for</h2>
+
+  <p>This is for the owner-operator with one to three stores who is personally doing the money admin and knows, in their gut, that it's the wrong use of the owner. You can't quite justify a full-time finance hire, but you also can't keep giving up your nights and your growth to invoices. If you already pay a bookkeeping firm a few thousand dollars a month, notice what it does and doesn't do: it keeps the ledger, but it isn't recovering a dollar of what your vendors owe you back — that's simply not what a general ledger is for.</p>
+
+  <p>It also helps if the vendor relationships themselves have gotten noisy. When one person is the entire back office, communication slips, and slipped communication is where credits and goodwill both leak. If that's your world, our note on <a href="/blog/cannabis-vendor-communication">keeping cannabis vendor communication clean</a> pairs directly with this. And if you want the wider picture of everything the money side covers, start with <a href="/blog/outsourced-cannabis-back-office">outsourced back office for cannabis dispensaries</a>.</p>
+
+  <p>The honest first move isn't a demo. It's a number. We'll connect to Metrc and your POS and show you what you're owed in unrecovered credits, how much of your receivables is overdue, and where your invoices don't match Metrc. It's free, it's specific to your store, and it almost always surfaces more than it costs to fix. Worst case, you get a clear picture of your own back office for the first time. Best case, you get your Sundays back.</p>
+
+  <blockquote>
+    <p>You opened a dispensary to run a store. Somewhere along the way it turned you into the back office. The fix isn't working harder at the pile — it's handing the pile to something built to carry it.</p>
+  </blockquote>
+
+</div>
+
+<!-- FAQ -->
+<section style="max-width: 720px; margin: 0 auto; padding: 0 48px 60px;">
+  <h2 style="font-size: 22px; font-weight: 700; color: #1b4332; margin-bottom: 24px; letter-spacing: -0.5px;">Frequently asked questions</h2>
+  <div class="faq-list">
+    <details>
+      <summary>I'm a dispensary owner too busy doing the books to run the store. Where do I start?</summary>
+      <p>Start with a number, not a demo. We connect to Metrc and your POS and show you what you're owed in unrecovered vendor credits, how much of your receivables is overdue, and where your invoices don't match Metrc. It's free and usually surfaces more money than it costs to fix. From there you decide whether you want the software to drive yourself or want us to run the whole money pile for you.</p>
+    </details>
+    <details>
+      <summary>What exactly does ShelfSpace take off my plate?</summary>
+      <p>Four jobs: paying your vendors (Check 21 checks, matched against Metrc and the delivery so you never overpay), consignment settlements (paying vendors for what actually sold), credit recovery (returns, expirations, and co-marketing dollars vendors owe you back), and collecting your overdue receivables if you also wholesale. ShelfiQ answers the routine vendor email so your inbox stops being the help desk. Your CPA and taxes stay where they are.</p>
+    </details>
+    <details>
+      <summary>I already pay a bookkeeper. Why isn't that enough?</summary>
+      <p>A bookkeeper records what happened and keeps you defensible. They do not systematically chase the credits a vendor owes you back, reconcile a consignment settlement to the penny, or collect your overdue invoices. That's a different job. Most owners keep the bookkeeper for the ledger and use ShelfSpace to run the operational money work, which is the part quietly costing them hours and lost credits.</p>
+    </details>
+    <details>
+      <summary>Do I have to hand everything off, or can I stay in control?</summary>
+      <p>Your call. Some owners drive the software themselves and approve the week's payments and settlements in a few minutes. Others hand it off entirely and we run AP, settlements, credit recovery, and collections for them, done-for-you. The work and the numbers are identical. The only question is who touches the keyboard, and you can change your mind as your store grows.</p>
+    </details>
+    <details>
+      <summary>How much of the lost money can I actually get back?</summary>
+      <p>It depends on your volume and how long the credits have been slipping, but the pattern is consistent: untracked vendor credits run past $200,000 a year at a multi-location operator, and we've found $8,000 to $25,000 a month in recoverable credits at a single Massachusetts client. The money-review shows your specific number before you commit to anything.</p>
+    </details>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-content">
+    <div class="section-label reveal">Get Started</div>
+    <h2 class="section-title reveal">Get Your Nights Back</h2>
+    <p class="section-desc reveal">We'll connect to Metrc and your POS and show you the hours, the overdue receivables, and the credits you're not recovering. Free, specific to your store, no commitment.</p>
+    <div class="cta-actions reveal">
+      <a href="/contact" class="btn-primary">
+        Get My Free Money-Review
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+      <a href="/contact" class="btn-secondary">Talk to us</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="/" class="nav-logo"><div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div><span class="nav-logo-text">ShelfSpace</span></a>
+      <p>Every Vendor. Every Payment. One Engine.</p>
+    </div>
+    <div class="footer-col"><h4>Services</h4><ul><li><a href="/consignment">Consignment</a></li><li><a href="/accounts-payable">Accounts Payable</a></li><li><a href="/credit-recovery">Credit Recovery</a></li><li><a href="/checks">Check Payments</a></li><li><a href="/shelfiq">ShelfiQ</a></li></ul></div>
+    <div class="footer-col"><h4>Platform</h4><ul><li><a href="/features">Features</a></li><li><a href="/how-it-works">How It Works</a></li><li><a href="/pricing">Pricing</a></li><li><a href="/about">About</a></li><li><a href="/blog">Blog</a></li><li><a href="/docs">Docs</a></li><li><a href="/tutorials">Tutorials</a></li></ul></div>
+    <div class="footer-col"><h4>Access</h4><ul><li><a href="https://ourshelf.space/login">Login</a></li><li><a href="/contact">Talk to us</a></li><li><a href="/contact">Contact</a></li><li><a href="/accounts-receivable">Accounts Receivable</a></li><li><a href="/vendors">For Vendors</a></li><li><a href="/for-bookkeepers">For Bookkeepers</a></li></ul></div>
+    <div class="footer-col"><h4>Company</h4><ul><li><a href="mailto:support@shelfspace.pro">Support</a></li><li><a href="https://linkedin.com/company/shelfspace-pro" target="_blank" rel="noopener" class="footer-social-link"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> LinkedIn</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><p>&copy; 2026 ShelfSpace Technologies Inc.</p><div class="footer-bottom-links"><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div></div>
+</footer>
+
+<script>
+(function() {
+  var nav = document.getElementById('nav');
+  var pageHero = document.querySelector('.page-hero');
+  var parallaxSections = [
+    document.querySelector('.cta-section')
+  ];
+
+  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var isMobile = window.innerWidth < 900;
+  var ticking = false;
+
+  /* ── Hero entrance ── */
+  requestAnimationFrame(function() {
+    nav.classList.toggle('scrolled', window.scrollY > 20);
+    if (pageHero) pageHero.classList.add('hero-loaded');
+  });
+
+  /* ── Scroll-Triggered Reveals (with unobserve for perf) ── */
+  var revealObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(function(el) { revealObserver.observe(el); });
+
+  /* ── Scroll handler (rAF + ticking flag) ── */
+  function onScroll() {
+    var scrollY = window.scrollY;
+    nav.classList.toggle('scrolled', scrollY > 20);
+    if (prefersReduced || isMobile) return;
+    var wh = window.innerHeight;
+    parallaxSections.forEach(function(section) {
+      if (!section) return;
+      var rect = section.getBoundingClientRect();
+      if (rect.bottom < 0 || rect.top > wh) return;
+      var center = rect.top + rect.height / 2 - wh / 2;
+      section.style.setProperty('--parallax-y', (center * 0.08) + 'px');
+    });
+  }
+
+  window.addEventListener('scroll', function() {
+    if (!ticking) {
+      requestAnimationFrame(function() {
+        onScroll();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, { passive: true });
+
+  onScroll();
+
+  window.addEventListener('resize', function() {
+    isMobile = window.innerWidth < 900;
+    if (isMobile) {
+      parallaxSections.forEach(function(section) {
+        if (section) section.style.setProperty('--parallax-y', '0px');
+      });
+    }
+  });
+
+  document.addEventListener('click', function() {
+    var navLinks = document.querySelector('.nav-links');
+    if (navLinks && navLinks.classList.contains('mobile-open')) {
+      navLinks.classList.remove('mobile-open');
+    }
+  });
+})();
+</script>
+<script src="/shelfiq-widget.js"></script>
+</body>
+</html>

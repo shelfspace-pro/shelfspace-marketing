@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cannabis Back Office Service Comparison | ShelfSpace</title>
+<meta name="description" content="Two ways to outsource the cannabis money back office: Headquarters staffs a human pod for accounting and order entry; ShelfSpace runs the vendor money layer.">
+<link rel="canonical" href="https://shelfspace.pro/blog/shelfspace-vs-headquarters-cannabis">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://shelfspace.pro/blog/shelfspace-vs-headquarters-cannabis">
+<meta property="og:title" content="Cannabis Back Office Service Comparison | ShelfSpace">
+<meta property="og:description" content="Two ways to outsource the cannabis money back office: Headquarters staffs a human pod for accounting and order entry; ShelfSpace runs the vendor money layer.">
+<meta property="og:image" content="https://shelfspace.pro/og-image-v7.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Cannabis Back Office Service Comparison | ShelfSpace">
+<meta name="twitter:description" content="Two ways to outsource the cannabis money back office: Headquarters staffs a human pod for accounting and order entry; ShelfSpace runs the vendor money layer.">
+<meta name="twitter:image" content="https://shelfspace.pro/og-image-v7.png">
+<meta name="apple-mobile-web-app-title" content="ShelfSpace">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+<style>
+  /* ─── HERO ENHANCEMENTS ─── */
+  .page-hero { padding-bottom: 40px; }
+  .hero-bg-gradient { position: absolute; top: -30%; right: -20%; width: 700px; height: 700px; background: radial-gradient(circle, rgba(149,213,178,0.18) 0%, rgba(149,213,178,0) 70%); animation: float 8s ease-in-out infinite; pointer-events: none; }
+  .hero-bg-gradient-2 { position: absolute; bottom: -20%; left: -15%; width: 550px; height: 550px; background: radial-gradient(circle, rgba(27,67,50,0.06) 0%, rgba(27,67,50,0) 70%); animation: float 10s ease-in-out infinite; animation-delay: -3s; pointer-events: none; }
+  .hero-grid-lines { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 1200px; height: 100%; opacity: 0.035; background-image: linear-gradient(var(--green-deep) 1px, transparent 1px), linear-gradient(90deg, var(--green-deep) 1px, transparent 1px); background-size: 80px 80px; pointer-events: none; }
+  .page-hero .section-label,
+  .page-hero .section-title,
+  .page-hero .section-desc { opacity: 0; transform: translateY(30px); }
+  .page-hero .section-label { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1); }
+  .page-hero .section-title { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s, transform 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s; }
+  .page-hero .section-desc { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1) 0.25s, transform 0.8s cubic-bezier(0.22,1,0.36,1) 0.25s; }
+  .page-hero.hero-loaded .section-label,
+  .page-hero.hero-loaded .section-title,
+  .page-hero.hero-loaded .section-desc { opacity: 1; transform: translateY(0); }
+
+  /* ─── REVEAL ─── */
+  .reveal {
+    opacity: 0; transform: translateY(40px);
+    transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .reveal.is-visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.2s; }
+  .reveal-delay-2 { transition-delay: 0.4s; }
+
+  /* ─── ARTICLE BODY ─── */
+  .article-body { max-width: 720px; margin: 0 auto; padding: 0 48px 80px; }
+  .article-body h2 { font-size: 24px; font-weight: 700; color: var(--green-deep); margin: 48px 0 16px; letter-spacing: -0.5px; line-height: 1.3; }
+  .article-body p { font-size: 17px; line-height: 1.85; color: var(--slate-600); margin-bottom: 24px; }
+  .article-body ul, .article-body ol { margin-bottom: 24px; padding-left: 24px; }
+  .article-body li { font-size: 17px; line-height: 1.85; color: var(--slate-600); margin-bottom: 8px; }
+  .article-body strong { color: var(--green-deep); font-weight: 600; }
+  .article-body a { color: var(--green-mid); font-weight: 500; text-decoration: none; }
+  .article-body a:hover { color: var(--green-deep); text-decoration: underline; }
+  .article-body blockquote { border-left: 3px solid var(--green-accent); padding: 16px 24px; margin: 32px 0; background: var(--green-ghost); border-radius: 0 8px 8px 0; }
+  .article-body blockquote p { font-style: italic; color: var(--green-dark); margin-bottom: 0; }
+
+  /* ─── AT A GLANCE ─── */
+  .article-glance {
+    max-width: 720px; margin: 0 auto 40px; padding: 24px 28px;
+    background: var(--green-ghost); border: 1px solid rgba(149,213,178,0.3);
+    border-radius: 12px;
+  }
+  .article-glance h2 {
+    font-size: 14px; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--green-mid); margin: 0 0 12px;
+  }
+  .article-glance ul { list-style: none; padding: 0; margin: 0; }
+  .article-glance li {
+    font-size: 15px; line-height: 1.6; color: var(--slate-600);
+    padding: 4px 0 4px 20px; position: relative;
+  }
+  .article-glance li::before {
+    content: ''; position: absolute; left: 0; top: 12px;
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--green-accent);
+  }
+
+  /* ─── COMPARISON TABLE ─── */
+  .compare-table { width: 100%; border-collapse: collapse; margin: 32px 0; border-radius: 12px; overflow: hidden; border: 1px solid var(--slate-200); }
+  .compare-table th { padding: 14px 16px; font-size: 14px; font-weight: 700; text-align: left; border-bottom: 2px solid var(--slate-200); }
+  .compare-table th:first-child { color: var(--slate-500); background: var(--white); width: 40%; }
+  .compare-table th:nth-child(2) { color: var(--slate-400); background: var(--slate-50); }
+  .compare-table th:nth-child(3) { color: var(--green-deep); background: var(--green-ghost); }
+  .compare-table td { padding: 12px 16px; font-size: 14px; border-bottom: 1px solid var(--slate-100); }
+  .compare-table td:first-child { color: var(--slate-600); font-weight: 500; }
+  .compare-table td:nth-child(2) { background: var(--slate-50); color: var(--slate-500); }
+  .compare-table td:nth-child(3) { background: rgba(240,250,244,0.5); }
+  .compare-table tr:last-child td { border-bottom: none; }
+  .compare-check { color: var(--green-mid); font-weight: 700; }
+  .compare-x { color: #c0392b; font-weight: 700; }
+  .compare-plus { color: var(--green-deep); font-size: 13px; }
+
+  /* ─── CTA PARALLAX ─── */
+  .cta-section::before { transform: translate(-50%,-50%) translateY(var(--parallax-y, 0)); will-change: transform; }
+
+  /* ─── FOOTER 5-COL ─── */
+  .footer-top { grid-template-columns: 2fr 1fr 1fr 1fr 1fr; }
+  @media (max-width: 900px) { .footer-top { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px) { .footer-top { grid-template-columns: 1fr; } }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    .article-body { padding: 0 24px 60px; }
+    .article-body h2 { margin-top: 36px; }
+    .compare-table { font-size: 13px; }
+    .compare-table th, .compare-table td { padding: 10px 12px; }
+  }
+
+  /* ─── REDUCED MOTION ─── */
+  @media (prefers-reduced-motion: reduce) {
+    .reveal {
+      opacity: 1; transform: none; transition: none;
+    }
+    .page-hero .section-label,
+    .page-hero .section-title,
+    .page-hero .section-desc {
+      opacity: 1; transform: none; transition: none;
+    }
+    .hero-bg-gradient, .hero-bg-gradient-2 { animation: none; }
+  }
+</style>
+<noscript><style>.reveal,.page-hero .section-label,.page-hero .section-title,.page-hero .section-desc{opacity:1;transform:none;transition:none;}</style></noscript>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-H2LBJT03WE"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-H2LBJT03WE');</script>
+<script>function initApollo(){var n=Math.random().toString(36).substring(7),o=document.createElement("script");
+o.src="https://assets.apollo.io/micro/website-tracker/tracker.iife.js?nocache="+n,o.async=!0,o.defer=!0,
+o.onload=function(){window.trackingFunctions.onLoad({appId:"69c141b32234890011a43849"})},
+document.head.appendChild(o)}initApollo();</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Cannabis Back Office Service Comparison: Headquarters and ShelfSpace",
+  "description": "Two ways to outsource the cannabis money back office: Headquarters staffs a human pod for accounting and order entry; ShelfSpace runs the vendor money layer.",
+  "author": {
+    "@type": "Person",
+    "name": "Chris Mitchem"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "ShelfSpace",
+    "url": "https://shelfspace.pro"
+  },
+  "datePublished": "2026-09-07",
+  "url": "https://shelfspace.pro/blog/shelfspace-vs-headquarters-cannabis",
+  "image": "https://shelfspace.pro/og-image-v7.png"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://shelfspace.pro/" },
+    { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://shelfspace.pro/blog" },
+    { "@type": "ListItem", "position": 3, "name": "Cannabis Back Office Service Comparison: Headquarters and ShelfSpace" }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is the difference between Headquarters and ShelfSpace?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Headquarters staffs a dedicated pod of people who handle a wide back office — order entry, sales ops, AR collections, bookkeeping, month-end close, and inventory and menu data. ShelfSpace is purpose-built software plus ShelfiQ, an AI layer, focused on the retailer-to-vendor money layer: accounts payable with Metrc three-way matching, Check 21 vendor payments, consignment settlements, vendor credit recovery, and AR collection. One is a people-first accounting service; the other is a cannabis-money-native rail you can drive yourself or hand off."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is ShelfSpace a Headquarters cannabis alternative?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "For the vendor money layer, yes. If what you need handled is paying vendors, settling consignment, recovering the credits vendors owe you, and collecting overdue invoices, ShelfSpace runs that end to end and reads Metrc directly. If what you need is full-service bookkeeping, order entry, and month-end close staffed by people, Headquarters covers a broader accounting scope that ShelfSpace does not try to replace."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does ShelfSpace do bookkeeping and month-end close?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. ShelfSpace moves the money and feeds your books. Every payment, settlement, and credit syncs to QuickBooks with the categories your accountant needs, so your bookkeeper or CPA opens a clean ledger instead of a pile of receipts. Full-service bookkeeping and month-end close are the kind of work a service like Headquarters or your CPA does; ShelfSpace is the operational money layer that feeds them."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I run ShelfSpace myself instead of paying for a service?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. That is the main structural difference from a human-pod service. Some operators drive the software themselves and approve the week's payments and settlements in a few minutes. Others hand it off entirely and we run accounts payable, settlements, credit recovery, and collections for them. Same work and same numbers; who touches the keyboard is your call."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Which one should a dispensary choose?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It depends on the shape of the problem. If the pain is broad accounting labor across order entry, bookkeeping, and month-end close, a full-service human pod like Headquarters fits. If the pain is the vendor money — overpaid invoices, unrecovered credits, consignment settlements, and overdue receivables — ShelfSpace is built for exactly that, reads Metrc, cuts Check 21 checks, and can be driven by you or done for you. Many operators use a general accounting service and ShelfSpace together."
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="/" class="nav-logo">
+    <div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div>
+    <span class="nav-logo-text">ShelfSpace</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="/consignment">Consignment</a></li>
+    <li><a href="/accounts-payable">Accounts Payable</a></li>
+    <li><a href="/credit-recovery">Credit Recovery</a></li>
+    <li><a href="/accounts-receivable">Accounts Receivable</a></li>
+    <li><a href="/about">About</a></li>
+    <li><a href="/pricing">Pricing</a></li>
+    <li class="nav-dropdown"><button class="nav-dropdown-toggle" aria-haspopup="true" aria-expanded="false">Platform <svg class="dropdown-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></button><div class="nav-dropdown-menu"><a href="/vendor-management">Vendor Management</a><a href="/how-it-works">How It Works</a><a href="/features">Features</a><a href="/shelfiq">ShelfiQ</a><a href="/checks">Check Payments</a><a href="/collections">Collections</a><a href="/tutorials">Tutorials</a></div></li>
+    <li><a href="/contact" class="nav-cta">Get Started <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a></li>
+  </ul>
+  <div class="nav-hamburger" onclick="document.querySelector('.nav-links').classList.toggle('mobile-open'); event.stopPropagation();"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="hero-bg-gradient"></div>
+  <div class="hero-bg-gradient-2"></div>
+  <div class="hero-grid-lines"></div>
+  <div class="section-label">Service Comparison</div>
+  <h1 class="section-title">Cannabis Back Office Service Comparison: Headquarters and ShelfSpace</h1>
+  <p class="section-desc">Two honest ways to get the money side of your dispensary off your plate. One staffs a pod of people across your whole accounting workload. The other runs the vendor money layer as software you drive or done for you.</p>
+</div>
+
+<!-- AT A GLANCE -->
+<div class="article-glance">
+  <h2>At a glance</h2>
+  <ul>
+    <li>Both are legitimate ways to outsource the cannabis back office — they solve different shapes of the same problem</li>
+    <li>Headquarters staffs a dedicated human pod across a broad scope: order entry, sales ops, AR collections, bookkeeping, month-end close, and inventory and menu data</li>
+    <li>ShelfSpace is software plus ShelfiQ focused on the retailer-to-vendor money layer: AP with Metrc three-way matching, Check 21 payments, consignment settlements, credit recovery, and AR collection</li>
+    <li>ShelfSpace's edge is being cannabis-money-native, software economics, and the option to drive it yourself instead of paying a per-seat team</li>
+    <li>Many operators keep a general accounting service and add ShelfSpace for the vendor money — the two overlap less than they look</li>
+    <li>The first step either way is a free money-review that shows what you are owed and where the leaks are</li>
+  </ul>
+</div>
+
+<!-- ARTICLE BODY -->
+<div class="article-body reveal">
+
+  <p>You have already made the hard decision: the back office is not going to run itself, and it is not going to keep running on your nights and weekends. The next decision is quieter but just as consequential. Do you hand the money work to a team of people who do it for you, or to a system built to do it? This is a cannabis back office service comparison between the two clearest answers on the market — <strong>Headquarters</strong> and <strong>ShelfSpace</strong> — written to help you match the model to your actual problem, not to talk you out of the other one.</p>
+
+  <p>Both are real, both are legitimate, and they are not the same product wearing different logos. Headquarters is a people-first service. ShelfSpace is a cannabis-money-native rail. Where they overlap, the comparison is fair game. Where they do not, pretending otherwise would waste your time.</p>
+
+  <h2>What each one actually is</h2>
+
+  <p><strong>Headquarters</strong> (tryheadquarters.com) staffs a dedicated pod of people who take on a broad slice of your back office. From their public positioning, that spans order entry and sales operations, accounts receivable collections, bookkeeping, month-end close, and inventory and menu data — the kind of outsourced accounting and operations team a growing dispensary would otherwise build in-house. The delivery model is human: you get people who learn your business and run the workload for you. If the pain you feel is "I need an accounting and ops team but do not want to hire and manage one," that is the shape Headquarters is built to fit.</p>
+
+  <p><strong>ShelfSpace</strong> is narrower on purpose. It is purpose-built software, with an AI layer called <a href="/shelfiq">ShelfiQ</a>, aimed squarely at the retailer-to-vendor money layer: <a href="/accounts-payable">accounts payable</a> with Metrc three-way matching, <a href="/blog/what-is-check-21">Check 21</a> vendor payments, <a href="/consignment">consignment settlements</a>, vendor <a href="/credit-recovery">credit recovery</a>, and accounts receivable collection. We do not do order entry. We do not keep your general ledger. We move the money between you and your vendors, catch what is wrong with it, and feed clean records to whoever keeps your books. If the pain you feel is "my vendor money is a mess," that is the shape ShelfSpace is built to fit.</p>
+
+  <h2>Where the money leaks in a dispensary</h2>
+
+  <p>The reason the vendor money layer deserves its own tool is that it is where the losses hide, and they are bigger than most operators think. This is not shrink or labor. It is the credits you never claimed, the invoices you overpaid, and the receivables that quietly slid from net-30 to net-90 while everyone was busy.</p>
+
+  <div class="stat-trio reveal">
+    <div class="stat-trio-item is-loss">
+      <svg class="stat-trio-ico" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      <p class="stat-trio-num">10&ndash;15 hrs</p>
+      <p class="stat-trio-label">a week swallowed by vendor payments, settlements, and email</p>
+    </div>
+    <div class="stat-trio-item is-loss">
+      <svg class="stat-trio-ico" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+      <p class="stat-trio-num">$200K+</p>
+      <p class="stat-trio-label">a year in untracked vendor credits at a multi-location operator</p>
+    </div>
+    <div class="stat-trio-item is-loss">
+      <svg class="stat-trio-ico" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+      <p class="stat-trio-num">$8K&ndash;$25K</p>
+      <p class="stat-trio-label">a month in recoverable credits found at one Massachusetts client</p>
+    </div>
+  </div>
+
+  <p>Those are the numbers we see over and over. The vendor money burns <strong>10 to 15 hours a week</strong> when it is done by hand — exporting the POS, building a settlement spreadsheet, matching invoices, cutting checks, chasing credits nobody wrote down. At a multi-location operator, <strong>$200,000 or more a year</strong> in vendor credits goes untracked because no single person owns the number. And in our first look at one Massachusetts client, we found <strong>$8,000 to $25,000 a month</strong> in recoverable credits sitting unclaimed. A general accounting team can keep your books beautifully and still not go hunting for that money, because a general ledger is a record of what happened, not a mechanism for recovering what a vendor owes you back.</p>
+
+  <h2>The comparison, capability by capability</h2>
+
+  <p>Here is the honest side-by-side. The rows where ShelfSpace shows a dash are not weaknesses we are hiding — they are scope we deliberately do not claim. The rows where Headquarters shows a dash reflect a capability that is not part of their public positioning as a people-first accounting and operations service, not a judgment that they could not do a version of it.</p>
+
+  <div style="max-width: 720px; margin: 0 auto; padding: 0 48px;" class="reveal">
+  <table class="compare-table">
+    <thead>
+      <tr>
+        <th>Capability</th>
+        <th>Headquarters</th>
+        <th>ShelfSpace</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Delivery model</td><td>Dedicated human pod</td><td><span class="compare-plus">Software + ShelfiQ &mdash; drive it or done for you</span></td></tr>
+      <tr><td>Order entry &amp; sales ops</td><td><span class="compare-check">&#10003;</span></td><td><span class="compare-x">&mdash;</span> <span class="compare-plus">not our scope</span></td></tr>
+      <tr><td>Bookkeeping &amp; month-end close</td><td><span class="compare-check">&#10003;</span></td><td><span class="compare-x">&mdash;</span> <span class="compare-plus">we feed clean books</span></td></tr>
+      <tr><td>Inventory &amp; menu data</td><td><span class="compare-check">&#10003;</span></td><td><span class="compare-x">&mdash;</span></td></tr>
+      <tr><td>AR / collections</td><td><span class="compare-check">&#10003;</span> Human pod</td><td><span class="compare-check">&#10003;</span> <span class="compare-plus">Software + ShelfiQ dunning</span></td></tr>
+      <tr><td>Accounts payable</td><td><span class="compare-check">&#10003;</span> Bookkeeping-side</td><td><span class="compare-check">&#10003;</span> <span class="compare-plus">Metrc-verified matching</span></td></tr>
+      <tr><td>Metrc three-way matching</td><td><span class="compare-x">&mdash;</span></td><td><span class="compare-check">&#10003;</span> <span class="compare-plus">Invoice vs. manifest vs. receipt</span></td></tr>
+      <tr><td>Cannabis vendor payments (Check 21)</td><td><span class="compare-x">&mdash;</span></td><td><span class="compare-check">&#10003;</span> <span class="compare-plus">Print at home, mobile deposit</span></td></tr>
+      <tr><td>Consignment settlements</td><td><span class="compare-x">&mdash;</span></td><td><span class="compare-check">&#10003;</span> <span class="compare-plus">Weekly, to the penny</span></td></tr>
+      <tr><td>Vendor credit recovery</td><td><span class="compare-x">&mdash;</span></td><td><span class="compare-check">&#10003;</span> <span class="compare-plus">$8K&ndash;$25K/mo found</span></td></tr>
+      <tr><td>AI vendor communication</td><td><span class="compare-x">&mdash;</span> People-first</td><td><span class="compare-check">&#10003;</span> <span class="compare-plus">ShelfiQ drafts routine email</span></td></tr>
+      <tr><td>QuickBooks sync</td><td><span class="compare-check">&#10003;</span></td><td><span class="compare-check">&#10003;</span></td></tr>
+      <tr><td>Run it yourself</td><td><span class="compare-x">&mdash;</span> Service only</td><td><span class="compare-check">&#10003;</span> <span class="compare-plus">Self-serve or hand off</span></td></tr>
+      <tr><td>280E / tax filing</td><td>280E-adjacent accounting</td><td><span class="compare-x">&mdash;</span> <span class="compare-plus">feeds your CPA</span></td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p>Read the table honestly and the shape is clear. Headquarters is wide and human across the accounting and operations stack. ShelfSpace is deep and cannabis-money-native on the vendor money layer. There is one column of genuine overlap — accounts payable and AR collections — and even there the two do it differently: a person on a pod versus software that reads Metrc and cuts a check.</p>
+
+  <h2>Human pod versus software plus AI</h2>
+
+  <p>The delivery model is the real fork in the road, so it is worth making the contrast plain.</p>
+
+  <div class="vs-split reveal">
+    <div class="vs-col vs-neg">
+      <div class="vs-head">
+        <svg class="vs-ico" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        <p class="vs-tag">The human pod</p>
+      </div>
+      <p class="vs-num">A team of people</p>
+      <p class="vs-text">People learn your business and run a broad workload for you &mdash; order entry, books, close, collections. The scope is wide and the touch is personal. The cost scales with the headcount your account needs, and the vendor money still gets a general-accounting eye, not a cannabis-money-native one.</p>
+    </div>
+    <div class="vs-col vs-pos">
+      <div class="vs-head">
+        <svg class="vs-ico" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+        <p class="vs-tag">Software + ShelfiQ</p>
+      </div>
+      <p class="vs-num">A purpose-built rail</p>
+      <p class="vs-text">The platform reads Metrc and your POS, three-way matches every invoice, runs the settlements, surfaces the credits vendors owe you, and drafts the routine vendor email. You approve in a few minutes, or hand it off entirely. The vendor money gets a tool built only for it.</p>
+    </div>
+  </div>
+
+  <p>Neither column is the villain. A wide human pod is exactly right for an operator who needs a whole accounting function and values a named team. But there are two things software does that a pod structurally cannot. First, it does not forget: every invoice is checked against the Metrc manifest and the delivery receipt, every credit is tracked to the dollar, and nothing depends on whether the right person remembered. Second, its economics do not scale with headcount — adding a fifth or tenth location multiplies the vendor count and the settlements, and the platform absorbs that without adding a salary. The AI is what keeps the model affordable and the vendor email off your team's desk. It is the engine under the hood, not the pitch.</p>
+
+  <div class="blog-callout">
+    <svg class="blog-callout-ico" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+    <p class="blog-callout-text">A general accounting team records the vendor money. A cannabis-money-native rail recovers it. The difference is $8K to $25K a month in one client's credits alone.</p>
+  </div>
+
+  <h2>Why cannabis-money-native matters</h2>
+
+  <p>The strongest reason to consider ShelfSpace as a <strong>Headquarters cannabis alternative</strong> for the money layer is that the vendor money in cannabis does not behave like it does anywhere else, and a tool built for it catches things a general service will not.</p>
+
+  <p>Every regulated delivery flows through Metrc. When the platform three-way matches an invoice against the manifest and the receipt, it flags the vendor who billed you for 50 units when 47 arrived, and the duplicate that two of your locations both paid. Payment runs on <a href="/blog/what-is-check-21">Check 21</a> checks because the card and ACH rails are unreliable for plant-touching businesses — a vendor who cannot take a transfer still gets paid by printing at home and depositing on their phone. Consignment is a settlement workflow, not an invoice workflow, and the platform reconciles sell-through to the penny with a report both sides trust. And credit recovery — returns, expirations, damaged units, co-marketing dollars promised and never applied — is the piece almost nobody tracks, which is exactly why it is worth the most.</p>
+
+  <p>On the receivable side, the same logic holds. If you also wholesale, someone has to chase the buyers who slid past terms. The default move is a <a href="/blog/cannabis-collections-outsourcing">collections agency</a>, and those take a <strong>25% to 50% contingency cut</strong> of whatever they recover — a brutal price for money you were already owed. Running <a href="/blog/cannabis-accounts-receivable-management">AR collection</a> as software with ShelfiQ handling the polite, persistent follow-up keeps that recovery whole instead of handing half of it away.</p>
+
+  <h2>You can drive it yourself</h2>
+
+  <p>Here is the structural difference a service comparison usually buries. A human pod is a service and only a service — you pay for the team whether or not you would rather touch it yourself. ShelfSpace can be either. Some operators drive the software: they log in, review the week's settlements and payments, approve in a few minutes, and move on. Others hand it off entirely and we run <a href="/accounts-payable">accounts payable</a>, settlements, credit recovery, and collections for them, done for you, and they watch the results land in the portal and in QuickBooks. Same work, same numbers. The only question is who touches the keyboard — and it is your question to answer, not the website's.</p>
+
+  <p>This is also why ShelfSpace does not try to replace your <a href="/blog/outsourced-finance-team-cannabis">finance team</a> or your CPA. Your accountant files your taxes and keeps you defensible under 280E — keep them. What ShelfSpace displaces is the operational money labor: the AP clerk, the outsourced firm's data-entry hours, the office manager's spreadsheet time. The <a href="/blog/outsourced-cannabis-back-office">back office</a> we take over is the part that moves money between you and your vendors, and it hands your accountant clean, categorized, QuickBooks-ready books instead of a shoebox.</p>
+
+  <h2>Who each one is for</h2>
+
+  <p><strong>Choose a full-service human pod</strong> like Headquarters when the pain is broad accounting and operations labor — order entry, bookkeeping, month-end close, inventory and menu upkeep — and you want a named team to own it. That is a genuine need, and a wide people-first service is the right answer to it.</p>
+
+  <p><strong>Choose ShelfSpace</strong> when the pain is the vendor money — overpaid invoices, unrecovered credits, consignment settlements that do not reconcile, and receivables aging past terms — and you want a tool built for exactly that, reading Metrc, cutting Check 21 checks, and running either under your hand or ours. And plenty of operators do both: a general accounting service for the books, ShelfSpace for the vendor money the books were never going to recover.</p>
+
+  <blockquote>
+    <p>The honest comparison is not which one wins. It is which shape of problem you have. If it is the vendor money, ShelfSpace is built for it, reads Metrc, and can be yours to drive or ours to run.</p>
+  </blockquote>
+
+  <p>Either way, the first move is not a demo — it is a number. We will connect to Metrc and your POS and show you what you are owed in unrecovered credits, how much of your receivables is overdue, and where your invoices do not match Metrc. It is free, specific to your operation, and it usually surfaces more than it costs to fix.</p>
+
+</div>
+
+<!-- FAQ -->
+<section style="max-width: 720px; margin: 0 auto; padding: 0 48px 60px;">
+  <h2 style="font-size: 22px; font-weight: 700; color: #1b4332; margin-bottom: 24px; letter-spacing: -0.5px;">Frequently asked questions</h2>
+  <div class="faq-list">
+    <details>
+      <summary>What is the difference between Headquarters and ShelfSpace?</summary>
+      <p>Headquarters staffs a dedicated pod of people who handle a wide back office — order entry, sales ops, AR collections, bookkeeping, month-end close, and inventory and menu data. ShelfSpace is purpose-built software plus ShelfiQ, an AI layer, focused on the retailer-to-vendor money layer: accounts payable with Metrc three-way matching, Check 21 vendor payments, consignment settlements, vendor credit recovery, and AR collection. One is a people-first accounting service; the other is a cannabis-money-native rail you can drive yourself or hand off.</p>
+    </details>
+    <details>
+      <summary>Is ShelfSpace a Headquarters cannabis alternative?</summary>
+      <p>For the vendor money layer, yes. If what you need handled is paying vendors, settling consignment, recovering the credits vendors owe you, and collecting overdue invoices, ShelfSpace runs that end to end and reads Metrc directly. If what you need is full-service bookkeeping, order entry, and month-end close staffed by people, Headquarters covers a broader accounting scope that ShelfSpace does not try to replace.</p>
+    </details>
+    <details>
+      <summary>Does ShelfSpace do bookkeeping and month-end close?</summary>
+      <p>No. ShelfSpace moves the money and feeds your books. Every payment, settlement, and credit syncs to QuickBooks with the categories your accountant needs, so your bookkeeper or CPA opens a clean ledger instead of a pile of receipts. Full-service bookkeeping and month-end close are the kind of work a service like Headquarters or your CPA does; ShelfSpace is the operational money layer that feeds them.</p>
+    </details>
+    <details>
+      <summary>Can I run ShelfSpace myself instead of paying for a service?</summary>
+      <p>Yes. That is the main structural difference from a human-pod service. Some operators drive the software themselves and approve the week's payments and settlements in a few minutes. Others hand it off entirely and we run accounts payable, settlements, credit recovery, and collections for them. Same work and same numbers; who touches the keyboard is your call.</p>
+    </details>
+    <details>
+      <summary>Which one should a dispensary choose?</summary>
+      <p>It depends on the shape of the problem. If the pain is broad accounting labor across order entry, bookkeeping, and month-end close, a full-service human pod like Headquarters fits. If the pain is the vendor money — overpaid invoices, unrecovered credits, consignment settlements, and overdue receivables — ShelfSpace is built for exactly that, reads Metrc, cuts Check 21 checks, and can be driven by you or done for you. Many operators use a general accounting service and ShelfSpace together.</p>
+    </details>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-content">
+    <div class="section-label reveal">Get Started</div>
+    <h2 class="section-title reveal">See What Your Vendor Money Is Costing You</h2>
+    <p class="section-desc reveal">We'll connect to Metrc and your POS and show you the hours, the overdue receivables, and the credits you're not recovering. Free, specific to your operation, no commitment.</p>
+    <div class="cta-actions reveal">
+      <a href="/contact" class="btn-primary">
+        Get My Free Money-Review
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+      <a href="/contact" class="btn-secondary">Talk to us</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="/" class="nav-logo"><div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div><span class="nav-logo-text">ShelfSpace</span></a>
+      <p>Every Vendor. Every Payment. One Engine.</p>
+    </div>
+    <div class="footer-col"><h4>Services</h4><ul><li><a href="/consignment">Consignment</a></li><li><a href="/accounts-payable">Accounts Payable</a></li><li><a href="/credit-recovery">Credit Recovery</a></li><li><a href="/checks">Check Payments</a></li><li><a href="/shelfiq">ShelfiQ</a></li></ul></div>
+    <div class="footer-col"><h4>Platform</h4><ul><li><a href="/features">Features</a></li><li><a href="/how-it-works">How It Works</a></li><li><a href="/pricing">Pricing</a></li><li><a href="/about">About</a></li><li><a href="/blog">Blog</a></li><li><a href="/docs">Docs</a></li><li><a href="/tutorials">Tutorials</a></li></ul></div>
+    <div class="footer-col"><h4>Access</h4><ul><li><a href="https://ourshelf.space/login">Login</a></li><li><a href="/contact">Talk to us</a></li><li><a href="/contact">Contact</a></li><li><a href="/accounts-receivable">Accounts Receivable</a></li><li><a href="/vendors">For Vendors</a></li><li><a href="/for-bookkeepers">For Bookkeepers</a></li></ul></div>
+    <div class="footer-col"><h4>Company</h4><ul><li><a href="mailto:support@shelfspace.pro">Support</a></li><li><a href="https://linkedin.com/company/shelfspace-pro" target="_blank" rel="noopener" class="footer-social-link"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> LinkedIn</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><p>&copy; 2026 ShelfSpace Technologies Inc.</p><div class="footer-bottom-links"><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div></div>
+</footer>
+
+<script>
+(function() {
+  var nav = document.getElementById('nav');
+  var pageHero = document.querySelector('.page-hero');
+  var parallaxSections = [
+    document.querySelector('.cta-section')
+  ];
+
+  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var isMobile = window.innerWidth < 900;
+  var ticking = false;
+
+  /* ── Hero entrance ── */
+  requestAnimationFrame(function() {
+    nav.classList.toggle('scrolled', window.scrollY > 20);
+    if (pageHero) pageHero.classList.add('hero-loaded');
+  });
+
+  /* ── Scroll-Triggered Reveals (with unobserve for perf) ── */
+  var revealObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(function(el) { revealObserver.observe(el); });
+
+  /* ── Scroll handler (rAF + ticking flag) ── */
+  function onScroll() {
+    var scrollY = window.scrollY;
+    nav.classList.toggle('scrolled', scrollY > 20);
+    if (prefersReduced || isMobile) return;
+    var wh = window.innerHeight;
+    parallaxSections.forEach(function(section) {
+      if (!section) return;
+      var rect = section.getBoundingClientRect();
+      if (rect.bottom < 0 || rect.top > wh) return;
+      var center = rect.top + rect.height / 2 - wh / 2;
+      section.style.setProperty('--parallax-y', (center * 0.08) + 'px');
+    });
+  }
+
+  window.addEventListener('scroll', function() {
+    if (!ticking) {
+      requestAnimationFrame(function() {
+        onScroll();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, { passive: true });
+
+  onScroll();
+
+  window.addEventListener('resize', function() {
+    isMobile = window.innerWidth < 900;
+    if (isMobile) {
+      parallaxSections.forEach(function(section) {
+        if (section) section.style.setProperty('--parallax-y', '0px');
+      });
+    }
+  });
+
+  document.addEventListener('click', function() {
+    var navLinks = document.querySelector('.nav-links');
+    if (navLinks && navLinks.classList.contains('mobile-open')) {
+      navLinks.classList.remove('mobile-open');
+    }
+  });
+})();
+</script>
+<script src="/shelfiq-widget.js"></script>
+</body>
+</html>
