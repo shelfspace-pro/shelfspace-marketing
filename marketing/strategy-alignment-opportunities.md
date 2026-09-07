@@ -2,7 +2,7 @@
 
 **Status:** ✅ EXECUTED 2026-09-07 (commit `126f8a4`) across all marketing pages + all 108 blog posts, pushed live. Gate: `check-docs-forbidden.sh` + `check-blog-sync.sh` clean; grep-clean for keep-100%/no-cut/vendor-free/self-serve-leads/pricing outside `/pricing`.
 
-**STILL TODO — surfaces NOT covered by this pass (need a dedicated comb, own systems):**
+**✅ PASS 2 DONE 2026-09-07 (commits `263884e` + `5512afe`)** — docs/, tutorials/, _pdf-source/ AND two surfaces the caveat missed: the retired two-tier pricing baked into `docs-search.js` (the search index) and the `api/shelfiq-chat.js` bot prompt (which said "It is NOT a managed service, you drive the system"). Eval PDF regenerated. Site is grep-clean + gate-clean site-wide. Original caveat list (now resolved):**
 - `docs/**` — help docs carry pricing/"keep 100%": `docs/billing/overview.html` is literally a "keep 100% / no percentage" billing doc; also `docs/consignment/*`, `docs/vendor-portal/*`, `docs/getting-started.html`, `docs/checks/mailing.html`, `docs/index.html`. Editing needs care re: docs-search index + sibling related-links (see marketing/CLAUDE.md Documentation System). `docs/billing/overview.html` probably should redirect to `/pricing`.
 - `tutorials/free-dispensary-eval.html` — carries pricing language.
 - `_pdf-source/evaluation-sample.html` — contains the **RETIRED $20-per-artifact** model + "keep 100%"; feeds a sample PDF (don't drive-by edit — regenerate). `_pdf-source/one-pager.html` got only the CTA-label swap in this pass.
