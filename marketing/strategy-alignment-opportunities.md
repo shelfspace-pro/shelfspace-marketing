@@ -10,11 +10,11 @@
 
 ## Decisions — LOCKED (Chris, 2026-09-07)
 
-- **D1 — Self-serve: leave the door OPEN.** Managed-services / done-for-you is the LEAD everywhere, but keep self-serve as an available option — **demote it, don't delete it.** "Software you drive, or done for you" may remain as a secondary mention; it must never be the hero lead and never a CTA destination (see D3).
+- **D1 — Self-serve as a DELIVERY MODE only; NO self-serve signup.** Done-for-you is the lead everywhere. Self-serve survives ONLY as a delivery option arranged in the consult ("if you'd rather drive it yourself, we set that up") — there is **NO public self-serve signup flow, and nothing on the site is reachable to one.** "Software you drive" may appear as a demoted secondary mention in copy, never a hero lead, never a link/CTA target.
 - **D2 — Financing/rail endgame: SILENT.** No rail/financing/factoring language on the public site for now. (Theme F below is DROPPED.)
-- **D3 — Every page drives to `https://shelfspace.pro/contact`.** Every PRIMARY CTA → `/contact`, never a self-serve signup. Rename every **"Book a demo" → "Book a Free Consult"** (→ `/contact`). The self-serve signup stays reachable for anyone who wants it (D1), but NO page funnels to it.
-- **D4 — Pricing lives ONLY on `https://shelfspace.pro/pricing`.** Every pricing reference anywhere else on the site is removed or converted to a link to `/pricing`. There is **no mention of pricing on any other page** — no "custom pricing," no cost FAQs, no "no cut / keep 100%," no tier/plan/fee language outside `/pricing`.
-  - **One sub-question for you:** does the free **"see what you're owed" diagnostic on-ramp** count as a "pricing mention"? It's the funnel's entry (a lead magnet, $0 to look), not a price/tier. **Recommendation: keep it as the on-ramp, treat it as not-pricing.** If you want it gone too, say so and it routes to `/contact` with no "free" language.
+- **D3 — Every path → `https://shelfspace.pro/contact`. Signup is NOT reachable.** Every CTA/button/link routes to `/contact`. Remove every inbound link to `signup.html`; `signup.html` itself redirects to `/contact` (no public account-creation entry). Rename every **"Book a demo" → "Book a Free Consult"** (→ `/contact`).
+- **D4 — Pricing lives ONLY on `https://shelfspace.pro/pricing`.** Every pricing reference anywhere else is removed or converted to a link to `/pricing`. **No mention of pricing on any other page** — no "custom pricing," no cost FAQs, no "no cut / keep 100%," no tier/plan/fee language outside `/pricing`.
+  - **Resolved (kept):** the free **"see what you're owed" diagnostic on-ramp** stays — it's the funnel entry (a $0 look that routes to `/contact`), not a price/tier. It is NOT treated as a pricing mention.
 
 ---
 
@@ -43,7 +43,7 @@ Managed-services/done-for-you becomes the LEAD in every hero, subhead, FAQ answe
 ### Theme C — CTA routing + "Book a Free Consult" — D3
 - Every primary CTA button → `https://shelfspace.pro/contact`. Audit each page's primary CTA; any that points at `signup.html` (self-serve) re-points to `/contact`.
 - `platform.html` "**Book a demo**" (~280, ~294, ~505, ~527) → "**Book a Free Consult**" → `/contact`. Grep "Book a demo" sitewide — replace every instance.
-- `signup.html` stays reachable (D1) but is not a CTA destination anywhere. (No auth-flow change needed — just stop funneling to it.)
+- **`signup.html` is NOT reachable.** Remove every inbound link to it — nav, footer, page CTAs, "Sign Up" buttons, `login.html`'s "create an account" link, blog CTAs. Then make `signup.html` itself redirect to `/contact` (meta-refresh + JS + a `/vercel.json` redirect so the URL can't be reached directly). Grep `signup` / `Sign Up` / `Create account` / `Start free` sitewide.
 
 ### Theme D — Tool-voice → we-voice (done-for-you is OUR labor)
 - `index.html` AP tour ~945 "The platform three-way matches… **You cut the check.**" → "we three-way match… then cut the check the moment you approve." (also ~910/~976/~977)
