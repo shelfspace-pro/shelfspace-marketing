@@ -254,7 +254,7 @@ function emailShell({ preheader = '', bodyHtml }) {
         <tr><td style="padding:32px;font-family:${FONT};color:#334155;font-size:15px;line-height:1.65;">${bodyHtml}</td></tr>
         <tr><td bgcolor="#1b4332" style="background:#1b4332;padding:28px 32px;font-family:${FONT};">
           <p style="margin:0 0 6px;font-size:15px;font-weight:700;color:#ffffff;">ShelfSpace</p>
-          <p style="margin:0 0 14px;font-size:13px;color:#95d5b2;font-style:italic;">Every Vendor. Every Payment. One Engine.</p>
+          <p style="margin:0 0 14px;font-size:13px;color:#95d5b2;font-style:italic;">Operations and Payments Intelligence</p>
           <p style="margin:0 0 6px;font-size:13px;"><a href="https://shelfspace.pro" style="color:#d8f3dc;text-decoration:none;font-weight:600;">shelfspace.pro</a></p>
           <p style="margin:0;font-size:11px;color:rgba(255,255,255,0.45);">Certified Metrc Third-Party Vendor &nbsp;&middot;&nbsp; &copy; 2026 ShelfSpace Technologies Inc.</p>
         </td></tr>
