@@ -93,6 +93,39 @@
   .article-body .digest-mock-cap { font-size: 13px; color: var(--slate-500); text-align: center; margin: 0 0 24px; }
   @media (max-width: 520px) { .digest-mock-stats { margin: 12px 14px; } .digest-mock-row, .digest-mock-bucket { margin-left: 14px; margin-right: 14px; } .digest-mock-top { padding: 16px 14px 4px; } .digest-mock-stat b { font-size: 15px; } }
 
+  /* ─── REAL SCREENSHOTS ─── */
+  .shot { margin: 32px auto 8px; max-width: 760px; border: 1px solid var(--slate-200); border-radius: 16px; overflow: hidden; background: var(--white); box-shadow: 0 22px 48px -24px rgba(27,67,50,0.32); }
+  .shot img { display: block; width: 100%; height: auto; }
+  .shot-cap, .article-body .shot-cap, .docs-content .shot-cap { max-width: 640px; margin: 12px auto 32px; font-size: 13px; line-height: 1.55; color: var(--slate-500); text-align: center; }
+  .shot-cap strong { color: var(--green-dark); font-weight: 600; }
+  .shot-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 900px; margin: 32px auto 8px; align-items: start; }
+  .shot-pair .shot { margin: 0; }
+  @media (max-width: 760px) { .shot-pair { grid-template-columns: 1fr; } }
+
+  /* ─── PHONE FRAME (auto-scrolling real email) ─── */
+  .phone { --phone-ink: var(--slate-900); position: relative; width: 300px; max-width: 100%; height: 600px; --screen-h: 578px; margin: 0 auto; border: 11px solid var(--phone-ink); border-radius: 42px; overflow: hidden; background: var(--slate-50); box-shadow: 0 30px 60px -28px rgba(27,67,50,0.45); }
+  .phone::before { content: ''; position: absolute; top: 8px; left: 50%; transform: translateX(-50%); width: 86px; height: 22px; border-radius: 12px; background: var(--phone-ink); z-index: 2; }
+  .phone-screen { position: absolute; inset: 0; overflow: hidden; }
+  .phone-screen img { display: block; width: 100%; height: auto; animation: phone-scroll 16s ease-in-out infinite; }
+  @keyframes phone-scroll { 0%, 12% { transform: translateY(0); } 55%, 70% { transform: translateY(calc(-100% + var(--screen-h))); } 100% { transform: translateY(0); } }
+  /* ─── HERO ILLUSTRATION ─── */
+  .rep-hero { --bubble-blue: #2f7df6; display: grid; grid-template-columns: auto 1fr; gap: 48px; align-items: center; max-width: 820px; margin: 0 auto 56px; padding: 0 24px; }
+  .rep-hero-phone { position: relative; }
+  .rep-hero-tag { position: absolute; top: 72px; left: -28px; z-index: 3; background: var(--green-deep); color: var(--white); font-family: var(--font-mono); font-size: 12px; padding: 6px 12px; border-radius: 999px; box-shadow: 0 10px 24px -10px rgba(27,67,50,0.5); }
+  .rep-hero-flow { display: flex; flex-direction: column; gap: 18px; align-items: flex-start; }
+  .rep-hero-tap { display: inline-flex; align-items: center; gap: 10px; font-size: 15px; color: var(--slate-600); opacity: 0; animation: hero-in 12s ease infinite; }
+  .rep-hero-tap b { color: var(--green-deep); }
+  .rep-hero-dot { width: 14px; height: 14px; border-radius: 50%; background: var(--green-mid); box-shadow: 0 0 0 0 rgba(64,145,108,0.5); animation: hero-pulse 1.6s ease-out infinite; }
+  .rep-hero-bubble { max-width: 340px; background: var(--bubble-blue); color: var(--white); font-size: 14.5px; line-height: 1.5; padding: 14px 16px; border-radius: 20px 20px 6px 20px; box-shadow: 0 14px 30px -16px rgba(27,67,50,0.45); opacity: 0; animation: hero-in 12s ease infinite; animation-delay: 1.2s; }
+  .rep-hero-bubble u { text-decoration-thickness: 1px; }
+  .rep-hero-paid { display: inline-flex; align-items: center; gap: 10px; background: var(--green-ghost); border: 1px solid var(--green-accent); color: var(--green-deep); font-size: 15px; padding: 10px 16px; border-radius: 12px; opacity: 0; animation: hero-in 12s ease infinite; animation-delay: 2.6s; }
+  .rep-hero-paid b { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+  .rep-hero-paid svg { width: 18px; height: 18px; fill: none; stroke: var(--green-mid); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+  @keyframes hero-in { 0% { opacity: 0; transform: translateY(12px); } 8%, 80% { opacity: 1; transform: none; } 90%, 100% { opacity: 0; transform: none; } }
+  @keyframes hero-pulse { 0% { box-shadow: 0 0 0 0 rgba(64,145,108,0.5); } 100% { box-shadow: 0 0 0 14px rgba(64,145,108,0); } }
+  @media (max-width: 760px) { .rep-hero { grid-template-columns: 1fr; gap: 28px; justify-items: center; } .rep-hero-flow { align-items: center; } .rep-hero-tag { left: -8px; } .phone { height: 520px; --screen-h: 498px; } }
+  @media (prefers-reduced-motion: reduce) { .rep-hero-tap, .rep-hero-bubble, .rep-hero-paid { opacity: 1; animation: none; } .rep-hero-dot, .phone-screen img { animation: none; } }
+
   /* ─── FAQ ─── */
   .faq-section { max-width: 720px; margin: 0 auto; padding: 0 48px 60px; }
   .faq-header { margin-bottom: 24px; }
@@ -276,6 +309,19 @@ document.head.appendChild(o)}initApollo();</script>
   <p class="section-desc">Your reps own the relationships. Now each one starts the week with every open invoice on their accounts, oldest first, and a one-tap way to text the buyer a pay link.</p>
 </div>
 
+<!-- HERO ILLUSTRATION: Monday email → one tap → text to buyer → paid -->
+<div class="rep-hero reveal" role="img" aria-label="A sales rep's Monday collections email on a phone, a pre-written text to the buyer with the pay link, and the invoice marked paid">
+  <div class="rep-hero-phone">
+    <div class="phone"><div class="phone-screen"><img src="/screenshots/sales-reps/weekly-email-phone.webp" alt="" width="860" height="2250"></div></div>
+    <span class="rep-hero-tag">Monday, 7:00 AM</span>
+  </div>
+  <div class="rep-hero-flow">
+    <div class="rep-hero-tap"><span class="rep-hero-dot"></span>Rep taps <b>Text</b></div>
+    <div class="rep-hero-bubble">Hi Sam, quick note from Verdant Hill Botanical: invoice #1043 for $3,186.00 was due 06/24/2026.<br>Pay securely here: <u>ourshelf.space/pay/…</u></div>
+    <div class="rep-hero-paid"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="5 12 10 17 19 7"/></svg><span>Paid · <b>$3,186.00</b></span></div>
+  </div>
+</div>
+
 <!-- AT A GLANCE -->
 <div class="article-glance">
   <h2>At a glance</h2>
@@ -301,28 +347,8 @@ document.head.appendChild(o)}initApollo();</script>
 
 <p>One email per rep, every Monday at 7 AM their time. It opens with four numbers: <strong>total owed</strong>, the amount <strong>31+ days late</strong>, the number of <strong>invoices</strong>, and the number of <strong>accounts</strong>. Then every open invoice on their accounts, grouped by how late it is and sorted oldest first: 91+ days, 61–90, 31–60, 1–30, then the ones that aren't due yet.</p>
 
-<div class="digest-mock reveal" role="img" aria-label="Example weekly sales rep collections email">
-  <div class="digest-mock-top">
-    <p class="digest-mock-hi">Hi Jordan,</p>
-    <p class="digest-mock-sub">Here are this week's open invoices for your accounts, oldest first. Tap Text or Email to send your customer their pay link, or View to open the invoice.</p>
-  </div>
-  <div class="digest-mock-stats">
-    <div class="digest-mock-stat"><span>Total owed</span><b>$48,215.40</b></div>
-    <div class="digest-mock-stat"><span>31+ days late</span><b class="late">$9,870.00</b></div>
-    <div class="digest-mock-stat"><span>Invoices</span><b>14</b></div>
-    <div class="digest-mock-stat"><span>Accounts</span><b>9</b></div>
-  </div>
-  <div class="digest-mock-bucket b91"><span>91+ days late · 1</span><span>$3,186.00</span></div>
-  <div class="digest-mock-row"><span class="payer">Holistic Cannabis Co.</span><span class="amt">$3,186.00</span><span class="meta">#1043 · <b class="l91">96d late</b></span><span class="acts">Text · Email · View</span></div>
-  <div class="digest-mock-bucket b30"><span>31–60 days late · 1</span><span>$6,684.00</span></div>
-  <div class="digest-mock-row"><span class="payer">Green Valley Provisions</span><span class="amt">$6,684.00</span><span class="meta">#1088 · <b class="l30">44d late</b></span><span class="acts">Text · Email · View</span></div>
-  <div class="digest-mock-bucket b30"><span>1–30 days late · 2</span><span>$6,412.50</span></div>
-  <div class="digest-mock-row"><span class="payer">Evergreen Wellness — Downtown</span><span class="amt">$4,092.00</span><span class="meta">#1117 · <b class="l30">20d late</b></span><span class="acts">Text · Email · View</span></div>
-  <div class="digest-mock-row"><span class="payer">Riverbend Dispensary</span><span class="amt">$2,320.50</span><span class="meta">#1131 · <b class="l30">6d late</b></span><span class="acts">Text · Email · View</span></div>
-  <div class="digest-mock-more">+ 10 more invoices, through the ones not yet due</div>
-  <div class="digest-mock-foot">Sent every Monday by ShelfSpace. Pay links open without a login.</div>
-</div>
-<p class="digest-mock-cap"><strong>A rep's Monday email.</strong> Account names and amounts are an illustration.</p>
+<div class="shot reveal" style="max-width:430px;"><img src="/screenshots/sales-reps/weekly-email-phone.webp" alt="A sales rep's weekly collections email: total owed, 31+ days late, invoice and account counts, then every open invoice grouped by days late with Text, Email and View links" width="860" height="2250" loading="lazy"></div>
+<p class="shot-cap"><strong>The real email, as a rep sees it on their phone.</strong> Shown with sample accounts and amounts.</p>
 
 <p>The not-yet-due invoices matter more than they look. A rep walking into a store on Tuesday can say "you've got one due Friday too" and clear two invoices in one conversation. That's how you stop invoices from going late in the first place.</p>
 
@@ -372,6 +398,15 @@ document.head.appendChild(o)}initApollo();</script>
   <li><strong>Or import your spreadsheet.</strong> Most brands already track this in Excel. Upload it and the platform matches each account, adds any new reps, and shows you every change before anything is saved.</li>
 </ul>
 
+<div class="shot-pair reveal">
+  <div class="shot"><img src="/screenshots/sales-reps/assign-bulk.webp" alt="Account Assignments by account: unassigned accounts at the top, three selected, with an Assign to bulk bar" width="1400" height="1143" loading="lazy"></div>
+  <div class="shot"><img src="/screenshots/sales-reps/assign-by-rep.webp" alt="Account Assignments by rep: each rep's accounts as chips with an Add accounts button, plus an Unassigned accounts card" width="1400" height="1220" loading="lazy"></div>
+</div>
+<p class="shot-cap"><strong>By account or by rep.</strong> Select a batch of unassigned accounts and assign them in one move, or open a rep and hand them more.</p>
+
+<div class="shot reveal" style="max-width:560px;"><img src="/screenshots/sales-reps/import-preview.webp" alt="Import sales reps and assignments: a preview showing one new rep to create, five assignments to set, and one payer that couldn't be matched" width="1344" height="1760" loading="lazy"></div>
+<p class="shot-cap"><strong>Import from your spreadsheet.</strong> You see every new rep and every assignment before anything is saved, plus anything that didn't match.</p>
+
 <p>One rep per account keeps it simple. Reassigning a territory is a dropdown change, and next Monday's emails follow it.</p>
 
 <div class="stat-trio reveal">
@@ -411,6 +446,9 @@ document.head.appendChild(o)}initApollo();</script>
   <li>Switch it off for one rep, or turn a rep back on</li>
   <li>Choose whether unassigned accounts go to your AR contact</li>
 </ul>
+
+<div class="shot reveal" style="max-width:640px;"><img src="/screenshots/sales-reps/digest-settings.webp" alt="Weekly collections digest settings: on/off switch, next send date, who gets it with per-rep switches, and Preview as with Send me a test" width="1400" height="1672" loading="lazy"></div>
+<p class="shot-cap"><strong>The Weekly collections digest card.</strong> Turn it on, choose who gets it, and preview any rep's email before Monday.</p>
 
 <p>The email carries your logo and colors, so reps recognize it as yours. Replies go to your AR inbox. The step-by-step setup is in the <a href="/docs/vendor-portal/weekly-sales-rep-digest">weekly sales rep collections email doc</a> and the <a href="/docs/vendor-portal/sales-rep-assignments">sales rep assignments doc</a>.</p>
 

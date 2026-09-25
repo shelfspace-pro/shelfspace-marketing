@@ -196,6 +196,22 @@
   .docs-content .digest-mock-cap { font-size: 13px; color: var(--slate-500); text-align: center; margin: 0 0 24px; }
   @media (max-width: 520px) { .digest-mock-stats { margin: 12px 14px; } .digest-mock-row, .digest-mock-bucket { margin-left: 14px; margin-right: 14px; } .digest-mock-top { padding: 16px 14px 4px; } .digest-mock-stat b { font-size: 15px; } }
 
+  /* ─── REAL SCREENSHOTS ─── */
+  .shot { margin: 28px auto 8px; max-width: 720px; border: 1px solid var(--slate-200); border-radius: 16px; overflow: hidden; background: var(--white); box-shadow: 0 22px 48px -24px rgba(27,67,50,0.32); }
+  .shot img { display: block; width: 100%; height: auto; }
+  .shot-cap, .article-body .shot-cap, .docs-content .shot-cap { max-width: 640px; margin: 12px auto 32px; font-size: 13px; line-height: 1.55; color: var(--slate-500); text-align: center; }
+  .shot-cap strong { color: var(--green-dark); font-weight: 600; }
+  .shot-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 900px; margin: 32px auto 8px; align-items: start; }
+  .shot-pair .shot { margin: 0; }
+  @media (max-width: 760px) { .shot-pair { grid-template-columns: 1fr; } }
+
+  /* ─── PHONE FRAME (auto-scrolling real email) ─── */
+  .phone { --phone-ink: var(--slate-900); position: relative; width: 300px; max-width: 100%; height: 600px; --screen-h: 578px; margin: 0 auto; border: 11px solid var(--phone-ink); border-radius: 42px; overflow: hidden; background: var(--slate-50); box-shadow: 0 30px 60px -28px rgba(27,67,50,0.45); }
+  .phone::before { content: ''; position: absolute; top: 8px; left: 50%; transform: translateX(-50%); width: 86px; height: 22px; border-radius: 12px; background: var(--phone-ink); z-index: 2; }
+  .phone-screen { position: absolute; inset: 0; overflow: hidden; }
+  .phone-screen img { display: block; width: 100%; height: auto; animation: phone-scroll 16s ease-in-out infinite; }
+  @keyframes phone-scroll { 0%, 12% { transform: translateY(0); } 55%, 70% { transform: translateY(calc(-100% + var(--screen-h))); } 100% { transform: translateY(0); } }
+
   /* ── Footer 5-col ── */
   .footer-top { grid-template-columns: 2fr 1fr 1fr 1fr 1fr; }
 
@@ -309,28 +325,8 @@ document.head.appendChild(o)}initApollo();</script>
     <h2>What Each Rep Receives</h2>
     <p>The email opens with four numbers: <strong>total owed</strong>, the amount <strong>31+ days late</strong>, the number of <strong>invoices</strong>, and the number of <strong>accounts</strong>. Below that, invoices are grouped by age (91+ days late, 61–90, 31–60, 1–30, then current and not yet due), oldest first. Every row shows the account, invoice number, amount, and how late it is or when it's due.</p>
 
-    <div class="digest-mock" role="img" aria-label="Example weekly sales rep collections email">
-      <div class="digest-mock-top">
-        <p class="digest-mock-hi">Hi Jordan,</p>
-        <p class="digest-mock-sub">Here are this week's open invoices for your accounts, oldest first. Tap Text or Email to send your customer their pay link, or View to open the invoice.</p>
-      </div>
-      <div class="digest-mock-stats">
-        <div class="digest-mock-stat"><span>Total owed</span><b>$48,215.40</b></div>
-        <div class="digest-mock-stat"><span>31+ days late</span><b class="late">$9,870.00</b></div>
-        <div class="digest-mock-stat"><span>Invoices</span><b>14</b></div>
-        <div class="digest-mock-stat"><span>Accounts</span><b>9</b></div>
-      </div>
-      <div class="digest-mock-bucket b91"><span>91+ days late · 1</span><span>$3,186.00</span></div>
-      <div class="digest-mock-row"><span class="payer">Holistic Cannabis Co.</span><span class="amt">$3,186.00</span><span class="meta">#1043 · <b class="l91">96d late</b></span><span class="acts">Text · Email · View</span></div>
-      <div class="digest-mock-bucket b30"><span>31–60 days late · 1</span><span>$6,684.00</span></div>
-  <div class="digest-mock-row"><span class="payer">Green Valley Provisions</span><span class="amt">$6,684.00</span><span class="meta">#1088 · <b class="l30">44d late</b></span><span class="acts">Text · Email · View</span></div>
-  <div class="digest-mock-bucket b30"><span>1–30 days late · 2</span><span>$6,412.50</span></div>
-      <div class="digest-mock-row"><span class="payer">Evergreen Wellness — Downtown</span><span class="amt">$4,092.00</span><span class="meta">#1117 · <b class="l30">20d late</b></span><span class="acts">Text · Email · View</span></div>
-      <div class="digest-mock-row"><span class="payer">Riverbend Dispensary</span><span class="amt">$2,320.50</span><span class="meta">#1131 · <b class="l30">6d late</b></span><span class="acts">Text · Email · View</span></div>
-      <div class="digest-mock-more">+ 10 more invoices, through the ones not yet due</div>
-  <div class="digest-mock-foot">Sent every Monday by ShelfSpace. Pay links open without a login.</div>
-    </div>
-    <p class="digest-mock-cap">An illustration. Account names and amounts are examples.</p>
+    <div class="shot" style="max-width:400px;"><img src="/screenshots/sales-reps/weekly-email-phone.webp" alt="A sales rep's weekly collections email with totals and every open invoice grouped by days late, each with Text, Email and View" width="860" height="2250" loading="lazy"></div>
+    <p class="shot-cap"><strong>A rep's Monday email on a phone.</strong> Sample accounts and amounts.</p>
 
     <h2>Text, Email, View: How Reps Collect in One Tap</h2>
     <ul>
@@ -353,6 +349,8 @@ document.head.appendChild(o)}initApollo();</script>
       <li>In the <strong>Weekly collections digest</strong> card, turn it on. Choose whether unassigned accounts go to your AR contact.</li>
       <li>Use <strong>Preview as</strong> to see exactly what any rep will get, or <strong>Send me a test</strong> to get a copy in your own inbox.</li>
     </ol>
+    <div class="shot"><img src="/screenshots/sales-reps/digest-settings.webp" alt="Weekly collections digest settings card with per-rep switches, Preview as and Send me a test" width="1400" height="1672" loading="lazy"></div>
+    <p class="shot-cap"><strong>Settings › Sales Reps › Weekly collections digest.</strong></p>
     <p>From the same card you can switch off the email for an individual rep, or turn a rep back on after they unsubscribed. The email carries your logo and colors, and replies go to your AR inbox.</p>
 
     <h2>Why It Speeds Up Collections</h2>

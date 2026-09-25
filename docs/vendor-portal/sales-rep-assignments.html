@@ -171,6 +171,22 @@
   .docs-cta a:hover { background: var(--slate-50); transform: translateY(-1px); }
   .docs-cta-note { margin-top: 12px; font-size: 13px; color: rgba(255,255,255,0.5); }
 
+  /* ─── REAL SCREENSHOTS ─── */
+  .shot { margin: 28px auto 8px; max-width: 720px; border: 1px solid var(--slate-200); border-radius: 16px; overflow: hidden; background: var(--white); box-shadow: 0 22px 48px -24px rgba(27,67,50,0.32); }
+  .shot img { display: block; width: 100%; height: auto; }
+  .shot-cap, .article-body .shot-cap, .docs-content .shot-cap { max-width: 640px; margin: 12px auto 32px; font-size: 13px; line-height: 1.55; color: var(--slate-500); text-align: center; }
+  .shot-cap strong { color: var(--green-dark); font-weight: 600; }
+  .shot-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 900px; margin: 32px auto 8px; align-items: start; }
+  .shot-pair .shot { margin: 0; }
+  @media (max-width: 760px) { .shot-pair { grid-template-columns: 1fr; } }
+
+  /* ─── PHONE FRAME (auto-scrolling real email) ─── */
+  .phone { --phone-ink: var(--slate-900); position: relative; width: 300px; max-width: 100%; height: 600px; --screen-h: 578px; margin: 0 auto; border: 11px solid var(--phone-ink); border-radius: 42px; overflow: hidden; background: var(--slate-50); box-shadow: 0 30px 60px -28px rgba(27,67,50,0.45); }
+  .phone::before { content: ''; position: absolute; top: 8px; left: 50%; transform: translateX(-50%); width: 86px; height: 22px; border-radius: 12px; background: var(--phone-ink); z-index: 2; }
+  .phone-screen { position: absolute; inset: 0; overflow: hidden; }
+  .phone-screen img { display: block; width: 100%; height: auto; animation: phone-scroll 16s ease-in-out infinite; }
+  @keyframes phone-scroll { 0%, 12% { transform: translateY(0); } 55%, 70% { transform: translateY(calc(-100% + var(--screen-h))); } 100% { transform: translateY(0); } }
+
   /* ── Footer 5-col ── */
   .footer-top { grid-template-columns: 2fr 1fr 1fr 1fr 1fr; }
 
@@ -325,7 +341,14 @@ document.head.appendChild(o)}initApollo();</script>
       <li><strong>By account</strong> — every account with a rep dropdown on its row. Unassigned accounts float to the top, so you can see the gaps first. Search, filter by rep, or check a batch of accounts and use <strong>Assign to…</strong> to move them all at once.</li>
       <li><strong>By rep</strong> — each rep's accounts as a list, with <strong>Add accounts</strong> to hand them more. An Unassigned card shows what's still open.</li>
     </ul>
+    <div class="shot"><img src="/screenshots/sales-reps/assign-bulk.webp" alt="Account Assignments by account with three unassigned accounts selected and the Assign to bulk bar" width="1400" height="1143" loading="lazy"></div>
+    <p class="shot-cap"><strong>By account:</strong> unassigned accounts float to the top. Select a batch and assign them at once.</p>
+    <div class="shot"><img src="/screenshots/sales-reps/assign-by-rep.webp" alt="Account Assignments by rep showing each rep's accounts and an Unassigned accounts card" width="1400" height="1220" loading="lazy"></div>
+    <p class="shot-cap"><strong>By rep:</strong> each rep's book, with Add accounts.</p>
     <p>Already keep this in a spreadsheet? Use <strong>Import</strong> to upload it (Excel or CSV). The platform matches each account, creates any new reps by email, and shows you a preview of every change, plus anything it couldn't match, before you apply it.</p>
+
+    <div class="shot" style="max-width:520px;"><img src="/screenshots/sales-reps/import-preview.webp" alt="Spreadsheet import preview: new reps to create, assignments to set, and payers that couldn't be matched" width="1344" height="1760" loading="lazy"></div>
+    <p class="shot-cap"><strong>Import preview.</strong> Nothing is saved until you click Apply import.</p>
 
     <h2>Filter AR Aging by Sales Rep</h2>
     <p>On your AR Aging screen, the <strong>sales rep filter</strong> narrows the aging buckets and the invoice list to one rep's accounts, or to <strong>Unassigned</strong>. Use it in a Monday sales meeting to go rep by rep through who owes what, or to spot accounts nobody owns yet.</p>
