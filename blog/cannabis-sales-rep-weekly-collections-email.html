@@ -118,6 +118,10 @@
   .rep-hero-dot { width: 14px; height: 14px; border-radius: 50%; background: var(--green-mid); box-shadow: 0 0 0 0 rgba(64,145,108,0.5); animation: hero-pulse 1.6s ease-out infinite; }
   .rep-hero-bubble { max-width: 340px; background: var(--bubble-blue); color: var(--white); font-size: 14.5px; line-height: 1.5; padding: 14px 16px; border-radius: 20px 20px 6px 20px; box-shadow: 0 14px 30px -16px rgba(27,67,50,0.45); opacity: 0; animation: hero-in 12s ease infinite; animation-delay: 1.2s; }
   .rep-hero-bubble u { text-decoration-thickness: 1px; }
+  .rep-hero-card { display: grid; grid-template-columns: 1fr auto; gap: 2px 12px; margin-top: 10px; padding: 10px 12px; background: var(--white); border-radius: 12px; color: var(--slate-700); }
+  .rep-hero-card-from { font-weight: 700; color: var(--green-deep); font-size: 13.5px; }
+  .rep-hero-card-amt { font-family: var(--font-mono); font-weight: 700; color: var(--green-deep); font-size: 13.5px; font-variant-numeric: tabular-nums; }
+  .rep-hero-card-inv { grid-column: 1 / -1; font-size: 12.5px; color: var(--slate-500); }
   .rep-hero-paid { display: inline-flex; align-items: center; gap: 10px; background: var(--green-ghost); border: 1px solid var(--green-accent); color: var(--green-deep); font-size: 15px; padding: 10px 16px; border-radius: 12px; opacity: 0; animation: hero-in 12s ease infinite; animation-delay: 2.6s; }
   .rep-hero-paid b { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
   .rep-hero-paid svg { width: 18px; height: 18px; fill: none; stroke: var(--green-mid); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
@@ -317,7 +321,7 @@ document.head.appendChild(o)}initApollo();</script>
   </div>
   <div class="rep-hero-flow">
     <div class="rep-hero-tap"><span class="rep-hero-dot"></span>Rep taps <b>Text</b></div>
-    <div class="rep-hero-bubble">Hi Sam, quick note from Verdant Hill Botanical: invoice #1043 for $3,186.00 was due 06/24/2026.<br>Pay securely here: <u>ourshelf.space/pay/…</u></div>
+    <div class="rep-hero-bubble">Invoice from Verdant Hill Botanical #1043 — pay here: <u>ourshelf.space/pay/…</u><div class="rep-hero-card"><span class="rep-hero-card-from">Verdant Hill Botanical</span><span class="rep-hero-card-amt">$3,186.00</span><span class="rep-hero-card-inv">Invoice #1043 · Pay now</span></div></div>
     <div class="rep-hero-paid"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="5 12 10 17 19 7"/></svg><span>Paid · <b>$3,186.00</b></span></div>
   </div>
 </div>
@@ -361,7 +365,7 @@ document.head.appendChild(o)}initApollo();</script>
     <div class="flow-step-num">1</div>
     <div class="flow-step-body">
       <div class="flow-step-title">Text</div>
-      <div class="flow-step-desc">Opens Messages on the rep's phone with a short note already written: the invoice number, the amount, when it was due, a link to the invoice PDF, and the pay link. The rep picks the buyer from their own contacts and hits send. It comes from the rep's number, not from us.</div>
+      <div class="flow-step-desc">Opens Messages on the rep's phone with a one-line note already written: the invoice number and the pay link. In the text, the link shows up as a preview card with your business name, the amount, and the invoice number. The rep picks the buyer from their own contacts and hits send. It comes from the rep's number, not from us.</div>
     </div>
   </div>
   <div class="flow-step">
