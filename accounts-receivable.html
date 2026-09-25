@@ -265,6 +265,31 @@
     .page-hero .hero-trust { opacity: 1; transform: none; transition: none; }
     .hero-bg-gradient, .hero-bg-gradient-2 { animation: none; }
   }
+
+  /* ─── SALES-REP WEEKLY DIGEST MOCK ─── */
+  .rep-mail { background: var(--white); border: 1px solid var(--slate-200); border-radius: 16px; box-shadow: 0 20px 50px rgba(27,67,50,0.08); text-align: left; overflow: hidden; max-width: 520px; margin: 0 auto; }
+  .rep-mail-head { padding: 16px 22px; border-bottom: 1px solid var(--slate-100); background: linear-gradient(155deg, var(--white) 0%, var(--green-ghost) 100%); }
+  .rep-mail-subj { font-size: 14px; font-weight: 700; color: var(--green-deep); line-height: 1.4; }
+  .rep-mail-meta { font-family: var(--font-mono); font-size: 10px; letter-spacing: 1px; text-transform: uppercase; color: var(--slate-500); margin-top: 4px; }
+  .rep-mail-body { padding: 18px 22px 20px; }
+  .rep-mail-hi { font-size: 15px; font-weight: 700; color: var(--slate-800); margin: 0 0 4px; }
+  .rep-mail-lede { font-size: 13px; line-height: 1.55; color: var(--slate-600); margin: 0 0 14px; }
+  .rep-mail-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 16px; border: 1px solid var(--slate-200); border-radius: 12px; padding: 14px 16px; margin-bottom: 14px; }
+  .rep-mail-stat-label { font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--slate-500); }
+  .rep-mail-stat-val { font-family: var(--font-mono); font-size: 17px; font-weight: 700; color: var(--slate-900); font-variant-numeric: tabular-nums; }
+  .rep-mail-stat-val--late { color: #c0392b; }
+  .rep-mail-bucket { display: flex; justify-content: space-between; gap: 8px; font-size: 12px; font-weight: 700; padding: 6px 0 4px; border-bottom: 2px solid rgba(192,57,43,0.25); color: #c0392b; margin-top: 8px; }
+  .rep-mail-bucket--amber { color: #b45309; border-bottom-color: rgba(217,119,6,0.35); }
+  .rep-mail-bucket span:last-child { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+  .rep-mail-row { padding: 9px 0; border-bottom: 1px solid var(--slate-100); }
+  .rep-mail-line { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+  .rep-mail-payer { font-size: 13px; font-weight: 600; color: var(--slate-800); }
+  .rep-mail-amt { font-family: var(--font-mono); font-size: 13px; font-weight: 700; color: var(--slate-900); font-variant-numeric: tabular-nums; }
+  .rep-mail-inv { font-size: 12px; color: var(--slate-500); }
+  .rep-mail-inv b { color: #c0392b; }
+  .rep-mail-acts { font-size: 12px; font-weight: 700; color: var(--green-mid); white-space: nowrap; }
+  .rep-mail-more { font-size: 12px; color: var(--slate-500); text-align: center; padding-top: 12px; }
+  @media (max-width: 480px) { .rep-mail-body { padding: 16px; } .rep-mail-stat-val { font-size: 15px; } }
 </style>
 <noscript><style>.reveal,.page-hero .section-label,.page-hero .hero-h1,.page-hero .hero-lede,.page-hero .hero-actions-centered,.page-hero .hero-trust{opacity:1;transform:none;transition:none;}</style></noscript>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-H2LBJT03WE"></script>
@@ -563,6 +588,53 @@ document.head.appendChild(o)}initApollo();</script>
     </div>
     <p class="svc-why reveal">More than half of cannabis invoices run past due, and nearly a quarter age past 90 days — where recovery drops off a cliff. The aging schedule is how you catch a slow-paying retailer while the money is still collectible, not after it's a write-off.</p>
     <a class="svc-link reveal" href="/blog/cannabis-vendor-management-guide">How AR aging protects your cash <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+  </div>
+</section>
+
+<!-- SALES REPS · Weekly collections email -->
+<section class="svc-section svc-section--slate" id="ar-sales-reps">
+  <div class="svc-inner">
+    <div class="svc-eyebrow reveal">For Your Sales Team · By Rep</div>
+    <h2 class="svc-headline reveal">Split your AR by sales rep.</h2>
+    <p class="svc-sub reveal">Add your reps, give each one their accounts (one at a time, in bulk, or straight from a spreadsheet), then filter AR aging by rep to see exactly what each person's book owes. Every Monday, each rep gets their own list of open invoices with one-tap Text and Email buttons that send the buyer their pay link.</p>
+    <div class="svc-visual reveal reveal-delay-1">
+      <div class="rep-mail" aria-hidden="true">
+        <div class="rep-mail-head">
+          <div class="rep-mail-subj">Sunrise Extracts collections: 9 open invoices · $38,240.00 owed</div>
+          <div class="rep-mail-meta">To: Jordan (sales rep) · Every Monday, 7 AM</div>
+        </div>
+        <div class="rep-mail-body">
+          <p class="rep-mail-hi">Hi Jordan,</p>
+          <p class="rep-mail-lede">Here are this week's open invoices for your accounts, oldest first. Tap Text or Email to send your customer their pay link, or View to open the invoice.</p>
+          <div class="rep-mail-stats">
+            <div><div class="rep-mail-stat-label">Total owed</div><div class="rep-mail-stat-val">$38,240.00</div></div>
+            <div><div class="rep-mail-stat-label">31+ days late</div><div class="rep-mail-stat-val rep-mail-stat-val--late">$9,870.00</div></div>
+            <div><div class="rep-mail-stat-label">Invoices</div><div class="rep-mail-stat-val">9</div></div>
+            <div><div class="rep-mail-stat-label">Accounts</div><div class="rep-mail-stat-val">6</div></div>
+          </div>
+          <div class="rep-mail-bucket"><span>61–90 days late · 1</span><span>$4,120.00</span></div>
+          <div class="rep-mail-row">
+            <div class="rep-mail-line"><span class="rep-mail-payer">Evergreen Wellness</span><span class="rep-mail-amt">$4,120.00</span></div>
+            <div class="rep-mail-line"><span class="rep-mail-inv">#1043 · <b>64d late</b></span><span class="rep-mail-acts">Text · Email · View</span></div>
+          </div>
+          <div class="rep-mail-bucket rep-mail-bucket--amber"><span>31–60 days late · 2</span><span>$5,750.00</span></div>
+          <div class="rep-mail-row">
+            <div class="rep-mail-line"><span class="rep-mail-payer">Harbor Cannabis Co.</span><span class="rep-mail-amt">$3,400.00</span></div>
+            <div class="rep-mail-line"><span class="rep-mail-inv">#1071 · <b>38d late</b></span><span class="rep-mail-acts">Text · Email · View</span></div>
+          </div>
+          <div class="rep-mail-row">
+            <div class="rep-mail-line"><span class="rep-mail-payer">Northside Dispensary</span><span class="rep-mail-amt">$2,350.00</span></div>
+            <div class="rep-mail-line"><span class="rep-mail-inv">#1088 · <b>33d late</b></span><span class="rep-mail-acts">Text · Email · View</span></div>
+          </div>
+          <div class="rep-mail-more">+ 6 more, down through invoices not yet due</div>
+        </div>
+      </div>
+    </div>
+    <p class="svc-why reveal">Collections works better coming from the person who made the sale. When every account has an owner and every owner gets a weekly list, no invoice sits unasked, and unassigned accounts go to your AR contact.</p>
+    <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:12px 28px;">
+      <a class="svc-link reveal" href="/docs/vendor-portal/weekly-sales-rep-digest">How the weekly rep email works <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+      <a class="svc-link reveal" href="/docs/vendor-portal/sales-rep-assignments">Set up your reps and accounts <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+    </div>
   </div>
 </section>
 

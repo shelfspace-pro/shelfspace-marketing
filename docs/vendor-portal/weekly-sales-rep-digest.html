@@ -3,20 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cannabis Dispensary Co-Op Promotions — ShelfSpace</title>
-<meta name="description" content="Cannabis dispensary co-op promotions — how retailers and vendors run joint promotions, track impact, and generate credits through ShelfSpace.">
-<link rel="canonical" href="https://shelfspace.pro/docs/promotions/overview">
+<title>Weekly Sales Rep Collections Email — ShelfSpace</title>
+<meta name="description" content="Every Monday, each cannabis sales rep gets one email with every open invoice on their accounts — oldest first, with one-tap Text and Email pay links.">
+<link rel="canonical" href="https://shelfspace.pro/docs/vendor-portal/weekly-sales-rep-digest">
 <meta property="og:type" content="article">
-<meta property="og:url" content="https://shelfspace.pro/docs/promotions/overview">
-<meta property="og:title" content="Cannabis Dispensary Co-Op Promotions — ShelfSpace">
-<meta property="og:description" content="Cannabis dispensary co-op promotions — how retailers and vendors run joint promotions, track impact, and generate credits through ShelfSpace.">
+<meta property="og:url" content="https://shelfspace.pro/docs/vendor-portal/weekly-sales-rep-digest">
+<meta property="og:title" content="Weekly Sales Rep Collections Email — ShelfSpace">
+<meta property="og:description" content="Every Monday, each cannabis sales rep gets one email with every open invoice on their accounts — oldest first, with one-tap Text and Email pay links.">
 <meta property="og:image" content="https://shelfspace.pro/og-image-v7.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:type" content="image/png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Cannabis Dispensary Co-Op Promotions — ShelfSpace">
-<meta name="twitter:description" content="Cannabis dispensary co-op promotions — how retailers and vendors run joint promotions, track impact, and generate credits through ShelfSpace.">
+<meta name="twitter:title" content="Weekly Sales Rep Collections Email — ShelfSpace">
+<meta name="twitter:description" content="Every Monday, each cannabis sales rep gets one email with every open invoice on their accounts — oldest first, with one-tap Text and Email pay links.">
 <meta name="twitter:image" content="https://shelfspace.pro/og-image-v7.png">
 <meta name="apple-mobile-web-app-title" content="ShelfSpace">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -120,6 +120,25 @@
   }
   .docs-highlight strong { color: var(--green-deep); }
 
+  /* ── Precedence steps ── */
+  .docs-steps {
+    list-style: none; padding: 0; margin: 24px 0;
+    counter-reset: step;
+  }
+  .docs-steps li {
+    position: relative; padding: 0 0 16px 44px; margin: 0;
+    font-size: 16px; line-height: 1.7; color: var(--slate-600);
+  }
+  .docs-steps li::before {
+    counter-increment: step; content: counter(step);
+    position: absolute; left: 0; top: 0;
+    width: 28px; height: 28px; border-radius: 8px;
+    background: var(--green-deep); color: var(--white);
+    font-size: 14px; font-weight: 700; font-family: 'Space Mono', monospace;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .docs-steps li:last-child { padding-bottom: 0; }
+
   /* ── Related Docs ── */
   .docs-related {
     margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--slate-100);
@@ -152,6 +171,31 @@
   .docs-cta a:hover { background: var(--slate-50); transform: translateY(-1px); }
   .docs-cta-note { margin-top: 12px; font-size: 13px; color: rgba(255,255,255,0.5); }
 
+  /* ── Digest mock ── */
+  .digest-mock { --late-red: #b42318; --late-red-soft: #fca5a5; --late-amber: #92400e; --late-amber-soft: #fcd34d; margin: 28px 0 8px; border: 1px solid var(--slate-200); border-radius: 16px; background: var(--white); overflow: hidden; box-shadow: 0 18px 40px -22px rgba(27,67,50,0.3); }
+  .digest-mock-top { padding: 18px 22px 6px; }
+  .docs-content .digest-mock-hi { font-size: 16px; font-weight: 700; color: var(--green-deep); margin: 0 0 4px; }
+  .docs-content .digest-mock-sub { font-size: 13.5px; line-height: 1.55; color: var(--slate-500); margin: 0; }
+  .digest-mock-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 20px; margin: 14px 22px; padding: 14px 16px; border: 1px solid var(--slate-200); border-radius: 12px; }
+  .digest-mock-stat span { display: block; font-size: 10.5px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--slate-500); }
+  .digest-mock-stat b { font-family: 'Space Mono', monospace; font-size: 18px; color: var(--green-deep); font-variant-numeric: tabular-nums; }
+  .digest-mock-stat b.late { color: var(--late-red); }
+  .digest-mock-bucket { margin: 10px 22px 0; padding: 4px 0; font-size: 12.5px; font-weight: 600; border-bottom: 2px solid; display: flex; justify-content: space-between; gap: 8px; }
+  .digest-mock-bucket.b91 { color: var(--late-red); border-color: var(--late-red-soft); }
+  .digest-mock-bucket.b30 { color: var(--late-amber); border-color: var(--late-amber-soft); }
+  .digest-mock-row { margin: 0 22px; padding: 9px 0; border-bottom: 1px solid var(--slate-100); display: grid; grid-template-columns: 1fr auto; gap: 2px 12px; font-size: 13.5px; }
+  .digest-mock-row .payer { color: var(--slate-700); font-weight: 500; min-width: 0; }
+  .digest-mock-row .amt { font-family: 'Space Mono', monospace; color: var(--green-deep); text-align: right; font-variant-numeric: tabular-nums; }
+  .digest-mock-row .meta { color: var(--slate-500); font-size: 12.5px; }
+  .digest-mock-row .meta b { font-weight: 700; }
+  .digest-mock-row .meta b.l91 { color: var(--late-red); }
+  .digest-mock-row .meta b.l30 { color: var(--late-amber); }
+  .digest-mock-row .acts { color: var(--green-mid); font-weight: 600; font-size: 12.5px; text-align: right; white-space: nowrap; }
+  .digest-mock-more { margin: 0 22px; padding: 10px 0; font-size: 12.5px; color: var(--slate-500); border-bottom: 1px solid var(--slate-100); }
+  .digest-mock-foot { padding: 14px 22px 18px; font-size: 12px; color: var(--slate-400); text-align: center; }
+  .docs-content .digest-mock-cap { font-size: 13px; color: var(--slate-500); text-align: center; margin: 0 0 24px; }
+  @media (max-width: 520px) { .digest-mock-stats { margin: 12px 14px; } .digest-mock-row, .digest-mock-bucket { margin-left: 14px; margin-right: 14px; } .digest-mock-top { padding: 16px 14px 4px; } .digest-mock-stat b { font-size: 15px; } }
+
   /* ── Footer 5-col ── */
   .footer-top { grid-template-columns: 2fr 1fr 1fr 1fr 1fr; }
 
@@ -172,12 +216,13 @@
 {
   "@context": "https://schema.org",
   "@type": "TechArticle",
-  "headline": "Co-Marketing Promotions",
-  "datePublished": "2026-03-25",
-  "dateModified": "2026-07-09",
+  "headline": "Weekly Sales Rep Collections Email",
+  "description": "Every Monday, each cannabis sales rep gets one email with every open invoice on their accounts — oldest first, with one-tap Text and Email pay links.",
+  "datePublished": "2026-09-25",
+  "dateModified": "2026-09-25",
   "author": { "@type": "Organization", "name": "ShelfSpace", "url": "https://shelfspace.pro" },
   "publisher": { "@type": "Organization", "name": "ShelfSpace" },
-  "url": "https://shelfspace.pro/docs/promotions/overview"
+  "url": "https://shelfspace.pro/docs/vendor-portal/weekly-sales-rep-digest"
 }
 </script>
 <script type="application/ld+json">
@@ -185,23 +230,9 @@
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position": 1,
-      "name": "Home",
-      "item": "https://shelfspace.pro/"
-    },
-    {
-      "@type": "ListItem",
-      "position": 2,
-      "name": "Documentation",
-      "item": "https://shelfspace.pro/docs"
-    },
-    {
-      "@type": "ListItem",
-      "position": 3,
-      "name": "Co-Marketing Promotions"
-    }
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://shelfspace.pro/" },
+    { "@type": "ListItem", "position": 2, "name": "Documentation", "item": "https://shelfspace.pro/docs" },
+    { "@type": "ListItem", "position": 3, "name": "Weekly Sales Rep Collections Email" }
   ]
 }
 </script>
@@ -213,9 +244,9 @@ o.onload=function(){window.trackingFunctions.onLoad({appId:"69c141b32234890011a4
 document.head.appendChild(o)}initApollo();</script>
 </head>
 <body>
-<!-- last-synced: 2026-07-09 -->
+<!-- last-synced: 2026-09-25 -->
 
-<!-- NAV -->
+<!-- NAV (same as all site pages) -->
 <nav id="nav">
   <a href="/" class="nav-logo">
     <div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div>
@@ -239,7 +270,7 @@ document.head.appendChild(o)}initApollo();</script>
 <div class="docs-hero">
   <div class="docs-hero-content">
     <a href="/docs" class="docs-hero-badge">Documentation</a>
-    <h1 class="docs-hero-title">Co-Marketing Promotions</h1>
+    <h1 class="docs-hero-title">Weekly Sales Rep Collections Email</h1>
   </div>
 </div>
 
@@ -254,75 +285,95 @@ document.head.appendChild(o)}initApollo();</script>
   <!-- CONTENT -->
   <main class="docs-content">
     <div class="docs-breadcrumb">
-      <a href="/docs">Docs</a> / Promotions
+      <a href="/docs">Docs</a> / Vendor Portal
     </div>
-    <div class="docs-category">Promotions</div>
+    <div class="docs-category">Vendor Portal</div>
 
     <!-- AT A GLANCE -->
     <div class="docs-glance">
       <h2>At a Glance</h2>
       <ul>
-        <li>Cannabis dispensary co-op promotions let retailers and vendors share the cost of discounts</li>
-        <li>Either side can propose — the other approves or declines</li>
-        <li>Credits are generated as co-marketing credit memos during the monthly credit-recovery cycle</li>
-        <li>Full tracking of sales lift, budget spend, and promotion impact</li>
-        <li>Promotions can also be proposed through ShelfiQ via chat or email</li>
+        <li>Every Monday at 7 AM local time, each sales rep gets one collections email covering every open invoice on their accounts</li>
+        <li>Invoices are grouped by how late they are, oldest first, and include ones that aren't due yet</li>
+        <li>Each invoice has one-tap <strong>Text</strong>, <strong>Email</strong>, and <strong>View</strong> buttons with the pay link already written in</li>
+        <li>No login for the rep or the buyer. Accounts with no rep go to your AR contact, so nothing slips</li>
+        <li>Turn it on, preview any rep's email, and send yourself a test from Settings › Sales Reps</li>
       </ul>
     </div>
 
     <!-- BODY CONTENT -->
-    <h2>How Cannabis Dispensary Co-Op Promotions Work</h2>
-    <p>Co-op promotions are joint marketing agreements between a cannabis dispensary and a vendor. The vendor agrees to share the cost of a discount — typically a percentage off retail price — in exchange for increased shelf visibility and sales velocity. You and the vendor agree on the terms; the platform then tracks performance, applies the agreed split, and generates the credit.</p>
+    <h2>What Is the Weekly Sales Rep Collections Email?</h2>
+    <p>The <strong>weekly sales rep collections email</strong> is part of ShelfCollect. Every Monday morning, each of your sales reps gets one email listing every open invoice for the dispensary accounts assigned to them. It's their collections list for the week, and it's built so they can act on it from their phone in the parking lot.</p>
+    <p>Your reps own the relationships. The buyer answers their texts. This email puts the money owed in front of the person the buyer actually listens to, with the pay link ready to send.</p>
 
-    <p>This is part of our <a href="/credit-recovery">credit recovery</a> system. When a co-op promotion runs, the platform tracks the discounted sales and generates a co-marketing credit memo against the vendor's account. The credit is then applied to the vendor's next settlement or payment. Both sides agree to the terms before the promotion starts, so there are no surprises.</p>
+    <h2>What Each Rep Receives</h2>
+    <p>The email opens with four numbers: <strong>total owed</strong>, the amount <strong>31+ days late</strong>, the number of <strong>invoices</strong>, and the number of <strong>accounts</strong>. Below that, invoices are grouped by age (91+ days late, 61–90, 31–60, 1–30, then current and not yet due), oldest first. Every row shows the account, invoice number, amount, and how late it is or when it's due.</p>
 
+    <div class="digest-mock" role="img" aria-label="Example weekly sales rep collections email">
+      <div class="digest-mock-top">
+        <p class="digest-mock-hi">Hi Jordan,</p>
+        <p class="digest-mock-sub">Here are this week's open invoices for your accounts, oldest first. Tap Text or Email to send your customer their pay link, or View to open the invoice.</p>
+      </div>
+      <div class="digest-mock-stats">
+        <div class="digest-mock-stat"><span>Total owed</span><b>$48,215.40</b></div>
+        <div class="digest-mock-stat"><span>31+ days late</span><b class="late">$9,870.00</b></div>
+        <div class="digest-mock-stat"><span>Invoices</span><b>14</b></div>
+        <div class="digest-mock-stat"><span>Accounts</span><b>9</b></div>
+      </div>
+      <div class="digest-mock-bucket b91"><span>91+ days late · 1</span><span>$3,186.00</span></div>
+      <div class="digest-mock-row"><span class="payer">Holistic Cannabis Co.</span><span class="amt">$3,186.00</span><span class="meta">#1043 · <b class="l91">96d late</b></span><span class="acts">Text · Email · View</span></div>
+      <div class="digest-mock-bucket b30"><span>31–60 days late · 1</span><span>$6,684.00</span></div>
+  <div class="digest-mock-row"><span class="payer">Green Valley Provisions</span><span class="amt">$6,684.00</span><span class="meta">#1088 · <b class="l30">44d late</b></span><span class="acts">Text · Email · View</span></div>
+  <div class="digest-mock-bucket b30"><span>1–30 days late · 2</span><span>$6,412.50</span></div>
+      <div class="digest-mock-row"><span class="payer">Evergreen Wellness — Downtown</span><span class="amt">$4,092.00</span><span class="meta">#1117 · <b class="l30">20d late</b></span><span class="acts">Text · Email · View</span></div>
+      <div class="digest-mock-row"><span class="payer">Riverbend Dispensary</span><span class="amt">$2,320.50</span><span class="meta">#1131 · <b class="l30">6d late</b></span><span class="acts">Text · Email · View</span></div>
+      <div class="digest-mock-more">+ 10 more invoices, through the ones not yet due</div>
+  <div class="digest-mock-foot">Sent every Monday by ShelfSpace. Pay links open without a login.</div>
+    </div>
+    <p class="digest-mock-cap">An illustration. Account names and amounts are examples.</p>
+
+    <h2>Text, Email, View: How Reps Collect in One Tap</h2>
+    <ul>
+      <li><strong>Text</strong> opens the Messages app on the rep's phone with a short note already written: the invoice number, the amount, when it was due, a link to the invoice PDF, and the pay link. The rep picks the buyer from their own contacts and hits send. The text comes from the rep, not from ShelfSpace.</li>
+      <li><strong>Email</strong> opens a pre-written email already addressed to that account's billing contacts, with the same links inside.</li>
+      <li><strong>View</strong> opens the invoice so the rep can check it before reaching out. A rep looking at an invoice never counts as the buyer viewing it.</li>
+    </ul>
+    <p>The buyer taps the pay link and lands on a one-screen pay page. No account, no login. See <a href="/docs/vendor-portal/get-paid">ShelfCollect</a> for what the buyer sees.</p>
+
+    <h2>Who Gets Which Accounts</h2>
+    <p>Each rep's email covers the accounts assigned to them in <a href="/docs/vendor-portal/sales-rep-assignments">Sales Rep Assignments</a>. You can assign accounts one at a time, in bulk, or by importing a spreadsheet.</p>
     <div class="docs-highlight">
-      <strong>What the platform handles:</strong> the proposal and approval workflow, promotion performance against POS sales data, the vendor's share of the discount, and credit memo generation. You propose and approve — the platform does the rest.
+      <strong>No account goes uncovered.</strong> Accounts with no rep, or whose rep has no working email or opted out, go into one email to your AR contact. Nothing falls between reps.
     </div>
 
-    <h2>Who Can Propose</h2>
-    <p>Either party can initiate a co-op promotion:</p>
-    <ul>
-      <li><strong>Retailers</strong> propose through their ShelfSpace dashboard when they want a vendor to co-fund a discount event</li>
-      <li><strong>Vendors</strong> propose through their <a href="/docs/vendor-portal/overview">vendor portal</a> or through <a href="/docs/shelfiq/overview">ShelfiQ</a> when they want to drive sales velocity at a specific store</li>
-    </ul>
+    <h2>Set Up the Weekly Collections Email</h2>
+    <ol class="docs-steps">
+      <li>Open <strong>Settings › Sales Reps</strong> in the vendor portal and add your reps with their email addresses.</li>
+      <li>Assign each dispensary account to a rep in <strong>Account Assignments</strong>.</li>
+      <li>In the <strong>Weekly collections digest</strong> card, turn it on. Choose whether unassigned accounts go to your AR contact.</li>
+      <li>Use <strong>Preview as</strong> to see exactly what any rep will get, or <strong>Send me a test</strong> to get a copy in your own inbox.</li>
+    </ol>
+    <p>From the same card you can switch off the email for an individual rep, or turn a rep back on after they unsubscribed. The email carries your logo and colors, and replies go to your AR inbox.</p>
 
-    <p>When a proposal is submitted, the other party receives a notification and can approve the terms or decline. The in-portal response is approve or decline — finer back-and-forth on the numbers can happen over email or through <a href="/docs/shelfiq/overview">ShelfiQ</a> before a proposal is sent. See <a href="/docs/promotions/creating">Creating a Promotion</a> for the step-by-step process.</p>
-
-    <h2>Promotion Terms</h2>
-    <p>Every co-op promotion includes:</p>
-    <ul>
-      <li><strong>Discount percentage</strong> — the retail discount offered to customers (e.g., 20% off)</li>
-      <li><strong>Co-marketing split</strong> — how much of the discount the vendor covers vs. the retailer</li>
-      <li><strong>Start and end dates</strong> — the promotion window</li>
-      <li><strong>Scope</strong> — all products from the vendor, or specific SKUs</li>
-      <li><strong>Budget cap</strong> — optional maximum dollar amount the vendor will cover</li>
-    </ul>
-
-    <h2>Credit Generation</h2>
-    <p>Co-marketing credits are calculated during the monthly credit-recovery cycle, not the moment a promotion ends. Below-keystone promotional sales that fall within the promotion window are classified into the pre-approved co-marketing bucket using actual POS sales data, and the vendor's share becomes a co-marketing credit memo. That memo goes through the standard <a href="/docs/credit-recovery/approval-workflow">approval process</a> — the vendor reviews it in their portal and confirms the amount before it is applied.</p>
-
-    <p>Co-marketing credits appear in the <a href="/docs/credit-recovery/co-marketing">co-marketing credits</a> section of the credit recovery dashboard, with full detail on which products were sold at what discount during the promotion period.</p>
-
-    <h2>Tracking Promotion Impact</h2>
-    <p>The platform measures each promotion against your POS sales data — units sold, discount given, and budget usage against any cap — so both sides can see how the promotion is delivering. When the monthly credit run computes budget usage, it stops accruing further credit once the cap is reached and the promotion shows a Budget Reached indicator.</p>
+    <h2>Why It Speeds Up Collections</h2>
+    <p>Most late invoices aren't disputes. They slipped. A text from the rep the buyer already knows, with a link that takes a minute to pay, clears them faster than another notice from accounting. Reps also see the not-yet-due invoices, so they can mention next week's bill on this week's visit. Read the full story in <a href="/blog/cannabis-sales-rep-weekly-collections-email">our post on the weekly rep collections email</a>, or see how it fits into <a href="/accounts-receivable">cannabis accounts receivable</a>.</p>
 
     <!-- RELATED DOCS -->
     <div class="docs-related">
       <h3>Related</h3>
       <div class="docs-related-links">
-        <a href="/docs/promotions/creating">Creating a Promotion</a>
-        <a href="/docs/promotions/vendor-pre-approval-sop">Vendor Pre-Approval SOP</a>
-        <a href="/docs/credit-recovery/co-marketing">Co-Marketing Credits</a>
-        <a href="/docs/credit-recovery/approval-workflow">Approval Process</a>
+        <a href="/docs/vendor-portal/sales-rep-assignments">Sales Rep Assignments</a>
+        <a href="/docs/vendor-portal/get-paid">ShelfCollect</a>
+        <a href="/docs/vendor-portal/overview">Vendor Portal Overview</a>
+        <a href="/collections">Cannabis Collections</a>
       </div>
     </div>
 
     <!-- CTA -->
     <div class="docs-cta">
-      <p><strong>Ready to start recovering what you're owed? Let's talk.</strong></p>
+      <p><strong>Want every rep collecting every Monday? Let's talk.</strong></p>
       <a href="/contact">Talk to Us <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a>
-      <div class="docs-cta-note">Free evaluation. No commitment.</div>
+      <div class="docs-cta-note">Free evaluation. We handle setup.</div>
     </div>
   </main>
 
