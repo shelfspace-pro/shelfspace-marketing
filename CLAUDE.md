@@ -35,7 +35,10 @@ The site sells the **OUTCOME**, stays agnostic on who does the work, and shows *
 
 ## Nav (all pages)
 
-Accounts Payable | Consignment | Credit Recovery | Accounts Receivable | About | Pricing | Platform ▾ | Login | **CTA**
+ShelfPay (AP) | Consignment | Credit Recovery | ShelfCollect (AR) | About | Pricing | Platform ▾ | Login | **CTA**
+
+- **Service labels (2026-09-28, Chris):** the AP link reads **"ShelfPay (AP)"** (→ `/accounts-payable`) and the AR link reads **"ShelfCollect (AR)"** (→ `/accounts-receivable`, the ShelfCollect page). Same labels in the footer and in the `scripts/build-tutorials.mjs` template. The product name "Get Paid" is retired sitewide — use ShelfCollect (URL slugs like `/get-paid` stay).
+- **Never remove an existing `.brand-ticker` logo strip** when rebuilding a page — Chris reverted exactly that on the ShelfCollect page (2026-09-28).
 
 - **Order (2026-09-04, Chris):** the four service links, then **About**, then **Pricing**, then **Platform ▾** as the RIGHTMOST content item (before Login + the CTA button). "Pricing" sits immediately left of Platform.
 - **Pricing** points at **`/pricing`** — the repurposed numberless "How We Work With You" page (URL kept for SEO). The label is **"Pricing"** (reverted from "How We Work" per Chris).
