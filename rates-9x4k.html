@@ -71,7 +71,7 @@
 <div class="rc-wrap">
   <a class="rc-top" href="/"><img src="/favicon.svg" alt="">ShelfSpace</a>
   <h1 class="rc-title">Rate calculator</h1>
-  <p class="rc-sub">Enter your numbers to see your monthly rate. Prices are based on monthly sales, so they grow with the size of the business, never with how many invoices or payments you run.</p>
+  <p class="rc-sub">Enter your numbers to see your monthly rate. Prices are based on monthly sales, so they grow with the size of the business, never with how many invoices or payments you run. ShelfPay also includes credit recovery: we keep 20% of the credits we recover for you.</p>
 
   <div class="rc-seg rc-big" role="group" aria-label="Service">
     <button type="button" data-product="pay" aria-pressed="true">ShelfPay<small>Dispensaries: pay your vendors</small></button>
@@ -100,9 +100,9 @@
           <p class="rc-help">Your largest store pays its full rate. Every additional store is 30% off.</p>
 
           <div class="rc-field" style="margin-top:20px">
-            <label class="rc-label" for="credits">Credits recovered per month, all stores (optional)</label>
+            <label class="rc-label" for="credits">Credit recovery: 20% of credits recovered</label>
             <div class="rc-money"><span>$</span><input class="rc-input" id="credits" inputmode="numeric" placeholder="0"></div>
-            <p class="rc-help">Credits your vendors owe you for returns, waste, and markdowns. We keep 20% of what we recover. You keep 80%, and you pay nothing on credits we don't recover.</p>
+            <p class="rc-help">Credits your vendors owe you for returns, waste, and markdowns. Enter your expected credits per month across all stores. We keep 20% of what we recover. You keep 80%, and you pay nothing on credits we don't recover.</p>
           </div>
         </div>
 
@@ -243,7 +243,9 @@
     var monthly = base + credit;
     var html = "";
     lines.forEach(function (l) { html += "<tr><td>" + esc(l[0]) + "<small>" + esc(l[1]) + "</small></td><td>" + usd(l[2]) + "/mo</td></tr>"; });
-    if (p === "pay" && credit > 0) html += "<tr><td>Credit recovery<small>20% of " + usd(num(state.credits)) + " recovered. You keep " + usd(num(state.credits) - credit) + "</small></td><td>" + usd(credit) + "/mo</td></tr>";
+    if (p === "pay") html += credit > 0
+      ? "<tr><td>Credit recovery, 20%<small>20% of " + usd(num(state.credits)) + " recovered. You keep " + usd(num(state.credits) - credit) + "</small></td><td>" + usd(credit) + "/mo</td></tr>"
+      : "<tr><td>Credit recovery, 20%<small>20% of credits we recover. Enter an amount to estimate</small></td><td>20%</td></tr>";
     html += "<tr class='rc-sum'><td>Monthly total</td><td>" + usd(monthly) + "/mo</td></tr>";
     html += "<tr><td>Onboarding<small>" + (onboarding ? "One time, month-to-month agreements" : "Included with a 12-month agreement") + "</small></td><td>" + (onboarding ? usd(onboarding) : "$0") + "</td></tr>";
     html += "<tr><td>First 12 months<small>Monthly total × 12, plus onboarding</small></td><td>" + usd(monthly * 12 + onboarding) + "</td></tr>";
@@ -254,6 +256,7 @@
     // Rate table for the chosen product + level (12-month list prices).
     var t = "<tr><th>Monthly sales</th><th>Done for you</th><th>You run it</th></tr>";
     BANDS[p].forEach(function (b) { t += "<tr class='" + (activeBands[b.label] ? "on" : "") + "'><td>" + b.label + "</td><td>" + usd(b.managed) + "</td><td>" + usd(b.self) + "</td></tr>"; });
+    if (p === "pay") t += "<tr class='on'><td>Credit recovery</td><td>20%</td><td>20%</td></tr>";
     $("bands").innerHTML = t;
     $("bands-title").textContent = p === "pay" ? "ShelfPay rates, per store, 12-month agreement" : "ShelfCollect rates, 12-month agreement";
 
