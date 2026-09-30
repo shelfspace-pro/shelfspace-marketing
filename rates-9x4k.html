@@ -139,8 +139,8 @@
     <fieldset>
       <legend><span class="step">3</span>Agreement</legend>
       <div class="opts opts-2">
-        <label class="opt"><input type="radio" name="term" value="annual" checked><span class="box"><span class="dot"></span><span><span class="t">12 months</span><span class="d">Our best rate. Onboarding included.</span></span></span></label>
-        <label class="opt"><input type="radio" name="term" value="monthly"><span class="box"><span class="dot"></span><span><span class="t">Month to month</span><span class="d">20% higher monthly rate, plus a one-time onboarding fee.</span></span></span></label>
+        <label class="opt"><input type="radio" name="term" value="annual" checked><span class="box"><span class="dot"></span><span><span class="t">12 months</span><span class="d">Our best rate.<br>Onboarding fee: <strong>$0 (waived)</strong></span></span></span></label>
+        <label class="opt"><input type="radio" name="term" value="monthly"><span class="box"><span class="dot"></span><span><span class="t">Month to month</span><span class="d">20% higher monthly rate.<br>Onboarding fee: <strong id="m2m-fee">$2,500 one time</strong></span></span></span></label>
       </div>
     </fieldset>
 
@@ -335,8 +335,8 @@
     var fixedYear = v.base * 12 + v.onboarding;
     var big = '<div class="q-stat"><div class="k">Monthly rate</div><div class="v">' + usd(v.base) + '</div><div class="s">' + (v.p === "pay" ? "Fixed · " + v.stores + (v.stores === 1 ? " store" : " stores") : "Flat rate, no cut of your sales") + "</div></div>";
     if (v.p === "pay") big += '<div class="q-stat"><div class="k">Estimated credits you keep</div><div class="v">+' + usd(v.keep) + '</div><div class="s">per month, 80% of ~' + usd(v.credits) + " recovered</div></div>";
-    big += '<div class="q-stat"><div class="k">Onboarding</div><div class="v">' + (v.onboarding ? usd(v.onboarding) : "Included") + '</div><div class="s">' + (v.onboarding ? "One time" : "With a 12-month agreement") + "</div></div>";
-    if (v.p !== "pay") big += '<div class="q-stat"><div class="k">First 12 months</div><div class="v">' + usd(v.year) + '</div><div class="s">Monthly × 12' + (v.onboarding ? " + onboarding" : "") + "</div></div>";
+    big += '<div class="q-stat"><div class="k">Onboarding fee</div><div class="v">' + (v.onboarding ? usd(v.onboarding) : "$0") + '</div><div class="s">' + (v.onboarding ? "One time" : "Waived with a 12-month agreement") + "</div></div>";
+    if (v.p !== "pay") big += '<div class="q-stat"><div class="k">First 12 months</div><div class="v">' + usd(v.year) + '</div><div class="s">Monthly × 12' + (v.onboarding ? " + onboarding fee" : "") + "</div></div>";
     if (v.p === "pay") big += '<div class="q-pays">' + (v.keep >= v.base
       ? "<strong>ShelfPay pays for itself.</strong> Estimated credits you keep (" + usd(v.keep) + "/mo) exceed your monthly rate (" + usd(v.base) + "/mo) by about " + usd(v.keep - v.base) + " a month."
       : "<strong>Credits help pay for ShelfPay.</strong> Estimated credits you keep (" + usd(v.keep) + "/mo) cover about " + Math.round(v.keep / v.base * 100) + "% of your monthly rate.") + "</div>";
@@ -344,8 +344,8 @@
 
     var rows = v.lines.map(function (l) { return "<tr><td>" + esc(l.item) + "<small>" + esc(l.sub) + "</small></td><td>" + l.amt + "</td></tr>"; }).join("");
     rows += "<tr class='sum'><td>Monthly rate</td><td>" + usd(v.base) + "/mo</td></tr>";
-    rows += "<tr><td>Onboarding<small>" + (v.onboarding ? "One time" + (v.p === "pay" && v.stores > 1 ? ": " + usd(ONBOARD_FIRST) + " first store + " + usd(ONBOARD_ADDL) + " each additional" : "") : "Included with a 12-month agreement") + "</small></td><td>" + (v.onboarding ? usd(v.onboarding) : "$0") + "</td></tr>";
-    rows += "<tr><td>First 12 months<small>Monthly rate × 12" + (v.onboarding ? " + onboarding" : "") + "</small></td><td>" + usd(fixedYear) + "</td></tr>";
+    rows += "<tr><td>Onboarding fee<small>" + (v.onboarding ? "One time" + (v.p === "pay" && v.stores > 1 ? ": " + usd(ONBOARD_FIRST) + " first store + " + usd(ONBOARD_ADDL) + " each additional" : "") : "Waived with a 12-month agreement") + "</small></td><td>" + (v.onboarding ? usd(v.onboarding) : "$0") + "</td></tr>";
+    rows += "<tr><td>First 12 months<small>Monthly rate × 12" + (v.onboarding ? " + onboarding fee" : "") + "</small></td><td>" + usd(fixedYear) + "</td></tr>";
     $("q-lines").innerHTML = rows;
 
     $("q-credit").hidden = v.p !== "pay";
@@ -367,7 +367,7 @@
     var t = ["ShelfSpace quote " + state.q + " · " + mdy(today), (state.name.trim() ? state.name.trim() + " · " : "") + product + " · " + levelName + " · " + termName];
     v.lines.forEach(function (l) { t.push("  " + l.item + " (" + l.sub + "): " + l.amt); });
     t.push("Monthly rate: " + usd(v.base) + "/mo");
-    t.push("Onboarding: " + (v.onboarding ? usd(v.onboarding) + " one time" : "included"));
+    t.push("Onboarding fee: " + (v.onboarding ? usd(v.onboarding) + " one time" : "$0 (waived with a 12-month agreement)"));
     t.push("First 12 months: " + usd(fixedYear));
     if (v.p === "pay") t.push("Credit recovery (estimated): ~" + usd(v.credits) + "/mo recovered from your vendors. You keep 80% (+" + usd(v.keep) + "/mo), we keep 20% (~" + usd(v.fee) + "/mo), only on credits we recover.");
     t.push("Valid through " + mdy(valid));
@@ -375,6 +375,8 @@
   }
 
   function update() {
+    var m2mFee = state.product === "pay" ? ONBOARD_FIRST + ONBOARD_ADDL * Math.max(0, state.stores.length - 1) : ONBOARD_FIRST;
+    $("m2m-fee").textContent = usd(m2mFee) + " one time";
     var ok = complete();
     if (ok && !state.q) state.q = newQuoteNum();
     saveHash();
