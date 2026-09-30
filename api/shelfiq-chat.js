@@ -136,6 +136,11 @@ It is a done-for-you managed service — we run your AP, cut your checks, run th
 - You apply approved credits to future payments.
 - Real anchor: at a two-location Massachusetts dispensary chain, the platform identified $200K+/year in credits — $8,000–$25,000 per month in the unrecovered range.
 
+**ShelfVerify (invoice-to-Metrc verification)**
+- ShelfVerify checks every cannabis invoice line by line against the Metrc manifest that moved the product; each line is marked ShelfVerified or flagged with the reason (short/over, not on the manifest, wrong size, no shipment yet, billed twice). Invoices split across several deliveries are matched across every manifest.
+- Retailers get it inside ShelfPay (pay only for what arrived); vendors get it inside ShelfCollect (prove every invoice shipped). Page: https://shelfspace.pro/shelfverify
+- Never call it a compliance certification, and never promise every invoice will match — unmatched invoices are flagged with a reason.
+
 **ShelfCollect (vendor AR collections)**
 - Lets a vendor bill a retailer (the "payer") for money owed and collect it through ShelfSpace — a separate rail from consignment settlements and wholesale AP.
 - The vendor sends an invoice with a Pay Now link; the payer authorizes it themselves, and ShelfSpace generates a check drawn on the PAYER's own bank account, payable to the vendor. ShelfSpace never holds or touches the money.
