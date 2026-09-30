@@ -73,13 +73,6 @@
   .qd-price { font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-size: clamp(40px, 5vw, 52px); font-weight: 700; color: var(--green-deep); line-height: 1; letter-spacing: -0.02em; }
   .qd-price small { font-family: var(--font-display); font-size: 16px; font-weight: 500; color: var(--slate-500); letter-spacing: 0; margin-left: 4px; }
   .qd-terms { margin-top: 10px; font-size: 14px; color: var(--slate-600); }
-  .qd-credit { margin-top: 24px; background: var(--green-ghost); border-radius: 12px; padding: 18px 20px; display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
-  .qd-credit .k { font-size: 13px; color: var(--slate-600); font-weight: 600; }
-  .qd-credit .v { font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-size: 26px; font-weight: 700; color: var(--green-dark); margin-top: 2px; }
-  .qd-credit .v small { font-family: var(--font-display); font-size: 14px; font-weight: 500; color: var(--slate-500); }
-  .qd-credit .s { font-size: 12px; color: var(--slate-500); margin-top: 4px; line-height: 1.45; max-width: 340px; }
-  .qd-pill { flex: 0 0 auto; background: var(--green-deep); color: var(--white); border-radius: 999px; padding: 7px 14px; font-size: 13px; font-weight: 600; }
-  .qd-pill.soft { background: var(--white); color: var(--green-deep); border: 1.5px solid var(--green-accent); }
   .qd-list { margin-top: 28px; }
   .qd-row { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding: 11px 0; border-top: 1px solid var(--slate-100); font-size: 15px; }
   .qd-row:first-child { border-top: 0; }
@@ -110,7 +103,6 @@
     .q-layout { display: block; }
     .q-side { position: static; }
     .q-doc { margin: 0; box-shadow: none; border: 1px solid var(--slate-200); }
-    .qd-credit, .qd-pill { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   }
 </style>
 </head>
@@ -179,7 +171,6 @@
         <div class="qd-price" id="qd-price"></div>
         <div class="qd-terms" id="qd-terms"></div>
       </div>
-      <div class="qd-credit" id="qd-credit"></div>
       <div class="qd-list" id="qd-list"></div>
       <div class="qd-fine" id="qd-fine"></div>
     </div>
@@ -334,19 +325,12 @@
     $("qd-price").innerHTML = usd(v.base) + "<small>/month</small>";
     $("qd-terms").textContent = levelName + " · " + (annual ? "12-month agreement, billed monthly" : "Month to month") + " · " + (v.onboarding ? usd(v.onboarding) + " onboarding fee" : "$0 onboarding fee");
 
-    var cr = $("qd-credit");
-    cr.hidden = v.p !== "pay";
-    if (v.p === "pay") {
-      var pays = v.keep >= v.base;
-      cr.innerHTML = '<div><div class="k">Estimated credits you keep</div><div class="v">+' + usd(v.keep) + '<small>/month</small></div>' +
-        '<div class="s">80% of ~' + usd(v.credits) + " your vendors owe you each month. We keep 20%, only on what we recover.</div></div>" +
-        '<div class="qd-pill' + (pays ? "" : " soft") + '">' + (pays ? "Pays for itself" : "Covers " + Math.round(v.keep / v.base * 100) + "% of your rate") + "</div>";
-    }
 
     var rows = v.lines.map(function (l) {
       return '<div class="qd-row"><div class="n">' + esc(l.item) + "<span>" + esc(l.range) + '</span></div><div class="a">' + (l.list ? "<s>" + usd(l.list) + "</s>" : "") + usd(l.price) + "</div></div>";
     }).join("");
     rows += '<div class="qd-row total"><div class="n">Monthly rate</div><div class="a">' + usd(v.base) + "</div></div>";
+    if (v.p === "pay") rows += '<div class="qd-row"><div class="n">Credit recovery<span>of credits we recover. Nothing recovered, nothing owed</span></div><div class="a">20%</div></div>';
     rows += '<div class="qd-row muted"><div class="n">Onboarding fee</div><div class="a">' + usd(v.onboarding) + "</div></div>";
     rows += '<div class="qd-row muted"><div class="n">First 12 months' + (annual ? ", billed monthly" : "") + '</div><div class="a">' + usd(fixedYear) + "</div></div>";
     $("qd-list").innerHTML = rows;
@@ -355,7 +339,7 @@
     fine.push(annual ? "Billed monthly, nothing up front. If we haven't delivered in the first 90 days, cancel and the remaining payments stop."
                      : "Month to month is 20% higher than a 12-month agreement.");
     if (v.p === "pay" && v.stores > 1) fine.push("Your largest store pays full rate; each additional store is 30% off.");
-    if (v.p === "pay") fine.push("Credits are estimated at about 0.75% of monthly sales and vary month to month.");
+    if (v.p === "pay") fine.push("Your estimated credits are in your eval.");
     fine.push("Valid through " + mdy(valid) + ". Final terms are confirmed in your agreement.");
     $("qd-fine").innerHTML = fine.map(function (f) { return "<p>" + esc(f) + "</p>"; }).join("");
 
@@ -365,7 +349,7 @@
     t.push("Monthly rate: " + usd(v.base) + "/mo");
     t.push("Onboarding fee: " + (v.onboarding ? usd(v.onboarding) + " one time" : "$0 (waived with a 12-month agreement)"));
     t.push("First 12 months: " + usd(fixedYear) + (annual ? " (billed monthly; cancel in the first 90 days if we haven't delivered and the remaining payments stop)" : ""));
-    if (v.p === "pay") t.push("Credit recovery (estimated): ~" + usd(v.credits) + "/mo recovered from your vendors. You keep 80% (+" + usd(v.keep) + "/mo), we keep 20% (~" + usd(v.fee) + "/mo), only on credits we recover.");
+    if (v.p === "pay") t.push("Credit recovery: 20% of credits we recover. Nothing recovered, nothing owed.");
     t.push("Valid through " + mdy(valid));
     summaryText = t.join("\n");
   }
