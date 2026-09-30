@@ -79,6 +79,10 @@
   .q-table td:last-child { font-family: var(--font-mono); font-variant-numeric: tabular-nums; white-space: nowrap; padding-left: 12px; color: var(--slate-800); }
   .q-table td small { display: block; color: var(--slate-500); font-size: 12px; margin-top: 2px; }
   .q-table tr.sum td { font-weight: 700; color: var(--green-deep); border-bottom: 0; border-top: 1.5px solid var(--slate-200); }
+  .q-pays { grid-column: 1 / -1; background: var(--white); border: 1.5px solid var(--green-accent); border-radius: 12px; padding: 14px 16px; font-size: 14px; color: var(--slate-700); line-height: 1.5; }
+  .q-pays strong { color: var(--green-deep); }
+  .q-credit { margin-top: 28px; }
+  .q-credit tr.sum td { color: var(--green-mid); }
   .q-notes { margin: 24px 0 0; padding: 0 0 0 18px; color: var(--slate-600); font-size: 13px; line-height: 1.6; }
   .q-actions { display: flex; gap: 8px; flex-wrap: wrap; padding: 0 28px 28px; }
   @media (max-width: 600px) { .q-actions { padding: 0 16px 20px; } }
@@ -169,7 +173,10 @@
     </div>
     <div class="q-body">
       <div class="q-big" id="q-big"></div>
-      <table class="q-table"><thead><tr><th>Item</th><th>Amount</th></tr></thead><tbody id="q-lines"></tbody></table>
+      <table class="q-table"><thead><tr><th>Your rate</th><th>Amount</th></tr></thead><tbody id="q-lines"></tbody></table>
+      <div id="q-credit" class="q-credit">
+        <table class="q-table"><thead><tr><th>Credit recovery, estimated</th><th>Amount</th></tr></thead><tbody id="q-credit-lines"></tbody></table>
+      </div>
       <ul class="q-notes" id="q-notes"></ul>
     </div>
     <div class="q-actions no-print">
@@ -320,27 +327,33 @@
     $("q-summary").textContent = (state.name.trim() ? product + " · " : "") + levelName + " · " + termName + (v.p === "pay" ? " · " + v.stores + (v.stores === 1 ? " store" : " stores") : "");
     $("q-num").textContent = state.q; $("q-date").textContent = mdy(today); $("q-valid").textContent = mdy(valid);
 
-    var big = '<div class="q-stat"><div class="k">' + (v.p === "pay" ? "Estimated monthly total" : "Monthly total") + '</div><div class="v">' + usd(v.monthly) + '</div><div class="s">' + (v.p === "pay" ? usd(v.base) + " base + " + usd(v.fee) + " credit recovery" : "Flat rate, no cut of your sales") + "</div></div>";
-    if (v.p === "pay") big += '<div class="q-stat"><div class="k">Estimated credits you keep</div><div class="v">' + usd(v.keep) + '</div><div class="s">per month, 80% of ' + usd(v.credits) + " recovered</div></div>";
+    var fixedYear = v.base * 12 + v.onboarding;
+    var big = '<div class="q-stat"><div class="k">Monthly rate</div><div class="v">' + usd(v.base) + '</div><div class="s">' + (v.p === "pay" ? "Fixed · " + v.stores + (v.stores === 1 ? " store" : " stores") : "Flat rate, no cut of your sales") + "</div></div>";
+    if (v.p === "pay") big += '<div class="q-stat"><div class="k">Estimated credits you keep</div><div class="v">+' + usd(v.keep) + '</div><div class="s">per month, 80% of ~' + usd(v.credits) + " recovered</div></div>";
     big += '<div class="q-stat"><div class="k">Onboarding</div><div class="v">' + (v.onboarding ? usd(v.onboarding) : "Included") + '</div><div class="s">' + (v.onboarding ? "One time" : "With a 12-month agreement") + "</div></div>";
     if (v.p !== "pay") big += '<div class="q-stat"><div class="k">First 12 months</div><div class="v">' + usd(v.year) + '</div><div class="s">Monthly × 12' + (v.onboarding ? " + onboarding" : "") + "</div></div>";
+    if (v.p === "pay") big += '<div class="q-pays">' + (v.keep >= v.base
+      ? "<strong>ShelfPay pays for itself.</strong> Estimated credits you keep (" + usd(v.keep) + "/mo) exceed your monthly rate (" + usd(v.base) + "/mo) by about " + usd(v.keep - v.base) + " a month."
+      : "<strong>Credits help pay for ShelfPay.</strong> Estimated credits you keep (" + usd(v.keep) + "/mo) cover about " + Math.round(v.keep / v.base * 100) + "% of your monthly rate.") + "</div>";
     $("q-big").innerHTML = big;
 
     var rows = v.lines.map(function (l) { return "<tr><td>" + esc(l.item) + "<small>" + esc(l.sub) + "</small></td><td>" + l.amt + "</td></tr>"; }).join("");
-    if (v.p === "pay") {
-      rows += "<tr><td>Monthly subscription<small>Fixed</small></td><td>" + usd(v.base) + "/mo</td></tr>";
-      rows += "<tr><td>Credit recovery, 20% of credits recovered<small>Estimated " + usd(v.credits) + "/mo in credits (about 0.75% of monthly sales). You pay nothing on credits we don't recover.</small></td><td>~" + usd(v.fee) + "/mo</td></tr>";
-      rows += "<tr class='sum'><td>Estimated monthly total</td><td>" + usd(v.monthly) + "/mo</td></tr>";
-    } else {
-      rows += "<tr class='sum'><td>Monthly total</td><td>" + usd(v.monthly) + "/mo</td></tr>";
-    }
+    rows += "<tr class='sum'><td>Monthly rate</td><td>" + usd(v.base) + "/mo</td></tr>";
     rows += "<tr><td>Onboarding<small>" + (v.onboarding ? "One time" + (v.p === "pay" && v.stores > 1 ? ": " + usd(ONBOARD_FIRST) + " first store + " + usd(ONBOARD_ADDL) + " each additional" : "") : "Included with a 12-month agreement") + "</small></td><td>" + (v.onboarding ? usd(v.onboarding) : "$0") + "</td></tr>";
-    rows += "<tr><td>First 12 months" + (v.p === "pay" ? ", estimated" : "") + "<small>Monthly total × 12" + (v.onboarding ? " + onboarding" : "") + "</small></td><td>" + usd(v.year) + "</td></tr>";
+    rows += "<tr><td>First 12 months<small>Monthly rate × 12" + (v.onboarding ? " + onboarding" : "") + "</small></td><td>" + usd(fixedYear) + "</td></tr>";
     $("q-lines").innerHTML = rows;
 
+    $("q-credit").hidden = v.p !== "pay";
+    if (v.p === "pay") {
+      $("q-credit-lines").innerHTML =
+        "<tr><td>Credits recovered from your vendors<small>About 0.75% of monthly sales, based on what we recover for stores today</small></td><td>~" + usd(v.credits) + "/mo</td></tr>" +
+        "<tr><td>Our share, 20%<small>Only on credits we actually recover. Nothing recovered, nothing owed.</small></td><td>~" + usd(v.fee) + "/mo</td></tr>" +
+        "<tr class='sum'><td>You keep, 80%</td><td>+" + usd(v.keep) + "/mo</td></tr>";
+    }
+
     var notes = [];
-    if (v.p === "pay") notes.push("Credits are what your vendors owe you for returns, waste, and aged markdowns. Actual credits depend on your vendors and your data in a given month, so the credit recovery amount will vary. You keep 80% of every credit.");
-    if (state.term === "annual") notes.push("12-month agreement. If we haven't delivered in the first 90 days, you can walk away.");
+    if (v.p === "pay") notes.push("Credits are what your vendors owe you for returns, waste, and aged markdowns. Credit amounts are estimates and vary month to month with your vendors and your data.");
+    if (state.term === "annual") notes.push("12-month agreement. If we haven't delivered in the first 90 days" + (v.p === "pay" ? ", including recovered credits," : "") + " you can walk away.");
     else notes.push("Month-to-month rates are 20% higher than 12-month rates. Switch to a 12-month agreement any time.");
     notes.push("Prices are set by monthly sales and reviewed once a year, never by how many invoices or payments you run.");
     notes.push("This quote is valid through " + mdy(valid) + ". Final terms are confirmed in your agreement.");
@@ -348,10 +361,10 @@
 
     var t = ["ShelfSpace quote " + state.q + " · " + mdy(today), (state.name.trim() ? state.name.trim() + " · " : "") + product + " · " + levelName + " · " + termName];
     v.lines.forEach(function (l) { t.push("  " + l.item + " (" + l.sub + "): " + l.amt); });
-    if (v.p === "pay") { t.push("  Credit recovery: 20% of credits recovered (est. " + usd(v.credits) + "/mo in credits → ~" + usd(v.fee) + "/mo; you keep ~" + usd(v.keep) + ")"); t.push("Estimated monthly total: " + usd(v.monthly) + "/mo"); }
-    else t.push("Monthly total: " + usd(v.monthly) + "/mo");
+    t.push("Monthly rate: " + usd(v.base) + "/mo");
     t.push("Onboarding: " + (v.onboarding ? usd(v.onboarding) + " one time" : "included"));
-    t.push("First 12 months: " + usd(v.year));
+    t.push("First 12 months: " + usd(fixedYear));
+    if (v.p === "pay") t.push("Credit recovery (estimated): ~" + usd(v.credits) + "/mo recovered from your vendors. You keep 80% (+" + usd(v.keep) + "/mo), we keep 20% (~" + usd(v.fee) + "/mo), only on credits we recover.");
     t.push("Valid through " + mdy(valid));
     summaryText = t.join("\n");
   }
