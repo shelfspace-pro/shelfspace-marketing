@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ShelfVerify — Cannabis Invoice-to-Metrc Verification — ShelfSpace</title>
+<meta name="description" content="ShelfVerify checks every cannabis invoice line by line against the Metrc manifest that moved the product. Retailers pay only for what arrived; vendors prove every invoice shipped.">
+<link rel="canonical" href="https://shelfspace.pro/shelfverify">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ShelfSpace">
+<meta property="og:locale" content="en_US">
+<meta property="og:url" content="https://shelfspace.pro/shelfverify">
+<meta property="og:title" content="ShelfVerify — Cannabis Invoice-to-Metrc Verification — ShelfSpace">
+<meta property="og:description" content="ShelfVerify checks every cannabis invoice line by line against the Metrc manifest that moved the product. Retailers pay only for what arrived; vendors prove every invoice shipped.">
+<meta property="og:image" content="https://shelfspace.pro/og-image-v7.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="ShelfVerify — Cannabis Invoice-to-Metrc Verification — ShelfSpace">
+<meta name="twitter:description" content="ShelfVerify checks every cannabis invoice line by line against the Metrc manifest that moved the product. Retailers pay only for what arrived; vendors prove every invoice shipped.">
+<meta name="twitter:image" content="https://shelfspace.pro/og-image-v7.png">
+<meta name="apple-mobile-web-app-title" content="ShelfSpace">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+  @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-12px); } }
+
+  /* ─── HERO (slim, no rotator) ─── */
+  .page-hero { display: flex; align-items: center; justify-content: center; padding: 140px 48px 60px; min-height: auto; position: relative; overflow: hidden; background: var(--white); }
+  .hero-bg-gradient { position: absolute; top: -30%; right: -20%; width: 700px; height: 700px; background: radial-gradient(circle, rgba(149,213,178,0.18) 0%, rgba(149,213,178,0) 70%); animation: float 8s ease-in-out infinite; pointer-events: none; }
+  .hero-bg-gradient-2 { position: absolute; bottom: -20%; left: -15%; width: 550px; height: 550px; background: radial-gradient(circle, rgba(27,67,50,0.06) 0%, rgba(27,67,50,0) 70%); animation: float 10s ease-in-out infinite; animation-delay: -3s; pointer-events: none; }
+  .hero-grid-lines { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 1200px; height: 100%; opacity: 0.035; background-image: linear-gradient(var(--green-deep) 1px, transparent 1px), linear-gradient(90deg, var(--green-deep) 1px, transparent 1px); background-size: 80px 80px; pointer-events: none; }
+  .hero-text--solo { flex: 1; max-width: 880px; margin: 0 auto; text-align: center; position: relative; z-index: 2; }
+  .hero-text--solo .section-label { display: inline-flex; }
+  .page-hero .hero-h1 { font-size: clamp(36px, 6vw, 72px); line-height: 1.05; letter-spacing: -2px; font-weight: 700; color: var(--green-deep); margin: 16px 0 24px; }
+  .hero-lede { font-size: 17px; color: var(--slate-600); line-height: 1.5; margin: 0 auto 28px; max-width: 560px; }
+  .hero-actions-centered { display: flex; justify-content: center; }
+  .page-hero .section-label,
+  .page-hero .hero-h1,
+  .page-hero .hero-lede,
+  .page-hero .hero-actions-centered { opacity: 0; transform: translateY(30px); }
+  .page-hero .section-label { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1); }
+  .page-hero .hero-h1 { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s, transform 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s; }
+  .page-hero .hero-lede { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1) 0.25s, transform 0.8s cubic-bezier(0.22,1,0.36,1) 0.25s; }
+  .page-hero .hero-actions-centered { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1) 0.4s, transform 0.8s cubic-bezier(0.22,1,0.36,1) 0.4s; }
+  .page-hero.hero-loaded .section-label,
+  .page-hero.hero-loaded .hero-h1,
+  .page-hero.hero-loaded .hero-lede,
+  .page-hero.hero-loaded .hero-actions-centered { opacity: 1; transform: translateY(0); }
+
+  /* ─── REVEAL ─── */
+  .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1); }
+  .reveal.is-visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.2s; }
+  .reveal-delay-2 { transition-delay: 0.4s; }
+  .reveal-delay-3 { transition-delay: 0.6s; }
+
+  /* ─── AP TOUR · NUMERAL WATERMARK ─── */
+  .ap-tour-numeral { position: absolute; top: -20px; left: 50%; transform: translateX(-50%); font-family: var(--font-display); font-weight: 700; font-size: clamp(180px, 28vw, 320px); line-height: 1; color: var(--green-ghost); z-index: -1; pointer-events: none; user-select: none; letter-spacing: -0.05em; }
+  .svc-section--slate .ap-tour-numeral { color: var(--white); }
+  .svc-section--dark .ap-tour-numeral { color: rgba(255,255,255,0.045); }
+  .svc-section--ghost .ap-tour-numeral { color: var(--white); }
+  @media (max-width: 700px) { .ap-tour-numeral { font-size: clamp(140px, 38vw, 240px); top: -8px; } }
+
+  /* ─── AP TOUR · INLINE SAMPLE PDF LINK ─── */
+  .ap-tour-pdf-link { display: inline-flex; align-items: center; gap: 4px; font-weight: 700; color: var(--green-dark); text-decoration: none; border-bottom: 1px dotted var(--green-mid); padding-bottom: 1px; }
+  .ap-tour-pdf-link:hover { color: var(--green-deep); border-bottom-color: var(--green-deep); }
+  .svc-section--dark .ap-tour-pdf-link { color: var(--green-accent); border-bottom-color: rgba(149,213,178,0.5); }
+  .svc-section--dark .ap-tour-pdf-link:hover { color: var(--white); border-bottom-color: var(--white); }
+
+  /* ─── S1 · INVOICE CARD ─── */
+  .ap-tour-invoice { background: var(--white); border: 1px solid var(--slate-200); border-radius: 14px; box-shadow: 0 20px 50px rgba(27,67,50,0.08); text-align: left; overflow: hidden; }
+  .ap-tour-invoice-head { padding: 18px 22px; border-bottom: 1px solid var(--slate-100); background: var(--slate-50); display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .ap-tour-invoice-id { font-family: var(--font-mono); font-size: 12px; font-weight: 700; letter-spacing: 1px; color: var(--slate-700); }
+  .ap-tour-invoice-vendor { font-size: 13px; color: var(--slate-500); margin-top: 2px; }
+  .ap-tour-invoice-badge { font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 1px; background: var(--green-ghost); color: var(--green-deep); padding: 5px 10px; border-radius: 100px; border: 1px solid rgba(149,213,178,0.5); flex-shrink: 0; }
+  .ap-tour-invoice-row { display: grid; grid-template-columns: 1.3fr 0.9fr 0.9fr 28px; align-items: center; padding: 14px 22px; border-bottom: 1px solid var(--slate-100); font-size: 14px; gap: 8px; }
+  .ap-tour-invoice-row:last-of-type { border-bottom: none; }
+  .ap-tour-invoice-sku { font-weight: 600; color: var(--green-deep); }
+  .ap-tour-invoice-qty { font-family: var(--font-mono); font-size: 12px; color: var(--slate-600); text-align: center; }
+  .ap-tour-invoice-qty--bad { color: var(--green-dark); font-weight: 700; }
+  .ap-tour-invoice-status { display: flex; justify-content: center; }
+  .ap-tour-invoice-status svg { width: 18px; height: 18px; }
+  .ap-tour-invoice-foot { padding: 14px 22px; background: var(--slate-50); font-family: var(--font-mono); font-size: 12px; font-weight: 700; letter-spacing: 0.5px; color: var(--green-dark); text-align: right; }
+
+  /* ─── S2 · INGESTION 3-STEP FLOW ─── */
+  .ap-tour-flow { display: flex; align-items: stretch; justify-content: center; gap: 8px; }
+  .ap-tour-flow-step { display: flex; flex-direction: column; align-items: center; justify-content: flex-start; gap: 12px; padding: 28px 16px; background: var(--white); border: 1px solid var(--slate-200); border-radius: 14px; flex: 1 1 0; min-width: 0; text-align: center; box-shadow: 0 6px 20px rgba(27,67,50,0.06); }
+  .ap-tour-flow-step:nth-child(5) { background: linear-gradient(155deg, var(--white) 0%, var(--green-ghost) 100%); border-color: rgba(149,213,178,0.5); }
+  .ap-tour-flow-icon { width: 40px; height: 40px; border-radius: 50%; background: var(--green-ghost); display: flex; align-items: center; justify-content: center; color: var(--green-dark); flex-shrink: 0; }
+  .ap-tour-flow-step:nth-child(5) .ap-tour-flow-icon { background: var(--green-deep); color: var(--white); }
+  .ap-tour-flow-label { font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--slate-500); }
+  .ap-tour-flow-title { font-size: 13px; font-weight: 600; color: var(--green-deep); line-height: 1.3; }
+  .ap-tour-flow-arrow { display: flex; align-items: center; color: var(--green-mid); font-size: 22px; flex-shrink: 0; padding: 0 4px; }
+  @media (max-width: 640px) {
+    .ap-tour-flow { flex-wrap: wrap; gap: 12px; }
+    .ap-tour-flow-arrow { display: none; }
+    .ap-tour-flow-step { min-width: 100%; flex: 1 1 100%; flex-direction: row; gap: 16px; padding: 18px 20px; text-align: left; justify-content: flex-start; }
+  }
+
+  /* ─── S3 · Metrc DELIVERY MATCH ─── */
+  .ap-tour-match { background: var(--white); border: 1px solid var(--slate-200); border-radius: 14px; box-shadow: 0 20px 50px rgba(27,67,50,0.08); text-align: left; overflow: hidden; }
+  .ap-tour-match-head { padding: 18px 22px; border-bottom: 1px solid var(--slate-100); background: var(--slate-50); display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .ap-tour-match-title { font-family: var(--font-mono); font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--slate-500); font-weight: 700; }
+  .ap-tour-match-vendor { font-size: 14px; color: var(--green-deep); font-weight: 600; margin-top: 4px; }
+  .ap-tour-match-logo { height: 16px; opacity: 0.75; flex-shrink: 0; }
+  .ap-tour-match-row { display: grid; grid-template-columns: 1.5fr 1fr 1fr 28px; align-items: center; padding: 12px 22px; border-bottom: 1px solid var(--slate-100); font-size: 14px; gap: 8px; }
+  .ap-tour-match-row:last-of-type { border-bottom: none; }
+  .ap-tour-match-sku { font-weight: 600; color: var(--green-deep); }
+  .ap-tour-match-qty { font-family: var(--font-mono); font-size: 12px; color: var(--slate-600); text-align: center; }
+  .ap-tour-match-qty--bad { color: #c0392b; font-weight: 700; }
+  .ap-tour-match-status { display: flex; justify-content: center; }
+  .ap-tour-match-status svg { width: 18px; height: 18px; }
+  .ap-tour-match-foot { padding: 14px 22px; background: var(--green-deep); color: var(--white); font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: 1px; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+  .ap-tour-match-foot-pill { background: var(--green-accent); color: var(--green-deep); padding: 3px 10px; border-radius: 100px; font-size: 10px; }
+
+  /* ─── S4 · STOPPED CHECK (on dark bg) ─── */
+  .ap-tour-check { background: var(--white); border: 1px solid var(--slate-300); border-radius: 8px; box-shadow: 0 24px 60px rgba(0,0,0,0.4); text-align: left; padding: 28px 32px; position: relative; overflow: hidden; max-width: 460px; margin: 0 auto; }
+  .ap-tour-check::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, #c0392b, #e74c3c, #c0392b); }
+  .ap-tour-check-watermark { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-18deg); font-family: var(--font-mono); font-size: 56px; font-weight: 700; letter-spacing: 6px; color: rgba(192,57,43,0.16); border: 5px solid rgba(192,57,43,0.16); border-radius: 10px; padding: 8px 22px; pointer-events: none; user-select: none; white-space: nowrap; }
+  .ap-tour-check-head { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 24px; position: relative; }
+  .ap-tour-check-brand { font-size: 14px; font-weight: 700; color: var(--green-deep); }
+  .ap-tour-check-brand-sub { font-family: var(--font-mono); font-size: 10px; color: var(--slate-500); margin-top: 2px; letter-spacing: 0.5px; }
+  .ap-tour-check-num { font-family: var(--font-mono); font-size: 12px; color: var(--slate-500); text-align: right; line-height: 1.4; }
+  .ap-tour-check-payee-row { display: flex; align-items: flex-end; gap: 12px; margin-bottom: 14px; position: relative; }
+  .ap-tour-check-payee-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 1px; text-transform: uppercase; color: var(--slate-500); padding-bottom: 6px; flex-shrink: 0; }
+  .ap-tour-check-payee-name { flex: 1; font-size: 17px; font-weight: 600; color: var(--green-deep); padding-bottom: 4px; border-bottom: 1px solid var(--slate-300); }
+  .ap-tour-check-line { font-family: var(--font-mono); font-size: 14px; color: var(--slate-500); text-decoration: line-through; margin-bottom: 4px; position: relative; }
+  .ap-tour-check-line-corrected { font-family: var(--font-mono); font-size: 22px; font-weight: 700; color: var(--green-deep); margin-bottom: 16px; position: relative; letter-spacing: -0.5px; }
+  .ap-tour-check-pill { display: inline-flex; align-items: center; gap: 8px; padding: 7px 14px; background: var(--green-ghost); color: var(--green-deep); border-radius: 100px; font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: 1px; position: relative; }
+  .ap-tour-check-pill::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--green-dark); }
+
+  /* ─── S5 · VENDOR EMAIL THREAD ─── */
+  .ap-tour-thread { max-width: 480px; margin: 0 auto; display: flex; flex-direction: column; gap: 8px; text-align: left; }
+  .ap-tour-thread-label { font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; padding: 0 4px; color: var(--slate-500); }
+  .ap-tour-thread-label--us { color: var(--green-dark); align-self: flex-end; margin-top: 6px; }
+  .ap-tour-thread-msg { padding: 14px 18px; border-radius: 16px; font-size: 14.5px; line-height: 1.55; max-width: 88%; box-shadow: 0 4px 16px rgba(27,67,50,0.06); }
+  .ap-tour-thread-msg--vendor { background: var(--white); color: var(--slate-700); border: 1px solid var(--slate-200); border-bottom-left-radius: 4px; align-self: flex-start; }
+  .ap-tour-thread-msg--us { background: var(--green-deep); color: rgba(255,255,255,0.95); border-bottom-right-radius: 4px; align-self: flex-end; }
+  .ap-tour-thread-time { font-family: var(--font-mono); font-size: 10px; color: var(--slate-500); letter-spacing: 0.5px; padding: 4px 4px 0; align-self: flex-end; display: flex; align-items: center; gap: 6px; }
+  .ap-tour-thread-time::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--green-accent); }
+
+  /* ─── S6 · BEFORE / AFTER HOURS ─── */
+  .ap-tour-hours { display: grid; grid-template-columns: 1fr auto 1fr; gap: 18px; align-items: stretch; text-align: left; }
+  .ap-tour-hours-pane { background: var(--white); border: 1px solid var(--slate-200); border-radius: 14px; padding: 28px 24px; box-shadow: 0 20px 50px rgba(27,67,50,0.06); display: flex; flex-direction: column; justify-content: center; }
+  .ap-tour-hours-pane--after { background: linear-gradient(155deg, var(--white) 0%, var(--green-ghost) 100%); border-color: rgba(149,213,178,0.5); }
+  .ap-tour-hours-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--slate-500); font-weight: 700; margin-bottom: 14px; }
+  .ap-tour-hours-pane--after .ap-tour-hours-label { color: var(--green-dark); }
+  .ap-tour-hours-big { font-family: var(--font-mono); font-size: clamp(24px, 3vw, 32px); font-weight: 700; color: var(--slate-700); letter-spacing: -1px; line-height: 1.1; margin-bottom: 10px; }
+  .ap-tour-hours-pane--after .ap-tour-hours-big { color: var(--green-deep); }
+  .ap-tour-hours-sub { font-size: 13px; color: var(--slate-500); line-height: 1.45; }
+  .ap-tour-hours-pane--after .ap-tour-hours-sub { color: var(--green-dark); }
+  .ap-tour-hours-arrow { display: flex; align-items: center; justify-content: center; color: var(--green-mid); }
+  .ap-tour-hours-arrow svg { width: 32px; height: 32px; }
+  @media (max-width: 640px) {
+    .ap-tour-hours { grid-template-columns: 1fr; gap: 12px; }
+    .ap-tour-hours-arrow { transform: rotate(90deg); padding: 4px 0; }
+  }
+
+  /* ─── S7 · VENDOR PORTAL CARD ─── */
+  .ap-tour-portal { background: var(--white); border: 1px solid var(--slate-200); border-radius: 16px; box-shadow: 0 20px 50px rgba(27,67,50,0.08); text-align: left; overflow: hidden; max-width: 440px; margin: 0 auto; }
+  .ap-tour-portal-head { padding: 22px 24px; border-bottom: 1px solid var(--slate-100); background: linear-gradient(155deg, var(--white) 0%, var(--green-ghost) 100%); display: flex; align-items: center; gap: 14px; }
+  .ap-tour-portal-avatar { width: 44px; height: 44px; border-radius: 50%; background: var(--green-deep); color: var(--white); display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 14px; font-weight: 700; letter-spacing: 1px; flex-shrink: 0; }
+  .ap-tour-portal-name { font-size: 16px; font-weight: 700; color: var(--green-deep); }
+  .ap-tour-portal-sub { font-family: var(--font-mono); font-size: 10px; letter-spacing: 1px; text-transform: uppercase; color: var(--slate-500); margin-top: 2px; }
+  .ap-tour-portal-rows { padding: 4px 24px 12px; }
+  .ap-tour-portal-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 0; border-bottom: 1px solid var(--slate-100); font-size: 14px; }
+  .ap-tour-portal-row:last-child { border-bottom: none; }
+  .ap-tour-portal-row-label { color: var(--slate-600); }
+  .ap-tour-portal-row-val { font-family: var(--font-mono); font-weight: 700; color: var(--green-deep); font-size: 13px; }
+  .ap-tour-portal-pill { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 100px; font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
+  .ap-tour-portal-pill--green { background: var(--green-ghost); color: var(--green-dark); }
+  .ap-tour-portal-pill--slate { background: var(--slate-100); color: var(--slate-600); }
+  .ap-tour-portal-pill--amber { background: rgba(217,119,6,0.1); color: #b45309; }
+  .ap-tour-portal-pill::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+
+  /* ════════════════════════════════════════════════════════════════════
+     TOUR VISUAL SCALING — bigger cards, more readable type
+     Overrides the lean defaults above. Targets desktop primarily;
+     mobile reverts to compact at the end. Mirrors /consignment pattern.
+     ════════════════════════════════════════════════════════════════════ */
+  .svc-section .svc-visual { max-width: 780px; }
+
+  /* S1 — invoice */
+  .ap-tour-invoice-head { padding: 22px 28px; }
+  .ap-tour-invoice-id { font-size: 14px; }
+  .ap-tour-invoice-vendor { font-size: 15px; margin-top: 4px; }
+  .ap-tour-invoice-badge { font-size: 12px; padding: 6px 14px; }
+  .ap-tour-invoice-row { font-size: 17px; padding: 18px 28px; grid-template-columns: 1.3fr 0.9fr 0.9fr 32px; }
+  .ap-tour-invoice-qty { font-size: 14px; }
+  .ap-tour-invoice-status svg { width: 22px; height: 22px; }
+  .ap-tour-invoice-foot { padding: 18px 28px; font-size: 14px; }
+
+  /* S2 — flow */
+  .ap-tour-flow-step { padding: 34px 18px; gap: 16px; }
+  .ap-tour-flow-icon { width: 56px; height: 56px; }
+  .ap-tour-flow-icon svg { width: 26px; height: 26px; }
+  .ap-tour-flow-label { font-size: 12px; }
+  .ap-tour-flow-title { font-size: 17px; line-height: 1.35; }
+  .ap-tour-flow-arrow { font-size: 28px; }
+
+  /* S3 — metrc match */
+  .ap-tour-match-head { padding: 22px 28px; }
+  .ap-tour-match-title { font-size: 13px; }
+  .ap-tour-match-vendor { font-size: 17px; margin-top: 4px; }
+  .ap-tour-match-logo { height: 20px; }
+  .ap-tour-match-row { font-size: 17px; padding: 16px 28px; grid-template-columns: 1.5fr 1fr 1fr 32px; }
+  .ap-tour-match-qty { font-size: 14px; }
+  .ap-tour-match-status svg { width: 22px; height: 22px; }
+  .ap-tour-match-foot { padding: 18px 28px; font-size: 13px; }
+  .ap-tour-match-foot-pill { font-size: 12px; padding: 4px 12px; }
+
+  /* S4 — stopped check (dark) */
+  .ap-tour-check { max-width: 580px; padding: 38px 40px; }
+  .ap-tour-check-watermark { font-size: 72px; letter-spacing: 8px; padding: 10px 28px; border-width: 6px; }
+  .ap-tour-check-head { margin-bottom: 28px; }
+  .ap-tour-check-brand { font-size: 17px; }
+  .ap-tour-check-brand-sub { font-size: 12px; }
+  .ap-tour-check-num { font-size: 14px; }
+  .ap-tour-check-payee-label { font-size: 12px; }
+  .ap-tour-check-payee-name { font-size: 22px; }
+  .ap-tour-check-line { font-size: 18px; margin-bottom: 6px; }
+  .ap-tour-check-line-corrected { font-size: 30px; margin-bottom: 20px; }
+  .ap-tour-check-pill { font-size: 13px; padding: 9px 18px; }
+
+  /* S5 — vendor email thread */
+  .ap-tour-thread { max-width: 620px; gap: 10px; }
+  .ap-tour-thread-label { font-size: 12px; }
+  .ap-tour-thread-msg { font-size: 17px; padding: 18px 22px; border-radius: 20px; }
+  .ap-tour-thread-time { font-size: 12px; padding-top: 6px; }
+
+  /* S6 — before/after hours */
+  .ap-tour-hours-pane { padding: 36px 30px; }
+  .ap-tour-hours-label { font-size: 12px; margin-bottom: 16px; }
+  .ap-tour-hours-big { font-size: clamp(32px, 4vw, 44px); margin-bottom: 14px; }
+  .ap-tour-hours-sub { font-size: 16px; }
+  .ap-tour-hours-arrow svg { width: 40px; height: 40px; }
+
+  /* S7 — vendor portal */
+  .ap-tour-portal { max-width: 560px; }
+  .ap-tour-portal-head { padding: 26px 28px; }
+  .ap-tour-portal-avatar { width: 54px; height: 54px; font-size: 17px; }
+  .ap-tour-portal-name { font-size: 19px; }
+  .ap-tour-portal-sub { font-size: 12px; }
+  .ap-tour-portal-rows { padding: 8px 28px 16px; }
+  .ap-tour-portal-row { font-size: 16px; padding: 18px 0; }
+  .ap-tour-portal-row-val { font-size: 15px; }
+  .ap-tour-portal-pill { font-size: 12px; padding: 5px 12px; }
+
+  /* Mobile — pull paddings back so cards fit; type stays readable */
+  @media (max-width: 700px) {
+    .svc-section .svc-visual { max-width: 100%; }
+    .ap-tour-check, .ap-tour-thread, .ap-tour-portal { max-width: 100%; }
+    .ap-tour-check { padding: 28px 22px; }
+    .ap-tour-check-watermark { font-size: 56px; letter-spacing: 6px; padding: 8px 22px; border-width: 5px; }
+    .ap-tour-check-line-corrected { font-size: 24px; }
+    .ap-tour-invoice-head,
+    .ap-tour-invoice-row,
+    .ap-tour-invoice-foot,
+    .ap-tour-match-head,
+    .ap-tour-match-row,
+    .ap-tour-match-foot,
+    .ap-tour-portal-head,
+    .ap-tour-portal-rows { padding-left: 20px; padding-right: 20px; }
+    .ap-tour-invoice-row { font-size: 15px; }
+    .ap-tour-match-row { font-size: 15px; }
+    .ap-tour-thread-msg { font-size: 15.5px; padding: 14px 18px; }
+    .ap-tour-hours-pane { padding: 28px 22px; }
+    .ap-tour-hours-big { font-size: 28px; }
+    .ap-tour-hours-sub { font-size: 14px; }
+  }
+
+  /* ─── AP CALCULATOR ─── */
+  .calc-section { background: var(--slate-50); padding: 100px 48px; }
+  .calc-header { text-align: center; max-width: 600px; margin: 0 auto 48px; }
+  .calc-header .section-desc { margin: 0 auto; }
+  .calc-container { max-width: 640px; margin: 0 auto; }
+  .calc-slider-wrapper { margin-bottom: 40px; }
+  .calc-slider-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 12px; }
+  .calc-slider-label { font-size: 14px; font-weight: 600; color: var(--green-deep); }
+  .calc-slider-value { font-family: var(--font-mono); font-size: 18px; font-weight: 700; color: var(--green-deep); }
+  .calc-slider-labels { display: flex; justify-content: space-between; font-size: 12px; color: var(--slate-500); margin-top: 8px; }
+  .calc-slider { width: 100%; -webkit-appearance: none; appearance: none; height: 8px; border-radius: 4px; background: var(--slate-200); outline: none; }
+  .calc-slider::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 28px; height: 28px; border-radius: 50%; background: var(--green-deep); cursor: pointer; box-shadow: 0 2px 8px rgba(27,67,50,0.3); }
+  .calc-slider::-moz-range-thumb { width: 28px; height: 28px; border-radius: 50%; background: var(--green-deep); cursor: pointer; border: none; box-shadow: 0 2px 8px rgba(27,67,50,0.3); }
+  .calc-results { background: var(--white); border: 1px solid var(--slate-200); border-radius: 16px; overflow: hidden; }
+  .calc-breakdown-row { display: flex; justify-content: space-between; align-items: center; padding: 20px 24px; border-bottom: 1px solid var(--slate-100); gap: 16px; }
+  .calc-breakdown-row:last-of-type { border-bottom: none; }
+  .calc-breakdown-label { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+  .calc-breakdown-name { font-size: 15px; font-weight: 600; color: var(--green-deep); }
+  .calc-breakdown-sub { font-size: 12px; color: var(--slate-500); }
+  .calc-breakdown-value { text-align: right; flex-shrink: 0; }
+  .calc-breakdown-year { display: block; font-family: var(--font-mono); font-size: clamp(18px, 2vw, 22px); font-weight: 700; color: var(--green-deep); letter-spacing: -0.5px; }
+  .calc-breakdown-month { display: block; font-size: 12px; color: var(--slate-500); margin-top: 3px; font-family: var(--font-mono); }
+  .calc-breakdown-row--total { background: var(--green-ghost); border-top: 1px solid rgba(149,213,178,0.4); }
+  .calc-breakdown-row--total .calc-breakdown-name { color: var(--green-deep); font-size: 16px; font-weight: 700; }
+  .calc-breakdown-row--total .calc-breakdown-year { font-size: clamp(22px, 2.6vw, 28px); }
+  .calc-breakdown-row--total .calc-breakdown-month { color: var(--green-dark); }
+  .calc-ebitda { display: flex; justify-content: space-between; align-items: center; padding: 16px 24px; background: var(--green-deep); }
+  .calc-ebitda span:first-child { font-size: 14px; font-weight: 600; color: rgba(255,255,255,0.7); }
+  .calc-ebitda span:last-child { font-family: var(--font-mono); font-size: 20px; font-weight: 700; color: var(--white); }
+  @media (max-width: 600px) {
+    .calc-breakdown-row { padding: 16px 20px; gap: 12px; }
+    .calc-breakdown-year { font-size: 18px; }
+    .calc-breakdown-row--total .calc-breakdown-year { font-size: 22px; }
+  }
+  .calc-guarantee { text-align: center; max-width: 540px; margin: 32px auto 24px; padding: 16px 24px; background: var(--green-ghost); border: 1px solid rgba(149,213,178,0.3); border-radius: 12px; }
+  .calc-guarantee p { font-size: 15px; color: var(--slate-600); margin: 0; }
+  .calc-guarantee strong { color: var(--green-deep); }
+  .calc-cta-wrap { text-align: center; margin-top: 24px; }
+
+  /* ─── FAQ ─── */
+  .faq-section { background: var(--slate-50); padding: 80px 48px; }
+  .faq-header { text-align: center; max-width: 600px; margin: 0 auto 48px; }
+  .faq-header .section-desc { margin: 0 auto; }
+  .faq-list { max-width: 680px; margin: 0 auto; }
+  .faq-list details { border-bottom: 1px solid var(--slate-200); }
+  .faq-list details:first-child { border-top: 1px solid var(--slate-200); }
+  .faq-list summary { padding: 20px 0; font-size: 17px; font-weight: 600; color: var(--green-deep); cursor: pointer; list-style: none; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+  .faq-list summary::-webkit-details-marker { display: none; }
+  .faq-list summary::after { content: '+'; font-size: 22px; font-weight: 400; color: var(--slate-500); transition: transform 0.2s; flex-shrink: 0; }
+  .faq-list details[open] summary::after { content: '\2212'; }
+  .faq-list details p { padding: 0 0 20px; margin: 0; font-size: 15px; line-height: 1.7; color: var(--slate-500); }
+
+  /* ─── CTA PARALLAX ─── */
+  .cta-section::before { transform: translate(-50%,-50%) translateY(var(--parallax-y, 0)); will-change: transform; }
+
+  /* ─── FOOTER 5-COL ─── */
+  .footer-top { grid-template-columns: 2fr 1fr 1fr 1fr 1fr; }
+  @media (max-width: 900px) { .footer-top { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px) { .footer-top { grid-template-columns: 1fr; } }
+
+  /* ─── MOBILE COLLAPSE (calc only) ─── */
+  .m-collapse-cb { position: absolute; opacity: 0; pointer-events: none; height: 0; width: 0; }
+  .m-collapse-trigger { display: none; }
+  .m-collapse-body { display: block; }
+  .uc-mobile-fallback-cta { display: none; }
+
+  @media (max-width: 700px) {
+    .calc-section .m-collapse-body { display: none; }
+    .calc-section .m-collapse-cb:checked ~ .m-collapse-body { display: block; }
+    .calc-section .m-collapse-cb:checked ~ .m-collapse-body .reveal { opacity: 1 !important; transform: none !important; }
+    .calc-section .m-collapse-trigger {
+      display: inline-flex; cursor: pointer;
+      align-items: center; justify-content: center; gap: 8px;
+      margin: 8px auto 0;
+      padding: 14px 28px;
+      background: var(--green-deep); color: var(--white);
+      border-radius: 12px;
+      font-family: var(--font-mono); font-size: 13px; font-weight: 700;
+      letter-spacing: 1px; text-transform: uppercase;
+    }
+    .calc-section .m-collapse-trigger::after { content: '↓'; font-size: 16px; line-height: 1; }
+    .calc-section .m-collapse-cb:checked ~ .m-collapse-trigger::after { content: '↑'; }
+    .calc-section .m-collapse-cb:checked ~ .m-collapse-body { margin-top: 28px; }
+    .calc-section { text-align: center; }
+    .calc-section .m-collapse-body { text-align: left; }
+    .calc-section .m-collapse-cb:not(:checked) ~ .uc-mobile-fallback-cta {
+      display: flex; justify-content: center; padding: 20px 24px 0; margin: 0;
+    }
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    .page-hero { padding: 100px 24px 48px; }
+    .hero-grid-lines { width: 100%; }
+    .calc-section { padding: 60px 24px; }
+    .faq-section { padding: 60px 24px; }
+  }
+  @media (max-width: 700px) {
+    .hero-bg-gradient, .hero-bg-gradient-2 { display: none; }
+  }
+
+  /* ─── REDUCED MOTION ─── */
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; transition: none; }
+    .page-hero .section-label,
+    .page-hero .hero-h1,
+    .page-hero .hero-lede,
+    .page-hero .hero-actions-centered { opacity: 1; transform: none; transition: none; }
+    .hero-bg-gradient, .hero-bg-gradient-2 { animation: none; }
+  }
+</style>
+<noscript><style>.reveal,.page-hero .section-label,.page-hero .hero-h1,.page-hero .hero-lede,.page-hero .hero-actions-centered{opacity:1;transform:none;transition:none;}</style></noscript>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-H2LBJT03WE"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-H2LBJT03WE');</script>
+<script>function initApollo(){var n=Math.random().toString(36).substring(7),o=document.createElement("script");
+o.src="https://assets.apollo.io/micro/website-tracker/tracker.iife.js?nocache="+n,o.async=!0,o.defer=!0,
+o.onload=function(){window.trackingFunctions.onLoad({appId:"69c141b32234890011a43849"})},
+document.head.appendChild(o)}initApollo();</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "ShelfVerify — Cannabis Invoice-to-Metrc Verification",
+  "provider": {
+    "@type": "Organization",
+    "name": "ShelfSpace",
+    "url": "https://shelfspace.pro"
+  },
+  "description": "ShelfVerify checks every cannabis invoice line by line against the Metrc manifest that moved the product. Retailers pay only for what arrived; vendors prove every invoice shipped.",
+  "areaServed": "US",
+  "url": "https://shelfspace.pro/shelfverify"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://shelfspace.pro/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "ShelfVerify",
+      "item": "https://shelfspace.pro/shelfverify"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is ShelfVerify?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "ShelfVerify checks every cannabis invoice line by line against the Metrc manifest that moved the product. Each line is either marked ShelfVerified or flagged with the reason it doesn't match."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is ShelfVerify a compliance certification?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Metrc stays your compliance record. ShelfVerify compares your invoices to that record so what you pay, or bill, agrees with what actually shipped."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What if one invoice covers several deliveries?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "ShelfVerify matches it across every manifest it covers. A split delivery isn't flagged as a problem."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What happens when a line doesn't match?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It's flagged with the reason: short, over, not on the manifest, wrong size, no shipment yet, or billed twice. Retailers can short-pay the difference; vendors see exactly which invoice to fix or re-send."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I have to do anything to use it?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Connect your Metrc account once. After that, every invoice is matched automatically, and we work the exceptions with you."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is ShelfVerify included?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. ShelfVerify runs inside ShelfPay for retailers and ShelfCollect for vendors. See our pricing page, or talk to us."
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="/" class="nav-logo">
+    <div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div>
+    <span class="nav-logo-text">ShelfSpace<sup class="nav-logo-tm">™</sup></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="/accounts-payable">ShelfPay (AP)</a></li>
+    <li><a href="/shelfverify" class="active">ShelfVerify</a></li>
+    <li><a href="/accounts-receivable">ShelfCollect (AR)</a></li>
+    <li><a href="/consignment">Consignment</a></li>
+    <li><a href="/credit-recovery">Credit Recovery</a></li>
+    <li><a href="/about">About</a></li>
+    <li><a href="/pricing">Pricing</a></li>
+    <li class="nav-login-mobile"><a href="https://ourshelf.space/login">Login</a></li>
+    <li><a href="/contact" class="nav-cta">Get Started <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a></li>
+  </ul>
+  <div class="nav-hamburger" onclick="document.querySelector('.nav-links').classList.toggle('mobile-open'); event.stopPropagation();"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- PAGE HERO (slim) -->
+<div class="page-hero">
+  <div class="hero-bg-gradient"></div>
+  <div class="hero-bg-gradient-2"></div>
+  <div class="hero-grid-lines"></div>
+  <div class="hero-text--solo">
+    <div class="aud-badge aud-retailer">For Retailers &amp; Vendors</div>
+    <div class="section-label">ShelfVerify &middot; Invoice-to-Metrc Verification</div>
+    <h1 class="hero-h1">Every invoice, checked against Metrc &mdash; line by line.</h1>
+    <p class="hero-lede">ShelfVerify matches each line of a cannabis invoice to the Metrc manifest that actually moved the product. What arrived gets paid. What didn't gets flagged, before any money moves.</p>
+    <div class="hero-actions-centered">
+      <a href="/contact" class="btn-primary">See it on your invoices <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+    </div>
+  </div>
+</div>
+
+<!-- HOW IT WORKS (reusable module: .dfy-flow) -->
+<style>
+  .dfy-flow { background: var(--slate-50); padding: 88px 48px; border-top: 1px solid var(--slate-100); }
+  .dfy-flow-inner { max-width: 1040px; margin: 0 auto; }
+  .dfy-flow-head { text-align: center; max-width: 660px; margin: 0 auto 44px; }
+  .dfy-flow-eyebrow { font-family: var(--font-mono); font-size: 11.5px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--green-dark); margin-bottom: 12px; }
+  .dfy-flow-head h2 { font-size: clamp(26px,3.4vw,38px); font-weight: 700; letter-spacing: -1px; color: var(--green-deep); margin: 0; line-height: 1.12; }
+  .dfy-flow-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+  .dfy-flow-step { background: var(--white); border: 1px solid var(--slate-200); border-radius: 20px; padding: 30px 26px; box-shadow: 0 12px 30px rgba(27,67,50,0.05); }
+  .dfy-flow-num { font-family: var(--font-mono); font-size: 14px; font-weight: 700; color: var(--green-mid); letter-spacing: 1px; }
+  .dfy-flow-step h3 { font-size: 19px; font-weight: 700; color: var(--green-deep); letter-spacing: -0.4px; margin: 14px 0 8px; }
+  .dfy-flow-step p { font-size: 14.5px; line-height: 1.6; color: var(--slate-600); margin: 0; }
+  @media (max-width: 820px) { .dfy-flow { padding: 64px 24px; } .dfy-flow-grid { grid-template-columns: 1fr; } }
+
+  /* ─── ShelfVerify · two-sided cards ─── */
+  .sv-sides { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; text-align: left; max-width: 900px; margin: 0 auto; }
+  .sv-side { background: var(--white); border: 1px solid var(--slate-200); border-radius: 20px; padding: 32px 28px; box-shadow: 0 12px 30px rgba(27,67,50,0.06); }
+  .sv-side .aud-badge { margin: 0 0 16px; }
+  .sv-side h3 { font-size: 22px; font-weight: 700; color: var(--green-deep); letter-spacing: -0.5px; margin: 0 0 10px; line-height: 1.2; }
+  .sv-side p { font-size: 15px; line-height: 1.6; color: var(--slate-600); margin: 0 0 14px; }
+  .sv-side ul { list-style: none; padding: 0; margin: 0 0 18px; }
+  .sv-side li { position: relative; padding-left: 24px; font-size: 14.5px; line-height: 1.55; color: var(--slate-700); margin-bottom: 8px; }
+  .sv-side li::before { content: ''; position: absolute; left: 0; top: 7px; width: 12px; height: 7px; border-left: 2.5px solid var(--green-mid); border-bottom: 2.5px solid var(--green-mid); transform: rotate(-45deg); }
+  .sv-side a.svc-link { margin-top: 0; }
+  @media (max-width: 820px) { .sv-sides { grid-template-columns: 1fr; } }
+
+  /* ─── ShelfVerify · what gets flagged ─── */
+  .sv-flags { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; text-align: left; }
+  .sv-flag { background: rgba(255,255,255,0.06); border: 1px solid rgba(149,213,178,0.22); border-radius: 16px; padding: 22px 20px; }
+  .sv-flag-tag { font-family: var(--font-mono); font-size: 10.5px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--green-accent); margin-bottom: 8px; }
+  .sv-flag h3 { font-size: 16px; font-weight: 700; color: var(--white); margin: 0 0 6px; line-height: 1.3; }
+  .sv-flag p { font-size: 14px; line-height: 1.55; color: rgba(255,255,255,0.72); margin: 0; }
+  @media (max-width: 900px) { .sv-flags { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px) { .sv-flags { grid-template-columns: 1fr; } }
+</style>
+<section class="dfy-flow" aria-labelledby="dfy-flow-h">
+  <div class="dfy-flow-inner">
+    <div class="dfy-flow-head reveal">
+      <div class="dfy-flow-eyebrow">How ShelfVerify works</div>
+      <h2 id="dfy-flow-h">Invoice in. Manifest found. Every line checked.</h2>
+    </div>
+    <div class="dfy-flow-grid">
+      <div class="dfy-flow-step reveal"><div class="dfy-flow-num">01</div><h3>The invoice comes in</h3><p>Emailed, uploaded, or already in the system. ShelfiQ reads every line: product, size, quantity, price.</p></div>
+      <div class="dfy-flow-step reveal reveal-delay-1"><div class="dfy-flow-num">02</div><h3>We find the manifest</h3><p>ShelfVerify pulls the Metrc manifest that moved the product, including invoices split across more than one delivery.</p></div>
+      <div class="dfy-flow-step reveal reveal-delay-2"><div class="dfy-flow-num">03</div><h3>Every line is matched</h3><p>Each invoice line is paired to a package on the manifest. Matches are marked ShelfVerified; anything off is flagged with the reason.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- BRAND TICKER — vendors paid through ShelfSpace -->
+<section class="brand-ticker">
+  <div class="brand-ticker-label">Brands paid every week, on the ShelfSpace platform</div>
+  <div class="brand-ticker-track">
+    <img src="/logos/brands/curaleaf.png" alt="Curaleaf — paid via ShelfSpace" class="brand-ticker-logo">
+    <img src="/logos/brands/cresco.png" alt="Cresco Labs — paid via ShelfSpace" class="brand-ticker-logo brand-ticker-logo--sm">
+    <img src="/logos/brands/gti.png" alt="Green Thumb Industries — paid via ShelfSpace" class="brand-ticker-logo brand-ticker-logo--sm">
+    <img src="/logos/brands/holistic.png" alt="Holistic Industries — paid via ShelfSpace" class="brand-ticker-logo">
+    <img src="/logos/brands/kiva.png" alt="Kiva Confections — paid via ShelfSpace" class="brand-ticker-logo brand-ticker-logo--sm">
+    <img src="/logos/brands/wyld.png" alt="Wyld — paid via ShelfSpace" class="brand-ticker-logo brand-ticker-logo--lg">
+    <img src="/logos/brands/marimed.png" alt="MariMed — paid via ShelfSpace" class="brand-ticker-logo brand-ticker-logo--lg">
+    <img src="/logos/brands/jushi.png" alt="Jushi Holdings — paid via ShelfSpace" class="brand-ticker-logo">
+    <img src="/logos/brands/rove.png" alt="Rove — paid via ShelfSpace" class="brand-ticker-logo">
+    <img src="/logos/brands/fernway.png" alt="Fernway — paid via ShelfSpace" class="brand-ticker-logo">
+    <img src="/logos/brands/curaleaf.png" alt="Curaleaf" aria-hidden="true" class="brand-ticker-logo">
+    <img src="/logos/brands/cresco.png" alt="Cresco Labs" aria-hidden="true" class="brand-ticker-logo brand-ticker-logo--sm">
+    <img src="/logos/brands/gti.png" alt="Green Thumb Industries" aria-hidden="true" class="brand-ticker-logo brand-ticker-logo--sm">
+    <img src="/logos/brands/holistic.png" alt="Holistic Industries" aria-hidden="true" class="brand-ticker-logo">
+    <img src="/logos/brands/kiva.png" alt="Kiva Confections" aria-hidden="true" class="brand-ticker-logo brand-ticker-logo--sm">
+    <img src="/logos/brands/wyld.png" alt="Wyld" aria-hidden="true" class="brand-ticker-logo brand-ticker-logo--lg">
+    <img src="/logos/brands/marimed.png" alt="MariMed" aria-hidden="true" class="brand-ticker-logo brand-ticker-logo--lg">
+    <img src="/logos/brands/jushi.png" alt="Jushi" aria-hidden="true" class="brand-ticker-logo">
+    <img src="/logos/brands/rove.png" alt="Rove" aria-hidden="true" class="brand-ticker-logo">
+    <img src="/logos/brands/fernway.png" alt="Fernway" aria-hidden="true" class="brand-ticker-logo">
+  </div>
+</section>
+
+<!-- S1 · The record -->
+<section class="svc-section svc-section--white" id="sv-1">
+  <div class="svc-inner">
+    <div class="svc-eyebrow reveal">The Record</div>
+    <h2 class="svc-headline reveal">Metrc already knows what shipped. Your invoice should agree.</h2>
+    <p class="svc-sub reveal">Cannabis is the one industry with a state record of every package that moved. ShelfVerify holds each invoice up against it.</p>
+    <div class="svc-visual reveal reveal-delay-1">
+      <div class="ap-tour-match" aria-hidden="true">
+        <div class="ap-tour-match-head">
+          <div>
+            <div class="ap-tour-match-title">ShelfVerify &middot; Invoice #INV-4827</div>
+            <div class="ap-tour-match-vendor">Sunrise Extracts &middot; Manifest #M2C-9821</div>
+          </div>
+          <img src="/metrc-logo.png" alt="" class="ap-tour-match-logo" loading="lazy">
+        </div>
+        <div class="ap-tour-match-row">
+          <span class="ap-tour-match-sku">GG #4 · 3.5g</span>
+          <span class="ap-tour-match-qty">24 invoiced</span>
+          <span class="ap-tour-match-qty">24 on manifest</span>
+          <span class="ap-tour-match-status"><svg viewBox="0 0 24 24" fill="none" stroke="#1b4332" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+        </div>
+        <div class="ap-tour-match-row">
+          <span class="ap-tour-match-sku">Blue Dream · 1g</span>
+          <span class="ap-tour-match-qty">24 invoiced</span>
+          <span class="ap-tour-match-qty ap-tour-match-qty--bad">22 on manifest</span>
+          <span class="ap-tour-match-status"><svg viewBox="0 0 24 24" fill="none" stroke="#c0392b" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg></span>
+        </div>
+        <div class="ap-tour-match-row">
+          <span class="ap-tour-match-sku">Pineapple Express · 1g Vape</span>
+          <span class="ap-tour-match-qty">12 invoiced</span>
+          <span class="ap-tour-match-qty">12 on manifest</span>
+          <span class="ap-tour-match-status"><svg viewBox="0 0 24 24" fill="none" stroke="#1b4332" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+        </div>
+        <div class="ap-tour-match-foot">
+          <span>2 OF 3 LINES SHELFVERIFIED</span>
+          <span class="ap-tour-match-foot-pill">1 SHORT &middot; FLAGGED</span>
+        </div>
+      </div>
+    </div>
+    <p class="svc-why reveal">No more "we shipped 24, you signed for 22, here's an invoice for 24." The gap is found before the check is cut, not three months later in a reconciliation.</p>
+    <a class="svc-link reveal" href="/docs/integrations/metrc">How the Metrc connection works <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+  </div>
+</section>
+
+<!-- S2 · Both sides -->
+<section class="svc-section svc-section--slate" id="sv-2">
+  <div class="svc-inner">
+    <div class="svc-eyebrow reveal">Both Sides of the Invoice</div>
+    <h2 class="svc-headline reveal">One match. Both sides trust it.</h2>
+    <p class="svc-sub reveal">The dispensary and the brand look at the same state record, so there's nothing left to argue about.</p>
+    <div class="svc-visual reveal reveal-delay-1" style="max-width:900px;">
+      <div class="sv-sides">
+        <div class="sv-side">
+          <div class="aud-badge aud-retailer">Retailers</div>
+          <h3>Pay for what actually arrived.</h3>
+          <p>Every vendor invoice is checked against the manifest you accepted before it reaches your payment queue.</p>
+          <ul>
+            <li>Shorts and overbills caught at receiving</li>
+            <li>Short-pay the difference right from the invoice</li>
+            <li>Products you never received never get paid for</li>
+          </ul>
+          <a class="svc-link" href="/accounts-payable">ShelfVerify inside ShelfPay <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        </div>
+        <div class="sv-side">
+          <div class="aud-badge aud-vendor">Vendors</div>
+          <h3>Prove every invoice shipped.</h3>
+          <p>Each invoice you send is matched to the outgoing manifest your customer accepted in Metrc.</p>
+          <ul>
+            <li>Invoices your buyer can't dispute</li>
+            <li>Catch a double-bill or a missed shipment before your customer does</li>
+            <li>Know which invoices are still waiting on a delivery</li>
+          </ul>
+          <a class="svc-link" href="/accounts-receivable">ShelfVerify inside ShelfCollect <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- S3 · What gets flagged (dark) -->
+<section class="svc-section svc-section--dark" id="sv-3">
+  <div class="svc-inner">
+    <div class="svc-eyebrow reveal">What Gets Flagged</div>
+    <h2 class="svc-headline reveal">When it doesn't match, you know why.</h2>
+    <p class="svc-sub reveal" style="color:rgba(255,255,255,0.75);">A flag always comes with the reason, so the fix is obvious.</p>
+    <div class="svc-visual reveal reveal-delay-1" style="max-width:980px;">
+      <div class="sv-flags">
+        <div class="sv-flag"><div class="sv-flag-tag">Quantity</div><h3>Short or over</h3><p>The invoice bills more (or less) than the manifest carried.</p></div>
+        <div class="sv-flag"><div class="sv-flag-tag">Product</div><h3>Not on the manifest</h3><p>A line was billed that never shipped in Metrc.</p></div>
+        <div class="sv-flag"><div class="sv-flag-tag">Timing</div><h3>No shipment yet</h3><p>The invoice went out before the product did. It re-checks when the manifest lands.</p></div>
+        <div class="sv-flag"><div class="sv-flag-tag">Duplicate</div><h3>Billed twice</h3><p>Two invoices point at the same delivery.</p></div>
+        <div class="sv-flag"><div class="sv-flag-tag">Split</div><h3>One invoice, several deliveries</h3><p>Matched across every manifest it covers, not flagged.</p></div>
+        <div class="sv-flag"><div class="sv-flag-tag">Size</div><h3>Right strain, wrong size</h3><p>An eighth billed, a gram shipped. Caught at the line, not the total.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-content">
+    <div class="section-label reveal">Get Started</div>
+    <h2 class="section-title reveal">See ShelfVerify run on your own invoices.</h2>
+    <p class="section-desc reveal">Connect Metrc once. Every invoice is matched after that.</p>
+    <div class="cta-actions reveal">
+      <a href="/contact" class="btn-primary">
+        Talk to us
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+    <div class="cta-founder reveal" style="display:flex;align-items:center;gap:20px;justify-content:center;margin:32px auto 0;max-width:680px;">
+      <img src="/chris-avatar.jpg" alt="Chris Mitchem" loading="lazy" style="width:56px;height:56px;border-radius:50%;object-fit:cover;flex-shrink:0;">
+      <div style="text-align:left;">
+        <p style="font-size:14px;color:var(--slate-700);line-height:1.5;margin:0 0 6px;font-style:italic;">"I've been a cannabis operator since 2015, and I have the scars to prove it. ShelfSpace is the product of everything I learned the hard way."</p>
+        <p style="font-size:13px;color:var(--slate-500);margin:0;">— Chris Mitchem, Founder</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section">
+  <div class="faq-header">
+    <div class="section-label reveal">FAQ</div>
+    <h2 class="section-title reveal">Frequently asked questions</h2>
+  </div>
+  <div class="faq-list">
+    <details>
+      <summary>What is ShelfVerify?</summary>
+      <p>ShelfVerify checks every cannabis invoice line by line against the Metrc manifest that moved the product. Each line is either marked ShelfVerified or flagged with the reason it doesn&#x27;t match.</p>
+    </details>
+    <details>
+      <summary>Is ShelfVerify a compliance certification?</summary>
+      <p>No. Metrc stays your compliance record. ShelfVerify compares your invoices to that record so what you pay, or bill, agrees with what actually shipped.</p>
+    </details>
+    <details>
+      <summary>What if one invoice covers several deliveries?</summary>
+      <p>ShelfVerify matches it across every manifest it covers. A split delivery isn&#x27;t flagged as a problem.</p>
+    </details>
+    <details>
+      <summary>What happens when a line doesn&#x27;t match?</summary>
+      <p>It&#x27;s flagged with the reason: short, over, not on the manifest, wrong size, no shipment yet, or billed twice. Retailers can short-pay the difference; vendors see exactly which invoice to fix or re-send.</p>
+    </details>
+    <details>
+      <summary>Do I have to do anything to use it?</summary>
+      <p>Connect your Metrc account once. After that, every invoice is matched automatically, and we work the exceptions with you.</p>
+    </details>
+    <details>
+      <summary>Is ShelfVerify included?</summary>
+      <p>Yes. ShelfVerify runs inside ShelfPay for retailers and ShelfCollect for vendors. See our pricing page, or talk to us.</p>
+    </details>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="/" class="nav-logo"><div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div><span class="nav-logo-text">ShelfSpace<sup class="nav-logo-tm">™</sup></span></a>
+      <p>Operations and Payments Intelligence</p>
+    </div>
+    <div class="footer-col"><h3>Services</h3><ul><li><a href="/accounts-payable">ShelfPay (AP)</a></li><li><a href="/shelfverify">ShelfVerify</a></li><li><a href="/consignment">Consignment</a></li><li><a href="/credit-recovery">Credit Recovery</a></li><li><a href="/checks">Check Payments</a></li><li><a href="/shelfiq">ShelfiQ</a></li></ul></div>
+    <div class="footer-col"><h3>Platform</h3><ul><li><a href="/features">Features</a></li><li><a href="/vendor-management">Vendor Management</a></li><li><a href="/collections">Collections</a></li><li><a href="/how-it-works">How It Works</a></li><li><a href="/pricing">Pricing</a></li><li><a href="/about">About</a></li><li><a href="/blog">Blog</a></li><li><a href="/docs">Docs</a></li>
+        <li><a href="/how-to">Guides</a></li><li><a href="/tutorials">Tutorials</a></li></ul></div>
+    <div class="footer-col"><h3>Access</h3><ul><li><a href="https://ourshelf.space/login">Login</a></li><li><a href="/contact">Talk to us</a></li><li><a href="/contact">Contact</a></li><li><a href="/accounts-receivable">ShelfCollect (AR)</a></li><li><a href="/vendors">For Vendors</a></li><li><a href="/for-bookkeepers">For Bookkeepers</a></li></ul></div>
+    <div class="footer-col"><h3>Company</h3><ul><li><a href="mailto:support@shelfspace.pro">Support</a></li><li><a href="https://linkedin.com/company/shelfspace-pro" target="_blank" rel="noopener" class="footer-social-link"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> LinkedIn</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><p>&copy; 2026 ShelfSpace Technologies Inc.</p><div style="display:flex;align-items:center;gap:8px;justify-content:center;margin-top:12px;"><img src="/metrc-logo.png" alt="Metrc" loading="lazy" style="height:18px;opacity:0.4;filter:brightness(0) invert(1);"><span style="font-size:11px;color:rgba(255,255,255,0.35);">Certified Metrc Third-Party Vendor</span></div><div class="footer-bottom-links"><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div></div>
+</footer>
+
+<script>
+(function() {
+  var nav = document.getElementById('nav');
+  var pageHero = document.querySelector('.page-hero');
+  var ctaSection = document.querySelector('.cta-section');
+
+  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var isMobile = window.innerWidth < 900;
+  var ticking = false;
+
+  /* ── Hero entrance ── */
+  requestAnimationFrame(function() {
+    nav.classList.toggle('scrolled', window.scrollY > 20);
+    if (pageHero) pageHero.classList.add('hero-loaded');
+  });
+
+  /* ── Scroll-Triggered Reveals (with unobserve for perf) ── */
+  var revealObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(function(el) { revealObserver.observe(el); });
+
+  /* ── Scroll handler (rAF + ticking flag) ── */
+  function onScroll() {
+    var scrollY = window.scrollY;
+    nav.classList.toggle('scrolled', scrollY > 20);
+
+    if (prefersReduced || isMobile) return;
+
+    var wh = window.innerHeight;
+    if (ctaSection) {
+      var rect = ctaSection.getBoundingClientRect();
+      if (rect.bottom >= 0 && rect.top <= wh) {
+        var center = rect.top + rect.height / 2 - wh / 2;
+        ctaSection.style.setProperty('--parallax-y', (center * 0.08) + 'px');
+      }
+    }
+  }
+
+  window.addEventListener('scroll', function() {
+    if (!ticking) {
+      requestAnimationFrame(function() { onScroll(); ticking = false; });
+      ticking = true;
+    }
+  }, { passive: true });
+  onScroll();
+
+  window.addEventListener('resize', function() {
+    isMobile = window.innerWidth < 900;
+    if (isMobile && ctaSection) ctaSection.style.setProperty('--parallax-y', '0px');
+  });
+
+  /* ── Close mobile nav on outside click ── */
+  document.addEventListener('click', function() {
+    var navLinks = document.querySelector('.nav-links');
+    if (navLinks && navLinks.classList.contains('mobile-open')) {
+      navLinks.classList.remove('mobile-open');
+    }
+  });
+
+  /* ── AP Calculator ── */
+  var revSlider = document.getElementById('ap-revenue');
+  if (revSlider) {
+    var revVal = document.getElementById('ap-revenue-val');
+    var laborYearEl = document.getElementById('ap-labor-year');
+    var laborMonthEl = document.getElementById('ap-labor-month');
+    var errorsYearEl = document.getElementById('ap-errors-year');
+    var errorsMonthEl = document.getElementById('ap-errors-month');
+    var totalYearEl = document.getElementById('ap-total-year');
+    var totalMonthEl = document.getElementById('ap-total-month');
+    var ebitdaEl = document.getElementById('ap-ebitda');
+
+    function formatCurrency(n) { return '$' + Math.round(n).toLocaleString(); }
+
+    function updateSliderTrack(slider) {
+      var pct = ((slider.value - slider.min) / (slider.max - slider.min)) * 100;
+      slider.style.background = 'linear-gradient(to right, #95d5b2 0%, #95d5b2 ' + pct + '%, #e2e8f0 ' + pct + '%, #e2e8f0 100%)';
+    }
+
+    function updateAPCalc() {
+      var revenue = parseInt(revSlider.value, 10);
+      revVal.textContent = formatCurrency(revenue);
+      updateSliderTrack(revSlider);
+
+      var laborYear = revenue * 0.005;
+      var errorsYear = revenue * 0.008;
+      var totalYear = laborYear + errorsYear;
+
+      laborYearEl.textContent = formatCurrency(laborYear);
+      laborMonthEl.textContent = formatCurrency(laborYear / 12);
+      errorsYearEl.textContent = formatCurrency(errorsYear);
+      errorsMonthEl.textContent = formatCurrency(errorsYear / 12);
+      totalYearEl.textContent = formatCurrency(totalYear);
+      totalMonthEl.textContent = formatCurrency(totalYear / 12);
+
+      var baselineEbitda = 0.15;
+      var newEbitda = ((revenue * baselineEbitda + totalYear) / revenue) * 100;
+      ebitdaEl.innerHTML = baselineEbitda * 100 + '.0% &rarr; ' + newEbitda.toFixed(1) + '%';
+    }
+
+    revSlider.addEventListener('input', updateAPCalc);
+    updateAPCalc();
+  }
+})();
+</script>
+<script src="/shelfiq-widget.js"></script>
+</body>
+</html>
