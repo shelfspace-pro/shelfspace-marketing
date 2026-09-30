@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow, noarchive">
-<title>ShelfSpace Rate Calculator</title>
-<meta name="description" content="ShelfPay and ShelfCollect rate calculator.">
+<title>ShelfSpace Quote</title>
+<meta name="description" content="Build a ShelfPay or ShelfCollect quote.">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,283 +14,379 @@
 <link rel="stylesheet" href="styles.css">
 <style>
   body { background: var(--green-ghost); }
-  .rc-wrap { max-width: 1080px; margin: 0 auto; padding: 40px 16px 80px; }
-  .rc-top { display: flex; align-items: center; gap: 10px; margin-bottom: 28px; text-decoration: none; color: var(--green-deep); font-weight: 700; font-size: 18px; }
-  .rc-top img { width: 32px; height: 32px; }
-  h1.rc-title { font-size: clamp(28px, 4vw, 40px); color: var(--green-deep); letter-spacing: -0.02em; margin: 0 0 8px; }
-  .rc-sub { color: var(--slate-600); font-size: 16px; margin: 0 0 28px; max-width: 640px; line-height: 1.55; }
-  .rc-grid { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 24px; align-items: start; }
-  @media (max-width: 860px) { .rc-grid { grid-template-columns: minmax(0, 1fr); } }
-  .rc-card { background: var(--white); border-radius: 16px; padding: 24px; box-shadow: 0 8px 32px rgba(27,67,50,0.08); border: 1px solid var(--green-light); }
-  .rc-card + .rc-card { margin-top: 20px; }
-  .rc-label { display: block; font-size: 13px; font-weight: 600; color: var(--slate-700); margin: 0 0 8px; }
-  .rc-help { font-size: 13px; color: var(--slate-500); margin: 6px 0 0; line-height: 1.45; }
-  .rc-seg { display: flex; background: var(--slate-100); border-radius: 12px; padding: 4px; gap: 4px; margin-bottom: 20px; }
-  .rc-seg button { flex: 1; border: 0; background: transparent; border-radius: 10px; padding: 10px 12px; font: inherit; font-size: 14px; font-weight: 600; color: var(--slate-600); cursor: pointer; text-transform: none; letter-spacing: normal; }
-  .rc-seg button[aria-pressed="true"] { background: var(--white); color: var(--green-deep); box-shadow: 0 2px 8px rgba(27,67,50,0.12); }
-  .rc-seg.rc-big button { padding: 14px 12px; font-size: 16px; }
-  .rc-seg button small { display: block; font-weight: 500; font-size: 12px; color: var(--slate-500); margin-top: 2px; }
-  .rc-field { margin-bottom: 20px; }
-  .rc-money { position: relative; }
-  .rc-money span { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--slate-500); font-family: var(--font-mono); font-size: 15px; }
-  .rc-input { width: 100%; box-sizing: border-box; border: 1.5px solid var(--slate-200); border-radius: 12px; padding: 12px 14px; font: inherit; font-size: 15px; color: var(--slate-800); background: var(--white); }
-  .rc-money .rc-input { padding-left: 28px; font-family: var(--font-mono); font-variant-numeric: tabular-nums; text-align: right; }
-  .rc-input:focus { outline: none; border-color: var(--green-mid); box-shadow: 0 0 0 3px rgba(27,67,50,0.12); }
-  .rc-store { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) 40px; gap: 8px; align-items: center; margin-bottom: 8px; }
-  .rc-store-head { font-size: 12px; font-weight: 600; color: var(--slate-500); text-transform: uppercase; letter-spacing: 0.04em; }
-  .rc-x { width: 40px; height: 44px; border: 1.5px solid var(--slate-200); border-radius: 12px; background: var(--white); color: var(--slate-500); cursor: pointer; font-size: 18px; line-height: 1; text-transform: none; }
-  .rc-x:hover { border-color: var(--green-accent); color: var(--green-deep); }
-  .rc-x:disabled { opacity: 0.35; cursor: default; }
-  .rc-add { margin-top: 4px; border: 1.5px dashed var(--green-accent); background: var(--green-ghost); color: var(--green-deep); border-radius: 12px; padding: 10px 14px; font: inherit; font-size: 14px; font-weight: 600; cursor: pointer; width: 100%; text-transform: none; letter-spacing: normal; }
-  .rc-sticky { position: sticky; top: 24px; }
-  .rc-total { background: var(--green-deep); color: var(--white); border-radius: 16px; padding: 24px; box-shadow: 0 8px 32px rgba(27,67,50,0.25); }
-  .rc-total-label { font-size: 13px; font-weight: 600; color: var(--green-accent); text-transform: uppercase; letter-spacing: 0.06em; }
-  .rc-total-num { font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-size: clamp(34px, 5vw, 44px); font-weight: 700; margin: 6px 0 2px; }
-  .rc-total-note { font-size: 14px; color: var(--green-light); line-height: 1.5; }
-  .rc-lines { width: 100%; border-collapse: collapse; margin-top: 4px; font-size: 14px; }
-  .rc-lines td { padding: 10px 0; border-bottom: 1px solid var(--slate-100); color: var(--slate-700); vertical-align: top; }
-  .rc-lines td:last-child { text-align: right; font-family: var(--font-mono); font-variant-numeric: tabular-nums; white-space: nowrap; padding-left: 12px; color: var(--slate-800); }
-  .rc-lines td small { display: block; color: var(--slate-500); font-size: 12px; margin-top: 2px; }
-  .rc-lines tr.rc-sum td { font-weight: 700; color: var(--green-deep); border-bottom: 0; }
-  .rc-actions { display: flex; gap: 8px; margin-top: 16px; flex-wrap: wrap; }
-  .rc-btn { flex: 1; min-width: 140px; border: 1.5px solid var(--slate-200); background: var(--white); color: var(--green-deep); border-radius: 12px; padding: 12px 14px; font: inherit; font-size: 14px; font-weight: 600; cursor: pointer; text-transform: none; letter-spacing: normal; }
-  .rc-btn:hover { background: var(--green-ghost); border-color: var(--green-accent); }
-  .rc-bands { width: 100%; border-collapse: collapse; font-size: 14px; }
-  .rc-bands th { text-align: left; font-size: 12px; font-weight: 600; color: var(--slate-500); text-transform: uppercase; letter-spacing: 0.04em; padding: 0 0 8px; }
-  .rc-bands th:not(:first-child), .rc-bands td:not(:first-child) { text-align: right; }
-  .rc-bands td { padding: 9px 0; border-top: 1px solid var(--slate-100); color: var(--slate-700); }
-  .rc-bands td:not(:first-child) { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
-  .rc-bands tr.on td { color: var(--green-deep); font-weight: 700; }
-  .rc-toast { position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%) translateY(20px); background: var(--green-deep); color: var(--white); padding: 12px 18px; border-radius: 12px; font-size: 14px; font-weight: 600; box-shadow: 0 8px 32px rgba(27,67,50,0.3); opacity: 0; transition: all 0.2s; pointer-events: none; }
-  .rc-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
-  .rc-foot { margin-top: 28px; font-size: 13px; color: var(--slate-500); line-height: 1.55; max-width: 720px; }
+  .q-wrap { max-width: 860px; margin: 0 auto; padding: 40px 16px 80px; }
+  .q-brand { display: inline-flex; align-items: center; gap: 10px; margin-bottom: 28px; text-decoration: none; color: var(--green-deep); font-weight: 700; font-size: 18px; }
+  .q-brand img { width: 32px; height: 32px; }
+  h1.q-title { font-size: clamp(28px, 4vw, 40px); color: var(--green-deep); letter-spacing: -0.02em; margin: 0 0 8px; }
+  .q-sub { color: var(--slate-600); font-size: 16px; margin: 0 0 28px; line-height: 1.55; }
+  .q-card { background: var(--white); border-radius: 16px; padding: 28px; box-shadow: 0 8px 32px rgba(27,67,50,0.08); border: 1px solid var(--green-light); }
+  @media (max-width: 600px) { .q-card { padding: 20px 16px; } }
+  fieldset { border: 0; margin: 0 0 28px; padding: 0; min-width: 0; }
+  legend { display: flex; align-items: center; gap: 10px; font-size: 16px; font-weight: 700; color: var(--green-deep); margin-bottom: 12px; padding: 0; }
+  legend .step { display: inline-flex; width: 26px; height: 26px; border-radius: 50%; background: var(--green-deep); color: var(--white); font-size: 13px; align-items: center; justify-content: center; font-family: var(--font-mono); }
+  .opts { display: grid; gap: 10px; }
+  .opts-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  @media (max-width: 600px) { .opts-2 { grid-template-columns: minmax(0, 1fr); } }
+  .opt { position: relative; display: block; cursor: pointer; }
+  .opt input { position: absolute; opacity: 0; pointer-events: none; }
+  .opt .box { display: flex; gap: 12px; align-items: flex-start; border: 1.5px solid var(--slate-200); border-radius: 12px; padding: 14px 16px; background: var(--white); transition: border-color .15s, background .15s, box-shadow .15s; height: 100%; box-sizing: border-box; }
+  .opt .dot { flex: 0 0 18px; height: 18px; border-radius: 50%; border: 2px solid var(--slate-400); margin-top: 2px; box-sizing: border-box; }
+  .opt .t { display: block; font-weight: 600; color: var(--slate-800); font-size: 15px; }
+  .opt .d { display: block; color: var(--slate-500); font-size: 13px; margin-top: 2px; line-height: 1.4; }
+  .opt:hover .box { border-color: var(--green-accent); }
+  .opt input:checked + .box { border-color: var(--green-mid); background: var(--green-ghost); box-shadow: 0 2px 10px rgba(27,67,50,0.1); }
+  .opt input:checked + .box .dot { border-color: var(--green-deep); border-width: 5px; }
+  .opt input:focus-visible + .box { box-shadow: 0 0 0 3px rgba(27,67,50,0.2); }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip { position: relative; cursor: pointer; }
+  .chip input { position: absolute; opacity: 0; pointer-events: none; }
+  .chip span { display: inline-block; border: 1.5px solid var(--slate-200); border-radius: 12px; padding: 9px 14px; font-size: 14px; font-weight: 500; color: var(--slate-700); background: var(--white); font-variant-numeric: tabular-nums; transition: all .15s; }
+  .chip:hover span { border-color: var(--green-accent); }
+  .chip input:checked + span { background: var(--green-deep); border-color: var(--green-deep); color: var(--white); }
+  .chip input:focus-visible + span { box-shadow: 0 0 0 3px rgba(27,67,50,0.2); }
+  .store { border: 1.5px solid var(--slate-100); border-radius: 12px; padding: 14px; margin-bottom: 10px; background: var(--slate-50); }
+  .store.err { border-color: #e5a4a4; background: #fdf5f5; }
+  .store-top { display: flex; gap: 8px; align-items: center; margin-bottom: 10px; }
+  .store-top .q-input { flex: 1; }
+  .store-sub { font-size: 12px; font-weight: 600; color: var(--slate-500); text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 8px; }
+  .q-input { width: 100%; box-sizing: border-box; border: 1.5px solid var(--slate-200); border-radius: 12px; padding: 11px 14px; font: inherit; font-size: 15px; color: var(--slate-800); background: var(--white); }
+  .q-input:focus { outline: none; border-color: var(--green-mid); box-shadow: 0 0 0 3px rgba(27,67,50,0.12); }
+  .x { flex: 0 0 auto; border: 1.5px solid var(--slate-200); border-radius: 12px; background: var(--white); color: var(--slate-500); cursor: pointer; font: inherit; font-size: 13px; font-weight: 600; padding: 11px 12px; text-transform: none; letter-spacing: normal; }
+  .x:hover { border-color: var(--green-accent); color: var(--green-deep); }
+  .add { border: 1.5px dashed var(--green-accent); background: var(--green-ghost); color: var(--green-deep); border-radius: 12px; padding: 11px 14px; font: inherit; font-size: 14px; font-weight: 600; cursor: pointer; width: 100%; text-transform: none; letter-spacing: normal; }
+  .help { font-size: 13px; color: var(--slate-500); margin: 8px 0 0; line-height: 1.5; }
+  .err-msg { color: #b42318; font-size: 13px; font-weight: 600; margin-top: 8px; }
+  .gen { width: 100%; justify-content: center; }
+  .q-doc { margin-top: 28px; background: var(--white); border-radius: 16px; box-shadow: 0 8px 32px rgba(27,67,50,0.12); border: 1px solid var(--green-light); overflow: hidden; }
+  .q-doc-head { background: var(--green-deep); color: var(--white); padding: 28px; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  .q-doc-head .k { font-size: 12px; color: var(--green-accent); text-transform: uppercase; letter-spacing: 0.06em; font-weight: 600; }
+  .q-doc-head .v { font-size: 15px; margin-top: 2px; }
+  .q-doc-head h2 { margin: 0 0 4px; font-size: 26px; color: var(--white); }
+  .q-meta { display: grid; grid-template-columns: repeat(2, auto); gap: 8px 24px; align-content: start; }
+  .q-meta .v { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+  .q-body { padding: 28px; }
+  @media (max-width: 600px) { .q-body, .q-doc-head { padding: 20px 16px; } }
+  .q-big { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-bottom: 24px; }
+  @media (max-width: 600px) { .q-big { grid-template-columns: minmax(0, 1fr); } }
+  .q-stat { background: var(--green-ghost); border-radius: 12px; padding: 16px; }
+  .q-stat .k { font-size: 12px; color: var(--slate-600); font-weight: 600; }
+  .q-stat .v { font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-size: 24px; font-weight: 700; color: var(--green-deep); margin-top: 4px; }
+  .q-stat .s { font-size: 12px; color: var(--slate-500); margin-top: 2px; }
+  .q-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  .q-table th { text-align: left; font-size: 12px; font-weight: 600; color: var(--slate-500); text-transform: uppercase; letter-spacing: 0.04em; padding: 0 0 8px; border-bottom: 1.5px solid var(--slate-200); }
+  .q-table th:last-child, .q-table td:last-child { text-align: right; }
+  .q-table td { padding: 12px 0; border-bottom: 1px solid var(--slate-100); color: var(--slate-700); vertical-align: top; }
+  .q-table td:last-child { font-family: var(--font-mono); font-variant-numeric: tabular-nums; white-space: nowrap; padding-left: 12px; color: var(--slate-800); }
+  .q-table td small { display: block; color: var(--slate-500); font-size: 12px; margin-top: 2px; }
+  .q-table tr.sum td { font-weight: 700; color: var(--green-deep); border-bottom: 0; border-top: 1.5px solid var(--slate-200); }
+  .q-notes { margin: 24px 0 0; padding: 0 0 0 18px; color: var(--slate-600); font-size: 13px; line-height: 1.6; }
+  .q-actions { display: flex; gap: 8px; flex-wrap: wrap; padding: 0 28px 28px; }
+  @media (max-width: 600px) { .q-actions { padding: 0 16px 20px; } }
+  .q-btn { flex: 1; min-width: 150px; border: 1.5px solid var(--slate-200); background: var(--white); color: var(--green-deep); border-radius: 12px; padding: 12px 14px; font: inherit; font-size: 14px; font-weight: 600; cursor: pointer; text-transform: none; letter-spacing: normal; text-align: center; text-decoration: none; }
+  .q-btn:hover { background: var(--green-ghost); border-color: var(--green-accent); }
+  .q-btn.primary { background: var(--green-deep); color: var(--white); border-color: var(--green-deep); }
+  .q-btn.primary:hover { background: var(--green-dark); }
+  .toast { position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%) translateY(20px); background: var(--green-deep); color: var(--white); padding: 12px 18px; border-radius: 12px; font-size: 14px; font-weight: 600; box-shadow: 0 8px 32px rgba(27,67,50,0.3); opacity: 0; transition: all .2s; pointer-events: none; }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
   [hidden] { display: none !important; }
+  @media print {
+    @page { margin: 0.5in; }
+    body { background: #fff; }
+    .no-print { display: none !important; }
+    .q-wrap { padding: 0; max-width: none; }
+    .q-doc { margin: 0; box-shadow: none; border: 1px solid var(--slate-200); }
+    .q-doc-head, .q-stat, .chip input:checked + span { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
 </style>
 </head>
 <body>
-<div class="rc-wrap">
-  <a class="rc-top" href="/"><img src="/favicon.svg" alt="">ShelfSpace</a>
-  <h1 class="rc-title">Rate calculator</h1>
-  <p class="rc-sub">Enter your numbers to see your monthly rate. Prices are based on monthly sales, so they grow with the size of the business, never with how many invoices or payments you run. ShelfPay also includes credit recovery: we keep 20% of the credits we recover for you.</p>
-
-  <div class="rc-seg rc-big" role="group" aria-label="Service">
-    <button type="button" data-product="pay" aria-pressed="true">ShelfPay<small>Dispensaries: pay your vendors</small></button>
-    <button type="button" data-product="collect" aria-pressed="false">ShelfCollect<small>Brands: collect what you're owed</small></button>
+<div class="q-wrap">
+  <a class="q-brand no-print" href="/"><img src="/favicon.svg" alt="">ShelfSpace</a>
+  <div class="no-print">
+    <h1 class="q-title">Build your quote</h1>
+    <p class="q-sub">Answer a few questions and get your rate. Pricing is based on monthly sales, never on how many invoices or payments you run.</p>
   </div>
 
-  <div class="rc-grid">
-    <div>
-      <div class="rc-card">
-        <span class="rc-label">How we work together</span>
-        <div class="rc-seg" role="group" aria-label="Service level">
-          <button type="button" data-level="managed" aria-pressed="true">Done for you<small>We run it</small></button>
-          <button type="button" data-level="self" aria-pressed="false">You run it<small>We onboard and support</small></button>
-        </div>
-        <span class="rc-label">Agreement</span>
-        <div class="rc-seg" role="group" aria-label="Agreement">
-          <button type="button" data-term="annual" aria-pressed="true">12 months<small>Onboarding included</small></button>
-          <button type="button" data-term="monthly" aria-pressed="false">Month to month<small>Onboarding fee applies</small></button>
-        </div>
-
-        <div id="pay-inputs">
-          <span class="rc-label">Your stores</span>
-          <div class="rc-store"><span class="rc-store-head">Store</span><span class="rc-store-head" style="text-align:right">Monthly sales</span><span></span></div>
-          <div id="stores"></div>
-          <button type="button" class="rc-add" id="add-store">+ Add a store</button>
-          <p class="rc-help">Your largest store pays its full rate. Every additional store is 30% off.</p>
-
-          <div class="rc-field" style="margin-top:20px">
-            <label class="rc-label" for="credits">Credit recovery: 20% of credits recovered</label>
-            <div class="rc-money"><span>$</span><input class="rc-input" id="credits" inputmode="numeric" placeholder="0"></div>
-            <p class="rc-help">Credits your vendors owe you for returns, waste, and markdowns. Enter your expected credits per month across all stores. We keep 20% of what we recover. You keep 80%, and you pay nothing on credits we don't recover.</p>
-          </div>
-        </div>
-
-        <div id="collect-inputs" hidden>
-          <div class="rc-field">
-            <label class="rc-label" for="wholesale">Monthly wholesale sales</label>
-            <div class="rc-money"><span>$</span><input class="rc-input" id="wholesale" inputmode="numeric" placeholder="0"></div>
-            <p class="rc-help">What you invoice dispensaries in a typical month. One flat rate: we chase every invoice, with no cut of your sales.</p>
-          </div>
-        </div>
+  <form class="q-card no-print" id="form" novalidate>
+    <fieldset>
+      <legend><span class="step">1</span>Which service?</legend>
+      <div class="opts opts-2">
+        <label class="opt"><input type="radio" name="product" value="pay" checked><span class="box"><span class="dot"></span><span><span class="t">ShelfPay</span><span class="d">For dispensaries. We pay your vendors, verify every invoice, and recover the credits vendors owe you.</span></span></span></label>
+        <label class="opt"><input type="radio" name="product" value="collect"><span class="box"><span class="dot"></span><span><span class="t">ShelfCollect</span><span class="d">For brands. We send your invoices, follow up, and collect what dispensaries owe you.</span></span></span></label>
       </div>
+    </fieldset>
 
-      <div class="rc-card">
-        <span class="rc-label" id="bands-title">ShelfPay rates, per store</span>
-        <table class="rc-bands" id="bands"></table>
+    <fieldset>
+      <legend><span class="step">2</span>How do you want to work with us?</legend>
+      <div class="opts opts-2">
+        <label class="opt"><input type="radio" name="level" value="managed" checked><span class="box"><span class="dot"></span><span><span class="t">Done for you</span><span class="d">We run it every week. You approve, we handle the rest.</span></span></span></label>
+        <label class="opt"><input type="radio" name="level" value="self"><span class="box"><span class="dot"></span><span><span class="t">You run it</span><span class="d">Your team runs the platform. We onboard you and support you.</span></span></span></label>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend><span class="step">3</span>Agreement</legend>
+      <div class="opts opts-2">
+        <label class="opt"><input type="radio" name="term" value="annual" checked><span class="box"><span class="dot"></span><span><span class="t">12 months</span><span class="d">Our best rate. Onboarding included.</span></span></span></label>
+        <label class="opt"><input type="radio" name="term" value="monthly"><span class="box"><span class="dot"></span><span><span class="t">Month to month</span><span class="d">20% higher monthly rate, plus a one-time onboarding fee.</span></span></span></label>
+      </div>
+    </fieldset>
+
+    <fieldset id="pay-fs">
+      <legend><span class="step">4</span>Your stores and monthly sales</legend>
+      <div id="stores"></div>
+      <button type="button" class="add" id="add-store">+ Add another store</button>
+      <p class="help">Your largest store pays its full rate. Every additional store is 30% off.</p>
+    </fieldset>
+
+    <fieldset id="collect-fs" hidden>
+      <legend><span class="step">4</span>Your monthly wholesale sales</legend>
+      <div class="chips" id="collect-chips"></div>
+      <p class="help">What you invoice dispensaries in a typical month.</p>
+    </fieldset>
+
+    <fieldset>
+      <legend><span class="step">5</span>Business name</legend>
+      <input class="q-input" id="bizname" maxlength="80" placeholder="Business name (optional)" autocomplete="organization">
+    </fieldset>
+
+    <div class="err-msg" id="form-err" hidden></div>
+    <button type="submit" class="btn-primary gen">Generate quote</button>
+  </form>
+
+  <div class="q-doc" id="quote" hidden aria-live="polite">
+    <div class="q-doc-head">
+      <div>
+        <div class="k">Quote</div>
+        <h2 id="q-for">ShelfPay</h2>
+        <div class="v" id="q-summary"></div>
+      </div>
+      <div class="q-meta">
+        <div><div class="k">Quote #</div><div class="v" id="q-num"></div></div>
+        <div><div class="k">Date</div><div class="v" id="q-date"></div></div>
+        <div><div class="k">Valid through</div><div class="v" id="q-valid"></div></div>
       </div>
     </div>
-
-    <div class="rc-sticky">
-      <div class="rc-total">
-        <div class="rc-total-label">Estimated monthly</div>
-        <div class="rc-total-num" id="total">$0</div>
-        <div class="rc-total-note" id="total-note"></div>
-      </div>
-      <div class="rc-card" style="margin-top:20px">
-        <table class="rc-lines" id="lines"></table>
-        <div class="rc-actions">
-          <button type="button" class="rc-btn" id="copy-link">Copy link to this quote</button>
-          <button type="button" class="rc-btn" id="copy-text">Copy summary</button>
-        </div>
-      </div>
+    <div class="q-body">
+      <div class="q-big" id="q-big"></div>
+      <table class="q-table"><thead><tr><th>Item</th><th>Amount</th></tr></thead><tbody id="q-lines"></tbody></table>
+      <ul class="q-notes" id="q-notes"></ul>
+    </div>
+    <div class="q-actions no-print">
+      <a class="q-btn primary" href="/contact">Get started</a>
+      <button type="button" class="q-btn" id="print">Save as PDF</button>
+      <button type="button" class="q-btn" id="copy-link">Copy link</button>
+      <button type="button" class="q-btn" id="copy-text">Copy summary</button>
     </div>
   </div>
-
-  <p class="rc-foot">Estimates for discussion. Your final rate is confirmed in your agreement. Month-to-month rates are 20% higher than 12-month rates. Credit estimates depend on your vendors, your data, and approved returns and markdowns in a given month.</p>
 </div>
-<div class="rc-toast" id="toast" role="status" aria-live="polite"></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
 (function () {
-  // All money is handled in whole dollars (integers); cents never arise except in the
-  // 20% credit share and the month-to-month uplift, which are rounded to the dollar.
-  var BANDS = {
-    pay: [
-      { label: "Under $150k", max: 150000, managed: 500, self: 400 },
-      { label: "$150k to $400k", max: 400000, managed: 850, self: 650 },
-      { label: "$400k and up", max: Infinity, managed: 1200, self: 900 }
-    ],
-    collect: [
-      { label: "Under $150k", max: 150000, managed: 750, self: 400 },
-      { label: "$150k to $500k", max: 500000, managed: 1250, self: 650 },
-      { label: "$500k and up", max: Infinity, managed: 2000, self: 1000 }
-    ]
+  // ---- Rates (whole dollars) -------------------------------------------------
+  var PRICE = {
+    pay:     [{ managed: 500,  self: 400 }, { managed: 850,  self: 650 }, { managed: 1200, self: 900 }],
+    collect: [{ managed: 750,  self: 400 }, { managed: 1250, self: 650 }, { managed: 2000, self: 1000 }]
   };
+  var PAY_RANGES = [
+    { id: "a", label: "Under $100k",  rep: 75000,  band: 0 },
+    { id: "b", label: "$100k–$150k",  rep: 125000, band: 0 },
+    { id: "c", label: "$150k–$250k",  rep: 200000, band: 1 },
+    { id: "d", label: "$250k–$400k",  rep: 325000, band: 1 },
+    { id: "e", label: "$400k–$600k",  rep: 500000, band: 2 },
+    { id: "f", label: "Over $600k",   rep: 700000, band: 2 }
+  ];
+  var COLLECT_RANGES = [
+    { id: "a", label: "Under $75k",   band: 0 },
+    { id: "b", label: "$75k–$150k",   band: 0 },
+    { id: "c", label: "$150k–$300k",  band: 1 },
+    { id: "d", label: "$300k–$500k",  band: 1 },
+    { id: "e", label: "$500k–$1M",    band: 2 },
+    { id: "f", label: "Over $1M",     band: 2 }
+  ];
   var ADDL_STORE_DISCOUNT = 0.30;
   var CREDIT_SHARE = 0.20;
+  // Credits recovered run ~0.6%–1.1% of a store's monthly sales in live accounts;
+  // quote the conservative end.
+  var CREDIT_RATE_OF_SALES = 0.0075;
   var MONTHLY_UPLIFT = 0.20;
-  var ONBOARD_FIRST = 2500;
-  var ONBOARD_ADDL = 750;
+  var ONBOARD_FIRST = 2500, ONBOARD_ADDL = 750;
+  var VALID_DAYS = 30;
 
-  var state = { product: "pay", level: "managed", term: "annual", stores: [{ name: "", sales: "" }], credits: "", wholesale: "" };
+  var state = { product: "pay", level: "managed", term: "annual", name: "", stores: [{ n: "", r: "" }], c: "", shown: false, q: "" };
 
   function $(id) { return document.getElementById(id); }
-  function num(v) { var n = parseInt(String(v || "").replace(/[^0-9]/g, ""), 10); return isNaN(n) ? 0 : n; }
   function usd(n) { return "$" + Math.round(n).toLocaleString("en-US"); }
-  function band(product, sales) { var b = BANDS[product]; for (var i = 0; i < b.length; i++) if (sales < b[i].max) return b[i]; return b[b.length - 1]; }
-  function uplift(n) { return state.term === "monthly" ? Math.round(n * (1 + MONTHLY_UPLIFT)) : n; }
+  function mdy(d) { return String(d.getMonth() + 1).padStart(2, "0") + "/" + String(d.getDate()).padStart(2, "0") + "/" + d.getFullYear(); }
+  function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
+  function range(list, id) { for (var i = 0; i < list.length; i++) if (list[i].id === id) return list[i]; return null; }
+  function up(n) { return state.term === "monthly" ? Math.round(n * (1 + MONTHLY_UPLIFT)) : n; }
+  function round50(n) { return Math.round(n / 50) * 50; }
+  function newQuoteNum() { var c = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789", s = ""; for (var i = 0; i < 6; i++) s += c[Math.floor(Math.random() * c.length)]; return "SS-" + s; }
 
+  // ---- Hash state (shareable quote links) -----------------------------------
+  function saveHash() { try { history.replaceState(null, "", "#" + encodeURIComponent(btoa(unescape(encodeURIComponent(JSON.stringify(state)))))); } catch (e) {} }
   function readHash() {
     try {
-      var h = decodeURIComponent(location.hash.slice(1));
-      if (!h) return;
-      var s = JSON.parse(atob(h));
-      if (s && typeof s === "object") {
-        ["product", "level", "term", "credits", "wholesale"].forEach(function (k) { if (typeof s[k] === "string") state[k] = s[k]; });
-        if (Array.isArray(s.stores) && s.stores.length) state.stores = s.stores.slice(0, 50).map(function (x) { return { name: String(x.name || "").slice(0, 60), sales: String(x.sales || "") }; });
-      }
+      var h = location.hash.slice(1); if (!h) return;
+      var s = JSON.parse(decodeURIComponent(escape(atob(decodeURIComponent(h)))));
+      if (!s || typeof s !== "object") return;
+      if (s.product === "pay" || s.product === "collect") state.product = s.product;
+      if (s.level === "managed" || s.level === "self") state.level = s.level;
+      if (s.term === "annual" || s.term === "monthly") state.term = s.term;
+      if (typeof s.name === "string") state.name = s.name.slice(0, 80);
+      if (typeof s.c === "string") state.c = s.c;
+      if (typeof s.q === "string") state.q = s.q.slice(0, 12);
+      if (Array.isArray(s.stores) && s.stores.length) state.stores = s.stores.slice(0, 50).map(function (x) { return { n: String(x.n || "").slice(0, 60), r: String(x.r || "") }; });
+      state.shown = !!s.shown;
     } catch (e) { /* ignore a malformed link */ }
   }
-  function linkFor() { return location.origin + location.pathname + "#" + encodeURIComponent(btoa(JSON.stringify(state))); }
 
+  // ---- Form rendering --------------------------------------------------------
+  function chipsHtml(name, list, selected) {
+    return list.map(function (r) {
+      return '<label class="chip"><input type="radio" name="' + name + '" value="' + r.id + '"' + (selected === r.id ? " checked" : "") + '><span>' + r.label + "</span></label>";
+    }).join("");
+  }
   function renderStores() {
     var box = $("stores"); box.innerHTML = "";
     state.stores.forEach(function (s, i) {
-      var row = document.createElement("div"); row.className = "rc-store";
-      var name = document.createElement("input"); name.className = "rc-input"; name.placeholder = "Store " + (i + 1); name.value = s.name; name.setAttribute("aria-label", "Store name");
-      name.addEventListener("input", function () { s.name = name.value; calc(); });
-      var wrap = document.createElement("div"); wrap.className = "rc-money";
-      var sign = document.createElement("span"); sign.textContent = "$";
-      var sales = document.createElement("input"); sales.className = "rc-input"; sales.inputMode = "numeric"; sales.placeholder = "0"; sales.setAttribute("aria-label", "Monthly sales");
-      sales.value = s.sales ? num(s.sales).toLocaleString("en-US") : "";
-      sales.addEventListener("input", function () { s.sales = sales.value; calc(); });
-      sales.addEventListener("blur", function () { sales.value = num(sales.value) ? num(sales.value).toLocaleString("en-US") : ""; });
-      wrap.appendChild(sign); wrap.appendChild(sales);
-      var x = document.createElement("button"); x.type = "button"; x.className = "rc-x"; x.textContent = "×"; x.setAttribute("aria-label", "Remove store");
-      x.disabled = state.stores.length === 1;
-      x.addEventListener("click", function () { state.stores.splice(i, 1); renderStores(); calc(); });
-      row.appendChild(name); row.appendChild(wrap); row.appendChild(x); box.appendChild(row);
+      var div = document.createElement("div"); div.className = "store"; div.dataset.i = i;
+      div.innerHTML = '<div class="store-top"><input class="q-input" maxlength="60" placeholder="Store ' + (i + 1) + ' name (optional)" aria-label="Store name">' +
+        (state.stores.length > 1 ? '<button type="button" class="x">Remove</button>' : "") + '</div>' +
+        '<div class="store-sub">Monthly sales</div><div class="chips">' + chipsHtml("sales-" + i, PAY_RANGES, s.r) + "</div>";
+      var name = div.querySelector("input.q-input"); name.value = s.n;
+      name.addEventListener("input", function () { s.n = name.value; update(); });
+      div.querySelectorAll('input[type="radio"]').forEach(function (r) { r.addEventListener("change", function () { s.r = r.value; div.classList.remove("err"); update(); }); });
+      var x = div.querySelector(".x"); if (x) x.addEventListener("click", function () { state.stores.splice(i, 1); renderStores(); update(); });
+      box.appendChild(div);
     });
   }
-
-  function syncToggles() {
-    document.querySelectorAll("[data-product]").forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.product === state.product)); });
-    document.querySelectorAll("[data-level]").forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.level === state.level)); });
-    document.querySelectorAll("[data-term]").forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.term === state.term)); });
-    $("pay-inputs").hidden = state.product !== "pay";
-    $("collect-inputs").hidden = state.product !== "collect";
-    $("credits").value = num(state.credits) ? num(state.credits).toLocaleString("en-US") : "";
-    $("wholesale").value = num(state.wholesale) ? num(state.wholesale).toLocaleString("en-US") : "";
+  function renderStatic() {
+    $("collect-chips").innerHTML = chipsHtml("collect-sales", COLLECT_RANGES, state.c);
+    $("collect-chips").querySelectorAll("input").forEach(function (r) { r.addEventListener("change", function () { state.c = r.value; update(); }); });
+    ["product", "level", "term"].forEach(function (k) {
+      document.querySelectorAll('input[name="' + k + '"]').forEach(function (r) { r.checked = r.value === state[k]; });
+    });
+    $("bizname").value = state.name;
+    $("pay-fs").hidden = state.product !== "pay";
+    $("collect-fs").hidden = state.product !== "collect";
   }
 
-  var lastSummary = "";
-  function calc() {
-    var p = state.product, lvl = state.level, lines = [], base = 0, onboarding = 0, credit = 0, activeBands = {};
-    var levelName = lvl === "managed" ? "Done for you" : "You run it";
-    var termName = state.term === "annual" ? "12-month agreement" : "Month to month";
-
+  // ---- Quote math ------------------------------------------------------------
+  function compute() {
+    var p = state.product, lvl = state.level, lines = [], base = 0, credits = 0, onboarding = 0;
     if (p === "pay") {
-      var stores = state.stores.map(function (s, i) { var sales = num(s.sales); var b = band("pay", sales); return { name: s.name.trim() || ("Store " + (i + 1)), sales: sales, band: b, list: b[lvl] }; });
-      var order = stores.slice().sort(function (a, b) { return b.list - a.list || b.sales - a.sales; });
-      order.forEach(function (s, i) {
-        activeBands[s.band.label] = true;
-        var price = i === 0 ? s.list : Math.round(s.list * (1 - ADDL_STORE_DISCOUNT));
-        price = uplift(price);
-        base += price;
-        lines.push([s.name, s.band.label + " monthly sales" + (i === 0 ? ", full rate" : ", 30% off " + usd(uplift(s.list))), price]);
+      var stores = state.stores.map(function (s, i) {
+        var r = range(PAY_RANGES, s.r); var list = PRICE.pay[r.band][lvl];
+        return { name: s.n.trim() || ("Store " + (i + 1)), r: r, list: list };
       });
-      credit = Math.round(num(state.credits) * CREDIT_SHARE);
+      var order = stores.slice().sort(function (a, b) { return b.list - a.list || b.r.rep - a.r.rep; });
+      order.forEach(function (s, i) {
+        var price = up(i === 0 ? s.list : Math.round(s.list * (1 - ADDL_STORE_DISCOUNT)));
+        base += price;
+        lines.push({ item: s.name, sub: s.r.label + " monthly sales · " + (i === 0 ? "full rate" : "30% off " + usd(up(s.list))), amt: usd(price) + "/mo" });
+      });
+      stores.forEach(function (s) { credits += round50(s.r.rep * CREDIT_RATE_OF_SALES); });
       if (state.term === "monthly") onboarding = ONBOARD_FIRST + ONBOARD_ADDL * Math.max(0, stores.length - 1);
     } else {
-      var w = num(state.wholesale), b = band("collect", w);
-      activeBands[b.label] = true;
-      base = uplift(b[lvl]);
-      lines.push(["ShelfCollect", b.label + " monthly wholesale sales", base]);
+      var cr = range(COLLECT_RANGES, state.c);
+      base = up(PRICE.collect[cr.band][lvl]);
+      lines.push({ item: "ShelfCollect", sub: cr.label + " monthly wholesale sales · every invoice sent, followed up, and collected", amt: usd(base) + "/mo" });
       if (state.term === "monthly") onboarding = ONBOARD_FIRST;
     }
-
-    var monthly = base + credit;
-    var html = "";
-    lines.forEach(function (l) { html += "<tr><td>" + esc(l[0]) + "<small>" + esc(l[1]) + "</small></td><td>" + usd(l[2]) + "/mo</td></tr>"; });
-    if (p === "pay") html += credit > 0
-      ? "<tr><td>Credit recovery, 20%<small>20% of " + usd(num(state.credits)) + " recovered. You keep " + usd(num(state.credits) - credit) + "</small></td><td>" + usd(credit) + "/mo</td></tr>"
-      : "<tr><td>Credit recovery, 20%<small>20% of credits we recover. Enter an amount to estimate</small></td><td>20%</td></tr>";
-    html += "<tr class='rc-sum'><td>Monthly total</td><td>" + usd(monthly) + "/mo</td></tr>";
-    html += "<tr><td>Onboarding<small>" + (onboarding ? "One time, month-to-month agreements" : "Included with a 12-month agreement") + "</small></td><td>" + (onboarding ? usd(onboarding) : "$0") + "</td></tr>";
-    html += "<tr><td>First 12 months<small>Monthly total × 12, plus onboarding</small></td><td>" + usd(monthly * 12 + onboarding) + "</td></tr>";
-    $("lines").innerHTML = html;
-    $("total").textContent = usd(monthly);
-    $("total-note").textContent = levelName + " · " + termName + (p === "pay" && credit > 0 ? " · includes 20% of credits recovered" : "") + (p === "pay" && credit === 0 ? " · plus 20% of any credits we recover" : "");
-
-    // Rate table for the chosen product + level (12-month list prices).
-    var t = "<tr><th>Monthly sales</th><th>Done for you</th><th>You run it</th></tr>";
-    BANDS[p].forEach(function (b) { t += "<tr class='" + (activeBands[b.label] ? "on" : "") + "'><td>" + b.label + "</td><td>" + usd(b.managed) + "</td><td>" + usd(b.self) + "</td></tr>"; });
-    if (p === "pay") t += "<tr class='on'><td>Credit recovery</td><td>20%</td><td>20%</td></tr>";
-    $("bands").innerHTML = t;
-    $("bands-title").textContent = p === "pay" ? "ShelfPay rates, per store, 12-month agreement" : "ShelfCollect rates, 12-month agreement";
-
-    var sum = [(p === "pay" ? "ShelfPay" : "ShelfCollect") + " estimate: " + levelName + ", " + termName];
-    lines.forEach(function (l) { sum.push("  " + l[0] + " (" + l[1] + "): " + usd(l[2]) + "/mo"); });
-    if (p === "pay") sum.push("  Credit recovery: 20% of credits recovered" + (credit ? " (" + usd(credit) + "/mo on " + usd(num(state.credits)) + ")" : ""));
-    sum.push("Monthly total: " + usd(monthly) + "/mo");
-    sum.push("Onboarding: " + (onboarding ? usd(onboarding) + " one time" : "included"));
-    sum.push("First 12 months: " + usd(monthly * 12 + onboarding));
-    lastSummary = sum.join("\n");
-
-    try { history.replaceState(null, "", "#" + encodeURIComponent(btoa(JSON.stringify(state)))); } catch (e) {}
+    var fee = Math.round(credits * CREDIT_SHARE);
+    return { p: p, lines: lines, base: base, credits: credits, fee: fee, keep: credits - fee, monthly: base + fee, onboarding: onboarding, year: (base + fee) * 12 + onboarding, stores: state.stores.length };
   }
 
-  function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
+  function validate() {
+    var ok = true;
+    if (state.product === "pay") {
+      document.querySelectorAll("#stores .store").forEach(function (el, i) { if (!range(PAY_RANGES, state.stores[i].r)) { el.classList.add("err"); ok = false; } });
+      if (!ok) { $("form-err").textContent = "Pick monthly sales for every store."; }
+    } else if (!range(COLLECT_RANGES, state.c)) { ok = false; $("form-err").textContent = "Pick your monthly wholesale sales."; }
+    $("form-err").hidden = ok;
+    return ok;
+  }
+
+  var summaryText = "";
+  function renderQuote() {
+    var v = compute(), levelName = state.level === "managed" ? "Done for you" : "You run it";
+    var termName = state.term === "annual" ? "12-month agreement" : "Month to month";
+    var product = v.p === "pay" ? "ShelfPay" : "ShelfCollect";
+    var today = new Date(), valid = new Date(today.getTime() + VALID_DAYS * 864e5);
+    $("q-for").textContent = state.name.trim() ? state.name.trim() : product;
+    $("q-summary").textContent = (state.name.trim() ? product + " · " : "") + levelName + " · " + termName + (v.p === "pay" ? " · " + v.stores + (v.stores === 1 ? " store" : " stores") : "");
+    $("q-num").textContent = state.q; $("q-date").textContent = mdy(today); $("q-valid").textContent = mdy(valid);
+
+    var big = '<div class="q-stat"><div class="k">' + (v.p === "pay" ? "Estimated monthly total" : "Monthly total") + '</div><div class="v">' + usd(v.monthly) + '</div><div class="s">' + (v.p === "pay" ? usd(v.base) + " base + " + usd(v.fee) + " credit recovery" : "Flat rate, no cut of your sales") + "</div></div>";
+    if (v.p === "pay") big += '<div class="q-stat"><div class="k">Estimated credits you keep</div><div class="v">' + usd(v.keep) + '</div><div class="s">per month, 80% of ' + usd(v.credits) + " recovered</div></div>";
+    big += '<div class="q-stat"><div class="k">Onboarding</div><div class="v">' + (v.onboarding ? usd(v.onboarding) : "Included") + '</div><div class="s">' + (v.onboarding ? "One time" : "With a 12-month agreement") + "</div></div>";
+    if (v.p !== "pay") big += '<div class="q-stat"><div class="k">First 12 months</div><div class="v">' + usd(v.year) + '</div><div class="s">Monthly × 12' + (v.onboarding ? " + onboarding" : "") + "</div></div>";
+    $("q-big").innerHTML = big;
+
+    var rows = v.lines.map(function (l) { return "<tr><td>" + esc(l.item) + "<small>" + esc(l.sub) + "</small></td><td>" + l.amt + "</td></tr>"; }).join("");
+    if (v.p === "pay") {
+      rows += "<tr><td>Monthly subscription<small>Fixed</small></td><td>" + usd(v.base) + "/mo</td></tr>";
+      rows += "<tr><td>Credit recovery, 20% of credits recovered<small>Estimated " + usd(v.credits) + "/mo in credits (about 0.75% of monthly sales). You pay nothing on credits we don't recover.</small></td><td>~" + usd(v.fee) + "/mo</td></tr>";
+      rows += "<tr class='sum'><td>Estimated monthly total</td><td>" + usd(v.monthly) + "/mo</td></tr>";
+    } else {
+      rows += "<tr class='sum'><td>Monthly total</td><td>" + usd(v.monthly) + "/mo</td></tr>";
+    }
+    rows += "<tr><td>Onboarding<small>" + (v.onboarding ? "One time" + (v.p === "pay" && v.stores > 1 ? ": " + usd(ONBOARD_FIRST) + " first store + " + usd(ONBOARD_ADDL) + " each additional" : "") : "Included with a 12-month agreement") + "</small></td><td>" + (v.onboarding ? usd(v.onboarding) : "$0") + "</td></tr>";
+    rows += "<tr><td>First 12 months" + (v.p === "pay" ? ", estimated" : "") + "<small>Monthly total × 12" + (v.onboarding ? " + onboarding" : "") + "</small></td><td>" + usd(v.year) + "</td></tr>";
+    $("q-lines").innerHTML = rows;
+
+    var notes = [];
+    if (v.p === "pay") notes.push("Credits are what your vendors owe you for returns, waste, and aged markdowns. Actual credits depend on your vendors and your data in a given month, so the credit recovery amount will vary. You keep 80% of every credit.");
+    if (state.term === "annual") notes.push("12-month agreement. If we haven't delivered in the first 90 days, you can walk away.");
+    else notes.push("Month-to-month rates are 20% higher than 12-month rates. Switch to a 12-month agreement any time.");
+    notes.push("Prices are set by monthly sales and reviewed once a year, never by how many invoices or payments you run.");
+    notes.push("This quote is valid through " + mdy(valid) + ". Final terms are confirmed in your agreement.");
+    $("q-notes").innerHTML = notes.map(function (n) { return "<li>" + esc(n) + "</li>"; }).join("");
+
+    var t = ["ShelfSpace quote " + state.q + " · " + mdy(today), (state.name.trim() ? state.name.trim() + " · " : "") + product + " · " + levelName + " · " + termName];
+    v.lines.forEach(function (l) { t.push("  " + l.item + " (" + l.sub + "): " + l.amt); });
+    if (v.p === "pay") { t.push("  Credit recovery: 20% of credits recovered (est. " + usd(v.credits) + "/mo in credits → ~" + usd(v.fee) + "/mo; you keep ~" + usd(v.keep) + ")"); t.push("Estimated monthly total: " + usd(v.monthly) + "/mo"); }
+    else t.push("Monthly total: " + usd(v.monthly) + "/mo");
+    t.push("Onboarding: " + (v.onboarding ? usd(v.onboarding) + " one time" : "included"));
+    t.push("First 12 months: " + usd(v.year));
+    t.push("Valid through " + mdy(valid));
+    summaryText = t.join("\n");
+  }
+
+  function update() {
+    saveHash();
+    if (!state.shown) return;
+    if (validate()) { $("quote").hidden = false; renderQuote(); } else { $("quote").hidden = true; }
+  }
+
+  // ---- Events ---------------------------------------------------------------
+  ["product", "level", "term"].forEach(function (k) {
+    document.querySelectorAll('input[name="' + k + '"]').forEach(function (r) {
+      r.addEventListener("change", function () { state[k] = r.value; renderStatic(); update(); });
+    });
+  });
+  $("bizname").addEventListener("input", function () { state.name = $("bizname").value; update(); });
+  $("add-store").addEventListener("click", function () { state.stores.push({ n: "", r: "" }); renderStores(); update(); });
+  $("form").addEventListener("submit", function (e) {
+    e.preventDefault();
+    if (!validate()) return;
+    if (!state.q) state.q = newQuoteNum();
+    state.shown = true; update();
+    $("quote").scrollIntoView({ behavior: "smooth", block: "start" });
+  });
   function toast(msg) { var t = $("toast"); t.textContent = msg; t.classList.add("show"); setTimeout(function () { t.classList.remove("show"); }, 1800); }
   function copy(text, msg) {
     if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(function () { toast(msg); }, function () { toast("Couldn't copy. Select and copy manually."); });
     else toast("Couldn't copy. Select and copy manually.");
   }
+  $("print").addEventListener("click", function () { window.print(); });
+  $("copy-link").addEventListener("click", function () { saveHash(); copy(location.href, "Link copied"); });
+  $("copy-text").addEventListener("click", function () { copy(summaryText, "Summary copied"); });
 
-  document.querySelectorAll("[data-product]").forEach(function (b) { b.addEventListener("click", function () { state.product = b.dataset.product; syncToggles(); calc(); }); });
-  document.querySelectorAll("[data-level]").forEach(function (b) { b.addEventListener("click", function () { state.level = b.dataset.level; syncToggles(); calc(); }); });
-  document.querySelectorAll("[data-term]").forEach(function (b) { b.addEventListener("click", function () { state.term = b.dataset.term; syncToggles(); calc(); }); });
-  $("add-store").addEventListener("click", function () { state.stores.push({ name: "", sales: "" }); renderStores(); calc(); });
-  ["credits", "wholesale"].forEach(function (id) {
-    var el = $(id);
-    el.addEventListener("input", function () { state[id] = el.value; calc(); });
-    el.addEventListener("blur", function () { el.value = num(el.value) ? num(el.value).toLocaleString("en-US") : ""; });
-  });
-  $("copy-link").addEventListener("click", function () { copy(linkFor(), "Link copied"); });
-  $("copy-text").addEventListener("click", function () { copy(lastSummary, "Summary copied"); });
-
-  readHash(); renderStores(); syncToggles(); calc();
+  readHash(); renderStatic(); renderStores(); update();
 })();
 </script>
 </body>
