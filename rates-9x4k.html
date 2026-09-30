@@ -14,7 +14,12 @@
 <link rel="stylesheet" href="styles.css">
 <style>
   body { background: var(--green-ghost); }
-  .q-wrap { max-width: 860px; margin: 0 auto; padding: 40px 16px 80px; }
+  .q-wrap { max-width: 1280px; margin: 0 auto; padding: 40px 16px 80px; }
+  .q-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: 24px; align-items: start; }
+  .q-side { position: sticky; top: 24px; }
+  @media (max-width: 960px) { .q-layout { grid-template-columns: minmax(0, 1fr); } .q-side { position: static; } }
+  .q-empty { background: var(--white); border: 1.5px dashed var(--green-accent); border-radius: 16px; padding: 48px 28px; text-align: center; color: var(--slate-600); font-size: 15px; line-height: 1.55; }
+  .q-empty strong { display: block; color: var(--green-deep); font-size: 18px; margin-bottom: 6px; }
   .q-brand { display: inline-flex; align-items: center; gap: 10px; margin-bottom: 28px; text-decoration: none; color: var(--green-deep); font-weight: 700; font-size: 18px; }
   .q-brand img { width: 32px; height: 32px; }
   h1.q-title { font-size: clamp(28px, 4vw, 40px); color: var(--green-deep); letter-spacing: -0.02em; margin: 0 0 8px; }
@@ -57,16 +62,16 @@
   .help { font-size: 13px; color: var(--slate-500); margin: 8px 0 0; line-height: 1.5; }
   .err-msg { color: #b42318; font-size: 13px; font-weight: 600; margin-top: 8px; }
   .gen { width: 100%; justify-content: center; }
-  .q-doc { margin-top: 28px; background: var(--white); border-radius: 16px; box-shadow: 0 8px 32px rgba(27,67,50,0.12); border: 1px solid var(--green-light); overflow: hidden; }
-  .q-doc-head { background: var(--green-deep); color: var(--white); padding: 28px; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  .q-doc { margin-top: 0; background: var(--white); border-radius: 16px; box-shadow: 0 8px 32px rgba(27,67,50,0.12); border: 1px solid var(--green-light); overflow: hidden; }
+  .q-doc-head { background: var(--green-deep); color: var(--white); padding: 22px 28px; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
   .q-doc-head .k { font-size: 12px; color: var(--green-accent); text-transform: uppercase; letter-spacing: 0.06em; font-weight: 600; }
   .q-doc-head .v { font-size: 15px; margin-top: 2px; }
   .q-doc-head h2 { margin: 0 0 4px; font-size: 26px; color: var(--white); }
-  .q-meta { display: grid; grid-template-columns: repeat(2, auto); gap: 8px 24px; align-content: start; }
+  .q-meta { display: flex; flex-wrap: wrap; gap: 8px 24px; align-content: start; }
   .q-meta .v { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
   .q-body { padding: 28px; }
   @media (max-width: 600px) { .q-body, .q-doc-head { padding: 20px 16px; } }
-  .q-big { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-bottom: 24px; }
+  .q-big { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-bottom: 24px; }
   @media (max-width: 600px) { .q-big { grid-template-columns: minmax(0, 1fr); } }
   .q-stat { background: var(--green-ghost); border-radius: 12px; padding: 16px; }
   .q-stat .k { font-size: 12px; color: var(--slate-600); font-weight: 600; }
@@ -86,7 +91,7 @@
   .q-notes { margin: 24px 0 0; padding: 0 0 0 18px; color: var(--slate-600); font-size: 13px; line-height: 1.6; }
   .q-actions { display: flex; gap: 8px; flex-wrap: wrap; padding: 0 28px 28px; }
   @media (max-width: 600px) { .q-actions { padding: 0 16px 20px; } }
-  .q-btn { flex: 1; min-width: 150px; border: 1.5px solid var(--slate-200); background: var(--white); color: var(--green-deep); border-radius: 12px; padding: 12px 14px; font: inherit; font-size: 14px; font-weight: 600; cursor: pointer; text-transform: none; letter-spacing: normal; text-align: center; text-decoration: none; }
+  .q-btn { flex: 1; min-width: 120px; border: 1.5px solid var(--slate-200); background: var(--white); color: var(--green-deep); border-radius: 12px; padding: 12px 14px; font: inherit; font-size: 14px; font-weight: 600; cursor: pointer; text-transform: none; letter-spacing: normal; text-align: center; text-decoration: none; }
   .q-btn:hover { background: var(--green-ghost); border-color: var(--green-accent); }
   .q-btn.primary { background: var(--green-deep); color: var(--white); border-color: var(--green-deep); }
   .q-btn.primary:hover { background: var(--green-dark); }
@@ -98,6 +103,8 @@
     body { background: #fff; }
     .no-print { display: none !important; }
     .q-wrap { padding: 0; max-width: none; }
+    .q-layout { display: block; }
+    .q-side { position: static; }
     .q-doc { margin: 0; box-shadow: none; border: 1px solid var(--slate-200); }
     .q-doc-head, .q-stat, .chip input:checked + span { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   }
@@ -108,9 +115,10 @@
   <a class="q-brand no-print" href="/"><img src="/favicon.svg" alt="">ShelfSpace</a>
   <div class="no-print">
     <h1 class="q-title">Build your quote</h1>
-    <p class="q-sub">Answer a few questions and get your rate. Pricing is based on monthly sales, never on how many invoices or payments you run.</p>
+    <p class="q-sub">Answer a few questions and watch your quote update. Pricing is based on monthly sales, never on how many invoices or payments you run.</p>
   </div>
 
+  <div class="q-layout">
   <form class="q-card no-print" id="form" novalidate>
     <fieldset>
       <legend><span class="step">1</span>Which service?</legend>
@@ -154,11 +162,12 @@
       <input class="q-input" id="bizname" maxlength="80" placeholder="Business name (optional)" autocomplete="organization">
     </fieldset>
 
-    <div class="err-msg" id="form-err" hidden></div>
-    <button type="submit" class="btn-primary gen">Generate quote</button>
   </form>
 
-  <div class="q-doc" id="quote" hidden aria-live="polite">
+  <div class="q-side">
+  <div class="q-empty no-print" id="q-empty"><strong>Your quote appears here</strong>Pick monthly sales for each store and the quote updates as you go.</div>
+
+  <div class="q-doc" id="quote" hidden>
     <div class="q-doc-head">
       <div>
         <div class="k">Quote</div>
@@ -185,6 +194,8 @@
       <button type="button" class="q-btn" id="copy-link">Copy link</button>
       <button type="button" class="q-btn" id="copy-text">Copy summary</button>
     </div>
+  </div>
+  </div>
   </div>
 </div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
@@ -221,7 +232,7 @@
   var ONBOARD_FIRST = 2500, ONBOARD_ADDL = 750;
   var VALID_DAYS = 30;
 
-  var state = { product: "pay", level: "managed", term: "annual", name: "", stores: [{ n: "", r: "" }], c: "", shown: false, q: "" };
+  var state = { product: "pay", level: "managed", term: "annual", name: "", stores: [{ n: "", r: "" }], c: "", q: "" };
 
   function $(id) { return document.getElementById(id); }
   function usd(n) { return "$" + Math.round(n).toLocaleString("en-US"); }
@@ -246,7 +257,6 @@
       if (typeof s.c === "string") state.c = s.c;
       if (typeof s.q === "string") state.q = s.q.slice(0, 12);
       if (Array.isArray(s.stores) && s.stores.length) state.stores = s.stores.slice(0, 50).map(function (x) { return { n: String(x.n || "").slice(0, 60), r: String(x.r || "") }; });
-      state.shown = !!s.shown;
     } catch (e) { /* ignore a malformed link */ }
   }
 
@@ -307,14 +317,9 @@
     return { p: p, lines: lines, base: base, credits: credits, fee: fee, keep: credits - fee, monthly: base + fee, onboarding: onboarding, year: (base + fee) * 12 + onboarding, stores: state.stores.length };
   }
 
-  function validate() {
-    var ok = true;
-    if (state.product === "pay") {
-      document.querySelectorAll("#stores .store").forEach(function (el, i) { if (!range(PAY_RANGES, state.stores[i].r)) { el.classList.add("err"); ok = false; } });
-      if (!ok) { $("form-err").textContent = "Pick monthly sales for every store."; }
-    } else if (!range(COLLECT_RANGES, state.c)) { ok = false; $("form-err").textContent = "Pick your monthly wholesale sales."; }
-    $("form-err").hidden = ok;
-    return ok;
+  function complete() {
+    if (state.product === "pay") return state.stores.every(function (s) { return !!range(PAY_RANGES, s.r); });
+    return !!range(COLLECT_RANGES, state.c);
   }
 
   var summaryText = "";
@@ -370,9 +375,14 @@
   }
 
   function update() {
+    var ok = complete();
+    if (ok && !state.q) state.q = newQuoteNum();
     saveHash();
-    if (!state.shown) return;
-    if (validate()) { $("quote").hidden = false; renderQuote(); } else { $("quote").hidden = true; }
+    $("quote").hidden = !ok; $("q-empty").hidden = ok;
+    $("q-empty").innerHTML = state.product === "pay"
+      ? "<strong>Your quote appears here</strong>Pick monthly sales for " + (state.stores.length > 1 ? "each store" : "your store") + " and the quote updates as you go."
+      : "<strong>Your quote appears here</strong>Pick your monthly wholesale sales and the quote updates as you go.";
+    if (ok) renderQuote();
   }
 
   // ---- Events ---------------------------------------------------------------
@@ -383,13 +393,7 @@
   });
   $("bizname").addEventListener("input", function () { state.name = $("bizname").value; update(); });
   $("add-store").addEventListener("click", function () { state.stores.push({ n: "", r: "" }); renderStores(); update(); });
-  $("form").addEventListener("submit", function (e) {
-    e.preventDefault();
-    if (!validate()) return;
-    if (!state.q) state.q = newQuoteNum();
-    state.shown = true; update();
-    $("quote").scrollIntoView({ behavior: "smooth", block: "start" });
-  });
+  $("form").addEventListener("submit", function (e) { e.preventDefault(); });
   function toast(msg) { var t = $("toast"); t.textContent = msg; t.classList.add("show"); setTimeout(function () { t.classList.remove("show"); }, 1800); }
   function copy(text, msg) {
     if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(function () { toast(msg); }, function () { toast("Couldn't copy. Select and copy manually."); });
