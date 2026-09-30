@@ -136,7 +136,7 @@
     <fieldset>
       <legend><span class="step">3</span>Agreement</legend>
       <div class="opts opts-2">
-        <label class="opt"><input type="radio" name="term" value="annual" checked><span class="box"><span class="dot"></span><span><span class="t">12 months <span class="save">Save 17%</span></span><span class="d">Billed monthly.<br>Onboarding fee: <strong>$0 (waived)</strong></span></span></span></label>
+        <label class="opt"><input type="radio" name="term" value="annual" checked><span class="box"><span class="dot"></span><span><span class="t">12 months <span class="save">Save 20%</span></span><span class="d">Billed monthly.<br>Onboarding fee: <strong>$0 (waived)</strong></span></span></span></label>
         <label class="opt"><input type="radio" name="term" value="monthly"><span class="box"><span class="dot"></span><span><span class="t">Month to month</span><span class="d">Standard rate.<br>Onboarding fee: <strong id="m2m-fee">$2,500 one time</strong></span></span></span></label>
       </div>
     </fieldset>
@@ -217,7 +217,9 @@
   // Credits recovered run ~0.6%–1.1% of a store's monthly sales in live accounts;
   // quote the conservative end.
   var CREDIT_RATE_OF_SALES = 0.0075;
-  var MONTHLY_UPLIFT = 0.20;
+  // Month to month is the standard rate: 12-month price / 0.8, rounded UP to the
+  // nearest $5 so the 12-month plan always saves at least 20%.
+  var MONTHLY_UPLIFT = 0.25;
   var ONBOARD_FIRST = 2500, ONBOARD_ADDL = 750;
   var VALID_DAYS = 30;
 
@@ -228,7 +230,7 @@
   function mdy(d) { return String(d.getMonth() + 1).padStart(2, "0") + "/" + String(d.getDate()).padStart(2, "0") + "/" + d.getFullYear(); }
   function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
   function range(list, id) { for (var i = 0; i < list.length; i++) if (list[i].id === id) return list[i]; return null; }
-  function up(n) { return state.term === "monthly" ? Math.round(n * (1 + MONTHLY_UPLIFT)) : n; }
+  function up(n) { return state.term === "monthly" ? Math.ceil(n * (1 + MONTHLY_UPLIFT) / 5) * 5 : n; }
   function round50(n) { return Math.round(n / 50) * 50; }
   function newQuoteNum() { var c = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789", s = ""; for (var i = 0; i < 6; i++) s += c[Math.floor(Math.random() * c.length)]; return "SS-" + s; }
 
@@ -342,7 +344,7 @@
     state.term = "monthly"; var m2m = compute(); state.term = savedTerm;
     var yearSave = (m2m.base - annualBase) * 12 + m2m.onboarding;
     fine.push(annual ? "You save " + usd(yearSave) + " a year vs. month to month. Billed monthly, nothing up front. If we haven't delivered in the first 90 days, cancel and the remaining payments stop."
-                     : "Month to month is our standard rate. A 12-month agreement saves 17% and waives the onboarding fee: " + usd(yearSave) + " less in the first year.");
+                     : "Month to month is our standard rate. A 12-month agreement saves 20% and waives the onboarding fee: " + usd(yearSave) + " less in the first year.");
     if (v.p === "pay" && v.stores > 1) fine.push("Your largest store pays full rate; each additional store is 30% off.");
     if (v.p === "pay") fine.push("Your estimated credits are in your eval.");
     fine.push("Valid through " + mdy(valid) + ". Final terms are confirmed in your agreement.");
