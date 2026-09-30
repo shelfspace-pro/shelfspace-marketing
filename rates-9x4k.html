@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>ShelfSpace Rate Calculator</title>
+<meta name="description" content="ShelfPay and ShelfCollect rate calculator.">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+  body { background: var(--green-ghost); }
+  .rc-wrap { max-width: 1080px; margin: 0 auto; padding: 40px 16px 80px; }
+  .rc-top { display: flex; align-items: center; gap: 10px; margin-bottom: 28px; text-decoration: none; color: var(--green-deep); font-weight: 700; font-size: 18px; }
+  .rc-top img { width: 32px; height: 32px; }
+  h1.rc-title { font-size: clamp(28px, 4vw, 40px); color: var(--green-deep); letter-spacing: -0.02em; margin: 0 0 8px; }
+  .rc-sub { color: var(--slate-600); font-size: 16px; margin: 0 0 28px; max-width: 640px; line-height: 1.55; }
+  .rc-grid { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 24px; align-items: start; }
+  @media (max-width: 860px) { .rc-grid { grid-template-columns: minmax(0, 1fr); } }
+  .rc-card { background: var(--white); border-radius: 16px; padding: 24px; box-shadow: 0 8px 32px rgba(27,67,50,0.08); border: 1px solid var(--green-light); }
+  .rc-card + .rc-card { margin-top: 20px; }
+  .rc-label { display: block; font-size: 13px; font-weight: 600; color: var(--slate-700); margin: 0 0 8px; }
+  .rc-help { font-size: 13px; color: var(--slate-500); margin: 6px 0 0; line-height: 1.45; }
+  .rc-seg { display: flex; background: var(--slate-100); border-radius: 12px; padding: 4px; gap: 4px; margin-bottom: 20px; }
+  .rc-seg button { flex: 1; border: 0; background: transparent; border-radius: 10px; padding: 10px 12px; font: inherit; font-size: 14px; font-weight: 600; color: var(--slate-600); cursor: pointer; text-transform: none; letter-spacing: normal; }
+  .rc-seg button[aria-pressed="true"] { background: var(--white); color: var(--green-deep); box-shadow: 0 2px 8px rgba(27,67,50,0.12); }
+  .rc-seg.rc-big button { padding: 14px 12px; font-size: 16px; }
+  .rc-seg button small { display: block; font-weight: 500; font-size: 12px; color: var(--slate-500); margin-top: 2px; }
+  .rc-field { margin-bottom: 20px; }
+  .rc-money { position: relative; }
+  .rc-money span { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--slate-500); font-family: var(--font-mono); font-size: 15px; }
+  .rc-input { width: 100%; box-sizing: border-box; border: 1.5px solid var(--slate-200); border-radius: 12px; padding: 12px 14px; font: inherit; font-size: 15px; color: var(--slate-800); background: var(--white); }
+  .rc-money .rc-input { padding-left: 28px; font-family: var(--font-mono); font-variant-numeric: tabular-nums; text-align: right; }
+  .rc-input:focus { outline: none; border-color: var(--green-mid); box-shadow: 0 0 0 3px rgba(27,67,50,0.12); }
+  .rc-store { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) 40px; gap: 8px; align-items: center; margin-bottom: 8px; }
+  .rc-store-head { font-size: 12px; font-weight: 600; color: var(--slate-500); text-transform: uppercase; letter-spacing: 0.04em; }
+  .rc-x { width: 40px; height: 44px; border: 1.5px solid var(--slate-200); border-radius: 12px; background: var(--white); color: var(--slate-500); cursor: pointer; font-size: 18px; line-height: 1; text-transform: none; }
+  .rc-x:hover { border-color: var(--green-accent); color: var(--green-deep); }
+  .rc-x:disabled { opacity: 0.35; cursor: default; }
+  .rc-add { margin-top: 4px; border: 1.5px dashed var(--green-accent); background: var(--green-ghost); color: var(--green-deep); border-radius: 12px; padding: 10px 14px; font: inherit; font-size: 14px; font-weight: 600; cursor: pointer; width: 100%; text-transform: none; letter-spacing: normal; }
+  .rc-sticky { position: sticky; top: 24px; }
+  .rc-total { background: var(--green-deep); color: var(--white); border-radius: 16px; padding: 24px; box-shadow: 0 8px 32px rgba(27,67,50,0.25); }
+  .rc-total-label { font-size: 13px; font-weight: 600; color: var(--green-accent); text-transform: uppercase; letter-spacing: 0.06em; }
+  .rc-total-num { font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-size: clamp(34px, 5vw, 44px); font-weight: 700; margin: 6px 0 2px; }
+  .rc-total-note { font-size: 14px; color: var(--green-light); line-height: 1.5; }
+  .rc-lines { width: 100%; border-collapse: collapse; margin-top: 4px; font-size: 14px; }
+  .rc-lines td { padding: 10px 0; border-bottom: 1px solid var(--slate-100); color: var(--slate-700); vertical-align: top; }
+  .rc-lines td:last-child { text-align: right; font-family: var(--font-mono); font-variant-numeric: tabular-nums; white-space: nowrap; padding-left: 12px; color: var(--slate-800); }
+  .rc-lines td small { display: block; color: var(--slate-500); font-size: 12px; margin-top: 2px; }
+  .rc-lines tr.rc-sum td { font-weight: 700; color: var(--green-deep); border-bottom: 0; }
+  .rc-actions { display: flex; gap: 8px; margin-top: 16px; flex-wrap: wrap; }
+  .rc-btn { flex: 1; min-width: 140px; border: 1.5px solid var(--slate-200); background: var(--white); color: var(--green-deep); border-radius: 12px; padding: 12px 14px; font: inherit; font-size: 14px; font-weight: 600; cursor: pointer; text-transform: none; letter-spacing: normal; }
+  .rc-btn:hover { background: var(--green-ghost); border-color: var(--green-accent); }
+  .rc-bands { width: 100%; border-collapse: collapse; font-size: 14px; }
+  .rc-bands th { text-align: left; font-size: 12px; font-weight: 600; color: var(--slate-500); text-transform: uppercase; letter-spacing: 0.04em; padding: 0 0 8px; }
+  .rc-bands th:not(:first-child), .rc-bands td:not(:first-child) { text-align: right; }
+  .rc-bands td { padding: 9px 0; border-top: 1px solid var(--slate-100); color: var(--slate-700); }
+  .rc-bands td:not(:first-child) { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+  .rc-bands tr.on td { color: var(--green-deep); font-weight: 700; }
+  .rc-toast { position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%) translateY(20px); background: var(--green-deep); color: var(--white); padding: 12px 18px; border-radius: 12px; font-size: 14px; font-weight: 600; box-shadow: 0 8px 32px rgba(27,67,50,0.3); opacity: 0; transition: all 0.2s; pointer-events: none; }
+  .rc-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+  .rc-foot { margin-top: 28px; font-size: 13px; color: var(--slate-500); line-height: 1.55; max-width: 720px; }
+  [hidden] { display: none !important; }
+</style>
+</head>
+<body>
+<div class="rc-wrap">
+  <a class="rc-top" href="/"><img src="/favicon.svg" alt="">ShelfSpace</a>
+  <h1 class="rc-title">Rate calculator</h1>
+  <p class="rc-sub">Enter your numbers to see your monthly rate. Prices are based on monthly sales, so they grow with the size of the business, never with how many invoices or payments you run.</p>
+
+  <div class="rc-seg rc-big" role="group" aria-label="Service">
+    <button type="button" data-product="pay" aria-pressed="true">ShelfPay<small>Dispensaries: pay your vendors</small></button>
+    <button type="button" data-product="collect" aria-pressed="false">ShelfCollect<small>Brands: collect what you're owed</small></button>
+  </div>
+
+  <div class="rc-grid">
+    <div>
+      <div class="rc-card">
+        <span class="rc-label">How we work together</span>
+        <div class="rc-seg" role="group" aria-label="Service level">
+          <button type="button" data-level="managed" aria-pressed="true">Done for you<small>We run it</small></button>
+          <button type="button" data-level="self" aria-pressed="false">You run it<small>We onboard and support</small></button>
+        </div>
+        <span class="rc-label">Agreement</span>
+        <div class="rc-seg" role="group" aria-label="Agreement">
+          <button type="button" data-term="annual" aria-pressed="true">12 months<small>Onboarding included</small></button>
+          <button type="button" data-term="monthly" aria-pressed="false">Month to month<small>Onboarding fee applies</small></button>
+        </div>
+
+        <div id="pay-inputs">
+          <span class="rc-label">Your stores</span>
+          <div class="rc-store"><span class="rc-store-head">Store</span><span class="rc-store-head" style="text-align:right">Monthly sales</span><span></span></div>
+          <div id="stores"></div>
+          <button type="button" class="rc-add" id="add-store">+ Add a store</button>
+          <p class="rc-help">Your largest store pays its full rate. Every additional store is 30% off.</p>
+
+          <div class="rc-field" style="margin-top:20px">
+            <label class="rc-label" for="credits">Credits recovered per month, all stores (optional)</label>
+            <div class="rc-money"><span>$</span><input class="rc-input" id="credits" inputmode="numeric" placeholder="0"></div>
+            <p class="rc-help">Credits your vendors owe you for returns, waste, and markdowns. We keep 20% of what we recover. You keep 80%, and you pay nothing on credits we don't recover.</p>
+          </div>
+        </div>
+
+        <div id="collect-inputs" hidden>
+          <div class="rc-field">
+            <label class="rc-label" for="wholesale">Monthly wholesale sales</label>
+            <div class="rc-money"><span>$</span><input class="rc-input" id="wholesale" inputmode="numeric" placeholder="0"></div>
+            <p class="rc-help">What you invoice dispensaries in a typical month. One flat rate: we chase every invoice, with no cut of your sales.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="rc-card">
+        <span class="rc-label" id="bands-title">ShelfPay rates, per store</span>
+        <table class="rc-bands" id="bands"></table>
+      </div>
+    </div>
+
+    <div class="rc-sticky">
+      <div class="rc-total">
+        <div class="rc-total-label">Estimated monthly</div>
+        <div class="rc-total-num" id="total">$0</div>
+        <div class="rc-total-note" id="total-note"></div>
+      </div>
+      <div class="rc-card" style="margin-top:20px">
+        <table class="rc-lines" id="lines"></table>
+        <div class="rc-actions">
+          <button type="button" class="rc-btn" id="copy-link">Copy link to this quote</button>
+          <button type="button" class="rc-btn" id="copy-text">Copy summary</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p class="rc-foot">Estimates for discussion. Your final rate is confirmed in your agreement. Month-to-month rates are 20% higher than 12-month rates. Credit estimates depend on your vendors, your data, and approved returns and markdowns in a given month.</p>
+</div>
+<div class="rc-toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function () {
+  // All money is handled in whole dollars (integers); cents never arise except in the
+  // 20% credit share and the month-to-month uplift, which are rounded to the dollar.
+  var BANDS = {
+    pay: [
+      { label: "Under $150k", max: 150000, managed: 500, self: 400 },
+      { label: "$150k to $400k", max: 400000, managed: 850, self: 650 },
+      { label: "$400k and up", max: Infinity, managed: 1200, self: 900 }
+    ],
+    collect: [
+      { label: "Under $150k", max: 150000, managed: 750, self: 400 },
+      { label: "$150k to $500k", max: 500000, managed: 1250, self: 650 },
+      { label: "$500k and up", max: Infinity, managed: 2000, self: 1000 }
+    ]
+  };
+  var ADDL_STORE_DISCOUNT = 0.30;
+  var CREDIT_SHARE = 0.20;
+  var MONTHLY_UPLIFT = 0.20;
+  var ONBOARD_FIRST = 2500;
+  var ONBOARD_ADDL = 750;
+
+  var state = { product: "pay", level: "managed", term: "annual", stores: [{ name: "", sales: "" }], credits: "", wholesale: "" };
+
+  function $(id) { return document.getElementById(id); }
+  function num(v) { var n = parseInt(String(v || "").replace(/[^0-9]/g, ""), 10); return isNaN(n) ? 0 : n; }
+  function usd(n) { return "$" + Math.round(n).toLocaleString("en-US"); }
+  function band(product, sales) { var b = BANDS[product]; for (var i = 0; i < b.length; i++) if (sales < b[i].max) return b[i]; return b[b.length - 1]; }
+  function uplift(n) { return state.term === "monthly" ? Math.round(n * (1 + MONTHLY_UPLIFT)) : n; }
+
+  function readHash() {
+    try {
+      var h = decodeURIComponent(location.hash.slice(1));
+      if (!h) return;
+      var s = JSON.parse(atob(h));
+      if (s && typeof s === "object") {
+        ["product", "level", "term", "credits", "wholesale"].forEach(function (k) { if (typeof s[k] === "string") state[k] = s[k]; });
+        if (Array.isArray(s.stores) && s.stores.length) state.stores = s.stores.slice(0, 50).map(function (x) { return { name: String(x.name || "").slice(0, 60), sales: String(x.sales || "") }; });
+      }
+    } catch (e) { /* ignore a malformed link */ }
+  }
+  function linkFor() { return location.origin + location.pathname + "#" + encodeURIComponent(btoa(JSON.stringify(state))); }
+
+  function renderStores() {
+    var box = $("stores"); box.innerHTML = "";
+    state.stores.forEach(function (s, i) {
+      var row = document.createElement("div"); row.className = "rc-store";
+      var name = document.createElement("input"); name.className = "rc-input"; name.placeholder = "Store " + (i + 1); name.value = s.name; name.setAttribute("aria-label", "Store name");
+      name.addEventListener("input", function () { s.name = name.value; calc(); });
+      var wrap = document.createElement("div"); wrap.className = "rc-money";
+      var sign = document.createElement("span"); sign.textContent = "$";
+      var sales = document.createElement("input"); sales.className = "rc-input"; sales.inputMode = "numeric"; sales.placeholder = "0"; sales.setAttribute("aria-label", "Monthly sales");
+      sales.value = s.sales ? num(s.sales).toLocaleString("en-US") : "";
+      sales.addEventListener("input", function () { s.sales = sales.value; calc(); });
+      sales.addEventListener("blur", function () { sales.value = num(sales.value) ? num(sales.value).toLocaleString("en-US") : ""; });
+      wrap.appendChild(sign); wrap.appendChild(sales);
+      var x = document.createElement("button"); x.type = "button"; x.className = "rc-x"; x.textContent = "×"; x.setAttribute("aria-label", "Remove store");
+      x.disabled = state.stores.length === 1;
+      x.addEventListener("click", function () { state.stores.splice(i, 1); renderStores(); calc(); });
+      row.appendChild(name); row.appendChild(wrap); row.appendChild(x); box.appendChild(row);
+    });
+  }
+
+  function syncToggles() {
+    document.querySelectorAll("[data-product]").forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.product === state.product)); });
+    document.querySelectorAll("[data-level]").forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.level === state.level)); });
+    document.querySelectorAll("[data-term]").forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.term === state.term)); });
+    $("pay-inputs").hidden = state.product !== "pay";
+    $("collect-inputs").hidden = state.product !== "collect";
+    $("credits").value = num(state.credits) ? num(state.credits).toLocaleString("en-US") : "";
+    $("wholesale").value = num(state.wholesale) ? num(state.wholesale).toLocaleString("en-US") : "";
+  }
+
+  var lastSummary = "";
+  function calc() {
+    var p = state.product, lvl = state.level, lines = [], base = 0, onboarding = 0, credit = 0, activeBands = {};
+    var levelName = lvl === "managed" ? "Done for you" : "You run it";
+    var termName = state.term === "annual" ? "12-month agreement" : "Month to month";
+
+    if (p === "pay") {
+      var stores = state.stores.map(function (s, i) { var sales = num(s.sales); var b = band("pay", sales); return { name: s.name.trim() || ("Store " + (i + 1)), sales: sales, band: b, list: b[lvl] }; });
+      var order = stores.slice().sort(function (a, b) { return b.list - a.list || b.sales - a.sales; });
+      order.forEach(function (s, i) {
+        activeBands[s.band.label] = true;
+        var price = i === 0 ? s.list : Math.round(s.list * (1 - ADDL_STORE_DISCOUNT));
+        price = uplift(price);
+        base += price;
+        lines.push([s.name, s.band.label + " monthly sales" + (i === 0 ? ", full rate" : ", 30% off " + usd(uplift(s.list))), price]);
+      });
+      credit = Math.round(num(state.credits) * CREDIT_SHARE);
+      if (state.term === "monthly") onboarding = ONBOARD_FIRST + ONBOARD_ADDL * Math.max(0, stores.length - 1);
+    } else {
+      var w = num(state.wholesale), b = band("collect", w);
+      activeBands[b.label] = true;
+      base = uplift(b[lvl]);
+      lines.push(["ShelfCollect", b.label + " monthly wholesale sales", base]);
+      if (state.term === "monthly") onboarding = ONBOARD_FIRST;
+    }
+
+    var monthly = base + credit;
+    var html = "";
+    lines.forEach(function (l) { html += "<tr><td>" + esc(l[0]) + "<small>" + esc(l[1]) + "</small></td><td>" + usd(l[2]) + "/mo</td></tr>"; });
+    if (p === "pay" && credit > 0) html += "<tr><td>Credit recovery<small>20% of " + usd(num(state.credits)) + " recovered. You keep " + usd(num(state.credits) - credit) + "</small></td><td>" + usd(credit) + "/mo</td></tr>";
+    html += "<tr class='rc-sum'><td>Monthly total</td><td>" + usd(monthly) + "/mo</td></tr>";
+    html += "<tr><td>Onboarding<small>" + (onboarding ? "One time, month-to-month agreements" : "Included with a 12-month agreement") + "</small></td><td>" + (onboarding ? usd(onboarding) : "$0") + "</td></tr>";
+    html += "<tr><td>First 12 months<small>Monthly total × 12, plus onboarding</small></td><td>" + usd(monthly * 12 + onboarding) + "</td></tr>";
+    $("lines").innerHTML = html;
+    $("total").textContent = usd(monthly);
+    $("total-note").textContent = levelName + " · " + termName + (p === "pay" && credit > 0 ? " · includes 20% of credits recovered" : "") + (p === "pay" && credit === 0 ? " · plus 20% of any credits we recover" : "");
+
+    // Rate table for the chosen product + level (12-month list prices).
+    var t = "<tr><th>Monthly sales</th><th>Done for you</th><th>You run it</th></tr>";
+    BANDS[p].forEach(function (b) { t += "<tr class='" + (activeBands[b.label] ? "on" : "") + "'><td>" + b.label + "</td><td>" + usd(b.managed) + "</td><td>" + usd(b.self) + "</td></tr>"; });
+    $("bands").innerHTML = t;
+    $("bands-title").textContent = p === "pay" ? "ShelfPay rates, per store, 12-month agreement" : "ShelfCollect rates, 12-month agreement";
+
+    var sum = [(p === "pay" ? "ShelfPay" : "ShelfCollect") + " estimate: " + levelName + ", " + termName];
+    lines.forEach(function (l) { sum.push("  " + l[0] + " (" + l[1] + "): " + usd(l[2]) + "/mo"); });
+    if (p === "pay") sum.push("  Credit recovery: 20% of credits recovered" + (credit ? " (" + usd(credit) + "/mo on " + usd(num(state.credits)) + ")" : ""));
+    sum.push("Monthly total: " + usd(monthly) + "/mo");
+    sum.push("Onboarding: " + (onboarding ? usd(onboarding) + " one time" : "included"));
+    sum.push("First 12 months: " + usd(monthly * 12 + onboarding));
+    lastSummary = sum.join("\n");
+
+    try { history.replaceState(null, "", "#" + encodeURIComponent(btoa(JSON.stringify(state)))); } catch (e) {}
+  }
+
+  function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
+  function toast(msg) { var t = $("toast"); t.textContent = msg; t.classList.add("show"); setTimeout(function () { t.classList.remove("show"); }, 1800); }
+  function copy(text, msg) {
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(function () { toast(msg); }, function () { toast("Couldn't copy. Select and copy manually."); });
+    else toast("Couldn't copy. Select and copy manually.");
+  }
+
+  document.querySelectorAll("[data-product]").forEach(function (b) { b.addEventListener("click", function () { state.product = b.dataset.product; syncToggles(); calc(); }); });
+  document.querySelectorAll("[data-level]").forEach(function (b) { b.addEventListener("click", function () { state.level = b.dataset.level; syncToggles(); calc(); }); });
+  document.querySelectorAll("[data-term]").forEach(function (b) { b.addEventListener("click", function () { state.term = b.dataset.term; syncToggles(); calc(); }); });
+  $("add-store").addEventListener("click", function () { state.stores.push({ name: "", sales: "" }); renderStores(); calc(); });
+  ["credits", "wholesale"].forEach(function (id) {
+    var el = $(id);
+    el.addEventListener("input", function () { state[id] = el.value; calc(); });
+    el.addEventListener("blur", function () { el.value = num(el.value) ? num(el.value).toLocaleString("en-US") : ""; });
+  });
+  $("copy-link").addEventListener("click", function () { copy(linkFor(), "Link copied"); });
+  $("copy-text").addEventListener("click", function () { copy(lastSummary, "Summary copied"); });
+
+  readHash(); renderStores(); syncToggles(); calc();
+})();
+</script>
+</body>
+</html>
