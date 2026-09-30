@@ -62,39 +62,43 @@
   .help { font-size: 13px; color: var(--slate-500); margin: 8px 0 0; line-height: 1.5; }
   .err-msg { color: #b42318; font-size: 13px; font-weight: 600; margin-top: 8px; }
   .gen { width: 100%; justify-content: center; }
-  .q-doc { margin-top: 0; background: var(--white); border-radius: 16px; box-shadow: 0 8px 32px rgba(27,67,50,0.12); border: 1px solid var(--green-light); overflow: hidden; }
-  .q-doc-head { background: var(--green-deep); color: var(--white); padding: 22px 28px; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
-  .q-doc-head .k { font-size: 12px; color: var(--green-accent); text-transform: uppercase; letter-spacing: 0.06em; font-weight: 600; }
-  .q-doc-head .v { font-size: 15px; margin-top: 2px; }
-  .q-doc-head h2 { margin: 0 0 4px; font-size: 26px; color: var(--white); }
-  .q-meta { display: flex; flex-wrap: wrap; gap: 8px 24px; align-content: start; }
-  .q-meta .v { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
-  .q-body { padding: 28px; }
-  @media (max-width: 600px) { .q-body, .q-doc-head { padding: 20px 16px; } }
-  .q-big { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-bottom: 24px; }
-  @media (max-width: 600px) { .q-big { grid-template-columns: minmax(0, 1fr); } }
-  .q-stat { background: var(--green-ghost); border-radius: 12px; padding: 16px; }
-  .q-stat .k { font-size: 12px; color: var(--slate-600); font-weight: 600; }
-  .q-stat .v { font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-size: 24px; font-weight: 700; color: var(--green-deep); margin-top: 4px; }
-  .q-stat .s { font-size: 12px; color: var(--slate-500); margin-top: 2px; }
-  .q-table { width: 100%; border-collapse: collapse; font-size: 14px; }
-  .q-table th { text-align: left; font-size: 12px; font-weight: 600; color: var(--slate-500); text-transform: uppercase; letter-spacing: 0.04em; padding: 0 0 8px; border-bottom: 1.5px solid var(--slate-200); }
-  .q-table th:last-child, .q-table td:last-child { text-align: right; }
-  .q-table td { padding: 12px 0; border-bottom: 1px solid var(--slate-100); color: var(--slate-700); vertical-align: top; }
-  .q-table td:last-child { font-family: var(--font-mono); font-variant-numeric: tabular-nums; white-space: nowrap; padding-left: 12px; color: var(--slate-800); }
-  .q-table td small { display: block; color: var(--slate-500); font-size: 12px; margin-top: 2px; }
-  .q-table tr.sum td { font-weight: 700; color: var(--green-deep); border-bottom: 0; border-top: 1.5px solid var(--slate-200); }
-  .q-pays { grid-column: 1 / -1; background: var(--white); border: 1.5px solid var(--green-accent); border-radius: 12px; padding: 14px 16px; font-size: 14px; color: var(--slate-700); line-height: 1.5; }
-  .q-pays strong { color: var(--green-deep); }
-  .q-credit { margin-top: 28px; }
-  .q-credit tr.sum td { color: var(--green-mid); }
-  .q-notes { margin: 24px 0 0; padding: 0 0 0 18px; color: var(--slate-600); font-size: 13px; line-height: 1.6; }
-  .q-actions { display: flex; gap: 8px; flex-wrap: wrap; padding: 0 28px 28px; }
-  @media (max-width: 600px) { .q-actions { padding: 0 16px 20px; } }
-  .q-btn { flex: 1; min-width: 120px; border: 1.5px solid var(--slate-200); background: var(--white); color: var(--green-deep); border-radius: 12px; padding: 12px 14px; font: inherit; font-size: 14px; font-weight: 600; cursor: pointer; text-transform: none; letter-spacing: normal; text-align: center; text-decoration: none; }
-  .q-btn:hover { background: var(--green-ghost); border-color: var(--green-accent); }
-  .q-btn.primary { background: var(--green-deep); color: var(--white); border-color: var(--green-deep); }
-  .q-btn.primary:hover { background: var(--green-dark); }
+  .q-doc { background: var(--white); border-radius: 16px; box-shadow: 0 8px 32px rgba(27,67,50,0.1); border: 1px solid var(--green-light); overflow: hidden; }
+  .qd { padding: 28px 32px; }
+  @media (max-width: 600px) { .qd { padding: 22px 18px; } }
+  .qd-top { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+  .qd-eyebrow { font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--green-mid); }
+  .qd-meta { font-family: var(--font-mono); font-size: 12px; color: var(--slate-400); font-variant-numeric: tabular-nums; }
+  .qd-name { margin: 6px 0 0; font-size: 22px; font-weight: 700; color: var(--slate-800); letter-spacing: -0.01em; }
+  .qd-hero { margin: 24px 0 0; }
+  .qd-price { font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-size: clamp(40px, 5vw, 52px); font-weight: 700; color: var(--green-deep); line-height: 1; letter-spacing: -0.02em; }
+  .qd-price small { font-family: var(--font-display); font-size: 16px; font-weight: 500; color: var(--slate-500); letter-spacing: 0; margin-left: 4px; }
+  .qd-terms { margin-top: 10px; font-size: 14px; color: var(--slate-600); }
+  .qd-credit { margin-top: 24px; background: var(--green-ghost); border-radius: 12px; padding: 18px 20px; display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
+  .qd-credit .k { font-size: 13px; color: var(--slate-600); font-weight: 600; }
+  .qd-credit .v { font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-size: 26px; font-weight: 700; color: var(--green-dark); margin-top: 2px; }
+  .qd-credit .v small { font-family: var(--font-display); font-size: 14px; font-weight: 500; color: var(--slate-500); }
+  .qd-credit .s { font-size: 12px; color: var(--slate-500); margin-top: 4px; line-height: 1.45; max-width: 340px; }
+  .qd-pill { flex: 0 0 auto; background: var(--green-deep); color: var(--white); border-radius: 999px; padding: 7px 14px; font-size: 13px; font-weight: 600; }
+  .qd-pill.soft { background: var(--white); color: var(--green-deep); border: 1.5px solid var(--green-accent); }
+  .qd-list { margin-top: 28px; }
+  .qd-row { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding: 11px 0; border-top: 1px solid var(--slate-100); font-size: 15px; }
+  .qd-row:first-child { border-top: 0; }
+  .qd-row .n { color: var(--slate-800); font-weight: 500; min-width: 0; }
+  .qd-row .n span { color: var(--slate-400); font-weight: 400; font-size: 13px; margin-left: 8px; white-space: nowrap; }
+  .qd-row .a { font-family: var(--font-mono); font-variant-numeric: tabular-nums; color: var(--slate-800); white-space: nowrap; }
+  .qd-row .a s { color: var(--slate-400); margin-right: 8px; font-size: 13px; }
+  .qd-row.total { border-top: 1.5px solid var(--slate-200); font-weight: 700; }
+  .qd-row.total .n, .qd-row.total .a { color: var(--green-deep); font-weight: 700; }
+  .qd-row.muted .n, .qd-row.muted .a { color: var(--slate-500); font-size: 14px; }
+  .qd-fine { margin-top: 20px; font-size: 12px; color: var(--slate-500); line-height: 1.6; }
+  .qd-fine p { margin: 0 0 4px; }
+  .qd-actions { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; padding: 0 32px 28px; }
+  @media (max-width: 600px) { .qd-actions { padding: 0 18px 22px; } }
+  .qd-go { background: var(--green-deep); color: var(--white); border-radius: 12px; padding: 12px 22px; font-size: 15px; font-weight: 600; text-decoration: none; }
+  .qd-go:hover { background: var(--green-dark); }
+  .qd-links { display: flex; gap: 16px; flex-wrap: wrap; }
+  .qd-links button { background: none; border: 0; padding: 0; font: inherit; font-size: 14px; font-weight: 600; color: var(--green-mid); cursor: pointer; text-transform: none; letter-spacing: normal; }
+  .qd-links button:hover { color: var(--green-deep); text-decoration: underline; }
   .toast { position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%) translateY(20px); background: var(--green-deep); color: var(--white); padding: 12px 18px; border-radius: 12px; font-size: 14px; font-weight: 600; box-shadow: 0 8px 32px rgba(27,67,50,0.3); opacity: 0; transition: all .2s; pointer-events: none; }
   .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
   [hidden] { display: none !important; }
@@ -106,7 +110,7 @@
     .q-layout { display: block; }
     .q-side { position: static; }
     .q-doc { margin: 0; box-shadow: none; border: 1px solid var(--slate-200); }
-    .q-doc-head, .q-stat, .chip input:checked + span { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .qd-credit, .qd-pill { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   }
 </style>
 </head>
@@ -168,31 +172,24 @@
   <div class="q-empty no-print" id="q-empty"><strong>Your quote appears here</strong>Pick monthly sales for each store and the quote updates as you go.</div>
 
   <div class="q-doc" id="quote" hidden>
-    <div class="q-doc-head">
-      <div>
-        <div class="k">Quote</div>
-        <h2 id="q-for">ShelfPay</h2>
-        <div class="v" id="q-summary"></div>
+    <div class="qd">
+      <div class="qd-top"><div class="qd-eyebrow" id="qd-eyebrow">ShelfPay quote</div><div class="qd-meta" id="qd-meta"></div></div>
+      <h2 class="qd-name" id="qd-name"></h2>
+      <div class="qd-hero">
+        <div class="qd-price" id="qd-price"></div>
+        <div class="qd-terms" id="qd-terms"></div>
       </div>
-      <div class="q-meta">
-        <div><div class="k">Quote #</div><div class="v" id="q-num"></div></div>
-        <div><div class="k">Date</div><div class="v" id="q-date"></div></div>
-        <div><div class="k">Valid through</div><div class="v" id="q-valid"></div></div>
-      </div>
+      <div class="qd-credit" id="qd-credit"></div>
+      <div class="qd-list" id="qd-list"></div>
+      <div class="qd-fine" id="qd-fine"></div>
     </div>
-    <div class="q-body">
-      <div class="q-big" id="q-big"></div>
-      <table class="q-table"><thead><tr><th>Your rate</th><th>Amount</th></tr></thead><tbody id="q-lines"></tbody></table>
-      <div id="q-credit" class="q-credit">
-        <table class="q-table"><thead><tr><th>Credit recovery, estimated</th><th>Amount</th></tr></thead><tbody id="q-credit-lines"></tbody></table>
+    <div class="qd-actions no-print">
+      <a class="qd-go" href="/contact">Get started</a>
+      <div class="qd-links">
+        <button type="button" id="print">Save as PDF</button>
+        <button type="button" id="copy-link">Copy link</button>
+        <button type="button" id="copy-text">Copy summary</button>
       </div>
-      <ul class="q-notes" id="q-notes"></ul>
-    </div>
-    <div class="q-actions no-print">
-      <a class="q-btn primary" href="/contact">Get started</a>
-      <button type="button" class="q-btn" id="print">Save as PDF</button>
-      <button type="button" class="q-btn" id="copy-link">Copy link</button>
-      <button type="button" class="q-btn" id="copy-text">Copy summary</button>
     </div>
   </div>
   </div>
@@ -303,14 +300,14 @@
       order.forEach(function (s, i) {
         var price = up(i === 0 ? s.list : Math.round(s.list * (1 - ADDL_STORE_DISCOUNT)));
         base += price;
-        lines.push({ item: s.name, sub: s.r.label + " monthly sales · " + (i === 0 ? "full rate" : "30% off " + usd(up(s.list))), amt: usd(price) + "/mo" });
+        lines.push({ item: s.name, range: s.r.label, price: price, list: i === 0 ? 0 : up(s.list), sub: s.r.label + " monthly sales" + (i === 0 ? "" : ", 30% off " + usd(up(s.list))), amt: usd(price) + "/mo" });
       });
       stores.forEach(function (s) { credits += round50(s.r.rep * CREDIT_RATE_OF_SALES); });
       if (state.term === "monthly") onboarding = ONBOARD_FIRST + ONBOARD_ADDL * Math.max(0, stores.length - 1);
     } else {
       var cr = range(COLLECT_RANGES, state.c);
       base = up(PRICE.collect[cr.band][lvl]);
-      lines.push({ item: "ShelfCollect", sub: cr.label + " monthly wholesale sales · every invoice sent, followed up, and collected", amt: usd(base) + "/mo" });
+      lines.push({ item: "ShelfCollect", range: cr.label + " wholesale", price: base, list: 0, sub: cr.label + " monthly wholesale sales", amt: usd(base) + "/mo" });
       if (state.term === "monthly") onboarding = ONBOARD_FIRST;
     }
     var fee = Math.round(credits * CREDIT_SHARE);
@@ -325,50 +322,49 @@
   var summaryText = "";
   function renderQuote() {
     var v = compute(), levelName = state.level === "managed" ? "Done for you" : "You run it";
-    var termName = state.term === "annual" ? "12-month agreement, billed monthly" : "Month to month";
+    var annual = state.term === "annual";
     var product = v.p === "pay" ? "ShelfPay" : "ShelfCollect";
     var today = new Date(), valid = new Date(today.getTime() + VALID_DAYS * 864e5);
-    $("q-for").textContent = state.name.trim() ? state.name.trim() : product;
-    $("q-summary").textContent = (state.name.trim() ? product + " · " : "") + levelName + " · " + termName + (v.p === "pay" ? " · " + v.stores + (v.stores === 1 ? " store" : " stores") : "");
-    $("q-num").textContent = state.q; $("q-date").textContent = mdy(today); $("q-valid").textContent = mdy(valid);
-
     var fixedYear = v.base * 12 + v.onboarding;
-    var big = '<div class="q-stat"><div class="k">Monthly rate</div><div class="v">' + usd(v.base) + '</div><div class="s">' + (v.p === "pay" ? "Fixed · " + v.stores + (v.stores === 1 ? " store" : " stores") : "Flat rate, no cut of your sales") + "</div></div>";
-    if (v.p === "pay") big += '<div class="q-stat"><div class="k">Estimated credits you keep</div><div class="v">+' + usd(v.keep) + '</div><div class="s">per month, 80% of ~' + usd(v.credits) + " recovered</div></div>";
-    big += '<div class="q-stat"><div class="k">Onboarding fee</div><div class="v">' + (v.onboarding ? usd(v.onboarding) : "$0") + '</div><div class="s">' + (v.onboarding ? "One time" : "Waived with a 12-month agreement") + "</div></div>";
-    if (v.p !== "pay") big += '<div class="q-stat"><div class="k">First 12 months</div><div class="v">' + usd(v.year) + '</div><div class="s">Monthly × 12' + (v.onboarding ? " + onboarding fee" : "") + "</div></div>";
-    if (v.p === "pay") big += '<div class="q-pays">' + (v.keep >= v.base
-      ? "<strong>ShelfPay pays for itself.</strong> Estimated credits you keep (" + usd(v.keep) + "/mo) exceed your monthly rate (" + usd(v.base) + "/mo) by about " + usd(v.keep - v.base) + " a month."
-      : "<strong>Credits help pay for ShelfPay.</strong> Estimated credits you keep (" + usd(v.keep) + "/mo) cover about " + Math.round(v.keep / v.base * 100) + "% of your monthly rate.") + "</div>";
-    $("q-big").innerHTML = big;
+    var name = state.name.trim();
 
-    var rows = v.lines.map(function (l) { return "<tr><td>" + esc(l.item) + "<small>" + esc(l.sub) + "</small></td><td>" + l.amt + "</td></tr>"; }).join("");
-    rows += "<tr class='sum'><td>Monthly rate</td><td>" + usd(v.base) + "/mo</td></tr>";
-    rows += "<tr><td>Onboarding fee<small>" + (v.onboarding ? "One time" + (v.p === "pay" && v.stores > 1 ? ": " + usd(ONBOARD_FIRST) + " first store + " + usd(ONBOARD_ADDL) + " each additional" : "") : "Waived with a 12-month agreement") + "</small></td><td>" + (v.onboarding ? usd(v.onboarding) : "$0") + "</td></tr>";
-    rows += "<tr><td>First 12 months<small>" + (state.term === "annual" ? "Paid monthly, not up front · " : "") + "Monthly rate × 12" + (v.onboarding ? " + onboarding fee" : "") + "</small></td><td>" + usd(fixedYear) + "</td></tr>";
-    $("q-lines").innerHTML = rows;
+    $("qd-eyebrow").textContent = product + " quote";
+    $("qd-meta").textContent = state.q + " · " + mdy(today);
+    $("qd-name").textContent = name || (v.p === "pay" ? v.stores + (v.stores === 1 ? " store" : " stores") : "Your brand");
+    $("qd-price").innerHTML = usd(v.base) + "<small>/month</small>";
+    $("qd-terms").textContent = levelName + " · " + (annual ? "12-month agreement, billed monthly" : "Month to month") + " · " + (v.onboarding ? usd(v.onboarding) + " onboarding fee" : "$0 onboarding fee");
 
-    $("q-credit").hidden = v.p !== "pay";
+    var cr = $("qd-credit");
+    cr.hidden = v.p !== "pay";
     if (v.p === "pay") {
-      $("q-credit-lines").innerHTML =
-        "<tr><td>Credits recovered from your vendors<small>About 0.75% of monthly sales, based on what we recover for stores today</small></td><td>~" + usd(v.credits) + "/mo</td></tr>" +
-        "<tr><td>Our share, 20%<small>Only on credits we actually recover. Nothing recovered, nothing owed.</small></td><td>~" + usd(v.fee) + "/mo</td></tr>" +
-        "<tr class='sum'><td>You keep, 80%</td><td>+" + usd(v.keep) + "/mo</td></tr>";
+      var pays = v.keep >= v.base;
+      cr.innerHTML = '<div><div class="k">Estimated credits you keep</div><div class="v">+' + usd(v.keep) + '<small>/month</small></div>' +
+        '<div class="s">80% of ~' + usd(v.credits) + " your vendors owe you each month. We keep 20%, only on what we recover.</div></div>" +
+        '<div class="qd-pill' + (pays ? "" : " soft") + '">' + (pays ? "Pays for itself" : "Covers " + Math.round(v.keep / v.base * 100) + "% of your rate") + "</div>";
     }
 
-    var notes = [];
-    if (v.p === "pay") notes.push("Credits are what your vendors owe you for returns, waste, and aged markdowns. Credit amounts are estimates and vary month to month with your vendors and your data.");
-    if (state.term === "annual") notes.push("12-month agreement, billed monthly. Nothing is paid up front. If we haven't delivered in the first 90 days" + (v.p === "pay" ? ", including recovered credits," : "") + " you can cancel and the remaining monthly payments stop. You only pay for the months you used.");
-    else notes.push("Month-to-month rates are 20% higher than 12-month rates. Switch to a 12-month agreement any time.");
-    notes.push("Prices are set by monthly sales and reviewed once a year, never by how many invoices or payments you run.");
-    notes.push("This quote is valid through " + mdy(valid) + ". Final terms are confirmed in your agreement.");
-    $("q-notes").innerHTML = notes.map(function (n) { return "<li>" + esc(n) + "</li>"; }).join("");
+    var rows = v.lines.map(function (l) {
+      return '<div class="qd-row"><div class="n">' + esc(l.item) + "<span>" + esc(l.range) + '</span></div><div class="a">' + (l.list ? "<s>" + usd(l.list) + "</s>" : "") + usd(l.price) + "</div></div>";
+    }).join("");
+    rows += '<div class="qd-row total"><div class="n">Monthly rate</div><div class="a">' + usd(v.base) + "</div></div>";
+    rows += '<div class="qd-row muted"><div class="n">Onboarding fee</div><div class="a">' + usd(v.onboarding) + "</div></div>";
+    rows += '<div class="qd-row muted"><div class="n">First 12 months' + (annual ? ", billed monthly" : "") + '</div><div class="a">' + usd(fixedYear) + "</div></div>";
+    $("qd-list").innerHTML = rows;
 
-    var t = ["ShelfSpace quote " + state.q + " · " + mdy(today), (state.name.trim() ? state.name.trim() + " · " : "") + product + " · " + levelName + " · " + termName];
+    var fine = [];
+    fine.push(annual ? "Billed monthly, nothing up front. If we haven't delivered in the first 90 days, cancel and the remaining payments stop."
+                     : "Month to month is 20% higher than a 12-month agreement.");
+    if (v.p === "pay" && v.stores > 1) fine.push("Your largest store pays full rate; each additional store is 30% off.");
+    if (v.p === "pay") fine.push("Credits are estimated at about 0.75% of monthly sales and vary month to month.");
+    fine.push("Valid through " + mdy(valid) + ". Final terms are confirmed in your agreement.");
+    $("qd-fine").innerHTML = fine.map(function (f) { return "<p>" + esc(f) + "</p>"; }).join("");
+
+    var termName = annual ? "12-month agreement, billed monthly" : "Month to month";
+    var t = ["ShelfSpace quote " + state.q + " · " + mdy(today), (name ? name + " · " : "") + product + " · " + levelName + " · " + termName];
     v.lines.forEach(function (l) { t.push("  " + l.item + " (" + l.sub + "): " + l.amt); });
     t.push("Monthly rate: " + usd(v.base) + "/mo");
     t.push("Onboarding fee: " + (v.onboarding ? usd(v.onboarding) + " one time" : "$0 (waived with a 12-month agreement)"));
-    t.push("First 12 months: " + usd(fixedYear) + (state.term === "annual" ? " (billed monthly; cancel in the first 90 days if we haven't delivered and the remaining payments stop)" : ""));
+    t.push("First 12 months: " + usd(fixedYear) + (annual ? " (billed monthly; cancel in the first 90 days if we haven't delivered and the remaining payments stop)" : ""));
     if (v.p === "pay") t.push("Credit recovery (estimated): ~" + usd(v.credits) + "/mo recovered from your vendors. You keep 80% (+" + usd(v.keep) + "/mo), we keep 20% (~" + usd(v.fee) + "/mo), only on credits we recover.");
     t.push("Valid through " + mdy(valid));
     summaryText = t.join("\n");
