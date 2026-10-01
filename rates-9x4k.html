@@ -185,15 +185,15 @@
 (function () {
   // ---- Rates (whole dollars) -------------------------------------------------
   var PRICE = {
-    pay:     [500, 650, 850, 1000, 1200],
+    pay:     [750, 1000, 1250, 1650, 2000],
     collect: [750, 1000, 1250, 1650, 2000]
   };
   var PAY_RANGES = [
     { id: "a", label: "Under $150k",  rep: 100000, band: 0 },
-    { id: "c", label: "$150k–$250k",  rep: 200000, band: 1 },
-    { id: "d", label: "$250k–$400k",  rep: 325000, band: 2 },
-    { id: "e", label: "$400k–$600k",  rep: 500000, band: 3 },
-    { id: "h", label: "$600k–$1M",    rep: 800000, band: 4 },
+    { id: "c", label: "$150k–$300k",  rep: 225000, band: 1 },
+    { id: "d", label: "$300k–$500k",  rep: 400000, band: 2 },
+    { id: "e", label: "$500k–$750k",  rep: 625000, band: 3 },
+    { id: "h", label: "$750k–$1M",    rep: 875000, band: 4 },
     { id: "g", label: "Over $1M · Enterprise", rep: 1200000, custom: true }
   ];
   var COLLECT_RANGES = [
@@ -330,6 +330,7 @@
     }).join("");
     rows += '<div class="qd-row total"><div class="n">Monthly rate</div><div class="a">' + usd(v.base) + "</div></div>";
     if (v.p === "pay") rows += '<div class="qd-row"><div class="n">Credit recovery<span>of credits we recover. Nothing recovered, nothing owed</span></div><div class="a">20%</div></div>';
+    if (v.p === "pay") rows += '<div class="qd-row"><div class="n">Guarantee<span>Credits cover your fee in 90 days, or we refund the difference</span></div><div class="a">Included</div></div>';
     rows += '<div class="qd-row muted"><div class="n">Onboarding fee</div><div class="a">' + usd(v.onboarding) + "</div></div>";
     rows += '<div class="qd-row muted"><div class="n">First 12 months' + (annual ? ", billed monthly" : "") + '</div><div class="a">' + usd(fixedYear) + "</div></div>";
     $("qd-list").innerHTML = rows;
@@ -342,7 +343,7 @@
     fine.push(annual ? "You save " + usd(yearSave) + " a year vs. month to month. Billed monthly, nothing up front. If we haven't delivered in the first 90 days, cancel and the remaining payments stop."
                      : "Month to month is our standard rate. A 12-month agreement saves 20% and waives the onboarding fee: " + usd(yearSave) + " less in the first year.");
     if (v.p === "pay" && v.stores > 1) fine.push("Your largest store pays full rate; each additional store is 30% off.");
-    if (v.p === "pay") fine.push("Your estimated credits are in your eval.");
+    if (v.p === "pay") fine.push("The credits pay for it: if the credits we recover in your first 90 days come to less than you paid us, we refund the difference. Your estimated credits are in your eval.");
     fine.push("Valid through " + mdy(valid) + ". Final terms are confirmed in your agreement.");
     $("qd-fine").innerHTML = fine.map(function (f) { return "<p>" + esc(f) + "</p>"; }).join("");
 
@@ -352,7 +353,7 @@
     t.push("Monthly rate: " + usd(v.base) + "/mo");
     t.push("Onboarding fee: " + (v.onboarding ? usd(v.onboarding) + " one time" : "$0 (waived with a 12-month agreement)"));
     t.push("First 12 months: " + usd(fixedYear) + (annual ? " (billed monthly; cancel in the first 90 days if we haven't delivered and the remaining payments stop)" : ""));
-    if (v.p === "pay") t.push("Credit recovery: 20% of credits we recover. Nothing recovered, nothing owed.");
+    if (v.p === "pay") { t.push("Credit recovery: 20% of credits we recover. Nothing recovered, nothing owed."); t.push("Guarantee: If the credits we recover in your first 90 days come to less than you paid us, we refund the difference."); }
     t.push("Valid through " + mdy(valid));
     summaryText = t.join("\n");
   }
@@ -370,6 +371,7 @@
       return '<div class="qd-row"><div class="n">' + esc(l.item) + "<span>" + esc(l.range.replace(" · Enterprise", "")) + '</span></div><div class="a">Custom</div></div>';
     }).join("");
     if (v.p === "pay") rows += '<div class="qd-row"><div class="n">Credit recovery<span>of credits we recover. Nothing recovered, nothing owed</span></div><div class="a">20%</div></div>';
+    if (v.p === "pay") rows += '<div class="qd-row"><div class="n">Guarantee<span>Credits cover your fee in 90 days, or we refund the difference</span></div><div class="a">Included</div></div>';
     $("qd-list").innerHTML = rows;
     var fine = ["Over $1M a month in sales is Enterprise pricing, set to your volume. Send us your monthly numbers and we'll come back with your rate.",
                 "Valid through " + mdy(valid) + ". Final terms are confirmed in your agreement."];
@@ -377,7 +379,7 @@
     var t = ["ShelfSpace quote " + state.q + " · " + mdy(today), (name ? name + " · " : "") + product + " Enterprise · " + termName];
     v.lines.forEach(function (l) { t.push("  " + l.item + " (" + l.range.replace(" · Enterprise", "") + (v.p === "pay" ? " monthly sales" : "") + "): Custom"); });
     t.push("Monthly rate: Custom (Enterprise, over $1M a month in sales)");
-    if (v.p === "pay") t.push("Credit recovery: 20% of credits we recover. Nothing recovered, nothing owed.");
+    if (v.p === "pay") { t.push("Credit recovery: 20% of credits we recover. Nothing recovered, nothing owed."); t.push("Guarantee: If the credits we recover in your first 90 days come to less than you paid us, we refund the difference."); }
     t.push("Valid through " + mdy(valid));
     summaryText = t.join("\n");
   }
