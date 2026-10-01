@@ -126,15 +126,7 @@
     </fieldset>
 
     <fieldset>
-      <legend><span class="step">2</span>How do you want to work with us?</legend>
-      <div class="opts opts-2">
-        <label class="opt"><input type="radio" name="level" value="managed" checked><span class="box"><span class="dot"></span><span><span class="t">Done for you</span><span class="d">We run it every week. You approve, we handle the rest.</span></span></span></label>
-        <label class="opt"><input type="radio" name="level" value="self"><span class="box"><span class="dot"></span><span><span class="t">You run it</span><span class="d">Your team runs the platform. We onboard you and support you.</span></span></span></label>
-      </div>
-    </fieldset>
-
-    <fieldset>
-      <legend><span class="step">3</span>Agreement</legend>
+      <legend><span class="step">2</span>Agreement</legend>
       <div class="opts opts-2">
         <label class="opt"><input type="radio" name="term" value="annual" checked><span class="box"><span class="dot"></span><span><span class="t">12 months <span class="save">Save 20%</span></span><span class="d">Billed monthly.<br>Onboarding fee: <strong>$0 (waived)</strong></span></span></span></label>
         <label class="opt"><input type="radio" name="term" value="monthly"><span class="box"><span class="dot"></span><span><span class="t">Month to month</span><span class="d">Standard rate.<br>Onboarding fee: <strong id="m2m-fee">$2,500 one time</strong></span></span></span></label>
@@ -142,20 +134,20 @@
     </fieldset>
 
     <fieldset id="pay-fs">
-      <legend><span class="step">4</span>Your stores and monthly sales</legend>
+      <legend><span class="step">3</span>Your stores and monthly sales</legend>
       <div id="stores"></div>
       <button type="button" class="add" id="add-store">+ Add another store</button>
       <p class="help">Your largest store pays its full rate. Every additional store is 30% off.</p>
     </fieldset>
 
     <fieldset id="collect-fs" hidden>
-      <legend><span class="step">4</span>Your monthly wholesale sales</legend>
+      <legend><span class="step">3</span>Your monthly wholesale sales</legend>
       <div class="chips" id="collect-chips"></div>
       <p class="help">What you invoice dispensaries in a typical month.</p>
     </fieldset>
 
     <fieldset>
-      <legend><span class="step">5</span>Business name</legend>
+      <legend><span class="step">4</span>Business name</legend>
       <input class="q-input" id="bizname" maxlength="80" placeholder="Business name (optional)" autocomplete="organization">
     </fieldset>
 
@@ -193,14 +185,8 @@
 (function () {
   // ---- Rates (whole dollars) -------------------------------------------------
   var PRICE = {
-    pay: [
-      { managed: 500,  self: 400 }, { managed: 650,  self: 525 }, { managed: 850,  self: 650 },
-      { managed: 1000, self: 775 }, { managed: 1200, self: 900 }
-    ],
-    collect: [
-      { managed: 750,  self: 400 }, { managed: 1000, self: 525 }, { managed: 1250, self: 650 },
-      { managed: 1650, self: 825 }, { managed: 2000, self: 1000 }
-    ]
+    pay:     [500, 650, 850, 1000, 1200],
+    collect: [750, 1000, 1250, 1650, 2000]
   };
   var PAY_RANGES = [
     { id: "a", label: "Under $150k",  rep: 100000, band: 0 },
@@ -232,7 +218,7 @@
   var ONBOARD_FIRST = 2500, ONBOARD_ADDL = 750;
   var VALID_DAYS = 30;
 
-  var state = { product: "pay", level: "managed", term: "annual", name: "", stores: [{ n: "", r: "" }], c: "", q: "" };
+  var state = { product: "pay", term: "annual", name: "", stores: [{ n: "", r: "" }], c: "", q: "" };
 
   function $(id) { return document.getElementById(id); }
   function usd(n) { return "$" + Math.round(n).toLocaleString("en-US"); }
@@ -251,7 +237,6 @@
       var s = JSON.parse(decodeURIComponent(escape(atob(decodeURIComponent(h)))));
       if (!s || typeof s !== "object") return;
       if (s.product === "pay" || s.product === "collect") state.product = s.product;
-      if (s.level === "managed" || s.level === "self") state.level = s.level;
       if (s.term === "annual" || s.term === "monthly") state.term = s.term;
       if (typeof s.name === "string") state.name = s.name.slice(0, 80);
       if (typeof s.c === "string") state.c = legacyRange(s.c, true);
@@ -283,7 +268,7 @@
   function renderStatic() {
     $("collect-chips").innerHTML = chipsHtml("collect-sales", COLLECT_RANGES, state.c);
     $("collect-chips").querySelectorAll("input").forEach(function (r) { r.addEventListener("change", function () { state.c = r.value; update(); }); });
-    ["product", "level", "term"].forEach(function (k) {
+    ["product", "term"].forEach(function (k) {
       document.querySelectorAll('input[name="' + k + '"]').forEach(function (r) { r.checked = r.value === state[k]; });
     });
     $("bizname").value = state.name;
@@ -293,10 +278,10 @@
 
   // ---- Quote math ------------------------------------------------------------
   function compute() {
-    var p = state.product, lvl = state.level, lines = [], base = 0, credits = 0, onboarding = 0;
+    var p = state.product, lines = [], base = 0, credits = 0, onboarding = 0;
     if (p === "pay") {
       var stores = state.stores.map(function (s, i) {
-        var r = range(PAY_RANGES, s.r); var list = r.custom ? 0 : PRICE.pay[r.band][lvl];
+        var r = range(PAY_RANGES, s.r); var list = r.custom ? 0 : PRICE.pay[r.band];
         return { name: s.n.trim() || ("Store " + (i + 1)), r: r, list: list };
       });
       var order = stores.slice().sort(function (a, b) { return b.list - a.list || b.r.rep - a.r.rep; });
@@ -309,7 +294,7 @@
       if (state.term === "monthly") onboarding = ONBOARD_FIRST + ONBOARD_ADDL * Math.max(0, stores.length - 1);
     } else {
       var cr = range(COLLECT_RANGES, state.c);
-      base = cr.custom ? 0 : up(PRICE.collect[cr.band][lvl]);
+      base = cr.custom ? 0 : up(PRICE.collect[cr.band]);
       lines.push({ item: "ShelfCollect", range: cr.label + " wholesale", price: base, list: 0, sub: cr.label + " monthly wholesale sales", amt: usd(base) + "/mo" });
       if (state.term === "monthly") onboarding = ONBOARD_FIRST;
     }
@@ -325,19 +310,19 @@
 
   var summaryText = "";
   function renderQuote() {
-    var v = compute(), levelName = state.level === "managed" ? "Done for you" : "You run it";
+    var v = compute();
     var annual = state.term === "annual";
     var product = v.p === "pay" ? "ShelfPay" : "ShelfCollect";
     var today = new Date(), valid = new Date(today.getTime() + VALID_DAYS * 864e5);
     var fixedYear = v.base * 12 + v.onboarding;
     var name = state.name.trim();
-    if (v.custom) return renderEnterprise(v, product, levelName, annual, today, valid, name);
+    if (v.custom) return renderEnterprise(v, product, annual, today, valid, name);
 
     $("qd-eyebrow").textContent = product + " quote";
     $("qd-meta").textContent = state.q + " · " + mdy(today);
     $("qd-name").textContent = name || (v.p === "pay" ? v.stores + (v.stores === 1 ? " store" : " stores") : "Your brand");
     $("qd-price").innerHTML = usd(v.base) + "<small>/month</small>";
-    $("qd-terms").textContent = levelName + " · " + (annual ? "12-month agreement, billed monthly" : "Month to month") + " · " + (v.onboarding ? usd(v.onboarding) + " onboarding fee" : "$0 onboarding fee");
+    $("qd-terms").textContent = (annual ? "12-month agreement, billed monthly" : "Month to month") + " · " + (v.onboarding ? usd(v.onboarding) + " onboarding fee" : "$0 onboarding fee");
 
 
     var rows = v.lines.map(function (l) {
@@ -362,7 +347,7 @@
     $("qd-fine").innerHTML = fine.map(function (f) { return "<p>" + esc(f) + "</p>"; }).join("");
 
     var termName = annual ? "12-month agreement, billed monthly" : "Month to month";
-    var t = ["ShelfSpace quote " + state.q + " · " + mdy(today), (name ? name + " · " : "") + product + " · " + levelName + " · " + termName];
+    var t = ["ShelfSpace quote " + state.q + " · " + mdy(today), (name ? name + " · " : "") + product + " · " + termName];
     v.lines.forEach(function (l) { t.push("  " + l.item + " (" + l.sub + "): " + l.amt); });
     t.push("Monthly rate: " + usd(v.base) + "/mo");
     t.push("Onboarding fee: " + (v.onboarding ? usd(v.onboarding) + " one time" : "$0 (waived with a 12-month agreement)"));
@@ -373,14 +358,14 @@
   }
 
   // Over $1M a month is Enterprise: no list price, we price it to the account.
-  function renderEnterprise(v, product, levelName, annual, today, valid, name) {
+  function renderEnterprise(v, product, annual, today, valid, name) {
     var termName = annual ? "12-month agreement, billed monthly" : "Month to month";
     var where = v.p === "pay" ? "store" : "brand";
     $("qd-eyebrow").textContent = product + " Enterprise quote";
     $("qd-meta").textContent = state.q + " · " + mdy(today);
     $("qd-name").textContent = name || (v.p === "pay" ? v.stores + (v.stores === 1 ? " store" : " stores") : "Your brand");
     $("qd-price").innerHTML = "Custom";
-    $("qd-terms").textContent = levelName + " · " + termName;
+    $("qd-terms").textContent = termName;
     var rows = v.lines.map(function (l) {
       return '<div class="qd-row"><div class="n">' + esc(l.item) + "<span>" + esc(l.range.replace(" · Enterprise", "")) + '</span></div><div class="a">Custom</div></div>';
     }).join("");
@@ -389,7 +374,7 @@
     var fine = ["Over $1M a month in sales is Enterprise pricing, set to your volume. Send us your monthly numbers and we'll come back with your rate.",
                 "Valid through " + mdy(valid) + ". Final terms are confirmed in your agreement."];
     $("qd-fine").innerHTML = fine.map(function (f) { return "<p>" + esc(f) + "</p>"; }).join("");
-    var t = ["ShelfSpace quote " + state.q + " · " + mdy(today), (name ? name + " · " : "") + product + " Enterprise · " + levelName + " · " + termName];
+    var t = ["ShelfSpace quote " + state.q + " · " + mdy(today), (name ? name + " · " : "") + product + " Enterprise · " + termName];
     v.lines.forEach(function (l) { t.push("  " + l.item + " (" + l.range.replace(" · Enterprise", "") + (v.p === "pay" ? " monthly sales" : "") + "): Custom"); });
     t.push("Monthly rate: Custom (Enterprise, over $1M a month in sales)");
     if (v.p === "pay") t.push("Credit recovery: 20% of credits we recover. Nothing recovered, nothing owed.");
@@ -411,7 +396,7 @@
   }
 
   // ---- Events ---------------------------------------------------------------
-  ["product", "level", "term"].forEach(function (k) {
+  ["product", "term"].forEach(function (k) {
     document.querySelectorAll('input[name="' + k + '"]').forEach(function (r) {
       r.addEventListener("change", function () { state[k] = r.value; renderStatic(); update(); });
     });
