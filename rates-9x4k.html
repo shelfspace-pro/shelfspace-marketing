@@ -197,21 +197,18 @@
     collect: [{ managed: 750,  self: 400 }, { managed: 1250, self: 650 }, { managed: 2000, self: 1000 }]
   };
   var PAY_RANGES = [
-    { id: "a", label: "Under $100k",  rep: 75000,  band: 0 },
-    { id: "b", label: "$100k–$150k",  rep: 125000, band: 0 },
-    { id: "c", label: "$150k–$250k",  rep: 200000, band: 1 },
-    { id: "d", label: "$250k–$400k",  rep: 325000, band: 1 },
-    { id: "e", label: "$400k–$600k",  rep: 500000, band: 2 },
-    { id: "f", label: "Over $600k",   rep: 700000, band: 2 }
+    { id: "a", label: "Under $150k",  rep: 100000, band: 0 },
+    { id: "c", label: "$150k–$400k",  rep: 250000, band: 1 },
+    { id: "e", label: "Over $400k",   rep: 550000, band: 2 }
   ];
   var COLLECT_RANGES = [
-    { id: "a", label: "Under $75k",   band: 0 },
-    { id: "b", label: "$75k–$150k",   band: 0 },
-    { id: "c", label: "$150k–$300k",  band: 1 },
-    { id: "d", label: "$300k–$500k",  band: 1 },
-    { id: "e", label: "$500k–$1M",    band: 2 },
-    { id: "f", label: "Over $1M",     band: 2 }
+    { id: "a", label: "Under $150k",  band: 0 },
+    { id: "c", label: "$150k–$500k",  band: 1 },
+    { id: "e", label: "Over $500k",   band: 2 }
   ];
+  // Older quote links used six ranges (two per price band) — fold them onto the band.
+  var LEGACY_RANGE = { b: "a", d: "c", f: "e" };
+  function legacyRange(id) { return LEGACY_RANGE[id] || id; }
   var ADDL_STORE_DISCOUNT = 0.30;
   var CREDIT_SHARE = 0.20;
   // Credits recovered run ~0.6%–1.1% of a store's monthly sales in live accounts;
@@ -245,9 +242,9 @@
       if (s.level === "managed" || s.level === "self") state.level = s.level;
       if (s.term === "annual" || s.term === "monthly") state.term = s.term;
       if (typeof s.name === "string") state.name = s.name.slice(0, 80);
-      if (typeof s.c === "string") state.c = s.c;
+      if (typeof s.c === "string") state.c = legacyRange(s.c);
       if (typeof s.q === "string") state.q = s.q.slice(0, 12);
-      if (Array.isArray(s.stores) && s.stores.length) state.stores = s.stores.slice(0, 50).map(function (x) { return { n: String(x.n || "").slice(0, 60), r: String(x.r || "") }; });
+      if (Array.isArray(s.stores) && s.stores.length) state.stores = s.stores.slice(0, 50).map(function (x) { return { n: String(x.n || "").slice(0, 60), r: legacyRange(String(x.r || "")) }; });
     } catch (e) { /* ignore a malformed link */ }
   }
 
