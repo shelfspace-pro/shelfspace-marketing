@@ -199,16 +199,18 @@
   var PAY_RANGES = [
     { id: "a", label: "Under $150k",  rep: 100000, band: 0 },
     { id: "c", label: "$150k–$400k",  rep: 250000, band: 1 },
-    { id: "e", label: "Over $400k",   rep: 550000, band: 2 }
+    { id: "e", label: "$400k–$1M",    rep: 650000, band: 2 },
+    { id: "g", label: "Over $1M · Enterprise", rep: 1200000, custom: true }
   ];
   var COLLECT_RANGES = [
     { id: "a", label: "Under $150k",  band: 0 },
     { id: "c", label: "$150k–$500k",  band: 1 },
-    { id: "e", label: "Over $500k",   band: 2 }
+    { id: "e", label: "$500k–$1M",    band: 2 },
+    { id: "g", label: "Over $1M · Enterprise", custom: true }
   ];
   // Older quote links used six ranges (two per price band) — fold them onto the band.
-  var LEGACY_RANGE = { b: "a", d: "c", f: "e" };
-  function legacyRange(id) { return LEGACY_RANGE[id] || id; }
+  // Old ShelfCollect "f" was "Over $1M", which is now the Enterprise (custom) range.
+  function legacyRange(id, collect) { return ({ b: "a", d: "c", f: collect ? "g" : "e" })[id] || id; }
   var ADDL_STORE_DISCOUNT = 0.30;
   var CREDIT_SHARE = 0.20;
   // Credits recovered run ~0.6%–1.1% of a store's monthly sales in live accounts;
@@ -242,7 +244,7 @@
       if (s.level === "managed" || s.level === "self") state.level = s.level;
       if (s.term === "annual" || s.term === "monthly") state.term = s.term;
       if (typeof s.name === "string") state.name = s.name.slice(0, 80);
-      if (typeof s.c === "string") state.c = legacyRange(s.c);
+      if (typeof s.c === "string") state.c = legacyRange(s.c, true);
       if (typeof s.q === "string") state.q = s.q.slice(0, 12);
       if (Array.isArray(s.stores) && s.stores.length) state.stores = s.stores.slice(0, 50).map(function (x) { return { n: String(x.n || "").slice(0, 60), r: legacyRange(String(x.r || "")) }; });
     } catch (e) { /* ignore a malformed link */ }
@@ -284,7 +286,7 @@
     var p = state.product, lvl = state.level, lines = [], base = 0, credits = 0, onboarding = 0;
     if (p === "pay") {
       var stores = state.stores.map(function (s, i) {
-        var r = range(PAY_RANGES, s.r); var list = PRICE.pay[r.band][lvl];
+        var r = range(PAY_RANGES, s.r); var list = r.custom ? 0 : PRICE.pay[r.band][lvl];
         return { name: s.n.trim() || ("Store " + (i + 1)), r: r, list: list };
       });
       var order = stores.slice().sort(function (a, b) { return b.list - a.list || b.r.rep - a.r.rep; });
@@ -297,12 +299,13 @@
       if (state.term === "monthly") onboarding = ONBOARD_FIRST + ONBOARD_ADDL * Math.max(0, stores.length - 1);
     } else {
       var cr = range(COLLECT_RANGES, state.c);
-      base = up(PRICE.collect[cr.band][lvl]);
+      base = cr.custom ? 0 : up(PRICE.collect[cr.band][lvl]);
       lines.push({ item: "ShelfCollect", range: cr.label + " wholesale", price: base, list: 0, sub: cr.label + " monthly wholesale sales", amt: usd(base) + "/mo" });
       if (state.term === "monthly") onboarding = ONBOARD_FIRST;
     }
     var fee = Math.round(credits * CREDIT_SHARE);
-    return { p: p, lines: lines, base: base, credits: credits, fee: fee, keep: credits - fee, monthly: base + fee, onboarding: onboarding, year: (base + fee) * 12 + onboarding, stores: state.stores.length };
+    var custom = p === "pay" ? state.stores.some(function (s) { return range(PAY_RANGES, s.r).custom; }) : !!range(COLLECT_RANGES, state.c).custom;
+    return { custom: custom, p: p, lines: lines, base: base, credits: credits, fee: fee, keep: credits - fee, monthly: base + fee, onboarding: onboarding, year: (base + fee) * 12 + onboarding, stores: state.stores.length };
   }
 
   function complete() {
@@ -318,6 +321,7 @@
     var today = new Date(), valid = new Date(today.getTime() + VALID_DAYS * 864e5);
     var fixedYear = v.base * 12 + v.onboarding;
     var name = state.name.trim();
+    if (v.custom) return renderEnterprise(v, product, levelName, annual, today, valid, name);
 
     $("qd-eyebrow").textContent = product + " quote";
     $("qd-meta").textContent = state.q + " · " + mdy(today);
@@ -353,6 +357,31 @@
     t.push("Monthly rate: " + usd(v.base) + "/mo");
     t.push("Onboarding fee: " + (v.onboarding ? usd(v.onboarding) + " one time" : "$0 (waived with a 12-month agreement)"));
     t.push("First 12 months: " + usd(fixedYear) + (annual ? " (billed monthly; cancel in the first 90 days if we haven't delivered and the remaining payments stop)" : ""));
+    if (v.p === "pay") t.push("Credit recovery: 20% of credits we recover. Nothing recovered, nothing owed.");
+    t.push("Valid through " + mdy(valid));
+    summaryText = t.join("\n");
+  }
+
+  // Over $1M a month is Enterprise: no list price, we price it to the account.
+  function renderEnterprise(v, product, levelName, annual, today, valid, name) {
+    var termName = annual ? "12-month agreement, billed monthly" : "Month to month";
+    var where = v.p === "pay" ? "store" : "brand";
+    $("qd-eyebrow").textContent = product + " Enterprise quote";
+    $("qd-meta").textContent = state.q + " · " + mdy(today);
+    $("qd-name").textContent = name || (v.p === "pay" ? v.stores + (v.stores === 1 ? " store" : " stores") : "Your brand");
+    $("qd-price").innerHTML = "Custom";
+    $("qd-terms").textContent = levelName + " · " + termName;
+    var rows = v.lines.map(function (l) {
+      return '<div class="qd-row"><div class="n">' + esc(l.item) + "<span>" + esc(l.range.replace(" · Enterprise", "")) + '</span></div><div class="a">Custom</div></div>';
+    }).join("");
+    if (v.p === "pay") rows += '<div class="qd-row"><div class="n">Credit recovery<span>of credits we recover. Nothing recovered, nothing owed</span></div><div class="a">20%</div></div>';
+    $("qd-list").innerHTML = rows;
+    var fine = ["Over $1M a month in sales is Enterprise pricing, set to your volume. Send us your monthly numbers and we'll come back with your rate.",
+                "Valid through " + mdy(valid) + ". Final terms are confirmed in your agreement."];
+    $("qd-fine").innerHTML = fine.map(function (f) { return "<p>" + esc(f) + "</p>"; }).join("");
+    var t = ["ShelfSpace quote " + state.q + " · " + mdy(today), (name ? name + " · " : "") + product + " Enterprise · " + levelName + " · " + termName];
+    v.lines.forEach(function (l) { t.push("  " + l.item + " (" + l.range.replace(" · Enterprise", "") + (v.p === "pay" ? " monthly sales" : "") + "): Custom"); });
+    t.push("Monthly rate: Custom (Enterprise, over $1M a month in sales)");
     if (v.p === "pay") t.push("Credit recovery: 20% of credits we recover. Nothing recovered, nothing owed.");
     t.push("Valid through " + mdy(valid));
     summaryText = t.join("\n");
