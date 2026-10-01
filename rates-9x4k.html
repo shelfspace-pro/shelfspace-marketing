@@ -193,24 +193,34 @@
 (function () {
   // ---- Rates (whole dollars) -------------------------------------------------
   var PRICE = {
-    pay:     [{ managed: 500,  self: 400 }, { managed: 850,  self: 650 }, { managed: 1200, self: 900 }],
-    collect: [{ managed: 750,  self: 400 }, { managed: 1250, self: 650 }, { managed: 2000, self: 1000 }]
+    pay: [
+      { managed: 500,  self: 400 }, { managed: 650,  self: 525 }, { managed: 850,  self: 650 },
+      { managed: 1000, self: 775 }, { managed: 1200, self: 900 }
+    ],
+    collect: [
+      { managed: 750,  self: 400 }, { managed: 1000, self: 525 }, { managed: 1250, self: 650 },
+      { managed: 1650, self: 825 }, { managed: 2000, self: 1000 }
+    ]
   };
   var PAY_RANGES = [
     { id: "a", label: "Under $150k",  rep: 100000, band: 0 },
-    { id: "c", label: "$150k–$400k",  rep: 250000, band: 1 },
-    { id: "e", label: "$400k–$1M",    rep: 650000, band: 2 },
+    { id: "c", label: "$150k–$250k",  rep: 200000, band: 1 },
+    { id: "d", label: "$250k–$400k",  rep: 325000, band: 2 },
+    { id: "e", label: "$400k–$600k",  rep: 500000, band: 3 },
+    { id: "h", label: "$600k–$1M",    rep: 800000, band: 4 },
     { id: "g", label: "Over $1M · Enterprise", rep: 1200000, custom: true }
   ];
   var COLLECT_RANGES = [
     { id: "a", label: "Under $150k",  band: 0 },
-    { id: "c", label: "$150k–$500k",  band: 1 },
-    { id: "e", label: "$500k–$1M",    band: 2 },
+    { id: "c", label: "$150k–$300k",  band: 1 },
+    { id: "d", label: "$300k–$500k",  band: 2 },
+    { id: "e", label: "$500k–$750k",  band: 3 },
+    { id: "h", label: "$750k–$1M",    band: 4 },
     { id: "g", label: "Over $1M · Enterprise", custom: true }
   ];
-  // Older quote links used six ranges (two per price band) — fold them onto the band.
-  // Old ShelfCollect "f" was "Over $1M", which is now the Enterprise (custom) range.
-  function legacyRange(id, collect) { return ({ b: "a", d: "c", f: collect ? "g" : "e" })[id] || id; }
+  // Older quote links: the first version split Under $150k in two ("b"), and its "f" was
+  // Over $600k (ShelfPay) / Over $1M (ShelfCollect, now Enterprise).
+  function legacyRange(id, collect) { return ({ b: "a", f: collect ? "g" : "h" })[id] || id; }
   var ADDL_STORE_DISCOUNT = 0.30;
   var CREDIT_SHARE = 0.20;
   // Credits recovered run ~0.6%–1.1% of a store's monthly sales in live accounts;
