@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ShelfCollect One-Pager</title>
+<!--
+  ShelfCollect one-page overview (US Letter, portrait). Mirrors /accounts-receivable.
+  Render: open via file:// in headless Chrome/Playwright and print to PDF (Letter,
+  printBackground, margin 0). Fonts load from Google Fonts at render time.
+  All names, invoice numbers and amounts are made up. No client data.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --green-deep: #1b4332; --green-dark: #2d6a4f; --green-mid: #40916c; --green-accent: #95d5b2;
+  --green-light: #d8f3dc; --green-ghost: #f0faf4;
+  --slate-100: #f1f5f9; --slate-200: #e2e8f0; --slate-300: #cbd5e1; --slate-400: #94a3b8;
+  --slate-500: #64748b; --slate-600: #475569; --slate-700: #334155; --slate-800: #1e293b;
+  --white: #ffffff;
+}
+@page { size: 8.5in 11in; margin: 0; }
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+html, body { font-family: 'DM Sans', -apple-system, sans-serif; color: var(--slate-700); background: var(--white); font-variant-ligatures: none; -webkit-font-smoothing: antialiased; }
+.page { width: 8.5in; height: 11in; overflow: hidden; display: flex; flex-direction: column; }
+.mono { font-family: 'Space Mono', monospace; font-variant-numeric: tabular-nums; }
+.wrap { padding: 0 0.5in; }
+
+/* Header */
+.top { display: flex; justify-content: space-between; align-items: center; padding-top: 0.38in; }
+.logo { display: flex; align-items: center; gap: 9px; color: var(--green-deep); font-weight: 700; font-size: 17px; }
+.logo-icon { width: 28px; height: 28px; border-radius: 7px; background: var(--green-deep); display: flex; align-items: center; justify-content: center; }
+.logo-icon svg { width: 16px; height: 16px; }
+.logo sup { font-size: 9px; font-weight: 500; }
+.metrc { display: flex; align-items: center; gap: 8px; font-size: 10px; color: var(--slate-500); font-weight: 600; }
+.metrc img { height: 18px; }
+
+/* Hero */
+.hero { display: grid; grid-template-columns: 1fr 2.55in; gap: 0.35in; align-items: center; margin-top: 0.12in; }
+.eyebrow { font-size: 10.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--green-mid); }
+h1 { font-size: 50px; line-height: 1; letter-spacing: -0.03em; color: var(--green-deep); font-weight: 800; margin: 10px 0 12px; }
+.lede { font-size: 14px; line-height: 1.5; color: var(--slate-600); max-width: 4in; }
+.promises { margin-top: 16px; display: grid; gap: 8px; }
+.promise { display: flex; gap: 9px; align-items: flex-start; font-size: 12px; line-height: 1.4; color: var(--slate-700); }
+.promise b { color: var(--slate-800); }
+.tick { flex: 0 0 18px; height: 18px; border-radius: 50%; background: var(--green-light); color: var(--green-deep); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800; margin-top: 1px; }
+
+/* Pay link mockup */
+.phone { background: var(--white); border: 1px solid var(--slate-200); border-radius: 18px; padding: 14px 14px 12px; box-shadow: 0 14px 40px rgba(27,67,50,0.16); position: relative; }
+.phone-cap { text-align: center; font-size: 9.5px; color: var(--slate-500); margin-top: 8px; line-height: 1.35; }
+.p-top { display: flex; justify-content: space-between; align-items: center; }
+.p-brand { font-size: 10px; font-weight: 700; color: var(--slate-800); }
+.p-badge { font-size: 7.5px; font-weight: 600; color: var(--green-dark); background: var(--green-ghost); border: 1px solid var(--green-light); border-radius: 999px; padding: 2px 6px; }
+.p-title { font-size: 15px; font-weight: 800; color: var(--slate-800); margin-top: 10px; letter-spacing: -0.01em; }
+.p-sub { font-size: 9px; color: var(--slate-500); margin-top: 2px; }
+.p-fwd { font-size: 8.5px; color: var(--green-mid); margin-top: 5px; font-weight: 600; }
+.p-amt { margin-top: 9px; background: var(--green-ghost); border: 1px solid var(--green-light); border-radius: 11px; padding: 9px 10px; }
+.p-amt .k { display: flex; justify-content: space-between; align-items: center; font-size: 7.5px; font-weight: 700; letter-spacing: 0.1em; color: var(--slate-500); }
+.p-amt .k span { letter-spacing: 0; font-size: 7px; color: var(--green-dark); background: var(--white); border-radius: 999px; padding: 2px 6px; font-weight: 600; }
+.p-amt .v { font-size: 23px; font-weight: 700; color: var(--green-deep); margin-top: 3px; }
+.p-opts { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 5px; margin-top: 9px; }
+.p-opt { border: 1px solid var(--slate-200); border-radius: 8px; padding: 5px 6px; font-size: 8.5px; font-weight: 700; color: var(--slate-800); }
+.p-opt small { display: block; font-weight: 400; font-size: 7px; color: var(--slate-500); margin-top: 1px; }
+.p-opt.on { border: 1.5px solid var(--green-deep); background: var(--green-ghost); }
+.p-field { margin-top: 7px; }
+.p-field label { font-size: 7.5px; font-weight: 600; color: var(--slate-700); }
+.p-field div { margin-top: 2px; border: 1px solid var(--slate-200); border-radius: 7px; padding: 5px 7px; font-size: 8.5px; color: var(--slate-500); }
+.p-two { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; }
+.p-btn { margin-top: 9px; background: var(--green-deep); color: var(--white); border-radius: 8px; text-align: center; padding: 7px; font-size: 10px; font-weight: 700; }
+.p-safe { text-align: center; font-size: 7px; color: var(--slate-400); margin-top: 5px; }
+
+/* Outcomes */
+.sec-h { display: flex; align-items: baseline; justify-content: space-between; margin-top: 0.24in; }
+.sec-h h2 { font-size: 15px; color: var(--slate-800); font-weight: 800; letter-spacing: -0.01em; }
+.sec-h span { font-size: 9.5px; color: var(--slate-400); }
+.outcomes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 10px; }
+.card { border: 1px solid var(--slate-200); border-radius: 14px; padding: 13px 14px; box-shadow: 0 4px 16px rgba(27,67,50,0.06); display: flex; flex-direction: column; }
+.card .n { font-size: 9px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--green-mid); }
+.card h3 { font-size: 13.5px; color: var(--slate-800); margin: 4px 0 6px; line-height: 1.25; letter-spacing: -0.01em; }
+.card p { font-size: 10px; line-height: 1.45; color: var(--slate-600); }
+.card .stat { margin-top: auto; padding-top: 10px; }
+.card .stat .v { font-size: 22px; font-weight: 700; color: var(--green-deep); }
+.card .stat .s { font-size: 8.5px; color: var(--slate-500); margin-top: 2px; line-height: 1.35; }
+.steps { margin-top: auto; padding-top: 10px; display: flex; flex-wrap: nowrap; gap: 3px; }
+.steps span { font-size: 8px; font-weight: 600; color: var(--green-deep); background: var(--green-ghost); border: 1px solid var(--green-light); border-radius: 999px; padding: 2px 5px; }
+.steps i { font-style: normal; color: var(--slate-300); font-size: 9px; align-self: center; }
+.mini { margin-top: auto; padding-top: 10px; }
+.mini-box { border: 1px solid var(--slate-200); border-radius: 9px; padding: 7px 9px; background: var(--white); }
+.mini-box .t { font-size: 8px; color: var(--slate-500); }
+.mini-box .r { display: flex; justify-content: space-between; font-size: 9px; color: var(--slate-700); margin-top: 3px; }
+.mini-box .r b { font-family: 'Space Mono', monospace; color: var(--slate-800); }
+
+/* How it works */
+.how { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 10px; }
+.how div { border-top: 2px solid var(--green-accent); padding-top: 8px; }
+.how .k { font-family: 'Space Mono', monospace; font-size: 10px; color: var(--green-mid); font-weight: 700; }
+.how h4 { font-size: 11.5px; color: var(--slate-800); margin: 3px 0 3px; }
+.how p { font-size: 9.5px; line-height: 1.4; color: var(--slate-600); }
+
+/* Proof band (the one dark section) */
+.band { margin-top: auto; background: var(--green-deep); color: var(--white); padding: 0.22in 0.5in 0.26in; }
+.band .lbl { font-size: 9.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--green-accent); text-align: center; }
+.logos { display: flex; justify-content: space-between; align-items: center; margin-top: 12px; gap: 10px; }
+.logos img { height: 20px; max-width: 0.72in; object-fit: contain; opacity: 0.92; }
+.cta { display: flex; justify-content: space-between; align-items: center; margin-top: 0.18in; padding-top: 0.16in; border-top: 1px solid rgba(255,255,255,0.14); }
+.cta h3 { font-size: 20px; font-weight: 800; letter-spacing: -0.01em; }
+.cta p { font-size: 10.5px; color: var(--green-light); margin-top: 3px; }
+.cta .contact { text-align: right; font-size: 10.5px; line-height: 1.6; color: var(--white); }
+.cta .contact b { display: inline-block; background: var(--white); color: var(--green-deep); border-radius: 9px; padding: 6px 12px; font-size: 11px; margin-bottom: 5px; }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="wrap">
+    <div class="top">
+      <div class="logo">
+        <div class="logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div>
+        <span>ShelfSpace<sup>™</sup></span>
+      </div>
+      <div class="metrc"><img src="../metrc-logo-v2.png" alt="Metrc">Certified Metrc Third-Party Vendor</div>
+    </div>
+
+    <div class="hero">
+      <div>
+        <div class="eyebrow">ShelfCollect · Cannabis Accounts Receivable</div>
+        <h1>Get paid faster.</h1>
+        <p class="lede">More cash freed, more past-due backlog recovered, and hours of AR chasing off your team. We run it as your own AR department, so the buyer relationship stays yours.</p>
+        <div class="promises">
+          <div class="promise"><span class="tick">✓</span><span><b>One Pay Now link per account.</b> No login, no app. Your buyer pays from their own bank, in full, in part, or in installments.</span></div>
+          <div class="promise"><span class="tick">✓</span><span><b>Every invoice matched to its Metrc manifest,</b> so "we never got that" has an answer.</span></div>
+          <div class="promise"><span class="tick">✓</span><span><b>We never hold your money.</b> It goes from their bank to yours.</span></div>
+        </div>
+      </div>
+
+      <div>
+        <div class="phone">
+          <div class="p-top"><span class="p-brand">ShelfSpace™</span><span class="p-badge">🔒 Secure</span></div>
+          <div class="p-title">Pay Sunrise Extracts</div>
+          <div class="p-sub">Invoice 4827 · Due 10/14/2026</div>
+          <div class="p-fwd">→ Forward to whoever pays</div>
+          <div class="p-amt">
+            <div class="k">AMOUNT DUE <span>✓ Verified against Metrc</span></div>
+            <div class="v mono">$3,186.00</div>
+          </div>
+          <div class="p-opts">
+            <div class="p-opt on">Pay in full<small class="mono">$3,186.00</small></div>
+            <div class="p-opt">Pay part<small>Choose amount</small></div>
+            <div class="p-opt">Installments<small>Interest-free</small></div>
+          </div>
+          <div class="p-field"><label>Account holder name</label><div>Green Leaf Dispensary, LLC</div></div>
+          <div class="p-btn">Pay $3,186.00</div>
+          <div class="p-safe">One charge on your statement · we never sell your bank details</div>
+        </div>
+        <div class="phone-cap">The Pay Now link your buyers get (sample).</div>
+      </div>
+    </div>
+
+    <div class="sec-h"><h2>Three things change.</h2><span>Examples are illustrative, not client results.</span></div>
+    <div class="outcomes">
+      <div class="card">
+        <div class="n">01 · Cash freed</div>
+        <h3>Every day you cut frees real cash.</h3>
+        <p>Money in receivables is money you already earned but can't use. Shorten how long buyers take to pay and it comes back to run the business.</p>
+        <div class="stat"><div class="v mono">≈$270,000</div><div class="s">$14M annual wholesale, 7 days faster. Freed once, and it stays freed.</div></div>
+      </div>
+      <div class="card">
+        <div class="n">02 · Backlog recovered</div>
+        <h3>Old invoices, worked instead of written off.</h3>
+        <p>Invoices 60+ days late get a real plan, not one more "just following up." Every account is worked on schedule, in your name.</p>
+        <div class="steps"><span>Match</span><i>›</i><span>Link</span><i>›</i><span>Remind</span><i>›</i><span>Plan</span><i>›</i><span>Paid</span></div>
+      </div>
+      <div class="card">
+        <div class="n">03 · Labor saved</div>
+        <h3>AR chasing, off your team's plate.</h3>
+        <p>Reminders go out on schedule and payments match to invoices. Every Monday, each sales rep gets their own list of who owes what.</p>
+        <div class="mini"><div class="mini-box">
+          <div class="t">Monday · to Jordan (sales rep)</div>
+          <div class="r"><span>Total owed</span><b>$38,240.00</b></div>
+          <div class="r"><span>31+ days late</span><b>$9,870.00</b></div>
+          <div class="r"><span>Accounts · invoices</span><b>6 · 9</b></div>
+        </div></div>
+      </div>
+    </div>
+
+    <div class="sec-h"><h2>You connect once. We run your AR from there.</h2></div>
+    <div class="how">
+      <div><div class="k">01</div><h4>Connect QuickBooks</h4><p>We read your open invoices to get started. Nothing is written back without your OK.</p></div>
+      <div><div class="k">02</div><h4>Match to Metrc</h4><p>Every invoice tied to the manifest it shipped on, so disputes have paperwork.</p></div>
+      <div><div class="k">03</div><h4>Buyers pay one link</h4><p>A standing Pay Now link per account, with reminders until it's paid.</p></div>
+      <div><div class="k">04</div><h4>Review monthly</h4><p>Dollars collected, days outstanding, and how your aging moved.</p></div>
+    </div>
+  </div>
+
+  <div class="band">
+    <div class="lbl">Brands collecting faster on the ShelfSpace platform</div>
+    <div class="logos">
+      <img src="../logos/brands/curaleaf.png" alt="Curaleaf">
+      <img src="../logos/brands/cresco.png" alt="Cresco Labs">
+      <img src="../logos/brands/gti.png" alt="Green Thumb Industries">
+      <img src="../logos/brands/holistic.png" alt="Holistic Industries">
+      <img src="../logos/brands/kiva.png" alt="Kiva Confections">
+      <img src="../logos/brands/wyld.png" alt="Wyld">
+      <img src="../logos/brands/marimed.png" alt="MariMed">
+      <img src="../logos/brands/jushi.png" alt="Jushi Holdings">
+      <img src="../logos/brands/rove.png" alt="Rove">
+      <img src="../logos/brands/fernway.png" alt="Fernway">
+    </div>
+    <div class="cta">
+      <div>
+        <h3>Get a free AR review.</h3>
+        <p>We'll look at your aging and tell you what's worth chasing. No commitment.</p>
+      </div>
+      <div class="contact">
+        <b>shelfspace.pro/accounts-receivable</b><br>
+        Chris Mitchem, Founder · chris@shelfspace.pro · 360-609-0721
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
