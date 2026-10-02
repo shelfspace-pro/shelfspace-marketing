@@ -37,7 +37,9 @@ The site sells the **OUTCOME**, stays agnostic on who does the work, and shows *
 
 ## Nav (all pages)
 
-ShelfPay (AP) | Consignment | Credit Recovery | ShelfCollect (AR) | About | Pricing | Platform ▾ | Login | **CTA**
+ShelfPay (AP) | ShelfCollect (AR) | About | Pricing | Platform ▾ | Login | **CTA**
+
+- **2026-10-02 (Chris):** Consignment and Credit Recovery are NOT top-nav items — they're part of ShelfPay, linked from the "Included in ShelfPay" section on `/accounts-payable` (and still in the footer). Don't re-add them to the nav.
 
 - **Service labels (2026-09-28, Chris):** the AP link reads **"ShelfPay (AP)"** (→ `/accounts-payable`) and the AR link reads **"ShelfCollect (AR)"** (→ `/accounts-receivable`, the ShelfCollect page). Same labels in the footer and in the `scripts/build-tutorials.mjs` template. The product name "Get Paid" is retired sitewide — use ShelfCollect (URL slugs like `/get-paid` stay).
 - **Never remove an existing `.brand-ticker` logo strip** when rebuilding a page — Chris reverted exactly that on the ShelfCollect page (2026-09-28).
