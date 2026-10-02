@@ -50,6 +50,10 @@
   .chip:hover span { border-color: var(--green-accent); }
   .chip input:checked + span { background: var(--green-deep); border-color: var(--green-deep); color: var(--white); }
   .chip input:focus-visible + span { box-shadow: 0 0 0 3px rgba(27,67,50,0.2); }
+  .stepper { display: inline-flex; align-items: center; gap: 4px; border: 1.5px solid var(--slate-200); border-radius: 12px; background: var(--white); padding: 4px; }
+  .stepper button { width: 38px; height: 38px; border: 0; border-radius: 10px; background: var(--green-ghost); color: var(--green-deep); font: inherit; font-size: 20px; font-weight: 600; cursor: pointer; }
+  .stepper button:disabled { opacity: 0.35; cursor: default; }
+  .stepper span { min-width: 44px; text-align: center; font-size: 16px; font-weight: 600; font-variant-numeric: tabular-nums; color: var(--slate-800); }
   .store { border: 1.5px solid var(--slate-100); border-radius: 12px; padding: 14px; margin-bottom: 10px; background: var(--slate-50); }
   .store.err { border-color: #e5a4a4; background: #fdf5f5; }
   .store-top { display: flex; gap: 8px; align-items: center; margin-bottom: 10px; }
@@ -134,10 +138,12 @@
     </fieldset>
 
     <fieldset id="pay-fs">
-      <legend><span class="step">3</span>Your stores and monthly sales</legend>
-      <div id="stores"></div>
-      <button type="button" class="add" id="add-store">+ Add another store</button>
-      <p class="help">Your largest store pays its full rate. Every additional store is 30% off.</p>
+      <legend><span class="step">3</span>Your monthly sales and stores</legend>
+      <div class="store-sub">Monthly sales, all stores combined</div>
+      <div class="chips" id="pay-chips"></div>
+      <div class="store-sub" style="margin-top:16px">Number of stores</div>
+      <div class="stepper"><button type="button" id="st-minus" aria-label="Fewer stores">&minus;</button><span id="st-n">1</span><button type="button" id="st-plus" aria-label="More stores">+</button></div>
+      <p class="help">One price for your sales, plus a flat monthly fee for each store after the first.</p>
     </fieldset>
 
     <fieldset id="collect-fs" hidden>
@@ -154,7 +160,7 @@
   </form>
 
   <div class="q-side">
-  <div class="q-empty no-print" id="q-empty"><strong>Your quote appears here</strong>Pick monthly sales for each store and the quote updates as you go.</div>
+  <div class="q-empty no-print" id="q-empty"><strong>Your quote appears here</strong>Pick your monthly sales and number of stores, and the quote updates as you go.</div>
 
   <div class="q-doc" id="quote" hidden>
     <div class="qd">
@@ -185,17 +191,25 @@
 (function () {
   // ---- Rates (whole dollars) -------------------------------------------------
   var PRICE = {
-    pay:     [750, 1000, 1250, 1650, 2000],
+    pay:     [750, 1000, 1250, 1650, 2000, 2500, 3000, 3500],
     collect: [750, 1000, 1250, 1650, 2000]
   };
+  // ShelfPay is priced on the GROUP's combined monthly sales, plus a flat fee per extra store.
   var PAY_RANGES = [
-    { id: "a", label: "Under $150k",  rep: 100000, band: 0 },
-    { id: "c", label: "$150k–$300k",  rep: 225000, band: 1 },
-    { id: "d", label: "$300k–$500k",  rep: 400000, band: 2 },
-    { id: "e", label: "$500k–$750k",  rep: 625000, band: 3 },
-    { id: "h", label: "$750k–$1M",    rep: 875000, band: 4 },
-    { id: "g", label: "Over $1M · Enterprise", rep: 1200000, custom: true }
+    { id: "p1", label: "Under $150k",  rep: 100000,  max: 150000,  band: 0 },
+    { id: "p2", label: "$150k–$300k",  rep: 225000,  max: 300000,  band: 1 },
+    { id: "p3", label: "$300k–$500k",  rep: 400000,  max: 500000,  band: 2 },
+    { id: "p4", label: "$500k–$750k",  rep: 625000,  max: 750000,  band: 3 },
+    { id: "p5", label: "$750k–$1M",    rep: 875000,  max: 1000000, band: 4 },
+    { id: "p6", label: "$1M–$1.5M",    rep: 1250000, max: 1500000, band: 5 },
+    { id: "p7", label: "$1.5M–$2M",    rep: 1750000, max: 2000000, band: 6 },
+    { id: "p8", label: "$2M–$3M",      rep: 2500000, max: 3000000, band: 7 },
+    { id: "p9", label: "Over $3M · Enterprise", rep: 3500000, max: Infinity, custom: true }
   ];
+  var PER_STORE = 250, MAX_STORES = 50;
+  // Older links priced each store separately: add up the stores' sales and pick the group range.
+  var LEGACY_STORE_SALES = { a: 100000, b: 125000, c: 225000, d: 400000, e: 625000, f: 700000, h: 875000, g: 1200000 };
+  function payRangeForSales(total) { for (var i = 0; i < PAY_RANGES.length; i++) if (total < PAY_RANGES[i].max) return PAY_RANGES[i].id; return "p9"; }
   var COLLECT_RANGES = [
     { id: "a", label: "Under $150k",  band: 0 },
     { id: "c", label: "$150k–$300k",  band: 1 },
@@ -207,7 +221,6 @@
   // Older quote links: the first version split Under $150k in two ("b"), and its "f" was
   // Over $600k (ShelfPay) / Over $1M (ShelfCollect, now Enterprise).
   function legacyRange(id, collect) { return ({ b: "a", f: collect ? "g" : "h" })[id] || id; }
-  var ADDL_STORE_DISCOUNT = 0.30;
   var CREDIT_SHARE = 0.20;
   // Credits recovered run ~0.6%–1.1% of a store's monthly sales in live accounts;
   // quote the conservative end.
@@ -218,7 +231,7 @@
   var ONBOARD_FIRST = 2500, ONBOARD_ADDL = 750;
   var VALID_DAYS = 30;
 
-  var state = { product: "pay", term: "annual", name: "", stores: [{ n: "", r: "" }], c: "", q: "" };
+  var state = { product: "pay", term: "annual", name: "", g: "", n: 1, c: "", q: "" };
 
   function $(id) { return document.getElementById(id); }
   function usd(n) { return "$" + Math.round(n).toLocaleString("en-US"); }
@@ -241,7 +254,13 @@
       if (typeof s.name === "string") state.name = s.name.slice(0, 80);
       if (typeof s.c === "string") state.c = legacyRange(s.c, true);
       if (typeof s.q === "string") state.q = s.q.slice(0, 12);
-      if (Array.isArray(s.stores) && s.stores.length) state.stores = s.stores.slice(0, 50).map(function (x) { return { n: String(x.n || "").slice(0, 60), r: legacyRange(String(x.r || "")) }; });
+      if (typeof s.g === "string" && range(PAY_RANGES, s.g)) state.g = s.g;
+      if (typeof s.n === "number" && s.n >= 1) state.n = Math.min(MAX_STORES, Math.floor(s.n));
+      if (Array.isArray(s.stores) && s.stores.length) {
+        var picked = s.stores.slice(0, MAX_STORES).map(function (x) { return LEGACY_STORE_SALES[String(x && x.r || "")]; });
+        state.n = picked.length;
+        if (picked.every(function (v) { return v; })) state.g = payRangeForSales(picked.reduce(function (a, b) { return a + b; }, 0));
+      }
     } catch (e) { /* ignore a malformed link */ }
   }
 
@@ -251,20 +270,16 @@
       return '<label class="chip"><input type="radio" name="' + name + '" value="' + r.id + '"' + (selected === r.id ? " checked" : "") + '><span>' + r.label + "</span></label>";
     }).join("");
   }
-  function renderStores() {
-    var box = $("stores"); box.innerHTML = "";
-    state.stores.forEach(function (s, i) {
-      var div = document.createElement("div"); div.className = "store"; div.dataset.i = i;
-      div.innerHTML = '<div class="store-top"><input class="q-input" maxlength="60" placeholder="Store ' + (i + 1) + ' name (optional)" aria-label="Store name">' +
-        (state.stores.length > 1 ? '<button type="button" class="x">Remove</button>' : "") + '</div>' +
-        '<div class="store-sub">Monthly sales</div><div class="chips">' + chipsHtml("sales-" + i, PAY_RANGES, s.r) + "</div>";
-      var name = div.querySelector("input.q-input"); name.value = s.n;
-      name.addEventListener("input", function () { s.n = name.value; update(); });
-      div.querySelectorAll('input[type="radio"]').forEach(function (r) { r.addEventListener("change", function () { s.r = r.value; div.classList.remove("err"); update(); }); });
-      var x = div.querySelector(".x"); if (x) x.addEventListener("click", function () { state.stores.splice(i, 1); renderStores(); update(); });
-      box.appendChild(div);
-    });
+  function renderPay() {
+    $("pay-chips").innerHTML = chipsHtml("pay-sales", PAY_RANGES, state.g);
+    $("pay-chips").querySelectorAll("input").forEach(function (r) { r.addEventListener("change", function () { state.g = r.value; update(); }); });
+    renderCount();
   }
+  function renderCount() {
+    $("st-n").textContent = state.n;
+    $("st-minus").disabled = state.n <= 1; $("st-plus").disabled = state.n >= MAX_STORES;
+  }
+
   function renderStatic() {
     $("collect-chips").innerHTML = chipsHtml("collect-sales", COLLECT_RANGES, state.c);
     $("collect-chips").querySelectorAll("input").forEach(function (r) { r.addEventListener("change", function () { state.c = r.value; update(); }); });
@@ -280,18 +295,13 @@
   function compute() {
     var p = state.product, lines = [], base = 0, credits = 0, onboarding = 0;
     if (p === "pay") {
-      var stores = state.stores.map(function (s, i) {
-        var r = range(PAY_RANGES, s.r); var list = r.custom ? 0 : PRICE.pay[r.band];
-        return { name: s.n.trim() || ("Store " + (i + 1)), r: r, list: list };
-      });
-      var order = stores.slice().sort(function (a, b) { return b.list - a.list || b.r.rep - a.r.rep; });
-      order.forEach(function (s, i) {
-        var price = up(i === 0 ? s.list : Math.round(s.list * (1 - ADDL_STORE_DISCOUNT)));
-        base += price;
-        lines.push({ item: s.name, range: s.r.label, price: price, list: i === 0 ? 0 : up(s.list), sub: s.r.label + " monthly sales" + (i === 0 ? "" : ", 30% off " + usd(up(s.list))), amt: usd(price) + "/mo" });
-      });
-      stores.forEach(function (s) { credits += round50(s.r.rep * CREDIT_RATE_OF_SALES); });
-      if (state.term === "monthly") onboarding = ONBOARD_FIRST + ONBOARD_ADDL * Math.max(0, stores.length - 1);
+      var g = range(PAY_RANGES, state.g), extra = state.n - 1;
+      var main = g.custom ? 0 : up(PRICE.pay[g.band]), addl = up(PER_STORE) * extra;
+      base = g.custom ? 0 : main + addl;
+      lines.push({ item: "ShelfPay", range: g.label + " monthly sales", price: main, list: 0, sub: g.label + " combined monthly sales", amt: usd(main) + "/mo" });
+      if (extra > 0) lines.push({ item: "Additional stores", range: extra + " × " + usd(up(PER_STORE)), price: addl, list: 0, sub: extra + (extra === 1 ? " store" : " stores") + " after the first", amt: usd(addl) + "/mo" });
+      credits = round50(g.rep * CREDIT_RATE_OF_SALES);
+      if (state.term === "monthly") onboarding = ONBOARD_FIRST + ONBOARD_ADDL * extra;
     } else {
       var cr = range(COLLECT_RANGES, state.c);
       base = cr.custom ? 0 : up(PRICE.collect[cr.band]);
@@ -299,12 +309,12 @@
       if (state.term === "monthly") onboarding = ONBOARD_FIRST;
     }
     var fee = Math.round(credits * CREDIT_SHARE);
-    var custom = p === "pay" ? state.stores.some(function (s) { return range(PAY_RANGES, s.r).custom; }) : !!range(COLLECT_RANGES, state.c).custom;
-    return { custom: custom, p: p, lines: lines, base: base, credits: credits, fee: fee, keep: credits - fee, monthly: base + fee, onboarding: onboarding, year: (base + fee) * 12 + onboarding, stores: state.stores.length };
+    var custom = p === "pay" ? !!range(PAY_RANGES, state.g).custom : !!range(COLLECT_RANGES, state.c).custom;
+    return { custom: custom, p: p, lines: lines, base: base, credits: credits, fee: fee, keep: credits - fee, monthly: base + fee, onboarding: onboarding, year: (base + fee) * 12 + onboarding, stores: state.n };
   }
 
   function complete() {
-    if (state.product === "pay") return state.stores.every(function (s) { return !!range(PAY_RANGES, s.r); });
+    if (state.product === "pay") return !!range(PAY_RANGES, state.g);
     return !!range(COLLECT_RANGES, state.c);
   }
 
@@ -343,7 +353,7 @@
     fine.push(annual ? "You save " + usd(yearSave) + " a year vs. month to month. Billed monthly, nothing up front. If we haven't delivered in the first 90 days, cancel and the remaining payments stop."
                      : "Month to month is our standard rate. A 12-month agreement saves 20% and waives the onboarding fee: " + usd(yearSave) + " less in the first year.");
     if (v.p === "collect") fine.push("We collect more than we cost: if the past-due payments we collect in your first 90 days come to less than you paid us, we refund the difference.");
-    if (v.p === "pay" && v.stores > 1) fine.push("Your largest store pays full rate; each additional store is 30% off.");
+    if (v.p === "pay" && v.stores > 1) fine.push("One price for your combined sales, plus " + usd(up(PER_STORE)) + " a month for each store after the first.");
     if (v.p === "pay") fine.push("The credits pay for it: if the credits we recover in your first 90 days come to less than you paid us, we refund the difference. Your estimated credits are in your eval.");
     fine.push("Valid through " + mdy(valid) + ". Final terms are confirmed in your agreement.");
     $("qd-fine").innerHTML = fine.map(function (f) { return "<p>" + esc(f) + "</p>"; }).join("");
@@ -386,14 +396,14 @@
   }
 
   function update() {
-    var m2mFee = state.product === "pay" ? ONBOARD_FIRST + ONBOARD_ADDL * Math.max(0, state.stores.length - 1) : ONBOARD_FIRST;
+    var m2mFee = state.product === "pay" ? ONBOARD_FIRST + ONBOARD_ADDL * (state.n - 1) : ONBOARD_FIRST;
     $("m2m-fee").textContent = usd(m2mFee) + " one time";
     var ok = complete();
     if (ok && !state.q) state.q = newQuoteNum();
     saveHash();
     $("quote").hidden = !ok; $("q-empty").hidden = ok;
     $("q-empty").innerHTML = state.product === "pay"
-      ? "<strong>Your quote appears here</strong>Pick monthly sales for " + (state.stores.length > 1 ? "each store" : "your store") + " and the quote updates as you go."
+      ? "<strong>Your quote appears here</strong>Pick your monthly sales and number of stores, and the quote updates as you go."
       : "<strong>Your quote appears here</strong>Pick your monthly wholesale sales and the quote updates as you go.";
     if (ok) renderQuote();
   }
@@ -405,7 +415,8 @@
     });
   });
   $("bizname").addEventListener("input", function () { state.name = $("bizname").value; update(); });
-  $("add-store").addEventListener("click", function () { state.stores.push({ n: "", r: "" }); renderStores(); update(); });
+  $("st-minus").addEventListener("click", function () { if (state.n > 1) { state.n--; renderCount(); update(); } });
+  $("st-plus").addEventListener("click", function () { if (state.n < MAX_STORES) { state.n++; renderCount(); update(); } });
   $("form").addEventListener("submit", function (e) { e.preventDefault(); });
   function toast(msg) { var t = $("toast"); t.textContent = msg; t.classList.add("show"); setTimeout(function () { t.classList.remove("show"); }, 1800); }
   function copy(text, msg) {
@@ -416,7 +427,7 @@
   $("copy-link").addEventListener("click", function () { saveHash(); copy(location.href, "Link copied"); });
   $("copy-text").addEventListener("click", function () { copy(summaryText, "Summary copied"); });
 
-  readHash(); renderStatic(); renderStores(); update();
+  readHash(); renderStatic(); renderPay(); update();
 })();
 </script>
 </body>
