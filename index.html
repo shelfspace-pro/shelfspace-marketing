@@ -1017,276 +1017,52 @@ document.head.appendChild(o)}initApollo();</script>
   </div>
 </section>
 
-<!-- SECTION 2.2: GET PAID — animated vendor→retailer showcase -->
+<!-- SECTION 6: TRUST — who's running your money -->
 <style>
-  .getpaid-home { padding: 100px 48px; background: linear-gradient(180deg, var(--white) 0%, var(--green-ghost) 100%); overflow: hidden; }
-  .gph-inner { max-width: 960px; margin: 0 auto; }
-  .gph-head { text-align: center; max-width: 880px; margin: 0 auto 52px; }
-  /* Match the .svc-headline scale exactly so this heading is the same size as
-     the ShelfIQ / AP / consignment section headlines (styles.css:739). */
-  .gph-head h2 { font-size: clamp(40px, 6.8vw, 80px); font-weight: 700; line-height: 1.05; color: var(--green-deep); letter-spacing: -2.5px; margin: 12px 0 14px; }
-  .gph-sub { font-size: 17px; line-height: 1.6; color: var(--slate-600); margin: 0; }
-
-  /* stage */
-  .gph-stage { display: flex; align-items: stretch; gap: 0; }
-  .gph-node { flex: 0 0 300px; }
-  .gph-tag { font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--green-mid); margin-bottom: 10px; }
-  .gph-node--retailer .gph-tag { text-align: right; }
-  .gph-screen { position: relative; background: var(--white); border: 1px solid var(--slate-200); border-radius: 18px; padding: 22px 22px; min-height: 208px; box-shadow: 0 20px 48px rgba(27,67,50,0.10); }
-
-  /* vendor invoice */
-  .gph-invoice { transition: opacity 0.5s ease; }
-  .gph-inv-row { display: flex; justify-content: space-between; align-items: baseline; }
-  .gph-inv-row > span:first-child { font-size: 14px; font-weight: 600; color: var(--slate-800); }
-  .gph-amt { font-family: var(--font-mono); font-size: 20px; font-weight: 700; color: var(--green-deep); letter-spacing: -0.5px; font-variant-numeric: tabular-nums; }
-  .gph-inv-sub { font-size: 12px; color: #c2410c; margin: 6px 0 22px; font-weight: 600; }
-  .gph-send { display: inline-flex; align-items: center; gap: 7px; background: var(--green-deep); color: var(--white); border: none; border-radius: 11px; padding: 11px 16px; font-family: var(--font-sans); font-size: 14px; font-weight: 700; box-shadow: 0 0 0 0 rgba(45,106,79,0); transition: box-shadow 0.4s ease, transform 0.3s ease; }
-  .gph-send svg { width: 15px; height: 15px; }
-  .gph-stage[data-step="0"] .gph-send { box-shadow: 0 0 0 6px rgba(149,213,178,0.5); transform: translateY(-1px); }
-  .gph-stage[data-step="4"] .gph-invoice { opacity: 0; }
-  /* vendor paid overlay */
-  .gph-paid { position: absolute; inset: 22px; display: flex; align-items: center; gap: 14px; background: var(--white); border-radius: 12px; opacity: 0; transform: translateY(10px); transition: opacity 0.5s ease, transform 0.5s ease; }
-  .gph-paid-ico { width: 46px; height: 46px; border-radius: 50%; background: var(--green-ghost); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-  .gph-paid-ico svg { width: 24px; height: 24px; stroke: var(--green-deep); }
-  .gph-paid-amt { font-family: var(--font-mono); font-size: 22px; font-weight: 700; color: var(--green-deep); letter-spacing: -0.5px; font-variant-numeric: tabular-nums; }
-  .gph-paid-label { font-size: 13px; color: var(--slate-500); font-weight: 600; }
-  .gph-stage[data-step="4"] .gph-paid { opacity: 1; transform: translateY(0); }
-
-  /* rail */
-  .gph-rail { flex: 1 1 auto; position: relative; align-self: center; height: 3px; margin: 0 8px; background-image: linear-gradient(90deg, var(--green-mid) 40%, transparent 0); background-size: 12px 3px; background-repeat: repeat-x; border-radius: 2px; }
-  .gph-token { position: absolute; top: 50%; left: 0; transform: translate(-50%, -50%); display: inline-flex; align-items: center; gap: 6px; background: var(--green-deep); color: var(--white); font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: 0.5px; padding: 7px 12px; border-radius: 999px; white-space: nowrap; box-shadow: 0 8px 20px rgba(27,67,50,0.25); opacity: 0; transition: left 0.9s cubic-bezier(0.4,0,0.2,1), opacity 0.3s ease; }
-  .gph-token svg { width: 13px; height: 13px; }
-  .gph-token--chk { background: var(--green-accent); color: var(--green-deep); }
-  .gph-token--chk svg { stroke: var(--green-deep); }
-  .gph-stage[data-step="1"] .gph-token--inv { opacity: 1; left: 100%; }
-  .gph-stage[data-step="2"] .gph-token--inv { opacity: 0; left: 100%; }
-  .gph-stage[data-step="3"] .gph-token--chk { opacity: 1; left: 100%; }
-  .gph-stage[data-step="4"] .gph-token--chk { opacity: 1; left: 0; }
-
-  /* retailer pay-now */
-  .gph-paynow { transition: opacity 0.4s ease, transform 0.4s ease; opacity: 0.5; }
-  .gph-stage[data-step="2"] .gph-paynow,
-  .gph-stage[data-step="3"] .gph-paynow,
-  .gph-stage[data-step="4"] .gph-paynow { opacity: 1; }
-  .gph-pn-to { font-size: 12px; color: var(--slate-500); margin-bottom: 4px; }
-  .gph-pn-amt { font-family: var(--font-mono); font-size: 26px; font-weight: 700; color: var(--green-deep); letter-spacing: -1px; font-variant-numeric: tabular-nums; margin-bottom: 18px; }
-  .gph-paybtn { position: relative; width: 100%; height: 48px; border: none; border-radius: 12px; background: var(--green-deep); color: var(--white); font-family: var(--font-sans); font-size: 15px; font-weight: 700; overflow: visible; transition: transform 0.18s ease, background 0.3s ease; }
-  .gph-pb-label, .gph-pb-paid { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; gap: 7px; transition: opacity 0.3s ease; }
-  .gph-pb-paid { opacity: 0; }
-  .gph-pb-paid svg { width: 16px; height: 16px; }
-  .gph-stage[data-step="2"] .gph-paybtn { box-shadow: 0 0 0 5px rgba(149,213,178,0.5); }
-  .gph-stage[data-step="3"] .gph-paybtn { transform: scale(0.95); }
-  .gph-stage[data-step="4"] .gph-paybtn { background: var(--green-mid); }
-  .gph-stage[data-step="4"] .gph-pb-label { opacity: 0; }
-  .gph-stage[data-step="4"] .gph-pb-paid { opacity: 1; }
-  /* click ripple */
-  .gph-ripple { position: absolute; left: 50%; top: 50%; width: 20px; height: 20px; border-radius: 50%; border: 2px solid var(--green-accent); transform: translate(-50%,-50%) scale(0.4); opacity: 0; pointer-events: none; }
-  .gph-stage[data-step="3"] .gph-ripple { animation: gphRipple 0.6s ease-out; }
-  @keyframes gphRipple { 0% { opacity: 0.8; transform: translate(-50%,-50%) scale(0.4); } 100% { opacity: 0; transform: translate(-50%,-50%) scale(6); } }
-  /* cursor */
-  .gph-cursor { position: absolute; right: 30px; bottom: 24px; opacity: 0; transform: translate(0,0); transition: opacity 0.3s ease, transform 0.7s cubic-bezier(0.4,0,0.2,1); pointer-events: none; }
-  .gph-cursor svg { width: 22px; height: 22px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.25)); }
-  .gph-stage[data-step="2"] .gph-cursor { opacity: 1; transform: translate(-58px, -34px); }
-  .gph-stage[data-step="3"] .gph-cursor { opacity: 1; transform: translate(-58px, -34px) scale(0.82); }
-
-  /* captions */
-  .gph-caps { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; margin-top: 44px; }
-  .gph-cap { display: inline-flex; align-items: center; gap: 9px; font-size: 14px; font-weight: 600; color: var(--slate-400); background: var(--white); border: 1px solid var(--slate-200); border-radius: 999px; padding: 9px 18px; transition: color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease; }
-  .gph-cap-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--slate-300); transition: background 0.3s ease, box-shadow 0.3s ease; }
-  .gph-cap.is-active { color: var(--green-deep); border-color: var(--green-accent); box-shadow: 0 6px 18px rgba(27,67,50,0.10); }
-  .gph-cap.is-active .gph-cap-dot { background: var(--green-accent); box-shadow: 0 0 0 4px rgba(149,213,178,0.4); }
-
-  .gph-cta { text-align: center; margin-top: 44px; }
-
-  @media (max-width: 760px) {
-    .getpaid-home { padding: 72px 24px; }
-    .gph-head h2 { letter-spacing: -1.5px; } /* mirror .svc-headline mobile (styles.css:754) */
-    .gph-stage { flex-direction: column; gap: 0; }
-    .gph-node { flex: 1 1 auto; width: 100%; max-width: 360px; margin: 0 auto; }
-    .gph-node--retailer .gph-tag { text-align: left; }
-    .gph-rail { width: 3px; min-height: 44px; align-self: center; margin: 6px 0; background-image: linear-gradient(180deg, var(--green-mid) 40%, transparent 0); background-size: 3px 12px; background-repeat: repeat-y; }
-    .gph-token { display: none; }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .gph-token, .gph-cursor, .gph-ripple { transition: none !important; animation: none !important; }
-  }
+.h-trust { background: var(--white); padding: 104px 48px 96px; }
+.h-trust-grid { display: grid; grid-template-columns: 1.05fr 1fr; gap: 28px; max-width: 1040px; margin: 0 auto; align-items: stretch; }
+.h-founder { display: flex; flex-direction: column; background: var(--green-ghost); border: 1px solid rgba(149,213,178,0.6); border-radius: 24px; padding: 36px; box-shadow: 0 18px 44px rgba(27,67,50,0.08); }
+.h-founder-top { display: flex; align-items: center; gap: 18px; margin-bottom: 22px; }
+.h-founder-top img { width: 84px; height: 84px; border-radius: 50%; object-fit: cover; flex: none; box-shadow: 0 8px 20px rgba(27,67,50,0.18); }
+.h-founder-name { font-size: 19px; font-weight: 700; color: var(--green-deep); margin: 0; }
+.h-founder-role { font-size: 14px; color: var(--slate-600); margin: 2px 0 0; }
+.h-founder-quote { font-size: clamp(19px, 1.9vw, 23px); font-weight: 600; line-height: 1.45; color: var(--green-deep); letter-spacing: -0.4px; margin: 0 0 18px; }
+.h-founder-body { font-size: 15.5px; line-height: 1.65; color: var(--slate-600); margin: 0 0 24px; flex-grow: 1; }
+.h-founder-links { display: flex; flex-wrap: wrap; gap: 10px 22px; }
+.h-founder-links a { display: inline-flex; align-items: center; gap: 7px; font-size: 15px; font-weight: 600; color: var(--green-dark); text-decoration: none; }
+.h-pillars { display: flex; flex-direction: column; gap: 16px; }
+.h-pillar { display: flex; gap: 16px; align-items: flex-start; background: var(--white); border: 1px solid var(--slate-200); border-radius: 16px; padding: 22px 24px; box-shadow: 0 10px 28px rgba(27,67,50,0.06); flex: 1; }
+.h-pillar-icon { flex: none; width: 44px; height: 44px; border-radius: 12px; background: var(--green-ghost); color: var(--green-deep); display: flex; align-items: center; justify-content: center; }
+.h-pillar-icon svg { width: 22px; height: 22px; }
+.h-pillar-icon img { width: 32px; height: auto; }
+.h-pillar h3 { font-size: 17px; font-weight: 700; color: var(--green-deep); letter-spacing: -0.3px; margin: 2px 0 6px; }
+.h-pillar p { font-size: 14.5px; line-height: 1.55; color: var(--slate-600); margin: 0; }
+@media (max-width: 900px) { .h-trust { padding: 72px 20px; } .h-trust-grid { grid-template-columns: 1fr; max-width: 560px; } .h-founder { padding: 28px 24px; } }
 </style>
-<section class="getpaid-home" id="get-paid-home" aria-labelledby="gph-heading">
-  <div class="gph-inner">
-    <div class="gph-head reveal">
-      <div class="section-label" style="justify-content:center;">ShelfCollect · For vendors &amp; brands</div>
-      <h2 id="gph-heading">An invoice goes out. One click, and you're paid.</h2>
-      <p class="gph-sub">Cash freed, backlog recovered, labor saved. Here's the part your buyers see: one link, no login, and no processor in the middle.</p>
-    </div>
-
-    <div class="gph-stage reveal" data-step="0" role="img" aria-label="Animation: a vendor sends an invoice, the retailer pays it in one click, and a digital check lands in the vendor's account.">
-      <!-- Vendor -->
-      <div class="gph-node gph-node--vendor">
-        <div class="gph-tag">Vendor</div>
-        <div class="gph-screen">
-          <div class="gph-invoice">
-            <div class="gph-inv-row"><span>Invoice #1042</span><span class="gph-amt">$4,820.00</span></div>
-            <div class="gph-inv-sub">Net 30 · 41 days overdue</div>
-            <button class="gph-send" type="button" tabindex="-1" aria-hidden="true">Send invoice <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>
-          </div>
-          <div class="gph-paid">
-            <div class="gph-paid-ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
-            <div>
-              <div class="gph-paid-amt">+$4,820.00</div>
-              <div class="gph-paid-label">Paid · check deposited</div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Rail -->
-      <div class="gph-rail">
-        <span class="gph-token gph-token--inv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Invoice</span>
-        <span class="gph-token gph-token--chk"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>Check</span>
-      </div>
-      <!-- Retailer -->
-      <div class="gph-node gph-node--retailer">
-        <div class="gph-tag">Retailer</div>
-        <div class="gph-screen gph-paynow">
-          <div class="gph-pn-to">Pay to Vendor</div>
-          <div class="gph-pn-amt">$4,820.00</div>
-          <button class="gph-paybtn" type="button" tabindex="-1" aria-hidden="true">
-            <span class="gph-pb-label">Pay Now</span>
-            <span class="gph-pb-paid"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Paid</span>
-            <span class="gph-ripple"></span>
-          </button>
-          <div class="gph-cursor"><svg viewBox="0 0 24 24" fill="var(--green-deep)" stroke="white" stroke-width="1.5"><path d="M5 3l14 7-6 2-2 6-6-15z"/></svg></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="gph-caps reveal">
-      <div class="gph-cap" data-cap="0"><span class="gph-cap-dot"></span>The vendor sends the invoice</div>
-      <div class="gph-cap" data-cap="1"><span class="gph-cap-dot"></span>The retailer pays in one click</div>
-      <div class="gph-cap" data-cap="2"><span class="gph-cap-dot"></span>A real check lands in your account</div>
-    </div>
-
-    <div class="gph-cta reveal">
-      <a href="/accounts-receivable" class="btn-primary">See what ShelfCollect frees up <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
-    </div>
+<section class="h-trust" id="trust" aria-labelledby="trust-heading">
+  <div class="h-head reveal">
+    <div class="section-label">Who's running your money</div>
+    <h2 id="trust-heading">Real people. The state's own records. Your bank.</h2>
+    <p>Handing someone your vendor money takes trust. Here's exactly who and what you're trusting.</p>
   </div>
-</section>
-<script>
-(function() {
-  var stage = document.querySelector('.gph-stage');
-  if (!stage) return;
-  var caps = Array.prototype.slice.call(document.querySelectorAll('.gph-cap'));
-  var stepToCap = [0, 0, 1, 1, 2];
-  function render(step) {
-    stage.setAttribute('data-step', step);
-    var ci = stepToCap[step];
-    caps.forEach(function(c) { c.classList.toggle('is-active', +c.getAttribute('data-cap') === ci); });
-  }
-  var params = new URLSearchParams(window.location.search);
-  var freeze = params.get('gpfreeze');
-  if (freeze !== null) { render(Math.max(0, Math.min(4, parseInt(freeze, 10) || 0))); return; }
-  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (reduce) { render(2); return; }
-  var step = 0, timer = null;
-  function tick() { step = (step + 1) % 5; render(step); }
-  function start() { if (timer) return; step = 0; render(0); timer = setInterval(tick, 1900); }
-  function stop() { if (timer) { clearInterval(timer); timer = null; } }
-  render(0);
-  var io = new IntersectionObserver(function(entries) {
-    entries.forEach(function(e) { if (e.isIntersecting) { start(); } else { stop(); } });
-  }, { threshold: 0.3 });
-  io.observe(stage);
-})();
-</script>
-
-<section class="vp-band vp-band--slate" id="watch" aria-labelledby="watch-heading">
-  <div class="vp-band-inner">
-    <div class="vp-band-head reveal">
-      <div class="vp-band-eyebrow">Watch it work</div>
-      <h2 id="watch-heading">Real screens. Real invoices. Real Metrc checks.</h2>
-      <p>Every step of the delivery workflow &mdash; recorded start to finish, narrated the whole way. No mockups, nothing staged.</p>
+  <div class="h-trust-grid">
+    <div class="h-founder reveal">
+      <div class="h-founder-top">
+        <img src="/chris-avatar.jpg" alt="Chris Mitchem, ShelfSpace founder" width="84" height="84" loading="lazy">
+        <div><p class="h-founder-name">Chris Mitchem</p><p class="h-founder-role">Founder &amp; CEO &middot; cannabis operator since 2015</p></div>
+      </div>
+      <p class="h-founder-quote">"I've run a dispensary's books myself, and I have the scars to prove it. Every account we take on, I stand behind personally."</p>
+      <p class="h-founder-body">ShelfSpace is built and run by operators, not a call center. If something about your account isn't right, you email me and it gets fixed.</p>
+      <div class="h-founder-links">
+        <a href="mailto:chris@shelfspace.pro">chris@shelfspace.pro</a>
+        <a href="https://www.linkedin.com/in/chris-mitchem-mba/" target="_blank" rel="noopener"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> LinkedIn</a>
+        <a href="/about">More about Chris &rarr;</a>
+      </div>
     </div>
-    <div class="vp-grid reveal reveal-delay-1">
-      <a class="vp-card" href="/tutorials/deliveries-overview" aria-label="Watch: The Delivery Dashboard (2 min 45 sec)">
-        <div class="vp-thumb">
-          <img src="https://i.ytimg.com/vi/o1eJZWGAcF0/hqdefault.jpg" alt="The Delivery Dashboard — ShelfSpace tutorial video" loading="lazy" width="480" height="270">
-          <span class="vp-badge">Episode 1</span>
-          <span class="vp-len">2:45</span>
-          <span class="vp-play" aria-hidden="true"><span><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span></span>
-        </div>
-        <div class="vp-body">
-          <h3>The Delivery Dashboard</h3>
-          <p>Track every vendor order from arrival to payment.</p>
-          <span class="vp-cta">Watch + transcript <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></span>
-        </div>
-      </a>
-      <a class="vp-card" href="/tutorials/create-a-delivery" aria-label="Watch: Creating a Delivery (3 min 35 sec)">
-        <div class="vp-thumb">
-          <img src="https://i.ytimg.com/vi/8E6NI2O24G8/hqdefault.jpg" alt="Creating a Delivery — ShelfSpace tutorial video" loading="lazy" width="480" height="270">
-          <span class="vp-badge">Episode 2</span>
-          <span class="vp-len">3:35</span>
-          <span class="vp-play" aria-hidden="true"><span><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span></span>
-        </div>
-        <div class="vp-body">
-          <h3>Creating a Delivery</h3>
-          <p>Turn any vendor invoice into a tracked delivery &mdash; automatically.</p>
-          <span class="vp-cta">Watch + transcript <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></span>
-        </div>
-      </a>
-      <a class="vp-card" href="/tutorials/receiving-a-delivery" aria-label="Watch: Receiving a Delivery (3 min 15 sec)">
-        <div class="vp-thumb">
-          <img src="https://i.ytimg.com/vi/le66YdivrQk/hqdefault.jpg" alt="Receiving a Delivery — ShelfSpace tutorial video" loading="lazy" width="480" height="270">
-          <span class="vp-badge">Episode 3</span>
-          <span class="vp-len">3:15</span>
-          <span class="vp-play" aria-hidden="true"><span><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span></span>
-        </div>
-        <div class="vp-body">
-          <h3>Receiving a Delivery</h3>
-          <p>Check in what arrived &mdash; and never overpay for what didn't.</p>
-          <span class="vp-cta">Watch + transcript <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></span>
-        </div>
-      </a>
-      <a class="vp-card" href="/tutorials/approving-a-delivery" aria-label="Watch: Approving a Delivery (2 min 15 sec)">
-        <div class="vp-thumb">
-          <img src="https://i.ytimg.com/vi/LesouiABf6k/hqdefault.jpg" alt="Approving a Delivery — ShelfSpace tutorial video" loading="lazy" width="480" height="270">
-          <span class="vp-badge">Episode 4</span>
-          <span class="vp-len">2:15</span>
-          <span class="vp-play" aria-hidden="true"><span><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span></span>
-        </div>
-        <div class="vp-body">
-          <h3>Approving a Delivery</h3>
-          <p>The office sign-off &mdash; ShelfiQ checks Metrc, you approve for payment.</p>
-          <span class="vp-cta">Watch + transcript <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></span>
-        </div>
-      </a>
-      <a class="vp-card" href="/tutorials/troubleshooting-metrc-discrepancies" aria-label="Watch: Troubleshooting Metrc Discrepancies (2 min 55 sec)">
-        <div class="vp-thumb">
-          <img src="https://i.ytimg.com/vi/BaQeOirCTLk/hqdefault.jpg" alt="Troubleshooting Metrc Discrepancies — ShelfSpace tutorial video" loading="lazy" width="480" height="270">
-          <span class="vp-badge">Episode 5</span>
-          <span class="vp-len">2:55</span>
-          <span class="vp-play" aria-hidden="true"><span><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span></span>
-        </div>
-        <div class="vp-body">
-          <h3>Troubleshooting Metrc Discrepancies</h3>
-          <p>When the invoice and the state's records don't line up.</p>
-          <span class="vp-cta">Watch + transcript <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></span>
-        </div>
-      </a>
-      <a class="vp-card" href="/tutorials/troubleshooting-duplicate-payments" aria-label="Watch: Troubleshooting Duplicate Payments (2 min 42 sec)">
-        <div class="vp-thumb">
-          <img src="https://i.ytimg.com/vi/mY2MEABHKu8/hqdefault.jpg" alt="Troubleshooting Duplicate Payments — ShelfSpace tutorial video" loading="lazy" width="480" height="270">
-          <span class="vp-badge">Episode 6</span>
-          <span class="vp-len">2:42</span>
-          <span class="vp-play" aria-hidden="true"><span><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span></span>
-        </div>
-        <div class="vp-body">
-          <h3>Troubleshooting Duplicate Payments</h3>
-          <p>Catch a double-billed invoice before a dollar goes out.</p>
-          <span class="vp-cta">Watch + transcript <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></span>
-        </div>
-      </a>
-    </div>
-    <div class="vp-band-foot reveal reveal-delay-2">
-      <a href="/tutorials">Browse all tutorials <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+    <div class="h-pillars">
+      <div class="h-pillar reveal"><span class="h-pillar-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span><div><h3>A real person runs your account</h3><p>Software does the typing. A person checks the work, and you approve every dollar before it moves.</p></div></div>
+      <div class="h-pillar reveal reveal-delay-1"><span class="h-pillar-icon"><img src="/metrc-logo-v2.png" alt="Metrc" loading="lazy"></span><div><h3>Certified Metrc third-party vendor</h3><p>Every invoice is checked against Metrc, the same state records your compliance runs on. Vetted and approved by Metrc.</p></div></div>
+      <div class="h-pillar reveal reveal-delay-2"><span class="h-pillar-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18"/><path d="M5 21V10"/><path d="M19 21V10"/><path d="M9 21v-7"/><path d="M15 21v-7"/><path d="M12 3 3 8h18z"/></svg></span><div><h3>Your money stays in your bank</h3><p>Vendor checks are drawn on your own account and signed by you. Stores pay brands straight into theirs. We never hold your funds.</p></div></div>
     </div>
   </div>
 </section>
@@ -1295,7 +1071,7 @@ document.head.appendChild(o)}initApollo();</script>
 <section class="case-studies">
   <div class="case-studies-inner">
     <div class="case-studies-header reveal">
-      <h2>Case Studies</h2>
+      <h2>What we find, every month</h2>
       <p class="case-studies-lead">Across the dispensaries we work with, the money hides in the same quiet corners &mdash; duplicate invoices, unfiled credits, product that expires before it sells. <strong>We find it, every month.</strong></p>
       <p>De-identified to protect our clients.</p>
     </div>
@@ -1515,53 +1291,95 @@ document.head.appendChild(o)}initApollo();</script>
   </div>
 </section>
 
-<!-- SECTION 1.5: FOUNDER STRIP -->
-<section class="founder-strip" id="founder">
-  <div class="founder-strip-inner reveal">
-    <img src="/chris-avatar.jpg" alt="Chris Mitchem, ShelfSpace founder" class="founder-strip-photo" width="96" height="96" loading="eager">
-    <div class="founder-strip-text">
-      <div class="founder-strip-eyebrow">From the founder</div>
-      <p class="founder-strip-quote">I've been a cannabis operator since 2015, and I have the scars to prove it. ShelfSpace is the product of everything I learned the hard way.</p>
-      <div class="founder-strip-meta">
-        <span><strong style="color:var(--slate-800);font-weight:600;">Chris Mitchem</strong> · Founder &amp; CEO · Massachusetts</span>
-        <a href="https://www.linkedin.com/in/chris-mitchem-mba/" target="_blank" rel="noopener" class="founder-strip-li" aria-label="Chris Mitchem on LinkedIn"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
-      </div>
-      <a href="/about" class="founder-strip-link">More about Chris <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
-      <a href="/blog/what-is-shelfspace" class="founder-strip-link" style="margin-left:18px;">What ShelfSpace actually is <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+<section class="vp-band vp-band--slate" id="watch" aria-labelledby="watch-heading">
+  <div class="vp-band-inner">
+    <div class="vp-band-head reveal">
+      <div class="vp-band-eyebrow">Watch it work</div>
+      <h2 id="watch-heading">Real screens. Real invoices. Real Metrc checks.</h2>
+      <p>Every step of the delivery workflow &mdash; recorded start to finish, narrated the whole way. No mockups, nothing staged.</p>
     </div>
-  </div>
-</section>
-
-<!-- TRUST SIGNALS: vendor experience + Metrc -->
-<section class="trust-signals-section" style="background:var(--white);padding:96px 48px;border-top:1px solid var(--slate-100);">
-  <div style="max-width:1100px;margin:0 auto;">
-    <div style="text-align:center;margin-bottom:48px;" class="reveal">
-      <div class="section-label">Built to be trusted</div>
-      <h2 style="font-size:clamp(28px,3.5vw,40px);font-weight:700;color:var(--green-deep);letter-spacing:-1.5px;margin-top:8px;">Vendors win. Compliance wins.</h2>
+    <div class="vp-grid reveal reveal-delay-1">
+      <a class="vp-card" href="/tutorials/deliveries-overview" aria-label="Watch: The Delivery Dashboard (2 min 45 sec)">
+        <div class="vp-thumb">
+          <img src="https://i.ytimg.com/vi/o1eJZWGAcF0/hqdefault.jpg" alt="The Delivery Dashboard — ShelfSpace tutorial video" loading="lazy" width="480" height="270">
+          <span class="vp-badge">Episode 1</span>
+          <span class="vp-len">2:45</span>
+          <span class="vp-play" aria-hidden="true"><span><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span></span>
+        </div>
+        <div class="vp-body">
+          <h3>The Delivery Dashboard</h3>
+          <p>Track every vendor order from arrival to payment.</p>
+          <span class="vp-cta">Watch + transcript <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></span>
+        </div>
+      </a>
+      <a class="vp-card" href="/tutorials/create-a-delivery" aria-label="Watch: Creating a Delivery (3 min 35 sec)">
+        <div class="vp-thumb">
+          <img src="https://i.ytimg.com/vi/8E6NI2O24G8/hqdefault.jpg" alt="Creating a Delivery — ShelfSpace tutorial video" loading="lazy" width="480" height="270">
+          <span class="vp-badge">Episode 2</span>
+          <span class="vp-len">3:35</span>
+          <span class="vp-play" aria-hidden="true"><span><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span></span>
+        </div>
+        <div class="vp-body">
+          <h3>Creating a Delivery</h3>
+          <p>Turn any vendor invoice into a tracked delivery &mdash; automatically.</p>
+          <span class="vp-cta">Watch + transcript <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></span>
+        </div>
+      </a>
+      <a class="vp-card" href="/tutorials/receiving-a-delivery" aria-label="Watch: Receiving a Delivery (3 min 15 sec)">
+        <div class="vp-thumb">
+          <img src="https://i.ytimg.com/vi/le66YdivrQk/hqdefault.jpg" alt="Receiving a Delivery — ShelfSpace tutorial video" loading="lazy" width="480" height="270">
+          <span class="vp-badge">Episode 3</span>
+          <span class="vp-len">3:15</span>
+          <span class="vp-play" aria-hidden="true"><span><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span></span>
+        </div>
+        <div class="vp-body">
+          <h3>Receiving a Delivery</h3>
+          <p>Check in what arrived &mdash; and never overpay for what didn't.</p>
+          <span class="vp-cta">Watch + transcript <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></span>
+        </div>
+      </a>
+      <a class="vp-card" href="/tutorials/approving-a-delivery" aria-label="Watch: Approving a Delivery (2 min 15 sec)">
+        <div class="vp-thumb">
+          <img src="https://i.ytimg.com/vi/LesouiABf6k/hqdefault.jpg" alt="Approving a Delivery — ShelfSpace tutorial video" loading="lazy" width="480" height="270">
+          <span class="vp-badge">Episode 4</span>
+          <span class="vp-len">2:15</span>
+          <span class="vp-play" aria-hidden="true"><span><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span></span>
+        </div>
+        <div class="vp-body">
+          <h3>Approving a Delivery</h3>
+          <p>The office sign-off &mdash; ShelfiQ checks Metrc, you approve for payment.</p>
+          <span class="vp-cta">Watch + transcript <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></span>
+        </div>
+      </a>
+      <a class="vp-card" href="/tutorials/troubleshooting-metrc-discrepancies" aria-label="Watch: Troubleshooting Metrc Discrepancies (2 min 55 sec)">
+        <div class="vp-thumb">
+          <img src="https://i.ytimg.com/vi/BaQeOirCTLk/hqdefault.jpg" alt="Troubleshooting Metrc Discrepancies — ShelfSpace tutorial video" loading="lazy" width="480" height="270">
+          <span class="vp-badge">Episode 5</span>
+          <span class="vp-len">2:55</span>
+          <span class="vp-play" aria-hidden="true"><span><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span></span>
+        </div>
+        <div class="vp-body">
+          <h3>Troubleshooting Metrc Discrepancies</h3>
+          <p>When the invoice and the state's records don't line up.</p>
+          <span class="vp-cta">Watch + transcript <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></span>
+        </div>
+      </a>
+      <a class="vp-card" href="/tutorials/troubleshooting-duplicate-payments" aria-label="Watch: Troubleshooting Duplicate Payments (2 min 42 sec)">
+        <div class="vp-thumb">
+          <img src="https://i.ytimg.com/vi/mY2MEABHKu8/hqdefault.jpg" alt="Troubleshooting Duplicate Payments — ShelfSpace tutorial video" loading="lazy" width="480" height="270">
+          <span class="vp-badge">Episode 6</span>
+          <span class="vp-len">2:42</span>
+          <span class="vp-play" aria-hidden="true"><span><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span></span>
+        </div>
+        <div class="vp-body">
+          <h3>Troubleshooting Duplicate Payments</h3>
+          <p>Catch a double-billed invoice before a dollar goes out.</p>
+          <span class="vp-cta">Watch + transcript <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></span>
+        </div>
+      </a>
     </div>
-    <input type="checkbox" id="m-collapse-trust" class="m-collapse-cb">
-    <label for="m-collapse-trust" class="m-collapse-trigger">Show me</label>
-    <div class="m-collapse-body">
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(360px,1fr));gap:24px;">
-      <!-- Vendor card -->
-      <div class="reveal" style="background:var(--white);border:1px solid var(--slate-200);border-radius:16px;padding:36px;display:flex;flex-direction:column;">
-        <div style="font-family:var(--font-mono);font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--green-deep);margin-bottom:20px;">What vendors get</div>
-        <h3 style="font-size:24px;font-weight:700;color:var(--green-deep);letter-spacing:-0.5px;margin:0 0 16px;line-height:1.2;">Vendors get more, not less</h3>
-        <p style="font-size:15px;line-height:1.7;color:var(--slate-600);margin:0 0 24px;">Their own portal. Live payment status. Credit memos when due. ShelfiQ answers their questions in seconds.</p>
-        <a href="/vendors" style="display:inline-flex;align-items:center;gap:6px;margin-top:auto;font-size:14px;font-weight:600;color:var(--green-dark);text-decoration:none;">See the vendor view <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
-      </div>
-      <!-- Metrc card -->
-      <div class="reveal reveal-delay-1" style="background:var(--white);border:1px solid var(--slate-200);border-radius:16px;padding:36px;display:flex;flex-direction:column;">
-        <div style="font-family:var(--font-mono);font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--green-deep);margin-bottom:20px;">Official Metrc integration</div>
-        <img src="/metrc-logo-v2.png" alt="Metrc" style="height:36px;width:auto;margin-bottom:16px;align-self:flex-start;" loading="lazy">
-        <h3 style="font-size:24px;font-weight:700;color:var(--green-deep);letter-spacing:-0.5px;margin:0 0 16px;line-height:1.2;">Same source of truth as your compliance</h3>
-        <ul style="list-style:none;padding:20px 0 0;margin:auto 0 0;display:flex;flex-direction:column;gap:10px;border-top:1px solid var(--slate-200);">
-          <li style="display:flex;align-items:center;gap:10px;font-size:14px;font-weight:600;color:var(--green-deep);"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="flex-shrink:0;"><polyline points="20 6 9 17 4 12"/></svg> Read-only — we never write to your account</li>
-          <li style="display:flex;align-items:center;gap:10px;font-size:14px;font-weight:600;color:var(--green-deep);"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="flex-shrink:0;"><polyline points="20 6 9 17 4 12"/></svg> Live sync — data updates as Metrc does</li>
-          <li style="display:flex;align-items:center;gap:10px;font-size:14px;font-weight:600;color:var(--green-deep);"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="flex-shrink:0;"><polyline points="20 6 9 17 4 12"/></svg> Vetted by Metrc — official third-party vendor</li>
-        </ul>
-      </div>
-    </div>
+    <div class="vp-band-foot reveal reveal-delay-2">
+      <a href="/tutorials">Browse all tutorials <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
     </div>
   </div>
 </section>
