@@ -3,20 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ShelfSpace Pricing &amp; How It Works — Cannabis AP, Consignment &amp; AR</title>
-<meta name="description" content="Custom pricing for cannabis accounts payable, consignment, accounts receivable, and vendor credit recovery — we run the money side for you. Free to see what you're owed. Tell us about your operation.">
+<title>ShelfSpace Pricing — Cannabis AP &amp; Collections, Done for You and Guaranteed</title>
+<meta name="description" content="We run your cannabis accounts payable or collections for you, and it pays for itself, or we refund the difference. See what you're owed first, free.">
 <link rel="canonical" href="https://shelfspace.pro/pricing">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://shelfspace.pro/pricing">
-<meta property="og:title" content="ShelfSpace Pricing &amp; How It Works — Cannabis AP, Consignment &amp; AR">
-<meta property="og:description" content="Custom pricing, scoped to your operation — accounts payable, consignment, AR, and credit recovery, run for you. Free to see what you're owed.">
+<meta property="og:title" content="ShelfSpace Pricing — It Pays for Itself, or We Refund the Difference">
+<meta property="og:description" content="Done-for-you cannabis AP and collections. The credits we recover cover your fee, or we refund the difference. See what you're owed first, free.">
 <meta property="og:image" content="https://shelfspace.pro/og-image-v7.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:type" content="image/png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="ShelfSpace Pricing &amp; How It Works — Cannabis">
-<meta name="twitter:description" content="Custom pricing for cannabis AP, consignment, AR &amp; credit recovery — we run it for you. Free to see what you're owed.">
+<meta name="twitter:title" content="ShelfSpace Pricing — It Pays for Itself, Guaranteed">
+<meta name="twitter:description" content="Done-for-you cannabis AP and collections. It pays for itself, or we refund the difference. See what you're owed first, free.">
 <meta name="twitter:image" content="https://shelfspace.pro/og-image-v7.png">
 <meta name="apple-mobile-web-app-title" content="ShelfSpace">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -26,160 +26,143 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 <style>
-  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
-
   .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1); }
   .reveal.is-visible { opacity: 1; transform: translateY(0); }
-  .reveal-delay-1 { transition-delay: 0.08s; }
-  .reveal-delay-2 { transition-delay: 0.16s; }
-
-  /* ── persona switching: one page, one reader at a time ── */
   [data-persona="retailer"] .show-vendor { display: none !important; }
   [data-persona="vendor"]   .show-retailer { display: none !important; }
+  .mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
 
-  /* ── HERO ── */
-  .pricing-hero { background: var(--white); padding: 132px 48px 44px; text-align: center; position: relative; overflow: hidden; }
-  .pricing-hero::before { content: ''; position: absolute; top: -220px; right: -180px; width: 640px; height: 640px; background: radial-gradient(circle, rgba(149,213,178,0.22) 0%, rgba(149,213,178,0) 70%); pointer-events: none; }
-  .pricing-hero::after { content: ''; position: absolute; bottom: -200px; left: -180px; width: 560px; height: 560px; background: radial-gradient(circle, rgba(27,67,50,0.06) 0%, rgba(27,67,50,0) 70%); pointer-events: none; }
-  .pricing-hero-content { max-width: 840px; margin: 0 auto; position: relative; z-index: 2; }
-  .pricing-hero h1 { font-size: clamp(38px, 5.4vw, 62px); font-weight: 700; color: var(--green-deep); letter-spacing: -2.2px; line-height: 1.06; margin: 6px auto 20px; max-width: 15ch; }
-  .pricing-hero-sub { max-width: 620px; margin: 0 auto; font-size: clamp(16px, 1.6vw, 19px); line-height: 1.62; color: var(--slate-600); }
-  .pricing-hero-sub strong { color: var(--green-deep); font-weight: 600; }
-
-  /* segmented persona switch */
-  .persona-switch { display: inline-flex; gap: 6px; margin: 22px auto 0; padding: 6px; background: var(--white); border: 1px solid var(--slate-200); border-radius: 999px; box-shadow: 0 12px 30px rgba(27,67,50,0.12); position: relative; z-index: 3; }
-  .persona-btn { appearance: none; border: none; cursor: pointer; font-family: inherit; font-size: 15.5px; font-weight: 700; letter-spacing: -0.2px; color: var(--slate-500); background: transparent; padding: 13px 34px; border-radius: 999px; transition: color 0.2s, background 0.25s, box-shadow 0.25s, transform 0.15s; }
+  /* HERO */
+  .o-hero { background: var(--white); padding: 136px 48px 56px; text-align: center; position: relative; overflow: hidden; }
+  .o-hero::before { content: ''; position: absolute; top: -220px; right: -180px; width: 640px; height: 640px; background: radial-gradient(circle, rgba(149,213,178,0.22) 0%, rgba(149,213,178,0) 70%); pointer-events: none; }
+  .o-hero-inner { max-width: 860px; margin: 0 auto; position: relative; }
+  .o-hero h1 { font-size: clamp(36px, 5.2vw, 60px); font-weight: 700; color: var(--green-deep); letter-spacing: -2px; line-height: 1.06; margin: 6px auto 22px; max-width: 18ch; }
+  .o-hero h1 .hl { color: var(--green-mid); }
+  .o-mirror { max-width: 640px; margin: 0 auto; font-size: clamp(16px, 1.6vw, 19px); line-height: 1.62; color: var(--slate-600); }
+  .persona-switch { display: inline-flex; gap: 6px; margin: 30px auto 0; padding: 6px; background: var(--white); border: 1px solid var(--slate-200); border-radius: 999px; box-shadow: 0 12px 30px rgba(27,67,50,0.12); }
+  .persona-btn { appearance: none; border: none; cursor: pointer; font-family: inherit; font-size: 15px; font-weight: 700; color: var(--slate-500); background: transparent; padding: 12px 30px; border-radius: 999px; transition: color 0.2s, background 0.25s, box-shadow 0.25s; }
   .persona-btn:hover:not(.is-active) { color: var(--green-deep); background: var(--green-ghost); }
   .persona-btn.is-active { background: var(--green-deep); color: var(--white); box-shadow: 0 8px 20px rgba(27,67,50,0.32); }
   .persona-btn:focus-visible { outline: 3px solid var(--green-accent); outline-offset: 2px; }
-  .persona-hint { display: block; font-family: var(--font-mono); font-size: 11.5px; font-weight: 700; letter-spacing: 1.6px; text-transform: uppercase; color: var(--green-dark); margin: 34px 0 -2px; }
 
-  /* ── PLANS ── */
-  .plans { background: var(--slate-50); padding: 60px 48px 84px; position: relative; }
-  .plans-grid { display: grid; grid-template-columns: 0.86fr 1.14fr; gap: 24px; max-width: 940px; margin: 0 auto; align-items: stretch; }
-  .plan { display: flex; flex-direction: column; background: var(--white); border: 1px solid var(--slate-200); border-radius: 20px; padding: 34px 32px 30px; position: relative; }
-  .plan--paid { border: 2px solid var(--green-deep); box-shadow: 0 26px 60px rgba(27,67,50,0.16); background: linear-gradient(180deg, var(--green-ghost) 0%, var(--white) 12%); }
-  .plan-flag { position: absolute; top: -14px; left: 32px; background: var(--green-deep); color: var(--white); font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 1.4px; text-transform: uppercase; padding: 7px 15px; border-radius: 999px; box-shadow: 0 6px 18px rgba(27,67,50,0.28); }
-  .plan-name { font-size: 15px; font-family: var(--font-mono); font-weight: 700; letter-spacing: 0.4px; text-transform: uppercase; color: var(--green-dark); margin: 0 0 4px; }
-  .plan--free .plan-name { color: var(--slate-500); }
-  .plan-headline { font-size: 21px; font-weight: 700; color: var(--green-deep); letter-spacing: -0.6px; line-height: 1.2; margin: 0 0 18px; }
-  .plan-price { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; margin: 0 0 4px; }
-  .plan-amt { font-family: var(--font-mono); font-size: 44px; font-weight: 700; color: var(--green-deep); letter-spacing: -1.5px; line-height: 1; }
-  .plan-unit { font-size: 14px; color: var(--slate-500); font-weight: 500; }
-  .plan-note { font-size: 13px; color: var(--slate-500); margin: 0 0 20px; line-height: 1.5; }
-  .plan-note b { color: var(--green-deep); font-weight: 600; }
-  .plan-divider { height: 1px; background: var(--slate-200); margin: 4px 0 18px; }
-  .plan--paid .plan-divider { background: rgba(64,145,108,0.22); }
-  .plan-lead { font-size: 13px; font-weight: 600; color: var(--green-dark); margin: 0 0 14px; letter-spacing: -0.1px; }
-  .plan-list { list-style: none; padding: 0; margin: 0 0 24px; display: flex; flex-direction: column; gap: 12px; flex-grow: 1; }
-  .plan-list li { display: flex; align-items: flex-start; gap: 11px; font-size: 14.5px; line-height: 1.5; color: var(--slate-700); }
-  .plan-list li svg { width: 18px; height: 18px; flex: none; margin-top: 1px; color: var(--green-mid); }
-  .plan-list li em { font-style: normal; color: var(--green-dark); font-weight: 600; }
-  .plan-cta { display: inline-flex; align-items: center; justify-content: center; gap: 8px; width: 100%; }
+  /* PAIN */
+  .o-pain { background: var(--slate-50); padding: 80px 48px; }
+  .o-head { text-align: center; max-width: 680px; margin: 0 auto 44px; }
+  .o-head .section-label { justify-content: center; }
+  .o-head h2 { font-size: clamp(28px, 3.6vw, 40px); font-weight: 700; color: var(--green-deep); letter-spacing: -1.2px; line-height: 1.12; margin: 0 0 12px; }
+  .o-head p { font-size: 16.5px; line-height: 1.6; color: var(--slate-600); margin: 0; }
+  .pain-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; max-width: 980px; margin: 0 auto; }
+  .pain-card { background: var(--white); border: 1px solid var(--slate-200); border-radius: 16px; padding: 30px 26px; box-shadow: 0 10px 28px rgba(27,67,50,0.06); }
+  .pain-num { font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-size: clamp(30px, 3.4vw, 40px); font-weight: 700; color: var(--green-deep); letter-spacing: -1.4px; line-height: 1.05; margin: 0 0 10px; }
+  .pain-card p { margin: 0; font-size: 15px; line-height: 1.55; color: var(--slate-600); }
+  .pain-pivot { text-align: center; max-width: 640px; margin: 40px auto 0; font-size: 19px; font-weight: 600; color: var(--green-deep); letter-spacing: -0.3px; }
 
-  /* inline scale curve inside the paid plan */
-  .plan-scale { list-style: none; padding: 14px 16px; margin: 0 0 22px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px 22px; background: var(--green-ghost); border: 1px solid rgba(149,213,178,0.5); border-radius: 12px; }
-  .plan-scale li { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; font-size: 13px; color: var(--slate-600); }
-  .plan-scale li b { font-family: var(--font-mono); font-size: 14px; font-weight: 700; color: var(--green-deep); letter-spacing: -0.3px; }
-  .plan-scale-cap { grid-column: 1 / -1; font-size: 11.5px; color: var(--slate-500); margin: 2px 0 0; }
+  /* STACK */
+  .o-stack { background: var(--white); padding: 92px 48px; }
+  .stack-card { max-width: 860px; margin: 0 auto; border: 2px solid var(--green-deep); border-radius: 24px; overflow: hidden; box-shadow: 0 30px 70px rgba(27,67,50,0.14); }
+  .stack-top { background: var(--green-ghost); padding: 26px 32px; border-bottom: 1px solid rgba(64,145,108,0.25); }
+  .stack-name { font-family: var(--font-mono); font-size: 12px; font-weight: 700; letter-spacing: 1.6px; text-transform: uppercase; color: var(--green-dark); margin: 0 0 4px; }
+  .stack-title { font-size: clamp(21px, 2.4vw, 26px); font-weight: 700; color: var(--green-deep); letter-spacing: -0.6px; margin: 0; }
+  .stack-cols { display: flex; justify-content: space-between; padding: 14px 32px 4px; font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--slate-400); }
+  .stack-list { list-style: none; margin: 0; padding: 0 32px; }
+  .stack-list li { display: flex; justify-content: space-between; align-items: flex-start; gap: 20px; padding: 16px 0; border-bottom: 1px solid var(--slate-100); }
+  .stack-item { display: flex; gap: 12px; align-items: flex-start; }
+  .stack-item svg { flex: none; width: 20px; height: 20px; margin-top: 2px; color: var(--green-mid); }
+  .stack-item b { display: block; font-size: 16px; font-weight: 600; color: var(--slate-800); line-height: 1.4; }
+  .stack-item span { display: block; font-size: 13.5px; color: var(--slate-500); line-height: 1.5; margin-top: 2px; }
+  .stack-val { flex: none; font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-size: 15px; font-weight: 700; color: var(--green-deep); text-align: right; white-space: nowrap; }
+  .stack-val small { display: block; font-size: 11px; font-weight: 400; color: var(--slate-400); }
+  .stack-total { display: flex; justify-content: space-between; align-items: baseline; gap: 20px; padding: 22px 32px; background: var(--slate-50); }
+  .stack-total b { font-size: 17px; color: var(--green-deep); }
+  .stack-total .mono { font-size: clamp(22px, 2.6vw, 30px); font-weight: 700; color: var(--green-deep); letter-spacing: -0.8px; text-align: right; }
+  .stack-total .mono small { display: block; font-size: 12px; font-weight: 400; color: var(--slate-500); letter-spacing: 0; }
+  .stack-pay { padding: 26px 32px 30px; text-align: center; border-top: 1px solid var(--slate-200); }
+  .stack-pay p { margin: 0 auto 18px; max-width: 560px; font-size: 17px; line-height: 1.6; color: var(--slate-700); }
+  .stack-pay p strong { color: var(--green-deep); }
+  .stack-foot { max-width: 860px; margin: 16px auto 0; font-size: 12.5px; line-height: 1.6; color: var(--slate-500); text-align: center; }
 
-  .plans-trust { max-width: 940px; margin: 30px auto 0; display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 12.5px; color: var(--slate-500); }
-  .plans-trust img { height: 16px; opacity: 0.55; }
+  /* GUARANTEE (the one dark section) */
+  .o-guarantee { background: var(--green-deep); padding: 100px 48px; position: relative; overflow: hidden; }
+  .o-guarantee::before { content: ''; position: absolute; top: -200px; left: 50%; transform: translateX(-50%); width: 820px; height: 520px; background: radial-gradient(circle, rgba(149,213,178,0.16) 0%, rgba(149,213,178,0) 70%); pointer-events: none; }
+  .g-inner { max-width: 900px; margin: 0 auto; text-align: center; position: relative; }
+  .g-seal { width: 76px; height: 76px; margin: 0 auto 20px; border-radius: 50%; border: 2px solid var(--green-accent); display: flex; align-items: center; justify-content: center; color: var(--green-accent); }
+  .g-seal svg { width: 38px; height: 38px; }
+  .g-inner .section-label { color: var(--green-accent); justify-content: center; }
+  .g-inner h2 { font-size: clamp(30px, 4.2vw, 50px); font-weight: 700; color: var(--white); letter-spacing: -1.6px; line-height: 1.08; margin: 0 auto 20px; max-width: 20ch; }
+  .g-lede { font-size: 18px; line-height: 1.65; color: rgba(255,255,255,0.86); max-width: 640px; margin: 0 auto; }
+  .g-lede strong { color: var(--white); }
+  .g-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 44px auto 0; text-align: left; }
+  .g-card { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.14); border-radius: 16px; padding: 24px; }
+  .g-card b { display: block; font-size: 16px; color: var(--white); margin-bottom: 6px; }
+  .g-card span { font-size: 14px; line-height: 1.55; color: rgba(255,255,255,0.74); }
 
-  /* ── GUARANTEE ── */
-  .guarantee { background: linear-gradient(180deg, var(--white) 0%, var(--green-ghost) 100%); padding: 92px 48px; }
-  .guarantee-card { max-width: 820px; margin: 0 auto; background: var(--green-deep); border-radius: 24px; padding: 52px 52px 46px; box-shadow: 0 30px 70px rgba(27,67,50,0.26); position: relative; overflow: hidden; text-align: center; }
-  .guarantee-card::before { content: ''; position: absolute; top: -140px; right: -110px; width: 380px; height: 380px; background: radial-gradient(circle, rgba(149,213,178,0.2) 0%, rgba(149,213,178,0) 70%); pointer-events: none; }
-  .guarantee-tag { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: 1.8px; text-transform: uppercase; color: var(--green-accent); margin-bottom: 16px; position: relative; }
-  .guarantee-tag svg { width: 16px; height: 16px; }
-  .guarantee-card h2 { font-size: clamp(28px,3.6vw,42px); font-weight: 700; color: var(--white); letter-spacing: -1.4px; line-height: 1.12; margin: 0 0 18px; position: relative; }
-  .guarantee-card > p { font-size: 16.5px; line-height: 1.65; color: rgba(255,255,255,0.86); margin: 0 auto; max-width: 620px; position: relative; }
-  .guarantee-card > p strong { color: var(--white); font-weight: 700; }
-  .guarantee-proof { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; max-width: 620px; margin: 32px auto 0; position: relative; }
-  .guarantee-proof .gp { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.14); border-radius: 14px; padding: 20px 22px; text-align: left; }
-  .guarantee-proof .gp b { display: block; font-size: 15px; color: var(--white); font-weight: 700; margin-bottom: 5px; letter-spacing: -0.3px; }
-  .guarantee-proof .gp span { font-size: 13.5px; line-height: 1.5; color: rgba(255,255,255,0.72); }
+  /* TIMELINE */
+  .o-time { background: var(--white); padding: 92px 48px; }
+  .tl { list-style: none; margin: 0 auto; padding: 0; max-width: 980px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; position: relative; }
+  .tl li { position: relative; background: var(--white); border: 1px solid var(--slate-200); border-radius: 16px; padding: 24px 22px; box-shadow: 0 10px 28px rgba(27,67,50,0.06); }
+  .tl-day { font-family: var(--font-mono); font-size: 13px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--green-mid); margin: 0 0 8px; }
+  .tl b { display: block; font-size: 17px; color: var(--green-deep); letter-spacing: -0.3px; margin-bottom: 6px; }
+  .tl span { font-size: 14px; line-height: 1.55; color: var(--slate-600); }
+  .ease { max-width: 760px; margin: 40px auto 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+  .ease span { display: inline-flex; align-items: center; gap: 8px; padding: 9px 16px; border-radius: 999px; background: var(--green-ghost); color: var(--green-deep); font-size: 14px; font-weight: 600; }
+  .ease svg { width: 15px; height: 15px; }
 
-  /* ── COMPACT COMPARE ── */
-  .compare { background: var(--white); padding: 88px 48px 72px; }
-  .compare-head { text-align: center; max-width: 640px; margin: 0 auto 40px; }
-  .compare-head h2 { font-size: clamp(26px,3.4vw,38px); font-weight: 700; color: var(--green-deep); letter-spacing: -1px; margin: 8px 0 10px; }
-  .compare-head p { font-size: 16px; color: var(--slate-600); line-height: 1.6; }
-  .compare-wrap { max-width: 760px; margin: 0 auto; border: 1px solid var(--slate-200); border-radius: 18px; overflow: hidden; box-shadow: 0 18px 44px rgba(27,67,50,0.06); }
-  .compare-table { width: 100%; border-collapse: collapse; }
-  .compare-table th, .compare-table td { padding: 15px 22px; border-bottom: 1px solid var(--slate-100); text-align: left; }
-  .compare-table thead th { background: var(--slate-50); border-bottom: 1px solid var(--slate-200); vertical-align: bottom; }
-  .compare-table thead .c-cap { font-family: var(--font-mono); font-size: 10.5px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--slate-400); }
-  .compare-table thead th.c-tier { text-align: center; width: 132px; }
-  .compare-table thead th.c-paid { background: var(--green-ghost); }
-  .c-tier-name { display: block; font-size: 15px; font-weight: 700; color: var(--green-deep); letter-spacing: -0.3px; }
-  .c-tier-sub { display: block; font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.6px; text-transform: uppercase; color: var(--slate-500); margin-top: 3px; }
-  .compare-table th.c-paid .c-tier-sub { color: var(--green-dark); }
-  .compare-table tbody th[scope="row"] { font-weight: 600; font-size: 14.5px; color: var(--green-deep); }
-  .compare-table tbody th[scope="row"] span { display: block; font-weight: 400; font-size: 12px; color: var(--slate-500); margin-top: 2px; }
-  .compare-table td.c-cell { text-align: center; width: 132px; }
-  .compare-table td.c-paid { background: var(--green-ghost); }
-  .compare-table tbody tr:last-child th, .compare-table tbody tr:last-child td { border-bottom: none; }
-  .c-yes { display: inline-flex; align-items: center; justify-content: center; width: 26px; height: 26px; border-radius: 50%; background: var(--green-deep); }
-  .c-yes svg { width: 14px; height: 14px; color: var(--white); }
-  .c-note { font-family: var(--font-mono); font-size: 12px; font-weight: 700; color: var(--green-deep); }
-  .c-no { color: var(--slate-300); font-size: 18px; }
-  .compare-foot { max-width: 760px; margin: 20px auto 0; text-align: center; font-size: 13px; color: var(--slate-500); line-height: 1.6; }
-  .compare-foot strong { color: var(--green-deep); font-weight: 600; }
-
-  /* ── FAQ ── */
+  /* FAQ */
   .faq-section { background: var(--slate-50); padding: 92px 48px; }
-  .faq-header { text-align: center; max-width: 600px; margin: 0 auto 44px; }
+  .faq-header { text-align: center; max-width: 600px; margin: 0 auto 40px; }
   .faq-header h2 { font-size: clamp(28px,3.5vw,36px); font-weight: 700; color: var(--green-deep); letter-spacing: -1px; }
   .faq-list { max-width: 720px; margin: 0 auto; }
-  .faq-list details { border-bottom: 1px solid var(--slate-200); background: var(--white); border-radius: 0; }
+  .faq-list details { border-bottom: 1px solid var(--slate-200); background: var(--white); }
   .faq-list details:first-child { border-top: 1px solid var(--slate-200); }
-  .faq-list summary { padding: 22px 4px; font-size: 17px; font-weight: 600; color: var(--green-deep); cursor: pointer; list-style: none; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+  .faq-list summary { padding: 22px 18px; font-size: 17px; font-weight: 600; color: var(--green-deep); cursor: pointer; list-style: none; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
   .faq-list summary::-webkit-details-marker { display: none; }
   .faq-list summary::after { content: '+'; font-size: 22px; font-weight: 400; color: var(--slate-500); flex-shrink: 0; }
   .faq-list details[open] summary::after { content: '\2212'; }
-  .faq-list details p { padding: 0 4px 24px; margin: 0; font-size: 15px; line-height: 1.7; color: var(--slate-600); }
+  .faq-list details p { padding: 0 18px 24px; margin: 0; font-size: 15px; line-height: 1.7; color: var(--slate-600); }
   .faq-list details p strong { color: var(--green-deep); }
 
-  /* ── FINAL CTA ── */
-  .trial-band { background: var(--green-deep); padding: 92px 48px; text-align: center; position: relative; overflow: hidden; }
-  .trial-band::before { content: ''; position: absolute; top: -180px; left: 50%; transform: translateX(-50%); width: 760px; height: 480px; background: radial-gradient(circle, rgba(149,213,178,0.14) 0%, rgba(149,213,178,0) 70%); pointer-events: none; }
-  .trial-band-inner { max-width: 720px; margin: 0 auto; position: relative; }
-  .trial-band h2 { font-size: clamp(28px,3.6vw,44px); font-weight: 700; color: var(--white); letter-spacing: -1.4px; line-height: 1.14; margin: 12px 0 18px; }
-  .trial-band h2 .slug { color: var(--green-accent); white-space: nowrap; }
-  .trial-band-lede { font-size: 17px; line-height: 1.7; color: rgba(255,255,255,0.84); margin: 0 auto 30px; max-width: 560px; }
-  .trial-band .section-label { color: var(--green-accent); justify-content: center; }
-  .trial-cta { display: inline-flex; align-items: center; gap: 24px; flex-wrap: wrap; justify-content: center; }
-  .trial-secondary { display: inline-flex; align-items: center; gap: 6px; font-size: 15px; font-weight: 600; color: var(--green-accent); text-decoration: none; }
-  .trial-secondary:hover { color: var(--white); }
-  .trial-disclosure { max-width: 660px; margin: 28px auto 0; font-size: 12.5px; line-height: 1.6; color: rgba(255,255,255,0.52); }
+  /* FINAL CTA */
+  .o-final { background: var(--white); padding: 96px 48px; text-align: center; }
+  .o-final-inner { max-width: 720px; margin: 0 auto; }
+  .o-final h2 { font-size: clamp(30px, 3.8vw, 44px); font-weight: 700; color: var(--green-deep); letter-spacing: -1.4px; line-height: 1.12; margin: 0 0 16px; }
+  .o-final-lede { font-size: 17px; line-height: 1.65; color: var(--slate-600); margin: 0 auto 30px; max-width: 580px; }
+  .o-founding { display: inline-flex; align-items: center; gap: 10px; margin: 0 auto 28px; padding: 10px 18px; border: 1.5px dashed var(--green-accent); border-radius: 999px; font-size: 14px; color: var(--green-deep); background: var(--green-ghost); }
+  .o-founding b { font-family: var(--font-mono); font-size: 11px; letter-spacing: 1.2px; text-transform: uppercase; color: var(--green-dark); }
+  .o-note { margin: 18px auto 0; font-size: 14px; color: var(--slate-500); }
+  .o-founder { display: flex; align-items: center; gap: 18px; justify-content: center; margin: 36px auto 0; max-width: 620px; text-align: left; }
+  .o-founder img { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
+  .o-founder p { margin: 0; }
+
+  /* STICKY BAR */
+  .sticky-bar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 90; background: var(--white); border-top: 1px solid var(--slate-200); box-shadow: 0 -10px 30px rgba(27,67,50,0.12); padding: 12px 24px; display: flex; align-items: center; justify-content: center; gap: 20px; transform: translateY(110%); transition: transform 0.35s cubic-bezier(0.22,1,0.36,1); }
+  .sticky-bar.show { transform: translateY(0); }
+  .sticky-bar p { margin: 0; font-size: 15px; font-weight: 600; color: var(--green-deep); }
+  .sticky-bar .btn-primary { padding: 11px 22px; font-size: 14px; }
 
   .footer-top { grid-template-columns: 2fr 1fr 1fr 1fr 1fr; }
 
   @media (max-width: 900px) {
-    .pricing-hero { padding: 116px 24px 36px; }
-    .plans { padding: 48px 24px 68px; }
-    .plans-grid { grid-template-columns: 1fr; max-width: 460px; }
-    .guarantee { padding: 64px 24px; }
-    .guarantee-card { padding: 40px 28px 34px; }
-    .guarantee-proof { grid-template-columns: 1fr; max-width: 420px; }
-    .compare { padding: 64px 24px 56px; }
-    .faq-section { padding: 64px 24px; }
-    .trial-band { padding: 68px 24px; }
+    .o-hero { padding: 116px 20px 44px; }
+    .o-pain, .o-stack, .o-guarantee, .o-time, .faq-section, .o-final { padding-left: 20px; padding-right: 20px; padding-top: 64px; padding-bottom: 64px; }
+    .pain-grid, .g-grid { grid-template-columns: 1fr; }
+    .tl { grid-template-columns: 1fr 1fr; }
     .footer-top { grid-template-columns: 1fr 1fr; }
   }
-  @media (max-width: 700px) {
-    .pricing-hero::before, .pricing-hero::after { display: none; }
-    .persona-btn { padding: 11px 20px; font-size: 14px; }
-    .compare-table th, .compare-table td { padding: 13px 14px; }
-    .compare-table thead th.c-tier, .compare-table td.c-cell { width: 80px; }
-    .plan-scale { grid-template-columns: 1fr; }
-  }
   @media (max-width: 600px) {
+    .o-hero::before { display: none; }
+    .persona-btn { padding: 11px 18px; font-size: 14px; }
+    .tl { grid-template-columns: 1fr; }
+    .stack-top, .stack-total, .stack-pay { padding-left: 18px; padding-right: 18px; }
+    .stack-list, .stack-cols { padding-left: 18px; padding-right: 18px; }
+    .stack-list li { gap: 12px; }
+    .stack-item svg { display: none; }
+    .sticky-bar { flex-direction: column; gap: 8px; padding: 10px 16px; }
+    .sticky-bar p { font-size: 13.5px; text-align: center; }
     .footer-top { grid-template-columns: 1fr; }
   }
   @media (prefers-reduced-motion: reduce) {
     .reveal { opacity: 1; transform: none; transition: none; }
+    .sticky-bar { transition: none; }
   }
 </style>
 <noscript><style>.reveal{opacity:1;transform:none;transition:none;}</style></noscript>
@@ -194,54 +177,11 @@ document.head.appendChild(o)}initApollo();</script>
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "How much does ShelfSpace cost?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Pricing is custom. Every operation is different, so we scope your accounts payable, consignment, accounts receivable, and credit recovery to your business and run it for you. Seeing what you're owed is always free. Tell us about your operation at https://shelfspace.pro/contact and we'll put together a plan."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Is ShelfSpace free to start?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Seeing what you're owed is free — the credits your vendors owe you, your overdue invoices, your settlements, all reconciled to Metrc. That free money-review is the first step; from there we scope the work with you."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Do you run it for us?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes. We run accounts payable, accounts receivable, consignment, and credit recovery for you, and you always approve anything that moves money. Some operators would rather drive the software themselves — we set that up in the conversation."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Will collections hurt my vendor relationships?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "No. Reminders go out on a steady, professional cadence in your name, not a collections agency's, and every one ends in a one-click Pay Now link. When a shop is genuinely short, you offer a 0% installment plan instead of an ultimatum. You collect the money and keep the account."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "How does this work with my bookkeeper or accounting firm?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "We're your bookkeeper's best friend. We run accounts payable and receivable — invoice processing, matching, vendor payments, credit recovery, collections — and sync clean entries to QuickBooks in real time. Your bookkeeper keeps month-end close, reconciliations, payroll, financial statements, tax prep, and 280E compliance. Their close gets faster, not bigger."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "How fast will we see results?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Day 1 we audit your last 90 days of vendor activity. First credits are identified within 14 days, consignment settlements run within 30 days, and the full AP operation is running within 60 days."
-      }
-    }
+    { "@type": "Question", "name": "How much does ShelfSpace cost?", "acceptedAnswer": { "@type": "Answer", "text": "Your price is set by your monthly sales, never by how many invoices or payments you run. We quote it after your free money review, so you see what you're owed before you see a price. For most dispensaries, the credits we recover cover the fee." } },
+    { "@type": "Question", "name": "What if the credits don't cover the fee?", "acceptedAnswer": { "@type": "Answer", "text": "Then we refund the difference. If the credits we recover for a dispensary in its first 90 days come to less than it paid us, we pay back the gap. For brands, the same promise applies to past-due payments we collect." } },
+    { "@type": "Question", "name": "Do I lose control of my money?", "acceptedAnswer": { "@type": "Answer", "text": "No. We do the work, and nothing moves until you approve it: every check, every credit, every adjustment. You see everything in your own portal." } },
+    { "@type": "Question", "name": "What happens to my bookkeeper?", "acceptedAnswer": { "@type": "Answer", "text": "They keep close, tax, and 280E. We take the vendor money work off their plate and keep QuickBooks current, so their month-end gets faster." } },
+    { "@type": "Question", "name": "How much work is it to switch?", "acceptedAnswer": { "@type": "Answer", "text": "Very little. We connect to Metrc and QuickBooks, load your vendors and open invoices, and run the setup ourselves. Your team approves; we handle the rest." } }
   ]
 }
 </script>
@@ -251,7 +191,7 @@ document.head.appendChild(o)}initApollo();</script>
   "@type": "BreadcrumbList",
   "itemListElement": [
     { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://shelfspace.pro/" },
-    { "@type": "ListItem", "position": 2, "name": "How We Work", "item": "https://shelfspace.pro/pricing" }
+    { "@type": "ListItem", "position": 2, "name": "Pricing", "item": "https://shelfspace.pro/pricing" }
   ]
 }
 </script>
@@ -262,7 +202,7 @@ document.head.appendChild(o)}initApollo();</script>
   "name": "ShelfSpace",
   "url": "https://shelfspace.pro/pricing",
   "image": "https://shelfspace.pro/favicon.svg",
-  "description": "The money side of cannabis, handled — accounts payable, consignment settlements, accounts receivable, and vendor credit recovery for cannabis dispensaries and their vendors, reconciled to Metrc. Pricing is custom, scoped per operation, and run for you as a managed service; you approve anything that moves money.",
+  "description": "Done-for-you accounts payable, credit recovery, consignment settlements, and collections for cannabis dispensaries and brands, checked against Metrc. Priced on monthly sales and guaranteed to pay for itself, or we refund the difference.",
   "areaServed": "US",
   "serviceType": ["Accounts payable", "Accounts receivable and collections", "Consignment settlement", "Vendor credit recovery"],
   "provider": { "@type": "Organization", "name": "ShelfSpace", "url": "https://shelfspace.pro" }
@@ -291,292 +231,169 @@ document.head.appendChild(o)}initApollo();</script>
   <div class="nav-hamburger" onclick="document.querySelector('.nav-links').classList.toggle('mobile-open'); event.stopPropagation();"><span></span><span></span><span></span></div>
 </nav>
 
-<!-- HERO -->
-<section class="pricing-hero">
-  <div class="pricing-hero-content">
-    <div class="section-label reveal" style="justify-content:center;margin-bottom:6px;">How we work</div>
-    <h1 class="reveal">Every operation is different. So we scope yours.</h1>
-    <p class="pricing-hero-sub reveal">Free to see every dollar you&rsquo;re owed. Then we build the plan around your shop and <strong>run the money side for you</strong> &mdash; and you only ever approve what moves money.</p>
-    <span class="persona-hint reveal">Which side of the invoice are you on?</span>
-    <div class="persona-switch reveal" role="tablist" aria-label="Choose your role">
-      <button class="persona-btn is-active" data-persona="retailer" role="tab" aria-selected="true">I'm a Retailer</button>
-      <button class="persona-btn" data-persona="vendor" role="tab" aria-selected="false">I'm a Vendor</button>
+<!-- 1 · HERO -->
+<section class="o-hero">
+  <div class="o-hero-inner">
+    <div class="section-label reveal" style="justify-content:center;margin-bottom:6px;">Pricing</div>
+    <h1 class="reveal">We run your vendor money. <span class="hl">It pays for itself, or we refund the difference.</span></h1>
+    <p class="o-mirror reveal show-retailer">You pay someone to type in invoices. You pay vendors in full for product that never showed up. And every month, the credits your vendors owe you stay in their bank account.</p>
+    <p class="o-mirror reveal show-vendor">You shipped the product. Now your reps chase checks instead of selling, stores pay when they feel like it, and your cash sits in somebody else's books.</p>
+    <div class="persona-switch reveal" role="tablist" aria-label="Choose your side">
+      <button class="persona-btn is-active" data-persona="retailer" role="tab" aria-selected="true">I run a dispensary</button>
+      <button class="persona-btn" data-persona="vendor" role="tab" aria-selected="false">I run a brand</button>
     </div>
   </div>
 </section>
 
-<!-- WHAT WE RUN FOR YOU -->
-<section class="plans">
-  <div class="plans-grid" style="grid-template-columns:1fr;max-width:660px;">
-
-    <!-- RETAILER -->
-    <article class="plan plan--paid reveal show-retailer">
-      <span class="plan-flag">Free to see what you're owed</span>
-      <p class="plan-name">For your dispensary</p>
-      <p class="plan-headline">We run the money side of your shop.</p>
-      <p class="plan-note">Scoped to your operation &mdash; <b>we run it for you,</b> and you approve anything that moves money. Prefer to drive the software yourself? We set that up too.</p>
-      <div class="plan-divider"></div>
-      <p class="plan-lead">What we handle:</p>
-      <ul class="plan-list">
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span><em>Recover the credits vendors owe you</em> — returns, expirations &amp; promo costs, clawed back every month</span></li>
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Every invoice checked against Metrc &amp; your PO — short-pay the phantom lines before the check goes out</li>
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Vendors paid by digital check or ACH, with the AP bot handling first-line vendor email</li>
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Real-time QuickBooks sync, demand analytics, promotions &amp; price drops</li>
-      </ul>
-      <a href="/contact" class="btn-primary plan-cta">See what you're owed <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
-    </article>
-
-    <!-- VENDOR -->
-    <article class="plan plan--paid reveal show-vendor">
-      <span class="plan-flag">Free to see what you're owed</span>
-      <p class="plan-name">For your brand</p>
-      <p class="plan-headline">We get your invoices collected.</p>
-      <p class="plan-note">Scoped to how you sell &mdash; <b>we run collections for you,</b> and you set the terms. Prefer to run it yourself? We set that up too.</p>
-      <div class="plan-divider"></div>
-      <p class="plan-lead">What we handle:</p>
-      <ul class="plan-list">
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span><em>Collections run for you</em> — reminders and follow-up on a steady cadence, in your name</span></li>
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>One-click Pay Now — a real check drawn on their bank, no login, no processor</li>
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>Offer <em>0% installment plans</em> instead of an ultimatum — keep the money and the account</span></li>
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Sync it all to QuickBooks — bank-to-bank ACH collect coming soon</li>
-      </ul>
-      <a href="/contact" class="btn-primary plan-cta">See what you're owed <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
-    </article>
-
+<!-- 2 · PAIN -->
+<section class="o-pain">
+  <div class="o-head reveal">
+    <div class="section-label">What it costs you today</div>
+    <h2 class="show-retailer">Doing it the old way is the expensive way.</h2>
+    <h2 class="show-vendor">Waiting to get paid is the most expensive thing you do.</h2>
   </div>
-  <p class="plans-trust reveal"><img src="/metrc-logo-v2.png" alt="Metrc">Certified Metrc Third-Party Vendor &middot; Free to see what you're owed</p>
+  <div class="pain-grid show-retailer">
+    <div class="pain-card reveal"><div class="pain-num">10–15 hrs</div><p>a week of someone's time keying invoices, cutting checks, and answering "where's my payment?"</p></div>
+    <div class="pain-card reveal"><div class="pain-num">$1,800–$3,300</div><p>a month in returns, expired product, and promo costs your vendors owe you and never pay back, for a store selling $300k.</p></div>
+    <div class="pain-card reveal"><div class="pain-num">$0</div><p>back on a short shipment once the check has cleared. Nobody checked the invoice against Metrc first.</p></div>
+  </div>
+  <div class="pain-grid show-vendor">
+    <div class="pain-card reveal"><div class="pain-num">10+ hrs</div><p>a week your team spends chasing stores for payment instead of selling to them.</p></div>
+    <div class="pain-card reveal"><div class="pain-num">$270,000</div><p>in cash a $14M brand frees up just by getting paid one week faster. Money you already earned.</p></div>
+    <div class="pain-card reveal"><div class="pain-num">1 email</div><p>is all most past-due stores ever get. Then it slips, and the invoice turns 90 days old.</p></div>
+  </div>
+  <p class="pain-pivot reveal">Here's the deal: we take all of it off your plate, and it pays for itself.</p>
 </section>
 
-<!-- GUARANTEE -->
-<section class="guarantee">
-  <div class="guarantee-card reveal">
-    <span class="guarantee-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>How it works</span>
-    <h2>See what you're owed. Then decide.</h2>
-    <p>The first step is free: we show you the money hiding in your operation. From there we scope the work and <strong>run it for you</strong> — and you approve anything that moves money.</p>
-    <div class="guarantee-proof">
-      <div class="gp">
-        <b>1 &middot; See it — free</b>
-        <span>We surface the credits vendors owe you, the invoices that don't match Metrc, and every dollar of AR that's overdue. No card, no commitment.</span>
-      </div>
-      <div class="gp">
-        <b>2 &middot; We scope it</b>
-        <span>Every operation is different. We build the plan around your shop — the pieces we run for you, and any you'd rather drive yourself.</span>
-      </div>
-      <div class="gp">
-        <b>3 &middot; We run it</b>
-        <span>AP, AR, consignment, credit recovery — handled on a steady cadence, synced to QuickBooks. You approve anything that moves money.</span>
-      </div>
-      <div class="gp">
-        <b>Your bookkeeper's best friend</b>
-        <span>We run AP and AR; your bookkeeper keeps close, tax, and 280E. Clean entries land in QuickBooks in real time, so their close gets faster.</span>
-      </div>
+<!-- 3 · THE OFFER (value stack) -->
+<section class="o-stack">
+  <div class="o-head reveal">
+    <div class="section-label">Everything you get</div>
+    <h2>One team runs the whole thing. You approve.</h2>
+    <p>No software to learn and no new hire. Here's what we take over, and what it's worth.</p>
+  </div>
+
+  <div class="stack-card reveal show-retailer">
+    <div class="stack-top"><p class="stack-name">ShelfPay · for dispensaries</p><p class="stack-title">Your AP department, done for you, paid for by your credits.</p></div>
+    <div class="stack-cols"><span>What we do</span><span>Worth a month</span></div>
+    <ul class="stack-list">
+      <li><div class="stack-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>Every vendor invoice received, read, and entered</b><span>Emailed, photographed, or handed over at the door. We take it from there.</span></div></div><div class="stack-val">$1,500</div></li>
+      <li><div class="stack-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>Every invoice checked line by line against the Metrc shipment</b><span>Short shipments and wrong prices caught before the check goes out.</span></div></div><div class="stack-val">$400</div></li>
+      <li><div class="stack-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>Credit memos built, sent, and chased every month</b><span>Returns, expired product, and promo costs, backed line by line by Metrc.</span></div></div><div class="stack-val">$1,800–$3,300<small>recovered</small></div></li>
+      <li><div class="stack-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>Vendors paid on time, every time</b><span>Checks written and sent on the terms you set.</span></div></div><div class="stack-val">$250</div></li>
+      <li><div class="stack-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>Vendor emails answered for you</b><span>"Where's my check?" and "why was I paid short?" handled in minutes.</span></div></div><div class="stack-val">$400</div></li>
+      <li><div class="stack-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>QuickBooks kept current</b><span>Bills and payments land as they happen. Your bookkeeper stops playing catch-up.</span></div></div><div class="stack-val">$500</div></li>
+      <li><div class="stack-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>Consignment settlements, run weekly</b><span>If you sell on consignment: each vendor's split worked out and paid.</span></div></div><div class="stack-val">$750</div></li>
+      <li><div class="stack-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>Setup, done by us</b><span>Metrc and QuickBooks connected, vendors loaded, open bills brought over. Included with a 12-month agreement.</span></div></div><div class="stack-val">$2,500<small>one time</small></div></li>
+    </ul>
+    <div class="stack-total"><b>Total value</b><div class="mono">$5,600–$7,100<small>a month, plus $2,500 setup</small></div></div>
+    <div class="stack-pay">
+      <p>You pay <strong>a fraction of that</strong>, priced on your monthly sales, never per invoice or per payment. And the credits we recover are built to cover it.</p>
+      <a href="/contact" class="btn-primary">Get my free money review <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+    </div>
+  </div>
+
+  <div class="stack-card reveal show-vendor">
+    <div class="stack-top"><p class="stack-name">ShelfCollect · for brands</p><p class="stack-title">Your collections department, done for you, in your name.</p></div>
+    <div class="stack-cols"><span>What we do</span><span>Worth a month</span></div>
+    <ul class="stack-list">
+      <li><div class="stack-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>Every invoice sent with a one-click Pay Now link</b><span>Stores pay from the email. No login, no processor in the middle.</span></div></div><div class="stack-val">$400</div></li>
+      <li><div class="stack-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>Follow-up on a steady schedule, in your name</b><span>Every past-due store, worked oldest first, until it pays.</span></div></div><div class="stack-val">$1,500</div></li>
+      <li><div class="stack-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>Store replies handled for you</b><span>"Send me the invoice again," "we paid that," "can we split it": answered fast.</span></div></div><div class="stack-val">$500</div></li>
+      <li><div class="stack-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>0% installment plans for slow payers</b><span>Keep the money and the account, instead of an ultimatum.</span></div></div><div class="stack-val">$300</div></li>
+      <li><div class="stack-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>A weekly "who owes what" list for every sales rep</b><span>Your reps walk into each store knowing exactly what's open.</span></div></div><div class="stack-val">$300</div></li>
+      <li><div class="stack-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>QuickBooks kept current</b><span>Payments recorded as they land.</span></div></div><div class="stack-val">$500</div></li>
+      <li><div class="stack-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>Setup, done by us</b><span>Open invoices and customers loaded, every past-due store contacted. Included with a 12-month agreement.</span></div></div><div class="stack-val">$2,500<small>one time</small></div></li>
+    </ul>
+    <div class="stack-total"><b>Total value</b><div class="mono">$3,500<small>a month, plus $2,500 setup and the cash you collect</small></div></div>
+    <div class="stack-pay">
+      <p>You pay <strong>a fraction of that</strong>, priced on your monthly wholesale sales, never a cut of what we collect. And what we collect is built to cover it.</p>
+      <a href="/contact" class="btn-primary">Get my free AR review <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+    </div>
+  </div>
+  <p class="stack-foot reveal show-retailer">Values are typical for a dispensary selling about $300k a month: what it costs to hire the work out, or the money it brings back. Your free review shows your real numbers.</p>
+  <p class="stack-foot reveal show-vendor">Values are typical for a brand selling about $500k a month wholesale: what it costs to hire the work out. Your free review shows your real numbers.</p>
+</section>
+
+<!-- 4 · GUARANTEE (the one dark section) -->
+<section class="o-guarantee">
+  <div class="g-inner">
+    <div class="g-seal reveal" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg></div>
+    <div class="section-label reveal">The guarantee</div>
+    <h2 class="reveal show-retailer">The credits pay for it. Or we refund the difference.</h2>
+    <h2 class="reveal show-vendor">We collect more than we cost. Or we refund the difference.</h2>
+    <p class="g-lede reveal show-retailer">If the credits we recover in your first 90 days come to less than you paid us, <strong>we pay you back the gap.</strong> You can't lose money hiring us.</p>
+    <p class="g-lede reveal show-vendor">If the past-due payments we collect in your first 90 days come to less than you paid us, <strong>we pay you back the gap.</strong> You can't lose money hiring us.</p>
+    <div class="g-grid">
+      <div class="g-card reveal"><b>See it before you sign</b><span>Your money review is free. You see what you're owed, in dollars, before we ever talk price.</span></div>
+      <div class="g-card reveal"><b>A 90-day way out</b><span>If we haven't delivered in the first 90 days, walk away. The remaining payments stop.</span></div>
+      <div class="g-card reveal"><b>You approve every dollar</b><span>Nothing moves without your OK: every check, every credit, every adjustment.</span></div>
     </div>
   </div>
 </section>
 
-<!-- COMPACT COMPARE -->
-<section class="compare" id="compare">
-  <div class="compare-head reveal">
-    <div class="section-label" style="justify-content:center;">What we run for you</div>
-    <h2>Everything the managed service covers.</h2>
-    <p class="show-retailer">Seeing what you're owed is always free. From there we run the whole money side — you approve what moves money.</p>
-    <p class="show-vendor">Seeing every dollar you're owed is always free. From there we run your collections — you set the terms.</p>
+<!-- 5 · TIMELINE -->
+<section class="o-time">
+  <div class="o-head reveal">
+    <div class="section-label">How fast it works</div>
+    <h2>Running in 60 days. Paying off in the first month.</h2>
   </div>
-
-  <!-- RETAILER TABLE -->
-  <div class="compare-wrap reveal show-retailer">
-    <table class="compare-table">
-      <caption class="sr-only">What we run for your dispensary</caption>
-      <thead>
-        <tr>
-          <th scope="col"><span class="c-cap">Retailer capability</span></th>
-          <th scope="col" class="c-tier c-paid"><span class="c-tier-name">We run it</span><span class="c-tier-sub">For you</span></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <th scope="row">See what's owed to you<span>The credits your vendors owe back, on a live ledger</span></th>
-          <td class="c-cell c-paid"><span class="c-yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span></td>
-        </tr>
-        <tr>
-          <th scope="row">Reports, documents &amp; data<span>Settlement reports, credit memos, uploads &amp; Metrc sync</span></th>
-          <td class="c-cell c-paid"><span class="c-yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span></td>
-        </tr>
-        <tr>
-          <th scope="row">ShelfiQ Q&amp;A<span>Ask about your own data — what you owe, where's a check</span></th>
-          <td class="c-cell c-paid"><span class="c-yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span></td>
-        </tr>
-        <tr>
-          <th scope="row">Credit-recovery engine<span>Generate, send &amp; collect monthly vendor credit memos</span></th>
-          <td class="c-cell c-paid"><span class="c-yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span></td>
-        </tr>
-        <tr>
-          <th scope="row">Invoice &#8596; Metrc verification<span>Every invoice matched line-by-line against Metrc &amp; your PO</span></th>
-          <td class="c-cell c-paid"><span class="c-yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span></td>
-        </tr>
-        <tr>
-          <th scope="row">Short-pay &amp; adjust payable<span>Reduce a payable when the delivery doesn't match</span></th>
-          <td class="c-cell c-paid"><span class="c-yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span></td>
-        </tr>
-        <tr>
-          <th scope="row">Cut checks &amp; ACH origination<span>Pay vendors by digital check or bank transfer</span></th>
-          <td class="c-cell c-paid"><span class="c-yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span></td>
-        </tr>
-        <tr>
-          <th scope="row">AP bot<span>ShelfiQ answers vendor email and runs the first-line back-and-forth</span></th>
-          <td class="c-cell c-paid"><span class="c-yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span></td>
-        </tr>
-        <tr>
-          <th scope="row">QuickBooks, analytics &amp; promotions<span>Real-time sync, demand planning, price drops</span></th>
-          <td class="c-cell c-paid"><span class="c-yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span></td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <!-- VENDOR TABLE -->
-  <div class="compare-wrap reveal show-vendor">
-    <table class="compare-table">
-      <caption class="sr-only">What we run for your brand</caption>
-      <thead>
-        <tr>
-          <th scope="col"><span class="c-cap">Vendor capability</span></th>
-          <th scope="col" class="c-tier c-paid"><span class="c-tier-name">We run it</span><span class="c-tier-sub">For you</span></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <th scope="row">See every dollar you're owed<span>Open invoices &amp; a live AR aging schedule across every retailer</span></th>
-          <td class="c-cell c-paid"><span class="c-yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span></td>
-        </tr>
-        <tr>
-          <th scope="row">Receive payments &amp; sync data<span>Download the checks you're paid; forward invoices &amp; Metrc sync</span></th>
-          <td class="c-cell c-paid"><span class="c-yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span></td>
-        </tr>
-        <tr>
-          <th scope="row">ShelfiQ Q&amp;A<span>Ask about your own data — who owes you, where's your check</span></th>
-          <td class="c-cell c-paid"><span class="c-yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span></td>
-        </tr>
-        <tr>
-          <th scope="row">Automated dunning<span>ShelfiQ sends reminders &amp; follow-up on a cadence, in your name</span></th>
-          <td class="c-cell c-paid"><span class="c-yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span></td>
-        </tr>
-        <tr>
-          <th scope="row">One-click Pay Now links<span>Retailers pay from the email — no login, a check drawn on their bank</span></th>
-          <td class="c-cell c-paid"><span class="c-yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span></td>
-        </tr>
-        <tr>
-          <th scope="row">Partial payments &amp; 0% installment plans<span>Let a slow-paying retailer clear the balance over time</span></th>
-          <td class="c-cell c-paid"><span class="c-yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span></td>
-        </tr>
-        <tr>
-          <th scope="row">ACH collect (coming soon)<span>Pull payment straight bank-to-bank when a retailer opts in</span></th>
-          <td class="c-cell c-paid"><span class="c-yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span></td>
-        </tr>
-        <tr>
-          <th scope="row">AR bot<span>ShelfiQ fields payer replies and runs the first-line back-and-forth</span></th>
-          <td class="c-cell c-paid"><span class="c-yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span></td>
-        </tr>
-        <tr>
-          <th scope="row">QuickBooks sync<span>Payments flow into QuickBooks in real time</span></th>
-          <td class="c-cell c-paid"><span class="c-yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span></td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  <p class="compare-foot reveal"><strong>Seeing what you're owed is always free.</strong> We run the rest — scoped to your operation. Talk to us.</p>
-</section>
-
-<!-- DFY CHOICE — reusable delivery-model module -->
-<style>
-.dfy-choice { background: var(--white); padding: 80px 48px; }
-.dfy-choice-head { text-align: center; max-width: 640px; margin: 0 auto 40px; }
-.dfy-choice-head .section-label { justify-content: center; margin-bottom: 12px; }
-.dfy-choice-head h2 { font-size: clamp(24px, 3vw, 34px); font-weight: 700; color: var(--green-deep); letter-spacing: -0.8px; line-height: 1.15; margin: 0 0 12px; }
-.dfy-choice-head p { font-size: 16px; line-height: 1.6; color: var(--slate-500); margin: 0; }
-.dfy-choice-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; max-width: 900px; margin: 0 auto; }
-.dfy-card {
-  display: flex; flex-direction: column;
-  background: var(--white); border: 1px solid var(--slate-200);
-  border-radius: 16px; padding: 36px 32px;
-  box-shadow: 0 12px 30px rgba(27,67,50,0.06);
-  transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
-}
-.dfy-card:hover { transform: translateY(-4px); box-shadow: 0 20px 44px rgba(27,67,50,0.10); border-color: var(--green-accent); }
-.dfy-card-tag { display: inline-flex; align-self: flex-start; padding: 5px 14px; border-radius: 100px; font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 16px; }
-.dfy-card.drive .dfy-card-tag { background: var(--green-ghost); color: var(--green-dark); }
-.dfy-card.dfy .dfy-card-tag { background: rgba(27,67,50,0.06); color: var(--green-deep); }
-.dfy-card h3 { font-size: 21px; font-weight: 700; color: var(--green-deep); letter-spacing: -0.4px; margin: 0 0 10px; }
-.dfy-card p { font-size: 15px; line-height: 1.65; color: var(--slate-500); margin: 0 0 24px; flex-grow: 1; }
-.dfy-card .btn-primary { align-self: flex-start; }
-@media (max-width: 900px) {
-  .dfy-choice { padding: 60px 24px; }
-  .dfy-choice-grid { grid-template-columns: 1fr; max-width: 460px; }
-}
-</style>
-<section class="dfy-choice">
-  <div class="dfy-choice-head reveal">
-    <div class="section-label">How we work</div>
-    <h2>We run it for you.</h2>
-    <p>Your vendors paid, your credits recovered, your invoices matched — handled end to end, so your team gets its week back.</p>
-  </div>
-  <div class="dfy-choice-grid" style="grid-template-columns:1fr;max-width:560px;">
-    <div class="dfy-card dfy reveal">
-      <span class="dfy-card-tag">Done for you</span>
-      <h3>We run the money side, end to end.</h3>
-      <p>We run accounts payable, accounts receivable, consignment, and credit recovery for you — invoices matched, vendors paid, credits recovered, collections worked. You just approve what moves money; we do the rest.</p>
-      <p style="font-size:14px;color:var(--slate-500);margin:0 0 24px;">Prefer to drive the software yourself? Some operators do — we set that up in the conversation.</p>
-      <a href="/contact" class="btn-primary">Talk to us <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
-    </div>
+  <ol class="tl show-retailer">
+    <li class="reveal"><p class="tl-day">Day 1</p><b>Free money review</b><span>We pull your last 90 days from Metrc and show you every dollar vendors owe you.</span></li>
+    <li class="reveal"><p class="tl-day">Day 14</p><b>First credits found</b><span>Credit memos built and on their way to your vendors.</span></li>
+    <li class="reveal"><p class="tl-day">Day 30</p><b>We're paying your vendors</b><span>Invoices checked against Metrc and paid on your terms. You approve.</span></li>
+    <li class="reveal"><p class="tl-day">Day 60</p><b>The whole AP desk is ours</b><span>Your team is down to approvals. QuickBooks is current.</span></li>
+  </ol>
+  <ol class="tl show-vendor">
+    <li class="reveal"><p class="tl-day">Day 1</p><b>Free AR review</b><span>Send us your aging. We show you the cash on the table and which stores to chase first.</span></li>
+    <li class="reveal"><p class="tl-day">Week 1</p><b>Every open invoice goes back out</b><span>Each one with a one-click Pay Now link, in your name.</span></li>
+    <li class="reveal"><p class="tl-day">Day 30</p><b>Follow-up on autopilot</b><span>Past-due stores worked on a steady schedule. Your reps get their week back.</span></li>
+    <li class="reveal"><p class="tl-day">Day 90</p><b>Collected more than we cost</b><span>Guaranteed, or we refund the difference.</span></li>
+  </ol>
+  <div class="ease reveal">
+    <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>No software to learn</span>
+    <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>No new hire</span>
+    <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Your bookkeeper stays</span>
+    <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Certified Metrc third-party vendor</span>
   </div>
 </section>
 
-<!-- FAQ -->
+<!-- 6 · FAQ -->
 <section class="faq-section">
-  <div class="faq-header reveal">
-    <h2>Frequently asked questions</h2>
-  </div>
+  <div class="faq-header reveal"><h2>The fine print, in plain English</h2></div>
   <div class="faq-list">
-    <details>
-      <summary>How much does ShelfSpace cost?</summary>
-      <p>Pricing is <strong>custom</strong>. Every operation is different, so we scope your accounts payable, consignment, accounts receivable, and credit recovery to your business and run it for you. Seeing what you're owed is always free. <a href="/contact" style="color:var(--green-dark);font-weight:600;text-decoration:none;">Tell us about your operation &rarr;</a></p>
-    </details>
-    <details>
-      <summary>Is ShelfSpace free to start?</summary>
-      <p>Seeing what you're owed is <strong>free</strong> — the credits your vendors owe you, your overdue invoices, your settlements, all reconciled to Metrc. That free money-review is the first step; from there we scope the work with you.</p>
-    </details>
-    <details>
-      <summary>Do you run it for us?</summary>
-      <p><strong>Yes.</strong> We run accounts payable, accounts receivable, consignment, and credit recovery for you, and you always approve anything that moves money. Some operators would rather drive the software themselves — we set that up in the conversation.</p>
-    </details>
-    <details>
-      <summary>Will collections hurt my vendor relationships?</summary>
-      <p>No. Reminders go out on a steady, professional cadence <strong>in your name</strong>, not a collections agency's, and every one ends in a one-click Pay Now link. When a shop is genuinely short, you offer a <strong>0% installment plan</strong> instead of an ultimatum. You collect the money and keep the account.</p>
-    </details>
-    <details>
-      <summary>How does this work with my bookkeeper or accounting firm?</summary>
-      <p>We're your <strong>bookkeeper's best friend</strong>. We run accounts payable and receivable — invoice processing, matching, vendor payments, credit recovery, collections — and sync clean entries to QuickBooks in real time. Your bookkeeper keeps month-end close, reconciliations, payroll, financial statements, tax prep, and 280E. Their close gets faster, not bigger. <a href="/for-bookkeepers" style="color:var(--green-dark);font-weight:600;text-decoration:none;">More for firms &rarr;</a></p>
-    </details>
-    <details>
-      <summary>How fast will we see results?</summary>
-      <p>Day 1 we audit your last 90 days of vendor activity. First credits are identified within <strong>14 days</strong>, consignment settlements run within 30, and the full AP operation is running within 60.</p>
-    </details>
+    <details><summary>How much does ShelfSpace cost?</summary><p>Your price is set by your <strong>monthly sales</strong>, never by how many invoices or payments you run. We quote it after your free money review, so you see what you're owed before you see a price. For most dispensaries, the credits we recover cover the fee.</p></details>
+    <details><summary>What if the credits don't cover the fee?</summary><p>Then <strong>we refund the difference</strong>. If the credits we recover in your first 90 days come to less than you paid us, we pay back the gap. Brands get the same promise on the past-due payments we collect.</p></details>
+    <details><summary>Do I lose control of my money?</summary><p>No. We do the work, and <strong>nothing moves until you approve it</strong>: every check, every credit, every adjustment. You see everything in your own portal.</p></details>
+    <details><summary>What happens to my bookkeeper?</summary><p>They keep close, tax, and 280E. We take the vendor money work off their plate and keep QuickBooks current, so their month-end gets faster. <a href="/for-bookkeepers" style="color:var(--green-dark);font-weight:600;text-decoration:none;">More for bookkeepers &rarr;</a></p></details>
+    <details><summary>How much work is it to switch?</summary><p>Very little. We connect to Metrc and QuickBooks, load your vendors and open invoices, and <strong>run the setup ourselves</strong>. Your team approves; we handle the rest.</p></details>
   </div>
 </section>
 
-<!-- FINAL CTA -->
-<section class="trial-band">
-  <div class="trial-band-inner">
-    <div class="section-label reveal">Get started</div>
-    <h2 class="reveal">See what you're owed. <span class="slug">Then we build your plan.</span></h2>
-    <p class="trial-band-lede reveal">Tell us about your operation and we'll show you the money hiding in it — free. From there we run the rest, scoped to your operation.</p>
-    <div class="trial-cta reveal">
-      <a href="/contact" class="btn-primary" style="background:var(--white);color:var(--green-deep);">See what you're owed <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
-      <a href="/contact" class="trial-secondary">Talk to us <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+<!-- 7 · FINAL CTA -->
+<section class="o-final" id="final-cta">
+  <div class="o-final-inner">
+    <h2 class="reveal show-retailer">See what your vendors owe you. Free, in 14 days.</h2>
+    <h2 class="reveal show-vendor">See the cash stuck in your AR. Free, this week.</h2>
+    <p class="o-final-lede reveal">Tell us about your business. We'll show you the money first. If it doesn't add up, you've lost nothing.</p>
+    <div class="o-founding reveal"><b>Founding clients</b> Our first clients get a founding rate for their first year.</div>
+    <div class="reveal"><a href="/contact" class="btn-primary"><span class="show-retailer">Get my free money review</span><span class="show-vendor">Get my free AR review</span> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a></div>
+    <p class="o-note reveal">Free. No commitment. Guaranteed to pay for itself once you start.</p>
+    <div class="o-founder reveal">
+      <img src="/chris-avatar.jpg" alt="Chris Mitchem, ShelfSpace founder" loading="lazy">
+      <div>
+        <p style="font-size:14px;color:var(--slate-700);line-height:1.5;margin:0 0 6px;font-style:italic;">"I've been a cannabis operator since 2015. I built ShelfSpace to do the money work I never had time for, and I stand behind it with a guarantee."</p>
+        <p style="font-size:13px;color:var(--slate-500);">— Chris Mitchem, Founder</p>
+      </div>
     </div>
-    <p class="trial-disclosure reveal">Free to see what you're owed. No commitment — pricing is custom and scoped to your operation.</p>
   </div>
 </section>
+
+<div class="sticky-bar" id="sticky-bar" aria-hidden="true">
+  <p class="show-retailer">Free money review. It pays for itself, or we refund the difference.</p>
+  <p class="show-vendor">Free AR review. We collect more than we cost, or we refund the difference.</p>
+  <a href="/contact" class="btn-primary" tabindex="-1">Get started</a>
+</div>
 
 <!-- FOOTER -->
 <footer>
@@ -598,40 +415,37 @@ document.head.appendChild(o)}initApollo();</script>
 (function() {
   var nav = document.getElementById('nav');
   nav.classList.toggle('scrolled', window.scrollY > 20);
-
   var revealObserver = new IntersectionObserver(function(entries) {
     entries.forEach(function(entry) {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('is-visible');
-        revealObserver.unobserve(entry.target);
-      }
+      if (entry.isIntersecting) { entry.target.classList.add('is-visible'); revealObserver.unobserve(entry.target); }
     });
   }, { threshold: 0.1 });
   document.querySelectorAll('.reveal').forEach(function(el) { revealObserver.observe(el); });
 
-  window.addEventListener('scroll', function() {
+  // Sticky bar: after the hero, hidden again once the final CTA is on screen.
+  var bar = document.getElementById('sticky-bar'), finalCta = document.getElementById('final-cta'), finalVisible = false;
+  new IntersectionObserver(function(e) { finalVisible = e[0].isIntersecting; onScroll(); }, { threshold: 0.2 }).observe(finalCta);
+  function onScroll() {
     nav.classList.toggle('scrolled', window.scrollY > 20);
-  }, { passive: true });
+    var show = window.scrollY > window.innerHeight * 0.8 && !finalVisible;
+    bar.classList.toggle('show', show);
+    bar.setAttribute('aria-hidden', show ? 'false' : 'true');
+    bar.querySelector('a').tabIndex = show ? 0 : -1;
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
 
-  // persona switch — one page, one reader at a time
   var btns = document.querySelectorAll('.persona-btn');
   btns.forEach(function(btn) {
     btn.addEventListener('click', function() {
-      var persona = btn.getAttribute('data-persona');
-      document.body.setAttribute('data-persona', persona);
-      btns.forEach(function(b) {
-        var on = b === btn;
-        b.classList.toggle('is-active', on);
-        b.setAttribute('aria-selected', on ? 'true' : 'false');
-      });
+      document.body.setAttribute('data-persona', btn.getAttribute('data-persona'));
+      btns.forEach(function(b) { var on = b === btn; b.classList.toggle('is-active', on); b.setAttribute('aria-selected', on ? 'true' : 'false'); });
     });
   });
+  if (/[?&]for=(brand|vendor)/.test(location.search)) btns[1].click();
 
   document.addEventListener('click', function(e) {
     var navLinks = document.querySelector('.nav-links');
-    if (navLinks && navLinks.classList.contains('mobile-open') && !e.target.closest('.nav-links') && !e.target.closest('.nav-hamburger')) {
-      navLinks.classList.remove('mobile-open');
-    }
+    if (navLinks && navLinks.classList.contains('mobile-open') && !e.target.closest('.nav-links') && !e.target.closest('.nav-hamburger')) navLinks.classList.remove('mobile-open');
   });
 })();
 </script>
