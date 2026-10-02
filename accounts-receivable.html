@@ -431,7 +431,7 @@ document.head.appendChild(o)}initApollo();</script>
     <div class="aud-badge aud-vendor">For Vendors &amp; Brands</div>
     <div class="section-label">ShelfCollect &middot; Cannabis Accounts Receivable</div>
     <h1 class="hero-h1">Get paid faster.</h1>
-    <p class="hero-lede">More cash freed, more past-due backlog recovered, and hours of AR chasing off your team. We run it as your own AR department, so the buyer relationship stays yours.</p>
+    <p class="hero-lede">More cash freed, more past-due backlog recovered, and hours of AR chasing off your team. We run it as your own AR department, so the buyer relationship stays yours. We collect more than we cost, or we refund the difference.</p>
     <div class="hero-actions-centered">
       <a href="/contact" class="btn-primary">Get a free AR review <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
     </div>
@@ -964,6 +964,97 @@ document.head.appendChild(o)}initApollo();</script>
     </div>
     <p class="svc-why reveal" style="margin-top:40px;">Already paid by a retailer that uses ShelfSpace (ShelfPay)? You're never charged to be paid.</p>
     <a class="svc-link reveal" href="/checks">How the digital check works <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+  </div>
+</section>
+
+<!-- WHAT IT'S WORTH — value stack, same numbers as /pricing -->
+<style>
+  .o-head { text-align: center; max-width: 680px; margin: 0 auto 44px; }
+  .o-head .section-label { justify-content: center; }
+  .o-head h2 { font-size: clamp(28px, 3.6vw, 40px); font-weight: 700; color: var(--green-deep); letter-spacing: -1.2px; line-height: 1.12; margin: 0 0 12px; text-wrap: balance; }
+  .o-head p { font-size: 16.5px; line-height: 1.6; color: var(--slate-600); margin: 0; }
+  .mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+  /* STACK */
+  .o-stack { background: var(--white); padding: 92px 48px; }
+  .stack-card { max-width: 860px; margin: 0 auto; border: 2px solid var(--green-deep); border-radius: 24px; overflow: hidden; box-shadow: 0 30px 70px rgba(27,67,50,0.14); }
+  .stack-top { background: var(--green-ghost); padding: 26px 32px; border-bottom: 1px solid rgba(64,145,108,0.25); }
+  .stack-name { font-family: var(--font-mono); font-size: 12px; font-weight: 700; letter-spacing: 1.6px; text-transform: uppercase; color: var(--green-dark); margin: 0 0 4px; }
+  .stack-title { font-size: clamp(21px, 2.4vw, 26px); font-weight: 700; color: var(--green-deep); letter-spacing: -0.6px; margin: 0; }
+  .stack-cols { display: flex; justify-content: space-between; padding: 14px 32px 4px; font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--slate-400); }
+  .stack-list { list-style: none; margin: 0; padding: 0 32px; }
+  .stack-list li { display: flex; justify-content: space-between; align-items: flex-start; gap: 20px; padding: 16px 0; border-bottom: 1px solid var(--slate-100); }
+  .stack-item { display: flex; gap: 12px; align-items: flex-start; }
+  .stack-item svg { flex: none; width: 20px; height: 20px; margin-top: 2px; color: var(--green-mid); }
+  .stack-item b { display: block; font-size: 16px; font-weight: 600; color: var(--slate-800); line-height: 1.4; }
+  .stack-item span { display: block; font-size: 13.5px; color: var(--slate-500); line-height: 1.5; margin-top: 2px; }
+  .stack-val { flex: none; font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-size: 15px; font-weight: 700; color: var(--green-deep); text-align: right; white-space: nowrap; }
+  .stack-val small { display: block; font-size: 11px; font-weight: 400; color: var(--slate-400); }
+  .stack-total { display: flex; justify-content: space-between; align-items: baseline; gap: 20px; padding: 22px 32px; background: var(--slate-50); }
+  .stack-total b { font-size: 17px; color: var(--green-deep); }
+  .stack-total .mono { font-size: clamp(22px, 2.6vw, 30px); font-weight: 700; color: var(--green-deep); letter-spacing: -0.8px; text-align: right; }
+  .stack-total .mono small { display: block; font-size: 12px; font-weight: 400; color: var(--slate-500); letter-spacing: 0; }
+  .stack-pay { padding: 26px 32px 30px; text-align: center; border-top: 1px solid var(--slate-200); }
+  .stack-pay p { margin: 0 auto 18px; max-width: 560px; font-size: 17px; line-height: 1.6; color: var(--slate-700); }
+  .stack-pay p strong { color: var(--green-deep); }
+  .stack-foot { max-width: 860px; margin: 16px auto 0; font-size: 12.5px; line-height: 1.6; color: var(--slate-500); text-align: center; }
+
+  @media (max-width: 600px) { .stack-top, .stack-total, .stack-pay { padding-left: 18px; padding-right: 18px; } .stack-list, .stack-cols { padding-left: 18px; padding-right: 18px; } .stack-list li { gap: 12px; } .stack-item svg { display: none; } .stack-total { flex-direction: column; align-items: flex-start; gap: 4px; } .stack-total .mono { text-align: left; white-space: nowrap; font-size: 24px; } }
+  @media (max-width: 900px) { .o-stack { padding: 64px 20px; } }
+</style>
+<section class="o-stack" id="value">
+  <div class="o-head reveal">
+    <div class="section-label">Everything you get</div>
+    <h2>Your collections department, worth $510,100 in year one.</h2>
+    <p>No software to learn and no new hire. Here's what we take over, and what it's worth for a brand selling $500k a month wholesale.</p>
+  </div>
+  <div class="stack-card reveal">
+    <div class="stack-top"><p class="stack-name">ShelfCollect · for brands</p><p class="stack-title">Your collections department, done for you, in your name.</p></div>
+    <div class="stack-cols"><span>What we do</span><span>Worth a month</span></div>
+    <ul class="stack-list">
+      <li><div class="stack-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>Your reps back to selling</b><span>The 10+ hours a week they spend chasing checks goes back into selling. Just 2% more sales is real money.</span></div></div><div class="stack-val">$10,000<small>added sales</small></div></li>
+      <li><div class="stack-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>Cash in the bank, sooner</b><span>Stores pay you about 15 days faster. That money stops sitting in their books and lands in yours.</span></div></div><div class="stack-val">$246,000<small>one time</small></div></li>
+      <li><div class="stack-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>Bad debt you stop writing off</b><span>Every past-due store worked until it pays, with 0% installment plans for the slow ones. About 1% of sales.</span></div></div><div class="stack-val">$5,000</div></li>
+      <li><div class="stack-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>Follow-up on a steady schedule, in your name</b><span>Every past-due store, worked oldest first. Replaces a full-time AR clerk.</span></div></div><div class="stack-val">$4,500</div></li>
+      <li><div class="stack-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>Every invoice sent with a one-click Pay Now link</b><span>Stores pay from the email. No login, no processor in the middle.</span></div></div><div class="stack-val">$500</div></li>
+      <li><div class="stack-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>Store replies handled for you</b><span>"Send me the invoice again," "we paid that," "can we split it": answered fast.</span></div></div><div class="stack-val">$750</div></li>
+      <li><div class="stack-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>A weekly "who owes what" list for every sales rep</b><span>Your reps walk into each store knowing exactly what's open.</span></div></div><div class="stack-val">$300</div></li>
+      <li><div class="stack-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>QuickBooks kept current</b><span>Payments recorded as they land. Your bookkeeper stops chasing deposits.</span></div></div><div class="stack-val">$750</div></li>
+      <li><div class="stack-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>Setup, done by us</b><span>Open invoices and customers loaded, every past-due store contacted. Included with a 12-month agreement.</span></div></div><div class="stack-val">$2,500<small>one time</small></div></li>
+    </ul>
+    <div class="stack-total"><b>Total value, first year</b><div class="mono">$510,100</div></div>
+    <div class="stack-pay">
+      <p>You pay <strong>a fraction of that</strong>, priced on your monthly wholesale sales, never a cut of what we collect. And what we collect is built to cover it.</p>
+      <a href="/contact" class="btn-primary">Get my free AR review <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+    </div>
+  </div>
+  <p class="stack-foot reveal">Values are typical for a brand selling about $500k a month wholesale. Cash in the bank assumes stores pay you 15 days faster. Your free review shows your real numbers.</p>
+</section>
+
+<!-- GUARANTEE -->
+<style>
+  .pg-guar { background: var(--slate-50); padding: 88px 48px; }
+  .pg-guar-card { max-width: 820px; margin: 0 auto; text-align: center; background: var(--white); border: 2px solid var(--green-deep); border-radius: 24px; padding: 48px 44px; box-shadow: 0 26px 60px rgba(27,67,50,0.14); }
+  .pg-guar-seal { width: 68px; height: 68px; margin: 0 auto 18px; border-radius: 50%; background: var(--green-ghost); color: var(--green-deep); display: flex; align-items: center; justify-content: center; }
+  .pg-guar-seal svg { width: 34px; height: 34px; }
+  .pg-guar-card .section-label { justify-content: center; }
+  .pg-guar-card h2 { font-size: clamp(28px, 3.8vw, 44px); font-weight: 700; color: var(--green-deep); letter-spacing: -1.4px; line-height: 1.1; margin: 0 auto 16px; max-width: 20ch; text-wrap: balance; }
+  .pg-guar-card > p { font-size: 17px; line-height: 1.65; color: var(--slate-600); max-width: 600px; margin: 0 auto; }
+  .pg-guar-three { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 26px; margin-top: 28px; font-size: 15px; font-weight: 600; color: var(--green-deep); }
+  .pg-guar-three span { display: inline-flex; align-items: center; gap: 8px; }
+  .pg-guar-three svg { width: 16px; height: 16px; color: var(--green-mid); }
+  @media (max-width: 900px) { .pg-guar { padding: 64px 20px; } .pg-guar-card { padding: 36px 24px; } }
+</style>
+<section class="pg-guar" id="guarantee">
+  <div class="pg-guar-card reveal">
+    <div class="pg-guar-seal" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg></div>
+    <div class="section-label">The guarantee</div>
+    <h2>We collect more than we cost. Or we refund the difference.</h2>
+    <p>If the past-due payments we collect in your first 90 days come to less than you paid us, we pay you back the gap. You can't lose money hiring us.</p>
+    <div class="pg-guar-three">
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>See what you're owed before you sign</span>
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>A 90-day way out</span>
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>You approve every dollar</span>
+    </div>
   </div>
 </section>
 
