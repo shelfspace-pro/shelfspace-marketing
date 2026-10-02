@@ -26,6 +26,12 @@ The site sells the **OUTCOME**, stays agnostic on who does the work, and shows *
 - **No demo-modal** (deleted, don't recreate). **No `<br>` in headings** (let text wrap). **No questions as headlines** (they give permission to say "no"). **No "learn more" CTAs** (a dead end, not an action).
 - **Verb split**: use "we" for brand + managed-delivery statements ("we run your AP," "we recover your credits"); "the platform" / "ShelfiQ" for software-action descriptions ("the platform three-way matches every invoice"); 2nd-person "you" for operator-driven actions ("you approve, we execute"). **Outcome voice** ("your vendors get paid") sidesteps the who-does-it question — prefer it in heroes. Never "ShelfSpace does X" — pick "we" or "the platform."
 
+## Offer numbers (2026-10-02)
+
+The "Total value, first year" figures are **single-sourced in `pricing.html`'s value stacks** (dispensary $185,500 / brand $510,100, both for a $500k/month example). Mirrors: the ShelfPay stack on `accounts-payable.html`, the ShelfCollect stack on `accounts-receivable.html`, and the homepage `#h-val-pay` / `#h-val-collect` defaults + slider formulas in `index.html`. Change a number → change all four, then run `bash marketing/scripts/check-offer-numbers.sh` (exits 1 on drift). Copy rules: generous scope, conservative per-line rates, ONE number per line (no ranges), same example size both sides, setup folded into one first-year total, one-time items labeled "one time", no unverified timing promises, never "founding clients" publicly.
+
+Homepage story order: static guarantee headline → which side → brand ticker → pain → what you get (+ sales slider) → guarantee (the one dark section) → "Who's running your money" trust → case studies → videos → CTA → FAQ.
+
 ## Design System
 
 - Fonts: DM Sans (display) + Space Mono (monospace — the hero of every dollar/number moment)
