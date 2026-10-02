@@ -329,7 +329,6 @@
     var annual = state.term === "annual";
     var product = v.p === "pay" ? "ShelfPay" : "ShelfCollect";
     var today = new Date(), valid = new Date(today.getTime() + VALID_DAYS * 864e5);
-    var fixedYear = v.base * 12 + v.onboarding;
     var name = state.name.trim();
     if (v.custom) return renderEnterprise(v, product, annual, today, valid, name);
 
@@ -347,7 +346,6 @@
     if (v.p === "pay") rows += '<div class="qd-row"><div class="n">Credit recovery<span>of credits we recover. Nothing recovered, nothing owed</span></div><div class="a">20%</div></div>';
     rows += '<div class="qd-row"><div class="n">Guarantee<span>' + (v.p === "pay" ? "Credits cover your fee in 90 days" : "We collect more than our fee in 90 days") + ', or we refund the difference</span></div><div class="a">Included</div></div>';
     rows += '<div class="qd-row muted"><div class="n">Onboarding fee</div><div class="a">' + usd(v.onboarding) + "</div></div>";
-    rows += '<div class="qd-row muted"><div class="n">First 12 months' + (annual ? ", billed monthly" : "") + '</div><div class="a">' + usd(fixedYear) + "</div></div>";
     $("qd-list").innerHTML = rows;
 
     var fine = [];
@@ -369,7 +367,7 @@
     v.lines.forEach(function (l) { t.push("  " + l.item + " (" + l.sub + "): " + l.amt); });
     t.push("Monthly rate: " + usd(v.base) + "/mo" + (founding() ? " (founding-client price: 35% off the " + usd(v.listBase) + "/mo list price for the first 12 months, in exchange for an anonymous case study and a reference call)" : ""));
     t.push("Onboarding fee: " + (v.onboarding ? usd(v.onboarding) + " one time" : "$0 (waived with a 12-month agreement)"));
-    t.push("First 12 months: " + usd(fixedYear) + (annual ? " (billed monthly; cancel in the first 90 days if we haven't delivered and the remaining payments stop)" : ""));
+    if (annual) t.push("90-day way out: if we haven't delivered in the first 90 days, cancel and the remaining payments stop.");
     if (v.p === "pay") { t.push("Credit recovery: 20% of credits we recover. Nothing recovered, nothing owed."); t.push("Guarantee: If the credits we recover in your first 90 days come to less than you paid us, we refund the difference."); } else t.push("Guarantee: If the past-due payments we collect in your first 90 days come to less than you paid us, we refund the difference.");
     t.push("Valid through " + mdy(valid));
     summaryText = t.join("\n");
