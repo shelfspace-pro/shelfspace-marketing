@@ -38,7 +38,7 @@ Homepage story order: static guarantee headline → which side → brand ticker 
 - Colors: `--green-deep` (#1b4332) through `--green-ghost` (#f0faf4), slate palette. **Design tokens only — never hardcoded hex.**
 - Shadows: green-tinted. Whitespace = confidence — let numbers breathe. **One dark (`--green-deep`) section per page, max**, reserved for the emotional peak.
 - ShelfiQ widget: `/shelfiq-widget.js` included on ALL pages as last script
-- Apollo tracking: `initApollo()` script before `</head>` on all pages
+- **No Apollo** — the Apollo.io tracker was removed sitewide 10/06/2026 (Chris: "rip apollo out"). Never re-add it; Google Analytics (`G-H2LBJT03WE`) is the only tracker on every page.
 - fi ligature fix: `font-variant-ligatures: none` when "Shelf" and "iQ" span split
 
 ## Nav (all pages)

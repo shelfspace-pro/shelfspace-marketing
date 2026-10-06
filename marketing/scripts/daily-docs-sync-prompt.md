@@ -51,7 +51,7 @@ Write or update the doc page following ALL rules in docs-instructions.md:
 - No "Diem Cannabis"
 - No `<br>` in headings
 - TechArticle JSON-LD schema
-- Apollo tracking script
+- Google Analytics tag (G-H2LBJT03WE) — no Apollo
 - shelfiq-widget.js as last script
 - `<!-- last-synced: YYYY-MM-DD -->` comment
 

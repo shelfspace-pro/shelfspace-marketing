@@ -106,6 +106,17 @@ if [ "${#EXISTING_PRICING[@]}" -gt 0 ]; then
   done
 fi
 
+# ─────────────────────────────────────────────────────────────────────
+# Scan C — Apollo.io tracker, sitewide. Removed 10/06/2026 (Chris: "rip
+# apollo out"); page templates used to copy it forward, so block a re-add.
+# ─────────────────────────────────────────────────────────────────────
+APOLLO=$(grep -rlI -E "initApollo|apollo\.io|aplo-evnt" --include=*.html --include=*.js --include=*.mjs --include=vercel.json --exclude-dir=node_modules --exclude-dir=.git --exclude-dir=.lighthouseci . 2>/dev/null)
+if [ -n "$APOLLO" ]; then
+  HITS=$((HITS + 1))
+  echo "🔴 FORBIDDEN Apollo tracker (removed 10/06/2026 — never re-add):"
+  echo "$APOLLO" | sed 's/^/     /'
+fi
+
 if [ "$HITS" -eq 0 ]; then
   echo "✅ Forbidden-string check clean (no provider leaks, no bad login URL, no retired pricing)."
   exit 0

@@ -7,7 +7,7 @@ must not read like filler.
 
 ## Boilerplate — copy VERBATIM, do not redesign
 Read `~/shelfspace-marketing/blog/outsourced-cannabis-back-office.html`. Copy these parts into your
-new file **unchanged**: the entire `<style>` block, the `gtag` + Apollo `<script>` tags, the whole
+new file **unchanged**: the entire `<style>` block, the `gtag` `<script>` tags, the whole
 `<nav>`, the `<!-- CTA -->` section wrapper, the `<footer>`, and the two trailing `<script>` blocks
 (the IIFE + `/shelfiq-widget.js`). Structure your file in the same order as that file.
 

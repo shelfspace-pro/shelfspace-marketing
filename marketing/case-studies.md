@@ -70,7 +70,7 @@ Blue-ocean keywords to target (very low cannabis-specific competition as of 2026
 - JSON-LD Article schema + FAQPage schema
 - OG and Twitter Card meta tags
 - Canonical URL
-- Google Analytics + Apollo tracking
+- Google Analytics tracking (no Apollo)
 - ShelfiQ widget as last script
 - All the same nav, footer, responsive patterns as other blog posts
 

@@ -103,7 +103,7 @@
 7. <!-- last-synced: YYYY-MM-DD --> comment in HTML
 8. Entry in docs-manifest.json
 9. Entry in sitemap.xml
-10. Apollo tracking script before </head>
+10. Google Analytics tag (G-H2LBJT03WE) before </head> — no Apollo
 11. shelfiq-widget.js as last script
 12. Nav: 7 items, no active state
 13. Footer: Blog in Platform column, Credit Recovery in Services column
