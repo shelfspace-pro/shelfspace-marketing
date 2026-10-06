@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dispensary Profit Margins and Where They Leak — ShelfSpace</title>
+<meta name="description" content="Typical dispensary profit margins, why 280E and price compression keep them thin, and the vendor credits, duplicate invoices, and shorted deliveries that leak.">
+<link rel="canonical" href="https://shelfspace.pro/blog/dispensary-profit-margins">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://shelfspace.pro/blog/dispensary-profit-margins">
+<meta property="og:site_name" content="ShelfSpace">
+<meta property="og:locale" content="en_US">
+<meta property="og:title" content="Dispensary Profit Margins and Where They Leak — ShelfSpace">
+<meta property="og:description" content="Typical dispensary profit margins, why 280E and price compression keep them thin, and the vendor credits, duplicate invoices, and shorted deliveries that leak.">
+<meta property="og:image" content="https://shelfspace.pro/og-image-v7.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Dispensary Profit Margins and Where They Leak — ShelfSpace">
+<meta name="twitter:description" content="Typical dispensary profit margins, why 280E and price compression keep them thin, and the vendor credits, duplicate invoices, and shorted deliveries that leak.">
+<meta name="twitter:image" content="https://shelfspace.pro/og-image-v7.png">
+<meta name="apple-mobile-web-app-title" content="ShelfSpace">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+<style>
+  @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-12px); } }
+
+  /* ─── HERO ENHANCEMENTS ─── */
+  .page-hero { padding-bottom: 40px; }
+  .hero-bg-gradient { position: absolute; top: -30%; right: -20%; width: 700px; height: 700px; background: radial-gradient(circle, rgba(149,213,178,0.18) 0%, rgba(149,213,178,0) 70%); animation: float 8s ease-in-out infinite; pointer-events: none; }
+  .hero-bg-gradient-2 { position: absolute; bottom: -20%; left: -15%; width: 550px; height: 550px; background: radial-gradient(circle, rgba(27,67,50,0.06) 0%, rgba(27,67,50,0) 70%); animation: float 10s ease-in-out infinite; animation-delay: -3s; pointer-events: none; }
+  .hero-grid-lines { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 1200px; height: 100%; opacity: 0.035; background-image: linear-gradient(var(--green-deep) 1px, transparent 1px), linear-gradient(90deg, var(--green-deep) 1px, transparent 1px); background-size: 80px 80px; pointer-events: none; }
+  .page-hero .section-label,
+  .page-hero .section-title,
+  .page-hero .section-desc { opacity: 0; transform: translateY(30px); }
+  .page-hero .section-label { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1); }
+  .page-hero .section-title { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s, transform 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s; }
+  .page-hero .section-desc { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1) 0.25s, transform 0.8s cubic-bezier(0.22,1,0.36,1) 0.25s; }
+  .page-hero.hero-loaded .section-label,
+  .page-hero.hero-loaded .section-title,
+  .page-hero.hero-loaded .section-desc { opacity: 1; transform: translateY(0); }
+
+  /* ─── REVEAL ─── */
+  .reveal {
+    opacity: 0; transform: translateY(40px);
+    transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+  /* ─── ARTICLE BODY ─── */
+  .article-body { max-width: 720px; margin: 0 auto; padding: 0 48px 80px; }
+  .article-body h2 { font-size: 24px; font-weight: 700; color: var(--green-deep); margin: 48px 0 16px; letter-spacing: -0.5px; line-height: 1.3; }
+  .article-body p { font-size: 17px; line-height: 1.85; color: var(--slate-600); margin-bottom: 24px; }
+  .article-body ul, .article-body ol { margin-bottom: 24px; padding-left: 24px; }
+  .article-body li { font-size: 17px; line-height: 1.85; color: var(--slate-600); margin-bottom: 8px; }
+  .article-body strong { color: var(--green-deep); font-weight: 600; }
+  .article-body a { color: var(--green-mid); font-weight: 500; text-decoration: none; }
+  .article-body a:hover { color: var(--green-deep); text-decoration: underline; }
+  .article-body blockquote { border-left: 3px solid var(--green-accent); padding: 16px 24px; margin: 32px 0; background: var(--green-ghost); border-radius: 0 8px 8px 0; }
+  .article-body blockquote p { font-style: italic; color: var(--green-dark); margin-bottom: 0; }
+
+  /* ─── AT A GLANCE ─── */
+  .article-glance {
+    max-width: 720px; margin: 0 auto 40px; padding: 24px 28px;
+    background: var(--green-ghost); border: 1px solid rgba(149,213,178,0.3);
+    border-radius: 12px;
+  }
+  .article-glance h2 {
+    font-size: 14px; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--green-mid); margin: 0 0 12px;
+  }
+  .article-glance ul { list-style: none; padding: 0; margin: 0; }
+  .article-glance li {
+    font-size: 15px; line-height: 1.6; color: var(--slate-600);
+    padding: 4px 0 4px 20px; position: relative;
+  }
+  .article-glance li::before {
+    content: ''; position: absolute; left: 0; top: 12px;
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--green-accent);
+  }
+
+  /* ─── CTA PARALLAX ─── */
+  .cta-section::before { transform: translate(-50%,-50%) translateY(var(--parallax-y, 0)); will-change: transform; }
+
+  /* ─── FOOTER 5-COL ─── */
+  .footer-top { grid-template-columns: 2fr 1fr 1fr 1fr 1fr; }
+  @media (max-width: 900px) { .footer-top { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px) { .footer-top { grid-template-columns: 1fr; } }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    .article-body { padding: 0 24px 60px; }
+  }
+
+  /* ─── REDUCED MOTION ─── */
+  @media (prefers-reduced-motion: reduce) {
+    .reveal {
+      opacity: 1; transform: none; transition: none;
+    }
+    .page-hero .section-label,
+    .page-hero .section-title,
+    .page-hero .section-desc {
+      opacity: 1; transform: none; transition: none;
+    }
+    .hero-bg-gradient, .hero-bg-gradient-2 { animation: none; }
+  }
+</style>
+<style>
+  /* ─── FAQ + visual kit spacing ─── */
+  .article-faq { max-width: 720px; margin: 0 auto; padding: 0 48px 60px; }
+  .article-faq h2 { font-size: 22px; font-weight: 700; color: var(--green-deep); margin-bottom: 24px; letter-spacing: -0.5px; }
+  .article-body h3 { font-size: 19px; font-weight: 700; color: var(--green-deep); margin: 32px 0 12px; letter-spacing: -0.3px; line-height: 1.35; }
+  .article-body .stat-trio-label, .article-body .vs-text, .article-body .flow-step-desc, .article-body .meter-cap, .article-body .blog-callout-text { margin-bottom: 0; }
+  .article-body .flow-steps .flow-step-desc { font-size: 15px; line-height: 1.6; }
+  .article-body .vs-split .vs-text { font-size: 14.5px; line-height: 1.55; }
+  .article-body .stat-trio .stat-trio-label { font-size: 14px; line-height: 1.45; }
+  .article-body .blog-callout .blog-callout-text { font-size: 16px; line-height: 1.6; }
+  .article-body .meter .meter-cap { font-size: 13px; line-height: 1.5; }
+  .article-body .meter .meter-head-label, .article-body .meter .meter-head-val { font-size: 14px; margin: 0; }
+  .article-body .stat-trio .stat-trio-num { font-size: 32px; }
+  .article-sources { font-size: 14px !important; line-height: 1.6 !important; color: var(--slate-500) !important; }
+  @media (max-width: 900px) { .article-faq { padding: 0 24px 48px; } }
+  @media (max-width: 600px) { .article-body .stat-trio .stat-trio-num { font-size: 30px; } }
+</style>
+<noscript><style>.reveal,.page-hero .section-label,.page-hero .section-title,.page-hero .section-desc{opacity:1;transform:none;transition:none;}</style></noscript>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-H2LBJT03WE"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-H2LBJT03WE');</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Dispensary Profit Margins: The Real Numbers and the Quiet Leaks",
+  "description": "Typical dispensary profit margins, why 280E and price compression keep them thin, and the vendor credits, duplicate invoices, and shorted deliveries that leak.",
+  "author": {
+    "@type": "Person",
+    "name": "Chris Mitchem"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "ShelfSpace",
+    "url": "https://shelfspace.pro"
+  },
+  "datePublished": "2026-10-06",
+  "dateModified": "2026-10-06",
+  "mainEntityOfPage": "https://shelfspace.pro/blog/dispensary-profit-margins",
+  "image": "https://shelfspace.pro/og-image-v7.png"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://shelfspace.pro/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Blog",
+      "item": "https://shelfspace.pro/blog"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Dispensary Profit Margins: The Real Numbers and the Quiet Leaks"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is a good profit margin for a dispensary?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Northstar Financial Advisory, a fractional CFO firm serving cannabis operators, puts well-run dispensaries at a net profit margin of 10 to 20 percent after all expenses and 280E-adjusted federal taxes. Many stores earn less: Whitney Economics found only 27.27% of U.S. cannabis operators were profitable in 2024."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the average gross margin for a dispensary?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Northstar Financial Advisory reports that dispensary gross margins typically range from 45% to 55%. Gross margin is what's left of each sale after the cost of the product, before rent, payroll, and taxes."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why are dispensary profit margins so low?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Two main reasons. Section 280E bars adult-use dispensaries from deducting most ordinary business expenses, so federal tax lands on income the store never kept; Whitney Economics reports some cannabis businesses face a 52.5% effective tax rate. And prices keep falling: Headset reports the average discount rate reached 27.1% of shelf value in the year ending September 2026."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How can a dispensary improve its profit margin without raising prices?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Recover the money that leaks through vendors. Check every invoice against the Metrc manifest before paying, bill vendors monthly for returns and expired product, calculate agreed co-marketing credits, catch duplicate invoices across locations, and apply approved credits to the next payment. A recovered credit goes straight to the bottom line."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How much can vendor credit recovery add?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It depends on the store and its vendors. At one single-location dispensary, ShelfSpace found $83,741 a year in vendor credits it didn't know it was owed, and recovering them lifted EBITDA 15%. The free review uses your own Metrc and POS data to estimate your number."
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="/" class="nav-logo">
+    <div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div>
+    <span class="nav-logo-text">ShelfSpace</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="/accounts-payable">ShelfPay (AP)</a></li>
+    <li><a href="/accounts-receivable">ShelfCollect (AR)</a></li>
+    <li><a href="/shelfverify">ShelfVerify</a></li>
+    <li><a href="/about">About</a></li>
+    <li><a href="/pricing">Pricing</a></li>
+    <li><a href="/contact" class="nav-cta">Get Started <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a></li>
+  </ul>
+  <div class="nav-hamburger" onclick="document.querySelector('.nav-links').classList.toggle('mobile-open'); event.stopPropagation();"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="hero-bg-gradient"></div>
+  <div class="hero-bg-gradient-2"></div>
+  <div class="hero-grid-lines"></div>
+  <div class="section-label">Credit Recovery · Margins</div>
+  <h1 class="section-title">Dispensary Profit Margins: The Real Numbers and the Quiet Leaks</h1>
+  <p class="section-desc">What a well-run store earns, why cannabis margins are thin, and the vendor money most dispensaries never collect.</p>
+</div>
+
+<!-- AT A GLANCE -->
+<div class="article-glance">
+  <h2>At a glance</h2>
+  <ul>
+    <li>Northstar Financial Advisory puts well-run dispensaries at a 45% to 55% gross margin and a 10 to 20 percent net margin</li>
+    <li>Only 27.27% of U.S. cannabis operators were profitable in 2024, per Whitney Economics</li>
+    <li>280E and falling prices are the two big squeezes; Headset reports discounts at 27.1% of shelf value</li>
+    <li>The margin you can still win back leaks through vendors: uncredited returns, co-marketing, duplicate invoices, and shorted deliveries</li>
+    <li>At ten cents of net profit per sales dollar, $10,000 in recovered credits does the same for profit as $100,000 in new sales</li>
+  </ul>
+</div>
+
+<!-- ARTICLE BODY -->
+<article class="article-body">
+
+  <p class="reveal">A well-run dispensary typically earns a gross margin between 45% and 55% and keeps a net margin between 10 and 20 percent after 280E-adjusted federal taxes, according to Northstar Financial Advisory, a fractional CFO firm that works with cannabis operators. Plenty of stores do worse. In Whitney Economics' 2024 survey of U.S. cannabis operators, only 27.27% reported being profitable.</p>
+
+  <p class="reveal">Those two facts together explain why every dollar matters in cannabis retail, and why the money that leaks out quietly, through vendors, is worth chasing. Here's what typical margins look like, why they're thin, and where the leaks are.</p>
+
+  <h2 class="reveal">Typical dispensary profit margins</h2>
+
+  <p class="reveal">Two margins matter, and they tell very different stories.</p>
+
+  <ul class="reveal">
+    <li><strong>Gross margin</strong> is what's left of each sale after the cost of the product. Northstar Financial Advisory puts well-run dispensaries between 45% and 55%. On a $40 eighth, that's the difference between keeping $18 and keeping $22 before rent, payroll, and taxes.</li>
+    <li><strong>Net margin</strong> is what's left after everything: staff, rent, security, software, and federal and state taxes. Northstar puts well-run dispensaries between 10 and 20 percent.</li>
+  </ul>
+
+  <p class="reveal">The industry as a whole is under more strain than those ranges suggest. Whitney Economics' 2024 Cannabis Industry Business Conditions Survey found:</p>
+
+  <div class="stat-trio reveal">
+    <div class="stat-trio-item">
+      <svg class="stat-trio-ico" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"/><polyline points="17 18 23 18 23 12"/></svg>
+      <p class="stat-trio-num">27.27%</p>
+      <p class="stat-trio-label">of U.S. cannabis operators were profitable in 2024</p>
+    </div>
+    <div class="stat-trio-item">
+      <svg class="stat-trio-ico" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      <p class="stat-trio-num">40.56%</p>
+      <p class="stat-trio-label">were breaking even</p>
+    </div>
+    <div class="stat-trio-item">
+      <svg class="stat-trio-ico" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+      <p class="stat-trio-num">32.17%</p>
+      <p class="stat-trio-label">were not profitable</p>
+    </div>
+  </div>
+
+  <p class="reveal">For comparison, the same release cites U.S. Chamber of Commerce figures that 65.3% of all small businesses are profitable.</p>
+
+  <h2 class="reveal">Why cannabis profit margins are so thin</h2>
+
+  <h3 class="reveal">280E taxes revenue, not profit</h3>
+
+  <p class="reveal">Section 280E bars businesses trafficking in Schedule I or II substances from deducting ordinary business expenses. A dispensary can subtract the cost of the product it sold, but not most of its rent, payroll, or marketing, so it pays federal tax on income it never really kept. Whitney Economics reports that some cannabis businesses face an effective tax rate of 52.5%.</p>
+
+  <p class="reveal">Relief is partial so far. On 04/23/2026, marijuana under a qualifying state medical license moved to Schedule III. Adult-use cannabis is still Schedule I, and a decision on broader rescheduling was still pending as of 10/06/2026. Until that changes, most adult-use stores carry the full 280E weight.</p>
+
+  <h3 class="reveal">Prices keep falling</h3>
+
+  <p class="reveal">Price compression is the other squeeze. According to Headset point-of-sale data for the 12 months ending September 2026, packaged flower dropped 3.8% per gram year over year, and the average discount rate rose from 23.6% to 27.1% of shelf value.</p>
+
+  <div class="meter reveal">
+    <div class="meter-head"><p class="meter-head-label">Shelf value kept at the register</p><p class="meter-head-val">27.1% given back in discounts</p></div>
+    <div class="meter-track"><div class="meter-fill" style="--fill: 72.9%"></div><div class="meter-loss" style="--loss: 27.1%"></div></div>
+    <p class="meter-cap"><strong>Headset, September 2026:</strong> the average discount rate across tracked markets was 27.1% of shelf value, up from 23.6% a year earlier.</p>
+  </div>
+
+  <p class="reveal">When the shelf price drops and wholesale cost doesn't drop with it, gross margin shrinks. Add more competition per license in mature markets, and most stores can't raise prices to fix it.</p>
+
+  <h2 class="reveal">The quiet leaks: money your vendors owe you</h2>
+
+  <p class="reveal">If you can't raise prices and can't control taxes, the margin you can still win back is the money that leaks out between you and your vendors. It doesn't show up as an expense line. It shows up as credits never requested and invoices paid that shouldn't have been. These are real cases from ShelfSpace accounts, anonymized:</p>
+
+  <ul class="reveal">
+    <li><strong>Returns and expired product.</strong> Customer returns, damaged units, and product that aged out are usually owed back by the vendor. Nobody sends that credit unless you ask with the data. See <a href="/blog/returns-and-waste-vendor-credits">returns and waste credits</a>.</li>
+    <li><strong>Co-marketing credits.</strong> When a wholesale vendor agrees to share promotional markdowns, the credit only exists if someone calculates it. One dispensary recovered <a href="/blog/case-study-vendor-credit-recovery">$2,340 in co-marketing credits</a> nobody had been tracking.</li>
+    <li><strong>Duplicate invoices.</strong> A multi-location retailer was billed again for a <a href="/blog/case-study-duplicate-invoice">$4,873 invoice</a> one of its stores had already paid. It was caught before it was paid twice.</li>
+    <li><strong>Shorted deliveries.</strong> A vendor invoiced 50 units and the Metrc manifest showed 42. The <a href="/blog/case-study-shorted-delivery">$1,140 difference</a> was flagged before the check went out.</li>
+  </ul>
+
+  <div class="stat-trio reveal">
+    <div class="stat-trio-item">
+      <svg class="stat-trio-ico" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <p class="stat-trio-num">$4,873</p>
+      <p class="stat-trio-label">duplicate invoice caught before it was paid twice</p>
+    </div>
+    <div class="stat-trio-item">
+      <svg class="stat-trio-ico" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+      <p class="stat-trio-num">$2,340</p>
+      <p class="stat-trio-label">co-marketing credits nobody was tracking</p>
+    </div>
+    <div class="stat-trio-item">
+      <svg class="stat-trio-ico" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+      <p class="stat-trio-num">$1,140</p>
+      <p class="stat-trio-label">shorted delivery flagged before payment</p>
+    </div>
+  </div>
+
+  <p class="reveal">Added up across every vendor, the number gets large. At one single-location dispensary, we found <a href="/blog/case-study-ebitda-credit-recovery">$83,741 a year in vendor credits</a> it didn't know it was owed, and recovering them lifted EBITDA 15%.</p>
+
+  <h2 class="reveal">Why a recovered dollar beats a sold dollar</h2>
+
+  <p class="reveal">A recovered credit has no cost of goods, no labor, and no extra rent attached. It goes straight to the bottom line. A new sale only contributes its margin. At a net margin of ten cents on the dollar, the low end of Northstar's range, you'd need $10 of new sales to keep $1, so $10,000 in recovered credits does the same for profit as $100,000 in new sales. That's why vendor credits are the cheapest margin a dispensary can find.</p>
+
+  <div class="vs-split reveal">
+    <div class="vs-col vs-neg">
+      <div class="vs-head">
+        <svg class="vs-ico" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        <p class="vs-tag">$10,000 of new sales</p>
+      </div>
+      <p class="vs-num">$1,000</p>
+      <p class="vs-text">kept at ten cents on the dollar, after product cost, labor, rent, and taxes.</p>
+    </div>
+    <div class="vs-col vs-pos">
+      <div class="vs-head">
+        <svg class="vs-ico" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        <p class="vs-tag">$10,000 of recovered credits</p>
+      </div>
+      <p class="vs-num">$10,000</p>
+      <p class="vs-text">kept. No product to buy, no extra staff, no added rent.</p>
+    </div>
+  </div>
+
+  <h2 class="reveal">How to improve dispensary profit margins without raising prices</h2>
+
+  <div class="flow-steps reveal">
+    <div class="flow-step">
+      <div class="flow-step-num">1</div>
+      <div class="flow-step-body">
+        <p class="flow-step-title">Check every invoice against Metrc before paying</p>
+        <p class="flow-step-desc">The manifest is the state's record of what shipped. Line it up against each invoice so you never pay for a short or a duplicate. Our <a href="/blog/metrc-manifest-guide">Metrc manifest guide</a> shows how.</p>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-step-num">2</div>
+      <div class="flow-step-body">
+        <p class="flow-step-title">Bill vendors for returns and expired product every month</p>
+        <p class="flow-step-desc">Pull returns and destruction records from Metrc and your POS, total them by vendor, and send a credit memo with the detail attached.</p>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-step-num">3</div>
+      <div class="flow-step-body">
+        <p class="flow-step-title">Put co-marketing in writing</p>
+        <p class="flow-step-desc">For wholesale vendors, agree on how promotional markdowns are shared, then calculate the credit every month instead of once a year.</p>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-step-num">4</div>
+      <div class="flow-step-body">
+        <p class="flow-step-title">Watch for duplicates across locations</p>
+        <p class="flow-step-desc">Multi-store groups are the easiest place for the same invoice to get paid twice. Match payments by invoice number across every entity.</p>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-step-num">5</div>
+      <div class="flow-step-body">
+        <p class="flow-step-title">Apply credits before you pay</p>
+        <p class="flow-step-desc">A credit is only real once it reduces what you owe. Net approved credits against the vendor's next payment.</p>
+      </div>
+    </div>
+  </div>
+
+  <p class="reveal">This is the work our <a href="/credit-recovery">credit recovery</a> and <a href="/accounts-payable">accounts payable</a> service does every month, done for you. The free review uses your own Metrc and POS data to show what's owed before you commit to anything.</p>
+
+  <p class="reveal article-sources">Sources: Northstar Financial Advisory, "Cannabis Dispensary Profit Margins: 2025 CFO Benchmarks"; Whitney Economics, 2024 Cannabis Industry Business Conditions Survey (released 07/24/2024); Headset, Cannabis Industry Statistics (12 months ending September 2026). Case figures are from ShelfSpace accounts, anonymized. This article is general information, not tax advice.</p>
+
+</article>
+
+<!-- FAQ -->
+<section class="article-faq">
+  <h2>Frequently asked questions</h2>
+  <div class="faq-list">
+    <details>
+      <summary>What is a good profit margin for a dispensary?</summary>
+      <p>Northstar Financial Advisory, a fractional CFO firm serving cannabis operators, puts well-run dispensaries at a net profit margin of 10 to 20 percent after all expenses and 280E-adjusted federal taxes. Many stores earn less: Whitney Economics found only 27.27% of U.S. cannabis operators were profitable in 2024.</p>
+    </details>
+    <details>
+      <summary>What is the average gross margin for a dispensary?</summary>
+      <p>Northstar Financial Advisory reports that dispensary gross margins typically range from 45% to 55%. Gross margin is what's left of each sale after the cost of the product, before rent, payroll, and taxes.</p>
+    </details>
+    <details>
+      <summary>Why are dispensary profit margins so low?</summary>
+      <p>Two main reasons. Section 280E bars adult-use dispensaries from deducting most ordinary business expenses, so federal tax lands on income the store never kept; Whitney Economics reports some cannabis businesses face a 52.5% effective tax rate. And prices keep falling: Headset reports the average discount rate reached 27.1% of shelf value in the year ending September 2026.</p>
+    </details>
+    <details>
+      <summary>How can a dispensary improve its profit margin without raising prices?</summary>
+      <p>Recover the money that leaks through vendors. Check every invoice against the Metrc manifest before paying, bill vendors monthly for returns and expired product, calculate agreed co-marketing credits, catch duplicate invoices across locations, and apply approved credits to the next payment. A recovered credit goes straight to the bottom line.</p>
+    </details>
+    <details>
+      <summary>How much can vendor credit recovery add?</summary>
+      <p>It depends on the store and its vendors. At one single-location dispensary, ShelfSpace found $83,741 a year in vendor credits it didn't know it was owed, and recovering them lifted EBITDA 15%. The free review uses your own Metrc and POS data to estimate your number.</p>
+    </details>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-content">
+    <div class="section-label reveal">Get Started</div>
+    <h2 class="section-title reveal">Find out what you're owed. Free.</h2>
+    <p class="section-desc reveal">We run your Metrc and POS data and show you the vendor credits, duplicates, and shorts sitting in your books. The credits pay for it. Or we refund the difference.</p>
+    <div class="cta-actions reveal">
+      <a href="/contact" class="btn-primary">
+        Get your free review
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="/" class="nav-logo"><div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div><span class="nav-logo-text">ShelfSpace</span></a>
+      <p>Operations and Payments Intelligence</p>
+    </div>
+    <div class="footer-col"><h4>Services</h4><ul><li><a href="/consignment">Consignment</a></li><li><a href="/accounts-payable">ShelfPay (AP)</a></li><li><a href="/credit-recovery">Credit Recovery</a></li><li><a href="/checks">Check Payments</a></li><li><a href="/shelfiq">ShelfiQ</a></li></ul></div>
+    <div class="footer-col"><h4>Platform</h4><ul><li><a href="/features">Features</a></li><li><a href="/how-it-works">How It Works</a></li><li><a href="/pricing">Pricing</a></li><li><a href="/about">About</a></li><li><a href="/blog">Blog</a></li><li><a href="/docs">Docs</a></li><li><a href="/tutorials">Tutorials</a></li></ul></div>
+    <div class="footer-col"><h4>Access</h4><ul><li><a href="https://ourshelf.space/login">Login</a></li><li><a href="/contact">Talk to us</a></li><li><a href="/contact">Contact</a></li><li><a href="/accounts-receivable">ShelfCollect (AR)</a></li><li><a href="/vendors">For Vendors</a></li><li><a href="/for-bookkeepers">For Bookkeepers</a></li></ul></div>
+    <div class="footer-col"><h4>Company</h4><ul><li><a href="mailto:support@shelfspace.pro">Support</a></li><li><a href="https://linkedin.com/company/shelfspace-pro" target="_blank" rel="noopener" class="footer-social-link"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> LinkedIn</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><p>&copy; 2026 ShelfSpace Technologies Inc.</p><div class="footer-bottom-links"><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div></div>
+</footer>
+
+<script>
+(function() {
+  var nav = document.getElementById('nav');
+  var pageHero = document.querySelector('.page-hero');
+  var parallaxSections = [
+    document.querySelector('.cta-section')
+  ];
+
+  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var isMobile = window.innerWidth < 900;
+  var ticking = false;
+
+  /* ── Hero entrance ── */
+  requestAnimationFrame(function() {
+    nav.classList.toggle('scrolled', window.scrollY > 20);
+    if (pageHero) pageHero.classList.add('hero-loaded');
+  });
+
+  /* ── Scroll-Triggered Reveals (with unobserve for perf) ── */
+  var revealObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(function(el) { revealObserver.observe(el); });
+
+  /* ── Scroll handler (rAF + ticking flag) ── */
+  function onScroll() {
+    var scrollY = window.scrollY;
+
+    /* Nav state */
+    nav.classList.toggle('scrolled', scrollY > 20);
+
+    /* Skip parallax for reduced motion or mobile */
+    if (prefersReduced || isMobile) return;
+
+    /* Section decorative parallax */
+    var wh = window.innerHeight;
+    parallaxSections.forEach(function(section) {
+      if (!section) return;
+      var rect = section.getBoundingClientRect();
+      if (rect.bottom < 0 || rect.top > wh) return;
+      var center = rect.top + rect.height / 2 - wh / 2;
+      section.style.setProperty('--parallax-y', (center * 0.08) + 'px');
+    });
+  }
+
+  window.addEventListener('scroll', function() {
+    if (!ticking) {
+      requestAnimationFrame(function() {
+        onScroll();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, { passive: true });
+
+  /* Initial call */
+  onScroll();
+
+  /* ── Resize handler ── */
+  window.addEventListener('resize', function() {
+    isMobile = window.innerWidth < 900;
+    if (isMobile) {
+      parallaxSections.forEach(function(section) {
+        if (section) section.style.setProperty('--parallax-y', '0px');
+      });
+    }
+  });
+
+  /* ── Close mobile nav on outside click ── */
+  document.addEventListener('click', function() {
+    var navLinks = document.querySelector('.nav-links');
+    if (navLinks && navLinks.classList.contains('mobile-open')) {
+      navLinks.classList.remove('mobile-open');
+    }
+  });
+})();
+</script>
+<script src="/shelfiq-widget.js"></script>
+</body>
+</html>
