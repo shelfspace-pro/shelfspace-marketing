@@ -63,6 +63,7 @@ function getClientIp(req) {
 // --- Validation constants ---
 const NOTIFY_EMAIL = process.env.NOTIFY_EMAIL || 'chris@shelfspace.pro';
 const ROLES = new Set(['Retailer', 'Vendor', 'Other']);
+const ROLE_LABEL = { Retailer: 'Dispensary', Vendor: 'Brand', Other: 'Other' };
 const SHOP_RANGES = new Set(['1', '2-5', '6-10', '11-20', '21+']);
 const STATE_CODES = new Set([
   'AL','AK','AZ','AR','CA','CO','CT','DE','FL','GA','HI','ID','IL','IN','IA','KS',
@@ -76,6 +77,9 @@ const MAX_NAME = 120;
 const MAX_EMAIL = 200;
 const MAX_BUSINESS = 200;
 const MAX_OTHER = 500;
+const MAX_NOTE = 1000;
+// Real people take a few seconds to fill the form; scripted posts don't.
+const MIN_FILL_MS = 2500;
 
 function str(v) {
   return typeof v === 'string' ? v.trim() : '';
@@ -211,14 +215,14 @@ async function verifyTurnstile(token, ip) {
 }
 
 // --- Resend email send (REST, no SDK dependency — matches the org's pattern) ---
-async function sendEmail({ from, to, replyTo, subject, html }) {
+async function sendEmail({ from, to, replyTo, subject, html, text }) {
   const res = await fetch('https://api.resend.com/emails', {
     method: 'POST',
     headers: {
       Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ from, to: [to], reply_to: replyTo, subject, html }),
+    body: JSON.stringify({ from, to: [to], reply_to: replyTo, subject, html, ...(text ? { text } : {}) }),
   });
   if (!res.ok) {
     const detail = await res.text().catch(() => '');
@@ -272,14 +276,10 @@ function notificationHtml(lead) {
     ['Business', lead.businessName],
     ['Role', lead.role],
   ];
-  if (lead.role === 'Retailer') {
-    rows.push(['Number of shops', lead.shops]);
-    rows.push(['State', lead.state]);
-  } else if (lead.role === 'Vendor') {
-    rows.push(['State', lead.state]);
-  } else if (lead.role === 'Other') {
-    rows.push(['What they do', lead.otherDescription]);
-  }
+  if (lead.role === 'Retailer' && lead.shops) rows.push(['Number of stores', lead.shops]);
+  if (lead.state) rows.push(['State', lead.state]);
+  if (lead.role === 'Other') rows.push(['What they do', lead.otherDescription]);
+  if (lead.note) rows.push(['Their note', lead.note]);
   rows.push(...sourceRows(lead.source || {}));
   const cells = rows
     .map(([k, v]) => `<tr>
@@ -288,28 +288,51 @@ function notificationHtml(lead) {
       </tr>`)
     .join('');
   const body = `
-      <h1 style="margin:0 0 4px;font-size:19px;font-weight:700;color:#1b4332;">New interest form submission</h1>
-      <p style="margin:0 0 20px;font-size:14px;color:#64748b;">Reply to this email to respond to ${escapeHtml(lead.name)} directly.</p>
+      <h1 style="margin:0 0 4px;font-size:19px;font-weight:700;color:#1b4332;">New lead: ${escapeHtml(lead.businessName)}</h1>
+      <p style="margin:0 0 20px;font-size:14px;color:#64748b;">The page promised ${escapeHtml(lead.name)} a personal reply by end of the next business day. Hit reply to answer them directly.</p>
       <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="border-collapse:collapse;width:100%;">${cells}</table>`;
   const channel = Object.keys(lead.source || {}).length ? ` · ${describeChannel(lead.source)}` : '';
   return emailShell({ preheader: `${lead.role} · ${lead.businessName}${channel}`, bodyHtml: body });
 }
 
-function autoReplyHtml(firstName, role) {
-  const greeting = firstName ? `Hi ${escapeHtml(firstName)},` : 'Hi there,';
-  const evalLine = role === 'Retailer'
-    ? `<p style="margin:0 0 24px;">Since you run a dispensary, this is where your <strong style="color:#1b4332;">free evaluation</strong> starts — we look at your last 90 days and show you exactly where margin is leaking. No cost, no commitment.</p>`
-    : '';
-  const body = `
-      <p style="margin:0 0 16px;">${greeting}</p>
-      <p style="margin:0 0 16px;">Thanks for reaching out to ShelfSpace. We've got your details and someone from our team will be in touch, usually within a business day.</p>
-      ${evalLine}
-      <p style="margin:0 0 24px;">If it's easier, just reply straight to this email and we'll pick it up.</p>
-      <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:0 0 28px;"><tr>
-        <td bgcolor="#1b4332" style="border-radius:10px;background:#1b4332;"><a href="https://shelfspace.pro/how-it-works" style="display:inline-block;padding:13px 26px;font-family:${FONT};font-size:14px;font-weight:600;color:#ffffff;text-decoration:none;border-radius:10px;">See how ShelfSpace works &rarr;</a></td>
-      </tr></table>
-      <p style="margin:0;font-weight:700;color:#1b4332;">&mdash; The ShelfSpace Team</p>`;
-  return emailShell({ preheader: "We've got your details — we'll be in touch within a business day.", bodyHtml: body });
+// The prospect's confirmation reads as a personal note from Chris (the page
+// promises "Chris reads every one"), not a branded team blast. Plain layout,
+// one link, replies land in his inbox.
+const ROLE_LINES = {
+  Retailer: "Your free review looks at your last 90 days and shows, in dollars, what your vendors owe you and where your AP is leaking. If we take it on, the credits pay for it, or we refund the difference.",
+  Vendor: "Your free review looks at what your stores owe you and how long they take to pay. If we take it on, we collect more than we cost, or we refund the difference.",
+  Other: "",
+};
+
+function autoReplyParts(firstName, role, businessName) {
+  const hi = firstName ? `Hi ${firstName},` : 'Hi there,';
+  const lines = [
+    hi,
+    `Thanks for reaching out about ${businessName}. I read every one of these myself, and I'll email you within one business day with the one thing I need to run your numbers.`,
+    ROLE_LINES[role] || '',
+    "If there's anything you want me to know before then, just reply here.",
+  ].filter(Boolean);
+  return { lines, signoff: ['Chris Mitchem', 'Founder, ShelfSpace', 'shelfspace.pro'] };
+}
+
+function autoReplyText(firstName, role, businessName) {
+  const { lines, signoff } = autoReplyParts(firstName, role, businessName);
+  return lines.join('\n\n') + '\n\n' + signoff.join('\n');
+}
+
+function autoReplyHtml(firstName, role, businessName) {
+  const { lines, signoff } = autoReplyParts(firstName, role, businessName);
+  const paras = lines
+    .map(l => `<p style="margin:0 0 16px;">${escapeHtml(l)}</p>`)
+    .join('');
+  return `<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ShelfSpace</title></head>
+<body style="margin:0;padding:0;background:#ffffff;">
+  <div style="max-width:560px;padding:24px 20px;font-family:${FONT};font-size:15px;line-height:1.6;color:#1e293b;">
+    ${paras}
+    <p style="margin:24px 0 0;">${escapeHtml(signoff[0])}<br><span style="color:#64748b;">${escapeHtml(signoff[1])}</span><br><a href="https://shelfspace.pro" style="color:#2d6a4f;">shelfspace.pro</a></p>
+  </div>
+</body></html>`;
 }
 
 export default async function handler(req, res) {
@@ -348,7 +371,16 @@ export default async function handler(req, res) {
   const shops = str(body.shops);
   const state = str(body.state).toUpperCase();
   const otherDescription = str(body.otherDescription);
+  const note = str(body.note).slice(0, MAX_NOTE);
   const token = str(body['cf-turnstile-response']);
+
+  // Bot traps: a filled honeypot or an instant submit gets a quiet 200 and
+  // no email — the bot learns nothing, Chris's inbox stays clean.
+  const elapsedMs = Number(body.elapsedMs);
+  if (str(body.website) || (Number.isFinite(elapsedMs) && elapsedMs < MIN_FILL_MS)) {
+    console.log('interest_trap ' + JSON.stringify({ honeypot: !!str(body.website), elapsedMs }));
+    return res.status(200).json({ ok: true });
+  }
 
   if (!name || name.length > MAX_NAME) {
     return res.status(400).json({ error: 'Please enter your name.' });
@@ -362,18 +394,15 @@ export default async function handler(req, res) {
   if (!ROLES.has(role)) {
     return res.status(400).json({ error: 'Please tell us whether you\'re a retailer, vendor, or something else.' });
   }
-  if (role === 'Retailer') {
-    if (!SHOP_RANGES.has(shops)) {
-      return res.status(400).json({ error: 'Please select how many shops you run.' });
-    }
-    if (!STATE_CODES.has(state)) {
-      return res.status(400).json({ error: 'Please select your state.' });
-    }
-  } else if (role === 'Vendor') {
-    if (!STATE_CODES.has(state)) {
-      return res.status(400).json({ error: 'Please select your state.' });
-    }
-  } else if (role === 'Other') {
+  // Store count and state are optional now (fewer fields, more leads);
+  // validate them only when sent.
+  if (shops && !SHOP_RANGES.has(shops)) {
+    return res.status(400).json({ error: 'Please pick how many stores you run.' });
+  }
+  if (state && !STATE_CODES.has(state)) {
+    return res.status(400).json({ error: 'Please pick a valid state.' });
+  }
+  if (role === 'Other') {
     if (!otherDescription || otherDescription.length > MAX_OTHER) {
       return res.status(400).json({ error: 'Please tell us a bit about what you do.' });
     }
@@ -392,6 +421,7 @@ export default async function handler(req, res) {
     shops: role === 'Retailer' ? shops : '',
     state: role === 'Retailer' || role === 'Vendor' ? state : '',
     otherDescription: role === 'Other' ? otherDescription : '',
+    note,
     source,
   };
   const firstName = name.split(/\s+/)[0];
@@ -401,7 +431,7 @@ export default async function handler(req, res) {
       from: 'ShelfSpace Leads <noreply@shelfspace.pro>',
       to: NOTIFY_EMAIL,
       replyTo: email,
-      subject: cleanSubject(`New interest form: ${name} — ${role}`),
+      subject: cleanSubject(`New lead: ${businessName} — ${ROLE_LABEL[role]}${role === 'Retailer' && shops ? ` (${shops} stores)` : ''}`),
       html: notificationHtml(lead),
     });
   } catch (err) {
@@ -412,7 +442,7 @@ export default async function handler(req, res) {
   // Structured line so leads can be aggregated by channel from the Vercel logs
   // without standing up a CRM. One line per captured lead, JSON after the tag.
   console.log('interest_lead ' + JSON.stringify({
-    role, state, shops, businessName,
+    role, state, shops, businessName, hasNote: !!note,
     channel: describeChannel(source),
     landing: source.landing || '',
     referrer: source.firstReferrer || source.referrer || '',
@@ -423,11 +453,12 @@ export default async function handler(req, res) {
   // Auto-response to the prospect. Failure here shouldn't lose the lead.
   try {
     await sendEmail({
-      from: 'ShelfSpace <support@shelfspace.pro>',
+      from: 'Chris Mitchem <chris@shelfspace.pro>',
       to: email,
-      replyTo: 'support@shelfspace.pro',
-      subject: 'Thanks for reaching out to ShelfSpace',
-      html: autoReplyHtml(firstName, role),
+      replyTo: 'chris@shelfspace.pro',
+      subject: `Got it, ${cleanSubject(firstName || 'thanks')} — here's what happens next`,
+      html: autoReplyHtml(firstName, role, businessName),
+      text: autoReplyText(firstName, role, businessName),
     });
   } catch (err) {
     console.error('Interest form: auto-response email failed (lead still captured):', err);

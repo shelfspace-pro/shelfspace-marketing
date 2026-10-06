@@ -3,20 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Get in Touch with ShelfSpace</title>
-<meta name="description" content="Tell the ShelfSpace team about your operation and we'll get back to you — a straight conversation about your dispensary's profitability.">
+<title>Free Review — Find Out What You're Owed | ShelfSpace</title>
+<meta name="description" content="Find out what your vendors owe you, or what your stores owe you. Free review, personally from ShelfSpace's founder, by email within one business day. No call, no commitment.">
 <link rel="canonical" href="https://shelfspace.pro/contact">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://shelfspace.pro/contact">
-<meta property="og:title" content="Get in Touch with ShelfSpace">
-<meta property="og:description" content="Tell the ShelfSpace team about your operation and we'll get back to you — a straight conversation about your dispensary's profitability.">
+<meta property="og:title" content="Find out what you're owed. Free. | ShelfSpace">
+<meta property="og:description" content="Find out what your vendors owe you, or what your stores owe you. Free review, personally from ShelfSpace's founder, by email within one business day. No call, no commitment.">
 <meta property="og:image" content="https://shelfspace.pro/og-image-v7.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:type" content="image/png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Get in Touch with ShelfSpace">
-<meta name="twitter:description" content="Tell the ShelfSpace team about your operation and we'll get back to you — a straight conversation about your dispensary's profitability.">
+<meta name="twitter:title" content="Find out what you're owed. Free. | ShelfSpace">
+<meta name="twitter:description" content="Find out what your vendors owe you, or what your stores owe you. Free review, personally from ShelfSpace's founder, by email within one business day. No call, no commitment.">
 <meta name="twitter:image" content="https://shelfspace.pro/og-image-v7.png">
 <meta name="apple-mobile-web-app-title" content="ShelfSpace">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -25,152 +25,184 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
-<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 <style>
   /* Reveals */
   .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1); }
   .reveal.is-visible { opacity: 1; transform: translateY(0); }
   .reveal-delay-1 { transition-delay: 0.15s; }
-  .reveal-delay-2 { transition-delay: 0.3s; }
 
-  /* ── HERO (dark) ── */
-  .contact-hero {
-    background: var(--green-deep); padding: 140px 48px 80px;
-    text-align: center; position: relative; overflow: hidden;
+  /* ── HERO: the form lives here, above the fold ── */
+  .cx-hero {
+    background: var(--green-deep); padding: 120px 48px 72px;
+    position: relative; overflow: hidden;
   }
-  .contact-hero::before {
+  .cx-hero::before {
     content: ''; position: absolute; top: -300px; right: -200px;
     width: 800px; height: 800px;
     background: radial-gradient(circle, rgba(149,213,178,0.1), transparent 70%);
   }
-  .contact-hero-content { max-width: 800px; margin: 0 auto; position: relative; z-index: 2; }
-  .contact-hero .section-label { color: var(--green-accent); }
-  .contact-hero h1 {
-    font-size: clamp(32px, 4.5vw, 48px); font-weight: 700;
-    color: var(--white); letter-spacing: -2px; line-height: 1.1;
-    margin-bottom: 16px;
+  .cx-grid {
+    max-width: 1080px; margin: 0 auto; position: relative; z-index: 2;
+    display: grid; grid-template-columns: 1fr 460px; gap: 64px; align-items: start;
+    grid-template-areas: "intro form" "next form"; grid-template-rows: auto 1fr;
   }
-  .contact-hero-sub { font-size: 18px; color: rgba(255,255,255,0.6); margin-bottom: 48px; }
-  .contact-hero-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-  .contact-step {
-    background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 12px; padding: 20px; text-align: left;
+  .cx-intro { grid-area: intro; padding-top: 12px; }
+  .cx-next { grid-area: next; }
+  .cx-form-col { grid-area: form; }
+  .cx-hero .section-label { color: var(--green-accent); }
+  .cx-hero h1 {
+    font-size: clamp(34px, 4.6vw, 52px); font-weight: 700;
+    color: var(--white); letter-spacing: -2px; line-height: 1.05; margin-bottom: 18px;
   }
-  .contact-step-num {
-    width: 28px; height: 28px; background: rgba(149,213,178,0.2);
-    border-radius: 50%; display: flex; align-items: center; justify-content: center;
-    font-family: var(--font-mono); font-size: 13px; font-weight: 700;
-    color: var(--green-accent); margin-bottom: 10px;
+  .cx-sub { font-size: 18px; line-height: 1.6; color: rgba(255,255,255,0.72); max-width: 520px; }
+  .cx-sub strong { color: var(--white); font-weight: 600; }
+
+  .cx-next h2 {
+    font-size: 13px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+    color: var(--green-accent); margin: 8px 0 16px;
   }
-  .contact-step-text { font-size: 14px; line-height: 1.5; color: rgba(255,255,255,0.5); }
-  .contact-step-text strong { color: var(--white); display: block; margin-bottom: 2px; }
+  .cx-steps { list-style: none; padding: 0; margin: 0 0 28px; display: grid; gap: 14px; }
+  .cx-steps li { display: grid; grid-template-columns: 28px 1fr; gap: 14px; align-items: start; }
+  .cx-step-num {
+    width: 28px; height: 28px; border-radius: 50%; background: rgba(149,213,178,0.18);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-mono); font-size: 13px; font-weight: 700; color: var(--green-accent);
+  }
+  .cx-steps strong { display: block; color: var(--white); font-size: 15px; margin-bottom: 2px; }
+  .cx-steps span { font-size: 14px; line-height: 1.5; color: rgba(255,255,255,0.6); }
 
-  /* ── FORM SECTION ── */
-  .contact-section { background: var(--white); padding: 80px 48px; }
-  .contact-container { max-width: 960px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: start; }
+  .cx-guarantee {
+    display: flex; gap: 12px; align-items: flex-start; padding: 16px 18px;
+    border: 1px solid rgba(149,213,178,0.3); border-radius: 16px; background: rgba(149,213,178,0.08);
+    max-width: 520px;
+  }
+  .cx-guarantee svg { flex-shrink: 0; color: var(--green-accent); margin-top: 2px; }
+  .cx-guarantee p { margin: 0; font-size: 14px; line-height: 1.55; color: rgba(255,255,255,0.75); }
+  .cx-guarantee strong { color: var(--white); }
 
-  .contact-info h2 { font-size: 28px; font-weight: 700; color: var(--green-deep); letter-spacing: -0.8px; margin-bottom: 24px; }
+  /* ── FORM CARD ── */
+  .cx-card {
+    background: var(--white); border-radius: 16px; padding: 32px;
+    box-shadow: 0 24px 64px rgba(27,67,50,0.35);
+  }
+  .cx-card-founder { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid var(--slate-100); }
+  .cx-card-founder img { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; }
+  .cx-card-founder p { margin: 0; font-size: 14px; line-height: 1.45; color: var(--slate-600); }
+  .cx-card-founder strong { color: var(--green-deep); }
 
-  .contact-founder { display: flex; align-items: center; gap: 16px; margin-bottom: 32px; }
+  .cx-step-title { font-size: 20px; font-weight: 700; color: var(--green-deep); letter-spacing: -0.4px; margin-bottom: 14px; }
+  .cx-roles { display: grid; gap: 10px; }
+  .cx-role {
+    display: grid; grid-template-columns: 40px 1fr 16px; gap: 14px; align-items: center; text-align: left;
+    width: 100%; padding: 16px; border: 1.5px solid var(--slate-200); border-radius: 12px;
+    background: var(--white); cursor: pointer; font-family: var(--font-display);
+    transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+  }
+  .cx-role:hover { border-color: var(--green-mid); background: var(--green-ghost); box-shadow: 0 6px 20px rgba(27,67,50,0.08); }
+  .cx-role:focus-visible { outline: 2px solid var(--green-dark); outline-offset: 2px; }
+  .cx-role-icon { width: 40px; height: 40px; border-radius: 10px; background: var(--green-ghost); display: flex; align-items: center; justify-content: center; color: var(--green-dark); }
+  .cx-role strong { display: block; font-size: 16px; color: var(--green-deep); }
+  .cx-role span { display: block; font-size: 13px; color: var(--slate-500); margin-top: 2px; }
+  .cx-role > svg { color: var(--slate-400); }
+  .cx-other-link {
+    display: inline-block; margin-top: 14px; padding: 0; border: none; background: none; cursor: pointer;
+    font-family: var(--font-display); font-size: 14px; color: var(--slate-500); text-decoration: underline; text-underline-offset: 3px;
+  }
+  .cx-other-link:hover { color: var(--green-dark); }
 
-  /* ── SAMPLE EVALUATION ── */
-  .contact-sample {
+  .cx-back {
+    display: inline-flex; align-items: center; gap: 4px; margin-bottom: 10px; padding: 0; border: none; background: none;
+    cursor: pointer; font-family: var(--font-display); font-size: 13px; font-weight: 600; color: var(--slate-500);
+  }
+  .cx-back:hover { color: var(--green-dark); }
+  .cx-chosen { display: inline-block; margin-left: 6px; padding: 2px 10px; border-radius: 999px; background: var(--green-ghost); color: var(--green-dark); font-size: 12px; font-weight: 600; }
+
+  .form-group { margin-bottom: 16px; }
+  .form-group label, .form-group .cx-label { display: block; font-size: 13px; font-weight: 600; color: var(--green-deep); margin-bottom: 6px; }
+  .cx-optional { font-weight: 400; color: var(--slate-500); }
+  .form-group input, .form-group textarea {
+    width: 100%; padding: 12px 14px; border: 1px solid var(--slate-200);
+    border-radius: 12px; font-size: 16px; font-family: var(--font-display);
+    color: var(--slate-800); background: var(--white);
+    transition: border-color 0.2s, box-shadow 0.2s; -webkit-appearance: none; appearance: none;
+  }
+  .form-group textarea { resize: vertical; min-height: 72px; line-height: 1.5; }
+  .form-group input::placeholder, .form-group textarea::placeholder { color: var(--slate-400); }
+  .form-group input:focus, .form-group textarea:focus { outline: none; border-color: var(--green-dark); box-shadow: 0 0 0 3px rgba(64,145,108,0.12); }
+  .form-group input[aria-invalid="true"] { border-color: #dc2626; }
+  .cx-hint { display: block; margin-top: 5px; font-size: 12px; color: var(--slate-500); }
+
+  .cx-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .cx-chips input { position: absolute; opacity: 0; width: 0; height: 0; }
+  .cx-chips label {
+    margin: 0; padding: 8px 14px; border: 1px solid var(--slate-200); border-radius: 12px;
+    font-size: 14px; font-weight: 600; color: var(--slate-600); cursor: pointer; font-variant-numeric: tabular-nums;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .cx-chips label:hover { border-color: var(--green-accent); }
+  .cx-chips input:checked + label { border-color: var(--green-dark); background: var(--green-ghost); color: var(--green-deep); }
+  .cx-chips input:focus-visible + label { outline: 2px solid var(--green-dark); outline-offset: 2px; }
+
+  .cx-hp { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
+  .cx-turnstile:empty { display: none; }
+  .cx-turnstile { margin-bottom: 12px; }
+
+  .cx-card .btn-primary { width: 100%; justify-content: center; margin-top: 4px; border-radius: 12px; }
+  .cx-card .btn-primary:disabled { opacity: 0.7; cursor: wait; transform: none; }
+  .cx-fine { margin: 12px 0 0; text-align: center; font-size: 12px; color: var(--slate-500); }
+
+  .form-error {
+    display: none; margin-top: 14px; padding: 12px 16px;
+    background: #fef2f2; border: 1px solid #fecaca; border-radius: 12px;
+    font-size: 14px; color: #991b1b; line-height: 1.5;
+  }
+  .form-error a { color: #991b1b; font-weight: 600; }
+
+  .cx-success { display: none; text-align: center; padding: 8px 0; }
+  .cx-success > svg { color: var(--green-mid); margin-bottom: 12px; }
+  .cx-success h3 { font-size: 22px; font-weight: 700; color: var(--green-deep); margin-bottom: 8px; }
+  .cx-success p { font-size: 15px; color: var(--slate-600); line-height: 1.6; margin: 0 0 18px; }
+  .cx-success strong { color: var(--green-deep); }
+  .cx-success .cx-sample-link {
+    display: inline-flex; align-items: center; gap: 6px; padding: 12px 18px; border-radius: 12px;
+    background: var(--green-ghost); color: var(--green-deep); font-weight: 600; font-size: 14px; text-decoration: none;
+  }
+  .cx-success .cx-sample-link:hover { background: var(--green-light); }
+
+  [hidden] { display: none !important; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* ── PROOF ── */
+  .cx-proof { background: var(--white); padding: 72px 48px; }
+  .cx-proof-inner { max-width: 1080px; margin: 0 auto; }
+  .cx-proof h2 { font-size: 28px; font-weight: 700; color: var(--green-deep); letter-spacing: -0.8px; margin-bottom: 8px; }
+  .cx-proof-lede { font-size: 15px; color: var(--slate-500); margin-bottom: 28px; }
+  .cx-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 24px; }
+  .cx-stat {
+    display: block; padding: 22px; border: 1px solid var(--slate-200); border-radius: 16px; text-decoration: none;
+    transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+  }
+  .cx-stat:hover { border-color: var(--green-accent); box-shadow: 0 8px 24px rgba(27,67,50,0.08); transform: translateY(-2px); }
+  .cx-stat-num { font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-size: 30px; font-weight: 700; letter-spacing: -1px; color: var(--green-deep); margin-bottom: 6px; }
+  .cx-stat p { margin: 0; font-size: 14px; line-height: 1.5; color: var(--slate-600); }
+  .cx-stat-meta { display: block; margin-top: 10px; font-size: 12px; font-weight: 600; color: var(--green-dark); }
+
+  .cx-sample {
     display: flex; align-items: flex-start; gap: 14px;
     padding: 20px; border: 1px solid var(--slate-200); border-radius: 16px;
     background: var(--green-ghost); text-decoration: none;
     transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
   }
-  .contact-sample:hover {
-    border-color: var(--green-accent);
-    box-shadow: 0 8px 24px rgba(27,67,50,0.08);
-    transform: translateY(-2px);
-  }
-  .contact-sample:focus-visible { outline: 2px solid var(--green-dark); outline-offset: 3px; }
-  .contact-sample-icon {
-    flex-shrink: 0; width: 40px; height: 40px; border-radius: 10px;
+  .cx-sample:hover { border-color: var(--green-accent); box-shadow: 0 8px 24px rgba(27,67,50,0.08); transform: translateY(-2px); }
+  .cx-sample:focus-visible { outline: 2px solid var(--green-dark); outline-offset: 3px; }
+  .cx-sample-icon {
+    flex-shrink: 0; width: 40px; height: 40px; border-radius: 12px;
     background: var(--white); border: 1px solid var(--slate-200);
     display: flex; align-items: center; justify-content: center; color: var(--green-dark);
   }
-  .contact-sample-body { flex: 1; }
-  .contact-sample-body strong {
-    display: flex; align-items: center; gap: 6px;
-    font-size: 15px; font-weight: 700; color: var(--green-deep); margin-bottom: 4px;
-  }
-  .contact-sample-body p { font-size: 14px; line-height: 1.55; color: var(--slate-600); margin: 0; }
-  .contact-sample-meta {
-    display: block; margin-top: 8px; font-family: var(--font-mono);
-    font-size: 11px; letter-spacing: 0.5px; text-transform: uppercase; color: var(--slate-500);
-  }
-
-  .contact-form-card {
-    background: var(--white); border: 1px solid var(--slate-200);
-    border-radius: 16px; padding: 40px;
-    box-shadow: 0 8px 40px rgba(27,67,50,0.06);
-  }
-  .contact-form-card h3 { font-size: 20px; font-weight: 700; color: var(--green-deep); margin-bottom: 8px; }
-  .contact-form-card > p { font-size: 15px; color: var(--slate-500); line-height: 1.6; margin-bottom: 24px; }
-
-  /* ── FORM CONTROLS (page-local; styles.css has no form primitives) ── */
-  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-  .form-group { margin-bottom: 20px; }
-  .form-group label { display: block; font-size: 13px; font-weight: 600; color: var(--green-deep); margin-bottom: 6px; }
-  .form-group input:not([type="radio"]),
-  .form-group select {
-    width: 100%; padding: 12px 16px; border: 1px solid var(--slate-200);
-    border-radius: 10px; font-size: 15px; font-family: var(--font-display);
-    color: var(--slate-800); background: var(--white);
-    transition: border-color 0.2s, box-shadow 0.2s;
-    -webkit-appearance: none; appearance: none;
-  }
-  .form-group input::placeholder { color: var(--slate-500); }
-  .form-group input:not([type="radio"]):focus,
-  .form-group select:focus {
-    outline: none; border-color: var(--green-dark);
-    box-shadow: 0 0 0 3px rgba(64,145,108,0.1);
-  }
-  .form-group select {
-    background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-    background-repeat: no-repeat; background-position: right 16px center;
-    padding-right: 40px; cursor: pointer;
-  }
-  .form-group select option[value=""] { color: var(--slate-500); }
-
-  /* Segmented role picker */
-  .role-fieldset { border: none; padding: 0; margin: 0 0 20px; }
-  .role-fieldset legend { font-size: 13px; font-weight: 600; color: var(--green-deep); margin-bottom: 6px; padding: 0; }
-  .role-toggle { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
-  .role-toggle input { position: absolute; opacity: 0; width: 0; height: 0; }
-  .role-toggle label {
-    display: flex; align-items: center; justify-content: center;
-    padding: 12px 8px; border: 1px solid var(--slate-200); border-radius: 10px;
-    font-size: 14px; font-weight: 600; color: var(--slate-600);
-    background: var(--white); cursor: pointer; text-align: center;
-    transition: all 0.2s;
-  }
-  .role-toggle label:hover { border-color: var(--green-accent); }
-  .role-toggle input:checked + label {
-    border-color: var(--green-dark); background: var(--green-ghost); color: var(--green-deep);
-    box-shadow: 0 0 0 3px rgba(64,145,108,0.1);
-  }
-  .role-toggle input:focus-visible + label { outline: 2px solid var(--green-dark); outline-offset: 2px; }
-
-  .conditional-fields { display: none; }
-  .conditional-fields.is-active { display: block; }
-
-  /* Status blocks */
-  .contact-form-card .btn-primary { width: 100%; justify-content: center; margin-top: 4px; }
-  .contact-form-card .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; transform: none; box-shadow: 0 4px 16px rgba(27,67,50,0.15); }
-  .turnstile-wrapper { display: flex; justify-content: center; margin-bottom: 20px; }
-  .form-error {
-    display: none; margin-top: 16px; padding: 12px 16px;
-    background: #fef2f2; border: 1px solid #fecaca; border-radius: 10px;
-    font-size: 14px; color: #991b1b; line-height: 1.5;
-  }
-  .form-success { display: none; text-align: center; padding: 24px 0; }
-  .form-success svg { color: var(--green-dark); margin-bottom: 12px; }
-  .form-success h3 { font-size: 20px; font-weight: 700; color: var(--green-deep); margin-bottom: 8px; }
-  .form-success p { font-size: 15px; color: var(--slate-500); line-height: 1.6; }
-  @keyframes spin { to { transform: rotate(360deg); } }
+  .cx-sample strong { display: block; font-size: 15px; font-weight: 700; color: var(--green-deep); margin-bottom: 4px; }
+  .cx-sample p { font-size: 14px; line-height: 1.55; color: var(--slate-600); margin: 0; }
+  .cx-sample-meta { display: block; margin-top: 8px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.5px; text-transform: uppercase; color: var(--slate-500); }
 
   /* ── TRUST BAR ── */
   .contact-trust { background: var(--slate-50); padding: 24px 48px; border-top: 1px solid var(--slate-100); }
@@ -178,18 +210,22 @@
   .contact-trust-inner span { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 500; color: var(--slate-500); }
   .contact-trust-inner svg { width: 16px; height: 16px; color: var(--green-dark); }
 
-  /* ── RESPONSIVE ── */
-  @media (max-width: 900px) {
-    .contact-hero { padding: 120px 24px 60px; }
-    .contact-hero-steps { grid-template-columns: 1fr; gap: 12px; }
-    .contact-section { padding: 60px 24px; }
-    .contact-container { grid-template-columns: 1fr; gap: 48px; max-width: 520px; }
+  /* ── RESPONSIVE: on a phone the form comes right after the headline ── */
+  @media (max-width: 960px) {
+    .cx-hero { padding: 104px 20px 48px; }
+    .cx-grid { grid-template-columns: 1fr; gap: 28px; max-width: 560px; grid-template-areas: "intro" "form" "next"; }
+    .cx-intro { padding-top: 0; }
+    .cx-sub { font-size: 16px; }
+    .cx-proof { padding: 56px 20px; }
+    .cx-stats { grid-template-columns: 1fr; }
+    .contact-trust { padding: 24px 20px; }
+    /* The chat bubble would sit on top of the submit button on a phone. */
+    .sq-toggle { display: none !important; }
   }
   @media (max-width: 600px) {
-    .form-row { grid-template-columns: 1fr; }
-    .contact-form-card { padding: 28px 20px; }
+    .cx-card { padding: 22px 18px; }
+    .cx-role { padding: 14px; grid-template-columns: 36px 1fr 16px; gap: 12px; }
   }
-
   /* Footer 5-col */
   .footer-top { grid-template-columns: 2fr 1fr 1fr 1fr 1fr; }
   @media (max-width: 900px) { .footer-top { grid-template-columns: 1fr 1fr; } }
@@ -205,9 +241,9 @@ document.head.appendChild(o)}initApollo();</script>
 {
   "@context": "https://schema.org",
   "@type": "ContactPage",
-  "name": "Get in Touch with ShelfSpace",
+  "name": "Free review — ShelfSpace",
   "url": "https://shelfspace.pro/contact",
-  "description": "Tell the ShelfSpace team about your operation and we'll get back to you — a straight conversation about your dispensary's profitability.",
+  "description": "Find out what your vendors owe you, or what your stores owe you. Free review, personally from ShelfSpace's founder, by email within one business day. No call, no commitment.",
   "isPartOf": { "@type": "WebSite", "name": "ShelfSpace", "url": "https://shelfspace.pro" },
   "about": {
     "@type": "Organization",
@@ -239,159 +275,167 @@ document.head.appendChild(o)}initApollo();</script>
   <div class="nav-hamburger" onclick="document.querySelector('.nav-links').classList.toggle('mobile-open'); event.stopPropagation();"><span></span><span></span><span></span></div>
 </nav>
 
-<!-- HERO (dark) -->
-<section class="contact-hero">
-  <div class="contact-hero-content reveal">
-    <div class="section-label">Get in touch</div>
-    <h1>Tell us about your operation.</h1>
-    <p class="contact-hero-sub">Tell us a bit about what you're running and we'll get back to you — usually within a business day. Need backoffice help for your cannabis business?</p>
-    <div class="contact-hero-steps">
-      <div class="contact-step">
-        <div class="contact-step-num">1</div>
-        <div class="contact-step-text"><strong>Tell us about your shop</strong>A few quick details. Takes 30 seconds.</div>
+<!-- HERO + FORM (the form sits above the fold) -->
+<section class="cx-hero">
+  <div class="cx-grid">
+    <div class="cx-intro">
+      <div class="section-label">Free review</div>
+      <h1>Find out what you're owed. Free.</h1>
+      <p class="cx-sub">Tell us who you are in 30 seconds. <strong>Chris, our founder, reads every one</strong> and emails you back within one business day. No call, no commitment.</p>
+    </div>
+
+    <div class="cx-next">
+      <h2>What happens next</h2>
+      <ol class="cx-steps">
+        <li><div class="cx-step-num">1</div><div><strong>You tell us who you are</strong><span>Three fields. Any email works.</span></div></li>
+        <li><div class="cx-step-num">2</div><div><strong>Chris emails you within one business day</strong><span>From his own inbox, with the one thing he needs to run your numbers.</span></div></li>
+        <li><div class="cx-step-num">3</div><div><strong>You get your review in dollars</strong><span>What you're owed and where money is leaking, vendor by vendor. Then you decide.</span></div></li>
+      </ol>
+      <div class="cx-guarantee">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+        <p><strong>Guaranteed.</strong> Dispensaries: the credits pay for it, or we refund the difference. Brands: we collect more than we cost, or we refund the difference.</p>
       </div>
-      <div class="contact-step">
-        <div class="contact-step-num">2</div>
-        <div class="contact-step-text"><strong>We reach out</strong>Usually within a business day, from someone who's run the business.</div>
-      </div>
-      <div class="contact-step">
-        <div class="contact-step-num">3</div>
-        <div class="contact-step-text"><strong>We talk when it works</strong>A quick call or an email thread, whatever's easier for you.</div>
+    </div>
+
+    <div class="cx-form-col">
+      <div class="cx-card" id="cxCard">
+        <div class="cx-card-founder">
+          <img src="/chris-avatar.jpg" alt="Chris Mitchem" width="44" height="44">
+          <p><strong>Chris Mitchem</strong>, founder. 10 years running cannabis stores. I answer every one of these myself.</p>
+        </div>
+
+        <form id="interestForm" novalidate>
+          <!-- Step 1: one tap, no typing -->
+          <div id="cxStep1">
+            <div class="cx-step-title" id="cxStep1Title">Which one are you?</div>
+            <div class="cx-roles" role="group" aria-labelledby="cxStep1Title">
+              <button type="button" class="cx-role" data-role="Retailer">
+                <div class="cx-role-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9l1.5-5h15L21 9"/><path d="M4 9v11h16V9"/><path d="M9 20v-6h6v6"/></svg></div>
+                <div><strong>I run a dispensary</strong><span>Pay vendors right, recover what they owe you</span></div>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+              </button>
+              <button type="button" class="cx-role" data-role="Vendor">
+                <div class="cx-role-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg></div>
+                <div><strong>I'm a cannabis brand</strong><span>Get paid by stores, on time</span></div>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+              </button>
+            </div>
+            <button type="button" class="cx-other-link" data-role="Other">Something else (accountant, partner, investor)</button>
+          </div>
+
+          <!-- Step 2: three fields -->
+          <div id="cxStep2" hidden>
+            <button type="button" class="cx-back" id="cxBack"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg> Back</button>
+            <div class="cx-step-title" id="cxStep2Title" tabindex="-1">Where should Chris send it?<span class="cx-chosen" id="cxChosen"></span></div>
+
+            <div class="form-group">
+              <label for="name">Your name</label>
+              <input type="text" id="name" name="name" autocomplete="name" placeholder="Mary Jane" required>
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" autocomplete="email" inputmode="email" placeholder="you@yourshop.com" required>
+              <span class="cx-hint">Any email works, Gmail included.</span>
+            </div>
+            <div class="form-group">
+              <label for="businessName" id="businessLabel">Business name</label>
+              <input type="text" id="businessName" name="businessName" autocomplete="organization" placeholder="Your business name" required>
+            </div>
+
+            <div class="form-group" id="cxShopsGroup" hidden>
+              <span class="cx-label" id="cxShopsLabel">How many stores? <span class="cx-optional">(optional)</span></span>
+              <div class="cx-chips" role="radiogroup" aria-labelledby="cxShopsLabel">
+                <input type="radio" id="shops-1" name="shops" value="1"><label for="shops-1">1</label>
+                <input type="radio" id="shops-2" name="shops" value="2-5"><label for="shops-2">2–5</label>
+                <input type="radio" id="shops-3" name="shops" value="6-10"><label for="shops-3">6–10</label>
+                <input type="radio" id="shops-4" name="shops" value="11-20"><label for="shops-4">11–20</label>
+                <input type="radio" id="shops-5" name="shops" value="21+"><label for="shops-5">21+</label>
+              </div>
+            </div>
+
+            <div class="form-group" id="cxOtherGroup" hidden>
+              <label for="otherDescription">What do you do?</label>
+              <input type="text" id="otherDescription" name="otherDescription" placeholder="e.g. accounting firm, finance partner, consultant">
+            </div>
+
+            <div class="form-group">
+              <label for="note">Anything Chris should know? <span class="cx-optional">(optional)</span></label>
+              <textarea id="note" name="note" rows="2" placeholder="e.g. our vendors never send credits for returns"></textarea>
+            </div>
+
+            <!-- Honeypot: invisible to people, irresistible to bots -->
+            <div class="cx-hp" aria-hidden="true">
+              <label for="website">Website</label>
+              <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+            </div>
+
+            <div class="cx-turnstile" id="cxTurnstile"></div>
+
+            <button type="submit" class="btn-primary" id="submitBtn">
+              <span id="submitLabel">Get my free review</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </button>
+            <p class="cx-fine">Chris replies within one business day. We never share your info.</p>
+            <div class="form-error" id="formError" role="alert" aria-live="assertive"></div>
+          </div>
+        </form>
+        <noscript><p style="font-size:14px;color:var(--slate-500);margin-top:16px;">Email Chris directly at <a href="mailto:chris@shelfspace.pro" style="color:var(--green-dark);font-weight:600;">chris@shelfspace.pro</a>.</p></noscript>
+
+        <div class="cx-success" id="formSuccess" role="status" aria-live="polite" tabindex="-1">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          <h3 id="cxSuccessTitle">You're in.</h3>
+          <p id="cxSuccessText">Chris will email you within one business day. A confirmation is on its way to your inbox now.</p>
+          <a class="cx-sample-link" href="/ShelfSpace_Sample_Evaluation.pdf" target="_blank" rel="noopener">While you wait: see a sample review (PDF) <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- CONTACT SECTION -->
-<section class="contact-section">
-  <div class="contact-container">
-    <div class="contact-info reveal">
-      <h2>Straight answers from real operators.</h2>
-      <div class="contact-founder">
-        <img src="/chris-avatar.jpg" alt="Chris Mitchem" style="width:64px;height:64px;border-radius:50%;object-fit:cover;">
-        <div>
-          <strong style="color:var(--green-deep);font-size:16px;">Chris Mitchem</strong>
-          <p style="font-size:14px;color:var(--slate-500);margin:4px 0 0;">Founder & CEO — 10 year cannabis operator</p>
-        </div>
-      </div>
-
-      <p style="font-size:15px;color:var(--slate-600);line-height:1.65;margin-bottom:28px;">No call center, no runaround. You'll hear back from real cannabis operators that can help. Ask questions, see how it works, and decide for yourself.</p>
-
-      <a href="/ShelfSpace_Sample_Evaluation.pdf" target="_blank" rel="noopener" class="contact-sample" aria-label="See a sample evaluation, 7-page PDF, opens in a new tab">
-        <div class="contact-sample-icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="13" y2="17"/></svg>
-        </div>
-        <div class="contact-sample-body">
-          <strong>See a sample evaluation
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-          </strong>
-          <p>This is what lands in your inbox: what your AP is leaking, what your vendors owe you, and what's trapped on your shelves — vendor by vendor, in dollars.</p>
-          <span class="contact-sample-meta">7 pages · PDF · Sample data</span>
-        </div>
+<!-- PROOF -->
+<section class="cx-proof">
+  <div class="cx-proof-inner reveal">
+    <h2>What a review turns up</h2>
+    <p class="cx-proof-lede">Real results from ShelfSpace clients. Names left out, numbers left in.</p>
+    <div class="cx-stats">
+      <a class="cx-stat" href="/blog/case-study-ebitda-credit-recovery">
+        <div class="cx-stat-num">$83,741/yr</div>
+        <p>in vendor credits at one dispensary. EBITDA up 15%.</p>
+        <span class="cx-stat-meta">First 90 days · Read the story →</span>
+      </a>
+      <a class="cx-stat" href="/blog/case-study-duplicate-invoice">
+        <div class="cx-stat-num">$4,873</div>
+        <p>duplicate invoice stopped before it was paid twice across two locations.</p>
+        <span class="cx-stat-meta">Read the story →</span>
+      </a>
+      <a class="cx-stat" href="/blog/case-study-vendor-credit-recovery">
+        <div class="cx-stat-num">$2,340</div>
+        <p>in co-marketing credits nobody was tracking.</p>
+        <span class="cx-stat-meta">Found in 14 days · Read the story →</span>
       </a>
     </div>
-
-    <div class="contact-form-card reveal reveal-delay-1">
-      <h3>Tell us about your operation</h3>
-      <p>A few quick details — we'll take it from there.</p>
-      <form id="interestForm" novalidate>
-        <div class="form-row">
-          <div class="form-group">
-            <label for="name">Name</label>
-            <input type="text" id="name" name="name" placeholder="Mary Jane" required>
-          </div>
-          <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" placeholder="mary@example.com" required>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label for="businessName">Business name</label>
-          <input type="text" id="businessName" name="businessName" placeholder="Your business name" required>
-        </div>
-
-        <fieldset class="role-fieldset">
-          <legend>I'm a…</legend>
-          <div class="role-toggle" id="roleToggle">
-            <input type="radio" id="role-retailer" name="role" value="Retailer">
-            <label for="role-retailer">Retailer</label>
-            <input type="radio" id="role-vendor" name="role" value="Vendor">
-            <label for="role-vendor">Vendor</label>
-            <input type="radio" id="role-other" name="role" value="Other">
-            <label for="role-other">Other</label>
-          </div>
-        </fieldset>
-
-        <div class="conditional-fields" id="fields-retailer" aria-hidden="true">
-          <div class="form-row">
-            <div class="form-group">
-              <label for="shops">Number of shops</label>
-              <select id="shops" name="shops" disabled>
-                <option value="" disabled selected>Select</option>
-                <option value="1">1</option>
-                <option value="2-5">2–5</option>
-                <option value="6-10">6–10</option>
-                <option value="11-20">11–20</option>
-                <option value="21+">21+</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="state-retailer">State</label>
-              <select id="state-retailer" name="state" disabled data-state-select>
-                <option value="" disabled selected>Select state</option>
-              </select>
-            </div>
-          </div>
-        </div>
-
-        <div class="conditional-fields" id="fields-vendor" aria-hidden="true">
-          <div class="form-group">
-            <label for="state-vendor">State</label>
-            <select id="state-vendor" name="state" disabled data-state-select>
-              <option value="" disabled selected>Select state</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="conditional-fields" id="fields-other" aria-hidden="true">
-          <div class="form-group">
-            <label for="otherDescription">Tell us what you do</label>
-            <input type="text" id="otherDescription" name="otherDescription" placeholder="e.g. accounting firm, finance partner, consultant" disabled>
-          </div>
-        </div>
-
-        <div class="form-group turnstile-wrapper">
-          <div class="cf-turnstile" data-sitekey="0x4AAAAAACiEpqqSU9lohNi-" data-callback="onTurnstileSuccess" data-expired-callback="onTurnstileExpired"></div>
-        </div>
-
-        <button type="submit" class="btn-primary" id="submitBtn" disabled>
-          Send it over
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-        </button>
-        <div class="form-error" id="formError" role="alert" aria-live="assertive"></div>
-      </form>
-      <noscript><p style="font-size:14px;color:var(--slate-500);margin-top:16px;">Email us directly at <a href="mailto:support@shelfspace.pro" style="color:var(--green-dark);font-weight:600;">support@shelfspace.pro</a>.</p></noscript>
-
-      <div class="form-success" id="formSuccess" role="status" aria-live="polite">
-        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-        <h3>Got it.</h3>
-        <p>Thanks — we've got your details and someone from our team will be in touch, usually within a business day.</p>
+    <a href="/ShelfSpace_Sample_Evaluation.pdf" target="_blank" rel="noopener" class="cx-sample" aria-label="See a sample review, 7-page PDF, opens in a new tab">
+      <div class="cx-sample-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="13" y2="17"/></svg>
       </div>
-    </div>
+      <div>
+        <strong>See a sample review →</strong>
+        <p>This is what lands in your inbox: what your AP is leaking, what your vendors owe you, and what's trapped on your shelves, vendor by vendor, in dollars.</p>
+        <span class="cx-sample-meta">7 pages · PDF · Sample data</span>
+      </div>
+    </a>
   </div>
 </section>
 
 <!-- TRUST BAR -->
 <section class="contact-trust">
   <div class="contact-trust-inner">
-    <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Reply within a business day</span>
+    <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Reply within one business day</span>
     <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> No commitment</span>
-    <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> Straight to our team</span>
+    <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg> All by email, no calls</span>
     <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg> Certified Metrc vendor</span>
   </div>
 </section>
-
 <!-- FOOTER -->
 <footer>
   <div class="footer-top">
@@ -419,71 +463,132 @@ document.head.appendChild(o)}initApollo();</script>
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
   // ── Interest form ──
+  // Two steps: one tap to pick a side, then three fields. The bot check
+  // (Turnstile) runs invisibly in the background and never disables the
+  // button — a slow or failed check used to strand real people.
+  var SITEKEY = '0x4AAAAAACiEpqqSU9lohNi-';
+  var pageLoadedAt = Date.now();
   var turnstileToken = null;
-  function onTurnstileSuccess(token) { turnstileToken = token; document.getElementById('submitBtn').disabled = false; }
-  function onTurnstileExpired() { turnstileToken = null; document.getElementById('submitBtn').disabled = true; }
+  var turnstileWidget = null;
+  var tokenWaiters = [];
+  var selectedRole = null;
 
-  // Populate both state selects (avoids duplicating a 51-option list in markup)
-  var US_STATES = [['AL','Alabama'],['AK','Alaska'],['AZ','Arizona'],['AR','Arkansas'],['CA','California'],['CO','Colorado'],['CT','Connecticut'],['DE','Delaware'],['FL','Florida'],['GA','Georgia'],['HI','Hawaii'],['ID','Idaho'],['IL','Illinois'],['IN','Indiana'],['IA','Iowa'],['KS','Kansas'],['KY','Kentucky'],['LA','Louisiana'],['ME','Maine'],['MD','Maryland'],['MA','Massachusetts'],['MI','Michigan'],['MN','Minnesota'],['MS','Mississippi'],['MO','Missouri'],['MT','Montana'],['NE','Nebraska'],['NV','Nevada'],['NH','New Hampshire'],['NJ','New Jersey'],['NM','New Mexico'],['NY','New York'],['NC','North Carolina'],['ND','North Dakota'],['OH','Ohio'],['OK','Oklahoma'],['OR','Oregon'],['PA','Pennsylvania'],['RI','Rhode Island'],['SC','South Carolina'],['SD','South Dakota'],['TN','Tennessee'],['TX','Texas'],['UT','Utah'],['VT','Vermont'],['VA','Virginia'],['WA','Washington'],['WV','West Virginia'],['WI','Wisconsin'],['WY','Wyoming'],['DC','District of Columbia']];
-  document.querySelectorAll('[data-state-select]').forEach(function(sel) {
-    US_STATES.forEach(function(s) { var o = document.createElement('option'); o.value = s[0]; o.textContent = s[1]; sel.appendChild(o); });
-  });
-
-  // Show only the fields relevant to the selected role; disable the rest so
-  // hidden inputs never submit and never block validation.
-  var BLOCKS = { Retailer: 'fields-retailer', Vendor: 'fields-vendor', Other: 'fields-other' };
-  function selectRole(role) {
-    Object.keys(BLOCKS).forEach(function(key) {
-      var block = document.getElementById(BLOCKS[key]);
-      var on = key === role;
-      block.classList.toggle('is-active', on);
-      block.setAttribute('aria-hidden', on ? 'false' : 'true');
-      block.querySelectorAll('input, select').forEach(function(f) { f.disabled = !on; });
+  function resolveToken(token) {
+    turnstileToken = token;
+    var waiting = tokenWaiters; tokenWaiters = [];
+    waiting.forEach(function(fn) { fn(token); });
+  }
+  window.onTurnstileLoad = function() {
+    turnstileWidget = turnstile.render('#cxTurnstile', {
+      sitekey: SITEKEY,
+      appearance: 'interaction-only',
+      callback: resolveToken,
+      'expired-callback': function() { turnstileToken = null; if (window.turnstile && turnstileWidget !== null) turnstile.reset(turnstileWidget); },
+      'error-callback': function() { turnstileToken = null; },
+    });
+  };
+  // Resolve with a token, or null after the timeout (the server then decides).
+  function getToken(timeoutMs) {
+    if (turnstileToken) return Promise.resolve(turnstileToken);
+    return new Promise(function(resolve) {
+      var done = false;
+      var timer = setTimeout(function() { if (!done) { done = true; resolve(null); } }, timeoutMs);
+      tokenWaiters.push(function(t) { if (!done) { done = true; clearTimeout(timer); resolve(t); } });
     });
   }
-  document.getElementById('roleToggle').addEventListener('change', function(e) {
-    if (e.target.name === 'role') selectRole(e.target.value);
+
+  function track(name, params) { try { if (window.gtag) gtag('event', name, params || {}); } catch (e) { /* never block the lead */ } }
+
+  var COPY = {
+    Retailer: { chip: 'Dispensary', business: 'Dispensary name', button: 'Get my free review' },
+    Vendor:   { chip: 'Brand',      business: 'Brand name',      button: 'Get my free review' },
+    Other:    { chip: 'Other',      business: 'Company name',    button: 'Send it to Chris' },
+  };
+
+  function showStep(n) {
+    document.getElementById('cxStep1').hidden = n !== 1;
+    document.getElementById('cxStep2').hidden = n !== 2;
+  }
+
+  function selectRole(role, opts) {
+    selectedRole = role;
+    var c = COPY[role];
+    document.getElementById('cxChosen').textContent = c.chip;
+    document.getElementById('businessLabel').textContent = c.business;
+    document.getElementById('submitLabel').textContent = c.button;
+    document.getElementById('cxShopsGroup').hidden = role !== 'Retailer';
+    document.getElementById('cxOtherGroup').hidden = role !== 'Other';
+    showStep(2);
+    if (!(opts && opts.silent)) {
+      track('lead_role_selected', { role: role });
+      document.getElementById('name').focus({ preventScroll: true });
+    }
+  }
+
+  document.querySelectorAll('[data-role]').forEach(function(btn) {
+    btn.addEventListener('click', function() { selectRole(btn.getAttribute('data-role')); });
+  });
+  document.getElementById('cxBack').addEventListener('click', function() {
+    showStep(1);
+    var first = document.querySelector('.cx-role');
+    if (first) first.focus();
   });
 
-  // Preselect role from ?role= or the legacy ?subject=partner-call link
+  // Preselect from ?role= (or the legacy ?subject=partner-call link)
   var params = new URLSearchParams(window.location.search);
   var wanted = (params.get('role') || '').toLowerCase();
   if (params.get('subject') === 'partner-call') wanted = 'other';
-  if (wanted === 'retailer' || wanted === 'vendor' || wanted === 'other') {
-    var radio = document.getElementById('role-' + wanted);
-    if (radio) { radio.checked = true; selectRole(radio.value); }
-  }
+  var ROLE_PARAM = { retailer: 'Retailer', dispensary: 'Retailer', vendor: 'Vendor', brand: 'Vendor', other: 'Other' };
+  if (ROLE_PARAM[wanted]) selectRole(ROLE_PARAM[wanted], { silent: true });
 
-  function showError(msg) {
+  function showError(html) {
     var el = document.getElementById('formError');
-    el.textContent = msg; el.style.display = 'block';
+    el.innerHTML = html; el.style.display = 'block';
+  }
+  function fieldError(id, msg) {
+    var f = document.getElementById(id);
+    f.setAttribute('aria-invalid', 'true');
+    f.addEventListener('input', function clear() { f.removeAttribute('aria-invalid'); f.removeEventListener('input', clear); });
+    f.focus();
+    showError(msg);
   }
 
+  // "Tuesday, 10/07/2026" — the next weekday after today, local time, MM/DD/YYYY.
+  function nextBusinessDay() {
+    var d = new Date();
+    do { d.setDate(d.getDate() + 1); } while (d.getDay() === 0 || d.getDay() === 6);
+    var days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+    var mm = String(d.getMonth() + 1).padStart(2, '0');
+    var dd = String(d.getDate()).padStart(2, '0');
+    return days[d.getDay()] + ', ' + mm + '/' + dd + '/' + d.getFullYear();
+  }
+
+  var SUBMIT_HTML = null;
   document.getElementById('interestForm').addEventListener('submit', async function(e) {
     e.preventDefault();
     var errorEl = document.getElementById('formError');
     errorEl.style.display = 'none';
-    if (!turnstileToken) { showError('Please complete the verification check.'); return; }
+    if (!selectedRole) { showStep(1); return; }
 
-    var role = (document.querySelector('input[name="role"]:checked') || {}).value;
     var name = document.getElementById('name').value.trim();
     var email = document.getElementById('email').value.trim();
     var businessName = document.getElementById('businessName').value.trim();
-    if (!name || !email || !businessName) { showError('Please fill in your name, email, and business name.'); return; }
-    if (!role) { showError('Let us know whether you’re a retailer, vendor, or something else.'); return; }
+    if (!name) return fieldError('name', 'Please add your name.');
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return fieldError('email', 'That email doesn’t look right. Mind checking it?');
+    if (!businessName) return fieldError('businessName', 'Please add your business name.');
 
-    var payload = { name: name, email: email, businessName: businessName, role: role, 'cf-turnstile-response': turnstileToken };
-    if (role === 'Retailer') {
-      payload.shops = document.getElementById('shops').value;
-      payload.state = document.getElementById('state-retailer').value;
-      if (!payload.shops) { showError('Please select how many shops you run.'); return; }
-      if (!payload.state) { showError('Please select your state.'); return; }
-    } else if (role === 'Vendor') {
-      payload.state = document.getElementById('state-vendor').value;
-      if (!payload.state) { showError('Please select your state.'); return; }
-    } else if (role === 'Other') {
+    var payload = {
+      name: name, email: email, businessName: businessName, role: selectedRole,
+      note: document.getElementById('note').value.trim().slice(0, 1000),
+      website: document.getElementById('website').value,
+      elapsedMs: Date.now() - pageLoadedAt,
+    };
+    if (selectedRole === 'Retailer') {
+      var shop = document.querySelector('input[name="shops"]:checked');
+      if (shop) payload.shops = shop.value;
+    } else if (selectedRole === 'Other') {
       payload.otherDescription = document.getElementById('otherDescription').value.trim();
-      if (!payload.otherDescription) { showError('Tell us a bit about what you do.'); return; }
+      if (!payload.otherDescription) return fieldError('otherDescription', 'Tell us a bit about what you do.');
     }
 
     // Where they came from: first-touch (captured site-wide by shelfiq-widget.js
@@ -506,10 +611,16 @@ document.head.appendChild(o)}initApollo();</script>
     })();
 
     var btn = document.getElementById('submitBtn');
+    if (SUBMIT_HTML === null) SUBMIT_HTML = btn.innerHTML;
     btn.disabled = true;
-    btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="animation:spin 1s linear infinite"><path d="M21 12a9 9 0 11-6.219-8.56"/></svg> Sending…';
+    btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="animation:spin 1s linear infinite" aria-hidden="true"><path d="M21 12a9 9 0 11-6.219-8.56"/></svg> Sending…';
 
     try {
+      // Usually already done in the background; if Cloudflare wants a click,
+      // the widget appears above the button and we wait for it.
+      payload['cf-turnstile-response'] = await getToken(15000);
+      if (!payload['cf-turnstile-response']) throw new Error('verify');
+
       var res = await fetch('/api/interest', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -519,17 +630,43 @@ document.head.appendChild(o)}initApollo();</script>
         var data = await res.json().catch(function() { return null; });
         throw new Error((data && data.error) || 'Something went wrong. Please try again.');
       }
+      var first = name.split(/\s+/)[0];
       document.getElementById('interestForm').style.display = 'none';
-      document.getElementById('formSuccess').style.display = 'block';
-      if (window.gtag) gtag('event', 'generate_lead');
+      document.querySelector('.cx-card-founder').style.display = 'none';
+      document.getElementById('cxSuccessTitle').textContent = 'You’re in, ' + first + '.';
+      var text = document.getElementById('cxSuccessText');
+      text.textContent = '';
+      text.append('Chris will email you at ');
+      var strong = document.createElement('strong'); strong.textContent = email; text.append(strong);
+      text.append(' by end of day ' + nextBusinessDay() + '. A confirmation is on its way now.');
+      var success = document.getElementById('formSuccess');
+      success.style.display = 'block';
+      success.focus({ preventScroll: true });
+      success.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      track('generate_lead', { role: selectedRole });
     } catch (err) {
-      showError(err.message + ' You can also email support@shelfspace.pro.');
-      if (window.turnstile) turnstile.reset();
+      var msg = err.message === 'verify'
+        ? 'We couldn’t confirm you’re not a bot.'
+        : err.message;
+      showError(escapeText(msg) + ' Or just email Chris at <a href="mailto:chris@shelfspace.pro">chris@shelfspace.pro</a>.');
       turnstileToken = null;
-      btn.disabled = true;
-      btn.innerHTML = 'Send it over <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>';
+      if (window.turnstile && turnstileWidget !== null) turnstile.reset(turnstileWidget);
+      btn.disabled = false;
+      btn.innerHTML = SUBMIT_HTML;
     }
   });
+
+  function escapeText(s) {
+    return String(s).replace(/[&<>"']/g, function(c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; });
+  }
+
+  // Load Turnstile only after onTurnstileLoad exists (explicit render, invisible unless needed).
+  (function() {
+    var s = document.createElement('script');
+    s.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=onTurnstileLoad';
+    s.async = true; s.defer = true;
+    document.head.appendChild(s);
+  })();
 </script>
 <script src="/shelfiq-widget.js"></script>
 </body>
