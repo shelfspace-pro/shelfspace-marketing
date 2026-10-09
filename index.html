@@ -215,6 +215,7 @@
 .case-tag--consignment { background: rgba(59,130,246,0.08); color: #2563eb; }
 .case-tag--credit { background: rgba(217,119,6,0.08); color: #b45309; }
 .case-tag--ops { background: rgba(124,58,237,0.08); color: #7c3aed; }
+.case-tag--brand { background: rgba(13,148,136,0.08); color: #0f766e; }
 .case-amount { font-family: var(--font-mono); font-size: clamp(28px, 3vw, 36px); font-weight: 700; color: var(--green-deep); letter-spacing: -1.5px; margin-bottom: 8px; }
 .case-headline { font-size: 17px; font-weight: 600; color: var(--slate-800); line-height: 1.4; margin-bottom: 12px; }
 .case-summary { font-size: 15px; line-height: 1.65; color: var(--slate-500); margin-bottom: 20px; }
@@ -1068,11 +1069,12 @@
   <div class="case-studies-inner">
     <div class="case-studies-header reveal">
       <h2>What we find, every month</h2>
-      <p class="case-studies-lead">Across the dispensaries we work with, the money hides in the same quiet corners &mdash; duplicate invoices, unfiled credits, product that expires before it sells. <strong>We find it, every month.</strong></p>
+      <p class="case-studies-lead">Across the dispensaries and brands we work with, the money hides in the same quiet corners &mdash; duplicate invoices, unfiled credits, invoices nobody chased. <strong>We find it, every month.</strong></p>
       <p>De-identified to protect our clients.</p>
     </div>
     <div class="case-filters reveal">
       <button class="case-filter active" data-filter="all">All</button>
+      <button class="case-filter" data-filter="brands">For Brands</button>
       <button class="case-filter" data-filter="accounts-payable">Accounts Payable</button>
       <button class="case-filter" data-filter="consignment">Consignment</button>
       <button class="case-filter" data-filter="credit-recovery">Credit Recovery</button>
@@ -1082,6 +1084,16 @@
       <button class="case-arrow case-arrow--left is-hidden" aria-label="Scroll left"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg></button>
       <button class="case-arrow case-arrow--right" aria-label="Scroll right"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 6 15 12 9 18"/></svg></button>
     <div class="case-grid">
+      <div class="case-card reveal" data-category="brands">
+        <div class="case-tag case-tag--brand">For Brands · ShelfVerify</div>
+        <div class="case-amount">$1.3M</div>
+        <div class="case-headline">A brand's invoices, checked against Metrc line by line</div>
+        <p class="case-summary">1,578 invoice lines across 173 invoices, each matched to the state's own shipment record. When a store says "that's not what we got," the answer is already on file.</p>
+        <div class="case-meta">
+          <span class="case-speed">First 3 weeks</span>
+          <a href="/shelfverify" class="case-link">See ShelfVerify <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        </div>
+      </div>
       <div class="case-card reveal" data-category="accounts-payable">
         <div class="case-tag case-tag--ap">Accounts Payable</div>
         <div class="case-amount">$784</div>
@@ -1098,6 +1110,16 @@
         <div class="case-meta">
           <span class="case-speed">Same-day fix</span>
           <a href="/blog/case-study-duplicate-invoice" class="case-link">Read the full story <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        </div>
+      </div>
+      <div class="case-card reveal" data-category="brands">
+        <div class="case-tag case-tag--brand">For Brands · ShelfCollect</div>
+        <div class="case-amount">94 reminders</div>
+        <div class="case-headline">Past-due stores followed up, without the brand writing one</div>
+        <p class="case-summary">In two weeks we sent 94 payment reminders to a brand's stores, every one in the brand's own name. Nobody on their team had to write, track, or send them.</p>
+        <div class="case-meta">
+          <span class="case-speed">First 2 weeks</span>
+          <a href="/accounts-receivable" class="case-link">See ShelfCollect <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
         </div>
       </div>
       <div class="case-card reveal reveal-delay-1" data-category="accounts-payable">
