@@ -929,7 +929,7 @@
         <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span><b>Consignment</b> settled weekly, if you sell on it.</span></li>
         <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span><b>Vendor emails and QuickBooks</b> handled and kept current.</span></li>
       </ul>
-      <div class="h-offer-val"><span>Worth, first year</span><b id="h-val-pay">$185,500</b></div>
+      <div class="h-offer-val"><span>Worth, first year</span><b id="h-val-pay">$224,500</b></div>
       <a class="h-offer-link" href="/accounts-payable">See ShelfPay <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
     </div>
     <div class="h-offer-card reveal reveal-delay-1">
@@ -942,7 +942,7 @@
         <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span><b>A weekly "who owes what"</b> list for every rep.</span></li>
         <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span><b>QuickBooks</b> updated as payments land.</span></li>
       </ul>
-      <div class="h-offer-val"><span>Worth, first year</span><b id="h-val-collect">$510,100</b></div>
+      <div class="h-offer-val"><span>Worth, first year</span><b id="h-val-collect">$301,000</b></div>
       <a class="h-offer-link" href="/accounts-receivable">See ShelfCollect <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
     </div>
   </div>
@@ -958,13 +958,13 @@
   function usd(n) { return '$' + (Math.round(n / 100) * 100).toLocaleString('en-US'); }
   function update() {
     var S = parseInt(slider.value, 10);
-    // Dispensary, per month: credits 0.85%, over-billing 1% of purchases (~half of sales), AP clerk 0.6%,
-    // on-time payments 0.15%, vendor email 0.15%, QuickBooks 0.2%, consignment 0.2%, plus $2,000 of owner time.
-    var pay = (S * 0.0265 + 2000) * 12 + 2500;
+    // Dispensary, per month: credits 0.85%, over-billing 1% of purchases (~half of sales), AP clerk 0.9%,
+    // on-time payments 0.5%, vendor email 0.15%, QuickBooks 0.2%, consignment 0.2%, plus $2,000 of owner time.
+    var pay = (S * 0.033 + 2000) * 12 + 2500;
     // Brand, per month: more sales 2%, bad debt 1%, AR clerk 0.9%, pay links 0.1%, replies 0.15%, rep list 0.06%,
-    // QuickBooks 0.15%; plus one-time cash freed by getting paid 15 days faster.
+    // QuickBooks 0.15%; plus cash freed by getting paid 15 days faster, valued at 15% a year.
     var cash = Math.floor(S * 12 * 15 / 365 / 1000) * 1000;
-    var col = S * 0.0436 * 12 + 2500 + cash;
+    var col = S * 0.0436 * 12 + 2500 + cash * 0.15;
     valEl.textContent = short(S);
     payEl.textContent = usd(pay); colEl.textContent = usd(col);
     var pct = (S - slider.min) / (slider.max - slider.min) * 100;
