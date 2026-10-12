@@ -209,7 +209,7 @@
   "@type": "TechArticle",
   "headline": "Sales Rep Assignments",
   "datePublished": "2026-07-03",
-  "dateModified": "2026-09-25",
+  "dateModified": "2026-10-12",
   "author": { "@type": "Organization", "name": "ShelfSpace", "url": "https://shelfspace.pro" },
   "publisher": { "@type": "Organization", "name": "ShelfSpace" },
   "url": "https://shelfspace.pro/docs/vendor-portal/sales-rep-assignments"
@@ -244,7 +244,7 @@
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-H2LBJT03WE');</script>
 </head>
 <body>
-<!-- last-synced: 2026-09-25 -->
+<!-- last-synced: 2026-10-12 -->
 
 <!-- NAV (same as all site pages) -->
 <nav id="nav">
@@ -296,6 +296,7 @@
         <li>By default, the platform matches a rep to a retailer by state coverage — zero setup</li>
         <li>Vendors assign every account to a rep in one place: by account, by rep, in bulk, or from a spreadsheet</li>
         <li>Filter AR Aging by rep to see exactly what each rep's accounts owe</li>
+        <li>A store that buys from several reps? Put a different rep on any single invoice</li>
         <li>Each rep gets a <a href="/docs/vendor-portal/weekly-sales-rep-digest">weekly collections email</a> every Monday with one-tap pay links</li>
         <li>The primary rep is auto-CC'd on settlement and payment emails — no more manual forwarding</li>
       </ul>
@@ -330,7 +331,7 @@
     <p>Use <strong>Add Rep</strong> to add each person. Covered states are what power the default: any retailer in a state your rep covers will see that rep automatically, with no per-account work on your end. If two of your reps cover the same state, both show up by default until someone pins a specific one to an account.</p>
 
     <h2>For Vendors: Assign Every Account to a Rep</h2>
-    <p>Right under the roster, <strong>Account Assignments</strong> lists every dispensary that buys from you, including ones that are paid up. Each account gets exactly one rep. Assigning a new rep replaces the old one. Work it two ways and switch between them any time:</p>
+    <p>Right under the roster, <strong>Account Assignments</strong> lists every dispensary that buys from you, including ones that are paid up. Each account has one main rep, and assigning a new one replaces the old one. That rep covers every invoice for the store, unless you <a href="#change-the-rep-on-a-single-invoice">put a different rep on a single invoice</a>. Work it two ways and switch between them any time:</p>
     <ul>
       <li><strong>By account</strong> — every account with a rep dropdown on its row. Unassigned accounts float to the top, so you can see the gaps first. Search, filter by rep, or check a batch of accounts and use <strong>Assign to…</strong> to move them all at once.</li>
       <li><strong>By rep</strong> — each rep's accounts as a list, with <strong>Add accounts</strong> to hand them more. An Unassigned card shows what's still open.</li>
@@ -345,10 +346,36 @@
     <p class="shot-cap"><strong>Import preview.</strong> Nothing is saved until you click Apply import.</p>
 
     <h2>Filter AR Aging by Sales Rep</h2>
-    <p>On your AR Aging screen, the <strong>sales rep filter</strong> narrows the aging buckets and the invoice list to one rep's accounts, or to <strong>Unassigned</strong>. Use it in a Monday sales meeting to go rep by rep through who owes what, or to spot accounts nobody owns yet.</p>
+    <p>On your AR Aging screen, the <strong>sales rep filter</strong> narrows the aging buckets and the invoice list to one rep's invoices, or to <strong>Unassigned</strong>. An invoice you gave its own rep shows under that rep. Use it in a Monday sales meeting to go rep by rep through who owes what, or to spot accounts nobody owns yet.</p>
+
+    <h2 id="change-the-rep-on-a-single-invoice">Change the Rep on a Single Invoice</h2>
+    <p>Some stores buy from more than one of your reps. A processor (a company that buys your product to make its own) is the classic case: several of your reps sell to it, each with their own orders. If the store's one rep covered every invoice, the others would never see what they sold or follow up on it. So you can put a different rep on any single invoice.</p>
+    <ol class="docs-steps">
+      <li>Open <strong>Payments › AR Aging</strong> and click the store to open its invoices.</li>
+      <li>Each invoice has its own rep menu. Pick the rep who made that sale. It saves right away.</li>
+      <li>A small <strong>On this invoice</strong> tag shows the rep was set by hand. Hover it to see who set it and when.</li>
+    </ol>
+    <div class="shot"><img src="/screenshots/sales-reps/invoice-rep-menu.webp" alt="An open store in AR Aging with the rep menu open on one invoice: Account default (Avery Lin), Avery Lin, Jordan Reyes" width="1400" height="311" loading="lazy"></div>
+    <p class="shot-cap"><strong>Pick the rep for one invoice.</strong> Account default keeps it with the store's rep.</p>
+    <div class="shot"><img src="/screenshots/sales-reps/invoice-rep-pill.webp" alt="An invoice now set to Jordan Reyes with an On this invoice tag next to the rep" width="1400" height="296" loading="lazy"></div>
+    <p class="shot-cap"><strong>On this invoice</strong> means the rep was picked by hand for just this invoice.</p>
+    <p>Changing a lot of invoices? Click <strong>Set reps</strong>, check the invoices you want, and pick one rep for all of them at once. You can also change the rep from the invoice's own page, next to <strong>Sales rep</strong>.</p>
+    <div class="shot"><img src="/screenshots/sales-reps/invoice-rep-bulk.webp" alt="Set reps turned on: two invoices checked and a bar reading 2 invoices selected with Set rep, Account default and Done" width="1400" height="960" loading="lazy"></div>
+    <p class="shot-cap"><strong>Set reps:</strong> check the invoices, then pick one rep for all of them. The bar stays in view while you scroll.</p>
+    <p>To undo it, choose <strong>Account default</strong> in the same menu. The invoice goes back to following the store's rep.</p>
+    <p>Once an invoice has its own rep, that rep is the one who:</p>
+    <ul>
+      <li>sees it under their name in the AR Aging <strong>sales rep filter</strong></li>
+      <li>sees it in their own view, if they have a login</li>
+      <li>gets it on their <a href="/docs/vendor-portal/weekly-sales-rep-digest">Monday collections email</a></li>
+      <li>is copied when that invoice is emailed to the store</li>
+    </ul>
+    <div class="docs-highlight">
+      <strong>Hand-picked invoices stay put.</strong> If you later change the store's rep, invoices you set by hand keep the rep you picked. Only invoices on Account default move to the new rep.
+    </div>
 
     <h2>The Weekly Collections Email</h2>
-    <p>Assignments also drive the <a href="/docs/vendor-portal/weekly-sales-rep-digest">weekly sales rep collections email</a>. Every Monday, each rep gets every open invoice on their accounts, oldest first, with one-tap Text and Email buttons that send the buyer a pay link. Accounts with no rep go to your AR contact, so nothing falls through. It's part of <a href="/collections">ShelfCollect</a>.</p>
+    <p>Assignments also drive the <a href="/docs/vendor-portal/weekly-sales-rep-digest">weekly sales rep collections email</a>. Every Monday, each rep gets every open invoice on their accounts (plus any single invoice you gave them), oldest first, with one-tap Text and Email buttons that send the buyer a pay link. Accounts with no rep go to your AR contact, so nothing falls through. It's part of <a href="/collections">ShelfCollect</a>.</p>
 
     <h2>For Retailers: Assign the Rep You Actually Work With</h2>
     <p>If you're a retailer, you don't manage anyone's roster — but you can control which of a vendor's reps is tied to <em>your</em> account. Open that vendor on its detail page in the retailer portal and look for the <strong>Your Sales Rep</strong> panel. It shows the rep ShelfSpace currently resolved for you, whether that came from an explicit assignment or the state-coverage default.</p>
