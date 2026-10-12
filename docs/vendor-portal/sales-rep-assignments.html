@@ -290,7 +290,66 @@
     <!-- AT A GLANCE -->
     <div class="docs-glance">
       <h2>At a Glance</h2>
+      <ul>
+        <li>Sales rep assignments put the right vendor rep on every account — automatically</li>
+        <li>Vendors keep a roster of their reps and the states each one covers</li>
+        <li>By default, the platform matches a rep to a retailer by state coverage — zero setup</li>
+        <li>Vendors assign every account to a rep in one place: by account, by rep, in bulk, or from a spreadsheet</li>
+        <li>Filter AR Aging by rep to see exactly what each rep's accounts owe</li>
+        <li>A store that buys from several reps? Put a different rep on any single invoice</li>
+        <li>Each rep gets a <a href="/docs/vendor-portal/weekly-sales-rep-digest">weekly collections email</a> every Monday with one-tap pay links</li>
+        <li>The primary rep is auto-CC'd on settlement and payment emails — no more manual forwarding</li>
+      </ul>
+    </div>
 
+    <!-- BODY CONTENT -->
+    <h2>What Are Sales Rep Assignments?</h2>
+    <p>Most cannabis vendors have more than one sales rep — often a different rep per state, and sometimes several reps in one state splitting up regions or accounts. Until now there was no clean way to say "this rep handles this specific retailer." <strong>Sales rep assignments</strong> fix that: they connect the right person to the right account so they stay in the loop on payment and settlement activity — without anyone manually CC'ing them.</p>
+
+    <p>The whole thing works on two levels: a <strong>roster</strong> the vendor maintains, and a <strong>per-account assignment</strong> that pins a specific rep to a specific retailer. If no one has pinned a rep, the platform figures it out from state coverage. So it just works out of the box, and you only reach for a manual override when you want one.</p>
+
+    <h2>How ShelfSpace Picks the Rep</h2>
+    <p>For any given retailer, the platform resolves the sales rep in this order:</p>
+    <ol class="docs-steps">
+      <li><strong>Explicit assignment</strong> — if a specific rep has been assigned to this retailer's account, that rep is used.</li>
+      <li><strong>State-coverage default</strong> — if there's no explicit assignment, the platform falls back to the rep (or reps) whose covered states include the retailer's state.</li>
+      <li><strong>None</strong> — if neither applies, the account simply has no rep attached, and nothing breaks.</li>
+    </ol>
+    <div class="docs-highlight">
+      <strong>The takeaway:</strong> state coverage is the zero-effort path — set each rep's states once and the right person shows up everywhere they operate. An explicit assignment is the fine-grained override for when two reps cover the same state and you need to name which one owns a particular account.
+    </div>
+
+    <h2>For Vendors: Build Your Sales Rep Roster</h2>
+    <p>If you're a vendor, open <strong>Settings › Sales Reps</strong> in the vendor portal. This is your team's roster. For each rep you can record:</p>
+    <ul>
+      <li><strong>Name</strong> (required)</li>
+      <li><strong>Email</strong> — where account emails get CC'd</li>
+      <li><strong>Phone</strong></li>
+      <li><strong>Title</strong> — e.g. Territory Manager</li>
+      <li><strong>Covered States</strong> — the states this rep is responsible for</li>
+    </ul>
+    <p>Use <strong>Add Rep</strong> to add each person. Covered states are what power the default: any retailer in a state your rep covers will see that rep automatically, with no per-account work on your end. If two of your reps cover the same state, both show up by default until someone pins a specific one to an account.</p>
+
+    <h2>For Vendors: Assign Every Account to a Rep</h2>
+    <p>Right under the roster, <strong>Account Assignments</strong> lists every dispensary that buys from you, including ones that are paid up. Each account has one main rep, and assigning a new one replaces the old one. That rep covers every invoice for the store, unless you <a href="#change-the-rep-on-a-single-invoice">put a different rep on a single invoice</a>. Work it two ways and switch between them any time:</p>
+    <ul>
+      <li><strong>By account</strong> — every account with a rep dropdown on its row. Unassigned accounts float to the top, so you can see the gaps first. Search, filter by rep, or check a batch of accounts and use <strong>Assign to…</strong> to move them all at once.</li>
+      <li><strong>By rep</strong> — each rep's accounts as a list, with <strong>Add accounts</strong> to hand them more. An Unassigned card shows what's still open.</li>
+    </ul>
+    <div class="shot"><img src="/screenshots/sales-reps/assign-bulk.webp" alt="Account Assignments by account with three unassigned accounts selected and the Assign to bulk bar" width="1400" height="1143" loading="lazy"></div>
+    <p class="shot-cap"><strong>By account:</strong> unassigned accounts float to the top. Select a batch and assign them at once.</p>
+    <div class="shot"><img src="/screenshots/sales-reps/assign-by-rep.webp" alt="Account Assignments by rep showing each rep's accounts and an Unassigned accounts card" width="1400" height="1220" loading="lazy"></div>
+    <p class="shot-cap"><strong>By rep:</strong> each rep's book, with Add accounts.</p>
+    <p>Already keep this in a spreadsheet? Use <strong>Import</strong> to upload it (Excel or CSV). The platform matches each account, creates any new reps by email, and shows you a preview of every change, plus anything it couldn't match, before you apply it.</p>
+
+    <div class="shot" style="max-width:520px;"><img src="/screenshots/sales-reps/import-preview.webp" alt="Spreadsheet import preview: new reps to create, assignments to set, and payers that couldn't be matched" width="1344" height="1760" loading="lazy"></div>
+    <p class="shot-cap"><strong>Import preview.</strong> Nothing is saved until you click Apply import.</p>
+
+    <h2>Filter AR Aging by Sales Rep</h2>
+    <p>On your AR Aging screen, the <strong>sales rep filter</strong> narrows the aging buckets and the invoice list to one rep's invoices, or to <strong>Unassigned</strong>. An invoice you gave its own rep shows under that rep. Use it in a Monday sales meeting to go rep by rep through who owes what, or to spot accounts nobody owns yet.</p>
+
+    <h2 id="change-the-rep-on-a-single-invoice">Change the Rep on a Single Invoice</h2>
+    <p>Some stores buy from more than one of your reps. A processor (a company that buys your product to make its own) is the classic case: several of your reps sell to it, each with their own orders. If the store's one rep covered every invoice, the others would never see what they sold or follow up on it. So you can put a different rep on any single invoice.</p>
 <!-- VIDEO: One Store, Several Reps -->
 <figure class="doc-video" style="max-width:760px;margin:0.5rem auto 2.5rem;">
   <div style="position:relative;padding-bottom:56.25%;height:0;border-radius:14px;overflow:hidden;box-shadow:0 18px 40px -18px rgba(27,67,50,0.35);">
@@ -375,66 +434,6 @@
 </script>
 <!-- tutorial-link:invoice-sales-rep -->
 <p style="text-align:center;margin:-0.5rem 0 2.5rem;"><a href="/tutorials/invoice-sales-rep" style="color:#40916c;font-weight:600;text-decoration:none;">▶ Watch the full tutorial with transcript &rarr;</a></p>
-      <ul>
-        <li>Sales rep assignments put the right vendor rep on every account — automatically</li>
-        <li>Vendors keep a roster of their reps and the states each one covers</li>
-        <li>By default, the platform matches a rep to a retailer by state coverage — zero setup</li>
-        <li>Vendors assign every account to a rep in one place: by account, by rep, in bulk, or from a spreadsheet</li>
-        <li>Filter AR Aging by rep to see exactly what each rep's accounts owe</li>
-        <li>A store that buys from several reps? Put a different rep on any single invoice</li>
-        <li>Each rep gets a <a href="/docs/vendor-portal/weekly-sales-rep-digest">weekly collections email</a> every Monday with one-tap pay links</li>
-        <li>The primary rep is auto-CC'd on settlement and payment emails — no more manual forwarding</li>
-      </ul>
-    </div>
-
-    <!-- BODY CONTENT -->
-    <h2>What Are Sales Rep Assignments?</h2>
-    <p>Most cannabis vendors have more than one sales rep — often a different rep per state, and sometimes several reps in one state splitting up regions or accounts. Until now there was no clean way to say "this rep handles this specific retailer." <strong>Sales rep assignments</strong> fix that: they connect the right person to the right account so they stay in the loop on payment and settlement activity — without anyone manually CC'ing them.</p>
-
-    <p>The whole thing works on two levels: a <strong>roster</strong> the vendor maintains, and a <strong>per-account assignment</strong> that pins a specific rep to a specific retailer. If no one has pinned a rep, the platform figures it out from state coverage. So it just works out of the box, and you only reach for a manual override when you want one.</p>
-
-    <h2>How ShelfSpace Picks the Rep</h2>
-    <p>For any given retailer, the platform resolves the sales rep in this order:</p>
-    <ol class="docs-steps">
-      <li><strong>Explicit assignment</strong> — if a specific rep has been assigned to this retailer's account, that rep is used.</li>
-      <li><strong>State-coverage default</strong> — if there's no explicit assignment, the platform falls back to the rep (or reps) whose covered states include the retailer's state.</li>
-      <li><strong>None</strong> — if neither applies, the account simply has no rep attached, and nothing breaks.</li>
-    </ol>
-    <div class="docs-highlight">
-      <strong>The takeaway:</strong> state coverage is the zero-effort path — set each rep's states once and the right person shows up everywhere they operate. An explicit assignment is the fine-grained override for when two reps cover the same state and you need to name which one owns a particular account.
-    </div>
-
-    <h2>For Vendors: Build Your Sales Rep Roster</h2>
-    <p>If you're a vendor, open <strong>Settings › Sales Reps</strong> in the vendor portal. This is your team's roster. For each rep you can record:</p>
-    <ul>
-      <li><strong>Name</strong> (required)</li>
-      <li><strong>Email</strong> — where account emails get CC'd</li>
-      <li><strong>Phone</strong></li>
-      <li><strong>Title</strong> — e.g. Territory Manager</li>
-      <li><strong>Covered States</strong> — the states this rep is responsible for</li>
-    </ul>
-    <p>Use <strong>Add Rep</strong> to add each person. Covered states are what power the default: any retailer in a state your rep covers will see that rep automatically, with no per-account work on your end. If two of your reps cover the same state, both show up by default until someone pins a specific one to an account.</p>
-
-    <h2>For Vendors: Assign Every Account to a Rep</h2>
-    <p>Right under the roster, <strong>Account Assignments</strong> lists every dispensary that buys from you, including ones that are paid up. Each account has one main rep, and assigning a new one replaces the old one. That rep covers every invoice for the store, unless you <a href="#change-the-rep-on-a-single-invoice">put a different rep on a single invoice</a>. Work it two ways and switch between them any time:</p>
-    <ul>
-      <li><strong>By account</strong> — every account with a rep dropdown on its row. Unassigned accounts float to the top, so you can see the gaps first. Search, filter by rep, or check a batch of accounts and use <strong>Assign to…</strong> to move them all at once.</li>
-      <li><strong>By rep</strong> — each rep's accounts as a list, with <strong>Add accounts</strong> to hand them more. An Unassigned card shows what's still open.</li>
-    </ul>
-    <div class="shot"><img src="/screenshots/sales-reps/assign-bulk.webp" alt="Account Assignments by account with three unassigned accounts selected and the Assign to bulk bar" width="1400" height="1143" loading="lazy"></div>
-    <p class="shot-cap"><strong>By account:</strong> unassigned accounts float to the top. Select a batch and assign them at once.</p>
-    <div class="shot"><img src="/screenshots/sales-reps/assign-by-rep.webp" alt="Account Assignments by rep showing each rep's accounts and an Unassigned accounts card" width="1400" height="1220" loading="lazy"></div>
-    <p class="shot-cap"><strong>By rep:</strong> each rep's book, with Add accounts.</p>
-    <p>Already keep this in a spreadsheet? Use <strong>Import</strong> to upload it (Excel or CSV). The platform matches each account, creates any new reps by email, and shows you a preview of every change, plus anything it couldn't match, before you apply it.</p>
-
-    <div class="shot" style="max-width:520px;"><img src="/screenshots/sales-reps/import-preview.webp" alt="Spreadsheet import preview: new reps to create, assignments to set, and payers that couldn't be matched" width="1344" height="1760" loading="lazy"></div>
-    <p class="shot-cap"><strong>Import preview.</strong> Nothing is saved until you click Apply import.</p>
-
-    <h2>Filter AR Aging by Sales Rep</h2>
-    <p>On your AR Aging screen, the <strong>sales rep filter</strong> narrows the aging buckets and the invoice list to one rep's invoices, or to <strong>Unassigned</strong>. An invoice you gave its own rep shows under that rep. Use it in a Monday sales meeting to go rep by rep through who owes what, or to spot accounts nobody owns yet.</p>
-
-    <h2 id="change-the-rep-on-a-single-invoice">Change the Rep on a Single Invoice</h2>
-    <p>Some stores buy from more than one of your reps. A processor (a company that buys your product to make its own) is the classic case: several of your reps sell to it, each with their own orders. If the store's one rep covered every invoice, the others would never see what they sold or follow up on it. So you can put a different rep on any single invoice.</p>
     <ol class="docs-steps">
       <li>Open <strong>Payments › AR Aging</strong> and click the store to open its invoices.</li>
       <li>Each invoice has its own rep menu. Pick the rep who made that sale. It saves right away.</li>
