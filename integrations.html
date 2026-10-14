@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Integrations — Outlook, Gmail, QuickBooks, Metrc &amp; POS — ShelfSpace</title>
+<meta name="description" content="ShelfSpace integrations: send invoices from your own Outlook or Gmail, sync QuickBooks Online, match invoices to Metrc, and import sales from any cannabis POS.">
+<link rel="canonical" href="https://shelfspace.pro/integrations">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ShelfSpace">
+<meta property="og:locale" content="en_US">
+<meta property="og:url" content="https://shelfspace.pro/integrations">
+<meta property="og:title" content="ShelfSpace Integrations — Outlook, Gmail, QuickBooks, Metrc, POS">
+<meta property="og:description" content="Send invoices from your own Outlook or Gmail, sync QuickBooks Online, match every invoice to Metrc, and bring sales in from any POS.">
+<meta property="og:image" content="https://shelfspace.pro/og-image-v7.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="ShelfSpace Integrations — Outlook, Gmail, QuickBooks, Metrc, POS">
+<meta name="twitter:description" content="Send invoices from your own Outlook or Gmail, sync QuickBooks Online, match every invoice to Metrc, and bring sales in from any POS.">
+<meta name="twitter:image" content="https://shelfspace.pro/og-image-v7.png">
+<meta name="apple-mobile-web-app-title" content="ShelfSpace">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+<style>
+  @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-12px); } }
+
+  /* ─── HERO (slim, big title — mirrors /accounts-payable) ─── */
+  .page-hero { display: flex; align-items: center; justify-content: center; padding: 140px 48px 60px; min-height: auto; position: relative; overflow: hidden; background: var(--white); }
+  .hero-bg-gradient { position: absolute; top: -30%; right: -20%; width: 700px; height: 700px; background: radial-gradient(circle, rgba(149,213,178,0.18) 0%, rgba(149,213,178,0) 70%); animation: float 8s ease-in-out infinite; pointer-events: none; }
+  .hero-bg-gradient-2 { position: absolute; bottom: -20%; left: -15%; width: 550px; height: 550px; background: radial-gradient(circle, rgba(27,67,50,0.06) 0%, rgba(27,67,50,0) 70%); animation: float 10s ease-in-out infinite; animation-delay: -3s; pointer-events: none; }
+  .hero-grid-lines { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 1200px; height: 100%; opacity: 0.035; background-image: linear-gradient(var(--green-deep) 1px, transparent 1px), linear-gradient(90deg, var(--green-deep) 1px, transparent 1px); background-size: 80px 80px; pointer-events: none; }
+  .hero-text--solo { flex: 1; max-width: 880px; margin: 0 auto; text-align: center; position: relative; z-index: 2; }
+  .hero-text--solo .section-label { display: inline-flex; }
+  .page-hero .hero-h1 { font-size: clamp(36px, 6vw, 72px); line-height: 1.05; letter-spacing: -2px; font-weight: 700; color: var(--green-deep); margin: 16px 0 24px; }
+  .hero-lede { font-size: 17px; color: var(--slate-600); line-height: 1.5; margin: 0 auto 28px; max-width: 600px; }
+  .hero-actions-centered { display: flex; justify-content: center; }
+  .hero-trust { display: inline-flex; align-items: center; gap: 10px; margin-top: 26px; font-size: 13px; color: var(--slate-500); }
+  .hero-trust img { height: 18px; opacity: 0.7; }
+  .page-hero .section-label,
+  .page-hero .hero-h1,
+  .page-hero .hero-lede,
+  .page-hero .hero-actions-centered,
+  .page-hero .hero-trust { opacity: 0; transform: translateY(30px); }
+  .page-hero .section-label { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1); }
+  .page-hero .hero-h1 { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s, transform 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s; }
+  .page-hero .hero-lede { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1) 0.25s, transform 0.8s cubic-bezier(0.22,1,0.36,1) 0.25s; }
+  .page-hero .hero-actions-centered { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1) 0.4s, transform 0.8s cubic-bezier(0.22,1,0.36,1) 0.4s; }
+  .page-hero .hero-trust { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1) 0.52s, transform 0.8s cubic-bezier(0.22,1,0.36,1) 0.52s; }
+  .page-hero.hero-loaded .section-label,
+  .page-hero.hero-loaded .hero-h1,
+  .page-hero.hero-loaded .hero-lede,
+  .page-hero.hero-loaded .hero-actions-centered,
+  .page-hero.hero-loaded .hero-trust { opacity: 1; transform: translateY(0); }
+
+  /* ─── REVEAL ─── */
+  .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1); }
+  .reveal.is-visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.2s; }
+  .reveal-delay-2 { transition-delay: 0.4s; }
+  .reveal-delay-3 { transition-delay: 0.6s; }
+
+
+  /* ─── INTEGRATION GRID ─── */
+  .int-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; text-align: left; }
+  .int-grid > .int-card { flex: 0 1 calc((100% - 40px) / 3); }
+  .int-card { display: flex; flex-direction: column; background: var(--white); border: 1px solid var(--slate-200); border-radius: 16px; padding: 28px 24px; box-shadow: 0 12px 30px rgba(27,67,50,0.05); text-decoration: none; transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s; }
+  .int-card:hover { transform: translateY(-3px); box-shadow: 0 18px 40px rgba(27,67,50,0.10); border-color: rgba(149,213,178,0.7); }
+  .int-card-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 16px; }
+  .int-icon { width: 44px; height: 44px; border-radius: 12px; background: var(--green-ghost); color: var(--green-dark); display: flex; align-items: center; justify-content: center; }
+  .int-icon svg { width: 22px; height: 22px; }
+  .int-tag { font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: var(--slate-500); border: 1px solid var(--slate-200); border-radius: 100px; padding: 4px 10px; white-space: nowrap; }
+  .int-tag--vendor { color: var(--green-dark); border-color: rgba(149,213,178,0.6); background: var(--green-ghost); }
+  .int-tag--retail { color: var(--green-mid); border-color: rgba(149,213,178,0.6); }
+  .int-card h3 { font-size: 19px; font-weight: 700; color: var(--green-deep); letter-spacing: -0.4px; margin: 0 0 8px; }
+  .int-card p { font-size: 15px; line-height: 1.6; color: var(--slate-600); margin: 0 0 18px; flex: 1; }
+  .int-more { font-size: 14px; font-weight: 600; color: var(--green-dark); }
+  @media (max-width: 1000px) { .int-grid > .int-card { flex-basis: calc((100% - 20px) / 2); } }
+  @media (max-width: 680px) { .int-grid > .int-card { flex-basis: 100%; } }
+
+  /* ─── MAILBOX MOCK (dark section) ─── */
+  .int-mail { max-width: 520px; margin: 0 auto; background: var(--white); border-radius: 16px; box-shadow: 0 30px 80px rgba(27,67,50,0.30); text-align: left; overflow: hidden; }
+  .int-mail-row { display: grid; grid-template-columns: 72px 1fr; gap: 12px; padding: 12px 22px; border-bottom: 1px solid var(--slate-100); font-size: 14px; }
+  .int-mail-k { font-family: var(--font-mono); font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: var(--slate-400); padding-top: 2px; }
+  .int-mail-v { color: var(--slate-700); overflow-wrap: anywhere; }
+  .int-mail-v strong { color: var(--green-deep); font-weight: 700; }
+  .int-mail-body { padding: 20px 22px 24px; background: var(--slate-50); }
+  .int-mail-amt { display: flex; justify-content: space-between; font-size: 14px; color: var(--slate-600); padding: 6px 0; }
+  .int-money { font-family: var(--font-mono); font-weight: 700; color: var(--slate-900); font-variant-numeric: tabular-nums; text-align: right; }
+  .int-mail-btn { margin-top: 16px; display: inline-block; background: var(--green-deep); color: var(--white); font-size: 14px; font-weight: 600; padding: 10px 18px; border-radius: 12px; }
+
+  /* ─── SAFE BY DESIGN ─── */
+  .int-safe-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; text-align: left; }
+  .int-safe { background: var(--white); border: 1px solid rgba(149,213,178,0.5); border-radius: 16px; padding: 28px 24px; box-shadow: 0 12px 30px rgba(27,67,50,0.06); }
+  .int-safe h3 { font-size: 18px; font-weight: 700; color: var(--green-deep); letter-spacing: -0.3px; margin: 0 0 8px; }
+  .int-safe p { font-size: 15px; line-height: 1.6; color: var(--slate-600); margin: 0; }
+  @media (max-width: 820px) { .int-safe-grid { grid-template-columns: 1fr; } }
+
+  /* ─── FAQ ─── */
+  .faq-section { background: var(--slate-50); padding: 80px 48px; }
+  .faq-header { text-align: center; max-width: 600px; margin: 0 auto 48px; }
+  .faq-list { max-width: 680px; margin: 0 auto; }
+
+  /* ─── CTA PARALLAX ─── */
+  .cta-section::before { transform: translate(-50%,-50%) translateY(var(--parallax-y, 0)); will-change: transform; }
+
+  /* ─── FOOTER 5-COL ─── */
+  .footer-top { grid-template-columns: 2fr 1fr 1fr 1fr 1fr; }
+  @media (max-width: 900px) { .footer-top { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px) { .footer-top { grid-template-columns: 1fr; } }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    .page-hero { padding: 100px 24px 48px; }
+    .hero-grid-lines { width: 100%; }
+    .faq-section { padding: 60px 24px; }
+  }
+  @media (max-width: 700px) {
+    .hero-bg-gradient, .hero-bg-gradient-2 { display: none; }
+    .int-mail-row { grid-template-columns: 1fr; gap: 2px; padding: 10px 16px; }
+    .int-mail-body { padding: 16px; }
+  }
+
+  /* ─── REDUCED MOTION ─── */
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; transition: none; }
+    .page-hero .section-label,
+    .page-hero .hero-h1,
+    .page-hero .hero-lede,
+    .page-hero .hero-actions-centered,
+    .page-hero .hero-trust { opacity: 1; transform: none; transition: none; }
+    .hero-bg-gradient, .hero-bg-gradient-2 { animation: none; }
+    .int-card { transition: none; }
+  }
+</style>
+<noscript><style>.reveal,.page-hero .section-label,.page-hero .hero-h1,.page-hero .hero-lede,.page-hero .hero-actions-centered,.page-hero .hero-trust{opacity:1;transform:none;transition:none;}</style></noscript>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-H2LBJT03WE"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-H2LBJT03WE');</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "ShelfSpace",
+  "legalName": "ShelfSpace Technologies Inc.",
+  "url": "https://shelfspace.pro",
+  "logo": "https://shelfspace.pro/shelfspace-logo.png"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "ShelfSpace Integrations",
+  "url": "https://shelfspace.pro/integrations",
+  "description": "ShelfSpace integrations: send invoices from your own Outlook or Gmail, sync QuickBooks Online, match invoices to Metrc, and import sales from any cannabis POS.",
+  "about": [
+    { "@type": "SoftwareApplication", "name": "Microsoft 365 / Outlook" },
+    { "@type": "SoftwareApplication", "name": "Google Workspace / Gmail" },
+    { "@type": "SoftwareApplication", "name": "QuickBooks Online" },
+    { "@type": "SoftwareApplication", "name": "Metrc" }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Can ShelfSpace read our email?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Outlook and Gmail connect with send-only permission, so ShelfSpace can send invoices and reminders from your mailbox but can’t open or read anything in it. You can disconnect at any time."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Our IT team blocks outside apps.",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "That’s common. ShelfSpace gives you a ready-made note for your IT team that says exactly what to approve, and they approve it once for the whole company. Until then your invoices keep going out from our billing address."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "We use a personal Gmail account.",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Connecting a mailbox needs a company Google Workspace or Microsoft 365 account. Personal @gmail.com addresses can’t connect, and your mail keeps sending from our billing address instead."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do we have to switch POS or accounting software?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Sales come in from your existing POS by export, and books sync to the QuickBooks Online file you already use. Your team keeps working the way it does today."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What happens if the person who connected leaves?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Your invoices automatically go back to sending from our billing address, and your admins get a notice to reconnect. Nothing is lost and nothing is sent twice."
+      }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://shelfspace.pro/" },
+    { "@type": "ListItem", "position": 2, "name": "Integrations", "item": "https://shelfspace.pro/integrations" }
+  ]
+}
+</script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="/" class="nav-logo">
+    <div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div>
+    <span class="nav-logo-text">ShelfSpace<sup class="nav-logo-tm">™</sup></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="/accounts-payable">ShelfPay (AP)</a></li>
+    <li class="nav-dropdown"><a href="/accounts-receivable" class="nav-dropdown-toggle">ShelfCollect (AR) <svg class="dropdown-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></a>
+      <div class="nav-dropdown-menu"><a href="/accounts-receivable">ShelfCollect overview</a><a href="/collections">Collections</a><a href="/promise-to-pay">Promise to Pay</a></div></li>
+    <li><a href="/shelfverify">ShelfVerify</a></li>
+    <li><a href="/about">About</a></li>
+    <li><a href="/pricing">Pricing</a></li>
+    <li class="nav-login-mobile"><a href="https://ourshelf.space/login">Login</a></li>
+    <li><a href="/contact" class="nav-cta">Get Started <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a></li>
+  </ul>
+  <div class="nav-hamburger" onclick="document.querySelector('.nav-links').classList.toggle('mobile-open'); event.stopPropagation();"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="hero-bg-gradient"></div>
+  <div class="hero-bg-gradient-2"></div>
+  <div class="hero-grid-lines"></div>
+  <div class="hero-text--solo">
+    <div class="section-label">Integrations</div>
+    <h1 class="hero-h1">Your email, your books, your Metrc. Connected.</h1>
+    <p class="hero-lede">Invoices go out from your own Outlook or Gmail. Bills and payments land in QuickBooks. Every invoice gets checked against Metrc. Your team keeps the tools it already knows.</p>
+    <div class="hero-actions-centered">
+      <a href="/contact" class="btn-primary">Connect my systems <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+    </div>
+    <div class="hero-trust">
+      <img src="/metrc-logo-v2.png" alt="Metrc">
+      <span>Certified Metrc Third-Party Vendor &middot; Verified Microsoft publisher</span>
+    </div>
+  </div>
+</div>
+
+<!-- INTEGRATION GRID -->
+<section class="svc-section svc-section--slate" id="int-list">
+  <div class="svc-inner">
+    <div class="svc-eyebrow reveal">What Connects</div>
+    <h2 class="svc-headline reveal">Five connections. No new software for your team.</h2>
+    <p class="svc-sub reveal">Each one is set up during onboarding. Most take one sign-in.</p>
+    <div class="int-grid">
+      <a class="int-card reveal" href="/docs/integrations/outlook-gmail">
+        <div class="int-card-top"><div class="int-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="22,6 12,13 2,6"/></svg></div><span class="int-tag int-tag--vendor">For brands</span></div>
+        <h3>Microsoft 365 &amp; Outlook</h3>
+        <p>Your invoices and payment reminders go out from your own Outlook mailbox, or a shared one like ar@yourcompany.com. Stores see a name they already know.</p>
+        <span class="int-more">Setup guide &rarr;</span>
+      </a>
+      <a class="int-card reveal reveal-delay-1" href="/docs/integrations/outlook-gmail">
+        <div class="int-card-top"><div class="int-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l8 6 8-6"/><rect x="2" y="4" width="20" height="16" rx="2"/><line x1="2" y1="20" x2="9" y2="13"/><line x1="22" y1="20" x2="15" y2="13"/></svg></div><span class="int-tag int-tag--vendor">For brands</span></div>
+        <h3>Google Workspace &amp; Gmail</h3>
+        <p>Same thing for brands on Google. Connect your company Gmail and your invoices and reminders send from it.</p>
+        <span class="int-more">Setup guide &rarr;</span>
+      </a>
+      <a class="int-card reveal reveal-delay-2" href="/docs/quickbooks/overview">
+        <div class="int-card-top"><div class="int-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="7" x2="16" y2="7"/><line x1="8" y1="11" x2="16" y2="11"/><line x1="8" y1="15" x2="12" y2="15"/></svg></div><span class="int-tag">Both sides</span></div>
+        <h3>QuickBooks Online</h3>
+        <p>Dispensaries get every bill and payment posted to their books. Brands get invoices synced and payments checked, so you know who paid without opening QuickBooks.</p>
+        <span class="int-more">How it works &rarr;</span>
+      </a>
+      <a class="int-card reveal" href="/docs/integrations/metrc">
+        <div class="int-card-top"><div class="int-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg></div><span class="int-tag">Both sides</span></div>
+        <h3>Metrc</h3>
+        <p>We&rsquo;re a certified Metrc third-party vendor. Transfers and sales flow in, and invoices are matched line by line to their manifests.</p>
+        <span class="int-more">How it works &rarr;</span>
+      </a>
+      <a class="int-card reveal reveal-delay-1" href="/docs/integrations/pos">
+        <div class="int-card-top"><div class="int-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="12" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="15" x2="12" y2="21"/></svg></div><span class="int-tag int-tag--retail">For dispensaries</span></div>
+        <h3>Your POS</h3>
+        <p>Dutchie, Flowhub, Blaze, Treez, Cova, Meadow or a regional system. Sales come in from a simple export, so you never switch POS.</p>
+        <span class="int-more">How it works &rarr;</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- SEND FROM YOUR OWN MAILBOX (dark — the peak) -->
+<section class="svc-section svc-section--dark" id="int-mailbox">
+  <div class="svc-inner">
+    <div class="svc-eyebrow reveal">Send From Your Own Mailbox</div>
+    <h2 class="svc-headline reveal">Stores open email from people they know.</h2>
+    <p class="svc-sub reveal">An invoice from a billing address gets skimmed. One from your AR lead gets paid. Connect Outlook or Gmail and every invoice and reminder leaves from your own mailbox, and the reply lands in front of a person who can help.</p>
+    <div class="svc-visual reveal reveal-delay-1">
+      <div class="int-mail" aria-hidden="true">
+        <div class="int-mail-row"><span class="int-mail-k">From</span><span class="int-mail-v"><strong>Jamie Ortiz, Verdant Hill Botanical</strong> &lt;ar@verdanthill.com&gt;</span></div>
+        <div class="int-mail-row"><span class="int-mail-k">To</span><span class="int-mail-v">Holistic Cannabis Co. Accounts Payable</span></div>
+        <div class="int-mail-row"><span class="int-mail-k">Subject</span><span class="int-mail-v">Invoice #1052 from Verdant Hill Botanical</span></div>
+        <div class="int-mail-body">
+          <div class="int-mail-amt"><span>Amount due</span><span class="int-money">$2,400.00</span></div>
+          <div class="int-mail-amt"><span>Due</span><span class="int-money">10/30/2026</span></div>
+          <div class="int-mail-btn">View &amp; pay invoice</div>
+        </div>
+      </div>
+    </div>
+    <p class="svc-why reveal">What sends, and when, doesn&rsquo;t change. Your reps still decide. Only the From line does.</p>
+  </div>
+</section>
+
+<!-- SAFE BY DESIGN -->
+<section class="svc-section svc-section--ghost" id="int-safe">
+  <div class="svc-inner">
+    <div class="svc-eyebrow reveal">Built to Be Safe</div>
+    <h2 class="svc-headline reveal">Send-only. Nothing reads your mail.</h2>
+    <div class="int-safe-grid">
+      <div class="int-safe reveal">
+        <h3>Permission to send, nothing more</h3>
+        <p>The connection can send mail as you. It can&rsquo;t open your inbox, read your messages or see your contacts.</p>
+      </div>
+      <div class="int-safe reveal reveal-delay-1">
+        <h3>A new address waits 72 hours</h3>
+        <p>When an address is new to ShelfSpace, nothing sends for 72 hours and every admin on your account is told, so you can cancel if it wasn&rsquo;t you.</p>
+      </div>
+      <div class="int-safe reveal reveal-delay-2">
+        <h3>An invoice never gets stuck</h3>
+        <p>Password changed, or the person who connected left? Mail goes out from our billing address again until you reconnect. Nothing is lost and nothing sends twice.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-content">
+    <div class="section-label reveal">Get Started</div>
+    <h2 class="section-title reveal">Bring the tools you already run.</h2>
+    <p class="section-desc reveal">Tell us what you run. We set up every connection with you, then show you what you&rsquo;re owed.</p>
+    <div class="cta-actions reveal" style="display:flex;gap:20px;align-items:center;justify-content:center;flex-wrap:wrap;">
+      <a href="/contact" class="btn-primary">
+        Talk to us
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+    <p class="cta-note reveal">Free review. We handle setup.</p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section">
+  <div class="faq-header">
+    <div class="section-label reveal">FAQ</div>
+    <h2 class="section-title reveal">Straight answers</h2>
+  </div>
+  <div class="faq-list">
+    <details>
+      <summary>Can ShelfSpace read our email?</summary>
+      <p>No. Outlook and Gmail connect with send-only permission, so ShelfSpace can send invoices and reminders from your mailbox but can&rsquo;t open or read anything in it. You can disconnect at any time.</p>
+    </details>
+    <details>
+      <summary>Our IT team blocks outside apps.</summary>
+      <p>That&rsquo;s common. ShelfSpace gives you a ready-made note for your IT team that says exactly what to approve, and they approve it once for the whole company. Until then your invoices keep going out from our billing address.</p>
+    </details>
+    <details>
+      <summary>We use a personal Gmail account.</summary>
+      <p>Connecting a mailbox needs a company Google Workspace or Microsoft 365 account. Personal @gmail.com addresses can&rsquo;t connect, and your mail keeps sending from our billing address instead.</p>
+    </details>
+    <details>
+      <summary>Do we have to switch POS or accounting software?</summary>
+      <p>No. Sales come in from your existing POS by export, and books sync to the QuickBooks Online file you already use. Your team keeps working the way it does today.</p>
+    </details>
+    <details>
+      <summary>What happens if the person who connected leaves?</summary>
+      <p>Your invoices automatically go back to sending from our billing address, and your admins get a notice to reconnect. Nothing is lost and nothing is sent twice.</p>
+    </details>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="/" class="nav-logo"><div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div><span class="nav-logo-text">ShelfSpace<sup class="nav-logo-tm">™</sup></span></a>
+      <p>Financial tools built for cannabis operators.</p>
+    </div>
+    <div class="footer-col"><h3>Services</h3><ul><li><a href="/accounts-payable">ShelfPay (AP)</a></li><li><a href="/shelfverify">ShelfVerify</a></li><li><a href="/consignment">Consignment</a></li><li><a href="/credit-recovery">Credit Recovery</a></li><li><a href="/checks">Check Payments</a></li><li><a href="/shelfiq">ShelfiQ</a></li></ul></div>
+    <div class="footer-col"><h3>Platform</h3><ul><li><a href="/features">Features</a></li><li><a href="/integrations">Integrations</a></li><li><a href="/vendor-management">Vendor Management</a></li><li><a href="/collections">Collections</a></li><li><a href="/how-it-works">How It Works</a></li><li><a href="/pricing">Pricing</a></li><li><a href="/about">About</a></li><li><a href="/blog">Blog</a></li><li><a href="/docs">Docs</a></li>
+        <li><a href="/how-to">Guides</a></li><li><a href="/tutorials">Tutorials</a></li></ul></div>
+    <div class="footer-col"><h3>Access</h3><ul><li><a href="https://ourshelf.space/login">Login</a></li><li><a href="/contact">Talk to us</a></li><li><a href="/contact">Contact</a></li><li><a href="/accounts-receivable">ShelfCollect (AR)</a></li><li><a href="/vendors">For Vendors</a></li><li><a href="/for-bookkeepers">For Bookkeepers</a></li></ul></div>
+    <div class="footer-col"><h3>Company</h3><ul><li><a href="mailto:support@shelfspace.pro">Support</a></li><li><a href="https://linkedin.com/company/shelfspace-pro" target="_blank" rel="noopener" class="footer-social-link"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> LinkedIn</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><p>&copy; 2026 ShelfSpace Technologies Inc.</p><div style="display:flex;align-items:center;gap:8px;justify-content:center;margin-top:12px;"><img src="/metrc-logo-v2.png" alt="Metrc" loading="lazy" style="height:18px;opacity:0.4;filter:brightness(0) invert(1);"><span style="font-size:11px;color:rgba(255,255,255,0.35);">Certified Metrc Third-Party Vendor</span></div><div class="footer-bottom-links"><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div></div>
+</footer>
+
+<script>
+(function() {
+  var nav = document.getElementById('nav');
+  var pageHero = document.querySelector('.page-hero');
+  var ctaSection = document.querySelector('.cta-section');
+
+  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var isMobile = window.innerWidth < 900;
+  var ticking = false;
+
+  /* ── Hero entrance ── */
+  requestAnimationFrame(function() {
+    nav.classList.toggle('scrolled', window.scrollY > 20);
+    if (pageHero) pageHero.classList.add('hero-loaded');
+  });
+
+  /* ── Scroll-triggered reveals ── */
+  var revealObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(function(el) { revealObserver.observe(el); });
+
+  /* ── Scroll handler (rAF + ticking) ── */
+  function onScroll() {
+    var scrollY = window.scrollY;
+    nav.classList.toggle('scrolled', scrollY > 20);
+    if (prefersReduced || isMobile) return;
+    var wh = window.innerHeight;
+    if (ctaSection) {
+      var rect = ctaSection.getBoundingClientRect();
+      if (rect.bottom >= 0 && rect.top <= wh) {
+        var center = rect.top + rect.height / 2 - wh / 2;
+        ctaSection.style.setProperty('--parallax-y', (center * 0.08) + 'px');
+      }
+    }
+  }
+  window.addEventListener('scroll', function() {
+    if (!ticking) { requestAnimationFrame(function() { onScroll(); ticking = false; }); ticking = true; }
+  }, { passive: true });
+  onScroll();
+  window.addEventListener('resize', function() {
+    isMobile = window.innerWidth < 900;
+    if (isMobile && ctaSection) ctaSection.style.setProperty('--parallax-y', '0px');
+  });
+
+  /* ── Close mobile nav on outside click ── */
+  document.addEventListener('click', function() {
+    var navLinks = document.querySelector('.nav-links');
+    if (navLinks && navLinks.classList.contains('mobile-open')) {
+      navLinks.classList.remove('mobile-open');
+    }
+  });
+})();
+</script>
+<script src="/shelfiq-widget.js"></script>
+</body>
+</html>

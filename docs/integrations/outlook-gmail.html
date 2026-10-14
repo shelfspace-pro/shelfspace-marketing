@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Send Invoices from Outlook or Gmail — ShelfSpace</title>
+<meta name="description" content="Send invoices from Outlook or Gmail with ShelfSpace: connect your company Microsoft 365 or Google Workspace mailbox so ShelfCollect invoices and reminders go out from it.">
+<link rel="canonical" href="https://shelfspace.pro/docs/integrations/outlook-gmail">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://shelfspace.pro/docs/integrations/outlook-gmail">
+<meta property="og:title" content="Send Invoices from Outlook or Gmail — ShelfSpace">
+<meta property="og:description" content="Send invoices from Outlook or Gmail with ShelfSpace: connect your company Microsoft 365 or Google Workspace mailbox so ShelfCollect invoices and reminders go out from it.">
+<meta property="og:image" content="https://shelfspace.pro/og-image-v7.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Send Invoices from Outlook or Gmail — ShelfSpace">
+<meta name="twitter:description" content="Send invoices from Outlook or Gmail with ShelfSpace: connect your company Microsoft 365 or Google Workspace mailbox so ShelfCollect invoices and reminders go out from it.">
+<meta name="twitter:image" content="https://shelfspace.pro/og-image-v7.png">
+<meta name="apple-mobile-web-app-title" content="ShelfSpace">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+<style>
+  /* ── Docs Hero ── */
+  .docs-hero {
+    padding: 120px 48px 40px; text-align: center;
+    background: var(--white); position: relative; overflow: hidden; z-index: 2;
+  }
+  .docs-hero::before {
+    content: ''; position: absolute; top: -200px; right: -200px;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(149,213,178,0.12), transparent 70%);
+  }
+  .docs-hero-content { position: relative; max-width: 640px; margin: 0 auto; }
+  .docs-hero-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 6px 16px; border-radius: 100px;
+    background: var(--green-ghost); border: 1px solid rgba(149,213,178,0.3);
+    font-size: 13px; font-weight: 600; color: var(--green-dark);
+    text-decoration: none; margin-bottom: 16px; transition: all 0.2s;
+  }
+  .docs-hero-badge:hover { background: var(--green-light); }
+  .docs-hero-title {
+    font-size: clamp(28px, 3.5vw, 40px); font-weight: 700;
+    color: var(--green-deep); letter-spacing: -1.5px; line-height: 1.2;
+  }
+  @media (max-width: 900px) {
+    .docs-hero { padding: 100px 24px 32px; }
+  }
+  /* ── Docs Layout ── */
+  .docs-layout {
+    max-width: 760px; margin: 0 auto;
+    padding: 40px 48px 0;
+  }
+
+  /* ── Docs Content ── */
+  .docs-content { max-width: 720px; padding-bottom: 80px; }
+  .docs-breadcrumb {
+    font-size: 13px; color: var(--slate-400); margin-bottom: 24px;
+  }
+  .docs-breadcrumb a { color: var(--slate-400); text-decoration: none; }
+  .docs-breadcrumb a:hover { color: var(--green-mid); }
+  .docs-category {
+    font-size: 11px; font-weight: 700; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--green-mid); margin-bottom: 12px;
+  }
+  .docs-content h1 {
+    font-size: clamp(28px, 3.5vw, 36px); font-weight: 700;
+    color: var(--green-deep); letter-spacing: -1px; line-height: 1.2;
+    margin-bottom: 24px;
+  }
+  .docs-content h2 {
+    font-size: 22px; font-weight: 700; color: var(--green-deep);
+    margin: 40px 0 16px; letter-spacing: -0.5px; line-height: 1.3;
+    padding-top: 24px; border-top: 1px solid var(--slate-100);
+  }
+  .docs-content h2:first-of-type { border-top: none; padding-top: 0; }
+  .docs-content p {
+    font-size: 16px; line-height: 1.8; color: var(--slate-600); margin-bottom: 20px;
+  }
+  .docs-content ul, .docs-content ol { margin-bottom: 20px; padding-left: 24px; }
+  .docs-content li {
+    font-size: 16px; line-height: 1.8; color: var(--slate-600); margin-bottom: 6px;
+  }
+  .docs-content strong { color: var(--green-deep); font-weight: 600; }
+  .docs-content a { color: var(--green-mid); font-weight: 500; text-decoration: none; }
+  .docs-content a:hover { color: var(--green-deep); text-decoration: underline; }
+
+  /* ── At a Glance Box ── */
+  .docs-glance {
+    padding: 24px 28px; margin-bottom: 32px;
+    background: var(--green-ghost); border: 1px solid rgba(149,213,178,0.3);
+    border-radius: 12px;
+  }
+  .docs-glance h2 {
+    font-size: 13px; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--green-mid);
+    margin: 0 0 12px; border: none; padding: 0;
+  }
+  .docs-glance ul { list-style: none; padding: 0; margin: 0; }
+  .docs-glance li {
+    font-size: 15px; line-height: 1.6; color: var(--slate-600);
+    padding: 4px 0 4px 20px; position: relative;
+  }
+  .docs-glance li::before {
+    content: ''; position: absolute; left: 0; top: 12px;
+    width: 8px; height: 8px; border-radius: 50%; background: var(--green-accent);
+  }
+
+  /* ── Highlight Box ── */
+  .docs-highlight {
+    background: var(--green-ghost); border: 1px solid rgba(149,213,178,0.3);
+    border-radius: 12px; padding: 20px 24px; margin: 24px 0;
+    font-size: 15px; line-height: 1.7; color: var(--green-dark);
+  }
+  .docs-highlight strong { color: var(--green-deep); }
+
+  /* ── Related Docs ── */
+  .docs-related {
+    margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--slate-100);
+  }
+  .docs-related h3 {
+    font-size: 13px; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--slate-400); margin-bottom: 12px;
+  }
+  .docs-related-links { display: flex; flex-wrap: wrap; gap: 12px; }
+  .docs-related-links a {
+    padding: 8px 16px; font-size: 14px; font-weight: 500;
+    color: var(--green-mid); background: var(--slate-50);
+    border-radius: 8px; text-decoration: none; transition: all 0.2s;
+  }
+  .docs-related-links a:hover { background: var(--green-ghost); color: var(--green-deep); }
+
+  /* ── Docs CTA ── */
+  .docs-cta {
+    margin-top: 48px; padding: 32px; text-align: center;
+    background: var(--green-deep); border-radius: 16px;
+  }
+  .docs-cta p { color: rgba(255,255,255,0.8); font-size: 16px; margin-bottom: 16px; }
+  .docs-cta p strong { color: var(--white); }
+  .docs-cta a {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 12px 28px; background: var(--white); color: var(--green-deep);
+    border-radius: 10px; font-size: 15px; font-weight: 600;
+    text-decoration: none; transition: all 0.3s;
+  }
+  .docs-cta a:hover { background: var(--slate-50); transform: translateY(-1px); }
+  .docs-cta-note { margin-top: 12px; font-size: 13px; color: rgba(255,255,255,0.5); }
+
+  /* ── Footer 5-col ── */
+  .footer-top { grid-template-columns: 2fr 1fr 1fr 1fr 1fr; }
+
+  /* ── Responsive ── */
+  @media (max-width: 900px) {
+    .docs-layout { padding: 24px 24px 0; }
+    .footer-top { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 600px) {
+    .footer-top { grid-template-columns: 1fr; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+  }
+</style>
+<!-- ARTICLE SCHEMA -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "Send Invoices from Outlook or Gmail",
+  "datePublished": "2026-10-14",
+  "dateModified": "2026-10-14",
+  "author": { "@type": "Organization", "name": "ShelfSpace", "url": "https://shelfspace.pro" },
+  "publisher": { "@type": "Organization", "name": "ShelfSpace" },
+  "url": "https://shelfspace.pro/docs/integrations/outlook-gmail"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://shelfspace.pro/" },
+    { "@type": "ListItem", "position": 2, "name": "Documentation", "item": "https://shelfspace.pro/docs" },
+    { "@type": "ListItem", "position": 3, "name": "Integrations", "item": "https://shelfspace.pro/integrations" },
+    { "@type": "ListItem", "position": 4, "name": "Send Invoices from Outlook or Gmail" }
+  ]
+}
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-H2LBJT03WE"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-H2LBJT03WE');</script>
+</head>
+<body>
+<!-- last-synced: 2026-10-14 -->
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="/" class="nav-logo">
+    <div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div>
+    <span class="nav-logo-text">ShelfSpace</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="/accounts-payable">ShelfPay (AP)</a></li>
+    <li class="nav-dropdown"><a href="/accounts-receivable" class="nav-dropdown-toggle">ShelfCollect (AR) <svg class="dropdown-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></a>
+      <div class="nav-dropdown-menu"><a href="/accounts-receivable">ShelfCollect overview</a><a href="/collections">Collections</a><a href="/promise-to-pay">Promise to Pay</a></div></li>
+    <li><a href="/shelfverify">ShelfVerify</a></li>
+    <li><a href="/about">About</a></li>
+    <li><a href="/pricing">Pricing</a></li>
+    <li><a href="/contact" class="nav-cta">Get Started <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a></li>
+  </ul>
+  <div class="nav-hamburger" onclick="document.querySelector('.nav-links').classList.toggle('mobile-open'); event.stopPropagation();"><span></span><span></span><span></span></div>
+</nav>
+
+
+<!-- DOCS HERO -->
+<div class="docs-hero">
+  <div class="docs-hero-content">
+    <a href="/docs" class="docs-hero-badge">Documentation</a>
+    <h1 class="docs-hero-title">Send Invoices from Outlook or Gmail</h1>
+  </div>
+</div>
+
+<div data-docs-search><noscript><a href="/docs">Browse the docs index</a></noscript></div>
+
+<!-- DOCS LAYOUT -->
+<div class="docs-layout docs-with-sidebar">
+
+  <!-- SIDEBAR -->
+  <aside class="docs-sidebar" data-docs-sidebar><noscript><a href="/docs">Browse all docs &rarr;</a></noscript></aside>
+
+  <!-- CONTENT -->
+  <main class="docs-content">
+    <div class="docs-breadcrumb">
+      <a href="/docs">Docs</a> / <a href="/integrations">Integrations</a> / Outlook &amp; Gmail
+    </div>
+    <div class="docs-category">Integrations</div>
+
+    <!-- AT A GLANCE -->
+    <div class="docs-glance">
+      <h2>At a Glance</h2>
+      <ul>
+        <li>Send invoices from Outlook or Gmail: connect your company Microsoft 365 or Google Workspace mailbox and your ShelfCollect invoices and payment reminders go out from it</li>
+        <li>The connection is send-only. ShelfSpace can send as you but can&rsquo;t read your mail</li>
+        <li>What sends, and when, doesn&rsquo;t change. Store replies still reach your AR assistant</li>
+        <li>If the connection stops working, mail goes out from ShelfSpace&rsquo;s billing address until you reconnect</li>
+        <li>Personal @gmail.com and Outlook.com accounts can&rsquo;t connect. Use your company mailbox</li>
+      </ul>
+    </div>
+
+    <!-- BODY -->
+    <h2>Why send invoices from your own mailbox</h2>
+    <p>When you send invoices from Outlook or Gmail through ShelfSpace, stores see a name they already know instead of a billing address. An invoice from your AR lead gets opened and paid faster than one from an address the buyer has never seen. Only the From line changes. Your reps still decide what goes out, and the <a href="/accounts-receivable">ShelfCollect</a> schedule for invoices and reminders stays the same.</p>
+    <p>The connection covers invoices you send (one at a time or in bulk), statements, recurring invoices, payment reminders and the &ldquo;send again&rdquo; button. Messages from your AI assistant still come from ShelfSpace, because an AI reply shouldn&rsquo;t carry a real person&rsquo;s name.</p>
+
+    <h2>Connect your Outlook or Gmail mailbox</h2>
+    <ol>
+      <li>Sign in at <a href="https://ourshelf.space/login">ourshelf.space</a> as an owner or accounts-receivable admin.</li>
+      <li>Go to <strong>My Account</strong> and open <strong>Send from your own mailbox</strong>.</li>
+      <li>Click <strong>Connect Outlook</strong> or <strong>Connect Google Workspace</strong> and sign in with your work account.</li>
+      <li>Approve the request. Microsoft shows it from <strong>ShelfSpace Technologies Inc.</strong> with a blue verified badge. Google asks you to allow ShelfSpace to send email on your behalf. Tick that box, and choose ongoing access if Google asks.</li>
+    </ol>
+    <p>Pick the person who connects with care. Stores see that person&rsquo;s name, so it should be someone who will stay with the company and keep their account.</p>
+
+    <div class="docs-highlight">
+      <strong>A new address waits 72 hours.</strong> If the mailbox is new to ShelfSpace, nothing sends from it for 72 hours, and every admin on your account gets an email. If it wasn&rsquo;t you, disconnect and nothing ever went out.
+    </div>
+
+    <h2>If your IT team has to approve it</h2>
+    <p>Some companies only let IT approve outside apps. If Microsoft says <strong>Need admin approval</strong>, or Google says the app is blocked, go back to the card and click <strong>Copy note for IT</strong>. Send the note to your IT person. It says exactly what to approve. They approve ShelfSpace once for the whole company, then you click Connect again to finish. Until then your invoices keep going out from the billing address, so nothing stops.</p>
+
+    <h2>Send as a shared mailbox (Outlook)</h2>
+    <p>On Outlook you can send from a shared address like ar@yourcompany.com instead of your own. Your IT team needs to give you <strong>Send As</strong> permission on that mailbox. &ldquo;Send on Behalf&rdquo; isn&rsquo;t enough. Enter the address under <strong>Send as a shared mailbox</strong> and click <strong>Save and send me a test</strong>. Open the test and check that it doesn&rsquo;t say &ldquo;on behalf of.&rdquo; The shared address has to be on your company&rsquo;s email domain.</p>
+
+    <h2>Test, fallback and disconnect</h2>
+    <ul>
+      <li><strong>Send me a test</strong> sends one email from your mailbox to you, so you can see exactly what stores see.</li>
+      <li><strong>Automatic fallback.</strong> If a password changes, the connected person leaves, or the provider pauses the account, your mail goes out from ShelfSpace&rsquo;s billing address again and your admins get a notice to reconnect. Nothing is lost and nothing sends twice.</li>
+      <li><strong>Bounces land in your inbox.</strong> Mail from your mailbox reports bounces to you, not to ShelfSpace. If an address bounces, open that store&rsquo;s billing recipients and click <strong>This address bounced</strong> so your mailbox stops using it.</li>
+      <li><strong>Disconnect any time</strong> from the same card. You can also remove ShelfSpace from your Microsoft or Google account settings.</li>
+    </ul>
+
+    <!-- RELATED DOCS -->
+    <div class="docs-related">
+      <h3>Related</h3>
+      <div class="docs-related-links">
+        <a href="/integrations">All Integrations</a>
+        <a href="/docs/integrations/metrc">Metrc Integration</a>
+        <a href="/docs/integrations/pos">POS Integration</a>
+        <a href="/docs/quickbooks/overview">QuickBooks Integration</a>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="docs-cta">
+      <p><strong>Ready to connect your systems? Let's talk.</strong></p>
+      <a href="/contact">Talk to Us <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a>
+      <div class="docs-cta-note">Free evaluation. We handle setup.</div>
+    </div>
+  </main>
+
+  <!-- ON THIS PAGE -->
+  <aside class="docs-on-this-page" data-on-this-page></aside>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="/" class="nav-logo"><div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div><span class="nav-logo-text">ShelfSpace</span></a>
+      <p>Operations and Payments Intelligence</p>
+    </div>
+    <div class="footer-col"><h4>Services</h4><ul><li><a href="/consignment">Consignment</a></li><li><a href="/accounts-payable">ShelfPay (AP)</a></li><li><a href="/credit-recovery">Credit Recovery</a></li><li><a href="/checks">Check Payments</a></li><li><a href="/shelfiq">ShelfiQ</a></li></ul></div>
+    <div class="footer-col"><h4>Platform</h4><ul><li><a href="/features">Features</a></li><li><a href="/how-it-works">How It Works</a></li><li><a href="/pricing">Pricing</a></li><li><a href="/about">About</a></li><li><a href="/blog">Blog</a></li><li><a href="/docs">Docs</a></li><li><a href="/how-to">Guides</a></li><li><a href="/tutorials">Tutorials</a></li></ul></div>
+    <div class="footer-col"><h4>Access</h4><ul><li><a href="https://ourshelf.space/login">Login</a></li><li><a href="/contact">Talk to us</a></li><li><a href="/contact">Contact</a></li><li><a href="/accounts-receivable">ShelfCollect (AR)</a></li><li><a href="/vendors">For Vendors</a></li><li><a href="/for-bookkeepers">For Bookkeepers</a></li></ul></div>
+    <div class="footer-col"><h4>Company</h4><ul><li><a href="mailto:support@shelfspace.pro">Support</a></li><li><a href="https://linkedin.com/company/shelfspace-pro" target="_blank" rel="noopener" class="footer-social-link"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> LinkedIn</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><p>&copy; 2026 ShelfSpace Technologies Inc.</p><div class="footer-bottom-links"><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div></div>
+</footer>
+
+<script>
+(function() {
+  var nav = document.getElementById('nav');
+  nav.classList.toggle('scrolled', window.scrollY > 20);
+  window.addEventListener('scroll', function() {
+    nav.classList.toggle('scrolled', window.scrollY > 20);
+  }, { passive: true });
+})();
+</script>
+<script src="/docs-search.js?v=40" defer></script>
+<script src="/shelfiq-widget.js"></script>
+</body>
+</html>
