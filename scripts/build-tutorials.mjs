@@ -300,9 +300,15 @@ ${REVEAL_SCRIPT}
 
 // ── write ─────────────────────────────────────────────────────────────────────
 mkdirSync(join(ROOT, "tutorials"), { recursive: true });
-writeFileSync(join(ROOT, "tutorials.html"), buildHub());
+// A video with no series (series: null) once rendered a blank <h2></h2> on the hub and
+// "More in </h2>" on 7 pages. Refuse to write a page with an empty heading.
+const guard = (name, html) => {
+  if (/<h2>\s*<\/h2>|More in\s*<\/h2>|Episode (?:undefined|null)/.test(html)) throw new Error(`build-tutorials: empty series heading in ${name}`);
+  return html;
+};
+writeFileSync(join(ROOT, "tutorials.html"), guard("tutorials.html", buildHub()));
 console.log(`✅ tutorials.html  (${videos.length} videos, ${new Set(videos.map((v) => v.series)).size} series)`);
 for (const v of videos) {
-  writeFileSync(join(ROOT, "tutorials", `${v.slug}.html`), buildVideoPage(v));
+  writeFileSync(join(ROOT, "tutorials", `${v.slug}.html`), guard(v.slug, buildVideoPage(v)));
   console.log(`   tutorials/${v.slug}.html`);
 }
