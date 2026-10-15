@@ -182,6 +182,14 @@ function card(v) {
     </a>`;
 }
 
+// One line under each series heading on the hub. Unknown series get the generic line.
+const SERIES_BLURB = {
+  "ShelfSpace Delivery Dashboard": "a step-by-step walkthrough of the ShelfSpace delivery workflow.",
+  "ShelfSpace Credit Memos": "how vendor credits work and how ShelfSpace recovers them.",
+  "ShelfSpace Vendor Payments": "how vendors see and collect what they're owed.",
+  "ShelfSpace for Vendors": "getting paid, collecting overdue invoices, and running your accounts as a brand.",
+};
+
 function buildHub() {
   const bySeries = new Map();
   for (const v of videos) {
@@ -192,8 +200,8 @@ function buildHub() {
     vids.sort((a, b) => a.episode - b.episode);
     return `  <section class="tut-series">
     <div class="tut-series-head">
-      <h2>${esc(series)}</h2>
-      <p>${vids.length} video${vids.length === 1 ? "" : "s"} — a step-by-step walkthrough of the ShelfSpace delivery workflow.</p>
+      <h2>${esc(series || "More tutorials")}</h2>
+      <p>${vids.length} video${vids.length === 1 ? "" : "s"} — ${esc(SERIES_BLURB[series] || "short walkthroughs of one ShelfSpace feature each.")}</p>
     </div>
     <div class="tut-grid">
 ${vids.map(card).join("\n")}
@@ -237,7 +245,7 @@ ${chapters.map((c) => `        <li><span class="at">${esc(c.at)}</span><span>${e
     </div>` : "";
   const relatedHtml = related.length ? `
   <section class="tut-series" style="margin-top:16px;">
-    <div class="tut-series-head"><h2>More in ${esc(v.series)}</h2></div>
+    <div class="tut-series-head"><h2>${v.series ? `More in ${esc(v.series)}` : "More tutorials"}</h2></div>
     <div class="tut-grid">
 ${related.map(card).join("\n")}
     </div>
@@ -253,7 +261,7 @@ ${related.map(card).join("\n")}
   ) + `
 <div class="page-hero" style="padding-bottom:24px;">
   <div class="hero-bg-gradient"></div>
-  <div class="section-label">Tutorial · Episode ${v.episode}</div>
+  <div class="section-label">${v.series ? `Tutorial · Episode ${v.episode}` : "Tutorial"}</div>
   <h1 class="section-title" style="font-size:2.2rem;">${esc(v.title)}</h1>
   <p class="section-desc">${esc(v.subtitle || v.blurb)}</p>
 </div>
