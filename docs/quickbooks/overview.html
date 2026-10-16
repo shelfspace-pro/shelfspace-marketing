@@ -280,7 +280,7 @@
     </ul>
 
     <p>Both types include a BillPayment record that marks the Bill as paid by check, with the check number and bank account reference. Settlement report PDFs and vendor invoice PDFs are attached to the Bill as supporting documents.</p>
-    <p><strong>When the Bill posts depends on your accounting method.</strong> On Cash (where every store starts), the Bill and its check post together when you pay. On Accrual, the Bill posts when you receive the product and the check posts later. Consignment payouts always post at approval. See <a href="/docs/quickbooks/accounting-method">Accounting method</a>.</p>
+    <p><strong>When the Bill posts depends on your accounting method.</strong> On Cash, the Bill and its check post together when you pay. On Accrual, the Bill posts when you receive the product and the check posts later. A store that already has deliveries in ShelfSpace when it finishes setup stays on Cash; a store with no deliveries yet is switched to Accrual automatically. Consignment payouts always post at approval. See <a href="/docs/quickbooks/accounting-method">Accounting method</a>.</p>
 
     <div class="docs-highlight">
       <strong>What the platform runs:</strong> it creates the Bill, attaches supporting PDFs, records the BillPayment with check number, and matches the vendor. Every sync is logged and idempotent, so duplicate entries are impossible even if a sync is retried.
@@ -303,7 +303,7 @@
     <ul>
       <li><strong>Bookkeeper Match Health</strong> — a panel on your QuickBooks settings page that shows how many checks are pre-matched in QBO's bank feed. When the bank feed sees a check clear, QBO pre-suggests the match and your bookkeeper sees the payee instantly.</li>
       <li><strong>Backfill checks</strong> — if any Bills are missing their matching Bill Payments in QBO, click <strong>Backfill checks</strong> and the button loops through batches of 50 until everything is caught up.</li>
-      <li><strong>Cleared status sync</strong> — daily at 3am ET, the platform reads cleared and reconciled Bill Payments from your QBO bank feed and flips matching ShelfSpace payments from <strong>Downloaded</strong> to <strong>Cleared</strong>, with the QBO clearing date.</li>
+      <li><strong>Cleared status sync</strong> — early each morning, the platform reads the checks that have cleared in your QuickBooks bank feed and marks the matching ShelfSpace payments <strong>Cleared</strong>, with the clearing date.</li>
     </ul>
     <p>For the full step-by-step walkthrough — including the six-step setup guide, per-vendor accounts and the closed-period workflow — see our <a href="/docs/quickbooks/setup">Cannabis Dispensary QuickBooks Setup guide</a>.</p>
 
