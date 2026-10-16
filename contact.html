@@ -200,6 +200,7 @@
     background: var(--white); border: 1px solid var(--slate-200);
     display: flex; align-items: center; justify-content: center; color: var(--green-dark);
   }
+  .cx-sample[hidden] { display: none; }
   .cx-sample strong { display: block; font-size: 15px; font-weight: 700; color: var(--green-deep); margin-bottom: 4px; }
   .cx-sample p { font-size: 14px; line-height: 1.55; color: var(--slate-600); margin: 0; }
   .cx-sample-meta { display: block; margin-top: 8px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.5px; text-transform: uppercase; color: var(--slate-500); }
@@ -287,7 +288,7 @@
       <ol class="cx-steps">
         <li><div class="cx-step-num">1</div><div><strong>You tell us who you are</strong><span>Three fields. Any email works.</span></div></li>
         <li><div class="cx-step-num">2</div><div><strong>Chris emails you within one business day</strong><span>From his own inbox, with the one thing he needs to run your numbers.</span></div></li>
-        <li><div class="cx-step-num">3</div><div><strong>You get your review in dollars</strong><span>What you're owed and where money is leaking, vendor by vendor. Then you decide.</span></div></li>
+        <li><div class="cx-step-num">3</div><div><strong>You get your review in dollars</strong><span id="cxReviewLine">What you're owed and where money is slipping away, account by account. Then you decide.</span></div></li>
       </ol>
       <div class="cx-guarantee">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
@@ -412,12 +413,12 @@
         <span class="cx-stat-meta">Found in 14 days · Read the story →</span>
       </a>
     </div>
-    <a href="/ShelfSpace_Sample_Evaluation.pdf" target="_blank" rel="noopener" class="cx-sample" aria-label="See a sample review, 7-page PDF, opens in a new tab">
+    <a href="/ShelfSpace_Sample_Evaluation.pdf" target="_blank" rel="noopener" class="cx-sample" id="cxSample" aria-label="See a sample review, 7-page PDF, opens in a new tab">
       <div class="cx-sample-icon">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="13" y2="17"/></svg>
       </div>
       <div>
-        <strong>See a sample review →</strong>
+        <strong>See a sample dispensary review →</strong>
         <p>This is what lands in your inbox: what your AP is leaking, what your vendors owe you, and what's trapped on your shelves, vendor by vendor, in dollars.</p>
         <span class="cx-sample-meta">7 pages · PDF · Sample data</span>
       </div>
@@ -498,9 +499,9 @@
   function track(name, params) { try { if (window.gtag) gtag('event', name, params || {}); } catch (e) { /* never block the lead */ } }
 
   var COPY = {
-    Retailer: { chip: 'Dispensary', business: 'Dispensary name', button: 'Get my free review' },
-    Vendor:   { chip: 'Brand',      business: 'Brand name',      button: 'Get my free review' },
-    Other:    { chip: 'Other',      business: 'Company name',    button: 'Send it to Chris' },
+    Retailer: { chip: 'Dispensary', business: 'Dispensary name', button: 'Get my free review', review: "What your vendors owe you and where money is leaking, vendor by vendor. Then you decide." },
+    Vendor:   { chip: 'Brand',      business: 'Brand name',      button: 'Get my free review', review: "What your stores owe you and which invoices are running late, store by store. Then you decide." },
+    Other:    { chip: 'Other',      business: 'Company name',    button: 'Send it to Chris',   review: "What you're owed and where money is slipping away, account by account. Then you decide." },
   };
 
   function showStep(n) {
@@ -514,6 +515,8 @@
     document.getElementById('cxChosen').textContent = c.chip;
     document.getElementById('businessLabel').textContent = c.business;
     document.getElementById('submitLabel').textContent = c.button;
+    document.getElementById('cxReviewLine').textContent = c.review;
+    document.getElementById('cxSample').hidden = role === 'Vendor';
     document.getElementById('cxShopsGroup').hidden = role !== 'Retailer';
     document.getElementById('cxOtherGroup').hidden = role !== 'Other';
     showStep(2);
