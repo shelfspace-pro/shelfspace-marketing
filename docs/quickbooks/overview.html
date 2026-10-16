@@ -275,11 +275,12 @@
     <h2>Settlements and Payments as QBO Bills</h2>
     <p>The platform creates two types of Bills in QuickBooks:</p>
     <ul>
-      <li><strong>Consignment settlements</strong> — Each weekly settlement becomes a Bill showing the net payout amount. The description includes a breakdown: gross payout, return credits, aging discount true-ups, and conversion credit deductions. The Bill is dated to the settlement week ending date.</li>
+      <li><strong>Consignment settlements</strong> — Each weekly settlement becomes a Bill showing the net payout amount. The description includes a breakdown: gross payout, return credits and conversion credit deductions. The Bill is dated to the settlement week ending date.</li>
       <li><strong>AP payments</strong> — Each vendor payment becomes a Bill showing the net check amount after any applied <a href="/docs/credit-recovery/overview">credit memos</a>. If credits were deducted, the description lists each credit memo number and amount. The Bill uses the vendor's invoice date for accrual accuracy.</li>
     </ul>
 
     <p>Both types include a BillPayment record that marks the Bill as paid by check, with the check number and bank account reference. Settlement report PDFs and vendor invoice PDFs are attached to the Bill as supporting documents.</p>
+    <p><strong>When the Bill posts depends on your accounting method.</strong> On Cash (where every store starts), the Bill and its check post together when you pay. On Accrual, the Bill posts when you receive the product and the check posts later. Consignment payouts always post at approval. See <a href="/docs/quickbooks/accounting-method">Accounting method</a>.</p>
 
     <div class="docs-highlight">
       <strong>What the platform runs:</strong> it creates the Bill, attaches supporting PDFs, records the BillPayment with check number, and matches the vendor. Every sync is logged and idempotent, so duplicate entries are impossible even if a sync is retried.
@@ -293,7 +294,7 @@
       <li>Create if needed — If no match is found in QBO, the platform creates a new vendor record with the company name and contact information from ShelfSpace.</li>
     </ol>
 
-    <p>There's no manual vendor-mapping UI on the retailer side. If a sync lands on the wrong QBO vendor — usually because the vendor exists under a slightly different name — edit the Bill in QuickBooks to point it at the right vendor and the platform picks up that mapping going forward, or contact support and we'll repoint it. See the <a href="/docs/quickbooks/setup">QuickBooks setup guide</a> for details on configuring your connection.</p>
+    <p>You can also connect vendors yourself: the setup guide's <strong>Your vendors</strong> step matches QuickBooks vendors to yours by cannabis license number and the invoices you already have, and lists any it can't be sure of for you to pick once. See the <a href="/docs/quickbooks/setup">QuickBooks setup guide</a> for details.</p>
 
     <p>Are you a <strong>vendor</strong> connecting <em>your</em> QuickBooks Online to ShelfSpace? See our <a href="/docs/vendor-portal/quickbooks-setup">Vendor QuickBooks Setup guide</a> — every settlement becomes an Invoice plus a matching PaymentReceived in your books, with the settlement PDF attached.</p>
 
@@ -304,7 +305,7 @@
       <li><strong>Backfill checks</strong> — if any Bills are missing their matching Bill Payments in QBO, click <strong>Backfill checks</strong> and the button loops through batches of 50 until everything is caught up.</li>
       <li><strong>Cleared status sync</strong> — daily at 3am ET, the platform reads cleared and reconciled Bill Payments from your QBO bank feed and flips matching ShelfSpace payments from <strong>Downloaded</strong> to <strong>Cleared</strong>, with the QBO clearing date.</li>
     </ul>
-    <p>For the full step-by-step walkthrough — including per-vendor expense overrides, historical backfill, and the closed-period workflow — see our <a href="/docs/quickbooks/setup">Cannabis Dispensary QuickBooks Setup guide</a>.</p>
+    <p>For the full step-by-step walkthrough — including the six-step setup guide, per-vendor accounts and the closed-period workflow — see our <a href="/docs/quickbooks/setup">Cannabis Dispensary QuickBooks Setup guide</a>.</p>
 
     <h2>Why This Matters for Cannabis Operators</h2>
     <p>Cannabis dispensaries process dozens of vendor payments per week across consignment settlements and wholesale AP. Without an integration, someone on your team is manually entering each transaction into QuickBooks. That means hours of data entry, inevitable typos, and books that are always a week behind.</p>
