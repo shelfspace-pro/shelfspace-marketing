@@ -324,25 +324,27 @@
   } catch (e) {}
 })();
 
-/* ── Platform nav dropdown: ARIA sync + click toggle (desktop hover/focus open via CSS) ── */
+/* ── Nav dropdowns: ARIA sync + touch toggle (desktop hover/focus open via CSS) ──
+   Clicking the toggle label NAVIGATES to the product overview page. Only on a
+   no-hover (touch) device does the first tap open the menu instead. */
 (function () {
-  var dd = document.querySelector('.nav-dropdown');
-  if (!dd) return;
-  var toggle = dd.querySelector('.nav-dropdown-toggle');
-  if (!toggle) return;
-  function setExpanded(v) { toggle.setAttribute('aria-expanded', v ? 'true' : 'false'); }
-  toggle.addEventListener('click', function (e) {
-    e.preventDefault();
-    setExpanded(dd.classList.toggle('open'));
-  });
-  dd.addEventListener('mouseenter', function () { setExpanded(true); });
-  dd.addEventListener('mouseleave', function () { if (!dd.classList.contains('open')) setExpanded(false); });
-  dd.addEventListener('focusin', function () { setExpanded(true); });
-  dd.addEventListener('focusout', function () { if (!dd.classList.contains('open')) setExpanded(false); });
-  document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape' && dd.classList.contains('open')) { dd.classList.remove('open'); setExpanded(false); }
-  });
-  document.addEventListener('click', function (e) {
-    if (!dd.contains(e.target) && dd.classList.contains('open')) { dd.classList.remove('open'); setExpanded(false); }
+  var noHover = window.matchMedia && window.matchMedia('(hover: none)').matches;
+  Array.prototype.forEach.call(document.querySelectorAll('.nav-dropdown'), function (dd) {
+    var toggle = dd.querySelector('.nav-dropdown-toggle');
+    if (!toggle) return;
+    function setExpanded(v) { toggle.setAttribute('aria-expanded', v ? 'true' : 'false'); }
+    function close() { dd.classList.remove('open'); setExpanded(false); }
+    toggle.addEventListener('click', function (e) {
+      var mobileSheet = dd.closest('.nav-links.mobile-open');
+      if (!noHover || mobileSheet || dd.classList.contains('open')) return;
+      e.preventDefault();
+      dd.classList.add('open'); setExpanded(true);
+    });
+    dd.addEventListener('mouseenter', function () { setExpanded(true); });
+    dd.addEventListener('mouseleave', function () { if (!dd.classList.contains('open')) setExpanded(false); });
+    dd.addEventListener('focusin', function () { setExpanded(true); });
+    dd.addEventListener('focusout', function () { if (!dd.classList.contains('open')) setExpanded(false); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && dd.classList.contains('open')) close(); });
+    document.addEventListener('click', function (e) { if (!dd.contains(e.target) && dd.classList.contains('open')) close(); });
   });
 })();
