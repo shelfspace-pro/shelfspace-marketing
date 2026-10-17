@@ -4,12 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Cannabis Vendor QuickBooks Setup — ShelfSpace</title>
-<meta name="description" content="Cannabis vendor QuickBooks setup for ShelfSpace. Connect QBO, map customers and items, backfill history. Every settlement becomes an Invoice + Payment.">
+<meta name="description" content="Cannabis vendor QuickBooks setup for ShelfSpace: what posts and when (payout invoices, payments, wholesale, ShelfCollect), accrual or cash, and the five-step setup.">
 <link rel="canonical" href="https://shelfspace.pro/docs/vendor-portal/quickbooks-setup">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://shelfspace.pro/docs/vendor-portal/quickbooks-setup">
 <meta property="og:title" content="Cannabis Vendor QuickBooks Setup — ShelfSpace">
-<meta property="og:description" content="Cannabis vendor QuickBooks setup for ShelfSpace. Connect QBO, map customers and items, backfill history. Every settlement becomes an Invoice + Payment.">
+<meta property="og:description" content="Cannabis vendor QuickBooks setup for ShelfSpace: what posts and when (payout invoices, payments, wholesale, ShelfCollect), accrual or cash, and the five-step setup.">
 <meta property="og:image" content="https://shelfspace.pro/og-image-v7.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -113,6 +113,20 @@
   }
 
   /* ── Highlight Box ── */
+  /* ── Table ── */
+  .docs-content table {
+    width: 100%; border-collapse: collapse; margin: 24px 0;
+    font-size: 14px; line-height: 1.55;
+  }
+  .docs-content th, .docs-content td {
+    padding: 12px 14px; border-bottom: 1px solid var(--slate-100);
+    text-align: left; vertical-align: top; color: var(--slate-600);
+  }
+  .docs-content th {
+    background: var(--slate-50); color: var(--green-deep);
+    font-weight: 600; letter-spacing: 0.2px;
+  }
+  .docs-table-wrap { overflow-x: auto; }
   .docs-highlight {
     background: var(--green-ghost); border: 1px solid rgba(149,213,178,0.3);
     border-radius: 12px; padding: 20px 24px; margin: 24px 0;
@@ -186,7 +200,7 @@
   "@type": "TechArticle",
   "headline": "Cannabis Vendor QuickBooks Setup",
   "datePublished": "2026-04-28",
-  "dateModified": "2026-06-02",
+  "dateModified": "2026-10-16",
   "author": { "@type": "Organization", "name": "ShelfSpace", "url": "https://shelfspace.pro" },
   "publisher": { "@type": "Organization", "name": "ShelfSpace" },
   "url": "https://shelfspace.pro/docs/vendor-portal/quickbooks-setup"
@@ -276,111 +290,79 @@
     <div class="docs-glance">
       <h2>At a Glance</h2>
       <ul>
-        <li>Cannabis vendor QuickBooks setup takes about 10 minutes, one time.</li>
-        <li>Every settlement — on whatever cadence the retailer runs, weekly by default — becomes an Invoice in your QBO with the settlement PDF attached.</li>
-        <li>The matching PaymentReceived posts when the check is cut, deposit-routed to the bank account you choose.</li>
-        <li>Pick your Income and Bank accounts once, map customers and items, and you are done.</li>
-        <li>The platform handles book-closed weeks, transient API errors, and refresh tokens for you.</li>
+        <li>Consignment payout approved by the store: an invoice posts (store = customer, one line per product, returns as their own lines, payout report attached).</li>
+        <li>Store's check issued: the payment posts against the invoice, with the check number.</li>
+        <li>Wholesale delivery received: an invoice posts; the payment posts when the store pays through ShelfSpace.</li>
+        <li>ShelfCollect invoices post when sent; each collected payment posts against them.</li>
+        <li>You start on accrual. Setup is five steps, and none of them is required.</li>
       </ul>
     </div>
 
     <!-- BODY CONTENT -->
-    <h2>Setup in 6 steps</h2>
-    <p>Cannabis vendor QuickBooks setup is a one-time, ~10-minute flow if you sell <a href="/consignment">consignment</a> or wholesale to a ShelfSpace retailer. The six steps below get every settlement landing in your books on its own. If you only need a quick reference, read this section — the rest of the page expands each step in detail.</p>
+    <h2>What lands in QuickBooks, and when</h2>
+    <div class="docs-table-wrap">
+    <table>
+      <caption class="sr-only">What ShelfSpace posts to a vendor's QuickBooks and when</caption>
+      <thead>
+        <tr><th scope="col">Event in ShelfSpace</th><th scope="col">What posts to QuickBooks</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>A store approves your consignment payout (or marks it paid outside ShelfSpace)</td><td>Invoice <code>SR-</code> plus the payout number. Customer = the store. One line per product sold; returns and applied credits as their own lines, so the invoice equals the check. Payout report attached.</td></tr>
+        <tr><td>The store's check for that payout is issued</td><td>Payment for the same amount, reference = check number, applied to the invoice, deposited to your mapped bank account (Undeposited Funds if none). Only when "ShelfSpace records payments" is on.</td></tr>
+        <tr><td>A store receives your wholesale delivery</td><td>Invoice <code>WR-</code> plus the order number, for the order amount.</td></tr>
+        <tr><td>The store pays that order through ShelfSpace</td><td>Payment against the <code>WR-</code> invoice. A payment made outside ShelfSpace posts nothing; record it yourself.</td></tr>
+        <tr><td>You send a ShelfCollect invoice</td><td>Invoice. Each collected payment posts against it.</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p><strong>Accounting method.</strong> Every brand starts on <strong>accrual</strong>: invoices post at the events above. On <strong>cash</strong>, the invoice waits and posts together with its payment. Your accounting admin can switch on the Settings tab of the QuickBooks card; anyone else, email us.</p>
+    <p><strong>Cleared deposits.</strong> If a bank account is mapped, ShelfSpace checks it every morning and counts which consignment payouts have cleared in your QuickBooks bank feed. The count is on the Overview tab ("Deposits cleared / awaiting").</p>
+
+    <h2>Connect</h2>
+    <p>Go to <strong>My Account &rarr; QuickBooks Online</strong> and click <strong>Connect to QuickBooks</strong>. If you see <strong>Request a consultation</strong> instead, request it and we'll set QuickBooks up with you. Only an account admin can connect. QuickBooks asks you to sign in and choose your company, then sends you back to the setup.</p>
+
+    <h2>Setup in 5 steps</h2>
+    <p>Every step has <strong>Skip for now</strong>. Payouts post with the default choices whether or not you finish.</p>
     <ol>
-      <li>In your vendor portal, go to <strong>Settings → QuickBooks Online</strong> and click <strong>Connect to QuickBooks</strong>. Authorize on Intuit.</li>
-      <li>Pick your <strong>Income Account</strong> (where settlement revenue posts) and a <strong>Bank Account</strong> (where settlement checks deposit). Click <strong>Save Account</strong>.</li>
-      <li>Click <strong>Manage Customers</strong>. For each retailer, verify or pick the right QBO Customer.</li>
-      <li>Click <strong>Manage Items</strong>. Either click <strong>Auto-create all in QBO</strong> to bootstrap the full catalog, or map items one-by-one (or pick <strong>Ignore</strong> to roll into a single fallback line).</li>
-      <li>If you ran settlements before connecting, click <strong>Sync Historical Transactions</strong> until the unsynced count is zero (50 per click).</li>
-      <li>Done. Future settlements push to your books on their own.</li>
+      <li><strong>Accounts.</strong> Pick the income account your sales land in. The bank account is optional; without it, payments land in Undeposited Funds and cleared deposits can't be counted.</li>
+      <li><strong>Customers.</strong> ShelfSpace matches each store to a QuickBooks customer by name, or creates one when there's no match. Check the list once so nothing lands under a duplicate. A changed match applies to future invoices only.</li>
+      <li><strong>Items.</strong> Match products to QuickBooks items, click <strong>Auto-create</strong> to create the missing ones, or <strong>Ignore</strong> to roll a product into the default item <code>ShelfSpace Consignment Sales</code>.</li>
+      <li><strong>Sync behavior.</strong> Two choices:
+        <ul>
+          <li><em>How should payments be recorded?</em> "ShelfSpace records payments" (default) or "I record payments myself" (only the invoice is added; you use Receive payment in QuickBooks). This governs consignment payouts only; wholesale and ShelfCollect payments always post.</li>
+          <li><em>What if a product isn't matched?</em> "Create the invoice anyway" (default, uses the default item) or "Hold the invoice until items are mapped" (you're emailed, and it posts once you match the product).</li>
+        </ul>
+      </li>
+      <li><strong>Done.</strong> Everything posts on its own from here.</li>
     </ol>
 
-    <h2>Connect your QuickBooks</h2>
-    <p>Open your vendor portal, then <strong>Settings → QuickBooks Online → Connect to QuickBooks</strong>. You will be redirected to Intuit, where you authorize ShelfSpace. After authorization you land back on the settings page with a "Connected" badge.</p>
-    <p>On the same screen, the <strong>Income Account</strong> dropdown lists every Income or Other Income account from your QBO chart of accounts. Pick the one where settlement revenue should post — typically a "Sales" or "Consignment Revenue" account. The platform tries to pre-select an account whose name contains "sales" or "revenue", but verify the choice.</p>
-    <p>The <strong>Bank Account</strong> dropdown is optional but recommended. Pick the bank account where the physical settlement check actually deposits. This routes each PaymentReceived's <code>DepositToAccountRef</code> there, so QBO's bank feed can match the deposit. Leave it blank and payments land in <strong>Undeposited Funds</strong> for manual matching.</p>
-    <p>Click <strong>Save Account</strong>.</p>
-
-    <h2>Map your customers</h2>
-    <p>Click <strong>Manage Customers</strong>. You will see one row per ShelfSpace retailer you have settlements with. Each row's <strong>QBO Customer</strong> column shows either the QBO Customer the platform matched on a prior sync, or empty if no settlement has synced against that retailer yet.</p>
-
-    <figure class="docs-figure">
-      <img src="/screenshots/qbo-vendor-customer-mapping.png"
-           alt="QuickBooks Customer Mapping screen showing retailer-to-QBO-customer mapping with first-time-setup verification banner."
-           width="1070" height="531" loading="lazy">
-      <figcaption>Customer mapping. The yellow banner is your reminder to verify each row — name-based matching uses display-name <code>LIKE</code> matching, which can pick the wrong record when two customers have similar names.</figcaption>
-    </figure>
-
-    <p>Name-based matching can pick the wrong record when you have similarly-named entities — for example, "Acme Cannabis" vs. "Acme Wholesale LLC". Pre-mapping a retailer here before the next settlement runs is the cleanest way to guarantee correct attribution.</p>
-    <p>For each row: click the dropdown (or the <strong>Change</strong> link if it is already mapped), type to filter your QBO customers, and pick the right one. The mapping saves instantly. If a customer you expect is missing, click <strong>Refresh from QBO</strong>.</p>
-    <p>Changing a mapping does <strong>not</strong> re-link past Invoices. Already-synced settlements stay under whichever customer they were created against. Future syncs use the new mapping.</p>
-
-    <h2>Map your items (or auto-create them)</h2>
-    <p>Click <strong>Manage Items</strong>. You will see one row per Metrc product that has appeared on a settlement. Three options per row:</p>
-
-    <figure class="docs-figure">
-      <img src="/screenshots/qbo-vendor-item-mapping.png"
-           alt="QuickBooks Item Mapping screen showing Metrc product names mapped to QBO Items, with Auto-create and Ignore options."
-           width="1139" height="725" loading="lazy">
-      <figcaption>Item mapping. Three options per row: map to a specific QBO Item, click <strong>Auto-create all in QBO</strong> to bootstrap the catalog, or pick <strong>Ignore (use default)</strong> to roll into a single fallback line.</figcaption>
-    </figure>
-
+    <h2>After setup</h2>
     <ul>
-      <li><strong>Map to a specific QBO Item.</strong> Click the dropdown, search, and pick. Best for products you want to track individually in QBO sales reports.</li>
-      <li><strong>Auto-create all in QBO.</strong> Click the green button at the top. The platform creates a <code>Service</code> item in your QBO for every unmapped Metrc item, named identically to the Metrc item, posting to your Income Account.</li>
-      <li><strong>Use default (Ignore).</strong> Pick <strong>Ignore (use default)</strong> in the dropdown. The item rolls up into a single fallback line called <code>ShelfSpace Consignment Sales</code>.</li>
-    </ul>
-    <p>Change any row at any time — even ones already set to "Using default" — by clicking the <strong>Change</strong> link. New mappings apply to future settlements; past Invoices keep whatever line items they synced with.</p>
-    <p>Two notes on the dropdown: the QBO catalog uses parent/child item names (e.g. <code>Flower:Indoor:Hybrid</code>), so the full path shows to disambiguate identical leaf names. And Bundle and Category item types are excluded — only Service, Inventory, and NonInventory items appear.</p>
-
-    <h2>Auto-create Payment toggle (optional)</h2>
-    <p>By default, ShelfSpace pushes a <strong>PaymentReceived</strong> to QBO as soon as the settlement check is issued — marks the Invoice paid, deposits to the bank account you mapped, and clears your AR aging on its own. That is the right default for vendors who want the integration to be fully hands-off.</p>
-    <p>If you would rather record deposits yourself (e.g. you reconcile via QBO's bank feed and prefer the manual <em>Receive Payments</em> workflow), turn off the <strong>Auto-create Payment in QuickBooks</strong> switch on the QuickBooks settings panel. With it off, ShelfSpace pushes only the Invoice for each settlement — no PaymentReceived — and you record the deposit yourself when the bank feed picks up the cleared check.</p>
-    <p>The toggle is forward-looking. Flipping it off will not undo Payments already pushed for past settlements; flipping it back on later will not auto-backfill the gap (you would click the per-settlement <strong>Push Payment</strong> button on each one).</p>
-
-    <h2>Backfill historical settlements</h2>
-    <p>If you connected QBO after already running settlements on ShelfSpace, those past settlements are not yet in your QBO. To push them, go back to <strong>Settings → QuickBooks Online</strong> and click <strong>Sync Historical Transactions</strong>. The button processes up to 50 settlements per click. If you have more than 50 unsynced, just click again until the panel shows zero pending.</p>
-    <p>Each historical settlement creates the same Invoice + PaymentReceived pair that future settlements do. If a settlement's accrual week falls inside a closed QBO period, the platform shifts the TxnDate to today for you (see Troubleshooting below) — you do not need to reopen anything.</p>
-
-    <h2>What the platform pushes on each settlement</h2>
-    <p>Once setup is complete, you do not need to touch anything. Per settlement:</p>
-    <ul>
-      <li>The platform creates the <strong>Invoice</strong> against the retailer (your QBO Customer), with one line per Metrc product (mapped or fallback) plus separate negative-amount lines for returns credit, discount true-up, conversion credit, and the ShelfSpace platform fee. The settlement PDF is attached.</li>
-      <li>When the settlement check is generated, the platform creates the matching <strong>PaymentReceived</strong> (PayType: Check, RefNum: check number, deposit-routed to your bank account) and link it to the Invoice via <code>LinkedTxn</code>. If you've turned off the <strong>Auto-create Payment</strong> toggle, this step is skipped — only the Invoice is pushed and you record the deposit yourself.</li>
-      <li>AR aging clears on its own (when auto-payment is on).</li>
-      <li>Both transactions appear in your QBO instantly. The settings page shows recent sync activity with status badges (Synced / Failed / Pending / Skipped).</li>
+      <li><strong>Overview tab</strong>: Synced, Failed and Pending counts, plus invoices synced, payments recorded, and deposits cleared / awaiting.</li>
+      <li><strong>Sync activity tab</strong>: every entry and its status. Failed entries retry on their own every 10 minutes; click Retry (or Push payment on a payment row) to retry now.</li>
+      <li><strong>Customers tab</strong>: check a new store's customer match when you start selling to it.</li>
+      <li><strong>Items tab</strong>: match new products as they start selling.</li>
+      <li><strong>Settings tab</strong>: accounts, accounting method, the two sync choices, <strong>Sync Historical Transactions</strong> (pushes past payouts; part of ShelfCollect), and Disconnect.</li>
     </ul>
 
     <div class="docs-highlight">
-      <strong>What the platform runs:</strong> book-closed weeks, transient QBO API errors (10-minute retry), and OAuth refresh tokens. You do not need to reopen closed periods or manage tokens.
+      <strong>Handled for you:</strong> closed accounting periods (posts with today's date; invoice and check numbers unchanged), transient QuickBooks errors (10-minute retry), and sign-in renewal.
     </div>
-
-    <h2>ShelfSpace-managed line items</h2>
-    <p>The platform creates and caches a few helper QBO Items in your books on first sync. You do not need to create or maintain them:</p>
-    <ul>
-      <li><code>ShelfSpace Consignment Sales</code> — fallback line for any unmapped or ignored Metrc product.</li>
-      <li><code>ShelfSpace - Returns Credit</code> — negative-amount line for returns offsets.</li>
-      <li><code>ShelfSpace - Discount True-Up</code> — negative-amount line for aging, promotional, and operational discount adjustments.</li>
-      <li><code>ShelfSpace - Conversion Credit</code> — negative-amount line for unit-conversion adjustments.</li>
-      <li><code>ShelfSpace - Platform Fee</code> — negative-amount line for the ShelfSpace platform fee.</li>
-    </ul>
-    <p>All five post to the Income Account you picked in step 2.</p>
 
     <h2>Troubleshooting</h2>
     <ul>
-      <li><strong>Settlement shows "Failed":</strong> click <strong>Retry</strong> on that row. Most failures recover. Failed rows also retry every 10 minutes on their own.</li>
-      <li><strong>"Account Period Closed":</strong> the platform handles it — it retries with today's TxnDate. The DocNumber stays as the settlement reference and the check number stays on the PaymentReceived's <code>PaymentRefNum</code>, so your bank-feed match still works.</li>
-      <li><strong>Wrong customer on a posted Invoice:</strong> open <strong>Manage Customers</strong>, click <strong>Change</strong>, and pick the right one. Future settlements use the new mapping. To re-route the existing Invoice, edit it directly in QBO.</li>
-      <li><strong>New QBO item or customer not in the dropdown:</strong> click <strong>Refresh from QBO</strong>.</li>
-      <li><strong>Connection expired banner:</strong> click <strong>Reconnect to QuickBooks</strong>. QBO refresh tokens expire after 100 days of inactivity. Reconnecting takes 10 seconds and resumes everything.</li>
-      <li><strong>You deleted the Invoice in QBO directly:</strong> click <strong>Re-sync to QBO</strong> on that settlement. ShelfSpace detects the deleted Invoice and pushes a fresh one. <em>Caveat:</em> if you had already linked a check Payment in QBO for that settlement, deleting the Invoice does not auto-delete the Payment — you'll have an orphan unapplied Payment in QBO that you'll need to delete or re-apply manually.</li>
+      <li><strong>An entry shows Failed:</strong> it retries every 10 minutes; to retry now, open Sync activity and click Retry.</li>
+      <li><strong>An invoice went to the wrong customer:</strong> fix the match on the Customers tab. Future invoices follow it; edit the posted invoice in QuickBooks.</li>
+      <li><strong>Payments land in Undeposited Funds:</strong> no bank account is mapped. Add one on the Settings tab.</li>
+      <li><strong>An invoice is missing for a payout:</strong> if "Hold the invoice until items are mapped" is on, match the product on the Items tab and it posts on its own.</li>
+      <li><strong>"Reconnect to QuickBooks" appears:</strong> QuickBooks ended the connection. Click Reconnect and sign in again; nothing is lost.</li>
     </ul>
 
     <h2>Need help with setup?</h2>
-    <p>Email us at <a href="mailto:support@shelfspace.pro">support@shelfspace.pro</a>, or message ShelfiQ at <a href="mailto:shelfiq@inbound.shelfspace.pro">shelfiq@inbound.shelfspace.pro</a> — ShelfiQ has full context on your account and can answer most "where do I see X" or "why did Y happen" questions instantly. The deeper version of this guide, with extra context for prospects, is in our blog post <a href="/blog/cannabis-vendor-quickbooks-setup">Cannabis Vendor QuickBooks Setup: A Step-by-Step Guide</a>.</p>
+    <p>Email us at <a href="mailto:support@shelfspace.pro">support@shelfspace.pro</a>. The longer version of this guide is our blog post <a href="/blog/cannabis-vendor-quickbooks-setup">Cannabis Vendor QuickBooks Setup: A Step-by-Step Guide</a>.</p>
 
-    <!-- RELATED DOCS -->
+    
+<!-- RELATED DOCS -->
     <div class="docs-related">
       <h3>Related</h3>
       <div class="docs-related-links">
