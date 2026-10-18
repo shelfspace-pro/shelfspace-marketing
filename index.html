@@ -1124,32 +1124,112 @@
 
 <!-- SECTION 2: PAIN — what the old way costs -->
 <style>
-.h-pain { background: var(--slate-50); padding: 96px 48px 88px; }
-.h-head { text-align: center; max-width: 720px; margin: 0 auto 44px; }
+.h-pain { --loss: #c2410c; --loss-soft: rgba(194,65,12,0.12); background: var(--slate-50); padding: 96px 48px 88px; position: relative; overflow: hidden; }
+.h-pain::before { content: ""; position: absolute; inset: 0; background-image: radial-gradient(rgba(27,67,50,0.07) 1px, transparent 1px); background-size: 22px 22px; mask-image: radial-gradient(ellipse at 50% 40%, #000 30%, transparent 75%); -webkit-mask-image: radial-gradient(ellipse at 50% 40%, #000 30%, transparent 75%); pointer-events: none; }
+.h-pain > * { position: relative; }
+.h-head { text-align: center; max-width: 720px; margin: 0 auto 48px; }
 .h-head .section-label { justify-content: center; }
 .h-head h2 { font-size: clamp(28px, 3.8vw, 44px); font-weight: 700; color: var(--green-deep); letter-spacing: -1.4px; line-height: 1.1; margin: 0 0 12px; }
 .h-head p { font-size: 17px; line-height: 1.6; color: var(--slate-600); margin: 0; }
-.h-pain-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; max-width: 1000px; margin: 0 auto; }
-.h-pain-card { background: var(--white); border: 1px solid var(--slate-200); border-radius: 16px; padding: 30px 26px; box-shadow: 0 10px 28px rgba(27,67,50,0.06); }
+.h-pain-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; max-width: 1080px; margin: 0 auto; }
+.h-pain-card { background: var(--white); border: 1px solid var(--slate-200); border-radius: 16px; padding: 28px 26px 26px; box-shadow: 0 14px 40px rgba(27,67,50,0.08); display: flex; flex-direction: column; position: relative; overflow: hidden; transition: transform .35s cubic-bezier(0.22,1,0.36,1), box-shadow .35s; }
+.h-pain-card::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 4px; background: linear-gradient(90deg, var(--loss), #ea580c); }
+.h-pain-card:hover { transform: translateY(-4px); box-shadow: 0 22px 54px rgba(27,67,50,0.14); }
 .h-pain-who { font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: 1.4px; text-transform: uppercase; color: var(--green-mid); margin: 0 0 10px; }
-.h-pain-num { font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-size: clamp(32px, 3.6vw, 44px); font-weight: 700; color: var(--green-deep); letter-spacing: -1.4px; line-height: 1.05; margin: 0 0 10px; }
-.h-pain-card p { margin: 0; font-size: 15px; line-height: 1.55; color: var(--slate-600); }
+.h-pain-num { font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-size: clamp(34px, 3.8vw, 48px); font-weight: 700; color: var(--green-deep); letter-spacing: -1.6px; line-height: 1.05; margin: 0 0 8px; white-space: nowrap; }
+.h-pain-card > p { margin: 0 0 22px; font-size: 15px; line-height: 1.55; color: var(--slate-600); }
+.hp-viz { margin-top: auto; background: var(--slate-50); border: 1px solid var(--slate-100); border-radius: 12px; padding: 16px 16px 12px; }
+.hp-cap { display: flex; justify-content: space-between; align-items: baseline; font-family: var(--font-mono); font-size: 10.5px; letter-spacing: .4px; color: var(--slate-500); margin-top: 10px; }
+.hp-cap strong { color: var(--loss); font-weight: 700; }
+/* 1: months stacking up */
+.hp-bars { display: grid; grid-template-columns: repeat(12, 1fr); gap: 4px; align-items: end; height: 92px; }
+.hp-bars i { display: block; height: var(--h); border-radius: 3px 3px 1px 1px; background: linear-gradient(180deg, var(--loss), rgba(194,65,12,0.55)); transform: scaleY(0); transform-origin: bottom; transition: transform .7s cubic-bezier(0.22,1,0.36,1); transition-delay: calc(.35s + var(--i) * 70ms); }
+.hp-bars i:last-child { box-shadow: 0 0 0 2px var(--loss-soft); }
+.hp-months { display: grid; grid-template-columns: repeat(12, 1fr); gap: 4px; margin-top: 6px; font-family: var(--font-mono); font-size: 9px; color: var(--slate-400); text-align: center; }
+/* 2: the week, eaten */
+.hp-week { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
+.hp-day { text-align: center; }
+.hp-day b { display: block; font-family: var(--font-mono); font-size: 9px; color: var(--slate-400); font-weight: 400; margin-top: 6px; }
+.hp-cells { display: grid; grid-template-rows: repeat(8, 1fr); gap: 3px; height: 92px; }
+.hp-cells i { display: block; border-radius: 2px; background: rgba(27,67,50,0.10); }
+.hp-cells i.lost { background: rgba(27,67,50,0.10); position: relative; overflow: hidden; }
+.hp-cells i.lost::after { content: ""; position: absolute; inset: 0; background: var(--loss); transform: scaleX(0); transform-origin: left; transition: transform .35s ease-out; transition-delay: calc(.5s + var(--i) * 90ms); }
+.hp-legend { display: flex; gap: 14px; justify-content: center; font-family: var(--font-mono); font-size: 10px; color: var(--slate-500); margin-top: 10px; }
+.hp-legend span::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 2px; margin-right: 5px; vertical-align: -1px; background: rgba(27,67,50,0.18); }
+.hp-legend span.l::before { background: var(--loss); }
+/* 3: cash stuck in the wait */
+.hp-track { margin-bottom: 14px; }
+.hp-track:last-of-type { margin-bottom: 0; }
+.hp-track-head { display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 10.5px; color: var(--slate-500); margin-bottom: 6px; }
+.hp-rail { height: 26px; border-radius: 8px; background: var(--slate-100); position: relative; overflow: hidden; }
+.hp-fill { position: absolute; top: 0; bottom: 0; left: 0; border-radius: 8px; transform: scaleX(0); transform-origin: left; transition: transform 1s cubic-bezier(0.22,1,0.36,1); }
+.hp-fill.base { width: 66.6%; background: var(--green-mid); transition-delay: .4s; }
+.hp-fill.stuck { width: 100%; background: repeating-linear-gradient(-45deg, var(--loss) 0 6px, #ea580c 6px 12px); transition-delay: .4s; }
+.hp-fill.stuck::after { content: ""; position: absolute; top: 0; bottom: 0; left: 0; width: 66.6%; background: var(--green-mid); border-radius: 8px 0 0 8px; }
+.hp-gap { position: absolute; top: 0; bottom: 0; left: 66.6%; right: 0; display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 10px; font-weight: 700; color: var(--white); opacity: 0; transition: opacity .5s 1.3s; letter-spacing: .3px; }
+.h-pain-card.is-visible .hp-bars i, .h-pain-card.is-visible .hp-fill { transform: none; }
+.h-pain-card.is-visible .hp-cells i.lost::after { transform: none; }
+.h-pain-card.is-visible .hp-gap { opacity: 1; }
 .h-pivot { text-align: center; max-width: 900px; margin: 64px auto 0; font-size: clamp(30px, 4.2vw, 50px); font-weight: 700; line-height: 1.1; color: var(--green-deep); letter-spacing: -1.6px; }
 .h-pivot span { color: var(--green-mid); }
 @media (max-width: 900px) { .h-pain { padding: 64px 20px; } .h-pain-grid { grid-template-columns: 1fr; max-width: 520px; } }
+@media (prefers-reduced-motion: reduce) { .hp-bars i, .hp-fill, .hp-cells i.lost::after { transform: none !important; transition: none !important; } .hp-gap { opacity: 1 !important; transition: none !important; } }
 </style>
+<noscript><style>.hp-bars i, .hp-fill, .hp-cells i.lost::after { transform: none !important; } .hp-gap { opacity: 1 !important; }</style></noscript>
 <section class="h-pain" aria-labelledby="pain-heading">
   <div class="h-head reveal">
     <div class="section-label">What the old way costs you</div>
     <h2 id="pain-heading">There's money hiding in quiet corners of your business.</h2>
   </div>
   <div class="h-pain-grid">
-    <div class="h-pain-card reveal"><p class="h-pain-who">Dispensaries</p><div class="h-pain-num">$51,000</div><p>a year in returns, expired product, and promo costs your vendors owe you and never pay back, for a store selling $500k.</p></div>
-    <div class="h-pain-card reveal reveal-delay-1"><p class="h-pain-who">Everyone</p><div class="h-pain-num">10–15 hrs</div><p>a week of someone's time keying invoices, cutting checks, and chasing payments instead of growing the business.</p></div>
-    <div class="h-pain-card reveal reveal-delay-2"><p class="h-pain-who">Brands</p><div class="h-pain-num">$246,000</div><p>in cash a brand selling $500k a month frees up just by getting paid 15 days faster.</p></div>
+    <div class="h-pain-card reveal">
+      <p class="h-pain-who">Dispensaries</p>
+      <div class="h-pain-num" data-count="51000" data-prefix="$">$51,000</div>
+      <p>a year in returns, expired product, and promo costs your vendors owe you and never pay back, for a store selling $500k.</p>
+      <div class="hp-viz" role="img" aria-label="$4,250 lost every month, adding up to $51,000 over a year">
+        <div class="hp-bars"><i style="--i:0;--h:8.3%"></i><i style="--i:1;--h:16.7%"></i><i style="--i:2;--h:25.0%"></i><i style="--i:3;--h:33.3%"></i><i style="--i:4;--h:41.7%"></i><i style="--i:5;--h:50.0%"></i><i style="--i:6;--h:58.3%"></i><i style="--i:7;--h:66.7%"></i><i style="--i:8;--h:75.0%"></i><i style="--i:9;--h:83.3%"></i><i style="--i:10;--h:91.7%"></i><i style="--i:11;--h:100.0%"></i></div>
+        <div class="hp-months"><span>J</span><span>F</span><span>M</span><span>A</span><span>M</span><span>J</span><span>J</span><span>A</span><span>S</span><span>O</span><span>N</span><span>D</span></div>
+        <div class="hp-cap"><span>$4,250 every month</span><strong>never paid back</strong></div>
+      </div>
+    </div>
+    <div class="h-pain-card reveal reveal-delay-1">
+      <p class="h-pain-who">Everyone</p>
+      <div class="h-pain-num">10–15 hrs</div>
+      <p>a week of someone's time keying invoices, cutting checks, and chasing payments instead of growing the business.</p>
+      <div class="hp-viz" role="img" aria-label="About a day and a half of every work week lost to paperwork">
+        <div class="hp-week"><div class="hp-day"><div class="hp-cells"><i></i><i></i><i></i><i></i><i></i><i class="lost" style="--i:0"></i><i class="lost" style="--i:1"></i><i class="lost" style="--i:2"></i></div><b>M</b></div><div class="hp-day"><div class="hp-cells"><i></i><i></i><i></i><i></i><i></i><i></i><i class="lost" style="--i:3"></i><i class="lost" style="--i:4"></i></div><b>T</b></div><div class="hp-day"><div class="hp-cells"><i></i><i></i><i></i><i></i><i></i><i class="lost" style="--i:5"></i><i class="lost" style="--i:6"></i><i class="lost" style="--i:7"></i></div><b>W</b></div><div class="hp-day"><div class="hp-cells"><i></i><i></i><i></i><i></i><i></i><i></i><i class="lost" style="--i:8"></i><i class="lost" style="--i:9"></i></div><b>T</b></div><div class="hp-day"><div class="hp-cells"><i></i><i></i><i></i><i></i><i></i><i></i><i class="lost" style="--i:10"></i><i class="lost" style="--i:11"></i></div><b>F</b></div></div>
+        <div class="hp-legend"><span>Growing the business</span><span class="l">Paperwork</span></div>
+      </div>
+    </div>
+    <div class="h-pain-card reveal reveal-delay-2">
+      <p class="h-pain-who">Brands</p>
+      <div class="h-pain-num" data-count="246000" data-prefix="$">$246,000</div>
+      <p>in cash a brand selling $500k a month frees up just by getting paid 15 days faster.</p>
+      <div class="hp-viz" role="img" aria-label="Getting paid in 30 days instead of 45 frees up $246,000 in cash">
+        <div class="hp-track"><div class="hp-track-head"><span>Paid in 45 days</span><strong style="color:var(--loss)">cash stuck</strong></div><div class="hp-rail"><div class="hp-fill stuck"></div><div class="hp-gap">+15 days</div></div></div>
+        <div class="hp-track"><div class="hp-track-head"><span>Paid in 30 days</span><strong style="color:var(--green-mid)">$246k back</strong></div><div class="hp-rail"><div class="hp-fill base"></div></div></div>
+      </div>
+    </div>
   </div>
   <p class="h-pivot reveal">Here's the deal: we take all of it off your plate, <span>and it pays for itself.</span></p>
 </section>
+<script>
+(function(){
+  var nums = document.querySelectorAll('.h-pain-num[data-count]');
+  if (!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (!e.isIntersecting) return;
+      io.unobserve(e.target);
+      var el = e.target, target = +el.getAttribute('data-count'), pre = el.getAttribute('data-prefix') || '', t0 = null;
+      function step(ts){ if (!t0) t0 = ts; var p = Math.min((ts - t0) / 1600, 1), v = Math.round((1 - Math.pow(1 - p, 3)) * target);
+        el.textContent = pre + v.toLocaleString('en-US'); if (p < 1) requestAnimationFrame(step); }
+      el.textContent = pre + '0'; requestAnimationFrame(step);
+    });
+  }, { threshold: 0.4 });
+  nums.forEach(function(n){ io.observe(n); });
+})();
+</script>
 
 <!-- SECTION 4: THE OFFER — what we take over -->
 <style>
