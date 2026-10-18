@@ -27,6 +27,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="/hero-motion.css">
 <style>
   @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-12px); } }
 
@@ -514,18 +515,67 @@
   <div class="nav-hamburger" onclick="document.querySelector('.nav-links').classList.toggle('mobile-open'); event.stopPropagation();"><span></span><span></span><span></span></div>
 </nav>
 
-<!-- PAGE HERO (slim) -->
-<div class="page-hero">
+<!-- PAGE HERO — motion (10/18/2026) -->
+<div class="page-hero page-hero--motion">
   <div class="hero-bg-gradient"></div>
   <div class="hero-bg-gradient-2"></div>
   <div class="hero-grid-lines"></div>
-  <div class="hero-text--solo">
+  <div class="lp-split">
+  <div class="hero-text--solo lp-text">
     <div class="aud-badge aud-retailer">For Retailers</div>
     <div class="section-label">ShelfPay &middot; Cannabis Accounts Payable</div>
-    <h1 class="hero-h1">Pay your vendors right.</h1>
-    <p class="hero-lede">Every invoice checked against Metrc before a dollar goes out. We run the AP desk; you just approve. It pays for itself, or we refund the difference.</p>
+    <h1 class="hero-h1">Never overpay <em>a vendor again.</em></h1>
+    <p class="hero-lede">Every invoice checked against Metrc before a dollar goes out. We run the AP desk. You just approve.</p>
     <div class="hero-actions-centered">
       <a href="/contact" class="btn-primary">Show me my number <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+    </div>
+    <div class="lp-guar"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6z"/><polyline points="8.5 12 11 14.5 15.5 9.5"/></svg> Pays for itself, or we refund the difference</div>
+  </div>
+    <div class="hm-stage" data-engine data-ms="6500" aria-label="Animated example: ShelfPay checks an invoice against Metrc, pays three vendors in one click, and recovers credits">
+      <div class="hm-glow"></div>
+      <div class="hm-window" aria-hidden="true">
+        <div class="hm-chrome"><i></i><i></i><i></i>
+          <div class="hm-tabs"><span class="hm-tab on" data-s="0">Verify</span><span class="hm-tab" data-s="1">Pay</span><span class="hm-tab" data-s="2">Recover</span></div>
+        </div>
+        <div class="hm-scenes">
+          <div class="hm-scene on">
+            <div class="hm-title"><b>Invoice #2209 vs. Metrc manifest</b><span>10/14/2026</span></div>
+            <div class="hm-cols">
+              <div class="hm-colhead">Invoice</div><div></div><div class="hm-colhead r">Metrc manifest</div>
+              <div class="hm-line" data-i="0" data-at="250"><span class="nm">OG Kush 3.5g</span><span class="q hm-mono">×40</span></div><div class="hm-link" data-i="0" data-at="550" data-cls="ok"><span>✓</span></div><div class="hm-line r" data-i="0" data-at="370"><span class="nm">OG Kush 3.5g</span><span class="q hm-mono">×40</span></div>
+              <div class="hm-line" data-i="1" data-at="630"><span class="nm">Gummies 100mg</span><span class="q hm-mono">×60</span></div><div class="hm-link" data-i="1" data-at="930" data-cls="ok"><span>✓</span></div><div class="hm-line r" data-i="1" data-at="750"><span class="nm">Gummies 100mg</span><span class="q hm-mono">×60</span></div>
+              <div class="hm-line" data-i="2" data-at="1010"><span class="nm">Pre-roll 5pk</span><span class="q hm-mono">×48</span></div><div class="hm-link" data-i="2" data-at="1310" data-cls="ok"><span>✓</span></div><div class="hm-line r" data-i="2" data-at="1130"><span class="nm">Pre-roll 5pk</span><span class="q hm-mono">×48</span></div>
+              <div class="hm-line" data-i="3" data-at="1390"><span class="nm">Live resin cart 1g</span><span class="q hm-mono">×30</span></div><div class="hm-link" data-i="3" data-at="1690" data-cls="bad"><span>!</span></div><div class="hm-line r" data-i="3" data-at="1510"><span class="nm">Live resin cart 1g</span><span class="q hm-mono">×24</span></div>
+              <div class="hm-line" data-i="4" data-at="1770"><span class="nm">Tincture 30ml</span><span class="q hm-mono">×12</span></div><div class="hm-link" data-i="4" data-at="2070" data-cls="ok"><span>✓</span></div><div class="hm-line r" data-i="4" data-at="1890"><span class="nm">Tincture 30ml</span><span class="q hm-mono">×12</span></div>
+            </div>
+            <div class="hm-result" data-at="2700"><div><b>6 carts billed, never shipped</b><small>Short-paid automatically. You never overpay.</small></div><div class="hm-big" data-count="150" data-count-ms="900">$0.00</div></div>
+          </div>
+          <div class="hm-scene">
+            <div class="hm-title"><b>Ready to pay · 3 invoices</b><span>All checked against Metrc</span></div>
+            <div class="hm-q">
+              <div class="hm-qrow hm-r" data-at="250"><span class="v">Verdant Hill Botanical<small>Inv #2209 · short-paid $150.00</small></span><span class="a">$2,480.00</span><span class="hm-pill chk" data-at="2350" data-cls="paid" data-rm="chk" data-text="Paid">Checked</span></div>
+              <div class="hm-qrow hm-r" data-at="500"><span class="v">Northern Lights Farms<small>Inv #0771</small></span><span class="a">$3,912.40</span><span class="hm-pill chk" data-at="2530" data-cls="paid" data-rm="chk" data-text="Paid">Checked</span></div>
+              <div class="hm-qrow hm-r" data-at="750"><span class="v">Riverbend Edibles<small>Inv #5130</small></span><span class="a">$2,020.00</span><span class="hm-pill chk" data-at="2710" data-cls="paid" data-rm="chk" data-text="Paid">Checked</span></div>
+            </div>
+            <div class="hm-btn" data-at="1700">Approve &amp; pay all <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+            <svg class="hm-cursor" data-at="900" style="--x0:82%;--y0:96%;--x1:56%;--y1:54%" viewBox="0 0 24 24"><path d="M4 2l16 9-7 2-3 7z" fill="#fff" stroke="#0f2a1f" stroke-width="1.5" stroke-linejoin="round"/></svg>
+            <div class="hm-paidbar" data-at="3000"><div><b style="font-size:13px;">Paid out, one click</b><small style="display:block;font-size:11px;color:rgba(230,244,234,0.65);margin-top:2px;">Checks on their way to 3 vendors</small></div><div class="hm-big" data-count="8412.40" data-count-ms="1000">$0.00</div></div>
+          </div>
+          <div class="hm-scene">
+            <div class="hm-title"><b>Credit memo · September 2026</b><span>Sent 10/01/2026</span></div>
+            <div class="hm-cm">
+              <div class="lbl" data-at="300">Customer returns</div><div class="amt" data-at="300">$412.50</div>
+              <div class="lbl" data-at="680">Destroyed product</div><div class="amt" data-at="680">$186.00</div>
+              <div class="lbl" data-at="1060">Price-drop share</div><div class="amt" data-at="1060">$311.25</div>
+              <div class="lbl" data-at="1440">Damaged on arrival</div><div class="amt" data-at="1440">$96.00</div>
+            </div>
+            <div class="hm-stamp" data-at="2100">Approved</div>
+            <div class="hm-total" data-at="2700"><div><b style="font-size:13px;">Recovered this month</b><small>Taken off your next vendor payment</small></div><div class="hm-big" data-count="1005.75">$0.00</div></div>
+          </div>
+        </div>
+        <div class="hm-progress"><i></i></div>
+      </div>
+      <div class="hm-caption">Illustration with example numbers</div>
     </div>
   </div>
 </div>
@@ -1155,6 +1205,7 @@
   }
 })();
 </script>
+<script src="/hero-motion.js" defer></script>
 <script src="/shelfiq-widget.js"></script>
 </body>
 </html>

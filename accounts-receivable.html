@@ -27,6 +27,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/styles.css">
+<link rel="stylesheet" href="/hero-motion.css">
 <style>
   @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-12px); } }
 
@@ -421,22 +422,79 @@
   <div class="nav-hamburger" onclick="document.querySelector('.nav-links').classList.toggle('mobile-open'); event.stopPropagation();"><span></span><span></span><span></span></div>
 </nav>
 
-<!-- PAGE HERO -->
-<div class="page-hero">
+<!-- PAGE HERO — motion (10/18/2026) -->
+<div class="page-hero page-hero--motion">
   <div class="hero-bg-gradient"></div>
   <div class="hero-bg-gradient-2"></div>
   <div class="hero-grid-lines"></div>
-  <div class="hero-text--solo">
+  <div class="lp-split">
+  <div class="hero-text--solo lp-text">
     <div class="aud-badge aud-vendor">For Vendors &amp; Brands</div>
     <div class="section-label">ShelfCollect &middot; Cannabis Accounts Receivable</div>
-    <h1 class="hero-h1">Get paid faster.</h1>
-    <p class="hero-lede">More cash freed, more past-due backlog recovered, and hours of AR chasing off your team. We run it as your own AR department, so the buyer relationship stays yours. We collect more than we cost, or we refund the difference.</p>
+    <h1 class="hero-h1">Get paid by every store. <em>On time.</em></h1>
+    <p class="hero-lede">Invoices go out with a pay link, reminders go out in your name, and past-dues get worked until they pay. The buyer stays yours.</p>
     <div class="hero-actions-centered">
       <a href="/contact" class="btn-primary">Get a free AR review <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
     </div>
+    <div class="lp-guar"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6z"/><polyline points="8.5 12 11 14.5 15.5 9.5"/></svg> We collect more than we cost, or we refund the difference</div>
     <div class="hero-trust">
       <img src="/metrc-logo-v2.png" alt="Metrc">
       <span>We never hold your money &middot; Certified Metrc Third-Party Vendor</span>
+    </div>
+  </div>
+    <div class="hm-stage" data-engine data-ms="6500" aria-label="Animated example: ShelfCollect sends an invoice with a pay link, works past-due stores down, and shows cash collected">
+      <div class="hm-glow"></div>
+      <div class="hm-window" aria-hidden="true">
+        <div class="hm-chrome"><i></i><i></i><i></i>
+          <div class="hm-tabs"><span class="hm-tab on" data-s="0">Send</span><span class="hm-tab" data-s="1">Chase</span><span class="hm-tab" data-s="2">Collect</span></div>
+        </div>
+        <div class="hm-scenes">
+          <div class="hm-scene on">
+            <div class="hm-title"><b>Invoice #1182 · Green Leaf Dispensary</b><span>Net 30</span></div>
+            <div class="hm-inv">
+              <div class="hm-row"><span>Amount</span><span class="hm-mono" style="color:#fff;font-weight:700;">$3,280.00</span></div>
+              <div class="hm-row"><span>Status</span><span class="hm-pstack"><span class="hm-pill wait">Draft</span><span class="hm-pill sent" data-at="500">Sent</span><span class="hm-pill sent" data-at="2200">Opened</span><span class="hm-pill paid" data-at="2900">Paid</span></span></div>
+            </div>
+            <div class="hm-feed">
+              <div class="hm-ev" data-at="500"><i></i>Sent with a one-click pay link<em>10/14/2026</em></div>
+              <div class="hm-ev" data-at="1500"><i></i>Copy to your sales rep<em>10/14/2026</em></div>
+              <div class="hm-ev" data-at="2200"><i></i>Buyer opened the invoice<em>10/15/2026</em></div>
+              <div class="hm-ev" data-at="2900"><i></i>Paid through the pay link<em>10/17/2026</em></div>
+            </div>
+            <div class="hm-paidbar" data-at="3300"><div><b style="font-size:13px;">Paid in 3 days</b><small style="display:block;font-size:11px;color:rgba(230,244,234,0.65);margin-top:2px;">Nobody had to ask</small></div><div class="hm-big" data-count="3280">$0.00</div></div>
+          </div>
+          <div class="hm-scene">
+            <div class="hm-title"><b>Past due, by days late</b><span>12 stores</span></div>
+            <div class="hm-aging">
+              <div class="hm-bar" style="--h:70%;--h2:37%" data-at="1300"><b data-at="1500" data-text="$9.6k">$18.2k</b><i></i><span>1–30 days</span></div>
+              <div class="hm-bar" style="--h:48%;--h2:16%" data-at="1450"><b data-at="1650" data-text="$4.1k">$12.4k</b><i></i><span>31–60 days</span></div>
+              <div class="hm-bar" style="--h:34%;--h2:9%" data-at="1600"><b data-at="1800" data-text="$2.3k">$8.9k</b><i></i><span>61–90 days</span></div>
+              <div class="hm-bar" style="--h:25%;--h2:12%" data-at="1750"><b data-at="1950" data-text="$3.2k">$6.5k</b><i></i><span>90+ days</span></div>
+            </div>
+            <div class="hm-feed">
+              <div class="hm-ev" data-at="400"><i></i>Reminders sent in your name to 12 stores<em>10/01/2026</em></div>
+              <div class="hm-ev" data-at="900"><i></i>9 promises to pay recorded<em>10/08/2026</em></div>
+            </div>
+            <div class="hm-paidbar" data-at="2600"><div><b style="font-size:13px;">Past due, down</b><small style="display:block;font-size:11px;color:rgba(230,244,234,0.65);margin-top:2px;">In 30 days, relationships intact</small></div><div class="hm-big" data-count="58" data-pre="" data-dec="0" data-suf="%">0%</div></div>
+          </div>
+          <div class="hm-scene">
+            <div class="hm-title"><b>Cash collected · October 2026</b><span>Month to date</span></div>
+            <div class="hm-paidbar" data-at="200" style="margin-top:0;"><div><b style="font-size:13px;">Collected for you</b><small style="display:block;font-size:11px;color:rgba(230,244,234,0.65);margin-top:2px;">Every dollar went straight to your bank</small></div><div class="hm-big" data-count="48920" data-count-ms="2000">$0.00</div></div>
+            <div class="hm-spark" data-at="400">
+              <svg viewBox="0 0 300 100" preserveAspectRatio="none"><defs><linearGradient id="hmSparkFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#95d5b2" stop-opacity="0.35"/><stop offset="1" stop-color="#95d5b2" stop-opacity="0"/></linearGradient></defs>
+                <path class="ar" d="M0 88 C 40 84, 60 74, 90 70 S 150 54, 180 46 S 240 24, 300 10 L300 100 L0 100 Z" fill="url(#hmSparkFill)"/>
+                <path class="ln" d="M0 88 C 40 84, 60 74, 90 70 S 150 54, 180 46 S 240 24, 300 10" fill="none" stroke="#95d5b2" stroke-width="3" stroke-linecap="round" vector-effect="non-scaling-stroke"/></svg>
+            </div>
+            <div class="hm-kpis">
+              <div class="hm-kpi hm-r" data-at="1700"><b data-count="11" data-pre="" data-dec="0" data-suf=" days">0 days</b><span>faster to get paid</span></div>
+              <div class="hm-kpi hm-r" data-at="2000"><b data-count="38" data-pre="" data-dec="0" data-suf=" hrs">0 hrs</b><span>back to your reps</span></div>
+              <div class="hm-kpi hm-r" data-at="2300"><b>0</b><span>collection calls you made</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="hm-progress"><i></i></div>
+      </div>
+      <div class="hm-caption">Illustration with example numbers</div>
     </div>
   </div>
 </div>
@@ -1286,6 +1344,7 @@
   }
 })();
 </script>
+<script src="/hero-motion.js" defer></script>
 <script src="/shelfiq-widget.js"></script>
 </body>
 </html>
