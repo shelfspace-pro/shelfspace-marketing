@@ -43,7 +43,9 @@ Homepage story order: static guarantee headline → which side → brand ticker 
 
 ## Nav (all pages)
 
-ShelfPay (AP) | ShelfCollect (AR) | About | Pricing | Platform ▾ | Login | **CTA**
+ShelfPay (AP) ▾ | ShelfCollect (AR) ▾ | Features ▾ | About | Pricing | Login | **CTA**
+
+- **Features ▾ (10/18/2026, Chris):** replaced the standalone "ShelfVerify" link. Toggle → `/features`; menu = ShelfVerify (`/shelfverify`) · Connect Your AI (`/connect-your-ai`) · Payments (`/checks`) · Integrations (`/integrations`). Toggle carries `active` on those five pages. Same markup on every page + `scripts/build-tutorials.mjs`. (The "Platform ▾" notes below are historical — that dropdown is no longer in the nav.)
 
 - **2026-10-02 (Chris):** Consignment and Credit Recovery are NOT top-nav items — they're part of ShelfPay, linked from the "Included in ShelfPay" section on `/accounts-payable` (and still in the footer). Don't re-add them to the nav.
 
