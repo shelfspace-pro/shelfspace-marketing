@@ -47,6 +47,7 @@ ShelfPay (AP) | ShelfCollect (AR) | About | Pricing | Platform ▾ | Login | **C
 
 - **2026-10-02 (Chris):** Consignment and Credit Recovery are NOT top-nav items — they're part of ShelfPay, linked from the "Included in ShelfPay" section on `/accounts-payable` (and still in the footer). Don't re-add them to the nav.
 
+- **Footer (10/18/2026, Chris — "wonky"):** ONE canonical footer on every page and in `scripts/build-tutorials.mjs`: four balanced columns — **Services** (ShelfPay (AP), ShelfCollect (AR), ShelfVerify, Consignment, Credit Recovery, Check Payments, ShelfiQ) · **Platform** (Features, How It Works, Integrations, Connect Your AI, Vendor Management, Collections, AI Calls) · **Resources** (Pricing, Blog, Docs, Guides, Tutorials) · **Company** (About, For Vendors, For Bookkeepers, Contact, Support, Login, LinkedIn). Keep columns ≤7 links. Adding a link = add it to EVERY page (it had drifted into 12 variants with a 13-link "Platform" column). Check: all `footer-col` blocks must be byte-identical sitewide.
 - **Service labels (2026-09-28, Chris):** the AP link reads **"ShelfPay (AP)"** (→ `/accounts-payable`) and the AR link reads **"ShelfCollect (AR)"** (→ `/accounts-receivable`, the ShelfCollect page). Same labels in the footer and in the `scripts/build-tutorials.mjs` template. The product name "Get Paid" is retired sitewide — use ShelfCollect (URL slugs like `/get-paid` stay).
 - **Never remove an existing `.brand-ticker` logo strip** when rebuilding a page — Chris reverted exactly that on the ShelfCollect page (2026-09-28).
 
