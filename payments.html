@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cannabis Payments: E-Check, Paper Check &amp; ACH — ShelfSpace</title>
+<meta name="description" content="Pay cannabis vendors and get paid by stores in one click. E-checks, mailed paper checks, and ACH bank transfers, each tied to its invoice. See every screen.">
+<link rel="canonical" href="https://shelfspace.pro/payments">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://shelfspace.pro/payments">
+<meta property="og:title" content="Cannabis Payments: E-Check, Paper Check &amp; ACH — ShelfSpace">
+<meta property="og:description" content="Pay cannabis vendors and get paid by stores in one click. E-checks, mailed paper checks, and ACH bank transfers, each tied to its invoice. See every screen.">
+<meta property="og:image" content="https://shelfspace.pro/og-image-v7.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Cannabis Payments: E-Check, Paper Check &amp; ACH — ShelfSpace">
+<meta name="twitter:description" content="Pay cannabis vendors and get paid by stores in one click. E-checks, mailed paper checks, and ACH bank transfers, each tied to its invoice. See every screen.">
+<meta name="twitter:image" content="https://shelfspace.pro/og-image-v7.png">
+<meta name="apple-mobile-web-app-title" content="ShelfSpace">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+  .pay-hero { padding: 150px 48px 90px; text-align: center; position: relative; overflow: hidden; background: linear-gradient(180deg, var(--white) 0%, var(--green-ghost) 100%); }
+  .pay-hero::before { content: ''; position: absolute; top: -220px; right: -220px; width: 640px; height: 640px; background: radial-gradient(circle, rgba(149,213,178,0.18), transparent 70%); }
+  .pay-hero .section-title { font-size: clamp(36px, 5vw, 58px); max-width: 820px; margin: 0 auto 20px; position: relative; }
+  .pay-hero .section-desc { max-width: 640px; margin: 0 auto; position: relative; }
+  .rail-chips { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin: 28px auto 0; position: relative; }
+  .rail-chip { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; border-radius: 999px; background: var(--white); border: 1px solid var(--slate-200); font-size: 14px; font-weight: 600; color: var(--slate-700); box-shadow: 0 2px 8px rgba(27,67,50,0.06); }
+  .rail-chip em { font-style: normal; font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: #b7791f; }
+  .rail-dot { width: 8px; height: 8px; border-radius: 50%; }
+  .rail-dot.live { background: var(--green-mid); }
+  .rail-dot.soon { background: #d69e2e; }
+  .hero-actions { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; margin: 32px 0 56px; position: relative; }
+  .hero-stage { max-width: 1040px; margin: 0 auto; display: grid; grid-template-columns: 1.5fr auto 0.62fr; gap: 28px; align-items: center; position: relative; }
+  .hero-arrow { width: 44px; height: 44px; border-radius: 50%; background: var(--green-deep); color: var(--white); display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 24px rgba(27,67,50,0.25); }
+  .hero-arrow svg { width: 20px; height: 20px; }
+  .hero-shot-phone img { max-height: 560px; object-fit: cover; object-position: top; }
+
+  .shot { margin: 0; }
+  .shot img { display: block; width: 100%; height: auto; border-radius: 16px; border: 1px solid var(--slate-200); background: var(--white); box-shadow: 0 18px 50px rgba(27,67,50,0.12), 0 2px 8px rgba(27,67,50,0.06); cursor: zoom-in; transition: transform 0.25s, box-shadow 0.25s; }
+  .shot img:hover { transform: translateY(-3px); box-shadow: 0 24px 60px rgba(27,67,50,0.18), 0 2px 8px rgba(27,67,50,0.08); }
+  .shot figcaption { margin-top: 12px; font-size: 13px; line-height: 1.5; color: var(--slate-500); text-align: center; }
+  .shot-wide { max-width: 1100px; margin: 56px auto 0; }
+  .shot-narrow { max-width: 460px; justify-self: center; width: 100%; }
+  .shot-tall { max-width: 420px; justify-self: center; width: 100%; }
+  .shot-tall img { max-height: 760px; object-fit: cover; object-position: top; }
+
+  .section-header { text-align: center; max-width: 720px; margin: 0 auto 56px; }
+  .section-header .section-desc { margin: 0 auto; }
+  .section-header .aud-badge { display: flex; width: max-content; margin: 0 auto 16px; }
+  .shot-narrow img { max-height: 680px; object-fit: cover; object-position: top; }
+
+  .ways { background: var(--white); }
+  .ways-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .way-card { background: var(--slate-50); border: 1px solid var(--slate-200); border-radius: 16px; padding: 32px 28px; position: relative; overflow: hidden; }
+  .way-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--green-accent), var(--green-mid)); }
+  .way-card h3 { font-size: 22px; font-weight: 700; color: var(--green-deep); margin: 14px 0 10px; letter-spacing: -0.4px; }
+  .way-card p { font-size: 15px; line-height: 1.7; color: var(--slate-500); margin-bottom: 16px; }
+  .way-card ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .way-card li { font-size: 14px; color: var(--slate-700); padding-left: 24px; position: relative; }
+  .way-card li::before { content: ''; position: absolute; left: 0; top: 4px; width: 14px; height: 14px; border-radius: 50%; background: var(--green-light) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231b4332' stroke-width='4'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E") center/9px no-repeat; }
+  .way-card a { color: var(--green-dark); }
+  .way-tag { display: inline-block; font-family: var(--font-mono); font-size: 10.5px; font-weight: 700; letter-spacing: 1.4px; text-transform: uppercase; padding: 4px 10px; border-radius: 999px; }
+  .way-tag.live { background: var(--green-light); color: var(--green-deep); }
+  .way-tag.soon { background: #fef3c7; color: #92400e; }
+
+  .flow { background: var(--white); }
+  .flow-light { background: var(--slate-50); }
+  .steps { max-width: 1100px; margin: 0 auto; display: flex; flex-direction: column; gap: 88px; }
+  .step { display: grid; grid-template-columns: 0.85fr 1.15fr; gap: 64px; align-items: center; }
+  .step-flip .step-copy { order: 2; }
+  .step-stack { grid-template-columns: 1fr; gap: 28px; }
+  .step-stack .step-copy { max-width: 620px; }
+  .step-num { width: 40px; height: 40px; border-radius: 12px; background: var(--green-deep); color: var(--white); font-family: var(--font-mono); font-weight: 700; display: flex; align-items: center; justify-content: center; margin-bottom: 18px; box-shadow: 0 6px 18px rgba(27,67,50,0.25); }
+  .step-copy h3 { font-size: clamp(24px, 2.6vw, 32px); font-weight: 700; line-height: 1.2; letter-spacing: -0.8px; color: var(--green-deep); margin-bottom: 14px; }
+  .step-copy p { font-size: 16px; line-height: 1.75; color: var(--slate-500); margin-bottom: 12px; }
+  .step-note { background: var(--green-ghost); border: 1px solid rgba(149,213,178,0.5); border-radius: 12px; padding: 14px 16px; font-size: 14px !important; color: var(--slate-700) !important; }
+  .shot-stack { position: relative; max-width: 460px; justify-self: center; width: 100%; padding-bottom: 60px; }
+  .shot-stack > .shot:first-child img { max-height: 640px; object-fit: cover; object-position: top; }
+  .shot-float { position: absolute; left: -40px; right: -40px; bottom: 0; }
+  .shot-float img { box-shadow: 0 24px 60px rgba(27,67,50,0.25); }
+
+  .proof-strip { max-width: 860px; margin: 88px auto 0; display: flex; align-items: center; gap: 32px; background: var(--green-deep); color: var(--white); border-radius: 16px; padding: 32px 40px; box-shadow: 0 18px 50px rgba(27,67,50,0.2); }
+  .proof-num { font-family: var(--font-mono); font-size: clamp(36px, 5vw, 52px); font-weight: 700; color: var(--green-accent); white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .proof-strip p { font-size: 16px; line-height: 1.65; color: rgba(255,255,255,0.85); }
+
+  .duo { max-width: 1000px; margin: 48px auto 0; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
+  .duo .shot img { max-height: 620px; object-fit: cover; object-position: top; }
+
+  .faq-section { background: var(--white); }
+  .faq-list { max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
+  .faq-item { border: 1px solid var(--slate-200); border-radius: 16px; background: var(--white); overflow: hidden; transition: border-color 0.2s; }
+  .faq-item.open { border-color: var(--green-accent); }
+  .faq-question { width: 100%; display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 20px 24px; background: none; border: none; font-family: inherit; font-size: 16px; font-weight: 600; color: var(--slate-800); text-align: left; cursor: pointer; }
+  .faq-question:hover { color: var(--green-dark); }
+  .faq-question svg { width: 18px; height: 18px; flex-shrink: 0; color: var(--slate-400); transition: transform 0.25s; }
+  .faq-item.open .faq-question svg { transform: rotate(45deg); color: var(--green-dark); }
+  .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+  .faq-item.open .faq-answer { max-height: 320px; }
+  .faq-answer-inner { padding: 0 24px 20px; font-size: 15px; line-height: 1.7; color: var(--slate-500); }
+  .faq-answer-inner a { color: var(--green-dark); font-weight: 600; }
+  .cta-reassure { font-size: 13px; color: var(--slate-500); position: relative; }
+
+  .lightbox { position: fixed; inset: 0; z-index: 1000; background: rgba(15,23,42,0.82); display: flex; align-items: center; justify-content: center; padding: 32px; cursor: zoom-out; }
+  .lightbox[hidden] { display: none; }
+  .lightbox img { max-width: min(1400px, 100%); max-height: 100%; object-fit: contain; border-radius: 12px; background: var(--white); box-shadow: 0 30px 80px rgba(0,0,0,0.4); }
+  .lightbox-close { position: absolute; top: 16px; right: 20px; width: 44px; height: 44px; border-radius: 12px; border: none; background: rgba(255,255,255,0.12); color: var(--white); font-size: 28px; line-height: 1; cursor: pointer; }
+
+  @media (max-width: 900px) {
+    .pay-hero { padding: 120px 16px 64px; }
+    section { padding: 72px 16px; }
+    .hero-stage { grid-template-columns: 1fr; gap: 20px; }
+    .hero-arrow { transform: rotate(90deg); margin: 0 auto; }
+    .hero-shot-phone { max-width: 300px; margin: 0 auto; }
+    .ways-grid { grid-template-columns: 1fr; }
+    .step, .step-flip { grid-template-columns: 1fr; gap: 28px; }
+    .step-flip .step-copy { order: 0; }
+    .steps { gap: 64px; }
+    .shot-float { left: -8px; right: -8px; }
+    .proof-strip { flex-direction: column; text-align: center; padding: 28px 24px; gap: 12px; }
+    .duo { grid-template-columns: 1fr; }
+  }
+</style>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-H2LBJT03WE"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-H2LBJT03WE');
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://shelfspace.pro/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Payments",
+      "item": "https://shelfspace.pro/payments"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "ShelfSpace Payments",
+  "serviceType": "Cannabis B2B payments",
+  "provider": {
+    "@type": "Organization",
+    "name": "ShelfSpace",
+    "url": "https://shelfspace.pro"
+  },
+  "areaServed": "US",
+  "description": "Pay cannabis vendors and get paid by stores in one click. E-checks, mailed paper checks, and ACH bank transfers, each tied to its invoice. See every screen."
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is an e-check a real check?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. It's a Check 21 check, legally the same as a paper check, and it deposits through mobile deposit, a scanner or a teller."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is ACH available now?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "ACH is rolling out account by account. Until it's on for yours, every payment goes as an e-check or a mailed check, and nothing about how you pay changes."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does my buyer need a ShelfSpace account to pay me?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. The pay link opens a single page with the amount filled in, with no login and no sign-up. They can forward it to whoever cuts checks at their store."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Who holds the money?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Your bank does. A check is drawn on the payer's own account and deposited into the payee's, so ShelfSpace never sits in the middle holding your money."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is bank information safe?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "ACH banks are connected through Plaid, so no one types or emails an account number. E-check details are encrypted in transit and never sold, and nothing moves without a signed authorization."
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="/" class="nav-logo">
+    <div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div>
+    <span class="nav-logo-text">ShelfSpace<sup class="nav-logo-tm">™</sup></span>
+  </a>
+  <ul class="nav-links">
+    <li class="nav-dropdown"><a href="/accounts-payable" class="nav-dropdown-toggle">ShelfPay (AP) <svg class="dropdown-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></a>
+      <div class="nav-dropdown-menu"><a href="/accounts-payable">ShelfPay overview</a><a href="/consignment">Consignment</a><a href="/credit-recovery">Credit Recovery</a><a href="/shelfverify">ShelfVerify</a></div></li>
+    <li class="nav-dropdown"><a href="/accounts-receivable" class="nav-dropdown-toggle">ShelfCollect (AR) <svg class="dropdown-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></a>
+      <div class="nav-dropdown-menu"><a href="/accounts-receivable">ShelfCollect overview</a><a href="/ai-calls">AI Calls <span class="nav-new">New</span></a><a href="/collections">Collections</a><a href="/promise-to-pay">Promise to Pay</a></div></li>
+    <li class="nav-dropdown"><a href="/features" class="nav-dropdown-toggle active">Features <svg class="dropdown-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></a>
+      <div class="nav-dropdown-menu"><a href="/shelfverify">ShelfVerify</a><a href="/connect-your-ai">Connect Your AI</a><a href="/payments" class="active">Payments</a><a href="/integrations">Integrations</a></div></li>
+    <li><a href="/about">About</a></li>
+    <li><a href="/pricing">Pricing</a></li>
+    <li class="nav-login-mobile"><a href="https://ourshelf.space/login">Login</a></li>
+    <li><a href="/contact" class="nav-cta">Get Started <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a></li>
+  </ul>
+  <div class="nav-hamburger" onclick="document.querySelector('.nav-links').classList.toggle('mobile-open'); event.stopPropagation();"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- HERO -->
+<div class="pay-hero">
+  <div class="section-label reveal">Cannabis payments</div>
+  <h1 class="section-title reveal reveal-delay-1">Cannabis payments that take one click, not one afternoon.</h1>
+  <p class="section-desc reveal reveal-delay-2">Pay your vendors and get paid by your stores from one screen. Every payment goes out as an e-check, a mailed paper check, or an ACH bank transfer, and every one ties back to its invoice.</p>
+  <div class="rail-chips reveal reveal-delay-2">
+    <span class="rail-chip"><span class="rail-dot live"></span>E-check</span>
+    <span class="rail-chip"><span class="rail-dot live"></span>Mailed paper check</span>
+    <span class="rail-chip"><span class="rail-dot soon"></span>ACH bank transfer <em>rolling out</em></span>
+  </div>
+  <div class="hero-actions reveal reveal-delay-3">
+    <a href="/contact" class="btn-primary">Talk to us <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+    <a href="#get-paid" class="btn-secondary">See the pay page</a>
+  </div>
+  <div class="hero-stage reveal reveal-delay-3">
+    <figure class="shot hero-shot-main">
+      <img src="/screenshots/payments/invoice-email.webp" width="1100" height="989" alt="The invoice email a store receives: amount due, due date, and one Pay button">
+      <figcaption>1. The store gets the invoice by email.</figcaption>
+    </figure>
+    <div class="hero-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+    <figure class="shot hero-shot-phone">
+      <img src="/screenshots/payments/pay-page-mobile.webp" width="700" height="2461" alt="The ShelfSpace pay page on a phone: pay in full, pay part, or pay over time, by bank or e-check">
+      <figcaption>2. They tap Pay and finish on their phone.</figcaption>
+    </figure>
+  </div>
+</div>
+
+<!-- THREE WAYS -->
+<section class="ways">
+  <div class="section-header">
+    <div class="section-label reveal">Three ways money moves</div>
+    <h2 class="section-title reveal">E-check, paper check, or ACH. Same payment, your choice of delivery.</h2>
+    <p class="section-desc reveal">Whichever way it goes, the amount, the invoice it pays and the record in your books are the same.</p>
+  </div>
+  <div class="ways-grid">
+    <div class="way-card reveal">
+      <div class="way-tag live">Live today</div>
+      <h3>E-check</h3>
+      <p>A real Check 21 check, ready the moment you click Send. Your vendor downloads it, prints it on plain paper and deposits it from their phone. No check stock, no stamps, no trip to the post office.</p>
+      <ul>
+        <li>Ready to deposit the same day</li>
+        <li>Mobile deposit, scanner or teller</li>
+        <li>Anyone can verify it at <a href="/verify">shelfspace.pro/verify</a></li>
+      </ul>
+    </div>
+    <div class="way-card reveal reveal-delay-1">
+      <div class="way-tag live">Live today</div>
+      <h3>Mailed paper check</h3>
+      <p>For the vendor who wants paper in hand. It's the same check, printed and mailed by us. You still just click Send.</p>
+      <ul>
+        <li>Nothing to print or stuff on your end</li>
+        <li>Same check number, same record</li>
+        <li>Set per vendor, not all-or-nothing</li>
+      </ul>
+    </div>
+    <div class="way-card reveal reveal-delay-2">
+      <div class="way-tag soon">Rolling out</div>
+      <h3>ACH bank transfer</h3>
+      <p>Money moves bank to bank, usually in 1–3 business days. Banks are connected with Plaid, so nobody types an account number and nobody's bank details sit in an email.</p>
+      <ul>
+        <li>Bank connected with Plaid in about a minute</li>
+        <li>Nothing to print or deposit</li>
+        <li>E-check stays one tap away as a backup</li>
+      </ul>
+    </div>
+  </div>
+  <figure class="shot shot-wide reveal">
+    <img src="/screenshots/payments/echeck.webp" width="1600" height="693" alt="A ShelfSpace e-check: payee, amount in numbers and words, memo with the PO and invoice number, and the bank line printed at the bottom" loading="lazy">
+    <figcaption>A real e-check from our demo account. It prints on plain paper and deposits like any other check.</figcaption>
+  </figure>
+</section>
+
+<!-- PAYING VENDORS -->
+<section class="flow flow-light" id="pay-vendors">
+  <div class="section-header">
+    <div class="aud-badge aud-retailer reveal">For dispensaries</div>
+    <div class="section-label reveal">Paying your vendors</div>
+    <h2 class="section-title reveal">Check the boxes. Click Send. Every vendor is paid.</h2>
+    <p class="section-desc reveal">No check book, no printer, no stamps. Pick what to pay from your open payables and send it all at once.</p>
+  </div>
+  <div class="steps">
+    <div class="step step-stack reveal">
+      <div class="step-copy">
+        <div class="step-num">1</div>
+        <h3>Pick what to pay</h3>
+        <p>Your open payables, sorted by how late they are. Tick the vendors you want to pay today and the total updates as you go.</p>
+      </div>
+      <figure class="shot"><img src="/screenshots/payments/shelfpay-select.webp" width="1600" height="534" alt="The open payables table with three vendors selected and a Review &amp; pay button showing the total owed" loading="lazy"></figure>
+    </div>
+    <div class="step step-flip reveal">
+      <div class="step-copy">
+        <div class="step-num">2</div>
+        <h3>Review and send</h3>
+        <p>Each vendor gets paid the way they prefer. Change any row if you need to, send now or schedule it for later, and see the cash going out before you commit.</p>
+      </div>
+      <figure class="shot shot-narrow"><img src="/screenshots/payments/shelfpay-dialog.webp" width="1100" height="1071" alt="The pay dialog: three vendors, payment method per vendor, total cash out, send now or schedule for later" loading="lazy"></figure>
+    </div>
+    <div class="step reveal">
+      <div class="step-copy">
+        <div class="step-num">3</div>
+        <h3>Your vendor hears about it right away</h3>
+        <p>They get an email with the amount, the invoice it pays and simple steps to deposit. The check is in their portal, so you won't get a "where's my check?" call.</p>
+      </div>
+      <figure class="shot shot-narrow"><img src="/screenshots/payments/you-got-paid-check.webp" width="1000" height="1952" alt="The email a vendor receives when a check is ready: payment summary and three steps to deposit it" loading="lazy"></figure>
+    </div>
+  </div>
+</section>
+
+<!-- GETTING PAID -->
+<section class="flow" id="get-paid">
+  <div class="section-header">
+    <div class="aud-badge aud-vendor reveal">For brands &amp; vendors</div>
+    <div class="section-label reveal">Getting paid by your stores</div>
+    <h2 class="section-title reveal">Your buyer pays from the email in under a minute.</h2>
+    <p class="section-desc reveal">No login, no account to create, no portal to learn. The pay link opens a single page with the amount already filled in.</p>
+  </div>
+  <div class="steps">
+    <div class="step reveal">
+      <div class="step-copy">
+        <div class="step-num">1</div>
+        <h3>The invoice lands with a Pay button</h3>
+        <p>It comes from your business name, with the PDF attached. One button, with the exact amount on it.</p>
+      </div>
+      <figure class="shot shot-narrow"><img src="/screenshots/payments/invoice-email.webp" width="1100" height="989" alt="Invoice email from the vendor with the amount due and a Pay button" loading="lazy"></figure>
+    </div>
+    <div class="step step-flip reveal">
+      <div class="step-copy">
+        <div class="step-num">2</div>
+        <h3>Pay in full, pay part, or pay over time</h3>
+        <p>Short on cash this week? They can pay part now or split it into installments you allow. Partial money in the bank beats a promise.</p>
+        <p class="step-note">Paying by bank: one tap on <strong>Connect your bank with Plaid</strong>, log in to their bank, done. Nothing to type.</p>
+      </div>
+      <figure class="shot shot-tall"><img src="/screenshots/payments/pay-page-bank.webp" width="992" height="2336" alt="The pay page: amount due, pay in full / part / over time, and pay by bank with a Connect your bank with Plaid button" loading="lazy"></figure>
+    </div>
+    <div class="step reveal">
+      <div class="step-copy">
+        <div class="step-num">3</div>
+        <h3>Sign, confirm, done</h3>
+        <p>Their connected bank shows up by name. They type their name to sign, confirm once, and the payment is on its way to you.</p>
+      </div>
+      <div class="shot-stack">
+        <figure class="shot"><img src="/screenshots/payments/pay-page-connected.webp" width="992" height="2340" alt="The pay page after the buyer's bank is connected, showing the bank name and last four digits" loading="lazy"></figure>
+        <figure class="shot shot-float"><img src="/screenshots/payments/pay-authorize.webp" width="1016" height="382" alt="The final confirmation: Authorize $1,250.00, expected in 1 to 3 business days" loading="lazy"></figure>
+      </div>
+    </div>
+    <div class="step step-flip reveal">
+      <div class="step-copy">
+        <div class="step-num">4</div>
+        <h3>Prefer a check? It's on the same page.</h3>
+        <p>E-check works at every bank, today. They enter the account once, and next time they can load it from their saved info.</p>
+      </div>
+      <figure class="shot shot-tall"><img src="/screenshots/payments/pay-page-echeck.webp" width="992" height="3278" alt="The e-check option on the pay page: account holder, routing and account number, and a saved-info shortcut for repeat payers" loading="lazy"></figure>
+    </div>
+  </div>
+  <div class="proof-strip reveal">
+    <div class="proof-num">60 sec</div>
+    <p>A store that had owed one of our brands for 26 days opened the pay link, paid the full $11,718 a minute later, and the brand deposited it that same morning.</p>
+  </div>
+</section>
+
+<!-- WHAT THE VENDOR SEES -->
+<section class="flow flow-light">
+  <div class="section-header">
+    <div class="section-label reveal">Where the money shows up</div>
+    <h2 class="section-title reveal">Every payment, in one list, with a download button.</h2>
+    <p class="section-desc reveal">Vendors see every payment from every store in one place. Checks are a click away, and ACH payments show when they'll land.</p>
+  </div>
+  <figure class="shot shot-wide reveal"><img src="/screenshots/payments/vendor-payments-received.webp" width="1600" height="379" alt="The vendor's payments received list: each payment with its PO, invoice number, amount, status and a Download Check button" loading="lazy"></figure>
+  <div class="duo">
+    <figure class="shot reveal"><img src="/screenshots/payments/echeck-remittance.webp" width="1100" height="883" alt="The payment page that comes with every check: from, to, amount and the invoice it pays" loading="lazy"><figcaption>Every check comes with a payment page naming the invoice it pays.</figcaption></figure>
+    <figure class="shot reveal reveal-delay-1"><img src="/screenshots/payments/you-got-paid-ach.webp" width="1000" height="1430" alt="The email a vendor receives for an ACH payment, expected in 1 to 3 business days" loading="lazy"><figcaption>ACH payments send a heads-up with when to expect the deposit.</figcaption></figure>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section">
+  <div class="section-header">
+    <div class="section-label reveal">Common questions</div>
+    <h2 class="section-title reveal">Payments, answered</h2>
+  </div>
+  <div class="faq-list">
+    <div class="faq-item reveal">
+      <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">Is an e-check a real check?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+      <div class="faq-answer"><div class="faq-answer-inner">Yes. It's a Check 21 check, legally the same as a paper check, and it deposits through mobile deposit, a scanner or a teller. <a href="/checks">Here's how depositing works</a>.</div></div>
+    </div>
+    <div class="faq-item reveal">
+      <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">Is ACH available now?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+      <div class="faq-answer"><div class="faq-answer-inner">ACH is rolling out account by account. Until it's on for yours, every payment goes as an e-check or a mailed check, and nothing about how you pay changes.</div></div>
+    </div>
+    <div class="faq-item reveal">
+      <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">Does my buyer need a ShelfSpace account to pay me?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+      <div class="faq-answer"><div class="faq-answer-inner">No. The pay link opens a single page with the amount filled in, with no login and no sign-up. They can forward it to whoever cuts checks at their store.</div></div>
+    </div>
+    <div class="faq-item reveal">
+      <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">Who holds the money?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+      <div class="faq-answer"><div class="faq-answer-inner">Your bank does. A check is drawn on the payer's own account and deposited into the payee's, so ShelfSpace never sits in the middle holding your money.</div></div>
+    </div>
+    <div class="faq-item reveal">
+      <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">Is bank information safe?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+      <div class="faq-answer"><div class="faq-answer-inner">ACH banks are connected through Plaid, so no one types or emails an account number. E-check details are encrypted in transit and never sold, and nothing moves without a signed authorization.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-content">
+    <div class="section-label reveal">Get started</div>
+    <h2 class="section-title reveal">Your next payment run could take one click.</h2>
+    <p class="section-desc reveal">Tell us how you pay and get paid today. We'll set it up and run it for you.</p>
+    <div class="cta-actions reveal">
+      <a href="/contact" class="btn-primary">Talk to us <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+      <a href="/checks" class="btn-secondary">How e-checks work</a>
+    </div>
+    <p class="cta-reassure reveal">Free. No commitment. We'll show you what you're owed.</p>
+  </div>
+</section>
+
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Enlarged screenshot" hidden>
+  <button class="lightbox-close" aria-label="Close">&times;</button>
+  <img alt="">
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="/" class="nav-logo"><div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div><span class="nav-logo-text">ShelfSpace<sup class="nav-logo-tm">™</sup></span></a>
+      <p>Operations and Payments Intelligence</p>
+    </div>
+    <div class="footer-col"><h3>Services</h3><ul><li><a href="/accounts-payable">ShelfPay (AP)</a></li><li><a href="/accounts-receivable">ShelfCollect (AR)</a></li><li><a href="/shelfverify">ShelfVerify</a></li><li><a href="/consignment">Consignment</a></li><li><a href="/credit-recovery">Credit Recovery</a></li><li><a href="/payments">Payments</a></li><li><a href="/shelfiq">ShelfiQ</a></li></ul></div>
+    <div class="footer-col"><h3>Platform</h3><ul><li><a href="/features">Features</a></li><li><a href="/how-it-works">How It Works</a></li><li><a href="/integrations">Integrations</a></li><li><a href="/connect-your-ai">Connect Your AI</a></li><li><a href="/vendor-management">Vendor Management</a></li><li><a href="/collections">Collections</a></li><li><a href="/ai-calls">AI Calls</a></li></ul></div>
+    <div class="footer-col"><h3>Resources</h3><ul><li><a href="/pricing">Pricing</a></li><li><a href="/blog">Blog</a></li><li><a href="/docs">Docs</a></li><li><a href="/how-to">Guides</a></li><li><a href="/tutorials">Tutorials</a></li></ul></div>
+    <div class="footer-col"><h3>Company</h3><ul><li><a href="/about">About</a></li><li><a href="/vendors">For Vendors</a></li><li><a href="/for-bookkeepers">For Bookkeepers</a></li><li><a href="/contact">Contact</a></li><li><a href="mailto:support@shelfspace.pro">Support</a></li><li><a href="https://ourshelf.space/login">Login</a></li><li><a href="https://linkedin.com/company/shelfspace-pro" target="_blank" rel="noopener" class="footer-social-link"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> LinkedIn</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><p>&copy; 2026 ShelfSpace Technologies Inc.</p><div style="display:flex;align-items:center;gap:8px;justify-content:center;margin-top:12px;"><img src="/metrc-logo-v2.png" alt="Metrc" style="height:18px;opacity:0.4;filter:brightness(0) invert(1);"><span style="font-size:11px;color:rgba(255,255,255,0.35);">Certified Metrc Third-Party Vendor</span></div><div class="footer-bottom-links"><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div></div>
+</footer>
+
+<script>
+  // Nav scroll behavior
+  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 20);
+  window.addEventListener('scroll', function() {
+    document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 20);
+  });
+
+  // Scroll-triggered reveal animations
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.style.animationPlayState = 'running';
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(function(el) {
+    el.style.animationPlayState = 'paused';
+    observer.observe(el);
+  });
+</script>
+<script src="/shelfiq-widget.js"></script>
+<script>
+(function(){
+  var lb=document.getElementById('lightbox'), big=lb.querySelector('img');
+  function close(){ lb.hidden=true; big.removeAttribute('src'); document.body.style.overflow=''; }
+  document.querySelectorAll('.shot img').forEach(function(img){
+    img.addEventListener('click',function(){ big.src=img.currentSrc||img.src; big.alt=img.alt; lb.hidden=false; document.body.style.overflow='hidden'; });
+  });
+  lb.addEventListener('click',close);
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape'&&!lb.hidden) close(); });
+})();
+</script>
+</body>
+</html>
