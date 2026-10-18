@@ -678,7 +678,7 @@
   .ad-ring--2, .ad-ring--3 { display: none; }
 }
 /* ===== HERO v2 — motion hero (10/18/2026) ===== */
-.hero--motion { min-height: 100vh; padding: 112px 48px 64px; }
+.hero--motion { min-height: 100vh; padding: 112px 48px 64px; overflow-x: clip; }
 .hero--motion .hero-split { gap: 56px; }
 .hero--motion .hero-content { flex: 0 1 520px; text-align: left; }
 .hm-h1 { font-size: clamp(40px, 5.6vw, 76px) !important; line-height: 0.98 !important; letter-spacing: -2.5px !important; margin-bottom: 22px !important; text-wrap: balance; }
@@ -747,7 +747,7 @@
 .hm-cm div.in { opacity: 1; transform: none; }
 .hm-cm .amt { text-align: right; font-family: var(--font-mono); font-variant-numeric: tabular-nums; color: var(--green-accent); }
 .hm-cm .lbl { color: rgba(230,244,234,0.8); }
-.hm-stamp { position: absolute; right: 18px; top: 118px; padding: 8px 16px; border: 3px solid var(--green-accent); border-radius: 12px; color: var(--green-accent); font-weight: 800; font-size: 18px; letter-spacing: 2px; text-transform: uppercase; transform: rotate(-10deg) scale(2.2); opacity: 0; transition: all .35s cubic-bezier(0.34,1.56,0.64,1); }
+.hm-stamp { position: absolute; left: 50%; margin-left: -78px; top: 252px; padding: 8px 16px; border: 3px solid var(--green-accent); border-radius: 12px; color: var(--green-accent); font-weight: 800; font-size: 18px; letter-spacing: 2px; text-transform: uppercase; transform: rotate(-10deg) scale(2.2); opacity: 0; transition: all .35s cubic-bezier(0.34,1.56,0.64,1); }
 .hm-stamp.in { opacity: 0.95; transform: rotate(-10deg) scale(1); }
 .hm-total { margin-top: 12px; display: flex; align-items: center; justify-content: space-between; padding: 14px; border-radius: 14px; background: var(--green-accent); color: #0f2a1f; opacity: 0; transform: translateY(10px); transition: all .5s cubic-bezier(0.22,1,0.36,1); }
 .hm-total.in { opacity: 1; transform: none; }
@@ -759,7 +759,8 @@
 .hm-caption { text-align: center; font-size: 11px; color: var(--slate-400); margin-top: 12px; }
 
 @media (max-width: 900px) {
-  .hero--motion { padding: 104px 16px 40px; }
+  .hero--motion { padding: 104px 16px 40px; overflow-x: clip; }
+  .hm-glow { inset: -20px 0; }
   .hero--motion .hero-split { flex-direction: column; gap: 36px; }
   .hero--motion .hero-content { text-align: center; flex: none; }
   .hm-sub { margin: 0 auto 24px; font-size: 17px; }
@@ -771,6 +772,8 @@
   .hm-line { padding: 7px 8px; }
   .hm-line .nm { overflow: hidden; text-overflow: ellipsis; }
   .hm-scenes { height: 372px; }
+  .hm-title span { white-space: nowrap; font-size: 10px; }
+  .hm-title b { font-size: 14px; }
 }
 @media (max-width: 420px) { .hm-line .q { display: none; } }
 @media (prefers-reduced-motion: reduce) {
