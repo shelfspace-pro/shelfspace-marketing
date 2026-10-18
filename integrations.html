@@ -155,8 +155,97 @@
     .hero-bg-gradient, .hero-bg-gradient-2 { animation: none; }
     .int-card { transition: none; }
   }
+
+  /* ===== INTEGRATIONS HERO (about-style) ===== */
+  .ig-hero { position: relative; overflow: hidden; overflow-x: clip; background: radial-gradient(ellipse at 72% 40%, #2d6a4f 0%, #1b4332 45%, #0f2a1f 100%); color: #fff; padding: 140px 48px 80px; }
+  .ig-hero::before { content: ''; position: absolute; inset: 0; opacity: 0.06; background-image: linear-gradient(#95d5b2 1px, transparent 1px), linear-gradient(90deg, #95d5b2 1px, transparent 1px); background-size: 80px 80px; pointer-events: none; }
+  .ig-split { position: relative; max-width: 1180px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
+  .ig-hero .section-label { color: var(--green-accent); }
+  .ig-h1 { font-size: clamp(40px, 5.2vw, 64px); font-weight: 700; line-height: 1.04; letter-spacing: -2px; margin: 14px 0 20px; color: #fff; }
+  .ig-h1 em { font-style: normal; color: var(--green-accent); }
+  .ig-sub { font-size: 18px; line-height: 1.6; color: rgba(255,255,255,0.74); max-width: 520px; margin-bottom: 24px; }
+  .ig-sub b { color: #fff; font-weight: 600; }
+  .ig-switch { display: inline-flex; flex-wrap: wrap; gap: 4px; padding: 5px; border-radius: 14px; background: rgba(255,255,255,0.08); border: 1px solid rgba(149,213,178,0.2); margin-bottom: 26px; }
+  .ig-switch button { font: inherit; font-size: 14px; font-weight: 600; color: rgba(255,255,255,0.75); background: none; border: 0; padding: 9px 14px; border-radius: 10px; cursor: pointer; text-transform: none; letter-spacing: 0; transition: background .2s, color .2s; }
+  .ig-switch button:hover { color: #fff; }
+  .ig-switch button.on { background: var(--green-accent); color: var(--green-deep); }
+  .ig-actions { display: flex; gap: 18px; flex-wrap: wrap; align-items: center; }
+  .ig-btn { display: inline-flex; align-items: center; gap: 10px; background: var(--green-accent); color: var(--green-deep); font-weight: 700; font-size: 17px; padding: 17px 28px; border-radius: 12px; text-decoration: none; animation: igCta 2.4s ease-in-out infinite; transition: transform .2s, background .2s; }
+  .ig-btn:hover { transform: translateY(-2px) scale(1.03); background: #b7e4c7; }
+  .ig-btn svg { transition: transform .2s; } .ig-btn:hover svg { transform: translateX(4px); }
+  @keyframes igCta { 0%,100% { box-shadow: 0 0 0 0 rgba(149,213,178,0.55), 0 10px 30px rgba(0,0,0,0.25); } 50% { box-shadow: 0 0 0 14px rgba(149,213,178,0), 0 10px 30px rgba(0,0,0,0.25); } }
+  .ig-link { color: rgba(255,255,255,0.8); font-weight: 600; font-size: 15px; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.3); padding-bottom: 2px; }
+  .ig-link:hover { color: #fff; border-color: #fff; }
+  .ig-trust { margin-top: 26px; display: flex; align-items: center; gap: 10px; font-size: 13px; color: rgba(255,255,255,0.55); font-weight: 600; }
+  .ig-trust img { height: 18px; filter: brightness(0) invert(1); opacity: 0.6; }
+  .ig-hero .ig-in { opacity: 0; transform: translateY(24px); transition: opacity .8s cubic-bezier(.22,1,.36,1), transform .8s cubic-bezier(.22,1,.36,1); }
+  .ig-hero.go .ig-in { opacity: 1; transform: none; }
+  .ig-hero.go .ig-in:nth-child(2) { transition-delay: .08s; } .ig-hero.go .ig-in:nth-child(3) { transition-delay: .16s; }
+  .ig-hero.go .ig-in:nth-child(4) { transition-delay: .24s; } .ig-hero.go .ig-in:nth-child(5) { transition-delay: .32s; } .ig-hero.go .ig-in:nth-child(6) { transition-delay: .4s; }
+
+  .ig-stage { position: relative; width: 100%; max-width: 520px; margin: 0 auto; }
+  .ig-hub { position: relative; width: 100%; aspect-ratio: 1; }
+  .ig-lines { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .ig-ln path { stroke: rgba(149,213,178,0.35); stroke-width: 1.5; stroke-dasharray: 4 6; fill: none; animation: igDash 1.2s linear infinite; }
+  .ig-ln circle { fill: #95d5b2; filter: drop-shadow(0 0 4px #95d5b2); }
+  .ig-ln { transition: opacity .4s; }
+  @keyframes igDash { to { stroke-dashoffset: -20; } }
+  .ig-core { position: absolute; left: 50%; top: 50%; width: 132px; height: 132px; transform: translate(-50%,-50%); }
+  .ig-ring { position: absolute; inset: 0; border-radius: 50%; border: 2px solid rgba(149,213,178,0.45); animation: igRing 3.6s ease-out infinite; }
+  .ig-ring:nth-child(2) { animation-delay: 1.2s; } .ig-ring:nth-child(3) { animation-delay: 2.4s; }
+  @keyframes igRing { 0% { transform: scale(0.9); opacity: 0.9; } 100% { transform: scale(2.1); opacity: 0; } }
+  .ig-core-in { position: absolute; inset: 0; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #2d6a4f, #0f2a1f); border: 2px solid #95d5b2; box-shadow: 0 0 50px rgba(149,213,178,0.35), inset 0 0 20px rgba(0,0,0,0.3); display: grid; place-content: center; justify-items: center; gap: 6px; animation: igBeat 2.4s ease-in-out infinite; }
+  .ig-core-in svg { width: 40px; height: 40px; }
+  .ig-core-in b { font-size: 14px; letter-spacing: -0.2px; }
+  @keyframes igBeat { 0%,100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+  .ig-node { position: absolute; transform: translate(-50%,-50%); display: flex; flex-direction: column; align-items: center; gap: 6px; transition: opacity .4s, filter .4s; }
+  .ig-node > span { font-size: 11.5px; font-weight: 700; color: rgba(255,255,255,0.82); white-space: nowrap; text-shadow: 0 1px 6px rgba(0,0,0,0.5); }
+  .ig-tile { width: 60px; height: 60px; border-radius: 16px; background: #fff; display: grid; place-items: center; box-shadow: 0 10px 26px rgba(0,0,0,0.35); opacity: 0; transform: scale(0.6); transition: transform .5s cubic-bezier(.34,1.56,.64,1), opacity .5s; transition-delay: var(--d); }
+  .ig-hero.go .ig-tile { opacity: 1; transform: none; animation: igBob 5s ease-in-out infinite; animation-delay: calc(var(--d) * -6); }
+  .ig-tile img { width: 36px; height: 36px; object-fit: contain; }
+  @keyframes igBob { 0%,100% { translate: 0 0; } 50% { translate: 0 -5px; } }
+  .ig-word { font-weight: 800; letter-spacing: -0.3px; line-height: 1; }
+  .ig-word--apex { font-size: 15px; color: #fff; background: #111827; padding: 6px 7px; border-radius: 7px; letter-spacing: 1px; }
+  .ig-word--trellis { font-size: 15px; color: #2f855a; font-style: italic; }
+  .ig-word--pos { font-size: 12px; color: #1b4332; }
+  .ig-word--lg.ig-word--apex { font-size: 18px; padding: 8px 10px; }
+  .ig-word--lg.ig-word--trellis { font-size: 26px; }
+  .int-logos .ig-word--apex { font-size: 13px; }
+  .int-wall-tile span.ig-word--apex { color: #fff; font-size: 16px; }
+  .int-wall-tile span.ig-word--trellis { color: #2f855a; font-size: 26px; }
+  .int-logos .ig-word--trellis { font-size: 18px; align-self: center; }
+  .int-logos { align-items: center; }
+  .ig-stage[data-mode="retail"] .ig-node[data-side="brand"], .ig-stage[data-mode="brand"] .ig-node[data-side="retail"] { opacity: 0.22; filter: grayscale(1); }
+  .ig-stage[data-mode="retail"] .ig-ln[data-side="brand"], .ig-stage[data-mode="brand"] .ig-ln[data-side="retail"] { opacity: 0.08; }
+  .ig-stage[data-mode="retail"] .ig-node[data-side="retail"] .ig-tile, .ig-stage[data-mode="brand"] .ig-node[data-side="brand"] .ig-tile { box-shadow: 0 0 0 3px #95d5b2, 0 10px 26px rgba(0,0,0,0.35); }
+  .ig-feed { margin: 14px auto 0; display: flex; align-items: center; gap: 10px; width: max-content; max-width: 100%; background: #fff; color: var(--green-deep); font-size: 14px; font-weight: 600; padding: 11px 16px; border-radius: 999px; box-shadow: 0 14px 36px rgba(0,0,0,0.3); }
+  .ig-feed-t { transition: opacity .3s, transform .3s; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .ig-feed-t.swap { opacity: 0; transform: translateY(6px); }
+  .ig-dot { width: 9px; height: 9px; border-radius: 50%; background: #2d6a4f; flex: none; animation: igLive 1.6s ease-out infinite; }
+  @keyframes igLive { 0% { box-shadow: 0 0 0 0 rgba(45,106,79,0.6); } 100% { box-shadow: 0 0 0 9px rgba(45,106,79,0); } }
+
+  @media (max-width: 980px) {
+    .ig-hero { padding: 120px 20px 64px; }
+    .ig-split { grid-template-columns: 1fr; gap: 40px; text-align: center; }
+    .ig-sub { margin-left: auto; margin-right: auto; }
+    .ig-actions, .ig-trust { justify-content: center; }
+    .ig-stage { max-width: 380px; }
+    .ig-tile { width: 44px; height: 44px; border-radius: 12px; }
+    .ig-tile img { width: 26px; height: 26px; }
+    .ig-node > span { font-size: 10px; }
+    .ig-core { width: 96px; height: 96px; }
+    .ig-core-in svg { width: 28px; height: 28px; } .ig-core-in b { font-size: 11px; }
+    .ig-word--apex { font-size: 11px; padding: 4px 5px; } .ig-word--trellis { font-size: 12px; } .ig-word--pos { font-size: 9.5px; }
+    .ig-feed { font-size: 12.5px; }
+  }
+  @media (max-width: 420px) { .ig-switch button { padding: 8px 10px; font-size: 13px; } }
+  @media (prefers-reduced-motion: reduce) {
+    .ig-hero .ig-in, .ig-tile { opacity: 1 !important; transform: none !important; transition: none; }
+    .ig-btn, .ig-ring, .ig-core-in, .ig-tile, .ig-ln path, .ig-dot { animation: none !important; }
+    .ig-ln circle { display: none; }
+  }
 </style>
-<noscript><style>.reveal,.page-hero .section-label,.page-hero .hero-h1,.page-hero .hero-lede,.page-hero .hero-actions-centered,.page-hero .hero-trust{opacity:1;transform:none;transition:none;}</style></noscript>
+<noscript><style>.ig-hero .ig-in,.ig-tile{opacity:1!important;transform:none!important}.reveal,.page-hero .section-label,.page-hero .hero-h1,.page-hero .hero-lede,.page-hero .hero-actions-centered,.page-hero .hero-trust{opacity:1;transform:none;transition:none;}</style></noscript>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-H2LBJT03WE"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-H2LBJT03WE');</script>
 <script type="application/ld+json">
@@ -223,6 +312,14 @@
     },
     {
       "@type": "Question",
+      "name": "We invoice from Apex Trading. Does that work?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Invoices that come from Apex Trading or Trellis are read in automatically and labeled with where they came from. You review each one before it goes out to the store, so nothing sends without you."
+      }
+    },
+    {
+      "@type": "Question",
       "name": "What happens if the person who connected leaves?",
       "acceptedAnswer": {
         "@type": "Answer",
@@ -267,32 +364,71 @@
 </nav>
 
 <!-- PAGE HERO -->
-<div class="page-hero">
-  <div class="hero-bg-gradient"></div>
-  <div class="hero-bg-gradient-2"></div>
-  <div class="hero-grid-lines"></div>
-  <div class="hero-text--solo">
-    <div class="section-label">Integrations</div>
-    <h1 class="hero-h1">Your email, your books, your Metrc. Connected.</h1>
-    <p class="hero-lede">Invoices go out from your own Outlook or Gmail. Bills and payments land in QuickBooks. Every invoice gets checked against Metrc. Your team keeps the tools it already knows.</p>
-    <div class="hero-actions-centered">
-      <a href="/contact" class="btn-primary">Connect my systems <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+<section class="ig-hero">
+  <div class="ig-split">
+    <div class="ig-text">
+      <div class="section-label ig-in">Integrations</div>
+      <h1 class="ig-h1 ig-in">Plugged into everything <em>you already run.</em></h1>
+      <p class="ig-sub ig-in">Metrc, QuickBooks, your POS, your mailbox, and the wholesale platforms brands sell on, like <b>Apex Trading</b> and <b>Trellis</b>. Your team keeps the tools it knows.</p>
+      <div class="ig-switch ig-in" role="group" aria-label="Show connections for">
+        <button type="button" class="on" data-mode="all">Everything</button>
+        <button type="button" data-mode="retail">I run a dispensary</button>
+        <button type="button" data-mode="brand">I run a brand</button>
+      </div>
+      <div class="ig-actions ig-in">
+        <a href="/contact" class="ig-btn">Connect my systems <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        <a href="#int-list" class="ig-link">See every connection</a>
+      </div>
+      <div class="ig-trust ig-in"><img src="/metrc-logo-v2.png" alt="Metrc"><span>Certified Metrc Third-Party Vendor &middot; Verified Microsoft publisher</span></div>
     </div>
-    <div class="hero-trust">
-      <img src="/metrc-logo-v2.png" alt="Metrc">
-      <span>Certified Metrc Third-Party Vendor &middot; Verified Microsoft publisher</span>
+    <div class="ig-stage" data-mode="all">
+      <div class="ig-hub">
+        <svg class="ig-lines" viewBox="0 0 520 520" aria-hidden="true"><g class="ig-ln" data-side="both"><path d="M260.0,64.0 L260,260"/><circle r="3.6"><animateMotion dur="2.40s" begin="-0.00s" repeatCount="indefinite" path="M260.0,64.0 L260,260"/></circle></g><g class="ig-ln" data-side="both"><path d="M358.0,90.3 L260,260"/><circle r="3.6"><animateMotion dur="2.75s" begin="-0.37s" repeatCount="indefinite" path="M358.0,90.3 L260,260"/></circle></g><g class="ig-ln" data-side="brand"><path d="M429.7,162.0 L260,260"/><circle r="3.6"><animateMotion dur="3.10s" begin="-0.74s" repeatCount="indefinite" path="M429.7,162.0 L260,260"/></circle></g><g class="ig-ln" data-side="brand"><path d="M456.0,260.0 L260,260"/><circle r="3.6"><animateMotion dur="3.45s" begin="-1.11s" repeatCount="indefinite" path="M456.0,260.0 L260,260"/></circle></g><g class="ig-ln" data-side="brand"><path d="M429.7,358.0 L260,260"/><circle r="3.6"><animateMotion dur="2.40s" begin="-1.48s" repeatCount="indefinite" path="M429.7,358.0 L260,260"/></circle></g><g class="ig-ln" data-side="brand"><path d="M358.0,429.7 L260,260"/><circle r="3.6"><animateMotion dur="2.75s" begin="-1.85s" repeatCount="indefinite" path="M358.0,429.7 L260,260"/></circle></g><g class="ig-ln" data-side="both"><path d="M260.0,456.0 L260,260"/><circle r="3.6"><animateMotion dur="3.10s" begin="-2.22s" repeatCount="indefinite" path="M260.0,456.0 L260,260"/></circle></g><g class="ig-ln" data-side="both"><path d="M162.0,429.7 L260,260"/><circle r="3.6"><animateMotion dur="3.45s" begin="-2.59s" repeatCount="indefinite" path="M162.0,429.7 L260,260"/></circle></g><g class="ig-ln" data-side="both"><path d="M90.3,358.0 L260,260"/><circle r="3.6"><animateMotion dur="2.40s" begin="-2.96s" repeatCount="indefinite" path="M90.3,358.0 L260,260"/></circle></g><g class="ig-ln" data-side="retail"><path d="M64.0,260.0 L260,260"/><circle r="3.6"><animateMotion dur="2.75s" begin="-3.33s" repeatCount="indefinite" path="M64.0,260.0 L260,260"/></circle></g><g class="ig-ln" data-side="retail"><path d="M90.3,162.0 L260,260"/><circle r="3.6"><animateMotion dur="3.10s" begin="-3.70s" repeatCount="indefinite" path="M90.3,162.0 L260,260"/></circle></g><g class="ig-ln" data-side="retail"><path d="M162.0,90.3 L260,260"/><circle r="3.6"><animateMotion dur="3.45s" begin="-4.07s" repeatCount="indefinite" path="M162.0,90.3 L260,260"/></circle></g></svg>
+        <div class="ig-core"><div class="ig-ring"></div><div class="ig-ring"></div><div class="ig-ring"></div><div class="ig-core-in"><svg viewBox="0 0 24 24" fill="none" stroke="#95d5b2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg><b>ShelfSpace</b></div></div>
+        <div class="ig-node" data-side="both" style="left:50.00%;top:12.31%;--d:0.00s"><div class="ig-tile"><img src="/logos/icons/metrc.png" alt=""></div><span>Metrc</span></div><div class="ig-node" data-side="both" style="left:68.85%;top:17.36%;--d:0.07s"><div class="ig-tile"><img src="/logos/icons/quickbooks.png" alt=""></div><span>QuickBooks</span></div><div class="ig-node" data-side="brand" style="left:82.64%;top:31.15%;--d:0.14s"><div class="ig-tile"><img src="/logos/icons/outlook.png" alt=""></div><span>Outlook</span></div><div class="ig-node" data-side="brand" style="left:87.69%;top:50.00%;--d:0.21s"><div class="ig-tile"><span class="ig-word ig-word--apex">APEX</span></div><span>Apex Trading</span></div><div class="ig-node" data-side="brand" style="left:82.64%;top:68.85%;--d:0.28s"><div class="ig-tile"><img src="/logos/icons/gmail.png" alt=""></div><span>Gmail</span></div><div class="ig-node" data-side="brand" style="left:68.85%;top:82.64%;--d:0.35s"><div class="ig-tile"><span class="ig-word ig-word--trellis">trellis</span></div><span>Trellis</span></div><div class="ig-node" data-side="both" style="left:50.00%;top:87.69%;--d:0.42s"><div class="ig-tile"><img src="/logos/icons/plaid.png" alt=""></div><span>Plaid</span></div><div class="ig-node" data-side="both" style="left:31.15%;top:82.64%;--d:0.49s"><div class="ig-tile"><img src="/logos/icons/claude.png" alt=""></div><span>Claude</span></div><div class="ig-node" data-side="both" style="left:17.36%;top:68.85%;--d:0.56s"><div class="ig-tile"><img src="/logos/icons/chatgpt.png" alt=""></div><span>ChatGPT</span></div><div class="ig-node" data-side="retail" style="left:12.31%;top:50.00%;--d:0.63s"><div class="ig-tile"><img src="/logos/icons/leaflink.png" alt=""></div><span>LeafLink</span></div><div class="ig-node" data-side="retail" style="left:17.36%;top:31.15%;--d:0.70s"><div class="ig-tile"><span class="ig-word ig-word--pos">dutchie</span></div><span>Dutchie</span></div><div class="ig-node" data-side="retail" style="left:31.15%;top:17.36%;--d:0.77s"><div class="ig-tile"><span class="ig-word ig-word--pos">flowhub</span></div><span>Flowhub</span></div>
+      </div>
+      <div class="ig-feed" aria-live="polite"><span class="ig-dot"></span><span class="ig-feed-t">Connecting&hellip;</span></div>
     </div>
   </div>
-</div>
+</section>
+
+<!-- BRAND TICKER -->
+<section class="brand-ticker brand-ticker--tight">
+  <div class="brand-ticker-label">Brands paid through ShelfSpace every week</div>
+  <div class="brand-ticker-track">
+    <img src="/logos/brands/curaleaf.png" alt="Curaleaf — paid via ShelfSpace" class="brand-ticker-logo">
+    <img src="/logos/brands/cresco.png" alt="Cresco Labs — paid via ShelfSpace" class="brand-ticker-logo brand-ticker-logo--sm">
+    <img src="/logos/brands/gti.png" alt="Green Thumb Industries — paid via ShelfSpace" class="brand-ticker-logo brand-ticker-logo--sm">
+    <img src="/logos/brands/holistic.png" alt="Holistic Industries — paid via ShelfSpace" class="brand-ticker-logo">
+    <img src="/logos/brands/kiva.png" alt="Kiva Confections — paid via ShelfSpace" class="brand-ticker-logo brand-ticker-logo--sm">
+    <img src="/logos/brands/wyld.png" alt="Wyld — paid via ShelfSpace" class="brand-ticker-logo brand-ticker-logo--lg">
+    <img src="/logos/brands/marimed.png" alt="MariMed — paid via ShelfSpace" class="brand-ticker-logo brand-ticker-logo--lg">
+    <img src="/logos/brands/jushi.png" alt="Jushi Holdings — paid via ShelfSpace" class="brand-ticker-logo">
+    <img src="/logos/brands/rove.png" alt="Rove — paid via ShelfSpace" class="brand-ticker-logo">
+    <img src="/logos/brands/fernway.png" alt="Fernway — paid via ShelfSpace" class="brand-ticker-logo">
+    <img src="/logos/brands/curaleaf.png" alt="Curaleaf" aria-hidden="true" class="brand-ticker-logo">
+    <img src="/logos/brands/cresco.png" alt="Cresco Labs" aria-hidden="true" class="brand-ticker-logo brand-ticker-logo--sm">
+    <img src="/logos/brands/gti.png" alt="Green Thumb Industries" aria-hidden="true" class="brand-ticker-logo brand-ticker-logo--sm">
+    <img src="/logos/brands/holistic.png" alt="Holistic Industries" aria-hidden="true" class="brand-ticker-logo">
+    <img src="/logos/brands/kiva.png" alt="Kiva Confections" aria-hidden="true" class="brand-ticker-logo brand-ticker-logo--sm">
+    <img src="/logos/brands/wyld.png" alt="Wyld" aria-hidden="true" class="brand-ticker-logo brand-ticker-logo--lg">
+    <img src="/logos/brands/marimed.png" alt="MariMed" aria-hidden="true" class="brand-ticker-logo brand-ticker-logo--lg">
+    <img src="/logos/brands/jushi.png" alt="Jushi" aria-hidden="true" class="brand-ticker-logo">
+    <img src="/logos/brands/rove.png" alt="Rove" aria-hidden="true" class="brand-ticker-logo">
+    <img src="/logos/brands/fernway.png" alt="Fernway" aria-hidden="true" class="brand-ticker-logo">
+  </div>
+</section>
 
 <!-- LOGO WALL -->
 <section class="svc-section svc-section--white" id="int-wall" style="padding-top:96px;padding-bottom:96px;">
   <div class="svc-inner">
     <div class="svc-eyebrow reveal">Works With</div>
     <h2 class="svc-headline reveal">Plugged into the systems cannabis already runs on.</h2>
-    <p class="svc-sub reveal">Compliance, accounting, email, banking, AI and every major POS.</p>
+    <p class="svc-sub reveal">Compliance, accounting, email, banking, AI, every major POS, and the wholesale platforms brands sell on.</p>
     <div class="int-wall-group reveal">Compliance, books &amp; banking</div>
     <div class="int-wall reveal"><div class="int-wall-tile"><img src="/metrc-logo-v2.png" alt="Metrc" loading="lazy"></div><div class="int-wall-tile"><img src="/logos/quickbooks.png" alt="Intuit QuickBooks Online" loading="lazy"></div><div class="int-wall-tile"><img src="/logos/plaid.png" alt="Plaid" loading="lazy"></div><div class="int-wall-tile"><img src="/logos/leaflink.png" alt="LeafLink" loading="lazy" style="max-height:30px"></div></div>
+    <div class="int-wall-group reveal">Brand-side wholesale &amp; ordering</div>
+    <div class="int-wall reveal"><div class="int-wall-tile"><span class="ig-word ig-word--apex ig-word--lg">APEX</span><span>Apex Trading</span></div><div class="int-wall-tile"><span class="ig-word ig-word--trellis ig-word--lg">trellis</span></div><div class="int-wall-tile"><img src="/logos/icons/quickbooks.png" alt="" class="int-wall-icon" loading="lazy"><span>QuickBooks for brands</span></div><div class="int-wall-tile"><span>+ any invoice PDF</span></div></div>
     <div class="int-wall-group reveal">Email</div>
     <div class="int-wall reveal"><div class="int-wall-tile"><img src="/logos/icons/microsoft-365.png" alt="" class="int-wall-icon" loading="lazy"><span>Microsoft 365</span></div><div class="int-wall-tile"><img src="/logos/icons/outlook.png" alt="" class="int-wall-icon" loading="lazy"><span>Outlook</span></div><div class="int-wall-tile"><img src="/logos/google-workspace.png" alt="Google Workspace" loading="lazy"></div><div class="int-wall-tile"><img src="/logos/icons/gmail.png" alt="" class="int-wall-icon" loading="lazy"><span>Gmail</span></div></div>
     <div class="int-wall-group reveal">AI assistants</div>
@@ -307,7 +443,7 @@
 <section class="svc-section svc-section--slate" id="int-list">
   <div class="svc-inner">
     <div class="svc-eyebrow reveal">What Connects</div>
-    <h2 class="svc-headline reveal">Eight connections. No new software for your team.</h2>
+    <h2 class="svc-headline reveal">Nine connections. No new software for your team.</h2>
     <p class="svc-sub reveal">Each one is set up during onboarding. Most take one sign-in.</p>
     <div class="int-grid">
       <a class="int-card reveal" href="/docs/integrations/outlook-gmail">
@@ -346,6 +482,12 @@
         <h3>Plaid</h3>
         <p>Stores and brands connect their bank with Plaid in about a minute to pay or get paid by ACH. No account numbers typed or emailed. Rolling out now; e-check covers everyone today.</p>
         <span class="int-more">See payments &rarr;</span>
+      </a>
+      <a class="int-card reveal reveal-delay-2" href="/accounts-receivable">
+        <div class="int-card-top"><div class="int-logos"><span class="ig-word ig-word--apex">APEX</span><span class="ig-word ig-word--trellis">trellis</span></div><span class="int-tag int-tag--vendor">For brands</span></div>
+        <h3>Apex Trading &amp; Trellis invoices</h3>
+        <p>Already invoicing stores from Apex Trading or Trellis? Those invoices come straight in. Each one is read into a draft, labeled with where it came from, and you check it before it goes to the store.</p>
+        <span class="int-more">See ShelfCollect &rarr;</span>
       </a>
       <a class="int-card reveal" href="/connect-your-ai">
         <div class="int-card-top"><div class="int-logos"><img src="/logos/icons/claude.png" alt="Claude" width="40" height="40"><img src="/logos/icons/chatgpt.png" alt="ChatGPT" width="40" height="40"></div><span class="int-tag">Both sides</span></div>
@@ -415,7 +557,7 @@
     <p class="section-desc reveal">Tell us what you run. We set up every connection with you, then show you the money you&rsquo;re missing.</p>
     <div class="cta-actions reveal" style="display:flex;gap:20px;align-items:center;justify-content:center;flex-wrap:wrap;">
       <a href="/contact" class="btn-primary">
-        Talk to us
+        Connect my systems
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
       </a>
     </div>
@@ -441,6 +583,10 @@
     <details>
       <summary>We use a personal Gmail account.</summary>
       <p>Connecting a mailbox needs a company Google Workspace or Microsoft 365 account. Personal @gmail.com addresses can&rsquo;t connect, and your mail keeps sending from our billing address instead.</p>
+    </details>
+    <details>
+      <summary>We invoice from Apex Trading. Does that work?</summary>
+      <p>Yes. Invoices that come from Apex Trading or Trellis are read in automatically and labeled with where they came from. You review each one before it goes out to the store, so nothing sends without you.</p>
     </details>
     <details>
       <summary>Do we have to switch POS or accounting software?</summary>
@@ -525,6 +671,45 @@
       navLinks.classList.remove('mobile-open');
     }
   });
+})();
+</script>
+<script>
+(function() {
+  var hero = document.querySelector('.ig-hero');
+  if (!hero) return;
+  requestAnimationFrame(function() { hero.classList.add('go'); });
+  var stage = hero.querySelector('.ig-stage');
+  var feed = hero.querySelector('.ig-feed-t');
+  var btns = hero.querySelectorAll('.ig-switch button');
+  var FEED = {
+    retail: ['LeafLink invoice read and checked against Metrc', 'Bill and payment posted to QuickBooks', 'Sales pulled in from your POS', 'Ask Claude: what do I owe this week?'],
+    brand: ['Apex Trading invoice read into a draft for you', 'Reminder sent from your own Outlook', 'Payment matched in QuickBooks', 'Trellis invoice read into a draft for you']
+  };
+  FEED.all = [FEED.retail[0], FEED.brand[0], FEED.retail[1], FEED.brand[1], FEED.retail[2], FEED.brand[3]];
+  var mode = 'all', i = 0, userPicked = false, timer = null;
+  function show() {
+    var list = FEED[mode];
+    feed.classList.add('swap');
+    setTimeout(function() { feed.textContent = list[i % list.length]; feed.classList.remove('swap'); i++; }, 300);
+  }
+  function setMode(m) {
+    mode = m; i = 0; stage.setAttribute('data-mode', m);
+    btns.forEach(function(b) { b.classList.toggle('on', b.getAttribute('data-mode') === m); });
+    show();
+  }
+  btns.forEach(function(b) {
+    b.addEventListener('click', function() { userPicked = true; setMode(b.getAttribute('data-mode')); });
+  });
+  var tick = 0;
+  function loop() {
+    if (document.hidden) return;
+    tick++;
+    // until someone picks a side, alternate the spotlight on its own
+    if (!userPicked && tick % 3 === 0) { var order = ['all', 'retail', 'brand']; setMode(order[(order.indexOf(mode) + 1) % 3]); }
+    else show();
+  }
+  setMode('all');
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) timer = setInterval(loop, 2600);
 })();
 </script>
 <script src="/shelfiq-widget.js"></script>
