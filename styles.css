@@ -122,24 +122,9 @@ nav.scrolled { box-shadow: 0 1px 24px rgba(27,67,50,0.08); }
 }
 .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
 .nav-hamburger span { width: 24px; height: 2px; background: var(--green-deep); border-radius: 2px; transition: all 0.3s; }
-.nav-links.mobile-open {
-  display: flex !important;
-  flex-direction: column;
-  position: absolute;
-  top: 72px;
-  left: 0;
-  right: 0;
-  background: rgba(255,255,255,0.98);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  padding: 24px 32px;
-  gap: 20px;
-  box-shadow: 0 8px 32px rgba(27,67,50,0.1);
-  border-bottom: 1px solid rgba(27,67,50,0.06);
-}
 /* Login link — surfaces only in the mobile hamburger menu (desktop Login lives in footer) */
 .nav-login-mobile { display: none; }
-.nav-links.mobile-open .nav-login-mobile { display: block; }
+.nav-dropdown-menu a.nav-overview-mobile { display: none; }
 
 /* Buttons */
 .btn-primary {
@@ -231,121 +216,226 @@ footer::before { content: ''; position: absolute; bottom: -100px; right: -100px;
   .cta-actions { flex-direction: column; align-items: center; }
   .footer-top { grid-template-columns: 1fr 1fr; }
   .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
+}
+
+/* ─── MOBILE MENU (≤900px) ───────────────────────────────────────────────
+   Full-screen deep-green overlay that grows out of the hamburger as a circle
+   (clip-path), items rise in on a stagger, product groups are accordions
+   (enhanced by /nav.js; without JS they render expanded). State class stays
+   `.mobile-open` on .nav-links so the inline hamburger onclick keeps working. */
+@media (max-width: 900px) {
+  /* backdrop-filter on <nav> would make it the containing block for the fixed overlay */
+  nav { background: rgba(255,255,255,0.94); -webkit-backdrop-filter: none; backdrop-filter: none; }
+  .nav-links .nav-dropdown-menu a.nav-overview-mobile { display: flex; }
+  :root { --nav-ease: cubic-bezier(0.76, 0, 0.24, 1); --nav-out: cubic-bezier(0.22, 1, 0.36, 1); }
+
+  /* Desktop dropdown hover/focus transforms must never apply here
+     (they shoved a tapped group's links 50% off-screen). */
   .nav-dropdown-menu {
-    position: static; transform: none; opacity: 1; visibility: visible; display: block;
-    min-width: 0; margin: 8px 0 0; padding: 0 0 0 14px;
-    background: transparent; border: none; border-left: 2px solid var(--green-light);
-    border-radius: 0; box-shadow: none; -webkit-backdrop-filter: none; backdrop-filter: none;
+    position: static; transform: none; opacity: 1; visibility: inherit;
+    min-width: 0; margin: 0; padding: 0; background: none; border: none; border-radius: 0;
+    box-shadow: none; -webkit-backdrop-filter: none; backdrop-filter: none;
   }
-  .nav-dropdown-menu a { padding: 8px 0; }
+  .nav-dropdown:hover .nav-dropdown-menu,
+  .nav-dropdown:focus-within .nav-dropdown-menu,
+  .nav-dropdown.open .nav-dropdown-menu { transform: none; opacity: 1; visibility: inherit; }
+  .nav-dropdown:hover .dropdown-chevron,
+  .nav-dropdown:focus-within .dropdown-chevron { transform: none; }
+  .nav-dropdown-menu::before { display: none; }
 
-  /* ── Mobile sheet: dark full-screen menu, product cards, chip links, staggered entrance (no JS) ── */
-  .nav-links.mobile-open {
-    position: fixed; top: 72px; left: 0; right: 0; bottom: 0;
-    height: calc(100dvh - 72px); overflow-y: auto; overscroll-behavior: contain;
-    display: grid !important; grid-template-columns: repeat(3, 1fr); align-content: start;
-    gap: 10px; padding: 12px 20px calc(28px + env(safe-area-inset-bottom));
+  /* The overlay — always rendered, revealed by a circle from the hamburger */
+  .nav-links {
+    display: grid; position: fixed; inset: 0; z-index: -1;
+    grid-template-columns: repeat(6, 1fr); grid-template-rows: repeat(4, auto) 1fr auto auto;
+    align-content: stretch; gap: 0 12px;
+    height: 100dvh; overflow-y: auto; overscroll-behavior: contain;
+    padding: 88px 24px calc(20px + env(safe-area-inset-bottom));
     background:
-      radial-gradient(120% 60% at 100% 0%, rgba(149,213,178,0.18), transparent 60%),
-      radial-gradient(90% 50% at 0% 100%, rgba(64,145,108,0.22), transparent 60%),
+      radial-gradient(70% 45% at 100% 0%, rgba(149,213,178,0.20), transparent 70%),
+      radial-gradient(80% 50% at 0% 100%, rgba(64,145,108,0.28), transparent 70%),
+      linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px) 0 0 / 100% 48px,
       var(--green-deep);
-    -webkit-backdrop-filter: none; backdrop-filter: none; box-shadow: none; border: none;
+    clip-path: circle(0px at calc(100% - 40px) 36px);
+    visibility: hidden;
+    transition: clip-path 0.55s var(--nav-ease), visibility 0s linear 0.55s;
+    -webkit-tap-highlight-color: transparent;
   }
-  .nav-links.mobile-open > li.nav-dropdown,
-  .nav-links.mobile-open > li:last-child { grid-column: 1 / -1; }
-  .nav-links.mobile-open > li {
-    width: 100%; opacity: 0; transform: translateY(12px);
-    animation: navSheetIn 0.45s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  .nav-links.mobile-open {
+    clip-path: circle(150vmax at calc(100% - 40px) 36px);
+    visibility: visible;
+    transition: clip-path 0.7s var(--nav-ease), visibility 0s;
   }
-  .nav-links.mobile-open > li:nth-child(1) { animation-delay: 0.03s; }
-  .nav-links.mobile-open > li:nth-child(2) { animation-delay: 0.08s; }
-  .nav-links.mobile-open > li:nth-child(3) { animation-delay: 0.13s; }
-  .nav-links.mobile-open > li:nth-child(4) { animation-delay: 0.18s; }
-  .nav-links.mobile-open > li:nth-child(5) { animation-delay: 0.21s; }
-  .nav-links.mobile-open > li:nth-child(6) { animation-delay: 0.24s; }
-  .nav-links.mobile-open > li:nth-child(n+7) { animation-delay: 0.28s; }
 
-  /* Product groups → glass cards */
-  .nav-links.mobile-open .nav-dropdown {
-    padding: 16px 16px 14px; border-radius: 16px;
-    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09);
+  /* Stagger: everything rises + unblurs in after the circle starts */
+  .nav-links > li {
+    grid-column: 1 / -1; min-width: 0;
+    opacity: 0; transform: translateY(28px); filter: blur(4px);
+    transition: opacity 0.2s, transform 0.2s, filter 0.2s;
   }
-  .nav-links.mobile-open .nav-dropdown-toggle {
-    display: flex; align-items: center; justify-content: space-between; width: 100%;
-    padding: 0; font-size: 20px; font-weight: 700; letter-spacing: -0.4px; color: var(--white);
+  .nav-links.mobile-open > li {
+    opacity: 1; transform: none; filter: none;
+    transition: opacity 0.6s var(--nav-out), transform 0.8s var(--nav-out), filter 0.6s var(--nav-out);
   }
-  .nav-links.mobile-open .nav-dropdown-toggle::after {
-    content: '\2192'; font-size: 18px; font-weight: 500; color: var(--green-accent);
+  .nav-links.mobile-open > li:nth-child(1) { transition-delay: 0.16s; }
+  .nav-links.mobile-open > li:nth-child(2) { transition-delay: 0.22s; }
+  .nav-links.mobile-open > li:nth-child(3) { transition-delay: 0.28s; }
+  .nav-links.mobile-open > li:nth-child(4),
+  .nav-links.mobile-open > li:nth-child(5) { transition-delay: 0.34s; }
+  .nav-links.mobile-open > li:nth-child(n+6) { transition-delay: 0.40s; }
+
+  /* ── Product groups: numbered, big type, accordion ── */
+  .nav-links { counter-reset: navgrp; }
+  .nav-links > li.nav-dropdown {
+    counter-increment: navgrp; display: flex; flex-direction: column;
+    border-bottom: 1px solid rgba(255,255,255,0.09);
   }
-  .nav-links.mobile-open .dropdown-chevron { display: none; }
-  .nav-links.mobile-open .nav-dropdown::before {
-    display: block; order: 2; margin: 3px 0 12px;
-    font-family: var(--font-mono); font-size: 11px; letter-spacing: 1px; text-transform: uppercase;
+  .nav-links > li.nav-dropdown:first-child { border-top: 1px solid rgba(255,255,255,0.09); }
+  .nav-links .nav-dropdown-toggle {
+    position: relative; display: block; width: 100%;
+    padding: 20px 44px 4px 30px;
+    font-size: 30px; font-weight: 700; letter-spacing: -1.1px; line-height: 1.1;
+    color: var(--white); transition: color 0.2s;
+  }
+  .nav-links .nav-dropdown-toggle::before {
+    content: counter(navgrp, decimal-leading-zero);
+    position: absolute; left: 0; top: 25px;
+    font-family: var(--font-mono); font-size: 11px; font-weight: 400; letter-spacing: 0.5px;
     color: var(--green-accent);
   }
-  .nav-links.mobile-open .nav-dropdown { display: flex; flex-direction: column; }
-  .nav-links.mobile-open .nav-dropdown-toggle { order: 1; }
-  .nav-links.mobile-open .nav-dropdown-menu { order: 3; }
-  .nav-links.mobile-open .nav-dropdown:has(> a[href="/accounts-payable"])::before { content: 'Pay vendors \00b7  recover credits'; }
-  .nav-links.mobile-open .nav-dropdown:has(> a[href="/accounts-receivable"])::before { content: 'Collect what stores owe'; }
-  .nav-links.mobile-open .nav-dropdown:has(> a[href="/features"])::before { content: 'How it all works'; }
-
-  /* Sub-links → chips */
-  .nav-links.mobile-open .nav-dropdown-menu {
-    display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; border-left: none;
+  .nav-links .dropdown-chevron { display: none; }
+  /* desktop hover/active colours are dark green — invisible on the overlay */
+  .nav-links a:hover, .nav-links .nav-dropdown-toggle:hover, .nav-links > li > a.active { color: var(--white); }
+  .nav-links .nav-dropdown-toggle.active::before { color: var(--white); }
+  /* tagline under each group title */
+  .nav-links > li.nav-dropdown::after {
+    order: 2; display: block; padding: 0 44px 18px 30px;
+    font-family: var(--font-mono); font-size: 11px; letter-spacing: 1px; text-transform: uppercase;
+    color: rgba(255,255,255,0.45);
   }
-  .nav-links.mobile-open .nav-dropdown-menu::before { display: none; }
-  .nav-links.mobile-open .nav-dropdown-menu a {
-    display: inline-flex; align-items: center; padding: 7px 13px; border-radius: 100px;
-    font-size: 14px; font-weight: 500; color: rgba(255,255,255,0.88);
-    background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.08);
-    transition: background 0.2s, color 0.2s;
-  }
-  .nav-links.mobile-open .nav-dropdown-menu a:hover,
-  .nav-links.mobile-open .nav-dropdown-menu a:active { background: var(--green-accent); color: var(--green-deep); }
-  .nav-links.mobile-open .nav-dropdown-menu a.active { background: rgba(149,213,178,0.22); color: var(--white); }
-  /* The card title already links to the overview — drop the duplicate chip */
-  .nav-links.mobile-open .nav-dropdown-menu a[href="/accounts-payable"],
-  .nav-links.mobile-open .nav-dropdown-menu a[href="/accounts-receivable"] { display: none; }
-  .nav-links.mobile-open .nav-new { background: var(--green-accent); color: var(--green-deep); vertical-align: 0; }
+  .nav-links > li.nav-dropdown:has(> a[href="/accounts-payable"])::after { content: 'Pay vendors \00b7  recover credits'; }
+  .nav-links > li.nav-dropdown:has(> a[href="/accounts-receivable"])::after { content: 'Collect what stores owe you'; }
+  .nav-links > li.nav-dropdown:has(> a[href="/features"])::after { content: 'Verify \00b7  pay \00b7  integrate'; }
+  .nav-links .nav-dropdown-toggle { order: 1; }
+  .nav-links .nav-dropdown-menu { order: 3; }
 
-  /* About / Pricing / Login → one row of three tiles */
-  .nav-links.mobile-open > li:not(.nav-dropdown):not(:last-child) > a {
-    display: flex; justify-content: center; align-items: center;
-    padding: 14px 8px; border-radius: 14px; font-size: 15px; font-weight: 600;
-    color: var(--white); background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09);
+  /* sub-links */
+  .nav-links .nav-dropdown-menu { display: flex; flex-direction: column; padding: 0 0 14px 30px; }
+  .nav-links .nav-dropdown-menu a {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 11px 0; font-size: 17px; font-weight: 500; color: rgba(255,255,255,0.72);
+    background: none; transition: color 0.2s, padding 0.25s var(--nav-out);
   }
-  .nav-links.mobile-open .nav-login-mobile > a { color: var(--green-accent) !important; }
+  .nav-links .nav-dropdown-menu a::after {
+    content: '\2192'; color: var(--green-accent); opacity: 0; transform: translateX(-8px);
+    transition: opacity 0.2s, transform 0.25s var(--nav-out);
+  }
+  .nav-links .nav-dropdown-menu a:hover,
+  .nav-links .nav-dropdown-menu a:active,
+  .nav-links .nav-dropdown-menu a.active { color: var(--white); background: none; }
+  .nav-links .nav-dropdown-menu a:active::after,
+  .nav-links .nav-dropdown-menu a.active::after { opacity: 1; transform: none; }
+  .nav-links .nav-new { background: var(--green-accent); color: var(--green-deep); vertical-align: 0; margin-right: auto; margin-left: 10px; }
 
-  /* CTA → mint, full width */
-  .nav-links.mobile-open > li:last-child { padding-top: 4px; }
-  .nav-links.mobile-open > li:last-child > a.nav-cta {
-    width: 100%; justify-content: center; padding: 18px 24px; border-radius: 14px;
-    font-size: 16px; font-weight: 700;
+  /* JS-enhanced accordion: collapsed until the group is opened */
+  .js-nav .nav-links .nav-dropdown-toggle { cursor: pointer; }
+  .js-nav .nav-links .nav-dropdown-toggle::after,
+  .js-nav .nav-links .nav-dropdown-toggle .nav-acc-bar {
+    content: ''; position: absolute; right: 4px; top: 35px; width: 16px; height: 2px; border-radius: 2px;
+    background: var(--green-accent); transition: transform 0.45s var(--nav-out);
+  }
+  .js-nav .nav-links .nav-dropdown-toggle::after { transform: rotate(90deg); }
+  .js-nav .nav-links .nav-dropdown.nav-acc-open .nav-dropdown-toggle::after { transform: rotate(0deg); }
+  .js-nav .nav-links .nav-dropdown-menu {
+    display: grid; grid-template-rows: 0fr; padding-bottom: 0;
+    transition: grid-template-rows 0.5s var(--nav-out), padding 0.5s var(--nav-out);
+  }
+  .js-nav .nav-links .nav-dropdown-menu > .nav-acc-inner { overflow: hidden; min-height: 0; }
+  .js-nav .nav-links .nav-dropdown.nav-acc-open .nav-dropdown-menu { grid-template-rows: 1fr; padding-bottom: 14px; }
+  .js-nav .nav-links .nav-acc-inner a {
+    opacity: 0; transform: translateY(-6px);
+    transition: opacity 0.25s, transform 0.35s var(--nav-out), color 0.2s;
+  }
+  .js-nav .nav-links .nav-dropdown.nav-acc-open .nav-acc-inner a { opacity: 1; transform: none; }
+  .js-nav .nav-links .nav-dropdown.nav-acc-open .nav-acc-inner a:nth-child(2) { transition-delay: 0.04s; }
+  .js-nav .nav-links .nav-dropdown.nav-acc-open .nav-acc-inner a:nth-child(3) { transition-delay: 0.08s; }
+  .js-nav .nav-links .nav-dropdown.nav-acc-open .nav-acc-inner a:nth-child(4) { transition-delay: 0.12s; }
+  .js-nav .nav-links .nav-dropdown.nav-acc-open .nav-acc-inner a:nth-child(n+5) { transition-delay: 0.16s; }
+
+  /* About + Pricing: a quiet two-up row */
+  .nav-links > li:not(.nav-dropdown):not(.nav-login-mobile):not(:last-child) { grid-column: 1 / -1; align-self: start; }
+  .nav-links > li:not(.nav-dropdown):not(.nav-login-mobile):not(:last-child):has(> a[href="/about"]) { grid-column: 1 / span 3; grid-row: 4; }
+  .nav-links > li:not(.nav-dropdown):not(.nav-login-mobile):not(:last-child):has(> a[href="/pricing"]) { grid-column: 4 / span 3; grid-row: 4; }
+  .nav-links > li:not(.nav-dropdown):not(.nav-login-mobile):not(:last-child) > a.active { color: var(--green-accent); }
+  .nav-links > li:not(.nav-dropdown):not(.nav-login-mobile):not(:last-child) > a {
+    display: block; padding: 22px 0 8px; font-size: 20px; font-weight: 600; letter-spacing: -0.4px;
+    color: rgba(255,255,255,0.88);
+  }
+  .nav-links > li > a:active { color: var(--green-accent); }
+
+  /* Bottom bar: Login (ghost) + Get Started (mint), pinned to the bottom */
+  .nav-login-mobile { display: block; }
+  .nav-links > li.nav-login-mobile { grid-column: span 2; grid-row: 6; align-self: end; margin-top: 24px; }
+  .nav-links > li:last-child { grid-column: span 4; grid-row: 6; align-self: end; margin-top: 24px; }
+  .nav-links:not(:has(.nav-login-mobile)) > li:last-child { grid-column: 1 / -1; }
+  .nav-links > li.nav-login-mobile > a,
+  .nav-links > li:last-child > a.nav-cta {
+    display: flex; align-items: center; justify-content: center; height: 56px; border-radius: 14px;
+    font-size: 16px; font-weight: 700; padding: 0 16px; transform: none;
+  }
+  .nav-links > li.nav-login-mobile > a {
+    color: var(--white); border: 1px solid rgba(255,255,255,0.22); background: rgba(255,255,255,0.04);
+  }
+  .nav-links > li:last-child > a.nav-cta {
     background: var(--green-accent); color: var(--green-deep) !important;
-    box-shadow: 0 8px 32px rgba(149,213,178,0.25);
+    box-shadow: 0 10px 40px rgba(149,213,178,0.28);
   }
+  .nav-links > li:last-child > a.nav-cta:active { transform: scale(0.98); }
+  /* trust line under the buttons */
+  .nav-links::after {
+    content: 'Certified Metrc Third-Party Vendor'; grid-column: 1 / -1; grid-row: 7;
+    padding-top: 16px; text-align: center;
+    font-family: var(--font-mono); font-size: 10px; letter-spacing: 1.2px; text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+    opacity: 0; transition: opacity 0.2s;
+  }
+  .nav-links.mobile-open::after { opacity: 1; transition: opacity 0.6s 0.5s; }
 
-  /* While open: dark bar, lock page scroll, hide chat bubble, hamburger → X */
-  body:has(.nav-links.mobile-open) { overflow: hidden; }
+  /* The bar itself while open: transparent over the overlay, white mark, X */
+  nav { transition: background 0.3s, box-shadow 0.3s, border-color 0.3s; }
+  nav:has(.nav-links.mobile-open) {
+    background: transparent; border-bottom-color: transparent; box-shadow: none;
+    -webkit-backdrop-filter: none; backdrop-filter: none;
+  }
+  .nav-logo, .nav-logo-icon { transition: color 0.3s, background 0.3s, border-color 0.3s; position: relative; z-index: 1; }
+  nav:has(.nav-links.mobile-open) .nav-logo { color: var(--white); }
+  nav:has(.nav-links.mobile-open) .nav-logo-icon { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.18); }
+  nav:has(.nav-links.mobile-open) .nav-progress { opacity: 0; }
+
+  .nav-hamburger {
+    position: relative; z-index: 1; width: 44px; height: 44px; margin-right: -10px;
+    justify-content: center; align-items: center; gap: 0; -webkit-tap-highlight-color: transparent;
+  }
+  .nav-hamburger span {
+    position: absolute; left: 11px; width: 22px; height: 2px;
+    transition: transform 0.5s var(--nav-ease), opacity 0.3s, background 0.3s, width 0.5s var(--nav-ease);
+  }
+  .nav-hamburger span:nth-child(1) { transform: translateY(-7px); }
+  .nav-hamburger span:nth-child(3) { transform: translateY(7px); width: 14px; }
+  nav:has(.mobile-open) .nav-hamburger span { background: var(--white); }
+  nav:has(.mobile-open) .nav-hamburger span:nth-child(1) { transform: rotate(45deg); }
+  nav:has(.mobile-open) .nav-hamburger span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+  nav:has(.mobile-open) .nav-hamburger span:nth-child(3) { transform: rotate(-45deg); width: 22px; }
+
+  /* Lock the page + hide the chat bubble while open */
+  html:has(.nav-links.mobile-open), body:has(.nav-links.mobile-open) { overflow: hidden; }
   body:has(.nav-links.mobile-open) .sq-toggle,
   body:has(.nav-links.mobile-open) .sq-window { display: none !important; }
-  nav:has(.nav-links.mobile-open) {
-    background: var(--green-deep); border-bottom-color: rgba(255,255,255,0.08); box-shadow: none;
-  }
-  nav:has(.nav-links.mobile-open) .nav-logo { color: var(--white); }
-  nav:has(.nav-links.mobile-open) .nav-logo-icon { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.15); }
-  nav:has(.nav-links.mobile-open) .nav-progress { display: none; }
-  .nav-hamburger { width: 32px; height: 32px; justify-content: center; align-items: center; }
-  nav:has(.mobile-open) .nav-hamburger span { background: var(--white); }
-  nav:has(.mobile-open) .nav-hamburger span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-  nav:has(.mobile-open) .nav-hamburger span:nth-child(2) { opacity: 0; }
-  nav:has(.mobile-open) .nav-hamburger span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 }
-@keyframes navSheetIn { to { opacity: 1; transform: none; } }
-@media (prefers-reduced-motion: reduce) {
-  .nav-links.mobile-open > li { animation: none; opacity: 1; transform: none; }
+@media (max-width: 900px) and (prefers-reduced-motion: reduce) {
+  .nav-links, .nav-links.mobile-open { clip-path: none; transition: visibility 0s; }
+  .nav-links > li, .nav-links.mobile-open > li { transform: none; filter: none; transition: opacity 0.2s; transition-delay: 0s !important; }
 }
+
 @media (max-width: 600px) {
   .footer-top { grid-template-columns: 1fr; }
 }

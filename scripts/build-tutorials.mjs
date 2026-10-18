@@ -78,7 +78,8 @@ const REVEAL_SCRIPT = `<script>
   document.querySelectorAll('.reveal').forEach(function(el){ro.observe(el);});
 })();
 </script>
-<script src="/shelfiq-widget.js"></script>`;
+<script src="/shelfiq-widget.js"></script>
+<script src="/nav.js" defer></script>`;
 
 const HERO_STYLE = `
   @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-12px); } }
