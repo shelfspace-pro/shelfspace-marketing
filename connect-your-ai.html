@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Connect Your AI to Your Cannabis Back Office (MCP) — ShelfSpace</title>
+<meta name="description" content="Run cannabis AP, AR, Metrc invoice matching, QuickBooks, credit recovery and vendor payments from ChatGPT, Claude or Meta Muse. ShelfSpace is a remote MCP server for cannabis finance.">
+<link rel="canonical" href="https://shelfspace.pro/connect-your-ai">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ShelfSpace">
+<meta property="og:locale" content="en_US">
+<meta property="og:url" content="https://shelfspace.pro/connect-your-ai">
+<meta property="og:title" content="Run your cannabis back office from your own AI — ShelfSpace">
+<meta property="og:description" content="Plug ChatGPT, Claude or Meta Muse into ShelfSpace. Ask questions, get analysis, match invoices to Metrc, run credit recovery and pay vendors, all from a chat.">
+<meta property="og:image" content="https://shelfspace.pro/og-image-v7.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Run your cannabis back office from your own AI — ShelfSpace">
+<meta name="twitter:description" content="Plug ChatGPT, Claude or Meta Muse into ShelfSpace. Ask questions, get analysis, match invoices to Metrc, run credit recovery and pay vendors, all from a chat.">
+<meta name="twitter:image" content="https://shelfspace.pro/og-image-v7.png">
+<meta name="apple-mobile-web-app-title" content="ShelfSpace">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+  @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-12px); } }
+  @keyframes pulse-dot { 0%, 100% { opacity: 0.35; } 50% { opacity: 1; } }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @keyframes flow-dash { to { stroke-dashoffset: -24; } }
+
+  /* ─── HERO ─── */
+  .ai-hero { position: relative; overflow: hidden; background: var(--white); padding: 140px 48px 90px; }
+  .hero-bg-gradient { position: absolute; top: -30%; right: -20%; width: 760px; height: 760px; background: radial-gradient(circle, rgba(149,213,178,0.22) 0%, rgba(149,213,178,0) 70%); animation: float 8s ease-in-out infinite; pointer-events: none; }
+  .hero-bg-gradient-2 { position: absolute; bottom: -25%; left: -15%; width: 560px; height: 560px; background: radial-gradient(circle, rgba(27,67,50,0.07) 0%, rgba(27,67,50,0) 70%); animation: float 10s ease-in-out infinite; animation-delay: -3s; pointer-events: none; }
+  .hero-grid-lines { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 1400px; height: 100%; opacity: 0.035; background-image: linear-gradient(var(--green-deep) 1px, transparent 1px), linear-gradient(90deg, var(--green-deep) 1px, transparent 1px); background-size: 80px 80px; pointer-events: none; }
+  .ai-hero-inner { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1.05fr 1fr; gap: 64px; align-items: center; }
+  .ai-hero h1 { font-size: clamp(38px, 5.4vw, 66px); line-height: 1.04; letter-spacing: -2px; font-weight: 700; color: var(--green-deep); margin: 14px 0 22px; }
+  .ai-hero h1 .hl { background: linear-gradient(120deg, var(--green-mid), var(--green-deep)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .ai-hero-lede { font-size: 18px; color: var(--slate-600); line-height: 1.6; margin: 0 0 30px; max-width: 540px; }
+  .ai-hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+  .ai-hero-works { margin-top: 34px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .ai-hero-works-label { font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 1.8px; text-transform: uppercase; color: var(--slate-500); margin-right: 4px; }
+  .ai-pill { display: inline-flex; align-items: center; gap: 7px; padding: 7px 14px; border-radius: 999px; background: var(--white); border: 1px solid var(--slate-200); font-size: 13px; font-weight: 600; color: var(--green-deep); box-shadow: 0 2px 8px rgba(27,67,50,0.05); }
+  .ai-pill::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--green-mid); }
+  .ai-hero .reveal-h { opacity: 0; transform: translateY(26px); transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1); }
+  .ai-hero.hero-loaded .reveal-h { opacity: 1; transform: none; }
+  .ai-hero .reveal-h:nth-child(2) { transition-delay: 0.1s; } .ai-hero .reveal-h:nth-child(3) { transition-delay: 0.2s; } .ai-hero .reveal-h:nth-child(4) { transition-delay: 0.3s; } .ai-hero .reveal-h:nth-child(5) { transition-delay: 0.4s; }
+
+  /* ─── CHAT DEMO ─── */
+  .chat { background: var(--white); border: 1px solid var(--slate-200); border-radius: 20px; box-shadow: 0 30px 80px rgba(27,67,50,0.16), 0 4px 14px rgba(27,67,50,0.06); overflow: hidden; text-align: left; position: relative; }
+  .chat-bar { display: flex; align-items: center; justify-content: space-between; padding: 14px 18px; border-bottom: 1px solid var(--slate-100); background: var(--slate-50); }
+  .chat-bar-left { display: flex; align-items: center; gap: 10px; }
+  .chat-dots { display: flex; gap: 6px; } .chat-dots span { width: 10px; height: 10px; border-radius: 50%; background: var(--slate-200); }
+  .chat-title { font-size: 13px; font-weight: 700; color: var(--green-deep); }
+  .chat-conn { display: inline-flex; align-items: center; gap: 7px; font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--green-dark); background: var(--green-ghost); border: 1px solid rgba(149,213,178,0.6); padding: 4px 10px; border-radius: 999px; }
+  .chat-conn::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--green-mid); animation: pulse-dot 1.6s ease-in-out infinite; }
+  .chat-body { padding: 22px 20px 18px; min-height: 430px; display: flex; flex-direction: column; gap: 14px; }
+  .msg-user { align-self: flex-end; max-width: 86%; background: var(--green-deep); color: var(--white); padding: 12px 16px; border-radius: 18px 18px 4px 18px; font-size: 14.5px; line-height: 1.5; min-height: 46px; }
+  .msg-user .caret { display: inline-block; width: 2px; height: 1em; background: var(--green-accent); vertical-align: -2px; margin-left: 2px; animation: pulse-dot 0.9s steps(2) infinite; }
+  .tool-chip { align-self: flex-start; display: inline-flex; align-items: center; gap: 9px; font-family: var(--font-mono); font-size: 11px; color: var(--slate-600); background: var(--slate-50); border: 1px dashed var(--slate-200); padding: 7px 12px; border-radius: 10px; opacity: 0; transform: translateY(6px); transition: all 0.4s ease; }
+  .tool-chip.show { opacity: 1; transform: none; }
+  .tool-chip .spin { width: 12px; height: 12px; border-radius: 50%; border: 2px solid var(--green-accent); border-top-color: var(--green-deep); animation: spin 0.8s linear infinite; }
+  .tool-chip.done .spin { animation: none; border-color: var(--green-mid); background: var(--green-mid); }
+  .tool-chip b { color: var(--green-deep); }
+  .msg-ai { align-self: flex-start; max-width: 96%; background: var(--white); border: 1px solid var(--slate-200); border-radius: 18px 18px 18px 4px; padding: 14px 16px; font-size: 14px; line-height: 1.55; color: var(--slate-700); box-shadow: 0 6px 20px rgba(27,67,50,0.06); opacity: 0; transform: translateY(8px); transition: all 0.5s ease; }
+  .msg-ai.show { opacity: 1; transform: none; }
+  .msg-ai p { margin: 0 0 10px; } .msg-ai p:last-child { margin-bottom: 0; }
+  .ai-table { width: 100%; border-collapse: collapse; margin: 6px 0 10px; font-size: 13px; }
+  .ai-table td { padding: 7px 4px; border-bottom: 1px solid var(--slate-100); vertical-align: top; }
+  .ai-table tr:last-child td { border-bottom: none; }
+  .ai-table .num { font-family: var(--font-mono); font-variant-numeric: tabular-nums; text-align: right; white-space: nowrap; color: var(--green-deep); font-weight: 700; }
+  .ai-table .flag { color: #b42318; font-weight: 600; }
+  .ai-table .ok { color: var(--green-dark); font-weight: 600; }
+  .ai-total { display: flex; justify-content: space-between; align-items: center; padding: 9px 12px; background: var(--green-ghost); border-radius: 10px; font-weight: 700; color: var(--green-deep); font-size: 13px; }
+  .ai-total .num { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+  .ai-email { border-left: 3px solid var(--green-accent); padding: 4px 0 4px 12px; color: var(--slate-600); font-size: 13px; margin: 6px 0 10px; }
+  .chat-input { display: flex; align-items: center; gap: 10px; margin: 0 16px 16px; padding: 11px 14px; border: 1px solid var(--slate-200); border-radius: 14px; color: var(--slate-400); font-size: 13.5px; }
+  .chat-input svg { margin-left: auto; color: var(--green-mid); flex-shrink: 0; }
+  .chat-steps { display: flex; justify-content: center; gap: 8px; margin-top: 18px; }
+  .chat-steps button { width: 28px; height: 6px; border-radius: 999px; border: none; background: var(--slate-200); cursor: pointer; padding: 0; transition: background 0.3s, width 0.3s; }
+  .chat-steps button.on { background: var(--green-mid); width: 44px; }
+
+  /* ─── PLAIN vs TECH ─── */
+  .lens-wrap { max-width: 1100px; margin: 56px auto 0; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; text-align: left; }
+  .lens { background: var(--white); border: 1px solid var(--slate-200); border-radius: 20px; padding: 34px 32px; box-shadow: 0 10px 30px rgba(27,67,50,0.06); }
+  .lens-tag { font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--green-mid); margin-bottom: 10px; }
+  .lens h3 { font-size: 24px; letter-spacing: -0.6px; color: var(--green-deep); margin: 0 0 16px; }
+  .lens ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; }
+  .lens li { position: relative; padding-left: 20px; font-size: 15.5px; line-height: 1.55; color: var(--slate-700); overflow-wrap: anywhere; }
+  .lens li::before { content: ''; position: absolute; left: 0; top: 8px; width: 8px; height: 8px; border-radius: 50%; background: var(--green-accent); }
+  .lens, .cap, .guard, .how-step { min-width: 0; }
+  .lens--tech { background: var(--slate-900); border-color: var(--slate-800); }
+  .lens--tech .lens-tag { color: var(--green-accent); }
+  .lens--tech h3 { color: var(--white); }
+  .lens--tech li { color: rgba(255,255,255,0.78); }
+  .lens--tech code { font-family: var(--font-mono); font-size: 13px; color: var(--green-accent); background: rgba(149,213,178,0.1); padding: 1px 6px; border-radius: 6px; }
+
+  /* ─── CAPABILITY GRID ─── */
+  .cap-grid { max-width: 1200px; margin: 56px auto 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; text-align: left; }
+  .cap { background: var(--white); border: 1px solid var(--slate-200); border-radius: 20px; padding: 26px 24px 22px; box-shadow: 0 6px 20px rgba(27,67,50,0.05); display: flex; flex-direction: column; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+  .cap:hover { transform: translateY(-4px); box-shadow: 0 18px 40px rgba(27,67,50,0.12); }
+  .cap-icon { width: 42px; height: 42px; border-radius: 12px; background: var(--green-ghost); color: var(--green-dark); display: flex; align-items: center; justify-content: center; margin-bottom: 16px; }
+  .cap h3 { font-size: 18px; color: var(--green-deep); margin: 0 0 8px; letter-spacing: -0.3px; }
+  .cap p { font-size: 14.5px; line-height: 1.6; color: var(--slate-600); margin: 0 0 16px; }
+  .cap-ask { margin-top: auto; font-size: 13.5px; line-height: 1.5; color: var(--green-deep); background: var(--green-ghost); border-radius: 12px; padding: 10px 12px 10px 34px; position: relative; font-style: italic; }
+  .cap-ask::before { content: '\201C'; position: absolute; left: 12px; top: 2px; font-size: 28px; font-style: normal; color: var(--green-mid); font-family: Georgia, serif; }
+
+  /* ─── DARK: HOW IT WORKS ─── */
+  .how-steps { max-width: 1100px; margin: 60px auto 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; text-align: left; position: relative; z-index: 2; }
+  .how-step { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12); border-radius: 20px; padding: 30px 26px; }
+  .how-num { font-family: var(--font-mono); font-size: 13px; font-weight: 700; color: var(--green-deep); background: var(--green-accent); width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 18px; }
+  .how-step h3 { color: var(--white); font-size: 20px; margin: 0 0 10px; letter-spacing: -0.4px; }
+  .how-step p { color: rgba(255,255,255,0.72); font-size: 15px; line-height: 1.6; margin: 0; }
+  .svc-section--dark .section-title { color: var(--white); }
+  .svc-section--dark .section-label { color: var(--green-accent); }
+  .svc-section--dark .section-desc { color: rgba(255,255,255,0.7); margin: 0 auto; }
+  .no-list { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin-top: 30px; position: relative; z-index: 2; }
+  .no-list span { font-family: var(--font-mono); font-size: 12px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--white); border: 1px solid rgba(149,213,178,0.4); padding: 8px 16px; border-radius: 999px; }
+  
+  /* ─── ARCHITECTURE DIAGRAM ─── */
+  .arch { max-width: 1100px; margin: 56px auto 0; }
+  .arch svg { width: 100%; height: auto; display: block; }
+  .arch .flow { stroke-dasharray: 6 6; animation: flow-dash 1.2s linear infinite; }
+
+  /* ─── GUARDRAILS ─── */
+  .guard-grid { max-width: 1100px; margin: 56px auto 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; text-align: left; }
+  .guard { display: flex; gap: 14px; background: var(--white); border: 1px solid var(--slate-200); border-radius: 16px; padding: 22px 20px; }
+  .guard-ic { flex: none; width: 36px; height: 36px; border-radius: 50%; background: var(--green-deep); color: var(--white); display: flex; align-items: center; justify-content: center; }
+  .guard h3 { font-size: 16px; color: var(--green-deep); margin: 0 0 6px; }
+  .guard p { font-size: 14px; color: var(--slate-600); line-height: 1.55; margin: 0; }
+
+  /* ─── DEV SPEC ─── */
+  .spec-wrap { max-width: 1100px; margin: 56px auto 0; display: grid; grid-template-columns: 1fr 1.1fr; gap: 24px; text-align: left; align-items: start; }
+  .spec-table { background: var(--white); border: 1px solid var(--slate-200); border-radius: 20px; overflow: hidden; box-shadow: 0 6px 20px rgba(27,67,50,0.05); }
+  .spec-row { display: grid; grid-template-columns: 150px 1fr; gap: 12px; padding: 14px 20px; border-bottom: 1px solid var(--slate-100); font-size: 14px; }
+  .spec-row:last-child { border-bottom: none; }
+  .spec-k { font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--slate-500); padding-top: 2px; }
+  .spec-v { color: var(--slate-800); line-height: 1.5; min-width: 0; overflow-wrap: anywhere; }
+  .spec-v code { font-family: var(--font-mono); font-size: 12.5px; color: var(--green-deep); background: var(--green-ghost); padding: 1px 6px; border-radius: 6px; }
+  .code { background: var(--slate-900); border-radius: 20px; padding: 0; overflow: hidden; box-shadow: 0 20px 50px rgba(27,67,50,0.18); }
+  .code-head { display: flex; gap: 6px; padding: 10px 12px; background: rgba(255,255,255,0.04); border-bottom: 1px solid rgba(255,255,255,0.06); }
+  .code-tab { font-family: var(--font-mono); font-size: 11px; color: rgba(255,255,255,0.55); padding: 6px 12px; border-radius: 8px; border: none; background: transparent; cursor: pointer; }
+  .code-tab.on { color: var(--white); background: rgba(149,213,178,0.16); }
+  .code pre { margin: 0; padding: 20px 22px; font-family: var(--font-mono); font-size: 12.5px; line-height: 1.7; color: rgba(255,255,255,0.85); overflow-x: auto; white-space: pre; }
+  .code pre[hidden] { display: none; }
+  .code .k { color: var(--green-accent); } .code .s { color: #f6d58e; } .code .c { color: rgba(255,255,255,0.4); }
+
+  /* ─── REVEAL ─── */
+  .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1); }
+  .reveal.is-visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.15s; } .reveal-delay-2 { transition-delay: 0.3s; }
+
+  @media (max-width: 980px) {
+    .ai-hero { padding: 120px 20px 70px; }
+    .ai-hero-inner { grid-template-columns: 1fr; gap: 44px; }
+    .lens-wrap, .spec-wrap { grid-template-columns: 1fr; }
+    .cap-grid, .guard-grid, .how-steps { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 640px) {
+    .cap-grid, .guard-grid, .how-steps { grid-template-columns: 1fr; }
+    .svc-section { padding: 90px 16px; }
+    .chat-body { min-height: 470px; padding: 18px 14px; }
+    .spec-row { grid-template-columns: 1fr; gap: 4px; }
+    .lens { padding: 26px 22px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hero-bg-gradient, .hero-bg-gradient-2, .arch .flow, .chat-conn::before { animation: none; }
+  }
+</style>
+<noscript><style>.reveal,.ai-hero .reveal-h,.msg-ai,.tool-chip{opacity:1;transform:none;transition:none;}</style></noscript>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-H2LBJT03WE"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-H2LBJT03WE');</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "ShelfSpace MCP Server — Connect Your AI",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Web",
+  "url": "https://shelfspace.pro/connect-your-ai",
+  "description": "ShelfSpace is a remote Model Context Protocol (MCP) server and REST API for cannabis back-office finance. Connect ChatGPT, Claude, Meta Muse or any MCP-compatible AI to run accounts payable, accounts receivable, invoice-to-Metrc matching, QuickBooks sync, credit recovery, consignment settlements, vendor communications and payments from a chat.",
+  "featureList": [
+    "Remote MCP server over Streamable HTTP",
+    "OAuth 2.1 with PKCE and dynamic client registration",
+    "REST API with an OpenAPI 3.1 description",
+    "Works with ChatGPT, Claude and Meta Muse",
+    "Cannabis invoice-to-Metrc manifest matching",
+    "Accounts payable, vendor payments and checks",
+    "Accounts receivable and collections",
+    "QuickBooks Online sync status",
+    "Monthly vendor credit recovery",
+    "Consignment settlements",
+    "CSV export of any result",
+    "Per-store scoping, role-based permissions and a full audit trail"
+  ],
+  "provider": { "@type": "Organization", "name": "ShelfSpace", "url": "https://shelfspace.pro" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://shelfspace.pro/" },
+    { "@type": "ListItem", "position": 2, "name": "Connect Your AI", "item": "https://shelfspace.pro/connect-your-ai" }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "Is there an MCP server for cannabis accounting and payments?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. ShelfSpace is a remote MCP server for cannabis back-office finance. Connect ChatGPT, Claude, Meta Muse or any MCP-compatible AI and it can work your accounts payable, receivables, Metrc invoice matching, QuickBooks, credit recovery, consignment settlements and vendor payments, scoped to your own stores." } },
+    { "@type": "Question", "name": "Can I use ChatGPT or Claude to run my dispensary's accounts payable?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Add ShelfSpace as a connector in ChatGPT or Claude, sign in once, and pick your stores. Your AI can then find invoices, check them against Metrc, see what's owed, line up vendor payments, upload new invoices and answer questions about any vendor." } },
+    { "@type": "Question", "name": "Does ShelfSpace work with Meta Muse?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Register an app in ShelfSpace Settings under AI agents, choose the Meta Muse preset, and paste the Client ID and Client Secret into a Muse custom connector." } },
+    { "@type": "Question", "name": "Do I need to log in to ShelfSpace to use it from my AI?", "acceptedAnswer": { "@type": "Answer", "text": "Only once. You sign in with your normal login and verification code to connect your AI. After that you work entirely from your AI's chat window." } },
+    { "@type": "Question", "name": "Can my AI send vendor payments?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, once your company turns on AI payments. You choose whether a person confirms each payment or whether your AI pays within per-payment and per-day limits you set. Bank-detail changes always need a person on your team to confirm." } },
+    { "@type": "Question", "name": "Can my AI see how my invoices match my Metrc manifests?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Your AI can pull every invoice with its Metrc match, line by line, and explain why a line is short, over, missing from the manifest, or billed twice." } },
+    { "@type": "Question", "name": "Can my AI manage QuickBooks through ShelfSpace?", "acceptedAnswer": { "@type": "Answer", "text": "Your AI can see what has synced to QuickBooks, what's waiting and why, so you can catch a stuck bill or payment without opening either system." } },
+    { "@type": "Question", "name": "Is it safe to connect an AI to my company's finances?", "acceptedAnswer": { "@type": "Answer", "text": "Your AI signs in as you and only sees the stores you choose. A read-only person gets a read-only AI. It never holds a database password, every action is logged as done by your AI, and you can disconnect it in one click." } },
+    { "@type": "Question", "name": "What is MCP?", "acceptedAnswer": { "@type": "Answer", "text": "MCP (Model Context Protocol) is the open standard AI assistants use to connect to outside tools and data. ShelfSpace speaks it, so your AI can use ShelfSpace the way a person on your team would." } },
+    { "@type": "Question", "name": "Is there a REST API too?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. The same tools are available as a REST API at /api/agent/v1/tools/{tool}, described by an OpenAPI 3.1 file, using the same OAuth token, permissions and audit trail as the MCP server." } }
+  ]
+}
+</script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="/" class="nav-logo">
+    <div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div>
+    <span class="nav-logo-text">ShelfSpace<sup class="nav-logo-tm">™</sup></span>
+  </a>
+  <ul class="nav-links">
+    <li class="nav-dropdown"><a href="/accounts-payable" class="nav-dropdown-toggle">ShelfPay (AP) <svg class="dropdown-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></a>
+      <div class="nav-dropdown-menu"><a href="/accounts-payable">ShelfPay overview</a><a href="/consignment">Consignment</a><a href="/credit-recovery">Credit Recovery</a><a href="/shelfverify">ShelfVerify</a></div></li>
+    <li class="nav-dropdown"><a href="/accounts-receivable" class="nav-dropdown-toggle">ShelfCollect (AR) <svg class="dropdown-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></a>
+      <div class="nav-dropdown-menu"><a href="/accounts-receivable">ShelfCollect overview</a><a href="/ai-calls">AI Calls <span class="nav-new">New</span></a><a href="/collections">Collections</a><a href="/promise-to-pay">Promise to Pay</a></div></li>
+    <li><a href="/shelfverify">ShelfVerify</a></li>
+    <li><a href="/about">About</a></li>
+    <li><a href="/pricing">Pricing</a></li>
+    <li class="nav-login-mobile"><a href="https://ourshelf.space/login">Login</a></li>
+    <li><a href="/contact" class="nav-cta">Get Started <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a></li>
+  </ul>
+  <div class="nav-hamburger" onclick="document.querySelector('.nav-links').classList.toggle('mobile-open'); event.stopPropagation();"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- HERO -->
+<header class="ai-hero">
+  <div class="hero-bg-gradient"></div>
+  <div class="hero-bg-gradient-2"></div>
+  <div class="hero-grid-lines"></div>
+  <div class="ai-hero-inner">
+    <div>
+      <div class="aud-badge aud-retailer reveal-h">New &middot; Bring your own AI</div>
+      <h1 class="reveal-h">Run your cannabis back office from <span class="hl">your own AI.</span></h1>
+      <p class="ai-hero-lede reveal-h">Plug ChatGPT, Claude or Meta Muse into ShelfSpace. Ask it anything about your money and it answers from your real books, then does the work: invoices checked against Metrc, credits recovered, QuickBooks caught up, vendors paid. You never have to open ShelfSpace.</p>
+      <div class="ai-hero-actions reveal-h">
+        <a href="/contact" class="btn-primary">Get started <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        <a href="#for-developers" class="btn-secondary">Connect in 2 minutes</a>
+      </div>
+      <div class="ai-hero-works reveal-h">
+        <span class="ai-hero-works-label">Works with</span>
+        <span class="ai-pill">ChatGPT</span><span class="ai-pill">Claude</span><span class="ai-pill">Meta Muse</span><span class="ai-pill">Any MCP client</span>
+      </div>
+    </div>
+
+    <div class="reveal-h">
+      <div class="chat" aria-label="Example conversation between a dispensary owner and their AI connected to ShelfSpace">
+        <div class="chat-bar">
+          <div class="chat-bar-left"><div class="chat-dots"><span></span><span></span><span></span></div><span class="chat-title">Your AI</span></div>
+          <span class="chat-conn">ShelfSpace connected</span>
+        </div>
+        <div class="chat-body" id="chat-body" aria-live="polite"></div>
+        <div class="chat-input">Ask about your invoices, payments, credits&hellip;<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></div>
+      </div>
+      <div class="chat-steps" id="chat-steps" role="tablist" aria-label="Example conversations"></div>
+    </div>
+  </div>
+</header>
+
+<!-- TWO LENSES -->
+<section class="svc-section svc-section--slate">
+  <div class="section-label reveal">Two ways to say it</div>
+  <h2 class="section-title reveal">Your AI becomes the newest member of your finance team.</h2>
+  <p class="section-desc reveal" style="margin:0 auto;">Same feature. Pick the explanation that fits how you think.</p>
+  <div class="lens-wrap">
+    <div class="lens reveal">
+      <div class="lens-tag">In plain English</div>
+      <h3>Just ask. It handles it.</h3>
+      <ul>
+        <li>You already talk to ChatGPT, Claude or Muse. Now it can see your ShelfSpace account, the same way you can.</li>
+        <li>Ask &ldquo;Which vendors am I paying this week and why?&rdquo; and get the real answer, with the invoices behind it.</li>
+        <li>Tell it to do things: draft the note to a vendor, upload an invoice, line up payments, pull a report.</li>
+        <li>It signs in as you and only sees the stores you pick. Turn it off any time with one click.</li>
+      </ul>
+    </div>
+    <div class="lens lens--tech reveal reveal-delay-1">
+      <div class="lens-tag">For the techies</div>
+      <h3>A remote MCP server for cannabis finance.</h3>
+      <ul>
+        <li>Remote <code>MCP</code> server over Streamable HTTP at <code>/api/mcp</code>. Add it as a custom connector.</li>
+        <li><code>OAuth 2.1</code> + <code>PKCE (S256)</code>, dynamic client registration, client ID metadata documents, and customer-registered confidential clients.</li>
+        <li>The same tool registry as REST: <code>POST /api/agent/v1/tools/{tool}</code>, described by <code>OpenAPI 3.1</code>.</li>
+        <li>Per-user, per-store scope; role-based permissions; every call audited; structured reads, filters, pagination and CSV export.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- CAPABILITIES -->
+<section class="svc-section svc-section--white">
+  <div class="section-label reveal">What your AI can do</div>
+  <h2 class="section-title reveal">Everything you do in ShelfSpace, you can do from a chat.</h2>
+  <p class="section-desc reveal" style="margin:0 auto;">Payables, receivables, Metrc, QuickBooks, credits and vendors. One conversation, every store you run.</p>
+  <div class="cap-grid">
+    <div class="cap reveal">
+      <div class="cap-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg></div>
+      <h3>Pay vendors</h3>
+      <p>See what's due, what's ready and what's blocked. Line up the week's payments and send them within the limits your company sets.</p>
+      <div class="cap-ask">Line up everything due Friday and tell me the total by store.</div>
+    </div>
+    <div class="cap reveal reveal-delay-1">
+      <div class="cap-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
+      <h3>Match invoices to Metrc</h3>
+      <p>Every invoice, line by line, against the Metrc manifest that moved the product. Your AI explains each mismatch in plain words.</p>
+      <div class="cap-ask">Which invoices last week don't match their manifests, and by how much?</div>
+    </div>
+    <div class="cap reveal reveal-delay-2">
+      <div class="cap-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div>
+      <h3>Run credit recovery</h3>
+      <p>Returns, destroyed product and price drops, rolled into each vendor's monthly credit memo. Ask where every dollar stands.</p>
+      <div class="cap-ask">How much are vendors crediting us this month, and who's pushing back?</div>
+    </div>
+    <div class="cap reveal">
+      <div class="cap-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-9-9"/><polyline points="21 3 21 9 15 9"/></svg></div>
+      <h3>Keep QuickBooks caught up</h3>
+      <p>Know what synced, what's waiting and why. Catch a stuck bill or payment before your bookkeeper does.</p>
+      <div class="cap-ask">Is QuickBooks caught up for every store?</div>
+    </div>
+    <div class="cap reveal reveal-delay-1">
+      <div class="cap-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+      <h3>Write to vendors</h3>
+      <p>Ask for a corrected invoice, a missing copy or a credit, with the numbers already in the note. Every message is labeled as written by your AI.</p>
+      <div class="cap-ask">Ask Verdant Hill for a corrected invoice on the short shipment.</div>
+    </div>
+    <div class="cap reveal reveal-delay-2">
+      <div class="cap-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><polyline points="9 15 12 12 15 15"/></svg></div>
+      <h3>Upload invoices and documents</h3>
+      <p>Hand your AI a photo or PDF of an invoice, a COA or a manifest. It lands in the right store for review, tagged as added by your AI.</p>
+      <div class="cap-ask">Here's the invoice the driver just handed me. Add it.</div>
+    </div>
+    <div class="cap reveal">
+      <div class="cap-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+      <h3>Collect what you're owed</h3>
+      <p>Open invoices, who's late, promises to pay and what came in this week, across every customer.</p>
+      <div class="cap-ask">Who owes us more than 30 days past due, oldest first?</div>
+    </div>
+    <div class="cap reveal reveal-delay-1">
+      <div class="cap-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h18v4H3z"/><path d="M5 7v13h14V7"/><line x1="10" y1="12" x2="14" y2="12"/></svg></div>
+      <h3>Settle consignment</h3>
+      <p>Weekly settlements, splits, returns and what each brand is owed, explained line by line.</p>
+      <div class="cap-ask">Why is this week's settlement for Verdant Hill lower than last week's?</div>
+    </div>
+    <div class="cap reveal reveal-delay-2">
+      <div class="cap-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div>
+      <h3>Analyze and export anything</h3>
+      <p>Deliveries, line items, purchase orders, payments, credits and sales, filtered and sorted any way you like, then exported to CSV.</p>
+      <div class="cap-ask">Export every Q3 delivery over $5,000 with its Metrc match status.</div>
+    </div>
+  </div>
+</section>
+
+<!-- DARK: HOW IT WORKS -->
+<section class="svc-section svc-section--dark">
+  <div class="section-label reveal">How it works</div>
+  <h2 class="section-title reveal">Connect once. Then just talk.</h2>
+  <p class="section-desc reveal">No new app to learn. Your AI does the clicking.</p>
+  <div class="how-steps">
+    <div class="how-step reveal">
+      <div class="how-num">1</div>
+      <h3>Add ShelfSpace to your AI</h3>
+      <p>In ChatGPT or Claude, add a connector and paste the ShelfSpace address. In Meta Muse, use the app you register in Settings.</p>
+    </div>
+    <div class="how-step reveal reveal-delay-1">
+      <div class="how-num">2</div>
+      <h3>Sign in and pick your stores</h3>
+      <p>Your normal ShelfSpace login and code, one time. Choose which stores your AI may use, then click Allow.</p>
+    </div>
+    <div class="how-step reveal reveal-delay-2">
+      <div class="how-num">3</div>
+      <h3>Ask, analyze, act</h3>
+      <p>Questions, reports, uploads, vendor notes and payments, all from the chat window you already live in.</p>
+    </div>
+  </div>
+  <div class="no-list reveal">
+    <span>No logins</span><span>No tabs</span><span>No exports to Excel</span><span>No waiting on a report</span>
+  </div>
+</section>
+
+<!-- ARCHITECTURE -->
+<section class="svc-section svc-section--white">
+  <div class="section-label reveal">Under the hood</div>
+  <h2 class="section-title reveal">One pipeline. Two front doors.</h2>
+  <p class="section-desc reveal" style="margin:0 auto;">MCP for AI assistants, REST for everything else. The same tools, permissions, limits and audit trail behind both.</p>
+  <div class="arch reveal">
+    <svg viewBox="0 0 1100 340" role="img" aria-label="Diagram: your AI connects over MCP or REST with OAuth to ShelfSpace, which works with Metrc, QuickBooks and your bank">
+      <defs>
+        <filter id="sh" x="-10%" y="-10%" width="120%" height="140%"><feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#1b4332" flood-opacity="0.12"/></filter>
+      </defs>
+      <!-- AI clients -->
+      <g font-family="DM Sans, sans-serif">
+        <rect x="20" y="40" width="210" height="260" rx="18" fill="#f0faf4" stroke="#95d5b2"/>
+        <text x="125" y="74" text-anchor="middle" font-size="12" font-weight="700" letter-spacing="2" fill="#40916c">YOUR AI</text>
+        <rect x="44" y="96" width="162" height="40" rx="12" fill="#fff" filter="url(#sh)"/><text x="125" y="121" text-anchor="middle" font-size="15" font-weight="600" fill="#1b4332">ChatGPT</text>
+        <rect x="44" y="146" width="162" height="40" rx="12" fill="#fff" filter="url(#sh)"/><text x="125" y="171" text-anchor="middle" font-size="15" font-weight="600" fill="#1b4332">Claude</text>
+        <rect x="44" y="196" width="162" height="40" rx="12" fill="#fff" filter="url(#sh)"/><text x="125" y="221" text-anchor="middle" font-size="15" font-weight="600" fill="#1b4332">Meta Muse</text>
+        <rect x="44" y="246" width="162" height="40" rx="12" fill="#fff" filter="url(#sh)"/><text x="125" y="271" text-anchor="middle" font-size="15" font-weight="600" fill="#1b4332">Your own app</text>
+      </g>
+      <!-- flows -->
+      <path class="flow" d="M232 140 C 300 140, 320 150, 400 150" stroke="#40916c" stroke-width="2.5" fill="none"/>
+      <path class="flow" d="M232 250 C 300 250, 320 210, 400 200" stroke="#40916c" stroke-width="2.5" fill="none"/>
+      <g font-family="Space Mono, monospace" font-size="11" fill="#475569">
+        <text x="250" y="128">MCP · Streamable HTTP</text>
+        <text x="250" y="272">REST · OpenAPI 3.1</text>
+      </g>
+      <!-- gateway -->
+      <g font-family="DM Sans, sans-serif">
+        <rect x="400" y="60" width="300" height="220" rx="22" fill="#1b4332" filter="url(#sh)"/>
+        <text x="550" y="98" text-anchor="middle" font-size="12" font-weight="700" letter-spacing="2" fill="#95d5b2">SHELFSPACE</text>
+        <text x="550" y="128" text-anchor="middle" font-size="20" font-weight="700" fill="#fff">Agent gateway</text>
+        <g font-family="Space Mono, monospace" font-size="11.5" fill="rgba(255,255,255,0.78)">
+          <text x="430" y="162">✓ OAuth 2.1 + PKCE</text>
+          <text x="430" y="186">✓ Signs in as you, your stores only</text>
+          <text x="430" y="210">✓ Your role, your permissions</text>
+          <text x="430" y="234">✓ Limits + kill switch</text>
+          <text x="430" y="258">✓ Every call audited</text>
+        </g>
+      </g>
+      <!-- out flows -->
+      <path class="flow" d="M702 120 C 780 120, 790 90, 860 90" stroke="#95d5b2" stroke-width="2.5" fill="none"/>
+      <path class="flow" d="M702 170 C 780 170, 790 170, 860 170" stroke="#95d5b2" stroke-width="2.5" fill="none"/>
+      <path class="flow" d="M702 220 C 780 220, 790 250, 860 250" stroke="#95d5b2" stroke-width="2.5" fill="none"/>
+      <g font-family="DM Sans, sans-serif">
+        <rect x="860" y="66" width="220" height="48" rx="14" fill="#fff" stroke="#e2e8f0" filter="url(#sh)"/><text x="970" y="96" text-anchor="middle" font-size="15" font-weight="600" fill="#1b4332">Metrc manifests</text>
+        <rect x="860" y="146" width="220" height="48" rx="14" fill="#fff" stroke="#e2e8f0" filter="url(#sh)"/><text x="970" y="176" text-anchor="middle" font-size="15" font-weight="600" fill="#1b4332">QuickBooks</text>
+        <rect x="860" y="226" width="220" height="48" rx="14" fill="#fff" stroke="#e2e8f0" filter="url(#sh)"/><text x="970" y="256" text-anchor="middle" font-size="15" font-weight="600" fill="#1b4332">Payments + vendors</text>
+      </g>
+    </svg>
+  </div>
+</section>
+
+<!-- GUARDRAILS -->
+<section class="svc-section svc-section--slate">
+  <div class="section-label reveal">Built for money</div>
+  <h2 class="section-title reveal">Powerful enough to run your books. Locked down like a bank.</h2>
+  <p class="section-desc reveal" style="margin:0 auto;">Your AI gets exactly your access and nothing more, and every move it makes is on the record.</p>
+  <div class="guard-grid">
+    <div class="guard reveal"><div class="guard-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><div><h3>It signs in as you</h3><p>Your login and verification code, once. No shared passwords, no database keys handed to an AI.</p></div></div>
+    <div class="guard reveal reveal-delay-1"><div class="guard-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></div><div><h3>Only the stores you pick</h3><p>Choose stores at connect time. Everything else stays invisible to it, every single call.</p></div></div>
+    <div class="guard reveal reveal-delay-2"><div class="guard-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div><div><h3>Your role, not more</h3><p>A read-only person gets a read-only AI. Permissions can only narrow, never widen.</p></div></div>
+    <div class="guard reveal"><div class="guard-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div><div><h3>Payments on your terms</h3><p>Have a person confirm each payment, or let your AI pay within per-payment and per-day limits you set.</p></div></div>
+    <div class="guard reveal reveal-delay-1"><div class="guard-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="13" y2="17"/></svg></div><div><h3>Every action on the record</h3><p>Each change is logged as done by your AI, with which app, when and what. Your team sees the badge.</p></div></div>
+    <div class="guard reveal reveal-delay-2"><div class="guard-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"/><line x1="12" y1="2" x2="12" y2="12"/></svg></div><div><h3>Off in one click</h3><p>Disconnect any AI from Settings and it loses access immediately. Bank details always need a person to confirm.</p></div></div>
+  </div>
+</section>
+
+<!-- DEVELOPERS -->
+<section class="svc-section svc-section--white" id="for-developers">
+  <div class="section-label reveal">For developers</div>
+  <h2 class="section-title reveal">Connect in two minutes.</h2>
+  <p class="section-desc reveal" style="margin:0 auto;">Standards all the way down. If your client speaks MCP or OAuth, it already speaks ShelfSpace.</p>
+  <div class="spec-wrap">
+    <div class="spec-table reveal">
+      <div class="spec-row"><div class="spec-k">MCP server</div><div class="spec-v"><code>https://ourshelf.space/api/mcp</code></div></div>
+      <div class="spec-row"><div class="spec-k">Transport</div><div class="spec-v">Streamable HTTP (POST), JSON-RPC 2.0</div></div>
+      <div class="spec-row"><div class="spec-k">Auth</div><div class="spec-v">OAuth 2.1, authorization code + PKCE (S256), refresh tokens</div></div>
+      <div class="spec-row"><div class="spec-k">Discovery</div><div class="spec-v"><code>/.well-known/oauth-authorization-server</code> (RFC 8414), <code>/.well-known/oauth-protected-resource</code> (RFC 9728)</div></div>
+      <div class="spec-row"><div class="spec-k">Clients</div><div class="spec-v">Dynamic registration (RFC 7591), client ID metadata documents, or a confidential app registered in Settings &rarr; AI agents</div></div>
+      <div class="spec-row"><div class="spec-k">Scopes</div><div class="spec-v"><code>shelfspace.read</code> &middot; <code>shelfspace.act</code></div></div>
+      <div class="spec-row"><div class="spec-k">REST</div><div class="spec-v"><code>POST /api/agent/v1/tools/{tool}</code> &middot; <code>GET /api/agent/v1/openapi.json</code></div></div>
+      <div class="spec-row"><div class="spec-k">Guide</div><div class="spec-v"><a href="https://ourshelf.space/developers/agents" style="color:var(--green-dark);font-weight:700;">ourshelf.space/developers/agents</a></div></div>
+    </div>
+    <div class="code reveal reveal-delay-1">
+      <div class="code-head" role="tablist">
+        <button class="code-tab on" data-tab="c1" role="tab" aria-selected="true">Claude / ChatGPT</button>
+        <button class="code-tab" data-tab="c2" role="tab" aria-selected="false">MCP config</button>
+        <button class="code-tab" data-tab="c3" role="tab" aria-selected="false">REST</button>
+      </div>
+<pre id="c1"><span class="c"># Settings → Connectors → Add custom connector</span>
+<span class="k">Name</span>        ShelfSpace
+<span class="k">Server URL</span>  <span class="s">https://ourshelf.space/api/mcp</span>
+<span class="k">Auth</span>        OAuth  <span class="c"># you'll sign in and pick stores</span>
+
+<span class="c"># then just ask:</span>
+<span class="s">"Which of my stores can you see?"</span></pre>
+<pre id="c2" hidden>{
+  <span class="k">"mcpServers"</span>: {
+    <span class="k">"shelfspace"</span>: {
+      <span class="k">"type"</span>: <span class="s">"http"</span>,
+      <span class="k">"url"</span>: <span class="s">"https://ourshelf.space/api/mcp"</span>
+    }
+  }
+}
+<span class="c">// OAuth + PKCE runs on first connect</span></pre>
+<pre id="c3" hidden>curl -X POST \
+  <span class="s">https://ourshelf.space/api/agent/v1/tools/list_my_stores</span> \
+  -H <span class="s">"Authorization: Bearer $ACCESS_TOKEN"</span> \
+  -H <span class="s">"Content-Type: application/json"</span> \
+  -d <span class="s">'{}'</span>
+
+<span class="c"># Full tool list + schemas:</span>
+<span class="c"># GET /api/agent/v1/openapi.json</span></pre>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-content">
+    <div class="section-label reveal">Get Started</div>
+    <h2 class="section-title reveal">The first cannabis back office you can run from your own AI.</h2>
+    <p class="section-desc reveal">Already a customer? Connect your AI today. New to ShelfSpace? We'll set up your account and you'll be chatting with your books in days.</p>
+    <div class="cta-actions reveal">
+      <a href="/contact" class="btn-primary">Talk to us <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+      <a href="/blog/cannabis-mcp-server-run-back-office-from-your-ai" class="btn-secondary">Read the announcement</a>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section">
+  <div class="faq-header">
+    <div class="section-label reveal">FAQ</div>
+    <h2 class="section-title reveal">Frequently asked questions</h2>
+  </div>
+  <div class="faq-list">
+    <details><summary>Is there an MCP server for cannabis accounting and payments?</summary><p>Yes. ShelfSpace is a remote MCP server for cannabis back-office finance. Connect ChatGPT, Claude, Meta Muse or any MCP-compatible AI and it can work your accounts payable, receivables, Metrc invoice matching, QuickBooks, credit recovery, consignment settlements and vendor payments, scoped to your own stores.</p></details>
+    <details><summary>Can I use ChatGPT or Claude to run my dispensary's accounts payable?</summary><p>Yes. Add ShelfSpace as a connector in ChatGPT or Claude, sign in once, and pick your stores. Your AI can then find invoices, check them against Metrc, see what's owed, line up vendor payments, upload new invoices and answer questions about any vendor.</p></details>
+    <details><summary>Does ShelfSpace work with Meta Muse?</summary><p>Yes. Register an app in ShelfSpace Settings under AI agents, choose the Meta Muse preset, and paste the Client ID and Client Secret into a Muse custom connector.</p></details>
+    <details><summary>Do I need to log in to ShelfSpace to use it from my AI?</summary><p>Only once. You sign in with your normal login and verification code to connect your AI. After that you work entirely from your AI's chat window.</p></details>
+    <details><summary>Can my AI send vendor payments?</summary><p>Yes, once your company turns on AI payments. You choose whether a person confirms each payment or whether your AI pays within per-payment and per-day limits you set. Bank-detail changes always need a person on your team to confirm.</p></details>
+    <details><summary>Can my AI see how my invoices match my Metrc manifests?</summary><p>Yes. Your AI can pull every invoice with its Metrc match, line by line, and explain why a line is short, over, missing from the manifest, or billed twice.</p></details>
+    <details><summary>Can my AI manage QuickBooks through ShelfSpace?</summary><p>Your AI can see what has synced to QuickBooks, what's waiting and why, so you can catch a stuck bill or payment without opening either system.</p></details>
+    <details><summary>Is it safe to connect an AI to my company's finances?</summary><p>Your AI signs in as you and only sees the stores you choose. A read-only person gets a read-only AI. It never holds a database password, every action is logged as done by your AI, and you can disconnect it in one click.</p></details>
+    <details><summary>What is MCP?</summary><p>MCP (Model Context Protocol) is the open standard AI assistants use to connect to outside tools and data. ShelfSpace speaks it, so your AI can use ShelfSpace the way a person on your team would.</p></details>
+    <details><summary>Is there a REST API too?</summary><p>Yes. The same tools are available as a REST API at /api/agent/v1/tools/{tool}, described by an OpenAPI 3.1 file, using the same OAuth token, permissions and audit trail as the MCP server.</p></details>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="/" class="nav-logo"><div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div><span class="nav-logo-text">ShelfSpace<sup class="nav-logo-tm">™</sup></span></a>
+      <p>Operations and Payments Intelligence</p>
+    </div>
+    <div class="footer-col"><h3>Services</h3><ul><li><a href="/accounts-payable">ShelfPay (AP)</a></li><li><a href="/shelfverify">ShelfVerify</a></li><li><a href="/consignment">Consignment</a></li><li><a href="/credit-recovery">Credit Recovery</a></li><li><a href="/checks">Check Payments</a></li><li><a href="/shelfiq">ShelfiQ</a></li></ul></div>
+    <div class="footer-col"><h3>Platform</h3><ul><li><a href="/features">Features</a></li><li><a href="/connect-your-ai">Connect Your AI</a></li><li><a href="/integrations">Integrations</a></li><li><a href="/vendor-management">Vendor Management</a></li><li><a href="/collections">Collections</a></li><li><a href="/ai-calls">AI Calls</a></li><li><a href="/how-it-works">How It Works</a></li><li><a href="/pricing">Pricing</a></li><li><a href="/about">About</a></li><li><a href="/blog">Blog</a></li><li><a href="/docs">Docs</a></li>
+        <li><a href="/how-to">Guides</a></li><li><a href="/tutorials">Tutorials</a></li></ul></div>
+    <div class="footer-col"><h3>Access</h3><ul><li><a href="https://ourshelf.space/login">Login</a></li><li><a href="/contact">Talk to us</a></li><li><a href="/contact">Contact</a></li><li><a href="/accounts-receivable">ShelfCollect (AR)</a></li><li><a href="/vendors">For Vendors</a></li><li><a href="/for-bookkeepers">For Bookkeepers</a></li></ul></div>
+    <div class="footer-col"><h3>Company</h3><ul><li><a href="mailto:support@shelfspace.pro">Support</a></li><li><a href="https://linkedin.com/company/shelfspace-pro" target="_blank" rel="noopener" class="footer-social-link"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> LinkedIn</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><p>&copy; 2026 ShelfSpace Technologies Inc.</p><div style="display:flex;align-items:center;gap:8px;justify-content:center;margin-top:12px;"><img src="/metrc-logo-v2.png" alt="Metrc" loading="lazy" style="height:18px;opacity:0.4;filter:brightness(0) invert(1);"><span style="font-size:11px;color:rgba(255,255,255,0.35);">Certified Metrc Third-Party Vendor</span></div><div class="footer-bottom-links"><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div></div>
+</footer>
+
+<script>
+(function() {
+  var nav = document.getElementById('nav');
+  var hero = document.querySelector('.ai-hero');
+  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  requestAnimationFrame(function() {
+    nav.classList.toggle('scrolled', window.scrollY > 20);
+    if (hero) hero.classList.add('hero-loaded');
+  });
+
+  var revealObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) { entry.target.classList.add('is-visible'); revealObserver.unobserve(entry.target); }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(function(el) { revealObserver.observe(el); });
+
+  window.addEventListener('scroll', function() { nav.classList.toggle('scrolled', window.scrollY > 20); }, { passive: true });
+  document.addEventListener('click', function() {
+    var navLinks = document.querySelector('.nav-links');
+    if (navLinks && navLinks.classList.contains('mobile-open')) navLinks.classList.remove('mobile-open');
+  });
+
+  /* ── Code tabs ── */
+  document.querySelectorAll('.code-tab').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.code-tab').forEach(function(b) { b.classList.remove('on'); b.setAttribute('aria-selected', 'false'); });
+      btn.classList.add('on'); btn.setAttribute('aria-selected', 'true');
+      ['c1','c2','c3'].forEach(function(id) { document.getElementById(id).hidden = id !== btn.dataset.tab; });
+    });
+  });
+
+  /* ── Chat demo ── (illustrative data: demo store + fictional vendors) */
+  var SCENES = [
+    {
+      ask: "Which invoices from last week don't match their Metrc manifests?",
+      tool: "query_my_data · deliveries + Metrc",
+      answer: '<p>2 of 38 invoices don’t match:</p><table class="ai-table"><tr><td><b>Verdant Hill</b> #4471<br><span class="flag">12 units short</span> on Blue Dream 3.5g</td><td class="num">$216.00</td></tr><tr><td><b>Coastal Kind</b> #1093<br><span class="flag">Not on the manifest</span>: 1 case gummies</td><td class="num">$480.00</td></tr></table><p>The other 36 are ShelfVerified. Want me to write to both vendors?</p>'
+    },
+    {
+      ask: "Yes, ask Verdant Hill for a corrected invoice.",
+      tool: "request_vendor_fix · Verdant Hill",
+      answer: '<p>Sent, labeled as written by your AI:</p><div class="ai-email">Hi Verdant Hill team, invoice #4471 bills 48 units of Blue Dream 3.5g, but Metrc shows 36 received. Could you send a corrected invoice for $216.00 less? Thanks!</div><p>I’ll flag it when they reply.</p>'
+    },
+    {
+      ask: "How much are vendors crediting us this month?",
+      tool: "query_my_data · credit memos",
+      answer: '<table class="ai-table"><tr><td>Customer returns</td><td class="num">$3,412.50</td></tr><tr><td>Destroyed product</td><td class="num">$1,186.00</td></tr><tr><td>Price drops</td><td class="num">$2,940.25</td></tr></table><div class="ai-total"><span>Total across 14 vendors</span><span class="num">$7,538.75</span></div><p style="margin-top:10px;">11 approved, 3 still open. Coastal Kind is disputing $420.00.</p>'
+    },
+    {
+      ask: "Is QuickBooks caught up?",
+      tool: "query_my_data · QuickBooks sync",
+      answer: '<p><span class="ok">Yes.</span> 41 bills and 37 payments synced this week. 2 bills are waiting on a vendor match in QuickBooks: Sunfield Farms and Coastal Kind. Want the details?</p>'
+    },
+    {
+      ask: "Line up this week's vendor payments.",
+      tool: "payments · due this week",
+      answer: '<table class="ai-table"><tr><td>Verdant Hill Botanical</td><td class="num">$8,640.00</td></tr><tr><td>Sunfield Farms</td><td class="num">$5,215.50</td></tr><tr><td>Coastal Kind</td><td class="num">$3,980.00</td></tr></table><div class="ai-total"><span>3 payments, all within your limits</span><span class="num">$17,835.50</span></div><p style="margin-top:10px;">Every invoice is Metrc-verified. Send them?</p>'
+    }
+  ];
+  var body = document.getElementById('chat-body');
+  var stepsEl = document.getElementById('chat-steps');
+  var idx = 0, timers = [];
+  function clearTimers() { timers.forEach(clearTimeout); timers = []; }
+  function later(fn, ms) { timers.push(setTimeout(fn, ms)); }
+  SCENES.forEach(function(s, i) {
+    var b = document.createElement('button');
+    b.setAttribute('aria-label', 'Example ' + (i + 1));
+    b.setAttribute('role', 'tab');
+    b.addEventListener('click', function() { play(i); });
+    stepsEl.appendChild(b);
+  });
+  function mark(i) { Array.prototype.forEach.call(stepsEl.children, function(b, j) { b.classList.toggle('on', j === i); b.setAttribute('aria-selected', j === i ? 'true' : 'false'); }); }
+  function play(i) {
+    clearTimers(); idx = i; mark(i);
+    var s = SCENES[i];
+    body.innerHTML = '';
+    var u = document.createElement('div'); u.className = 'msg-user'; body.appendChild(u);
+    var chip = document.createElement('div'); chip.className = 'tool-chip'; chip.innerHTML = '<span class="spin"></span>ShelfSpace &middot; <b>' + s.tool + '</b>';
+    var a = document.createElement('div'); a.className = 'msg-ai'; a.innerHTML = s.answer;
+    if (prefersReduced) {
+      u.textContent = s.ask; chip.classList.add('show', 'done'); a.classList.add('show');
+      body.appendChild(chip); body.appendChild(a); return;
+    }
+    var n = 0;
+    (function type() {
+      u.innerHTML = s.ask.slice(0, n).replace(/</g, '&lt;') + '<span class="caret"></span>';
+      if (n++ < s.ask.length) { later(type, 26); return; }
+      u.textContent = s.ask;
+      body.appendChild(chip);
+      later(function() { chip.classList.add('show'); }, 250);
+      later(function() { chip.classList.add('done'); body.appendChild(a); }, 1500);
+      later(function() { a.classList.add('show'); }, 1580);
+      later(function() { play((idx + 1) % SCENES.length); }, 7600);
+    })();
+  }
+  var chatStarted = false;
+  var chatObs = new IntersectionObserver(function(entries) {
+    if (entries[0].isIntersecting && !chatStarted) { chatStarted = true; play(0); chatObs.disconnect(); }
+  });
+  chatObs.observe(body);
+})();
+</script>
+<script src="/shelfiq-widget.js"></script>
+</body>
+</html>

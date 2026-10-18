@@ -85,6 +85,10 @@ ShelfSpace runs the money side for the retailer as a done-for-you managed servic
 
 It is a done-for-you managed service — we run your AP, cut your checks, run the weekly settlements, and recover your credits, and you just approve what moves money. Prefer to drive the software yourself instead? You can — it's decided per account. Either way, the work that used to take days is handled.
 
+## Connect your own AI (MCP) — https://shelfspace.pro/connect-your-ai
+
+Customers can plug their own AI — ChatGPT, Claude, Meta Muse, or any MCP-compatible assistant — into ShelfSpace and run their back office from a chat: ask about invoices, Metrc matches, QuickBooks sync, credits, settlements and receivables; get analysis and CSV exports; upload invoices; write to vendors; and line up and send vendor payments within limits the company sets. They connect once (normal login + verification code, pick stores, click Allow) and never have to open ShelfSpace after that. The AI signs in as the user, sees only the stores chosen, gets that user's role (read-only person = read-only AI), never holds a database password, every action is logged as done by the AI, and it can be disconnected in one click. Technical: remote MCP server at https://ourshelf.space/api/mcp (Streamable HTTP, OAuth 2.1 + PKCE, dynamic client registration) plus the same tools as REST with an OpenAPI 3.1 file; setup guide https://ourshelf.space/developers/agents. If asked "can I use ChatGPT/Claude with ShelfSpace" or "do you have an MCP server" — yes; point to /connect-your-ai.
+
 ## Verb-split rules (use these in your answers)
 
 - Use "we" for brand-level and managed-delivery statements ("we work in every legal state," "we run the money side for you").

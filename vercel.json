@@ -2,38 +2,135 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "rewrites": [
-    { "source": "/api/:path*", "destination": "https://ourshelf.space/api/:path*" },
-    { "source": "/how-to", "destination": "https://ourshelf.space/how-to" },
-    { "source": "/how-to/:path*", "destination": "https://ourshelf.space/how-to/:path*" },
-    { "source": "/refer", "destination": "https://ourshelf.space/refer" },
-    { "source": "/refer/:path*", "destination": "https://ourshelf.space/refer/:path*" },
-    { "source": "/_next/:path*", "destination": "https://ourshelf.space/_next/:path*" }
+    {
+      "source": "/api/:path*",
+      "destination": "https://ourshelf.space/api/:path*"
+    },
+    {
+      "source": "/how-to",
+      "destination": "https://ourshelf.space/how-to"
+    },
+    {
+      "source": "/how-to/:path*",
+      "destination": "https://ourshelf.space/how-to/:path*"
+    },
+    {
+      "source": "/refer",
+      "destination": "https://ourshelf.space/refer"
+    },
+    {
+      "source": "/refer/:path*",
+      "destination": "https://ourshelf.space/refer/:path*"
+    },
+    {
+      "source": "/_next/:path*",
+      "destination": "https://ourshelf.space/_next/:path*"
+    }
   ],
   "redirects": [
-    { "source": "/rates-9x4k", "destination": "/quote", "permanent": true },
-    { "source": "/tutorials/quickbooks-integration", "destination": "/tutorials/quickbooks-how-it-works", "permanent": true },
-    { "source": "/tutorials/quickbooks-bill-reconciliation", "destination": "/tutorials/quickbooks-how-it-works", "permanent": true },
-    { "source": "/signup", "destination": "/contact", "permanent": true },
-    { "source": "/get-paid", "destination": "/accounts-receivable", "permanent": true },
-    { "source": "/login", "destination": "https://ourshelf.space/login", "permanent": true },
-    { "source": "/credit-memos", "destination": "/credit-recovery", "permanent": true },
-    { "source": "/email-deliverability", "destination": "/blog/whitelist-shelfspace-emails", "permanent": false },
-    { "source": "/vendor-management", "destination": "/blog/cannabis-vendor-management-guide", "permanent": false }
+    {
+      "source": "/rates-9x4k",
+      "destination": "/quote",
+      "permanent": true
+    },
+    {
+      "source": "/tutorials/quickbooks-integration",
+      "destination": "/tutorials/quickbooks-how-it-works",
+      "permanent": true
+    },
+    {
+      "source": "/tutorials/quickbooks-bill-reconciliation",
+      "destination": "/tutorials/quickbooks-how-it-works",
+      "permanent": true
+    },
+    {
+      "source": "/signup",
+      "destination": "/contact",
+      "permanent": true
+    },
+    {
+      "source": "/get-paid",
+      "destination": "/accounts-receivable",
+      "permanent": true
+    },
+    {
+      "source": "/login",
+      "destination": "https://ourshelf.space/login",
+      "permanent": true
+    },
+    {
+      "source": "/credit-memos",
+      "destination": "/credit-recovery",
+      "permanent": true
+    },
+    {
+      "source": "/email-deliverability",
+      "destination": "/blog/whitelist-shelfspace-emails",
+      "permanent": false
+    },
+    {
+      "source": "/vendor-management",
+      "destination": "/blog/cannabis-vendor-management-guide",
+      "permanent": false
+    },
+    {
+      "source": "/mcp",
+      "destination": "/connect-your-ai",
+      "permanent": false
+    },
+    {
+      "source": "/ai-agents",
+      "destination": "/connect-your-ai",
+      "permanent": false
+    },
+    {
+      "source": "/byo-ai",
+      "destination": "/connect-your-ai",
+      "permanent": false
+    },
+    {
+      "source": "/connect-ai",
+      "destination": "/connect-your-ai",
+      "permanent": false
+    }
   ],
   "headers": [
     {
       "source": "/quote",
-      "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow, noarchive" }]
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow, noarchive"
+        }
+      ]
     },
     {
       "source": "/((?!how-to|refer$|refer/|_next).*)",
       "headers": [
-        { "key": "X-Frame-Options", "value": "DENY" },
-        { "key": "X-Content-Type-Options", "value": "nosniff" },
-        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
-        { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=()" },
-        { "key": "Strict-Transport-Security", "value": "max-age=63072000; includeSubDomains; preload" },
-        { "key": "Content-Security-Policy", "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn-cgi/ https://challenges.cloudflare.com https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://www.google-analytics.com https://i.ytimg.com; connect-src 'self' https://ourshelf.space https://challenges.cloudflare.com https://www.google-analytics.com https://analytics.google.com; frame-src https://challenges.cloudflare.com https://www.youtube-nocookie.com; frame-ancestors 'none'" }
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=()"
+        },
+        {
+          "key": "Strict-Transport-Security",
+          "value": "max-age=63072000; includeSubDomains; preload"
+        },
+        {
+          "key": "Content-Security-Policy",
+          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn-cgi/ https://challenges.cloudflare.com https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://www.google-analytics.com https://i.ytimg.com; connect-src 'self' https://ourshelf.space https://challenges.cloudflare.com https://www.google-analytics.com https://analytics.google.com; frame-src https://challenges.cloudflare.com https://www.youtube-nocookie.com; frame-ancestors 'none'"
+        }
       ]
     }
   ]
