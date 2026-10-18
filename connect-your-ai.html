@@ -85,6 +85,18 @@
   .chat-steps button { width: 28px; height: 6px; border-radius: 999px; border: none; background: var(--slate-200); cursor: pointer; padding: 0; transition: background 0.3s, width 0.3s; }
   .chat-steps button.on { background: var(--green-mid); width: 44px; }
 
+  /* ─── AUDIENCE TOGGLE ─── */
+  .aud-toggle { display: inline-flex; gap: 4px; padding: 4px; background: var(--slate-100); border: 1px solid var(--slate-200); border-radius: 14px; }
+  .aud-toggle button { font-family: var(--font-display); font-size: 14px; font-weight: 600; color: var(--slate-600); background: transparent; border: none; border-radius: 10px; padding: 9px 16px; cursor: pointer; transition: all 0.25s ease; display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; }
+  .aud-toggle button small { font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--slate-400); }
+  .aud-toggle button.on { background: var(--white); color: var(--green-deep); box-shadow: 0 4px 14px rgba(27,67,50,0.12); }
+  .aud-toggle button.on small { color: var(--green-mid); }
+  .aud-toggle-wrap { display: flex; justify-content: center; margin-bottom: 14px; }
+  .aud-toggle-wrap--section { margin: 36px 0 0; }
+  body[data-aud="pay"] .aud-collect, body[data-aud="collect"] .aud-pay { display: none; }
+  .cap-tag { display: inline-block; font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: var(--green-mid); margin-bottom: 6px; }
+  @media (max-width: 480px) { .aud-toggle button { padding: 8px 10px; font-size: 13px; } .aud-toggle button small { display: none; } }
+
   /* ─── PLAIN vs TECH ─── */
   .lens-wrap { max-width: 1100px; margin: 56px auto 0; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; text-align: left; }
   .lens { background: var(--white); border: 1px solid var(--slate-200); border-radius: 20px; padding: 34px 32px; box-shadow: 0 10px 30px rgba(27,67,50,0.06); }
@@ -191,7 +203,7 @@
     "Works with ChatGPT, Claude and Meta Muse",
     "Cannabis invoice-to-Metrc manifest matching",
     "Accounts payable, vendor payments and checks",
-    "Accounts receivable and collections",
+    "Accounts receivable and collections for cannabis brands: past-due chasing, statements, reminders and promises to pay",
     "QuickBooks Online sync status",
     "Monthly vendor credit recovery",
     "Consignment settlements",
@@ -216,21 +228,107 @@
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
-    { "@type": "Question", "name": "Is there an MCP server for cannabis accounting and payments?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. ShelfSpace is a remote MCP server for cannabis back-office finance. Connect ChatGPT, Claude, Meta Muse or any MCP-compatible AI and it can work your accounts payable, receivables, Metrc invoice matching, QuickBooks, credit recovery, consignment settlements and vendor payments, scoped to your own stores." } },
-    { "@type": "Question", "name": "Can I use ChatGPT or Claude to run my dispensary's accounts payable?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Add ShelfSpace as a connector in ChatGPT or Claude, sign in once, and pick your stores. Your AI can then find invoices, check them against Metrc, see what's owed, line up vendor payments, upload new invoices and answer questions about any vendor." } },
-    { "@type": "Question", "name": "Does ShelfSpace work with Meta Muse?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Register an app in ShelfSpace Settings under AI agents, choose the Meta Muse preset, and paste the Client ID and Client Secret into a Muse custom connector." } },
-    { "@type": "Question", "name": "Do I need to log in to ShelfSpace to use it from my AI?", "acceptedAnswer": { "@type": "Answer", "text": "Only once. You sign in with your normal login and verification code to connect your AI. After that you work entirely from your AI's chat window." } },
-    { "@type": "Question", "name": "Can my AI send vendor payments?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, once your company turns on AI payments. You choose whether a person confirms each payment or whether your AI pays within per-payment and per-day limits you set. Bank-detail changes always need a person on your team to confirm." } },
-    { "@type": "Question", "name": "Can my AI see how my invoices match my Metrc manifests?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Your AI can pull every invoice with its Metrc match, line by line, and explain why a line is short, over, missing from the manifest, or billed twice." } },
-    { "@type": "Question", "name": "Can my AI manage QuickBooks through ShelfSpace?", "acceptedAnswer": { "@type": "Answer", "text": "Your AI can see what has synced to QuickBooks, what's waiting and why, so you can catch a stuck bill or payment without opening either system." } },
-    { "@type": "Question", "name": "Is it safe to connect an AI to my company's finances?", "acceptedAnswer": { "@type": "Answer", "text": "Your AI signs in as you and only sees the stores you choose. A read-only person gets a read-only AI. It never holds a database password, every action is logged as done by your AI, and you can disconnect it in one click." } },
-    { "@type": "Question", "name": "What is MCP?", "acceptedAnswer": { "@type": "Answer", "text": "MCP (Model Context Protocol) is the open standard AI assistants use to connect to outside tools and data. ShelfSpace speaks it, so your AI can use ShelfSpace the way a person on your team would." } },
-    { "@type": "Question", "name": "Is there a REST API too?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. The same tools are available as a REST API at /api/agent/v1/tools/{tool}, described by an OpenAPI 3.1 file, using the same OAuth token, permissions and audit trail as the MCP server." } }
+    {
+      "@type": "Question",
+      "name": "Is there an MCP server for cannabis accounting and payments?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. ShelfSpace is a remote MCP server for cannabis back-office finance. Connect ChatGPT, Claude, Meta Muse or any MCP-compatible AI and it can work your accounts payable, receivables, Metrc invoice matching, QuickBooks, credit recovery, consignment settlements and vendor payments, scoped to your own stores."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does it work for cannabis brands and vendors?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Brands on ShelfCollect connect the same way. Your AI can see who owes you and how late, send invoices, statements and reminders, track promises to pay, and show which invoices match the buyer's accepted Metrc manifest."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can my AI chase past-due invoices for me?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Ask who's past due and tell it to send reminders. They go from your billing address with a pay link, and your AI tracks every promise to pay so you know the moment one slips."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I use ChatGPT or Claude to run my dispensary's accounts payable?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Add ShelfSpace as a connector in ChatGPT or Claude, sign in once, and pick your stores. Your AI can then find invoices, check them against Metrc, see what's owed, line up vendor payments, upload new invoices and answer questions about any vendor."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does ShelfSpace work with Meta Muse?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Register an app in ShelfSpace Settings under AI agents, choose the Meta Muse preset, and paste the Client ID and Client Secret into a Muse custom connector."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need to log in to ShelfSpace to use it from my AI?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Only once. You sign in with your normal login and verification code to connect your AI. After that you work entirely from your AI's chat window."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can my AI send vendor payments?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, once your company turns on AI payments. You choose whether a person confirms each payment or whether your AI pays within per-payment and per-day limits you set. Bank-detail changes always need a person on your team to confirm."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can my AI see how my invoices match my Metrc manifests?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Your AI can pull every invoice with its Metrc match, line by line, and explain why a line is short, over, missing from the manifest, or billed twice."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can my AI manage QuickBooks through ShelfSpace?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Your AI can see what has synced to QuickBooks, what's waiting and why, so you can catch a stuck bill or payment without opening either system."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is it safe to connect an AI to my company's finances?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Your AI signs in as you and only sees the stores you choose. A read-only person gets a read-only AI. It never holds a database password, every action is logged as done by your AI, and you can disconnect it in one click."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is MCP?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "MCP (Model Context Protocol) is the open standard AI assistants use to connect to outside tools and data. ShelfSpace speaks it, so your AI can use ShelfSpace the way a person on your team would."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is there a REST API too?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. The same tools are available as a REST API at /api/agent/v1/tools/{tool}, described by an OpenAPI 3.1 file, using the same OAuth token, permissions and audit trail as the MCP server."
+      }
+    }
   ]
 }
 </script>
 </head>
-<body>
+<body data-aud="pay">
 
 <!-- NAV -->
 <nav id="nav">
@@ -259,9 +357,9 @@
   <div class="hero-grid-lines"></div>
   <div class="ai-hero-inner">
     <div>
-      <div class="aud-badge aud-retailer reveal-h">New &middot; Bring your own AI</div>
+      <div class="aud-badge aud-retailer reveal-h">New &middot; For dispensaries &amp; brands</div>
       <h1 class="reveal-h">Run your cannabis back office from <span class="hl">your own AI.</span></h1>
-      <p class="ai-hero-lede reveal-h">Plug ChatGPT, Claude or Meta Muse into ShelfSpace. Ask it anything about your money and it answers from your real books, then does the work: invoices checked against Metrc, credits recovered, QuickBooks caught up, vendors paid. You never have to open ShelfSpace.</p>
+      <p class="ai-hero-lede reveal-h">Plug ChatGPT, Claude or Meta Muse into ShelfSpace. Ask it anything about your money and it answers from your real books, then does the work. Run a dispensary? Invoices checked against Metrc, credits recovered, vendors paid. Run a brand? Past-due invoices chased, promises to pay tracked, every invoice proven against Metrc. You never have to open ShelfSpace.</p>
       <div class="ai-hero-actions reveal-h">
         <a href="/contact" class="btn-primary">Get started <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
         <a href="#for-developers" class="btn-secondary">Connect in 2 minutes</a>
@@ -273,13 +371,19 @@
     </div>
 
     <div class="reveal-h">
-      <div class="chat" aria-label="Example conversation between a dispensary owner and their AI connected to ShelfSpace">
+      <div class="aud-toggle-wrap">
+      <div class="aud-toggle" role="group" aria-label="Show examples for">
+        <button type="button" data-aud-btn="pay" class="on" aria-pressed="true">I run a dispensary <small>ShelfPay</small></button>
+        <button type="button" data-aud-btn="collect" aria-pressed="false">I run a brand <small>ShelfCollect</small></button>
+      </div>
+      </div>
+      <div class="chat" aria-label="Example conversation between a cannabis business and their AI connected to ShelfSpace">
         <div class="chat-bar">
           <div class="chat-bar-left"><div class="chat-dots"><span></span><span></span><span></span></div><span class="chat-title">Your AI</span></div>
-          <span class="chat-conn">ShelfSpace connected</span>
+          <span class="chat-conn" id="chat-conn">ShelfSpace connected</span>
         </div>
         <div class="chat-body" id="chat-body" aria-live="polite"></div>
-        <div class="chat-input">Ask about your invoices, payments, credits&hellip;<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></div>
+        <div class="chat-input"><span id="chat-ph">Ask about your invoices, payments, credits&hellip;</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></div>
       </div>
       <div class="chat-steps" id="chat-steps" role="tablist" aria-label="Example conversations"></div>
     </div>
@@ -319,60 +423,96 @@
 <section class="svc-section svc-section--white">
   <div class="section-label reveal">What your AI can do</div>
   <h2 class="section-title reveal">Everything you do in ShelfSpace, you can do from a chat.</h2>
-  <p class="section-desc reveal" style="margin:0 auto;">Payables, receivables, Metrc, QuickBooks, credits and vendors. One conversation, every store you run.</p>
+  <p class="section-desc reveal" style="margin:0 auto;">Dispensaries run payables, Metrc checks and credits. Brands run receivables, collections and proof of delivery. One conversation either way.</p>
+  <div class="aud-toggle-wrap aud-toggle-wrap--section reveal">
+    <div class="aud-toggle" role="group" aria-label="Show examples for">
+        <button type="button" data-aud-btn="pay" class="on" aria-pressed="true">I run a dispensary <small>ShelfPay</small></button>
+        <button type="button" data-aud-btn="collect" aria-pressed="false">I run a brand <small>ShelfCollect</small></button>
+      </div>
+  </div>
   <div class="cap-grid">
-    <div class="cap reveal">
+    <div class="cap aud-pay reveal">
       <div class="cap-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg></div>
-      <h3>Pay vendors</h3>
+      <span class="cap-tag">ShelfPay</span><h3>Pay vendors</h3>
       <p>See what's due, what's ready and what's blocked. Line up the week's payments and send them within the limits your company sets.</p>
       <div class="cap-ask">Line up everything due Friday and tell me the total by store.</div>
     </div>
-    <div class="cap reveal reveal-delay-1">
+    <div class="cap aud-pay reveal reveal-delay-1">
       <div class="cap-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
-      <h3>Match invoices to Metrc</h3>
+      <span class="cap-tag">ShelfVerify</span><h3>Match invoices to Metrc</h3>
       <p>Every invoice, line by line, against the Metrc manifest that moved the product. Your AI explains each mismatch in plain words.</p>
       <div class="cap-ask">Which invoices last week don't match their manifests, and by how much?</div>
     </div>
-    <div class="cap reveal reveal-delay-2">
+    <div class="cap aud-pay reveal reveal-delay-2">
       <div class="cap-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div>
-      <h3>Run credit recovery</h3>
+      <span class="cap-tag">Credit Recovery</span><h3>Run credit recovery</h3>
       <p>Returns, destroyed product and price drops, rolled into each vendor's monthly credit memo. Ask where every dollar stands.</p>
       <div class="cap-ask">How much are vendors crediting us this month, and who's pushing back?</div>
     </div>
-    <div class="cap reveal">
-      <div class="cap-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-9-9"/><polyline points="21 3 21 9 15 9"/></svg></div>
-      <h3>Keep QuickBooks caught up</h3>
-      <p>Know what synced, what's waiting and why. Catch a stuck bill or payment before your bookkeeper does.</p>
+    <div class="cap  reveal">
       <div class="cap-ask">Is QuickBooks caught up for every store?</div>
     </div>
-    <div class="cap reveal reveal-delay-1">
+    <div class="cap aud-pay reveal reveal-delay-1">
       <div class="cap-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
-      <h3>Write to vendors</h3>
+      <span class="cap-tag">ShelfPay</span><h3>Write to vendors</h3>
       <p>Ask for a corrected invoice, a missing copy or a credit, with the numbers already in the note. Every message is labeled as written by your AI.</p>
       <div class="cap-ask">Ask Verdant Hill for a corrected invoice on the short shipment.</div>
     </div>
-    <div class="cap reveal reveal-delay-2">
+    <div class="cap aud-pay reveal reveal-delay-2">
       <div class="cap-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><polyline points="9 15 12 12 15 15"/></svg></div>
-      <h3>Upload invoices and documents</h3>
+      <span class="cap-tag">ShelfPay</span><h3>Upload invoices and documents</h3>
       <p>Hand your AI a photo or PDF of an invoice, a COA or a manifest. It lands in the right store for review, tagged as added by your AI.</p>
       <div class="cap-ask">Here's the invoice the driver just handed me. Add it.</div>
     </div>
-    <div class="cap reveal">
-      <div class="cap-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
-      <h3>Collect what you're owed</h3>
-      <p>Open invoices, who's late, promises to pay and what came in this week, across every customer.</p>
-      <div class="cap-ask">Who owes us more than 30 days past due, oldest first?</div>
+        <div class="cap aud-collect reveal">
+      <div class="cap-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+      <span class="cap-tag">ShelfCollect</span><h3>Chase past-due invoices</h3>
+      <p>Who owes you, how much and how late, by store and by sales rep. Your AI ranks it and tells you who to chase first.</p>
+      <div class="cap-ask">Who owes us more than 30 days, oldest first?</div>
     </div>
-    <div class="cap reveal reveal-delay-1">
+    <div class="cap aud-collect reveal">
+      <div class="cap-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+      <span class="cap-tag">ShelfCollect</span><h3>Send invoices, statements and reminders</h3>
+      <p>From your billing address, with a pay link in every one. Every message is labeled as written by your AI.</p>
+      <div class="cap-ask">Send statements to every store over 45 days and copy their rep.</div>
+    </div>
+    <div class="cap aud-collect reveal">
+      <div class="cap-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
+      <span class="cap-tag">ShelfCollect</span><h3>Track promises to pay</h3>
+      <p>When a buyer commits to a date, your AI knows it, and tells you the morning it slips.</p>
+      <div class="cap-ask">Did Holistic Cannabis promise to pay, and when?</div>
+    </div>
+    <div class="cap aud-collect reveal">
+      <div class="cap-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+      <span class="cap-tag">ShelfCollect</span><h3>Prove every invoice shipped</h3>
+      <p>Each invoice matched to the buyer's accepted Metrc manifest, so "we never got it" ends the conversation, not starts it.</p>
+      <div class="cap-ask">Which of last month's invoices haven't matched a manifest yet?</div>
+    </div>
+    <div class="cap aud-collect reveal">
+      <div class="cap-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+      <span class="cap-tag">ShelfCollect</span><h3>See cash coming in</h3>
+      <p>Payments received, partial payments and payment plans, plus what's due next week across every buyer.</p>
+      <div class="cap-ask">What came in this week, and what's due next week?</div>
+    </div>
+    <div class="cap aud-collect reveal">
+      <div class="cap-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div>
+      <span class="cap-tag">ShelfCollect</span><h3>Know your best and worst payers</h3>
+      <p>Days to pay by store, by chain and by rep, so credit terms follow the data.</p>
+      <div class="cap-ask">Which stores take the longest to pay, and has it gotten worse?</div>
+    </div>
+    <div class="cap aud-pay reveal reveal-delay-1">
       <div class="cap-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h18v4H3z"/><path d="M5 7v13h14V7"/><line x1="10" y1="12" x2="14" y2="12"/></svg></div>
-      <h3>Settle consignment</h3>
+      <span class="cap-tag">Consignment</span><h3>Settle consignment</h3>
       <p>Weekly settlements, splits, returns and what each brand is owed, explained line by line.</p>
       <div class="cap-ask">Why is this week's settlement for Verdant Hill lower than last week's?</div>
     </div>
-    <div class="cap reveal reveal-delay-2">
+    <div class="cap  reveal reveal-delay-2">
+      <div class="cap-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-9-9"/><polyline points="21 3 21 9 15 9"/></svg></div>
+      <span class="cap-tag">Both</span><h3>Keep QuickBooks caught up</h3>
+      <p>Know what synced, what's waiting and why. Catch a stuck bill or payment before your bookkeeper does.</p>
       <div class="cap-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div>
-      <h3>Analyze and export anything</h3>
-      <p>Deliveries, line items, purchase orders, payments, credits and sales, filtered and sorted any way you like, then exported to CSV.</p>
+      <span class="cap-tag">Both</span><h3>Analyze and export anything</h3>
+      <p>Deliveries, invoices, line items, purchase orders, payments, credits and sales, filtered and sorted any way you like, then exported to CSV.</p>
       <div class="cap-ask">Export every Q3 delivery over $5,000 with its Metrc match status.</div>
     </div>
   </div>
@@ -542,6 +682,8 @@
     <h2 class="section-title reveal">Frequently asked questions</h2>
   </div>
   <div class="faq-list">
+    <details><summary>Does it work for cannabis brands and vendors?</summary><p>Yes. Brands on ShelfCollect connect the same way. Your AI can see who owes you and how late, send invoices, statements and reminders, track promises to pay, and show which invoices match the buyer's accepted Metrc manifest.</p></details>
+    <details><summary>Can my AI chase past-due invoices for me?</summary><p>Yes. Ask who's past due and tell it to send reminders. They go from your billing address with a pay link, and your AI tracks every promise to pay so you know the moment one slips.</p></details>
     <details><summary>Is there an MCP server for cannabis accounting and payments?</summary><p>Yes. ShelfSpace is a remote MCP server for cannabis back-office finance. Connect ChatGPT, Claude, Meta Muse or any MCP-compatible AI and it can work your accounts payable, receivables, Metrc invoice matching, QuickBooks, credit recovery, consignment settlements and vendor payments, scoped to your own stores.</p></details>
     <details><summary>Can I use ChatGPT or Claude to run my dispensary's accounts payable?</summary><p>Yes. Add ShelfSpace as a connector in ChatGPT or Claude, sign in once, and pick your stores. Your AI can then find invoices, check them against Metrc, see what's owed, line up vendor payments, upload new invoices and answer questions about any vendor.</p></details>
     <details><summary>Does ShelfSpace work with Meta Muse?</summary><p>Yes. Register an app in ShelfSpace Settings under AI agents, choose the Meta Muse preset, and paste the Client ID and Client Secret into a Muse custom connector.</p></details>
@@ -605,7 +747,7 @@
   });
 
   /* ── Chat demo ── (illustrative data: demo store + fictional vendors) */
-  var SCENES = [
+  var PAY = [
     {
       ask: "Which invoices from last week don't match their Metrc manifests?",
       tool: "query_my_data · deliveries + Metrc",
@@ -632,18 +774,54 @@
       answer: '<table class="ai-table"><tr><td>Verdant Hill Botanical</td><td class="num">$8,640.00</td></tr><tr><td>Sunfield Farms</td><td class="num">$5,215.50</td></tr><tr><td>Coastal Kind</td><td class="num">$3,980.00</td></tr></table><div class="ai-total"><span>3 payments, all within your limits</span><span class="num">$17,835.50</span></div><p style="margin-top:10px;">Every invoice is Metrc-verified. Send them?</p>'
     }
   ];
+  var COLLECT = [
+    {
+      ask: "Who owes us more than 30 days, oldest first?",
+      tool: "query_my_data · open invoices",
+      answer: '<table class="ai-table"><tr><td><b>Green Leaf Dispensary</b><br><span class="flag">67 days past due</span></td><td class="num">$6,480.00</td></tr><tr><td><b>Holistic Cannabis Co.</b><br><span class="flag">52 days past due</span></td><td class="num">$4,200.00</td></tr><tr><td><b>Riverbend Cannabis</b><br>38 days past due</td><td class="num">$2,915.50</td></tr></table><div class="ai-total"><span>3 stores</span><span class="num">$13,595.50</span></div><p style="margin-top:10px;">Want me to remind everyone over 45 days?</p>'
+    },
+    {
+      ask: "Yes, send them reminders.",
+      tool: "collections · send reminders",
+      answer: '<p>Sent 2 reminders from your billing address, each with a pay link, labeled as written by your AI:</p><table class="ai-table"><tr><td>Green Leaf Dispensary</td><td class="num ok">Sent</td></tr><tr><td>Holistic Cannabis Co.</td><td class="num ok">Sent</td></tr></table><p>I\u2019ll tell you the moment either one pays.</p>'
+    },
+    {
+      ask: "Did Holistic Cannabis promise to pay?",
+      tool: "query_my_data · promises to pay",
+      answer: '<p><span class="ok">Yes.</span> Their buyer promised <span class="num" style="font-family:var(--font-mono);font-weight:700;color:var(--green-deep);">$4,200.00</span> by Friday, 10/24/2026. I\u2019ll flag it that morning if it hasn\u2019t landed.</p>'
+    },
+    {
+      ask: "Can we prove last month's invoices shipped?",
+      tool: "query_my_data · invoices + Metrc",
+      answer: '<p>38 of 41 match the buyer\u2019s accepted Metrc manifest, line by line.</p><table class="ai-table"><tr><td>Waiting on the shipment</td><td class="num">2</td></tr><tr><td><span class="flag">Looks billed twice</span>: #2207 and #2212</td><td class="num">1</td></tr></table><p>Want me to void the duplicate?</p>'
+    },
+    {
+      ask: "Is QuickBooks caught up?",
+      tool: "query_my_data · QuickBooks sync",
+      answer: '<p><span class="ok">Yes.</span> 52 invoices and 47 payments synced this week. Nothing is waiting.</p>'
+    }
+  ];
+  var SCENES = PAY;
+  var AUD_META = {
+    pay: { conn: 'ShelfSpace connected', ph: 'Ask about your invoices, payments, credits\u2026' },
+    collect: { conn: 'ShelfSpace connected', ph: 'Ask who owes you, what came in, what shipped\u2026' }
+  };
   var body = document.getElementById('chat-body');
   var stepsEl = document.getElementById('chat-steps');
   var idx = 0, timers = [];
   function clearTimers() { timers.forEach(clearTimeout); timers = []; }
   function later(fn, ms) { timers.push(setTimeout(fn, ms)); }
-  SCENES.forEach(function(s, i) {
-    var b = document.createElement('button');
-    b.setAttribute('aria-label', 'Example ' + (i + 1));
-    b.setAttribute('role', 'tab');
-    b.addEventListener('click', function() { play(i); });
-    stepsEl.appendChild(b);
-  });
+  function buildSteps() {
+    stepsEl.innerHTML = '';
+    SCENES.forEach(function(s, i) {
+      var b = document.createElement('button');
+      b.setAttribute('aria-label', 'Example ' + (i + 1));
+      b.setAttribute('role', 'tab');
+      b.addEventListener('click', function() { play(i); });
+      stepsEl.appendChild(b);
+    });
+  }
+  buildSteps();
   function mark(i) { Array.prototype.forEach.call(stepsEl.children, function(b, j) { b.classList.toggle('on', j === i); b.setAttribute('aria-selected', j === i ? 'true' : 'false'); }); }
   function play(i) {
     clearTimers(); idx = i; mark(i);
@@ -673,6 +851,31 @@
     if (entries[0].isIntersecting && !chatStarted) { chatStarted = true; play(0); chatObs.disconnect(); }
   });
   chatObs.observe(body);
+
+  /* ── Audience toggle (dispensary = ShelfPay, brand = ShelfCollect) ── */
+  function setAud(aud, restart) {
+    if (aud !== 'pay' && aud !== 'collect') aud = 'pay';
+    document.body.setAttribute('data-aud', aud);
+    document.querySelectorAll('[data-aud-btn]').forEach(function(b) {
+      var on = b.getAttribute('data-aud-btn') === aud;
+      b.classList.toggle('on', on); b.setAttribute('aria-pressed', on ? 'true' : 'false');
+    });
+    document.getElementById('chat-conn').textContent = AUD_META[aud].conn;
+    document.getElementById('chat-ph').textContent = AUD_META[aud].ph;
+    SCENES = aud === 'collect' ? COLLECT : PAY;
+    buildSteps();
+    if (restart) { chatStarted = true; play(0); }
+    document.querySelectorAll('.cap.reveal').forEach(function(el) { if (el.offsetParent !== null && el.getBoundingClientRect().top < window.innerHeight) el.classList.add('is-visible'); });
+    try { localStorage.setItem('cya-aud', aud); } catch (e) {}
+  }
+  document.querySelectorAll('[data-aud-btn]').forEach(function(b) {
+    b.addEventListener('click', function() { setAud(b.getAttribute('data-aud-btn'), true); });
+  });
+  var initAud = 'pay';
+  var q = /[?&]for=(brand|vendor|collect|dispensary|store|pay)/.exec(location.search);
+  if (q) initAud = /brand|vendor|collect/.test(q[1]) ? 'collect' : 'pay';
+  else { try { initAud = localStorage.getItem('cya-aud') || 'pay'; } catch (e) {} }
+  if (initAud !== 'pay') setAud(initAud, false);
 })();
 </script>
 <script src="/shelfiq-widget.js"></script>
