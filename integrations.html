@@ -80,6 +80,24 @@
   .int-card h3 { font-size: 19px; font-weight: 700; color: var(--green-deep); letter-spacing: -0.4px; margin: 0 0 8px; }
   .int-card p { font-size: 15px; line-height: 1.6; color: var(--slate-600); margin: 0 0 18px; flex: 1; }
   .int-more { font-size: 14px; font-weight: 600; color: var(--green-dark); }
+  .int-logos { display: flex; align-items: center; gap: 8px; }
+  .int-logos img { width: 40px; height: 40px; object-fit: contain; }
+  .int-pos-row { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 14px; margin: -4px 0 18px; }
+  .int-pos-row img { height: 40px; width: auto; margin: -6px -8px; }
+
+  /* ─── LOGO WALL ─── */
+  .int-wall { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; margin-top: 8px; }
+  .int-wall > .int-wall-tile { flex: 0 1 calc((100% - 42px) / 4); }
+  .int-wall-tile { display: flex; align-items: center; justify-content: center; gap: 10px; height: 92px; padding: 14px 18px; background: var(--white); border: 1px solid var(--slate-200); border-radius: 16px; box-shadow: 0 8px 24px rgba(27,67,50,0.05); transition: transform 0.2s, box-shadow 0.2s; }
+  .int-wall-tile:hover { transform: translateY(-2px); box-shadow: 0 14px 32px rgba(27,67,50,0.10); }
+  .int-wall-tile img { max-width: 100%; max-height: 40px; width: auto; height: auto; object-fit: contain; }
+  .int-wall-tile img.int-wall-pos { max-height: 64px; }
+  .int-wall-tile img.int-wall-icon { height: 34px; width: 34px; }
+  .int-wall-tile span { font-size: 16px; font-weight: 700; color: var(--slate-800); letter-spacing: -0.2px; white-space: nowrap; }
+  .int-wall-note { margin-top: 24px; font-size: 12px; color: var(--slate-400); }
+  .int-wall-group { text-align: center !important; font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: 1.6px; text-transform: uppercase; color: var(--slate-500); margin: 28px 0 12px; text-align: left; }
+  @media (max-width: 1000px) { .int-wall > .int-wall-tile { flex-basis: calc((100% - 28px) / 3); } }
+  @media (max-width: 600px) { .int-wall > .int-wall-tile { flex-basis: calc((100% - 14px) / 2); } .int-wall-tile { height: 76px; } .int-wall-tile span { font-size: 14px; } }
   @media (max-width: 1000px) { .int-grid > .int-card { flex-basis: calc((100% - 20px) / 2); } }
   @media (max-width: 680px) { .int-grid > .int-card { flex-basis: 100%; } }
 
@@ -267,33 +285,51 @@
   </div>
 </div>
 
+<!-- LOGO WALL -->
+<section class="svc-section svc-section--white" id="int-wall" style="padding-top:96px;padding-bottom:96px;">
+  <div class="svc-inner">
+    <div class="svc-eyebrow reveal">Works With</div>
+    <h2 class="svc-headline reveal">Plugged into the systems cannabis already runs on.</h2>
+    <p class="svc-sub reveal">Compliance, accounting, email, banking, AI and every major POS.</p>
+    <div class="int-wall-group reveal">Compliance, books &amp; banking</div>
+    <div class="int-wall reveal"><div class="int-wall-tile"><img src="/metrc-logo-v2.png" alt="Metrc" loading="lazy"></div><div class="int-wall-tile"><img src="/logos/quickbooks.png" alt="Intuit QuickBooks Online" loading="lazy"></div><div class="int-wall-tile"><img src="/logos/plaid.png" alt="Plaid" loading="lazy"></div><div class="int-wall-tile"><img src="/logos/leaflink.png" alt="LeafLink" loading="lazy" style="max-height:30px"></div></div>
+    <div class="int-wall-group reveal">Email</div>
+    <div class="int-wall reveal"><div class="int-wall-tile"><img src="/logos/icons/microsoft-365.png" alt="" class="int-wall-icon" loading="lazy"><span>Microsoft 365</span></div><div class="int-wall-tile"><img src="/logos/icons/outlook.png" alt="" class="int-wall-icon" loading="lazy"><span>Outlook</span></div><div class="int-wall-tile"><img src="/logos/google-workspace.png" alt="Google Workspace" loading="lazy"></div><div class="int-wall-tile"><img src="/logos/icons/gmail.png" alt="" class="int-wall-icon" loading="lazy"><span>Gmail</span></div></div>
+    <div class="int-wall-group reveal">AI assistants</div>
+    <div class="int-wall reveal"><div class="int-wall-tile"><img src="/logos/claude.png" alt="Claude" loading="lazy" style="max-height:30px"></div><div class="int-wall-tile"><img src="/logos/icons/chatgpt.png" alt="" class="int-wall-icon" loading="lazy"><span>ChatGPT</span></div></div>
+    <div class="int-wall-group reveal">Point of sale</div>
+    <div class="int-wall reveal"><div class="int-wall-tile"><img src="/logos/dutchie.png" alt="Dutchie" loading="lazy" class="int-wall-pos"></div><div class="int-wall-tile"><img src="/logos/flowhub.png" alt="Flowhub" loading="lazy" class="int-wall-pos"></div><div class="int-wall-tile"><img src="/logos/treez.png" alt="Treez" loading="lazy" class="int-wall-pos"></div><div class="int-wall-tile"><img src="/logos/blaze.png" alt="Blaze" loading="lazy" class="int-wall-pos"></div><div class="int-wall-tile"><img src="/logos/cova.png" alt="Cova" loading="lazy" class="int-wall-pos"></div><div class="int-wall-tile"><img src="/logos/meadow.png" alt="Meadow" loading="lazy" class="int-wall-pos"></div><div class="int-wall-tile"><img src="/logos/alleaves.png" alt="Alleaves" loading="lazy" class="int-wall-pos"></div><div class="int-wall-tile"><img src="/logos/mjfreeway.png" alt="MJ Freeway" loading="lazy" class="int-wall-pos"></div><div class="int-wall-tile"><img src="/logos/indicaonline.png" alt="IndicaOnline" loading="lazy" class="int-wall-pos"></div><div class="int-wall-tile"><span>+ your regional POS</span></div></div>
+    <p class="int-wall-note">Logos are trademarks of their owners and show the systems ShelfSpace connects to or reads from.</p>
+  </div>
+</section>
+
 <!-- INTEGRATION GRID -->
 <section class="svc-section svc-section--slate" id="int-list">
   <div class="svc-inner">
     <div class="svc-eyebrow reveal">What Connects</div>
-    <h2 class="svc-headline reveal">Five connections. No new software for your team.</h2>
+    <h2 class="svc-headline reveal">Eight connections. No new software for your team.</h2>
     <p class="svc-sub reveal">Each one is set up during onboarding. Most take one sign-in.</p>
     <div class="int-grid">
       <a class="int-card reveal" href="/docs/integrations/outlook-gmail">
-        <div class="int-card-top"><div class="int-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="22,6 12,13 2,6"/></svg></div><span class="int-tag int-tag--vendor">For brands</span></div>
+        <div class="int-card-top"><div class="int-logos"><img src="/logos/icons/outlook.png" alt="Microsoft Outlook" width="40" height="40"><img src="/logos/icons/microsoft-365.png" alt="Microsoft 365" width="40" height="40"></div><span class="int-tag int-tag--vendor">For brands</span></div>
         <h3>Microsoft 365 &amp; Outlook</h3>
         <p>Your invoices and payment reminders go out from your own Outlook mailbox, or a shared one like ar@yourcompany.com. Stores see a name they already know.</p>
         <span class="int-more">Setup guide &rarr;</span>
       </a>
       <a class="int-card reveal reveal-delay-1" href="/docs/integrations/outlook-gmail">
-        <div class="int-card-top"><div class="int-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l8 6 8-6"/><rect x="2" y="4" width="20" height="16" rx="2"/><line x1="2" y1="20" x2="9" y2="13"/><line x1="22" y1="20" x2="15" y2="13"/></svg></div><span class="int-tag int-tag--vendor">For brands</span></div>
+        <div class="int-card-top"><div class="int-logos"><img src="/logos/icons/gmail.png" alt="Gmail" width="40" height="40"></div><span class="int-tag int-tag--vendor">For brands</span></div>
         <h3>Google Workspace &amp; Gmail</h3>
         <p>Same thing for brands on Google. Connect your company Gmail and your invoices and reminders send from it.</p>
         <span class="int-more">Setup guide &rarr;</span>
       </a>
       <a class="int-card reveal reveal-delay-2" href="/docs/quickbooks/overview">
-        <div class="int-card-top"><div class="int-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="7" x2="16" y2="7"/><line x1="8" y1="11" x2="16" y2="11"/><line x1="8" y1="15" x2="12" y2="15"/></svg></div><span class="int-tag">Both sides</span></div>
+        <div class="int-card-top"><div class="int-logos"><img src="/logos/icons/quickbooks.png" alt="QuickBooks Online" width="40" height="40"></div><span class="int-tag">Both sides</span></div>
         <h3>QuickBooks Online</h3>
         <p>Dispensaries get every bill and payment posted to their books. Brands get invoices synced and payments checked, so you know who paid without opening QuickBooks.</p>
         <span class="int-more">How it works &rarr;</span>
       </a>
       <a class="int-card reveal" href="/docs/integrations/metrc">
-        <div class="int-card-top"><div class="int-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg></div><span class="int-tag">Both sides</span></div>
+        <div class="int-card-top"><div class="int-logos"><img src="/logos/icons/metrc.png" alt="Metrc" width="40" height="40"></div><span class="int-tag">Both sides</span></div>
         <h3>Metrc</h3>
         <p>We&rsquo;re a certified Metrc third-party vendor. Transfers and sales flow in, and invoices are matched line by line to their manifests.</p>
         <span class="int-more">How it works &rarr;</span>
@@ -302,7 +338,26 @@
         <div class="int-card-top"><div class="int-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="12" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="15" x2="12" y2="21"/></svg></div><span class="int-tag int-tag--retail">For dispensaries</span></div>
         <h3>Your POS</h3>
         <p>Dutchie, Flowhub, Blaze, Treez, Cova, Meadow or a regional system. Sales come in from a simple export, so you never switch POS.</p>
+        <div class="int-pos-row"><img src="/logos/dutchie.png" alt="Dutchie" loading="lazy"><img src="/logos/flowhub.png" alt="Flowhub" loading="lazy"><img src="/logos/blaze.png" alt="Blaze" loading="lazy"><img src="/logos/treez.png" alt="Treez" loading="lazy"><img src="/logos/cova.png" alt="Cova" loading="lazy"><img src="/logos/meadow.png" alt="Meadow" loading="lazy"></div>
         <span class="int-more">How it works &rarr;</span>
+      </a>
+      <a class="int-card reveal reveal-delay-2" href="/payments">
+        <div class="int-card-top"><div class="int-logos"><img src="/logos/icons/plaid.png" alt="Plaid" width="40" height="40"></div><span class="int-tag">Both sides</span></div>
+        <h3>Plaid</h3>
+        <p>Stores and brands connect their bank with Plaid in about a minute to pay or get paid by ACH. No account numbers typed or emailed. Rolling out now; e-check covers everyone today.</p>
+        <span class="int-more">See payments &rarr;</span>
+      </a>
+      <a class="int-card reveal" href="/connect-your-ai">
+        <div class="int-card-top"><div class="int-logos"><img src="/logos/icons/claude.png" alt="Claude" width="40" height="40"><img src="/logos/icons/chatgpt.png" alt="ChatGPT" width="40" height="40"></div><span class="int-tag">Both sides</span></div>
+        <h3>Claude &amp; ChatGPT</h3>
+        <p>Ask your AI who owes you, what&rsquo;s due this week or which invoices don&rsquo;t match Metrc. It answers from your live ShelfSpace data.</p>
+        <span class="int-more">Connect your AI &rarr;</span>
+      </a>
+      <a class="int-card reveal reveal-delay-1" href="/accounts-payable">
+        <div class="int-card-top"><div class="int-logos"><img src="/logos/icons/leaflink.png" alt="LeafLink" width="40" height="40"></div><span class="int-tag int-tag--retail">For dispensaries</span></div>
+        <h3>LeafLink invoices</h3>
+        <p>Forward LeafLink and other wholesale invoices to your AP inbox. Every line is read, checked against Metrc and lined up to pay.</p>
+        <span class="int-more">How AP works &rarr;</span>
       </a>
     </div>
   </div>
