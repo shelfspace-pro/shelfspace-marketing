@@ -614,7 +614,108 @@
 .hero-static { font-size: clamp(34px, 5.4vw, 66px); max-width: 17ch; margin-left: auto; margin-right: auto; }
 .hero-static-hl { color: var(--green-mid); }
 .hero-static, .h-head h2, .h-pivot, .h-guar h2, .section-title { text-wrap: balance; }
+/* ===== HERO v2 — motion hero (10/18/2026) ===== */
+.hero--motion { min-height: 100vh; padding: 112px 48px 64px; }
+.hero--motion .hero-split { gap: 56px; }
+.hero--motion .hero-content { flex: 0 1 520px; text-align: left; }
+.hm-h1 { font-size: clamp(40px, 5.6vw, 76px) !important; line-height: 0.98 !important; letter-spacing: -2.5px !important; margin-bottom: 22px !important; text-wrap: balance; }
+.hm-h1 em { font-style: normal; color: var(--green-mid); }
+.hm-sub { font-size: 19px; line-height: 1.5; color: var(--slate-600); max-width: 460px; margin: 0 0 28px; animation: fadeUp 0.8s cubic-bezier(0.22,1,0.36,1) 0.3s both; }
+.hm-guar { display: inline-flex; align-items: center; gap: 8px; margin-top: 18px; padding: 7px 14px 7px 10px; border-radius: 999px; background: var(--green-ghost); border: 1px solid var(--green-light); font-size: 13px; font-weight: 600; color: var(--green-dark); animation: fadeUp 0.8s cubic-bezier(0.22,1,0.36,1) 0.5s both; }
+.hm-guar svg { flex: none; }
+.hero--motion .hero-trust { justify-content: flex-start; }
+
+/* stage */
+.hm-stage { flex: 1 1 560px; max-width: 600px; position: relative; animation: fadeUp 1s cubic-bezier(0.22,1,0.36,1) 0.35s both; }
+.hm-glow { position: absolute; inset: -40px; background: radial-gradient(60% 60% at 60% 45%, rgba(64,145,108,0.35), rgba(64,145,108,0) 70%); filter: blur(10px); pointer-events: none; }
+.hm-window { position: relative; background: #0f2a1f; border-radius: 20px; padding: 18px; box-shadow: 0 40px 90px rgba(27,67,50,0.35), 0 0 0 1px rgba(149,213,178,0.12) inset; color: #e6f4ea; overflow: hidden; }
+.hm-chrome { display: flex; align-items: center; gap: 6px; margin-bottom: 14px; }
+.hm-chrome i { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,0.14); }
+.hm-tabs { margin-left: auto; display: flex; gap: 4px; background: rgba(255,255,255,0.06); padding: 3px; border-radius: 999px; }
+.hm-tab { position: relative; overflow: hidden; font-size: 12px; font-weight: 700; letter-spacing: 0.3px; padding: 6px 12px; border-radius: 999px; color: rgba(230,244,234,0.55); transition: color .3s, background .3s; }
+.hm-tab.on { color: #0f2a1f; background: var(--green-accent); }
+.hm-scenes { position: relative; height: 368px; }
+.hm-scene { position: absolute; inset: 0; opacity: 0; transform: translateY(14px) scale(0.985); transition: opacity .6s ease, transform .6s cubic-bezier(0.22,1,0.36,1); pointer-events: none; }
+.hm-scene.on { opacity: 1; transform: none; }
+.hm-title { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 12px; }
+.hm-title b { font-size: 15px; font-weight: 700; color: #fff; }
+.hm-title span { font-family: var(--font-mono); font-size: 11px; color: rgba(230,244,234,0.5); }
+.hm-mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+
+/* scene 1: match */
+.hm-cols { display: grid; grid-template-columns: 1fr 34px 1fr; gap: 0; font-size: 12px; }
+.hm-colhead { font-size: 10px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: var(--green-accent); padding: 0 10px 8px; }
+.hm-colhead.r { text-align: right; }
+.hm-line { display: flex; justify-content: space-between; gap: 8px; padding: 8px 10px; margin-bottom: 6px; border-radius: 10px; background: rgba(255,255,255,0.05); border: 1px solid transparent; opacity: 0; transform: translateX(-18px); transition: all .45s cubic-bezier(0.22,1,0.36,1); white-space: nowrap; }
+.hm-line.r { transform: translateX(18px); }
+.hm-line.in { opacity: 1; transform: none; }
+.hm-line.ok { border-color: rgba(149,213,178,0.45); background: rgba(149,213,178,0.10); }
+.hm-line.bad { border-color: rgba(251,191,36,0.7); background: rgba(251,191,36,0.12); }
+.hm-line .q { color: rgba(230,244,234,0.6); }
+.hm-link { display: flex; align-items: center; justify-content: center; height: 33px; margin-bottom: 6px; }
+.hm-link span { width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; transform: scale(0); transition: transform .35s cubic-bezier(0.34,1.56,0.64,1); font-size: 12px; font-weight: 800; }
+.hm-link.ok span { transform: scale(1); background: var(--green-accent); color: #0f2a1f; }
+.hm-link.bad span { transform: scale(1); background: #fbbf24; color: #3b2a00; }
+.hm-result { margin-top: 10px; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 14px; border-radius: 14px; background: rgba(251,191,36,0.12); border: 1px solid rgba(251,191,36,0.4); opacity: 0; transform: translateY(10px); transition: all .5s cubic-bezier(0.22,1,0.36,1); }
+.hm-result.in { opacity: 1; transform: none; }
+.hm-result small { display: block; font-size: 11px; color: rgba(230,244,234,0.65); margin-top: 2px; }
+.hm-result b { font-size: 13px; }
+.hm-big { font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-size: 24px; font-weight: 700; color: #fcd34d; }
+
+/* scene 2: collect */
+.hm-inv { padding: 16px; border-radius: 14px; background: rgba(255,255,255,0.05); }
+.hm-row { display: flex; justify-content: space-between; align-items: center; font-size: 13px; padding: 6px 0; color: rgba(230,244,234,0.8); }
+.hm-row + .hm-row { border-top: 1px solid rgba(255,255,255,0.06); }
+.hm-pill { font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 999px; transition: all .4s; }
+.hm-pill.late { background: rgba(248,113,113,0.18); color: #fca5a5; }
+.hm-pill.paid { background: var(--green-accent); color: #0f2a1f; }
+.hm-feed { margin-top: 12px; display: flex; flex-direction: column; gap: 6px; }
+.hm-ev { display: flex; align-items: center; gap: 10px; font-size: 12px; padding: 8px 12px; border-radius: 10px; background: rgba(255,255,255,0.04); opacity: 0; transform: translateY(8px); transition: all .4s cubic-bezier(0.22,1,0.36,1); }
+.hm-ev.in { opacity: 1; transform: none; }
+.hm-ev i { flex: none; width: 8px; height: 8px; border-radius: 50%; background: var(--green-accent); }
+.hm-ev em { font-style: normal; margin-left: auto; color: rgba(230,244,234,0.45); font-family: var(--font-mono); font-size: 10px; }
+.hm-paidbar { margin-top: 12px; display: flex; align-items: center; justify-content: space-between; padding: 12px 14px; border-radius: 14px; background: rgba(149,213,178,0.14); border: 1px solid rgba(149,213,178,0.45); opacity: 0; transform: translateY(10px); transition: all .5s cubic-bezier(0.22,1,0.36,1); }
+.hm-paidbar.in { opacity: 1; transform: none; }
+.hm-paidbar .hm-big { color: var(--green-accent); }
+
+/* scene 3: recover */
+.hm-cm { display: grid; grid-template-columns: 1fr auto; gap: 6px 14px; font-size: 13px; padding: 14px 16px; border-radius: 14px; background: rgba(255,255,255,0.05); }
+.hm-cm div { opacity: 0; transform: translateY(6px); transition: all .4s; }
+.hm-cm div.in { opacity: 1; transform: none; }
+.hm-cm .amt { text-align: right; font-family: var(--font-mono); font-variant-numeric: tabular-nums; color: var(--green-accent); }
+.hm-cm .lbl { color: rgba(230,244,234,0.8); }
+.hm-stamp { position: absolute; right: 18px; top: 118px; padding: 8px 16px; border: 3px solid var(--green-accent); border-radius: 12px; color: var(--green-accent); font-weight: 800; font-size: 18px; letter-spacing: 2px; text-transform: uppercase; transform: rotate(-10deg) scale(2.2); opacity: 0; transition: all .35s cubic-bezier(0.34,1.56,0.64,1); }
+.hm-stamp.in { opacity: 0.95; transform: rotate(-10deg) scale(1); }
+.hm-total { margin-top: 12px; display: flex; align-items: center; justify-content: space-between; padding: 14px; border-radius: 14px; background: var(--green-accent); color: #0f2a1f; opacity: 0; transform: translateY(10px); transition: all .5s cubic-bezier(0.22,1,0.36,1); }
+.hm-total.in { opacity: 1; transform: none; }
+.hm-total .hm-big { color: #0f2a1f; }
+.hm-total small { display: block; font-size: 11px; opacity: 0.7; margin-top: 2px; }
+
+.hm-progress { height: 3px; border-radius: 3px; background: rgba(255,255,255,0.08); margin-top: 14px; overflow: hidden; }
+.hm-progress i { display: block; height: 100%; width: 0; background: var(--green-accent); }
+.hm-caption { text-align: center; font-size: 11px; color: var(--slate-400); margin-top: 12px; }
+
+@media (max-width: 900px) {
+  .hero--motion { padding: 104px 16px 40px; }
+  .hero--motion .hero-split { flex-direction: column; gap: 36px; }
+  .hero--motion .hero-content { text-align: center; flex: none; }
+  .hm-sub { margin: 0 auto 24px; font-size: 17px; }
+  .hero--motion .hero-trust { justify-content: center; }
+  .hm-stage { width: 100%; flex: none; }
+  .hm-window { padding: 14px; }
+  .hm-tab { padding: 5px 9px; font-size: 11px; }
+  .hm-cols { font-size: 11px; grid-template-columns: 1fr 26px 1fr; }
+  .hm-line { padding: 7px 8px; }
+  .hm-line .nm { overflow: hidden; text-overflow: ellipsis; }
+  .hm-scenes { height: 372px; }
+}
+@media (max-width: 420px) { .hm-line .q { display: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .hm-scene, .hm-line, .hm-link span, .hm-result, .hm-ev, .hm-paidbar, .hm-cm div, .hm-stamp, .hm-total { transition: none !important; }
+}
 </style>
+<noscript><style>.hm-line,.hm-result{opacity:1!important;transform:none!important}</style></noscript>
+<noscript><style>.hm-line,.hm-result{opacity:1!important;transform:none!important}</style></noscript>
 <noscript><style>.reveal,.hero h1,.hero-actions,.hero-founder-credit,.hero-trust{opacity:1;transform:none;transition:none;animation:none;}</style></noscript>
 <script type="application/ld+json">
 {
@@ -773,8 +874,8 @@
   <div class="nav-hamburger" onclick="document.querySelector('.nav-links').classList.toggle('mobile-open'); event.stopPropagation();"><span></span><span></span><span></span></div>
 </nav>
 
-<!-- SECTION 1: HERO -->
-<section class="hero">
+<!-- SECTION 1: HERO — motion hero (10/18/2026) -->
+<section class="hero hero--motion">
   <div class="hero-bg">
     <div class="hero-grid-lines"></div>
     <div class="hero-parallax-layer" data-speed="0.3">
@@ -785,20 +886,81 @@
     </div>
   </div>
   <div class="hero-split">
-    <div class="hero-content hero-content--solo">
+    <div class="hero-content">
       <div class="section-label" style="margin-bottom:16px;">The cannabis back office</div>
-      <h1 class="hero-rotator hero-static">We run your cannabis back office. <span class="hero-static-hl">It pays for itself, or we refund the difference.</span></h1>
-      <p style="font-size:18px;color:var(--slate-600);line-height:1.55;margin:0 auto 30px;max-width:640px;">We pay your vendors, recover your credits, and collect what stores owe you, all checked against Metrc. For dispensaries and the brands that supply them.</p>
+      <h1 class="hm-h1">Stop leaving money <em>on the shelf.</em></h1>
+      <p class="hm-sub">We pay your vendors, collect what stores owe you, and recover your credits. Every dollar checked against Metrc.</p>
       <div class="hero-actions">
         <a href="/contact" class="btn-primary">
           See what I'm owed, free
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
         </a>
       </div>
+      <div class="hm-guar">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6z"/><polyline points="8.5 12 11 14.5 15.5 9.5"/></svg>
+        Pays for itself, or we refund the difference
+      </div>
       <div class="hero-trust">
         <img src="/metrc-logo-v2.png" alt="Metrc">
         <span>Certified Metrc Third-Party Vendor</span>
       </div>
+    </div>
+
+    <div class="hm-stage" aria-label="Animated example: ShelfSpace checking an invoice against Metrc, collecting a past-due invoice, and recovering credits">
+      <div class="hm-glow"></div>
+      <div class="hm-window" aria-hidden="true">
+        <div class="hm-chrome"><i></i><i></i><i></i>
+          <div class="hm-tabs"><span class="hm-tab on" data-s="0">Verify</span><span class="hm-tab" data-s="1">Collect</span><span class="hm-tab" data-s="2">Recover</span></div>
+        </div>
+        <div class="hm-scenes">
+
+          <!-- 1. VERIFY: invoice vs Metrc manifest -->
+          <div class="hm-scene on" data-scene="0">
+            <div class="hm-title"><b>Invoice #4471 vs. Metrc manifest</b><span>10/14/2026</span></div>
+            <div class="hm-cols">
+              <div class="hm-colhead">Invoice</div><div></div><div class="hm-colhead r">Metrc manifest</div>
+              <div class="hm-line" data-i="0"><span class="nm">Blue Dream 3.5g</span><span class="q hm-mono">×40</span></div><div class="hm-link" data-i="0"><span>✓</span></div><div class="hm-line r" data-i="0"><span class="nm">Blue Dream 3.5g</span><span class="q hm-mono">×40</span></div>
+              <div class="hm-line" data-i="1"><span class="nm">Gummies 100mg</span><span class="q hm-mono">×60</span></div><div class="hm-link" data-i="1"><span>✓</span></div><div class="hm-line r" data-i="1"><span class="nm">Gummies 100mg</span><span class="q hm-mono">×60</span></div>
+              <div class="hm-line" data-i="2"><span class="nm">Pre-roll 5pk</span><span class="q hm-mono">×48</span></div><div class="hm-link" data-i="2"><span>✓</span></div><div class="hm-line r" data-i="2"><span class="nm">Pre-roll 5pk</span><span class="q hm-mono">×48</span></div>
+              <div class="hm-line" data-i="3" data-bad><span class="nm">Live resin cart 1g</span><span class="q hm-mono">×30</span></div><div class="hm-link" data-i="3" data-bad><span>!</span></div><div class="hm-line r" data-i="3" data-bad><span class="nm">Live resin cart 1g</span><span class="q hm-mono">×24</span></div>
+              <div class="hm-line" data-i="4"><span class="nm">Tincture 30ml</span><span class="q hm-mono">×12</span></div><div class="hm-link" data-i="4"><span>✓</span></div><div class="hm-line r" data-i="4"><span class="nm">Tincture 30ml</span><span class="q hm-mono">×12</span></div>
+            </div>
+            <div class="hm-result"><div><b>6 carts billed, never shipped</b><small>Caught before you paid</small></div><div class="hm-big" data-count="150">$0.00</div></div>
+          </div>
+
+          <!-- 2. COLLECT: past-due invoice gets paid -->
+          <div class="hm-scene" data-scene="1">
+            <div class="hm-title"><b>Invoice #1182 · Green Leaf Dispensary</b><span>Due 09/14/2026</span></div>
+            <div class="hm-inv">
+              <div class="hm-row"><span>Amount due</span><span class="hm-mono" style="color:#fff;font-weight:700;">$3,280.00</span></div>
+              <div class="hm-row"><span>Status</span><span class="hm-pill late">34 days late</span></div>
+            </div>
+            <div class="hm-feed">
+              <div class="hm-ev"><i></i>Reminder sent, in your name<em>10/15/2026</em></div>
+              <div class="hm-ev"><i></i>Store replied: "Paying Friday"<em>10/15/2026</em></div>
+              <div class="hm-ev"><i></i>Promise to pay recorded<em>10/16/2026</em></div>
+              <div class="hm-ev"><i></i>Paid through the one-click pay link<em>10/17/2026</em></div>
+            </div>
+            <div class="hm-paidbar"><div><b style="font-size:13px;">Collected</b><small style="display:block;font-size:11px;color:rgba(230,244,234,0.65);margin-top:2px;">Your rep never made a call</small></div><div class="hm-big" data-count="3280">$0.00</div></div>
+          </div>
+
+          <!-- 3. RECOVER: monthly credit memo -->
+          <div class="hm-scene" data-scene="2">
+            <div class="hm-title"><b>Credit memo · September 2026</b><span>Sent 10/01/2026</span></div>
+            <div class="hm-cm">
+              <div class="lbl">Customer returns</div><div class="amt">$412.50</div>
+              <div class="lbl">Destroyed product</div><div class="amt">$186.00</div>
+              <div class="lbl">Price-drop share</div><div class="amt">$311.25</div>
+              <div class="lbl">Damaged on arrival</div><div class="amt">$96.00</div>
+            </div>
+            <div class="hm-stamp">Approved</div>
+            <div class="hm-total"><div><b style="font-size:13px;">Recovered this month</b><small>Taken off your next vendor payment</small></div><div class="hm-big" data-count="1005.75">$0.00</div></div>
+          </div>
+
+        </div>
+        <div class="hm-progress"><i></i></div>
+      </div>
+      <div class="hm-caption">Illustration with example numbers</div>
     </div>
   </div>
   <div class="nav-progress"></div>
@@ -1685,5 +1847,84 @@
 })();
 </script>
 <script src="/shelfiq-widget.js"></script>
+<script>
+/* Motion hero: 3 looping scenes (Verify / Collect / Recover). Pauses off-screen + in background tabs. */
+(function () {
+  var stage = document.querySelector('.hm-stage');
+  if (!stage) return;
+  var scenes = stage.querySelectorAll('.hm-scene');
+  var tabs = stage.querySelectorAll('.hm-tab');
+  var bar = stage.querySelector('.hm-progress i');
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var SCENE_MS = 6500;
+  var timers = [], cur = 0, visible = true, running = false;
+
+  function q(sel, root) { return Array.prototype.slice.call((root || stage).querySelectorAll(sel)); }
+  function later(fn, ms) { timers.push(setTimeout(fn, ms)); }
+  function clear() { timers.forEach(clearTimeout); timers = []; }
+  function money(n) { return '$' + n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
+  function count(el, ms) {
+    var target = parseFloat(el.getAttribute('data-count')), t0 = null;
+    if (reduced) { el.textContent = money(target); return; }
+    (function step(ts) {
+      if (!t0) t0 = ts;
+      var p = Math.min((ts - t0) / ms, 1), e = 1 - Math.pow(1 - p, 3);
+      el.textContent = money(Math.round(target * e * 100) / 100);
+      if (p < 1) requestAnimationFrame(step);
+    })(performance.now());
+  }
+  function reset(scene) {
+    q('.in, .ok, .bad', scene).forEach(function (el) { el.classList.remove('in', 'ok', 'bad'); });
+    q('[data-count]', scene).forEach(function (el) { el.textContent = '$0.00'; });
+    var pill = scene.querySelector('.hm-pill');
+    if (pill) { pill.className = 'hm-pill late'; pill.textContent = '34 days late'; }
+  }
+  function show(i) {
+    scenes.forEach(function (s, k) { s.classList.toggle('on', k === i); });
+    tabs.forEach(function (t, k) { t.classList.toggle('on', k === i); });
+  }
+  function play(i) {
+    var s = scenes[i];
+    reset(s); show(i);
+    if (bar) {
+      bar.style.transition = 'none'; bar.style.width = '0';
+      void bar.offsetWidth;
+      bar.style.transition = 'width ' + SCENE_MS + 'ms linear'; bar.style.width = '100%';
+    }
+    var d = reduced ? 0 : 1;
+    if (i === 0) {
+      for (var k = 0; k < 5; k++) (function (k) {
+        later(function () { q('.hm-line[data-i="' + k + '"]', s).forEach(function (el) { el.classList.add('in'); }); }, d * (250 + k * 380));
+        later(function () {
+          var cls = s.querySelector('.hm-link[data-i="' + k + '"]').hasAttribute('data-bad') ? 'bad' : 'ok';
+          q('[data-i="' + k + '"]', s).forEach(function (el) { el.classList.add(cls); });
+        }, d * (520 + k * 380));
+      })(k);
+      later(function () { s.querySelector('.hm-result').classList.add('in'); count(s.querySelector('[data-count]'), 900); }, d * 2700);
+    } else if (i === 1) {
+      q('.hm-ev', s).forEach(function (el, k) { later(function () { el.classList.add('in'); }, d * (450 + k * 650)); });
+      later(function () {
+        var pill = s.querySelector('.hm-pill'); pill.className = 'hm-pill paid'; pill.textContent = 'Paid';
+        s.querySelector('.hm-paidbar').classList.add('in'); count(s.querySelector('[data-count]'), 1000);
+      }, d * 3300);
+    } else {
+      q('.hm-cm div', s).forEach(function (el, k) { later(function () { el.classList.add('in'); }, d * (300 + Math.floor(k / 2) * 380)); });
+      later(function () { s.querySelector('.hm-stamp').classList.add('in'); }, d * 2100);
+      later(function () { s.querySelector('.hm-total').classList.add('in'); count(s.querySelector('[data-count]'), 1000); }, d * 2700);
+    }
+    if (!reduced) later(function () { cur = (i + 1) % scenes.length; play(cur); }, SCENE_MS);
+  }
+  function start() { if (running) return; running = true; play(cur); }
+  function stop() { running = false; clear(); }
+  tabs.forEach(function (t, k) { t.addEventListener('click', function () { clear(); cur = k; running = true; play(k); }); });
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function (es) {
+      visible = es[0].isIntersecting;
+      if (visible && !document.hidden) start(); else stop();
+    }, { threshold: 0.2 }).observe(stage);
+  } else start();
+  document.addEventListener('visibilitychange', function () { if (document.hidden) stop(); else if (visible) start(); });
+})();
+</script>
 </body>
 </html>
