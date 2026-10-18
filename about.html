@@ -26,91 +26,279 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 <style>
-  @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-12px); } }
-  .hero-bg-gradient { position: absolute; top: -30%; right: -20%; width: 700px; height: 700px; background: radial-gradient(circle, rgba(149,213,178,0.18) 0%, rgba(149,213,178,0) 70%); animation: float 8s ease-in-out infinite; pointer-events: none; }
-  .hero-bg-gradient-2 { position: absolute; bottom: -20%; left: -15%; width: 550px; height: 550px; background: radial-gradient(circle, rgba(27,67,50,0.06) 0%, rgba(27,67,50,0) 70%); animation: float 10s ease-in-out infinite; animation-delay: -3s; pointer-events: none; }
-  .hero-grid-lines { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 1200px; height: 100%; opacity: 0.035; background-image: linear-gradient(var(--green-deep) 1px, transparent 1px), linear-gradient(90deg, var(--green-deep) 1px, transparent 1px); background-size: 80px 80px; pointer-events: none; }
-  .page-hero .section-label,
-  .page-hero .section-title,
-  .page-hero .section-desc { opacity: 0; transform: translateY(30px); }
-  .page-hero .section-label { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1); }
-  .page-hero .section-title { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s, transform 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s; }
-  .page-hero .section-desc { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1) 0.25s, transform 0.8s cubic-bezier(0.22,1,0.36,1) 0.25s; }
-  .page-hero.hero-loaded .section-label,
-  .page-hero.hero-loaded .section-title,
-  .page-hero.hero-loaded .section-desc { opacity: 1; transform: translateY(0); }
-  .reveal {
-    opacity: 0; transform: translateY(40px);
-    transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
-                transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
-  }
-  .reveal.is-visible { opacity: 1; transform: translateY(0); }
-  .reveal-delay-1 { transition-delay: 0.2s; }
-  .reveal-delay-2 { transition-delay: 0.4s; }
-  .reveal-delay-3 { transition-delay: 0.6s; }
-  @media (prefers-reduced-motion: reduce) {
-    .reveal, .page-hero .section-label, .page-hero .section-title, .page-hero .section-desc {
-      opacity: 1; transform: none; transition: none;
-    }
-  }
-  .page-hero { padding-bottom: 40px; }
-  .about-section { background: var(--white); padding-top: 60px; }
-  .about-container { max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: 300px 1fr; gap: 64px; align-items: start; }
-  .about-photo {
-    position: sticky; top: 100px;
-    border-radius: 16px; overflow: hidden;
-    border: 1px solid var(--slate-200); box-shadow: 0 8px 32px rgba(0,0,0,0.06);
-  }
-  .about-photo img { width: 100%; display: block; aspect-ratio: 3/4; object-fit: cover; background: var(--slate-100); }
-  .about-photo-caption {
-    padding: 20px; background: var(--white);
-    border-top: 1px solid var(--slate-100);
-  }
-  .about-photo-caption .about-photo-name { font-size: 18px; font-weight: 700; color: var(--green-deep); margin-bottom: 2px; }
-  .about-photo-caption p { font-size: 14px; color: var(--slate-500); }
-  .about-linkedin {
-    display: inline-flex; align-items: center; vertical-align: middle;
-    margin-left: 6px; color: var(--slate-500); transition: color 0.2s;
-  }
-  .about-linkedin:hover { color: var(--green-mid); }
+  .reveal { opacity: 0; transform: translateY(36px); transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1); }
+  .reveal.is-visible { opacity: 1; transform: none; }
+  .reveal-delay-1 { transition-delay: 0.15s; }
+  .reveal-delay-2 { transition-delay: 0.3s; }
+  .reveal-delay-3 { transition-delay: 0.45s; }
 
-  .about-text h2 {
-    font-size: 32px; font-weight: 700; letter-spacing: -1px;
-    color: var(--green-deep); margin-bottom: 32px; line-height: 1.2;
-  }
-  .about-text p {
-    font-size: 16px; line-height: 1.85; color: var(--slate-600); margin-bottom: 24px;
-  }
-  .about-text p:last-of-type { margin-bottom: 0; }
-  .about-text strong { color: var(--green-deep); font-weight: 600; }
-  .about-text em { font-style: italic; }
-  .about-signature {
-    margin-top: 32px; padding-top: 32px; border-top: 1px solid var(--slate-100);
-    font-size: 20px; font-weight: 700; color: var(--green-deep); letter-spacing: -0.3px;
-  }
+  /* ===== HERO ===== */
+  .ab-hero { position: relative; overflow: hidden; overflow-x: clip; background: radial-gradient(ellipse at 75% 30%, #2d6a4f 0%, #1b4332 45%, #0f2a1f 100%); color: #fff; padding: 150px 48px 90px; }
+  .ab-hero::before { content: ''; position: absolute; inset: 0; opacity: 0.06; background-image: linear-gradient(#95d5b2 1px, transparent 1px), linear-gradient(90deg, #95d5b2 1px, transparent 1px); background-size: 80px 80px; pointer-events: none; }
+  .ab-split { position: relative; max-width: 1160px; margin: 0 auto; display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 64px; align-items: center; }
+  .ab-hero .section-label { color: var(--green-accent); }
+  .ab-h1 { font-size: clamp(40px, 5.4vw, 66px); font-weight: 700; line-height: 1.04; letter-spacing: -2px; margin: 14px 0 22px; color: #fff; }
+  .ab-h1 em { font-style: normal; color: var(--green-accent); position: relative; white-space: nowrap; }
+  .ab-h1 em::after { content: ''; position: absolute; left: 0; right: 0; bottom: 4px; height: 10px; background: rgba(149,213,178,0.25); border-radius: 4px; z-index: -1; transform: scaleX(0); transform-origin: left; transition: transform 0.9s cubic-bezier(0.22,1,0.36,1) 0.6s; }
+  .ab-hero.go .ab-h1 em::after { transform: scaleX(1); }
+  .ab-sub { font-size: 19px; line-height: 1.6; color: rgba(255,255,255,0.74); max-width: 520px; margin-bottom: 32px; }
+  .ab-sub b { color: #fff; font-weight: 600; }
+  .ab-actions { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
+  .ab-btn { display: inline-flex; align-items: center; gap: 10px; background: var(--green-accent); color: var(--green-deep); font-weight: 700; font-size: 17px; padding: 18px 30px; border-radius: 12px; text-decoration: none; animation: abCta 2.4s ease-in-out infinite; transition: transform 0.2s, background 0.2s; }
+  .ab-btn:hover { transform: translateY(-2px) scale(1.03); background: #b7e4c7; }
+  .ab-btn svg { transition: transform 0.2s; }
+  .ab-btn:hover svg { transform: translateX(4px); }
+  .ab-btn--dark { background: var(--green-deep); color: #fff; animation-name: abCtaDark; }
+  .ab-btn--dark:hover { background: var(--green-dark); }
+  .ab-link { color: rgba(255,255,255,0.8); font-weight: 600; font-size: 15px; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.3); padding-bottom: 2px; }
+  .ab-link:hover { color: #fff; border-color: #fff; }
+  @keyframes abCta { 0%,100% { box-shadow: 0 0 0 0 rgba(149,213,178,0.55), 0 10px 30px rgba(0,0,0,0.25); } 50% { box-shadow: 0 0 0 14px rgba(149,213,178,0), 0 10px 30px rgba(0,0,0,0.25); } }
+  @keyframes abCtaDark { 0%,100% { box-shadow: 0 0 0 0 rgba(27,67,50,0.45), 0 10px 30px rgba(27,67,50,0.25); } 50% { box-shadow: 0 0 0 14px rgba(27,67,50,0), 0 10px 30px rgba(27,67,50,0.25); } }
+  .ab-trust { margin-top: 26px; display: flex; gap: 22px; flex-wrap: wrap; font-size: 13px; color: rgba(255,255,255,0.55); font-weight: 600; }
+  .ab-trust span { display: inline-flex; align-items: center; gap: 7px; }
+  .ab-trust svg { color: var(--green-accent); }
 
-  /* Mission */
-  .mission-section {
-    background: var(--green-deep); position: relative; overflow: hidden;
-    padding: 100px 48px;
-  }
-  .mission-section::before { content: ''; position: absolute; top: -200px; left: -200px; width: 500px; height: 500px; background: radial-gradient(circle, rgba(149,213,178,0.08), transparent 70%); }
-  .mission-container { max-width: 700px; margin: 0 auto; text-align: center; position: relative; }
-  .mission-container .section-label { color: var(--green-accent); }
-  .mission-container h2 { font-size: clamp(28px, 3.5vw, 40px); font-weight: 700; color: var(--white); line-height: 1.3; letter-spacing: -1px; margin-bottom: 20px; }
-  .mission-container p { font-size: 18px; line-height: 1.75; color: rgba(255,255,255,0.6); }
+  /* hero text entrance */
+  .ab-hero .ab-in { opacity: 0; transform: translateY(26px); transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1); }
+  .ab-hero.go .ab-in { opacity: 1; transform: none; }
+  .ab-hero.go .ab-in:nth-child(2) { transition-delay: 0.08s; }
+  .ab-hero.go .ab-in:nth-child(3) { transition-delay: 0.18s; }
+  .ab-hero.go .ab-in:nth-child(4) { transition-delay: 0.28s; }
+  .ab-hero.go .ab-in:nth-child(5) { transition-delay: 0.38s; }
 
-  @media (max-width: 900px) {
-    .about-container { grid-template-columns: 1fr; gap: 40px; max-width: 600px; }
-    .about-photo { position: static; max-width: 280px; margin: 0 auto; }
-    .mission-section { padding: 80px 24px; }
-  }
+  /* photo stage */
+  .ab-stage { position: relative; width: 100%; max-width: 380px; margin: 0 auto; }
+  .ab-ring { position: absolute; left: 50%; top: 50%; width: 120%; aspect-ratio: 1; border-radius: 50%; border: 2px solid rgba(149,213,178,0.35); transform: translate(-50%,-50%) scale(0.7); opacity: 0; animation: abRing 4.5s ease-out infinite; pointer-events: none; }
+  .ab-ring:nth-child(2) { animation-delay: 1.5s; }
+  .ab-ring:nth-child(3) { animation-delay: 3s; }
+  @keyframes abRing { 0% { transform: translate(-50%,-50%) scale(0.6); opacity: 0.8; } 100% { transform: translate(-50%,-50%) scale(1.15); opacity: 0; } }
+  .ab-photo { position: relative; border-radius: 20px; overflow: hidden; border: 1px solid rgba(149,213,178,0.3); box-shadow: 0 30px 80px rgba(0,0,0,0.45), 0 0 0 8px rgba(149,213,178,0.08); transform: rotate(-2deg) scale(0.94); opacity: 0; transition: transform 1s cubic-bezier(0.22,1,0.36,1) 0.2s, opacity 0.8s ease 0.2s; }
+  .ab-hero.go .ab-photo { transform: rotate(-2deg); opacity: 1; }
+  .ab-photo img { width: 100%; height: auto; display: block; aspect-ratio: 906/1100; object-fit: cover; background: #1b4332; }
+  .ab-cap { position: absolute; left: 0; right: 0; bottom: 0; padding: 60px 20px 18px; background: linear-gradient(to top, rgba(15,42,31,0.95), rgba(15,42,31,0)); }
+  .ab-cap-name { font-size: 20px; font-weight: 700; color: #fff; display: flex; align-items: center; gap: 8px; }
+  .ab-cap-name a { color: rgba(255,255,255,0.7); display: inline-flex; }
+  .ab-cap-name a:hover { color: var(--green-accent); }
+  .ab-cap p { font-size: 13px; color: rgba(255,255,255,0.7); margin-top: 2px; }
+  .ab-chip { position: absolute; z-index: 2; display: flex; align-items: center; gap: 10px; background: #fff; color: var(--green-deep); border-radius: 14px; padding: 11px 15px; box-shadow: 0 14px 40px rgba(0,0,0,0.3); font-size: 13px; font-weight: 700; line-height: 1.25; white-space: nowrap; opacity: 0; transform: translateY(16px) scale(0.9); transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.34,1.56,0.64,1); }
+  .ab-chip small { display: block; font-size: 11px; font-weight: 600; color: var(--slate-500); }
+  .ab-chip .ab-ic { width: 32px; height: 32px; border-radius: 10px; background: var(--green-ghost, #f0faf4); color: var(--green-dark); display: grid; place-items: center; flex: none; }
+  .ab-chip .mono { font-family: var(--font-mono); font-size: 15px; }
+  .ab-hero.go .ab-chip { opacity: 1; transform: none; animation: abBob 5s ease-in-out infinite; }
+  .ab-chip--1 { top: 8%; left: -18%; transition-delay: 0.9s; }
+  .ab-chip--2 { top: 40%; right: -22%; transition-delay: 1.25s; }
+  .ab-chip--3 { bottom: 24%; left: -24%; transition-delay: 1.6s; }
+  .ab-chip--4 { bottom: -40px; right: -10%; transition-delay: 1.95s; background: var(--green-accent); }
+  .ab-chip--4 .ab-ic { background: var(--green-deep); color: var(--green-accent); }
+  .ab-hero.go .ab-chip--2 { animation-delay: -1.2s; }
+  .ab-hero.go .ab-chip--3 { animation-delay: -2.4s; }
+  .ab-hero.go .ab-chip--4 { animation-delay: -3.6s; }
+  @keyframes abBob { 0%,100% { translate: 0 0; } 50% { translate: 0 -8px; } }
+  .ab-live { width: 8px; height: 8px; border-radius: 50%; background: #2d6a4f; box-shadow: 0 0 0 0 rgba(45,106,79,0.6); animation: abLive 1.6s ease-out infinite; display: inline-block; margin-right: 4px; vertical-align: 1px; }
+  @keyframes abLive { 0% { box-shadow: 0 0 0 0 rgba(45,106,79,0.6); } 100% { box-shadow: 0 0 0 9px rgba(45,106,79,0); } }
+
+  /* ===== STATS ===== */
+  .ab-stats { background: #fff; padding: 64px 48px; border-bottom: 1px solid var(--slate-100); }
+  .ab-stats-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+  .ab-stat { text-align: center; padding: 26px 16px; border-radius: 16px; background: linear-gradient(180deg, #f0faf4, #fff); border: 1px solid #e3f2e9; }
+  .ab-stat-n { font-family: var(--font-mono); font-size: clamp(38px, 4.4vw, 54px); font-weight: 700; color: var(--green-deep); line-height: 1; letter-spacing: -1px; font-variant-numeric: tabular-nums; }
+  .ab-stat-n span { color: var(--green-mid); }
+  .ab-stat-l { margin-top: 10px; font-size: 14px; color: var(--slate-600); line-height: 1.45; font-weight: 500; }
+
+  /* ===== JOURNEY ===== */
+  .ab-journey { background: var(--slate-50); padding: 96px 48px; overflow: hidden; }
+  .ab-head { max-width: 760px; margin: 0 auto 56px; text-align: center; }
+  .ab-head h2 { font-size: clamp(30px, 3.8vw, 46px); font-weight: 700; letter-spacing: -1.2px; color: var(--green-deep); line-height: 1.12; margin-top: 10px; }
+  .ab-head p { font-size: 17px; color: var(--slate-600); line-height: 1.6; margin-top: 14px; }
+  .ab-tl { position: relative; max-width: 1160px; margin: 0 auto; display: grid; grid-template-columns: repeat(5, 1fr); gap: 18px; }
+  .ab-tl-track { position: absolute; left: 10%; right: 10%; top: 31px; height: 4px; border-radius: 4px; background: #d8e9df; }
+  .ab-tl-fill { position: absolute; left: 0; top: 0; bottom: 0; width: 0; border-radius: 4px; background: linear-gradient(90deg, var(--green-mid), var(--green-accent)); transition: width 2.6s cubic-bezier(0.65,0,0.35,1) 0.2s; }
+  .ab-tl.go .ab-tl-fill { width: 100%; }
+  .ab-step { position: relative; text-align: center; opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.34,1.56,0.64,1); }
+  .ab-tl.go .ab-step { opacity: 1; transform: none; }
+  .ab-tl.go .ab-step:nth-of-type(1) { transition-delay: 0.2s; }
+  .ab-tl.go .ab-step:nth-of-type(2) { transition-delay: 0.75s; }
+  .ab-tl.go .ab-step:nth-of-type(3) { transition-delay: 1.3s; }
+  .ab-tl.go .ab-step:nth-of-type(4) { transition-delay: 1.85s; }
+  .ab-tl.go .ab-step:nth-of-type(5) { transition-delay: 2.4s; }
+  .ab-dot { position: relative; width: 66px; height: 66px; margin: 0 auto 18px; border-radius: 50%; background: #fff; border: 3px solid var(--green-accent); display: grid; place-items: center; color: var(--green-dark); box-shadow: 0 10px 26px rgba(27,67,50,0.12); }
+  .ab-step--now .ab-dot { background: var(--green-deep); border-color: var(--green-deep); color: var(--green-accent); }
+  .ab-step--now .ab-dot::before, .ab-step--now .ab-dot::after { content: ''; position: absolute; inset: -3px; border-radius: 50%; border: 2px solid var(--green-mid); animation: abPulse 2.4s ease-out infinite; }
+  .ab-step--now .ab-dot::after { animation-delay: 1.2s; }
+  @keyframes abPulse { 0% { transform: scale(1); opacity: 0.8; } 100% { transform: scale(1.7); opacity: 0; } }
+  .ab-when { font-family: var(--font-mono); font-size: 12px; font-weight: 700; letter-spacing: 1.4px; text-transform: uppercase; color: var(--green-mid); margin-bottom: 6px; }
+  .ab-step h3 { font-size: 18px; font-weight: 700; color: var(--green-deep); margin-bottom: 8px; letter-spacing: -0.3px; }
+  .ab-step p { font-size: 14px; line-height: 1.55; color: var(--slate-600); max-width: 220px; margin: 0 auto; }
+
+  /* ===== SHELF / DONUT ===== */
+  .ab-shelf { background: #fff; padding: 96px 48px; }
+  .ab-shelf-grid { max-width: 1080px; margin: 0 auto; display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 72px; align-items: center; }
+  .ab-donut { position: relative; width: 100%; max-width: 360px; margin: 0 auto; aspect-ratio: 1; }
+  .ab-donut svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+  .ab-donut .bg { stroke: #e3f2e9; }
+  .ab-donut .arc { stroke: url(#abGrad); stroke-dasharray: 502.65; stroke-dashoffset: 502.65; transition: stroke-dashoffset 1.8s cubic-bezier(0.65,0,0.35,1) 0.2s; }
+  .ab-donut.go .arc { stroke-dashoffset: 251.33; }
+  .ab-donut-c { position: absolute; inset: 0; display: grid; place-content: center; text-align: center; }
+  .ab-donut-n { font-family: var(--font-mono); font-size: 64px; font-weight: 700; color: var(--green-deep); line-height: 1; letter-spacing: -2px; }
+  .ab-donut-l { font-size: 14px; font-weight: 600; color: var(--slate-600); margin-top: 8px; line-height: 1.4; }
+  .ab-donut-tag { position: absolute; right: -6%; top: 12%; background: var(--green-deep); color: #fff; font-size: 12px; font-weight: 700; padding: 8px 12px; border-radius: 10px; box-shadow: 0 10px 24px rgba(27,67,50,0.25); opacity: 0; transform: scale(0.8); transition: all 0.5s cubic-bezier(0.34,1.56,0.64,1) 1.9s; }
+  .ab-donut.go .ab-donut-tag { opacity: 1; transform: none; }
+  .ab-shelf h2 { font-size: clamp(30px, 3.6vw, 44px); font-weight: 700; letter-spacing: -1.2px; color: var(--green-deep); line-height: 1.12; margin: 10px 0 16px; }
+  .ab-shelf .ab-lede { font-size: 17px; line-height: 1.65; color: var(--slate-600); margin-bottom: 26px; }
+  .ab-leaks { list-style: none; padding: 0; margin: 0 0 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .ab-leaks li { display: flex; align-items: center; gap: 12px; padding: 14px 16px; border-radius: 14px; background: #fff5f5; border: 1px solid #fde2e2; font-size: 14px; font-weight: 600; color: #7f1d1d; line-height: 1.35; opacity: 0; transform: translateX(-14px); transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.34,1.56,0.64,1); }
+  .ab-leaks.go li { opacity: 1; transform: none; }
+  .ab-leaks.go li:nth-child(2) { transition-delay: 0.15s; }
+  .ab-leaks.go li:nth-child(3) { transition-delay: 0.3s; }
+  .ab-leaks.go li:nth-child(4) { transition-delay: 0.45s; }
+  .ab-leaks .ab-x { width: 30px; height: 30px; flex: none; border-radius: 50%; background: #fee2e2; color: #dc2626; display: grid; place-items: center; }
+  .ab-fix { display: flex; align-items: center; gap: 12px; padding: 16px 18px; border-radius: 14px; background: var(--green-deep); color: #fff; font-weight: 600; font-size: 15px; line-height: 1.4; }
+  .ab-fix svg { flex: none; color: var(--green-accent); }
+
+  /* ===== PARTNERS FLOW ===== */
+  .ab-flow-sec { background: linear-gradient(180deg, var(--slate-50), #fff); padding: 96px 48px; }
+  .ab-flow { position: relative; max-width: 980px; margin: 0 auto; display: grid; grid-template-columns: 170px 1fr 170px; align-items: center; gap: 12px; }
+  .ab-node { text-align: center; }
+  .ab-node-ic { position: relative; width: 132px; height: 132px; margin: 0 auto 14px; border-radius: 28px; background: #fff; border: 1px solid #e3f2e9; box-shadow: 0 16px 40px rgba(27,67,50,0.12); display: grid; place-items: center; }
+  .ab-node-ic::after { content: ''; position: absolute; inset: -6px; border-radius: 32px; border: 2px solid var(--green-accent); opacity: 0; animation: abNode 3s ease-out infinite; }
+  .ab-node--brand .ab-node-ic::after { animation-delay: 1.5s; }
+  @keyframes abNode { 0% { transform: scale(0.95); opacity: 0.9; } 100% { transform: scale(1.25); opacity: 0; } }
+  .ab-node b { display: block; font-size: 16px; color: var(--green-deep); }
+  .ab-node span { font-size: 13px; color: var(--slate-500); }
+  .ab-lanes { position: relative; height: 210px; }
+  .ab-lane { position: absolute; left: 0; right: 0; height: 2px; background-image: linear-gradient(90deg, #b7e4c7 50%, transparent 50%); background-size: 12px 2px; }
+  .ab-lane--a { top: 62px; animation: abDash 1s linear infinite; }
+  .ab-lane--b { top: 146px; animation: abDash 1s linear infinite reverse; }
+  @keyframes abDash { to { background-position: 12px 0; } }
+  .ab-pkt { position: absolute; left: 0; display: inline-flex; align-items: center; gap: 7px; white-space: nowrap; font-size: 12.5px; font-weight: 700; padding: 8px 13px; border-radius: 999px; box-shadow: 0 8px 20px rgba(27,67,50,0.16); opacity: 0; }
+  .ab-lanes.go .ab-pkt { animation: abRight 7.5s linear infinite; }
+  .ab-pkt--a { top: 44px; background: #fff; color: var(--green-deep); border: 1px solid #cdebd9; }
+  .ab-pkt--b { top: 128px; background: var(--green-deep); color: #fff; }
+  .ab-lanes.go .ab-pkt--b { animation-name: abLeft; }
+  .ab-pkt i { font-style: normal; width: 18px; height: 18px; border-radius: 50%; display: grid; place-items: center; font-size: 11px; background: var(--green-accent); color: var(--green-deep); }
+  .ab-lanes.go .ab-pkt:nth-child(4) { animation-delay: 2.5s; }
+  .ab-lanes.go .ab-pkt:nth-child(5) { animation-delay: 5s; }
+  .ab-lanes.go .ab-pkt:nth-child(7) { animation-delay: 2.5s; }
+  .ab-lanes.go .ab-pkt:nth-child(8) { animation-delay: 5s; }
+  @keyframes abRight { 0% { left: 0; transform: translateX(-30%); opacity: 0; } 8% { opacity: 1; } 30% { left: 50%; transform: translateX(-50%); } 52% { opacity: 1; } 60% { left: 100%; transform: translateX(-70%); opacity: 0; } 100% { left: 100%; opacity: 0; } }
+  @keyframes abLeft { 0% { left: 100%; transform: translateX(-70%); opacity: 0; } 8% { opacity: 1; } 30% { left: 50%; transform: translateX(-50%); } 52% { opacity: 1; } 60% { left: 0; transform: translateX(-30%); opacity: 0; } 100% { left: 0; opacity: 0; } }
+  .ab-flow-foot { max-width: 680px; margin: 40px auto 0; text-align: center; font-size: 17px; line-height: 1.65; color: var(--slate-600); }
+  .ab-flow-foot strong { color: var(--green-deep); }
+
+  /* ===== SERVICES ===== */
+  .ab-svc { background: #fff; padding: 96px 48px; }
+  .ab-svc-grid { max-width: 1120px; margin: 0 auto; display: grid; grid-template-columns: 3fr 1fr; gap: 22px; }
+  .ab-svc-group { border-radius: 22px; padding: 22px; }
+  .ab-svc-group--pay { background: #f0faf4; border: 1px solid #d8eee1; }
+  .ab-svc-group--col { background: #fdf8ec; border: 1px solid #f3e6c4; }
+  .ab-svc-tag { display: flex; align-items: center; justify-content: space-between; gap: 10px; font-size: 12px; font-weight: 700; letter-spacing: 1.3px; text-transform: uppercase; color: var(--green-dark); margin: 2px 4px 16px; }
+  .ab-svc-group--col .ab-svc-tag { color: #92600a; }
+  .ab-svc-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .ab-svc-group--col .ab-svc-cards { grid-template-columns: 1fr; }
+  .ab-card { position: relative; display: flex; flex-direction: column; background: #fff; border-radius: 16px; padding: 22px; text-decoration: none; color: inherit; box-shadow: 0 6px 20px rgba(27,67,50,0.07); transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.25s; }
+  .ab-card:hover { transform: translateY(-6px); box-shadow: 0 18px 40px rgba(27,67,50,0.16); }
+  .ab-card-ic { width: 48px; height: 48px; border-radius: 14px; display: grid; place-items: center; background: var(--green-deep); color: var(--green-accent); margin-bottom: 16px; transition: transform 0.3s; }
+  .ab-card:hover .ab-card-ic { transform: rotate(-8deg) scale(1.08); }
+  .ab-svc-group--col .ab-card-ic { background: #b7791f; color: #fff7e0; }
+  .ab-card h3 { font-size: 18px; font-weight: 700; color: var(--green-deep); margin-bottom: 8px; letter-spacing: -0.3px; }
+  .ab-card p { font-size: 14px; line-height: 1.55; color: var(--slate-600); flex: 1; }
+  .ab-card-go { margin-top: 16px; font-size: 14px; font-weight: 700; color: var(--green-mid); display: inline-flex; align-items: center; gap: 6px; }
+  .ab-card:hover .ab-card-go svg { transform: translateX(4px); }
+  .ab-card-go svg { transition: transform 0.2s; }
+
+  /* ===== LETTER ===== */
+  .ab-letter-sec { background: var(--slate-50); padding: 96px 48px; }
+  .ab-letter { position: relative; max-width: 780px; margin: 0 auto; background: #fff; border-radius: 22px; padding: 48px 56px; box-shadow: 0 20px 60px rgba(27,67,50,0.1); border: 1px solid #e8f1ec; }
+  .ab-letter::before { content: '\201C'; position: absolute; top: -34px; left: 40px; font-size: 140px; line-height: 1; font-family: Georgia, serif; color: var(--green-accent); }
+  .ab-letter-head { display: flex; align-items: center; gap: 14px; margin-bottom: 26px; }
+  .ab-letter-head img { width: 54px; height: 54px; flex: none; border-radius: 50%; object-fit: cover; border: 2px solid var(--green-accent); }
+  .ab-letter-head b { display: block; font-size: 16px; color: var(--green-deep); }
+  .ab-letter-head span { font-size: 13px; color: var(--slate-500); }
+  .ab-letter h2 { font-size: clamp(24px, 2.8vw, 30px); font-weight: 700; letter-spacing: -0.8px; color: var(--green-deep); line-height: 1.25; margin-bottom: 22px; }
+  .ab-letter p { font-size: 16px; line-height: 1.85; color: var(--slate-600); margin-bottom: 20px; }
+  .ab-letter strong { color: var(--green-deep); font-weight: 600; }
+  .ab-letter a { color: var(--green-mid); font-weight: 600; }
+  .ab-letter-body { position: relative; max-height: 330px; overflow: hidden; transition: max-height 0.9s cubic-bezier(0.22,1,0.36,1); }
+  .ab-letter-body::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 140px; background: linear-gradient(to top, #fff, rgba(255,255,255,0)); transition: opacity 0.4s; pointer-events: none; }
+  .ab-letter.open .ab-letter-body { max-height: 3200px; }
+  .ab-letter.open .ab-letter-body::after { opacity: 0; }
+  .ab-letter-btn { display: inline-flex; align-items: center; gap: 8px; margin-top: 8px; background: none; border: 2px solid var(--green-deep); color: var(--green-deep); font: inherit; font-weight: 700; font-size: 15px; padding: 12px 22px; border-radius: 12px; cursor: pointer; transition: background 0.2s, color 0.2s; text-transform: none; }
+  .ab-letter-btn:hover { background: var(--green-deep); color: #fff; }
+  .ab-letter-btn svg { transition: transform 0.3s; }
+  .ab-letter.open .ab-letter-btn svg { transform: rotate(180deg); }
+  .ab-sig { margin-top: 10px; font-size: 22px; font-weight: 700; color: var(--green-deep); }
+
+  /* ===== MISSION ===== */
+  .ab-mission { position: relative; overflow: hidden; background: radial-gradient(ellipse at 50% 0%, #2d6a4f 0%, #1b4332 55%, #0f2a1f 100%); padding: 110px 48px; text-align: center; color: #fff; }
+  .ab-mission-glow { position: absolute; left: 50%; top: 50%; width: 700px; height: 700px; transform: translate(-50%,-50%); border-radius: 50%; background: radial-gradient(circle, rgba(149,213,178,0.18), transparent 65%); animation: abGlow 6s ease-in-out infinite; pointer-events: none; }
+  @keyframes abGlow { 0%,100% { transform: translate(-50%,-50%) scale(0.9); opacity: 0.7; } 50% { transform: translate(-50%,-50%) scale(1.1); opacity: 1; } }
+  .ab-mission .section-label { color: var(--green-accent); position: relative; }
+  .ab-mission h2 { position: relative; font-size: clamp(36px, 5vw, 64px); font-weight: 700; letter-spacing: -2px; line-height: 1.06; margin: 14px auto 20px; max-width: 820px; }
+  .ab-mission h2 em { font-style: normal; color: var(--green-accent); }
+  .ab-mission p { position: relative; max-width: 620px; margin: 0 auto; font-size: 18px; line-height: 1.7; color: rgba(255,255,255,0.7); }
+
+  /* ===== FINAL CTA ===== */
+  .ab-final { background: #fff; padding: 96px 48px 104px; text-align: center; }
+  .ab-final h2 { font-size: clamp(32px, 4vw, 48px); font-weight: 700; letter-spacing: -1.4px; color: var(--green-deep); line-height: 1.1; margin: 10px 0 14px; }
+  .ab-final > p { font-size: 18px; color: var(--slate-600); margin: 0 auto 32px; max-width: 560px; line-height: 1.6; }
+  .ab-final-note { margin-top: 16px; font-size: 14px; color: var(--slate-500); }
+  .ab-final-note a { color: var(--green-mid); font-weight: 600; }
+  .ab-final-trust { margin-top: 40px; display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; font-size: 13px; font-weight: 600; color: var(--slate-500); }
+  .ab-final-trust span { display: inline-flex; align-items: center; gap: 8px; }
+
   /* Footer 5-col */
   .footer-top { grid-template-columns: 2fr 1fr 1fr 1fr 1fr; }
   @media (max-width: 900px) { .footer-top { grid-template-columns: 1fr 1fr; } }
   @media (max-width: 600px) { .footer-top { grid-template-columns: 1fr; } }
+
+  @media (max-width: 980px) {
+    .ab-hero { padding: 120px 20px 80px; }
+    .ab-split { grid-template-columns: 1fr; gap: 56px; text-align: center; }
+    .ab-sub { margin-left: auto; margin-right: auto; }
+    .ab-actions, .ab-trust { justify-content: center; }
+    .ab-stage { max-width: 290px; }
+    .ab-chip { font-size: 12px; padding: 9px 12px; }
+    .ab-chip .ab-ic { width: 26px; height: 26px; }
+    .ab-chip--1 { left: -16%; } .ab-chip--2 { right: -16%; } .ab-chip--3 { left: -18%; } .ab-chip--4 { right: -8%; }
+    .ab-stats, .ab-journey, .ab-shelf, .ab-flow-sec, .ab-svc, .ab-letter-sec, .ab-mission, .ab-final { padding-left: 20px; padding-right: 20px; }
+    .ab-stats-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+    .ab-journey, .ab-shelf, .ab-flow-sec, .ab-svc, .ab-letter-sec, .ab-final { padding-top: 72px; padding-bottom: 72px; }
+    .ab-tl { grid-template-columns: 1fr; gap: 26px; max-width: 460px; }
+    .ab-tl-track { left: 31px; right: auto; top: 20px; bottom: 20px; width: 4px; height: auto; }
+    .ab-tl-fill { width: 100% !important; height: 0; right: 0; bottom: auto; transition-property: height; }
+    .ab-tl.go .ab-tl-fill { height: 100%; }
+    .ab-step { display: grid; grid-template-columns: 66px 1fr; gap: 0 18px; text-align: left; align-items: start; }
+    .ab-dot { grid-row: span 3; margin: 0; }
+    .ab-step p { margin: 0; max-width: none; }
+    .ab-when { margin-top: 6px; }
+    .ab-shelf-grid { grid-template-columns: 1fr; gap: 44px; }
+    .ab-donut { max-width: 270px; }
+    .ab-donut-n { font-size: 50px; }
+    .ab-donut-tag { right: -4%; }
+    .ab-flow { grid-template-columns: 1fr 1fr; grid-template-areas: 'a b' 'l l'; gap: 8px 12px; }
+    .ab-flow > .ab-node:first-child { grid-area: a; } .ab-flow > .ab-node--brand { grid-area: b; } .ab-lanes { grid-area: l; margin-top: -10px; }
+    .ab-node-ic { width: 84px; height: 84px; border-radius: 22px; }
+    .ab-node-ic svg { width: 54px; height: 54px; }
+    .ab-node b { font-size: 14px; } .ab-node span { font-size: 12px; }
+    .ab-pkt { font-size: 11px; padding: 6px 10px; }
+    .ab-svc-grid, .ab-svc-cards { grid-template-columns: 1fr; }
+    .ab-letter { padding: 40px 24px 32px; }
+    .ab-letter::before { left: 20px; font-size: 110px; top: -28px; }
+  }
+  @media (max-width: 520px) {
+    .ab-leaks { grid-template-columns: 1fr; }
+    .ab-h1 em { white-space: normal; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+    .reveal, .ab-hero .ab-in, .ab-photo, .ab-chip, .ab-step, .ab-leaks li { opacity: 1 !important; transform: none !important; }
+    .ab-pkt { opacity: 1; position: absolute; }
+    .ab-pkt--a:nth-child(3), .ab-pkt--b:nth-child(6) { left: 50%; transform: translateX(-50%); }
+    .ab-pkt:nth-child(4), .ab-pkt:nth-child(5), .ab-pkt:nth-child(7), .ab-pkt:nth-child(8) { display: none; }
+    .ab-tl-fill { width: 100%; } .ab-donut .arc { stroke-dashoffset: 251.33; }
+  }
 </style>
-<noscript><style>.reveal,.page-hero .section-label,.page-hero .section-title,.page-hero .section-desc{opacity:1;transform:none;transition:none;}</style></noscript>
+<noscript><style>.reveal,.ab-hero .ab-in,.ab-photo,.ab-chip,.ab-step,.ab-leaks li{opacity:1!important;transform:none!important}.ab-letter-body{max-height:none}.ab-letter-body::after,.ab-letter-btn{display:none}.ab-donut .arc{stroke-dashoffset:251.33}.ab-tl-fill{width:100%}</style></noscript>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-H2LBJT03WE"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-H2LBJT03WE');</script>
 <script type="application/ld+json">
@@ -178,29 +366,224 @@
   <div class="nav-hamburger" onclick="document.querySelector('.nav-links').classList.toggle('mobile-open'); event.stopPropagation();"><span></span><span></span><span></span></div>
 </nav>
 
-<!-- PAGE HERO -->
-<div class="page-hero">
-  <div class="hero-bg-gradient"></div>
-  <div class="hero-bg-gradient-2"></div>
-  <div class="hero-grid-lines"></div>
-  <div class="section-label">About ShelfSpace</div>
-  <h1 class="section-title">Born in the trenches</h1>
-  <p class="section-desc">Founded by a 10+ year cannabis industry veteran who's been on both sides of the counter.</p>
-</div>
-
-<!-- ABOUT -->
-<section class="about-section">
-  <div class="about-container">
-    <div class="about-photo reveal">
-      <img src="/chris-mitchem.jpg" alt="Chris Mitchem, Founder and CEO of ShelfSpace">
-      <div class="about-photo-caption">
-        <div class="about-photo-name">Chris Mitchem <a href="https://www.linkedin.com/in/chris-mitchem-mba/" target="_blank" rel="noopener" class="about-linkedin" aria-label="Chris Mitchem on LinkedIn"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a></div>
-        <p>Founder &amp; CEO, ShelfSpace &middot; Founder &amp; CEO, Diem Cannabis</p>
+<!-- HERO -->
+<section class="ab-hero" id="top">
+  <div class="ab-split">
+    <div class="ab-text">
+      <div class="section-label ab-in">About ShelfSpace</div>
+      <h1 class="ab-h1 ab-in">I built the back office <em>I needed.</em></h1>
+      <p class="ab-sub ab-in">10+ years running cannabis companies. Grower, maker, retailer. <b>ShelfSpace is the team that runs the money side, so you can get back to selling.</b></p>
+      <div class="ab-actions ab-in">
+        <a href="/contact" class="ab-btn">Get a free money review <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        <a href="#letter" class="ab-link">Read my story</a>
+      </div>
+      <div class="ab-trust ab-in">
+        <span><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Still runs a dispensary today</span>
+        <span><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Certified Metrc Third-Party Vendor</span>
       </div>
     </div>
-    <div class="about-text reveal reveal-delay-1">
-      <h2>A decade in the trenches. Every lesson the hard way. ShelfSpace is what I wish existed when I needed it most.</h2>
+    <div class="ab-stage" aria-label="Chris Mitchem, Founder and CEO of ShelfSpace">
+      <div class="ab-ring"></div><div class="ab-ring"></div><div class="ab-ring"></div>
+      <div class="ab-photo">
+        <img src="/chris-mitchem.jpg" alt="Chris Mitchem, Founder and CEO of ShelfSpace" width="906" height="1100">
+        <div class="ab-cap">
+          <div class="ab-cap-name">Chris Mitchem <a href="https://www.linkedin.com/in/chris-mitchem-mba/" target="_blank" rel="noopener" aria-label="Chris Mitchem on LinkedIn"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a></div>
+          <p>Founder &amp; CEO, ShelfSpace &middot; Founder &amp; CEO, Diem Cannabis</p>
+        </div>
+      </div>
+      <div class="ab-chip ab-chip--1"><div class="ab-ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22V12"/><path d="M12 12C12 7 8 4 3 4c0 5 4 8 9 8z"/><path d="M12 12c0-4 3-7 8-7 0 4-3 7-8 7z"/></svg></div><div><span class="mono">2015</span><small>First company, Oregon</small></div></div>
+      <div class="ab-chip ab-chip--2"><div class="ab-ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20h20"/><path d="M4 20V9l5 3V9l5 3V6l6 4v10"/></svg></div><div>Grow · Make · Sell<small>Every side of the counter</small></div></div>
+      <div class="ab-chip ab-chip--3"><div class="ab-ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l1.5-5h15L21 9"/><path d="M4 9v11h16V9"/><path d="M9 20v-6h6v6"/></svg></div><div>Diem Cannabis<small>Massachusetts, still running</small></div></div>
+      <div class="ab-chip ab-chip--4"><div class="ab-ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><div><span class="ab-live"></span>Operator, not consultant<small style="color:#1b4332;opacity:.75">Every feature, used on my floor first</small></div></div>
+    </div>
+  </div>
+</section>
 
+<!-- BRAND TICKER -->
+<section class="brand-ticker brand-ticker--tight">
+  <div class="brand-ticker-label">Brands paid through ShelfSpace every week</div>
+  <div class="brand-ticker-track">
+    <img src="/logos/brands/curaleaf.png" alt="Curaleaf — paid via ShelfSpace" class="brand-ticker-logo">
+    <img src="/logos/brands/cresco.png" alt="Cresco Labs — paid via ShelfSpace" class="brand-ticker-logo brand-ticker-logo--sm">
+    <img src="/logos/brands/gti.png" alt="Green Thumb Industries — paid via ShelfSpace" class="brand-ticker-logo brand-ticker-logo--sm">
+    <img src="/logos/brands/holistic.png" alt="Holistic Industries — paid via ShelfSpace" class="brand-ticker-logo">
+    <img src="/logos/brands/kiva.png" alt="Kiva Confections — paid via ShelfSpace" class="brand-ticker-logo brand-ticker-logo--sm">
+    <img src="/logos/brands/wyld.png" alt="Wyld — paid via ShelfSpace" class="brand-ticker-logo brand-ticker-logo--lg">
+    <img src="/logos/brands/marimed.png" alt="MariMed — paid via ShelfSpace" class="brand-ticker-logo brand-ticker-logo--lg">
+    <img src="/logos/brands/jushi.png" alt="Jushi Holdings — paid via ShelfSpace" class="brand-ticker-logo">
+    <img src="/logos/brands/rove.png" alt="Rove — paid via ShelfSpace" class="brand-ticker-logo">
+    <img src="/logos/brands/fernway.png" alt="Fernway — paid via ShelfSpace" class="brand-ticker-logo">
+    <img src="/logos/brands/curaleaf.png" alt="Curaleaf" aria-hidden="true" class="brand-ticker-logo">
+    <img src="/logos/brands/cresco.png" alt="Cresco Labs" aria-hidden="true" class="brand-ticker-logo brand-ticker-logo--sm">
+    <img src="/logos/brands/gti.png" alt="Green Thumb Industries" aria-hidden="true" class="brand-ticker-logo brand-ticker-logo--sm">
+    <img src="/logos/brands/holistic.png" alt="Holistic Industries" aria-hidden="true" class="brand-ticker-logo">
+    <img src="/logos/brands/kiva.png" alt="Kiva Confections" aria-hidden="true" class="brand-ticker-logo brand-ticker-logo--sm">
+    <img src="/logos/brands/wyld.png" alt="Wyld" aria-hidden="true" class="brand-ticker-logo brand-ticker-logo--lg">
+    <img src="/logos/brands/marimed.png" alt="MariMed" aria-hidden="true" class="brand-ticker-logo brand-ticker-logo--lg">
+    <img src="/logos/brands/jushi.png" alt="Jushi" aria-hidden="true" class="brand-ticker-logo">
+    <img src="/logos/brands/rove.png" alt="Rove" aria-hidden="true" class="brand-ticker-logo">
+    <img src="/logos/brands/fernway.png" alt="Fernway" aria-hidden="true" class="brand-ticker-logo">
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="ab-stats">
+  <div class="ab-stats-grid">
+    <div class="ab-stat reveal"><div class="ab-stat-n"><b data-ab-count="10">0</b><span>+</span></div><div class="ab-stat-l">years running cannabis companies</div></div>
+    <div class="ab-stat reveal reveal-delay-1"><div class="ab-stat-n"><b data-ab-count="3">0</b></div><div class="ab-stat-l">sides of the supply chain: grower, maker, retailer</div></div>
+    <div class="ab-stat reveal reveal-delay-2"><div class="ab-stat-n"><span>~</span><b data-ab-count="50">0</b><span>%</span></div><div class="ab-stat-l">of a dispensary's budget sits on its shelves</div></div>
+    <div class="ab-stat reveal reveal-delay-3"><div class="ab-stat-n"><b data-ab-count="2">0</b></div><div class="ab-stat-l">sides of every invoice we run: stores and brands</div></div>
+  </div>
+</section>
+
+<!-- JOURNEY -->
+<section class="ab-journey">
+  <div class="ab-head reveal">
+    <div class="section-label">Born in the trenches</div>
+    <h2>Every lesson, learned the hard way.</h2>
+    <p>I wasn't looking at this problem from the outside. I was the operator drowning in it.</p>
+  </div>
+  <div class="ab-tl" data-ab-play>
+    <div class="ab-tl-track"><div class="ab-tl-fill"></div></div>
+    <div class="ab-step">
+      <div class="ab-dot"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22V12"/><path d="M12 12C12 7 8 4 3 4c0 5 4 8 9 8z"/><path d="M12 12c0-4 3-7 8-7 0 4-3 7-8 7z"/></svg></div>
+      <div class="ab-when">2015 · Oregon</div>
+      <h3>First company</h3>
+      <p>Vertically integrated, multi-state, the whole thing.</p>
+    </div>
+    <div class="ab-step">
+      <div class="ab-dot"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20h20"/><path d="M4 20V9l5 3V9l5 3V6l6 4v10"/></svg></div>
+      <div class="ab-when">Every side</div>
+      <h3>Grower, maker, retailer</h3>
+      <p>Made payroll by the skin of my teeth. Fought through market crashes.</p>
+    </div>
+    <div class="ab-step">
+      <div class="ab-dot"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg></div>
+      <div class="ab-when">2023 · The exit</div>
+      <h3>Every SKU earns its spot</h3>
+      <p>Exiting Oregon taught me shelf space is precious. Get it wrong and the math turns fast.</p>
+    </div>
+    <div class="ab-step">
+      <div class="ab-dot"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></div>
+      <div class="ab-when">Midnight</div>
+      <h3>The back office problem</h3>
+      <p>Reconciling invoices at midnight. Chasing credits nobody tracked.</p>
+    </div>
+    <div class="ab-step ab-step--now">
+      <div class="ab-dot"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div>
+      <div class="ab-when">Today</div>
+      <h3>ShelfSpace</h3>
+      <p>The team that runs the money side for stores and brands. And I still run Diem in Massachusetts.</p>
+    </div>
+  </div>
+</section>
+
+<!-- HALF YOUR BUDGET -->
+<section class="ab-shelf">
+  <div class="ab-shelf-grid">
+    <div class="ab-donut" data-ab-play>
+      <svg viewBox="0 0 200 200" aria-hidden="true">
+        <defs><linearGradient id="abGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#40916c"/><stop offset="1" stop-color="#95d5b2"/></linearGradient></defs>
+        <circle class="bg" cx="100" cy="100" r="80" fill="none" stroke-width="26"/>
+        <circle class="arc" cx="100" cy="100" r="80" fill="none" stroke-width="26" stroke-linecap="round"/>
+      </svg>
+      <div class="ab-donut-c"><div class="ab-donut-n">~<b data-ab-count="50">0</b>%</div><div class="ab-donut-l">of your budget is<br>inventory</div></div>
+      <div class="ab-donut-tag">Your biggest profit lever</div>
+    </div>
+    <div>
+      <div class="section-label reveal">What we're actually doing</div>
+      <h2 class="reveal">Half your budget lives on your shelves.</h2>
+      <p class="ab-lede reveal">Every SKU is a bet that it sells, at your margin, before it expires. Lose enough of those bets and your P&amp;L quietly turns against you.</p>
+      <ul class="ab-leaks" data-ab-play>
+        <li><span class="ab-x"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></span>Dead SKUs eating shelf space</li>
+        <li><span class="ab-x"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></span>Expired product nobody credited</li>
+        <li><span class="ab-x"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></span>Invoices that don't match what arrived</li>
+        <li><span class="ab-x"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></span>Brands that never earned their spot</li>
+      </ul>
+      <div class="ab-fix reveal"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>We plug those leaks, SKU by SKU and vendor by vendor, so the margin stays in your account.</div>
+    </div>
+  </div>
+</section>
+
+<!-- PARTNERS -->
+<section class="ab-flow-sec">
+  <div class="ab-head reveal">
+    <div class="section-label">Both sides of the invoice</div>
+    <h2>Vendors are partners, not invoices.</h2>
+  </div>
+  <div class="ab-flow reveal">
+    <div class="ab-node">
+      <div class="ab-node-ic"><svg width="78" height="78" viewBox="0 0 64 64" fill="none" aria-hidden="true"><path d="M8 26l4-14h40l4 14z" fill="#95d5b2"/><path d="M8 26h48v4a6 6 0 0 1-12 0 6 6 0 0 1-12 0 6 6 0 0 1-12 0 6 6 0 0 1-12 0z" fill="#1b4332"/><rect x="11" y="32" width="42" height="22" rx="2" fill="#f0faf4" stroke="#1b4332" stroke-width="2.5"/><rect x="27" y="40" width="10" height="14" fill="#40916c"/><rect x="15" y="37" width="8" height="7" rx="1" fill="#b7e4c7"/><rect x="41" y="37" width="8" height="7" rx="1" fill="#b7e4c7"/></svg></div>
+      <b>Your store</b><span>ShelfPay</span>
+    </div>
+    <div class="ab-lanes" data-ab-play aria-hidden="true">
+      <div class="ab-lane ab-lane--a"></div>
+      <div class="ab-lane ab-lane--b"></div>
+      <div class="ab-pkt ab-pkt--a"><i>✓</i>Paid on time</div>
+      <div class="ab-pkt ab-pkt--a"><i>↩</i>Return flagged</div>
+      <div class="ab-pkt ab-pkt--a"><i>%</i>Promo shared</div>
+      <div class="ab-pkt ab-pkt--b"><i>$</i>Credit approved</div>
+      <div class="ab-pkt ab-pkt--b"><i>✓</i>Invoice, Metrc-checked</div>
+      <div class="ab-pkt ab-pkt--b"><i>↗</i>Sell-through data</div>
+    </div>
+    <div class="ab-node ab-node--brand">
+      <div class="ab-node-ic"><svg width="78" height="78" viewBox="0 0 64 64" fill="none" aria-hidden="true"><rect x="4" y="18" width="34" height="24" rx="3" fill="#1b4332"/><text x="21" y="33" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="6.5" font-weight="700" fill="#95d5b2">YOUR BRAND</text><path d="M38 24h11l7 9v9H38z" fill="#40916c"/><path d="M42 27h6l4 6h-10z" fill="#d8f3dc"/><circle cx="14" cy="45" r="5" fill="#0f2a1f" stroke="#95d5b2" stroke-width="2"/><circle cx="47" cy="45" r="5" fill="#0f2a1f" stroke="#95d5b2" stroke-width="2"/></svg></div>
+      <b>Your brands</b><span>ShelfCollect</span>
+    </div>
+  </div>
+  <p class="ab-flow-foot reveal">The products on your shelf are really relationships. <strong>We keep both sides clean:</strong> real data shared, credits filed, invoices paid right and on time. Done right, none of it is a fight.</p>
+</section>
+
+<!-- WHAT WE DO -->
+<section class="ab-svc">
+  <div class="ab-head reveal">
+    <div class="section-label">What ShelfSpace does</div>
+    <h2>You approve. We run it.</h2>
+  </div>
+  <div class="ab-svc-grid">
+    <div class="ab-svc-group ab-svc-group--pay reveal">
+      <div class="ab-svc-tag"><span>For dispensaries · ShelfPay</span></div>
+      <div class="ab-svc-cards">
+        <a href="/accounts-payable" class="ab-card">
+          <div class="ab-card-ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/><polyline points="8 15 10 17 14 13"/></svg></div>
+          <h3>Accounts Payable</h3>
+          <p>Every invoice checked against Metrc before a dollar goes out. Vendors paid right and on time.</p>
+          <span class="ab-card-go">See ShelfPay <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></span>
+        </a>
+        <a href="/consignment" class="ab-card">
+          <div class="ab-card-ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg></div>
+          <h3>Consignment</h3>
+          <p>Vendors stock the shelf, you pay on what sells. Weekly settlements, reconciled to Metrc.</p>
+          <span class="ab-card-go">See consignment <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></span>
+        </a>
+        <a href="/credit-recovery" class="ab-card">
+          <div class="ab-card-ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/><line x1="12" y1="8" x2="12" y2="16"/><path d="M14.5 9.5h-3.5a1.5 1.5 0 0 0 0 3h2a1.5 1.5 0 0 1 0 3H9.5"/></svg></div>
+          <h3>Credit Recovery</h3>
+          <p>Returns, expirations, co-marketing. We find the credits you're owed and file them every month.</p>
+          <span class="ab-card-go">See credit recovery <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></span>
+        </a>
+      </div>
+    </div>
+    <div class="ab-svc-group ab-svc-group--col reveal reveal-delay-1">
+      <div class="ab-svc-tag"><span>For brands · ShelfCollect</span></div>
+      <div class="ab-svc-cards">
+        <a href="/accounts-receivable" class="ab-card">
+          <div class="ab-card-ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+          <h3>Accounts Receivable</h3>
+          <p>Every unpaid invoice in one place, reminders sent in your name, and a Pay Now link so stores settle in one click.</p>
+          <span class="ab-card-go">See ShelfCollect <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LETTER -->
+<section class="ab-letter-sec" id="letter">
+  <div class="ab-letter reveal">
+    <div class="ab-letter-head"><img src="/chris-mitchem.jpg" alt="" width="54" height="54"><div><b>A note from Chris</b><span>Founder &amp; CEO, ShelfSpace</span></div></div>
+    <h2>A decade in the trenches. Every lesson the hard way. ShelfSpace is what I wish existed when I needed it most.</h2>
+    <div class="ab-letter-body">
       <p>I started my first cannabis company in Oregon in 2015 — vertically integrated, multi-state, the whole thing. I've been a cultivator, a manufacturer, and a retailer. I'm the Founder &amp; CEO of Diem Cannabis, the dispensary business I still run in Massachusetts today. I've made payroll by the skin of my teeth, fought through market crashes, and navigated every compliance curveball this industry throws at you. We exited Oregon in 2023 — a decision that changed my perspective forever.</p>
 
       <p><strong>I didn't build ShelfSpace from the outside looking in.</strong> I built it because I was the operator drowning in the problem — reconciling vendor invoices at midnight, chasing credits nobody tracked, watching margin leak out of a business I'd bet everything on. Every feature here is one I needed on my own floor first.</p>
@@ -213,7 +596,7 @@
 
       <p>And I didn't stop at the software. <strong>So I built the team that runs the money side for you</strong> — AP, AR, consignment, and credit recovery — while you keep growing and selling. You approve; we do the reconciling, the chasing, and the paperwork that used to eat your nights.</p>
 
-      <p>And it works from both sides of the invoice. <strong>If you're a brand supplying the shelf, the same engine gets you paid.</strong> Every receivable in one place, aging tracked on a schedule, and the polite, relentless follow-up handled for you — with a Pay Now link on every invoice so retailers settle in one click. You stop being the one chasing. We run the <a href="/accounts-receivable" style="color:var(--green-mid);font-weight:600;">accounts receivable</a> in your name.</p>
+      <p>And it works from both sides of the invoice. <strong>If you're a brand supplying the shelf, the same engine gets you paid.</strong> Every receivable in one place, aging tracked on a schedule, and the polite, relentless follow-up handled for you — with a Pay Now link on every invoice so retailers settle in one click. You stop being the one chasing. We run the <a href="/accounts-receivable">accounts receivable</a> in your name.</p>
 
       <p>Because here's the truth I learned the hard way: <strong>inventory is roughly half your budget.</strong> It's the meat of profitability in a dispensary. If you aren't optimizing it — SKU by SKU, vendor by vendor — <strong>you aren't going to make it.</strong> That's the whole reason ShelfSpace exists.</p>
 
@@ -221,79 +604,31 @@
 
       <p><strong>Let's fix this industry together. I'm in it with you.</strong></p>
 
-      <div class="about-signature">— Chris</div>
+      <div class="ab-sig">— Chris</div>
     </div>
+    <button type="button" class="ab-letter-btn" aria-expanded="false">Read the whole letter <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
   </div>
-</section>
-
-<!-- WHAT WE'RE ACTUALLY DOING -->
-<section class="about-thesis">
-  <div class="about-thesis-inner">
-    <div class="section-label reveal">What we're actually doing</div>
-    <h2 class="reveal">Half your budget lives on your shelves.</h2>
-    <p class="reveal">In a dispensary, inventory is roughly half your budget. It's the single biggest lever you have on profit. Every SKU you stock is a bet that it'll sell, at the margin you need, before it expires or gets discounted into the ground.</p>
-    <p class="reveal">Win those bets and you make it. Lose enough of them — the dead SKUs, the expired product nobody credited you for, the brands that never earned their space — and the average on your P&amp;L quietly turns against you. Most owners don't see it until it's too late to fix.</p>
-    <p class="reveal"><strong>The retailers who get this right treat their vendors as partners, not invoices.</strong> They share data. They flag returns and damaged product early. They ask for help when a SKU takes a hit. That's the work. We built the system that makes it possible across every vendor, every SKU, every month.</p>
-    <p class="reveal">We keep the partnerships clean, the data moving, and the margin where it belongs: in your account.</p>
-  </div>
-</section>
-
-<!-- WHAT WE DO -->
-<section style="background:var(--white);padding:60px 48px;">
-  <div style="max-width:900px;margin:0 auto;">
-    <div style="text-align:center;margin-bottom:32px;">
-      <div class="section-label reveal">What ShelfSpace Does</div>
-    </div>
-    <div style="display:flex;gap:32px;flex-wrap:wrap;justify-content:center;">
-    <a href="/accounts-payable" style="flex:1;min-width:240px;max-width:280px;padding:24px;border:1px solid var(--slate-200);border-radius:12px;text-decoration:none;transition:all 0.3s;display:block;">
-      <div style="font-size:13px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--green-dark);margin-bottom:8px;">Accounts Payable</div>
-      <div style="font-size:15px;color:var(--slate-600);line-height:1.5;">Every invoice three-way matched against Metrc and your PO before a dollar goes out. Terms set per vendor, vendors paid right and on time. You approve &mdash; we run it.</div>
-    </a>
-    <a href="/consignment" style="flex:1;min-width:240px;max-width:280px;padding:24px;border:1px solid var(--slate-200);border-radius:12px;text-decoration:none;transition:all 0.3s;display:block;">
-      <div style="font-size:13px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--green-dark);margin-bottom:8px;">Consignment</div>
-      <div style="font-size:15px;color:var(--slate-600);line-height:1.5;">Vendors stock the shelf, you pay on what sells. Weekly settlements reconciled to Metrc, a shared vendor portal, capital freed from slow inventory &mdash; run for you.</div>
-    </a>
-    <a href="/credit-recovery" style="flex:1;min-width:240px;max-width:280px;padding:24px;border:1px solid var(--slate-200);border-radius:12px;text-decoration:none;transition:all 0.3s;display:block;">
-      <div style="font-size:13px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--green-dark);margin-bottom:8px;">Credit Recovery</div>
-      <div style="font-size:15px;color:var(--slate-600);line-height:1.5;">When a SKU takes a hit &mdash; returns, expirations, co-marketing &mdash; we find the credits you&rsquo;re owed and file them every month. Money most shops never claim, recovered.</div>
-    </a>
-    <a href="/accounts-receivable" style="flex:1;min-width:240px;max-width:280px;padding:24px;border:1px solid var(--slate-200);border-radius:12px;text-decoration:none;transition:all 0.3s;display:block;">
-      <div style="font-size:13px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--green-dark);margin-bottom:8px;">Accounts Receivable</div>
-      <div style="font-size:15px;color:var(--slate-600);line-height:1.5;">For the brands supplying the shelf: every unpaid invoice in one place, AR aging tracked, and a follow-up cadence that fires on its own. Retailers pay in one click &mdash; we run the collections in your name.</div>
-    </a>
-    </div>
-  </div>
-</section>
-
-<!-- TRUST SIGNALS -->
-<section style="background:var(--white);padding:40px 48px;text-align:center;">
-  <div style="display:flex;justify-content:center;gap:32px;flex-wrap:wrap;max-width:700px;margin:0 auto;">
-    <span style="display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--slate-500);"><img src="/metrc-logo-v2.png" alt="Metrc" style="height:16px;opacity:0.5;"> Official Metrc Integration</span>
-    <span style="display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--slate-500);"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Bank-Grade Security</span>
-    <span style="display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--slate-500);"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 10+ Years Cannabis</span>
-  </div>
-  <p style="text-align:center;margin-top:16px;font-size:14px;color:var(--slate-500);font-style:italic;">We find money hiding in plain sight &mdash; in most shops, in the same quiet corners.</p>
 </section>
 
 <!-- MISSION -->
-<div class="mission-section" id="mission">
-  <div class="mission-container">
-    <div class="section-label reveal">Our Mission</div>
-    <h2 class="reveal">Your profitability is our mission.</h2>
-    <p class="reveal">Every dispensary lives or dies by what's on its shelves: the right products, the right vendors, the right margin, protected SKU by SKU. We run all of it for you, and keep your vendor partnerships healthy. Your margin stays where it belongs: in your account.</p>
-  </div>
-</div>
+<section class="ab-mission" id="mission">
+  <div class="ab-mission-glow"></div>
+  <div class="section-label reveal">Our mission</div>
+  <h2 class="reveal">Your profitability is <em>our mission.</em></h2>
+  <p class="reveal">The right products, the right vendors, the right margin, protected SKU by SKU. We run all of it for you and keep your vendor partnerships healthy.</p>
+</section>
 
 <!-- CTA -->
-<section class="cta-section">
-  <div class="cta-content">
-    <div class="section-label reveal">Join Us</div>
-    <h2 class="section-title reveal">Ready to fix this industry together?</h2>
-    <p class="section-desc reveal">We're enrolling retailers and vendors for a free evaluation. Let's talk.</p>
-    <div class="cta-actions reveal">
-      <a href="/contact" class="btn-primary">Talk to us <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
-      <a href="mailto:support@shelfspace.pro" class="btn-secondary">Email Us</a>
-    </div>
+<section class="ab-final">
+  <div class="section-label reveal">Let's fix this industry together</div>
+  <h2 class="reveal">See what your shelves are leaking.</h2>
+  <p class="reveal">Free money review for dispensaries and brands. You see your real numbers before you ever see a price.</p>
+  <div class="reveal"><a href="/contact" class="ab-btn ab-btn--dark">Get a free money review <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a></div>
+  <div class="ab-final-note reveal">Rather write? <a href="mailto:support@shelfspace.pro">support@shelfspace.pro</a></div>
+  <div class="ab-final-trust reveal">
+    <span><img src="/metrc-logo-v2.png" alt="Metrc" style="height:16px;opacity:0.5;"> Official Metrc Integration</span>
+    <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Bank-Grade Security</span>
+    <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 10+ Years Cannabis</span>
   </div>
 </section>
 
@@ -315,69 +650,49 @@
 <script>
 (function() {
   var nav = document.getElementById('nav');
-  var pageHero = document.querySelector('.page-hero');
-  var parallaxSections = [
-    document.querySelector('.mission-section'),
-    document.querySelector('.cta-section')
-  ];
+  var hero = document.querySelector('.ab-hero');
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var isMobile = window.innerWidth < 900;
-  var ticking = false;
-
-  /* Hero entrance */
   requestAnimationFrame(function() {
     nav.classList.toggle('scrolled', window.scrollY > 20);
-    if (pageHero) pageHero.classList.add('hero-loaded');
+    if (hero) hero.classList.add('go');
   });
+  window.addEventListener('scroll', function() { nav.classList.toggle('scrolled', window.scrollY > 20); }, { passive: true });
 
-  /* Scroll-Triggered Reveals */
-  var revealObserver = new IntersectionObserver(function(entries) {
-    entries.forEach(function(entry) {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('is-visible');
-        revealObserver.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.1 });
-  document.querySelectorAll('.reveal').forEach(function(el) { revealObserver.observe(el); });
-
-  /* Scroll handler */
-  function onScroll() {
-    var scrollY = window.scrollY;
-    nav.classList.toggle('scrolled', scrollY > 20);
-    if (prefersReduced || isMobile) return;
-    var wh = window.innerHeight;
-    parallaxSections.forEach(function(section) {
-      if (!section) return;
-      var rect = section.getBoundingClientRect();
-      if (rect.bottom < 0 || rect.top > wh) return;
-      var center = rect.top + rect.height / 2 - wh / 2;
-      section.style.setProperty('--parallax-y', (center * 0.08) + 'px');
-    });
+  function countUp(el) {
+    var to = +el.getAttribute('data-ab-count');
+    if (reduced) { el.textContent = to; return; }
+    var t0 = null, dur = 1400;
+    function step(t) {
+      if (!t0) t0 = t;
+      var p = Math.min(1, (t - t0) / dur);
+      el.textContent = Math.round(to * (1 - Math.pow(1 - p, 3)));
+      if (p < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
   }
 
-  window.addEventListener('scroll', function() {
-    if (!ticking) {
-      requestAnimationFrame(function() {
-        onScroll();
-        ticking = false;
-      });
-      ticking = true;
-    }
-  }, { passive: true });
+  var io = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (!e.isIntersecting) return;
+      var el = e.target;
+      el.classList.add(el.classList.contains('reveal') ? 'is-visible' : 'go');
+      if (el.hasAttribute('data-ab-count')) countUp(el);
+      el.querySelectorAll && el.querySelectorAll('[data-ab-count]').forEach(countUp);
+      io.unobserve(el);
+    });
+  }, { threshold: 0.25 });
+  document.querySelectorAll('.reveal, [data-ab-play]').forEach(function(el) { io.observe(el); });
+  document.querySelectorAll('.ab-stat [data-ab-count]').forEach(function(el) { io.observe(el); });
 
-  onScroll();
-
-  window.addEventListener('resize', function() {
-    isMobile = window.innerWidth < 900;
-    if (isMobile) {
-      parallaxSections.forEach(function(section) {
-        if (section) section.style.setProperty('--parallax-y', '0px');
-      });
-    }
+  var letter = document.querySelector('.ab-letter');
+  var btn = letter && letter.querySelector('.ab-letter-btn');
+  if (btn) btn.addEventListener('click', function() {
+    var open = letter.classList.toggle('open');
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    btn.firstChild.textContent = open ? 'Show less ' : 'Read the whole letter ';
+    if (!open) letter.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' });
   });
-
 })();
 </script>
 <script src="/shelfiq-widget.js"></script>
