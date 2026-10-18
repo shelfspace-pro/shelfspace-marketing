@@ -1233,29 +1233,55 @@
 
 <!-- SECTION 4: THE OFFER — what we take over -->
 <style>
-.h-offer { background: var(--white); padding: 96px 48px; }
-.h-offer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; max-width: 1000px; margin: 0 auto; }
-.h-offer-card { display: flex; flex-direction: column; border: 2px solid var(--green-deep); border-radius: 24px; overflow: hidden; box-shadow: 0 26px 60px rgba(27,67,50,0.12); background: var(--white); }
-.h-offer-top { background: var(--green-ghost); padding: 26px 30px; border-bottom: 1px solid rgba(64,145,108,0.25); }
-.h-offer-name { font-family: var(--font-mono); font-size: 12px; font-weight: 700; letter-spacing: 1.6px; text-transform: uppercase; color: var(--green-dark); margin: 0 0 4px; }
-.h-offer-title { font-size: 22px; font-weight: 700; color: var(--green-deep); letter-spacing: -0.5px; line-height: 1.25; margin: 0; }
-.h-offer-list { list-style: none; margin: 0; padding: 22px 30px 8px; display: flex; flex-direction: column; gap: 12px; flex-grow: 1; }
-.h-offer-list li { display: flex; gap: 11px; align-items: flex-start; font-size: 15px; line-height: 1.5; color: var(--slate-600); }
-.h-offer-list li b { color: var(--slate-800); font-weight: 600; }
-.h-offer-list svg { flex: none; width: 18px; height: 18px; margin-top: 2px; color: var(--green-mid); }
-.h-offer-val { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; margin: 14px 30px 0; padding: 18px 0; border-top: 1px solid var(--slate-200); }
-.h-offer-val span { font-size: 15px; font-weight: 600; color: var(--green-deep); }
-.h-offer-val b { font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-size: clamp(24px, 2.6vw, 30px); color: var(--green-deep); letter-spacing: -0.8px; }
-.h-offer-link { display: inline-flex; align-items: center; gap: 8px; margin: 0 30px 26px; font-size: 15px; font-weight: 600; color: var(--green-dark); text-decoration: none; }
-.h-sales { max-width: 560px; margin: 0 auto 40px; text-align: center; }
-.h-sales-label { display: block; font-family: var(--font-mono); font-size: 12px; font-weight: 700; letter-spacing: 1.6px; text-transform: uppercase; color: var(--green-dark); margin-bottom: 6px; }
-.h-sales-val { font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-size: clamp(34px, 4vw, 48px); font-weight: 700; color: var(--green-deep); letter-spacing: -1.4px; margin-bottom: 14px; }
-.h-sales-ends { display: flex; justify-content: space-between; font-size: 12px; color: var(--slate-500); margin-top: 8px; }
+.h-offer { background: var(--white); padding: 96px 48px; position: relative; overflow: hidden; }
+.h-offer::before { content: ""; position: absolute; left: 50%; top: 220px; width: 1100px; height: 700px; transform: translateX(-50%); background: radial-gradient(ellipse at center, rgba(149,213,178,0.22), transparent 65%); pointer-events: none; }
+.h-offer > * { position: relative; }
+.h-offer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; max-width: 1080px; margin: 0 auto; }
+.h-offer-card { display: flex; flex-direction: column; border: 1px solid rgba(64,145,108,0.28); border-radius: 24px; overflow: hidden; box-shadow: 0 26px 60px rgba(27,67,50,0.12); background: var(--white); transition: transform .35s cubic-bezier(0.22,1,0.36,1), box-shadow .35s; }
+.h-offer-card:hover { transform: translateY(-4px); box-shadow: 0 34px 76px rgba(27,67,50,0.18); }
+.h-offer-top { background: linear-gradient(135deg, var(--green-deep), var(--green-dark)); padding: 26px 30px 24px; color: var(--white); position: relative; overflow: hidden; }
+.h-offer-top::after { content: ""; position: absolute; right: -60px; top: -60px; width: 200px; height: 200px; border-radius: 50%; border: 28px solid rgba(149,213,178,0.12); }
+.h-offer-name { font-family: var(--font-mono); font-size: 12px; font-weight: 700; letter-spacing: 1.6px; text-transform: uppercase; color: var(--green-accent); margin: 0 0 6px; }
+.h-offer-title { font-size: 22px; font-weight: 700; color: var(--white); letter-spacing: -0.5px; line-height: 1.25; margin: 0; max-width: 400px; }
+.h-offer-worth { padding: 22px 30px 20px; background: var(--green-ghost); border-bottom: 1px solid rgba(64,145,108,0.18); }
+.h-offer-val { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; margin: 0 0 14px; }
+.h-offer-val span { font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: 1.4px; text-transform: uppercase; color: var(--green-dark); }
+.h-offer-val b { font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-size: clamp(30px, 3.2vw, 40px); color: var(--green-deep); letter-spacing: -1.2px; line-height: 1; }
+.h-stack { display: flex; height: 16px; border-radius: 8px; overflow: hidden; gap: 2px; background: var(--white); }
+.h-stack i { display: block; height: 100%; transition: width .45s cubic-bezier(0.22,1,0.36,1); transform: scaleX(0); transform-origin: left; }
+.h-offer-card.is-visible .h-stack i { transform: none; transition: width .45s cubic-bezier(0.22,1,0.36,1), transform .9s cubic-bezier(0.22,1,0.36,1) .3s; }
+.s0 { background: var(--green-deep); } .s1 { background: var(--green-dark); } .s2 { background: var(--green-mid); } .s3 { background: var(--green-accent); } .s4 { background: var(--green-light); box-shadow: inset 0 0 0 1px rgba(64,145,108,0.3); }
+.h-legend { list-style: none; margin: 12px 0 0; padding: 0; display: grid; grid-template-columns: 1fr; gap: 5px; }
+.h-legend li { display: flex; align-items: center; gap: 7px; font-size: 12.5px; color: var(--slate-600); min-width: 0; }
+.h-legend .sw { flex: none; width: 9px; height: 9px; border-radius: 3px; }
+.h-legend b { margin-left: auto; font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-size: 12px; color: var(--green-deep); font-weight: 700; }
+.h-offer-kicker { font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: 1.4px; text-transform: uppercase; color: var(--slate-500); margin: 22px 30px 0; }
+.h-offer-list { list-style: none; margin: 0; padding: 12px 30px 8px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; flex-grow: 1; align-content: start; }
+.h-offer-list li { display: flex; gap: 10px; align-items: flex-start; font-size: 14px; line-height: 1.45; color: var(--slate-600); padding: 12px; border-radius: 12px; border: 1px solid var(--slate-100); background: var(--slate-50); transition: border-color .2s, background .2s; }
+.h-offer-list li:hover { border-color: rgba(64,145,108,0.35); background: var(--green-ghost); }
+.h-offer-list li b { display: block; color: var(--slate-800); font-weight: 600; }
+.h-ic { flex: none; width: 32px; height: 32px; border-radius: 10px; background: var(--green-light); color: var(--green-deep); display: inline-flex; align-items: center; justify-content: center; }
+.h-ic svg { width: 17px; height: 17px; }
+.h-offer-link { display: inline-flex; align-items: center; gap: 8px; margin: 14px 30px 26px; font-size: 15px; font-weight: 600; color: var(--green-dark); text-decoration: none; }
+.h-offer-link:hover { gap: 12px; }
+.h-sales { max-width: 640px; margin: 0 auto 44px; text-align: center; background: var(--white); border: 1px solid var(--slate-200); border-radius: 24px; padding: 26px 34px 22px; box-shadow: 0 18px 48px rgba(27,67,50,0.10); }
+.h-sales-label { display: block; font-family: var(--font-mono); font-size: 12px; font-weight: 700; letter-spacing: 1.6px; text-transform: uppercase; color: var(--green-dark); margin-bottom: 4px; }
+.h-sales-val { font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-size: clamp(44px, 5.4vw, 64px); font-weight: 700; color: var(--green-deep); letter-spacing: -2px; line-height: 1.05; margin-bottom: 16px; }
+.h-sales .uc-slider { height: 12px; border-radius: 6px; cursor: pointer; }
+.h-sales .uc-slider::-webkit-slider-thumb { width: 34px; height: 34px; border: 4px solid var(--white); box-shadow: 0 0 0 6px rgba(149,213,178,0.45), 0 6px 16px rgba(27,67,50,0.35); transition: box-shadow .2s; }
+.h-sales .uc-slider::-moz-range-thumb { width: 26px; height: 26px; border: 4px solid var(--white); box-shadow: 0 0 0 6px rgba(149,213,178,0.45), 0 6px 16px rgba(27,67,50,0.35); }
+.h-sales .uc-slider:active::-webkit-slider-thumb { box-shadow: 0 0 0 10px rgba(149,213,178,0.5), 0 6px 16px rgba(27,67,50,0.35); }
+.h-sales-ends { position: relative; height: 18px; font-family: var(--font-mono); font-size: 11px; color: var(--slate-500); margin-top: 10px; }
+.h-sales-ends span { position: absolute; transform: translateX(-50%); white-space: nowrap; }
+.h-sales-ends span:first-child { transform: none; } .h-sales-ends span:last-child { transform: translateX(-100%); }
 .h-sales-note { font-size: 13.5px; color: var(--slate-500); margin: 10px 0 0; }
 .h-offer-foot { text-align: center; max-width: 640px; margin: 36px auto 0; font-size: 17px; line-height: 1.6; color: var(--slate-700); }
 .h-offer-foot strong { color: var(--green-deep); }
-@media (max-width: 900px) { .h-offer { padding: 64px 20px; } .h-offer-grid { grid-template-columns: 1fr; max-width: 520px; } .h-offer-top, .h-offer-list { padding-left: 20px; padding-right: 20px; } .h-offer-val, .h-offer-link { margin-left: 20px; margin-right: 20px; } }
+@media (max-width: 900px) { .h-offer { padding: 64px 20px; } .h-offer-grid { grid-template-columns: 1fr; max-width: 520px; } .h-offer-top, .h-offer-worth, .h-offer-list { padding-left: 20px; padding-right: 20px; } .h-offer-kicker, .h-offer-link { margin-left: 20px; margin-right: 20px; } .h-sales { padding: 22px 20px 18px; } }
+@media (max-width: 520px) { .h-offer-list, .h-legend { grid-template-columns: 1fr; } .h-sales-ends span:nth-child(2), .h-sales-ends span:nth-child(4) { display: none; } }
+@media (prefers-reduced-motion: reduce) { .h-stack i { transform: none !important; transition: none !important; } .h-offer-card, .h-offer-card:hover { transform: none; } }
 </style>
+<noscript><style>.h-stack i { transform: none !important; }</style></noscript>
 <section class="h-offer" id="offer" aria-labelledby="offer-heading">
   <div class="h-head reveal">
     <div class="section-label">Everything you get</div>
@@ -1266,35 +1292,42 @@
     <label for="h-sales-slider" class="h-sales-label">Your monthly sales</label>
     <div class="h-sales-val" id="h-sales-val">$500k</div>
     <input type="range" class="uc-slider" id="h-sales-slider" min="100000" max="3000000" step="50000" value="500000" aria-describedby="h-sales-note">
-    <div class="h-sales-ends"><span>$100k</span><span>$3M</span></div>
+    <div class="h-sales-ends"><span style="left:0">$100k</span><span style="left:13.8%">$500k</span><span style="left:31%">$1M</span><span style="left:65.5%">$2M</span><span style="left:100%">$3M</span></div>
     <p class="h-sales-note" id="h-sales-note">Slide to your size. For brands, use wholesale sales.</p>
   </div>
   <div class="h-offer-grid">
     <div class="h-offer-card reveal">
       <div class="h-offer-top"><p class="h-offer-name">ShelfPay &middot; for dispensaries</p><p class="h-offer-title">Your AP department, done for you, paid for by your credits.</p></div>
+      <div class="h-offer-worth">
+        <div class="h-offer-val"><span>Worth, first year</span><b id="h-val-pay">$224,500</b></div>
+        <div class="h-stack" aria-hidden="true"><i id="h-pay-b0" style="width:22.72%" class="s0"></i><i id="h-pay-b1" style="width:13.36%" class="s1"></i><i id="h-pay-b2" style="width:33.41%" class="s2"></i><i id="h-pay-b3" style="width:18.71%" class="s3"></i><i id="h-pay-b4" style="width:11.80%" class="s4"></i></div><ul class="h-legend"><li><span class="sw s0"></span>Credits recovered<b id="h-pay-l0">$51,000</b></li><li><span class="sw s1"></span>Over-billing caught<b id="h-pay-l1">$30,000</b></li><li><span class="sw s2"></span>AP labor replaced<b id="h-pay-l2">$75,000</b></li><li><span class="sw s3"></span>On-time pay + consignment<b id="h-pay-l3">$42,000</b></li><li><span class="sw s4"></span>Your time back + setup<b id="h-pay-l4">$26,500</b></li></ul>
+      </div>
+      <p class="h-offer-kicker">What we take over</p>
       <ul class="h-offer-list">
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span><b>Every vendor invoice</b> received, read, and entered.</span></li>
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span><b>Checked against Metrc</b> line by line, before the check goes out.</span></li>
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span><b>Credit memos</b> built, sent, and chased every month.</span></li>
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span><b>Vendors paid</b> on time, on your terms.</span></li>
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span><b>Consignment</b> settled weekly, if you sell on it.</span></li>
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span><b>Vendor emails and QuickBooks</b> handled and kept current.</span></li>
+        <li><span class="h-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-6l-2 3h-4l-2-3H2"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/></svg></span><span><b>Every vendor invoice</b> received, read, and entered.</span></li>
+        <li><span class="h-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg></span><span><b>Checked against Metrc</b> line by line, before the check goes out.</span></li>
+        <li><span class="h-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1Z"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 17.5v-11"/></svg></span><span><b>Credit memos</b> built, sent, and chased every month.</span></li>
+        <li><span class="h-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2"/><path d="M6 12h.01M18 12h.01"/></svg></span><span><b>Vendors paid</b> on time, on your terms.</span></li>
+        <li><span class="h-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m17 2 4 4-4 4"/><path d="M3 11v-1a4 4 0 0 1 4-4h14"/><path d="m7 22-4-4 4-4"/><path d="M21 13v1a4 4 0 0 1-4 4H3"/></svg></span><span><b>Consignment</b> settled weekly, if you sell on it.</span></li>
+        <li><span class="h-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/><path d="M8 7h8M8 11h6"/></svg></span><span><b>Vendor emails and QuickBooks</b> handled and kept current.</span></li>
       </ul>
-      <div class="h-offer-val"><span>Worth, first year</span><b id="h-val-pay">$224,500</b></div>
       <a class="h-offer-link" href="/accounts-payable">See ShelfPay <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
     </div>
     <div class="h-offer-card reveal reveal-delay-1">
       <div class="h-offer-top"><p class="h-offer-name">ShelfCollect &middot; for brands</p><p class="h-offer-title">Your collections department, done for you, in your name.</p></div>
+      <div class="h-offer-worth">
+        <div class="h-offer-val"><span>Worth, first year</span><b id="h-val-collect">$301,000</b></div>
+        <div class="h-stack" aria-hidden="true"><i id="h-col-b0" style="width:39.87%" class="s0"></i><i id="h-col-b1" style="width:19.93%" class="s1"></i><i id="h-col-b2" style="width:27.94%" class="s2"></i><i id="h-col-b3" style="width:12.26%" class="s3"></i></div><ul class="h-legend"><li><span class="sw s0"></span>More sales<b id="h-col-l0">$120,000</b></li><li><span class="sw s1"></span>Bad debt avoided<b id="h-col-l1">$60,000</b></li><li><span class="sw s2"></span>Collections labor + setup<b id="h-col-l2">$84,100</b></li><li><span class="sw s3"></span>Faster cash, valued<b id="h-col-l3">$36,900</b></li></ul>
+      </div>
+      <p class="h-offer-kicker">What we take over</p>
       <ul class="h-offer-list">
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span><b>Every invoice</b> sent with a one-click Pay Now link.</span></li>
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span><b>Every past-due store</b> worked in your name until it pays.</span></li>
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span><b>AI phone calls</b> to overdue stores, bringing back a date to pay. <a href="/ai-calls" style="color:var(--green-dark);font-weight:600;text-decoration:none;">Hear one &rarr;</a></span></li>
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span><b>Store replies</b> answered fast.</span></li>
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span><b>0% installment plans</b> for slow payers.</span></li>
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span><b>A weekly "who owes what"</b> list for every rep.</span></li>
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span><b>QuickBooks</b> updated as payments land.</span></li>
+        <li><span class="h-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg></span><span><b>Every invoice</b> sent with a one-click Pay Now link.</span></li>
+        <li><span class="h-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></span><span><b>Every past-due store</b> worked in your name until it pays.</span></li>
+        <li><span class="h-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span><span><b>AI phone calls</b> to overdue stores, bringing back a date to pay. <a href="/ai-calls" style="color:var(--green-dark);font-weight:600;text-decoration:none;">Hear one &rarr;</a></span></li>
+        <li><span class="h-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span><span><b>Store replies</b> answered fast.</span></li>
+        <li><span class="h-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="m9 16 2 2 4-4"/></svg></span><span><b>0% installment plans</b> for slow payers.</span></li>
+        <li><span class="h-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg></span><span><b>A weekly “who owes what”</b> list for every rep, and QuickBooks updated as payments land.</span></li>
       </ul>
-      <div class="h-offer-val"><span>Worth, first year</span><b id="h-val-collect">$301,000</b></div>
       <a class="h-offer-link" href="/accounts-receivable">See ShelfCollect <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
     </div>
   </div>
@@ -1308,6 +1341,14 @@
   var valEl = document.getElementById('h-sales-val'), payEl = document.getElementById('h-val-pay'), colEl = document.getElementById('h-val-collect');
   function short(n) { return n >= 1e6 ? '$' + (n / 1e6).toFixed(n % 1e6 ? 2 : 0).replace(/0$/, '') + 'M' : '$' + Math.round(n / 1e3) + 'k'; }
   function usd(n) { return '$' + (Math.round(n / 100) * 100).toLocaleString('en-US'); }
+  function paint(prefix, parts) {
+    var tot = parts.reduce(function (a, b) { return a + b; }, 0);
+    parts.forEach(function (v, i) {
+      var b = document.getElementById(prefix + '-b' + i), l = document.getElementById(prefix + '-l' + i);
+      if (b) b.style.width = (v / tot * 100) + '%';
+      if (l) l.textContent = usd(v);
+    });
+  }
   function update() {
     var S = parseInt(slider.value, 10);
     // Dispensary, per month: credits 0.85%, over-billing 1% of purchases (~half of sales), AP clerk 0.9%,
@@ -1319,8 +1360,11 @@
     var col = S * 0.0436 * 12 + 2500 + cash * 0.15;
     valEl.textContent = short(S);
     payEl.textContent = usd(pay); colEl.textContent = usd(col);
+    // Bar segments regroup the same lines above; they always sum to the totals.
+    paint('h-pay', [S * 0.0085 * 12, S * 0.005 * 12, S * 0.0125 * 12, S * 0.007 * 12, 2000 * 12 + 2500]);
+    paint('h-col', [S * 0.02 * 12, S * 0.01 * 12, S * 0.0136 * 12 + 2500, cash * 0.15]);
     var pct = (S - slider.min) / (slider.max - slider.min) * 100;
-    slider.style.background = 'linear-gradient(to right, var(--green-accent) 0%, var(--green-accent) ' + pct + '%, var(--slate-200) ' + pct + '%, var(--slate-200) 100%)';
+    slider.style.background = 'linear-gradient(to right, var(--green-mid) 0%, var(--green-accent) ' + pct + '%, var(--slate-200) ' + pct + '%, var(--slate-200) 100%)';
   }
   slider.addEventListener('input', update);
   update();
