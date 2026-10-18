@@ -134,3 +134,8 @@ bash "$(dirname "$0")/check-docs-forbidden.sh" || true
 echo ""
 # Fence: every embedded training video must carry VideoObject JSON-LD (SEO).
 bash "$(dirname "$0")/check-video-jsonld.sh" || true
+
+echo ""
+# Fence: a weekday written next to a MM/DD/YYYY date must be that date's real weekday
+# ("Friday, 10/24/2026" shipped live 10/18/2026 — 10/24 is a Saturday).
+bash "$(dirname "$0")/check-weekday-dates.sh" || true
