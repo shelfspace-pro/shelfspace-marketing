@@ -1411,25 +1411,60 @@
 
 <!-- SECTION 6: TRUST — who's running your money -->
 <style>
-.h-trust { background: var(--white); padding: 104px 48px 96px; }
-.h-trust-grid { display: grid; grid-template-columns: 1.05fr 1fr; gap: 28px; max-width: 1040px; margin: 0 auto; align-items: stretch; }
-.h-founder { display: flex; flex-direction: column; background: var(--green-ghost); border: 1px solid rgba(149,213,178,0.6); border-radius: 24px; padding: 36px; box-shadow: 0 18px 44px rgba(27,67,50,0.08); }
-.h-founder-top { display: flex; align-items: center; gap: 18px; margin-bottom: 22px; }
-.h-founder-top img { width: 84px; height: 84px; border-radius: 50%; object-fit: cover; flex: none; box-shadow: 0 8px 20px rgba(27,67,50,0.18); }
-.h-founder-name { font-size: 19px; font-weight: 700; color: var(--green-deep); margin: 0; }
-.h-founder-role { font-size: 14px; color: var(--slate-600); margin: 2px 0 0; }
-.h-founder-quote { font-size: clamp(19px, 1.9vw, 23px); font-weight: 600; line-height: 1.45; color: var(--green-deep); letter-spacing: -0.4px; margin: 0 0 18px; }
-.h-founder-body { font-size: 15.5px; line-height: 1.65; color: var(--slate-600); margin: 0 0 24px; flex-grow: 1; }
-.h-founder-links { display: flex; flex-wrap: wrap; gap: 10px 22px; }
-.h-founder-links a { display: inline-flex; align-items: center; gap: 7px; font-size: 15px; font-weight: 600; color: var(--green-dark); text-decoration: none; }
+.h-trust { background: var(--white); padding: 104px 48px 96px; position: relative; overflow: hidden; }
+.h-trust::before { content: ""; position: absolute; right: -200px; top: 120px; width: 700px; height: 700px; border-radius: 50%; background: radial-gradient(circle, rgba(149,213,178,0.20), transparent 65%); pointer-events: none; }
+.h-trust > * { position: relative; }
+.h-trust-grid { display: grid; grid-template-columns: 1fr 1.05fr; gap: 28px; max-width: 1080px; margin: 0 auto; align-items: stretch; }
+.h-founder { position: relative; min-height: 600px; border-radius: 24px; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end; color: var(--white); background: var(--green-deep) url('/chris-mitchem.jpg') center 18% / cover no-repeat; box-shadow: 0 30px 70px rgba(27,67,50,0.28); isolation: isolate; }
+.h-founder::before { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(27,67,50,0) 22%, rgba(27,67,50,0.55) 48%, rgba(27,67,50,0.94) 72%, var(--green-deep) 100%); }
+.h-founder-badge { position: absolute; top: 20px; left: 20px; display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px 8px 10px; border-radius: 999px; background: rgba(255,255,255,0.92); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: .6px; text-transform: uppercase; color: var(--green-deep); box-shadow: 0 8px 20px rgba(27,67,50,0.18); }
+.h-founder-badge i { width: 8px; height: 8px; border-radius: 50%; background: var(--green-mid); box-shadow: 0 0 0 0 rgba(64,145,108,0.6); animation: hfPulse 2s infinite; }
+@keyframes hfPulse { 0% { box-shadow: 0 0 0 0 rgba(64,145,108,0.55); } 70% { box-shadow: 0 0 0 9px rgba(64,145,108,0); } 100% { box-shadow: 0 0 0 0 rgba(64,145,108,0); } }
+.h-founder-inner { padding: 0 34px 30px; }
+.h-founder-mark { font-family: Georgia, serif; font-size: 84px; line-height: .6; color: var(--green-accent); height: 34px; display: block; }
+.h-founder-quote { font-size: clamp(20px, 2vw, 25px); font-weight: 700; line-height: 1.35; color: var(--white); letter-spacing: -0.5px; margin: 0 0 14px; }
+.h-founder-body { font-size: 15px; line-height: 1.6; color: rgba(255,255,255,0.78); margin: 0 0 20px; }
+.h-founder-id { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding-top: 18px; border-top: 1px solid rgba(149,213,178,0.25); }
+.h-founder-name { font-size: 19px; font-weight: 700; color: var(--white); margin: 0; }
+.h-founder-role { font-size: 13.5px; color: var(--green-accent); margin: 2px 0 0; }
+.h-founder-links { display: flex; gap: 8px; }
+.h-founder-links a { display: inline-flex; align-items: center; gap: 7px; height: 38px; padding: 0 14px; border-radius: 12px; font-size: 14px; font-weight: 600; color: var(--white); text-decoration: none; background: rgba(255,255,255,0.10); border: 1px solid rgba(255,255,255,0.18); transition: background .2s; }
+.h-founder-links a:hover { background: rgba(255,255,255,0.2); }
+.h-founder-links a.pri { background: var(--white); color: var(--green-deep); border-color: var(--white); }
+.h-founder-links a.pri:hover { background: var(--green-ghost); }
 .h-pillars { display: flex; flex-direction: column; gap: 16px; }
-.h-pillar { display: flex; gap: 16px; align-items: flex-start; background: var(--white); border: 1px solid var(--slate-200); border-radius: 16px; padding: 22px 24px; box-shadow: 0 10px 28px rgba(27,67,50,0.06); flex: 1; }
-.h-pillar-icon { flex: none; width: 44px; height: 44px; border-radius: 12px; background: var(--green-ghost); color: var(--green-deep); display: flex; align-items: center; justify-content: center; }
-.h-pillar-icon svg { width: 22px; height: 22px; }
-.h-pillar-icon img { width: 32px; height: auto; }
-.h-pillar h3 { font-size: 17px; font-weight: 700; color: var(--green-deep); letter-spacing: -0.3px; margin: 2px 0 6px; }
-.h-pillar p { font-size: 14.5px; line-height: 1.55; color: var(--slate-600); margin: 0; }
-@media (max-width: 900px) { .h-trust { padding: 72px 20px; } .h-trust-grid { grid-template-columns: 1fr; max-width: 560px; } .h-founder { padding: 28px 24px; } }
+.h-pillar { display: grid; grid-template-columns: 1fr 220px; gap: 18px; align-items: center; background: var(--white); border: 1px solid var(--slate-200); border-radius: 16px; padding: 22px 22px 22px 24px; box-shadow: 0 12px 32px rgba(27,67,50,0.07); flex: 1; transition: transform .3s cubic-bezier(0.22,1,0.36,1), box-shadow .3s, border-color .3s; }
+.h-pillar:hover { transform: translateX(4px); border-color: rgba(64,145,108,0.4); box-shadow: 0 18px 44px rgba(27,67,50,0.12); }
+.h-pillar-head { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
+.h-pillar-icon { flex: none; width: 34px; height: 34px; border-radius: 10px; background: var(--green-ghost); color: var(--green-deep); display: flex; align-items: center; justify-content: center; }
+.h-pillar-icon svg { width: 18px; height: 18px; }
+.h-pillar-icon img { width: 26px; height: auto; }
+.h-pillar h3 { font-size: 17px; font-weight: 700; color: var(--green-deep); letter-spacing: -0.3px; margin: 0; }
+.h-pillar p { font-size: 14px; line-height: 1.55; color: var(--slate-600); margin: 0; }
+/* mini visuals */
+.tv { background: var(--slate-50); border: 1px solid var(--slate-100); border-radius: 12px; padding: 12px; font-size: 11.5px; color: var(--slate-600); }
+.tv-row { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.tv-row + .tv-row { margin-top: 8px; }
+.tv-mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; color: var(--green-deep); font-weight: 700; }
+.tv-tag { display: inline-flex; align-items: center; gap: 4px; font-size: 10.5px; font-weight: 600; padding: 3px 8px; border-radius: 999px; background: var(--green-light); color: var(--green-deep); }
+.tv-tag svg { width: 10px; height: 10px; }
+.tv-btn { display: block; text-align: center; margin-top: 10px; padding: 7px; border-radius: 9px; background: var(--green-deep); color: var(--white); font-weight: 600; font-size: 11.5px; position: relative; overflow: hidden; }
+.tv-btn::after { content: ""; position: absolute; top: 0; bottom: 0; width: 40%; left: -50%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent); animation: hmShine 2.8s infinite; }
+@keyframes hmShine { 0%, 40% { left: -50%; } 80%, 100% { left: 120%; } }
+.tv-line { display: flex; align-items: center; gap: 6px; padding: 6px 8px; border-radius: 8px; background: var(--white); border: 1px solid var(--slate-200); }
+.tv-line small { font-family: var(--font-mono); font-size: 9px; color: var(--slate-400); letter-spacing: .4px; min-width: 44px; } .tv-line span { white-space: nowrap; font-size: 11px; }
+.tv-link { display: flex; align-items: center; justify-content: center; height: 16px; color: var(--green-mid); }
+.tv-link svg { width: 14px; height: 14px; }
+.tv-flow { display: flex; align-items: center; gap: 6px; }
+.tv-node { flex: none; text-align: center; padding: 8px 6px; border-radius: 9px; background: var(--white); border: 1px solid var(--slate-200); font-weight: 600; color: var(--slate-800); font-size: 11px; width: 74px; white-space: nowrap; }
+.tv-pipe { flex: 1; height: 4px; border-radius: 2px; background: var(--green-light); position: relative; overflow: hidden; }
+.tv-pipe::after { content: ""; position: absolute; top: 0; bottom: 0; width: 30%; left: -30%; border-radius: 2px; background: var(--green-mid); animation: hmFlow 1.8s linear infinite; }
+@keyframes hmFlow { to { left: 100%; } }
+.tv-us { margin-top: 10px; text-align: center; font-size: 10.5px; color: var(--slate-500); border: 1px dashed var(--slate-200); border-radius: 8px; padding: 5px; }
+.tv-us s { color: var(--slate-400); }
+@media (max-width: 1000px) { .h-pillar { grid-template-columns: 1fr; } }
+@media (max-width: 900px) { .h-trust { padding: 72px 20px; } .h-trust-grid { grid-template-columns: 1fr; max-width: 560px; } .h-founder { min-height: 560px; } .h-founder-inner { padding: 0 22px 24px; } }
+@media (prefers-reduced-motion: reduce) { .h-founder-badge i, .tv-btn::after, .tv-pipe::after { animation: none; } .tv-pipe::after { left: 0; width: 100%; } }
 </style>
 <section class="h-trust" id="trust" aria-labelledby="trust-heading">
   <div class="h-head reveal">
@@ -1438,23 +1473,47 @@
     <p>Handing someone your vendor money takes trust. Here's exactly who and what you're trusting.</p>
   </div>
   <div class="h-trust-grid">
-    <div class="h-founder reveal">
-      <div class="h-founder-top">
-        <img src="/chris-avatar.jpg" alt="Chris Mitchem, ShelfSpace founder" width="84" height="84" loading="lazy">
-        <div><p class="h-founder-name">Chris Mitchem</p><p class="h-founder-role">Founder &amp; CEO &middot; cannabis operator since 2015</p></div>
-      </div>
-      <p class="h-founder-quote">"I've run a dispensary's books myself, and I have the scars to prove it. Every account we take on, I stand behind personally."</p>
-      <p class="h-founder-body">ShelfSpace is built and run by operators, not a call center. If something about your account isn't right, you email me and it gets fixed.</p>
-      <div class="h-founder-links">
-        <a href="mailto:chris@shelfspace.pro">chris@shelfspace.pro</a>
-        <a href="https://www.linkedin.com/in/chris-mitchem-mba/" target="_blank" rel="noopener"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> LinkedIn</a>
-        <a href="/about">More about Chris &rarr;</a>
+    <div class="h-founder reveal" role="img" aria-label="Chris Mitchem, ShelfSpace founder">
+      <span class="h-founder-badge"><i></i>Cannabis operator since 2015</span>
+      <div class="h-founder-inner">
+        <span class="h-founder-mark" aria-hidden="true">&ldquo;</span>
+        <p class="h-founder-quote">I've run a dispensary's books myself, and I have the scars to prove it. Every account we take on, I stand behind personally.</p>
+        <p class="h-founder-body">ShelfSpace is built and run by operators, not a call center. If something about your account isn't right, you email me and it gets fixed.</p>
+        <div class="h-founder-id">
+          <div><p class="h-founder-name">Chris Mitchem</p><p class="h-founder-role">Founder &amp; CEO</p></div>
+          <div class="h-founder-links">
+            <a class="pri" href="mailto:chris@shelfspace.pro">Email Chris</a>
+            <a href="https://www.linkedin.com/in/chris-mitchem-mba/" target="_blank" rel="noopener" aria-label="Chris Mitchem on LinkedIn"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+            <a href="/about" aria-label="More about Chris">About &rarr;</a>
+          </div>
+        </div>
       </div>
     </div>
     <div class="h-pillars">
-      <div class="h-pillar reveal"><span class="h-pillar-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span><div><h3>A real person runs your account</h3><p>Software does the typing. A person checks the work, and you approve every dollar before it moves.</p></div></div>
-      <div class="h-pillar reveal reveal-delay-1"><span class="h-pillar-icon"><img src="/metrc-logo-v2.png" alt="Metrc" loading="lazy"></span><div><h3>Certified Metrc third-party vendor</h3><p>Every invoice is checked against Metrc, the same state records your compliance runs on. Vetted and approved by Metrc.</p></div></div>
-      <div class="h-pillar reveal reveal-delay-2"><span class="h-pillar-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18"/><path d="M5 21V10"/><path d="M19 21V10"/><path d="M9 21v-7"/><path d="M15 21v-7"/><path d="M12 3 3 8h18z"/></svg></span><div><h3>Your money stays in your bank</h3><p>Vendor checks are drawn on your own account and signed by you. Stores pay brands straight into theirs. We never hold your funds.</p></div></div>
+      <div class="h-pillar reveal">
+        <div><div class="h-pillar-head"><span class="h-pillar-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span><h3>A real person runs your account</h3></div><p>Software does the typing. A person checks the work, and you approve every dollar before it moves.</p></div>
+        <div class="tv" aria-hidden="true">
+          <div class="tv-row"><span>Vendor invoice</span><span class="tv-mono">$4,812.50</span></div>
+          <div class="tv-row"><span>Checked by your team</span><span class="tv-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Done</span></div>
+          <span class="tv-btn">Approve payment</span>
+        </div>
+      </div>
+      <div class="h-pillar reveal reveal-delay-1">
+        <div><div class="h-pillar-head"><span class="h-pillar-icon"><img src="/metrc-logo-v2.png" alt="Metrc" loading="lazy"></span><h3>Certified Metrc third-party vendor</h3></div><p>Every invoice is checked against Metrc, the same state records your compliance runs on. Vetted and approved by Metrc.</p></div>
+        <div class="tv" aria-hidden="true">
+          <div class="tv-line"><small>INVOICE</small><span>Blue Dream 3.5g &times; 48</span></div>
+          <div class="tv-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg></div>
+          <div class="tv-line"><small>METRC</small><span>Blue Dream 3.5g &times; 48</span></div>
+          <div class="tv-row" style="margin-top:8px;justify-content:center"><span class="tv-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Matched line by line</span></div>
+        </div>
+      </div>
+      <div class="h-pillar reveal reveal-delay-2">
+        <div><div class="h-pillar-head"><span class="h-pillar-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18"/><path d="M5 21V10"/><path d="M19 21V10"/><path d="M9 21v-7"/><path d="M15 21v-7"/><path d="M12 3 3 8h18z"/></svg></span><h3>Your money stays in your bank</h3></div><p>Vendor checks are drawn on your own account and signed by you. Stores pay brands straight into theirs. We never hold your funds.</p></div>
+        <div class="tv" aria-hidden="true">
+          <div class="tv-flow"><span class="tv-node">Your bank</span><span class="tv-pipe"></span><span class="tv-node">Vendor</span></div>
+          <div class="tv-us">ShelfSpace holds <b class="tv-mono">$0</b> of it</div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
