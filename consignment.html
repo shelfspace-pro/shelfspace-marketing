@@ -27,6 +27,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="/hero-motion.css">
 <style>
   @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-12px); } }
 
@@ -651,6 +652,285 @@
   "url": "https://shelfspace.pro/consignment"
 }
 </script>
+<style>
+  /* ===== CONSIGNMENT v2 ===== */
+  .page-hero .hero-trust { display: inline-flex; align-items: center; gap: 10px; margin-top: 26px; font-size: 13px; color: var(--slate-500); opacity: 0; transform: translateY(30px); transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1) 0.52s, transform 0.8s cubic-bezier(0.22,1,0.36,1) 0.52s; }
+  .page-hero .hero-trust img { height: 18px; opacity: 0.7; }
+  .page-hero.hero-loaded .hero-trust { opacity: 1; transform: none; }
+  .cg-sales .hm-bar i { background: linear-gradient(180deg, #95d5b2, #40916c); }
+  .cg-sales .hm-bar.in i { background: linear-gradient(180deg, #b7e4c7, #40916c); }
+
+  .cg-head { max-width: 760px; margin: 0 auto 52px; text-align: center; }
+  .cg-head h2, .cg-copy h2 { font-size: clamp(30px, 3.8vw, 46px); font-weight: 700; letter-spacing: -1.3px; color: var(--green-deep); line-height: 1.1; margin: 10px 0 14px; }
+  .cg-head h2 em, .cg-copy h2 em { font-style: normal; color: var(--green-mid); }
+  .cg-head p { font-size: 17px; line-height: 1.6; color: var(--slate-600); }
+  .cg-head p a { color: var(--green-mid); font-weight: 600; text-decoration: none; }
+  .cg-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px 26px; margin-top: 36px; }
+  .cg-links a, .cg-more { font-size: 14px; font-weight: 700; color: var(--green-mid); text-decoration: none; border-bottom: 1px solid rgba(64,145,108,0.35); padding-bottom: 2px; transition: color .2s, border-color .2s; }
+  .cg-links a:hover, .cg-more:hover { color: var(--green-deep); border-color: var(--green-deep); }
+  .cg-more-row { display: flex; flex-wrap: wrap; gap: 10px 22px; }
+
+  /* how it works timeline */
+  .cg-how { background: var(--slate-50); padding: 96px 48px; overflow: hidden; }
+  .cg-tl { position: relative; max-width: 1080px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+  .cg-tl-track { position: absolute; left: 12.5%; right: 12.5%; top: 31px; height: 4px; border-radius: 4px; background: #d8e9df; }
+  .cg-tl-fill { position: absolute; left: 0; top: 0; bottom: 0; width: 0; border-radius: 4px; background: linear-gradient(90deg, var(--green-mid), var(--green-accent)); transition: width 2.2s cubic-bezier(0.65,0,0.35,1) 0.2s; }
+  .cg-tl.go .cg-tl-fill { width: 100%; }
+  .cg-step { position: relative; text-align: center; opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.34,1.56,0.64,1); }
+  .cg-tl.go .cg-step { opacity: 1; transform: none; }
+  .cg-tl.go .cg-step:nth-of-type(1) { transition-delay: 0.2s; }
+  .cg-tl.go .cg-step:nth-of-type(2) { transition-delay: 0.8s; }
+  .cg-tl.go .cg-step:nth-of-type(3) { transition-delay: 1.4s; }
+  .cg-tl.go .cg-step:nth-of-type(4) { transition-delay: 2s; }
+  .cg-dot { position: relative; width: 66px; height: 66px; margin: 0 auto 18px; border-radius: 50%; background: #fff; border: 3px solid var(--green-accent); display: grid; place-items: center; color: var(--green-dark); box-shadow: 0 10px 26px rgba(27,67,50,0.12); }
+  .cg-step--win .cg-dot { background: var(--green-deep); border-color: var(--green-deep); color: var(--green-accent); }
+  .cg-step--win .cg-dot::before, .cg-step--win .cg-dot::after { content: ''; position: absolute; inset: -3px; border-radius: 50%; border: 2px solid var(--green-mid); animation: cgPulse 2.4s ease-out infinite; }
+  .cg-step--win .cg-dot::after { animation-delay: 1.2s; }
+  @keyframes cgPulse { 0% { transform: scale(1); opacity: 0.8; } 100% { transform: scale(1.7); opacity: 0; } }
+  .cg-when { font-family: var(--font-mono); font-size: 12px; font-weight: 700; letter-spacing: 1.4px; text-transform: uppercase; color: var(--green-mid); margin-bottom: 6px; }
+  .cg-step h3 { font-size: 18px; font-weight: 700; color: var(--green-deep); margin-bottom: 8px; letter-spacing: -0.3px; }
+  .cg-step p { font-size: 14px; line-height: 1.55; color: var(--slate-600); max-width: 220px; margin: 0 auto; }
+  .cg-cats { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 10px; margin-top: 52px; }
+  .cg-cats-l { font-size: 13px; font-weight: 600; color: var(--slate-500); margin-right: 4px; }
+  .cg-cat { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; border-radius: 999px; background: #fff; border: 1px solid var(--slate-200); font-size: 14px; font-weight: 600; color: var(--slate-600); }
+  .cg-cat--now { background: var(--green-deep); border-color: var(--green-deep); color: #fff; }
+  .cg-cat--now i { width: 8px; height: 8px; border-radius: 50%; background: var(--green-accent); animation: cgLive 1.6s ease-out infinite; }
+  @keyframes cgLive { 0% { box-shadow: 0 0 0 0 rgba(149,213,178,0.7); } 100% { box-shadow: 0 0 0 9px rgba(149,213,178,0); } }
+
+  /* stats */
+  .cg-stats { background: #fff; padding: 60px 48px; border-bottom: 1px solid var(--slate-100); }
+  .cg-stats-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+  .cg-stat { text-align: center; padding: 26px 16px; border-radius: 16px; background: linear-gradient(180deg, #f0faf4, #fff); border: 1px solid #e3f2e9; }
+  .cg-stat-n { font-family: var(--font-mono); font-size: clamp(34px, 4vw, 50px); font-weight: 700; color: var(--green-deep); line-height: 1; letter-spacing: -1px; font-variant-numeric: tabular-nums; }
+  .cg-stat-n span { color: var(--green-mid); font-size: 0.55em; letter-spacing: 0; }
+  .cg-stat-l { margin-top: 10px; font-size: 14px; color: var(--slate-600); line-height: 1.45; font-weight: 500; }
+
+  /* split sections */
+  .cg-sec { padding: 104px 48px; overflow: hidden; }
+  .cg-sec--white { background: #fff; }
+  .cg-sec--slate { background: var(--slate-50); }
+  .cg-sec--ghost { background: var(--green-ghost, #f0faf4); }
+  .cg-split { max-width: 1120px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1.05fr; gap: 72px; align-items: center; }
+  .cg-split--rev .cg-copy { order: 2; }
+  .cg-copy p { font-size: 17px; line-height: 1.65; color: var(--slate-600); margin-bottom: 22px; }
+  .cg-ticks { list-style: none; padding: 0; margin: 0 0 24px; display: grid; gap: 10px; }
+  .cg-ticks li { position: relative; padding-left: 32px; font-size: 15px; font-weight: 600; color: var(--green-deep); line-height: 1.45; }
+  .cg-ticks li::before { content: '✓'; position: absolute; left: 0; top: -1px; width: 22px; height: 22px; border-radius: 50%; background: var(--green-deep); color: var(--green-accent); font-size: 12px; display: grid; place-items: center; }
+  .cg-vis { position: relative; }
+
+  /* both lanes */
+  .cg-lane { background: #0f2a1f; color: #e6f4ea; border-radius: 20px; padding: 22px; box-shadow: 0 30px 70px rgba(15,42,31,0.35); }
+  .cg-lane-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 18px; }
+  .cg-lane-head b { font-size: 15px; } .cg-lane-head span { font-size: 12px; color: rgba(230,244,234,0.55); font-family: var(--font-mono); }
+  .cg-switch { position: relative; display: grid; grid-template-columns: 1fr 1fr; border-radius: 14px; background: rgba(255,255,255,0.07); padding: 5px; margin-bottom: 18px; }
+  .cg-switch span { position: relative; z-index: 2; text-align: center; padding: 11px 0; font-size: 14px; font-weight: 700; transition: color .4s; }
+  .cg-switch i { position: absolute; z-index: 1; top: 5px; bottom: 5px; left: 5px; width: calc(50% - 5px); border-radius: 10px; background: #fff; transition: transform .55s cubic-bezier(0.34,1.56,0.64,1), background .4s; }
+  .cg-sw-a { color: var(--green-deep); } .cg-sw-b { color: rgba(230,244,234,0.7); }
+  .cg-lane.b .cg-switch i { transform: translateX(100%); background: var(--green-accent); }
+  .cg-lane.b .cg-sw-a { color: rgba(230,244,234,0.7); } .cg-lane.b .cg-sw-b { color: var(--green-deep); }
+  .cg-lane-rows > div { display: flex; justify-content: space-between; gap: 12px; padding: 12px 4px; border-top: 1px solid rgba(255,255,255,0.08); font-size: 14px; }
+  .cg-lane-rows span { color: rgba(230,244,234,0.7); }
+  .cg-lane-rows b { font-family: var(--font-mono); font-size: 14px; color: #fca5a5; transition: color .4s; text-align: right; }
+  .cg-lane.b .cg-lane-rows b { color: var(--green-accent); }
+  .cg-flip.swap { animation: cgSwap .5s ease; }
+  @keyframes cgSwap { 0% { opacity: 0; transform: translateY(6px); } 100% { opacity: 1; transform: none; } }
+  .cg-terms { position: relative; margin: -14px 18px 0; background: #fff; border-radius: 16px; box-shadow: 0 18px 40px rgba(27,67,50,0.14); padding: 6px 18px; }
+  .cg-terms > div { display: grid; grid-template-columns: 1fr auto auto; gap: 10px; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--slate-100); font-size: 14px; }
+  .cg-terms > div:last-child { border-bottom: 0; }
+  .cg-terms span { font-weight: 600; color: var(--green-deep); }
+  .cg-terms em { font-style: normal; font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: 999px; background: #e3f2e9; color: var(--green-dark); }
+  .cg-terms small { font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: 999px; background: var(--slate-100); color: var(--slate-600); }
+
+  /* settlement */
+  .cg-settle { background: #fff; border-radius: 20px; box-shadow: 0 30px 70px rgba(27,67,50,0.14); overflow: hidden; }
+  .cg-settle-head { display: flex; justify-content: space-between; align-items: center; padding: 18px 22px; background: var(--green-deep); color: #fff; }
+  .cg-settle-head b { display: block; font-size: 15px; } .cg-settle-head span { font-size: 12px; color: rgba(255,255,255,0.65); }
+  .cg-settle-head em { font-style: normal; font-size: 11px; font-weight: 700; padding: 5px 10px; border-radius: 999px; background: var(--green-accent); color: var(--green-deep); }
+  .cg-settle-big { padding: 22px 22px 10px; }
+  .cg-settle-big small { font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--slate-500); }
+  .cg-settle-big .mono { font-family: var(--font-mono); font-size: clamp(36px, 4vw, 48px); font-weight: 700; color: var(--green-deep); letter-spacing: -1.5px; font-variant-numeric: tabular-nums; }
+  .cg-settle-row { display: flex; justify-content: space-between; padding: 12px 22px; border-top: 1px solid var(--slate-100); font-size: 14px; color: var(--slate-600); opacity: 0; transform: translateX(-12px); transition: all .5s ease; }
+  .cg-settle-row b { font-family: var(--font-mono); color: var(--green-deep); }
+  .cg-settle-row--hl { background: #f0faf4; } .cg-settle-row--hl span { font-weight: 700; color: var(--green-deep); }
+  .cg-settle.go .cg-settle-row { opacity: 1; transform: none; }
+  .cg-settle.go .cg-settle-row:nth-of-type(4) { transition-delay: .2s; }
+  .cg-settle.go .cg-settle-row:nth-of-type(5) { transition-delay: .4s; }
+  .cg-settle-bar { position: relative; display: flex; justify-content: space-between; margin: 10px 22px 22px; height: 34px; border-radius: 10px; background: #d8f3dc; overflow: hidden; font-size: 12px; font-weight: 700; align-items: center; padding: 0 12px; color: var(--green-deep); }
+  .cg-settle-bar i { position: absolute; left: 0; top: 0; bottom: 0; width: 0; background: var(--green-deep); transition: width 1.4s cubic-bezier(0.65,0,0.35,1) .5s; }
+  .cg-settle.go .cg-settle-bar i { width: var(--w); }
+  .cg-settle-bar span { position: relative; z-index: 1; }
+  .cg-settle-bar span:first-of-type { color: #fff; }
+  .cg-adj { position: relative; margin: -10px 22px 0 40px; background: #fff; border-radius: 16px; box-shadow: 0 18px 40px rgba(27,67,50,0.14); padding: 4px 18px; }
+  .cg-adj-row { display: grid; grid-template-columns: 1fr auto auto; gap: 12px; align-items: center; padding: 12px 0; font-size: 13px; color: var(--slate-600); }
+  .cg-adj-row + .cg-adj-row { border-top: 1px solid var(--slate-100); }
+  .cg-adj-row b { color: var(--green-deep); }
+  .cg-adj-row em { font-style: normal; font-size: 11px; font-weight: 700; padding: 3px 9px; border-radius: 999px; background: #e3f2e9; color: var(--green-dark); }
+  .cg-adj-row strong { font-family: var(--font-mono); color: #b91c1c; }
+
+  /* metrc */
+  .cg-metrc { background: #fff; border-radius: 20px; box-shadow: 0 30px 70px rgba(27,67,50,0.14); overflow: hidden; border: 1px solid #e8f1ec; }
+  .cg-metrc-head { display: flex; justify-content: space-between; align-items: center; padding: 18px 22px; border-bottom: 1px solid var(--slate-100); }
+  .cg-metrc-head b { display: block; font-size: 15px; color: var(--green-deep); } .cg-metrc-head span { font-size: 12px; color: var(--slate-500); }
+  .cg-metrc-head img { height: 20px; opacity: .8; }
+  .cg-metrc-row { display: grid; grid-template-columns: 1.3fr 1.3fr auto 26px; gap: 14px; align-items: center; padding: 15px 22px; border-bottom: 1px solid var(--slate-100); font-size: 14px; }
+  .cg-metrc-row .sku { font-weight: 600; color: var(--green-deep); }
+  .cg-metrc-row .bar { height: 8px; border-radius: 8px; background: var(--slate-100); overflow: hidden; }
+  .cg-metrc-row .bar i { display: block; height: 100%; width: 0; border-radius: 8px; background: linear-gradient(90deg, var(--green-mid), var(--green-accent)); transition: width 1.3s cubic-bezier(0.22,1,0.36,1); }
+  .cg-metrc.go .bar i { width: var(--w); }
+  .cg-metrc.go .cg-metrc-row:nth-of-type(3) .bar i { transition-delay: .2s; }
+  .cg-metrc-row .q { font-family: var(--font-mono); font-size: 12px; color: var(--slate-600); white-space: nowrap; }
+  .cg-metrc-row .ok { width: 24px; height: 24px; border-radius: 50%; background: var(--green-deep); color: var(--green-accent); display: grid; place-items: center; font-size: 12px; transform: scale(0); transition: transform .4s cubic-bezier(0.34,1.56,0.64,1); }
+  .cg-metrc.go .ok { transform: scale(1); }
+  .cg-metrc.go .cg-metrc-row:nth-of-type(2) .ok { transition-delay: .9s; }
+  .cg-metrc.go .cg-metrc-row:nth-of-type(3) .ok { transition-delay: 1.1s; }
+  .cg-metrc.go .cg-metrc-row:nth-of-type(4) .ok { transition-delay: 1.3s; }
+  .cg-metrc-foot { display: flex; justify-content: space-between; align-items: center; padding: 14px 22px; background: #f0faf4; font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: .5px; text-transform: uppercase; color: var(--green-dark); }
+  .cg-metrc-foot em { font-style: normal; padding: 4px 10px; border-radius: 999px; background: var(--green-deep); color: #fff; }
+
+  /* portal + check */
+  .cg-stack { padding-bottom: 225px; }
+  .cg-portal { background: #fff; border-radius: 20px; box-shadow: 0 30px 70px rgba(27,67,50,0.14); overflow: hidden; width: 88%; }
+  .cg-portal-head { display: flex; align-items: center; gap: 12px; padding: 18px 22px; background: var(--green-deep); color: #fff; }
+  .cg-av { width: 40px; height: 40px; border-radius: 12px; background: var(--green-accent); color: var(--green-deep); display: grid; place-items: center; font-weight: 700; font-size: 14px; }
+  .cg-portal-head b { display: block; font-size: 15px; } .cg-portal-head span { font-size: 12px; color: rgba(255,255,255,0.65); }
+  .cg-portal-row { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 13px 22px; border-top: 1px solid var(--slate-100); font-size: 13.5px; color: var(--slate-600); }
+  .cg-portal-row b { font-family: var(--font-mono); font-size: 13px; color: var(--green-deep); display: inline-flex; align-items: center; gap: 8px; text-align: right; }
+  .cg-portal-row em { font-family: var(--font-display, inherit); font-style: normal; font-size: 11px; font-weight: 700; padding: 3px 9px; border-radius: 999px; }
+  .cg-portal-row em.g { background: #e3f2e9; color: var(--green-dark); } .cg-portal-row em.s { background: var(--slate-100); color: var(--slate-600); } .cg-portal-row em.a { background: #fef3c7; color: #92400e; }
+  .cg-check { position: absolute; right: 0; bottom: 0; width: 58%; background: linear-gradient(135deg, #fffdf6, #f6fbf7); border: 1px solid #d9e7de; border-radius: 12px; padding: 18px 20px; box-shadow: 0 24px 50px rgba(27,67,50,0.22); transform: rotate(3deg); animation: cgFloat 5s ease-in-out infinite; }
+  @keyframes cgFloat { 0%,100% { translate: 0 0; } 50% { translate: 0 -8px; } }
+  .cg-check-top { display: flex; justify-content: space-between; gap: 10px; margin-bottom: 12px; }
+  .cg-check-top b { display: block; font-size: 14px; color: var(--green-deep); } .cg-check-top small { font-size: 9px; letter-spacing: .5px; text-transform: uppercase; color: var(--slate-500); }
+  .cg-check-top span { font-family: var(--font-mono); font-size: 10px; color: var(--slate-500); text-align: right; }
+  .cg-check-pay { display: flex; align-items: baseline; gap: 10px; border-bottom: 1px solid var(--slate-200); padding-bottom: 6px; }
+  .cg-check-pay small { font-size: 10px; text-transform: uppercase; color: var(--slate-500); } .cg-check-pay b { font-size: 14px; color: var(--green-deep); }
+  .cg-check-amt { font-family: var(--font-mono); font-size: 24px; font-weight: 700; color: var(--green-deep); margin: 10px 0; }
+  .cg-check-pill { display: inline-block; font-family: var(--font-mono); font-size: 9.5px; font-weight: 700; letter-spacing: .5px; text-transform: uppercase; padding: 5px 10px; border-radius: 999px; background: var(--green-deep); color: var(--green-accent); }
+
+  /* cash freed */
+  .cg-cash { position: relative; overflow: hidden; text-align: center; color: #fff; padding: 110px 48px; background: radial-gradient(ellipse at 50% 0%, #2d6a4f 0%, #1b4332 55%, #0f2a1f 100%); }
+  .cg-cash-glow { position: absolute; left: 50%; top: 55%; width: 760px; height: 760px; transform: translate(-50%,-50%); border-radius: 50%; background: radial-gradient(circle, rgba(149,213,178,0.16), transparent 65%); animation: cgGlow 6s ease-in-out infinite; pointer-events: none; }
+  @keyframes cgGlow { 0%,100% { transform: translate(-50%,-50%) scale(0.9); opacity: .7; } 50% { transform: translate(-50%,-50%) scale(1.1); opacity: 1; } }
+  .cg-cash > *:not(.cg-cash-glow) { position: relative; }
+  .cg-cash .section-label { color: var(--green-accent); }
+  .cg-cash h2 { font-size: clamp(34px, 4.8vw, 60px); font-weight: 700; letter-spacing: -1.8px; line-height: 1.06; margin: 12px auto 44px; }
+  .cg-cash h2 em { font-style: normal; color: var(--green-accent); }
+  .cg-cash-row { display: flex; justify-content: center; align-items: center; gap: 28px; }
+  .cg-cash-pane { width: 300px; padding: 28px 26px; border-radius: 20px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); text-align: left; }
+  .cg-cash-pane--after { background: rgba(149,213,178,0.14); border-color: rgba(149,213,178,0.45); box-shadow: 0 0 60px rgba(149,213,178,0.2); }
+  .cg-cash-pane small { font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,0.55); }
+  .cg-cash-pane .mono { font-family: var(--font-mono); font-size: 52px; font-weight: 700; letter-spacing: -2px; line-height: 1.1; margin: 6px 0 4px; }
+  .cg-cash-pane--after .mono { color: var(--green-accent); }
+  .cg-cash-pane span { font-size: 14px; color: rgba(255,255,255,0.7); }
+  .cg-cash-meter { margin-top: 18px; height: 10px; border-radius: 10px; background: rgba(255,255,255,0.1); overflow: hidden; }
+  .cg-cash-meter i { display: block; height: 100%; border-radius: 10px; transition: width 1.8s cubic-bezier(0.65,0,0.35,1) .3s; }
+  .cg-drain { width: 100%; background: linear-gradient(90deg, #f87171, #b91c1c); }
+  .cg-fill { width: 0; background: linear-gradient(90deg, #40916c, #95d5b2); }
+  .cg-cash-row.go .cg-drain { width: 0; }
+  .cg-cash-row.go .cg-fill { width: 100%; }
+  .cg-cash-arrow { color: var(--green-accent); animation: cgNudge 1.6s ease-in-out infinite; }
+  @keyframes cgNudge { 0%,100% { transform: translateX(0); } 50% { transform: translateX(8px); } }
+  .cg-cash-foot { margin-top: 18px; font-size: 13px; color: rgba(255,255,255,0.5); }
+  .cg-cash-p { max-width: 600px; margin: 22px auto 22px; font-size: 18px; line-height: 1.65; color: rgba(255,255,255,0.75); }
+  .cg-more--light { color: var(--green-accent); border-color: rgba(149,213,178,0.4); }
+  .cg-more--light:hover { color: #fff; border-color: #fff; }
+
+  /* margin */
+  .cg-margin { background: #fff; border-radius: 20px; box-shadow: 0 30px 70px rgba(27,67,50,0.14); border: 1px solid #e8f1ec; padding: 28px; }
+  .cg-tag { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; }
+  .cg-tag small { font-size: 14px; font-weight: 700; color: var(--green-deep); }
+  .cg-price { font-family: var(--font-mono); font-size: 34px; font-weight: 700; color: var(--green-deep); display: flex; align-items: baseline; gap: 10px; }
+  .cg-price s { font-size: 22px; color: var(--slate-400, #94a3b8); text-decoration-thickness: 3px; text-decoration-color: transparent; transition: text-decoration-color .4s; }
+  .cg-price b { display: inline-block; color: #b91c1c; transform: scale(0); transition: transform .5s cubic-bezier(0.34,1.56,0.64,1); }
+  .cg-margin.b .cg-price s { text-decoration-color: #b91c1c; }
+  .cg-margin.b .cg-price b { transform: none; }
+  .cg-tag em { margin-left: auto; font-style: normal; font-size: 11px; font-weight: 700; padding: 5px 10px; border-radius: 999px; background: #fee2e2; color: #b91c1c; opacity: 0; transition: opacity .4s; }
+  .cg-margin.b .cg-tag em { opacity: 1; }
+  .cg-mbar { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; height: 84px; }
+  .cg-mbar > div { border-radius: 14px; display: flex; flex-direction: column; justify-content: center; align-items: center; color: #fff; transition: transform .5s; }
+  .cg-mbar-l { background: var(--green-deep); } .cg-mbar-r { background: var(--green-mid); }
+  .cg-mbar b { font-family: var(--font-mono); font-size: 26px; } .cg-mbar span { font-size: 12px; opacity: .8; }
+  .cg-margin.b .cg-mbar > div { transform: scaleY(0.92); }
+  .cg-margin-foot { margin-top: 18px; text-align: center; font-size: 14px; color: var(--slate-600); }
+  .cg-margin-foot b { color: var(--green-deep); }
+
+  /* we run it */
+  .cg-run { background: var(--slate-50); padding: 96px 48px; }
+  .cg-run-grid { max-width: 980px; margin: 0 auto; display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; }
+  .cg-run-grid > div { display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center; padding: 22px 14px; border-radius: 16px; background: #fff; box-shadow: 0 8px 22px rgba(27,67,50,0.07); font-size: 14px; font-weight: 600; color: var(--green-deep); line-height: 1.35; opacity: 0; transform: translateY(16px) scale(.96); transition: opacity .45s ease, transform .45s cubic-bezier(0.34,1.56,0.64,1); }
+  .cg-run-grid.go > div { opacity: 1; transform: none; }
+  .cg-run-grid > div i { font-style: normal; width: 34px; height: 34px; border-radius: 50%; background: var(--green-deep); color: var(--green-accent); display: grid; place-items: center; font-size: 15px; }
+  .cg-run-grid.go > div:nth-child(2) { transition-delay: .07s; } .cg-run-grid.go > div:nth-child(3) { transition-delay: .14s; } .cg-run-grid.go > div:nth-child(4) { transition-delay: .21s; } .cg-run-grid.go > div:nth-child(5) { transition-delay: .28s; }
+  .cg-run-grid.go > div:nth-child(6) { transition-delay: .35s; } .cg-run-grid.go > div:nth-child(7) { transition-delay: .42s; } .cg-run-grid.go > div:nth-child(8) { transition-delay: .49s; } .cg-run-grid.go > div:nth-child(9) { transition-delay: .56s; } .cg-run-grid.go > div:nth-child(10) { transition-delay: .63s; }
+
+  /* suite */
+  .cg-suite { background: #fff; padding: 96px 48px; }
+  .cg-suite-grid { max-width: 1060px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .cg-card { display: flex; flex-direction: column; background: #fff; border-radius: 18px; padding: 26px; border: 1px solid #e8f1ec; text-decoration: none; box-shadow: 0 8px 24px rgba(27,67,50,0.07); transition: transform .25s cubic-bezier(0.34,1.56,0.64,1), box-shadow .25s; }
+  .cg-card:hover { transform: translateY(-6px); box-shadow: 0 20px 44px rgba(27,67,50,0.16); }
+  .cg-card-ic { width: 48px; height: 48px; border-radius: 14px; background: var(--green-deep); color: var(--green-accent); display: grid; place-items: center; margin-bottom: 16px; transition: transform .3s; }
+  .cg-card:hover .cg-card-ic { transform: rotate(-8deg) scale(1.08); }
+  .cg-card h3 { font-size: 18px; font-weight: 700; color: var(--green-deep); margin-bottom: 8px; }
+  .cg-card p { font-size: 14px; line-height: 1.55; color: var(--slate-600); flex: 1; }
+  .cg-card span { margin-top: 14px; font-size: 14px; font-weight: 700; color: var(--green-mid); }
+
+  /* final cta */
+  .cg-final { position: relative; overflow: hidden; text-align: center; color: #fff; padding: 110px 48px; background: radial-gradient(ellipse at 50% 0%, #2d6a4f 0%, #1b4332 55%, #0f2a1f 100%); }
+  .cg-final-glow { position: absolute; left: 50%; top: 50%; width: 700px; height: 700px; transform: translate(-50%,-50%); border-radius: 50%; background: radial-gradient(circle, rgba(149,213,178,0.18), transparent 65%); animation: cgGlow 6s ease-in-out infinite; pointer-events: none; }
+  .cg-final > *:not(.cg-final-glow) { position: relative; }
+  .cg-final .section-label { color: var(--green-accent); }
+  .cg-final h2 { font-size: clamp(34px, 4.8vw, 58px); font-weight: 700; letter-spacing: -1.8px; line-height: 1.06; margin: 12px auto 16px; max-width: 820px; }
+  .cg-final h2 em { font-style: normal; color: var(--green-accent); }
+  .cg-final > p { font-size: 18px; color: rgba(255,255,255,0.72); margin-bottom: 32px; }
+  .cg-btn { display: inline-flex; align-items: center; gap: 10px; background: var(--green-accent); color: var(--green-deep); font-weight: 700; font-size: 17px; padding: 18px 30px; border-radius: 12px; text-decoration: none; animation: cgCta 2.4s ease-in-out infinite; transition: transform .2s, background .2s; }
+  .cg-btn:hover { transform: translateY(-2px) scale(1.03); background: #b7e4c7; }
+  @keyframes cgCta { 0%,100% { box-shadow: 0 0 0 0 rgba(149,213,178,0.55), 0 10px 30px rgba(0,0,0,0.25); } 50% { box-shadow: 0 0 0 14px rgba(149,213,178,0), 0 10px 30px rgba(0,0,0,0.25); } }
+  .cg-quote { display: flex; align-items: center; gap: 18px; max-width: 640px; margin: 44px auto 0; padding: 20px 24px; border-radius: 18px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); text-align: left; }
+  .cg-quote img { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; flex: none; border: 2px solid var(--green-accent); }
+  .cg-quote p { font-size: 15px; font-style: italic; line-height: 1.5; color: rgba(255,255,255,0.85); margin: 0 0 6px; }
+  .cg-quote span { font-size: 13px; color: rgba(255,255,255,0.55); }
+
+  @media (max-width: 980px) {
+    .cg-how, .cg-stats, .cg-sec, .cg-cash, .cg-run, .cg-suite, .cg-final { padding-left: 20px; padding-right: 20px; }
+    .cg-how, .cg-sec, .cg-run, .cg-suite { padding-top: 72px; padding-bottom: 72px; }
+    .cg-cash, .cg-final { padding-top: 80px; padding-bottom: 80px; }
+    .cg-tl { grid-template-columns: 1fr; gap: 26px; max-width: 460px; }
+    .cg-tl-track { left: 31px; right: auto; top: 20px; bottom: 20px; width: 4px; height: auto; }
+    .cg-tl-fill { width: 100% !important; height: 0; transition-property: height; }
+    .cg-tl.go .cg-tl-fill { height: 100%; }
+    .cg-step { display: grid; grid-template-columns: 66px 1fr; gap: 0 18px; text-align: left; align-items: start; }
+    .cg-dot { grid-row: span 3; margin: 0; }
+    .cg-step p { margin: 0; max-width: none; }
+    .cg-when { margin-top: 6px; }
+    .cg-stats-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+    .cg-split { grid-template-columns: 1fr; gap: 40px; }
+    .cg-split--rev .cg-copy { order: 0; }
+    .cg-adj { margin: -10px 10px 0 18px; }
+    .cg-terms { margin: -14px 10px 0; }
+    .cg-cash-row { flex-direction: column; gap: 14px; }
+    .cg-cash-pane { width: 100%; max-width: 340px; }
+    .cg-cash-arrow { transform: rotate(90deg); animation: none; }
+    .cg-run-grid { grid-template-columns: 1fr 1fr; }
+    .cg-suite-grid { grid-template-columns: 1fr; }
+    .cg-portal { width: 100%; }
+    .cg-check { position: relative; width: 88%; margin: 16px 0 0 auto; transform: rotate(2deg); }
+    .cg-stack { padding-bottom: 0; }
+    .cg-quote { flex-direction: column; text-align: center; }
+  }
+  @media (max-width: 520px) {
+    .cg-metrc-row { grid-template-columns: 1fr auto 24px; }
+    .cg-metrc-row .bar { grid-column: 1 / -1; grid-row: 2; }
+    .cg-adj-row { grid-template-columns: 1fr auto; }
+    .cg-adj-row em { display: none; }
+    .cg-price { font-size: 28px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .cg-step, .cg-run-grid > div, .cg-settle-row { opacity: 1 !important; transform: none !important; transition: none !important; }
+    .cg-tl-fill { width: 100%; } .cg-metrc .bar i { width: var(--w); } .cg-metrc .ok { transform: none; }
+    .cg-check, .cg-btn, .cg-cash-glow, .cg-final-glow, .cg-cash-arrow, .cg-cat--now i, .cg-step--win .cg-dot::before, .cg-step--win .cg-dot::after { animation: none !important; }
+  }
+</style>
+<noscript><style>.cg-step,.cg-run-grid>div,.cg-settle-row,.page-hero .hero-trust{opacity:1!important;transform:none!important}.cg-tl-fill{width:100%}.cg-metrc .bar i{width:var(--w)}.cg-metrc .ok{transform:none}.cg-settle-bar i{width:var(--w)}</style></noscript>
 </head>
 <body>
 
@@ -676,22 +956,78 @@
 </nav>
 
 <!-- SECTION 1: HERO -->
-<div class="page-hero">
+<div class="page-hero page-hero--motion">
   <div class="hero-bg-gradient"></div>
   <div class="hero-bg-gradient-2"></div>
   <div class="hero-grid-lines"></div>
-  <div class="hero-text hero-text--solo">
+  <div class="lp-split">
+  <div class="hero-text--solo lp-text">
     <div class="aud-badge aud-retailer">For Retailers</div>
-    <div class="section-label">Carry inventory on consignment</div>
-    <h1 class="hero-h1">Run consignment without running it. Vendors own the shelf; we run the settlements.</h1>
-    <p class="hero-lede">Vendors stock the shelf and you pay on what sells. Weekly settlements reconciled to Metrc and your POS, a shared vendor portal, capital freed from slow inventory &mdash; run for you.</p>
+    <div class="section-label">Cannabis Consignment</div>
+    <h1 class="hero-h1">Stock the shelf. <em>Pay on what sells.</em></h1>
+    <p class="hero-lede">Vendors own the inventory until it sells. We run the weekly settlements, reconciled to Metrc. You approve the check.</p>
     <div class="hero-actions-centered">
       <a href="/contact" class="btn-primary">Show me my number <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+    </div>
+    <div class="hero-trust"><img src="/metrc-logo-v2.png" alt="Metrc"> Certified Metrc Third-Party Vendor &middot; Vendors paid every week</div>
+  </div>
+    <div class="hm-stage" data-engine data-ms="6500" aria-label="Animated example: a vendor delivery is received on consignment with nothing paid upfront, the product sells through, and the weekly settlement pays the vendor their split of what sold">
+      <div class="hm-glow"></div>
+      <div class="hm-window" aria-hidden="true">
+        <div class="hm-chrome"><i></i><i></i><i></i>
+          <div class="hm-tabs"><span class="hm-tab on" data-s="0">Stock</span><span class="hm-tab" data-s="1">Sell</span><span class="hm-tab" data-s="2">Settle</span></div>
+        </div>
+        <div class="hm-scenes">
+          <div class="hm-scene on">
+            <div class="hm-title"><b>Delivery · Sunrise Extracts</b><span>10/09/2026</span></div>
+            <div class="hm-q">
+              <div class="hm-qrow hm-r" data-at="250"><span class="v">GG #4 3.5g<small>24 units</small></span><span class="a">$600.00</span><span class="hm-pill chk" data-at="2350" data-cls="sent" data-rm="chk" data-text="On shelf">Arrived</span></div>
+              <div class="hm-qrow hm-r" data-at="450"><span class="v">Blue Dream 1g<small>12 units</small></span><span class="a">$240.00</span><span class="hm-pill chk" data-at="2500" data-cls="sent" data-rm="chk" data-text="On shelf">Arrived</span></div>
+              <div class="hm-qrow hm-r" data-at="650"><span class="v">Gummies 100mg<small>20 units</small></span><span class="a">$300.00</span><span class="hm-pill chk" data-at="2650" data-cls="sent" data-rm="chk" data-text="On shelf">Arrived</span></div>
+              <div class="hm-qrow hm-r" data-at="850"><span class="v">Pineapple Express 3.5g<small>6 units</small></span><span class="a">$135.00</span><span class="hm-pill chk" data-at="2800" data-cls="sent" data-rm="chk" data-text="On shelf">Arrived</span></div>
+            </div>
+            <div class="hm-btn" data-at="1500">Receive as consignment <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <svg class="hm-cursor" data-at="1000" style="--x0:84%;--y0:98%;--x1:58%;--y1:62%" viewBox="0 0 24 24"><path d="M4 2l16 9-7 2-3 7z" fill="#fff" stroke="#0f2a1f" stroke-width="1.5" stroke-linejoin="round"/></svg>
+            <div class="hm-paidbar" data-at="3100"><div><b style="font-size:13px;">You paid upfront</b><small style="display:block;font-size:11px;color:rgba(230,244,234,0.65);margin-top:2px;">$1,275.00 of product on your shelf. Your cash stays put.</small></div><div class="hm-big">$0.00</div></div>
+          </div>
+          <div class="hm-scene">
+            <div class="hm-title"><b>Sell-through · this week</b><span>From Metrc + your POS</span></div>
+            <div class="hm-aging cg-sales">
+              <div class="hm-bar" style="--h:4%;--h2:75%" data-at="300"><b data-at="900" data-text="18 sold">0</b><i></i><span>GG #4</span></div>
+              <div class="hm-bar" style="--h:4%;--h2:75%" data-at="450"><b data-at="1050" data-text="9 sold">0</b><i></i><span>Blue Dream</span></div>
+              <div class="hm-bar" style="--h:4%;--h2:70%" data-at="600"><b data-at="1200" data-text="14 sold">0</b><i></i><span>Gummies</span></div>
+              <div class="hm-bar" style="--h:4%;--h2:4%" data-at="750"><b data-at="1350" data-text="0 sold">0</b><i></i><span>Pineapple</span></div>
+            </div>
+            <div class="hm-feed">
+              <div class="hm-ev" data-at="1500"><i></i>Sale · GG #4 3.5g · $50.00<em>10/14/2026</em></div>
+              <div class="hm-ev" data-at="2000"><i></i>Pineapple Express not moving: goes back, never bought<em>10/15/2026</em></div>
+            </div>
+            <div class="hm-kpis">
+              <div class="hm-kpi hm-r" data-at="2500"><b data-count="41" data-pre="" data-dec="0" data-suf="">0</b><span>units sold</span></div>
+              <div class="hm-kpi hm-r" data-at="2750"><b data-count="1680" data-dec="0">$0</b><span>net sales</span></div>
+              <div class="hm-kpi hm-r" data-at="3000"><b>$0</b><span>owed on unsold</span></div>
+            </div>
+          </div>
+          <div class="hm-scene">
+            <div class="hm-title"><b>Settlement · week ending 10/16/2026</b><span>Sunrise Extracts</span></div>
+            <div class="hm-cm">
+              <div class="lbl" data-at="300">Net sales · 41 units</div><div class="amt" data-at="300">$1,680.00</div>
+              <div class="lbl" data-at="680">Vendor split · 50%</div><div class="amt" data-at="680">$840.00</div>
+              <div class="lbl" data-at="1060">Customer return, netted</div><div class="amt" data-at="1060">&minus;$25.00</div>
+              <div class="lbl" data-at="1440">Unsold product</div><div class="amt" data-at="1440">$0.00</div>
+            </div>
+            <div class="hm-stamp" data-at="2100">Approved</div>
+            <div class="hm-total" data-at="2700"><div><b style="font-size:13px;">Check sent to the vendor</b><small>Paid on what sold. Nothing more.</small></div><div class="hm-big" data-count="815">$0.00</div></div>
+          </div>
+        </div>
+        <div class="hm-progress"><i></i></div>
+      </div>
+      <div class="hm-caption">Illustration with example numbers</div>
     </div>
   </div>
 </div>
 
-<!-- SECTION 1.5: BRAND TICKER — vendors paid through ShelfSpace -->
+<!-- BRAND TICKER — vendors paid through ShelfSpace -->
 <section class="brand-ticker brand-ticker--tight">
   <div class="brand-ticker-label">Brands paid through ShelfSpace every week</div>
   <div class="brand-ticker-track">
@@ -718,488 +1054,214 @@
   </div>
 </section>
 
-<!-- DONE-FOR-YOU FLOW (reusable module: .dfy-flow) -->
-<style>
-  .dfy-flow { background: var(--slate-50); padding: 88px 48px; border-top: 1px solid var(--slate-100); }
-  .dfy-flow-inner { max-width: 1040px; margin: 0 auto; }
-  .dfy-flow-head { text-align: center; max-width: 660px; margin: 0 auto 44px; }
-  .dfy-flow-eyebrow { font-family: var(--font-mono); font-size: 11.5px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--green-dark); margin-bottom: 12px; }
-  .dfy-flow-head h2 { font-size: clamp(26px,3.4vw,38px); font-weight: 700; letter-spacing: -1px; color: var(--green-deep); margin: 0; line-height: 1.12; }
-  .dfy-flow-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
-  .dfy-flow-step { background: var(--white); border: 1px solid var(--slate-200); border-radius: 20px; padding: 30px 26px; box-shadow: 0 12px 30px rgba(27,67,50,0.05); }
-  .dfy-flow-num { font-family: var(--font-mono); font-size: 14px; font-weight: 700; color: var(--green-mid); letter-spacing: 1px; }
-  .dfy-flow-step h3 { font-size: 19px; font-weight: 700; color: var(--green-deep); letter-spacing: -0.4px; margin: 14px 0 8px; }
-  .dfy-flow-step p { font-size: 14.5px; line-height: 1.6; color: var(--slate-600); margin: 0; }
-  @media (max-width: 820px) { .dfy-flow { padding: 64px 24px; } .dfy-flow-grid { grid-template-columns: 1fr; } }
-</style>
-<section class="dfy-flow" aria-labelledby="dfy-flow-h">
-  <div class="dfy-flow-inner">
-    <div class="dfy-flow-head reveal">
-      <div class="dfy-flow-eyebrow">How the done-for-you works</div>
-      <h2 id="dfy-flow-h">You connect once. We run the settlements. You approve the check.</h2>
+<!-- HOW IT WORKS -->
+<section class="cg-how">
+  <div class="cg-head reveal">
+    <div class="section-label">How consignment works</div>
+    <h2>Selling product <em>you don't own yet.</em></h2>
+    <p>The vendor delivers. You sell it. You pay them after, only for what sold.</p>
+  </div>
+  <div class="cg-tl" data-cg-play>
+    <div class="cg-tl-track"><div class="cg-tl-fill"></div></div>
+    <div class="cg-step"><div class="cg-dot"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div><div class="cg-when">Step 1</div><h3>Vendor delivers</h3><p>You mark the delivery consignment when it arrives.</p></div>
+    <div class="cg-step"><div class="cg-dot"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><div class="cg-when">Step 2</div><h3>Lives on your shelf</h3><p>$0 paid upfront. The vendor owns it until it sells.</p></div>
+    <div class="cg-step"><div class="cg-dot"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg></div><div class="cg-when">Step 3</div><h3>Customer buys</h3><p>Every sale tracked from Metrc and your POS.</p></div>
+    <div class="cg-step cg-step--win"><div class="cg-dot"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2"/><path d="M6 12h.01M18 12h.01"/></svg></div><div class="cg-when">Every week</div><h3>Vendor gets paid</h3><p>We settle, you approve, the check goes out.</p></div>
+  </div>
+  <div class="cg-cats reveal">
+    <span class="cg-cats-l">Already sold this way:</span>
+    <span class="cg-cat">Grocery</span><span class="cg-cat">Hardware</span><span class="cg-cat">Apparel</span><span class="cg-cat cg-cat--now"><i></i>Cannabis, now</span>
+  </div>
+  <div class="cg-links reveal">
+    <a href="/blog/how-cannabis-consignment-works">How cannabis consignment works &rarr;</a>
+    <a href="/blog/why-general-consignment-software-doesnt-work-cannabis">Why general consignment software fails cannabis &rarr;</a>
+    <a href="/blog/get-started-cannabis-consignment">Getting started &rarr;</a>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="cg-stats">
+  <div class="cg-stats-grid">
+    <div class="cg-stat reveal"><div class="cg-stat-n">$<b data-cg-count="0">0</b></div><div class="cg-stat-l">paid upfront for consignment product</div></div>
+    <div class="cg-stat reveal reveal-delay-1"><div class="cg-stat-n">Weekly</div><div class="cg-stat-l">settlements, reconciled to Metrc and your POS</div></div>
+    <div class="cg-stat reveal reveal-delay-2"><div class="cg-stat-n"><b data-cg-count="2">2</b><span> lanes</span></div><div class="cg-stat-l">for every vendor: consignment and wholesale</div></div>
+    <div class="cg-stat reveal reveal-delay-3"><div class="cg-stat-n">$<b data-cg-count="27">27</b><span>K</span></div><div class="cg-stat-l">freed at one Massachusetts dispensary</div></div>
+  </div>
+</section>
+
+<!-- BOTH LANES -->
+<section class="cg-sec cg-sec--white" id="con-4">
+  <div class="cg-split">
+    <div class="cg-copy">
+      <div class="section-label reveal">Both lanes, every vendor</div>
+      <h2 class="reveal">The delivery decides. <em>Not a contract.</em></h2>
+      <p class="reveal">Every vendor is set up for consignment and wholesale from day one. Whoever receives the truck picks the lane. Proven movers wholesale, new SKUs on consignment, same vendor, same week.</p>
+      <ul class="cg-ticks reveal">
+        <li>Nothing to propose or renegotiate</li>
+        <li>You set the split and the payment terms</li>
+        <li>Wholesale stays on whatever terms you have</li>
+      </ul>
+      <a class="cg-more reveal" href="/blog/cannabis-vendor-management-guide">Cannabis vendor management guide &rarr;</a>
     </div>
-    <div class="dfy-flow-grid">
-      <div class="dfy-flow-step reveal"><div class="dfy-flow-num">01</div><h3>Flip a vendor to consignment</h3><p>You pick which deliveries are consignment at receive time &mdash; each vendor is set up for both lanes, so nothing gets renegotiated.</p></div>
-      <div class="dfy-flow-step reveal reveal-delay-1"><div class="dfy-flow-num">02</div><h3>We settle weekly on what sold</h3><p>Reconciled to Metrc and your POS, category splits applied, and the vendor&rsquo;s portal updated &mdash; every week, in your name.</p></div>
-      <div class="dfy-flow-step reveal reveal-delay-2"><div class="dfy-flow-num">03</div><h3>You approve the check</h3><p>Approve and we cut it. The vendor is paid their split of what actually sold &mdash; and unsold product goes back, never bought.</p></div>
+    <div class="cg-vis reveal reveal-delay-1">
+      <div class="cg-lane">
+        <div class="cg-lane-head"><b>Receiving · Fernway</b><span>Delivery #4471</span></div>
+        <div class="cg-switch"><span class="cg-sw-a">Wholesale</span><span class="cg-sw-b">Consignment</span><i></i></div>
+        <div class="cg-lane-rows">
+          <div><span>Due to vendor today</span><b class="cg-flip" data-a="$1,275.00" data-b="$0.00">$1,275.00</b></div>
+          <div><span>Vendor paid</span><b class="cg-flip" data-a="Net 30" data-b="Weekly, on what sells">Net 30</b></div>
+          <div><span>If it doesn't sell</span><b class="cg-flip" data-a="Your loss" data-b="Goes back">Your loss</b></div>
+        </div>
+      </div>
+      <div class="cg-terms">
+        <div><span>Sunrise Extracts</span><em>Consignment 50/50</em><small>Net 30</small></div>
+        <div><span>Wyld</span><em>Consignment 60/40</em><small>Net 30</small></div>
+        <div><span>Kiva Confections</span><em>Consignment 50/50</em><small>COD</small></div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- SERVICE TOUR · S1 · What Is Consignment -->
-<section class="svc-section svc-section--white" id="con-1">
-  <div class="svc-inner">
-    <div class="con-tour-numeral" aria-hidden="true">1</div>
-    <div class="svc-eyebrow reveal">Step 1 / 12 · What Is Consignment</div>
-    <h2 class="svc-headline reveal">Consignment is selling product you don't own.</h2>
-    <p class="svc-sub reveal">Vendor delivers product. You sell it. You pay them after.</p>
-    <div class="svc-visual reveal reveal-delay-1">
-      <div class="con-tour-flow" aria-hidden="true">
-        <div class="con-tour-flow-step">
-          <div class="con-tour-flow-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
-          <div class="con-tour-flow-label">Step 1</div>
-          <div class="con-tour-flow-title">Vendor delivers product</div>
-        </div>
-        <div class="con-tour-flow-arrow">&rarr;</div>
-        <div class="con-tour-flow-step">
-          <div class="con-tour-flow-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
-          <div class="con-tour-flow-label">Step 2</div>
-          <div class="con-tour-flow-title">Lives on your shelf</div>
-        </div>
-        <div class="con-tour-flow-arrow">&rarr;</div>
-        <div class="con-tour-flow-step">
-          <div class="con-tour-flow-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg></div>
-          <div class="con-tour-flow-label">Step 3</div>
-          <div class="con-tour-flow-title">Customer buys at the register</div>
-        </div>
-        <div class="con-tour-flow-arrow">&rarr;</div>
-        <div class="con-tour-flow-step con-tour-flow-step--win">
-          <div class="con-tour-flow-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2"/><path d="M6 12h.01M18 12h.01"/></svg></div>
-          <div class="con-tour-flow-label">Step 4</div>
-          <div class="con-tour-flow-title">Vendor paid weekly</div>
-        </div>
+<!-- WEEKLY SETTLEMENT -->
+<section class="cg-sec cg-sec--slate" id="con-5">
+  <div class="cg-split cg-split--rev">
+    <div class="cg-copy">
+      <div class="section-label reveal">Weekly settlements</div>
+      <h2 class="reveal">Pay every week <em>on what actually sold.</em></h2>
+      <p class="reveal">We read your Metrc and POS sales, run the math, and queue the check. You approve. The vendor sees the same numbers you do.</p>
+      <ul class="cg-ticks reveal">
+        <li>Discounts shared automatically: the vendor gets their split of what it rang up for</li>
+        <li>Returns and credit memos netted the same week</li>
+        <li>No quarterly true-ups, no "next month"</li>
+      </ul>
+      <div class="cg-more-row reveal">
+        <a class="cg-more" href="/ShelfSpace_Sample_Settlement_Report.pdf" target="_blank" rel="noopener">Download a real settlement (PDF) &rarr;</a>
+        <a class="cg-more" href="/blog/anatomy-of-a-consignment-settlement-report">Anatomy of a settlement report &rarr;</a>
+        <a class="cg-more" href="/docs/consignment/overview">How settlements work &rarr;</a>
       </div>
     </div>
-    <p class="svc-why reveal">Wholesale ties up your cash before a single customer walks in. Consignment flips it: the vendor owns the risk, you own the shelf, and the money moves only after the SKU earns its keep.</p>
-    <a class="svc-link reveal" href="/blog/how-cannabis-consignment-works">How cannabis consignment works <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+    <div class="cg-vis reveal reveal-delay-1">
+      <div class="cg-settle" data-cg-play>
+        <div class="cg-settle-head"><div><b>Settlement Report · SR-61</b><span>Week ending 03/29/2026</span></div><em>Sent weekly</em></div>
+        <div class="cg-settle-big"><small>Net vendor payout</small><div class="mono">$<b data-cg-count="1534.66" data-cg-dec="2">1,534.66</b></div></div>
+        <div class="cg-settle-row"><span>Net sales</span><b>$3,069.31</b></div>
+        <div class="cg-settle-row cg-settle-row--hl"><span>Vendor split (50%)</span><b>$1,534.66</b></div>
+        <div class="cg-settle-row"><span>Inventory on shelves</span><b>$2,406 · 25 items</b></div>
+        <div class="cg-settle-bar"><i style="--w:50%"></i><span>Your 50%</span><span>Vendor 50%</span></div>
+      </div>
+      <div class="cg-adj">
+        <div class="cg-adj-row"><span><b>Returns</b> · 3 units credited</span><em>Auto-applied</em><strong>&minus;$72.00</strong></div>
+        <div class="cg-adj-row"><span><b>Credit memo</b> · CM-2841 netted</span><em>Auto-applied</em><strong>&minus;$45.50</strong></div>
+      </div>
+    </div>
   </div>
 </section>
 
-<!-- SERVICE TOUR · S2 · Proven Model -->
-<section class="svc-section svc-section--slate" id="con-2">
-  <div class="svc-inner">
-    <div class="con-tour-numeral" aria-hidden="true">2</div>
-    <div class="svc-eyebrow reveal">Step 2 / 12 · Proven Model</div>
-    <h2 class="svc-headline reveal">Major retailers do it. Now cannabis can too.</h2>
-    <p class="svc-sub reveal">Grocery, hardware, apparel — they all moved to consignment decades ago. It's the same model that stocks a cooler with Coca-Cola before a single can is paid for.</p>
-    <div class="svc-visual reveal reveal-delay-1">
-      <div class="con-tour-categories" aria-hidden="true">
-        <div class="con-tour-categories-head">Retail categories already on consignment</div>
-        <div class="con-tour-categories-row">
-          <div class="con-tour-categories-name">
-            <span class="con-tour-categories-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3c0 1.5 1 3 3 5 2-2 3-3.5 3-5a3 3 0 0 0-3-3z"/><path d="M5 11a7 7 0 0 0 7 7 7 7 0 0 0 7-7"/><path d="M12 18v4"/></svg></span>
-            Grocery
-          </div>
-          <span class="con-tour-categories-pill">On consignment</span>
-        </div>
-        <div class="con-tour-categories-row">
-          <div class="con-tour-categories-name">
-            <span class="con-tour-categories-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></span>
-            Hardware
-          </div>
-          <span class="con-tour-categories-pill">On consignment</span>
-        </div>
-        <div class="con-tour-categories-row">
-          <div class="con-tour-categories-name">
-            <span class="con-tour-categories-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.38 3.46L16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z"/></svg></span>
-            Apparel
-          </div>
-          <span class="con-tour-categories-pill">On consignment</span>
-        </div>
-        <div class="con-tour-categories-row con-tour-categories-row--win">
-          <div class="con-tour-categories-name">
-            <span class="con-tour-categories-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20"/><path d="M12 12c0-4 4-7 8-7-1 4-4 7-8 7z"/><path d="M12 12c0-4-4-7-8-7 1 4 4 7 8 7z"/><path d="M12 18c-3 0-6-2-6-5 3 0 6 2 6 5z"/><path d="M12 18c3 0 6-2 6-5-3 0-6 2-6 5z"/></svg></span>
-            Cannabis
-          </div>
-          <span class="con-tour-categories-pill">Now · via ShelfSpace</span>
-        </div>
+<!-- METRC -->
+<section class="cg-sec cg-sec--white" id="con-7">
+  <div class="cg-split">
+    <div class="cg-copy">
+      <div class="section-label reveal">Reconciled to Metrc</div>
+      <h2 class="reveal">Numbers nobody <em>can argue with.</em></h2>
+      <p class="reveal">Cannabis has a state-run package ledger. We use it. Every package on your shelf and every sale at the register, traced and matched, so the settlement holds up.</p>
+      <a class="cg-more reveal" href="/docs/integrations/metrc">How Metrc verification works &rarr;</a>
+    </div>
+    <div class="cg-vis reveal reveal-delay-1">
+      <div class="cg-metrc" data-cg-play>
+        <div class="cg-metrc-head"><div><b>Settlement match</b><span>Sunrise Extracts · Manifest #M2C-9821</span></div><img src="/metrc-logo-v2.png" alt="" loading="lazy"></div>
+        <div class="cg-metrc-row"><span class="sku">GG #4 · 3.5g</span><span class="bar"><i style="--w:75%"></i></span><span class="q">18 / 24 sold</span><span class="ok">✓</span></div>
+        <div class="cg-metrc-row"><span class="sku">Blue Dream · 1g</span><span class="bar"><i style="--w:75%"></i></span><span class="q">9 / 12 sold</span><span class="ok">✓</span></div>
+        <div class="cg-metrc-row"><span class="sku">Pineapple Express</span><span class="bar"><i style="--w:0%"></i></span><span class="q">0 / 6 sold</span><span class="ok">✓</span></div>
+        <div class="cg-metrc-foot"><span>Metrc verified · 42 of 42 packages traced</span><em>27 sold</em></div>
       </div>
     </div>
-    <p class="svc-why reveal">Big retail figured out long ago: buying inventory upfront is brutal. The supplier owns the risk; the retailer owns the shelf. We brought that playbook to cannabis, with a team that knows Metrc and the math.</p>
-    <a class="svc-link reveal" href="/blog/why-general-consignment-software-doesnt-work-cannabis">Why general consignment software doesn't work for cannabis <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
   </div>
 </section>
 
-<!-- SERVICE TOUR · S3 · Vendor Onboarding -->
-<section class="svc-section svc-section--white" id="con-3">
-  <div class="svc-inner">
-    <div class="con-tour-numeral" aria-hidden="true">3</div>
-    <div class="svc-eyebrow reveal">Step 3 / 12 · Easy Onboarding</div>
-    <h2 class="svc-headline reveal">Flip a vendor live in minutes.</h2>
-    <p class="svc-sub reveal">Add them in ShelfSpace, set the split, and settlements run the next week.</p>
-    <div class="svc-visual reveal reveal-delay-1">
-      <div class="con-tour-flow" aria-hidden="true">
-        <div class="con-tour-flow-step">
-          <div class="con-tour-flow-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg></div>
-          <div class="con-tour-flow-label">Step 1</div>
-          <div class="con-tour-flow-title">Add the vendor</div>
-        </div>
-        <div class="con-tour-flow-arrow">&rarr;</div>
-        <div class="con-tour-flow-step">
-          <div class="con-tour-flow-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="5" x2="5" y2="19"/><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></svg></div>
-          <div class="con-tour-flow-label">Step 2</div>
-          <div class="con-tour-flow-title">Set the split</div>
-        </div>
-        <div class="con-tour-flow-arrow">&rarr;</div>
-        <div class="con-tour-flow-step con-tour-flow-step--win">
-          <div class="con-tour-flow-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
-          <div class="con-tour-flow-label">Step 3</div>
-          <div class="con-tour-flow-title">First weekly settlement</div>
-        </div>
+<!-- PORTAL + CHECK -->
+<section class="cg-sec cg-sec--ghost" id="con-8">
+  <div class="cg-split cg-split--rev">
+    <div class="cg-copy">
+      <div class="section-label reveal">Vendor portal + payments</div>
+      <h2 class="reveal">Vendors see it. <em>The phone stops ringing.</em></h2>
+      <p class="reveal">Every vendor gets a portal with live sell-through, inventory aging and their next payment date. They get paid by digital check every week, deposited from their phone.</p>
+      <div class="cg-more-row reveal">
+        <a class="cg-more" href="/vendors">How vendors get paid &rarr;</a>
+        <a class="cg-more" href="/checks">How check payments work &rarr;</a>
       </div>
     </div>
-    <p class="svc-why reveal">No spreadsheets to chase. No shared docs to maintain. Add the vendor, pick the split, and the settlement engine takes over weekly from there.</p>
-    <a class="svc-link reveal" href="/blog/get-started-cannabis-consignment">Getting started with consignment <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+    <div class="cg-vis cg-stack reveal reveal-delay-1">
+      <div class="cg-portal">
+        <div class="cg-portal-head"><div class="cg-av">SX</div><div><b>Sunrise Extracts</b><span>Vendor portal</span></div></div>
+        <div class="cg-portal-row"><span>This week's settlement</span><b>$1,534 <em class="g">Cleared</em></b></div>
+        <div class="cg-portal-row"><span>Inventory on shelves</span><b>$2,406 · 25 units <em class="s">Current</em></b></div>
+        <div class="cg-portal-row"><span>Oldest package on shelf</span><b>42 days <em class="a">Aging</em></b></div>
+        <div class="cg-portal-row"><span>Next payment</span><b>Next week <em class="g">Scheduled</em></b></div>
+      </div>
+      <div class="cg-check">
+        <div class="cg-check-top"><div><b>ShelfSpace</b><small>Paid on behalf of: Greenbrook Retail LLC</small></div><span>No. 04829<br>04/03/2026</span></div>
+        <div class="cg-check-pay"><small>Pay to</small><b>Sunrise Extracts</b></div>
+        <div class="cg-check-amt">$1,534.66</div>
+        <div class="cg-check-pill">Check 21 · Mobile deposit ready</div>
+      </div>
+    </div>
   </div>
 </section>
 
-<!-- SERVICE TOUR · S4 · Payment Terms -->
-<section class="svc-section svc-section--slate" id="con-4">
-  <div class="svc-inner">
-    <div class="con-tour-numeral" aria-hidden="true">4</div>
-    <div class="svc-eyebrow reveal">Step 4 / 12 · Payment Terms</div>
-    <h2 class="svc-headline reveal">Every vendor, both lanes.</h2>
-    <p class="svc-sub reveal">Consignment and wholesale are set up for every vendor from day one. Your team picks which one each delivery is when it arrives.</p>
-    <div class="svc-visual reveal reveal-delay-1">
-      <div class="con-tour-terms" aria-hidden="true">
-        <div class="con-tour-terms-head">
-          <div>
-            <div class="con-tour-terms-title">Vendor terms</div>
-          </div>
-          <div class="con-tour-terms-meta">5 of 42 active</div>
-        </div>
-        <div class="con-tour-terms-row">
-          <span class="con-tour-terms-vendor">Sunrise Extracts</span>
-          <span class="con-tour-terms-pill con-tour-terms-pill--consign">Consignment 50/50</span>
-          <span class="con-tour-terms-pill con-tour-terms-pill--net">Net 30</span>
-        </div>
-        <div class="con-tour-terms-row">
-          <span class="con-tour-terms-vendor">Fernway</span>
-          <span class="con-tour-terms-pill con-tour-terms-pill--consign">Consignment 50/50</span>
-          <span class="con-tour-terms-pill con-tour-terms-pill--net">Net 30</span>
-        </div>
-        <div class="con-tour-terms-row">
-          <span class="con-tour-terms-vendor">Wyld</span>
-          <span class="con-tour-terms-pill con-tour-terms-pill--consign">Consignment 60/40</span>
-          <span class="con-tour-terms-pill con-tour-terms-pill--net">Net 30</span>
-        </div>
-        <div class="con-tour-terms-row">
-          <span class="con-tour-terms-vendor">Kiva Confections</span>
-          <span class="con-tour-terms-pill con-tour-terms-pill--consign">Consignment 50/50</span>
-          <span class="con-tour-terms-pill con-tour-terms-pill--cod">COD</span>
-        </div>
-        <div class="con-tour-terms-row">
-          <span class="con-tour-terms-vendor">Cresco Labs</span>
-          <span class="con-tour-terms-pill con-tour-terms-pill--consign">Consignment 55/45</span>
-          <span class="con-tour-terms-pill con-tour-terms-pill--net">Net 30</span>
-        </div>
-        <div class="con-tour-terms-foot">BOTH LANES, EVERY VENDOR &middot; THE DELIVERY DECIDES</div>
+<!-- CASH FREED (dark) -->
+<section class="cg-cash" id="con-10">
+  <div class="cg-cash-glow"></div>
+  <div class="section-label reveal">Cash freed</div>
+  <h2 class="reveal">Inventory turns back <em>into cash.</em></h2>
+  <div class="cg-cash-row" data-cg-play>
+    <div class="cg-cash-pane"><small>Before</small><div class="mono">$250K</div><span>Trapped on shelves</span><div class="cg-cash-meter"><i class="cg-drain"></i></div></div>
+    <div class="cg-cash-arrow"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+    <div class="cg-cash-pane cg-cash-pane--after"><small>After</small><div class="mono">$<b data-cg-count="250">250</b>K</div><span>Back in your account</span><div class="cg-cash-meter"><i class="cg-fill"></i></div></div>
+  </div>
+  <p class="cg-cash-foot reveal">Modeled at $3M annual revenue with a 90-day inventory turn.</p>
+  <p class="cg-cash-p reveal">Put a chunk of your deliveries on consignment and that money never leaves your account: payroll, marketing, a new location, or just breathing room.</p>
+  <a class="cg-more cg-more--light reveal" href="/blog/case-study-consignment-conversion">Case study: $27K freed at a Massachusetts dispensary &rarr;</a>
+</section>
+
+<!-- MARGIN -->
+<section class="cg-sec cg-sec--white" id="con-11">
+  <div class="cg-split">
+    <div class="cg-copy">
+      <div class="section-label reveal">Margin protection</div>
+      <h2 class="reveal">Mark it down. <em>Your split still holds.</em></h2>
+      <p class="reveal">On wholesale, every dollar you discount comes out of your margin. On consignment the vendor is paid their share of what it actually rang up for, so a markdown is shared the moment it rings. Nothing to chase.</p>
+      <a class="cg-more reveal" href="/docs/consignment/profit-splits">How profit splits work &rarr;</a>
+    </div>
+    <div class="cg-vis reveal reveal-delay-1">
+      <div class="cg-margin" data-cg-play>
+        <div class="cg-tag"><small>GG #4 · 3.5g</small><div class="cg-price"><s>$50</s><b>$40</b></div><em>Marked down</em></div>
+        <div class="cg-mbar"><div class="cg-mbar-l"><b class="cg-mflip" data-a="$25" data-b="$20">$25</b><span>You</span></div><div class="cg-mbar-r"><b class="cg-mflip" data-a="$25" data-b="$20">$25</b><span>Vendor</span></div></div>
+        <div class="cg-margin-foot">50/50 split · <b>50% margin at every price</b></div>
       </div>
     </div>
-    <p class="svc-why reveal">Consignment isn't all-or-nothing, and it isn't a switch you flip per vendor. There's nothing to propose and nothing to convert — the split and the payment terms both sit on the vendor from the start, and whoever receives the truck marks that delivery consignment or wholesale. The same vendor can ship you their proven movers wholesale and float you their new SKUs on consignment in the same week.</p>
-    <a class="svc-link reveal" href="/blog/cannabis-vendor-management-guide">Cannabis vendor management guide <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
   </div>
 </section>
 
-<!-- SERVICE TOUR · S5 · Weekly Settlements -->
-<section class="svc-section svc-section--white" id="con-5">
-  <div class="svc-inner">
-    <div class="con-tour-numeral" aria-hidden="true">5</div>
-    <div class="svc-eyebrow reveal">Step 5 / 12 · Weekly Settlements</div>
-    <h2 class="svc-headline reveal">Pay every week on what actually sold.</h2>
-    <p class="svc-sub reveal">The platform reads your Metrc and POS sales data. Runs the math. Queues the check. You approve. You send. Every week.</p>
-    <div class="svc-visual reveal reveal-delay-1">
-      <div class="con-tour-settlement" aria-hidden="true">
-        <div class="con-tour-settlement-head">
-          <div>
-            <div class="con-tour-settlement-id">Settlement Report &middot; SR-61</div>
-            <div class="con-tour-settlement-week">Week ending 03/29/2026</div>
-          </div>
-          <div class="con-tour-settlement-cadence">Sent weekly</div>
-        </div>
-        <div class="con-tour-settlement-body">
-          <div class="con-tour-settlement-label">Net vendor payout</div>
-          <div class="con-tour-settlement-payout">
-            <div class="con-tour-settlement-payout-num">$1,534.66</div>
-            <div class="con-tour-settlement-payout-sub">every sale tied line-by-line to Metrc</div>
-          </div>
-          <div class="con-tour-settlement-line">
-            <span class="con-tour-settlement-line-label">Net sales</span>
-            <span class="con-tour-settlement-line-val">$3,069.31</span>
-          </div>
-          <div class="con-tour-settlement-line con-tour-settlement-line--highlight">
-            <span class="con-tour-settlement-line-label">Vendor split (50%)</span>
-            <span class="con-tour-settlement-line-val">$1,534.66</span>
-          </div>
-          <div class="con-tour-settlement-line">
-            <span class="con-tour-settlement-line-label">Inventory on shelves</span>
-            <span class="con-tour-settlement-line-val">$2,406 &middot; 25 items</span>
-          </div>
-          <div class="con-tour-settlement-foot">
-            <span class="con-tour-settlement-foot-label">Payment method</span>
-            <span class="con-tour-settlement-foot-val">Check 21 compliant</span>
-          </div>
-        </div>
-      </div>
-    </div>
-    <p class="svc-why reveal">No quarterly reconciliation. No "we'll figure it out next month." The vendor sees the same numbers you see, every package, every sale, every week. <a class="con-tour-pdf-link" href="/ShelfSpace_Sample_Settlement_Report.pdf" target="_blank" rel="noopener">Download a real settlement (PDF)</a>.</p>
-    <a class="svc-link reveal" href="/blog/anatomy-of-a-consignment-settlement-report">Anatomy of a cannabis consignment settlement report <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+<!-- WE RUN IT -->
+<section class="cg-run">
+  <div class="cg-head reveal">
+    <div class="section-label">Done for you</div>
+    <h2>We run the engine. <em>You run the relationships.</em></h2>
+    <p>Most operators try consignment in spreadsheets and quit by week six. None of this fits in Excel.</p>
   </div>
-</section>
-
-<!-- SERVICE TOUR · S6 · Promos + Returns -->
-<section class="svc-section svc-section--slate" id="con-6">
-  <div class="svc-inner">
-    <div class="con-tour-numeral" aria-hidden="true">6</div>
-    <div class="svc-eyebrow reveal">Step 6 / 12 · Promos + Returns</div>
-    <h2 class="svc-headline reveal">Promotions and returns baked into the math.</h2>
-    <p class="svc-sub reveal">Run a BOGO. Take a return. The settlement reconciles both.</p>
-    <div class="svc-visual reveal reveal-delay-1">
-      <div class="con-tour-adjust" aria-hidden="true">
-        <div class="con-tour-adjust-head">This week's adjustments</div>
-        <div class="con-tour-adjust-row">
-          <div class="con-tour-adjust-label"><span class="con-tour-adjust-label-strong">Returns</span> — 3 units credited line by line</div>
-          <span class="con-tour-adjust-tag">Auto-applied</span>
-          <span class="con-tour-adjust-val">&minus;$72.00</span>
-        </div>
-        <div class="con-tour-adjust-row">
-          <div class="con-tour-adjust-label"><span class="con-tour-adjust-label-strong">Vendor credit memo</span> — CM-2841 netted off this payout</div>
-          <span class="con-tour-adjust-tag">Auto-applied</span>
-          <span class="con-tour-adjust-val">&minus;$45.50</span>
-        </div>
-        <div class="con-tour-adjust-foot">BOTH NETTED IN FRIDAY'S SETTLEMENT</div>
-      </div>
-    </div>
-    <p class="svc-why reveal">A discount needs no adjustment at all on consignment — the vendor is paid their split of whatever the item actually rang up for, so a BOGO is shared the moment it rings. Returns and any credit memo you've built get netted off the same week's payout as ordinary line items, instead of becoming a conversation next quarter.</p>
-    <a class="svc-link reveal" href="/docs/consignment/overview">How consignment settlements work <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+  <div class="cg-run-grid" data-cg-play>
+    <div><i>✓</i>POS sales data ingest</div>
+    <div><i>✓</i>Metrc package reconciliation</div>
+    <div><i>✓</i>Consignment or wholesale, per delivery</div>
+    <div><i>✓</i>Weekly settlement math</div>
+    <div><i>✓</i>Category-level profit splits</div>
+    <div><i>✓</i>Promo and return adjustments</div>
+    <div><i>✓</i>Settlement reports</div>
+    <div><i>✓</i>Vendor portal access</div>
+    <div><i>✓</i>One-click check delivery</div>
+    <div><i>✓</i>QuickBooks sync</div>
   </div>
-</section>
-
-<!-- SERVICE TOUR · S7 · Metrc Integration -->
-<section class="svc-section svc-section--white" id="con-7">
-  <div class="svc-inner">
-    <div class="con-tour-numeral" aria-hidden="true">7</div>
-    <div class="svc-eyebrow reveal">Step 7 / 12 · Metrc Integration</div>
-    <h2 class="svc-headline reveal">Reconciled to Metrc, line by line.</h2>
-    <p class="svc-sub reveal">Every package on your shelf, every sale at the register — traced and matched.</p>
-    <div class="svc-visual reveal reveal-delay-1">
-      <div class="con-tour-metrc" aria-hidden="true">
-        <div class="con-tour-metrc-head">
-          <div>
-            <div class="con-tour-metrc-title">Settlement Match</div>
-            <div class="con-tour-metrc-manifest">Sunrise Extracts &middot; Manifest #M2C-9821</div>
-          </div>
-          <img src="/metrc-logo-v2.png" alt="" class="con-tour-metrc-logo" loading="lazy">
-        </div>
-        <div class="con-tour-metrc-row">
-          <span class="con-tour-metrc-sku">GG #4 &middot; 3.5g</span>
-          <span class="con-tour-metrc-qty">24 placed</span>
-          <span class="con-tour-metrc-qty">18 sold</span>
-          <span class="con-tour-metrc-status"><svg viewBox="0 0 24 24" fill="none" stroke="#1b4332" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
-        </div>
-        <div class="con-tour-metrc-row">
-          <span class="con-tour-metrc-sku">Blue Dream &middot; 1g</span>
-          <span class="con-tour-metrc-qty">12 placed</span>
-          <span class="con-tour-metrc-qty">9 sold</span>
-          <span class="con-tour-metrc-status"><svg viewBox="0 0 24 24" fill="none" stroke="#1b4332" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
-        </div>
-        <div class="con-tour-metrc-row">
-          <span class="con-tour-metrc-sku">Pineapple Express</span>
-          <span class="con-tour-metrc-qty">6 placed</span>
-          <span class="con-tour-metrc-qty con-tour-metrc-qty--zero">0 sold</span>
-          <span class="con-tour-metrc-status"><svg viewBox="0 0 24 24" fill="none" stroke="#1b4332" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
-        </div>
-        <div class="con-tour-metrc-foot">
-          <span>Metrc VERIFIED &middot; 42 OF 42 PACKAGES TRACED</span>
-          <span class="con-tour-metrc-foot-pill">27 SOLD</span>
-        </div>
-      </div>
-    </div>
-    <p class="svc-why reveal">Cannabis is the one industry with a state-mandated package ledger. We use it. Vendors can't dispute the numbers, because the regulator already signed off on the manifest.</p>
-    <a class="svc-link reveal" href="/docs/integrations/metrc">How Metrc verification works <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
-  </div>
-</section>
-
-<!-- SERVICE TOUR · S8 · Vendor Dashboard -->
-<section class="svc-section svc-section--ghost" id="con-8">
-  <div class="svc-inner">
-    <div class="con-tour-numeral" aria-hidden="true">8</div>
-    <div class="svc-eyebrow reveal">Step 8 / 12 · Vendor Dashboard</div>
-    <h2 class="svc-headline reveal">Every vendor gets their own portal.</h2>
-    <p class="svc-sub reveal">Live sell-through. Inventory aging. Next payment date. All in one view.</p>
-    <div class="svc-visual reveal reveal-delay-1">
-      <div class="con-tour-portal" aria-hidden="true">
-        <div class="con-tour-portal-head">
-          <div class="con-tour-portal-avatar">SX</div>
-          <div>
-            <div class="con-tour-portal-name">Sunrise Extracts</div>
-            <div class="con-tour-portal-sub">Vendor Portal</div>
-          </div>
-        </div>
-        <div class="con-tour-portal-rows">
-          <div class="con-tour-portal-row">
-            <span class="con-tour-portal-row-label">This week's settlement</span>
-            <span class="con-tour-portal-row-val">$1,534 <span class="con-tour-portal-pill con-tour-portal-pill--green">Cleared</span></span>
-          </div>
-          <div class="con-tour-portal-row">
-            <span class="con-tour-portal-row-label">Inventory on shelves</span>
-            <span class="con-tour-portal-row-val">$2,406 &middot; 25 units <span class="con-tour-portal-pill con-tour-portal-pill--slate">Current</span></span>
-          </div>
-          <div class="con-tour-portal-row">
-            <span class="con-tour-portal-row-label">Oldest package on shelf</span>
-            <span class="con-tour-portal-row-val">42 days <span class="con-tour-portal-pill con-tour-portal-pill--amber">Aging</span></span>
-          </div>
-          <div class="con-tour-portal-row">
-            <span class="con-tour-portal-row-label">Next payment</span>
-            <span class="con-tour-portal-row-val">Next week <span class="con-tour-portal-pill con-tour-portal-pill--green">Scheduled</span></span>
-          </div>
-        </div>
-      </div>
-    </div>
-    <p class="svc-why reveal">When the vendor can see what's selling and when they get paid, the phone stops ringing. You save the back-and-forth; they get the data they actually need to plan replenishment.</p>
-    <a class="svc-link reveal" href="/vendors">How vendors get paid through cannabis consignment <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
-  </div>
-</section>
-
-<!-- SERVICE TOUR · S9 · Digital Checks -->
-<section class="svc-section svc-section--white" id="con-9">
-  <div class="svc-inner">
-    <div class="con-tour-numeral" aria-hidden="true">9</div>
-    <div class="svc-eyebrow reveal">Step 9 / 12 · Payments</div>
-    <h2 class="svc-headline reveal">Paid by digital check, every week.</h2>
-    <p class="svc-sub reveal">Check 21 compliant. Mobile-deposit ready. Mailed or downloaded.</p>
-    <div class="svc-visual reveal reveal-delay-1">
-      <div class="con-tour-check" aria-hidden="true">
-        <div class="con-tour-check-head">
-          <div>
-            <div class="con-tour-check-brand">ShelfSpace</div>
-            <div class="con-tour-check-brand-sub">PAID ON BEHALF OF: GREENBROOK RETAIL LLC</div>
-          </div>
-          <div class="con-tour-check-num">No. 04829<br>Apr 3, 2026</div>
-        </div>
-        <div class="con-tour-check-payee-row">
-          <span class="con-tour-check-payee-label">Pay to</span>
-          <span class="con-tour-check-payee-name">Sunrise Extracts</span>
-        </div>
-        <div class="con-tour-check-amount">$1,534.66</div>
-        <div class="con-tour-check-memo">Memo &middot; Settlement Week 03/29 &middot; SR-61</div>
-        <span class="con-tour-check-pill">CHECK 21 &middot; MOBILE DEPOSIT READY</span>
-      </div>
-    </div>
-    <p class="svc-why reveal">Cannabis banking is a mess. Wire fees, ACH limits, returned checks. Check 21 sidesteps the whole circus, because the vendor downloads the image and deposits from their phone.</p>
-    <a class="svc-link reveal" href="/checks">How check payments work <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
-  </div>
-</section>
-
-<!-- SERVICE TOUR · S10 · Cash Freed (dark — emotional peak) -->
-<section class="svc-section svc-section--dark" id="con-10">
-  <div class="svc-inner">
-    <div class="con-tour-numeral" aria-hidden="true">10</div>
-    <div class="svc-eyebrow reveal">Step 10 / 12 · Cash Freed</div>
-    <h2 class="svc-headline reveal">Cash back in your bank account.</h2>
-    <p class="svc-sub reveal">What used to be inventory is now liquid.</p>
-    <div class="svc-visual reveal reveal-delay-1">
-      <div class="con-tour-cash" aria-hidden="true">
-        <div class="con-tour-cash-pane">
-          <div class="con-tour-cash-label">Before</div>
-          <div class="con-tour-cash-big">$250K</div>
-          <div class="con-tour-cash-sub">Trapped on shelves.</div>
-        </div>
-        <div class="con-tour-cash-arrow">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-        </div>
-        <div class="con-tour-cash-pane con-tour-cash-pane--after">
-          <div class="con-tour-cash-label">After</div>
-          <div class="con-tour-cash-big">$250K</div>
-          <div class="con-tour-cash-sub">Back in your account.</div>
-        </div>
-      </div>
-      <p class="con-tour-cash-foot">Modeled at $3M annual revenue with a 90-day inventory turn.</p>
-    </div>
-    <p class="svc-why reveal">Inventory is your biggest balance-sheet item. Start taking a chunk of your deliveries on consignment and that money stops leaving your account in the first place — funding payroll, marketing, new locations, or just breathing room.</p>
-    <a class="svc-link reveal" href="/blog/case-study-consignment-conversion">Case study &mdash; $27K freed at a Massachusetts dispensary <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
-  </div>
-</section>
-
-<!-- SERVICE TOUR · S11 · Margin Protection -->
-<section class="svc-section svc-section--slate" id="con-11">
-  <div class="svc-inner">
-    <div class="con-tour-numeral" aria-hidden="true">11</div>
-    <div class="svc-eyebrow reveal">Step 11 / 12 · Margin Protection</div>
-    <h2 class="svc-headline reveal">Profit margins, locked at the SKU.</h2>
-    <p class="svc-sub reveal">Mark it down to move it — your margin percentage doesn't budge.</p>
-    <div class="svc-visual reveal reveal-delay-1">
-      <div class="con-tour-margin" aria-hidden="true">
-        <div class="con-tour-margin-head">
-          <span>SKU margin floor</span>
-          <span class="con-tour-margin-head-pct">Example · 50/50 split</span>
-        </div>
-        <div class="con-tour-margin-row">
-          <span class="con-tour-margin-sku">GG #4 &middot; 3.5g</span>
-          <span class="con-tour-margin-cell">Retail $50</span>
-          <span class="con-tour-margin-cell">Cost $25</span>
-          <span class="con-tour-margin-cell con-tour-margin-cell--strong">50%</span>
-          <span class="con-tour-margin-pill">Locked</span>
-        </div>
-        <div class="con-tour-margin-row">
-          <span class="con-tour-margin-sku">Blue Dream &middot; 1g</span>
-          <span class="con-tour-margin-cell">Retail $40</span>
-          <span class="con-tour-margin-cell">Cost $20</span>
-          <span class="con-tour-margin-cell con-tour-margin-cell--strong">50%</span>
-          <span class="con-tour-margin-pill">Locked</span>
-        </div>
-        <div class="con-tour-margin-row">
-          <span class="con-tour-margin-sku">Pineapple Express</span>
-          <span class="con-tour-margin-cell">Retail $45</span>
-          <span class="con-tour-margin-cell">Cost $22.50</span>
-          <span class="con-tour-margin-cell con-tour-margin-cell--strong">50%</span>
-          <span class="con-tour-margin-pill">Locked</span>
-        </div>
-        <div class="con-tour-margin-foot">YOUR SPLIT HOLDS AT EVERY PRICE</div>
-      </div>
-    </div>
-    <p class="svc-why reveal">In wholesale you already paid for the unit, so every dollar you discount comes straight out of your margin. On consignment the vendor is paid their share of what the item actually rang up for — so a markdown is shared the instant it rings, in the same proportion as the split you set. Sell that $50 eighth for $40 and a 50/50 split still pays you $20 on $20. You never have to chase the vendor for their half, because they never got it.</p>
-    <a class="svc-link reveal" href="/docs/consignment/profit-splits">How cannabis consignment profit splits work <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
-  </div>
-</section>
-
-<!-- SERVICE TOUR · S12 · We Run The Engine (close) -->
-<section class="svc-section svc-section--white" id="con-12">
-  <div class="svc-inner">
-    <div class="con-tour-numeral" aria-hidden="true">12</div>
-    <div class="svc-eyebrow reveal">Step 12 / 12 · The Split</div>
-    <h2 class="svc-headline reveal">We run the engine. You run the relationships.</h2>
-    <p class="svc-sub reveal">You own the vendor conversation. We own the settlement cycle.</p>
-    <div class="svc-visual reveal reveal-delay-1">
-      <div class="con-tour-handle" aria-hidden="true">
-        <div class="con-tour-handle-grid">
-          <div class="con-tour-handle-item"><span class="con-tour-handle-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> POS sales data ingest</div>
-          <div class="con-tour-handle-item"><span class="con-tour-handle-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Metrc package reconciliation</div>
-          <div class="con-tour-handle-item"><span class="con-tour-handle-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Per-delivery consignment vs wholesale</div>
-          <div class="con-tour-handle-item"><span class="con-tour-handle-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Weekly settlement math</div>
-          <div class="con-tour-handle-item"><span class="con-tour-handle-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Category-level profit splits</div>
-          <div class="con-tour-handle-item"><span class="con-tour-handle-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Promo + return adjustments</div>
-          <div class="con-tour-handle-item"><span class="con-tour-handle-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Settlement report generation</div>
-          <div class="con-tour-handle-item"><span class="con-tour-handle-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Vendor portal access</div>
-          <div class="con-tour-handle-item"><span class="con-tour-handle-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> One-click check delivery</div>
-          <div class="con-tour-handle-item"><span class="con-tour-handle-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> QuickBooks sync</div>
-        </div>
-        <div class="con-tour-handle-foot">YOU TALK TO VENDORS &middot; WE RUN THE NUMBERS</div>
-      </div>
-    </div>
-    <p class="svc-why reveal">Most operators try consignment in spreadsheets and quit by week six. The math, the category splits, the returns, the Metrc reconciliation, the payment cycle — none of it fits in Excel. We built the engine that does.</p>
-    <a class="svc-link reveal" href="/docs/consignment/overview">See full consignment docs <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
-  </div>
+  <div class="cg-links reveal"><a href="/docs/consignment/overview">See the full consignment docs &rarr;</a></div>
 </section>
 
 <!-- SECTION 3: CALCULATOR -->
@@ -1261,59 +1323,30 @@
   </div>
 </section>
 
-<!-- PRICING REVEAL -->
-<section style="background:var(--white);padding:80px 48px;border-top:1px solid var(--slate-100);">
-  <div style="max-width:680px;margin:0 auto;text-align:center;">
-    <div class="section-label reveal">How we work with you</div>
-    <h2 class="reveal" style="font-size:clamp(28px,3.5vw,40px);font-weight:700;color:var(--green-deep);letter-spacing:-1px;margin:8px 0 16px;">Scoped to your operation.</h2>
-    <p class="reveal" style="font-size:17px;line-height:1.7;color:var(--slate-600);max-width:560px;margin:0 auto 24px;">Seeing your settlements is free. We run the rest for you. Every engagement is scoped to your locations and your vendors. <a href="/pricing" style="color:var(--green-dark);font-weight:600;text-decoration:none;">See how we work with you →</a></p>
-    <a href="/contact" class="reveal" style="display:inline-flex;align-items:center;gap:6px;font-size:15px;font-weight:600;color:var(--green-dark);text-decoration:none;">Show me my number <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+<!-- SUITE -->
+<section class="cg-suite">
+  <div class="cg-head reveal">
+    <div class="section-label">The whole money side</div>
+    <h2>Consignment is one service. <em>We run the rest too.</em></h2>
+    <p>Same team, one Metrc connection, one set of vendor relationships. Every engagement is scoped to your locations and vendors. <a href="/pricing">See how we work with you &rarr;</a></p>
   </div>
-</section>
-
-<!-- SUITE BAND: consignment is one service -->
-<section style="background:var(--green-ghost);padding:72px 48px;border-top:1px solid var(--slate-100);">
-  <div style="max-width:960px;margin:0 auto;text-align:center;">
-    <div class="section-label reveal">The whole money side</div>
-    <h2 class="reveal" style="font-size:clamp(26px,3vw,36px);font-weight:700;color:var(--green-deep);letter-spacing:-1px;margin:8px 0 12px;">Consignment is one service. We handle the rest too.</h2>
-    <p class="reveal" style="font-size:17px;line-height:1.7;color:var(--slate-600);max-width:600px;margin:0 auto 36px;">Settlements are one piece of the money side of your business. The same team runs your payables, your receivables, and your vendor credit recovery — one Metrc connection, one set of vendor relationships.</p>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;text-align:left;">
-      <a href="/accounts-payable" class="reveal" style="display:block;background:var(--white);border:1px solid var(--slate-100);border-radius:16px;padding:24px;text-decoration:none;box-shadow:0 4px 16px rgba(27,67,50,0.06);">
-        <h3 style="font-size:18px;font-weight:700;color:var(--green-deep);margin:0 0 6px;">Accounts Payable →</h3>
-        <p style="font-size:14px;line-height:1.6;color:var(--slate-600);margin:0;">Every wholesale invoice three-way matched, then paid the moment you approve.</p>
-      </a>
-      <a href="/accounts-receivable" class="reveal reveal-delay-1" style="display:block;background:var(--white);border:1px solid var(--slate-100);border-radius:16px;padding:24px;text-decoration:none;box-shadow:0 4px 16px rgba(27,67,50,0.06);">
-        <h3 style="font-size:18px;font-weight:700;color:var(--green-deep);margin:0 0 6px;">Accounts Receivable →</h3>
-        <p style="font-size:14px;line-height:1.6;color:var(--slate-600);margin:0;">Overdue invoices chased and collected, so your money doesn't sit in limbo.</p>
-      </a>
-      <a href="/credit-recovery" class="reveal reveal-delay-2" style="display:block;background:var(--white);border:1px solid var(--slate-100);border-radius:16px;padding:24px;text-decoration:none;box-shadow:0 4px 16px rgba(27,67,50,0.06);">
-        <h3 style="font-size:18px;font-weight:700;color:var(--green-deep);margin:0 0 6px;">Credit Recovery →</h3>
-        <p style="font-size:14px;line-height:1.6;color:var(--slate-600);margin:0;">Returns, expirations, and co-marketing turned into credit memos every month.</p>
-      </a>
-    </div>
+  <div class="cg-suite-grid">
+    <a href="/accounts-payable" class="cg-card reveal"><div class="cg-card-ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/><polyline points="8 15 10 17 14 13"/></svg></div><h3>Accounts Payable</h3><p>Every wholesale invoice checked against Metrc, then paid the moment you approve.</p><span>See ShelfPay &rarr;</span></a>
+    <a href="/accounts-receivable" class="cg-card reveal reveal-delay-1"><div class="cg-card-ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div><h3>Accounts Receivable</h3><p>Overdue invoices chased and collected, so your money doesn't sit in limbo.</p><span>See ShelfCollect &rarr;</span></a>
+    <a href="/credit-recovery" class="cg-card reveal reveal-delay-2"><div class="cg-card-ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg></div><h3>Credit Recovery</h3><p>Returns, expirations and co-marketing on wholesale product turned into credit memos every month.</p><span>See credit recovery &rarr;</span></a>
   </div>
 </section>
 
 <!-- SECTION 5: CTA -->
-<section class="cta-section">
-  <div class="cta-content">
-    <div class="section-label reveal">Get Started</div>
-    <h2 class="section-title reveal">Your cash flow could change this quarter.</h2>
-    <p class="section-desc reveal">Seeing your settlements is free. We run the rest for you.</p>
-    <div class="cta-actions reveal">
-      <a href="/contact" class="btn-primary">
-        Show me my number
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-      </a>
-    </div>
-    <div class="cta-founder reveal" style="display:flex;align-items:center;gap:20px;justify-content:center;margin:32px auto 0;max-width:680px;">
-      <img src="/chris-avatar.jpg" alt="Chris Mitchem" style="width:56px;height:56px;border-radius:50%;object-fit:cover;flex-shrink:0;" loading="lazy">
-      <div style="text-align:left;">
-        <p style="font-size:14px;color:var(--slate-700);line-height:1.5;margin:0 0 6px;font-style:italic;">"I've been a cannabis operator since 2015, and I have the scars to prove it. ShelfSpace is the product of everything I learned the hard way."</p>
-        <p style="font-size:13px;color:var(--slate-500);margin:0;">— Chris Mitchem, Founder</p>
-      </div>
-    </div>
-    <p class="cta-note reveal">Finding the money you're missing is free. Everything else is scoped to your operation in a quick consult.</p>
+<section class="cg-final">
+  <div class="cg-final-glow"></div>
+  <div class="section-label reveal">Get started</div>
+  <h2 class="reveal">Your cash flow could change <em>this quarter.</em></h2>
+  <p class="reveal">Seeing your settlements is free. We run the rest for you.</p>
+  <div class="reveal"><a href="/contact" class="cg-btn">Show me my number <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a></div>
+  <div class="cg-quote reveal">
+    <img src="/chris-avatar.jpg" alt="Chris Mitchem" width="56" height="56" loading="lazy">
+    <div><p>"I've been a cannabis operator since 2015, and I have the scars to prove it. ShelfSpace is the product of everything I learned the hard way."</p><span>Chris Mitchem, Founder</span></div>
   </div>
 </section>
 
@@ -1378,9 +1411,7 @@
 (function() {
   var nav = document.getElementById('nav');
   var pageHero = document.querySelector('.page-hero');
-  var parallaxSections = [
-    document.querySelector('.cta-section')
-  ];
+  var parallaxSections = [];
 
   var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var isMobile = window.innerWidth < 900;
@@ -1490,6 +1521,58 @@
   })();
 })();
 </script>
+<script>
+(function() {
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function countUp(el) {
+    var to = parseFloat(el.getAttribute('data-cg-count')), dec = +(el.getAttribute('data-cg-dec') || 0);
+    var fmt = function(v) { return v.toLocaleString('en-US', { minimumFractionDigits: dec, maximumFractionDigits: dec }); };
+    if (reduced || !to) { el.textContent = fmt(to); return; }
+    var t0 = null;
+    (function step(t) {
+      if (!t0) t0 = t;
+      var p = Math.min(1, (t - t0) / 1500);
+      el.textContent = fmt(to * (1 - Math.pow(1 - p, 3)));
+      if (p < 1) requestAnimationFrame(step);
+    })(performance.now());
+  }
+  if (!('IntersectionObserver' in window)) return;
+  var io = new IntersectionObserver(function(es) {
+    es.forEach(function(e) {
+      if (!e.isIntersecting) return;
+      var el = e.target;
+      if (el.hasAttribute('data-cg-count')) countUp(el);
+      else { el.classList.add('go'); el.querySelectorAll('[data-cg-count]').forEach(countUp); }
+      io.unobserve(el);
+    });
+  }, { threshold: 0.3 });
+  document.querySelectorAll('[data-cg-play]').forEach(function(el) { io.observe(el); });
+  document.querySelectorAll('.cg-stat [data-cg-count]').forEach(function(el) { if (!reduced) el.textContent = '0'; io.observe(el); });
+
+  /* looping toggles: lane switch + markdown */
+  function looper(root, ms) {
+    if (!root || reduced) { if (root) root.classList.add('b'); swap(root, true); return; }
+    var on = false, vis = false, timer = null;
+    function tick() { on = !on; root.classList.toggle('b', on); swap(root, on); }
+    var o = new IntersectionObserver(function(es) {
+      vis = es[0].isIntersecting;
+      if (vis && !timer) { timer = setInterval(function() { if (!document.hidden) tick(); }, ms); setTimeout(tick, 700); }
+      else if (!vis && timer) { clearInterval(timer); timer = null; }
+    }, { threshold: 0.3 });
+    o.observe(root);
+  }
+  function swap(root, b) {
+    if (!root) return;
+    root.querySelectorAll('.cg-flip, .cg-mflip').forEach(function(x) {
+      x.textContent = x.getAttribute(b ? 'data-b' : 'data-a');
+      x.classList.remove('swap'); void x.offsetWidth; x.classList.add('swap');
+    });
+  }
+  looper(document.querySelector('.cg-lane'), 3200);
+  looper(document.querySelector('.cg-margin'), 3000);
+})();
+</script>
+<script src="/hero-motion.js" defer></script>
 <script src="/shelfiq-widget.js"></script>
 </body>
 </html>
