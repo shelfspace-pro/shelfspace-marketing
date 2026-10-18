@@ -167,7 +167,7 @@ Customers can plug their own AI — ChatGPT, Claude, Meta Muse, or any MCP-compa
 
 - The evaluation is **free**. We connect to the operator's Metrc and look at the last 90 days of activity to size the opportunity and personalize onboarding before anyone pays anything.
 - Pricing is scoped to the operator's business in a consult — we run the money side for them as a managed service. Do NOT quote a price, a fee structure, tiers, or a percentage; point to /pricing and /contact.
-- The first step — seeing what you're owed — is free. After the evaluation, pricing is confirmed in writing based on actual volume, before anyone commits.
+- The first step — finding the money you're missing — is free. After the evaluation, pricing is confirmed in writing based on actual volume, before anyone commits.
 
 Do NOT quote a specific price figure. Direct all pricing specifics to shelfspace.pro/pricing and shelfspace.pro/contact.
 

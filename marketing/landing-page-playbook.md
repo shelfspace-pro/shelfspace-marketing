@@ -142,7 +142,7 @@ Seven sections. That's the max. If you need more sections, you're over-explainin
 **The site shows no pricing.** No tiers, no plan names, no "$X/location," no trial, no subscription. Every operation is different — AP, AR, consignment, and credit recovery are scoped in the sales conversation, and delivered as software the operator drives OR done-for-you, decided per account. So the site sells the outcome and routes to a conversation.
 
 ### The free on-ramp (keep it — it's the upsell engine, reframed)
-Keep the "see what you're owed" mechanic that makes the pain visible ("you're owed $X in credits," "$Y of your AR is overdue," "N invoices don't match Metrc"). It is now framed as the **first step of the conversation**, not a "Free plan": a free money-review that quantifies the leak, then → **Talk to us** to get it back. Never present it as a pricing tier or pair it with a paid tier.
+Keep the "see the money you're missing" mechanic that makes the pain visible ("you're owed $X in credits," "$Y of your AR is overdue," "N invoices don't match Metrc"). It is now framed as the **first step of the conversation**, not a "Free plan": a free money-review that quantifies the leak, then → **Talk to us** to get it back. Never present it as a pricing tier or pair it with a paid tier.
 
 ### The "How We Work" page (`/pricing`, repurposed)
 The old pricing page lives on at `/pricing` (URL kept for SEO) as **"How We Work With You"** — a numberless page: every operation is different → we scope your AP / AR / consignment / credit recovery → software or done-for-you → one CTA, Talk to us. A cost FAQ ("How much does ShelfSpace cost?") answers "custom, based on your operation — let's talk."
@@ -172,10 +172,10 @@ The two-tier Visibility/Automate subscription, the 30-day trial, the tier number
 
 ## CTA Rules
 
-- Primary button: "Talk to us" / "See what you're owed" / "Get started" → `/contact` (first-person variants like "Get MY free money-review" convert well)
-- Below button: reassure — "Free. No commitment. We'll show you what you're owed." (results-based, no pricing)
+- Primary button: "Talk to us" / "See the money you're missing" / "Get started" → `/contact` (first-person variants like "Get MY free money-review" convert well)
+- Below button: reassure — "Free. No commitment. We'll show you the money you're missing." (results-based, no pricing)
 - Chris's photo next to the CTA on bottom sections (humanize)
-- The free "see what you're owed" on-ramp is the soft entry; `/contact` is the destination. One primary action per screen.
+- The free "see the money you're missing" on-ramp is the soft entry; `/contact` is the destination. One primary action per screen.
 - No "learn more" dead ends. No trial-signup and no "Sign Up" as a primary CTA — the site is consult-first.
 
 ## SEO Rules

@@ -63,7 +63,7 @@
    - Single CTA pushing to /contact
    - Copy varies by section:
      - Consignment: "Ready to free up your capital? Let's talk."
-     - Credit Recovery: "Ready to start recovering what you're owed? Let's talk."
+     - Credit Recovery: "Ready to start recovering the money you're missing? Let's talk."
      - AP: "Ready to upgrade your AP? Let's talk."
      - Vendor Portal: "Want your vendors on a portal? Let's talk."
      - Integrations: "Ready to connect your systems? Let's talk."
