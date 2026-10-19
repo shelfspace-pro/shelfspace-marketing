@@ -138,6 +138,13 @@ nav.scrolled { box-shadow: 0 1px 24px rgba(27,67,50,0.08); }
 .btn-primary:hover { background: var(--green-dark); transform: translateY(-2px); box-shadow: 0 8px 32px rgba(27,67,50,0.35); }
 .btn-primary svg { transition: transform 0.3s; }
 .btn-primary:hover svg { transform: translateX(3px); }
+/* Sitewide CTA (sales row D3): the "Schedule a call" button with one line of page
+   microcopy under it. Written by scripts/cta-sweep.mjs; checked by scripts/check-cta.mjs.
+   inline-block (not flex) on purpose: the button and the line follow the parent's
+   text-align, so they sit left in a left hero and centered in a centered CTA box. */
+.cta-stack { display: inline-block; max-width: 100%; vertical-align: top; }
+.cta-micro { display: block; margin-top: 10px; font-size: 14px; line-height: 1.4; opacity: 0.8; }
+.cta-micro--on-dark { color: var(--white); }
 .btn-secondary {
   display: inline-flex; align-items: center; gap: 10px;
   background: transparent; color: var(--green-deep);

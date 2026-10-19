@@ -172,8 +172,8 @@ The two-tier Visibility/Automate subscription, the 30-day trial, the tier number
 
 ## CTA Rules
 
-- Primary button: "Talk to us" / "See the money you're missing" / "Get started" → `/contact` (first-person variants like "Get MY free money-review" convert well)
-- Below button: reassure — "Free. No commitment. We'll show you the money you're missing." (results-based, no pricing)
+- Primary button: **"Schedule a call"** → `/contact?cta=<page>-<slot>`, every page, no variants (sales row D3, 10/19/2026 — wording tests run in Chelsea's email, the site has too little traffic). Run `npm run cta:sweep` then `npm run check:cta`.
+- Under the button: one line of page microcopy, written by the sweep ("30 minutes with Chris. See how you'd get paid faster." for brand pages; "…See how your vendor payments would run." for store pages). A results-based reassurance line ("Free. No commitment.") may follow it.
 - Chris's photo next to the CTA on bottom sections (humanize)
 - The free "see the money you're missing" on-ramp is the soft entry; `/contact` is the destination. One primary action per screen.
 - No "learn more" dead ends. No trial-signup and no "Sign Up" as a primary CTA — the site is consult-first.

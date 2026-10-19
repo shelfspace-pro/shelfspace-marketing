@@ -83,7 +83,7 @@ PRICING_PATTERNS=(
   "subscription:::retired subscription model — engagements are custom, scoped in the consult"
   "per location:::retired per-location pricing — pricing is custom, no public numbers"
   "\\\$(499|749|799|899|999)\\b:::retired Automate tier price — the site shows no public pricing"
-  "Start your free:::retired trial-signup CTA — the primary CTA is 'Talk to us' → /contact"
+  "Start your free:::retired trial-signup CTA — the primary CTA is 'Schedule a call' → /contact"
   "per artifact:::retired \$20-per-artifact pricing — the site shows no public pricing"
 )
 

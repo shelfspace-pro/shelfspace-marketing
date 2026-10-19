@@ -43,13 +43,13 @@ const NAV = `<nav id="nav">
     <li class="nav-dropdown"><a href="/accounts-payable" class="nav-dropdown-toggle">ShelfPay (AP) <svg class="dropdown-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></a>
       <div class="nav-dropdown-menu"><a href="/accounts-payable">ShelfPay overview</a><a href="/consignment">Consignment</a><a href="/credit-recovery">Credit Recovery</a><a href="/shelfverify">ShelfVerify</a></div></li>
     <li class="nav-dropdown"><a href="/accounts-receivable" class="nav-dropdown-toggle">ShelfCollect (AR) <svg class="dropdown-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></a>
-      <div class="nav-dropdown-menu"><a href="/accounts-receivable">ShelfCollect overview</a><a href="/ai-calls">AI Calls <span class="nav-new">New</span></a><a href="/collections">Collections</a><a href="/promise-to-pay">Promise to Pay</a></div></li>
+      <div class="nav-dropdown-menu"><a href="/accounts-receivable">ShelfCollect overview</a><a href="/ai-calls">AI Calls <span class="nav-new">New</span></a><a href="/collections">Collections</a><a href="/promise-to-pay">Promise to Pay</a><a href="/ar-aging">AR Aging</a><a href="/rep-management">Rep Management</a></div></li>
     <li class="nav-dropdown"><a href="/features" class="nav-dropdown-toggle">Features <svg class="dropdown-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></a>
       <div class="nav-dropdown-menu"><a href="/shelfverify">ShelfVerify</a><a href="/connect-your-ai">Connect Your AI</a><a href="/payments">Payments</a><a href="/integrations">Integrations</a></div></li>
     <li><a href="/pricing">Pricing</a></li>
     <li><a href="/about">About</a></li>
     <li class="nav-login-mobile"><a href="https://ourshelf.space/login">Login</a></li>
-    <li><a href="/contact" class="nav-cta">Get Started <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a></li>
+    <li><a href="/contact?cta=__CTA_PAGE__-nav" class="nav-cta">Schedule a call <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a></li>
   </ul>
   <div class="nav-hamburger" onclick="document.querySelector('.nav-links').classList.toggle('mobile-open'); event.stopPropagation();"><span></span><span></span><span></span></div>
 </nav>`;
@@ -307,7 +307,9 @@ mkdirSync(join(ROOT, "tutorials"), { recursive: true });
 // "More in </h2>" on 7 pages. Refuse to write a page with an empty heading.
 const guard = (name, html) => {
   if (/<h2>\s*<\/h2>|More in\s*<\/h2>|Episode (?:undefined|null)/.test(html)) throw new Error(`build-tutorials: empty series heading in ${name}`);
-  return html;
+  // nav CTA tag ?cta=<page>-nav (sales row D3; same page ids as scripts/cta-lib.mjs pageId)
+  const page = name === "tutorials.html" ? "tutorials" : `tutorials-${name}`;
+  return html.replace(/__CTA_PAGE__/g, page.toLowerCase().replace(/[^a-z0-9]+/g, "-"));
 };
 writeFileSync(join(ROOT, "tutorials.html"), guard("tutorials.html", buildHub()));
 console.log(`✅ tutorials.html  (${videos.length} videos, ${new Set(videos.map((v) => v.series)).size} series)`);

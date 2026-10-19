@@ -14,8 +14,8 @@ new file **unchanged**: the entire `<style>` block, the `gtag` `<script>` tags, 
 Change per post ONLY: `<title>`, meta description (og/twitter/name — all identical text), canonical
 URL, the 3 JSON-LD blocks, the hero (section-label / h1 / section-desc), the At-a-glance card, the
 `article-body` content, the FAQ `<details>` list, and the CTA headline + subhead. Keep the primary
-CTA button → `/contact` (label "Get My Free Money-Review" or a fitting first-person variant) and the
-secondary "Talk to us" → `/contact`.
+CTA button → `/contact` (label "Schedule a call" — then run `npm run cta:sweep` + `npm run check:cta`), no
+second /contact button.
 
 ## Voice (the current law — 2026-09-04 overhaul)
 - Sell the OUTCOME, delivery-model-agnostic. Managed-service framing is ALLOWED and encouraged: "we

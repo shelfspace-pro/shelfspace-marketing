@@ -68,8 +68,8 @@
      - Vendor Portal: "Want your vendors on a portal? Let's talk."
      - Integrations: "Ready to connect your systems? Let's talk."
      - Generic: "Ready for a free evaluation? Let's talk."
-   - One button: "Talk to Us →" → /contact
-   - Below button: "Free evaluation. We handle setup."
+   - One button: "Schedule a call →" → /contact?cta=<page>-cta (run `npm run cta:sweep`, then `npm run check:cta`)
+   - Below button (`docs-cta-note`): the page microcopy the sweep writes, e.g. "30 minutes with Chris. See how your vendor payments would run."
    - No secondary CTA
 ```
 
