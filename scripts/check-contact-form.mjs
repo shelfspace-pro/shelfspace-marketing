@@ -197,7 +197,42 @@ for (const [label, fn] of [['500', () => ({ status: 500, body: { ok: false } })]
   await page.fill('#name', 'A'); await page.fill('#email', 'a@b.co'); await page.fill('#phone', '12345'); await page.fill('#company', 'X');
   await page.click('#submitBtn'); await page.waitForTimeout(400);
   ok(posts === 0 && (await page.textContent('#formError')).includes('mobile'), 'short phone refused before any post');
+  for (const bad of ['(360) 609-0721 ext 12', '0044 20 7946 0958', '360-609-0721x5']) {
+    await page.fill('#phone', bad); await page.click('#submitBtn'); await page.waitForTimeout(300);
+    ok(posts === 0 && (await page.textContent('#formError')).includes('no extension'), 'refused before posting: ' + bad);
+  }
   await browser.close();
+}
+// 8b. attribution: a campaign on the /contact URL replaces the session touch wholesale (never a blend)
+{
+  console.log('\n# attribution');
+  const browser = await chromium.launch(); const ctx = await browser.newContext(); const page = await ctx.newPage();
+  await page.addInitScript(() => { try { sessionStorage.setItem('ss-session-touch', JSON.stringify({ utmSource: 'li', utmMedium: 'social', landing: '/ai-calls?utm_source=li', referrer: 'https://www.linkedin.com/', at: '2026-10-19T00:00:00Z' })); } catch (e) {} });
+  await page.route('**/turnstile/v0/api.js*', r => r.fulfill({ contentType: 'application/javascript', body: TURNSTILE_STUB }));
+  await page.route('**/googletagmanager.com/**', r => r.fulfill({ body: '' }));
+  const posts = [];
+  await page.route('https://ourshelf.space/**', r => { if (r.request().method() === 'POST') posts.push(JSON.parse(r.request().postData() || '{}')); return r.fulfill({ status: 200, contentType: 'application/json', headers: { 'access-control-allow-origin': '*' }, body: r.request().method() === 'POST' ? '{"ok":true,"leadId":"11111111-2222-4333-8444-555555555555"}' : '{"live":false,"capture":true}' }); });
+  for (const [label, url, want] of [['url campaign wins', '/contact.html?utm_campaign=q4', { utm_campaign: 'q4' }], ['session touch when url has none', '/contact.html?cta=x1', { utm_source: 'li', utm_medium: 'social', landing_path: '/ai-calls?utm_source=li' }]]) {
+    posts.length = 0;
+    await page.goto(BASE + url, { waitUntil: 'domcontentloaded' }); await page.waitForTimeout(1700);
+    await page.fill('#name', 'A B'); await page.fill('#email', 'a@b.co'); await page.fill('#phone', '+44 20 7946 0958'); await page.fill('#company', 'X');
+    await page.click('#submitBtn'); await page.waitForSelector('#cxStep2:not([hidden])', { timeout: 10000 });
+    const p = posts[0] || {};
+    const got = { utm_source: p.utm_source, utm_medium: p.utm_medium, utm_campaign: p.utm_campaign, landing_path: p.landing_path };
+    const exp = { utm_source: undefined, utm_medium: undefined, utm_campaign: undefined, landing_path: '/contact.html?utm_campaign=q4', ...want };
+    ok(JSON.stringify(got) === JSON.stringify(exp), label + ': ' + JSON.stringify(got));
+    ok(p.phone === '+44 20 7946 0958', label + ': +country number accepted');
+    if (label === 'url campaign wins') ok(!('referrer' in p), 'url touch: no stored referrer blended in (' + p.referrer + ')');
+  }
+  await browser.close();
+}
+// 8c. the lead system refuses the number (400 fields:[phone]) → field error, NOT the email backup
+{
+  const s = await scenario('phone refused by the lead system', { status: { live: false, capture: true }, lead: (b) => ({ status: 400, body: { ok: false, error: 'invalid', fields: ['phone'] } }) });
+  await s.page.waitForFunction(() => getComputedStyle(document.getElementById('formError')).display === 'block', null, { timeout: 30000 });
+  ok((await s.page.textContent('#formError')).includes('country code') && s.seen.interest.length === 0, 'phone 400 → asks for another number, no fallback');
+  ok(await s.page.isVisible('#cxStep1') && !(await s.page.isDisabled('#submitBtn')), 'step 1 stays, button re-enabled');
+  await s.browser.close();
 }
 // 9. phone width screenshots
 {

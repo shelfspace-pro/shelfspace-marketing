@@ -80,6 +80,14 @@ for (const s of sends) {
   if (!/to: NOTIFY_EMAIL/.test(s)) fail('an interest.js send is not addressed to NOTIFY_EMAIL');
 }
 if (/from: ['"`][^'"`]*chris@shelfspace\.pro/i.test(api)) fail('interest.js still sends From chris@shelfspace.pro');
+// The backup must not silently drop a fast autofill the lead system would have kept (its floor is 1.5 s).
+if (!/const MIN_FILL_MS_FALLBACK = 1500;/.test(api) || !/const minFill = body\.fallback === true \? MIN_FILL_MS_FALLBACK : MIN_FILL_MS;/.test(handler) || !/elapsedMs < minFill\)/.test(handler)) fail('interest.js fallback fill floor is not the 1.5 s floor');
+
+// 6. www must land on the apex: the lead system's CORS preflight (platform proxy.ts) allows ONLY
+//    https://shelfspace.pro, so a form served from www would fall back to email on every submit.
+const vercel = JSON.parse(readFileSync(process.argv[4] || 'vercel.json', 'utf8'));
+const wwwRedirect = (vercel.redirects || []).find((r) => (r.has || []).some((h) => h.type === 'host' && h.value === 'www.shelfspace.pro'));
+if (!wwwRedirect || !/^https:\/\/shelfspace\.pro\//.test(wwwRedirect.destination) || wwwRedirect.source !== '/:path*') fail('vercel.json no longer redirects www.shelfspace.pro to the apex');
 
 if (fails.length) {
   console.error('check-sales-disclosure: FAIL');

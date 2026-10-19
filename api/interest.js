@@ -84,6 +84,7 @@ const MAX_PHONE = 40;
 const MAX_REASON = 40;
 // Real people take a few seconds to fill the form; scripted posts don't.
 const MIN_FILL_MS = 2500;
+const MIN_FILL_MS_FALLBACK = 1500;
 
 function str(v) {
   return typeof v === 'string' ? v.trim() : '';
@@ -351,7 +352,10 @@ export default async function handler(req, res) {
   // Bot traps: a filled honeypot or an instant submit gets a quiet 200 and
   // no email — the bot learns nothing, Chris's inbox stays clean.
   const elapsedMs = Number(body.elapsedMs);
-  if (str(body.website) || (Number.isFinite(elapsedMs) && elapsedMs < MIN_FILL_MS)) {
+  // The /contact backup has already passed the page's own checks (and its fill floor is the lead
+  // system's 1.5 s), so it gets the lower floor — a fast autofill must not be silently dropped.
+  const minFill = body.fallback === true ? MIN_FILL_MS_FALLBACK : MIN_FILL_MS;
+  if (str(body.website) || (Number.isFinite(elapsedMs) && elapsedMs < minFill)) {
     console.log('interest_trap ' + JSON.stringify({ honeypot: !!str(body.website), elapsedMs }));
     return res.status(200).json({ ok: true });
   }

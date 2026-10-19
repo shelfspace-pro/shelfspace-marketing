@@ -496,7 +496,9 @@
   var DISCLOSURE_SHA256 = '1072b51767aa3389a01512a8cbdee287f71a886f870a7e4dcbe00f9acfd2cc9f';
   var SITEKEY = '0x4AAAAAACiquH5tTwIbSo5z';         // verified by the lead system
   var FALLBACK_SITEKEY = '0x4AAAAAACiEpqqSU9lohNi-'; // verified by /api/interest
-  var LEAD_TIMEOUT_MS = 30000;
+  // Above the route's own 60 s budget would be pointless; 55 s keeps a slow-but-successful save from
+  // also firing the email backup (a double notice to Chris).
+  var LEAD_TIMEOUT_MS = 55000;
   var STATES = ['AL','AK','AZ','AR','CA','CO','CT','DE','DC','FL','GA','HI','ID','IL','IN','IA','KS','KY','LA','ME','MD','MA','MI','MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY','NC','ND','OH','OK','OR','PA','RI','SC','SD','TN','TX','UT','VT','VA','WA','WV','WI','WY'];
 
   var pageLoadedAt = Date.now();
@@ -507,6 +509,16 @@
   function track(name, p) { try { if (window.gtag) gtag('event', name, p || {}); } catch (e) { /* never block the lead */ } }
   function escapeText(s) {
     return String(s).replace(/[&<>"']/g, function(c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; });
+  }
+  // Mirrors the lead system's phone rule (normalizeE164Loose → normalizeUsCallableE164): digits and
+  // ( ) . - spaces only, one leading +; US = 10 digits or 1 + 10; any other country must start with +.
+  // A number it would refuse returns 400, which would drop the visitor to the email-only backup.
+  function phoneOk(raw) {
+    var p = String(raw || '').trim();
+    if (!p || p.length > 32 || !/^\+?[\d\s().\-]+$/.test(p)) return false;
+    var d = p.replace(/\D/g, '');
+    if (p.charAt(0) === '+') return /^[1-9]\d{6,14}$/.test(d);
+    return d.length === 10 || (d.length === 11 && d.charAt(0) === '1');
   }
   function clip(v, n) { return typeof v === 'string' ? v.trim().slice(0, n) : ''; }
 
@@ -573,9 +585,13 @@
     var s = {}, f = {};
     try { s = JSON.parse(sessionStorage.getItem('ss-session-touch') || '{}') || {}; } catch (e) { s = {}; }
     try { f = JSON.parse(localStorage.getItem('ss-first-touch') || '{}') || {}; } catch (e) { f = {}; }
-    // One touch, never a blend: this session's first page when we have it, else the visitor's first ever.
-    var t = s && s.at ? s : (f || {});
-    function pick(key, urlKey, n) { return clip(t[key] || params.get(urlKey) || '', n); }
+    // One touch, never a blend: a campaign on THIS url wins, else this session's first page, else the
+    // visitor's first ever.
+    var URL_KEYS = { utmSource: 'utm_source', utmMedium: 'utm_medium', utmCampaign: 'utm_campaign', utmTerm: 'utm_term', utmContent: 'utm_content', fbclid: 'fbclid', liFatId: 'li_fat_id' };
+    var u = {};
+    Object.keys(URL_KEYS).forEach(function(k) { if (params.get(URL_KEYS[k])) u[k] = params.get(URL_KEYS[k]); });
+    var t = Object.keys(u).length ? u : (s && s.at ? s : (f || {}));
+    function pick(key, urlKey, n) { return clip(t[key] || '', n); }
     var out = {
       utm_source: pick('utmSource', 'utm_source', 200),
       utm_medium: pick('utmMedium', 'utm_medium', 200),
@@ -740,7 +756,7 @@
     };
     if (!fields.name) return fieldError('name', 'Please add your name.');
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(fields.email)) return fieldError('email', 'That email doesn’t look right. Mind checking it?');
-    if (fields.phone.replace(/\D/g, '').length < 10) return fieldError('phone', 'Please add a mobile number we can reach you at.');
+    if (!phoneOk(fields.phone)) return fieldError('phone', 'Please add a mobile number we can reach you at (digits only, no extension).');
     if (!fields.company) return fieldError('company', 'Please add your company name.');
 
     var btn = document.getElementById('submitBtn');
@@ -768,6 +784,14 @@
           try {
             var r = await fetchJson(LEAD_API, { method: 'POST', headers: { 'Content-Type': 'application/json' }, credentials: 'omit', body: JSON.stringify(payload) }, LEAD_TIMEOUT_MS);
             if (r.ok && r.data && r.data.ok === true && typeof r.data.leadId === 'string') lead.id = r.data.leadId;
+            else if (r.status === 400 && r.data && Array.isArray(r.data.fields) && r.data.fields.length === 1 && r.data.fields[0] === 'phone') {
+              // The lead system can't use this number (e.g. a Canadian or 555-01xx number typed without +).
+              // Ask for another one rather than dropping to the email backup; phoneOk() above can't know
+              // every area-code rule, so the server's answer is the authority.
+              widgets.main.reset();
+              busy(btn, false);
+              return fieldError('phone', 'We can’t use that number. Use a US mobile, or start with + and your country code.');
+            }
             else reason = 'http_' + r.status;
           } catch (err) {
             reason = 'network';
