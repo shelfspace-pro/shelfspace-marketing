@@ -77,9 +77,14 @@
   });
 
   // Tapping a real destination closes the sheet behind the navigation.
+  // A tap inside the open sheet stops here: ~130 pages carry an inline
+  // "close mobile nav on any document click" handler, which otherwise shut
+  // the whole sheet when you tapped a group's +/- toggle.
   links.addEventListener('click', function (e) {
+    if (!mq.matches) return;
+    if (isOpen()) e.stopPropagation();
     var a = e.target.closest('a');
-    if (!a || !mq.matches || a.classList.contains('nav-dropdown-toggle')) return;
+    if (!a || a.classList.contains('nav-dropdown-toggle')) return;
     setTimeout(close, 250);
   });
 })();
