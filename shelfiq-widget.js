@@ -46,302 +46,494 @@
 })();
 
 /**
- * ShelfiQ Live Chat Widget
- * Self-contained: injects all HTML + CSS, manages chat state.
- * Include on any page via <script src="/shelfiq-widget.js"></script>
+ * Chelsea chat widget (sales row D4, 10/19/2026).
+ * Chelsea is ShelfSpace's AI assistant. Everything that matters lives on the platform route
+ * https://ourshelf.space/api/public/sales-chat (prompt, model, guardrail check, lead capture,
+ * booking, "call me now"); this file is only the UI. Nothing is sent until the visitor opens the
+ * chat. Model text is rendered as TEXT (never innerHTML); the only server html inserted is the
+ * registered call-consent disclosure, and only when it has the exact registry shape.
  */
 (function () {
-  var MAX_MESSAGES = 10;
-  var STORAGE_KEY = 'shelfiq-chat-open';
-  var messages = []; // { role, content } for API
-  var userMsgCount = 0;
-  var isLoading = false;
+  var API = 'https://ourshelf.space/api/public/sales-chat';
+  var TIMEOUT_MS = 55000;
+  var STORE_KEY = 'chelsea-chat-v1';
+  var OPEN_KEY = 'chelsea-chat-open';
+  var FALLBACK_HREF = '/contact?cta=chat-widget-fallback';
+  var DISCLOSURE_RE = /^<p class="sales-consent">[^<]*<\/p>$/;
+
+  // state: token + the signed model history; ui = what the visitor sees (incl. notes); flags.
+  var st = { token: null, history: [], ui: [], disclosure: null, siteKey: null, captured: false, offers: null, booked: false, ended: false };
+  var busy = false;
+  var cardOpenedAt = 0;
+
+  function save() { try { sessionStorage.setItem(STORE_KEY, JSON.stringify(st)); } catch (e) { /* best-effort */ } }
+  function load() {
+    try {
+      var raw = sessionStorage.getItem(STORE_KEY);
+      if (!raw) return;
+      var s = JSON.parse(raw);
+      if (s && typeof s.token === 'string' && Array.isArray(s.history) && Array.isArray(s.ui)) st = s;
+    } catch (e) { /* ignore */ }
+  }
 
   // --- CSS ---
   var style = document.createElement('style');
   style.textContent = [
-    /* Container & toggle */
-    '.sq-toggle{position:fixed;bottom:24px;right:24px;z-index:9998;display:flex;align-items:center;gap:8px;background:#1b4332;color:#fff;border:none;padding:12px 20px 12px 16px;border-radius:100px;font-family:inherit;font-size:14px;font-weight:600;cursor:pointer;box-shadow:0 4px 24px rgba(27,67,50,0.3);transition:all .3s cubic-bezier(.22,1,.36,1)}',
-    '.sq-toggle:hover{background:#2d6a4f;transform:translateY(-2px);box-shadow:0 8px 32px rgba(27,67,50,0.4)}',
-    '.sq-toggle svg{flex-shrink:0}',
-    '.sq-iq{background:linear-gradient(135deg,#40916c,#95d5b2);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}',
-    '.sq-iq-sm{color:#95d5b2 !important;-webkit-text-fill-color:#95d5b2}',
-
-    /* Chat window */
-    '.sq-window{position:fixed;bottom:24px;right:24px;z-index:9998;width:400px;height:520px;max-height:calc(100dvh - 48px);background:#fff;border-radius:20px;box-shadow:0 16px 64px rgba(27,67,50,0.18),0 2px 8px rgba(27,67,50,0.06);display:none;flex-direction:column;overflow:hidden;border:1px solid #e2e8f0}',
-    '.sq-window.open{display:flex}',
-
-    /* Title bar */
-    '.sq-title{display:flex;align-items:center;gap:10px;padding:16px 18px;border-bottom:1px solid #f1f5f9;background:#f8fafc;flex-shrink:0}',
-    '.sq-title-icon{width:32px;height:32px;border-radius:10px;background:linear-gradient(135deg,#1b4332,#40916c);display:flex;align-items:center;justify-content:center;flex-shrink:0}',
-    '.sq-title-icon svg{width:16px;height:16px;color:#fff}',
-    '.sq-title-info{flex:1;min-width:0}',
-    '.sq-title-name{font-size:14px;font-weight:700;color:#1b4332}',
-    '.sq-title-status{font-size:11px;color:#40916c;display:flex;align-items:center;gap:5px}',
-    '.sq-title-status::before{content:"";width:6px;height:6px;background:#40916c;border-radius:50%}',
-    '.sq-close{width:32px;height:32px;display:flex;align-items:center;justify-content:center;border:none;background:transparent;cursor:pointer;color:#94a3b8;border-radius:8px;transition:all .15s;font-size:18px;flex-shrink:0}',
-    '.sq-close:hover{background:#f1f5f9;color:#1e293b}',
-
-    /* Messages area */
-    '.sq-messages{flex:1;overflow-y:auto;padding:18px;display:flex;flex-direction:column;gap:12px;scroll-behavior:smooth}',
-
-    /* Message bubbles */
-    '.sq-msg{max-width:85%;padding:11px 15px;border-radius:16px;font-size:14px;line-height:1.6;animation:sq-fade .3s ease both;word-wrap:break-word}',
-    '.sq-msg a{color:inherit;text-decoration:underline}',
-    '.sq-msg.user{align-self:flex-end;background:#1b4332;color:#fff;border-bottom-right-radius:6px}',
-    '.sq-msg.ai{align-self:flex-start;background:#f8fafc;color:#334155;border:1px solid #f1f5f9;border-bottom-left-radius:6px}',
-    '.sq-msg.ai strong{color:#1b4332}',
-    '@keyframes sq-fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}',
-
-    /* Starter chips */
-    '.sq-chips{display:flex;flex-direction:column;gap:8px;padding:0 18px 12px}',
-    '.sq-chip{background:#f0faf4;border:1px solid rgba(149,213,178,0.4);color:#1b4332;padding:10px 14px;border-radius:12px;font-size:13px;font-weight:500;cursor:pointer;text-align:left;transition:all .2s;font-family:inherit;line-height:1.4}',
-    '.sq-chip:hover{background:#d8f3dc;border-color:#95d5b2}',
-
-    /* Loading dots */
-    '.sq-loading{align-self:flex-start;display:flex;gap:4px;padding:14px 18px;background:#f8fafc;border:1px solid #f1f5f9;border-radius:16px;border-bottom-left-radius:6px}',
-    '.sq-dot{width:7px;height:7px;background:#94a3b8;border-radius:50%;animation:sq-bounce .6s ease-in-out infinite}',
-    '.sq-dot:nth-child(2){animation-delay:.15s}',
-    '.sq-dot:nth-child(3){animation-delay:.3s}',
-    '@keyframes sq-bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}',
-
-    /* Input bar */
-    '.sq-input-bar{display:flex;align-items:center;gap:8px;padding:14px 16px;border-top:1px solid #f1f5f9;background:#fff;flex-shrink:0}',
-    '.sq-input{flex:1;border:none;outline:none;font-size:14px;font-family:inherit;color:#1e293b;background:transparent;min-width:0}',
-    '.sq-input::placeholder{color:#94a3b8}',
-    '.sq-send{width:34px;height:34px;border-radius:10px;border:none;background:#1b4332;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s;flex-shrink:0}',
-    '.sq-send:hover{background:#2d6a4f}',
-    '.sq-send:disabled{opacity:0.4;cursor:not-allowed}',
-
-    /* Cap message */
-    '.sq-cap{text-align:center;padding:16px 18px;font-size:13px;color:#64748b;line-height:1.5;border-top:1px solid #f1f5f9;flex-shrink:0}',
-    '.sq-cap a{color:#40916c;font-weight:600;text-decoration:none}',
-    '.sq-cap a:hover{color:#1b4332}',
-
-    /* Mobile */
-    '@media(max-width:480px){',
-    '  .sq-window{width:calc(100vw - 16px);height:calc(100dvh - 16px);max-height:calc(100dvh - 16px);bottom:8px;right:8px;border-radius:16px}',
-    '  .sq-toggle{bottom:16px;right:16px}',
-    '}',
+    '.cw-toggle{position:fixed;bottom:24px;right:24px;z-index:9998;display:flex;align-items:center;gap:8px;background:#1b4332;color:#fff;border:none;padding:12px 20px 12px 16px;border-radius:100px;font-family:inherit;font-size:14px;font-weight:600;cursor:pointer;box-shadow:0 4px 24px rgba(27,67,50,0.3);transition:all .3s cubic-bezier(.22,1,.36,1)}',
+    '.cw-toggle:hover{background:#2d6a4f;transform:translateY(-2px);box-shadow:0 8px 32px rgba(27,67,50,0.4)}',
+    '.cw-window{position:fixed;bottom:24px;right:24px;z-index:9998;width:400px;height:580px;max-height:calc(100dvh - 48px);background:#fff;border-radius:20px;box-shadow:0 16px 64px rgba(27,67,50,0.18),0 2px 8px rgba(27,67,50,0.06);display:none;flex-direction:column;overflow:hidden;border:1px solid #e2e8f0;font-family:inherit}',
+    '.cw-window.open{display:flex}',
+    '.cw-title{display:flex;align-items:center;gap:10px;padding:14px 16px;border-bottom:1px solid #f1f5f9;background:#f8fafc;flex-shrink:0}',
+    '.cw-avatar{width:34px;height:34px;border-radius:12px;background:linear-gradient(135deg,#1b4332,#40916c);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px;flex-shrink:0}',
+    '.cw-title-info{flex:1;min-width:0}',
+    '.cw-name{font-size:14px;font-weight:700;color:#1b4332}',
+    '.cw-sub{font-size:11px;color:#64748b}',
+    '.cw-sched{border:1px solid rgba(149,213,178,.6);background:#f0faf4;color:#1b4332;font-family:inherit;font-size:12px;font-weight:600;padding:6px 10px;border-radius:12px;cursor:pointer;white-space:nowrap}',
+    '.cw-sched:hover{background:#d8f3dc}',
+    '.cw-close{width:32px;height:32px;display:flex;align-items:center;justify-content:center;border:none;background:transparent;cursor:pointer;color:#94a3b8;border-radius:8px;font-size:20px;flex-shrink:0}',
+    '.cw-close:hover{background:#f1f5f9;color:#1e293b}',
+    '.cw-body{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:10px}',
+    '.cw-msg{max-width:86%;padding:10px 14px;border-radius:16px;font-size:14px;line-height:1.55;white-space:pre-wrap;word-wrap:break-word;overflow-wrap:anywhere}',
+    '.cw-msg a{color:inherit;text-decoration:underline}',
+    '.cw-msg.user{align-self:flex-end;background:#1b4332;color:#fff;border-bottom-right-radius:6px}',
+    '.cw-msg.ai{align-self:flex-start;background:#f8fafc;color:#334155;border:1px solid #f1f5f9;border-bottom-left-radius:6px}',
+    '.cw-msg.note{align-self:stretch;max-width:100%;background:#f0faf4;color:#1b4332;border:1px solid rgba(149,213,178,.5);font-size:13px}',
+    '.cw-chips{display:flex;flex-direction:column;gap:8px}',
+    '.cw-chip,.cw-btn{background:#f0faf4;border:1px solid rgba(149,213,178,0.5);color:#1b4332;padding:9px 13px;border-radius:12px;font-size:13px;font-weight:500;cursor:pointer;text-align:left;font-family:inherit;line-height:1.4}',
+    '.cw-chip:hover,.cw-btn:hover{background:#d8f3dc;border-color:#95d5b2}',
+    '.cw-btn.pri{background:#1b4332;color:#fff;border-color:#1b4332;font-weight:600;text-align:center}',
+    '.cw-btn.pri:hover{background:#2d6a4f}',
+    '.cw-btn:disabled{opacity:.5;cursor:not-allowed}',
+    '.cw-actions{display:flex;flex-direction:column;gap:8px}',
+    '.cw-card{border:1px solid #e2e8f0;border-radius:16px;padding:14px;display:flex;flex-direction:column;gap:8px;background:#fff;box-shadow:0 2px 12px rgba(27,67,50,0.06)}',
+    '.cw-card h4{margin:0;font-size:14px;color:#1b4332}',
+    '.cw-card label{font-size:12px;color:#475569;display:flex;flex-direction:column;gap:3px}',
+    '.cw-card input,.cw-card select{font-family:inherit;font-size:14px;padding:8px 10px;border:1px solid #cbd5e1;border-radius:12px;color:#1e293b;background:#fff;width:100%;box-sizing:border-box}',
+    '.cw-card .sales-consent{margin:2px 0 0;font-size:12px;line-height:1.5;color:#475569}',
+    '.cw-err{font-size:12px;color:#b91c1c;min-height:0}',
+    '.cw-loading{align-self:flex-start;display:flex;gap:4px;padding:12px 16px;background:#f8fafc;border:1px solid #f1f5f9;border-radius:16px}',
+    '.cw-dot{width:7px;height:7px;background:#94a3b8;border-radius:50%;animation:cw-bounce .6s ease-in-out infinite}',
+    '.cw-dot:nth-child(2){animation-delay:.15s}.cw-dot:nth-child(3){animation-delay:.3s}',
+    '@keyframes cw-bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}',
+    '.cw-input-bar{display:flex;align-items:center;gap:8px;padding:12px 14px;border-top:1px solid #f1f5f9;background:#fff;flex-shrink:0}',
+    '.cw-input{flex:1;border:none;outline:none;font-size:14px;font-family:inherit;color:#1e293b;background:transparent;min-width:0}',
+    '.cw-send{width:34px;height:34px;border-radius:12px;border:none;background:#1b4332;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0}',
+    '.cw-send:disabled{opacity:.4;cursor:not-allowed}',
+    '@media(max-width:480px){.cw-window{width:calc(100vw - 16px);height:calc(100dvh - 16px);max-height:calc(100dvh - 16px);bottom:8px;right:8px;border-radius:16px}.cw-toggle{bottom:16px;right:16px}}',
   ].join('\n');
   document.head.appendChild(style);
 
-  // --- Toggle Button ---
-  var toggle = document.createElement('button');
-  toggle.className = 'sq-toggle';
-  toggle.setAttribute('aria-label', 'Ask ShelfiQ');
-  toggle.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg> <span style="font-variant-ligatures:none">Ask Shelf<span class="sq-iq-sm">iQ</span></span>';
-  document.body.appendChild(toggle);
-
-  // --- Chat Window ---
-  var win = document.createElement('div');
-  win.className = 'sq-window';
-  win.innerHTML = [
-    '<div class="sq-title">',
-    '  <div class="sq-title-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a4 4 0 0 1 4 4v2a4 4 0 0 1-8 0V6a4 4 0 0 1 4-4z"/><rect x="3" y="12" width="18" height="8" rx="3"/></svg></div>',
-    '  <div class="sq-title-info"><div class="sq-title-name" style="font-variant-ligatures:none">Shelf<span class="sq-iq">iQ</span></div><div class="sq-title-status">Online</div></div>',
-    '  <button class="sq-close" aria-label="Close chat">&times;</button>',
-    '</div>',
-    '<div class="sq-messages" id="sqMessages"></div>',
-    '<div class="sq-chips" id="sqChips"></div>',
-    '<div class="sq-input-bar" id="sqInputBar">',
-    '  <input class="sq-input" id="sqInput" type="text" placeholder="Ask about ShelfSpace..." autocomplete="off">',
-    '  <button class="sq-send" id="sqSend" aria-label="Send"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>',
-    '</div>',
-  ].join('\n');
-  document.body.appendChild(win);
-
-  var messagesEl = document.getElementById('sqMessages');
-  var chipsEl = document.getElementById('sqChips');
-  var inputBar = document.getElementById('sqInputBar');
-  var input = document.getElementById('sqInput');
-  var sendBtn = document.getElementById('sqSend');
-  var closeBtn = win.querySelector('.sq-close');
-
-  // --- Greeting ---
-  function addGreeting() {
-    appendBubble('ai', "Hi! I'm ShelfiQ, ShelfSpace's AI assistant. I can answer questions about consignment, wholesale payments, platform features, pricing, and more. What would you like to know?");
+  function el(tag, cls, text) {
+    var n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (text !== undefined) n.textContent = text;
+    return n;
   }
 
-  // --- Starter Chips ---
-  var starters = [
-    'How does consignment work?',
-    'What POS systems do you support?',
-    'What is ShelfiQ?',
-  ];
+  // Text with safe links: only shelfspace.pro pages and support@shelfspace.pro become links.
+  function richText(parent, text) {
+    var re = /((?:https?:\/\/)?(?:www\.)?shelfspace\.pro(?:\/[A-Za-z0-9\-_/]*)?|support@shelfspace\.pro)/g;
+    var last = 0, m;
+    while ((m = re.exec(text))) {
+      if (m.index > last) parent.appendChild(document.createTextNode(text.slice(last, m.index)));
+      var raw = m[0].replace(/[.,;:!?)]+$/, '');
+      var a = document.createElement('a');
+      if (raw.indexOf('@') !== -1) a.href = 'mailto:' + raw;
+      else { var p = raw.replace(/^https?:\/\//, '').replace(/^www\./, ''); a.href = 'https://' + p; }
+      a.textContent = raw;
+      parent.appendChild(a);
+      if (raw.length < m[0].length) parent.appendChild(document.createTextNode(m[0].slice(raw.length)));
+      last = m.index + m[0].length;
+    }
+    if (last < text.length) parent.appendChild(document.createTextNode(text.slice(last)));
+  }
+
+  // --- DOM ---
+  var toggle = el('button', 'cw-toggle');
+  toggle.setAttribute('aria-label', 'Chat with Chelsea, ShelfSpace’s AI assistant');
+  toggle.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>';
+  toggle.appendChild(el('span', '', 'Chat with Chelsea'));
+  document.body.appendChild(toggle);
+
+  var win = el('div', 'cw-window');
+  win.setAttribute('role', 'dialog');
+  win.setAttribute('aria-label', 'Chat with Chelsea');
+  var title = el('div', 'cw-title');
+  title.appendChild(el('div', 'cw-avatar', 'C'));
+  var info = el('div', 'cw-title-info');
+  info.appendChild(el('div', 'cw-name', 'Chelsea'));
+  info.appendChild(el('div', 'cw-sub', 'ShelfSpace’s AI assistant'));
+  title.appendChild(info);
+  var schedBtn = el('button', 'cw-sched', 'Schedule a call');
+  title.appendChild(schedBtn);
+  var closeBtn = el('button', 'cw-close', '×');
+  closeBtn.setAttribute('aria-label', 'Close chat');
+  title.appendChild(closeBtn);
+  win.appendChild(title);
+  var body = el('div', 'cw-body');
+  body.setAttribute('aria-live', 'polite');
+  win.appendChild(body);
+  var bar = el('div', 'cw-input-bar');
+  var input = el('input', 'cw-input');
+  input.type = 'text';
+  input.maxLength = 600;
+  input.placeholder = 'Ask Chelsea about ShelfSpace…';
+  input.setAttribute('aria-label', 'Your message');
+  var send = el('button', 'cw-send');
+  send.setAttribute('aria-label', 'Send');
+  send.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>';
+  bar.appendChild(input);
+  bar.appendChild(send);
+  win.appendChild(bar);
+  document.body.appendChild(win);
+
+  // --- network ---
+  function call(payload) {
+    var ctrl = typeof AbortController !== 'undefined' ? new AbortController() : null;
+    var timer = setTimeout(function () { if (ctrl) ctrl.abort(); }, TIMEOUT_MS);
+    return fetch(API, { method: 'POST', headers: { 'Content-Type': 'application/json' }, credentials: 'omit', body: JSON.stringify(payload), signal: ctrl ? ctrl.signal : undefined })
+      .then(function (r) { return r.json().catch(function () { return {}; }).then(function (b) { b.__status = r.status; return b; }); })
+      .finally(function () { clearTimeout(timer); });
+  }
+
+  // --- rendering ---
+  function scroll() { body.scrollTop = body.scrollHeight; }
+  function bubble(kind, text) {
+    var d = el('div', 'cw-msg ' + kind);
+    richText(d, text);
+    body.appendChild(d);
+    scroll();
+    return d;
+  }
+  function addUi(kind, text) { st.ui.push({ k: kind, t: text }); save(); bubble(kind, text); }
+  function fallbackNote(text) {
+    var d = el('div', 'cw-msg note');
+    d.appendChild(document.createTextNode((text || 'Sorry, I couldn’t connect just now.') + ' '));
+    var a = el('a', '', 'Schedule a call');
+    a.href = FALLBACK_HREF;
+    d.appendChild(a);
+    body.appendChild(d);
+    scroll();
+  }
+  function loading(on) {
+    var x = document.getElementById('cwLoading');
+    if (on && !x) {
+      x = el('div', 'cw-loading');
+      x.id = 'cwLoading';
+      for (var i = 0; i < 3; i++) x.appendChild(el('div', 'cw-dot'));
+      body.appendChild(x);
+      scroll();
+    } else if (!on && x) x.remove();
+  }
+  function setBusy(b) { busy = b; send.disabled = b || st.ended; input.disabled = st.ended; }
+
+  function renderAll() {
+    body.textContent = '';
+    st.ui.forEach(function (m) { bubble(m.k, m.t); });
+    if (!st.captured && st.ui.length <= 1) renderChips();
+    if (st.captured && st.offers && !st.booked) renderOffers();
+    setBusy(false);
+  }
 
   function renderChips() {
-    chipsEl.innerHTML = '';
-    starters.forEach(function (text) {
-      var chip = document.createElement('button');
-      chip.className = 'sq-chip';
-      chip.textContent = text;
-      chip.addEventListener('click', function () {
-        sendMessage(text);
+    var c = el('div', 'cw-chips');
+    c.id = 'cwChips';
+    [['How does ShelfCollect work for a brand?', null], ['I run a dispensary. How does ShelfPay work?', null], ['Schedule a call', 'card']].forEach(function (pair) {
+      var b = el('button', 'cw-chip', pair[0]);
+      b.addEventListener('click', function () { c.remove(); if (pair[1] === 'card') openCard(); else sendMessage(pair[0]); });
+      c.appendChild(b);
+    });
+    body.appendChild(c);
+    scroll();
+  }
+  function dropChips() { var c = document.getElementById('cwChips'); if (c) c.remove(); }
+
+  // --- start / message ---
+  function ensureSession() {
+    if (st.token) return Promise.resolve(true);
+    loading(true);
+    return call({ action: 'start' }).then(function (b) {
+      loading(false);
+      if (!b.ok || !b.token) { fallbackNote('Chat isn’t available right now.'); return false; }
+      st.token = b.token;
+      st.history = [{ role: 'assistant', content: b.greeting }];
+      st.disclosure = b.disclosure || null;
+      st.siteKey = b.turnstileSiteKey || null;
+      st.ui = [{ k: 'ai', t: b.greeting }];
+      save();
+      renderAll();
+      return true;
+    }, function () { loading(false); fallbackNote('Chat isn’t available right now.'); return false; });
+  }
+
+  function sendMessage(text) {
+    text = (text || '').trim().slice(0, 600);
+    if (!text || busy || st.ended) return;
+    dropChips();
+    setBusy(true);
+    ensureSession().then(function (ok) {
+      if (!ok) { setBusy(false); return; }
+      addUi('user', text);
+      loading(true);
+      return call({ action: 'message', token: st.token, history: st.history, message: text }).then(function (b) {
+        loading(false);
+        if (b.ok && b.reply) {
+          st.history = st.history.concat([{ role: 'user', content: text }, { role: 'assistant', content: b.reply }]);
+          st.token = b.token;
+          if (b.ended) st.ended = true;
+          addUi('ai', b.reply);
+          if (b.showCard && !st.captured) openCard();
+        } else if (b.ok && b.note) {
+          if (b.ended) st.ended = true;
+          addUi('note', b.note);
+          if (b.showCard && !st.captured) openCard();
+        } else if (b.__status === 429) {
+          fallbackNote('You’re sending messages quickly. Try again in a few minutes, or');
+        } else if (b.error === 'session' || b.error === 'history') {
+          st.token = null; st.history = []; st.ui = []; save();
+          fallbackNote('This chat expired. Open it again to start over, or');
+        } else {
+          fallbackNote('Sorry, something went wrong.');
+        }
+        save();
+        setBusy(false);
+        input.focus();
       });
-      chipsEl.appendChild(chip);
+    }).catch(function () { loading(false); fallbackNote('Sorry, I couldn’t connect.'); setBusy(false); });
+  }
+
+  // --- Turnstile (own instance; never touches the /contact form's widget or its onload hook) ---
+  var ts = { id: null, token: null, waiters: [] };
+  function loadTurnstile() {
+    if (window.turnstile) return Promise.resolve(window.turnstile);
+    if (!document.querySelector('script[src*="challenges.cloudflare.com/turnstile"]')) {
+      var s = document.createElement('script');
+      s.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
+      s.async = true;
+      document.head.appendChild(s);
+    }
+    return new Promise(function (resolve) {
+      var n = 0;
+      var t = setInterval(function () {
+        if (window.turnstile || ++n > 100) { clearInterval(t); resolve(window.turnstile || null); }
+      }, 100);
+    });
+  }
+  function renderTurnstile(slot) {
+    if (!st.siteKey) return;
+    loadTurnstile().then(function (T) {
+      if (!T || ts.id !== null) return;
+      ts.id = T.render(slot, {
+        sitekey: st.siteKey, appearance: 'interaction-only',
+        callback: function (tok) { ts.token = tok; var w = ts.waiters; ts.waiters = []; w.forEach(function (f) { f(tok); }); },
+        'expired-callback': function () { ts.token = null; },
+        'error-callback': function () { ts.token = null; },
+      });
+    });
+  }
+  function turnstileToken(ms) {
+    if (ts.token) { var t = ts.token; ts.token = null; return Promise.resolve(t); }
+    return new Promise(function (resolve) {
+      var done = false;
+      var timer = setTimeout(function () { if (!done) { done = true; resolve(null); } }, ms);
+      ts.waiters.push(function (tok) { if (!done) { done = true; clearTimeout(timer); ts.token = null; resolve(tok); } });
+    });
+  }
+  function resetTurnstile() { ts.token = null; if (window.turnstile && ts.id !== null) window.turnstile.reset(ts.id); }
+
+  // --- details card ---
+  function attribution() {
+    var s = {};
+    try { s = JSON.parse(sessionStorage.getItem('ss-session-touch') || '{}') || {}; } catch (e) { s = {}; }
+    function c(v, n) { return typeof v === 'string' ? v.slice(0, n) : ''; }
+    return {
+      utm_source: c(s.utmSource, 200), utm_medium: c(s.utmMedium, 200), utm_campaign: c(s.utmCampaign, 200),
+      utm_term: c(s.utmTerm, 200), utm_content: c(s.utmContent, 200), fbclid: c(s.fbclid, 500), li_fat_id: c(s.liFatId, 500),
+      referrer: c(s.referrer, 1000), landing_path: c(s.landing, 1000),
+    };
+  }
+
+  function field(card, label, name, type, auto) {
+    var l = el('label', '', label);
+    var i = el('input');
+    i.name = name; i.type = type; i.required = true; i.autocomplete = auto; i.maxLength = name === 'email' ? 254 : 200;
+    l.appendChild(i);
+    card.appendChild(l);
+    return i;
+  }
+
+  function openCard() {
+    if (st.captured || document.getElementById('cwCard')) return;
+    ensureSession().then(function (ok) {
+      if (!ok || document.getElementById('cwCard')) return;
+      if (!st.disclosure || !DISCLOSURE_RE.test(st.disclosure.html || '')) { fallbackNote('Leave your details on our contact page:'); return; }
+      dropChips();
+      cardOpenedAt = Date.now();
+      var card = el('form', 'cw-card');
+      card.id = 'cwCard';
+      card.noValidate = true;
+      card.appendChild(el('h4', '', 'Set up a call with Chris'));
+      var hp = el('input'); hp.name = 'website'; hp.type = 'text'; hp.tabIndex = -1; hp.autocomplete = 'off';
+      hp.setAttribute('aria-hidden', 'true'); hp.style.cssText = 'position:absolute;left:-9999px;width:1px;height:1px;opacity:0';
+      card.appendChild(hp);
+      var name = field(card, 'Your name', 'name', 'text', 'name');
+      var email = field(card, 'Work email', 'email', 'email', 'email');
+      var phone = field(card, 'Mobile', 'phone', 'tel', 'tel');
+      var company = field(card, 'Company', 'company', 'text', 'organization');
+      var rl = el('label', '', 'I run a…');
+      var role = el('select');
+      [['', 'Choose one'], ['brand', 'Brand'], ['distributor', 'Distributor'], ['store', 'Dispensary or store'], ['other', 'Something else']].forEach(function (o) {
+        var op = el('option', '', o[1]); op.value = o[0]; role.appendChild(op);
+      });
+      rl.appendChild(role);
+      card.appendChild(rl);
+      var tsSlot = el('div', 'cw-ts');
+      card.appendChild(tsSlot);
+      var disc = el('div');
+      disc.innerHTML = st.disclosure.html; // registry html only (shape-checked above)
+      card.appendChild(disc);
+      var err = el('div', 'cw-err');
+      card.appendChild(err);
+      var LABEL = st.disclosure.buttonLabel || 'Submit';
+      var submit = el('button', 'cw-btn pri', LABEL);
+      submit.type = 'submit';
+      card.appendChild(submit);
+      body.appendChild(card);
+      renderTurnstile(tsSlot);
+      scroll();
+      name.focus();
+
+      card.addEventListener('submit', function (ev) {
+        ev.preventDefault();
+        err.textContent = '';
+        if (!name.value.trim() || !email.value.trim() || !phone.value.trim() || !company.value.trim() || !role.value) { err.textContent = 'Please fill in every field.'; return; }
+        submit.disabled = true;
+        submit.textContent = 'Sending…';
+        turnstileToken(20000).then(function (tok) {
+          if (!tok) { err.textContent = 'Couldn’t verify you’re human. Try again.'; resetTurnstile(); submit.disabled = false; submit.textContent = LABEL; return; }
+          var a = attribution();
+          var payload = {
+            action: 'capture', token: st.token, history: st.history,
+            name: name.value.trim(), email: email.value.trim(), phone: phone.value.trim(), company: company.value.trim(), role: role.value,
+            turnstile_token: tok, website: hp.value, fill_ms: Date.now() - cardOpenedAt,
+            disclosure_version: st.disclosure.version, disclosure_html_sha256: st.disclosure.sha256, button_label: LABEL,
+            page_url: location.href.slice(0, 1000), cta_id: 'chat-widget',
+          };
+          Object.keys(a).forEach(function (k) { if (a[k]) payload[k] = a[k]; });
+          return call(payload).then(function (b) {
+            if (b.ok) {
+              card.remove();
+              st.captured = true;
+              if (b.token) st.token = b.token;
+              st.offers = b.offers || { booking: false, callNow: false };
+              if (b.reply) addUi('note', b.reply);
+              save();
+              renderOffers();
+              return;
+            }
+            resetTurnstile();
+            submit.disabled = false;
+            submit.textContent = LABEL;
+            if (b.__status === 400 && b.fields && b.fields.length) {
+              var map = { email: 'work email', phone: 'mobile number', name: 'name', company: 'company', role: 'role' };
+              var names = b.fields.map(function (f) { return map[f] || f; }).filter(function (v, i, arr) { return arr.indexOf(v) === i; });
+              err.textContent = 'Please check your ' + names.join(' and ') + '.';
+            } else if (b.__status === 429) err.textContent = 'Too many tries. Please wait a few minutes.';
+            else if (b.__status === 403) err.textContent = 'Couldn’t verify you’re human. Try again.';
+            else err.textContent = 'Something went wrong. You can also use our contact page.';
+          });
+        }).catch(function () { submit.disabled = false; submit.textContent = LABEL; err.textContent = 'Couldn’t connect. Try again.'; });
+      });
     });
   }
 
-  function hideChips() {
-    chipsEl.style.display = 'none';
-  }
-
-  // --- Bubble helpers ---
-  function appendBubble(role, text) {
-    var div = document.createElement('div');
-    div.className = 'sq-msg ' + role;
-    div.innerHTML = formatText(text);
-    messagesEl.appendChild(div);
-    scrollToBottom();
-    return div;
-  }
-
-  function formatText(text) {
-    return text
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>')
-      .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
-      .replace(/(https?:\/\/[^\s<]+)/g, function (url) {
-        if (url.indexOf('"') !== -1) return url; // already inside an href
-        return '<a href="' + url + '" target="_blank" rel="noopener">' + url + '</a>';
-      })
-      .replace(/\b(shelfspace\.pro\/[^\s<,.)]+)/g, function (m, path) {
-        if (m.indexOf('"') !== -1) return m;
-        return '<a href="https://' + path + '">' + path + '</a>';
-      })
-      .replace(/\n/g, '<br>');
-  }
-
-  function showLoading() {
-    var div = document.createElement('div');
-    div.className = 'sq-loading';
-    div.id = 'sqLoading';
-    div.innerHTML = '<div class="sq-dot"></div><div class="sq-dot"></div><div class="sq-dot"></div>';
-    messagesEl.appendChild(div);
-    scrollToBottom();
-  }
-
-  function hideLoading() {
-    var el = document.getElementById('sqLoading');
-    if (el) el.remove();
-  }
-
-  function scrollToBottom() {
-    messagesEl.scrollTop = messagesEl.scrollHeight;
-  }
-
-  // --- Cap UI ---
-  function showCap() {
-    inputBar.style.display = 'none';
-    var cap = document.createElement('div');
-    cap.className = 'sq-cap';
-    cap.innerHTML = 'You\'ve reached the message limit for this session.<br><a href="/signup">Sign up free</a> to keep exploring ShelfSpace.';
-    win.appendChild(cap);
-  }
-
-  // --- Send ---
-  function sendMessage(text) {
-    if (isLoading || !text.trim()) return;
-    if (userMsgCount >= MAX_MESSAGES) return;
-
-    hideChips();
-    var userText = text.trim();
-    appendBubble('user', userText);
-
-    messages.push({ role: 'user', content: userText });
-    userMsgCount++;
-
-    if (userMsgCount >= MAX_MESSAGES) {
-      // Send this last message but show cap after response
-      callAPI(true);
-    } else {
-      callAPI(false);
+  // --- offers: booking + call me now ---
+  function renderOffers() {
+    var old = document.getElementById('cwOffers');
+    if (old) old.remove();
+    if (!st.offers || st.booked || (!st.offers.booking && !st.offers.callNow)) return;
+    var box = el('div', 'cw-actions');
+    box.id = 'cwOffers';
+    if (st.offers.booking) {
+      var pick = el('button', 'cw-btn pri', 'Pick a time');
+      pick.addEventListener('click', function () { pick.disabled = true; loadSlots(box); });
+      box.appendChild(pick);
     }
-  }
-
-  function callAPI(showCapAfter) {
-    isLoading = true;
-    sendBtn.disabled = true;
-    showLoading();
-
-    fetch('/api/shelfiq-chat', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ messages: messages }),
-    })
-      .then(function (res) { return res.json(); })
-      .then(function (data) {
-        hideLoading();
-        if (data.reply) {
-          appendBubble('ai', data.reply);
-          messages.push({ role: 'assistant', content: data.reply });
-        } else if (data.error) {
-          appendBubble('ai', 'Sorry, something went wrong. Please try again.');
-        }
-        if (showCapAfter) {
-          showCap();
-        }
-      })
-      .catch(function () {
-        hideLoading();
-        appendBubble('ai', 'Sorry, I couldn\'t connect. Please try again.');
-      })
-      .finally(function () {
-        isLoading = false;
-        sendBtn.disabled = false;
-        input.focus();
+    if (st.offers.callNow) {
+      var cn = el('button', 'cw-btn', 'Call me now');
+      cn.addEventListener('click', function () {
+        cn.disabled = true;
+        call({ action: 'call', token: st.token }).then(function (b) {
+          addUi('note', b.reply || 'Chris will reach out soon.');
+          st.offers.callNow = false; save(); renderOffers();
+        }, function () { cn.disabled = false; fallbackNote(); });
       });
+      box.appendChild(cn);
+    }
+    body.appendChild(box);
+    scroll();
   }
 
-  // --- Events ---
-  sendBtn.addEventListener('click', function () {
-    sendMessage(input.value);
-    input.value = '';
-  });
+  function zone() { try { return Intl.DateTimeFormat().resolvedOptions().timeZone || ''; } catch (e) { return ''; } }
 
-  input.addEventListener('keydown', function (e) {
-    if (e.key === 'Enter') {
-      e.preventDefault();
-      sendMessage(input.value);
-      input.value = '';
-    }
-  });
+  function slotButtons(box, slots) {
+    var list = el('div', 'cw-actions');
+    list.id = 'cwSlots';
+    slots.forEach(function (s) {
+      var b = el('button', 'cw-btn', s.label);
+      b.addEventListener('click', function () {
+        Array.prototype.forEach.call(list.querySelectorAll('button'), function (x) { x.disabled = true; });
+        call({ action: 'book', token: st.token, start: s.start, timeZone: zone() }).then(function (r) {
+          list.remove();
+          if (r.ok) { st.booked = true; if (r.token) st.token = r.token; addUi('note', r.reply); save(); renderOffers(); return; }
+          if (r.token) st.token = r.token;
+          addUi('note', r.reply || 'Chris will reach out to find a time.');
+          save();
+          if (r.slots && r.slots.length) slotButtons(box, r.slots);
+        }, function () { list.remove(); fallbackNote(); });
+      });
+      list.appendChild(b);
+    });
+    body.appendChild(list);
+    scroll();
+  }
+
+  function loadSlots(box) {
+    loading(true);
+    call({ action: 'slots', token: st.token, timeZone: zone() }).then(function (b) {
+      loading(false);
+      if (b.ok && b.slots && b.slots.length) {
+        if (b.token) st.token = b.token;
+        save();
+        addUi('note', 'Here are the next open times (your time zone):');
+        slotButtons(box, b.slots);
+      } else fallbackNote('I couldn’t load open times.');
+    }, function () { loading(false); fallbackNote('I couldn’t load open times.'); });
+  }
+
+  // --- events ---
+  send.addEventListener('click', function () { var v = input.value; input.value = ''; sendMessage(v); });
+  input.addEventListener('keydown', function (e) { if (e.key === 'Enter') { e.preventDefault(); var v = input.value; input.value = ''; sendMessage(v); } });
+  schedBtn.addEventListener('click', function () { openCard(); });
 
   function openChat() {
     win.classList.add('open');
     toggle.style.display = 'none';
-    try { sessionStorage.setItem(STORAGE_KEY, '1'); } catch (e) {}
+    try { sessionStorage.setItem(OPEN_KEY, '1'); } catch (e) {}
+    if (st.token) renderAll(); else ensureSession();
     setTimeout(function () { input.focus(); }, 100);
   }
-
   function closeChat() {
     win.classList.remove('open');
     toggle.style.display = '';
-    try { sessionStorage.setItem(STORAGE_KEY, '0'); } catch (e) {}
+    try { sessionStorage.setItem(OPEN_KEY, '0'); } catch (e) {}
   }
-
   toggle.addEventListener('click', openChat);
   closeBtn.addEventListener('click', closeChat);
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && win.classList.contains('open')) closeChat(); });
 
-  document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape' && win.classList.contains('open')) {
-      closeChat();
-    }
-  });
-
-  // --- Init ---
-  addGreeting();
-  renderChips();
-
-  // Restore open state from sessionStorage
-  try {
-    if (sessionStorage.getItem(STORAGE_KEY) === '1') {
-      openChat();
-    }
-  } catch (e) {}
+  load();
+  try { if (sessionStorage.getItem(OPEN_KEY) === '1' && st.token) openChat(); } catch (e) {}
 })();
 
 /* ── Nav dropdowns: ARIA sync + touch toggle (desktop hover/focus open via CSS) ──

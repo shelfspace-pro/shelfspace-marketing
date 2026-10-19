@@ -37,7 +37,7 @@ Homepage story order: static guarantee headline → which side → brand ticker 
 - Fonts: DM Sans (display) + Space Mono (monospace — the hero of every dollar/number moment)
 - Colors: `--green-deep` (#1b4332) through `--green-ghost` (#f0faf4), slate palette. **Design tokens only — never hardcoded hex.**
 - Shadows: green-tinted. Whitespace = confidence — let numbers breathe. **One dark (`--green-deep`) section per page, max**, reserved for the emotional peak.
-- ShelfiQ widget: `/shelfiq-widget.js` included on ALL pages as last script
+- Chat widget (sales row D4, 10/19/2026): `/shelfiq-widget.js` (file name kept) is included on ALL pages as last script. It holds three blocks: first-touch attribution (`ss-session-touch`, read by /contact — keep it), the **Chelsea** chat (ShelfSpace's AI assistant), and the nav-dropdown JS. Chelsea's brain is on the platform (`https://ourshelf.space/api/public/sales-chat`: prompt, model, guardrail checker, lead capture, booking, "call me now"); this repo has only the UI. Nothing is sent until the visitor opens the chat. Model text renders as text, never HTML. The call-consent disclosure comes from the platform and is rendered verbatim above a "Submit" button. `api/shelfiq-chat.js` is gone — to change what Chelsea says, edit `lib/sales/chat/knowledge.ts` in the platform repo. Fence: `npm run check:chat-widget`.
 - **No Apollo** — the Apollo.io tracker was removed sitewide 10/06/2026 (Chris: "rip apollo out"). Never re-add it; Google Analytics (`G-H2LBJT03WE`) is the only tracker on every page.
 - fi ligature fix: `font-variant-ligatures: none` when "Shelf" and "iQ" span split
 
@@ -127,11 +127,11 @@ The `/blog-post` and `/case-study` skills handle the full rollout. Manual checkl
 /                     — HTML pages (index.html, about.html, etc.)
 /blog/                — Blog articles
 /docs/                — Documentation pages
-/api/                 — Serverless functions (shelfiq-chat.js)
+/api/                 — Serverless functions (interest.js — the /contact fallback)
 /logos/               — POS integration logos
 /marketing/           — Internal marketing files (playbook, case-studies, docs-plan, etc.)
 /styles.css           — Shared design system CSS
-/shelfiq-widget.js    — Chat widget (included on all pages)
+/shelfiq-widget.js    — Attribution + Chelsea chat widget + nav JS (included on all pages)
 /docs-search.js       — Docs search (DOCS index + auto-mount; included on all /docs pages)
 /llms.txt             — AI-readable site reference
 /sitemap.xml          — All indexable URLs
