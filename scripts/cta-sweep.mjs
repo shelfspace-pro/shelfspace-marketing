@@ -16,17 +16,19 @@
 import { readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { LABEL, MICRO, ON_DARK, listPages, GENERATED, pageId, ctaId, audience, findContactAnchors, kind, slotFor, attr } from "./cta-lib.mjs";
+import { LABEL, MICRO, ON_DARK, isPartnerCta, listPages, GENERATED, pageId, ctaId, audience, findContactAnchors, kind, slotFor, attr } from "./cta-lib.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const DRY = process.argv.includes("--dry");
 
-const MICRO_CSS = `<style id="cta-micro-css">.cta-stack{display:inline-block;max-width:100%;vertical-align:top}.cta-micro{display:block;margin-top:10px;font-size:14px;line-height:1.4;opacity:.8}</style>`;
+const MICRO_CSS = `<style id="cta-micro-css">.cta-stack{display:inline-block;max-width:100%;vertical-align:top}.cta-micro{display:block;margin-top:10px;font-size:14px;line-height:1.4;opacity:.8}.cta-micro--on-dark{color:#fff}.cta-micro--row{flex-basis:100%;margin-top:0}:has(>.cta-micro--row){flex-wrap:wrap}</style>`;
 
 const UNWRAP_RE = /<span class="cta-stack">(<a\b[\s\S]*?<\/a>)(?:<span class="cta-micro[^"]*">[^<]*<\/span>)+<\/span>/g;
+// row mode: the microcopy is the last item of the button row (see below)
+const ROW_MICRO_RE = /\s*<span class="cta-micro[^"]*\bcta-micro--row\b[^"]*">[^<]*<\/span>/g;
 
-function microHtml(rel, partner, id) {
-  const c = ON_DARK.has(id) ? "cta-micro cta-micro--on-dark" : "cta-micro";
+function microHtml(rel, partner, id, extra = "") {
+  const c = (ON_DARK.has(id) ? "cta-micro cta-micro--on-dark" : "cta-micro") + extra;
   if (partner) return `<span class="${c}">${MICRO.partner}</span>`;
   if (rel === "pricing.html") return `<span class="${c} show-retailer">${MICRO.store}</span><span class="${c} show-vendor">${MICRO.brand}</span>`;
   return `<span class="${c}">${MICRO[audience(rel)]}</span>`;
@@ -46,7 +48,7 @@ function relabel(inner) {
 }
 
 export function sweep(rel, html) {
-  let src = html.replace(UNWRAP_RE, "$1");
+  let src = html.replace(UNWRAP_RE, "$1").replace(ROW_MICRO_RE, "");
   const anchors = findContactAnchors(src);
   for (const a of anchors) a.href = a.href.replace(/&amp;/g, "&");
   const page = pageId(rel);
@@ -82,8 +84,8 @@ export function sweep(rel, html) {
     const n = (seen.get(base) || 0) + 1;
     seen.set(base, n);
     const slot = n === 1 ? base : `${base}-${n}`;
-    const partner = pageAud === "partner" || /[?&](path=partner|subject=partner-call)\b/.test(a.href) || /partner/i.test(a.inner.replace(/<[^>]+>/g, ""));
     const id = ctaId(page, slot);
+    const partner = isPartnerCta(rel, id);
     const href = newHref(a.href, id, partner);
     let tag = a.tag.replace(/(\shref\s*=\s*")[^"]*(")/i, `$1${href}$2`);
     let inner = a.inner;
@@ -99,18 +101,39 @@ export function sweep(rel, html) {
         // the docs CTA box already has a note line under its button: it becomes the microcopy
         const after = src.slice(a.end, a.parent.end);
         const note = after.match(/^(\s*<div class="docs-cta-note">)[^<]*(<\/div>)/);
-        if (note) edits.push({ start: a.end + note[1].length, end: a.end + note[0].length - note[2].length, text: MICRO[partner ? "partner" : pageAud] });
+        const text = MICRO[partner ? "partner" : pageAud];
+        if (note) edits.push({ start: a.end + note[1].length, end: a.end + note[0].length - note[2].length, text });
+        else edits.push({ start: a.end, end: a.end, text: `\n      <div class="docs-cta-note">${text}</div>` });
       } else if (!inSticky) {
-        out = `<span class="cta-stack">${out}${microHtml(rel, partner, id)}</span>`;
+        // A button that shares a row (.cta-actions, .hero-actions, …) with other items gets
+        // its microcopy as the row's LAST item, on a line of its own (flex-basis 100%): wrapping
+        // the button would make the row as tall as button + line and stretch its neighbours.
+        const p = a.parent;
+        const rowish = p && /actions|hero-cta/.test(attr(p.tag, "class") || "");
+        let rest = "";
+        if (rowish) {
+          const close = src.lastIndexOf("</", p.end - 1);
+          rest = src.slice(p.innerStart, a.start) + src.slice(a.end, close);
+          for (const r of removed) if (r.parent === p) rest = rest.replace(src.slice(r.start, r.end), "");
+        }
+        if (rowish && /<[a-z]/i.test(rest)) {
+          const close = src.lastIndexOf("</", p.end - 1);
+          let s = close;
+          while (s > 0 && /[ \t]/.test(src[s - 1])) s--;
+          const indent = src.slice(s, close);
+          edits.push({ start: s, end: s, text: `${indent}  ${microHtml(rel, partner, id, " cta-micro--row")}\n` });
+        } else {
+          out = `<span class="cta-stack">${out}${microHtml(rel, partner, id)}</span>`;
+        }
       }
     }
     edits.push({ start: a.start, end: a.end, text: out });
   }
   edits.sort((x, y) => y.start - x.start);
   for (const e of edits) src = src.slice(0, e.start) + e.text + src.slice(e.end);
-  if (!/styles\.css/.test(src) && /class="cta-stack"/.test(src) && !src.includes('id="cta-micro-css"')) {
-    src = src.replace("</head>", `${MICRO_CSS}\n</head>`);
-  }
+  // A page without the shared stylesheet carries the microcopy CSS inline (kept current on every run).
+  src = src.replace(/<style id="cta-micro-css">[^<]*<\/style>\n?/, "");
+  if (!/styles\.css/.test(src) && /class="cta-micro/.test(src)) src = src.replace("</head>", `${MICRO_CSS}\n</head>`);
   return src;
 }
 

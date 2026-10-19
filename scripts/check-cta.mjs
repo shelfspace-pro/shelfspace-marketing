@@ -6,13 +6,14 @@
 //   D  an in-page primary button without its microcopy line
 //   E  a partner CTA (for-bookkeepers, partner call) without path=partner
 //   F  the sweep is not idempotent: re-running it would change a page
+//   G  the docs CTA note (microcopy on a dark box) is too faint
 //
 //   node scripts/check-cta.mjs          (npm run check:cta)
 
 import { readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { LABEL, MICRO, ON_DARK, OLD_LABELS, CTA_RE, listPages, GENERATED, findContactAnchors, kind, visibleText, attr } from "./cta-lib.mjs";
+import { LABEL, MICRO, ON_DARK, isPartnerCta, OLD_LABELS, CTA_RE, listPages, GENERATED, findContactAnchors, kind, visibleText, attr } from "./cta-lib.mjs";
 import { sweep } from "./cta-sweep.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
@@ -26,8 +27,8 @@ for (const rel of listPages(ROOT)) {
   const html = readFileSync(join(ROOT, rel), "utf8");
   pages++;
 
-  // A — any button-styled link, wherever it points
-  for (const m of html.matchAll(/<a\b([^>]*)>([\s\S]*?)<\/a>/g)) {
+  // A — any button-styled link or <button>, wherever it points
+  for (const m of html.matchAll(/<(?:a|button)\b([^>]*)>([\s\S]*?)<\/(?:a|button)>/g)) {
     const cls = (attr(m[0].slice(0, m[0].indexOf(">") + 1), "class") || "").split(/\s+/);
     const isButton = cls.some((c) => c === "nav-cta" || /btn/.test(c) || c === "pri" || c === "qd-go");
     if (!isButton) continue;
@@ -47,9 +48,10 @@ for (const rel of listPages(ROOT)) {
     else if (seen.has(cta)) fail(rel, "C", `cta "${cta}" used twice on the page`);
     else { seen.add(cta); tagged++; }
     // E
-    const partnerPage = rel === "for-bookkeepers.html";
-    if ((partnerPage || q.get("subject") === "partner-call") && q.get("path") !== "partner") fail(rel, "E", `partner CTA without path=partner (${a.href})`);
-    if (q.get("path") === "partner" && !partnerPage && !/partner/i.test(html.slice(Math.max(0, a.start - 2000), a.end))) fail(rel, "E", `path=partner on a non-partner CTA (${a.href})`);
+    const partner = isPartnerCta(rel, cta);
+    if (q.get("subject")) fail(rel, "E", `old subject= param on a /contact link (${a.href})`);
+    if (partner && q.get("path") !== "partner") fail(rel, "E", `partner CTA without path=partner (${a.href})`);
+    if (!partner && q.get("path") === "partner") fail(rel, "E", `path=partner on a non-partner CTA (${a.href})`);
     if (k === "inline") continue;
     primaries++;
     // B
@@ -63,13 +65,29 @@ for (const rel of listPages(ROOT)) {
     const after = html.slice(a.end, a.end + 400);
     if (docsCta) {
       const note = after.match(/^\s*<div class="docs-cta-note">([^<]*)<\/div>/);
-      if (note && !MICROS.has(note[1])) fail(rel, "D", `docs CTA note is "${note[1]}", not page microcopy`);
+      if (!note) fail(rel, "D", `docs CTA (${a.href}) has no microcopy note under it`);
+      else if (!MICROS.has(note[1])) fail(rel, "D", `docs CTA note is "${note[1]}", not page microcopy`);
     } else if (!sticky) {
-      const micro = after.match(/^<span class="(cta-micro[^"]*)">([^<]*)<\/span>/);
+      // stack mode: <span class="cta-stack"><a…>…</a><span class="cta-micro">…</span></span>
+      // row mode:   the button's row ends with <span class="cta-micro cta-micro--row">…</span>
+      const inStack = a.parent && /\bcta-stack\b/.test(attr(a.parent.tag, "class") || "");
+      let micro = null;
+      if (inStack) micro = after.match(/^<span class="(cta-micro[^"]*)">([^<]*)<\/span>/);
+      else if (a.parent) micro = html.slice(a.end, a.parent.end).match(/<span class="(cta-micro[^"]*\bcta-micro--row\b[^"]*)">([^<]*)<\/span>\s*<\/[a-z]+>$/);
       if (!micro || !MICROS.has(micro[2])) fail(rel, "D", `primary CTA (${a.href}) has no microcopy line under it`);
       else if (ON_DARK.has(cta) !== /\bcta-micro--on-dark\b/.test(micro[1])) fail(rel, "D", `microcopy under ${cta} has the wrong on-dark class (dark panel: ${ON_DARK.has(cta)})`);
-      if (!a.parent || !/\bcta-stack\b/.test(attr(a.parent.tag, "class") || "")) fail(rel, "D", `primary CTA (${a.href}) is not inside .cta-stack`);
     }
+  }
+
+  // C — a script that sends the visitor to /contact must tag it too
+  for (const m of html.matchAll(/location(?:\.href\s*=|\s*=|\.assign\s*\(|\.replace\s*\()\s*['"](\/contact[^'"]*)['"]/g)) {
+    const cta = new URLSearchParams((m[1].split("?")[1] || "")).get("cta");
+    if (!cta || !CTA_RE.test(cta)) fail(rel, "C", `script redirect to ${m[1]} without a cta`);
+  }
+
+  // G — the docs CTA note is the microcopy on a dark box: keep it readable (0.5 was 4.06:1)
+  for (const m of html.matchAll(/\.docs-cta-note\s*\{[^}]*color:\s*rgba\(255,\s*255,\s*255,\s*([\d.]+)\)/g)) {
+    if (Number(m[1]) < 0.7) fail(rel, "G", `.docs-cta-note text alpha ${m[1]} is too faint on the dark CTA box (use 0.75)`);
   }
 
   // F

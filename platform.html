@@ -256,7 +256,7 @@ footer.site{background:var(--ground);padding:44px 0}
 </style>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-H2LBJT03WE"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-H2LBJT03WE');</script>
-<style id="cta-micro-css">.cta-stack{display:inline-block;max-width:100%;vertical-align:top}.cta-micro{display:block;margin-top:10px;font-size:14px;line-height:1.4;opacity:.8}</style>
+<style id="cta-micro-css">.cta-stack{display:inline-block;max-width:100%;vertical-align:top}.cta-micro{display:block;margin-top:10px;font-size:14px;line-height:1.4;opacity:.8}.cta-micro--on-dark{color:#fff}.cta-micro--row{flex-basis:100%;margin-top:0}:has(>.cta-micro--row){flex-wrap:wrap}</style>
 </head>
 <body>
 <header class="site">
@@ -294,8 +294,9 @@ footer.site{background:var(--ground);padding:44px 0}
         <h1 class="hl">Pay your vendors, collect what you're owed, and settle up &mdash; <span class="accent">we run the money side.</span></h1>
         <p class="sub">ShelfSpace is the managed money-movement service for cannabis retailers and the vendors who stock their shelves &mdash; we run bill payment, accounts payable and receivable, collections, and consignment settlement, all in one place.</p>
         <div class="hero-cta">
-          <span class="cta-stack"><a class="btn btn-primary" href="/contact?cta=platform-hero">Schedule a call <svg class="arw" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9M8.5 4l4 4-4 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></a><span class="cta-micro">30 minutes with Chris. See how it would run for your business.</span></span>
+          <a class="btn btn-primary" href="/contact?cta=platform-hero">Schedule a call <svg class="arw" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9M8.5 4l4 4-4 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
           <a class="btn btn-ghost" href="#services">See what we do</a>
+          <span class="cta-micro cta-micro--row">30 minutes with Chris. See how it would run for your business.</span>
         </div>
         <p class="hero-note"><span class="dot" aria-hidden="true"></span> Syncs to QuickBooks · Pay by check or ACH · Full audit trail</p>
       </div>
@@ -526,9 +527,9 @@ footer.site{background:var(--ground);padding:44px 0}
             <label for="f-msg">What would you like to automate?</label>
             <textarea id="f-msg" name="message" placeholder="We pay ~120 vendors a month and run consignment with a few of them&hellip;"></textarea>
           </div>
-          <button class="btn btn-primary" type="submit">Book a Free Consult</button>
-          <p class="form-note">Opens your email to send &mdash; we reply within one business day.</p>
-          <p class="form-ok" id="form-ok" role="status">Thanks &mdash; your email draft is ready to send. We'll be in touch within one business day.</p>
+          <button class="btn btn-primary" type="submit">Schedule a call</button>
+          <p class="form-note">30 minutes with Chris. See how it would run for your business.</p>
+          <p class="form-ok" id="form-ok" role="status">Thanks &mdash; taking you to the next step.</p>
         </form>
       </div>
     </div>
@@ -615,7 +616,7 @@ footer.site{background:var(--ground);padding:44px 0}
         '',
         (msg||'I\'d like a walkthrough of AP, AR, and consignment settlement.')
       ];
-      window.location.href='/contact';
+      window.location.href='/contact?cta=platform-form';
       document.getElementById('form-ok').classList.add('show');
     });
   }

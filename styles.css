@@ -145,6 +145,10 @@ nav.scrolled { box-shadow: 0 1px 24px rgba(27,67,50,0.08); }
 .cta-stack { display: inline-block; max-width: 100%; vertical-align: top; }
 .cta-micro { display: block; margin-top: 10px; font-size: 14px; line-height: 1.4; opacity: 0.8; }
 .cta-micro--on-dark { color: var(--white); }
+/* Row mode: a button that shares a flex row with other items gets its line as the row's
+   last item, wrapped onto a line of its own, so the buttons keep their own heights. */
+.cta-micro--row { flex-basis: 100%; margin-top: 0; }
+:has(> .cta-micro--row) { flex-wrap: wrap; }
 .btn-secondary {
   display: inline-flex; align-items: center; gap: 10px;
   background: transparent; color: var(--green-deep);
