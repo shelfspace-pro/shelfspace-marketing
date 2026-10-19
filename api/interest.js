@@ -62,8 +62,10 @@ function getClientIp(req) {
 
 // --- Validation constants ---
 const NOTIFY_EMAIL = process.env.NOTIFY_EMAIL || 'chris@shelfspace.pro';
-const ROLES = new Set(['Retailer', 'Vendor', 'Other']);
-const ROLE_LABEL = { Retailer: 'Dispensary', Vendor: 'Brand', Other: 'Other' };
+// 'Unknown' = the /contact backup path: the two-step form asks the role AFTER the lead is saved,
+// so a fallback submit (lead system unreachable) doesn't have one yet.
+const ROLES = new Set(['Retailer', 'Vendor', 'Other', 'Unknown']);
+const ROLE_LABEL = { Retailer: 'Dispensary', Vendor: 'Brand', Other: 'Other', Unknown: 'Not asked yet' };
 const SHOP_RANGES = new Set(['1', '2-5', '6-10', '11-20', '21+']);
 const STATE_CODES = new Set([
   'AL','AK','AZ','AR','CA','CO','CT','DE','FL','GA','HI','ID','IL','IN','IA','KS',
@@ -78,6 +80,8 @@ const MAX_EMAIL = 200;
 const MAX_BUSINESS = 200;
 const MAX_OTHER = 500;
 const MAX_NOTE = 1000;
+const MAX_PHONE = 40;
+const MAX_REASON = 40;
 // Real people take a few seconds to fill the form; scripted posts don't.
 const MIN_FILL_MS = 2500;
 
@@ -274,8 +278,9 @@ function notificationHtml(lead) {
     ['Name', lead.name],
     ['Email', lead.email],
     ['Business', lead.businessName],
-    ['Role', lead.role],
+    ['Role', ROLE_LABEL[lead.role] || lead.role],
   ];
+  if (lead.phone) rows.splice(2, 0, ['Mobile', lead.phone]);
   if (lead.role === 'Retailer' && lead.shops) rows.push(['Number of stores', lead.shops]);
   if (lead.state) rows.push(['State', lead.state]);
   if (lead.role === 'Other') rows.push(['What they do', lead.otherDescription]);
@@ -289,51 +294,17 @@ function notificationHtml(lead) {
     .join('');
   const body = `
       <h1 style="margin:0 0 4px;font-size:19px;font-weight:700;color:#1b4332;">New lead: ${escapeHtml(lead.businessName)}</h1>
-      <p style="margin:0 0 20px;font-size:14px;color:#64748b;">The page promised ${escapeHtml(lead.name)} a personal reply by end of the next business day. Hit reply to answer them directly.</p>
+      <p style="margin:0 0 20px;font-size:14px;color:#64748b;">${lead.fallback
+        ? `Sent by the backup form: the lead system didn't answer (${escapeHtml(lead.fallbackReason || 'unknown')}), so this lead is NOT in the sales pipeline and nobody has emailed or called ${escapeHtml(lead.name)}. They gave call consent on the form, but the record of it is only this email.`
+        : `Nobody else has replied to ${escapeHtml(lead.name)}.`} The page told them Chris reaches out within one business day. Hit reply to answer them directly.</p>
       <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="border-collapse:collapse;width:100%;">${cells}</table>`;
   const channel = Object.keys(lead.source || {}).length ? ` · ${describeChannel(lead.source)}` : '';
   return emailShell({ preheader: `${lead.role} · ${lead.businessName}${channel}`, bodyHtml: body });
 }
 
-// The prospect's confirmation reads as a personal note from Chris (the page
-// promises "Chris reads every one"), not a branded team blast. Plain layout,
-// one link, replies land in his inbox.
-const ROLE_LINES = {
-  Retailer: "Your free review looks at your last 90 days and shows, in dollars, what your vendors owe you and where your AP is leaking. If we take it on, the credits pay for it, or we refund the difference.",
-  Vendor: "Your free review looks at what your stores owe you and how long they take to pay. If we take it on, we collect more than we cost, or we refund the difference.",
-  Other: "",
-};
-
-function autoReplyParts(firstName, role, businessName) {
-  const hi = firstName ? `Hi ${firstName},` : 'Hi there,';
-  const lines = [
-    hi,
-    `Thanks for reaching out about ${businessName}. I read every one of these myself, and I'll email you within one business day with the one thing I need to run your numbers.`,
-    ROLE_LINES[role] || '',
-    "If there's anything you want me to know before then, just reply here.",
-  ].filter(Boolean);
-  return { lines, signoff: ['Chris Mitchem', 'Founder, ShelfSpace', 'shelfspace.pro'] };
-}
-
-function autoReplyText(firstName, role, businessName) {
-  const { lines, signoff } = autoReplyParts(firstName, role, businessName);
-  return lines.join('\n\n') + '\n\n' + signoff.join('\n');
-}
-
-function autoReplyHtml(firstName, role, businessName) {
-  const { lines, signoff } = autoReplyParts(firstName, role, businessName);
-  const paras = lines
-    .map(l => `<p style="margin:0 0 16px;">${escapeHtml(l)}</p>`)
-    .join('');
-  return `<!DOCTYPE html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ShelfSpace</title></head>
-<body style="margin:0;padding:0;background:#ffffff;">
-  <div style="max-width:560px;padding:24px 20px;font-family:${FONT};font-size:15px;line-height:1.6;color:#1e293b;">
-    ${paras}
-    <p style="margin:24px 0 0;">${escapeHtml(signoff[0])}<br><span style="color:#64748b;">${escapeHtml(signoff[1])}</span><br><a href="https://shelfspace.pro" style="color:#2d6a4f;">shelfspace.pro</a></p>
-  </div>
-</body></html>`;
-}
+// No confirmation email to the visitor from here (sales machine row D2, spec §14 O): prospects
+// hear only from Chelsea, through the platform's lead system, which honors the outreach switch
+// and every opt-out. This endpoint is now the BACKUP for /contact and only notifies Chris.
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -372,6 +343,9 @@ export default async function handler(req, res) {
   const state = str(body.state).toUpperCase();
   const otherDescription = str(body.otherDescription);
   const note = str(body.note).slice(0, MAX_NOTE);
+  const phone = str(body.phone).slice(0, MAX_PHONE);
+  const fallback = body.fallback === true;
+  const fallbackReason = str(body.fallbackReason).replace(/[^a-z0-9_]/gi, '').slice(0, MAX_REASON);
   const token = str(body['cf-turnstile-response']);
 
   // Bot traps: a filled honeypot or an instant submit gets a quiet 200 and
@@ -423,15 +397,17 @@ export default async function handler(req, res) {
     otherDescription: role === 'Other' ? otherDescription : '',
     note,
     source,
+    phone,
+    fallback,
+    fallbackReason,
   };
-  const firstName = name.split(/\s+/)[0];
 
   try {
     await sendEmail({
       from: 'ShelfSpace Leads <noreply@shelfspace.pro>',
       to: NOTIFY_EMAIL,
       replyTo: email,
-      subject: cleanSubject(`New lead: ${businessName} — ${ROLE_LABEL[role]}${role === 'Retailer' && shops ? ` (${shops} stores)` : ''}`),
+      subject: cleanSubject(`${fallback ? 'New lead (backup form)' : 'New lead'}: ${businessName} — ${ROLE_LABEL[role]}${role === 'Retailer' && shops ? ` (${shops} stores)` : ''}`),
       html: notificationHtml(lead),
     });
   } catch (err) {
@@ -442,27 +418,13 @@ export default async function handler(req, res) {
   // Structured line so leads can be aggregated by channel from the Vercel logs
   // without standing up a CRM. One line per captured lead, JSON after the tag.
   console.log('interest_lead ' + JSON.stringify({
-    role, state, shops, businessName, hasNote: !!note,
+    role, state, shops, businessName, hasNote: !!note, fallback, fallbackReason,
     channel: describeChannel(source),
     landing: source.landing || '',
     referrer: source.firstReferrer || source.referrer || '',
     utmSource: source.utmSource || '',
     utmCampaign: source.utmCampaign || '',
   }));
-
-  // Auto-response to the prospect. Failure here shouldn't lose the lead.
-  try {
-    await sendEmail({
-      from: 'Chris Mitchem <chris@shelfspace.pro>',
-      to: email,
-      replyTo: 'chris@shelfspace.pro',
-      subject: `Got it, ${cleanSubject(firstName || 'thanks')} — here's what happens next`,
-      html: autoReplyHtml(firstName, role, businessName),
-      text: autoReplyText(firstName, role, businessName),
-    });
-  } catch (err) {
-    console.error('Interest form: auto-response email failed (lead still captured):', err);
-  }
 
   return res.status(200).json({ ok: true });
 }

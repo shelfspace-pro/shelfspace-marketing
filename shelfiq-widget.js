@@ -8,6 +8,26 @@
  */
 (function () {
   var KEY = 'ss-first-touch';
+  // This TAB SESSION's first touch, with every field the /contact lead system stores (row D2):
+  // the UTMs incl. term/content and the Meta / LinkedIn click ids. sessionStorage, so a visitor
+  // who returns later from a new campaign is attributed to that campaign. Keep this block if the
+  // widget is replaced (row D4) — contact.html reads it.
+  try {
+    if (!sessionStorage.getItem('ss-session-touch')) {
+      var sp = new URLSearchParams(location.search);
+      var g = function (k, n) { return (sp.get(k) || '').slice(0, n); };
+      sessionStorage.setItem('ss-session-touch', JSON.stringify({
+        landing: (location.pathname + location.search).slice(0, 1000),
+        referrer: (document.referrer || '').slice(0, 1000),
+        utmSource: g('utm_source', 200), utmMedium: g('utm_medium', 200), utmCampaign: g('utm_campaign', 200),
+        utmTerm: g('utm_term', 200), utmContent: g('utm_content', 200),
+        fbclid: g('fbclid', 500), liFatId: g('li_fat_id', 500),
+        at: new Date().toISOString(),
+      }));
+    }
+  } catch (err) {
+    /* storage disabled — attribution is best-effort */
+  }
   try {
     if (localStorage.getItem(KEY)) return;
     var params = new URLSearchParams(location.search);
