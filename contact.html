@@ -34,7 +34,9 @@
   /* ── HERO: the form lives here, above the fold ── */
   .cx-hero {
     background: var(--green-deep); padding: 120px 48px 72px;
-    position: relative; overflow: hidden;
+    /* clip, not hidden: a hidden box is still a scroll container, and scrollIntoView on the
+       success card scrolled the hero sideways (the glow overflows right). */
+    position: relative; overflow: hidden; overflow: clip;
   }
   .cx-hero::before {
     content: ''; position: absolute; top: -300px; right: -200px;
@@ -659,7 +661,7 @@
     document.getElementById('cxStep1').hidden = true;
     document.getElementById('cxStep2').hidden = false;
     var t = document.getElementById('cxStep2Title'); t.focus({ preventScroll: true });
-    t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    t.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' });
   }
 
   function showThanks() {
@@ -675,7 +677,7 @@
     var success = document.getElementById('formSuccess');
     success.style.display = 'block';
     success.focus({ preventScroll: true });
-    success.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    success.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'nearest' });
   }
 
   function loadCal(cb) {
@@ -698,7 +700,7 @@
       cal('on', { action: 'bookingSuccessful', callback: function() { track('demo_booked', {}); } });
     });
     var t = document.getElementById('cxBookingTitle'); t.focus({ preventScroll: true });
-    t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    t.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' });
     track('booking_shown', {});
   }
 
