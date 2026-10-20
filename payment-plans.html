@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cannabis Payment Plans for Wholesale Invoices — ShelfSpace</title>
+<meta name="description" content="Offer dispensaries a 0% payment plan on any open invoice in one click. They set it up by e-check, you approve, and every payment arrives on schedule.">
+<link rel="canonical" href="https://shelfspace.pro/payment-plans">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ShelfSpace">
+<meta property="og:locale" content="en_US">
+<meta property="og:url" content="https://shelfspace.pro/payment-plans">
+<meta property="og:title" content="Payment Plans — ShelfCollect by ShelfSpace">
+<meta property="og:description" content="Slow-paying stores, paid on a schedule. Offer a 0% plan in one click, approve it, and every payment arrives on its date.">
+<meta property="og:image" content="https://shelfspace.pro/og-image-v7.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Payment Plans — ShelfCollect by ShelfSpace">
+<meta name="twitter:description" content="Offer dispensaries a 0% payment plan in one click. They set it up by e-check, you approve, and every payment arrives on schedule.">
+<meta name="twitter:image" content="https://shelfspace.pro/og-image-v7.png">
+<meta name="apple-mobile-web-app-title" content="ShelfSpace">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+<link rel="stylesheet" href="/hero-motion.css">
+<style>
+  /* ─── DARK HERO ─── */
+  .page-hero { display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; background: radial-gradient(ellipse at 75% 30%, #2d6a4f 0%, #1b4332 45%, #0f2a1f 100%); color: #fff; }
+  .page-hero::before { content: ''; position: absolute; inset: 0; opacity: 0.06; background-image: linear-gradient(#95d5b2 1px, transparent 1px), linear-gradient(90deg, #95d5b2 1px, transparent 1px); background-size: 80px 80px; pointer-events: none; }
+  .page-hero.page-hero--motion { min-height: auto; padding: 136px 48px 72px; }
+  .page-hero .aud-badge { background: rgba(255,255,255,0.08); border-color: rgba(149,213,178,0.35); color: var(--green-accent); }
+  .page-hero .section-label { color: var(--green-accent); }
+  .page-hero.page-hero--motion .hero-h1 { color: #fff; }
+  .page-hero.page-hero--motion .hero-h1 em { color: var(--green-accent); }
+  .page-hero .hero-lede { font-size: 18.5px; line-height: 1.5; color: rgba(255,255,255,0.78); margin: 0 0 26px; }
+  .hero-actions-centered { display: flex; }
+  .page-hero.page-hero--motion .btn-primary { background: var(--green-accent); color: var(--green-deep); animation: ppCta 2.4s ease-in-out 1.4s infinite; }
+  .page-hero.page-hero--motion .btn-primary:hover { background: #fff; }
+  @keyframes ppCta { 0%,100% { box-shadow: 0 10px 30px rgba(0,0,0,0.25), 0 0 0 0 rgba(149,213,178,0.55); } 50% { box-shadow: 0 10px 30px rgba(0,0,0,0.25), 0 0 0 12px rgba(149,213,178,0); } }
+  .pp-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
+  .pp-chips span { display: inline-flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.85); padding: 6px 12px; border-radius: 999px; background: rgba(255,255,255,0.07); border: 1px solid rgba(149,213,178,0.25); }
+  .pp-chips svg { width: 14px; height: 14px; color: var(--green-accent); }
+  .page-hero .hm-caption { color: rgba(255,255,255,0.5); }
+  .page-hero .hm-window { box-shadow: 0 40px 90px rgba(0,0,0,0.45), 0 0 0 1px rgba(149,213,178,0.18) inset; }
+  .page-hero .hm-scenes { height: 384px; }
+  .page-hero .section-label, .page-hero .hero-h1, .page-hero .hero-lede, .page-hero .hero-actions-centered, .page-hero .pp-chips, .page-hero .aud-badge { opacity: 0; transform: translateY(26px); transition: opacity .8s cubic-bezier(0.22,1,0.36,1), transform .8s cubic-bezier(0.22,1,0.36,1); }
+  .page-hero .hero-h1 { transition-delay: .08s; } .page-hero .hero-lede { transition-delay: .2s; } .page-hero .hero-actions-centered { transition-delay: .32s; } .page-hero .pp-chips { transition-delay: .44s; }
+  .page-hero.hero-loaded .section-label, .page-hero.hero-loaded .hero-h1, .page-hero.hero-loaded .hero-lede, .page-hero.hero-loaded .hero-actions-centered, .page-hero.hero-loaded .pp-chips, .page-hero.hero-loaded .aud-badge { opacity: 1; transform: none; }
+
+  /* hero scene pieces */
+  .pp-lbl { font-size: 10px; font-weight: 700; letter-spacing: 1.4px; text-transform: uppercase; color: var(--green-accent); margin-bottom: 8px; }
+  .pp-offer, .pp-plan { margin-top: 10px; padding: 14px; border-radius: 14px; background: rgba(149,213,178,0.08); border: 1px solid rgba(149,213,178,0.3); }
+  .pp-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .pp-field small { display: block; font-size: 10.5px; color: rgba(230,244,234,0.6); margin-bottom: 4px; }
+  .pp-sel { display: block; padding: 8px 10px; border-radius: 10px; font-size: 13px; font-weight: 700; color: rgba(230,244,234,0.45); background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); transition: all .35s; }
+  .pp-sel.on { color: #fff; border-color: var(--green-accent); background: rgba(149,213,178,0.14); box-shadow: 0 0 0 3px rgba(149,213,178,0.15); }
+  .pp-note { margin: 10px 0 0; font-size: 12px; color: rgba(230,244,234,0.8); }
+  .pp-note b { color: #fff; font-family: var(--font-mono); }
+  .pp-modes { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .pp-mode { padding: 10px 12px; border-radius: 12px; font-size: 13px; font-weight: 700; color: rgba(230,244,234,0.6); background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); transition: all .35s; }
+  .pp-mode small { display: block; font-weight: 400; font-size: 11px; margin-top: 2px; font-family: var(--font-mono); }
+  .pp-mode.on { color: #fff; border-color: var(--green-accent); background: rgba(149,213,178,0.14); }
+  .pp-plan p { margin: 0 0 10px; font-size: 12.5px; color: rgba(230,244,234,0.85); }
+  .pp-plan p b { font-family: var(--font-mono); color: #fff; }
+  .pp-bank { display: flex; align-items: center; gap: 10px; padding: 9px 10px; border-radius: 10px; background: rgba(255,255,255,0.06); }
+  .pp-bank > i { flex: none; width: 28px; height: 28px; border-radius: 8px; display: grid; place-items: center; background: rgba(149,213,178,0.16); color: var(--green-accent); }
+  .pp-bank > i svg { width: 15px; height: 15px; }
+  .pp-bank b { display: block; font-size: 12px; color: #fff; }
+  .pp-bank small { font-size: 10.5px; color: rgba(230,244,234,0.6); }
+  .pp-bank > div { flex: 1; min-width: 0; }
+  .pp-tick, .pp-box { flex: none; width: 20px; height: 20px; border-radius: 6px; display: grid; place-items: center; font-size: 11px; font-weight: 800; color: transparent; border: 1.5px solid rgba(230,244,234,0.35); transition: all .3s cubic-bezier(0.34,1.56,0.64,1); }
+  .pp-tick.on, .pp-box.on { background: var(--green-accent); border-color: var(--green-accent); color: #0f2a1f; transform: scale(1.08); }
+  .pp-auth { display: flex; align-items: center; gap: 10px; margin-top: 8px; font-size: 11.5px; color: rgba(230,244,234,0.75); }
+  .pp-stack { display: inline-grid; }
+  .pp-stack > span { grid-area: 1 / 1; opacity: 0; transform: translateY(6px); transition: opacity .3s, transform .3s; }
+  .pp-stack:not(:has(.in)) > span:first-child, .pp-stack > .in:not(:has(~ .in)) { opacity: 1; transform: none; }
+  .pp-sched .hm-qrow { padding: 7px 12px; }
+  .pp-sched .hm-qrow .v { font-size: 12.5px; }
+  .pp-stop { margin-top: 10px; display: flex; align-items: center; justify-content: space-between; gap: 10px; font-size: 11px; color: rgba(230,244,234,0.55); }
+  .pp-stop span { flex: none; padding: 7px 12px; border-radius: 10px; border: 1px solid rgba(230,244,234,0.25); color: rgba(230,244,234,0.85); font-weight: 700; font-size: 11.5px; }
+  .hm-scene .hm-kpis { margin: 0 0 10px; }
+  .hm-scene .hm-paidbar b { font-size: 13px; }
+  .hm-scene .hm-paidbar small { display: block; font-size: 11px; color: rgba(230,244,234,0.65); margin-top: 2px; }
+
+  /* ─── REVEAL ─── */
+  .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1); }
+  .reveal.is-visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.15s; }
+  .reveal-delay-2 { transition-delay: 0.3s; }
+  .reveal-delay-3 { transition-delay: 0.45s; }
+
+  /* ─── SECTION SHELL ─── */
+  .pp-sec { position: relative; padding: 96px 48px; overflow: hidden; }
+  .pp-sec--white { background: var(--white); }
+  .pp-sec--slate { background: var(--slate-50); }
+  .pp-sec--ghost { background: linear-gradient(180deg, var(--green-ghost), #fff); }
+  .pp-sec--dark { background: radial-gradient(ellipse at 50% 0%, #2d6a4f 0%, #1b4332 50%, #0f2a1f 100%); color: #fff; }
+  .pp-head { max-width: 760px; margin: 0 auto 48px; text-align: center; position: relative; }
+  .pp-eyebrow { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 12px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--green-dark); margin-bottom: 14px; }
+  .pp-eyebrow::before { content: ''; width: 22px; height: 2px; border-radius: 2px; background: var(--green-mid); }
+  .pp-sec--dark .pp-eyebrow { color: var(--green-accent); }
+  .pp-head h2, .pp-copy h2, .pp-final h2 { font-size: clamp(30px, 4vw, 48px); font-weight: 700; letter-spacing: -1.5px; line-height: 1.08; color: var(--green-deep); margin: 0 0 14px; }
+  .pp-sec--dark .pp-head h2 { color: #fff; }
+  .pp-head h2 em, .pp-copy h2 em { font-style: normal; color: var(--green-mid); }
+  .pp-sec--dark .pp-head h2 em { color: var(--green-accent); }
+  .pp-head p, .pp-copy > p { font-size: 17.5px; line-height: 1.6; color: var(--slate-600); margin: 0; }
+  .pp-sec--dark .pp-head p { color: rgba(255,255,255,0.72); }
+
+  /* timeline */
+  .pp-tl { position: relative; max-width: 1120px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; }
+  .pp-tl-track { position: absolute; left: 12.5%; right: 12.5%; top: 31px; height: 4px; border-radius: 4px; background: #d8e9df; }
+  .pp-tl-fill { position: absolute; left: 0; top: 0; bottom: 0; width: 0; border-radius: 4px; background: linear-gradient(90deg, var(--green-mid), var(--green-accent)); transition: width 2.2s cubic-bezier(0.65,0,0.35,1) .2s; }
+  .pp-tl.go .pp-tl-fill { width: 100%; }
+  .pp-step { text-align: center; opacity: 0; transform: translateY(22px); transition: opacity .6s ease, transform .6s cubic-bezier(0.34,1.56,0.64,1); }
+  .pp-tl.go .pp-step { opacity: 1; transform: none; }
+  .pp-tl.go .pp-step:nth-of-type(1) { transition-delay: .2s; }
+  .pp-tl.go .pp-step:nth-of-type(2) { transition-delay: .85s; }
+  .pp-tl.go .pp-step:nth-of-type(3) { transition-delay: 1.5s; }
+  .pp-tl.go .pp-step:nth-of-type(4) { transition-delay: 2.15s; }
+  .pp-dot { position: relative; width: 66px; height: 66px; margin: 0 auto 16px; border-radius: 50%; background: #fff; border: 3px solid var(--green-accent); color: var(--green-dark); display: grid; place-items: center; box-shadow: 0 10px 26px rgba(27,67,50,0.12); }
+  .pp-step--now .pp-dot { background: var(--green-deep); border-color: var(--green-deep); color: var(--green-accent); }
+  .pp-step--now .pp-dot::before, .pp-step--now .pp-dot::after { content: ''; position: absolute; inset: -3px; border-radius: 50%; border: 2px solid var(--green-mid); animation: ppPulse 2.4s ease-out infinite; }
+  .pp-step--now .pp-dot::after { animation-delay: 1.2s; }
+  @keyframes ppPulse { 0% { transform: scale(1); opacity: .8; } 100% { transform: scale(1.7); opacity: 0; } }
+  .pp-num { font-family: var(--font-mono); font-size: 12px; font-weight: 700; letter-spacing: 1.4px; color: var(--green-mid); margin-bottom: 6px; }
+  .pp-step h3 { font-size: 18px; font-weight: 700; color: var(--green-deep); margin: 0 0 8px; letter-spacing: -0.3px; }
+  .pp-step p { font-size: 14.5px; line-height: 1.55; color: var(--slate-600); max-width: 240px; margin: 0 auto; }
+
+  /* count-up strip */
+  .pp-stats { max-width: 1000px; margin: 64px auto 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .pp-stat { text-align: center; padding: 22px 12px; border-radius: 18px; background: var(--green-ghost); border: 1px solid rgba(149,213,178,0.5); }
+  .pp-stat b { display: block; font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-size: 34px; font-weight: 700; color: var(--green-deep); letter-spacing: -1px; }
+  .pp-stat > span { font-size: 13.5px; color: var(--slate-600); }
+
+  /* approve split */
+  .pp-split { max-width: 1120px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+  .pp-ticks { list-style: none; padding: 0; margin: 24px 0 0; display: grid; gap: 10px; }
+  .pp-ticks li { display: flex; align-items: center; gap: 12px; font-size: 15.5px; font-weight: 600; color: var(--green-deep); }
+  .pp-ticks i { flex: none; width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center; font-style: normal; font-size: 13px; background: var(--green-deep); color: var(--green-accent); }
+  .pp-card-wrap { position: relative; }
+  .pp-ring { position: absolute; left: 50%; top: 50%; width: 110%; aspect-ratio: 1; border-radius: 50%; border: 2px solid rgba(64,145,108,0.25); transform: translate(-50%,-50%) scale(0.6); opacity: 0; animation: ppBig 5s ease-out infinite; pointer-events: none; }
+  .pp-ring + .pp-ring { animation-delay: 2.5s; }
+  @keyframes ppBig { 0% { transform: translate(-50%,-50%) scale(0.55); opacity: .9; } 100% { transform: translate(-50%,-50%) scale(1.1); opacity: 0; } }
+  .pp-appr { position: relative; max-width: 460px; margin: 0 auto; background: #fff; border: 1px solid var(--slate-200); border-radius: 16px; box-shadow: 0 30px 80px rgba(27,67,50,0.14); padding: 24px; text-align: left; }
+  .pp-appr-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 12px; }
+  .pp-appr-title { font-size: 18px; font-weight: 700; color: var(--green-deep); }
+  .pp-pill { display: inline-flex; align-items: center; gap: 6px; padding: 4px 11px; border-radius: 100px; font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; white-space: nowrap; }
+  .pp-pill::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+  .pp-pill--amber { background: rgba(217,119,6,0.10); color: #b45309; }
+  .pp-pill--green { background: var(--green-ghost); color: var(--green-dark); }
+  .pp-appr p { font-size: 14px; line-height: 1.55; color: var(--slate-600); margin: 0 0 14px; }
+  .pp-appr p b { color: var(--green-deep); }
+  .pp-money { font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-weight: 700; color: var(--slate-900); }
+  .pp-sched-mini { border: 1px solid var(--slate-200); border-radius: 12px; overflow: hidden; margin-bottom: 14px; }
+  .pp-sched-mini div { display: flex; justify-content: space-between; padding: 9px 14px; font-size: 13px; color: var(--slate-700); font-variant-numeric: tabular-nums; }
+  .pp-sched-mini div + div { border-top: 1px solid var(--slate-100); }
+  .pp-appr-acts { display: flex; gap: 10px; }
+  .pp-appr-btn { font-size: 14px; font-weight: 700; padding: 10px 18px; border-radius: 12px; background: var(--green-deep); color: #fff; transition: all .3s; }
+  .pp-appr-btn--ghost { background: #fff; color: var(--slate-700); border: 1px solid var(--slate-200); }
+  .pp-card-wrap.go .pp-a1 { animation: ppAppr 1.6s ease-out 1s 2; }
+  @keyframes ppAppr { 0% { box-shadow: 0 0 0 0 rgba(27,67,50,0.45); } 100% { box-shadow: 0 0 0 12px rgba(27,67,50,0); } }
+  .pp-appr-stamp { position: absolute; right: 24px; bottom: 92px; padding: 6px 14px; border: 3px solid var(--green-mid); border-radius: 12px; color: var(--green-mid); font-weight: 800; font-size: 16px; letter-spacing: 2px; text-transform: uppercase; background: rgba(255,255,255,0.9); transform: rotate(-10deg) scale(2.2); opacity: 0; transition: all .4s cubic-bezier(0.34,1.56,0.64,1) 3.6s; }
+  .pp-card-wrap.go .pp-appr-stamp { opacity: 1; transform: rotate(-10deg) scale(1); }
+  .pp-appr-foot { display: flex; flex-direction: column; gap: 6px; margin-top: 16px; padding-top: 14px; border-top: 1px dashed var(--slate-200); font-size: 12.5px; color: var(--slate-500); }
+  .pp-appr-foot span { display: flex; align-items: center; gap: 8px; }
+  .pp-appr-foot svg { width: 14px; height: 14px; color: var(--green-mid); flex: none; }
+
+  /* safety cards */
+  .pp-cards { max-width: 1080px; margin: 0 auto; display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  .pp-card { position: relative; display: flex; gap: 18px; background: #fff; border: 1px solid #e3f2e9; border-radius: 18px; padding: 26px 24px; box-shadow: 0 14px 34px rgba(27,67,50,0.07); transition: transform .3s cubic-bezier(.34,1.56,.64,1), box-shadow .3s; }
+  .pp-card:hover { transform: translateY(-5px); box-shadow: 0 24px 50px rgba(27,67,50,0.14); }
+  .pp-card-ic { flex: none; width: 50px; height: 50px; border-radius: 14px; background: var(--green-deep); color: var(--green-accent); display: grid; place-items: center; transition: transform .3s; }
+  .pp-card:hover .pp-card-ic { transform: rotate(-8deg) scale(1.08); }
+  .pp-card-ic svg { width: 24px; height: 24px; }
+  .pp-card h3 { font-size: 18px; font-weight: 700; color: var(--green-deep); letter-spacing: -0.3px; margin: 2px 0 6px; }
+  .pp-card p { font-size: 15px; line-height: 1.6; color: var(--slate-600); margin: 0; }
+  .pp-flow { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: 10px; }
+  .pp-flow span { font-family: var(--font-mono); font-size: 10.5px; font-weight: 700; letter-spacing: .8px; text-transform: uppercase; padding: 3px 9px; border-radius: 999px; background: var(--green-ghost); color: var(--green-dark); }
+  .pp-flow span.r { background: rgba(192,57,43,0.10); color: #c0392b; }
+  .pp-flow span.a { background: rgba(217,119,6,0.10); color: #b45309; }
+  .pp-flow i { font-style: normal; color: var(--slate-400); font-size: 12px; }
+
+  /* dark band */
+  .pp-glowball { position: absolute; left: 50%; top: 55%; width: 760px; height: 760px; transform: translate(-50%,-50%); border-radius: 50%; background: radial-gradient(circle, rgba(149,213,178,0.16), transparent 65%); animation: ppGlow 6s ease-in-out infinite; pointer-events: none; }
+  @keyframes ppGlow { 0%,100% { opacity: .6; transform: translate(-50%,-50%) scale(.9); } 50% { opacity: 1; transform: translate(-50%,-50%) scale(1.08); } }
+  .pp-bar-wrap { position: relative; max-width: 760px; margin: 0 auto; padding: 24px; border-radius: 20px; background: rgba(255,255,255,0.06); border: 1px solid rgba(149,213,178,0.2); }
+  .pp-bar-top { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 14px; }
+  .pp-bar-top > span { font-size: 13px; color: rgba(255,255,255,0.65); }
+  .pp-bar-top b { font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-size: 28px; color: var(--green-accent); }
+  .pp-bar { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+  .pp-seg { height: 14px; border-radius: 7px; background: rgba(255,255,255,0.08); overflow: hidden; }
+  .pp-seg i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, var(--green-mid), var(--green-accent)); transition: width .7s cubic-bezier(0.65,0,0.35,1); }
+  .pp-bar-wrap.go .pp-seg i { width: 100%; }
+  .pp-bar-wrap.go .pp-seg:nth-child(2) i { transition-delay: .7s; }
+  .pp-bar-wrap.go .pp-seg:nth-child(3) i { transition-delay: 1.4s; }
+  .pp-bar-wrap.go .pp-seg:nth-child(4) i { transition-delay: 2.1s; }
+  .pp-bar-dates { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-top: 8px; font-family: var(--font-mono); font-size: 11px; color: rgba(255,255,255,0.55); }
+  .pp-wins { position: relative; max-width: 1000px; margin: 40px auto 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .pp-win { padding: 22px; border-radius: 16px; background: rgba(255,255,255,0.05); border: 1px solid rgba(149,213,178,0.18); }
+  .pp-win small { font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: 1.6px; text-transform: uppercase; color: var(--green-accent); }
+  .pp-win h3 { font-size: 18px; color: #fff; margin: 8px 0 6px; letter-spacing: -0.3px; }
+  .pp-win p { font-size: 14.5px; line-height: 1.55; color: rgba(255,255,255,0.7); margin: 0; }
+
+  /* FAQ */
+  .faq-section { background: var(--white); padding: 88px 48px; }
+  .faq-header { text-align: center; max-width: 600px; margin: 0 auto 40px; }
+  .faq-list { max-width: 720px; margin: 0 auto; }
+  .faq-list details { border-bottom: 1px solid var(--slate-200); }
+  .faq-list details:first-child { border-top: 1px solid var(--slate-200); }
+  .faq-list summary { padding: 20px 0; font-size: 17px; font-weight: 600; color: var(--green-deep); cursor: pointer; list-style: none; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+  .faq-list summary::-webkit-details-marker { display: none; }
+  .faq-list summary::after { content: '+'; font-size: 22px; font-weight: 400; color: var(--slate-500); flex-shrink: 0; }
+  .faq-list details[open] summary::after { content: '\2212'; }
+  .faq-list details p { padding: 0 0 20px; margin: 0; font-size: 15px; line-height: 1.7; color: var(--slate-600); }
+  .faq-list details p a { color: var(--green-dark); font-weight: 600; text-decoration: none; }
+
+  /* related + final */
+  .pp-related { max-width: 1080px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .pp-rel { display: flex; align-items: center; gap: 14px; padding: 18px 20px; border-radius: 16px; background: #fff; border: 1px solid var(--slate-200); text-decoration: none; box-shadow: 0 8px 22px rgba(27,67,50,0.05); transition: transform .25s, box-shadow .25s, border-color .25s; }
+  .pp-rel:hover { transform: translateY(-3px); border-color: var(--green-light); box-shadow: 0 16px 36px rgba(27,67,50,0.1); }
+  .pp-rel i { flex: none; width: 40px; height: 40px; border-radius: 11px; display: grid; place-items: center; background: var(--green-ghost); color: var(--green-dark); }
+  .pp-rel i svg { width: 20px; height: 20px; }
+  .pp-rel b { display: block; font-size: 15px; color: var(--green-deep); }
+  .pp-rel small { font-size: 13px; color: var(--slate-500); }
+  .pp-final { position: relative; overflow: hidden; background: var(--slate-50); text-align: center; padding: 100px 48px 108px; }
+  .pp-final::before { content: ''; position: absolute; left: 50%; top: 50%; width: 760px; height: 760px; transform: translate(-50%,-50%); border-radius: 50%; background: radial-gradient(circle, rgba(149,213,178,0.22), transparent 68%); pointer-events: none; }
+  .pp-final > * { position: relative; }
+  .pp-final > p { font-size: 18px; line-height: 1.6; color: var(--slate-600); max-width: 560px; margin: 0 auto 30px; }
+  .pp-btn { display: inline-flex; align-items: center; gap: 10px; background: var(--green-deep); color: #fff; font-weight: 700; font-size: 17px; padding: 18px 32px; border-radius: 12px; text-decoration: none; animation: ppCta2 2.4s ease-in-out infinite; transition: transform .2s, background .2s; }
+  .pp-btn:hover { transform: translateY(-2px) scale(1.03); background: var(--green-dark); }
+  @keyframes ppCta2 { 0%,100% { box-shadow: 0 10px 30px rgba(27,67,50,0.25), 0 0 0 0 rgba(27,67,50,0.4); } 50% { box-shadow: 0 10px 30px rgba(27,67,50,0.25), 0 0 0 14px rgba(27,67,50,0); } }
+
+  /* footer 5-col */
+  .footer-top { grid-template-columns: 2fr 1fr 1fr 1fr 1fr; }
+  @media (max-width: 900px) { .footer-top { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px) { .footer-top { grid-template-columns: 1fr; } }
+
+  @media (max-width: 900px) {
+    .page-hero.page-hero--motion { padding: 104px 16px 48px; }
+    .page-hero .hero-lede { margin: 0 auto 22px; font-size: 17px; }
+    .hero-actions-centered, .pp-chips { justify-content: center; }
+    .page-hero .hm-scenes { height: 396px; }
+    .pp-sec { padding: 72px 16px; }
+    .faq-section { padding: 64px 16px; }
+    .pp-final { padding: 72px 16px 80px; }
+    .pp-head { margin-bottom: 36px; }
+    .pp-tl { grid-template-columns: 1fr; gap: 24px; max-width: 460px; }
+    .pp-tl-track { left: 31px; right: auto; top: 20px; bottom: 20px; width: 4px; height: auto; }
+    .pp-tl-fill { width: 100% !important; height: 0; transition-property: height; }
+    .pp-tl.go .pp-tl-fill { height: 100%; }
+    .pp-step { display: grid; grid-template-columns: 66px 1fr; gap: 0 18px; text-align: left; align-items: start; }
+    .pp-dot { grid-row: span 3; margin: 0; }
+    .pp-num { margin-top: 6px; }
+    .pp-step p { margin: 0; max-width: none; }
+    .pp-stats { grid-template-columns: repeat(2, 1fr); margin-top: 48px; }
+    .pp-split { grid-template-columns: 1fr; gap: 44px; }
+    .pp-cards, .pp-related, .pp-wins { grid-template-columns: 1fr; max-width: 560px; }
+    .pp-appr-stamp { right: 16px; bottom: auto; top: 128px; }
+  }
+  @media (max-width: 420px) {
+    .pp-stat b { font-size: 28px; }
+    .pp-card { flex-direction: column; gap: 14px; }
+    .pp-bar-dates span:nth-child(2), .pp-bar-dates span:nth-child(3) { visibility: hidden; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal, .pp-step, .page-hero .section-label, .page-hero .hero-h1, .page-hero .hero-lede, .page-hero .hero-actions-centered, .page-hero .pp-chips, .page-hero .aud-badge { opacity: 1 !important; transform: none !important; transition: none !important; }
+    .pp-tl-fill, .pp-seg i { width: 100% !important; transition: none !important; }
+    .pp-appr-stamp { opacity: 1; transform: rotate(-10deg); transition: none; }
+    .pp-ring, .pp-glowball, .pp-btn, .pp-step--now .pp-dot::before, .pp-step--now .pp-dot::after, .page-hero.page-hero--motion .btn-primary { animation: none !important; }
+  }
+</style>
+<noscript><style>.reveal,.pp-step,.page-hero .section-label,.page-hero .hero-h1,.page-hero .hero-lede,.page-hero .hero-actions-centered,.page-hero .pp-chips,.page-hero .aud-badge,.hm-r,.hm-paidbar{opacity:1!important;transform:none!important}.pp-tl-fill,.pp-seg i{width:100%}.pp-appr-stamp{opacity:1;transform:rotate(-10deg)}</style></noscript>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-H2LBJT03WE"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-H2LBJT03WE');</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "ShelfCollect Payment Plans — 0% Payment Plans on Cannabis Wholesale Invoices",
+  "alternateName": ["Cannabis Payment Plans", "Dispensary Payment Plans", "Wholesale Cannabis Installment Payments"],
+  "serviceType": "Accounts receivable installment payment plans",
+  "provider": { "@type": "Organization", "name": "ShelfSpace", "url": "https://shelfspace.pro" },
+  "areaServed": "US",
+  "audience": { "@type": "Audience", "audienceType": "Cannabis vendors, brands, cultivators and distributors selling wholesale to dispensaries" },
+  "description": "A cannabis brand offers a 0% payment plan on any open wholesale invoice in one click: weekly, every 2 weeks or monthly, from 2 to 24 payments. The dispensary sets it up on its payment link with an e-check from its bank account, the brand approves it, and each payment goes out on its date. The store gets a heads-up 3 days before each payment and a receipt after it, and can stop future payments from its link. A bounced payment pauses the plan and is reversed in QuickBooks; the brand can resume, or cancel and turn the rest back into a normal invoice.",
+  "url": "https://shelfspace.pro/payment-plans"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://shelfspace.pro/" },
+    { "@type": "ListItem", "position": 2, "name": "Features", "item": "https://shelfspace.pro/features" },
+    { "@type": "ListItem", "position": 3, "name": "Payment Plans", "item": "https://shelfspace.pro/payment-plans" }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "Can wholesale cannabis buyers pay invoices over time?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. The brand offers a 0% payment plan on an open invoice: weekly, every 2 weeks or monthly, from 2 to 24 payments. The dispensary picks Pay over time on its payment link, sets it up with an e-check from its bank account, and the brand approves it." } },
+    { "@type": "Question", "name": "Is there interest on a payment plan?", "acceptedAnswer": { "@type": "Answer", "text": "No. Every plan is 0% interest with no finance charge. The store pays the invoice balance, split into equal payments." } },
+    { "@type": "Question", "name": "What happens if a payment bounces?", "acceptedAnswer": { "@type": "Answer", "text": "The brand reports it in one click from the invoice and picks the bank's reason. The payment is reversed in the app and in QuickBooks, and the plan pauses. For an ordinary bounce the brand can resume: the next payment is at least 3 days out and the bounced amount becomes one payment at the end. Or the brand cancels, and what's left becomes a normal invoice with reminders." } },
+    { "@type": "Question", "name": "How does the store pay each installment?", "acceptedAnswer": { "@type": "Answer", "text": "By e-check from the store's own bank account, on each scheduled date. A store that saved its bank for that location sets the plan up in one click. The store gets a heads-up 3 days before each payment and a receipt after it." } },
+    { "@type": "Question", "name": "Who approves the payment plan?", "acceptedAnswer": { "@type": "Answer", "text": "The brand does, from the invoice page. Nothing is taken until the brand approves, and the first payment goes out at approval. The brand gets a reminder after 2 days, and a request left unanswered for 7 days is declined automatically and the invoice goes back to normal reminders." } },
+    { "@type": "Question", "name": "Can the store stop the payment plan?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Once a plan is set up, the store's payment link becomes a plan-status page with the schedule, what's paid so far and the next date, plus a Stop future payments button. Payments already made stay paid." } }
+  ]
+}
+</script>
+</head>
+<body>
+<!-- NAV -->
+<nav id="nav">
+  <a href="/" class="nav-logo">
+    <div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div>
+    <span class="nav-logo-text">ShelfSpace<sup class="nav-logo-tm">™</sup></span>
+  </a>
+  <ul class="nav-links">
+    <li class="nav-dropdown"><a href="/accounts-payable" class="nav-dropdown-toggle">ShelfPay (AP) <svg class="dropdown-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></a>
+      <div class="nav-dropdown-menu"><a href="/accounts-payable">ShelfPay overview</a><a href="/consignment">Consignment</a><a href="/credit-recovery">Credit Recovery</a><a href="/shelfverify">ShelfVerify</a></div></li>
+    <li class="nav-dropdown"><a href="/accounts-receivable" class="nav-dropdown-toggle">ShelfCollect (AR) <svg class="dropdown-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></a>
+      <div class="nav-dropdown-menu"><a href="/accounts-receivable">ShelfCollect overview</a><a href="/ai-calls">AI Calls <span class="nav-new">New</span></a><a href="/collections">Collections</a><a href="/promise-to-pay">Promise to Pay</a><a href="/ar-aging">AR Aging</a><a href="/rep-management">Rep Management</a></div></li>
+    <li class="nav-dropdown"><a href="/features" class="nav-dropdown-toggle active">Features <svg class="dropdown-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></a>
+      <div class="nav-dropdown-menu"><a href="/shelfverify">ShelfVerify</a><a href="/connect-your-ai">Connect Your AI</a><a href="/payments">Payments</a><a href="/integrations">Integrations</a><a href="/payment-plans" class="active">Payment Plans <span class="nav-new">New</span></a></div></li>
+    <li><a href="/about">About</a></li>
+    <li><a href="/pricing">Pricing</a></li>
+    <li class="nav-login-mobile"><a href="https://ourshelf.space/login">Login</a></li>
+    <li><a href="/contact?cta=payment-plans-nav" class="nav-cta">Schedule a call <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a></li>
+  </ul>
+  <div class="nav-hamburger" onclick="document.querySelector('.nav-links').classList.toggle('mobile-open'); event.stopPropagation();"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero page-hero--motion">
+  <div class="lp-split">
+  <div class="lp-text">
+    <div class="aud-badge aud-vendor">For Vendors &amp; Brands</div>
+    <div class="section-label">ShelfCollect &middot; Payment Plans</div>
+    <h1 class="hero-h1">Slow payers, <em>paid on a schedule.</em></h1>
+    <p class="hero-lede">Offer a 0% payment plan on any open invoice in one click. The store sets it up, you approve, and every payment shows up on its date.</p>
+    <div class="hero-actions-centered">
+      <span class="cta-stack"><a href="/contact?cta=payment-plans-hero" class="btn-primary">Schedule a call <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a><span class="cta-micro cta-micro--on-dark">30 minutes with Chris. See how you'd get paid faster.</span></span>
+    </div>
+    <div class="pp-chips">
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>0% interest</span>
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>You approve every plan</span>
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Paid on every date</span>
+    </div>
+  </div>
+    <div class="hm-stage" data-engine data-ms="6200" aria-label="Animated example: the brand offers a 4-payment plan on an overdue invoice, the store picks Pay over time on its payment link, then the plan-status page fills in payments one by one">
+      <div class="hm-glow"></div>
+      <div class="hm-window" aria-hidden="true">
+        <div class="hm-chrome"><i></i><i></i><i></i>
+          <div class="hm-tabs"><span class="hm-tab on" data-s="0">Offer</span><span class="hm-tab" data-s="1">Pay over time</span><span class="hm-tab" data-s="2">Plan</span></div>
+        </div>
+        <div class="hm-scenes">
+          <div class="hm-scene on">
+            <div class="hm-title"><b>Invoice VHB-2044</b><span>Northside Wellness</span></div>
+            <div class="hm-inv hm-r" data-at="100">
+              <div class="hm-row"><span>Balance due</span><span class="hm-mono">$4,800.00</span></div>
+              <div class="hm-row"><span>Due 09/29/2026</span><span class="hm-pill late">21 days late</span></div>
+            </div>
+            <div class="pp-offer hm-r" data-at="600">
+              <div class="pp-lbl">Payment plan</div>
+              <div class="pp-fields">
+                <div class="pp-field"><small>How often</small><b class="pp-sel" data-at="1200" data-cls="on">Monthly</b></div>
+                <div class="pp-field"><small>Payments</small><b class="pp-sel" data-at="1700" data-cls="on">4</b></div>
+              </div>
+              <p class="pp-note hm-r" data-at="2100">4 monthly payments of about <b>$1,200.00</b>, 0% interest.</p>
+            </div>
+            <div class="hm-btn" data-at="2900">Offer plan</div>
+            <div class="hm-paidbar" data-at="3300"><div><b>Payment plan offered</b><small>Northside Wellness was emailed: &ldquo;Need more time?&rdquo;</small></div><div class="hm-big" data-count="4800" data-count-ms="900">$0.00</div></div>
+          </div>
+          <div class="hm-scene">
+            <div class="hm-title"><b>Pay Verdant Hill Botanical</b><span>VHB-2044</span></div>
+            <div class="pp-modes hm-r" data-at="100">
+              <div class="pp-mode on" data-at="800" data-rm="on" data-cls="off">Pay in full<small>$4,800.00</small></div>
+              <div class="pp-mode" data-at="800" data-cls="on">Pay over time<small>4&times; monthly</small></div>
+            </div>
+            <div class="pp-plan hm-r" data-at="1200">
+              <div class="pp-lbl">Payment plan &middot; 0% interest</div>
+              <p>4 monthly payments of <b>$1,200.00</b>, no finance charge.</p>
+              <div class="pp-bank"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10h18L12 4z"/><line x1="5" y1="10" x2="5" y2="18"/><line x1="10" y1="10" x2="10" y2="18"/><line x1="14" y1="10" x2="14" y2="18"/><line x1="19" y1="10" x2="19" y2="18"/><line x1="3" y1="20" x2="21" y2="20"/></svg></i><div><b>Saved bank</b><small>Northside Wellness LLC, ending 4821</small></div><span class="pp-tick" data-at="1900" data-cls="on">&#10003;</span></div>
+              <div class="pp-auth"><span class="pp-box" data-at="2400" data-cls="on">&#10003;</span>I authorize these 4 payments by e-check.</div>
+            </div>
+            <div class="hm-btn" data-at="3100">Set up plan</div>
+            <div class="hm-paidbar" data-at="3500"><div><b>Sent to Verdant Hill Botanical</b><small>Nothing is taken until they approve it</small></div><div class="hm-big" style="font-size:20px;">&#10003;</div></div>
+          </div>
+          <div class="hm-scene">
+            <div class="hm-title"><b>Your payment plan</b><span>VHB-2044 &middot; 0% interest</span></div>
+            <div class="hm-kpis">
+              <div class="hm-kpi"><b data-at="200" data-count="3600" data-count-ms="2400">$0.00</b><span>Paid so far</span></div>
+              <div class="hm-kpi"><b>$4,800.00</b><span>Plan total</span></div>
+              <div class="hm-kpi"><b><span class="pp-stack"><span>11/22/2026</span><span data-at="1400">12/22/2026</span><span data-at="2400">01/22/2027</span></span></b><span>Next payment</span></div>
+            </div>
+            <div class="hm-q pp-sched">
+              <div class="hm-qrow" data-at="300" data-cls="paid"><span class="v">Payment 1 of 4<small>10/22/2026</small></span><span class="a">$1,200.00</span><span class="hm-pstack"><span class="hm-pill wait">Scheduled</span><span class="hm-pill paid" data-at="300">Paid</span></span></div>
+              <div class="hm-qrow" data-at="1300" data-cls="paid"><span class="v">Payment 2 of 4<small>11/22/2026</small></span><span class="a">$1,200.00</span><span class="hm-pstack"><span class="hm-pill wait">Scheduled</span><span class="hm-pill paid" data-at="1300">Paid</span></span></div>
+              <div class="hm-qrow" data-at="2300" data-cls="paid"><span class="v">Payment 3 of 4<small>12/22/2026</small></span><span class="a">$1,200.00</span><span class="hm-pstack"><span class="hm-pill wait">Scheduled</span><span class="hm-pill paid" data-at="2300">Paid</span></span></div>
+              <div class="hm-qrow"><span class="v">Payment 4 of 4<small>01/22/2027</small></span><span class="a">$1,200.00</span><span class="hm-pstack"><span class="hm-pill wait">Scheduled</span><span class="hm-pill sent" data-at="3000">Heads-up sent</span></span></div>
+            </div>
+            <div class="pp-stop hm-r" data-at="3400">Payments made stay paid. You can stop the rest any time.<span>Stop future payments</span></div>
+          </div>
+        </div>
+        <div class="hm-progress"><i></i></div>
+      </div>
+      <div class="hm-caption">Illustration with example numbers</div>
+    </div>
+  </div>
+</div>
+
+<!-- BRAND TICKER -->
+<section class="brand-ticker brand-ticker--tight">
+  <div class="brand-ticker-label">Brands using the platform</div>
+  <div class="brand-ticker-track">
+    <img src="/logos/brands/curaleaf.png" alt="Curaleaf — using the platform" class="brand-ticker-logo">
+    <img src="/logos/brands/cresco.png" alt="Cresco Labs — using the platform" class="brand-ticker-logo brand-ticker-logo--sm">
+    <img src="/logos/brands/gti.png" alt="Green Thumb Industries — using the platform" class="brand-ticker-logo brand-ticker-logo--sm">
+    <img src="/logos/brands/holistic.png" alt="Holistic Industries — using the platform" class="brand-ticker-logo">
+    <img src="/logos/brands/kiva.png" alt="Kiva Confections — using the platform" class="brand-ticker-logo brand-ticker-logo--sm">
+    <img src="/logos/brands/wyld.png" alt="Wyld — using the platform" class="brand-ticker-logo brand-ticker-logo--lg">
+    <img src="/logos/brands/marimed.png" alt="MariMed — using the platform" class="brand-ticker-logo brand-ticker-logo--lg">
+    <img src="/logos/brands/jushi.png" alt="Jushi Holdings — using the platform" class="brand-ticker-logo">
+    <img src="/logos/brands/rove.png" alt="Rove — using the platform" class="brand-ticker-logo">
+    <img src="/logos/brands/fernway.png" alt="Fernway — using the platform" class="brand-ticker-logo">
+    <img src="/logos/brands/curaleaf.png" alt="Curaleaf" aria-hidden="true" class="brand-ticker-logo">
+    <img src="/logos/brands/cresco.png" alt="Cresco Labs" aria-hidden="true" class="brand-ticker-logo brand-ticker-logo--sm">
+    <img src="/logos/brands/gti.png" alt="Green Thumb Industries" aria-hidden="true" class="brand-ticker-logo brand-ticker-logo--sm">
+    <img src="/logos/brands/holistic.png" alt="Holistic Industries" aria-hidden="true" class="brand-ticker-logo">
+    <img src="/logos/brands/kiva.png" alt="Kiva Confections" aria-hidden="true" class="brand-ticker-logo brand-ticker-logo--sm">
+    <img src="/logos/brands/wyld.png" alt="Wyld" aria-hidden="true" class="brand-ticker-logo brand-ticker-logo--lg">
+    <img src="/logos/brands/marimed.png" alt="MariMed" aria-hidden="true" class="brand-ticker-logo brand-ticker-logo--lg">
+    <img src="/logos/brands/jushi.png" alt="Jushi" aria-hidden="true" class="brand-ticker-logo">
+    <img src="/logos/brands/rove.png" alt="Rove" aria-hidden="true" class="brand-ticker-logo">
+    <img src="/logos/brands/fernway.png" alt="Fernway" aria-hidden="true" class="brand-ticker-logo">
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="pp-sec pp-sec--white" id="pp-how" aria-labelledby="pp-how-h">
+  <div class="pp-head reveal">
+    <div class="pp-eyebrow">How it works</div>
+    <h2 id="pp-how-h">Offer it once. <em>Get paid on every date.</em></h2>
+  </div>
+  <div class="pp-tl" data-pp-play>
+    <div class="pp-tl-track"><div class="pp-tl-fill"></div></div>
+    <div class="pp-step">
+      <div class="pp-dot"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="12" y1="14" x2="12" y2="18"/><line x1="10" y1="16" x2="14" y2="16"/></svg></div>
+      <div class="pp-num">01</div>
+      <h3>You offer the plan</h3>
+      <p>One click on any open invoice. Weekly, every 2 weeks or monthly, 2 to 24 payments.</p>
+    </div>
+    <div class="pp-step">
+      <div class="pp-dot"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg></div>
+      <div class="pp-num">02</div>
+      <h3>The store gets a heads-up</h3>
+      <p>Three days before each payment, so the money is there when it goes out.</p>
+    </div>
+    <div class="pp-step">
+      <div class="pp-dot"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg></div>
+      <div class="pp-num">03</div>
+      <h3>The payment goes out</h3>
+      <p>An e-check from the store&rsquo;s bank account, on the date. Nobody has to chase it.</p>
+    </div>
+    <div class="pp-step pp-step--now">
+      <div class="pp-dot"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <div class="pp-num">04</div>
+      <h3>A receipt lands</h3>
+      <p>The store sees what&rsquo;s paid, what&rsquo;s left and the next date. So do you.</p>
+    </div>
+  </div>
+  <div class="pp-stats" data-pp-play>
+    <div class="pp-stat reveal"><b><span data-pp-count="0">0</span>%</b><span>interest for the store</span></div>
+    <div class="pp-stat reveal reveal-delay-1"><b>2&ndash;<span data-pp-count="24">24</span></b><span>payments per plan</span></div>
+    <div class="pp-stat reveal reveal-delay-2"><b><span data-pp-count="3">3</span> days</b><span>heads-up before each payment</span></div>
+    <div class="pp-stat reveal reveal-delay-3"><b><span data-pp-count="1">1</span> click</b><span>to offer, one to approve</span></div>
+  </div>
+</section>
+
+<!-- APPROVE -->
+<section class="pp-sec pp-sec--ghost" id="pp-approve">
+  <div class="pp-split">
+    <div class="pp-copy">
+      <div class="pp-eyebrow reveal">They set it up. You approve it.</div>
+      <h2 class="reveal">Nothing moves until <em>you say yes.</em></h2>
+      <p class="reveal">The invoice email and every reminder say &ldquo;Need more time? 0% payment plan available.&rdquo; The store picks Pay over time on its payment link and sets it up with an e-check. You approve it from the invoice page, and the first payment goes out right away.</p>
+      <ul class="pp-ticks reveal">
+        <li><i>&#10003;</i>Saved their bank for that store? One click.</li>
+        <li><i>&#10003;</i>You get a nudge if a request sits for 2 days</li>
+        <li><i>&#10003;</i>Unanswered for 7 days, it&rsquo;s declined and normal paying resumes</li>
+      </ul>
+    </div>
+    <div class="pp-card-wrap" data-pp-play>
+      <div class="pp-ring"></div><div class="pp-ring"></div>
+      <div class="pp-appr" aria-hidden="true">
+        <div class="pp-appr-top"><span class="pp-appr-title">Payment plan</span><span class="pp-pill pp-pill--amber">Waiting for you</span></div>
+        <p><b>Northside Wellness</b> asked to pay invoice VHB-2044 in 4 monthly payments, 0% interest.</p>
+        <div class="pp-sched-mini">
+          <div><span>10/22/2026 &middot; at approval</span><span class="pp-money">$1,200.00</span></div>
+          <div><span>11/22/2026</span><span class="pp-money">$1,200.00</span></div>
+          <div><span>12/22/2026</span><span class="pp-money">$1,200.00</span></div>
+          <div><span>01/22/2027</span><span class="pp-money">$1,200.00</span></div>
+        </div>
+        <div class="pp-appr-acts"><span class="pp-appr-btn pp-a1">Approve</span><span class="pp-appr-btn pp-appr-btn--ghost">Decline</span></div>
+        <div class="pp-appr-foot">
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10h18L12 4z"/><line x1="5" y1="10" x2="5" y2="18"/><line x1="19" y1="10" x2="19" y2="18"/><line x1="3" y1="20" x2="21" y2="20"/></svg>E-check from the account ending 4821</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 14"/></svg>Declined on its own after 7 days with no answer</span>
+        </div>
+        <div class="pp-appr-stamp">Approved</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SAFETY -->
+<section class="pp-sec pp-sec--white" id="pp-safety">
+  <div class="pp-head reveal">
+    <div class="pp-eyebrow">Built for when things go wrong</div>
+    <h2>Every plan has a <em>way out.</em></h2>
+    <p>For the store, for you, and for your books.</p>
+  </div>
+  <div class="pp-cards">
+    <div class="pp-card reveal">
+      <div class="pp-card-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><rect x="9" y="9" width="6" height="6" rx="1"/></svg></div>
+      <div><h3>The store can stop it</h3><p>Their payment link becomes a plan-status page with a Stop future payments button. Payments already made stay paid.</p></div>
+    </div>
+    <div class="pp-card reveal reveal-delay-1">
+      <div class="pp-card-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><h3>A bounce is one click</h3><p>Report it from the invoice and pick the bank&rsquo;s reason. The payment is reversed and the plan pauses.</p><div class="pp-flow"><span class="r">Bounced</span><i>&rarr;</i><span class="a">Paused</span><i>&rarr;</i><span>Resumed</span></div></div>
+    </div>
+    <div class="pp-card reveal">
+      <div class="pp-card-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="6 4 20 12 6 20 6 4"/></svg></div>
+      <div><h3>Resume or cancel</h3><p>Resume, and the bounced amount becomes one payment at the end. Cancel, and the rest turns back into a normal invoice with reminders.</p></div>
+    </div>
+    <div class="pp-card reveal reveal-delay-1">
+      <div class="pp-card-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.5 9a9 9 0 0 1 14.9-3.4L23 10M1 14l4.6 4.4A9 9 0 0 0 20.5 15"/></svg></div>
+      <div><h3>QuickBooks stays in sync</h3><p>A bounced payment is reversed in QuickBooks too, so your books match what actually arrived.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- DARK BAND -->
+<section class="pp-sec pp-sec--dark" id="pp-outcome">
+  <div class="pp-glowball"></div>
+  <div class="pp-head reveal">
+    <div class="pp-eyebrow">Why it works</div>
+    <h2>Breathing room for them. <em>Cash flow for you.</em></h2>
+    <p>A store that can&rsquo;t pay $4,800 today can often pay $1,200 a month. Now you take that deal instead of chasing the whole thing.</p>
+  </div>
+  <div class="pp-bar-wrap" data-pp-play aria-hidden="true">
+    <div class="pp-bar-top"><span>VHB-2044 &middot; Northside Wellness &middot; example</span><b>$<span data-pp-count="4800" data-pp-dec="2">4,800.00</span></b></div>
+    <div class="pp-bar"><div class="pp-seg"><i></i></div><div class="pp-seg"><i></i></div><div class="pp-seg"><i></i></div><div class="pp-seg"><i></i></div></div>
+    <div class="pp-bar-dates"><span>10/22/2026</span><span>11/22/2026</span><span>12/22/2026</span><span>01/22/2027</span></div>
+  </div>
+  <div class="pp-wins">
+    <div class="pp-win reveal"><small>For brands</small><h3>Paid instead of chasing</h3><p>Slow accounts turn into scheduled payments you can count on.</p></div>
+    <div class="pp-win reveal reveal-delay-1"><small>For stores</small><h3>Time without a finance charge</h3><p>0% interest, the schedule you offered, paid from their own bank account.</p></div>
+    <div class="pp-win reveal reveal-delay-2"><small>For both</small><h3>Money on autopilot</h3><p>Heads-ups, payments and receipts go out on their own. Nobody sends a reminder.</p></div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section" id="pp-faq">
+  <div class="faq-header">
+    <div class="section-label reveal">FAQ</div>
+    <h2 class="section-title reveal">Straight answers</h2>
+  </div>
+  <div class="faq-list">
+    <details><summary>Can wholesale cannabis buyers pay invoices over time?</summary><p>Yes. You offer a 0% payment plan on an open invoice: weekly, every 2 weeks or monthly, from 2 to 24 payments. The dispensary picks Pay over time on its payment link, sets it up with an e-check from its bank account, and you approve it. More on getting paid on net terms in <a href="/blog/cannabis-payment-plans-getting-paid-by-dispensaries">our payment plans guide</a>.</p></details>
+    <details><summary>Is there interest on a payment plan?</summary><p>No. Every plan is 0% interest with no finance charge. The store pays the invoice balance, split into equal payments.</p></details>
+    <details><summary>What happens if a payment bounces?</summary><p>Report it in one click from the invoice and pick the bank&rsquo;s reason. The payment is reversed in the app and in QuickBooks, and the plan pauses. For an ordinary bounce you can resume: the next payment is at least 3 days out and the bounced amount becomes one payment at the end. Or cancel, and what&rsquo;s left becomes a normal invoice with reminders.</p></details>
+    <details><summary>How does the store pay each installment?</summary><p>By e-check from the store&rsquo;s own bank account, on each scheduled date. A store that saved its bank for that location sets the plan up in one click. It gets a heads-up 3 days before each payment and a receipt after it. See every way stores can pay on <a href="/payments">Payments</a>.</p></details>
+    <details><summary>Who approves the payment plan?</summary><p>You do, from the invoice page. Nothing is taken until you approve, and the first payment goes out at approval. You get a reminder after 2 days, and a request left unanswered for 7 days is declined automatically and the invoice goes back to normal reminders.</p></details>
+    <details><summary>Can the store stop the payment plan?</summary><p>Yes. Once a plan is set up, the store&rsquo;s payment link becomes a plan-status page with the schedule, what&rsquo;s paid so far and the next date, plus a Stop future payments button. Payments already made stay paid.</p></details>
+  </div>
+</section>
+
+<!-- RELATED -->
+<section class="pp-sec pp-sec--slate" id="pp-related" style="padding-top:72px;padding-bottom:72px;">
+  <div class="pp-head reveal" style="margin-bottom:32px;">
+    <div class="pp-eyebrow">Part of ShelfCollect</div>
+    <h2 style="font-size:clamp(26px,3vw,36px);">Everything else that gets you paid</h2>
+  </div>
+  <div class="pp-related">
+    <a class="pp-rel reveal" href="/collections"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="22,6 12,13 2,6"/></svg></i><div><b>Collections</b><small>Pay Now links and reminders</small></div></a>
+    <a class="pp-rel reveal reveal-delay-1" href="/promise-to-pay"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></i><div><b>Promise to Pay</b><small>Track every promise to pay</small></div></a>
+    <a class="pp-rel reveal reveal-delay-2" href="/payments"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg></i><div><b>Payments</b><small>Every way stores pay you</small></div></a>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="pp-final">
+  <div class="pp-eyebrow reveal">Get started</div>
+  <h2 class="reveal">Turn slow accounts into scheduled money.</h2>
+  <p class="reveal">See the money you&rsquo;re missing, then let ShelfCollect offer the plans, run the payments and keep your books in sync.</p>
+  <div class="reveal"><span class="cta-stack"><a href="/contact?cta=payment-plans-pp-final" class="pp-btn">Schedule a call <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a><span class="cta-micro">30 minutes with Chris. See how you'd get paid faster.</span></span></div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="/" class="nav-logo"><div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div><span class="nav-logo-text">ShelfSpace<sup class="nav-logo-tm">™</sup></span></a>
+      <p>Financial tools built for cannabis operators.</p>
+    </div>
+    <div class="footer-col"><h3>Services</h3><ul><li><a href="/accounts-payable">ShelfPay (AP)</a></li><li><a href="/accounts-receivable">ShelfCollect (AR)</a></li><li><a href="/shelfverify">ShelfVerify</a></li><li><a href="/consignment">Consignment</a></li><li><a href="/credit-recovery">Credit Recovery</a></li><li><a href="/payments">Payments</a></li><li><a href="/shelfiq">ShelfiQ</a></li></ul></div>
+    <div class="footer-col"><h3>Platform</h3><ul><li><a href="/features">Features</a></li><li><a href="/integrations">Integrations</a></li><li><a href="/connect-your-ai">Connect Your AI</a></li><li><a href="/payment-plans">Payment Plans</a></li><li><a href="/vendor-management">Vendor Management</a></li><li><a href="/collections">Collections</a></li><li><a href="/ai-calls">AI Calls</a></li></ul></div>
+    <div class="footer-col"><h3>Resources</h3><ul><li><a href="/how-it-works">How It Works</a></li><li><a href="/pricing">Pricing</a></li><li><a href="/blog">Blog</a></li><li><a href="/docs">Docs</a></li><li><a href="/how-to">Guides</a></li><li><a href="/tutorials">Tutorials</a></li></ul></div>
+    <div class="footer-col"><h3>Company</h3><ul><li><a href="/about">About</a></li><li><a href="/vendors">For Vendors</a></li><li><a href="/for-bookkeepers">For Bookkeepers</a></li><li><a href="/contact">Contact</a></li><li><a href="mailto:support@shelfspace.pro">Support</a></li><li><a href="https://ourshelf.space/login">Login</a></li><li><a href="https://linkedin.com/company/shelfspace-pro" target="_blank" rel="noopener" class="footer-social-link"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> LinkedIn</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><p>&copy; 2026 ShelfSpace Technologies Inc.</p><div style="display:flex;align-items:center;gap:8px;justify-content:center;margin-top:12px;"><img src="/metrc-logo-v2.png" alt="Metrc" loading="lazy" style="height:18px;opacity:0.4;filter:brightness(0) invert(1);"><span style="font-size:11px;color:rgba(255,255,255,0.35);">Certified Metrc Third-Party Vendor</span></div><div class="footer-bottom-links"><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div></div>
+</footer>
+
+<script>
+(function() {
+  var nav = document.getElementById('nav');
+  var pageHero = document.querySelector('.page-hero');
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  requestAnimationFrame(function() {
+    nav.classList.toggle('scrolled', window.scrollY > 20);
+    if (pageHero) pageHero.classList.add('hero-loaded');
+  });
+  window.addEventListener('scroll', function() { nav.classList.toggle('scrolled', window.scrollY > 20); }, { passive: true });
+  document.addEventListener('click', function() {
+    var navLinks = document.querySelector('.nav-links');
+    if (navLinks && navLinks.classList.contains('mobile-open')) navLinks.classList.remove('mobile-open');
+  });
+  var ro = new IntersectionObserver(function(es) {
+    es.forEach(function(e) { if (e.isIntersecting) { e.target.classList.add('is-visible'); ro.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(function(el) { ro.observe(el); });
+
+  function fmt(v, dec) { return v.toLocaleString('en-US', { minimumFractionDigits: dec, maximumFractionDigits: dec }); }
+  function countUp(el) {
+    var to = parseFloat(el.getAttribute('data-pp-count')), dec = parseInt(el.getAttribute('data-pp-dec') || '0', 10);
+    if (reduced) { el.textContent = fmt(to, dec); return; }
+    var t0 = null;
+    (function step(t) {
+      if (!t0) t0 = t;
+      var p = Math.min(1, (t - t0) / 1600);
+      el.textContent = fmt(Math.round(to * (1 - Math.pow(1 - p, 3)) * Math.pow(10, dec)) / Math.pow(10, dec), dec);
+      if (p < 1) requestAnimationFrame(step);
+    })(performance.now());
+  }
+  var els = document.querySelectorAll('[data-pp-play]');
+  if (!('IntersectionObserver' in window)) { els.forEach(function(el) { el.classList.add('go'); }); return; }
+  var io = new IntersectionObserver(function(es) {
+    es.forEach(function(e) {
+      if (!e.isIntersecting) return;
+      e.target.classList.add('go');
+      e.target.querySelectorAll('[data-pp-count]').forEach(countUp);
+      io.unobserve(e.target);
+    });
+  }, { threshold: 0.3 });
+  els.forEach(function(el) {
+    if (!reduced) el.querySelectorAll('[data-pp-count]').forEach(function(n) { n.textContent = fmt(0, parseInt(n.getAttribute('data-pp-dec') || '0', 10)); });
+    io.observe(el);
+  });
+})();
+</script>
+<script src="/hero-motion.js" defer></script>
+<script src="/shelfiq-widget.js"></script>
+<script src="/nav.js" defer></script>
+</body>
+</html>
