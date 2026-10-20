@@ -315,7 +315,7 @@
       "name": "Does it work for cannabis brands and vendors?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes. Brands on ShelfCollect connect the same way. Your AI can see who owes you and how late, send invoices, statements and reminders, track promises to pay, and show which invoices match the buyer's accepted Metrc manifest."
+        "text": "Yes. Brands on ShelfCollect connect the same way. Your AI can see who owes you and how late, send invoices, statements and reminders, and track promises to pay. No Metrc connection required."
       }
     },
     {
@@ -434,7 +434,7 @@
     <div>
       <div class="aud-badge aud-retailer reveal-h">New &middot; For dispensaries &amp; brands</div>
       <h1 class="reveal-h">Run your cannabis back office from <span class="hl">your own AI.</span></h1>
-      <p class="ai-hero-lede reveal-h">Plug ChatGPT, Claude or Meta Muse into ShelfSpace. Ask it anything about your money and it answers from your real books, then does the work. Run a dispensary? Invoices checked against Metrc, credits recovered, vendors paid. Run a brand? Past-due invoices chased, promises to pay tracked, every invoice proven against Metrc. You never have to open ShelfSpace.</p>
+      <p class="ai-hero-lede reveal-h">Plug ChatGPT, Claude or Meta Muse into ShelfSpace. Ask it anything about your money and it answers from your real books, then does the work. Run a dispensary? Invoices checked against Metrc, credits recovered, vendors paid. Run a brand? Past-due invoices chased and promises to pay tracked. No Metrc connection required. You never have to open ShelfSpace.</p>
       <div class="ai-hero-actions reveal-h">
         <a href="/contact?cta=connect-your-ai-hero" class="btn-primary">Schedule a call <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
         <a href="#for-developers" class="btn-secondary">Connect in 2 minutes</a>
@@ -507,7 +507,7 @@
 <section class="svc-section svc-section--white">
   <div class="section-label reveal">What your AI can do</div>
   <h2 class="section-title reveal">Everything you do in ShelfSpace, you can do from a chat.</h2>
-  <p class="section-desc reveal" style="margin:0 auto;">Dispensaries run payables, Metrc checks and credits. Brands run receivables, collections and proof of delivery. One conversation either way.</p>
+  <p class="section-desc reveal" style="margin:0 auto;">Dispensaries run payables, Metrc checks and credits. Brands run receivables and collections. One conversation either way.</p>
   <div class="aud-toggle-wrap aud-toggle-wrap--section reveal">
     <div class="aud-toggle" role="group" aria-label="Show examples for">
         <button type="button" data-aud-btn="pay" class="on" aria-pressed="true">I run a dispensary <small>ShelfPay</small></button>
@@ -565,9 +565,9 @@
     </div>
     <div class="cap aud-collect reveal">
       <div class="cap-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-      <span class="cap-tag">ShelfCollect</span><h3>Prove every invoice shipped</h3>
-      <p>Each invoice matched to the buyer's accepted Metrc manifest, so "we never got it" ends the conversation, not starts it.</p>
-      <div class="cap-ask">Which of last month's invoices haven't matched a manifest yet?</div>
+      <span class="cap-tag">ShelfCollect</span><h3>No Metrc connection required</h3>
+      <p>Your AI works from your invoices and payments, so there's nothing else to connect before it starts collecting.</p>
+      <div class="cap-ask">Which of last month's invoices are still open?</div>
     </div>
     <div class="cap aud-collect reveal">
       <div class="cap-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
@@ -767,7 +767,7 @@
     <h2 class="section-title reveal">Frequently asked questions</h2>
   </div>
   <div class="faq-list">
-    <details><summary>Does it work for cannabis brands and vendors?</summary><p>Yes. Brands on ShelfCollect connect the same way. Your AI can see who owes you and how late, send invoices, statements and reminders, track promises to pay, and show which invoices match the buyer's accepted Metrc manifest.</p></details>
+    <details><summary>Does it work for cannabis brands and vendors?</summary><p>Yes. Brands on ShelfCollect connect the same way. Your AI can see who owes you and how late, send invoices, statements and reminders, and track promises to pay. No Metrc connection required.</p></details>
     <details><summary>Can my AI chase past-due invoices for me?</summary><p>Yes. Ask who's past due and tell it to send reminders. They go from your billing address with a pay link, and your AI tracks every promise to pay so you know the moment one slips.</p></details>
     <details><summary>Is there an MCP server for cannabis accounting and payments?</summary><p>Yes. ShelfSpace is a remote MCP server for cannabis back-office finance. Connect ChatGPT, Claude, Meta Muse or any MCP-compatible AI and it can work your accounts payable, receivables, Metrc invoice matching, QuickBooks, credit recovery, consignment settlements and vendor payments, scoped to your own stores.</p></details>
     <details><summary>Can I use ChatGPT or Claude to run my dispensary's accounts payable?</summary><p>Yes. Add ShelfSpace as a connector in ChatGPT or Claude, sign in once, and pick your stores. Your AI can then find invoices, check them against Metrc, see what's owed, line up vendor payments, upload new invoices and answer questions about any vendor.</p></details>
@@ -875,9 +875,9 @@
       answer: '<p><span class="ok">Yes.</span> Their buyer promised <span class="num" style="font-family:var(--font-mono);font-weight:700;color:var(--green-deep);">$4,200.00</span> by Friday, 10/23/2026. I\u2019ll flag it that morning if it hasn\u2019t landed.</p>'
     },
     {
-      ask: "Can we prove last month's invoices shipped?",
-      tool: "query_my_data · invoices + Metrc",
-      answer: '<p>38 of 41 match the buyer\u2019s accepted Metrc manifest, line by line.</p><table class="ai-table"><tr><td>Waiting on the shipment</td><td class="num">2</td></tr><tr><td><span class="flag">Looks billed twice</span>: #2207 and #2212</td><td class="num">1</td></tr></table><p>Want me to void the duplicate?</p>'
+      ask: "What came in last week?",
+      tool: "query_my_data · payments received",
+      answer: '<p>3 payments landed, 1 of them a payment-plan installment.</p><table class="ai-table"><tr><td>Riverbend Cannabis</td><td class="num">$2,915.50</td></tr><tr><td>Green Leaf Dispensary</td><td class="num">$1,620.00</td></tr><tr><td>Sunny Days Wellness</td><td class="num">$3,410.00</td></tr></table><div class="ai-total"><span>3 payments</span><span class="num">$7,945.50</span></div>'
     },
     {
       ask: "Is QuickBooks caught up?",
