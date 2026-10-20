@@ -39,7 +39,7 @@ const ok = (c, m) => { if (c) { pass++; console.log("  PASS " + m); } else { fai
 const hashOf = (state) => encodeURIComponent(Buffer.from(JSON.stringify(state), "utf8").toString("base64"));
 // "No contract and no onboarding fee" is allowed; any onboarding fee AMOUNT, and any
 // committed-term wording, is not.
-const RETIRED = /12[- ]month|annual|Save 20%|waived|one time|\$[0-9,]+ onboarding|onboarding fee: \$|agreement|way out|remaining payments/i;
+const RETIRED = /12[- ]month|annual|Save 20%|waived|one[- ]time|\$[0-9,]+ onboarding|onboarding fee:? (of )?\$|agreement|way out|remaining payments/i;
 
 // Copy summary goes to the clipboard; capture it instead.
 await ctx.addInitScript(() => {
