@@ -94,7 +94,6 @@
   @media (max-width: 640px) { .qd-row .n span { display: block; margin-left: 0; margin-top: 2px; white-space: normal; } .qd-row .a { align-self: flex-start; } }
   .qd-row.total { border-top: 1.5px solid var(--slate-200); font-weight: 700; }
   .qd-row.total .n, .qd-row.total .a { color: var(--green-deep); font-weight: 700; }
-  .qd-row.muted .n, .qd-row.muted .a { color: var(--slate-500); font-size: 14px; }
   .qd-fine { margin-top: 20px; font-size: 12px; color: var(--slate-500); line-height: 1.6; }
   .qd-fine p { margin: 0 0 4px; }
   .qd-actions { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; padding: 0 32px 28px; }
@@ -224,7 +223,7 @@
   // Older quote links: map each old range to the new one by its typical sales.
   var LEGACY_STORE_SALES = { a: 100000, b: 125000, c: 225000, d: 400000, e: 625000, f: 700000, h: 875000, g: 1200000 };
   var LEGACY_PAY = { p1: 100000, p2: 225000, p3: 400000, p4: 625000, p5: 875000, p6: 1250000, p7: 1750000, p8: 2500000, p9: 3500000 };
-  var LEGACY_COLLECT = { a: 100000, b: 100000, c: 225000, d: 400000, e: 625000, h: 875000, g: 1200000, f: 1200000 };
+  var LEGACY_COLLECT = { a: 60000, b: 60000, c: 225000, d: 400000, e: 625000, h: 875000, g: 1200000, f: 1200000 };
   var CREDIT_SHARE = 0.20;
   // Credits recovered run ~0.6%–1.1% of a store's monthly sales in live accounts;
   // quote the conservative end.
@@ -388,7 +387,7 @@
                 "Valid through " + mdy(valid) + ". No contract: stop whenever you like."];
     $("qd-fine").innerHTML = fine.map(function (f) { return "<p>" + esc(f) + "</p>"; }).join("");
     var t = ["ShelfSpace quote " + state.q + " · " + mdy(today), (name ? name + " · " : "") + product + " Enterprise · " + termName];
-    v.lines.forEach(function (l) { t.push("  " + l.item + " (" + l.range.replace(" · Enterprise", "") + (v.p === "pay" ? " monthly sales" : "") + "): Custom"); });
+    v.lines.forEach(function (l) { t.push("  " + l.item + " (" + l.range.replace(" · Enterprise", "") + "): Custom"); });
     t.push("Monthly rate: Custom, from " + usd(ent.from) + "/mo (Enterprise, over " + ent.over + " a month in sales)");
     if (v.p === "pay") { t.push("Credit recovery: 20% of credits we recover. Nothing recovered, nothing owed."); t.push("Guarantee: If the credits we recover in your first 90 days come to less than you paid us, we refund the difference."); } else t.push("Guarantee: If the past-due payments we collect in your first 90 days come to less than you paid us, we refund the difference.");
     t.push("Valid through " + mdy(valid));
