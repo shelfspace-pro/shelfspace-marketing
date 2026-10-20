@@ -22,7 +22,7 @@ export const MICRO = {
 
 // CTAs that sit on a dark green panel: their microcopy line gets .cta-micro--on-dark
 // (light text). Found by measuring every microcopy line's contrast in Chrome, 10/19/2026.
-export const ON_DARK = new Set(["features-cta", "for-bookkeepers-cta", "how-it-works-hero", "pricing-cta"]);
+export const ON_DARK = new Set(["features-cta", "for-bookkeepers-cta", "how-it-works-hero", "payment-plans-hero", "pricing-cta"]);
 
 // Partner CTAs → /contact?…&path=partner (the partner path on /contact: partner questions,
 // routed to Chris, no booking calendar). Every CTA on a partner page, plus these named ones
@@ -84,7 +84,7 @@ export const CTA_RE = /^[a-z0-9][a-z0-9_-]{0,79}$/i;
 export function audience(rel) {
   if (PARTNER_PAGES.has(rel)) return "partner";
   const r = rel.toLowerCase();
-  const brandRoot = ["accounts-receivable.html", "collections.html", "promise-to-pay.html", "ar-aging.html", "ai-calls.html", "rep-management.html", "vendors.html"];
+  const brandRoot = ["accounts-receivable.html", "collections.html", "promise-to-pay.html", "ar-aging.html", "ai-calls.html", "rep-management.html", "vendors.html", "payment-plans.html"];
   const storeRoot = ["accounts-payable.html", "consignment.html", "credit-recovery.html", "shelfverify.html", "checks.html"];
   if (brandRoot.includes(r)) return "brand";
   if (storeRoot.includes(r)) return "store";
