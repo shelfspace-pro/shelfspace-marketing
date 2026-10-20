@@ -329,7 +329,7 @@
 }
 </script>
 </head>
-<body data-persona="retailer">
+<body data-persona="vendor">
 
 <!-- NAV -->
 <nav id="nav">
@@ -338,10 +338,10 @@
     <span class="nav-logo-text">ShelfSpace<sup class="nav-logo-tm">™</sup></span>
   </a>
   <ul class="nav-links">
-    <li class="nav-dropdown"><a href="/accounts-payable" class="nav-dropdown-toggle">ShelfPay (AP) <svg class="dropdown-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></a>
-      <div class="nav-dropdown-menu"><a href="/accounts-payable">ShelfPay overview</a><a href="/consignment">Consignment</a><a href="/credit-recovery">Credit Recovery</a><a href="/shelfverify">ShelfVerify</a></div></li>
     <li class="nav-dropdown"><a href="/accounts-receivable" class="nav-dropdown-toggle">ShelfCollect (AR) <svg class="dropdown-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></a>
       <div class="nav-dropdown-menu"><a href="/accounts-receivable">ShelfCollect overview</a><a href="/ai-calls">AI Calls <span class="nav-new">New</span></a><a href="/collections">Collections</a><a href="/payment-plans">Payment Plans <span class="nav-new">New</span></a><a href="/promise-to-pay">Promise to Pay</a><a href="/ar-aging">AR Aging</a><a href="/rep-management">Rep Management</a></div></li>
+    <li class="nav-dropdown"><a href="/accounts-payable" class="nav-dropdown-toggle">ShelfPay (AP) <svg class="dropdown-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></a>
+      <div class="nav-dropdown-menu"><a href="/accounts-payable">ShelfPay overview</a><a href="/consignment">Consignment</a><a href="/credit-recovery">Credit Recovery</a><a href="/shelfverify">ShelfVerify</a></div></li>
     <li class="nav-dropdown"><a href="/features" class="nav-dropdown-toggle">Features <svg class="dropdown-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></a>
       <div class="nav-dropdown-menu"><a href="/shelfverify">ShelfVerify</a><a href="/connect-your-ai">Connect Your AI</a><a href="/payments">Payments</a><a href="/integrations">Integrations</a><a href="/payment-plans">Payment Plans <span class="nav-new">New</span></a></div></li>
     <li><a href="/about">About</a></li>
@@ -358,8 +358,8 @@
     <div class="pv-text">
       <div class="section-label reveal" style="margin-bottom:14px;">Pricing</div>
       <div class="persona-switch reveal" role="tablist" aria-label="Choose your side">
-        <button class="persona-btn is-active" data-persona="retailer" role="tab" aria-selected="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l1.5-5h15L21 9"/><path d="M3 9h18v2a3 3 0 0 1-6 0 3 3 0 0 1-6 0 3 3 0 0 1-6 0z"/><path d="M5 13v8h14v-8"/><path d="M10 21v-5h4v5"/></svg>I run a dispensary</button>
-        <button class="persona-btn" data-persona="vendor" role="tab" aria-selected="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="6" width="14" height="10" rx="1"/><path d="M15 9h4l3 3v4h-7z"/><circle cx="6" cy="18" r="2"/><circle cx="18" cy="18" r="2"/></svg>I run a brand</button>
+        <button class="persona-btn" data-persona="retailer" role="tab" aria-selected="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l1.5-5h15L21 9"/><path d="M3 9h18v2a3 3 0 0 1-6 0 3 3 0 0 1-6 0 3 3 0 0 1-6 0z"/><path d="M5 13v8h14v-8"/><path d="M10 21v-5h4v5"/></svg>I run a dispensary</button>
+        <button class="persona-btn is-active" data-persona="vendor" role="tab" aria-selected="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="6" width="14" height="10" rx="1"/><path d="M15 9h4l3 3v4h-7z"/><circle cx="6" cy="18" r="2"/><circle cx="18" cy="18" r="2"/></svg>I run a brand</button>
       </div>
       <h1 class="reveal"><span class="show-retailer">Worth <span class="hl mono-ish">$224,500</span> a year.</span><span class="show-vendor">Worth <span class="hl mono-ish">$301,000</span> a year.</span> <span class="pv-sub">You pay a fraction. Guaranteed.</span></h1>
       <p class="o-mirror reveal show-retailer">We pay your vendors, check every invoice against Metrc, and get your credits back. The credits are built to cover the fee.</p>
@@ -603,7 +603,7 @@
   }
   setTimeout(playValue, 350);
   btns.forEach(function (b) { b.addEventListener('click', function () { setTimeout(playValue, 30); }); });
-  if (/[?&]for=(brand|vendor)/.test(location.search)) btns[1].click();
+  if (/[?&]for=(dispensary|retailer|store)/.test(location.search)) btns[0].click();
 
   document.addEventListener('click', function(e) {
     var navLinks = document.querySelector('.nav-links');
