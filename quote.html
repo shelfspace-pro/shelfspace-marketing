@@ -38,7 +38,6 @@
   .opt .dot { flex: 0 0 18px; height: 18px; border-radius: 50%; border: 2px solid var(--slate-400); margin-top: 2px; box-sizing: border-box; }
   .opt .t { display: block; font-weight: 600; color: var(--slate-800); font-size: 15px; }
   .opt .d { display: block; color: var(--slate-500); font-size: 13px; margin-top: 2px; line-height: 1.4; }
-  .opt .save { display: inline-block; margin-left: 6px; background: var(--green-light); color: var(--green-deep); font-size: 12px; font-weight: 700; border-radius: 999px; padding: 2px 8px; vertical-align: 1px; }
   .opt:hover .box { border-color: var(--green-accent); }
   .opt input:checked + .box { border-color: var(--green-mid); background: var(--green-ghost); box-shadow: 0 2px 10px rgba(27,67,50,0.1); }
   .opt input:checked + .box .dot { border-color: var(--green-deep); border-width: 5px; }
@@ -137,16 +136,8 @@
       </div>
     </fieldset>
 
-    <fieldset>
-      <legend><span class="step">2</span>Agreement</legend>
-      <div class="opts opts-2">
-        <label class="opt"><input type="radio" name="term" value="annual" checked><span class="box"><span class="dot"></span><span><span class="t">12 months <span class="save">Save 20%</span></span><span class="d">Billed monthly.<br>Onboarding fee: <strong>$0 (waived)</strong></span></span></span></label>
-        <label class="opt"><input type="radio" name="term" value="monthly"><span class="box"><span class="dot"></span><span><span class="t">Month to month</span><span class="d">Standard rate.<br>Onboarding fee: <strong id="m2m-fee">$2,500 one time</strong></span></span></span></label>
-      </div>
-    </fieldset>
-
     <fieldset id="pay-fs">
-      <legend><span class="step">3</span>Your monthly sales and stores</legend>
+      <legend><span class="step">2</span>Your monthly sales and stores</legend>
       <div class="store-sub">Monthly sales, all stores combined</div>
       <div class="chips" id="pay-chips"></div>
       <div class="store-sub" style="margin-top:16px">Number of stores</div>
@@ -155,18 +146,18 @@
     </fieldset>
 
     <fieldset id="collect-fs" hidden>
-      <legend><span class="step">3</span>Your monthly wholesale sales</legend>
+      <legend><span class="step">2</span>Your monthly wholesale sales</legend>
       <div class="chips" id="collect-chips"></div>
       <p class="help">What you invoice dispensaries in a typical month.</p>
     </fieldset>
 
     <fieldset>
-      <legend><span class="step">4</span>Business name</legend>
+      <legend><span class="step">3</span>Business name</legend>
       <input class="q-input" id="bizname" maxlength="80" placeholder="Business name (optional)" autocomplete="organization">
     </fieldset>
 
     <fieldset>
-      <legend><span class="step">5</span>Discount</legend>
+      <legend><span class="step">4</span>Discount</legend>
       <div class="disc">
         <input class="q-input" id="disc-name" maxlength="60" placeholder="Discount name (optional)" autocomplete="off">
         <span class="pct"><input class="q-input" id="disc-pct" type="number" inputmode="decimal" min="0" max="100" step="0.5" placeholder="0" aria-label="Discount percent"></span>
@@ -216,9 +207,12 @@
     { id: "t4", label: "$2M–$4M",      rep: 3000000, max: 4000000, rate: 6500 },
     { id: "t5", label: "Over $4M · Enterprise", rep: 5000000, max: Infinity, custom: true, from: 8000, over: "$4M" }
   ];
-  // ShelfCollect: the brand's monthly wholesale sales, in $500k steps; over $2M is Enterprise.
+  // ShelfCollect: the brand's monthly wholesale sales; over $2M is Enterprise (10/20/2026).
+  // Older links carrying "t1" (the old "Under $500k" range) land on $250k–$500k, the same price.
   var COLLECT_RANGES = [
-    { id: "t1", label: "Under $500k",  rep: 300000,  max: 500000,  rate: 1500 },
+    { id: "c0", label: "Under $100k",  rep: 60000,   max: 100000,  rate: 750 },
+    { id: "c1", label: "$100k–$250k",  rep: 175000,  max: 250000,  rate: 1000 },
+    { id: "c2", label: "$250k–$500k",  rep: 375000,  max: 500000,  rate: 1500 },
     { id: "t2", label: "$500k–$1M",    rep: 750000,  max: 1000000, rate: 2500 },
     { id: "c3", label: "$1M–$1.5M",    rep: 1250000, max: 1500000, rate: 3500 },
     { id: "c4", label: "$1.5M–$2M",    rep: 1750000, max: 2000000, rate: 4500 },
@@ -235,25 +229,25 @@
   // Credits recovered run ~0.6%–1.1% of a store's monthly sales in live accounts;
   // quote the conservative end.
   var CREDIT_RATE_OF_SALES = 0.0075;
-  // Month to month is the standard rate: 12-month price / 0.8, rounded UP to the
-  // nearest $5 so the 12-month plan always saves at least 20%.
-  var MONTHLY_UPLIFT = 0.25;
-  var ONBOARD_FIRST = 2500, ONBOARD_ADDL = 750;
+  // Month to month only, for everyone (10/20/2026): the list price IS the monthly price.
+  // No 12-month agreement, no month-to-month markup, no onboarding fee. Older quote links
+  // may still carry term "annual" or "monthly"; it is ignored and they open at this price.
+  // Fence: npm run check:quote.
   var VALID_DAYS = 30;
+  var TERM_NAME = "Month to month, billed monthly";
 
-  var state = { product: "pay", term: "annual", name: "", g: "", n: 1, c: "", q: "", dn: "", dp: 0 };
+  var state = { product: "pay", name: "", g: "", n: 1, c: "", q: "", dn: "", dp: 0 };
 
   function $(id) { return document.getElementById(id); }
   function usd(n) { return "$" + Math.round(n).toLocaleString("en-US"); }
   function mdy(d) { return String(d.getMonth() + 1).padStart(2, "0") + "/" + String(d.getDate()).padStart(2, "0") + "/" + d.getFullYear(); }
   function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
   function range(list, id) { for (var i = 0; i < list.length; i++) if (list[i].id === id) return list[i]; return null; }
-  function up(n) { return state.term === "monthly" ? Math.ceil(n * (1 + MONTHLY_UPLIFT) / 5) * 5 : n; }
-  // Custom discount: a % off the monthly rate (not onboarding, not the credit share), rounded to $5.
+  // Custom discount: a % off the monthly rate (not the credit share), rounded to $5.
   function discounted() { return state.dp > 0; }
   function discName() { return state.dn.trim() || "Discount"; }
   function pctText() { return (Math.round(state.dp * 10) / 10) + "%"; }
-  function price(n) { var l = up(n); return discounted() ? Math.round(l * (1 - state.dp / 100) / 5) * 5 : l; }
+  function price(n) { return discounted() ? Math.round(n * (1 - state.dp / 100) / 5) * 5 : n; }
   function round50(n) { return Math.round(n / 50) * 50; }
   function newQuoteNum() { var c = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789", s = ""; for (var i = 0; i < 6; i++) s += c[Math.floor(Math.random() * c.length)]; return "SS-" + s; }
 
@@ -265,7 +259,6 @@
       var s = JSON.parse(decodeURIComponent(escape(atob(decodeURIComponent(h)))));
       if (!s || typeof s !== "object") return;
       if (s.product === "pay" || s.product === "collect") state.product = s.product;
-      if (s.term === "annual" || s.term === "monthly") state.term = s.term;
       if (typeof s.name === "string") state.name = s.name.slice(0, 80);
       if (typeof s.c === "string") state.c = range(COLLECT_RANGES, s.c) ? s.c : range(RANGES, s.c) ? rangeForSales(range(RANGES, s.c).rep, COLLECT_RANGES) : (LEGACY_COLLECT[s.c] ? rangeForSales(LEGACY_COLLECT[s.c], COLLECT_RANGES) : "");
       if (typeof s.q === "string") state.q = s.q.slice(0, 12);
@@ -300,9 +293,7 @@
   function renderStatic() {
     $("collect-chips").innerHTML = chipsHtml("collect-sales", COLLECT_RANGES, state.c);
     $("collect-chips").querySelectorAll("input").forEach(function (r) { r.addEventListener("change", function () { state.c = r.value; update(); }); });
-    ["product", "term"].forEach(function (k) {
-      document.querySelectorAll('input[name="' + k + '"]').forEach(function (r) { r.checked = r.value === state[k]; });
-    });
+    document.querySelectorAll('input[name="product"]').forEach(function (r) { r.checked = r.value === state.product; });
     $("bizname").value = state.name;
     $("disc-name").value = state.dn;
     $("disc-pct").value = state.dp ? String(state.dp) : "";
@@ -312,26 +303,24 @@
 
   // ---- Quote math ------------------------------------------------------------
   function compute() {
-    var p = state.product, lines = [], base = 0, listBase = 0, credits = 0, onboarding = 0;
+    var p = state.product, lines = [], base = 0, listBase = 0, credits = 0;
     if (p === "pay") {
       var g = range(PAY_RANGES, state.g), extra = state.n - 1;
       var main = g.custom ? 0 : price(g.rate), addl = price(PER_STORE) * extra;
       base = g.custom ? 0 : main + addl;
-      listBase = g.custom ? 0 : up(g.rate) + up(PER_STORE) * extra;
-      lines.push({ item: "ShelfPay", range: g.label + " monthly sales", price: main, list: discounted() && !g.custom ? up(g.rate) : 0, sub: g.label + " combined monthly sales", amt: usd(main) + "/mo" });
-      if (extra > 0) lines.push({ item: "Additional stores", range: g.custom ? extra + (extra === 1 ? " store" : " stores") + " after the first" : extra + " × " + usd(price(PER_STORE)), price: addl, list: discounted() ? up(PER_STORE) * extra : 0, sub: extra + (extra === 1 ? " store" : " stores") + " after the first", amt: usd(addl) + "/mo" });
+      listBase = g.custom ? 0 : g.rate + PER_STORE * extra;
+      lines.push({ item: "ShelfPay", range: g.label + " monthly sales", price: main, list: discounted() && !g.custom ? g.rate : 0, sub: g.label + " combined monthly sales", amt: usd(main) + "/mo" });
+      if (extra > 0) lines.push({ item: "Additional stores", range: g.custom ? extra + (extra === 1 ? " store" : " stores") + " after the first" : extra + " × " + usd(price(PER_STORE)), price: addl, list: discounted() ? PER_STORE * extra : 0, sub: extra + (extra === 1 ? " store" : " stores") + " after the first", amt: usd(addl) + "/mo" });
       credits = round50(g.rep * CREDIT_RATE_OF_SALES);
-      if (state.term === "monthly") onboarding = ONBOARD_FIRST + ONBOARD_ADDL * extra;
     } else {
       var cr = range(COLLECT_RANGES, state.c);
       base = cr.custom ? 0 : price(cr.rate);
-      listBase = cr.custom ? 0 : up(cr.rate);
-      lines.push({ item: "ShelfCollect", range: cr.label + " wholesale", price: base, list: discounted() && !cr.custom ? up(cr.rate) : 0, sub: cr.label + " monthly wholesale sales", amt: usd(base) + "/mo" });
-      if (state.term === "monthly") onboarding = ONBOARD_FIRST;
+      listBase = cr.custom ? 0 : cr.rate;
+      lines.push({ item: "ShelfCollect", range: cr.label + " wholesale", price: base, list: discounted() && !cr.custom ? cr.rate : 0, sub: cr.label + " monthly wholesale sales", amt: usd(base) + "/mo" });
     }
     var fee = Math.round(credits * CREDIT_SHARE);
     var custom = p === "pay" ? !!range(PAY_RANGES, state.g).custom : !!range(COLLECT_RANGES, state.c).custom;
-    return { custom: custom, p: p, lines: lines, base: base, listBase: listBase, credits: credits, fee: fee, keep: credits - fee, monthly: base + fee, onboarding: onboarding, year: (base + fee) * 12 + onboarding, stores: state.n };
+    return { custom: custom, p: p, lines: lines, base: base, listBase: listBase, credits: credits, fee: fee, keep: credits - fee, monthly: base + fee, stores: state.n };
   }
 
   function complete() {
@@ -342,18 +331,16 @@
   var summaryText = "";
   function renderQuote() {
     var v = compute();
-    var annual = state.term === "annual";
     var product = v.p === "pay" ? "ShelfPay" : "ShelfCollect";
     var today = new Date(), valid = new Date(today.getTime() + VALID_DAYS * 864e5);
     var name = state.name.trim();
-    if (v.custom) return renderEnterprise(v, product, annual, today, valid, name);
+    if (v.custom) return renderEnterprise(v, product, today, valid, name);
 
     $("qd-eyebrow").textContent = product + " quote";
     $("qd-meta").textContent = state.q + " · " + mdy(today);
     $("qd-name").textContent = name || (v.p === "pay" ? v.stores + (v.stores === 1 ? " store" : " stores") : "Your brand");
     $("qd-price").innerHTML = usd(v.base) + "<small>/month</small>";
-    $("qd-terms").textContent = (annual ? "12-month agreement, billed monthly" : "Month to month") + " · " + (v.onboarding ? usd(v.onboarding) + " onboarding fee" : "$0 onboarding fee");
-
+    $("qd-terms").textContent = TERM_NAME;
 
     var rows = v.lines.map(function (l) {
       return '<div class="qd-row"><div class="n">' + esc(l.item) + "<span>" + esc(l.range) + '</span></div><div class="a">' + (l.list ? "<s>" + usd(l.list) + "</s>" : "") + usd(l.price) + "</div></div>";
@@ -361,38 +348,30 @@
     rows += '<div class="qd-row total"><div class="n">Monthly rate' + (discounted() ? "<span>" + esc(discName()) + ", " + pctText() + " off</span>" : "") + '</div><div class="a">' + usd(v.base) + "</div></div>";
     if (v.p === "pay") rows += '<div class="qd-row"><div class="n">Credit recovery<span>of credits we recover. Nothing recovered, nothing owed</span></div><div class="a">20%</div></div>';
     rows += '<div class="qd-row"><div class="n">Guarantee<span>' + (v.p === "pay" ? "Credits cover your fee in 90 days" : "We collect more than our fee in 90 days") + ', or we refund the difference</span></div><div class="a">Included</div></div>';
-    rows += '<div class="qd-row muted"><div class="n">Onboarding fee</div><div class="a">' + usd(v.onboarding) + "</div></div>";
     $("qd-list").innerHTML = rows;
 
     var fine = [];
-    var savedTerm = state.term;
-    state.term = "annual"; var annualBase = compute().base;
-    state.term = "monthly"; var m2m = compute(); state.term = savedTerm;
-    var yearSave = (m2m.base - annualBase) * 12 + m2m.onboarding;
-    fine.push(annual ? "You save " + usd(yearSave) + " a year vs. month to month. Billed monthly, nothing up front. If we haven't delivered in the first 90 days, cancel and the remaining payments stop."
-                     : "Month to month is our standard rate. A 12-month agreement saves 20% and waives the onboarding fee: " + usd(yearSave) + " less in the first year.");
+    fine.push("Billed monthly, nothing up front. No contract and no onboarding fee.");
     if (v.p === "collect") fine.push("We collect more than we cost: if the past-due payments we collect in your first 90 days come to less than you paid us, we refund the difference.");
-    if (v.p === "pay" && v.stores > 1) fine.push("One price for your combined sales, plus " + usd(up(PER_STORE)) + " a month for each store after the first.");
+    if (v.p === "pay" && v.stores > 1) fine.push("One price for your combined sales, plus " + usd(PER_STORE) + " a month for each store after the first.");
     if (v.p === "pay") fine.push("The credits pay for it: if the credits we recover in your first 90 days come to less than you paid us, we refund the difference. Your estimated credits are in your eval.");
     if (discounted()) fine.push(discName() + ": " + pctText() + " off our list price of " + usd(v.listBase) + " a month.");
-    fine.push("Valid through " + mdy(valid) + ". Final terms are confirmed in your agreement.");
+    fine.push("Valid through " + mdy(valid) + ".");
     $("qd-fine").innerHTML = fine.map(function (f) { return "<p>" + esc(f) + "</p>"; }).join("");
 
-    var termName = annual ? "12-month agreement, billed monthly" : "Month to month";
-    var t = ["ShelfSpace quote " + state.q + " · " + mdy(today), (name ? name + " · " : "") + product + " · " + termName];
+    var t = ["ShelfSpace quote " + state.q + " · " + mdy(today), (name ? name + " · " : "") + product + " · " + TERM_NAME];
     v.lines.forEach(function (l) { t.push("  " + l.item + " (" + l.sub + "): " + l.amt); });
     t.push("Monthly rate: " + usd(v.base) + "/mo" + (discounted() ? " (" + discName() + ": " + pctText() + " off the " + usd(v.listBase) + "/mo list price)" : ""));
-    t.push("Onboarding fee: " + (v.onboarding ? usd(v.onboarding) + " one time" : "$0 (waived with a 12-month agreement)"));
-    if (annual) t.push("90-day way out: if we haven't delivered in the first 90 days, cancel and the remaining payments stop.");
+    t.push("No contract, no onboarding fee.");
     if (v.p === "pay") { t.push("Credit recovery: 20% of credits we recover. Nothing recovered, nothing owed."); t.push("Guarantee: If the credits we recover in your first 90 days come to less than you paid us, we refund the difference."); } else t.push("Guarantee: If the past-due payments we collect in your first 90 days come to less than you paid us, we refund the difference.");
     t.push("Valid through " + mdy(valid));
     summaryText = t.join("\n");
   }
 
   // Top range is Enterprise (over $4M ShelfPay, over $2M ShelfCollect): no list price, we price it to the account.
-  function renderEnterprise(v, product, annual, today, valid, name) {
+  function renderEnterprise(v, product, today, valid, name) {
     var ent = v.p === "pay" ? range(PAY_RANGES, state.g) : range(COLLECT_RANGES, state.c);
-    var termName = annual ? "12-month agreement, billed monthly" : "Month to month";
+    var termName = TERM_NAME;
     var where = v.p === "pay" ? "store" : "brand";
     $("qd-eyebrow").textContent = product + " Enterprise quote";
     $("qd-meta").textContent = state.q + " · " + mdy(today);
@@ -406,7 +385,7 @@
     rows += '<div class="qd-row"><div class="n">Guarantee<span>' + (v.p === "pay" ? "Credits cover your fee in 90 days" : "We collect more than our fee in 90 days") + ', or we refund the difference</span></div><div class="a">Included</div></div>';
     $("qd-list").innerHTML = rows;
     var fine = ["Over " + ent.over + " a month in sales is Enterprise pricing, starting at " + usd(ent.from) + " a month and set to your volume. Send us your monthly numbers and we'll come back with your rate.",
-                "Valid through " + mdy(valid) + ". Final terms are confirmed in your agreement."];
+                "Valid through " + mdy(valid) + ". No contract: stop whenever you like."];
     $("qd-fine").innerHTML = fine.map(function (f) { return "<p>" + esc(f) + "</p>"; }).join("");
     var t = ["ShelfSpace quote " + state.q + " · " + mdy(today), (name ? name + " · " : "") + product + " Enterprise · " + termName];
     v.lines.forEach(function (l) { t.push("  " + l.item + " (" + l.range.replace(" · Enterprise", "") + (v.p === "pay" ? " monthly sales" : "") + "): Custom"); });
@@ -417,8 +396,6 @@
   }
 
   function update() {
-    var m2mFee = state.product === "pay" ? ONBOARD_FIRST + ONBOARD_ADDL * (state.n - 1) : ONBOARD_FIRST;
-    $("m2m-fee").textContent = usd(m2mFee) + " one time";
     var ok = complete();
     if (ok && !state.q) state.q = newQuoteNum();
     saveHash();
@@ -430,10 +407,8 @@
   }
 
   // ---- Events ---------------------------------------------------------------
-  ["product", "term"].forEach(function (k) {
-    document.querySelectorAll('input[name="' + k + '"]').forEach(function (r) {
-      r.addEventListener("change", function () { state[k] = r.value; renderStatic(); update(); });
-    });
+  document.querySelectorAll('input[name="product"]').forEach(function (r) {
+    r.addEventListener("change", function () { state.product = r.value; renderStatic(); update(); });
   });
   $("bizname").addEventListener("input", function () { state.name = $("bizname").value; update(); });
   $("disc-name").addEventListener("input", function () { state.dn = $("disc-name").value.slice(0, 60); update(); });

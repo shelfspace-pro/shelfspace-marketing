@@ -1,0 +1,27 @@
+name: Page checks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  quote:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '24'
+          cache: 'npm'
+
+      - run: npm ci
+
+      # /quote is month to month only: a saved 12-month link must open at the month-to-month price.
+      - name: Quote builder
+        run: npm run check:quote
+        env:
+          CHROME_PATH: /usr/bin/google-chrome
