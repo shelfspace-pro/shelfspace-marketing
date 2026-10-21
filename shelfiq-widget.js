@@ -22,8 +22,15 @@
         utmSource: g('utm_source', 200), utmMedium: g('utm_medium', 200), utmCampaign: g('utm_campaign', 200),
         utmTerm: g('utm_term', 200), utmContent: g('utm_content', 200),
         fbclid: g('fbclid', 500), liFatId: g('li_fat_id', 500),
+        // Sales row R3: a partner's booking-link code, kept for /contact and the chat capture.
+        rep: /^[A-Za-z0-9_-]{1,40}$/.test(g('rep', 40)) ? g('rep', 40) : '',
         at: new Date().toISOString(),
       }));
+    } else {
+      // Sales row R3: a partner link opened LATER in the same tab still counts (backfill, never overwrite).
+      var cur = JSON.parse(sessionStorage.getItem('ss-session-touch') || '{}') || {};
+      var later = (new URLSearchParams(location.search).get('rep') || '').slice(0, 40);
+      if (!cur.rep && /^[A-Za-z0-9_-]{1,40}$/.test(later)) { cur.rep = later; sessionStorage.setItem('ss-session-touch', JSON.stringify(cur)); }
     }
   } catch (err) {
     /* storage disabled — attribution is best-effort */
@@ -350,6 +357,12 @@
       utm_source: c(s.utmSource, 200), utm_medium: c(s.utmMedium, 200), utm_campaign: c(s.utmCampaign, 200),
       utm_term: c(s.utmTerm, 200), utm_content: c(s.utmContent, 200), fbclid: c(s.fbclid, 500), li_fat_id: c(s.liFatId, 500),
       referrer: c(s.referrer, 1000), landing_path: c(s.landing, 1000),
+      // Sales row R3: this page's ?rep= first, else the session's.
+      rep_code: (function () {
+        var u = (new URLSearchParams(location.search).get('rep') || '').slice(0, 40);
+        if (/^[A-Za-z0-9_-]{1,40}$/.test(u)) return u;
+        return /^[A-Za-z0-9_-]{1,40}$/.test(c(s.rep, 40)) ? c(s.rep, 40) : '';
+      })(),
     };
   }
 

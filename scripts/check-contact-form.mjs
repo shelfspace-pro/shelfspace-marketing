@@ -129,11 +129,22 @@ const ok200 = (b) => b.step === 1 ? { status: 200, body: { ok: true, leadId: '11
     ok(s.seen.cal > 0, 'Cal.com embed loader requested');
     const href = await s.page.getAttribute('#cxBookingLink', 'href');
     ok(/shelfcollect-demo\?name=Chris\+D2test&email=chris%2Bd2test/.test(href), 'booking link prefilled: ' + href);
+    ok(!/metadata/.test(href), 'no partner code → no booking metadata');
   }
   SHOTS && await s.page.screenshot({ path: `${SHOTS}/desk-live-booking.png` });
   const csp = s.seen.consoleErr.filter(e => /Content Security Policy|Refused/.test(e));
   ok(csp.length === 0, 'no CSP violations ' + csp.join(' | '));
   ok(await s.page.isHidden('#formSuccess'), 'thanks hidden when booking');
+  await s.browser.close();
+}
+// 2b. a partner's booking link (sales row R3): ?rep=CODE → step 1 posts rep_code AND the calendar carries it
+{
+  const s = await scenario('partner link → coded booking', { status: { live: true, capture: true }, lead: ok200, url: '/contact.html?cta=home-hero&rep=JAKE_R3-x' });
+  await doStep2(s.page, 'brand');
+  await s.page.waitForSelector('#cxBooking:not([hidden])', { timeout: 10000 });
+  ok(s.seen.lead[0] && s.seen.lead[0].rep_code === 'JAKE_R3-x', 'step 1 posts the partner code');
+  const href = await s.page.getAttribute('#cxBookingLink', 'href');
+  ok(/metadata%5Brep_code%5D=JAKE_R3-x/.test(href), 'booking link carries metadata[rep_code]: ' + href);
   await s.browser.close();
 }
 // 3. live, store → thanks

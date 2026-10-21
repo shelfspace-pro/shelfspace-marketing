@@ -35,7 +35,7 @@ const DISCLOSURE = { version: '2026-10-18-f', html: '<p class="sales-consent">By
 const GREETING = "Hi, I'm Chelsea, ShelfSpace's AI assistant.";
 const TURNSTILE_STUB = `window.turnstile={_n:0,render:function(el,o){var id=++this._n;setTimeout(function(){o.callback('tok-'+id)},50);return id},reset:function(){}};`;
 
-async function scenario(name, { offers = { booking: true, callNow: true }, fail = false, captureFail = false, reply = 'ShelfCollect sends reminders from your name. Read shelfspace.pro/accounts-receivable or evil.example.com/x', width = 1440, url = '/accounts-receivable.html?utm_source=li&fbclid=fb9' } = {}) {
+async function scenario(name, { offers = { booking: true, callNow: true }, fail = false, captureFail = false, reply = 'ShelfCollect sends reminders from your name. Read shelfspace.pro/accounts-receivable or evil.example.com/x', width = 1440, url = '/accounts-receivable.html?utm_source=li&fbclid=fb9&rep=JAKE_R3-x' } = {}) {
   console.log('\n# ' + name);
   const browser = await launch();
   const ctx = await browser.newContext({ viewport: { width, height: 900 } });
@@ -116,6 +116,7 @@ async function scenario(name, { offers = { booking: true, callNow: true }, fail 
   ok(cap && cap.disclosure_version === DISCLOSURE.version && cap.disclosure_html_sha256 === DISCLOSURE.sha256 && cap.button_label === 'Submit', 'capture posts version + sha + label');
   ok(cap && cap.turnstile_token === 'tok-1' && cap.website === '' && cap.fill_ms > 0 && cap.cta_id === 'chat-widget' && cap.role === 'brand', 'capture posts Turnstile token, empty honeypot, fill time, cta, role');
   ok(cap && cap.fbclid === 'fb9' && cap.utm_source === 'li' && /^http/.test(cap.page_url), 'capture posts the session attribution + page url');
+  ok(cap && cap.rep_code === 'JAKE_R3-x', 'capture posts the partner code from the first page (sales row R3)');
   await s.page.click('#cwOffers button:has-text("Pick a time")');
   await s.page.waitForSelector('#cwSlots button');
   await s.page.click('#cwSlots button');

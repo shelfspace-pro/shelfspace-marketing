@@ -606,7 +606,8 @@
     Object.keys(out).forEach(function(k) { if (!out[k]) delete out[k]; });
     var cta = clip(params.get('cta') || '', 80);
     if (/^[a-z0-9][a-z0-9_-]{0,79}$/i.test(cta)) out.cta_id = cta;
-    var rep = clip(params.get('rep') || '', 40);
+    // A partner's booking link (sales row R3): this URL's ?rep=, else the session's first page's (shelfiq-widget.js).
+    var rep = clip(params.get('rep') || (s && typeof s.rep === 'string' ? s.rep : '') || '', 40);
     if (/^[A-Za-z0-9_-]{1,40}$/.test(rep)) out.rep_code = rep;
     if (isPartner) out.path = 'partner';
     return out;
@@ -709,9 +710,13 @@
     var box = document.getElementById('cxBooking');
     box.hidden = false;
     var q = new URLSearchParams({ name: lead.name, email: lead.email });
+    var calConfig = { name: lead.name, email: lead.email, layout: 'month_view', theme: 'light' };
+    // Sales row R3: a partner's code rides on the booking as Cal.com metadata (the platform registers it to them).
+    var repCode = attribution().rep_code;
+    if (repCode) { q.set('metadata[rep_code]', repCode); calConfig['metadata[rep_code]'] = repCode; }
     document.getElementById('cxBookingLink').href = 'https://cal.com/' + BOOKING_LINK + '?' + q.toString();
     loadCal(function(cal) {
-      cal('inline', { elementOrSelector: '#cxCalInline', calLink: BOOKING_LINK, config: { name: lead.name, email: lead.email, layout: 'month_view', theme: 'light' } });
+      cal('inline', { elementOrSelector: '#cxCalInline', calLink: BOOKING_LINK, config: calConfig });
       cal('ui', { hideEventTypeDetails: false, layout: 'month_view' });
       cal('on', { action: 'bookingSuccessful', callback: function() { track('demo_booked', {}); } });
     });
