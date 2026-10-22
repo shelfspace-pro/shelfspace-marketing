@@ -249,10 +249,11 @@
 .proof-cta-card > p { font-size: 15px; color: var(--slate-600); line-height: 1.6; margin-bottom: 24px; }
 .proof-cta-founder { display: flex; align-items: center; gap: 12px; justify-content: center; margin-top: 24px; font-size: 14px; color: var(--slate-600); }
 .proof-cta-risk { font-size: 13px; color: var(--slate-600); margin-top: 16px; }
-/* Bottom CTA (Chris, 10/22/2026): one huge button, no card. */
-.proof-cta .proof-cta-big { display: inline-flex; align-items: center; gap: 18px; padding: 34px 64px; border-radius: 28px; font-size: clamp(26px, 3.4vw, 44px); font-weight: 800; letter-spacing: -1px; line-height: 1.1; box-shadow: 0 24px 60px -18px rgba(27,67,50,0.55); }
-.proof-cta .proof-cta-big svg { width: 0.9em; height: 0.9em; flex: none; }
-.proof-cta .proof-cta-big:hover { transform: translateY(-4px); box-shadow: 0 32px 70px -18px rgba(27,67,50,0.6); }
+/* Big CTA (Chris, 10/22/2026): one huge WHITE button inside the dark case-studies section, under the guarantee line. */
+.cs-cta { margin: 28px 0 22px; }
+.cs-cta .proof-cta-big { background: var(--white); color: var(--green-deep); display: inline-flex; align-items: center; gap: 18px; padding: 34px 64px; border-radius: 28px; font-size: clamp(26px, 3.4vw, 44px); font-weight: 800; letter-spacing: -1px; line-height: 1.1; box-shadow: 0 0 0 0 rgba(149,213,178,0), 0 24px 60px -20px rgba(149,213,178,0.35); transition: background .25s, transform .25s, box-shadow .25s; }
+.cs-cta .proof-cta-big svg { width: 0.9em; height: 0.9em; flex: none; }
+.cs-cta .proof-cta-big:hover { background: var(--green-ghost); color: var(--green-deep); transform: translateY(-4px); box-shadow: 0 0 0 6px rgba(149,213,178,0.18), 0 28px 60px -18px rgba(149,213,178,0.45); }
 
 /* FAQ */
 .faq-section { background: var(--slate-50); padding: 80px 48px; }
@@ -495,7 +496,7 @@
   .proof-cta { padding: 24px 24px 60px; }
   .proof-cta-stats { grid-template-columns: 1fr; gap: 20px; }
   .proof-cta-card { padding: 32px 24px; }
-  .proof-cta .proof-cta-big { padding: 24px 26px; gap: 10px; border-radius: 24px; font-size: 22px; letter-spacing: -0.5px; white-space: nowrap; }
+  .cs-cta .proof-cta-big { padding: 24px 26px; gap: 10px; border-radius: 24px; font-size: 22px; letter-spacing: -0.5px; white-space: nowrap; }
   .faq-section { padding: 60px 24px; }
   .footer-top { grid-template-columns: 1fr 1fr; }
   .pos-ticker-logo { height: 72px; padding: 0 32px; }
@@ -1275,6 +1276,7 @@ a.cs-stat:hover .cs-stat-go span { transform: translateX(4px); }
     <div class="case-studies-header reveal">
       <h2>Upgrade your business</h2>
       <p class="case-studies-lead">We guarantee to make you more successful, and we can prove it.</p>
+      <div class="cs-cta"><a href="/contact?cta=home-cta" class="btn-primary proof-cta-big">Upgrade your business <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a></div>
       <p>De-identified to protect our clients.</p>
     </div>
     <div class="cs-stats reveal">
@@ -1563,11 +1565,6 @@ a.cs-stat:hover .cs-stat-go span { transform: translateX(4px); }
   <div class="vf-foot reveal">
     <a href="/tutorials">Browse all 34 tutorials <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
   </div>
-</section>
-
-<!-- SECTION 6: PROOF + CTA -->
-<section class="proof-cta">
-  <a href="/contact?cta=home-cta" class="btn-primary proof-cta-big reveal">Upgrade your business <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
 </section>
 
 <!-- SECTION 7: FAQ -->
