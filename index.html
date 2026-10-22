@@ -1131,7 +1131,7 @@ a.cs-stat:hover .cs-stat-go span { transform: translateX(4px); }
         <figcaption class="tq-who"><b>Avery Leveston</b><span>CEO, Cowboy Kush</span><img class="tq-brand" src="/logos/customers/cowboy-kush-mark.svg" alt="Cowboy Kush" width="190" height="65" loading="lazy"></figcaption>
       </figure>
       <figure class="tq-panel" id="tq-p3" role="tabpanel" aria-labelledby="tq-t3">
-        <blockquote class="tq-q tq-q--xl">&ldquo;It&rsquo;s been a <mark>total game-changer</mark> for the Michigan cannabis industry!&rdquo;</blockquote>
+        <blockquote class="tq-q tq-q--xl">&ldquo;ShelfSpace has been a <mark>total game-changer</mark> for Michigan cannabis operators!&rdquo;</blockquote>
         <figcaption class="tq-who"><b>Jessa P.</b><span>CEO, Jesstures LLC</span><span class="tq-brand tq-brand--js" role="img" aria-label="Jesstures"><svg class="tq-jm" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="9" fill="#e8590c"/><path d="M18.5 8v10.5a4.5 4.5 0 0 1-8.6 1.9" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round"/><path d="M22.5 9.5c1.6 1.4 1.6 4.2 0 5.6M25.2 7.4c2.9 2.6 2.9 7.2 0 9.8" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" opacity=".85"/></svg><span>Jess<i>tures</i></span></span></figcaption>
       </figure>
       <figure class="tq-panel" id="tq-p4" role="tabpanel" aria-labelledby="tq-t4">
@@ -1665,17 +1665,22 @@ a.cs-stat:hover .cs-stat-go span { transform: translateX(4px); }
   :root { --display-size: clamp(34px, 9.4vw, 40px); } /* still ONE variable: hero H1, quotes, trust heading, guarantee line, "Watch it work" */
 
   /* hero: CTA full-width in thumb reach, 44px+ toggles */
-  .hero--motion { min-height: 0; padding: 92px 16px 48px; }
-  .persona-switch { margin-bottom: 20px; }
+  .hero--motion { min-height: 0; padding: 88px 16px 28px; }
+  .persona-switch { margin-bottom: 18px; }
   .persona-btn { min-height: 44px; }
-  .hm-h1 { letter-spacing: -1.6px !important; }
-  .hero--motion .hm-sub { font-size: 18px; line-height: 1.45; }
-  .hero--motion .hero-actions { align-items: stretch; width: 100%; max-width: 340px; margin: 0 auto; gap: 2px; }
+  .hm-h1 { letter-spacing: -1.6px !important; margin-bottom: 12px !important; }
+  .hero--motion .hm-sub { font-size: 17px; line-height: 1.45; margin-bottom: 20px; }
+  .hero--motion .hero-actions { align-items: stretch; width: 100%; max-width: 340px; margin: 0 auto; gap: 0; }
   .hero--motion .hero-actions .btn-primary { justify-content: center; min-height: 54px; width: 100%; }
-  .hm-more { justify-content: center; min-height: 48px; }
-  .hero--motion .hero-split { gap: 28px; }
-  .hm-card-num { font-size: clamp(36px, 11.4vw, 48px); }
-  .hm-card.show-store .hm-paid { font-size: clamp(28px, 8.4vw, 38px) !important; padding: 10px 18px !important; }
+  .hm-more { justify-content: center; min-height: 44px; padding: 10px 6px; }
+  .hero--motion .hero-split { gap: 16px; }
+  /* invoice card: compact so the whole hero, card included, fits the first screen */
+  .hm-glow { inset: -12px 0; }
+  .hm-card { padding: 18px 20px 20px; border-radius: 20px; }
+  .hm-card-num { font-size: clamp(34px, 10vw, 42px); margin: 8px 0 14px; letter-spacing: -1px; }
+  .hm-status > span { font-size: clamp(22px, 6.4vw, 28px); padding: 8px 14px; border-radius: 12px; }
+  .hm-paid, .hm-card.show-store .hm-paid { font-size: clamp(26px, 7.6vw, 32px) !important; padding: 8px 18px !important; }
+  .hm-caption { margin-top: 10px; }
 
   /* scroll-in: shorter slide on phones */
   .reveal { transform: translateY(20px); transition-duration: .6s; }
@@ -1685,15 +1690,16 @@ a.cs-stat:hover .cs-stat-go span { transform: translateX(4px); }
   nav, nav.scrolled { background: var(--white); -webkit-backdrop-filter: none; backdrop-filter: none; }
 
   /* testimonials: arrows in a thumb row under the quote, 44px */
-  .tq { padding: 64px 16px; }
-  .tq-stage { padding: 32px 24px 84px; }
+  .tq { padding: 40px 16px 56px; }
+  .tq-stage { padding: 28px 22px 80px; }
   .tq-panel { justify-content: flex-start; }
   .tq-arrow { top: auto; bottom: 22px; margin-top: 0; width: 44px; height: 44px; }
   .tq-arrow svg { width: 18px; height: 18px; }
-  .tq-arrow--prev { left: auto; right: 78px; }
-  .tq-arrow--next { right: 24px; }
+  .tq-arrow--prev { left: 22px; right: auto; }
+  .tq-arrow--next { left: 76px; right: auto; }
   .tq-arrow--prev:hover, .tq-arrow--next:hover { transform: none; }
-  .tq-who { padding-right: 0; }
+  .tq-who { padding-right: 0; margin-top: auto; } /* name + logo sit on the card's bottom row; the quote stays up top */
+  .tq-q { margin-bottom: 28px; }
   .tq-tab { height: 60px; }
 
   /* trust */
