@@ -251,6 +251,9 @@
 .proof-cta-risk { font-size: 13px; color: var(--slate-600); margin-top: 16px; }
 /* Big CTA (Chris, 10/22/2026): one huge WHITE button inside the dark case-studies section, under the guarantee line. */
 .cs-cta { margin: 40px 0 26px; }
+/* FAQ "How do I get started?" button (Chris, 10/22). A styled inline link, deliberately NOT a .btn-* class: a btn-class link would be checked as a primary "Schedule a call" CTA. */
+.faq-go { display: inline-flex; align-items: center; gap: 8px; margin-left: 10px; padding: 10px 20px; border-radius: 14px; background: var(--green-deep); color: var(--white) !important; font-weight: 700; font-size: 15px; text-decoration: none; box-shadow: 0 10px 24px -10px rgba(27,67,50,0.45); transition: transform .2s, background .2s; }
+.faq-go:hover { background: var(--green-dark); transform: translateY(-2px); }
 .cs-cta .proof-cta-big { background: var(--white); color: var(--green-deep); display: inline-flex; align-items: center; gap: 18px; padding: 34px 64px; border-radius: 28px; font-size: clamp(26px, 3.4vw, 44px); font-weight: 800; letter-spacing: -1px; line-height: 1.1; box-shadow: 0 0 0 0 rgba(149,213,178,0), 0 24px 60px -20px rgba(149,213,178,0.35); transition: background .25s, transform .25s, box-shadow .25s; }
 .cs-cta .proof-cta-big svg { width: 0.9em; height: 0.9em; flex: none; }
 .cs-cta .proof-cta-big:hover { background: var(--green-ghost); color: var(--green-deep); transform: translateY(-4px); box-shadow: 0 0 0 6px rgba(149,213,178,0.18), 0 28px 60px -18px rgba(149,213,178,0.45); }
@@ -797,7 +800,7 @@
       "name": "How do I get started?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Schedule a call. We'll look at your numbers with you and show you what we'd fix first."
+        "text": "Get started today at https://shelfspace.pro/contact."
       }
     }
   ]
@@ -1623,7 +1626,7 @@ a.cs-stat:hover .cs-stat-go span { transform: translateX(4px); }
     </details>
     <details>
       <summary>How do I get started?</summary>
-      <p>Schedule a call. We'll look at your numbers with you and show you what we'd fix first.</p>
+      <p>Get started today. <a class="faq-go" href="/contact?cta=home-inline">Click here <span aria-hidden="true">&rarr;</span></a></p>
     </details>
   </div>
 </section>
