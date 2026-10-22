@@ -1047,16 +1047,19 @@ a.cs-stat:hover .cs-stat-go span { transform: translateX(4px); }
 .tq-arrow--prev:hover { transform: translateX(-3px); }
 .tq-arrow--next:hover { transform: translateX(3px); }
 .tq-arrow:focus-visible { outline: 2px solid var(--green-mid); outline-offset: 3px; }
-.tq-tabs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 20px; }
+.tq-tabs { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; margin-top: 20px; }
 .tq-tab { appearance: none; -webkit-appearance: none; font: inherit; text-transform: none; position: relative; height: 92px; display: flex; align-items: center; justify-content: center; padding: 0 24px; background: var(--white); border: 1px solid var(--green-light); border-radius: 20px; cursor: pointer; overflow: hidden; box-shadow: 0 1px 2px rgba(27,67,50,0.05); transition: border-color .3s, box-shadow .3s, transform .3s; }
 .tq-tab:hover { transform: translateY(-2px); box-shadow: 0 12px 28px -12px rgba(27,67,50,0.25); }
 .tq-tab:focus-visible { outline: 2px solid var(--green-mid); outline-offset: 3px; }
-.tq-tab img { height: 42px; width: auto; max-width: 78%; object-fit: contain; filter: grayscale(1); opacity: .45; transition: filter .35s, opacity .35s; }
+.tq-tab img { height: 42px; width: auto; max-width: 88%; object-fit: contain; filter: grayscale(1); opacity: .45; transition: filter .35s, opacity .35s; }
 .tq-tab img.tq-ck { height: 50px; }
 .tq-tab img.tq-mc { height: 56px; }
 .tq-tab img.tq-og { height: 44px; }
-.tq-wm { font-weight: 800; font-size: 22px; letter-spacing: -0.6px; color: var(--green-deep); white-space: nowrap; filter: grayscale(1); opacity: .45; transition: filter .35s, opacity .35s; }
+.tq-wm { display: inline-flex; align-items: center; gap: 9px; font-weight: 800; font-size: 22px; letter-spacing: -0.6px; color: var(--slate-800); white-space: nowrap; filter: grayscale(1); opacity: .45; transition: filter .35s, opacity .35s; }
 .tq-tab:hover .tq-wm { opacity: .75; }
+.tq-wm i { font-style: normal; font-weight: 500; }
+.tq-jm { width: 30px; height: 30px; flex: none; }
+.tq-tab img.tq-kc { height: 34px; }
 .tq-tab[aria-selected="true"] .tq-wm { filter: none; opacity: 1; }
 .tq-tab:hover img { opacity: .75; }
 .tq-tab[aria-selected="true"] { border-color: var(--green-accent); box-shadow: 0 16px 34px -14px rgba(27,67,50,0.3); }
@@ -1083,13 +1086,17 @@ a.cs-stat:hover .cs-stat-go span { transform: translateX(4px); }
   .tq-q--l { font-size: 24px; }
   .tq-who { font-size: 15px; flex-direction: column; align-items: flex-start; gap: 2px; padding-top: 18px; }
   .tq-who b + span::before { display: none; }
-  .tq-tabs { gap: 8px; margin-top: 12px; }
+  .tq-tabs { gap: 8px; margin-top: 12px; grid-template-columns: repeat(6, 1fr); }
+  .tq-tab { grid-column: span 2; }
+  .tq-tab:nth-child(4) { grid-column: 2 / span 2; }
   .tq-tab { height: 64px; padding: 0 10px; border-radius: 16px; }
   .tq-tab img { height: 28px; max-width: 88%; }
   .tq-tab img.tq-og { height: 24px; }
   .tq-tab img.tq-mc { height: 30px; }
   .tq-tab img.tq-ck { height: 26px; }
-  .tq-wm { font-size: 13px; letter-spacing: -0.3px; }
+  .tq-wm { font-size: 14px; letter-spacing: -0.3px; gap: 5px; }
+  .tq-jm { width: 20px; height: 20px; }
+  .tq-tab img.tq-kc { height: 18px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .tq-panel, .tq-q mark, .tq-tab { transition: none; }
@@ -1111,12 +1118,16 @@ a.cs-stat:hover .cs-stat-go span { transform: translateX(4px); }
         <figcaption class="tq-who"><b>Shawna Gurgul</b><span>Sales Operations Administrator, One Garden</span></figcaption>
       </figure>
       <figure class="tq-panel" id="tq-p2" role="tabpanel" aria-labelledby="tq-t2">
-        <blockquote class="tq-q tq-q--l">&ldquo;ShelfSpace has allowed me to <mark>run our collections more efficiently</mark>, freeing up much-needed time to go out and focus on sales.&rdquo;</blockquote>
+        <blockquote class="tq-q tq-q--l">&ldquo;ShelfSpace has allowed me to <mark>run our collections more efficiently</mark> and freed up much-needed time to go out and focus on sales.&rdquo;</blockquote>
         <figcaption class="tq-who"><b>Avery Leveston</b><span>CEO, Cowboy Kush</span></figcaption>
       </figure>
       <figure class="tq-panel" id="tq-p3" role="tabpanel" aria-labelledby="tq-t3">
         <blockquote class="tq-q tq-q--l">&ldquo;It&rsquo;s been a <mark>total game-changer</mark> for the Michigan cannabis industry!&rdquo;</blockquote>
         <figcaption class="tq-who"><b>Jessa P.</b><span>CEO, Jesstures LLC</span></figcaption>
+      </figure>
+      <figure class="tq-panel" id="tq-p4" role="tabpanel" aria-labelledby="tq-t4">
+        <blockquote class="tq-q tq-q--l">&ldquo;ShelfSpace made <mark>consignment partnerships possible</mark>, which is a game-changer for our business.&rdquo;</blockquote>
+        <figcaption class="tq-who"><b>Noah Braunstein</b><span>Operations Manager, KushCart</span></figcaption>
       </figure>
     </div>
     </div>
@@ -1124,7 +1135,8 @@ a.cs-stat:hover .cs-stat-go span { transform: translateX(4px); }
       <button class="tq-tab" type="button" role="tab" id="tq-t0" aria-controls="tq-p0" aria-selected="true"><img class="tq-mc" src="/logos/customers/meds-cafe.png" alt="Meds Cafe" width="480" height="160" loading="lazy"><span class="tq-bar"><i></i></span></button>
       <button class="tq-tab" type="button" role="tab" id="tq-t1" aria-controls="tq-p1" aria-selected="false" tabindex="-1"><img class="tq-og" src="/logos/customers/one-garden.png" alt="One Garden" width="480" height="144" loading="lazy"><span class="tq-bar"><i></i></span></button>
       <button class="tq-tab" type="button" role="tab" id="tq-t2" aria-controls="tq-p2" aria-selected="false" tabindex="-1"><img class="tq-ck" src="/logos/customers/cowboy-kush-mark.svg" alt="Cowboy Kush" width="190" height="65" loading="lazy"><span class="tq-bar"><i></i></span></button>
-      <button class="tq-tab" type="button" role="tab" id="tq-t3" aria-controls="tq-p3" aria-selected="false" tabindex="-1"><span class="tq-wm" role="img" aria-label="Jesstures">Jesstures</span><span class="tq-bar"><i></i></span></button>
+      <button class="tq-tab" type="button" role="tab" id="tq-t3" aria-controls="tq-p3" aria-selected="false" tabindex="-1"><span class="tq-wm tq-js" role="img" aria-label="Jesstures"><svg class="tq-jm" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="9" fill="#e8590c"/><path d="M18.5 8v10.5a4.5 4.5 0 0 1-8.6 1.9" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round"/><path d="M22.5 9.5c1.6 1.4 1.6 4.2 0 5.6M25.2 7.4c2.9 2.6 2.9 7.2 0 9.8" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" opacity=".85"/></svg><span>Jess<i>tures</i></span></span><span class="tq-bar"><i></i></span></button>
+      <button class="tq-tab" type="button" role="tab" id="tq-t4" aria-controls="tq-p4" aria-selected="false" tabindex="-1"><img class="tq-kc" src="/logos/customers/kushcart.png" alt="KushCart" width="836" height="136" loading="lazy"><span class="tq-bar"><i></i></span></button>
     </div>
   </div>
 </section>
