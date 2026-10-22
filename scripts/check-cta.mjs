@@ -13,7 +13,7 @@
 import { readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { LABEL, MICRO, ON_DARK, isPartnerCta, OLD_LABELS, CTA_RE, listPages, GENERATED, findContactAnchors, kind, visibleText, attr } from "./cta-lib.mjs";
+import { LABEL, labelFor, NO_MICRO, MICRO, ON_DARK, isPartnerCta, OLD_LABELS, CTA_RE, listPages, GENERATED, findContactAnchors, kind, visibleText, attr } from "./cta-lib.mjs";
 import { sweep } from "./cta-sweep.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
@@ -56,9 +56,10 @@ for (const rel of listPages(ROOT)) {
     primaries++;
     // B
     const label = visibleText(a.inner);
-    if (label !== LABEL) fail(rel, "B", `primary /contact CTA says "${label}"`);
+    const want = k === "primary" ? labelFor(cta) : LABEL;
+    if (label !== want) fail(rel, "B", `primary /contact CTA says "${label}"`);
     // D
-    if (k !== "primary") continue;
+    if (k !== "primary" || NO_MICRO.has(cta)) continue;
     const cls = attr(a.tag, "class") || "";
     const sticky = a.ancestors.some((n) => /sticky/.test(attr(n.tag, "class") || "")) || /(^|\s)(pri|qd-go)(\s|$)/.test(cls);
     const docsCta = a.parent && /\bdocs-cta\b/.test(attr(a.parent.tag, "class") || "");

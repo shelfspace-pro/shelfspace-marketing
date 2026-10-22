@@ -13,6 +13,12 @@ import { join, relative, sep } from "node:path";
 
 export const LABEL = "Schedule a call";
 
+// Named exceptions (Chris, 10/22/2026): the homepage hero button reads "Get Paid" with no
+// microcopy line under it. Keyed by cta id; the link stays /contact?cta=home-hero.
+export const LABEL_OVERRIDES = new Map([["home-hero", "Get Paid"]]);
+export const NO_MICRO = new Set(["home-hero"]);
+export const labelFor = (id) => LABEL_OVERRIDES.get(id) || LABEL;
+
 export const MICRO = {
   brand: "30 minutes with Chris. See how you'd get paid faster.",
   store: "30 minutes with Chris. See how your vendor payments would run.",

@@ -16,7 +16,7 @@
 import { readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { LABEL, MICRO, ON_DARK, isPartnerCta, listPages, GENERATED, pageId, ctaId, audience, findContactAnchors, kind, slotFor, attr } from "./cta-lib.mjs";
+import { LABEL, labelFor, NO_MICRO, MICRO, ON_DARK, isPartnerCta, listPages, GENERATED, pageId, ctaId, audience, findContactAnchors, kind, slotFor, attr } from "./cta-lib.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const DRY = process.argv.includes("--dry");
@@ -42,9 +42,9 @@ function newHref(oldHref, id, partner) {
   return `${abs}/contact?cta=${id}${partner ? "&amp;path=partner" : ""}${rest ? "&amp;" + rest.replace(/&/g, "&amp;") : ""}`;
 }
 
-function relabel(inner) {
+function relabel(inner, label = LABEL) {
   const svgs = inner.match(/<svg\b[\s\S]*?<\/svg>/g) || [];
-  return svgs.length ? `${LABEL} ${svgs.join("")}` : LABEL;
+  return svgs.length ? `${label} ${svgs.join("")}` : label;
 }
 
 export function sweep(rel, html) {
@@ -89,9 +89,9 @@ export function sweep(rel, html) {
     const href = newHref(a.href, id, partner);
     let tag = a.tag.replace(/(\shref\s*=\s*")[^"]*(")/i, `$1${href}$2`);
     let inner = a.inner;
-    if (k === "nav" || k === "primary") inner = relabel(inner);
+    if (k === "nav" || k === "primary") inner = relabel(inner, k === "primary" ? labelFor(id) : LABEL);
     let out = `${tag}${inner}</a>`;
-    if (k === "primary") {
+    if (k === "primary" && !NO_MICRO.has(id)) {
       const inDocsCta = a.parent && /\bdocs-cta\b/.test(attr(a.parent.tag, "class") || "");
       // a sticky bar already carries its own line; the founder card's link row and the
       // unlinked quote builder are too tight for a second line
