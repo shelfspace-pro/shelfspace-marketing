@@ -16,6 +16,7 @@ const server = http.createServer((req, res) => {
   const p = decodeURIComponent(req.url.split('?')[0]);
   let file = path.join(ROOT, p);
   if (!file.startsWith(ROOT)) { res.writeHead(403); return res.end(); }
+  if (p === '/') file = path.join(ROOT, 'index.html');
   if (!fs.existsSync(file) && fs.existsSync(file + '.html')) file += '.html';
   if (!fs.existsSync(file) || fs.statSync(file).isDirectory()) { res.writeHead(404); return res.end(); }
   res.writeHead(200, { 'Content-Type': TYPES[path.extname(file)] || 'application/octet-stream' });
@@ -40,7 +41,10 @@ for (const pg of pages.filter((p) => !ONLY || ONLY.includes(p))) {
   for (const width of [320, 375, 390, 430]) {
     const ctx = await browser.newContext({ viewport: { width, height: 800 }, isMobile: browser.browserType().name() !== 'chromium', hasTouch: true });
     const page = await ctx.newPage();
-    await page.goto(BASE + pg, { waitUntil: 'load' });
+    const res = await page.goto(BASE + pg, { waitUntil: 'load' });
+    // a page that didn't load would pass vacuously (a 404 has no controls to measure), so it fails
+    if (!res || !res.ok()) { failN++; console.log(`  FAIL ${pg} @${width}px: HTTP ${res ? res.status() : 'no response'}`); await ctx.close(); continue; }
+    if (!(await page.locator('a').count())) { failN++; console.log(`  FAIL ${pg} @${width}px: page has no links (did it load?)`); await ctx.close(); continue; }
     const off = await page.evaluate(() => {
       document.querySelectorAll('details').forEach((d) => { d.open = true; });
       const iw = window.innerWidth;
