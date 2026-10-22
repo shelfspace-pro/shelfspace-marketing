@@ -833,6 +833,12 @@
 .cs-stat-n { font-family: var(--font-mono); font-size: clamp(34px, 3.6vw, 46px); font-weight: 700; color: #fff; letter-spacing: -1.5px; line-height: 1; font-variant-numeric: tabular-nums; }
 .cs-stat-n small { font-size: 0.45em; color: rgba(255,255,255,0.6); letter-spacing: 0; }
 .cs-stat-l { margin-top: 10px; font-size: 14px; line-height: 1.45; color: rgba(255,255,255,0.68); }
+a.cs-stat { display: block; text-decoration: none; color: inherit; transition: transform .3s cubic-bezier(0.22,1,0.36,1), border-color .3s, background .3s, box-shadow .3s; }
+a.cs-stat:hover { transform: translateY(-4px); background: rgba(255,255,255,0.09); border-color: rgba(149,213,178,0.4); box-shadow: 0 18px 40px -16px rgba(27,67,50,0.6); }
+a.cs-stat:focus-visible { outline: 2px solid var(--green-accent); outline-offset: 3px; }
+.cs-stat-go { margin-top: 14px; font-size: 13px; font-weight: 600; color: var(--c, #95d5b2); }
+.cs-stat-go span { display: inline-block; transition: transform .3s; }
+a.cs-stat:hover .cs-stat-go span { transform: translateX(4px); }
 .cs-v2 .case-filter { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.16); color: rgba(255,255,255,0.75); }
 .cs-v2 .case-filter:hover { border-color: var(--green-accent); color: #fff; }
 .cs-v2 .case-filter.active { background: var(--green-accent); border-color: var(--green-accent); color: var(--green-deep); font-weight: 700; }
@@ -1260,9 +1266,9 @@
       <p>De-identified to protect our clients.</p>
     </div>
     <div class="cs-stats reveal">
-      <div class="cs-stat cs-stat--brand"><div class="cs-stat-n"><b data-cs-count="94">94</b></div><div class="cs-stat-l">payment reminders sent in a brand's own name, in two weeks</div></div>
-      <div class="cs-stat cs-stat--credit"><div class="cs-stat-n">$<b data-cs-count="83741">83,741</b><small>/yr</small></div><div class="cs-stat-l">in credits recovered at one dispensary</div></div>
-      <div class="cs-stat cs-stat--ops"><div class="cs-stat-n"><b data-cs-count="98">98</b>%</div><div class="cs-stat-l">less time on AP: 15 hours a week down to one button</div></div>
+      <a class="cs-stat cs-stat--brand" href="/blog/case-study-brand-past-due-reminders"><div class="cs-stat-n"><b data-cs-count="94">94</b></div><div class="cs-stat-l">payment reminders sent in a brand's own name, in two weeks</div><div class="cs-stat-go">Read the case study <span aria-hidden="true">&rarr;</span></div></a>
+      <a class="cs-stat cs-stat--credit" href="/blog/case-study-ebitda-credit-recovery"><div class="cs-stat-n">$<b data-cs-count="83741">83,741</b><small>/yr</small></div><div class="cs-stat-l">in credits recovered at one dispensary</div><div class="cs-stat-go">Read the case study <span aria-hidden="true">&rarr;</span></div></a>
+      <a class="cs-stat cs-stat--ops" href="/blog/case-study-ap-time-savings"><div class="cs-stat-n"><b data-cs-count="98">98</b>%</div><div class="cs-stat-l">less time on AP: 15 hours a week down to one button</div><div class="cs-stat-go">Read the case study <span aria-hidden="true">&rarr;</span></div></a>
     </div>
     <div class="case-filters reveal">
       <button class="case-filter active" data-filter="all">All</button>
