@@ -983,10 +983,10 @@
         <div class="hm-card-num">$3,280.00</div>
         <div class="hm-status"><span class="hm-late">34 days late</span><span class="hm-paid">Paid</span></div>
       </div>
-      <div class="hm-card show-store" aria-label="Example: unclaimed vendor credits get recovered">
-        <div class="hm-card-top">Vendor credits · September 2026</div>
-        <div class="hm-card-num">$1,005.75</div>
-        <div class="hm-status"><span class="hm-late">Unclaimed</span><span class="hm-paid">Recovered</span></div>
+      <div class="hm-card show-store" aria-label="Example: a dispensary's monthly profit goes from $40,000 to $58,700">
+        <div class="hm-card-top">Monthly profit · Northside Wellness</div>
+        <div class="hm-card-num" data-from="40000" data-to="58700">$40,000.00</div>
+        <div class="hm-status"><span class="hm-late">Before</span><span class="hm-paid">+$18,700/mo</span></div>
       </div>
       <div class="hm-caption">Illustration with example numbers</div>
     </div>
@@ -2054,7 +2054,21 @@
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var timer = null, visible = true;
   function card() { return hero.querySelector('.hm-card.show-' + hero.getAttribute('data-persona')); }
-  function set(c, done) { c.classList.toggle('done', done); }
+  function money(n) { return '$' + n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
+  function set(c, done) {
+    c.classList.toggle('done', done);
+    var num = c.querySelector('[data-to]');
+    if (!num) return;
+    var from = +num.getAttribute('data-from'), to = +num.getAttribute('data-to');
+    if (!done || reduced) { num.textContent = money(done ? to : from); return; }
+    var t0 = null;
+    (function step(ts) {
+      if (!t0) t0 = ts;
+      var p = Math.min((ts - t0) / 900, 1), e = 1 - Math.pow(1 - p, 3);
+      num.textContent = money(Math.round(from + (to - from) * e));
+      if (p < 1 && c.classList.contains('done')) requestAnimationFrame(step);
+    })(performance.now());
+  }
   function stop() { clearTimeout(timer); timer = null; }
   function loop(c, done) { set(c, done); timer = setTimeout(function () { loop(c, !done); }, done ? 3600 : 2400); }
   function restart() {
