@@ -97,15 +97,12 @@
   .g-card b { display: block; font-size: 16px; color: var(--white); margin-bottom: 6px; }
   .g-card span { font-size: 14px; line-height: 1.55; color: rgba(255,255,255,0.74); }
 
-  /* TIMELINE */
-  .o-time { background: var(--white); padding: 92px 48px; }
-  .tl { list-style: none; margin: 0 auto; padding: 0; max-width: 980px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; position: relative; }
-  .tl li { position: relative; background: var(--white); border: 1px solid var(--slate-200); border-radius: 16px; padding: 24px 22px; box-shadow: 0 10px 28px rgba(27,67,50,0.06); }
-  .tl-day { font-family: var(--font-mono); font-size: 13px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--green-mid); margin: 0 0 8px; }
-  .tl b { display: block; font-size: 17px; color: var(--green-deep); letter-spacing: -0.3px; margin-bottom: 6px; }
-  .tl span { font-size: 14px; line-height: 1.55; color: var(--slate-600); }
-  .ease { max-width: 760px; margin: 40px auto 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
-  .ease span { display: inline-flex; align-items: center; gap: 8px; padding: 9px 16px; border-radius: 999px; background: var(--green-ghost); color: var(--green-deep); font-size: 14px; font-weight: 600; }
+  /* FREE TRIAL */
+  .o-trial { background: var(--white); padding: 92px 48px; }
+  .trial-card { max-width: 820px; margin: 0 auto; text-align: center; background: var(--green-ghost); border: 1px solid rgba(27,67,50,0.12); border-radius: 16px; padding: 56px 32px; box-shadow: 0 10px 28px rgba(27,67,50,0.08); }
+  .trial-card h2 { font-size: clamp(32px,4.5vw,48px); font-weight: 700; color: var(--green-deep); letter-spacing: -1.2px; margin: 0; }
+  .ease { max-width: 760px; margin: 28px auto 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+  .ease span { display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: 999px; background: var(--white); color: var(--green-deep); font-size: 15px; font-weight: 600; box-shadow: 0 4px 12px rgba(27,67,50,0.08); }
   .ease svg { width: 15px; height: 15px; }
 
   /* FAQ */
@@ -142,15 +139,13 @@
 
   @media (max-width: 900px) {
     .o-hero { padding: 116px 20px 44px; }
-    .o-pain, .o-stack, .o-guarantee, .o-time, .faq-section, .o-final { padding-left: 20px; padding-right: 20px; padding-top: 64px; padding-bottom: 64px; }
+    .o-pain, .o-stack, .o-guarantee, .o-trial, .faq-section, .o-final { padding-left: 20px; padding-right: 20px; padding-top: 64px; padding-bottom: 64px; }
     .pain-grid, .g-grid { grid-template-columns: 1fr; }
-    .tl { grid-template-columns: 1fr 1fr; }
     .footer-top { grid-template-columns: 1fr 1fr; }
   }
   @media (max-width: 600px) {
     .o-hero::before { display: none; }
     .persona-btn { padding: 11px 18px; font-size: 14px; }
-    .tl { grid-template-columns: 1fr; }
     .stack-top, .stack-total, .stack-pay { padding-left: 18px; padding-right: 18px; }
     .stack-list, .stack-cols { padding-left: 18px; padding-right: 18px; }
     .stack-list li { gap: 12px; }
@@ -246,14 +241,6 @@
   .g-ring { position: absolute; inset: -2px; border-radius: 50%; border: 2px solid rgba(149,213,178,0.6); animation: pvPulse 2.6s ease-out infinite; }
   .g-ring--2 { animation-delay: 1.3s; }
 
-  /* timeline: a track that fills as it comes on screen */
-  .tl { padding-top: 34px; }
-  .tl::before, .tl::after { content: ''; position: absolute; top: 8px; left: 11%; right: 11%; height: 4px; border-radius: 4px; background: var(--slate-200); }
-  .tl::after { background: linear-gradient(90deg, var(--green-accent), var(--green-mid)); right: auto; width: 0; transition: width 1.6s cubic-bezier(0.22,1,0.36,1) .2s; }
-  .tl:has(li.is-visible)::after { width: 78%; }
-  .tl li::before { content: ''; position: absolute; top: -34px; left: 50%; width: 20px; height: 20px; margin-left: -10px; border-radius: 50%; background: var(--white); border: 4px solid var(--green-mid); box-shadow: 0 0 0 6px rgba(64,145,108,0.15); z-index: 1; }
-  .tl li { text-align: center; transition: transform .3s; }
-  .tl li:hover { transform: translateY(-4px); }
 
   /* final CTA: the dark closer */
   .o-final { background: radial-gradient(80% 120% at 50% 0%, #2d6a4f 0%, var(--green-deep) 55%, #0f2a1f 100%); }
@@ -276,8 +263,6 @@
     .pv-visual { width: 100%; flex: none; }
     .pv-visual::before { inset: -16px 0; }
     .pv-card { padding: 18px 16px; }
-    .tl::before, .tl::after, .tl li::before { display: none; }
-    .tl { padding-top: 0; }
   }
   @media (max-width: 600px) {
     .pv-sub { font-size: 0.55em; }
@@ -286,7 +271,7 @@
   }
   @media (prefers-reduced-motion: reduce) {
     .pv-btn, .pv-ring, .g-ring { animation: none !important; }
-    .pv-bar i, .pv-legend li, .pv-cover, .pv-seal, .stack-list li, .tl::after { transition: none !important; }
+    .pv-bar i, .pv-legend li, .pv-cover, .pv-seal, .stack-list li { transition: none !important; }
   }
 </style>
 <noscript><style>.reveal{opacity:1;transform:none;transition:none;}</style></noscript>
@@ -482,29 +467,16 @@
   </div>
 </section>
 
-<!-- 5 · TIMELINE -->
-<section class="o-time">
-  <div class="o-head reveal">
-    <div class="section-label">How fast it works</div>
-    <h2>Running in 60 days. Paying off in the first month.</h2>
-  </div>
-  <ol class="tl show-retailer">
-    <li class="reveal"><p class="tl-day">Day 1</p><b>Free money review</b><span>We pull your last 90 days from Metrc and show you every dollar vendors owe you.</span></li>
-    <li class="reveal"><p class="tl-day">Day 14</p><b>First credits found</b><span>Credit memos built and on their way to your vendors.</span></li>
-    <li class="reveal"><p class="tl-day">Day 30</p><b>We're paying your vendors</b><span>Invoices checked against Metrc and paid on your terms. You approve.</span></li>
-    <li class="reveal"><p class="tl-day">Day 60</p><b>The whole AP desk is ours</b><span>Your team is down to approvals. QuickBooks is current.</span></li>
-  </ol>
-  <ol class="tl show-vendor">
-    <li class="reveal"><p class="tl-day">Day 1</p><b>Free AR review</b><span>Send us your aging. We show you the cash on the table and which stores to chase first.</span></li>
-    <li class="reveal"><p class="tl-day">Week 1</p><b>Every open invoice goes back out</b><span>Each one with a one-click Pay Now link, in your name.</span></li>
-    <li class="reveal"><p class="tl-day">Day 30</p><b>Follow-up on autopilot</b><span>Past-due stores worked on a steady schedule. Your reps get their week back.</span></li>
-    <li class="reveal"><p class="tl-day">Day 90</p><b>Collected more than we cost</b><span>Guaranteed, or we refund the difference.</span></li>
-  </ol>
-  <div class="ease reveal">
-    <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>No software to learn</span>
-    <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>No new hire</span>
-    <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Your bookkeeper stays</span>
-    <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Certified Metrc third-party vendor</span>
+<!-- 5 · FREE TRIAL -->
+<section class="o-trial show-vendor">
+  <div class="trial-card reveal">
+    <div class="section-label">Free trial</div>
+    <h2>Try it free for 30 days.</h2>
+    <div class="ease">
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>No card required</span>
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>No contracts</span>
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Cancel any time</span>
+    </div>
   </div>
 </section>
 
