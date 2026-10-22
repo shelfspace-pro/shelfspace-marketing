@@ -5,8 +5,7 @@
 # Mirrors that must match it:
 #   - accounts-payable.html  (ShelfPay stack, copied from pricing)
 #   - accounts-receivable.html (ShelfCollect stack, copied from pricing)
-#   - index.html  static defaults of #h-val-pay / #h-val-collect
-#   - index.html  slider formulas evaluated at the $500k default
+#   (the homepage value slider was removed 10/22/2026 — the homepage carries no offer totals)
 # Drift here means a prospect sees two different numbers for the same offer.
 #
 # Usage: bash marketing/scripts/check-offer-numbers.sh   (exit 1 on any mismatch)
@@ -33,25 +32,9 @@ if (ap.join() !== pay) fail(`accounts-payable.html total ${ap.join()} ≠ pricin
 const ar = totals(read('accounts-receivable.html'), 'accounts-receivable.html');
 if (ar.join() !== col) fail(`accounts-receivable.html total ${ar.join()} ≠ pricing brand ${col}`);
 
-const home = read('index.html');
-const dflt = id => (home.match(new RegExp(`id="${id}">\\$([\\d,]+)<`)) || [])[1];
-if (dflt('h-val-pay') !== pay) fail(`index.html #h-val-pay default ${dflt('h-val-pay')} ≠ ${pay}`);
-if (dflt('h-val-collect') !== col) fail(`index.html #h-val-collect default ${dflt('h-val-collect')} ≠ ${col}`);
-
-// Evaluate the homepage slider formulas at its default value.
-const expr = name => (home.match(new RegExp(`var ${name} = ([^;]+);`)) || [])[1];
-const def = (home.match(/id="h-sales-slider"[^>]*value="(\d+)"/) || [])[1];
-if (!expr('pay') || !expr('col') || !expr('cash') || !def) fail('index.html: slider formulas or default value not found');
-else {
-  const S = Number(def);
-  const cash = Function('S', `return ${expr('cash')}`)(S);
-  const usd = n => (Math.round(n / 100) * 100).toLocaleString('en-US');
-  const p = usd(Function('S', `return ${expr('pay')}`)(S));
-  const c = usd(Function('S', 'cash', `return ${expr('col')}`)(S, cash));
-  if (p !== pay) fail(`index.html slider dispensary at ${S}: ${p} ≠ ${pay}`);
-  if (c !== col) fail(`index.html slider brand at ${S}: ${c} ≠ ${col}`);
-}
+// The homepage must not carry a stale copy of the totals (its slider was removed 10/22/2026).
+if (/Total value, first year|id="h-val-(pay|collect)"/.test(read('index.html'))) fail('index.html carries offer totals again — add them back to this check');
 
 if (bad) { console.log(`\n${bad} offer-number mismatch(es). pricing.html is canonical — update the mirrors.`); process.exit(1); }
-console.log(`✅ Offer numbers agree: dispensary $${pay}, brand $${col} (pricing, ShelfPay, ShelfCollect, homepage + slider).`);
+console.log(`✅ Offer numbers agree: dispensary $${pay}, brand $${col} (pricing, ShelfPay, ShelfCollect).`);
 JS
