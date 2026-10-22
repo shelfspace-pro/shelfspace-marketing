@@ -249,6 +249,10 @@
 .proof-cta-card > p { font-size: 15px; color: var(--slate-600); line-height: 1.6; margin-bottom: 24px; }
 .proof-cta-founder { display: flex; align-items: center; gap: 12px; justify-content: center; margin-top: 24px; font-size: 14px; color: var(--slate-600); }
 .proof-cta-risk { font-size: 13px; color: var(--slate-600); margin-top: 16px; }
+/* Bottom CTA (Chris, 10/22/2026): one huge button, no card. */
+.proof-cta .proof-cta-big { display: inline-flex; align-items: center; gap: 18px; padding: 34px 64px; border-radius: 28px; font-size: clamp(26px, 3.4vw, 44px); font-weight: 800; letter-spacing: -1px; line-height: 1.1; box-shadow: 0 24px 60px -18px rgba(27,67,50,0.55); }
+.proof-cta .proof-cta-big svg { width: 0.9em; height: 0.9em; flex: none; }
+.proof-cta .proof-cta-big:hover { transform: translateY(-4px); box-shadow: 0 32px 70px -18px rgba(27,67,50,0.6); }
 
 /* FAQ */
 .faq-section { background: var(--slate-50); padding: 80px 48px; }
@@ -491,6 +495,7 @@
   .proof-cta { padding: 24px 24px 60px; }
   .proof-cta-stats { grid-template-columns: 1fr; gap: 20px; }
   .proof-cta-card { padding: 32px 24px; }
+  .proof-cta .proof-cta-big { padding: 24px 26px; gap: 10px; border-radius: 24px; font-size: 22px; letter-spacing: -0.5px; white-space: nowrap; }
   .faq-section { padding: 60px 24px; }
   .footer-top { grid-template-columns: 1fr 1fr; }
   .pos-ticker-logo { height: 72px; padding: 0 32px; }
@@ -747,10 +752,18 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What does this cost?",
+      "name": "What do you actually do?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Your price is set by your monthly sales, never by how many invoices or payments you run. We quote it after your free review, so you see the money you're missing before you see a price. See https://shelfspace.pro/pricing."
+        "text": "We run the money side of your business. For brands, we follow up on every unpaid invoice, in your name, until the store pays. For dispensaries, we check every invoice, pay your vendors, and recover the credits you're owed. You approve. We do the work."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What does it cost?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It depends on the size of your business, never on how many invoices or payments we handle. You get a quote after a free review, so you see what you're missing before you see a price. See https://shelfspace.pro/pricing."
       }
     },
     {
@@ -758,31 +771,31 @@
       "name": "What if it doesn't pay for itself?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Then we refund the difference. If the credits we recover for a dispensary, or the past-due payments we collect for a brand, come to less than you paid us in the first 90 days, we pay back the gap."
+        "text": "We refund the difference. If what we collect or recover for you in the first 90 days is less than you paid us, we pay back the gap."
       }
     },
     {
       "@type": "Question",
-      "name": "How fast will I see results?",
+      "name": "Do I have to switch systems?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Day 1 we review your last 90 days for free. First credits are found within 14 days, we're paying your vendors within 30, and the whole AP desk is running within 60."
+        "text": "No. We work alongside QuickBooks and the tools you already use. Nothing to rip out, nothing new for your team to learn."
       }
     },
     {
       "@type": "Question",
-      "name": "Do you replace my buyer or bookkeeper?",
+      "name": "Does this replace my team?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "No. Your buyer keeps product and vendor relationships. Your bookkeeper keeps close, payroll, tax, and 280E. We take the invoice and payment work off their plates and keep QuickBooks current, so their month-end gets faster."
+        "text": "No. Your team keeps the relationships and the decisions. We take the follow-ups, data entry, and payments off their plate."
       }
     },
     {
       "@type": "Question",
-      "name": "Do you only work in Massachusetts?",
+      "name": "How do I get started?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "No. We work in every state with Metrc. Massachusetts was first, with 50+ vendors already paid through ShelfSpace there."
+        "text": "Schedule a call. We'll look at your numbers with you and show you what we'd fix first."
       }
     }
   ]
@@ -1555,13 +1568,7 @@ a.cs-stat:hover .cs-stat-go span { transform: translateX(4px); }
 
 <!-- SECTION 6: PROOF + CTA -->
 <section class="proof-cta">
-  <div class="proof-cta-card reveal">
-    <h3>Find the money you're missing. Free.</h3>
-    <p>Tell us about your business. We'll show you exactly how much is slipping through, then run the rest for you, guaranteed to pay for itself.</p>
-    <p style="margin-top:8px;"><a href="/ShelfSpace_Sample_Evaluation.pdf" target="_blank" rel="noopener" style="font-size:14px;color:var(--green-dark);font-weight:600;text-decoration:none;">See a sample evaluation <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="vertical-align:middle;"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a></p>
-    <span class="cta-stack"><a href="/contact?cta=home-cta" class="btn-primary">Schedule a call <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a><span class="cta-micro">30 minutes with Chris. See how it would run for your business.</span></span>
-    <p class="proof-cta-risk">Free. No commitment. It pays for itself, or we refund the difference.</p>
-  </div>
+  <a href="/contact?cta=home-cta" class="btn-primary proof-cta-big reveal">Upgrade your business <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
 </section>
 
 <!-- SECTION 7: FAQ -->
@@ -1572,24 +1579,28 @@ a.cs-stat:hover .cs-stat-go span { transform: translateX(4px); }
   </div>
   <div class="faq-list">
     <details>
-      <summary>What does this cost?</summary>
-      <p>Your price is set by your monthly sales, never by how many invoices or payments you run. We quote it after your free review, so you see the money you're missing before you see a price. <a href="/pricing" style="color:var(--green-dark);font-weight:600;text-decoration:none;">See how the value adds up</a>.</p>
+      <summary>What do you actually do?</summary>
+      <p>We run the money side of your business. For brands, we follow up on every unpaid invoice, in your name, until the store pays. For dispensaries, we check every invoice, pay your vendors, and recover the credits you're owed. You approve. We do the work.</p>
+    </details>
+    <details>
+      <summary>What does it cost?</summary>
+      <p>It depends on the size of your business, never on how many invoices or payments we handle. You get a quote after a free review, so you see what you're missing before you see a price. <a href="/pricing" style="color:var(--green-dark);font-weight:600;text-decoration:none;">See how the value adds up</a>.</p>
     </details>
     <details>
       <summary>What if it doesn't pay for itself?</summary>
-      <p>Then we refund the difference. If the credits we recover for a dispensary, or the past-due payments we collect for a brand, come to less than you paid us in the first 90 days, we pay back the gap.</p>
+      <p>We refund the difference. If what we collect or recover for you in the first 90 days is less than you paid us, we pay back the gap.</p>
     </details>
     <details>
-      <summary>How fast will I see results?</summary>
-      <p>Day 1 we review your last 90 days for free. First credits are found within 14 days, we're paying your vendors within 30, and the whole AP desk is running within 60.</p>
+      <summary>Do I have to switch systems?</summary>
+      <p>No. We work alongside QuickBooks and the tools you already use. Nothing to rip out, nothing new for your team to learn.</p>
     </details>
     <details>
-      <summary>Do you replace my buyer or bookkeeper?</summary>
-      <p>No. Your buyer keeps product and vendor relationships. Your bookkeeper keeps close, payroll, tax, and 280E. We take the invoice and payment work off their plates and keep QuickBooks current, so their month-end gets faster.</p>
+      <summary>Does this replace my team?</summary>
+      <p>No. Your team keeps the relationships and the decisions. We take the follow-ups, data entry, and payments off their plate.</p>
     </details>
     <details>
-      <summary>Do you only work in Massachusetts?</summary>
-      <p>No. We work in every state with Metrc. Massachusetts was first, with 50+ vendors already paid through ShelfSpace there.</p>
+      <summary>How do I get started?</summary>
+      <p>Schedule a call. We'll look at your numbers with you and show you what we'd fix first.</p>
     </details>
   </div>
 </section>

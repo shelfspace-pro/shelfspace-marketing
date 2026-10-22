@@ -15,8 +15,9 @@ export const LABEL = "Schedule a call";
 
 // Named exceptions (Chris, 10/22/2026): the homepage hero buttons read "Get Paid" (brand side)
 // and "Get Profitable" (dispensary side, home-hero-2) with no microcopy line under them. Keyed by cta id; the link stays /contact?cta=home-hero.
-export const LABEL_OVERRIDES = new Map([["home-hero", "Get Paid"], ["home-hero-2", "Get Profitable"]]);
-export const NO_MICRO = new Set(["home-hero", "home-hero-2"]);
+// Same day: the homepage bottom CTA (home-cta) is one huge "Upgrade your business" button, no card, no microcopy.
+export const LABEL_OVERRIDES = new Map([["home-hero", "Get Paid"], ["home-hero-2", "Get Profitable"], ["home-cta", "Upgrade your business"]]);
+export const NO_MICRO = new Set(["home-hero", "home-hero-2", "home-cta"]);
 export const labelFor = (id) => LABEL_OVERRIDES.get(id) || LABEL;
 
 export const MICRO = {
