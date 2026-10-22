@@ -161,6 +161,13 @@
   toggle.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>';
   toggle.appendChild(el('span', '', 'Chat with Chelsea'));
   document.body.appendChild(toggle);
+  // Phones hide the launcher until the visitor scrolls past the first screen (styles.css PHONE LAYER),
+  // so it never sits on a hero's text or button.
+  (function () {
+    function pastHero() { document.body.classList.toggle('ss-past-hero', window.scrollY > window.innerHeight * 0.9); }
+    pastHero();
+    window.addEventListener('scroll', pastHero, { passive: true });
+  })();
 
   var win = el('div', 'cw-window');
   win.setAttribute('role', 'dialog');

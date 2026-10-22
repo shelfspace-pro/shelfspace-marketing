@@ -193,6 +193,11 @@ async function scenario(name, { offers = { booking: true, callNow: true }, fail 
 }
 {
   const s = await scenario('phone width', { width: 390 });
+  // phones hide the launcher on the first screen so it never covers a hero; it must stay hidden there and appear once scrolled
+  ok(await s.page.evaluate(() => getComputedStyle(document.querySelector('.cw-toggle')).pointerEvents === 'none'), 'phone: the launcher waits off the first screen');
+  await s.page.evaluate(() => { document.body.style.minHeight = '3000px'; window.scrollTo(0, window.innerHeight * 2); });
+  await s.page.waitForFunction(() => document.body.classList.contains('ss-past-hero'));
+  await s.page.waitForTimeout(400);
   await s.page.click('.cw-toggle');
   await s.page.waitForSelector('.cw-msg.ai');
   await s.page.click('.cw-chip:has-text("Schedule a call")');

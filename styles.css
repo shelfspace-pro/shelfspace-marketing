@@ -1383,3 +1383,77 @@ footer::before { content: ''; position: absolute; bottom: -100px; right: -100px;
   .brand-ticker--tight .brand-ticker-track { animation-duration: 26s; }
 }
 
+
+/* ===== PHONE LAYER (10/22/2026) — sitewide phone rules, same scale as the homepage:
+   20px side gutter · 64px section padding · 32px between groups · 16-24px inside a group ·
+   44px tap targets · solid header · icon-only chat button · two-column footer.
+   Section classes below are the nav pages' own section wrappers (audited at iPhone 14). ===== */
+@media (max-width: 640px) {
+  /* header: solid (the translucent blur showed page text through it) */
+  html body nav, html body nav.scrolled { background: var(--white); -webkit-backdrop-filter: none; backdrop-filter: none; }
+  html body nav { padding: 0 20px; }
+
+  /* headings never leave one word alone on the last line */
+  html body :is(h1, h2, h3) { text-wrap: balance; }
+  html body p { text-wrap: pretty; }
+
+  /* section rhythm */
+  html body :is(.svc-section, .cta-section, .calc-section, .faq-section, .split-section, .shelfiq-feature, .stat-band,
+    .tier-compare, .boost-section, .dfy-flow, .getpaid-home, .vp-band, .o-stack, .pg-guar, .sp-included,
+    .ab-stats, .ab-journey, .ab-shelf, .ab-flow-sec, .ab-svc, .ab-letter-sec, .ab-mission, .ab-final,
+    .ac-video-sec, .ac-vs-sec, .ac-how, .ac-can, .ac-dark, .ac-polite, .ac-final,
+    .pp-sec, .pp-final, .pt-sec, .pt-final, .fn-sec, .fn-final, .ag-sec, .ag-dark, .ag-final, .rp-sec,
+    .cg-how, .cg-sec, .cg-cash, .cg-run, .cg-suite, .cg-final, .cr-flow,
+    .sv-how, .sv-record, .sv-both, .sv-flagsec, .sv-final,
+    .ft-svc, .ft-flow-sec, .ft-portals, .ft-int, .ft-sec, .ft-final, .dx-sec, .ways, .flow,
+    .o-pain, .o-guarantee, .o-trial, .o-final) { padding: 64px 20px; }
+  html body section[style*="padding:96px 48px"], html body section[style*="padding:80px 48px"] { padding: 64px 20px !important; }
+  html body section[style*="padding:0 16px;margin:72px auto"] { padding: 0 20px !important; margin: 64px auto !important; }
+
+  /* calculators: two-up assumption fields must shrink to the column, not push the page wider */
+  html body .roi-assume-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  html body .roi-assume-grid .roi-field, html body .roi-assume-grid .roi-input-wrap { min-width: 0; }
+
+  /* "How X works →" link rows: 44px hit area without moving the underline */
+  html body :is(.svc-link, .cl-calls-links a, .stat-band-sub a, .ac-sub, .pt-more a, .vp-band-foot a, .cg-links a, .cg-more,
+    .cr-tour-pdf-link, .ft-also a, .spec-v a, .ig-link) { position: relative; }
+  html body :is(.svc-link, .cl-calls-links a, .stat-band-sub a, .ac-sub, .pt-more a, .vp-band-foot a, .cg-links a, .cg-more,
+    .cr-tour-pdf-link, .ft-also a, .spec-v a, .ig-link)::after { content: ''; position: absolute; inset: -12px -4px; }
+  /* segmented toggles and tabs: 44px tall */
+  html body :is(.persona-btn, .aud-toggle button, .ig-switch button, .dx-chips button, .code-tab, .fn-tabs-demo button) { min-height: 44px; }
+
+  /* footer: link groups in two columns instead of one long column */
+  html body footer { padding: 64px 20px 32px; }
+  html body .footer-top { grid-template-columns: 1fr 1fr; gap: 32px 20px; }
+  html body .footer-brand { grid-column: 1 / -1; }
+  html body .footer-col ul { gap: 4px; }
+  html body .footer-col a { display: inline-flex; align-items: center; min-height: 40px; font-size: 15px; }
+  html body .footer-bottom-links a { display: inline-flex; align-items: center; min-height: 44px; }
+
+  /* chat launcher: icon-only so it never covers the page */
+  body .cw-toggle { width: 56px; height: 56px; padding: 0; justify-content: center; bottom: 16px; right: 16px; }
+  body .cw-toggle > span { display: none; }
+  body:not(.ss-past-hero) .cw-toggle { opacity: 0; pointer-events: none; transform: translateY(12px); }
+
+  /* page heroes: badge + label + headline + lede are one group; the button is its own group 32px below; the demo 40px below that */
+  html body .page-hero.page-hero { padding-left: 20px; padding-right: 20px; }
+  html body .page-hero.page-hero .aud-badge { margin-bottom: 12px; }
+  html body .page-hero.page-hero .section-label { margin-bottom: 16px; }
+  html body .page-hero.page-hero .hero-h1 { margin-top: 0; margin-bottom: 16px; }
+  html body .page-hero.page-hero .hero-lede { margin-top: 0; margin-bottom: 32px; }
+  html body .page-hero.page-hero .hero-lede + .hero-lede { margin-top: -16px; }
+  html body .page-hero.page-hero .lp-guar { margin-top: 16px; }
+  html body .page-hero.page-hero :is(.hero-trust, .ft-trust) { margin-top: 24px; }
+  html body .page-hero.page-hero .lp-split { gap: 40px; }
+
+  /* page heroes: one full-width primary button in thumb reach, like the homepage */
+  html body :is(.page-hero, .ig-hero) .cta-stack { display: flex; flex-direction: column; align-items: stretch; width: 100%; max-width: 340px; margin: 0 auto; }
+  html body :is(.page-hero, .ig-hero) .cta-stack .btn-primary { width: 100%; min-height: 54px; justify-content: center; }
+  /* heroes with a button row: stack full-width, primary first, secondary (if any) as a quiet link or outline under it */
+  html body :is(.ai-hero-actions, .pay-hero .hero-actions, .ig-actions) { display: flex; flex-direction: column; align-items: stretch; gap: 12px; width: 100%; max-width: 340px; margin-left: auto; margin-right: auto; text-align: center; }
+  html body :is(.ai-hero-actions, .pay-hero .hero-actions, .ig-actions) :is(.btn-primary, .btn-secondary, .ig-btn) { width: 100%; min-height: 54px; justify-content: center; margin: 0; }
+  html body .ig-actions .ig-link { align-self: center; }
+  html body .ai-hero-inner { text-align: center; }
+  html body .ai-hero-inner :is(h1, .ai-hero-lede) { margin-left: auto; margin-right: auto; }
+  html body .ai-hero-works { justify-content: center; }
+}
