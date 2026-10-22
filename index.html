@@ -836,21 +836,21 @@
 .cs-v2 .case-studies-header .case-studies-lead { color: #fff; font-weight: 700; font-size: clamp(24px, 3vw, 36px); line-height: 1.2; letter-spacing: -0.8px; max-width: 760px; text-wrap: balance; }
 .cs-v2 .case-studies-header .case-studies-lead strong { color: var(--green-accent); }
 .cs-v2 .case-studies-header p { color: rgba(255,255,255,0.45); font-size: 13px; }
-.cs-stats { max-width: 1080px; margin: -8px auto 44px; padding: 0 48px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
-.cs-stat { position: relative; border-radius: 18px; padding: 26px 24px 22px; background: rgba(255,255,255,0.06); border: 1px solid rgba(149,213,178,0.18); overflow: hidden; }
+.cs-stats { max-width: 1280px; margin: -8px auto 56px; padding: 0 48px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.cs-stat { position: relative; border-radius: 24px; padding: 44px 36px 38px; min-height: 280px; background: rgba(255,255,255,0.06); border: 1px solid rgba(149,213,178,0.18); overflow: hidden; }
 .cs-stat::before { content: ''; position: absolute; left: 0; right: 0; top: 0; height: 3px; background: var(--c, #95d5b2); }
-.cs-stat::after { content: ''; position: absolute; right: -60px; top: -60px; width: 160px; height: 160px; border-radius: 50%; background: radial-gradient(circle, var(--c, #95d5b2), transparent 70%); opacity: 0.22; animation: csGlow 4s ease-in-out infinite; }
+.cs-stat::after { content: ''; position: absolute; right: -80px; top: -80px; width: 240px; height: 240px; border-radius: 50%; background: radial-gradient(circle, var(--c, #95d5b2), transparent 70%); opacity: 0.22; animation: csGlow 4s ease-in-out infinite; }
 .cs-stat--credit { --c: #f6c453; } .cs-stat--credit::after { animation-delay: -1.3s; }
 .cs-stat--ops { --c: #c4b5fd; } .cs-stat--ops::after { animation-delay: -2.6s; }
 .cs-stat--brand { --c: #5eead4; }
 @keyframes csGlow { 0%,100% { transform: scale(0.85); opacity: 0.15; } 50% { transform: scale(1.15); opacity: 0.32; } }
-.cs-stat-n { font-family: var(--font-mono); font-size: clamp(34px, 3.6vw, 46px); font-weight: 700; color: #fff; letter-spacing: -1.5px; line-height: 1; font-variant-numeric: tabular-nums; }
+.cs-stat-n { font-family: var(--font-mono); font-size: clamp(44px, 4vw, 64px); white-space: nowrap; font-weight: 700; color: #fff; letter-spacing: -1.5px; line-height: 1; font-variant-numeric: tabular-nums; }
 .cs-stat-n small { font-size: 0.45em; color: rgba(255,255,255,0.6); letter-spacing: 0; }
-.cs-stat-l { margin-top: 10px; font-size: 14px; line-height: 1.45; color: rgba(255,255,255,0.68); }
-a.cs-stat { display: block; text-decoration: none; color: inherit; transition: transform .3s cubic-bezier(0.22,1,0.36,1), border-color .3s, background .3s, box-shadow .3s; }
+.cs-stat-l { margin-top: 18px; font-size: 18px; line-height: 1.45; color: rgba(255,255,255,0.68); }
+a.cs-stat { display: flex; flex-direction: column; text-decoration: none; color: inherit; transition: transform .3s cubic-bezier(0.22,1,0.36,1), border-color .3s, background .3s, box-shadow .3s; }
 a.cs-stat:hover { transform: translateY(-4px); background: rgba(255,255,255,0.09); border-color: rgba(149,213,178,0.4); box-shadow: 0 18px 40px -16px rgba(27,67,50,0.6); }
 a.cs-stat:focus-visible { outline: 2px solid var(--green-accent); outline-offset: 3px; }
-.cs-stat-go { margin-top: 14px; font-size: 13px; font-weight: 600; color: var(--c, #95d5b2); }
+.cs-stat-go { margin-top: auto; padding-top: 22px; font-size: 16px; font-weight: 600; color: var(--c, #95d5b2); }
 .cs-stat-go span { display: inline-block; transition: transform .3s; }
 a.cs-stat:hover .cs-stat-go span { transform: translateX(4px); }
 .cs-v2 .case-filter { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.16); color: rgba(255,255,255,0.75); }
@@ -931,7 +931,9 @@ a.cs-stat:hover .cs-stat-go span { transform: translateX(4px); }
 @media (max-width: 900px) {
   .cs-v2 { padding: 72px 0 48px; }
   .cs-stats { grid-template-columns: 1fr; padding: 0 20px; gap: 12px; margin-bottom: 32px; }
-  .cs-stat { padding: 20px 20px 18px; }
+  .cs-stat { padding: 30px 26px 26px; min-height: 0; }
+  .cs-stat-n { font-size: 56px; }
+  .cs-stat-l { font-size: 16px; }
   .vf-band { padding: 72px 0 56px; }
   .vf-inner { padding: 0 20px; }
   .vf-grid { grid-template-columns: 1fr; }
@@ -1045,7 +1047,7 @@ a.cs-stat:hover .cs-stat-go span { transform: translateX(4px); }
 .tq-arrow--prev:hover { transform: translateX(-3px); }
 .tq-arrow--next:hover { transform: translateX(3px); }
 .tq-arrow:focus-visible { outline: 2px solid var(--green-mid); outline-offset: 3px; }
-.tq-tabs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 20px; }
+.tq-tabs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 20px; }
 .tq-tab { appearance: none; -webkit-appearance: none; font: inherit; text-transform: none; position: relative; height: 92px; display: flex; align-items: center; justify-content: center; padding: 0 24px; background: var(--white); border: 1px solid var(--green-light); border-radius: 20px; cursor: pointer; overflow: hidden; box-shadow: 0 1px 2px rgba(27,67,50,0.05); transition: border-color .3s, box-shadow .3s, transform .3s; }
 .tq-tab:hover { transform: translateY(-2px); box-shadow: 0 12px 28px -12px rgba(27,67,50,0.25); }
 .tq-tab:focus-visible { outline: 2px solid var(--green-mid); outline-offset: 3px; }
@@ -1053,6 +1055,9 @@ a.cs-stat:hover .cs-stat-go span { transform: translateX(4px); }
 .tq-tab img.tq-ck { height: 50px; }
 .tq-tab img.tq-mc { height: 56px; }
 .tq-tab img.tq-og { height: 44px; }
+.tq-wm { font-weight: 800; font-size: 22px; letter-spacing: -0.6px; color: var(--green-deep); white-space: nowrap; filter: grayscale(1); opacity: .45; transition: filter .35s, opacity .35s; }
+.tq-tab:hover .tq-wm { opacity: .75; }
+.tq-tab[aria-selected="true"] .tq-wm { filter: none; opacity: 1; }
 .tq-tab:hover img { opacity: .75; }
 .tq-tab[aria-selected="true"] { border-color: var(--green-accent); box-shadow: 0 16px 34px -14px rgba(27,67,50,0.3); }
 .tq-tab[aria-selected="true"] img { filter: none; opacity: 1; }
@@ -1081,9 +1086,10 @@ a.cs-stat:hover .cs-stat-go span { transform: translateX(4px); }
   .tq-tabs { gap: 8px; margin-top: 12px; }
   .tq-tab { height: 64px; padding: 0 10px; border-radius: 16px; }
   .tq-tab img { height: 28px; max-width: 88%; }
-  .tq-tab img.tq-ck { height: 32px; }
-  .tq-tab img.tq-mc { height: 36px; }
-  .tq-tab img.tq-og { height: 28px; }
+  .tq-tab img.tq-og { height: 24px; }
+  .tq-tab img.tq-mc { height: 30px; }
+  .tq-tab img.tq-ck { height: 26px; }
+  .tq-wm { font-size: 13px; letter-spacing: -0.3px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .tq-panel, .tq-q mark, .tq-tab { transition: none; }
@@ -1108,12 +1114,17 @@ a.cs-stat:hover .cs-stat-go span { transform: translateX(4px); }
         <blockquote class="tq-q tq-q--l">&ldquo;ShelfSpace has allowed me to <mark>run our collections more efficiently</mark>, freeing up much-needed time to go out and focus on sales.&rdquo;</blockquote>
         <figcaption class="tq-who"><b>Avery Leveston</b><span>CEO, Cowboy Kush</span></figcaption>
       </figure>
+      <figure class="tq-panel" id="tq-p3" role="tabpanel" aria-labelledby="tq-t3">
+        <blockquote class="tq-q tq-q--l">&ldquo;It&rsquo;s been a <mark>total game-changer</mark> for the Michigan cannabis industry!&rdquo;</blockquote>
+        <figcaption class="tq-who"><b>Jessa P.</b><span>CEO, Jesstures LLC</span></figcaption>
+      </figure>
     </div>
     </div>
     <div class="tq-tabs" role="tablist" aria-label="Customer quotes">
       <button class="tq-tab" type="button" role="tab" id="tq-t0" aria-controls="tq-p0" aria-selected="true"><img class="tq-mc" src="/logos/customers/meds-cafe.png" alt="Meds Cafe" width="480" height="160" loading="lazy"><span class="tq-bar"><i></i></span></button>
       <button class="tq-tab" type="button" role="tab" id="tq-t1" aria-controls="tq-p1" aria-selected="false" tabindex="-1"><img class="tq-og" src="/logos/customers/one-garden.png" alt="One Garden" width="480" height="144" loading="lazy"><span class="tq-bar"><i></i></span></button>
       <button class="tq-tab" type="button" role="tab" id="tq-t2" aria-controls="tq-p2" aria-selected="false" tabindex="-1"><img class="tq-ck" src="/logos/customers/cowboy-kush-mark.svg" alt="Cowboy Kush" width="190" height="65" loading="lazy"><span class="tq-bar"><i></i></span></button>
+      <button class="tq-tab" type="button" role="tab" id="tq-t3" aria-controls="tq-p3" aria-selected="false" tabindex="-1"><span class="tq-wm" role="img" aria-label="Jesstures">Jesstures</span><span class="tq-bar"><i></i></span></button>
     </div>
   </div>
 </section>
@@ -1263,9 +1274,9 @@ a.cs-stat:hover .cs-stat-go span { transform: translateX(4px); }
       </div>
     </div>
     <div class="tb-card tb-code reveal reveal-delay-2">
-      <h3>Not &ldquo;vibe-coded&rdquo; this weekend.</h3>
-      <div class="tb-num" data-code-count="4008233">4,008,233</div>
-      <div class="tb-lbl"><i></i>lines of code and counting</div>
+      <h3>Brands paid using ShelfSpace</h3>
+      <div class="tb-num">$<span data-paid-count="4791318">4,791,318</span></div>
+      <div class="tb-lbl"><i></i>live &middot; paid through ShelfSpace</div>
     </div>
   </div>
 </section>
@@ -1930,23 +1941,44 @@ a.cs-stat:hover .cs-stat-go span { transform: translateX(4px); }
 })();
 </script>
 <script>
-/* Code counter: counts up to the real line count when it scrolls into view. */
+/* Brands-paid counter (10/22/2026): the real total paid to brands through ShelfSpace, from the platform
+   (GET https://ourshelf.space/api/public/brands-paid, CDN-cached 5 min). Counts up when it scrolls into view,
+   then re-checks every minute while visible and ticks up as money goes out. The baked number in the HTML is the
+   fallback when the endpoint can't be reached. */
 (function () {
-  var el = document.querySelector('[data-code-count]');
-  if (!el || !('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  var target = +el.getAttribute('data-code-count');
-  var io = new IntersectionObserver(function (es) {
-    if (!es[0].isIntersecting) return;
-    io.disconnect();
+  var el = document.querySelector('[data-paid-count]');
+  if (!el) return;
+  var shown = +el.getAttribute('data-paid-count');
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var visible = false, timer = null;
+  function fmt(n) { return Math.round(n).toLocaleString('en-US'); }
+  function animate(from, to, ms) {
+    if (reduced || to <= from) { shown = to; el.textContent = fmt(to); return; }
     var t0 = null;
     (function step(ts) {
       if (!t0) t0 = ts;
-      var p = Math.min((ts - t0) / 1800, 1), e = 1 - Math.pow(1 - p, 4);
-      el.textContent = Math.round(target * e).toLocaleString('en-US');
-      if (p < 1) requestAnimationFrame(step);
+      var p = Math.min((ts - t0) / ms, 1), e = 1 - Math.pow(1 - p, 4);
+      el.textContent = fmt(from + (to - from) * e);
+      if (p < 1) requestAnimationFrame(step); else shown = to;
     })(performance.now());
-  }, { threshold: 0.4 });
-  io.observe(el);
+  }
+  function load() {
+    return fetch('https://ourshelf.space/api/public/brands-paid', { mode: 'cors' })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (j) { return j && typeof j.total_cents === 'number' ? Math.floor(j.total_cents / 100) : null; })
+      .catch(function () { return null; });
+  }
+  var first = load();
+  if (!('IntersectionObserver' in window)) { first.then(function (v) { if (v) animate(shown, v, 0); }); return; }
+  new IntersectionObserver(function (es) {
+    visible = es[0].isIntersecting;
+    if (visible && first) {
+      var p = first; first = null;
+      p.then(function (v) { animate(reduced ? shown : Math.round(shown * 0.8), v || shown, 1800); });
+    }
+    if (visible && !timer) timer = setInterval(function () { load().then(function (v) { if (v && v > shown) animate(shown, v, 1200); }); }, 60000);
+    if (!visible && timer) { clearInterval(timer); timer = null; }
+  }, { threshold: 0.4 }).observe(el);
 })();
 </script>
 <script src="/nav.js" defer></script>
