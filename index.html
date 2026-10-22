@@ -447,12 +447,6 @@
   .svc-chat-msg { font-size: 15.5px; padding: 14px 18px; border-radius: 16px; }
 }
 
-/* ── Two-door audience split — stack to a single column on mobile ── */
-@media (max-width: 700px) {
-  .audience-split { padding: 48px 20px 20px !important; }
-  .audience-grid { grid-template-columns: 1fr !important; gap: 16px !important; }
-  .audience-grid > a { padding: 26px 24px !important; }
-}
 
 /* ── Profit map — system at-a-glance overview (dark) ── */
 .profit-map { background: var(--green-deep); color: var(--white); padding: 120px 48px; position: relative; overflow: hidden; }
@@ -614,59 +608,6 @@
 .hero-static { font-size: clamp(34px, 5.4vw, 66px); max-width: 17ch; margin-left: auto; margin-right: auto; }
 .hero-static-hl { color: var(--green-mid); }
 .hero-static, .h-head h2, .h-pivot, .h-guar h2, .section-title { text-wrap: balance; }
-/* ===== Audience doors (10/18/2026) ===== */
-.ad-sec { padding: 72px 48px 32px; }
-.ad-wrap { max-width: 1000px; margin: 0 auto; }
-.ad-h2 { font-size: clamp(28px, 3.6vw, 42px); font-weight: 700; color: var(--green-deep); letter-spacing: -0.8px; margin: 10px 0 0; }
-.ad-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
-.ad-card { position: relative; display: flex; flex-direction: column; border-radius: 24px; padding: 28px 30px 30px; text-decoration: none; overflow: hidden; transition: transform .3s cubic-bezier(0.22,1,0.36,1), box-shadow .3s; }
-.ad-card--store { background: linear-gradient(180deg, var(--green-ghost) 0%, var(--white) 62%); border: 1px solid var(--green-light); box-shadow: 0 18px 44px rgba(27,67,50,0.10); }
-.ad-card--brand { background: linear-gradient(180deg, #0f2a1f 0%, var(--green-deep) 62%); border: 1px solid var(--green-deep); box-shadow: 0 18px 44px rgba(27,67,50,0.22); }
-.ad-card:hover { transform: translateY(-6px); }
-.ad-card--store:hover { box-shadow: 0 28px 60px rgba(27,67,50,0.18); }
-.ad-card--brand:hover { box-shadow: 0 28px 60px rgba(27,67,50,0.38); }
-.ad-art { position: relative; height: 200px; display: grid; place-items: center; margin-bottom: 18px; }
-.ad-svg { position: relative; width: 230px; height: auto; z-index: 1; animation: adBob 3.2s ease-in-out infinite; overflow: visible; }
-.ad-ring { position: absolute; left: 50%; top: 50%; width: 170px; height: 170px; margin: -85px 0 0 -85px; border-radius: 50%; border: 2px solid rgba(64,145,108,0.45); animation: adPulse 2.8s cubic-bezier(0.22,1,0.36,1) infinite; }
-.ad-card--brand .ad-ring { border-color: rgba(149,213,178,0.45); }
-.ad-ring--2 { animation-delay: .93s; }
-.ad-ring--3 { animation-delay: 1.86s; }
-.ad-card:hover .ad-ring { animation-duration: 1.6s; }
-.ad-badge { transform-box: fill-box; transform-origin: center; animation: adBeat 1.4s ease-in-out infinite; }
-.ad-coin { animation: adCoin 2.4s ease-in-out infinite; }
-.ad-wheel { animation: adSpin 1s linear infinite; }
-.ad-truck { animation: adRumble .5s ease-in-out infinite alternate; }
-.ad-speed line { stroke-dasharray: 16; animation: adDash 0.9s linear infinite; }
-.ad-eyebrow { font-family: var(--font-mono); font-size: 12px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--green-mid); margin-bottom: 10px; }
-.ad-card--brand .ad-eyebrow { color: var(--green-accent); }
-.ad-title { font-size: 23px; font-weight: 700; line-height: 1.2; color: var(--green-deep); letter-spacing: -0.4px; margin-bottom: 8px; text-wrap: balance; }
-.ad-card--brand .ad-title { color: var(--white); }
-.ad-copy { font-size: 15px; line-height: 1.55; color: var(--slate-600); margin-bottom: 22px; }
-.ad-card--brand .ad-copy { color: rgba(255,255,255,0.75); }
-.ad-cta { margin-top: auto; align-self: flex-start; display: inline-flex; align-items: center; gap: 10px; padding: 14px 22px; border-radius: 12px; font-size: 16px; font-weight: 700; transition: gap .25s, transform .25s; }
-.ad-card--store .ad-cta { background: var(--green-deep); color: var(--white); box-shadow: 0 8px 22px rgba(27,67,50,0.25); }
-.ad-card--brand .ad-cta { background: var(--green-accent); color: #0f2a1f; box-shadow: 0 8px 22px rgba(27,67,50,0.45); }
-.ad-card:hover .ad-cta { gap: 16px; }
-@keyframes adPulse { 0% { transform: scale(0.55); opacity: 0.9; } 100% { transform: scale(1.45); opacity: 0; } }
-@keyframes adBeat { 0%,100% { transform: scale(1); } 50% { transform: scale(1.16); } }
-@keyframes adCoin { 0%,100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-8px) scale(1.12); } }
-@keyframes adBob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
-@keyframes adSpin { to { transform: rotate(360deg); } }
-@keyframes adRumble { from { transform: translateY(0); } to { transform: translateY(-1.5px); } }
-@keyframes adDash { from { stroke-dashoffset: 32; } to { stroke-dashoffset: 0; } }
-@media (max-width: 900px) {
-  .ad-sec { padding: 52px 16px 20px; }
-  .ad-grid { grid-template-columns: 1fr; gap: 18px; }
-  .ad-card { padding: 22px 20px 24px; }
-  .ad-art { height: 170px; margin-bottom: 12px; }
-  .ad-svg { width: 200px; }
-  .ad-cta { align-self: stretch; justify-content: center; }
-}
-@media (prefers-reduced-motion: reduce) {
-  .ad-svg, .ad-ring, .ad-badge, .ad-coin, .ad-wheel, .ad-truck, .ad-speed line { animation: none !important; }
-  .ad-ring { opacity: 0.25; transform: scale(1.1); }
-  .ad-ring--2, .ad-ring--3 { display: none; }
-}
 /* ===== HERO v2 — motion hero (10/18/2026) ===== */
 .hero--motion { min-height: 100vh; padding: 112px 48px 64px; overflow-x: clip; }
 .hero--motion .hero-split { gap: 56px; }
@@ -678,75 +619,38 @@
 .hm-guar svg { flex: none; }
 .hero--motion .hero-trust { justify-content: flex-start; }
 
-/* stage */
-.hm-stage { flex: 1 1 560px; max-width: 600px; position: relative; animation: fadeUp 1s cubic-bezier(0.22,1,0.36,1) 0.35s both; }
+/* stage: one card per side, one motion (10/22/2026) */
+.hm-stage { flex: 1 1 520px; max-width: 540px; position: relative; animation: fadeUp 1s cubic-bezier(0.22,1,0.36,1) 0.35s both; }
 .hm-glow { position: absolute; inset: -40px; background: radial-gradient(60% 60% at 60% 45%, rgba(64,145,108,0.35), rgba(64,145,108,0) 70%); filter: blur(10px); pointer-events: none; }
-.hm-window { position: relative; background: #0f2a1f; border-radius: 20px; padding: 18px; box-shadow: 0 40px 90px rgba(27,67,50,0.35), 0 0 0 1px rgba(149,213,178,0.12) inset; color: #e6f4ea; overflow: hidden; }
-.hm-chrome { display: flex; align-items: center; gap: 6px; margin-bottom: 14px; }
-.hm-chrome i { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,0.14); }
-.hm-tabs { margin-left: auto; display: flex; gap: 4px; background: rgba(255,255,255,0.06); padding: 3px; border-radius: 999px; }
-.hm-tab { position: relative; overflow: hidden; font-size: 12px; font-weight: 700; letter-spacing: 0.3px; padding: 6px 12px; border-radius: 999px; color: rgba(230,244,234,0.55); transition: color .3s, background .3s; }
-.hm-tab.on { color: #0f2a1f; background: var(--green-accent); }
-.hm-scenes { position: relative; height: 368px; }
-.hm-scene { position: absolute; inset: 0; opacity: 0; transform: translateY(14px) scale(0.985); transition: opacity .6s ease, transform .6s cubic-bezier(0.22,1,0.36,1); pointer-events: none; }
-.hm-scene.on { opacity: 1; transform: none; }
-.hm-title { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 12px; }
-.hm-title b { font-size: 15px; font-weight: 700; color: #fff; }
-.hm-title span { font-family: var(--font-mono); font-size: 11px; color: rgba(230,244,234,0.5); }
-.hm-mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
-
-/* scene 1: match */
-.hm-cols { display: grid; grid-template-columns: 1fr 34px 1fr; gap: 0; font-size: 12px; }
-.hm-colhead { font-size: 10px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: var(--green-accent); padding: 0 10px 8px; }
-.hm-colhead.r { text-align: right; }
-.hm-line { display: flex; justify-content: space-between; gap: 8px; padding: 8px 10px; margin-bottom: 6px; border-radius: 10px; background: rgba(255,255,255,0.05); border: 1px solid transparent; opacity: 0; transform: translateX(-18px); transition: all .45s cubic-bezier(0.22,1,0.36,1); white-space: nowrap; }
-.hm-line.r { transform: translateX(18px); }
-.hm-line.in { opacity: 1; transform: none; }
-.hm-line.ok { border-color: rgba(149,213,178,0.45); background: rgba(149,213,178,0.10); }
-.hm-line.bad { border-color: rgba(251,191,36,0.7); background: rgba(251,191,36,0.12); }
-.hm-line .q { color: rgba(230,244,234,0.6); }
-.hm-link { display: flex; align-items: center; justify-content: center; height: 33px; margin-bottom: 6px; }
-.hm-link span { width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; transform: scale(0); transition: transform .35s cubic-bezier(0.34,1.56,0.64,1); font-size: 12px; font-weight: 800; }
-.hm-link.ok span { transform: scale(1); background: var(--green-accent); color: #0f2a1f; }
-.hm-link.bad span { transform: scale(1); background: #fbbf24; color: #3b2a00; }
-.hm-result { margin-top: 10px; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 14px; border-radius: 14px; background: rgba(251,191,36,0.12); border: 1px solid rgba(251,191,36,0.4); opacity: 0; transform: translateY(10px); transition: all .5s cubic-bezier(0.22,1,0.36,1); }
-.hm-result.in { opacity: 1; transform: none; }
-.hm-result small { display: block; font-size: 11px; color: rgba(230,244,234,0.65); margin-top: 2px; }
-.hm-result b { font-size: 13px; }
-.hm-big { font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-size: 24px; font-weight: 700; color: #fcd34d; }
-
-/* scene 2: collect */
-.hm-inv { padding: 16px; border-radius: 14px; background: rgba(255,255,255,0.05); }
-.hm-row { display: flex; justify-content: space-between; align-items: center; font-size: 13px; padding: 6px 0; color: rgba(230,244,234,0.8); }
-.hm-row + .hm-row { border-top: 1px solid rgba(255,255,255,0.06); }
-.hm-pill { font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 999px; transition: all .4s; }
+.hm-card { position: relative; background: #0f2a1f; border-radius: 24px; padding: 30px 32px 28px; box-shadow: 0 40px 90px rgba(27,67,50,0.35), 0 0 0 1px rgba(149,213,178,0.12) inset; color: #e6f4ea; }
+.hm-card-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; font-size: 14px; font-weight: 600; color: rgba(230,244,234,0.75); }
+.hm-pill { flex: none; font-size: 12px; font-weight: 700; padding: 5px 12px; border-radius: 999px; transition: background .4s, color .4s, transform .4s cubic-bezier(0.34,1.56,0.64,1); }
 .hm-pill.late { background: rgba(248,113,113,0.18); color: #fca5a5; }
-.hm-pill.paid { background: var(--green-accent); color: #0f2a1f; }
-.hm-feed { margin-top: 12px; display: flex; flex-direction: column; gap: 6px; }
-.hm-ev { display: flex; align-items: center; gap: 10px; font-size: 12px; padding: 8px 12px; border-radius: 10px; background: rgba(255,255,255,0.04); opacity: 0; transform: translateY(8px); transition: all .4s cubic-bezier(0.22,1,0.36,1); }
-.hm-ev.in { opacity: 1; transform: none; }
-.hm-ev i { flex: none; width: 8px; height: 8px; border-radius: 50%; background: var(--green-accent); }
-.hm-ev em { font-style: normal; margin-left: auto; color: rgba(230,244,234,0.45); font-family: var(--font-mono); font-size: 10px; }
-.hm-paidbar { margin-top: 12px; display: flex; align-items: center; justify-content: space-between; padding: 12px 14px; border-radius: 14px; background: rgba(149,213,178,0.14); border: 1px solid rgba(149,213,178,0.45); opacity: 0; transform: translateY(10px); transition: all .5s cubic-bezier(0.22,1,0.36,1); }
-.hm-paidbar.in { opacity: 1; transform: none; }
-.hm-paidbar .hm-big { color: var(--green-accent); }
+.hm-pill.paid { background: var(--green-accent); color: #0f2a1f; transform: scale(1.08); }
+.hm-card-lbl, .hm-card-foot { position: relative; display: grid; }
+.hm-card-lbl > span, .hm-card-foot > span { grid-area: 1 / 1; transition: opacity .45s, transform .45s cubic-bezier(0.22,1,0.36,1); }
+.hm-card-lbl { margin-top: 34px; font-size: 15px; font-weight: 600; color: rgba(230,244,234,0.6); }
+.hm-card-num { font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-size: clamp(44px, 6vw, 68px); font-weight: 700; letter-spacing: -2px; line-height: 1.05; margin: 6px 0 30px; color: #fff; transition: color .5s; }
+.hm-card-foot { padding-top: 18px; border-top: 1px solid rgba(255,255,255,0.08); font-size: 14px; color: rgba(230,244,234,0.7); }
+.hm-b { opacity: 0; transform: translateY(8px); }
+.hm-card.done .hm-a { opacity: 0; transform: translateY(-8px); }
+.hm-card.done .hm-b { opacity: 1; transform: none; }
+.hm-card.done .hm-card-num { color: var(--green-accent); }
+.hm-card.done .hm-card-foot { color: var(--green-accent); font-weight: 600; }
+.hm-caption { text-align: center; font-size: 11px; color: var(--slate-400); margin-top: 14px; }
 
-/* scene 3: recover */
-.hm-cm { display: grid; grid-template-columns: 1fr auto; gap: 6px 14px; font-size: 13px; padding: 14px 16px; border-radius: 14px; background: rgba(255,255,255,0.05); }
-.hm-cm div { opacity: 0; transform: translateY(6px); transition: all .4s; }
-.hm-cm div.in { opacity: 1; transform: none; }
-.hm-cm .amt { text-align: right; font-family: var(--font-mono); font-variant-numeric: tabular-nums; color: var(--green-accent); }
-.hm-cm .lbl { color: rgba(230,244,234,0.8); }
-.hm-stamp { position: absolute; left: 50%; margin-left: -78px; top: 252px; padding: 8px 16px; border: 3px solid var(--green-accent); border-radius: 12px; color: var(--green-accent); font-weight: 800; font-size: 18px; letter-spacing: 2px; text-transform: uppercase; transform: rotate(-10deg) scale(2.2); opacity: 0; transition: all .35s cubic-bezier(0.34,1.56,0.64,1); }
-.hm-stamp.in { opacity: 0.95; transform: rotate(-10deg) scale(1); }
-.hm-total { margin-top: 12px; display: flex; align-items: center; justify-content: space-between; padding: 14px; border-radius: 14px; background: var(--green-accent); color: #0f2a1f; opacity: 0; transform: translateY(10px); transition: all .5s cubic-bezier(0.22,1,0.36,1); }
-.hm-total.in { opacity: 1; transform: none; }
-.hm-total .hm-big { color: #0f2a1f; }
-.hm-total small { display: block; font-size: 11px; opacity: 0.7; margin-top: 2px; }
-
-.hm-progress { height: 3px; border-radius: 3px; background: rgba(255,255,255,0.08); margin-top: 14px; overflow: hidden; }
-.hm-progress i { display: block; height: 100%; width: 0; background: var(--green-accent); }
-.hm-caption { text-align: center; font-size: 11px; color: var(--slate-400); margin-top: 12px; }
+/* side switch */
+.hero--motion[data-persona="brand"] .show-store, .hero--motion[data-persona="store"] .show-brand { display: none !important; }
+.persona-switch { display: inline-flex; gap: 6px; margin: 0 0 22px; padding: 6px; background: var(--white); border: 1px solid var(--slate-200); border-radius: 999px; box-shadow: 0 12px 30px rgba(27,67,50,0.12); animation: fadeUp 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s both; }
+.persona-btn { appearance: none; border: none; cursor: pointer; font-family: inherit; font-size: 15px; font-weight: 700; color: var(--slate-500); background: transparent; padding: 12px 24px; border-radius: 999px; display: inline-flex; align-items: center; gap: 9px; transition: color 0.2s, background 0.25s, box-shadow 0.25s; }
+.persona-btn svg { width: 19px; height: 19px; flex: none; }
+.persona-btn:hover:not(.is-active) { color: var(--green-deep); background: var(--green-ghost); }
+.persona-btn.is-active { background: var(--green-deep); color: var(--white); box-shadow: 0 8px 20px rgba(27,67,50,0.32); }
+.persona-btn:focus-visible { outline: 3px solid var(--green-accent); outline-offset: 2px; }
+.hero--motion .hero-actions { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 14px 22px; }
+.hm-more { display: inline-flex; align-items: center; gap: 8px; padding: 15px 4px; font-size: 16px; font-weight: 700; color: var(--green-deep); text-decoration: none; transition: gap .25s; }
+.hm-more:hover { gap: 13px; }
+.hero--motion .hm-sub { min-height: 4.5em; }
 
 @media (max-width: 900px) {
   .hero--motion { padding: 104px 16px 40px; overflow-x: clip; }
@@ -755,23 +659,17 @@
   .hero--motion .hero-content { text-align: center; flex: none; }
   .hm-sub { margin: 0 auto 24px; font-size: 17px; }
   .hero--motion .hero-trust { justify-content: center; }
+  .hero--motion .hero-actions { flex-direction: column; align-items: center; gap: 4px; }
+  .hero--motion .hm-sub { min-height: 0; }
   .hm-stage { width: 100%; flex: none; }
-  .hm-window { padding: 14px; }
-  .hm-tab { padding: 5px 9px; font-size: 11px; }
-  .hm-cols { font-size: 11px; grid-template-columns: 1fr 26px 1fr; }
-  .hm-line { padding: 7px 8px; }
-  .hm-line .nm { overflow: hidden; text-overflow: ellipsis; }
-  .hm-scenes { height: 372px; }
-  .hm-title span { white-space: nowrap; font-size: 10px; }
-  .hm-title b { font-size: 14px; }
+  .hm-card { padding: 24px 22px 22px; }
+  .hm-card-top { font-size: 13px; }
 }
-@media (max-width: 420px) { .hm-line .q { display: none; } }
+@media (max-width: 420px) { .persona-btn { padding: 11px 14px; font-size: 14px; gap: 7px; } .persona-btn svg { width: 17px; height: 17px; } }
 @media (prefers-reduced-motion: reduce) {
-  .hm-scene, .hm-line, .hm-link span, .hm-result, .hm-ev, .hm-paidbar, .hm-cm div, .hm-stamp, .hm-total { transition: none !important; }
+  .hm-card-lbl > span, .hm-card-foot > span, .hm-pill, .hm-card-num { transition: none !important; }
 }
 </style>
-<noscript><style>.hm-line,.hm-result{opacity:1!important;transform:none!important}</style></noscript>
-<noscript><style>.hm-line,.hm-result{opacity:1!important;transform:none!important}</style></noscript>
 <noscript><style>.reveal,.hero h1,.hero-actions,.hero-founder-credit,.hero-trust{opacity:1;transform:none;transition:none;animation:none;}</style></noscript>
 <script type="application/ld+json">
 {
@@ -1040,9 +938,9 @@
     <span class="nav-logo-text">ShelfSpace<sup class="nav-logo-tm">™</sup></span>
   </a>
   <ul class="nav-links">
-    <li class="nav-dropdown"><a href="/accounts-receivable" class="nav-dropdown-toggle">ShelfCollect (AR) <svg class="dropdown-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></a>
+    <li class="nav-dropdown"><a href="/accounts-receivable" class="nav-dropdown-toggle">For brands <svg class="dropdown-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></a>
       <div class="nav-dropdown-menu"><a href="/accounts-receivable">ShelfCollect overview</a><a href="/ai-calls">AI Calls</a><a href="/collections">Collections</a><a href="/payment-plans">Payment Plans</a><a href="/promise-to-pay">Promise to Pay</a><a href="/final-notice">Final Notice</a><a href="/ar-aging">AR Aging</a><a href="/rep-management">Rep Management</a></div></li>
-    <li class="nav-dropdown"><a href="/accounts-payable" class="nav-dropdown-toggle">ShelfPay (AP) <svg class="dropdown-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></a>
+    <li class="nav-dropdown"><a href="/accounts-payable" class="nav-dropdown-toggle">For dispensaries <svg class="dropdown-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></a>
       <div class="nav-dropdown-menu"><a href="/accounts-payable">ShelfPay overview</a><a href="/consignment">Consignment</a><a href="/credit-recovery">Credit Recovery</a><a href="/shelfverify">ShelfVerify</a></div></li>
     <li class="nav-dropdown"><a href="/features" class="nav-dropdown-toggle">Features <svg class="dropdown-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></a>
       <div class="nav-dropdown-menu"><a href="/shelfverify">ShelfVerify</a><a href="/connect-your-ai">Connect Your AI</a><a href="/payments">Payments</a><a href="/integrations">Integrations</a><a href="/payment-plans">Payment Plans</a></div></li>
@@ -1055,7 +953,7 @@
 </nav>
 
 <!-- SECTION 1: HERO — motion hero (10/18/2026) -->
-<section class="hero hero--motion">
+<section class="hero hero--motion" data-persona="brand">
   <div class="hero-bg">
     <div class="hero-grid-lines"></div>
     <div class="hero-parallax-layer" data-speed="0.3">
@@ -1068,74 +966,40 @@
   <div class="hero-split">
     <div class="hero-content">
       <div class="section-label" style="margin-bottom:16px;">The cannabis back office</div>
+      <div class="persona-switch" role="tablist" aria-label="Choose your side">
+        <button class="persona-btn is-active" data-persona="brand" role="tab" aria-selected="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="6" width="14" height="10" rx="1"/><path d="M15 9h4l3 3v4h-7z"/><circle cx="6" cy="18" r="2"/><circle cx="18" cy="18" r="2"/></svg>I run a brand</button>
+        <button class="persona-btn" data-persona="store" role="tab" aria-selected="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l1.5-5h15L21 9"/><path d="M3 9h18v2a3 3 0 0 1-6 0 3 3 0 0 1-6 0 3 3 0 0 1-6 0z"/><path d="M5 13v8h14v-8"/><path d="M10 21v-5h4v5"/></svg>I run a dispensary</button>
+      </div>
       <h1 class="hm-h1">Stop leaving money <em>on the shelf.</em></h1>
-      <p class="hm-sub">Back-office finance for cannabis operators.</p>
+      <p class="hm-sub show-brand">We get you paid by the dispensaries you sell to. Reminders go out in your name, so your reps can get back to selling.</p>
+      <p class="hm-sub show-store">We pay your vendors, check every invoice against Metrc first, and get your credits back every month.</p>
       <div class="hero-actions">
-        <span class="cta-stack"><a href="/contact?cta=home-hero" class="btn-primary">Schedule a call <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a><span class="cta-micro">30 minutes with Chris. See how it would run for your business.</span></span>
+        <a href="/contact?cta=home-hero" class="btn-primary">Schedule a call <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        <a href="/accounts-receivable" class="hm-more show-brand">See how ShelfCollect works <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        <a href="/accounts-payable" class="hm-more show-store">See how ShelfPay works <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        <span class="cta-micro cta-micro--row">30 minutes with Chris. See how it would run for your business.</span>
       </div>
-      <div class="hm-guar">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6z"/><polyline points="8.5 12 11 14.5 15.5 9.5"/></svg>
-        Pays for itself, or we refund the difference
-      </div>
+      <div class="hm-guar show-brand"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6z"/><polyline points="8.5 12 11 14.5 15.5 9.5"/></svg>We collect more than we cost. Or we refund the difference.</div>
+      <div class="hm-guar show-store"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6z"/><polyline points="8.5 12 11 14.5 15.5 9.5"/></svg>The credits pay for it. Or we refund the difference.</div>
       <div class="hero-trust">
         <img src="/metrc-logo-v2.png" alt="Metrc">
         <span>Certified Metrc Third-Party Vendor</span>
       </div>
     </div>
 
-    <div class="hm-stage" aria-label="Animated example: ShelfSpace checking an invoice against Metrc, collecting a past-due invoice, and recovering credits">
+    <div class="hm-stage">
       <div class="hm-glow"></div>
-      <div class="hm-window" aria-hidden="true">
-        <div class="hm-chrome"><i></i><i></i><i></i>
-          <div class="hm-tabs"><span class="hm-tab on" data-s="0">Verify</span><span class="hm-tab" data-s="1">Collect</span><span class="hm-tab" data-s="2">Recover</span></div>
-        </div>
-        <div class="hm-scenes">
-
-          <!-- 1. VERIFY: invoice vs Metrc manifest -->
-          <div class="hm-scene on" data-scene="0">
-            <div class="hm-title"><b>Invoice #4471 vs. Metrc manifest</b><span>10/14/2026</span></div>
-            <div class="hm-cols">
-              <div class="hm-colhead">Invoice</div><div></div><div class="hm-colhead r">Metrc manifest</div>
-              <div class="hm-line" data-i="0"><span class="nm">Blue Dream 3.5g</span><span class="q hm-mono">×40</span></div><div class="hm-link" data-i="0"><span>✓</span></div><div class="hm-line r" data-i="0"><span class="nm">Blue Dream 3.5g</span><span class="q hm-mono">×40</span></div>
-              <div class="hm-line" data-i="1"><span class="nm">Gummies 100mg</span><span class="q hm-mono">×60</span></div><div class="hm-link" data-i="1"><span>✓</span></div><div class="hm-line r" data-i="1"><span class="nm">Gummies 100mg</span><span class="q hm-mono">×60</span></div>
-              <div class="hm-line" data-i="2"><span class="nm">Pre-roll 5pk</span><span class="q hm-mono">×48</span></div><div class="hm-link" data-i="2"><span>✓</span></div><div class="hm-line r" data-i="2"><span class="nm">Pre-roll 5pk</span><span class="q hm-mono">×48</span></div>
-              <div class="hm-line" data-i="3" data-bad><span class="nm">Live resin cart 1g</span><span class="q hm-mono">×30</span></div><div class="hm-link" data-i="3" data-bad><span>!</span></div><div class="hm-line r" data-i="3" data-bad><span class="nm">Live resin cart 1g</span><span class="q hm-mono">×24</span></div>
-              <div class="hm-line" data-i="4"><span class="nm">Tincture 30ml</span><span class="q hm-mono">×12</span></div><div class="hm-link" data-i="4"><span>✓</span></div><div class="hm-line r" data-i="4"><span class="nm">Tincture 30ml</span><span class="q hm-mono">×12</span></div>
-            </div>
-            <div class="hm-result"><div><b>6 carts billed, never shipped</b><small>Caught before you paid</small></div><div class="hm-big" data-count="150">$0.00</div></div>
-          </div>
-
-          <!-- 2. COLLECT: past-due invoice gets paid -->
-          <div class="hm-scene" data-scene="1">
-            <div class="hm-title"><b>Invoice #1182 · Green Leaf Dispensary</b><span>Due 09/14/2026</span></div>
-            <div class="hm-inv">
-              <div class="hm-row"><span>Amount due</span><span class="hm-mono" style="color:#fff;font-weight:700;">$3,280.00</span></div>
-              <div class="hm-row"><span>Status</span><span class="hm-pill late">34 days late</span></div>
-            </div>
-            <div class="hm-feed">
-              <div class="hm-ev"><i></i>Reminder sent, in your name<em>10/15/2026</em></div>
-              <div class="hm-ev"><i></i>Store replied: "Paying Friday"<em>10/15/2026</em></div>
-              <div class="hm-ev"><i></i>Promise to pay recorded<em>10/16/2026</em></div>
-              <div class="hm-ev"><i></i>Paid through the one-click pay link<em>10/17/2026</em></div>
-            </div>
-            <div class="hm-paidbar"><div><b style="font-size:13px;">Collected</b><small style="display:block;font-size:11px;color:rgba(230,244,234,0.65);margin-top:2px;">Your rep never made a call</small></div><div class="hm-big" data-count="3280">$0.00</div></div>
-          </div>
-
-          <!-- 3. RECOVER: monthly credit memo -->
-          <div class="hm-scene" data-scene="2">
-            <div class="hm-title"><b>Credit memo · September 2026</b><span>Sent 10/01/2026</span></div>
-            <div class="hm-cm">
-              <div class="lbl">Customer returns</div><div class="amt">$412.50</div>
-              <div class="lbl">Destroyed product</div><div class="amt">$186.00</div>
-              <div class="lbl">Price-drop share</div><div class="amt">$311.25</div>
-              <div class="lbl">Damaged on arrival</div><div class="amt">$96.00</div>
-            </div>
-            <div class="hm-stamp">Approved</div>
-            <div class="hm-total"><div><b style="font-size:13px;">Recovered this month</b><small>Taken off your next vendor payment</small></div><div class="hm-big" data-count="1005.75">$0.00</div></div>
-          </div>
-
-        </div>
-        <div class="hm-progress"><i></i></div>
+      <div class="hm-card show-brand" aria-label="Example: a past-due invoice from a dispensary gets paid">
+        <div class="hm-card-top"><span>Invoice #1182 · Green Leaf Dispensary</span><span class="hm-pill late" data-late="34 days late">34 days late</span></div>
+        <div class="hm-card-lbl"><span class="hm-a">They owe you</span><span class="hm-b">In your bank</span></div>
+        <div class="hm-card-num">$3,280.00</div>
+        <div class="hm-card-foot"><span class="hm-a">Reminder sent, in your name</span><span class="hm-b">Paid. Your rep never made a call.</span></div>
+      </div>
+      <div class="hm-card show-store" aria-label="Example: a vendor credit recovered for a dispensary">
+        <div class="hm-card-top"><span>Vendor credits · September 2026</span><span class="hm-pill late" data-late="Not claimed">Not claimed</span></div>
+        <div class="hm-card-lbl"><span class="hm-a">Your vendors owe you</span><span class="hm-b">Back in your pocket</span></div>
+        <div class="hm-card-num">$1,005.75</div>
+        <div class="hm-card-foot"><span class="hm-a">Returns, destroyed product, price drops</span><span class="hm-b">Taken off your next vendor payment.</span></div>
       </div>
       <div class="hm-caption">Illustration with example numbers</div>
     </div>
@@ -1170,76 +1034,6 @@
   </div>
 </section>
 
-<!-- SECTION 1.4: TWO-DOOR AUDIENCE SPLIT (visual doors, 10/18/2026) -->
-<section class="audience-split ad-sec" aria-labelledby="audience-heading">
-  <div class="ad-wrap">
-    <div class="reveal" style="text-align:center;margin-bottom:36px;">
-      <div class="section-label" style="justify-content:center;">Dispensaries and the brands that supply them</div>
-      <h2 id="audience-heading" class="ad-h2">Which side are you on?</h2>
-    </div>
-    <div class="ad-grid">
-      <a href="/accounts-payable" class="ad-card ad-card--store reveal">
-        <div class="ad-art">
-          <span class="ad-ring"></span><span class="ad-ring ad-ring--2"></span><span class="ad-ring ad-ring--3"></span>
-          <svg class="ad-svg" viewBox="0 0 200 160" aria-hidden="true">
-            <line x1="14" y1="141" x2="186" y2="141" stroke="#95d5b2" stroke-width="3" stroke-linecap="round"/>
-            <rect x="40" y="52" width="120" height="89" rx="6" fill="#fff" stroke="#1b4332" stroke-width="3"/>
-            <rect x="32" y="32" width="136" height="24" rx="6" fill="#1b4332"/>
-            <text x="100" y="48.5" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="10" font-weight="700" letter-spacing="2.5" fill="#fff">DISPENSARY</text>
-            <g>
-              <rect x="40" y="56" width="20" height="13" fill="#40916c"/><rect x="60" y="56" width="20" height="13" fill="#d8f3dc"/><rect x="80" y="56" width="20" height="13" fill="#40916c"/><rect x="100" y="56" width="20" height="13" fill="#d8f3dc"/><rect x="120" y="56" width="20" height="13" fill="#40916c"/><rect x="140" y="56" width="20" height="13" fill="#d8f3dc"/>
-              <circle cx="50" cy="69" r="10" fill="#40916c"/><circle cx="70" cy="69" r="10" fill="#d8f3dc"/><circle cx="90" cy="69" r="10" fill="#40916c"/><circle cx="110" cy="69" r="10" fill="#d8f3dc"/><circle cx="130" cy="69" r="10" fill="#40916c"/><circle cx="150" cy="69" r="10" fill="#d8f3dc"/>
-            </g>
-            <rect x="52" y="88" width="50" height="38" rx="3" fill="#f0faf4" stroke="#1b4332" stroke-width="2.5"/>
-            <line x1="52" y1="107" x2="102" y2="107" stroke="#1b4332" stroke-width="2"/>
-            <rect x="58" y="96" width="7" height="11" rx="1.5" fill="#40916c"/><rect x="69" y="98" width="7" height="9" rx="1.5" fill="#95d5b2"/><rect x="80" y="95" width="7" height="12" rx="1.5" fill="#2d6a4f"/><rect x="91" y="98" width="6" height="9" rx="1.5" fill="#40916c"/>
-            <rect x="58" y="113" width="9" height="13" rx="1.5" fill="#95d5b2"/><rect x="71" y="115" width="7" height="11" rx="1.5" fill="#2d6a4f"/><rect x="82" y="112" width="8" height="14" rx="1.5" fill="#40916c"/>
-            <rect x="112" y="84" width="36" height="57" rx="3" fill="#d8f3dc" stroke="#1b4332" stroke-width="2.5"/>
-            <rect x="118" y="92" width="24" height="10" rx="2" fill="#1b4332"/>
-            <text x="130" y="99.6" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="6.5" font-weight="700" fill="#95d5b2">OPEN</text>
-            <circle cx="141" cy="116" r="2.5" fill="#1b4332"/>
-            <g class="ad-badge">
-              <circle cx="164" cy="40" r="17" fill="#40916c" stroke="#fff" stroke-width="3"/>
-              <polyline points="156.5 40 162 45.5 172 35" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </g>
-          </svg>
-        </div>
-        <div class="ad-eyebrow">For dispensaries &middot; ShelfPay</div>
-        <div class="ad-title">We pay your vendors and get your credits back.</div>
-        <div class="ad-copy">Every invoice checked against Metrc before a dollar goes out.</div>
-        <span class="ad-cta">I run a dispensary <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
-      </a>
-      <a href="/accounts-receivable" class="ad-card ad-card--brand reveal reveal-delay-1">
-        <div class="ad-art">
-          <span class="ad-ring"></span><span class="ad-ring ad-ring--2"></span><span class="ad-ring ad-ring--3"></span>
-          <svg class="ad-svg" viewBox="0 0 200 160" aria-hidden="true">
-            <line x1="10" y1="133" x2="190" y2="133" stroke="rgba(149,213,178,0.35)" stroke-width="3" stroke-linecap="round" class="ad-road"/>
-            <g class="ad-speed" stroke="#95d5b2" stroke-width="3" stroke-linecap="round"><line x1="4" y1="74" x2="18" y2="74"/><line x1="0" y1="88" x2="16" y2="88"/><line x1="6" y1="102" x2="18" y2="102"/></g>
-            <g class="ad-truck">
-              <rect x="24" y="58" width="102" height="60" rx="6" fill="#e6f4ea"/>
-              <rect x="40" y="72" width="30" height="30" rx="4" fill="none" stroke="#1b4332" stroke-width="2.5"/>
-              <path d="M55 76 C 48 84 48 92 55 98 C 62 92 62 84 55 76 Z" fill="#40916c"/>
-              <text x="98" y="86" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="9" font-weight="700" letter-spacing="1.2" fill="#1b4332">YOUR</text>
-              <text x="98" y="98" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="9" font-weight="700" letter-spacing="1.2" fill="#1b4332">BRAND</text>
-              <path d="M126 74 h28 l20 22 v22 h-48 z" fill="#40916c"/>
-              <path d="M134 80 h17 l13 14 h-30 z" fill="#0f2a1f"/>
-            </g>
-            <g class="ad-wheel" style="transform-origin:56px 120px"><circle cx="56" cy="120" r="12" fill="#0f2a1f" stroke="#95d5b2" stroke-width="4"/><line x1="56" y1="112" x2="56" y2="128" stroke="#95d5b2" stroke-width="2"/><line x1="48" y1="120" x2="64" y2="120" stroke="#95d5b2" stroke-width="2"/></g>
-            <g class="ad-wheel" style="transform-origin:152px 120px"><circle cx="152" cy="120" r="12" fill="#0f2a1f" stroke="#95d5b2" stroke-width="4"/><line x1="152" y1="112" x2="152" y2="128" stroke="#95d5b2" stroke-width="2"/><line x1="144" y1="120" x2="160" y2="120" stroke="#95d5b2" stroke-width="2"/></g>
-            <g class="ad-badge ad-coin">
-              <circle cx="166" cy="38" r="18" fill="#fcd34d" stroke="#0f2a1f" stroke-width="3"/>
-              <text x="166" y="45" text-anchor="middle" font-family="Space Mono, monospace" font-size="20" font-weight="700" fill="#0f2a1f">$</text>
-            </g>
-          </svg>
-        </div>
-        <div class="ad-eyebrow">For brands &middot; ShelfCollect</div>
-        <div class="ad-title">We collect what stores owe you.</div>
-        <div class="ad-copy">Pay links, reminders in your name, and your reps back to selling.</div>
-        <span class="ad-cta">I'm a brand <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
-      </a>
-    </div>
-  </div>
-</section>
 
 
 
@@ -2252,82 +2046,48 @@
 </script>
 <script src="/shelfiq-widget.js"></script>
 <script>
-/* Motion hero: 3 looping scenes (Verify / Collect / Recover). Pauses off-screen + in background tabs. */
+/* Hero: brand / dispensary switch (both sides are in the HTML; this only shows one) + one looping motion per card. */
 (function () {
-  var stage = document.querySelector('.hm-stage');
-  if (!stage) return;
-  var scenes = stage.querySelectorAll('.hm-scene');
-  var tabs = stage.querySelectorAll('.hm-tab');
-  var bar = stage.querySelector('.hm-progress i');
-  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var SCENE_MS = 6500;
-  var timers = [], cur = 0, visible = true, running = false;
+  var hero = document.querySelector('.hero--motion');
+  if (!hero) return;
+  var btns = hero.querySelectorAll('.persona-btn');
+  function setSide(side, remember) {
+    hero.setAttribute('data-persona', side);
+    btns.forEach(function (b) { var on = b.getAttribute('data-persona') === side; b.classList.toggle('is-active', on); b.setAttribute('aria-selected', on ? 'true' : 'false'); });
+    if (remember) {
+      try { localStorage.setItem('ss-side', side); } catch (e) {}
+      try { var u = new URL(location.href); if (side === 'store') u.searchParams.set('for', 'dispensary'); else u.searchParams.delete('for'); history.replaceState(null, '', u); } catch (e) {}
+    }
+    restart();
+  }
+  var start = null;
+  try { var f = new URLSearchParams(location.search).get('for'); if (f === 'dispensary') start = 'store'; else if (f === 'brand') start = 'brand'; } catch (e) {}
+  if (!start) { try { var s = localStorage.getItem('ss-side'); if (s === 'store' || s === 'brand') start = s; } catch (e) {} }
 
-  function q(sel, root) { return Array.prototype.slice.call((root || stage).querySelectorAll(sel)); }
-  function later(fn, ms) { timers.push(setTimeout(fn, ms)); }
-  function clear() { timers.forEach(clearTimeout); timers = []; }
-  function money(n) { return '$' + n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
-  function count(el, ms) {
-    var target = parseFloat(el.getAttribute('data-count')), t0 = null;
-    if (reduced) { el.textContent = money(target); return; }
-    (function step(ts) {
-      if (!t0) t0 = ts;
-      var p = Math.min((ts - t0) / ms, 1), e = 1 - Math.pow(1 - p, 3);
-      el.textContent = money(Math.round(target * e * 100) / 100);
-      if (p < 1) requestAnimationFrame(step);
-    })(performance.now());
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var timer = null, visible = true;
+  function card() { return hero.querySelector('.hm-card.show-' + hero.getAttribute('data-persona')); }
+  function set(c, done) {
+    c.classList.toggle('done', done);
+    var pill = c.querySelector('.hm-pill');
+    pill.className = 'hm-pill ' + (done ? 'paid' : 'late');
+    pill.textContent = done ? (c.classList.contains('show-brand') ? 'Paid' : 'Recovered') : pill.getAttribute('data-late');
   }
-  function reset(scene) {
-    q('.in, .ok, .bad', scene).forEach(function (el) { el.classList.remove('in', 'ok', 'bad'); });
-    q('[data-count]', scene).forEach(function (el) { el.textContent = '$0.00'; });
-    var pill = scene.querySelector('.hm-pill');
-    if (pill) { pill.className = 'hm-pill late'; pill.textContent = '34 days late'; }
+  function stop() { clearTimeout(timer); timer = null; }
+  function loop(c, done) { set(c, done); timer = setTimeout(function () { loop(c, !done); }, done ? 3600 : 2400); }
+  function restart() {
+    stop();
+    hero.querySelectorAll('.hm-card').forEach(function (c) { set(c, false); });
+    var c = card(); if (!c) return;
+    if (reduced) { set(c, true); return; }
+    if (visible && !document.hidden) loop(c, false);
   }
-  function show(i) {
-    scenes.forEach(function (s, k) { s.classList.toggle('on', k === i); });
-    tabs.forEach(function (t, k) { t.classList.toggle('on', k === i); });
-  }
-  function play(i) {
-    var s = scenes[i];
-    reset(s); show(i);
-    if (bar) {
-      bar.style.transition = 'none'; bar.style.width = '0';
-      void bar.offsetWidth;
-      bar.style.transition = 'width ' + SCENE_MS + 'ms linear'; bar.style.width = '100%';
-    }
-    var d = reduced ? 0 : 1;
-    if (i === 0) {
-      for (var k = 0; k < 5; k++) (function (k) {
-        later(function () { q('.hm-line[data-i="' + k + '"]', s).forEach(function (el) { el.classList.add('in'); }); }, d * (250 + k * 380));
-        later(function () {
-          var cls = s.querySelector('.hm-link[data-i="' + k + '"]').hasAttribute('data-bad') ? 'bad' : 'ok';
-          q('[data-i="' + k + '"]', s).forEach(function (el) { el.classList.add(cls); });
-        }, d * (520 + k * 380));
-      })(k);
-      later(function () { s.querySelector('.hm-result').classList.add('in'); count(s.querySelector('[data-count]'), 900); }, d * 2700);
-    } else if (i === 1) {
-      q('.hm-ev', s).forEach(function (el, k) { later(function () { el.classList.add('in'); }, d * (450 + k * 650)); });
-      later(function () {
-        var pill = s.querySelector('.hm-pill'); pill.className = 'hm-pill paid'; pill.textContent = 'Paid';
-        s.querySelector('.hm-paidbar').classList.add('in'); count(s.querySelector('[data-count]'), 1000);
-      }, d * 3300);
-    } else {
-      q('.hm-cm div', s).forEach(function (el, k) { later(function () { el.classList.add('in'); }, d * (300 + Math.floor(k / 2) * 380)); });
-      later(function () { s.querySelector('.hm-stamp').classList.add('in'); }, d * 2100);
-      later(function () { s.querySelector('.hm-total').classList.add('in'); count(s.querySelector('[data-count]'), 1000); }, d * 2700);
-    }
-    if (!reduced) later(function () { cur = (i + 1) % scenes.length; play(cur); }, SCENE_MS);
-  }
-  function start() { if (running) return; running = true; play(cur); }
-  function stop() { running = false; clear(); }
-  tabs.forEach(function (t, k) { t.addEventListener('click', function () { clear(); cur = k; running = true; play(k); }); });
+  btns.forEach(function (b) { b.addEventListener('click', function () { setSide(b.getAttribute('data-persona'), true); }); });
   if ('IntersectionObserver' in window) {
-    new IntersectionObserver(function (es) {
-      visible = es[0].isIntersecting;
-      if (visible && !document.hidden) start(); else stop();
-    }, { threshold: 0.2 }).observe(stage);
-  } else start();
-  document.addEventListener('visibilitychange', function () { if (document.hidden) stop(); else if (visible) start(); });
+    new IntersectionObserver(function (es) { visible = es[0].isIntersecting; if (visible && !document.hidden) { if (!timer) restart(); } else stop(); }, { threshold: 0.2 }).observe(hero.querySelector('.hm-stage'));
+  }
+  document.addEventListener('visibilitychange', function () { if (document.hidden) stop(); else if (visible) restart(); });
+  setSide(start || 'brand', false);
 })();
 </script>
 <script src="/nav.js" defer></script>

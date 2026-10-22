@@ -30,7 +30,7 @@ The site sells the **OUTCOME**, stays agnostic on who does the work, and shows *
 
 The "Total value, first year" figures are **single-sourced in `pricing.html`'s value stacks** (dispensary $224,500 / brand $301,000, both for a $500k/month example). Mirrors: the ShelfPay stack on `accounts-payable.html`, the ShelfCollect stack on `accounts-receivable.html`, and the homepage `#h-val-pay` / `#h-val-collect` defaults + slider formulas in `index.html`. Change a number → change all four, then run `bash marketing/scripts/check-offer-numbers.sh` (exits 1 on drift). Copy rules: generous scope, conservative per-line rates, ONE number per line (no ranges), same example size both sides, setup folded into one first-year total, one-time items labeled "one time", no unverified timing promises, never "founding clients" publicly.
 
-Homepage story order: static guarantee headline → which side → brand ticker → pain → what you get (+ sales slider) → guarantee (the one dark section) → "Who's running your money" trust → case studies → videos → CTA → FAQ.
+Homepage story order (10/22/2026): toggle hero ("I run a brand" default / "I run a dispensary"; BOTH sides are in the HTML, the toggle only shows one; `?for=dispensary` opens that side; the H1 "Stop leaving money on the shelf.", `<title>` and meta description are shared and FROZEN for SEO; each side = value-prop subhead + one simple looping card + "See how ShelfCollect/ShelfPay works" link to its product page, never a copy of that page) → brand ticker → pain → what you get (+ sales slider) → guarantee (the one dark section) → "Who's running your money" trust → case studies → videos → CTA → FAQ.
 
 ## Design System
 
@@ -43,7 +43,9 @@ Homepage story order: static guarantee headline → which side → brand ticker 
 
 ## Nav (all pages)
 
-ShelfCollect (AR) ▾ | ShelfPay (AP) ▾ | Features ▾ | About | Pricing | Login | **CTA**
+For brands ▾ | For dispensaries ▾ | Features ▾ | About | Pricing | Login | **CTA**
+
+- **Audience labels (10/22/2026, Chris):** the two product toggles read **"For brands"** (→ `/accounts-receivable`, ShelfCollect menu) and **"For dispensaries"** (→ `/accounts-payable`, ShelfPay menu), matching the homepage toggle. The product names live inside the menus ("ShelfCollect overview" / "ShelfPay overview") and in the footer, which keeps "ShelfPay (AP)" / "ShelfCollect (AR)".
 
 - **Features ▾ (10/18/2026, Chris):** replaced the standalone "ShelfVerify" link. Toggle → `/features`; menu = ShelfVerify (`/shelfverify`) · Connect Your AI (`/connect-your-ai`) · Payments (`/payments`) · Integrations (`/integrations`). Toggle carries `active` on those five pages. Same markup on every page + `scripts/build-tutorials.mjs`. (The "Platform ▾" notes below are historical — that dropdown is no longer in the nav.)
 
@@ -51,7 +53,7 @@ ShelfCollect (AR) ▾ | ShelfPay (AP) ▾ | Features ▾ | About | Pricing | Log
 
 - **`/payments` (10/18/2026, Chris):** the unified payments page — e-check, mailed paper check, ACH (labelled **"Rolling out"**: ACH is live for no one yet, never say "available now"). Pitch = paying and getting paid is effortless; every visual is a REAL screenshot (demo sandbox / stubbed pay page) in `screenshots/payments/`. Plaid may be named; the ACH bank/provider never. Linked from Features ▾ "Payments" and footer Services "Payments".
 - **Footer (10/18/2026, Chris — "wonky"):** ONE canonical footer on every page and in `scripts/build-tutorials.mjs`: four balanced columns — **Services** (ShelfPay (AP), ShelfCollect (AR), ShelfVerify, Consignment, Credit Recovery, Payments, ShelfiQ) · **Platform** (Features, How It Works, Integrations, Connect Your AI, Vendor Management, Collections, AI Calls) · **Resources** (Pricing, Blog, Docs, Guides, Tutorials) · **Company** (About, For Vendors, For Bookkeepers, Contact, Support, Login, LinkedIn). Keep columns ≤7 links. Adding a link = add it to EVERY page (it had drifted into 12 variants with a 13-link "Platform" column). Check: all `footer-col` blocks must be byte-identical sitewide.
-- **Service labels (2026-09-28, Chris):** the AP link reads **"ShelfPay (AP)"** (→ `/accounts-payable`) and the AR link reads **"ShelfCollect (AR)"** (→ `/accounts-receivable`, the ShelfCollect page). Same labels in the footer and in the `scripts/build-tutorials.mjs` template. The product name "Get Paid" is retired sitewide — use ShelfCollect (URL slugs like `/get-paid` stay).
+- **Service labels (2026-09-28, Chris; nav toggles superseded 10/22 by the audience labels above, footer unchanged):** the AP link reads **"ShelfPay (AP)"** (→ `/accounts-payable`) and the AR link reads **"ShelfCollect (AR)"** (→ `/accounts-receivable`, the ShelfCollect page). Same labels in the footer and in the `scripts/build-tutorials.mjs` template. The product name "Get Paid" is retired sitewide — use ShelfCollect (URL slugs like `/get-paid` stay).
 - **Never remove an existing `.brand-ticker` logo strip** when rebuilding a page — Chris reverted exactly that on the ShelfCollect page (2026-09-28).
 
 - **Order (2026-09-04, Chris):** the four service links, then **About**, then **Pricing**, then **Platform ▾** as the RIGHTMOST content item (before Login + the CTA button). "Pricing" sits immediately left of Platform.
