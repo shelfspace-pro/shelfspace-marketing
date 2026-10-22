@@ -1659,6 +1659,73 @@ a.cs-stat:hover .cs-stat-go span { transform: translateX(4px); }
 </section>
 
 <!-- FOOTER -->
+<style>
+/* ===== HOMEPAGE PHONE PASS (10/22/2026) — layout/size only; copy + sections unchanged ===== */
+@media (max-width: 640px) {
+  :root { --display-size: clamp(34px, 9.4vw, 40px); } /* still ONE variable: hero H1, quotes, trust heading, guarantee line, "Watch it work" */
+
+  /* hero: CTA full-width in thumb reach, 44px+ toggles */
+  .hero--motion { min-height: 0; padding: 92px 16px 48px; }
+  .persona-switch { margin-bottom: 20px; }
+  .persona-btn { min-height: 44px; }
+  .hm-h1 { letter-spacing: -1.6px !important; }
+  .hero--motion .hm-sub { font-size: 18px; line-height: 1.45; }
+  .hero--motion .hero-actions { align-items: stretch; width: 100%; max-width: 340px; margin: 0 auto; gap: 2px; }
+  .hero--motion .hero-actions .btn-primary { justify-content: center; min-height: 54px; width: 100%; }
+  .hm-more { justify-content: center; min-height: 48px; }
+  .hero--motion .hero-split { gap: 28px; }
+  .hm-card-num { font-size: clamp(36px, 11.4vw, 48px); }
+  .hm-card.show-store .hm-paid { font-size: clamp(28px, 8.4vw, 38px) !important; padding: 10px 18px !important; }
+
+  /* testimonials: arrows in a thumb row under the quote, 44px */
+  .tq { padding: 64px 16px; }
+  .tq-stage { padding: 32px 24px 88px; }
+  .tq-arrow { top: auto; bottom: 22px; margin-top: 0; width: 44px; height: 44px; }
+  .tq-arrow svg { width: 18px; height: 18px; }
+  .tq-arrow--prev { left: auto; right: 78px; }
+  .tq-arrow--next { right: 24px; }
+  .tq-arrow--prev:hover, .tq-arrow--next:hover { transform: none; }
+  .tq-who { padding-right: 0; }
+  .tq-tab { height: 60px; }
+
+  /* trust */
+  .tb { padding-left: 16px; padding-right: 16px; }
+  .tb-h { margin-bottom: 32px; }
+  .tb-li { width: 44px; height: 44px; }
+
+  /* case studies: swipe with a visible peek, no arrows over the text */
+  .case-grid-wrap .case-arrow { display: none; }
+  .case-grid { -webkit-mask-image: none; mask-image: none; padding: 14px 16px 28px; gap: 12px; scroll-padding: 0 16px; }
+  .case-card, .cs-v2 .case-card { min-width: calc(100vw - 64px); max-width: calc(100vw - 64px); }
+  .case-link { min-height: 44px; display: inline-flex; align-items: center; }
+  .case-grid-mobile-foot a { display: inline-flex; align-items: center; min-height: 44px; }
+  .cs-stats { padding: 0 16px; }
+  .cs-v2 .case-studies-header { padding-left: 16px; padding-right: 16px; }
+
+  /* videos */
+  .vf-band { padding: 64px 0 48px; }
+  .vf-inner { padding: 0 16px; }
+  .vf-body p { font-size: 15px; }
+  .vf-cta { min-height: 44px; }
+  .vm-label { padding: 0 16px; letter-spacing: 1.5px; line-height: 1.6; }
+  .vf-foot a { min-height: 52px; }
+
+  /* FAQ */
+  .faq-go { min-height: 44px; margin: 10px 0 0; }
+
+  /* footer: link groups in two columns instead of one 1,500px column */
+  footer { padding: 56px 20px 28px; }
+  .footer-top { grid-template-columns: 1fr 1fr; gap: 36px 20px; }
+  .footer-brand { grid-column: 1 / -1; }
+  .footer-col ul { gap: 4px; }
+  .footer-col a { display: inline-flex; align-items: center; min-height: 40px; font-size: 15px; }
+  .footer-bottom-links a { display: inline-flex; align-items: center; min-height: 44px; }
+
+  /* chat launcher: icon-only on phones so it never sits on the content */
+  body .cw-toggle { width: 56px; height: 56px; padding: 0; justify-content: center; bottom: 16px; right: 16px; }
+  body .cw-toggle > span { display: none; }
+}
+</style>
 <footer>
   <div class="footer-top">
     <div class="footer-brand">
@@ -1817,6 +1884,10 @@ a.cs-stat:hover .cs-stat-go span { transform: translateX(4px); }
   });
 
   /* Case study arrows */
+  function caseStep() {
+    var c = caseGrid && caseGrid.querySelector('.case-card:not(.hidden)');
+    return c ? c.offsetWidth + (parseFloat(getComputedStyle(caseGrid).columnGap) || 0) : 364;
+  }
   function updateArrows() {
     if (!caseGrid || !arrowLeft || !arrowRight) return;
     arrowLeft.classList.toggle('is-hidden', caseGrid.scrollLeft < 10);
@@ -1828,12 +1899,12 @@ a.cs-stat:hover .cs-stat-go span { transform: translateX(4px); }
   }
   if (arrowLeft) {
     arrowLeft.addEventListener('click', function() {
-      caseGrid.scrollBy({ left: -364, behavior: 'smooth' });
+      caseGrid.scrollBy({ left: -caseStep(), behavior: 'smooth' });
     });
   }
   if (arrowRight) {
     arrowRight.addEventListener('click', function() {
-      caseGrid.scrollBy({ left: 364, behavior: 'smooth' });
+      caseGrid.scrollBy({ left: caseStep(), behavior: 'smooth' });
     });
   }
 
@@ -1847,7 +1918,7 @@ a.cs-stat:hover .cs-stat-go span { transform: translateX(4px); }
       if (caseGrid.scrollLeft + caseGrid.offsetWidth >= caseGrid.scrollWidth - 10) {
         caseGrid.scrollTo({ left: 0, behavior: 'smooth' });
       } else {
-        caseGrid.scrollBy({ left: 364, behavior: 'smooth' });
+        caseGrid.scrollBy({ left: caseStep(), behavior: 'smooth' });
       }
     }, 4000);
   }
