@@ -1001,8 +1001,6 @@ a.cs-stat:hover .cs-stat-go span { transform: translateX(4px); }
       <div class="hero-actions">
         <a href="/contact?cta=home-hero" class="btn-primary show-brand">Get Paid <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
         <a href="/contact?cta=home-hero-2" class="btn-primary show-store">Get Profitable <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
-        <a href="/accounts-receivable" class="hm-more show-brand">Learn more <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
-        <a href="/accounts-payable" class="hm-more show-store">Learn more <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
       </div>
     </div>
 
@@ -1664,25 +1662,27 @@ a.cs-stat:hover .cs-stat-go span { transform: translateX(4px); }
 @media (max-width: 640px) {
   :root { --display-size: clamp(34px, 9.4vw, 40px); } /* still ONE variable: hero H1, quotes, trust heading, guarantee line, "Watch it work" */
 
-  /* hero: CTA full-width in thumb reach, 44px+ toggles */
-  .hero--motion { min-height: 0; padding: 88px 16px 28px; }
-  .persona-switch { margin-bottom: 34px; } /* clear air between the toggle and the headline */
+  /* Spacing on phones = one 8px scale: 20px side gutter · 64px section padding · 32px between groups ·
+     16–24px inside a group · a heading sits closer to what it introduces than to what came before it. */
+
+  /* hero: toggle / headline + subline / CTA / card = four groups, 32-40px apart; clears the header by 32px */
+  .hero--motion { min-height: 0; padding: 104px 20px 48px; }
+  .persona-switch { margin-bottom: 32px; }
   .persona-btn { min-height: 44px; }
   .persona-btn { white-space: nowrap; }
   @media (max-width: 360px) { .persona-switch { gap: 2px; padding: 4px; } .persona-btn { padding: 10px 11px; font-size: 13px; gap: 6px; } .persona-btn svg { width: 15px; height: 15px; } }
   .hm-h1 { letter-spacing: -1.6px !important; margin-bottom: 16px !important; }
-  .hero--motion .hm-sub { font-size: 17px; line-height: 1.45; margin-bottom: 20px; }
+  .hero--motion .hm-sub { font-size: 17px; line-height: 1.5; margin-bottom: 32px; }
   .hero--motion .hero-actions { align-items: stretch; width: 100%; max-width: 340px; margin: 0 auto; gap: 0; }
   .hero--motion .hero-actions .btn-primary { justify-content: center; min-height: 54px; width: 100%; }
-  .hm-more { justify-content: center; min-height: 44px; padding: 10px 6px; }
-  .hero--motion .hero-split { gap: 16px; }
+  .hero--motion .hero-split { gap: 40px; }
   /* invoice card: compact so the whole hero, card included, fits the first screen */
   .hm-glow { inset: -12px 0; }
   .hm-card { padding: 18px 20px 20px; border-radius: 20px; }
   .hm-card-num { font-size: clamp(34px, 10vw, 42px); margin: 8px 0 14px; letter-spacing: -1px; }
   .hm-status > span { font-size: clamp(22px, 6.4vw, 28px); padding: 8px 14px; border-radius: 12px; }
   .hm-paid, .hm-card.show-store .hm-paid { font-size: clamp(26px, 7.6vw, 32px) !important; padding: 8px 18px !important; }
-  .hm-caption { margin-top: 10px; }
+  .hm-caption { margin-top: 12px; }
 
   /* scroll-in: shorter slide on phones */
   .reveal { transform: translateY(20px); transition-duration: .6s; }
@@ -1692,47 +1692,64 @@ a.cs-stat:hover .cs-stat-go span { transform: translateX(4px); }
   nav, nav.scrolled { background: var(--white); -webkit-backdrop-filter: none; backdrop-filter: none; }
 
   /* testimonials: arrows in a thumb row under the quote, 44px */
-  .tq { padding: 40px 16px 56px; }
-  .tq-stage { padding: 28px 22px 80px; }
+  .tq { padding: 64px 20px; }
+  .tq-stage { padding: 32px 24px 92px; }
   .tq-panel { justify-content: flex-start; }
-  .tq-arrow { top: auto; bottom: 22px; margin-top: 0; width: 44px; height: 44px; }
+  .tq-arrow { top: auto; bottom: 24px; margin-top: 0; width: 44px; height: 44px; }
   .tq-arrow svg { width: 18px; height: 18px; }
-  .tq-arrow--prev { left: 22px; right: auto; }
-  .tq-arrow--next { left: 76px; right: auto; }
+  .tq-arrow--prev { left: 24px; right: auto; }
+  .tq-arrow--next { left: 80px; right: auto; }
   .tq-arrow--prev:hover, .tq-arrow--next:hover { transform: none; }
   .tq-who { padding-right: 0; margin-top: auto; } /* name + logo sit on the card's bottom row; the quote stays up top */
-  .tq-q { margin-bottom: 28px; }
+  .tq-q { margin-bottom: 32px; }
+  .tq-tabs { margin-top: 24px; gap: 8px; }
   .tq-tab { height: 60px; }
 
   /* trust */
-  .tb { padding-left: 16px; padding-right: 16px; }
+  .tb { padding: 64px 20px; }
   .tb-h { margin-bottom: 32px; }
+  .tb-grid { gap: 16px; }
+  .tb-card { padding: 24px; }
+  .tb-me { padding: 24px; }
   .tb-li { width: 44px; height: 44px; }
   .tb-edu img { filter: brightness(0) invert(1); } /* drop-shadow() here made WebKit paint a garbage tile beside the photo */
 
   /* case studies: swipe with a visible peek, no arrows over the text */
   .case-grid-wrap .case-arrow { display: none; }
-  .case-grid { -webkit-mask-image: none; mask-image: none; padding: 14px 16px 28px; gap: 12px; scroll-padding: 0 16px; }
-  .case-card, .cs-v2 .case-card { min-width: calc(100vw - 64px); max-width: calc(100vw - 64px); }
+  .cs-v2 { padding: 64px 0; }
+  .cs-cta { margin: 32px 0 16px; }
+  .cs-v2 .case-studies-header { margin-bottom: 24px; }
+  .cs-stats { margin: 0 auto 40px; gap: 16px; }
+  .cs-stat { padding: 24px; }
+  .case-grid, .cs-v2 .case-grid { -webkit-mask-image: none; mask-image: none; padding: 8px 20px 24px; gap: 16px; scroll-padding: 0 20px; }
+  .case-card, .cs-v2 .case-card { min-width: calc(100vw - 72px); max-width: calc(100vw - 72px); padding: 28px 24px 24px; }
   .case-link { min-height: 44px; display: inline-flex; align-items: center; }
   .case-grid-mobile-foot a { display: inline-flex; align-items: center; min-height: 44px; }
-  .cs-stats { padding: 0 16px; }
-  .cs-v2 .case-studies-header { padding-left: 16px; padding-right: 16px; }
+  .cs-stats { padding: 0 20px; }
+  .cs-v2 .case-studies-header { padding-left: 20px; padding-right: 20px; }
 
   /* videos */
-  .vf-band { padding: 64px 0 48px; }
-  .vf-inner { padding: 0 16px; }
+  .vf-band { padding: 64px 0; }
+  .vf-inner { padding: 0 20px; }
+  .vf-head { margin-bottom: 32px; }
+  .vf-grid { gap: 24px; }
+  .vf-body, .vf-card--1 .vf-body { padding: 24px; }
+  .vf-foot { margin-top: 32px; }
   .vf-body p { font-size: 15px; }
   .vf-cta { min-height: 44px; }
-  .vm-label { padding: 0 16px; letter-spacing: 1.5px; line-height: 1.6; }
+  .vm-label { padding: 0 20px; margin-bottom: 16px; letter-spacing: 1.5px; line-height: 1.6; }
   .vf-foot a { min-height: 52px; }
 
   /* FAQ */
-  .faq-go { min-height: 44px; margin: 10px 0 0; }
+  .faq-section { padding: 64px 20px; }
+  .faq-section .section-label { margin-bottom: 12px; }
+  .faq-section .section-title { margin-bottom: 32px; }
+  .faq-section .faq-header { margin-bottom: 0; }
+  .faq-go { min-height: 44px; margin: 16px 0 0; }
 
   /* footer: link groups in two columns instead of one 1,500px column */
-  footer { padding: 56px 20px 28px; }
-  .footer-top { grid-template-columns: 1fr 1fr; gap: 36px 20px; }
+  footer { padding: 64px 20px 32px; }
+  .footer-top { grid-template-columns: 1fr 1fr; gap: 32px 20px; }
   .footer-brand { grid-column: 1 / -1; }
   .footer-col ul { gap: 4px; }
   .footer-col a { display: inline-flex; align-items: center; min-height: 40px; font-size: 15px; }
