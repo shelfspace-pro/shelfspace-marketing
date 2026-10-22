@@ -1134,7 +1134,7 @@ a.cs-stat:hover .cs-stat-go span { transform: translateX(4px); }
 <!-- SECTION 6b: TESTIMONIALS (rebuilt 10/22/2026). One featured quote at a time, logo tabs underneath
      (the Ramp / Stripe pattern): every quote gets the same stage, so a one-liner is a headline, not an empty card.
      Panels share one grid cell, so the stage is as tall as the longest quote and never jumps.
-     Verdant Hill is a PLACEHOLDER Chris ordered shown (untagged, 10/22): swap in a real quote + logo. -->
+     All three quotes are real (10/22/2026). One Garden's logo comes from its AR branding upload, with the white text recolored for a light background. -->
 <style>
 .tq { background: var(--green-ghost); padding: 112px 48px; }
 .tq-wrap { max-width: 1040px; margin: 0 auto; }
@@ -1162,14 +1162,13 @@ a.cs-stat:hover .cs-stat-go span { transform: translateX(4px); }
 .tq-tab { appearance: none; -webkit-appearance: none; font: inherit; text-transform: none; position: relative; height: 92px; display: flex; align-items: center; justify-content: center; padding: 0 24px; background: var(--white); border: 1px solid var(--green-light); border-radius: 20px; cursor: pointer; overflow: hidden; box-shadow: 0 1px 2px rgba(27,67,50,0.05); transition: border-color .3s, box-shadow .3s, transform .3s; }
 .tq-tab:hover { transform: translateY(-2px); box-shadow: 0 12px 28px -12px rgba(27,67,50,0.25); }
 .tq-tab:focus-visible { outline: 2px solid var(--green-mid); outline-offset: 3px; }
-.tq-tab img, .tq-wm { height: 42px; width: auto; max-width: 78%; object-fit: contain; filter: grayscale(1); opacity: .45; transition: filter .35s, opacity .35s; }
+.tq-tab img { height: 42px; width: auto; max-width: 78%; object-fit: contain; filter: grayscale(1); opacity: .45; transition: filter .35s, opacity .35s; }
 .tq-tab img.tq-ck { height: 50px; }
 .tq-tab img.tq-mc { height: 56px; }
-.tq-tab:hover img, .tq-tab:hover .tq-wm { opacity: .75; }
+.tq-tab img.tq-og { height: 44px; }
+.tq-tab:hover img { opacity: .75; }
 .tq-tab[aria-selected="true"] { border-color: var(--green-accent); box-shadow: 0 16px 34px -14px rgba(27,67,50,0.3); }
-.tq-tab[aria-selected="true"] img, .tq-tab[aria-selected="true"] .tq-wm { filter: none; opacity: 1; }
-.tq-wm { display: inline-flex; align-items: center; gap: 8px; height: auto; max-width: none; font-weight: 800; font-size: 19px; letter-spacing: -0.4px; color: var(--green-deep); white-space: nowrap; }
-.tq-wm svg { width: 24px; height: 24px; flex: none; }
+.tq-tab[aria-selected="true"] img { filter: none; opacity: 1; }
 .tq-bar { position: absolute; left: 0; right: 0; bottom: 0; height: 3px; background: transparent; }
 .tq-bar i { display: block; height: 100%; width: 0; background: var(--green-mid); }
 .tq-tab[aria-selected="true"] .tq-bar i { width: 100%; }
@@ -1190,14 +1189,14 @@ a.cs-stat:hover .cs-stat-go span { transform: translateX(4px); }
   .tq-q { font-size: 20px; margin-bottom: 28px; }
   .tq-q--xl { font-size: 38px; }
   .tq-q--l { font-size: 24px; }
-  .tq-who { font-size: 15px; gap: 8px; padding-top: 18px; }
+  .tq-who { font-size: 15px; flex-direction: column; align-items: flex-start; gap: 2px; padding-top: 18px; }
+  .tq-who b + span::before { display: none; }
   .tq-tabs { gap: 8px; margin-top: 12px; }
   .tq-tab { height: 64px; padding: 0 10px; border-radius: 16px; }
   .tq-tab img { height: 28px; max-width: 88%; }
   .tq-tab img.tq-ck { height: 32px; }
   .tq-tab img.tq-mc { height: 36px; }
-  .tq-wm { font-size: 13px; gap: 5px; letter-spacing: -0.2px; }
-  .tq-wm svg { width: 16px; height: 16px; }
+  .tq-tab img.tq-og { height: 28px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .tq-panel, .tq-q mark, .tq-tab { transition: none; }
@@ -1218,17 +1217,16 @@ a.cs-stat:hover .cs-stat-go span { transform: translateX(4px); }
         <blockquote class="tq-q tq-q--l">&ldquo;ShelfSpace has allowed me to <mark>run our collections more efficiently</mark>, freeing up much-needed time to go out and focus on sales.&rdquo;</blockquote>
         <figcaption class="tq-who"><b>Avery Leveston</b><span>CEO, Cowboy Kush</span></figcaption>
       </figure>
-      <!-- PLACEHOLDER (Chris, 10/22/2026): fictional, shown untagged on Chris's call. Replace with a real quote + logo. -->
       <figure class="tq-panel" id="tq-p2" role="tabpanel" aria-labelledby="tq-t2">
-        <blockquote class="tq-q tq-q--l">&ldquo;Our past-due list used to eat a day a week. Now the reminders go out in our name and <mark>the stores just pay</mark>.&rdquo;</blockquote>
-        <figcaption class="tq-who"><b>Jordan T.</b><span>Owner, Verdant Hill Botanical</span></figcaption>
+        <blockquote class="tq-q tq-q--xl">&ldquo;It&rsquo;s been a <mark>great addition</mark> to our AR efforts!&rdquo;</blockquote>
+        <figcaption class="tq-who"><b>Shawna Gurgul</b><span>Sales Operations Administrator, One Garden</span></figcaption>
       </figure>
     </div>
     </div>
     <div class="tq-tabs" role="tablist" aria-label="Customer quotes">
       <button class="tq-tab" type="button" role="tab" id="tq-t0" aria-controls="tq-p0" aria-selected="true"><img class="tq-mc" src="/logos/customers/meds-cafe.png" alt="Meds Cafe" width="480" height="160" loading="lazy"><span class="tq-bar"><i></i></span></button>
       <button class="tq-tab" type="button" role="tab" id="tq-t1" aria-controls="tq-p1" aria-selected="false" tabindex="-1"><img class="tq-ck" src="/logos/customers/cowboy-kush-mark.svg" alt="Cowboy Kush" width="190" height="65" loading="lazy"><span class="tq-bar"><i></i></span></button>
-      <button class="tq-tab" type="button" role="tab" id="tq-t2" aria-controls="tq-p2" aria-selected="false" tabindex="-1"><span class="tq-wm"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 19c3-7 8-11 18-14-2 9-7 14-14 14-1.4 0-2.8-.2-4 0z" fill="var(--green-mid)"/><path d="M5 18c4-4 8-7 13-10" stroke="var(--white)" stroke-width="1.6" fill="none" stroke-linecap="round"/></svg>Verdant Hill</span><span class="tq-bar"><i></i></span></button>
+      <button class="tq-tab" type="button" role="tab" id="tq-t2" aria-controls="tq-p2" aria-selected="false" tabindex="-1"><img class="tq-og" src="/logos/customers/one-garden.png" alt="One Garden" width="480" height="144" loading="lazy"><span class="tq-bar"><i></i></span></button>
     </div>
   </div>
 </section>
