@@ -1107,8 +1107,8 @@
   </div>
 </section>
 
-<!-- SECTION 6b: TESTIMONIALS (10/22/2026). Only REAL quotes are visible. The two placeholder cards are
-     `hidden` until their real quote + approval arrive: swap the text/logo, then delete the hidden attribute. -->
+<!-- SECTION 6b: TESTIMONIALS (10/22/2026). The two "Example" cards are placeholders shown on Chris's call
+     until real quotes arrive: swap the text/logo and drop the Example tag. -->
 <style>
 .tq { background: var(--green-ghost); padding: 96px 48px; position: relative; overflow: hidden; }
 .tq::before { content: "\201C"; position: absolute; left: 50%; top: -60px; margin-left: -120px; font-family: Georgia, serif; font-size: 420px; line-height: 1; color: rgba(64,145,108,0.08); pointer-events: none; }
@@ -1116,7 +1116,8 @@
 .tq-h { text-align: center; font-size: clamp(28px, 3.8vw, 44px); font-weight: 800; letter-spacing: -1.4px; line-height: 1.08; color: var(--green-deep); margin: 0 auto 40px; max-width: 760px; text-wrap: balance; }
 .tq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 1000px; margin: 0 auto; }
 .tq-card { grid-column: span 2; background: var(--white); border: 1px solid var(--green-light); border-radius: 28px; padding: 44px 48px; box-shadow: 0 24px 60px rgba(27,67,50,0.12); display: grid; grid-template-columns: 200px 1fr; gap: 40px; align-items: center; }
-.tq-card[hidden] { display: none; }
+.tq-card--ex { position: relative; }
+.tq-ex { position: absolute; top: 16px; right: 16px; font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: var(--slate-500); background: var(--slate-50); border: 1px solid var(--slate-200); padding: 4px 8px; border-radius: 999px; }
 .tq-card + .tq-card { grid-column: span 1; grid-template-columns: 1fr; gap: 20px; padding: 32px; }
 .tq-logo { display: flex; align-items: center; justify-content: center; height: 140px; border-radius: 20px; background: var(--green-ghost); padding: 20px; }
 .tq-logo img { max-width: 100%; max-height: 96px; width: auto; height: auto; }
@@ -1147,20 +1148,20 @@
         <figcaption class="tq-who"><span class="tq-av" aria-hidden="true">AL</span><span><b>Avery Leveston</b><small>CEO, Cowboy Kush</small></span></figcaption>
       </div>
     </figure>
-    <!-- PLACEHOLDER: replace with a real quote + logo from a real client, then remove `hidden`. -->
-    <figure class="tq-card" hidden style="margin:0">
+    <!-- PLACEHOLDER (Chris, 10/22/2026): fictional example, tagged "Example". Replace with a real client quote + logo and drop the tag. -->
+    <figure class="tq-card tq-card--ex" style="margin:0"><span class="tq-ex">Example</span>
       <div class="tq-logo"><span style="font-weight:800;font-size:20px;color:var(--green-deep)">Holistic Cannabis Co.</span></div>
       <div>
         <blockquote class="tq-quote" style="margin:0 0 22px">&ldquo;Every vendor invoice gets checked against Metrc before we pay it, and our credits come back every month without anyone chasing them.&rdquo;</blockquote>
-        <figcaption class="tq-who"><span class="tq-av" aria-hidden="true">HC</span><span><b>Name</b><small>Title, Holistic Cannabis Co.</small></span></figcaption>
+        <figcaption class="tq-who"><span class="tq-av" aria-hidden="true">MR</span><span><b>Maya R.</b><small>Controller, Holistic Cannabis Co.</small></span></figcaption>
       </div>
     </figure>
-    <!-- PLACEHOLDER: replace with a real quote + logo from a real client, then remove `hidden`. -->
-    <figure class="tq-card" hidden style="margin:0">
+    <!-- PLACEHOLDER (Chris, 10/22/2026): fictional example, tagged "Example". Replace with a real client quote + logo and drop the tag. -->
+    <figure class="tq-card tq-card--ex" style="margin:0"><span class="tq-ex">Example</span>
       <div class="tq-logo"><span style="font-weight:800;font-size:20px;color:var(--green-deep)">Verdant Hill Botanical</span></div>
       <div>
         <blockquote class="tq-quote" style="margin:0 0 22px">&ldquo;Our past-due list used to eat a day a week. Now the reminders go out in our name and the stores just pay.&rdquo;</blockquote>
-        <figcaption class="tq-who"><span class="tq-av" aria-hidden="true">VH</span><span><b>Name</b><small>Title, Verdant Hill Botanical</small></span></figcaption>
+        <figcaption class="tq-who"><span class="tq-av" aria-hidden="true">JT</span><span><b>Jordan T.</b><small>Owner, Verdant Hill Botanical</small></span></figcaption>
       </div>
     </figure>
   </div>
