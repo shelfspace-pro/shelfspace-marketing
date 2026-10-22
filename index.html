@@ -622,21 +622,18 @@
 /* stage: one card per side, one motion (10/22/2026) */
 .hm-stage { flex: 1 1 520px; max-width: 540px; position: relative; animation: fadeUp 1s cubic-bezier(0.22,1,0.36,1) 0.35s both; }
 .hm-glow { position: absolute; inset: -40px; background: radial-gradient(60% 60% at 60% 45%, rgba(64,145,108,0.35), rgba(64,145,108,0) 70%); filter: blur(10px); pointer-events: none; }
-.hm-card { position: relative; background: #0f2a1f; border-radius: 24px; padding: 30px 32px 28px; box-shadow: 0 40px 90px rgba(27,67,50,0.35), 0 0 0 1px rgba(149,213,178,0.12) inset; color: #e6f4ea; }
-.hm-card-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; font-size: 14px; font-weight: 600; color: rgba(230,244,234,0.75); }
-.hm-pill { flex: none; font-size: 12px; font-weight: 700; padding: 5px 12px; border-radius: 999px; transition: background .4s, color .4s, transform .4s cubic-bezier(0.34,1.56,0.64,1); }
-.hm-pill.late { background: rgba(248,113,113,0.18); color: #fca5a5; }
-.hm-pill.paid { background: var(--green-accent); color: #0f2a1f; transform: scale(1.08); }
-.hm-card-lbl, .hm-card-foot { position: relative; display: grid; }
-.hm-card-lbl > span, .hm-card-foot > span { grid-area: 1 / 1; transition: opacity .45s, transform .45s cubic-bezier(0.22,1,0.36,1); }
-.hm-card-lbl { margin-top: 34px; font-size: 15px; font-weight: 600; color: rgba(230,244,234,0.6); }
-.hm-card-num { font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-size: clamp(44px, 6vw, 68px); font-weight: 700; letter-spacing: -2px; line-height: 1.05; margin: 6px 0 30px; color: #fff; transition: color .5s; }
-.hm-card-foot { padding-top: 18px; border-top: 1px solid rgba(255,255,255,0.08); font-size: 14px; color: rgba(230,244,234,0.7); }
-.hm-b { opacity: 0; transform: translateY(8px); }
-.hm-card.done .hm-a { opacity: 0; transform: translateY(-8px); }
-.hm-card.done .hm-b { opacity: 1; transform: none; }
+.hm-card { position: relative; overflow: hidden; background: #0f2a1f; border-radius: 24px; padding: 30px 32px 32px; color: #e6f4ea; box-shadow: 0 40px 90px rgba(27,67,50,0.35), 0 0 0 2px rgba(248,113,113,0.55) inset; transition: box-shadow .5s; }
+.hm-card.done { box-shadow: 0 40px 90px rgba(27,67,50,0.45), 0 0 0 3px var(--green-accent) inset, 0 0 80px rgba(149,213,178,0.35); }
+.hm-card-top { font-size: 15px; font-weight: 600; color: rgba(230,244,234,0.7); }
+.hm-card-num { font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-size: clamp(44px, 6vw, 68px); font-weight: 700; letter-spacing: -2px; line-height: 1.05; margin: 18px 0 24px; color: #fff; transition: color .5s; }
 .hm-card.done .hm-card-num { color: var(--green-accent); }
-.hm-card.done .hm-card-foot { color: var(--green-accent); font-weight: 600; }
+.hm-status { display: grid; }
+.hm-status > span { grid-area: 1 / 1; justify-self: start; font-size: clamp(34px, 4.6vw, 54px); font-weight: 800; text-transform: uppercase; letter-spacing: 1px; line-height: 1; padding: 12px 22px; border-radius: 14px; transition: opacity .3s, transform .45s cubic-bezier(0.34,1.56,0.64,1); }
+.hm-late { background: #dc2626; color: #fff; box-shadow: 0 10px 30px rgba(220,38,38,0.45); animation: hmThrob 1.1s ease-in-out infinite; }
+.hm-paid { font-size: clamp(46px, 6.4vw, 80px) !important; padding: 10px 30px !important; background: var(--green-accent); color: #0f2a1f; box-shadow: 0 10px 34px rgba(149,213,178,0.5); opacity: 0; transform: rotate(-6deg) scale(2.4); }
+.hm-card.done .hm-late { opacity: 0; transform: scale(0.8); animation: none; }
+.hm-card.done .hm-paid { opacity: 1; transform: rotate(-4deg) scale(1); }
+@keyframes hmThrob { 0%,100% { transform: scale(1); } 50% { transform: scale(1.05); } }
 .hm-caption { text-align: center; font-size: 11px; color: var(--slate-400); margin-top: 14px; }
 
 /* side switch */
@@ -650,7 +647,7 @@
 .hero--motion .hero-actions { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 14px 22px; }
 .hm-more { display: inline-flex; align-items: center; gap: 8px; padding: 15px 4px; font-size: 16px; font-weight: 700; color: var(--green-deep); text-decoration: none; transition: gap .25s; }
 .hm-more:hover { gap: 13px; }
-.hero--motion .hm-sub { min-height: 4.5em; }
+.hero--motion .hm-sub { min-height: 3em; font-size: 22px; max-width: 480px; }
 
 @media (max-width: 900px) {
   .hero--motion { padding: 104px 16px 40px; overflow-x: clip; }
@@ -664,10 +661,12 @@
   .hm-stage { width: 100%; flex: none; }
   .hm-card { padding: 24px 22px 22px; }
   .hm-card-top { font-size: 13px; }
+  .hm-status > span { padding: 10px 16px; }
+  .hero--motion .hm-sub { font-size: 19px; }
 }
 @media (max-width: 420px) { .persona-btn { padding: 11px 14px; font-size: 14px; gap: 7px; } .persona-btn svg { width: 17px; height: 17px; } }
 @media (prefers-reduced-motion: reduce) {
-  .hm-card-lbl > span, .hm-card-foot > span, .hm-pill, .hm-card-num { transition: none !important; }
+  .hm-status > span, .hm-card-num, .hm-card { transition: none !important; animation: none !important; }
 }
 </style>
 <noscript><style>.reveal,.hero h1,.hero-actions,.hero-founder-credit,.hero-trust{opacity:1;transform:none;transition:none;animation:none;}</style></noscript>
@@ -970,36 +969,28 @@
         <button class="persona-btn is-active" data-persona="brand" role="tab" aria-selected="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="6" width="14" height="10" rx="1"/><path d="M15 9h4l3 3v4h-7z"/><circle cx="6" cy="18" r="2"/><circle cx="18" cy="18" r="2"/></svg>I run a brand</button>
         <button class="persona-btn" data-persona="store" role="tab" aria-selected="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l1.5-5h15L21 9"/><path d="M3 9h18v2a3 3 0 0 1-6 0 3 3 0 0 1-6 0 3 3 0 0 1-6 0z"/><path d="M5 13v8h14v-8"/><path d="M10 21v-5h4v5"/></svg>I run a dispensary</button>
       </div>
-      <h1 class="hm-h1">Stop leaving money <em>on the shelf.</em></h1>
-      <p class="hm-sub show-brand">We get you paid by the dispensaries you sell to. Reminders go out in your name, so your reps can get back to selling.</p>
-      <p class="hm-sub show-store">We pay your vendors, check every invoice against Metrc first, and get your credits back every month.</p>
+      <h1 class="hm-h1">We get you <em>paid.</em></h1>
+      <p class="hm-sub show-brand">Imagine a CFO and a collections agency had a baby, that's ShelfSpace.</p>
+      <p class="hm-sub show-store">Imagine a CFO and an AP department had a baby, that's ShelfSpace.</p>
       <div class="hero-actions">
         <a href="/contact?cta=home-hero" class="btn-primary">Schedule a call <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
         <a href="/accounts-receivable" class="hm-more show-brand">See how ShelfCollect works <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
         <a href="/accounts-payable" class="hm-more show-store">See how ShelfPay works <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
         <span class="cta-micro cta-micro--row">30 minutes with Chris. See how it would run for your business.</span>
       </div>
-      <div class="hm-guar show-brand"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6z"/><polyline points="8.5 12 11 14.5 15.5 9.5"/></svg>We collect more than we cost. Or we refund the difference.</div>
-      <div class="hm-guar show-store"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6z"/><polyline points="8.5 12 11 14.5 15.5 9.5"/></svg>The credits pay for it. Or we refund the difference.</div>
-      <div class="hero-trust">
-        <img src="/metrc-logo-v2.png" alt="Metrc">
-        <span>Certified Metrc Third-Party Vendor</span>
-      </div>
     </div>
 
     <div class="hm-stage">
       <div class="hm-glow"></div>
-      <div class="hm-card show-brand" aria-label="Example: a past-due invoice from a dispensary gets paid">
-        <div class="hm-card-top"><span>Invoice #1182 · Green Leaf Dispensary</span><span class="hm-pill late" data-late="34 days late">34 days late</span></div>
-        <div class="hm-card-lbl"><span class="hm-a">They owe you</span><span class="hm-b">In your bank</span></div>
+      <div class="hm-card show-brand" aria-label="Example: a 34-day-late invoice from a dispensary gets paid">
+        <div class="hm-card-top">Invoice #1182 · Green Leaf Dispensary</div>
         <div class="hm-card-num">$3,280.00</div>
-        <div class="hm-card-foot"><span class="hm-a">Reminder sent, in your name</span><span class="hm-b">Paid. Your rep never made a call.</span></div>
+        <div class="hm-status"><span class="hm-late">34 days late</span><span class="hm-paid">Paid</span></div>
       </div>
-      <div class="hm-card show-store" aria-label="Example: a vendor credit recovered for a dispensary">
-        <div class="hm-card-top"><span>Vendor credits · September 2026</span><span class="hm-pill late" data-late="Not claimed">Not claimed</span></div>
-        <div class="hm-card-lbl"><span class="hm-a">Your vendors owe you</span><span class="hm-b">Back in your pocket</span></div>
+      <div class="hm-card show-store" aria-label="Example: unclaimed vendor credits get recovered">
+        <div class="hm-card-top">Vendor credits · September 2026</div>
         <div class="hm-card-num">$1,005.75</div>
-        <div class="hm-card-foot"><span class="hm-a">Returns, destroyed product, price drops</span><span class="hm-b">Taken off your next vendor payment.</span></div>
+        <div class="hm-status"><span class="hm-late">Unclaimed</span><span class="hm-paid">Recovered</span></div>
       </div>
       <div class="hm-caption">Illustration with example numbers</div>
     </div>
@@ -2067,12 +2058,7 @@
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var timer = null, visible = true;
   function card() { return hero.querySelector('.hm-card.show-' + hero.getAttribute('data-persona')); }
-  function set(c, done) {
-    c.classList.toggle('done', done);
-    var pill = c.querySelector('.hm-pill');
-    pill.className = 'hm-pill ' + (done ? 'paid' : 'late');
-    pill.textContent = done ? (c.classList.contains('show-brand') ? 'Paid' : 'Recovered') : pill.getAttribute('data-late');
-  }
+  function set(c, done) { c.classList.toggle('done', done); }
   function stop() { clearTimeout(timer); timer = null; }
   function loop(c, done) { set(c, done); timer = setTimeout(function () { loop(c, !done); }, done ? 3600 : 2400); }
   function restart() {
