@@ -861,6 +861,7 @@ a.cs-stat:hover .cs-stat-go span { transform: translateX(4px); }
 .cs-v2 .case-filter:hover { border-color: var(--green-accent); color: #fff; }
 .cs-v2 .case-filter.active { background: var(--green-accent); border-color: var(--green-accent); color: var(--green-deep); font-weight: 700; }
 .cs-v2 .case-grid { padding-top: 14px; padding-bottom: 28px; }
+.case-grid.is-fit { justify-content: center; }
 .cs-v2 .case-card { --c: #40916c; position: relative; border: 0; border-radius: 18px; padding: 30px 26px 24px; box-shadow: 0 18px 40px rgba(0,0,0,0.28); overflow: hidden; }
 .cs-v2 .case-card::before { content: ''; position: absolute; left: 0; right: 0; top: 0; height: 5px; background: var(--c); }
 .cs-v2 .case-card:hover { transform: translateY(-8px) rotate(-0.4deg); box-shadow: 0 30px 60px rgba(0,0,0,0.38), 0 0 0 3px var(--c); }
@@ -1327,7 +1328,7 @@ a.cs-stat:hover .cs-stat-go span { transform: translateX(4px); }
       <button class="case-arrow case-arrow--left is-hidden" aria-label="Scroll left"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg></button>
       <button class="case-arrow case-arrow--right" aria-label="Scroll right"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 6 15 12 9 18"/></svg></button>
     <div class="case-grid">
-      <div class="case-card reveal" data-category="accounts-payable">
+      <div class="case-card reveal" data-category="accounts-payable" data-also="brands">
         <div class="case-tag case-tag--ap">Accounts Payable</div>
         <div class="case-amount">$784</div>
         <div class="case-headline">Caught a vendor under-billing itself</div>
@@ -1373,7 +1374,7 @@ a.cs-stat:hover .cs-stat-go span { transform: translateX(4px); }
           <a href="/blog/case-study-non-cannabis-vendors" class="case-link">Read the full story <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
         </div>
       </div>
-      <div class="case-card reveal" data-category="operations">
+      <div class="case-card reveal" data-category="operations" data-also="brands">
         <div class="case-tag case-tag--ops">Operations</div>
         <div class="case-amount">1 min</div>
         <div class="case-headline">Vendor AR reminder answered, Treasury user added — both in one thread</div>
@@ -1455,7 +1456,7 @@ a.cs-stat:hover .cs-stat-go span { transform: translateX(4px); }
           <a href="/blog/case-study-shelfiq-vendor-emails" class="case-link">Read the full story <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
         </div>
       </div>
-      <div class="case-card reveal" data-category="operations">
+      <div class="case-card reveal" data-category="operations" data-also="brands">
         <div class="case-tag case-tag--ops">Operations</div>
         <div class="case-amount">27 hrs/week</div>
         <div class="case-headline">Back-office finance labor saved, AP and AR</div>
@@ -1500,7 +1501,7 @@ a.cs-stat:hover .cs-stat-go span { transform: translateX(4px); }
           <a href="/blog/case-study-quickbooks-sync" class="case-link">Read the full story <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
         </div>
       </div>
-      <div class="case-card reveal" data-category="consignment">
+      <div class="case-card reveal" data-category="consignment" data-also="brands">
         <div class="case-tag case-tag--consignment">Consignment</div>
         <div class="case-amount">Zero stockouts</div>
         <div class="case-headline">Vendor started restocking from their settlement report</div>
@@ -1518,7 +1519,7 @@ a.cs-stat:hover .cs-stat-go span { transform: translateX(4px); }
           <a href="/blog/case-study-metrc-invoice-accuracy" class="case-link">Read the full story <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
         </div>
       </div>
-      <div class="case-card reveal reveal-delay-2" data-category="consignment">
+      <div class="case-card reveal reveal-delay-2" data-category="consignment" data-also="brands">
         <div class="case-tag case-tag--consignment">Consignment</div>
         <div class="case-amount">$14,230</div>
         <div class="case-headline">We got a new product on shelves — zero risk for both sides</div>
@@ -1906,7 +1907,8 @@ a.cs-stat:hover .cs-stat-go span { transform: translateX(4px); }
       btn.classList.add('active');
       var filter = btn.dataset.filter;
       cards.forEach(function(card) {
-        if (filter === 'all' || card.dataset.category === filter) {
+        var also = (card.dataset.also || '').split(' ');
+        if (filter === 'all' || card.dataset.category === filter || also.indexOf(filter) !== -1) {
           card.classList.remove('hidden');
         } else {
           card.classList.add('hidden');
@@ -1924,11 +1926,16 @@ a.cs-stat:hover .cs-stat-go span { transform: translateX(4px); }
   }
   function updateArrows() {
     if (!caseGrid || !arrowLeft || !arrowRight) return;
+    caseGrid.classList.remove('is-fit');
+    var fits = caseGrid.scrollWidth <= caseGrid.offsetWidth + 2;
+    caseGrid.classList.toggle('is-fit', fits);
+    arrowLeft.style.display = arrowRight.style.display = fits ? 'none' : '';
     arrowLeft.classList.toggle('is-hidden', caseGrid.scrollLeft < 10);
     arrowRight.classList.toggle('is-hidden', caseGrid.scrollLeft + caseGrid.offsetWidth >= caseGrid.scrollWidth - 10);
   }
   if (caseGrid) {
     caseGrid.addEventListener('scroll', updateArrows, { passive: true });
+    window.addEventListener('resize', updateArrows);
     updateArrows();
   }
   if (arrowLeft) {
