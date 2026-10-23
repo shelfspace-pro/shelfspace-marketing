@@ -286,7 +286,7 @@
       <p class="cx-phone">Prefer to talk now? Call Chelsea, our AI assistant, at <a href="tel:+16162714585">(616) 271-4585</a>. She can answer questions and book your call with Chris.</p>
       <noscript><p style="font-size:14px;color:var(--slate-500);margin-top:16px;">Email us at <a href="mailto:support@shelfspace.pro" style="color:var(--green-dark);font-weight:600;">support@shelfspace.pro</a>.</p></noscript>
 
-      <!-- Done: the calendar for brands + distributors, otherwise a thank-you -->
+      <!-- Done: the calendar for brands, distributors and dispensaries, otherwise a thank-you -->
       <div class="cx-success" id="formSuccess" role="status" aria-live="polite" tabindex="-1">
         <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
         <h3 id="cxSuccessTitle">Thanks.</h3>
@@ -713,11 +713,12 @@
   }
 
   function finish(role) {
-    // Brands and distributors book right away (10/23/2026: before go-live too — a booking while
-    // outreach is off is saved and Chris is told). The status only decides Chelsea's call line.
+    // Brands, distributors AND dispensaries book right away (dispensaries added 10/23/2026, Chris: never
+    // lose a lead). Before go-live too: a booking while outreach is off is saved and Chris is told.
+    // Only "Something else" and partners get the thank-you. The status only decides Chelsea's call line.
     loadStatus().then(function() {
       applyStatusCopy();
-      var book = !isPartner && !lead.viaFallback && (role === 'brand' || role === 'distributor');
+      var book = !isPartner && !lead.viaFallback && (role === 'brand' || role === 'distributor' || role === 'store');
       if (book) showBooking(); else showThanks();
     });
   }

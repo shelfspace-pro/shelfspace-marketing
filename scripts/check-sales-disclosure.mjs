@@ -70,7 +70,8 @@ if (/['"]\/api\/public\/sales-lead/.test(html)) fail('a relative /api/public/sal
 
 // 4. booking gate
 const fin = region(html, 'function finish(role) {', '\n  }\n', 'finish()');
-if (!/var book = !isPartner && !lead\.viaFallback && \(role === 'brand' \|\| role === 'distributor'\);/.test(fin)) fail('finish() no longer gates the calendar on brand/distributor (not partner, not fallback)');
+// Dispensaries book too (10/23/2026, Chris: never lose a lead); "something else", partners and fallback leads don't.
+if (!/var book = !isPartner && !lead\.viaFallback && \(role === 'brand' \|\| role === 'distributor' \|\| role === 'store'\);/.test(fin)) fail('finish() no longer gates the calendar on brand/distributor/store (not partner, not fallback)');
 if ((html.match(/(?<!function )showBooking\(\)/g) || []).length !== 1) fail('showBooking() must be called from exactly one place (finish)');
 if (!/if \(book\) showBooking\(\); else showThanks\(\);/.test(fin)) fail('finish() does not branch on the gate');
 const st = region(html, 'function loadStatus() {', '\n  }\n', 'loadStatus()');

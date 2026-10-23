@@ -212,13 +212,20 @@ const ok200 = (b) => b.step === 1 ? { status: 200, body: { ok: true, leadId: '11
   ok(s.seen.book.length === 2, 'second pick books');
   await s.browser.close();
 }
-// 3. live, store → thanks
+// 3. live, store → the calendar too (10/23/2026, Chris: never lose a lead); "something else" → thanks
 {
-  const s = await scenario('live store → thanks', { status: { live: true, capture: true }, lead: ok200 });
+  const s = await scenario('live store → calendar', { status: { live: true, capture: true }, lead: ok200 });
   await doStep2(s.page, 'store');
-  await s.page.waitForSelector('#formSuccess', { state: 'visible' });
-  ok(await s.page.isHidden('#cxBooking') && s.seen.cal === 0, 'store gets no calendar');
+  await s.page.waitForSelector('#cxDays .cx-day', { timeout: 10000 });
+  ok(await s.page.isVisible('#cxBooking'), 'store gets the calendar');
   ok(!('wholesale_band' in s.seen.lead[1]) && s.seen.lead[1].role === 'store', 'store: role posted straight from the role screen, no band');
+  await s.browser.close();
+}
+{
+  const s = await scenario('live other → thanks', { status: { live: true, capture: true }, lead: ok200 });
+  await doStep2(s.page, 'other');
+  await s.page.waitForSelector('#formSuccess', { state: 'visible' });
+  ok(await s.page.isHidden('#cxBooking') && s.seen.cal === 0, 'other gets no calendar');
   ok((await s.page.textContent('#cxSuccessText')).includes('chris+d2test@shelfspace.pro'), 'thanks names the email');
   await s.browser.close();
 }
@@ -397,7 +404,7 @@ for (const [label, fn] of [['500', () => ({ status: 500, body: { ok: false } })]
 // 9. phone width screenshots
 {
   const s = await scenario('phone width', { status: { live: false, capture: true }, lead: ok200, width: 390, shotPrefix: 'phone' });
-  await doStep2(s.page, 'store', 'phone');
+  await doStep2(s.page, 'other', 'phone');
   await s.page.waitForSelector('#formSuccess', { state: 'visible' });
   SHOTS && await s.page.screenshot({ path: `${SHOTS}/phone-thanks.png` });
   const sw = await s.page.evaluate(() => document.documentElement.scrollWidth);
