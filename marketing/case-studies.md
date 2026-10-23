@@ -128,6 +128,7 @@ Add a one-line entry for the new case study under the blog section.
 | 16 | `case-study-metrc-invoice-accuracy` | accounts-payable | $7,340 | We caught 12 wrong invoices in one month using Metrc | Live |
 | 17 | `case-study-consignment-new-product` | consignment | $14,230 | We got a new product on shelves — zero risk for both sides | Live |
 | 18 | `case-study-ceo-email-relief` | operations | 20+ hrs/month | We took over vendor emails — the owner never answered another one | Live |
+| 20 | `case-study-back-office-labor-saved` | operations | 27 hrs/week | AP 15h→15m (case 10) + One Garden AR ~12h/wk: 38 invoices, 195 reminders, 120 rep lists 09/24–10/23 at 5/5/10 min + 2h spreadsheet | Live |
 | 19 | `case-study-buyer-reorder-data` | operations | 23% less waste | We gave a buyer real data — waste dropped 23% | Live |
 
 ## SEO Targets
