@@ -496,7 +496,10 @@
 
   function zone() { try { return Intl.DateTimeFormat().resolvedOptions().timeZone || ''; } catch (e) { return ''; } }
 
-  function slotButtons(box, slots) {
+  function slotButtons(box, slots, more) {
+    // Only the times on screen are bookable (the server signs just this page), so a new page replaces the old one.
+    var prev = document.getElementById('cwSlots');
+    if (prev) prev.remove();
     var list = el('div', 'cw-actions');
     list.id = 'cwSlots';
     slots.forEach(function (s) {
@@ -514,19 +517,30 @@
       });
       list.appendChild(b);
     });
+    if (more && slots.length) {
+      var mt = el('button', 'cw-btn', 'More times');
+      mt.addEventListener('click', function () { mt.disabled = true; loadSlots(box, slots[slots.length - 1].start); });
+      list.appendChild(mt);
+    }
     body.appendChild(list);
     scroll();
   }
 
-  function loadSlots(box) {
+  function loadSlots(box, after) {
     loading(true);
-    call({ action: 'slots', token: st.token, timeZone: zone() }).then(function (b) {
+    var req = { action: 'slots', token: st.token, timeZone: zone() };
+    if (after) req.after = after;
+    call(req).then(function (b) {
       loading(false);
       if (b.ok && b.slots && b.slots.length) {
         if (b.token) st.token = b.token;
         save();
-        addUi('note', 'Here are the next open times (your time zone):');
-        slotButtons(box, b.slots);
+        addUi('note', after ? 'Here are more open times (your time zone):' : 'Here are the next open times (your time zone):');
+        slotButtons(box, b.slots, !!b.more);
+      } else if (after) {
+        var prev = document.getElementById('cwSlots');
+        if (prev) Array.prototype.forEach.call(prev.querySelectorAll('button'), function (x) { if (x.textContent === 'More times') x.remove(); });
+        addUi('note', 'Those are the open times for the next few weeks. Pick one above, or leave a note and Chris will find a time.');
       } else fallbackNote('I couldn’t load open times.');
     }, function () { loading(false); fallbackNote('I couldn’t load open times.'); });
   }
