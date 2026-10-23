@@ -4,19 +4,21 @@
 // What it protects, and the mutation each check exists to catch:
 //  1. The consent paragraph is byte-identical to the platform registry (sha256 pinned below and
 //     in the page's DISCLOSURE_SHA256). Drift → every lead is saved WITHOUT call consent, silently.
-//  2. The paragraph sits inside step 1, ABOVE the submit button, and that button says "Submit"
-//     (visible text AND the data-label the page posts) — the disclosure says "By clicking Submit".
+//  2. The paragraph sits inside step 1 (the mobile-number screen), ABOVE the submit button, and that
+//     button says "Continue" (visible text AND the data-label the page posts) — the disclosure says
+//     "By clicking Continue" (platform version 2026-10-23-continue).
 //  3. Step 1 posts to the ABSOLUTE ourshelf.space URL, never through this site's /api rewrite
 //     (the rewrite would make every visitor share one IP for the lead system's rate limits).
-//  4. The booking calendar is gated on the live status AND brand/distributor, in one place.
+//  4. The booking calendar shows for brands/distributors only (never partners, never the email
+//     backup), in one place. Since 10/23/2026 it no longer waits for go-live.
 //  5. /api/interest never writes to the visitor (it used to reply as Chris; only Chelsea, through
 //     the lead system's gates, may write to a prospect).
 // Usage: node scripts/check-sales-disclosure.mjs [path/to/contact.html] [path/to/interest.js]
 import { readFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 
-const PINNED_VERSION = '2026-10-18-f';
-const PINNED_SHA256 = '1072b51767aa3389a01512a8cbdee287f71a886f870a7e4dcbe00f9acfd2cc9f';
+const PINNED_VERSION = '2026-10-23-continue';
+const PINNED_SHA256 = 'd047b4f337cf87ea1a0d51ec63f373e28b45f1941f9a78c4c1dc9e65c01c879a';
 const LEAD_API = 'https://ourshelf.space/api/public/sales-lead';
 
 const htmlPath = process.argv[2] || 'contact.html';
@@ -53,9 +55,11 @@ if (consentAt < 0) fail('consent paragraph is not inside step 1');
 if (!btnMatch) fail('submit button #submitBtn not found in step 1');
 else {
   if (consentAt > step1.indexOf(btnMatch[0])) fail('consent paragraph is below the submit button');
-  if (!/data-label="Submit"/.test(btnMatch[0])) fail('submit button data-label is not "Submit"');
+  if (!/data-label="Continue"/.test(btnMatch[0])) fail('submit button data-label is not "Continue"');
   const visible = btnMatch[1].replace(/<svg[\s\S]*?<\/svg>/g, '').replace(/<[^>]+>/g, '').trim();
-  if (visible !== 'Submit') fail(`submit button text is "${visible}", not "Submit"`);
+  if (visible !== 'Continue') fail(`submit button text is "${visible}", not "Continue"`);
+  const phoneQ = region(step1, '<div class="cx-q" data-q="phone"', '<div class="form-error" id="formError"', 'mobile screen');
+  if (!phoneQ.includes('<p class="sales-consent">') || !phoneQ.includes('id="submitBtn"')) fail('consent + submit button are not both on the mobile-number screen');
 }
 if (!/button_label: btn\.getAttribute\('data-label'\)/.test(html)) fail('step 1 does not post the button label from data-label');
 
@@ -66,7 +70,7 @@ if (/['"]\/api\/public\/sales-lead/.test(html)) fail('a relative /api/public/sal
 
 // 4. booking gate
 const fin = region(html, 'function finish(role) {', '\n  }\n', 'finish()');
-if (!/var book = st\.live && !isPartner && !lead\.viaFallback && \(role === 'brand' \|\| role === 'distributor'\);/.test(fin)) fail('finish() no longer gates the calendar on live + brand/distributor');
+if (!/var book = !isPartner && !lead\.viaFallback && \(role === 'brand' \|\| role === 'distributor'\);/.test(fin)) fail('finish() no longer gates the calendar on brand/distributor (not partner, not fallback)');
 if ((html.match(/(?<!function )showBooking\(\)/g) || []).length !== 1) fail('showBooking() must be called from exactly one place (finish)');
 if (!/if \(book\) showBooking\(\); else showThanks\(\);/.test(fin)) fail('finish() does not branch on the gate');
 const st = region(html, 'function loadStatus() {', '\n  }\n', 'loadStatus()');

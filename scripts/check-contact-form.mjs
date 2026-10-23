@@ -1,8 +1,9 @@
 #!/usr/bin/env node
-// Behavioral check of the /contact two-step lead form (sales machine row D2). Serves the repo,
-// stubs Turnstile and the platform endpoints, and asserts what the page posts and shows:
-// the D1 contract, the go-live calendar gate, the /api/interest fallback on every failure,
-// the partner path, and no sideways scroll at 1440 / 390 px.
+// Behavioral check of the /contact one-question-per-screen lead form (sales row D2, rebuilt
+// closers.io-style 10/23/2026). Serves the repo, stubs Turnstile and the platform endpoints, and
+// asserts what the page posts and shows: screen-by-screen validation (nothing posts before the mobile
+// screen), the D1 contract, the calendar for brands/distributors (live or not), the Chelsea line only
+// when live, the /api/interest fallback on every failure, the partner path, no sideways scroll.
 // Usage: npm run check:contact-form   (CAL_LIVE=1 also loads the real Cal.com embed under the
 // production CSP; SHOTS=<dir> writes screenshots). Exits 1 on any failure.
 import http from 'node:http';
@@ -60,55 +61,67 @@ async function scenario(name, { status, lead, interest, url = '/contact.html?utm
   await page.goto(BASE + url, { waitUntil: 'domcontentloaded' });
   await page.waitForTimeout(1700); // past the 1.5 s too-fast floor
   if (shotPrefix && SHOTS) await page.screenshot({ path: `${SHOTS}/${shotPrefix}-step1.png`, fullPage: false });
-  await page.fill('#name', 'Chris D2test');
-  await page.fill('#email', 'chris+d2test@shelfspace.pro');
-  await page.fill('#phone', '(360) 609-0721');
-  await page.fill('#company', 'D2 Test Brand (ShelfSpace sales test)');
-  const talkVisible = await page.isVisible('#cxTalkLine');
+  await walkStep1(page, { name: 'Chris D2test', email: 'chris+d2test@shelfspace.pro', company: 'D2 Test Brand (ShelfSpace sales test)', phone: '(360) 609-0721' }, seen);
   await page.click('#submitBtn');
-  return { browser, page, seen, talkVisible, role };
+  return { browser, page, seen, role };
 }
 
+// Screens 1–3 (Enter on name + company, the Continue button on email), then type the mobile number.
+async function walkStep1(page, f, seen) {
+  await page.fill('#name', f.name); await page.press('#name', 'Enter');
+  await page.waitForSelector('#email', { state: 'visible' });
+  await page.fill('#email', f.email); await page.click('.cx-q[data-q="email"] [data-next]');
+  await page.waitForSelector('#company', { state: 'visible' });
+  await page.fill('#company', f.company); await page.press('#company', 'Enter');
+  await page.waitForSelector('#phone', { state: 'visible' });
+  if (seen) ok(seen.lead.length === 0 && seen.interest.length === 0, 'nothing posted before the mobile screen');
+  await page.fill('#phone', f.phone);
+}
+const bar = (page) => page.evaluate(() => document.getElementById('cxProgress').style.width);
+
 async function doStep2(page, role, shotPrefix) {
-  await page.waitForSelector('#cxStep2:not([hidden])', { timeout: 10000 });
+  await page.waitForSelector('#qRole:not([hidden])', { timeout: 10000 });
   if (shotPrefix && SHOTS) await page.screenshot({ path: `${SHOTS}/${shotPrefix}-step2.png`, fullPage: false });
   if (role) await page.click(`label[for=role-${role}]`);
-  await page.click('label[for=st-MI]');
-  await page.selectOption('#cxMoreStates', 'OH');
-  if (role === 'brand' || role === 'distributor') await page.click('label[for=band-2]');
-  await page.click('label[for=tl-1]');
-  await page.fill('#pain', 'Stores pay late <b>');
-  await page.click('#step2Btn');
+  await page.click('#roleBtn');
+  if (role === 'brand' || role === 'distributor') {
+    await page.waitForSelector('#qBand:not([hidden])');
+    if (shotPrefix && SHOTS) await page.screenshot({ path: `${SHOTS}/${shotPrefix}-step3.png`, fullPage: false });
+    await page.click('label[for=band-2]');
+    await page.click('#step2Btn');
+  }
 }
 
 const ok200 = (b) => b.step === 1 ? { status: 200, body: { ok: true, leadId: '11111111-2222-4333-8444-555555555555' } } : { status: 200, body: { ok: true } };
 
-// 1. not live, brand
+// 1. not live, brand → the calendar anyway (10/23/2026), no Chelsea line
 {
-  const s = await scenario('not live → thanks, no calendar', { status: { live: false, capture: true }, lead: ok200, shotPrefix: 'desk' });
-  ok(!s.talkVisible, 'Chelsea call line hidden while not live');
+  const s = await scenario('not live brand → calendar, no Chelsea line', { status: { live: false, capture: true }, lead: ok200, shotPrefix: 'desk' });
   await doStep2(s.page, 'brand', 'desk');
-  await s.page.waitForSelector('#formSuccess', { state: 'visible' });
-  SHOTS && await s.page.screenshot({ path: `${SHOTS}/desk-thanks.png` });
+  await s.page.waitForSelector('#cxBooking:not([hidden])', { timeout: 10000 });
+  SHOTS && await s.page.screenshot({ path: `${SHOTS}/desk-booking.png` });
+  ok(await s.page.isHidden('#cxTalkLine'), 'Chelsea call line hidden while not live');
+  await s.page.waitForTimeout(500);
+  ok(s.seen.cal > 0, 'Cal.com embed loader requested while not live');
+  ok(await bar(s.page) === '100%', 'progress bar full on the calendar');
   const p1 = s.seen.lead[0], p2 = s.seen.lead[1];
-  ok(p1 && p1.step === 1 && p1.disclosure_version === '2026-10-18-f', 'step 1 posts the disclosure version');
-  ok(p1.disclosure_html_sha256 === '1072b51767aa3389a01512a8cbdee287f71a886f870a7e4dcbe00f9acfd2cc9f' && p1.button_label === 'Submit', 'step 1 posts registry sha + "Submit"');
+  ok(p1 && p1.step === 1 && p1.disclosure_version === '2026-10-23-continue', 'step 1 posts the Continue disclosure version');
+  ok(p1.disclosure_html_sha256 === 'd047b4f337cf87ea1a0d51ec63f373e28b45f1941f9a78c4c1dc9e65c01c879a' && p1.button_label === 'Continue', 'step 1 posts registry sha + "Continue"');
   ok(p1.turnstile_token && p1.turnstile_token.startsWith('tok-0x4AAAAAACiquH5tTwIbSo5z'), 'step 1 token from the platform site key');
   ok(p1.website === '' && typeof p1.fill_ms === 'number' && p1.fill_ms >= 1500, 'honeypot empty + fill_ms sent');
   ok(p1.page_url.startsWith(BASE + '/contact'), 'page_url = this page');
   ok(p1.utm_source === 'li' && p1.utm_term === 't1' && p1.fbclid === 'fb1' && p1.cta_id === 'home-hero', 'UTMs / click id / cta captured');
-  ok(p1.phone === '(360) 609-0721' && p1.company && !('role' in p1) && !('path' in p1), 'phone as typed, no role, no path');
+  ok(p1.name === 'Chris D2test' && p1.email === 'chris+d2test@shelfspace.pro' && p1.phone === '(360) 609-0721' && p1.company && !('role' in p1) && !('path' in p1), 'all four answers, phone as typed, no role, no path');
   const allowed = new Set(['step','name','email','phone','company','role','turnstile_token','website','fill_ms','disclosure_version','disclosure_html_sha256','button_label','page_url','utm_source','utm_medium','utm_campaign','utm_term','utm_content','fbclid','li_fat_id','referrer','landing_path','cta_id','rep_code','path']);
   ok(Object.keys(p1).every(k => allowed.has(k)), 'step 1 keys ⊆ D1 strict schema: ' + Object.keys(p1).join(','));
   ok(p2 && p2.step === 2 && p2.leadId === '11111111-2222-4333-8444-555555555555' && p2.role === 'brand', 'step 2 posts leadId + role');
-  ok(JSON.stringify(p2.states) === '["MI","OH"]' && p2.wholesale_band === '50k_250k' && p2.timeline === 'now' && p2.pain === 'Stores pay late <b>', 'step 2 qualifiers');
+  ok(JSON.stringify(p2.states) === '[]' && p2.wholesale_band === '50k_250k' && !('timeline' in p2) && !('pain' in p2), 'step 2: the band, nothing else');
   const allowed2 = new Set(['step','leadId','website','role','states','wholesale_band','pain','timeline']);
   ok(Object.keys(p2).every(k => allowed2.has(k)), 'step 2 keys ⊆ D1 strict schema');
-  ok(await s.page.isHidden('#cxBooking') && s.seen.cal === 0, 'no calendar, Cal.com never loaded');
-  ok((await s.page.textContent('#cxSuccessText')).includes('chris+d2test@shelfspace.pro'), 'thanks names the email');
+  ok(await s.page.isHidden('#formSuccess'), 'thanks hidden when booking');
   await s.page.waitForTimeout(800);
   const sl = await s.page.evaluate(() => document.querySelector('.cx-hero').scrollLeft);
-  ok(sl === 0, 'hero not scrolled sideways after the thanks (scrollLeft ' + sl + ')');
+  ok(sl === 0, 'hero not scrolled sideways (scrollLeft ' + sl + ')');
   ok(s.seen.interest.length === 0, 'fallback not used');
   ok(s.seen.consoleErr.length === 0, 'no console errors ' + s.seen.consoleErr.join(' | '));
   await s.browser.close();
@@ -116,9 +129,9 @@ const ok200 = (b) => b.step === 1 ? { status: 200, body: { ok: true, leadId: '11
 // 2. live, brand → calendar (real Cal.com under the production CSP)
 {
   const s = await scenario('live brand → calendar', { status: { live: true, capture: true }, lead: ok200, realCal: CAL_LIVE, shotPrefix: 'desk-live' });
-  ok(s.talkVisible, 'Chelsea call line shown when live');
   await doStep2(s.page, 'brand');
   await s.page.waitForSelector('#cxBooking:not([hidden])', { timeout: 10000 });
+  ok(await s.page.isVisible('#cxTalkLine'), 'Chelsea call line shown on the calendar when live');
   if (CAL_LIVE) {
     const fr = await s.page.waitForSelector('#cxCalInline iframe', { timeout: 20000 }).catch(() => null);
     ok(!!fr, 'Cal.com iframe mounted');
@@ -153,7 +166,8 @@ const ok200 = (b) => b.step === 1 ? { status: 200, body: { ok: true, leadId: '11
   await doStep2(s.page, 'store');
   await s.page.waitForSelector('#formSuccess', { state: 'visible' });
   ok(await s.page.isHidden('#cxBooking') && s.seen.cal === 0, 'store gets no calendar');
-  ok(!('wholesale_band' in s.seen.lead[1]), 'store sends no wholesale band');
+  ok(!('wholesale_band' in s.seen.lead[1]) && s.seen.lead[1].role === 'store', 'store: role posted straight from the role screen, no band');
+  ok((await s.page.textContent('#cxSuccessText')).includes('chris+d2test@shelfspace.pro'), 'thanks names the email');
   await s.browser.close();
 }
 // 4. lead system 500 → /api/interest fallback
@@ -165,6 +179,7 @@ for (const [label, fn] of [['500', () => ({ status: 500, body: { ok: false } })]
   ok(f && f['cf-turnstile-response'].startsWith('tok-0x4AAAAAACiEpqqSU9lohNi-'), label + ': fallback token from the interest site key');
   ok(f && f.fallbackReason === (label === 'network' ? 'network' : 'http_' + label), label + ': reason ' + (f && f.fallbackReason));
   ok(await s.page.isHidden('#cxStep2') && await s.page.isHidden('#cxBooking'), label + ': no step 2, no calendar');
+  ok(s.seen.cal === 0, label + ': Cal.com never loaded');
   await s.browser.close();
 }
 // 5. capture switched off → straight to fallback, no lead post
@@ -174,42 +189,70 @@ for (const [label, fn] of [['500', () => ({ status: 500, body: { ok: false } })]
   ok(s.seen.lead.length === 0 && s.seen.interest.length === 1 && s.seen.interest[0].fallbackReason === 'capture_off', 'no lead post; fallback capture_off');
   await s.browser.close();
 }
-// 6. status unreachable → treated as not live
+// 6. status unreachable → treated as not live: calendar still shows, no Chelsea line
 {
   const s = await scenario('status unreachable → not live', { status: 'fail', lead: ok200 });
-  ok(!s.talkVisible, 'call line hidden');
   await doStep2(s.page, 'brand');
-  await s.page.waitForSelector('#formSuccess', { state: 'visible' });
-  ok(await s.page.isHidden('#cxBooking') && s.seen.cal === 0, 'no calendar when status fails');
+  await s.page.waitForSelector('#cxBooking:not([hidden])', { timeout: 10000 });
+  ok(await s.page.isHidden('#cxTalkLine'), 'call line hidden when status fails');
+  await s.browser.close();
+}
+// 6b. role + band are required; Back from the band returns to the role screen
+{
+  const s = await scenario('role and band required', { status: { live: false, capture: true }, lead: ok200 });
+  await s.page.waitForSelector('#qRole:not([hidden])', { timeout: 10000 });
+  ok(await bar(s.page) === '71%', 'progress at screen 5 of 7 (' + await bar(s.page) + ')');
+  await s.page.click('#roleBtn'); await s.page.waitForTimeout(200);
+  ok(s.seen.lead.length === 1 && (await s.page.textContent('#step2Error')).includes('pick one'), 'no role → error, nothing posted');
+  await s.page.click('label[for=role-distributor]'); await s.page.click('#roleBtn');
+  await s.page.waitForSelector('#qBand:not([hidden])');
+  await s.page.click('#step2Btn'); await s.page.waitForTimeout(200);
+  ok(s.seen.lead.length === 1 && await s.page.isVisible('#qBand'), 'no band → stays, nothing posted');
+  await s.page.click('#bandBack');
+  ok(await s.page.isVisible('#qRole') && await s.page.isChecked('#role-distributor'), 'Back → role screen, answer kept');
   await s.browser.close();
 }
 // 7. partner path
 {
   const s = await scenario('partner path', { status: { live: true, capture: true }, lead: ok200, url: '/contact.html?cta=for-bookkeepers-hero&path=partner' });
-  ok(!s.talkVisible, 'partner: no Chelsea call line');
-  await s.page.waitForSelector('#cxStep2:not([hidden])');
-  ok(await s.page.isHidden('#cxQualify'), 'partner: qualifiers hidden');
+  await s.page.waitForSelector('#qPartner:not([hidden])');
+  ok(await s.page.isHidden('#qRole') && await s.page.isHidden('#qBand'), 'partner: role + band screens skipped');
   await s.page.fill('#pain', 'We keep books for six stores');
-  await s.page.click('#step2Btn');
+  await s.page.click('#partnerBtn');
   await s.page.waitForSelector('#formSuccess', { state: 'visible' });
   const [p1, p2] = s.seen.lead;
   ok(p1.path === 'partner' && p1.role === 'other' && p1.cta_id === 'for-bookkeepers-hero', 'partner step 1: path + role other + cta');
   ok(p2.role === 'other' && p2.pain === 'Partner: We keep books for six stores' && p2.states.length === 0, 'partner step 2');
-  ok(await s.page.isHidden('#cxBooking'), 'partner: no calendar even when live');
+  ok(await s.page.isHidden('#cxBooking') && await s.page.isHidden('#cxTalkLine'), 'partner: no calendar, no Chelsea line');
   await s.browser.close();
 }
-// 8. validation: short phone blocked client-side
+// 8. validation: each screen refuses a bad answer before moving on; a short phone never posts
 {
   console.log('\n# validation');
   const browser = await chromium.launch(); const page = await browser.newPage();
   await page.route('**/turnstile/v0/api.js*', r => r.fulfill({ contentType: 'application/javascript', body: TURNSTILE_STUB }));
   let posts = 0; await page.route('https://ourshelf.space/**', r => { if (r.request().method() === 'POST') posts++; return r.fulfill({ status: 200, contentType: 'application/json', headers: { 'access-control-allow-origin': '*' }, body: '{"live":false,"capture":true}' }); });
   await page.goto(BASE + '/contact.html', { waitUntil: 'domcontentloaded' });
-  await page.fill('#name', 'A'); await page.fill('#email', 'a@b.co'); await page.fill('#phone', '12345'); await page.fill('#company', 'X');
+  ok(await page.isVisible('#name') && await page.isHidden('#email') && await page.isHidden('#phone'), 'only the name screen shows first');
+  ok(await bar(page) === '14%', 'progress at screen 1 of 7 (' + await bar(page) + ')');
+  await page.press('#name', 'Enter'); await page.waitForTimeout(150);
+  ok(await page.isVisible('#name') && (await page.textContent('#formError')).includes('name'), 'empty name → stays, error');
+  await page.fill('#name', 'A'); await page.press('#name', 'Enter');
+  await page.fill('#email', 'not-an-email'); await page.press('#email', 'Enter'); await page.waitForTimeout(150);
+  ok(await page.isVisible('#email') && (await page.textContent('#formError')).includes('email'), 'bad email → stays, error');
+  await page.click('.cx-q[data-q="email"] [data-back]');
+  ok(await page.isVisible('#name') && (await page.inputValue('#name')) === 'A', 'Back → name screen, answer kept');
+  await page.press('#name', 'Enter');
+  await page.fill('#email', 'a@b.co'); await page.press('#email', 'Enter');
+  await page.press('#company', 'Enter'); await page.waitForTimeout(150);
+  ok(await page.isVisible('#company') && (await page.textContent('#formError')).includes('company'), 'empty company → stays, error');
+  await page.fill('#company', 'X'); await page.press('#company', 'Enter');
+  ok(await page.isVisible('#phone') && await page.isVisible('.sales-consent') && await page.isVisible('#submitBtn'), 'mobile screen shows the consent above Continue');
+  await page.fill('#phone', '12345');
   await page.click('#submitBtn'); await page.waitForTimeout(400);
   ok(posts === 0 && (await page.textContent('#formError')).includes('mobile'), 'short phone refused before any post');
   for (const bad of ['(360) 609-0721 ext 12', '0044 20 7946 0958', '360-609-0721x5']) {
-    await page.fill('#phone', bad); await page.click('#submitBtn'); await page.waitForTimeout(300);
+    await page.fill('#phone', bad); await page.press('#phone', 'Enter'); await page.waitForTimeout(300);
     ok(posts === 0 && (await page.textContent('#formError')).includes('no extension'), 'refused before posting: ' + bad);
   }
   await browser.close();
@@ -226,7 +269,7 @@ for (const [label, fn] of [['500', () => ({ status: 500, body: { ok: false } })]
   for (const [label, url, want] of [['url campaign wins', '/contact.html?utm_campaign=q4', { utm_campaign: 'q4' }], ['session touch when url has none', '/contact.html?cta=x1', { utm_source: 'li', utm_medium: 'social', landing_path: '/ai-calls?utm_source=li' }]]) {
     posts.length = 0;
     await page.goto(BASE + url, { waitUntil: 'domcontentloaded' }); await page.waitForTimeout(1700);
-    await page.fill('#name', 'A B'); await page.fill('#email', 'a@b.co'); await page.fill('#phone', '+44 20 7946 0958'); await page.fill('#company', 'X');
+    await walkStep1(page, { name: 'A B', email: 'a@b.co', company: 'X', phone: '+44 20 7946 0958' });
     await page.click('#submitBtn'); await page.waitForSelector('#cxStep2:not([hidden])', { timeout: 10000 });
     const p = posts[0] || {};
     const got = { utm_source: p.utm_source, utm_medium: p.utm_medium, utm_campaign: p.utm_campaign, landing_path: p.landing_path };
@@ -242,13 +285,13 @@ for (const [label, fn] of [['500', () => ({ status: 500, body: { ok: false } })]
   const s = await scenario('phone refused by the lead system', { status: { live: false, capture: true }, lead: (b) => ({ status: 400, body: { ok: false, error: 'invalid', fields: ['phone'] } }) });
   await s.page.waitForFunction(() => getComputedStyle(document.getElementById('formError')).display === 'block', null, { timeout: 30000 });
   ok((await s.page.textContent('#formError')).includes('country code') && s.seen.interest.length === 0, 'phone 400 → asks for another number, no fallback');
-  ok(await s.page.isVisible('#cxStep1') && !(await s.page.isDisabled('#submitBtn')), 'step 1 stays, button re-enabled');
+  ok(await s.page.isVisible('#phone') && !(await s.page.isDisabled('#submitBtn')), 'mobile screen stays, button re-enabled');
   await s.browser.close();
 }
 // 9. phone width screenshots
 {
   const s = await scenario('phone width', { status: { live: false, capture: true }, lead: ok200, width: 390, shotPrefix: 'phone' });
-  await doStep2(s.page, 'brand', 'phone');
+  await doStep2(s.page, 'store', 'phone');
   await s.page.waitForSelector('#formSuccess', { state: 'visible' });
   SHOTS && await s.page.screenshot({ path: `${SHOTS}/phone-thanks.png` });
   const sw = await s.page.evaluate(() => document.documentElement.scrollWidth);

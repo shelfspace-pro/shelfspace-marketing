@@ -3,20 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Free Review — Find the Money You're Missing | ShelfSpace</title>
-<meta name="description" content="Find out what your vendors owe you, or what your stores owe you. Free review, personally from ShelfSpace's founder, within one business day. No commitment.">
+<title>Schedule a Call | ShelfSpace</title>
+<meta name="description" content="Give us 7 days and we'll transform your back-office finance function. If we don't collect 25% of your past-due invoices in the first month, you don't pay.">
 <link rel="canonical" href="https://shelfspace.pro/contact">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://shelfspace.pro/contact">
-<meta property="og:title" content="Find the money you're missing. Free. | ShelfSpace">
-<meta property="og:description" content="Find out what your vendors owe you, or what your stores owe you. Free review, personally from ShelfSpace's founder, within one business day. No commitment.">
+<meta property="og:title" content="Give us 7 days. | ShelfSpace">
+<meta property="og:description" content="Give us 7 days and we'll transform your back-office finance function. If we don't collect 25% of your past-due invoices in the first month, you don't pay.">
 <meta property="og:image" content="https://shelfspace.pro/og-image-v7.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:type" content="image/png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Find the money you're missing. Free. | ShelfSpace">
-<meta name="twitter:description" content="Find out what your vendors owe you, or what your stores owe you. Free review, personally from ShelfSpace's founder, within one business day. No commitment.">
+<meta name="twitter:title" content="Give us 7 days. | ShelfSpace">
+<meta name="twitter:description" content="Give us 7 days and we'll transform your back-office finance function. If we don't collect 25% of your past-due invoices in the first month, you don't pay.">
 <meta name="twitter:image" content="https://shelfspace.pro/og-image-v7.png">
 <meta name="apple-mobile-web-app-title" content="ShelfSpace">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -31,103 +31,70 @@
   .reveal.is-visible { opacity: 1; transform: translateY(0); }
   .reveal-delay-1 { transition-delay: 0.15s; }
 
-  /* ── HERO: the form lives here, above the fold ── */
-  .cx-hero {
-    background: var(--green-deep); padding: 120px 48px 72px;
-    /* clip, not hidden: a hidden box is still a scroll container, and scrollIntoView on the
-       success card scrolled the hero sideways (the glow overflows right). */
-    position: relative; overflow: hidden; overflow: clip;
+  /* ── One question per screen, under one promise (closers.io-style, 10/23/2026) ── */
+  .cx-hero { background: var(--white); padding: 128px 24px 96px; min-height: 80vh; }
+  .cx-wrap { max-width: 860px; margin: 0 auto; }
+  .cx-promise {
+    text-align: center; font-size: clamp(28px, 4vw, 42px); font-weight: 700; line-height: 1.2;
+    letter-spacing: -1px; color: var(--green-deep); margin: 0 auto 18px; max-width: 820px;
   }
-  .cx-hero::before {
-    content: ''; position: absolute; top: -300px; right: -200px;
-    width: 800px; height: 800px;
-    background: radial-gradient(circle, rgba(149,213,178,0.1), transparent 70%);
+  .cx-promise u { text-decoration-thickness: 3px; text-underline-offset: 6px; text-decoration-color: var(--green-accent); }
+  .cx-pill {
+    display: table; margin: 0 auto 40px; padding: 10px 22px; border-radius: 12px;
+    background: var(--green-ghost); border: 1px solid var(--green-light);
+    box-shadow: 0 6px 18px rgba(27,67,50,0.10);
+    text-align: center; font-size: clamp(16px, 2vw, 20px); font-weight: 700; line-height: 1.4; color: var(--green-deep);
   }
-  .cx-grid {
-    max-width: 1080px; margin: 0 auto; position: relative; z-index: 2;
-    display: grid; grid-template-columns: 1fr 460px; gap: 64px; align-items: start;
-    grid-template-areas: "intro form" "next form"; grid-template-rows: auto 1fr;
-  }
-  .cx-intro { grid-area: intro; padding-top: 12px; }
-  .cx-next { grid-area: next; }
-  .cx-form-col { grid-area: form; }
-  .cx-hero .section-label { color: var(--green-accent); }
-  .cx-hero h1 {
-    font-size: clamp(34px, 4.6vw, 52px); font-weight: 700;
-    color: var(--white); letter-spacing: -2px; line-height: 1.05; margin-bottom: 18px;
-  }
-  .cx-sub { font-size: 18px; line-height: 1.6; color: rgba(255,255,255,0.72); max-width: 520px; }
-  .cx-sub strong { color: var(--white); font-weight: 600; }
+  .cx-progress { height: 8px; border-radius: 8px 8px 0 0; background: var(--green-ghost); overflow: hidden; }
+  .cx-progress-bar { height: 100%; width: 14%; background: var(--green-dark); transition: width 0.35s ease; }
+  .cx-card { padding: 56px 64px 48px; min-height: 340px; }
 
-  .cx-next h2 {
-    font-size: 13px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
-    color: var(--green-accent); margin: 8px 0 16px;
+  .cx-q { max-width: 640px; }
+  .cx-back {
+    display: inline-flex; align-items: center; gap: 4px; margin-bottom: 10px; padding: 0; border: 0; background: none;
+    font: 600 13px var(--font-display); color: var(--green-dark); cursor: pointer; text-transform: none;
   }
-  .cx-steps { list-style: none; padding: 0; margin: 0 0 28px; display: grid; gap: 14px; }
-  .cx-steps li { display: grid; grid-template-columns: 28px 1fr; gap: 14px; align-items: start; }
-  .cx-step-num {
-    width: 28px; height: 28px; border-radius: 50%; background: rgba(149,213,178,0.18);
-    display: flex; align-items: center; justify-content: center;
-    font-family: var(--font-mono); font-size: 13px; font-weight: 700; color: var(--green-accent);
+  .cx-q-title { display: block; font-size: 22px; font-weight: 700; letter-spacing: -0.4px; color: var(--slate-900); margin-bottom: 6px; scroll-margin-top: 96px; }
+  .cx-req { color: var(--green-mid); margin-left: 2px; }
+  .cx-q-help { font-size: 14px; color: var(--slate-500); margin: 0 0 12px; }
+  .cx-q input[type="text"], .cx-q input[type="email"], .cx-q input[type="tel"], .cx-q textarea {
+    width: 100%; margin: 18px 0 22px; padding: 8px 0; border: 0; border-bottom: 2px solid var(--slate-200);
+    border-radius: 0; font-size: 22px; font-family: var(--font-display); color: var(--slate-800); background: transparent;
+    -webkit-appearance: none; appearance: none;
   }
-  .cx-steps strong { display: block; color: var(--white); font-size: 15px; margin-bottom: 2px; }
-  .cx-steps span { font-size: 14px; line-height: 1.5; color: rgba(255,255,255,0.6); }
+  .cx-q textarea { font-size: 18px; resize: vertical; min-height: 72px; line-height: 1.5; }
+  .cx-q input::placeholder, .cx-q textarea::placeholder { color: var(--slate-400); }
+  .cx-q input:focus, .cx-q textarea:focus { outline: none; border-bottom-color: var(--green-dark); }
+  .cx-q input[aria-invalid="true"] { border-bottom-color: #dc2626; }
 
-  .cx-guarantee {
-    display: flex; gap: 12px; align-items: flex-start; padding: 16px 18px;
-    border: 1px solid rgba(149,213,178,0.3); border-radius: 16px; background: rgba(149,213,178,0.08);
-    max-width: 520px;
-  }
-  .cx-guarantee svg { flex-shrink: 0; color: var(--green-accent); margin-top: 2px; }
-  .cx-guarantee p { margin: 0; font-size: 14px; line-height: 1.55; color: rgba(255,255,255,0.75); }
-  .cx-guarantee strong { color: var(--white); }
-
-  /* ── FORM CARD ── */
-  .cx-card {
-    background: var(--white); border-radius: 16px; padding: 32px;
-    box-shadow: 0 24px 64px rgba(27,67,50,0.35);
-  }
-  .cx-card-founder { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid var(--slate-100); }
-  .cx-card-founder img { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; }
-  .cx-card-founder p { margin: 0; font-size: 14px; line-height: 1.45; color: var(--slate-600); }
-  .cx-card-founder strong { color: var(--green-deep); }
-
-  .cx-step-title { scroll-margin-top: 96px; font-size: 20px; font-weight: 700; color: var(--green-deep); letter-spacing: -0.4px; margin-bottom: 14px; }
-  .form-group { margin-bottom: 16px; }
-  .form-group label, .form-group .cx-label { display: block; font-size: 13px; font-weight: 600; color: var(--green-deep); margin-bottom: 6px; }
-  .cx-optional { font-weight: 400; color: var(--slate-500); }
-  .form-group input, .form-group textarea {
-    width: 100%; padding: 12px 14px; border: 1px solid var(--slate-200);
-    border-radius: 12px; font-size: 16px; font-family: var(--font-display);
-    color: var(--slate-800); background: var(--white);
-    transition: border-color 0.2s, box-shadow 0.2s; -webkit-appearance: none; appearance: none;
-  }
-  .form-group textarea { resize: vertical; min-height: 72px; line-height: 1.5; }
-  .form-group input::placeholder, .form-group textarea::placeholder { color: var(--slate-400); }
-  .form-group input:focus, .form-group textarea:focus { outline: none; border-color: var(--green-dark); box-shadow: 0 0 0 3px rgba(64,145,108,0.12); }
-  .form-group input[aria-invalid="true"] { border-color: #dc2626; }
-  .cx-hint { display: block; margin-top: 5px; font-size: 12px; color: var(--slate-500); }
-
-  .cx-chips { display: flex; flex-wrap: wrap; gap: 8px; }
-  .cx-chips input { position: absolute; opacity: 0; width: 0; height: 0; }
-  .cx-chips label {
-    margin: 0; padding: 8px 14px; border: 1px solid var(--slate-200); border-radius: 12px;
-    font-size: 14px; font-weight: 600; color: var(--slate-600); cursor: pointer; font-variant-numeric: tabular-nums;
+  .cx-options { display: grid; gap: 10px; margin: 18px 0 22px; }
+  .cx-options input { position: absolute; opacity: 0; width: 0; height: 0; }
+  .cx-options label {
+    display: flex; align-items: center; gap: 12px; margin: 0; padding: 12px 16px;
+    border: 1px solid var(--slate-200); border-radius: 12px; background: var(--white);
+    font-size: 16px; font-weight: 500; color: var(--slate-700); cursor: pointer; font-variant-numeric: tabular-nums;
     transition: border-color 0.2s, background 0.2s;
   }
-  .cx-chips label:hover { border-color: var(--green-accent); }
-  .cx-chips input:checked + label { border-color: var(--green-dark); background: var(--green-ghost); color: var(--green-deep); }
-  .cx-chips input:focus-visible + label { outline: 2px solid var(--green-dark); outline-offset: 2px; }
+  .cx-options label:hover { border-color: var(--green-accent); }
+  .cx-options .cx-key {
+    flex-shrink: 0; width: 24px; height: 24px; border-radius: 6px; border: 1px solid var(--slate-200);
+    display: inline-flex; align-items: center; justify-content: center; font: 700 12px var(--font-mono); color: var(--slate-500);
+  }
+  .cx-options input:checked + label { border-color: var(--green-dark); background: var(--green-ghost); color: var(--green-deep); }
+  .cx-options input:checked + label .cx-key { background: var(--green-dark); border-color: var(--green-dark); color: var(--white); }
+  .cx-options input:focus-visible + label { outline: 2px solid var(--green-dark); outline-offset: 2px; }
+
+  .cx-actions { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+  .cx-card .btn-primary { border-radius: 12px; }
+  .cx-card .btn-primary:disabled { opacity: 0.7; cursor: wait; transform: none; }
+  .cx-enter { font-size: 12px; color: var(--slate-500); }
 
   .cx-hp { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
   .cx-turnstile:empty { display: none; }
   .cx-turnstile { margin-bottom: 12px; }
 
-  .cx-card .btn-primary { width: 100%; justify-content: center; margin-top: 4px; border-radius: 12px; }
-  .cx-card .btn-primary:disabled { opacity: 0.7; cursor: wait; transform: none; }
-
   .form-error {
-    display: none; margin-top: 14px; padding: 12px 16px;
+    display: none; margin-top: 16px; padding: 12px 16px; max-width: 640px;
     background: #fef2f2; border: 1px solid #fecaca; border-radius: 12px;
     font-size: 14px; color: #991b1b; line-height: 1.5;
   }
@@ -135,63 +102,32 @@
 
   .cx-success { display: none; text-align: center; padding: 8px 0; }
   .cx-success > svg { color: var(--green-mid); margin-bottom: 12px; }
-  .cx-success h3 { font-size: 22px; font-weight: 700; color: var(--green-deep); margin-bottom: 8px; }
-  .cx-success p { font-size: 15px; color: var(--slate-600); line-height: 1.6; margin: 0 0 18px; }
+  .cx-success h3 { font-size: 24px; font-weight: 700; color: var(--green-deep); margin-bottom: 8px; }
+  .cx-success p { font-size: 16px; color: var(--slate-600); line-height: 1.6; margin: 0; }
   .cx-success strong { color: var(--green-deep); }
 
-  .cx-talk { margin: 4px 0 14px; padding: 10px 14px; border-radius: 12px; background: var(--green-ghost); font-size: 14px; line-height: 1.5; color: var(--green-deep); }
+  .cx-talk { margin: 0 0 14px; padding: 10px 14px; border-radius: 12px; background: var(--green-ghost); font-size: 14px; line-height: 1.5; color: var(--green-deep); }
   /* The consent text: readable, normal small type, never hidden or faint (spec §1). */
-  .sales-consent { margin: 4px 0 14px; font-size: 13px; line-height: 1.55; color: var(--slate-600); }
-  .cx-select {
-    margin-top: 10px; width: 100%; padding: 10px 14px; border: 1px solid var(--slate-200); border-radius: 12px;
-    font-size: 15px; font-family: var(--font-display); color: var(--slate-700); background: var(--white);
-  }
-  .cx-select:focus { outline: none; border-color: var(--green-dark); box-shadow: 0 0 0 3px rgba(64,145,108,0.12); }
-  .cx-booking-sub { margin: -6px 0 14px; font-size: 14px; color: var(--slate-600); }
+  .sales-consent { margin: 0 0 18px; font-size: 13px; line-height: 1.55; color: var(--slate-600); }
+  .cx-booking .cx-q-title { margin-bottom: 4px; }
+  .cx-booking-sub { margin: 0 0 14px; font-size: 14px; color: var(--slate-600); }
   .cx-cal { min-height: 520px; width: 100%; overflow: auto; border-radius: 12px; border: 1px solid var(--slate-100); }
   .cx-booking-alt { margin: 10px 0 0; text-align: center; font-size: 13px; }
   .cx-booking-alt a { color: var(--green-dark); font-weight: 600; }
-  .cx-grid.is-booking { grid-template-columns: 1fr 560px; }
   [hidden] { display: none !important; }
   @keyframes spin { to { transform: rotate(360deg); } }
 
-  /* ── PROOF ── */
-  .cx-proof { background: var(--white); padding: 72px 48px; }
-  .cx-proof-inner { max-width: 1080px; margin: 0 auto; }
-  .cx-proof h2 { font-size: 28px; font-weight: 700; color: var(--green-deep); letter-spacing: -0.8px; margin-bottom: 8px; }
-  .cx-proof-lede { font-size: 15px; color: var(--slate-500); margin-bottom: 28px; }
-  .cx-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 24px; }
-  .cx-stat {
-    display: block; padding: 22px; border: 1px solid var(--slate-200); border-radius: 16px; text-decoration: none;
-    transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
-  }
-  .cx-stat:hover { border-color: var(--green-accent); box-shadow: 0 8px 24px rgba(27,67,50,0.08); transform: translateY(-2px); }
-  .cx-stat-num { font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-size: 30px; font-weight: 700; letter-spacing: -1px; color: var(--green-deep); margin-bottom: 6px; }
-  .cx-stat p { margin: 0; font-size: 14px; line-height: 1.5; color: var(--slate-600); }
-  .cx-stat-meta { display: block; margin-top: 10px; font-size: 12px; font-weight: 600; color: var(--green-dark); }
-
-
-  /* ── TRUST BAR ── */
-  .contact-trust { background: var(--slate-50); padding: 24px 48px; border-top: 1px solid var(--slate-100); }
-  .contact-trust-inner { max-width: 800px; margin: 0 auto; display: flex; justify-content: center; gap: 32px; flex-wrap: wrap; }
-  .contact-trust-inner span { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 500; color: var(--slate-500); }
-  .contact-trust-inner svg { width: 16px; height: 16px; color: var(--green-dark); }
-
-  /* ── RESPONSIVE: on a phone the form comes right after the headline ── */
   @media (max-width: 960px) {
-    .cx-hero { padding: 104px 20px 48px; }
-    .cx-grid { grid-template-columns: 1fr; gap: 28px; max-width: 560px; grid-template-areas: "intro" "form" "next"; }
-    .cx-grid.is-booking { grid-template-columns: 1fr; }
-    .cx-intro { padding-top: 0; }
-    .cx-sub { font-size: 16px; }
-    .cx-proof { padding: 56px 20px; }
-    .cx-stats { grid-template-columns: 1fr; }
-    .contact-trust { padding: 24px 20px; }
-    /* The chat bubble would sit on top of the submit button on a phone. */
+    .cx-hero { padding: 104px 20px 56px; }
+    .cx-card { padding: 36px 4px 32px; }
+    .cx-pill { margin-bottom: 28px; }
+    /* The chat bubble would sit on top of the Continue button on a phone. */
     .sq-toggle { display: none !important; }
   }
   @media (max-width: 600px) {
-    .cx-card { padding: 22px 18px; }
+    .cx-q-title { font-size: 20px; }
+    .cx-enter { display: none; }
+    .cx-q input[type="text"], .cx-q input[type="email"], .cx-q input[type="tel"] { font-size: 20px; }
   }
   /* Footer 5-col */
   .footer-top { grid-template-columns: 2fr 1fr 1fr 1fr 1fr; }
@@ -204,9 +140,9 @@
 {
   "@context": "https://schema.org",
   "@type": "ContactPage",
-  "name": "Free review — ShelfSpace",
+  "name": "Schedule a call — ShelfSpace",
   "url": "https://shelfspace.pro/contact",
-  "description": "Find out what your vendors owe you, or what your stores owe you. Free review, personally from ShelfSpace's founder, within one business day. No commitment.",
+  "description": "Give us 7 days and we'll transform your back-office finance function. If we don't collect 25% of your past-due invoices in the first month, you don't pay.",
   "isPartOf": { "@type": "WebSite", "name": "ShelfSpace", "url": "https://shelfspace.pro" },
   "about": {
     "@type": "Organization",
@@ -241,56 +177,37 @@
   <div class="nav-hamburger" onclick="document.querySelector('.nav-links').classList.toggle('mobile-open'); event.stopPropagation();"><span></span><span></span><span></span></div>
 </nav>
 
-<!-- HERO + FORM (the form sits above the fold) -->
+<!-- ONE PROMISE, ONE QUESTION PER SCREEN (closers.io-style, 10/23/2026) -->
 <section class="cx-hero">
-  <div class="cx-grid">
-    <div class="cx-intro">
-      <div class="section-label">Free review</div>
-      <h1>Find the money you're missing. Free.</h1>
-      <p class="cx-sub">Tell us who you are in 30 seconds. <strong>Chris, our founder, reads every one</strong> and gets back to you within one business day. No commitment.</p>
-    </div>
-
-    <div class="cx-next">
-      <h2>What happens next</h2>
-      <ol class="cx-steps">
-        <li><div class="cx-step-num">1</div><div><strong>You tell us who you are</strong><span>Four fields, then a few quick questions.</span></div></li>
-        <li><div class="cx-step-num">2</div><div><strong id="cxNext2Title">Chris gets back to you within one business day</strong><span id="cxNext2Text">With the one thing he needs to run your numbers.</span></div></li>
-        <li><div class="cx-step-num">3</div><div><strong>You get your review in dollars</strong><span id="cxReviewLine">The money you're missing and where it's slipping away, account by account. Then you decide.</span></div></li>
-      </ol>
-      <div class="cx-guarantee">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
-        <p><strong>Guaranteed.</strong> Dispensaries: the credits pay for it, or we refund the difference. Brands: we collect more than we cost, or we refund the difference.</p>
-      </div>
-    </div>
-
-    <div class="cx-form-col">
-      <div class="cx-card" id="cxCard">
-        <div class="cx-card-founder">
-          <img src="/chris-avatar.jpg" alt="Chris Mitchem" width="44" height="44">
-          <p><strong>Chris Mitchem</strong>, founder. 10 years running cannabis stores. I read every one of these myself.</p>
-        </div>
-
-        <form id="salesForm" novalidate>
-          <!-- Step 1: four fields. Submitting creates the lead at once (row D2 → D1). -->
-          <div id="cxStep1">
-            <div class="cx-step-title" id="cxStep1Title" tabindex="-1">Where should we reach you?</div>
-
-            <div class="form-group">
-              <label for="name">Your name</label>
-              <input type="text" id="name" name="name" autocomplete="name" maxlength="120" placeholder="Mary Jane" required>
-            </div>
-            <div class="form-group">
-              <label for="email">Work email</label>
-              <input type="email" id="email" name="email" autocomplete="email" inputmode="email" maxlength="254" placeholder="you@yourbrand.com" required>
-            </div>
-            <div class="form-group">
-              <label for="phone">Mobile</label>
-              <input type="tel" id="phone" name="phone" autocomplete="tel" inputmode="tel" maxlength="40" placeholder="(555) 555-0123" required>
-            </div>
-            <div class="form-group">
-              <label for="company">Company</label>
-              <input type="text" id="company" name="company" autocomplete="organization" maxlength="200" placeholder="Your company name" required>
-            </div>
+  <div class="cx-wrap">
+    <h1 class="cx-promise">Give us <u>7 days</u> and we'll transform your back&#8209;office finance function.</h1>
+    <p class="cx-pill">If we don&#39;t collect 25% of your past&#8209;due invoices in the first month, you don&#39;t pay.</p>
+    <div class="cx-progress" aria-hidden="true"><div class="cx-progress-bar" id="cxProgress"></div></div>
+    <div class="cx-card" id="cxCard">
+      <form id="salesForm" novalidate>
+        <!-- Screens 1–4. Continue on the mobile screen creates the lead (row D1); nothing is saved before it. -->
+        <div id="cxStep1">
+          <div class="cx-q" data-q="name">
+            <label class="cx-q-title" for="name">Your name<span class="cx-req">*</span></label>
+            <input type="text" id="name" name="name" autocomplete="name" maxlength="120" placeholder="Mary Jane" required>
+            <div class="cx-actions"><button type="button" class="btn-primary" data-next><span>Continue</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button><span class="cx-enter">press Enter &crarr;</span></div>
+          </div>
+          <div class="cx-q" data-q="email" hidden>
+            <button type="button" class="cx-back" data-back>&larr; Back</button>
+            <label class="cx-q-title" for="email">Work email<span class="cx-req">*</span></label>
+            <input type="email" id="email" name="email" autocomplete="email" inputmode="email" maxlength="254" placeholder="you@yourbrand.com" required>
+            <div class="cx-actions"><button type="button" class="btn-primary" data-next><span>Continue</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button><span class="cx-enter">press Enter &crarr;</span></div>
+          </div>
+          <div class="cx-q" data-q="company" hidden>
+            <button type="button" class="cx-back" data-back>&larr; Back</button>
+            <label class="cx-q-title" for="company">Company name<span class="cx-req">*</span></label>
+            <input type="text" id="company" name="company" autocomplete="organization" maxlength="200" placeholder="Your company" required>
+            <div class="cx-actions"><button type="button" class="btn-primary" data-next><span>Continue</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button><span class="cx-enter">press Enter &crarr;</span></div>
+          </div>
+          <div class="cx-q" data-q="phone" hidden>
+            <button type="button" class="cx-back" data-back>&larr; Back</button>
+            <label class="cx-q-title" for="phone">What&#39;s your mobile number?<span class="cx-req">*</span></label>
+            <input type="tel" id="phone" name="phone" autocomplete="tel" inputmode="tel" maxlength="40" placeholder="(555) 555-0123" required>
 
             <!-- Honeypot: invisible to people, irresistible to bots -->
             <div class="cx-hp" aria-hidden="true">
@@ -298,127 +215,68 @@
               <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
             </div>
 
-            <p class="cx-talk" id="cxTalkLine" hidden>Rather talk than book? If you haven&#39;t picked a time in 10 minutes, Chelsea, our AI assistant, calls you to find one.</p>
-
             <div class="cx-turnstile" id="cxTurnstile"></div>
             <div class="cx-turnstile" id="cxTurnstileBackup"></div>
 
             <!-- The consent text the lead system records. Keep it byte-identical to the registry
                  (scripts/check-sales-disclosure.mjs); a new wording is a new platform version. -->
-            <p class="sales-consent">By clicking Submit, you agree ShelfSpace Technologies Inc. may call you at the number you provide about your business, including automated or AI-voice calls that may be recorded, and may email you. Agreeing isn&#39;t a condition of buying anything. Opt out anytime by replying &quot;stop&quot; or telling Chelsea.</p>
+            <p class="sales-consent">By clicking Continue, you agree ShelfSpace Technologies Inc. may call you at the number you provide about your business, including automated or AI-voice calls that may be recorded, and may email you. Agreeing isn&#39;t a condition of buying anything. Opt out anytime by replying &quot;stop&quot; or telling Chelsea.</p>
 
-            <button type="submit" class="btn-primary" id="submitBtn" data-label="Submit"><span id="submitLabel">Submit</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
-            <div class="form-error" id="formError" role="alert" aria-live="assertive"></div>
+            <div class="cx-actions"><button type="submit" class="btn-primary" id="submitBtn" data-label="Continue"><span id="submitLabel">Continue</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button><span class="cx-enter">press Enter &crarr;</span></div>
           </div>
+          <div class="form-error" id="formError" role="alert" aria-live="assertive"></div>
+        </div>
 
-          <!-- Step 2: who you are, so the right person follows up -->
-          <div id="cxStep2" hidden>
-            <div class="cx-step-title" id="cxStep2Title" tabindex="-1">Thanks. A few quick questions.</div>
-
-            <div id="cxQualify">
-              <div class="form-group">
-                <span class="cx-label" id="cxRoleLabel">Which one are you?</span>
-                <div class="cx-chips" role="radiogroup" aria-labelledby="cxRoleLabel">
-                  <input type="radio" id="role-brand" name="role" value="brand"><label for="role-brand">Brand</label>
-                  <input type="radio" id="role-distributor" name="role" value="distributor"><label for="role-distributor">Distributor</label>
-                  <input type="radio" id="role-store" name="role" value="store"><label for="role-store">Dispensary</label>
-                  <input type="radio" id="role-other" name="role" value="other"><label for="role-other">Something else</label>
-                </div>
-              </div>
-
-              <div class="form-group">
-                <span class="cx-label" id="cxStatesLabel">Where do you sell? <span class="cx-optional">(pick any)</span></span>
-                <div class="cx-chips" role="group" aria-labelledby="cxStatesLabel" id="cxStateChips">
-                  <input type="checkbox" id="st-MI" name="states" value="MI"><label for="st-MI">Michigan</label>
-                  <input type="checkbox" id="st-NY" name="states" value="NY"><label for="st-NY">New York</label>
-                </div>
-                <select id="cxMoreStates" class="cx-select" aria-label="Add another state">
-                  <option value="">Add another state</option>
-                </select>
-              </div>
-
-              <div class="form-group" id="cxBandGroup">
-                <span class="cx-label" id="cxBandLabel">Monthly wholesale sales <span class="cx-optional">(roughly)</span></span>
-                <div class="cx-chips" role="radiogroup" aria-labelledby="cxBandLabel">
-                  <input type="radio" id="band-1" name="band" value="under_50k"><label for="band-1">Under $50k</label>
-                  <input type="radio" id="band-2" name="band" value="50k_250k"><label for="band-2">$50k–$250k</label>
-                  <input type="radio" id="band-3" name="band" value="250k_1m"><label for="band-3">$250k–$1M</label>
-                  <input type="radio" id="band-4" name="band" value="over_1m"><label for="band-4">Over $1M</label>
-                  <input type="radio" id="band-5" name="band" value="not_sure"><label for="band-5">Not sure</label>
-                </div>
-              </div>
-
-              <div class="form-group">
-                <span class="cx-label" id="cxTimelineLabel">When do you want this fixed?</span>
-                <div class="cx-chips" role="radiogroup" aria-labelledby="cxTimelineLabel">
-                  <input type="radio" id="tl-1" name="timeline" value="now"><label for="tl-1">Now</label>
-                  <input type="radio" id="tl-2" name="timeline" value="1_3_months"><label for="tl-2">1–3 months</label>
-                  <input type="radio" id="tl-3" name="timeline" value="3_plus_months"><label for="tl-3">3+ months</label>
-                  <input type="radio" id="tl-4" name="timeline" value="exploring"><label for="tl-4">Just looking</label>
-                </div>
-              </div>
+        <!-- Screens 5–6: who you are, so the right person follows up -->
+        <div id="cxStep2" hidden>
+          <div class="cx-q" id="qRole">
+            <span class="cx-q-title" id="cxRoleLabel" tabindex="-1">What do you sell?<span class="cx-req">*</span></span>
+            <p class="cx-q-help">Pick one.</p>
+            <div class="cx-options" role="radiogroup" aria-labelledby="cxRoleLabel">
+              <input type="radio" id="role-brand" name="role" value="brand"><label for="role-brand"><span class="cx-key">A</span>I&#39;m a brand</label>
+              <input type="radio" id="role-distributor" name="role" value="distributor"><label for="role-distributor"><span class="cx-key">B</span>I&#39;m a distributor</label>
+              <input type="radio" id="role-store" name="role" value="store"><label for="role-store"><span class="cx-key">C</span>I run a dispensary</label>
+              <input type="radio" id="role-other" name="role" value="other"><label for="role-other"><span class="cx-key">D</span>Something else</label>
             </div>
-
-            <div class="form-group">
-              <label for="pain" id="cxPainLabel">What's the biggest headache right now? <span class="cx-optional">(optional)</span></label>
-              <textarea id="pain" name="pain" rows="2" maxlength="1000" placeholder="e.g. three stores are 60+ days late and nobody chases them"></textarea>
-            </div>
-
-            <button type="button" class="btn-primary" id="step2Btn"><span>Continue</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
-            <div class="form-error" id="step2Error" role="alert" aria-live="assertive"></div>
+            <div class="cx-actions"><button type="button" class="btn-primary" id="roleBtn"><span>Continue</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button></div>
           </div>
-        </form>
-        <noscript><p style="font-size:14px;color:var(--slate-500);margin-top:16px;">Email us at <a href="mailto:support@shelfspace.pro" style="color:var(--green-dark);font-weight:600;">support@shelfspace.pro</a>.</p></noscript>
+          <div class="cx-q" id="qBand" hidden>
+            <button type="button" class="cx-back" id="bandBack">&larr; Back</button>
+            <span class="cx-q-title" id="cxBandLabel" tabindex="-1">Roughly how much do you sell wholesale each month?<span class="cx-req">*</span></span>
+            <p class="cx-q-help">Pick one.</p>
+            <div class="cx-options" role="radiogroup" aria-labelledby="cxBandLabel">
+              <input type="radio" id="band-1" name="band" value="under_50k"><label for="band-1"><span class="cx-key">A</span>Under $50k</label>
+              <input type="radio" id="band-2" name="band" value="50k_250k"><label for="band-2"><span class="cx-key">B</span>$50k–$250k</label>
+              <input type="radio" id="band-3" name="band" value="250k_1m"><label for="band-3"><span class="cx-key">C</span>$250k–$1M</label>
+              <input type="radio" id="band-4" name="band" value="over_1m"><label for="band-4"><span class="cx-key">D</span>Over $1M</label>
+              <input type="radio" id="band-5" name="band" value="not_sure"><label for="band-5"><span class="cx-key">E</span>Not sure</label>
+            </div>
+            <div class="cx-actions"><button type="button" class="btn-primary" id="step2Btn"><span>Continue</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button></div>
+          </div>
+          <div class="cx-q" id="qPartner" hidden>
+            <label class="cx-q-title" for="pain" id="cxPainLabel" tabindex="-1">What do you do, and how would you like to work together?</label>
+            <textarea id="pain" name="pain" rows="2" maxlength="1000" placeholder="e.g. we keep the books for six dispensaries"></textarea>
+            <div class="cx-actions"><button type="button" class="btn-primary" id="partnerBtn"><span>Continue</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button></div>
+          </div>
+          <div class="form-error" id="step2Error" role="alert" aria-live="assertive"></div>
+        </div>
+      </form>
+      <noscript><p style="font-size:14px;color:var(--slate-500);margin-top:16px;">Email us at <a href="mailto:support@shelfspace.pro" style="color:var(--green-dark);font-weight:600;">support@shelfspace.pro</a>.</p></noscript>
 
-        <!-- Done: a booking calendar once outreach is live (brands + distributors), otherwise a thank-you -->
-        <div class="cx-success" id="formSuccess" role="status" aria-live="polite" tabindex="-1">
-          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-          <h3 id="cxSuccessTitle">Thanks.</h3>
-          <p id="cxSuccessText">Chris will reach out within one business day.</p>
-        </div>
-        <div class="cx-booking" id="cxBooking" hidden>
-          <h3 class="cx-step-title" id="cxBookingTitle" tabindex="-1">Pick a time with Chris</h3>
-          <p class="cx-booking-sub">30 minutes on Google Meet. You'll get a calendar invite right away.</p>
-          <div id="cxCalInline" class="cx-cal"></div>
-          <p class="cx-booking-alt"><a id="cxBookingLink" href="https://cal.com/shelfspace/shelfcollect-demo" target="_blank" rel="noopener">Calendar not loading? Open it in a new tab</a></p>
-        </div>
+      <!-- Done: the calendar for brands + distributors, otherwise a thank-you -->
+      <div class="cx-success" id="formSuccess" role="status" aria-live="polite" tabindex="-1">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        <h3 id="cxSuccessTitle">Thanks.</h3>
+        <p id="cxSuccessText">Chris will reach out within one business day.</p>
+      </div>
+      <div class="cx-booking" id="cxBooking" hidden>
+        <h3 class="cx-q-title" id="cxBookingTitle" tabindex="-1">Pick a time with Chris</h3>
+        <p class="cx-booking-sub">30 minutes on Google Meet. You&#39;ll get a calendar invite right away.</p>
+        <p class="cx-talk" id="cxTalkLine" hidden>Rather talk than book? If you haven&#39;t picked a time in 10 minutes, Chelsea, our AI assistant, calls you to find one.</p>
+        <div id="cxCalInline" class="cx-cal"></div>
+        <p class="cx-booking-alt"><a id="cxBookingLink" href="https://cal.com/shelfspace/shelfcollect-demo" target="_blank" rel="noopener">Calendar not loading? Open it in a new tab</a></p>
       </div>
     </div>
-  </div>
-</section>
-
-<!-- PROOF -->
-<section class="cx-proof">
-  <div class="cx-proof-inner reveal">
-    <h2>What a review turns up</h2>
-    <p class="cx-proof-lede">Real results from ShelfSpace clients. Names left out, numbers left in.</p>
-    <div class="cx-stats">
-      <a class="cx-stat" href="/blog/case-study-ebitda-credit-recovery">
-        <div class="cx-stat-num">$83,741/yr</div>
-        <p>in vendor credits at one dispensary. EBITDA up 15%.</p>
-        <span class="cx-stat-meta">First 90 days · Read the story →</span>
-      </a>
-      <a class="cx-stat" href="/blog/case-study-duplicate-invoice">
-        <div class="cx-stat-num">$4,873</div>
-        <p>duplicate invoice stopped before it was paid twice across two locations.</p>
-        <span class="cx-stat-meta">Read the story →</span>
-      </a>
-      <a class="cx-stat" href="/blog/case-study-vendor-credit-recovery">
-        <div class="cx-stat-num">$2,340</div>
-        <p>in co-marketing credits nobody was tracking.</p>
-        <span class="cx-stat-meta">Found in 14 days · Read the story →</span>
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- TRUST BAR -->
-<section class="contact-trust">
-  <div class="contact-trust-inner">
-    <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Reply within one business day</span>
-    <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> No commitment</span>
-    <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg> We never share your info</span>
-    <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg> Certified Metrc vendor</span>
   </div>
 </section>
 <!-- FOOTER -->
@@ -459,14 +317,13 @@
   // Must equal the platform's SALES_DISCLOSURES registry (lib/sales/capture/disclosure.ts):
   // a mismatch records the lead WITHOUT call consent. scripts/check-sales-disclosure.mjs
   // proves the sha matches the <p class="sales-consent"> above.
-  var DISCLOSURE_VERSION = '2026-10-18-f';
-  var DISCLOSURE_SHA256 = '1072b51767aa3389a01512a8cbdee287f71a886f870a7e4dcbe00f9acfd2cc9f';
+  var DISCLOSURE_VERSION = '2026-10-23-continue';
+  var DISCLOSURE_SHA256 = 'd047b4f337cf87ea1a0d51ec63f373e28b45f1941f9a78c4c1dc9e65c01c879a';
   var SITEKEY = '0x4AAAAAACiquH5tTwIbSo5z';         // verified by the lead system
   var FALLBACK_SITEKEY = '0x4AAAAAACiEpqqSU9lohNi-'; // verified by /api/interest
   // Above the route's own 60 s budget would be pointless; 55 s keeps a slow-but-successful save from
   // also firing the email backup (a double notice to Chris).
   var LEAD_TIMEOUT_MS = 55000;
-  var STATES = ['AL','AK','AZ','AR','CA','CO','CT','DE','DC','FL','GA','HI','ID','IL','IN','IA','KS','KY','LA','ME','MD','MA','MI','MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY','NC','ND','OH','OK','OR','PA','RI','SC','SD','TN','TX','UT','VT','VA','WA','WV','WI','WY'];
 
   var pageLoadedAt = Date.now();
   var params = new URLSearchParams(window.location.search);
@@ -489,7 +346,7 @@
   }
   function clip(v, n) { return typeof v === 'string' ? v.trim().slice(0, n) : ''; }
 
-  // ── Go-live status (fail closed: anything but {live:true} keeps the calendar hidden) ──
+  // ── Go-live status: only says whether Chelsea is calling yet (the calendar shows either way) ──
   function fetchJson(url, opts, ms) {
     var ctl = typeof AbortController === 'function' ? new AbortController() : null;
     var timer = ctl ? setTimeout(function() { ctl.abort(); }, ms) : null;
@@ -509,12 +366,7 @@
     }, function() { salesStatus = { live: false, capture: true }; return salesStatus; });
   }
   function applyStatusCopy() {
-    var live = salesStatus.live && !isPartner;
-    document.getElementById('cxTalkLine').hidden = !live;
-    document.getElementById('cxNext2Title').textContent = live ? 'Pick a time with Chris' : 'Chris gets back to you within one business day';
-    document.getElementById('cxNext2Text').textContent = live
-      ? '30 minutes, right on the next screen. Or Chelsea, our AI assistant, calls you to find a time.'
-      : 'With the one thing he needs to run your numbers.';
+    document.getElementById('cxTalkLine').hidden = !(salesStatus.live && !isPartner);
   }
   var statusReady = loadStatus().then(applyStatusCopy);
 
@@ -594,6 +446,7 @@
   function showError(id, html) { var el = document.getElementById(id); el.innerHTML = html; el.style.display = 'block'; }
   function clearError(id) { document.getElementById(id).style.display = 'none'; }
   function fieldError(id, msg) {
+    showQ(id);
     var f = document.getElementById(id);
     f.setAttribute('aria-invalid', 'true');
     f.addEventListener('input', function clear() { f.removeAttribute('aria-invalid'); f.removeEventListener('input', clear); });
@@ -609,48 +462,60 @@
   }
   function firstName() { return (lead.name.split(/\s+/)[0] || '').slice(0, 40); }
 
-  // Step 2 adapts: brands/distributors get the sales band; the partner path asks what they do.
+  // ── One question per screen. Progress: name, email, company, phone, role, band, calendar. ──
+  var Q1 = ['name', 'email', 'company', 'phone'];
+  var TOTAL = 7;
+  function progress(n) { document.getElementById('cxProgress').style.width = Math.round(n / TOTAL * 100) + '%'; }
+  function focusTop(el) {
+    el.focus({ preventScroll: true });
+    if (el.getBoundingClientRect().top < 80) el.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' });
+  }
+  function showQ(key) {
+    document.querySelectorAll('#cxStep1 .cx-q').forEach(function(q) { q.hidden = q.getAttribute('data-q') !== key; });
+    progress(Q1.indexOf(key) + 1);
+    focusTop(document.getElementById(key));
+  }
+  function stepOk(key) {
+    var v = document.getElementById(key).value.trim();
+    if (key === 'name' && !v) { fieldError('name', 'Please add your name.'); return false; }
+    if (key === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)) { fieldError('email', 'That email doesn’t look right. Mind checking it?'); return false; }
+    if (key === 'company' && !v) { fieldError('company', 'Please add your company name.'); return false; }
+    return true;
+  }
+  function nextQ(key) {
+    clearError('formError');
+    if (!stepOk(key)) return;
+    showQ(Q1[Q1.indexOf(key) + 1]);
+  }
+  document.querySelectorAll('#cxStep1 .cx-q').forEach(function(q) {
+    var key = q.getAttribute('data-q');
+    var next = q.querySelector('[data-next]');
+    if (next) next.addEventListener('click', function() { nextQ(key); });
+    var back = q.querySelector('[data-back]');
+    if (back) back.addEventListener('click', function() { clearError('formError'); showQ(Q1[Q1.indexOf(key) - 1]); });
+    // Enter moves on; on the mobile screen it submits the form (creates the lead).
+    if (key !== 'phone') document.getElementById(key).addEventListener('keydown', function(e) { if (e.key === 'Enter') { e.preventDefault(); nextQ(key); } });
+  });
+  progress(1);
+
   var preRole = { brand: 'brand', vendor: 'brand', distributor: 'distributor', dispensary: 'store', retailer: 'store', store: 'store', other: 'other' }[(params.get('role') || '').toLowerCase()];
   if (isPartner) preRole = 'other';
+  if (preRole && !isPartner) { var pr = document.getElementById('role-' + preRole); if (pr) pr.checked = true; }
   function currentRole() { var r = document.querySelector('input[name="role"]:checked'); return r ? r.value : null; }
-  function refreshStep2() {
-    var role = currentRole();
-    document.getElementById('cxBandGroup').hidden = !(role === 'brand' || role === 'distributor');
-    document.getElementById('cxPainLabel').firstChild.textContent = role === 'store'
-      ? "What's your biggest headache with vendors? "
-      : "What's the biggest headache right now? ";
+  function show2(id, n) {
+    ['qRole', 'qBand', 'qPartner'].forEach(function(q) { document.getElementById(q).hidden = q !== id; });
+    progress(n);
+    focusTop(document.querySelector('#' + id + ' .cx-q-title'));
   }
-  document.querySelectorAll('input[name="role"]').forEach(function(r) { r.addEventListener('change', refreshStep2); });
-  if (preRole) { var pr = document.getElementById('role-' + preRole); if (pr) pr.checked = true; }
-  if (isPartner) {
-    document.getElementById('cxQualify').hidden = true;
-    document.getElementById('cxPainLabel').firstChild.textContent = 'What do you do, and how would you like to work together? ';
-    document.getElementById('pain').placeholder = 'e.g. we keep the books for six dispensaries';
-  }
-  refreshStep2();
-  (function fillStates() {
-    var sel = document.getElementById('cxMoreStates');
-    STATES.forEach(function(code) { if (code === 'MI' || code === 'NY') return; var o = document.createElement('option'); o.value = code; o.textContent = code; sel.appendChild(o); });
-    sel.addEventListener('change', function() {
-      var code = sel.value; sel.value = '';
-      if (!code || document.getElementById('st-' + code)) { if (code) document.getElementById('st-' + code).checked = true; return; }
-      var box = document.getElementById('cxStateChips');
-      var input = document.createElement('input'); input.type = 'checkbox'; input.id = 'st-' + code; input.name = 'states'; input.value = code; input.checked = true;
-      var label = document.createElement('label'); label.htmlFor = input.id; label.textContent = code;
-      box.appendChild(input); box.appendChild(label);
-    });
-  })();
-
   function showStep2() {
     document.getElementById('cxStep1').hidden = true;
     document.getElementById('cxStep2').hidden = false;
-    var t = document.getElementById('cxStep2Title'); t.focus({ preventScroll: true });
-    t.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' });
+    if (isPartner) show2('qPartner', 5); else show2('qRole', 5);
   }
 
   function showThanks() {
     document.getElementById('salesForm').style.display = 'none';
-    document.querySelector('.cx-card-founder').style.display = 'none';
+    progress(TOTAL);
     var first = firstName();
     document.getElementById('cxSuccessTitle').textContent = first ? 'Thanks, ' + first + '.' : 'Thanks.';
     var text = document.getElementById('cxSuccessText');
@@ -672,8 +537,7 @@
   }
   function showBooking() {
     document.getElementById('salesForm').style.display = 'none';
-    document.querySelector('.cx-card-founder').style.display = 'none';
-    document.querySelector('.cx-grid').classList.add('is-booking');
+    progress(TOTAL);
     var box = document.getElementById('cxBooking');
     box.hidden = false;
     var q = new URLSearchParams({ name: lead.name, email: lead.email });
@@ -687,16 +551,16 @@
       cal('ui', { hideEventTypeDetails: false, layout: 'month_view' });
       cal('on', { action: 'bookingSuccessful', callback: function() { track('demo_booked', {}); } });
     });
-    var t = document.getElementById('cxBookingTitle'); t.focus({ preventScroll: true });
-    t.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' });
+    focusTop(document.getElementById('cxBookingTitle'));
     track('booking_shown', {});
   }
 
   function finish(role) {
-    // Re-read the switch at the moment it matters; a failure keeps the calendar hidden.
-    loadStatus().then(function(st) {
+    // Brands and distributors book right away (10/23/2026: before go-live too — a booking while
+    // outreach is off is saved and Chris is told). The status only decides Chelsea's call line.
+    loadStatus().then(function() {
       applyStatusCopy();
-      var book = st.live && !isPartner && !lead.viaFallback && (role === 'brand' || role === 'distributor');
+      var book = !isPartner && !lead.viaFallback && (role === 'brand' || role === 'distributor');
       if (book) showBooking(); else showThanks();
     });
   }
@@ -788,27 +652,33 @@
     }
   });
 
-  document.getElementById('step2Btn').addEventListener('click', async function() {
+  async function submitStep2(role, btn) {
     clearError('step2Error');
-    var role = isPartner ? 'other' : currentRole();
-    if (!role) { showError('step2Error', 'Please pick which one you are.'); return; }
-    var btn = document.getElementById('step2Btn');
     busy(btn, true);
-    var states = [];
-    document.querySelectorAll('input[name="states"]:checked').forEach(function(i) { if (states.length < 10) states.push(i.value); });
     var band = document.querySelector('input[name="band"]:checked');
-    var timeline = document.querySelector('input[name="timeline"]:checked');
     var pain = clip(document.getElementById('pain').value, 1000);
-    var body = { step: 2, leadId: lead.id, website: document.getElementById('website').value, role: role, states: isPartner ? [] : states };
+    var body = { step: 2, leadId: lead.id, website: document.getElementById('website').value, role: role, states: [] };
     if (!isPartner && band && (role === 'brand' || role === 'distributor')) body.wholesale_band = band.value;
-    if (!isPartner && timeline) body.timeline = timeline.value;
-    if (pain) body.pain = isPartner ? clip('Partner: ' + pain, 1000) : pain;
+    if (isPartner && pain) body.pain = clip('Partner: ' + pain, 1000);
     try {
       await fetchJson(LEAD_API, { method: 'POST', headers: { 'Content-Type': 'application/json' }, credentials: 'omit', body: JSON.stringify(body) }, LEAD_TIMEOUT_MS);
-    } catch (err) { /* the lead already exists from step 1; the answers are a bonus */ }
+    } catch (err) { /* the lead already exists from the mobile screen; the answers are a bonus */ }
     track('lead_step2', { role: role });
     finish(role);
+  }
+  document.getElementById('roleBtn').addEventListener('click', function() {
+    clearError('step2Error');
+    var role = currentRole();
+    if (!role) { showError('step2Error', 'Please pick one.'); return; }
+    if (role === 'brand' || role === 'distributor') show2('qBand', 6);
+    else submitStep2(role, this);
   });
+  document.getElementById('bandBack').addEventListener('click', function() { clearError('step2Error'); show2('qRole', 5); });
+  document.getElementById('step2Btn').addEventListener('click', function() {
+    if (!document.querySelector('input[name="band"]:checked')) { showError('step2Error', 'Please pick one.'); return; }
+    submitStep2(currentRole(), this);
+  });
+  document.getElementById('partnerBtn').addEventListener('click', function() { submitStep2('other', this); });
 
   // Load Turnstile only after onTurnstileLoad exists (explicit render, invisible unless needed).
   (function() {
