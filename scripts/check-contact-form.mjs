@@ -129,6 +129,8 @@ const ok200 = (b) => b.step === 1 ? { status: 200, body: { ok: true, leadId: '11
   SHOTS && await s.page.screenshot({ path: `${SHOTS}/desk-booked.png` });
   const bk = s.seen.book[0] || {};
   ok(bk.eventTypeSlug === 'shelfcollect-demo' && bk.username === 'shelfspace' && bk.attendee && bk.attendee.email === 'chris+d2test@shelfspace.pro' && bk.attendee.name === 'Chris D2test' && !!bk.attendee.timeZone, 'booking posts the event + the lead as attendee');
+  ok(bk.bookingFieldsResponses && bk.bookingFieldsResponses.company === 'D2 Test Brand (ShelfSpace sales test)', 'booking sends the company (invite title "ShelfSpace Demo | {company}")');
+  ok(/company=D2\+Test\+Brand/.test(await s.page.getAttribute('#cxBookingLink', 'href')), 'full-calendar link prefills the company');
   ok(bk.start === SLOTS.data[Object.keys(SLOTS.data).sort()[1]][0].start && bk.metadata && bk.metadata.source === 'contact_page' && !('rep_code' in bk.metadata), 'booking: the picked time, source contact_page, no partner code');
   ok(/You.re booked/.test(await s.page.textContent('#cxBooked')) && (await s.page.textContent('#cxBookedText')).includes('chris+d2test@shelfspace.pro') && /\d\d\/\d\d\/\d{4}/.test(await s.page.textContent('#cxBookedText')), 'booked: MM/DD/YYYY date + the invite email');
   ok(s.seen.cal === 0, 'Cal.com embed never loaded (picker worked)');

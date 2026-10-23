@@ -361,7 +361,7 @@
   var pageLoadedAt = Date.now();
   var params = new URLSearchParams(window.location.search);
   var isPartner = params.get('path') === 'partner' || params.get('subject') === 'partner-call';
-  var lead = { id: null, name: '', email: '', viaFallback: false };
+  var lead = { id: null, name: '', email: '', company: '', viaFallback: false };
 
   function track(name, p) { try { if (window.gtag) gtag('event', name, p || {}); } catch (e) { /* never block the lead */ } }
   function escapeText(s) {
@@ -601,6 +601,7 @@
   function mdy(key) { var p = key.split('-'); return p[1] + '/' + p[2] + '/' + p[0]; }
   function bookingQuery() {
     var q = new URLSearchParams({ name: lead.name, email: lead.email });
+    if (lead.company) q.set('company', lead.company); // the invite title: "ShelfSpace Demo | {company}"
     var repCode = attribution().rep_code;
     if (repCode) q.set('metadata[rep_code]', repCode);
     return q;
@@ -653,6 +654,7 @@
     var box = document.getElementById('cxCalInline');
     box.hidden = false;
     var calConfig = { name: lead.name, email: lead.email, layout: 'month_view', theme: 'light' };
+    if (lead.company) calConfig.company = lead.company;
     var repCode = attribution().rep_code;
     if (repCode) calConfig['metadata[rep_code]'] = repCode;
     loadCal(function(cal) {
@@ -669,6 +671,8 @@
     if (!start) return;
     busy(btn, true);
     var body = { start: new Date(start).toISOString(), eventTypeSlug: CAL_EVENT.eventTypeSlug, username: CAL_EVENT.username, attendee: { name: lead.name, email: lead.email, timeZone: tz }, metadata: { source: 'contact_page' } };
+    // Cal.com titles the invite "ShelfSpace Demo | {company}" from this answer.
+    if (lead.company) body.bookingFieldsResponses = { company: clip(lead.company, 200) };
     var repCode = attribution().rep_code;
     if (repCode) body.metadata.rep_code = repCode;
     var r = null;
@@ -746,7 +750,7 @@
 
     var btn = document.getElementById('submitBtn');
     busy(btn, true);
-    lead.name = fields.name; lead.email = fields.email;
+    lead.name = fields.name; lead.email = fields.email; lead.company = fields.company;
     remember();
     var attrib = attribution();
     await statusReady;
