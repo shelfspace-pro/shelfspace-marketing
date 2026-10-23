@@ -34,12 +34,12 @@ const ok = (c, m) => { if (c) { pass++; console.log('  PASS ' + m); } else { fai
 
 const TURNSTILE_STUB = `window.turnstile={_n:0,render:function(el,o){var id=++this._n;setTimeout(function(){o.callback('tok-'+o.sitekey+'-'+id)},60);return id},reset:function(){}};setTimeout(function(){window.onTurnstileLoad&&window.onTurnstileLoad()},0);`;
 
-async function scenario(name, { status, lead, interest, url = '/contact.html?utm_source=li&utm_term=t1&fbclid=fb1&cta=home-hero', role = 'brand', width = 1440, shotPrefix, realCal = false }) {
+async function scenario(name, { status, lead, interest, url = '/contact.html?utm_source=li&utm_term=t1&fbclid=fb1&cta=home-hero', role = 'brand', width = 1440, shotPrefix, realCal = false, calApi = 'ok' }) {
   console.log('\n# ' + name);
   const browser = await chromium.launch();
   const ctx = await browser.newContext({ viewport: { width, height: 900 } });
   const page = await ctx.newPage();
-  const seen = { lead: [], interest: [], status: 0, cal: 0, consoleErr: [] };
+  const seen = { lead: [], interest: [], status: 0, cal: 0, slots: 0, book: [], consoleErr: [] };
   page.on('console', m => { if (m.type() === 'error') seen.consoleErr.push(m.text()); });
   page.on('pageerror', e => seen.consoleErr.push('pageerror ' + e.message));
   await page.route('**/turnstile/v0/api.js*', r => r.fulfill({ contentType: 'application/javascript', body: TURNSTILE_STUB }));
@@ -52,6 +52,14 @@ async function scenario(name, { status, lead, interest, url = '/contact.html?utm
     return r.fulfill({ status: res.status, contentType: 'application/json', headers: { 'access-control-allow-origin': '*' }, body: JSON.stringify(res.body) });
   });
   await page.route('**/api/interest', async r => { seen.interest.push(JSON.parse(r.request().postData() || '{}')); return r.fulfill({ status: interest || 200, contentType: 'application/json', body: '{"ok":true}' }); });
+  // Bookings are ALWAYS stubbed (never a real meeting on Chris's calendar); slots are real only under CAL_LIVE.
+  await page.route('https://api.cal.com/v2/bookings', async r => {
+    seen.book.push(JSON.parse(r.request().postData() || '{}'));
+    const taken = calApi === 'taken' && seen.book.length === 1;
+    return r.fulfill({ status: taken ? 400 : 201, contentType: 'application/json', headers: { 'access-control-allow-origin': '*' }, body: JSON.stringify(taken ? { status: 'error', error: { message: 'slot unavailable' } } : { status: 'success', data: { uid: 'u1' } }) });
+  });
+  if (!realCal) await page.route('https://api.cal.com/v2/slots*', r => { seen.slots++; return calApi === 'fail' ? r.abort() : r.fulfill({ contentType: 'application/json', headers: { 'access-control-allow-origin': '*' }, body: JSON.stringify(SLOTS) }); });
+  else page.on('request', q => { if (q.url().startsWith('https://api.cal.com/v2/slots')) seen.slots++; });
   if (realCal) {
     // Apply the production CSP to the page itself so a blocked Cal.com load shows up here.
     await page.route(BASE + '/contact*', async r => { const resp = await r.fetch(); return r.fulfill({ response: resp, headers: { ...resp.headers(), 'content-security-policy': CSP } }); });
@@ -92,6 +100,13 @@ async function doStep2(page, role, shotPrefix) {
   }
 }
 
+// Six days of open times starting tomorrow (14:00, 15:00, 16:00 UTC), so the picker shows the first five.
+const SLOTS = (() => { const data = {}; for (let i = 1; i <= 6; i++) { const d = new Date(Date.now() + i * 86400000); const k = d.toISOString().slice(0, 10); data[k] = [14, 15, 16].map(h => ({ start: k + 'T' + h + ':00:00.000Z' })); } return { status: 'success', data }; })();
+async function pickAndBook(page) {
+  await page.waitForSelector('#cxDays .cx-day', { timeout: 10000 });
+  await page.click('#cxTimes .cx-time >> nth=0');
+  await page.click('#cxBookBtn');
+}
 const ok200 = (b) => b.step === 1 ? { status: 200, body: { ok: true, leadId: '11111111-2222-4333-8444-555555555555' } } : { status: 200, body: { ok: true } };
 
 // 1. not live, brand → the calendar anyway (10/23/2026), no Chelsea line
@@ -102,7 +117,21 @@ const ok200 = (b) => b.step === 1 ? { status: 200, body: { ok: true, leadId: '11
   SHOTS && await s.page.screenshot({ path: `${SHOTS}/desk-booking.png` });
   ok(await s.page.isHidden('#cxTalkLine'), 'Chelsea call line hidden while not live');
   await s.page.waitForTimeout(500);
-  ok(s.seen.cal > 0, 'Cal.com embed loader requested while not live');
+  ok((await s.page.locator('#cxDays .cx-day').count()) === 5 && (await s.page.locator('#cxTimes .cx-time').count()) === 3, 'picker: 5 days, the first day\'s 3 times');
+  const pickerH = await s.page.evaluate(() => document.getElementById('cxPicker').getBoundingClientRect().height);
+  ok(pickerH < 420, 'picker is compact (height ' + Math.round(pickerH) + 'px)');
+  ok(await s.page.isHidden('#cxBookBtn'), 'Book button waits for a time');
+  await s.page.click('#cxDays .cx-day >> nth=1');
+  ok((await s.page.getAttribute('#cxDays .cx-day >> nth=1', 'aria-checked')) === 'true', 'tapping a day selects it');
+  SHOTS && await s.page.screenshot({ path: `${SHOTS}/desk-picker.png` });
+  await pickAndBook(s.page);
+  await s.page.waitForSelector('#cxBooked:not([hidden])', { timeout: 10000 });
+  SHOTS && await s.page.screenshot({ path: `${SHOTS}/desk-booked.png` });
+  const bk = s.seen.book[0] || {};
+  ok(bk.eventTypeSlug === 'shelfcollect-demo' && bk.username === 'shelfspace' && bk.attendee && bk.attendee.email === 'chris+d2test@shelfspace.pro' && bk.attendee.name === 'Chris D2test' && !!bk.attendee.timeZone, 'booking posts the event + the lead as attendee');
+  ok(bk.start === SLOTS.data[Object.keys(SLOTS.data).sort()[1]][0].start && bk.metadata && bk.metadata.source === 'contact_page' && !('rep_code' in bk.metadata), 'booking: the picked time, source contact_page, no partner code');
+  ok(/You.re booked/.test(await s.page.textContent('#cxBooked')) && (await s.page.textContent('#cxBookedText')).includes('chris+d2test@shelfspace.pro') && /\d\d\/\d\d\/\d{4}/.test(await s.page.textContent('#cxBookedText')), 'booked: MM/DD/YYYY date + the invite email');
+  ok(s.seen.cal === 0, 'Cal.com embed never loaded (picker worked)');
   ok(await bar(s.page) === '100%', 'progress bar full on the calendar');
   const p1 = s.seen.lead[0], p2 = s.seen.lead[1];
   ok(p1 && p1.step === 1 && p1.disclosure_version === '2026-10-23-short', 'step 1 posts the Continue disclosure version');
@@ -133,13 +162,10 @@ const ok200 = (b) => b.step === 1 ? { status: 200, body: { ok: true, leadId: '11
   await s.page.waitForSelector('#cxBooking:not([hidden])', { timeout: 10000 });
   ok(await s.page.isVisible('#cxTalkLine'), 'Chelsea call line shown on the calendar when live');
   if (CAL_LIVE) {
-    const fr = await s.page.waitForSelector('#cxCalInline iframe', { timeout: 20000 }).catch(() => null);
-    ok(!!fr, 'Cal.com iframe mounted');
-    await s.page.waitForTimeout(6000);
-    if (fr) { const src = await fr.getAttribute('src'); ok(/shelfspace\/shelfcollect-demo/.test(src) && /email=chris%2Bd2test/.test(src), 'iframe prefilled: ' + src.slice(0, 140)); }
+    const real = await s.page.waitForSelector('#cxDays .cx-day', { timeout: 20000 }).catch(() => null);
+    ok(!!real && await s.page.isVisible('#cxPicker'), 'real Cal.com open times load under the prod CSP (picker, not the fallback)');
   } else {
-    await s.page.waitForTimeout(500);
-    ok(s.seen.cal > 0, 'Cal.com embed loader requested');
+    await s.page.waitForSelector('#cxDays .cx-day', { timeout: 10000 });
     const href = await s.page.getAttribute('#cxBookingLink', 'href');
     ok(/shelfcollect-demo\?name=Chris\+D2test&email=chris%2Bd2test/.test(href), 'booking link prefilled: ' + href);
     ok(!/metadata/.test(href), 'no partner code → no booking metadata');
@@ -157,7 +183,31 @@ const ok200 = (b) => b.step === 1 ? { status: 200, body: { ok: true, leadId: '11
   await s.page.waitForSelector('#cxBooking:not([hidden])', { timeout: 10000 });
   ok(s.seen.lead[0] && s.seen.lead[0].rep_code === 'JAKE_R3-x', 'step 1 posts the partner code');
   const href = await s.page.getAttribute('#cxBookingLink', 'href');
-  ok(/metadata%5Brep_code%5D=JAKE_R3-x/.test(href), 'booking link carries metadata[rep_code]: ' + href);
+  ok(/metadata%5Brep_code%5D=JAKE_R3-x/.test(href), 'full-calendar link carries metadata[rep_code]: ' + href);
+  await pickAndBook(s.page);
+  await s.page.waitForSelector('#cxBooked:not([hidden])', { timeout: 10000 });
+  ok(s.seen.book[0] && s.seen.book[0].metadata && s.seen.book[0].metadata.rep_code === 'JAKE_R3-x', 'picker booking carries the partner code');
+  await s.browser.close();
+}
+// 2c. Cal.com's API down → the embed calendar instead; 2d. the time was just taken → fresh times + a message
+{
+  const s = await scenario('slots API down → embed fallback', { status: { live: false, capture: true }, lead: ok200, calApi: 'fail' });
+  await doStep2(s.page, 'brand');
+  await s.page.waitForSelector('#cxCalInline:not([hidden])', { timeout: 15000 });
+  await s.page.waitForTimeout(400);
+  ok(await s.page.isHidden('#cxPicker') && s.seen.cal > 0, 'picker hidden, Cal.com embed loaded instead');
+  await s.browser.close();
+}
+{
+  const s = await scenario('time just taken', { status: { live: false, capture: true }, lead: ok200, calApi: 'taken' });
+  await doStep2(s.page, 'brand');
+  await pickAndBook(s.page);
+  await s.page.waitForFunction(() => getComputedStyle(document.getElementById('bookError')).display === 'block', null, { timeout: 10000 });
+  ok((await s.page.textContent('#bookError')).includes('just taken') && s.seen.slots === 2 && await s.page.isHidden('#cxBooked'), 'taken → message, times fetched again, not booked');
+  ok(await s.page.isHidden('#cxBookBtn') && (await s.page.textContent('#cxBookBtn')).includes('Book'), 'Book button reset (hidden until a new time, label intact)');
+  await pickAndBook(s.page);
+  await s.page.waitForSelector('#cxBooked:not([hidden])', { timeout: 10000 });
+  ok(s.seen.book.length === 2, 'second pick books');
   await s.browser.close();
 }
 // 3. live, store → thanks
@@ -341,8 +391,8 @@ for (const [label, fn] of [['500', () => ({ status: 500, body: { ok: false } })]
 {
   const s = await scenario('phone live booking', { status: { live: true, capture: true }, lead: ok200, width: 390, realCal: CAL_LIVE });
   await doStep2(s.page, 'brand');
-  if (CAL_LIVE) await s.page.waitForSelector('#cxCalInline iframe', { timeout: 20000 }).catch(() => null);
-  await s.page.waitForTimeout(6000);
+  await s.page.waitForSelector('#cxDays .cx-day', { timeout: 20000 }).catch(() => null);
+  await s.page.waitForTimeout(500);
   SHOTS && await s.page.screenshot({ path: `${SHOTS}/phone-live-booking.png` });
   const sw = await s.page.evaluate(() => document.documentElement.scrollWidth);
   ok(sw <= 390, 'booking: no horizontal scroll at 390px (scrollWidth ' + sw + ')');

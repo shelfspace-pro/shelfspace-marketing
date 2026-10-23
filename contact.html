@@ -112,6 +112,25 @@
   .cx-booking .cx-q-title { margin-bottom: 4px; }
   .cx-booking-sub { margin: 0 0 14px; font-size: 14px; color: var(--slate-600); }
   .cx-cal { min-height: 520px; width: 100%; overflow: auto; border-radius: 12px; border: 1px solid var(--slate-100); }
+  .cx-days { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-bottom: 14px; }
+  .cx-day, .cx-time {
+    padding: 12px 8px; border: 1px solid var(--slate-200); border-radius: 12px; background: var(--white);
+    font: 500 15px var(--font-display); color: var(--slate-700); cursor: pointer; text-transform: none; letter-spacing: 0;
+    font-variant-numeric: tabular-nums; transition: border-color 0.2s, background 0.2s;
+  }
+  .cx-day { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+  .cx-day small { font-size: 12px; color: var(--slate-500); }
+  .cx-day strong { font-size: 20px; font-weight: 700; color: var(--slate-800); }
+  .cx-day:hover, .cx-time:hover { border-color: var(--green-accent); }
+  .cx-day[aria-checked="true"], .cx-time[aria-checked="true"] { border-color: var(--green-dark); background: var(--green-ghost); color: var(--green-deep); }
+  .cx-day[aria-checked="true"] strong, .cx-day[aria-checked="true"] small { color: var(--green-deep); }
+  .cx-tz { margin: 0 0 10px; font-size: 13px; color: var(--slate-500); }
+  .cx-times { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 18px; }
+  .cx-times:empty { display: none; }
+  .cx-booked { text-align: center; padding: 16px 0 8px; }
+  .cx-booked svg { color: var(--green-mid); margin-bottom: 10px; }
+  .cx-booked h3 { font-size: 22px; font-weight: 700; color: var(--green-deep); margin-bottom: 6px; }
+  .cx-booked p { font-size: 16px; line-height: 1.6; color: var(--slate-600); margin: 0; }
   .cx-booking-alt { margin: 10px 0 0; text-align: center; font-size: 13px; }
   .cx-booking-alt a { color: var(--green-dark); font-weight: 600; }
   [hidden] { display: none !important; }
@@ -127,6 +146,8 @@
   @media (max-width: 600px) {
     .cx-q-title { font-size: 20px; }
     .cx-enter { display: none; }
+    .cx-days { grid-template-columns: repeat(3, 1fr); }
+    .cx-times { grid-template-columns: repeat(2, 1fr); }
     .cx-q input[type="text"], .cx-q input[type="email"], .cx-q input[type="tel"] { font-size: 20px; }
   }
   /* Footer 5-col */
@@ -272,8 +293,21 @@
         <h3 class="cx-q-title" id="cxBookingTitle" tabindex="-1">Pick a time with Chris</h3>
         <p class="cx-booking-sub">30 minutes on Google Meet. You&#39;ll get a calendar invite right away.</p>
         <p class="cx-talk" id="cxTalkLine" hidden>Rather talk than book? If you haven&#39;t picked a time in 10 minutes, Chelsea, our AI assistant, calls you to find one.</p>
-        <div id="cxCalInline" class="cx-cal"></div>
-        <p class="cx-booking-alt"><a id="cxBookingLink" href="https://cal.com/shelfspace/shelfcollect-demo" target="_blank" rel="noopener">Calendar not loading? Open it in a new tab</a></p>
+        <!-- Our own compact picker (Cal.com's public slots + bookings API); the Cal.com embed is only the fallback. -->
+        <div id="cxPicker">
+          <div class="cx-days" id="cxDays" role="radiogroup" aria-label="Day"></div>
+          <p class="cx-tz" id="cxTz"></p>
+          <div class="cx-times" id="cxTimes" role="radiogroup" aria-label="Time"></div>
+          <div class="cx-actions"><button type="button" class="btn-primary" id="cxBookBtn" hidden><span>Book it</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button></div>
+          <div class="form-error" id="bookError" role="alert" aria-live="assertive"></div>
+        </div>
+        <div class="cx-booked" id="cxBooked" hidden role="status" tabindex="-1">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          <h3>You&#39;re booked.</h3>
+          <p id="cxBookedText"></p>
+        </div>
+        <div id="cxCalInline" class="cx-cal" hidden></div>
+        <p class="cx-booking-alt" id="cxBookingAlt"><a id="cxBookingLink" href="https://cal.com/shelfspace/shelfcollect-demo" target="_blank" rel="noopener">Need a different time? Open the full calendar</a></p>
       </div>
     </div>
   </div>
@@ -457,8 +491,9 @@
   function busy(btn, on) {
     if (!btn._html) btn._html = btn.innerHTML;
     btn.disabled = on;
+    var label = ((btn._html.match(/<span[^>]*>([^<]*)<\/span>/) || [])[1] || 'Continue');
     btn.innerHTML = on
-      ? '<span>Continue</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="animation:spin 1s linear infinite" aria-hidden="true"><path d="M21 12a9 9 0 11-6.219-8.56"/></svg>'
+      ? '<span>' + label + '</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="animation:spin 1s linear infinite" aria-hidden="true"><path d="M21 12a9 9 0 11-6.219-8.56"/></svg>'
       : btn._html;
   }
   function firstName() { return (lead.name.split(/\s+/)[0] || '').slice(0, 40); }
@@ -552,22 +587,116 @@
     Cal('init', 'demo', { origin: 'https://app.cal.com' });
     cb(Cal.ns.demo);
   }
-  function showBooking() {
-    document.getElementById('salesForm').style.display = 'none';
-    progress(TOTAL);
-    var box = document.getElementById('cxBooking');
-    box.hidden = false;
+  // ── The picker: the next 5 days with open times, then that day's times, then one "Book" tap. ──
+  var CAL_API = 'https://api.cal.com/v2';
+  var CAL_EVENT = { eventTypeSlug: 'shelfcollect-demo', username: 'shelfspace' };
+  var tz = (function() { try { return Intl.DateTimeFormat().resolvedOptions().timeZone || 'America/New_York'; } catch (e) { return 'America/New_York'; } })();
+  var pick = { days: [], day: null, start: null };
+  function ymd(d) { return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); }
+  function fmt(iso, o) { return new Date(iso).toLocaleString('en-US', Object.assign({ timeZone: tz }, o)); }
+  function dayLabel(key, o) { return new Date(key + 'T12:00:00Z').toLocaleDateString('en-US', Object.assign({ timeZone: 'UTC' }, o)); }
+  function mdy(key) { var p = key.split('-'); return p[1] + '/' + p[2] + '/' + p[0]; }
+  function bookingQuery() {
     var q = new URLSearchParams({ name: lead.name, email: lead.email });
-    var calConfig = { name: lead.name, email: lead.email, layout: 'month_view', theme: 'light' };
-    // Sales row R3: a partner's code rides on the booking as Cal.com metadata (the platform registers it to them).
     var repCode = attribution().rep_code;
-    if (repCode) { q.set('metadata[rep_code]', repCode); calConfig['metadata[rep_code]'] = repCode; }
-    document.getElementById('cxBookingLink').href = 'https://cal.com/' + BOOKING_LINK + '?' + q.toString();
+    if (repCode) q.set('metadata[rep_code]', repCode);
+    return q;
+  }
+  function loadSlots() {
+    var from = new Date(), to = new Date(Date.now() + 21 * 86400000);
+    var url = CAL_API + '/slots?' + new URLSearchParams({ eventTypeSlug: CAL_EVENT.eventTypeSlug, username: CAL_EVENT.username, start: ymd(from), end: ymd(to), timeZone: tz }).toString();
+    return fetchJson(url, { method: 'GET', headers: { 'cal-api-version': '2024-09-04' }, credentials: 'omit', cache: 'no-store' }, 10000).then(function(r) {
+      var data = r.ok && r.data && r.data.data ? r.data.data : null;
+      if (!data) throw new Error('slots ' + r.status);
+      var days = Object.keys(data).sort().map(function(k) {
+        return { key: k, starts: (data[k] || []).map(function(x) { return x && x.start; }).filter(function(x) { return x && Date.parse(x) > Date.now(); }) };
+      }).filter(function(d) { return d.starts.length; }).slice(0, 5);
+      if (!days.length) throw new Error('no open times');
+      return days;
+    });
+  }
+  function chip(cls, html, checked, onClick) {
+    var b = document.createElement('button');
+    b.type = 'button'; b.className = cls; b.setAttribute('role', 'radio'); b.setAttribute('aria-checked', checked ? 'true' : 'false');
+    b.innerHTML = html; b.addEventListener('click', onClick);
+    return b;
+  }
+  function renderPicker() {
+    var days = document.getElementById('cxDays'), times = document.getElementById('cxTimes');
+    days.innerHTML = ''; times.innerHTML = '';
+    pick.days.forEach(function(d) {
+      days.appendChild(chip('cx-day', '<small>' + dayLabel(d.key, { weekday: 'short' }) + '</small><strong>' + dayLabel(d.key, { day: 'numeric' }) + '</strong><small>' + dayLabel(d.key, { month: 'short' }) + '</small>', d.key === pick.day, function() { pick.day = d.key; pick.start = null; renderPicker(); }));
+    });
+    var day = pick.days.filter(function(d) { return d.key === pick.day; })[0];
+    (day ? day.starts : []).forEach(function(st) {
+      times.appendChild(chip('cx-time', escapeText(fmt(st, { hour: 'numeric', minute: '2-digit' })), st === pick.start, function() { pick.start = st; renderPicker(); }));
+    });
+    var btn = document.getElementById('cxBookBtn');
+    btn.hidden = !pick.start;
+    if (pick.start) btn.querySelector('span').textContent = 'Book ' + fmt(pick.start, { weekday: 'short', hour: 'numeric', minute: '2-digit' });
+    btn._html = null;
+  }
+  function refreshSlots(msg) {
+    return loadSlots().then(function(days) {
+      pick.days = days; pick.day = days[0].key; pick.start = null;
+      document.getElementById('cxTz').textContent = 'Times in ' + tz.replace(/_/g, ' ') + '.';
+      renderPicker();
+      if (msg) showError('bookError', msg);
+    });
+  }
+  function fallbackEmbed() {
+    // Cal.com's public API didn't answer: show its own calendar instead (the pre-picker experience).
+    document.getElementById('cxPicker').hidden = true;
+    var box = document.getElementById('cxCalInline');
+    box.hidden = false;
+    var calConfig = { name: lead.name, email: lead.email, layout: 'month_view', theme: 'light' };
+    var repCode = attribution().rep_code;
+    if (repCode) calConfig['metadata[rep_code]'] = repCode;
     loadCal(function(cal) {
       cal('inline', { elementOrSelector: '#cxCalInline', calLink: BOOKING_LINK, config: calConfig });
       cal('ui', { hideEventTypeDetails: true, layout: 'month_view', cssVarsPerTheme: { light: { 'cal-brand': '#1b4332' } } });
-      cal('on', { action: 'bookingSuccessful', callback: function() { track('demo_booked', {}); } });
+      cal('on', { action: 'bookingSuccessful', callback: function() { track('demo_booked', { via: 'embed' }); } });
     });
+    track('booking_embed_fallback', {});
+  }
+  async function bookPicked() {
+    clearError('bookError');
+    var btn = document.getElementById('cxBookBtn');
+    var start = pick.start;
+    if (!start) return;
+    busy(btn, true);
+    var body = { start: new Date(start).toISOString(), eventTypeSlug: CAL_EVENT.eventTypeSlug, username: CAL_EVENT.username, attendee: { name: lead.name, email: lead.email, timeZone: tz }, metadata: { source: 'contact_page' } };
+    var repCode = attribution().rep_code;
+    if (repCode) body.metadata.rep_code = repCode;
+    var r = null;
+    try {
+      r = await fetchJson(CAL_API + '/bookings', { method: 'POST', headers: { 'Content-Type': 'application/json', 'cal-api-version': '2026-02-25' }, credentials: 'omit', body: JSON.stringify(body) }, 20000);
+    } catch (e) { r = null; }
+    busy(btn, false);
+    if (r && r.ok && r.data && r.data.status === 'success') {
+      document.getElementById('cxPicker').hidden = true;
+      document.getElementById('cxBookingAlt').hidden = true;
+      document.getElementById('cxTalkLine').hidden = true;
+      document.getElementById('cxBookingTitle').hidden = true;
+      document.querySelector('.cx-booking-sub').hidden = true;
+      var key = new Date(start).toLocaleDateString('en-CA', { timeZone: tz }); // YYYY-MM-DD in the visitor's zone
+      document.getElementById('cxBookedText').textContent = dayLabel(key, { weekday: 'long' }) + ', ' + mdy(key) + ' at ' + fmt(start, { hour: 'numeric', minute: '2-digit', timeZoneName: 'short' }) + '. The calendar invite is on its way to ' + lead.email + '.';
+      var done = document.getElementById('cxBooked');
+      done.hidden = false; focusTop(done);
+      track('demo_booked', { via: 'picker' });
+      return;
+    }
+    if (!r) { showError('bookError', 'We couldn’t book that just now. Try again, or open the full calendar below.'); return; }
+    // Most likely the time was just taken: fetch fresh times and say so.
+    refreshSlots('That time was just taken. Pick another.').catch(function() { showError('bookError', 'That time didn’t work. Open the full calendar below.'); });
+  }
+  document.getElementById('cxBookBtn').addEventListener('click', bookPicked);
+  function showBooking() {
+    document.getElementById('salesForm').style.display = 'none';
+    progress(TOTAL);
+    document.getElementById('cxBooking').hidden = false;
+    document.getElementById('cxBookingLink').href = 'https://cal.com/' + BOOKING_LINK + '?' + bookingQuery().toString();
+    refreshSlots().catch(fallbackEmbed);
     focusTop(document.getElementById('cxBookingTitle'));
     track('booking_shown', {});
   }
