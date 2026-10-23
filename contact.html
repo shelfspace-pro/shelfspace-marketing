@@ -502,9 +502,12 @@
   var Q1 = ['name', 'email', 'company', 'phone'];
   var TOTAL = 7;
   function progress(n) { document.getElementById('cxProgress').style.width = Math.round(n / TOTAL * 100) + '%'; }
+  // Bring the new question to the top when it starts under the header OR would run off the bottom of the
+  // screen (on a phone the headline pushes a 4-option question's Continue button out of sight).
   function focusTop(el) {
     el.focus({ preventScroll: true });
-    if (el.getBoundingClientRect().top < 80) el.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' });
+    var block = el.closest('.cx-q, .cx-booking') || el;
+    if (el.getBoundingClientRect().top < 80 || block.getBoundingClientRect().bottom > window.innerHeight) el.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' });
   }
   function showQ(key) {
     document.querySelectorAll('#cxStep1 .cx-q').forEach(function(q) { q.hidden = q.getAttribute('data-q') !== key; });

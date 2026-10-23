@@ -34,10 +34,10 @@ const ok = (c, m) => { if (c) { pass++; console.log('  PASS ' + m); } else { fai
 
 const TURNSTILE_STUB = `window.turnstile={_n:0,render:function(el,o){var id=++this._n;setTimeout(function(){o.callback('tok-'+o.sitekey+'-'+id)},60);return id},reset:function(){}};setTimeout(function(){window.onTurnstileLoad&&window.onTurnstileLoad()},0);`;
 
-async function scenario(name, { status, lead, interest, url = '/contact.html?utm_source=li&utm_term=t1&fbclid=fb1&cta=home-hero', role = 'brand', width = 1440, shotPrefix, realCal = false, calApi = 'ok' }) {
+async function scenario(name, { status, lead, interest, url = '/contact.html?utm_source=li&utm_term=t1&fbclid=fb1&cta=home-hero', role = 'brand', width = 1440, shotPrefix, realCal = false, calApi = 'ok', height = 900 }) {
   console.log('\n# ' + name);
   const browser = await chromium.launch();
-  const ctx = await browser.newContext({ viewport: { width, height: 900 } });
+  const ctx = await browser.newContext({ viewport: { width, height } });
   const page = await ctx.newPage();
   const seen = { lead: [], interest: [], status: 0, cal: 0, slots: 0, book: [], consoleErr: [] };
   page.on('console', m => { if (m.type() === 'error') seen.consoleErr.push(m.text()); });
@@ -376,6 +376,20 @@ for (const [label, fn] of [['500', () => ({ status: 500, body: { ok: false } })]
   await s.page.waitForFunction(() => getComputedStyle(document.getElementById('formError')).display === 'block', null, { timeout: 30000 });
   ok((await s.page.textContent('#formError')).includes('country code') && s.seen.interest.length === 0, 'phone 400 → asks for another number, no fallback');
   ok(await s.page.isVisible('#phone') && !(await s.page.isDisabled('#submitBtn')), 'mobile screen stays, button re-enabled');
+  await s.browser.close();
+}
+// 9a. a real phone height (iPhone 13, 390×664): each question's Continue/Book button lands on screen without scrolling
+{
+  const s = await scenario('phone height: buttons on screen', { status: { live: false, capture: true }, lead: ok200, width: 390, height: 664 });
+  const onScreen = (sel) => s.page.evaluate((q) => { const r = document.querySelector(q).getBoundingClientRect(); return r.top >= 0 && r.bottom <= innerHeight; }, sel);
+  await s.page.waitForSelector('#qRole:not([hidden])', { timeout: 10000 }); await s.page.waitForTimeout(900);
+  ok(await onScreen('#roleBtn'), 'role screen: Continue on screen');
+  await s.page.click('label[for=role-brand]'); await s.page.click('#roleBtn');
+  await s.page.waitForSelector('#qBand:not([hidden])'); await s.page.waitForTimeout(900);
+  ok(await onScreen('#step2Btn'), 'sales screen: Continue on screen');
+  await s.page.click('label[for=band-2]'); await s.page.click('#step2Btn');
+  await s.page.waitForSelector('#cxDays .cx-day'); await s.page.click('#cxTimes .cx-time >> nth=0'); await s.page.waitForTimeout(900);
+  ok(await onScreen('#cxBookBtn'), 'picker: Book button on screen');
   await s.browser.close();
 }
 // 9. phone width screenshots
