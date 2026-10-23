@@ -11,6 +11,13 @@
 #            location / $499+ vendor tiers / $20-per-artifact" — is forbidden.
 #            Engagements are custom, consult-first. See CLAUDE.md
 #            § Positioning & Voice and WEBSITE-OVERHAUL.md.
+#            ONE carve-out (Z-33, 10/23/2026): the brand ShelfCollect 30-day
+#            trial (a live product: no payment details to start, no contract,
+#            no setup fee) may be NAMED, but only inside a
+#            `<!-- trial-ok:start -->` … `<!-- trial-ok:end -->` region on a
+#            file in TRIAL_OK_FILES — and on pricing.html (both personas) the
+#            region's section must be `show-vendor`. Trial copy anywhere else
+#            (every dispensary page, the retailer side of pricing) stays red.
 #
 # WHY Scan B is file-scoped: a bare `$749` / `subscription` grep would
 # false-positive across blog content + illustrative worked-example dollar amounts.
@@ -19,9 +26,7 @@
 # repo or to blog/ or docs/. Tier-price patterns anchor on a literal `$` +
 # word-boundary so "$1,250" (an example amount) can't trip them.
 #
-# EXPECTED STATE during the 2026-09-04 overhaul rollout: this check stays RED
-# until every pricing page is swept of pricing/trial copy (WEBSITE-OVERHAUL.md
-# Rows 2–14). A red exit before those land is BY DESIGN, not a regression.
+# EXPECTED STATE: GREEN. Any red is a regression (CI runs this on every push).
 #
 # Usage: bash marketing/scripts/check-docs-forbidden.sh   (exit 1 on any hit)
 
@@ -93,11 +98,79 @@ for f in "${PRICING_FILES[@]}"; do
   [ -f "$f" ] && EXISTING_PRICING+=("$f")
 done
 
+# Trial-copy carve-out (Z-33). file:mode — "vendor-only" = the whole page is for
+# brands; "show-vendor" = a two-persona page, so the region's first <section>
+# must carry class show-vendor (hidden on the dispensary side).
+TRIAL_OK_FILES=(
+  "accounts-receivable.html:vendor-only"
+  "pricing.html:show-vendor"
+)
+# Patterns the carve-out exempts INSIDE a trial-ok region. Everything else in
+# PRICING_PATTERNS (subscription, tier prices, per location, …) stays forbidden
+# even inside the region.
+TRIAL_RX="^(free trial|day trial|cancel anytime|Start your free)$"
+
+trial_mode() { # $1 = file → prints its mode, or nothing
+  local e
+  for e in "${TRIAL_OK_FILES[@]}"; do
+    [ "${e%%:*}" = "$1" ] && { echo "${e#*:}"; return; }
+  done
+}
+
+# Prints the file with every trial-ok region blanked (line numbers preserved).
+# Fails (exit 3) if a region is unclosed, empty, nested, or — in show-vendor
+# mode — its first <section> is not show-vendor. A region must never be ""
+# (an empty region would pass every scan and prove nothing).
+blank_trial_regions() { # $1 = file, $2 = mode
+  awk -v mode="$2" '
+    /<!-- trial-ok:start -->/ { if (inr) { bad="nested start at line " NR; exit 3 } inr=1; body=0; sec=""; print ""; next }
+    /<!-- trial-ok:end -->/   { if (!inr) { bad="end without start at line " NR; exit 3 }
+                                if (!body) { bad="empty region ending line " NR; exit 3 }
+                                if (mode=="show-vendor" && sec !~ /show-vendor/) { bad="region ending line " NR " is not inside a show-vendor section"; exit 3 }
+                                inr=0; regions++; print ""; next }
+    inr { if ($0 ~ /[^[:space:]]/) body=1; if (sec=="" && $0 ~ /<section/) sec=$0; print ""; next }
+    { print }
+    END { if (bad!="") { print "TRIAL-OK: " bad > "/dev/stderr"; exit 3 }
+          if (inr) { print "TRIAL-OK: unclosed region" > "/dev/stderr"; exit 3 } }
+  ' "$1"
+}
+
+# A trial-ok marker on any file NOT in TRIAL_OK_FILES is itself a hit — the
+# carve-out can't be borrowed by a dispensary page.
+STRAY=$(grep -rlI --include=*.html -e "trial-ok:start" -e "trial-ok:end" --exclude-dir=node_modules --exclude-dir=.git . 2>/dev/null | sed 's|^\./||' | while read -r f; do [ -z "$(trial_mode "$f")" ] && echo "$f"; done)
+if [ -n "$STRAY" ]; then
+  HITS=$((HITS + 1))
+  echo "🔴 FORBIDDEN trial-ok marker outside TRIAL_OK_FILES (trial copy is brand-only — Z-33):"
+  echo "$STRAY" | sed 's/^/     /'
+fi
+
+# Each allow-listed file must still carry at least one valid region (else the
+# carve-out is dead weight and a typo'd marker would go unnoticed).
+for e in "${TRIAL_OK_FILES[@]}"; do
+  f="${e%%:*}"; [ -f "$f" ] || continue
+  if ! grep -q "trial-ok:start" "$f"; then
+    HITS=$((HITS + 1)); echo "🔴 TRIAL-OK: $f is allow-listed but has no trial-ok region (remove it from TRIAL_OK_FILES or restore the region)"
+  elif ! ERR=$(blank_trial_regions "$f" "${e#*:}" 2>&1 >/dev/null); then
+    HITS=$((HITS + 1)); echo "🔴 TRIAL-OK: $f — ${ERR:-region check failed}"
+  fi
+done
+
 if [ "${#EXISTING_PRICING[@]}" -gt 0 ]; then
   for entry in "${PRICING_PATTERNS[@]}"; do
     rx="${entry%%:::*}"
     reason="${entry#*:::}"
-    MATCHES=$(grep -inI -E "$rx" "${EXISTING_PRICING[@]}" 2>/dev/null)
+    MATCHES=""
+    for f in "${EXISTING_PRICING[@]}"; do
+      mode="$(trial_mode "$f")"
+      if [ -n "$mode" ] && echo "$rx" | grep -qE "$TRIAL_RX"; then
+        # Trial pattern on a carve-out file: scan with its trial-ok regions blanked.
+        M=$(blank_trial_regions "$f" "$mode" 2>/dev/null | grep -inI -E "$rx" | sed "s|^|$f:|")
+      else
+        M=$(grep -inI -E "$rx" "$f" 2>/dev/null | sed "s|^|$f:|")
+      fi
+      [ -n "$M" ] && MATCHES="${MATCHES:+$MATCHES
+}$M"
+    done
     if [ -n "$MATCHES" ]; then
       HITS=$((HITS + 1))
       echo "🔴 FORBIDDEN retired-pricing copy: /$rx/ — $reason"
@@ -123,5 +196,4 @@ if [ "$HITS" -eq 0 ]; then
 fi
 echo ""
 echo "❌ $HITS forbidden pattern(s) present — remove before deploy."
-echo "   (A red exit on retired-pricing patterns is EXPECTED until WEBSITE-OVERHAUL.md Rows 2–14 sweep the pricing pages.)"
 exit 1

@@ -21,6 +21,10 @@ jobs:
 
       - run: npm ci
 
+      # No provider leaks, no retired pricing; trial copy only inside brand-page trial-ok regions (Z-33).
+      - name: Forbidden copy
+        run: npm run check:forbidden
+
       # /quote is month to month only: a saved 12-month link must open at the month-to-month price.
       - name: Quote builder
         run: npm run check:quote
