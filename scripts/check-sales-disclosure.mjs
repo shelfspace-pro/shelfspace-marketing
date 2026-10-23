@@ -6,7 +6,7 @@
 //     in the page's DISCLOSURE_SHA256). Drift → every lead is saved WITHOUT call consent, silently.
 //  2. The paragraph sits inside step 1 (the mobile-number screen), ABOVE the submit button, and that
 //     button says "Continue" (visible text AND the data-label the page posts) — the disclosure says
-//     "By clicking Continue" (platform version 2026-10-23-continue).
+//     "By clicking Continue" (platform version 2026-10-23-short).
 //  3. Step 1 posts to the ABSOLUTE ourshelf.space URL, never through this site's /api rewrite
 //     (the rewrite would make every visitor share one IP for the lead system's rate limits).
 //  4. The booking calendar shows for brands/distributors only (never partners, never the email
@@ -17,8 +17,8 @@
 import { readFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 
-const PINNED_VERSION = '2026-10-23-continue';
-const PINNED_SHA256 = 'd047b4f337cf87ea1a0d51ec63f373e28b45f1941f9a78c4c1dc9e65c01c879a';
+const PINNED_VERSION = '2026-10-23-short';
+const PINNED_SHA256 = 'cc39a9c775e52bb10878dedba4e8ba04beff966965ad0d4faa0eacd4cf0fc90a';
 const LEAD_API = 'https://ourshelf.space/api/public/sales-lead';
 
 const htmlPath = process.argv[2] || 'contact.html';

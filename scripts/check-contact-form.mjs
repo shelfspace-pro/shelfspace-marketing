@@ -105,8 +105,8 @@ const ok200 = (b) => b.step === 1 ? { status: 200, body: { ok: true, leadId: '11
   ok(s.seen.cal > 0, 'Cal.com embed loader requested while not live');
   ok(await bar(s.page) === '100%', 'progress bar full on the calendar');
   const p1 = s.seen.lead[0], p2 = s.seen.lead[1];
-  ok(p1 && p1.step === 1 && p1.disclosure_version === '2026-10-23-continue', 'step 1 posts the Continue disclosure version');
-  ok(p1.disclosure_html_sha256 === 'd047b4f337cf87ea1a0d51ec63f373e28b45f1941f9a78c4c1dc9e65c01c879a' && p1.button_label === 'Continue', 'step 1 posts registry sha + "Continue"');
+  ok(p1 && p1.step === 1 && p1.disclosure_version === '2026-10-23-short', 'step 1 posts the Continue disclosure version');
+  ok(p1.disclosure_html_sha256 === 'cc39a9c775e52bb10878dedba4e8ba04beff966965ad0d4faa0eacd4cf0fc90a' && p1.button_label === 'Continue', 'step 1 posts registry sha + "Continue"');
   ok(p1.turnstile_token && p1.turnstile_token.startsWith('tok-0x4AAAAAACiquH5tTwIbSo5z'), 'step 1 token from the platform site key');
   ok(p1.website === '' && typeof p1.fill_ms === 'number' && p1.fill_ms >= 1500, 'honeypot empty + fill_ms sent');
   ok(p1.page_url.startsWith(BASE + '/contact'), 'page_url = this page');
@@ -247,7 +247,7 @@ for (const [label, fn] of [['500', () => ({ status: 500, body: { ok: false } })]
   await page.press('#company', 'Enter'); await page.waitForTimeout(150);
   ok(await page.isVisible('#company') && (await page.textContent('#formError')).includes('company'), 'empty company → stays, error');
   await page.fill('#company', 'X'); await page.press('#company', 'Enter');
-  ok(await page.isVisible('#phone') && await page.isVisible('.sales-consent') && await page.isVisible('#submitBtn'), 'mobile screen shows the consent above Continue');
+  ok(await page.isVisible('#phone') && await page.isVisible('.sales-consent') && await page.isVisible('#submitBtn'), 'mobile screen shows the consent under the question, above Continue');
   await page.fill('#phone', '12345');
   await page.click('#submitBtn'); await page.waitForTimeout(400);
   ok(posts === 0 && (await page.textContent('#formError')).includes('mobile'), 'short phone refused before any post');

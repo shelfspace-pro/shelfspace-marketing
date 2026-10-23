@@ -108,7 +108,7 @@
 
   .cx-talk { margin: 0 0 14px; padding: 10px 14px; border-radius: 12px; background: var(--green-ghost); font-size: 14px; line-height: 1.5; color: var(--green-deep); }
   /* The consent text: readable, normal small type, never hidden or faint (spec §1). */
-  .sales-consent { margin: 0 0 18px; font-size: 13px; line-height: 1.55; color: var(--slate-600); }
+  .sales-consent { margin: 0; font-size: 13px; line-height: 1.5; color: var(--slate-600); }
   .cx-booking .cx-q-title { margin-bottom: 4px; }
   .cx-booking-sub { margin: 0 0 14px; font-size: 14px; color: var(--slate-600); }
   .cx-cal { min-height: 520px; width: 100%; overflow: auto; border-radius: 12px; border: 1px solid var(--slate-100); }
@@ -207,6 +207,9 @@
           <div class="cx-q" data-q="phone" hidden>
             <button type="button" class="cx-back" data-back>&larr; Back</button>
             <label class="cx-q-title" for="phone">What&#39;s your mobile number?<span class="cx-req">*</span></label>
+            <!-- The consent text the lead system records. Keep it byte-identical to the registry
+                 (scripts/check-sales-disclosure.mjs); a new wording is a new platform version. -->
+            <p class="sales-consent">By clicking Continue, I agree ShelfSpace may call me at this number, including automated and AI-voice calls. Consent isn&#39;t a condition of purchase.</p>
             <input type="tel" id="phone" name="phone" autocomplete="tel" inputmode="tel" maxlength="40" placeholder="(555) 555-0123" required>
 
             <!-- Honeypot: invisible to people, irresistible to bots -->
@@ -217,10 +220,6 @@
 
             <div class="cx-turnstile" id="cxTurnstile"></div>
             <div class="cx-turnstile" id="cxTurnstileBackup"></div>
-
-            <!-- The consent text the lead system records. Keep it byte-identical to the registry
-                 (scripts/check-sales-disclosure.mjs); a new wording is a new platform version. -->
-            <p class="sales-consent">By clicking Continue, you agree ShelfSpace Technologies Inc. may call you at the number you provide about your business, including automated or AI-voice calls that may be recorded, and may email you. Agreeing isn&#39;t a condition of buying anything. Opt out anytime by replying &quot;stop&quot; or telling Chelsea.</p>
 
             <div class="cx-actions"><button type="submit" class="btn-primary" id="submitBtn" data-label="Continue"><span id="submitLabel">Continue</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button><span class="cx-enter">press Enter &crarr;</span></div>
           </div>
@@ -317,8 +316,8 @@
   // Must equal the platform's SALES_DISCLOSURES registry (lib/sales/capture/disclosure.ts):
   // a mismatch records the lead WITHOUT call consent. scripts/check-sales-disclosure.mjs
   // proves the sha matches the <p class="sales-consent"> above.
-  var DISCLOSURE_VERSION = '2026-10-23-continue';
-  var DISCLOSURE_SHA256 = 'd047b4f337cf87ea1a0d51ec63f373e28b45f1941f9a78c4c1dc9e65c01c879a';
+  var DISCLOSURE_VERSION = '2026-10-23-short';
+  var DISCLOSURE_SHA256 = 'cc39a9c775e52bb10878dedba4e8ba04beff966965ad0d4faa0eacd4cf0fc90a';
   var SITEKEY = '0x4AAAAAACiquH5tTwIbSo5z';         // verified by the lead system
   var FALLBACK_SITEKEY = '0x4AAAAAACiEpqqSU9lohNi-'; // verified by /api/interest
   // Above the route's own 60 s budget would be pointless; 55 s keeps a slow-but-successful save from
