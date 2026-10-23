@@ -84,7 +84,9 @@ PRICING_FILES=(
 PRICING_PATTERNS=(
   "free trial:::retired trial framing — the site is consult-first, no trial. Primary CTA → /contact"
   "day trial:::retired 30-day-trial framing — consult-first, no trial"
-  "cancel anytime:::retired subscription/trial language — no public pricing"
+  "cancel any ?time:::retired subscription/trial language — no public pricing"
+  "try it free:::trial headline — brand trial-ok regions only (Z-33)"
+  "payment details to start:::trial promise — brand trial-ok regions only (Z-33)"
   "subscription:::retired subscription model — engagements are custom, scoped in the consult"
   "per location:::retired per-location pricing — pricing is custom, no public numbers"
   "\\\$(499|749|799|899|999)\\b:::retired Automate tier price — the site shows no public pricing"
@@ -108,7 +110,7 @@ TRIAL_OK_FILES=(
 # Patterns the carve-out exempts INSIDE a trial-ok region. Everything else in
 # PRICING_PATTERNS (subscription, tier prices, per location, …) stays forbidden
 # even inside the region.
-TRIAL_RX="^(free trial|day trial|cancel anytime|Start your free)$"
+TRIAL_RX="^(free trial|day trial|cancel any \\?time|try it free|payment details to start)$"
 
 trial_mode() { # $1 = file → prints its mode, or nothing
   local e
@@ -118,20 +120,25 @@ trial_mode() { # $1 = file → prints its mode, or nothing
 }
 
 # Prints the file with every trial-ok region blanked (line numbers preserved).
-# Fails (exit 3) if a region is unclosed, empty, nested, or — in show-vendor
-# mode — its first <section> is not show-vendor. A region must never be ""
+# Fails (exit 3) if a region is unclosed, empty, nested, is not exactly ONE
+# <section>…</section> (so it can't span into a section the dispensary side
+# sees), or — in show-vendor mode — that section's class lacks show-vendor. A region must never be ""
 # (an empty region would pass every scan and prove nothing).
 blank_trial_regions() { # $1 = file, $2 = mode
   awk -v mode="$2" '
-    /<!-- trial-ok:start -->/ { if (inr) { bad="nested start at line " NR; exit 3 } inr=1; body=0; sec=""; print ""; next }
+    /<!-- trial-ok:start -->/ { if (inr) { bad="nested start at line " NR; exit 3 } inr=1; body=0; sec=""; nopen=0; nclose=0; last=""; print ""; next }
     /<!-- trial-ok:end -->/   { if (!inr) { bad="end without start at line " NR; exit 3 }
                                 if (!body) { bad="empty region ending line " NR; exit 3 }
-                                if (mode=="show-vendor" && sec !~ /show-vendor/) { bad="region ending line " NR " is not inside a show-vendor section"; exit 3 }
+                                if (nopen!=1 || nclose!=1 || last !~ /<\/section>[[:space:]]*$/) { bad="region ending line " NR " must be exactly one <section>…</section>"; exit 3 }
+                                if (mode=="show-vendor" && sec !~ /class="([^"]* )?show-vendor( [^"]*)?"/) { bad="region ending line " NR " is not inside a show-vendor section"; exit 3 }
                                 inr=0; regions++; print ""; next }
-    inr { if ($0 ~ /[^[:space:]]/) body=1; if (sec=="" && $0 ~ /<section/) sec=$0; print ""; next }
+    inr { if ($0 ~ /[^[:space:]]/) { body=1; last=$0 }
+          if ($0 ~ /<section[[:space:]>]/) { nopen++; if (sec=="") sec=$0 }
+          if ($0 ~ /<\/section>/) nclose++
+          print ""; next }
     { print }
-    END { if (bad!="") { print "TRIAL-OK: " bad > "/dev/stderr"; exit 3 }
-          if (inr) { print "TRIAL-OK: unclosed region" > "/dev/stderr"; exit 3 } }
+    END { if (bad!="") { print bad > "/dev/stderr"; exit 3 }
+          if (inr) { print "unclosed region" > "/dev/stderr"; exit 3 } }
   ' "$1"
 }
 
