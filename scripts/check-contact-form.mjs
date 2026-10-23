@@ -257,6 +257,28 @@ for (const [label, fn] of [['500', () => ({ status: 500, body: { ok: false } })]
   }
   await browser.close();
 }
+// 8a. answers are remembered in this browser: a reload starts with them filled in (blocked storage never breaks the page)
+{
+  console.log('\n# remembered answers');
+  const browser = await chromium.launch(); const ctx = await browser.newContext(); const page = await ctx.newPage();
+  await page.route('**/turnstile/v0/api.js*', r => r.fulfill({ contentType: 'application/javascript', body: TURNSTILE_STUB }));
+  await page.route('https://ourshelf.space/**', r => r.fulfill({ status: 200, contentType: 'application/json', headers: { 'access-control-allow-origin': '*' }, body: '{"live":false,"capture":true}' }));
+  await page.goto(BASE + '/contact.html', { waitUntil: 'domcontentloaded' });
+  await page.fill('#name', 'Remy Member'); await page.press('#name', 'Enter');
+  await page.fill('#email', 'remy@brand.co'); await page.press('#email', 'Enter');
+  await page.reload({ waitUntil: 'domcontentloaded' });
+  ok((await page.inputValue('#name')) === 'Remy Member' && (await page.inputValue('#email')) === 'remy@brand.co', 'reload: name + email filled back in');
+  ok((await page.inputValue('#company')) === '' && (await page.inputValue('#phone')) === '', 'reload: unanswered screens stay empty');
+  const blocked = await browser.newContext(); const bp = await blocked.newPage();
+  const errs = []; bp.on('pageerror', e => errs.push(e.message));
+  await bp.addInitScript(() => { Object.defineProperty(window, 'localStorage', { get() { throw new Error('blocked'); } }); });
+  await bp.route('**/turnstile/v0/api.js*', r => r.fulfill({ contentType: 'application/javascript', body: TURNSTILE_STUB }));
+  await bp.route('https://ourshelf.space/**', r => r.fulfill({ status: 200, contentType: 'application/json', headers: { 'access-control-allow-origin': '*' }, body: '{"live":false,"capture":true}' }));
+  await bp.goto(BASE + '/contact.html', { waitUntil: 'domcontentloaded' });
+  await bp.fill('#name', 'A'); await bp.press('#name', 'Enter');
+  ok(await bp.isVisible('#email') && errs.filter(e => !/gtag|googletagmanager/.test(e)).length === 0, 'blocked storage: the form still moves on, no errors ' + errs.join(' | '));
+  await browser.close();
+}
 // 8b. attribution: a campaign on the /contact URL replaces the session touch wholesale (never a blend)
 {
   console.log('\n# attribution');

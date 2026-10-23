@@ -481,9 +481,25 @@
     if (key === 'company' && !v) { fieldError('company', 'Please add your company name.'); return false; }
     return true;
   }
+  // Remember the four answers in this browser (like closers.io): a refresh or a return visit starts filled in.
+  // Per-viewer convenience only; storage can be blocked, so every read/write is wrapped.
+  var REMEMBER_KEY = 'ss-contact-answers';
+  function remember() {
+    try {
+      var a = {};
+      Q1.forEach(function(k) { a[k] = clip(document.getElementById(k).value, 254); });
+      localStorage.setItem(REMEMBER_KEY, JSON.stringify(a));
+    } catch (e) { /* storage blocked: nothing to remember */ }
+  }
+  (function recall() {
+    var a = {};
+    try { a = JSON.parse(localStorage.getItem(REMEMBER_KEY) || '{}') || {}; } catch (e) { a = {}; }
+    Q1.forEach(function(k) { if (typeof a[k] === 'string' && a[k] && !document.getElementById(k).value) document.getElementById(k).value = a[k]; });
+  })();
   function nextQ(key) {
     clearError('formError');
     if (!stepOk(key)) return;
+    remember();
     showQ(Q1[Q1.indexOf(key) + 1]);
   }
   document.querySelectorAll('#cxStep1 .cx-q').forEach(function(q) {
@@ -597,6 +613,7 @@
     var btn = document.getElementById('submitBtn');
     busy(btn, true);
     lead.name = fields.name; lead.email = fields.email;
+    remember();
     var attrib = attribution();
     await statusReady;
     var reason = null;
