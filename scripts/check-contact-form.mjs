@@ -257,6 +257,24 @@ for (const [label, fn] of [['500', () => ({ status: 500, body: { ok: false } })]
   }
   await browser.close();
 }
+// 8-busy. while the mobile-screen save is in flight the button still says "Continue" (never "Sending")
+{
+  console.log('\n# busy button');
+  const browser = await chromium.launch(); const page = await browser.newPage();
+  await page.route('**/turnstile/v0/api.js*', r => r.fulfill({ contentType: 'application/javascript', body: TURNSTILE_STUB }));
+  await page.route('https://ourshelf.space/api/public/sales-status', r => r.fulfill({ contentType: 'application/json', headers: { 'access-control-allow-origin': '*' }, body: '{"live":false,"capture":true}' }));
+  let release; const held = new Promise(r => { release = r; });
+  await page.route('https://ourshelf.space/api/public/sales-lead', async r => { await held; return r.fulfill({ status: 200, contentType: 'application/json', headers: { 'access-control-allow-origin': '*' }, body: '{"ok":true,"leadId":"11111111-2222-4333-8444-555555555555"}' }); });
+  await page.goto(BASE + '/contact.html', { waitUntil: 'domcontentloaded' }); await page.waitForTimeout(1700);
+  await walkStep1(page, { name: 'B U', email: 'b@u.co', company: 'X', phone: '(360) 609-0721' });
+  await page.click('#submitBtn');
+  await page.waitForFunction(() => document.getElementById('submitBtn').disabled, null, { timeout: 5000 });
+  const txt = (await page.textContent('#submitBtn')).trim();
+  ok(txt === 'Continue' && !/send/i.test(txt), 'in flight: button still reads "Continue" (' + txt + ')');
+  release();
+  await page.waitForSelector('#qRole:not([hidden])', { timeout: 10000 });
+  await browser.close();
+}
 // 8a. answers are remembered in this browser: a reload starts with them filled in (blocked storage never breaks the page)
 {
   console.log('\n# remembered answers');
