@@ -128,7 +128,6 @@ Add a one-line entry for the new case study under the blog section.
 | 16 | `case-study-metrc-invoice-accuracy` | accounts-payable | $7,340 | We caught 12 wrong invoices in one month using Metrc | Live |
 | 17 | `case-study-consignment-new-product` | consignment | $14,230 | We got a new product on shelves — zero risk for both sides | Live |
 | 18 | `case-study-ceo-email-relief` | operations | 20+ hrs/month | We took over vendor emails — the owner never answered another one | Live |
-| 20 | `case-study-brand-past-due-collected` | brands | 43% paid | 43% of past-due paid in month one (HPF, QBO payments 09/05–10/05 vs Apr–Aug baseline; $93,418 = fuzzed 60+ day $) | Live |
 | 19 | `case-study-buyer-reorder-data` | operations | 23% less waste | We gave a buyer real data — waste dropped 23% | Live |
 
 ## SEO Targets
