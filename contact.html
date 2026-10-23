@@ -547,7 +547,7 @@
     document.getElementById('cxBookingLink').href = 'https://cal.com/' + BOOKING_LINK + '?' + q.toString();
     loadCal(function(cal) {
       cal('inline', { elementOrSelector: '#cxCalInline', calLink: BOOKING_LINK, config: calConfig });
-      cal('ui', { hideEventTypeDetails: false, layout: 'month_view' });
+      cal('ui', { hideEventTypeDetails: true, layout: 'month_view', cssVarsPerTheme: { light: { 'cal-brand': '#1b4332' } } });
       cal('on', { action: 'bookingSuccessful', callback: function() { track('demo_booked', {}); } });
     });
     focusTop(document.getElementById('cxBookingTitle'));
