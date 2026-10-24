@@ -1493,3 +1493,57 @@ footer::before { content: ''; position: absolute; bottom: -100px; right: -100px;
 @media (prefers-reduced-motion: reduce) {
   .brand-ticker-label { animation: none; background-position: 100% 0; }
 }
+
+/* ─── Call now: Chelsea's line in the header (10/24/2026, Chris) ─────────────
+   Desktop: a phone pill left of the "Schedule a call" button. Phones: a "Call"
+   pill in the header bar (always visible) + a big tap-to-call row in the menu. */
+.nav-links > li.nav-call { margin-right: -14px; }
+.nav-links .nav-call > a { display: inline-flex; align-items: center; gap: 10px; color: var(--green-deep); }
+.nav-call-icon {
+  position: relative; display: inline-flex; align-items: center; justify-content: center;
+  width: 34px; height: 34px; border-radius: 50%; background: var(--green-ghost); color: var(--green-deep);
+  box-shadow: inset 0 0 0 1px rgba(27,67,50,0.10); transition: background 0.2s, transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.nav-call-icon::after {
+  content: ''; position: absolute; top: 1px; right: 1px; width: 8px; height: 8px; border-radius: 50%;
+  background: var(--green-mid); box-shadow: 0 0 0 2px var(--white); animation: nav-call-live 2.4s ease-out infinite;
+}
+@keyframes nav-call-live { 0% { box-shadow: 0 0 0 2px var(--white), 0 0 0 2px rgba(64,145,108,0.5); } 70%, 100% { box-shadow: 0 0 0 2px var(--white), 0 0 0 8px rgba(64,145,108,0); } }
+.nav-call-text { display: flex; flex-direction: column; line-height: 1.15; }
+.nav-call-kicker { font-size: 10px; font-weight: 700; letter-spacing: 1.4px; text-transform: uppercase; color: var(--green-mid); }
+.nav-call-num { font-family: var(--font-mono); font-size: 13.5px; font-weight: 700; color: var(--green-deep); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.nav-links .nav-call > a:hover .nav-call-icon { background: var(--green-light); transform: rotate(-8deg); }
+.nav-call-bar { display: none; }
+@media (max-width: 1240px) and (min-width: 901px) {
+  .nav-links { gap: 26px; }
+  .nav-links > li > a, .nav-dropdown-toggle { white-space: nowrap; }
+  .nav-call-text { display: none; }
+  .nav-links > li.nav-call { margin-right: -8px; }
+}
+@media (max-width: 1040px) and (min-width: 901px) {
+  nav { padding: 0 24px; }
+  .nav-links { gap: 18px; }
+  .nav-cta { padding: 10px 16px; }
+}
+@media (max-width: 900px) {
+  /* header bar pill, left of the hamburger */
+  .nav-call-bar {
+    display: inline-flex; align-items: center; gap: 6px; margin-left: auto; margin-right: 14px;
+    height: 36px; padding: 0 14px; border-radius: 100px; text-decoration: none;
+    background: var(--green-deep); color: var(--white); font-size: 14px; font-weight: 600;
+    box-shadow: 0 2px 8px rgba(27,67,50,0.2); -webkit-tap-highlight-color: transparent;
+  }
+  .nav-call-bar svg { width: 15px; height: 15px; }
+  .nav-links.mobile-open ~ .nav-call-bar { background: var(--green-accent); color: var(--green-deep); }
+  /* in the open menu: a full-width tap-to-call row above Login / Schedule a call */
+  .nav-links > li.nav-call:not(.nav-dropdown):not(.nav-login-mobile):not(:last-child) { grid-column: 1 / -1; grid-row: 5; align-self: end; margin: 24px 0 0 0; }
+  .nav-links > li.nav-call:not(.nav-dropdown):not(.nav-login-mobile):not(:last-child) > a {
+    display: flex; align-items: center; gap: 14px; padding: 14px 16px;
+    border-radius: 14px; background: rgba(149,213,178,0.12); border: 1px solid rgba(149,213,178,0.28); color: var(--white);
+  }
+  .nav-links .nav-call .nav-call-icon { width: 40px; height: 40px; background: var(--green-accent); color: var(--green-deep); box-shadow: none; }
+  .nav-links .nav-call .nav-call-icon::after { box-shadow: 0 0 0 2px var(--green-deep); animation: none; background: var(--white); }
+  .nav-links .nav-call .nav-call-kicker { color: var(--green-accent); font-size: 11px; }
+  .nav-links .nav-call .nav-call-num { color: var(--white); font-size: 18px; }
+}
+@media (prefers-reduced-motion: reduce) { .nav-call-icon::after { animation: none; } }
