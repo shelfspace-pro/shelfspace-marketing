@@ -351,7 +351,7 @@
 
     var fine = [];
     fine.push("Billed monthly, nothing up front. No contract and no onboarding fee.");
-    if (v.p === "collect") fine.push("We collect more than we cost: if the past-due payments we collect in your first 90 days come to less than you paid us, we refund the difference.");
+    if (v.p === "collect") fine.push("We collect 25% of your past-due invoices in month one, or it's free: if we don't, you don't pay for that month.");
     if (v.p === "pay" && v.stores > 1) fine.push("One price for your combined sales, plus " + usd(PER_STORE) + " a month for each store after the first.");
     if (v.p === "pay") fine.push("The credits pay for it: if the credits we recover in your first 90 days come to less than you paid us, we refund the difference. Your estimated credits are in your eval.");
     if (discounted()) fine.push(discName() + ": " + pctText() + " off our list price of " + usd(v.listBase) + " a month.");
@@ -362,7 +362,7 @@
     v.lines.forEach(function (l) { t.push("  " + l.item + " (" + l.sub + "): " + l.amt); });
     t.push("Monthly rate: " + usd(v.base) + "/mo" + (discounted() ? " (" + discName() + ": " + pctText() + " off the " + usd(v.listBase) + "/mo list price)" : ""));
     t.push("No contract, no onboarding fee.");
-    if (v.p === "pay") { t.push("Credit recovery: 20% of credits we recover. Nothing recovered, nothing owed."); t.push("Guarantee: If the credits we recover in your first 90 days come to less than you paid us, we refund the difference."); } else t.push("Guarantee: If the past-due payments we collect in your first 90 days come to less than you paid us, we refund the difference.");
+    if (v.p === "pay") { t.push("Credit recovery: 20% of credits we recover. Nothing recovered, nothing owed."); t.push("Guarantee: If the credits we recover in your first 90 days come to less than you paid us, we refund the difference."); } else t.push("Guarantee: If we don't collect 25% of your past-due invoices in the first month, you don't pay.");
     t.push("Valid through " + mdy(valid));
     summaryText = t.join("\n");
   }
@@ -389,7 +389,7 @@
     var t = ["ShelfSpace quote " + state.q + " · " + mdy(today), (name ? name + " · " : "") + product + " Enterprise · " + termName];
     v.lines.forEach(function (l) { t.push("  " + l.item + " (" + l.range.replace(" · Enterprise", "") + "): Custom"); });
     t.push("Monthly rate: Custom, from " + usd(ent.from) + "/mo (Enterprise, over " + ent.over + " a month in sales)");
-    if (v.p === "pay") { t.push("Credit recovery: 20% of credits we recover. Nothing recovered, nothing owed."); t.push("Guarantee: If the credits we recover in your first 90 days come to less than you paid us, we refund the difference."); } else t.push("Guarantee: If the past-due payments we collect in your first 90 days come to less than you paid us, we refund the difference.");
+    if (v.p === "pay") { t.push("Credit recovery: 20% of credits we recover. Nothing recovered, nothing owed."); t.push("Guarantee: If the credits we recover in your first 90 days come to less than you paid us, we refund the difference."); } else t.push("Guarantee: If we don't collect 25% of your past-due invoices in the first month, you don't pay.");
     t.push("Valid through " + mdy(valid));
     summaryText = t.join("\n");
   }
