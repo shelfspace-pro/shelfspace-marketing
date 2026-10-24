@@ -129,6 +129,8 @@ Add a one-line entry for the new case study under the blog section.
 | 17 | `case-study-consignment-new-product` | consignment | $14,230 | We got a new product on shelves — zero risk for both sides | Live |
 | 18 | `case-study-ceo-email-relief` | operations | 20+ hrs/month | We took over vendor emails — the owner never answered another one | Live |
 | 20 | `case-study-back-office-labor-saved` | operations | 27 hrs/week | AP 15h→15m (case 10) + One Garden AR ~12h/wk: 38 invoices, 195 reminders, 120 rep lists 09/24–10/23 at 5/5/10 min + 2h spreadsheet | Live |
+| 21 | `case-study-brand-past-due-collected-30-days` | brands (AR) | $417,560 | One Garden: 115 invoices / $1,090,679 past due at first send 09/25; 52 paid by 10/25 (external_paid_at, day-0 excluded); $172,876 in week 1 | Live |
+| 22 | `case-study-cannabis-farm-past-due-paid` | brands (AR) | 88% | High Plains Farm: 10 invoices / $22,099 past due at first send 09/05; 9 paid ($19,531) within 30d; first reminders 09/12, 4 paid 09/14 | Live |
 | 19 | `case-study-buyer-reorder-data` | operations | 23% less waste | We gave a buyer real data — waste dropped 23% | Live |
 
 ## SEO Targets
