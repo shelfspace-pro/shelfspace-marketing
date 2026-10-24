@@ -1460,3 +1460,36 @@ footer::before { content: ''; position: absolute; bottom: -100px; right: -100px;
   html body .ai-hero-inner :is(h1, .ai-hero-lede) { margin-left: auto; margin-right: auto; }
   html body .ai-hero-works { justify-content: center; }
 }
+
+/* Brand-ticker label emphasis (Chris, 10/24/2026): bigger, bright, a slow light sweep across the
+   text, glowing rules either side — so the proof line gets read, not skimmed. Sitewide. */
+.brand-ticker .brand-ticker-label,
+.brand-ticker--tight .brand-ticker-label {
+  display: flex; align-items: center; justify-content: center; gap: 16px;
+  font-size: 13px; font-weight: 700; letter-spacing: 2.4px; color: #fff;
+}
+.brand-ticker-label::before, .brand-ticker-label::after {
+  content: ''; flex: none; width: 40px; height: 1px;
+  box-shadow: 0 0 10px rgba(149,213,178,0.7);
+}
+.brand-ticker-label::before { background: linear-gradient(90deg, transparent, var(--green-accent)); }
+.brand-ticker-label::after { background: linear-gradient(270deg, transparent, var(--green-accent)); }
+.brand-ticker-label {
+  background: linear-gradient(100deg, #ffffff 0%, #ffffff 38%, #d8f3dc 46%, var(--green-accent) 50%, #d8f3dc 54%, #ffffff 62%, #ffffff 100%);
+  background-size: 250% 100%; background-position: 100% 0;
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 10px rgba(149,213,178,0.45));
+  animation: bt-label-shine 4.5s ease-in-out 0.6s infinite;
+}
+@keyframes bt-label-shine {
+  0% { background-position: 100% 0; }
+  55%, 100% { background-position: 0% 0; }
+}
+@media (max-width: 600px) {
+  .brand-ticker .brand-ticker-label, .brand-ticker--tight .brand-ticker-label { font-size: 11px; letter-spacing: 1.8px; gap: 10px; }
+  .brand-ticker-label::before, .brand-ticker-label::after { width: 20px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .brand-ticker-label { animation: none; background-position: 100% 0; }
+}
