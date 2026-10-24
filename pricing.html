@@ -135,6 +135,11 @@
   .sticky-bar.show { transform: translateY(0); }
   .sticky-bar p { margin: 0; font-size: 15px; font-weight: 600; color: var(--green-deep); }
   .sticky-bar .btn-primary { padding: 11px 22px; font-size: 14px; }
+  .sticky-bar .sb-actions { display: inline-flex; align-items: center; gap: 14px; }
+  .sticky-bar .sb-call { font-size: 14px; font-weight: 500; color: var(--slate-600); text-decoration: none; white-space: nowrap; }
+  .sticky-bar .sb-num { font-family: var(--font-mono); font-weight: 700; color: var(--green-deep); font-variant-numeric: tabular-nums; }
+  .sticky-bar .sb-call:hover .sb-num { text-decoration: underline; }
+  body:has(.sticky-bar.show) .cw-toggle { bottom: 88px; }
 
   .footer-top { grid-template-columns: 2fr 1fr 1fr 1fr 1fr; }
 
@@ -519,7 +524,7 @@
 <div class="sticky-bar" id="sticky-bar" aria-hidden="true">
   <p class="show-retailer">Free money review. It pays for itself, or we refund the difference.</p>
   <p class="show-vendor">Free AR review. We collect 25% of your past-due invoices in month one, or it&#39;s free.</p>
-  <a href="/contact?cta=pricing-body" class="btn-primary" tabindex="-1">Schedule a call</a>
+  <span class="sb-actions"><a href="/contact?cta=pricing-body" class="btn-primary" tabindex="-1">Schedule a call</a><a href="tel:+16162714585" class="sb-call" tabindex="-1">or call now <span class="sb-num">(616) 271-4585</span></a></span>
 </div>
 
 <style>
@@ -542,7 +547,9 @@
     .sticky-bar { flex-direction: row; align-items: center; gap: 12px; padding: 10px 16px calc(10px + env(safe-area-inset-bottom)); }
     .sticky-bar p { font-size: 13px; line-height: 1.35; text-align: left; flex: 1; }
     .sticky-bar .btn-primary { white-space: nowrap; min-height: 44px; }
-    body:has(.sticky-bar.show) .cw-toggle { bottom: calc(84px + env(safe-area-inset-bottom)); }
+    .sticky-bar .sb-actions { flex-direction: column; align-items: stretch; gap: 2px; }
+    .sticky-bar .sb-call { font-size: 12px; text-align: center; min-height: 28px; display: flex; align-items: center; justify-content: center; gap: 4px; }
+    body:has(.sticky-bar.show) .cw-toggle { bottom: calc(140px + env(safe-area-inset-bottom)); }
   }
 </style>
 <!-- FOOTER -->
