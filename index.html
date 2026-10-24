@@ -252,8 +252,11 @@
 /* Big CTA (Chris, 10/22/2026): one huge WHITE button inside the dark case-studies section, under the guarantee line. */
 .cs-cta { margin: 40px 0 26px; }
 /* FAQ "How do I get started?" button (Chris, 10/22). A styled inline link, deliberately NOT a .btn-* class: a btn-class link would be checked as a primary "Schedule a call" CTA. */
-.faq-go { display: inline-flex; align-items: center; gap: 8px; margin-left: 10px; padding: 10px 20px; border-radius: 14px; background: var(--green-deep); color: var(--white) !important; font-weight: 700; font-size: 15px; text-decoration: none; box-shadow: 0 10px 24px -10px rgba(27,67,50,0.45); transition: transform .2s, background .2s; }
-.faq-go:hover { background: var(--green-dark); transform: translateY(-2px); }
+.faq-go { display: flex; width: fit-content; align-items: center; gap: 8px; margin: 18px 0 6px; padding: 12px 22px; border-radius: 12px; background: var(--green-deep); color: var(--white) !important; font-weight: 700; font-size: 15px; line-height: 1; text-decoration: none; box-shadow: 0 6px 16px -6px rgba(27,67,50,0.45); transition: background .2s, transform .2s; }
+.faq-list details p + .faq-go { margin-top: -6px; margin-bottom: 24px; }
+.faq-go span { transition: transform .2s; }
+.faq-go:hover { background: var(--green-dark); transform: translateY(-1px); }
+.faq-go:hover span { transform: translateX(3px); }
 .cs-cta .proof-cta-big { background: var(--white); color: var(--green-deep); display: inline-flex; align-items: center; gap: 18px; padding: 34px 64px; border-radius: 28px; font-size: clamp(26px, 3.4vw, 44px); font-weight: 800; letter-spacing: -1px; line-height: 1.1; box-shadow: 0 0 0 0 rgba(149,213,178,0), 0 24px 60px -20px rgba(149,213,178,0.35); transition: background .25s, transform .25s, box-shadow .25s; }
 .cs-cta .proof-cta-big svg { width: 0.9em; height: 0.9em; flex: none; }
 .cs-cta .proof-cta-big:hover { background: var(--green-ghost); color: var(--green-deep); transform: translateY(-4px); box-shadow: 0 0 0 6px rgba(149,213,178,0.18), 0 28px 60px -18px rgba(149,213,178,0.45); }
@@ -777,7 +780,7 @@
       "name": "How hard is it to get started?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Not hard. You connect QuickBooks, which takes a few minutes. We load your open invoices, match them to your stores, and set everything up ourselves. Nothing to install, no new system for your team to learn. Give us 7 days."
+        "text": "Not hard, and you don't need QuickBooks. Send us your open invoices whatever way is easiest: forward the PDFs, send a spreadsheet, or connect QuickBooks if you use it. We match them to your stores and set everything up ourselves. Nothing to install, no new system for your team to learn. Give us 7 days."
       }
     },
     {
@@ -785,7 +788,7 @@
       "name": "What are the next steps?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Book a 30-minute call with Chris. We'll look at your past-due invoices together, show you what's collectable, and give you a price. If it's a fit, you connect QuickBooks and we start that week. Book it at https://shelfspace.pro/contact."
+        "text": "Book a 30-minute call with Chris. We'll look at your past-due invoices together, show you what's collectable, and give you a price. If it's a fit, you send us your open invoices and we start that week. Book it at https://shelfspace.pro/contact."
       }
     }
   ]
@@ -1289,7 +1292,7 @@ a.cs-stat:hover .cs-stat-go span { transform: translateX(4px); }
     <div class="cs-stats reveal">
       <a class="cs-stat cs-stat--brand" href="/blog/case-study-brand-past-due-collected-30-days"><div class="cs-stat-n">$<b data-cs-count="417560">417,560</b></div><div class="cs-stat-l">in past-due invoices collected for one brand in its first 30 days</div><div class="cs-stat-go">Read the case study <span aria-hidden="true">&rarr;</span></div></a>
       <a class="cs-stat cs-stat--ops" href="/blog/case-study-cannabis-farm-past-due-paid"><div class="cs-stat-n"><b data-cs-count="88">88</b><small>%</small></div><div class="cs-stat-l">of a cannabis farm's past-due balance paid in month one</div><div class="cs-stat-go">Read the case study <span aria-hidden="true">&rarr;</span></div></a>
-      <a class="cs-stat cs-stat--credit" href="/blog/case-study-ebitda-credit-recovery"><div class="cs-stat-n">$<b data-cs-count="83741">83,741</b><small>/yr</small></div><div class="cs-stat-l">in credits recovered at one dispensary</div><div class="cs-stat-go">Read the case study <span aria-hidden="true">&rarr;</span></div></a>
+      <a class="cs-stat cs-stat--credit" href="/blog/case-study-back-office-labor-saved"><div class="cs-stat-n"><b data-cs-count="12">12</b><small> hrs/wk</small></div><div class="cs-stat-l">of AR work off a brand's back office, so its reps could sell instead of chase</div><div class="cs-stat-go">Read the case study <span aria-hidden="true">&rarr;</span></div></a>
     </div>
     <div class="case-filters reveal">
       <button class="case-filter active" data-filter="all">All</button>
@@ -1319,6 +1322,36 @@ a.cs-stat:hover .cs-stat-go span { transform: translateX(4px); }
         <div class="case-meta">
           <span class="case-speed">Same-day fix</span>
           <a href="/blog/case-study-duplicate-invoice" class="case-link">Read the full story <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        </div>
+      </div>
+      <div class="case-card reveal" data-category="brands">
+        <div class="case-tag case-tag--brand">For Brands · ShelfCollect</div>
+        <div class="case-amount">$417,560</div>
+        <div class="case-headline">Past-due invoices collected in a brand&#39;s first 30 days</div>
+        <p class="case-summary">A brand started with $1.09M past due. In 30 days, 52 invoices were paid, $172,876 of it in the first week.</p>
+        <div class="case-meta">
+          <span class="case-speed">First 30 days</span>
+          <a href="/blog/case-study-brand-past-due-collected-30-days" class="case-link">Read the full story <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        </div>
+      </div>
+      <div class="case-card reveal" data-category="brands">
+        <div class="case-tag case-tag--brand">For Brands · ShelfCollect</div>
+        <div class="case-amount">88%</div>
+        <div class="case-headline">Of a cannabis farm&#39;s past-due balance paid in month one</div>
+        <p class="case-summary">10 past-due invoices, most a month or more late. Within 30 days, 9 were paid.</p>
+        <div class="case-meta">
+          <span class="case-speed">First 30 days</span>
+          <a href="/blog/case-study-cannabis-farm-past-due-paid" class="case-link">Read the full story <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        </div>
+      </div>
+      <div class="case-card reveal" data-category="brands">
+        <div class="case-tag case-tag--brand">For Brands · ShelfCollect</div>
+        <div class="case-amount">12 hrs/week</div>
+        <div class="case-headline">AR work off a brand&#39;s team, and reps who sell instead of chase</div>
+        <p class="case-summary">38 invoices, 195 reminders and 120 rep lists in a month, all in the brand&#39;s name. The reps stopped being the bad guy.</p>
+        <div class="case-meta">
+          <span class="case-speed">First month</span>
+          <a href="/blog/case-study-back-office-labor-saved" class="case-link">Read the full story <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
         </div>
       </div>
       <div class="case-card reveal" data-category="brands">
@@ -1429,15 +1462,6 @@ a.cs-stat:hover .cs-stat-go span { transform: translateX(4px); }
         <div class="case-meta">
           <span class="case-speed">First week</span>
           <a href="/blog/case-study-shelfiq-vendor-emails" class="case-link">Read the full story <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
-        </div>
-      </div>
-      <div class="case-card reveal" data-category="operations" data-also="brands">
-        <div class="case-tag case-tag--ops">Operations</div>
-        <div class="case-amount">27 hrs/week</div>
-        <div class="case-headline">Back-office finance labor saved, AP and AR</div>
-        <div class="case-meta">
-          <span class="case-speed">First month</span>
-          <a href="/blog/case-study-back-office-labor-saved" class="case-link">Read the full story <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
         </div>
       </div>
       <div class="case-card reveal reveal-delay-1" data-category="operations">
@@ -1638,11 +1662,12 @@ a.cs-stat:hover .cs-stat-go span { transform: translateX(4px); }
     </details>
     <details>
       <summary>How hard is it to get started?</summary>
-      <p>Not hard. You connect QuickBooks, which takes a few minutes. We load your open invoices, match them to your stores, and set everything up ourselves. Nothing to install, no new system for your team to learn. Give us 7 days.</p>
+      <p>Not hard, and you don't need QuickBooks. Send us your open invoices whatever way is easiest: forward the PDFs, send a spreadsheet, or connect QuickBooks if you use it. We match them to your stores and set everything up ourselves. Nothing to install, no new system for your team to learn. Give us 7 days.</p>
     </details>
     <details>
       <summary>What are the next steps?</summary>
-      <p>Book a 30-minute call with Chris. We'll look at your past-due invoices together, show you what's collectable, and give you a price. If it's a fit, you connect QuickBooks and we start that week. <a class="faq-go" href="/contact?cta=home-inline">Book the call <span aria-hidden="true">&rarr;</span></a></p>
+      <p>Book a 30-minute call with Chris. We'll look at your past-due invoices together, show you what's collectable, and give you a price. If it's a fit, you send us your open invoices and we start that week.</p>
+      <a class="faq-go" href="/contact?cta=home-inline">Book the call <span aria-hidden="true">&rarr;</span></a>
     </details>
   </div>
 </section>
@@ -1733,7 +1758,7 @@ a.cs-stat:hover .cs-stat-go span { transform: translateX(4px); }
   .faq-section .section-label { margin-bottom: 12px; }
   .faq-section .section-title { margin-bottom: 32px; }
   .faq-section .faq-header { margin-bottom: 0; }
-  .faq-go { min-height: 44px; margin: 16px 0 0; }
+  .faq-go { min-height: 44px; }
 
 }
 </style>

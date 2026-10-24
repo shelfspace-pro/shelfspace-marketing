@@ -3,20 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>27 Hours a Week of Finance Labor Saved — ShelfSpace</title>
-<meta name="description" content="A dispensary's AP went from 15 hours a week to 15 minutes, and a brand's invoicing, reminders and rep follow-up now run without its team: 27 hours a week saved.">
+<title>12 Hours a Week of AR Work, Off a Brand's Team — ShelfSpace</title>
+<meta name="description" content="A cannabis brand handed us its collections. In one month we sent 38 invoices, 195 reminders and 120 rep lists, about 12 hours a week its team got back to sell.">
 <link rel="canonical" href="https://shelfspace.pro/blog/case-study-back-office-labor-saved">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://shelfspace.pro/blog/case-study-back-office-labor-saved">
-<meta property="og:title" content="27 Hours a Week of Finance Labor Saved — ShelfSpace">
-<meta property="og:description" content="A dispensary's AP went from 15 hours a week to 15 minutes, and a brand's invoicing, reminders and rep follow-up now run without its team: 27 hours a week saved.">
+<meta property="og:title" content="12 Hours a Week of AR Work, Off a Brand&#x27;s Team — ShelfSpace">
+<meta property="og:description" content="A cannabis brand handed us its collections. In one month we sent 38 invoices, 195 reminders and 120 rep lists, about 12 hours a week its team got back to sell.">
 <meta property="og:image" content="https://shelfspace.pro/og-image-v7.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:type" content="image/png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="27 Hours a Week of Finance Labor Saved — ShelfSpace">
-<meta name="twitter:description" content="A dispensary's AP went from 15 hours a week to 15 minutes, and a brand's invoicing, reminders and rep follow-up now run without its team: 27 hours a week saved.">
+<meta name="twitter:title" content="12 Hours a Week of AR Work, Off a Brand&#x27;s Team — ShelfSpace">
+<meta name="twitter:description" content="A cannabis brand handed us its collections. In one month we sent 38 invoices, 195 reminders and 120 rep lists, about 12 hours a week its team got back to sell.">
 <meta name="twitter:image" content="https://shelfspace.pro/og-image-v7.png">
 <meta name="apple-mobile-web-app-title" content="ShelfSpace">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -143,6 +143,32 @@
     }
     .hero-bg-gradient, .hero-bg-gradient-2 { animation: none; }
   }
+
+  /* ─── STATS STRIP + AGING CHART (AR case studies, 10/24/2026) ─── */
+  .stats-strip { max-width: 720px; margin: 0 auto 40px; padding: 0 48px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .stats-strip-item { text-align: center; padding: 20px 12px; background: var(--white); border: 1px solid var(--slate-200); border-radius: 16px; box-shadow: 0 8px 24px rgba(27,67,50,0.06); }
+  .stats-strip-item--hero { background: var(--green-deep); border-color: var(--green-deep); box-shadow: 0 14px 34px rgba(27,67,50,0.28); }
+  .stats-strip-num { font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-size: clamp(20px, 2.5vw, 28px); font-weight: 700; color: var(--green-deep); letter-spacing: -1px; }
+  .stats-strip-item--hero .stats-strip-num { color: var(--green-accent); }
+  .stats-strip-label { font-size: 12px; font-weight: 600; color: var(--slate-400); letter-spacing: 1px; text-transform: uppercase; margin-top: 4px; }
+  .stats-strip-item--hero .stats-strip-label { color: rgba(230,244,234,0.7); }
+  .ag { margin: 36px 0; padding: 28px; border-radius: 20px; background: var(--white); border: 1px solid var(--slate-200); box-shadow: 0 18px 44px rgba(27,67,50,0.08); }
+  .ag-title { font-size: 17px; font-weight: 700; color: var(--green-deep); margin: 0 0 4px; }
+  .ag-sub { font-size: 14px; color: var(--slate-500); margin: 0 0 20px; }
+  .ag-key { display: flex; gap: 18px; font-size: 13px; color: var(--slate-600); margin: 0 0 18px; }
+  .ag-key span { display: inline-flex; align-items: center; gap: 7px; }
+  .ag-key i { width: 12px; height: 12px; border-radius: 4px; background: var(--slate-200); }
+  .ag-key i.ag-k-paid { background: linear-gradient(90deg, var(--green-mid), var(--green-accent)); }
+  .ag-row { display: grid; grid-template-columns: 92px 1fr; gap: 14px; align-items: center; margin: 0 0 14px; }
+  .ag-lbl { font-size: 13px; font-weight: 600; color: var(--slate-600); }
+  .ag-bar { position: relative; height: 34px; border-radius: 10px; background: var(--slate-100); overflow: hidden; }
+  .ag-due { position: absolute; inset: 0 auto 0 0; background: var(--slate-200); border-radius: 10px; }
+  .ag-paid { position: absolute; inset: 0 auto 0 0; border-radius: 10px; background: linear-gradient(90deg, var(--green-mid), var(--green-accent)); transform-origin: left; animation: ag-grow 1.1s cubic-bezier(0.22,1,0.36,1) both; }
+  .ag-row:nth-of-type(2) .ag-paid { animation-delay: .1s; } .ag-row:nth-of-type(3) .ag-paid { animation-delay: .2s; }
+  .ag-val { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-size: 12px; font-weight: 700; color: var(--slate-700); white-space: nowrap; }
+  @keyframes ag-grow { from { transform: scaleX(0); } }
+  @media (max-width: 900px) { .stats-strip { grid-template-columns: repeat(2, 1fr); padding: 0 24px; } .ag { padding: 20px; } .ag-row { grid-template-columns: 70px 1fr; gap: 10px; } }
+  @media (prefers-reduced-motion: reduce) { .ag-paid { animation: none; } }
 </style>
 <noscript><style>.reveal,.page-hero .section-label,.page-hero .section-title,.page-hero .section-desc{opacity:1;transform:none;transition:none;}</style></noscript>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-H2LBJT03WE"></script>
@@ -151,8 +177,8 @@
 {
   "@context": "https://schema.org",
   "@type": "Article",
-  "headline": "27 Hours a Week of Back-Office Finance Labor, Saved",
-  "description": "A dispensary's AP went from 15 hours a week to 15 minutes, and a brand's invoicing, reminders and rep follow-up now run without its team: 27 hours a week saved.",
+  "headline": "12 Hours a Week of AR Work Off a Brand&#39;s Team, and Reps Who Never Have to Be the Bad Guy",
+  "description": "A cannabis brand handed us its collections. In one month we sent 38 invoices, 195 reminders and 120 rep lists, about 12 hours a week its team got back to sell.",
   "author": {
     "@type": "Person",
     "name": "Chris Mitchem"
@@ -162,7 +188,7 @@
     "name": "ShelfSpace",
     "url": "https://shelfspace.pro"
   },
-  "datePublished": "2026-10-23",
+  "datePublished": "2026-10-24",
   "url": "https://shelfspace.pro/blog/case-study-back-office-labor-saved",
   "image": "https://shelfspace.pro/og-image-v7.png"
 }
@@ -174,10 +200,18 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "How much time does a cannabis business spend on AP and AR?",
+      "name": "How much time does accounts receivable take a cannabis brand?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "For a small team, often 10 to 15 hours a week on each. In this case study, AP at one dispensary took 15 hours a week, and AR plus sales-rep follow-up at one brand took about 12."
+        "text": "For a brand with a few hundred open invoices, often 10 to 15 hours a week once you count invoicing, reminders, rep follow-up and the collections spreadsheet. In this case study it was about 12 hours a week."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Should my sales reps collect past-due invoices?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "They shouldn't have to ask. Reps sell best when every visit is about product and the next order. Let the reminders come from your AR department, in your name, and give reps a list so they always know who's behind."
       }
     },
     {
@@ -185,7 +219,7 @@
       "name": "What's left for my team to do?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Approve. On AP, that's one weekly payment summary. On AR, invoices and reminders go out on a schedule in your name, and your reps get their lists automatically."
+        "text": "Approve and sell. Invoices and reminders go out on a schedule in your name, payments are recorded as they land, and your reps get their lists without anyone pulling them together."
       }
     }
   ]
@@ -211,7 +245,7 @@
     {
       "@type": "ListItem",
       "position": 3,
-      "name": "Back-Office Finance Labor Saved"
+      "name": "12 Hours a Week of AR Work Saved"
     }
   ]
 }
@@ -245,68 +279,97 @@
   <div class="hero-bg-gradient"></div>
   <div class="hero-bg-gradient-2"></div>
   <div class="hero-grid-lines"></div>
-  <div class="section-label">Case Study · Operations</div>
-  <h1 class="section-title">27 Hours a Week of Back-Office Finance Labor, Saved</h1>
-  <p class="section-desc">Two clients, two kinds of finance work. A dispensary's AP went from 15 hours a week to 15 minutes. A brand's invoicing, reminders and sales-rep follow-up, about 12 hours a week, now run without their team.</p>
+  <div class="section-label">Case Study · For Brands · ShelfCollect</div>
+  <h1 class="section-title">12 Hours a Week of AR Work Off a Brand&#39;s Team, and Reps Who Never Have to Be the Bad Guy</h1>
+  <p class="section-desc">A wholesale cannabis brand handed us its invoices and its past-due follow-up. Its back office got about 12 hours a week back, and its sales reps went back to selling.</p>
+</div>
+
+<!-- STATS STRIP -->
+<div class="stats-strip reveal">
+  <div class="stats-strip-item stats-strip-item--hero">
+    <div class="stats-strip-num">12 hrs/wk</div>
+    <div class="stats-strip-label">AR work saved</div>
+  </div>
+  <div class="stats-strip-item">
+    <div class="stats-strip-num">195</div>
+    <div class="stats-strip-label">Reminders sent</div>
+  </div>
+  <div class="stats-strip-item">
+    <div class="stats-strip-num">120</div>
+    <div class="stats-strip-label">Rep lists sent</div>
+  </div>
+  <div class="stats-strip-item">
+    <div class="stats-strip-num">38</div>
+    <div class="stats-strip-label">Invoices sent</div>
+  </div>
 </div>
 
 <!-- AT A GLANCE -->
 <div class="article-glance">
   <h2>At a glance</h2>
   <ul>
-    <li>Accounts payable at a single-store dispensary: 15 hours a week down to 15 minutes</li>
-    <li>Accounts receivable at a wholesale brand: about 12 hours a week of invoices, reminders and rep follow-up taken over</li>
-    <li>In the brand's first month: 38 invoices, 195 payment reminders, and 120 who-owes-what lists to six sales reps</li>
-    <li>Every invoice and reminder went out in the brand's own name</li>
-    <li>Together: about 27 hours a week of back-office finance labor saved</li>
+    <li>A wholesale cannabis brand with nearly 200 open invoices and six sales reps</li>
+    <li>Before: the back office sent invoices and kept a collections spreadsheet; the reps were expected to chase the late ones</li>
+    <li>In the first month we sent 38 invoices, 195 payment reminders and 120 who-owes-what lists to the reps</li>
+    <li>About 12 hours a week of AR work came off the brand&#39;s team</li>
+    <li>The same month, $417,560 in past-due invoices came in</li>
+    <li>Reps went back to talking product, not asking for money</li>
   </ul>
 </div>
 
 <!-- ARTICLE BODY -->
 <div class="article-body reveal">
   <h2>The Setup</h2>
-  <p>Most cannabis businesses don't have a finance department. They have a store manager who does AP on the side, or a brand owner who sends invoices at night and a sales team that's supposed to chase the late ones.</p>
-  <p>The work is the same every week: enter it, check it, send it, follow up, record it. It doesn't grow the business, and it never stops.</p>
+  <p>A growing wholesale brand: nearly 200 open invoices across its stores, six sales reps, and a small back office that does everything else.</p>
+  <p>Collections lived in two places. The back office sent invoices, kept a spreadsheet of who owed what, and nudged when it had a minute. The reps were supposed to do the rest: walk into a store they&#39;d just pitched and ask the buyer when the last order would be paid.</p>
+  <p>Nobody likes that conversation. The rep is there to build a relationship and win the next order. Asking for money in the same breath makes them the bad guy, so mostly it didn&#39;t happen.</p>
 
+  <h2>What We Took Over</h2>
+  <p>The brand connected QuickBooks and handed the follow-up to us. In its first month, every piece in the brand&#39;s own name:</p>
   <div class="stat-trio reveal">
     <div class="stat-trio-item">
-      <svg class="stat-trio-ico" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-      <p class="stat-trio-num">15 hrs</p>
-      <p class="stat-trio-label">of AP a week, down to 15 minutes</p>
+      <svg class="stat-trio-ico" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+      <p class="stat-trio-num">38</p>
+      <p class="stat-trio-label">invoices sent with a Pay Now link</p>
     </div>
     <div class="stat-trio-item">
       <svg class="stat-trio-ico" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="22 6 12 13 2 6"/></svg>
-      <p class="stat-trio-num">12 hrs</p>
-      <p class="stat-trio-label">of AR and rep follow-up a week, taken over</p>
+      <p class="stat-trio-num">195</p>
+      <p class="stat-trio-label">payment reminders to past-due stores</p>
     </div>
     <div class="stat-trio-item">
-      <svg class="stat-trio-ico" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-      <p class="stat-trio-num">27 hrs</p>
-      <p class="stat-trio-label">of finance labor saved every week</p>
+      <svg class="stat-trio-ico" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      <p class="stat-trio-num">120</p>
+      <p class="stat-trio-label">who-owes-what lists to six reps</p>
     </div>
   </div>
+  <p>Payments were recorded from QuickBooks as they landed, so the collections spreadsheet went away too.</p>
 
-  <h2>Accounts Payable: 15 Hours to 15 Minutes</h2>
-  <p>A single-store dispensary had its store manager doing AP for 35+ vendors: entering invoices, writing checks, driving to the post office, then keying it all into QuickBooks. 15 hours a week, by his count.</p>
-  <p>Now invoices come to ShelfSpace, get checked against Metrc, and land in one weekly summary. He reviews it and taps approve. Checks go out and QuickBooks updates. About 15 minutes. <a href="/blog/case-study-ap-time-savings">Read the full AP story</a>.</p>
-
-  <h2>Accounts Receivable: About 12 Hours a Week, Taken Over</h2>
-  <p>A wholesale brand had nearly 200 open invoices across its stores and six sales reps who were supposed to help collect. In its first month with us, we did this, every piece in the brand's own name:</p>
+  <h2>The Back Office Got 12 Hours a Week Back</h2>
+  <p>Done by hand, that month is about 12 hours of work every week. We count it conservatively:</p>
   <ul>
-    <li><strong>38 invoices</strong> sent with a one-click Pay Now link</li>
-    <li><strong>195 payment reminders</strong> sent to past-due stores, on a steady schedule</li>
-    <li><strong>120 who-owes-what lists</strong> sent to six sales reps, three times a week</li>
-    <li>Payments recorded from QuickBooks, so nobody keeps a collections spreadsheet by hand</li>
+    <li><strong>5 minutes</strong> to send an invoice</li>
+    <li><strong>5 minutes</strong> to look up a balance and write a reminder</li>
+    <li><strong>10 minutes</strong> to pull one rep&#39;s list together</li>
+    <li><strong>2 hours a week</strong> keeping the collections spreadsheet current</li>
   </ul>
-  <p>Done by hand, that's about 12 hours a week. We count it conservatively: 5 minutes to send an invoice, 5 minutes to look up a balance and write a reminder, 10 minutes to pull one rep's list together, and 2 hours a week for the collections spreadsheet. The brand's team didn't write, track or send any of it. <a href="/accounts-receivable">That's ShelfCollect</a>.</p>
+  <p>The brand&#39;s team didn&#39;t write, track or send any of it. Twelve hours a week is a third of a full-time job, handed back to people who had better things to do with it.</p>
 
-  <h2>The Result</h2>
-  <p>About 27 hours a week of back-office finance labor, off two small teams. That's most of a full-time job.</p>
+  <h2>The Reps Stopped Being the Bad Guy</h2>
+  <p>This is the part that doesn&#39;t show up in the hours.</p>
+  <p>Now the asking comes from the brand&#39;s AR department, on a schedule, in the brand&#39;s name. The rep isn&#39;t the one chasing anymore. They walk into the store to talk about new product, sell-through and the next order, which is the conversation that grows the account.</p>
+  <p>Their list still tells them who&#39;s behind, so they&#39;re never caught off guard. If a buyer brings it up, the rep can say &quot;our AR team has that&quot; and get back to selling. A rep who calls to connect instead of collect gets their calls answered.</p>
   <div class="blog-callout">
     <svg class="blog-callout-ico" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-    <p class="blog-callout-text">Your best people shouldn't spend their week typing invoices and chasing balances. Hand it to us and put them back on the work that grows the business.</p>
+    <p class="blog-callout-text">Your reps should be the good news. Let AR be the reminder.</p>
   </div>
 
+  <h2>And the Money Still Came In</h2>
+  <p>Taking collections off the team didn&#39;t mean collecting less. The same month, the same brand collected <strong>$417,560 in past-due invoices</strong>, $172,876 of it in the first week. <a href="/blog/case-study-brand-past-due-collected-30-days">Read that story</a>.</p>
+  <p>That&#39;s <a href="/accounts-receivable">ShelfCollect</a>: invoices with a Pay Now link, a steady reminder schedule, phone calls and final notices for the old ones, interest-free payment plans, and a weekly list for every rep. All in your name.</p>
+
+  <h2>The Result</h2>
+  <p>About 12 hours a week off the back office. Six reps who get to sell instead of chase. And more past-due money in the bank than the brand had seen in months.</p>
 </div>
 
 <!-- FAQ -->
@@ -314,12 +377,16 @@
   <h2>Frequently Asked Questions</h2>
   <div class="faq-list">
     <details>
-      <summary>How much time does a cannabis business spend on AP and AR?</summary>
-      <p>For a small team, often 10 to 15 hours a week on each. In this case study, AP at one dispensary took 15 hours a week, and AR plus sales-rep follow-up at one brand took about 12.</p>
+      <summary>How much time does accounts receivable take a cannabis brand?</summary>
+      <p>For a brand with a few hundred open invoices, often 10 to 15 hours a week once you count invoicing, reminders, rep follow-up and the collections spreadsheet. In this case study it was about 12 hours a week.</p>
     </details>
     <details>
-      <summary>What's left for my team to do?</summary>
-      <p>Approve. On AP, that's one weekly payment summary. On AR, invoices and reminders go out on a schedule in your name, and your reps get their lists automatically.</p>
+      <summary>Should my sales reps collect past-due invoices?</summary>
+      <p>They shouldn&#39;t have to ask. Reps sell best when every visit is about product and the next order. Let the reminders come from your AR department, in your name, and give reps a list so they always know who&#39;s behind.</p>
+    </details>
+    <details>
+      <summary>What&#39;s left for my team to do?</summary>
+      <p>Approve and sell. Invoices and reminders go out on a schedule in your name, payments are recorded as they land, and your reps get their lists without anyone pulling them together.</p>
     </details>
   </div>
 </div>
@@ -328,15 +395,20 @@
 <section style="max-width:720px;margin:0 auto;padding:0 48px 60px;">
   <h2 style="font-size:22px;font-weight:700;color:#1b4332;margin-bottom:24px;letter-spacing:-0.5px;">Related Case Studies</h2>
   <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;">
-    <a href="/blog/case-study-ap-time-savings" style="text-decoration:none;padding:20px;border:1px solid #e2e8f0;border-radius:12px;transition:all 0.2s;">
-      <span style="display:block;font-size:11px;font-weight:600;letter-spacing:0.5px;color:#7c3aed;margin-bottom:8px;">OPERATIONS</span>
-      <span style="display:block;font-family:'Space Mono',monospace;font-size:20px;font-weight:700;color:#1b4332;letter-spacing:-1px;margin-bottom:4px;">98% less time</span>
-      <span style="display:block;font-size:14px;font-weight:500;color:#334155;line-height:1.4;">From 15 hours of AP to one button</span>
-    </a>
-    <a href="/blog/case-study-brand-past-due-reminders" style="text-decoration:none;padding:20px;border:1px solid #e2e8f0;border-radius:12px;transition:all 0.2s;">
+    <a href="/blog/case-study-brand-past-due-collected-30-days" style="text-decoration:none;padding:20px;border:1px solid #e2e8f0;border-radius:16px;transition:all 0.2s;">
       <span style="display:block;font-size:11px;font-weight:600;letter-spacing:0.5px;color:#0f766e;margin-bottom:8px;">FOR BRANDS</span>
-      <span style="display:block;font-family:'Space Mono',monospace;font-size:20px;font-weight:700;color:#1b4332;letter-spacing:-1px;margin-bottom:4px;">94 reminders</span>
-      <span style="display:block;font-size:14px;font-weight:500;color:#334155;line-height:1.4;">Sent in a brand's name in two weeks</span>
+      <span style="display:block;font-family:'Space Mono',monospace;font-size:20px;font-weight:700;color:#1b4332;letter-spacing:-1px;margin-bottom:4px;">$417,560</span>
+      <span style="display:block;font-size:14px;font-weight:500;color:#334155;line-height:1.4;">Same brand, same month: past-due collected</span>
+    </a>
+    <a href="/blog/case-study-cannabis-farm-past-due-paid" style="text-decoration:none;padding:20px;border:1px solid #e2e8f0;border-radius:16px;transition:all 0.2s;">
+      <span style="display:block;font-size:11px;font-weight:600;letter-spacing:0.5px;color:#0f766e;margin-bottom:8px;">FOR BRANDS</span>
+      <span style="display:block;font-family:'Space Mono',monospace;font-size:20px;font-weight:700;color:#1b4332;letter-spacing:-1px;margin-bottom:4px;">88%</span>
+      <span style="display:block;font-size:14px;font-weight:500;color:#334155;line-height:1.4;">A farm&#39;s past-due balance paid in month one</span>
+    </a>
+    <a href="/blog/case-study-back-office-labor-saved" style="text-decoration:none;padding:20px;border:1px solid #e2e8f0;border-radius:16px;transition:all 0.2s;">
+      <span style="display:block;font-size:11px;font-weight:600;letter-spacing:0.5px;color:#0f766e;margin-bottom:8px;">FOR BRANDS</span>
+      <span style="display:block;font-family:'Space Mono',monospace;font-size:20px;font-weight:700;color:#1b4332;letter-spacing:-1px;margin-bottom:4px;">94</span>
+      <span style="display:block;font-size:14px;font-weight:500;color:#334155;line-height:1.4;">Reminders sent in a brand&#39;s name in two weeks</span>
     </a>
   </div>
 </section>
@@ -345,8 +417,8 @@
 <section class="cta-section">
   <div class="cta-content">
     <div class="section-label reveal">Get Started</div>
-    <h2 class="section-title reveal">Get a Free Back-Office Review</h2>
-    <p class="section-desc reveal">Free. No commitment. We'll look at where your finance hours go and what we'd take off your plate.</p>
+    <h2 class="section-title reveal">Give Your Team Its Week Back</h2>
+    <p class="section-desc reveal">Free. No commitment. We'll look at your aging and tell you what's worth chasing.</p>
     <div class="cta-actions reveal">
       <span class="cta-stack"><a href="/contact?cta=blog-case-study-back-office-labor-saved-cta" class="btn-primary">Schedule a call <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a><span class="cta-micro">30 minutes with Chris. See how it would run for your business.</span></span>
     </div>
