@@ -620,6 +620,14 @@
 .hero-static { font-size: clamp(34px, 5.4vw, 66px); max-width: 17ch; margin-left: auto; margin-right: auto; }
 .hero-static-hl { color: var(--green-mid); }
 .hero-static, .h-head h2, .h-pivot, .h-guar h2, .section-title { text-wrap: balance; }
+/* Hero "watch the 60-second video" (10/25/2026): scrolls to #watch and plays the featured card */
+.hm-watch { display: inline-flex; align-items: center; gap: 10px; margin-top: 18px; padding: 6px 14px 6px 6px; border: 1px solid var(--green-accent); border-radius: 999px; background: var(--white); color: var(--green-deep); font: 600 14px/1 var(--font-display); cursor: pointer; box-shadow: 0 6px 18px -8px rgba(27,67,50,0.35); transition: transform .25s cubic-bezier(0.22,1,0.36,1), box-shadow .25s; animation: fadeUp 0.8s cubic-bezier(0.22,1,0.36,1) 0.5s both; }
+.hm-watch:hover { transform: translateY(-2px); box-shadow: 0 10px 24px -8px rgba(27,67,50,0.45); }
+.hm-watch-play { display: inline-flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 50%; background: var(--green-deep); }
+.hm-watch-play svg { width: 14px; height: 14px; fill: var(--white); margin-left: 2px; }
+.hm-watch-len { font-family: var(--font-mono); font-size: 12px; color: var(--slate-500); font-weight: 400; }
+@media (prefers-reduced-motion: reduce) { .hm-watch { animation: none; } }
+
 /* ===== HERO v2 — motion hero (10/18/2026) ===== */
 .hero--motion { min-height: 100vh; padding: 112px 48px 64px; overflow-x: clip; }
 .hero--motion .hero-split { gap: 56px; }
@@ -814,7 +822,7 @@
 {"@context":"https://schema.org","@type":"VideoObject","name":"ShelfCollect Final Notice Letters: One Page, Your Letterhead","description":"When an invoice is badly late, send a one-page letter: your words, a pay-by date and a scan-to-pay code.","thumbnailUrl":["https://i.ytimg.com/vi/vpNML4cYuOU/maxresdefault.jpg"],"uploadDate":"2026-10-21","duration":"PT3M36S","embedUrl":"https://www.youtube-nocookie.com/embed/vpNML4cYuOU","contentUrl":"https://www.youtube.com/watch?v=vpNML4cYuOU","url":"https://shelfspace.pro/tutorials/final-notice"}
 </script>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"VideoObject","name":"ShelfCollect AI Phone Calls: Get Paid Faster","description":"Overdue stores get a polite, persistent phone call in your name. Hear it on your own phone first.","thumbnailUrl":["https://i.ytimg.com/vi/juhktAyCxrU/maxresdefault.jpg"],"uploadDate":"2026-10-15","duration":"PT2M18S","embedUrl":"https://www.youtube-nocookie.com/embed/juhktAyCxrU","contentUrl":"https://www.youtube.com/watch?v=juhktAyCxrU","url":"https://shelfspace.pro/tutorials/ar-ai-phone-calls"}
+{"@context":"https://schema.org","@type":"VideoObject","name":"ShelfSpace: Get Your Unpaid Invoices Paid","description":"Load an invoice, pick how we reach the store, and the money lands in your bank. We don't take a cut.","thumbnailUrl":["https://i.ytimg.com/vi/rCu5tQu_FGo/maxresdefault.jpg"],"uploadDate":"2026-10-25","duration":"PT1M7S","embedUrl":"https://www.youtube-nocookie.com/embed/rCu5tQu_FGo","contentUrl":"https://www.youtube.com/watch?v=rCu5tQu_FGo","url":"https://shelfspace.pro/tutorials/shelfspace-hype"}
 </script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"VideoObject","name":"ShelfCollect Payment Plans: 0% Plans on Wholesale Invoices","description":"The store sets it up from their payment link, you approve it, and every payment runs on schedule.","thumbnailUrl":["https://i.ytimg.com/vi/uqIsYD5Z1hU/maxresdefault.jpg"],"uploadDate":"2026-10-20","duration":"PT2M26S","embedUrl":"https://www.youtube-nocookie.com/embed/uqIsYD5Z1hU","contentUrl":"https://www.youtube.com/watch?v=uqIsYD5Z1hU","url":"https://shelfspace.pro/tutorials/payment-plans"}
@@ -990,6 +998,7 @@ a.cs-stat:hover .cs-stat-go span { transform: translateX(4px); }
       <div class="hero-actions">
         <a href="/contact?cta=home-hero" class="btn-primary show-brand">Get Paid <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
       </div>
+      <button type="button" class="hm-watch show-brand" data-watch="rCu5tQu_FGo"><span class="hm-watch-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>Watch it in 60 seconds <span class="hm-watch-len">1:07</span></button>
     </div>
 
     <div class="hm-stage">
@@ -1596,6 +1605,18 @@ a.cs-stat:hover .cs-stat-go span { transform: translateX(4px); }
     </div>
     <div class="vf-grid reveal reveal-delay-1">
       <div class="vf-card vf-card--1">
+        <button type="button" class="vf-thumb" data-yt="rCu5tQu_FGo" aria-label="Play: Your unpaid invoices, paid (1:07)">
+          <img src="https://i.ytimg.com/vi/rCu5tQu_FGo/maxresdefault.jpg" alt="Your unpaid invoices, paid, ShelfSpace video" loading="lazy" width="1280" height="720">
+          <span class="vf-tag">New · ShelfSpace in a minute</span><span class="vf-len">1:07</span>
+          <span class="vf-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+        </button>
+        <a class="vf-body" href="/tutorials/shelfspace-hype">
+          <h3>Your unpaid invoices, paid. In one minute.</h3>
+          <p>Load an invoice, pick how we reach the store, and the money lands in your bank. We don&#x27;t take a cut.</p>
+          <span class="vf-cta">Watch + transcript <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></span>
+        </a>
+      </div>
+      <div class="vf-card vf-card--2">
         <button type="button" class="vf-thumb" data-yt="vpNML4cYuOU" aria-label="Play: A final notice on your own letterhead (3:36)">
           <img src="https://i.ytimg.com/vi/vpNML4cYuOU/maxresdefault.jpg" alt="A final notice on your own letterhead, ShelfSpace video" loading="lazy" width="1280" height="720">
           <span class="vf-tag">New · ShelfCollect</span><span class="vf-len">3:36</span>
@@ -1607,7 +1628,7 @@ a.cs-stat:hover .cs-stat-go span { transform: translateX(4px); }
           <span class="vf-cta">Watch + transcript <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></span>
         </a>
       </div>
-      <div class="vf-card vf-card--2">
+      <div class="vf-card vf-card--3">
         <button type="button" class="vf-thumb" data-yt="uqIsYD5Z1hU" aria-label="Play: 0% payment plans on any open invoice (2:26)">
           <img src="https://i.ytimg.com/vi/uqIsYD5Z1hU/maxresdefault.jpg" alt="0% payment plans on any open invoice, ShelfSpace video" loading="lazy" width="1280" height="720">
           <span class="vf-tag">New · ShelfCollect</span><span class="vf-len">2:26</span>
@@ -1616,18 +1637,6 @@ a.cs-stat:hover .cs-stat-go span { transform: translateX(4px); }
         <a class="vf-body" href="/tutorials/payment-plans">
           <h3>0% payment plans on any open invoice</h3>
           <p>The store sets it up from their payment link, you approve it, and every payment runs on schedule.</p>
-          <span class="vf-cta">Watch + transcript <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></span>
-        </a>
-      </div>
-      <div class="vf-card vf-card--3">
-        <button type="button" class="vf-thumb" data-yt="juhktAyCxrU" aria-label="Play: AI calls that get your invoices paid (2:18)">
-          <img src="https://i.ytimg.com/vi/juhktAyCxrU/maxresdefault.jpg" alt="AI calls that get your invoices paid, ShelfSpace video" loading="lazy" width="1280" height="720">
-          <span class="vf-tag">New · ShelfCollect</span><span class="vf-len">2:18</span>
-          <span class="vf-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
-        </button>
-        <a class="vf-body" href="/tutorials/ar-ai-phone-calls">
-          <h3>AI calls that get your invoices paid</h3>
-          <p>Overdue stores get a polite, persistent phone call in your name. Hear it on your own phone first.</p>
           <span class="vf-cta">Watch + transcript <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></span>
         </a>
       </div>
@@ -1987,6 +1996,14 @@ a.cs-stat:hover .cs-stat-go span { transform: translateX(4px); }
 <script>
 (function() {
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.querySelectorAll('.hm-watch[data-watch]').forEach(function(w) {
+    w.addEventListener('click', function() {
+      var thumb = document.querySelector('.vf-thumb[data-yt="' + w.getAttribute('data-watch') + '"]');
+      if (!thumb) return;
+      thumb.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'center' });
+      thumb.click();
+    });
+  });
   document.querySelectorAll('.vf-thumb[data-yt]').forEach(function(btn) {
     btn.addEventListener('click', function() {
       if (btn.classList.contains('playing')) return;
