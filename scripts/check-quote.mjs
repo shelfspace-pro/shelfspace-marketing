@@ -83,9 +83,10 @@ const CASES = [
   ["ShelfPay under $500k + 2 extra stores, saved term=monthly (no x1.25)", { product: "pay", term: "monthly", g: "t1", n: 3, q: "SS-AAAAAD" }, "$2,000/month"],
   ["ShelfPay $1M–$2M, saved term=monthly, 10% discount", { product: "pay", term: "monthly", g: "t3", n: 1, dn: "Spring", dp: 10, q: "SS-AAAAAE" }, "$3,600/month"],
   ["ShelfCollect old 'Under $500k' (t1) lands on $250k–$500k", { product: "collect", term: "annual", c: "t1", q: "SS-AAAAAF" }, "$1,500/month"],
-  ["ShelfCollect oldest '<$150k' letter (a) lands on under $100k", { product: "collect", term: "annual", c: "a", q: "SS-AAAAAP" }, "$750/month"],
+  ["ShelfCollect oldest '<$150k' letter (a) lands on $50k–$100k", { product: "collect", term: "annual", c: "a", q: "SS-AAAAAP" }, "$750/month"],
   // Every band of both tables.
-  ["ShelfCollect under $100k", { product: "collect", c: "c0", q: "SS-AAAAAG" }, "$750/month"],
+  ["ShelfCollect under $50k (10/25/2026 entry band)", { product: "collect", c: "s0", q: "SS-AAAAAS" }, "$400/month"],
+  ["ShelfCollect $50k–$100k", { product: "collect", c: "c0", q: "SS-AAAAAG" }, "$750/month"],
   ["ShelfCollect $100k–$250k", { product: "collect", c: "c1", q: "SS-AAAAAH" }, "$1,000/month"],
   ["ShelfCollect $250k–$500k", { product: "collect", c: "c2", q: "SS-AAAAAJ" }, "$1,500/month"],
   ["ShelfCollect $1M–$1.5M", { product: "collect", c: "c3", q: "SS-AAAAAK" }, "$3,500/month"],
@@ -116,7 +117,7 @@ ok(blank.errors.length === 0, `blank form: no script errors ${JSON.stringify(bla
 ok(!blank.shown, "blank form: no quote until a range is picked");
 ok(!RETIRED.test(blank.body), "blank form (empty state): no retired copy");
 ok(blank.termInputs === 0, `no agreement-term choice on the form (found ${blank.termInputs})`);
-const WANT_COLLECT = ["Under $100k", "$100k–$250k", "$250k–$500k", "$500k–$1M", "$1M–$1.5M", "$1.5M–$2M", "Over $2M · Enterprise"];
+const WANT_COLLECT = ["Under $50k", "$50k–$100k", "$100k–$250k", "$250k–$500k", "$500k–$1M", "$1M–$1.5M", "$1.5M–$2M", "Over $2M · Enterprise"];
 ok(JSON.stringify(blank.collectChips) === JSON.stringify(WANT_COLLECT), `ShelfCollect table = ${JSON.stringify(blank.collectChips)}`);
 const WANT_PAY = ["Under $500k", "$500k–$1M", "$1M–$2M", "$2M–$4M", "Over $4M · Enterprise"];
 ok(JSON.stringify(blank.payChips) === JSON.stringify(WANT_PAY), `ShelfPay table = ${JSON.stringify(blank.payChips)}`);
