@@ -85,7 +85,7 @@ const CASES = [
   ["ShelfCollect old 'Under $500k' (t1) lands on $250k–$500k", { product: "collect", term: "annual", c: "t1", q: "SS-AAAAAF" }, "$1,500/month"],
   ["ShelfCollect oldest '<$150k' letter (a) lands on $50k–$100k", { product: "collect", term: "annual", c: "a", q: "SS-AAAAAP" }, "$750/month"],
   // Every band of both tables.
-  ["ShelfCollect under $50k (10/25/2026 entry band)", { product: "collect", c: "s0", q: "SS-AAAAAS" }, "$400/month"],
+  ["ShelfCollect under $50k (10/25/2026 entry band)", { product: "collect", c: "s0", q: "SS-AAAAAS" }, "$399/month"],
   ["ShelfCollect $50k–$100k", { product: "collect", c: "c0", q: "SS-AAAAAG" }, "$750/month"],
   ["ShelfCollect $100k–$250k", { product: "collect", c: "c1", q: "SS-AAAAAH" }, "$1,000/month"],
   ["ShelfCollect $250k–$500k", { product: "collect", c: "c2", q: "SS-AAAAAJ" }, "$1,500/month"],
