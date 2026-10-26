@@ -1547,3 +1547,7 @@ footer::before { content: ''; position: absolute; bottom: -100px; right: -100px;
   .nav-links .nav-call .nav-call-num { color: var(--white); font-size: 18px; }
 }
 @media (prefers-reduced-motion: reduce) { .nav-call-icon::after { animation: none; } }
+
+/* 10/26/2026 (Chris): not taking new dispensary clients — hide the "For dispensaries" nav dropdown sitewide
+   (desktop + mobile). Markup stays on every page; delete this rule to bring it back. Footer links unchanged. */
+.nav-links > li.nav-dropdown:has(> a.nav-dropdown-toggle[href="/accounts-payable"]) { display: none !important; }
