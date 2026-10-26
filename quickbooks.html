@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QuickBooks Integration — Two-Way Sync for Cannabis Brands — ShelfSpace</title>
+<meta name="description" content="Connect QuickBooks Online once. ShelfSpace imports every open invoice and customer, then keeps both sides in sync: a payment in ShelfSpace posts to QuickBooks, and a payment in QuickBooks marks the invoice paid in ShelfSpace.">
+<link rel="canonical" href="https://shelfspace.pro/quickbooks">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ShelfSpace">
+<meta property="og:locale" content="en_US">
+<meta property="og:url" content="https://shelfspace.pro/quickbooks">
+<meta property="og:title" content="QuickBooks Integration — ShelfSpace">
+<meta property="og:description" content="Every open invoice imported. Every payment synced, both ways. Your books and your collections always match.">
+<meta property="og:image" content="https://shelfspace.pro/og-image-v7.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="QuickBooks Integration — ShelfSpace">
+<meta name="twitter:description" content="Every open invoice imported. Every payment synced, both ways.">
+<meta name="twitter:image" content="https://shelfspace.pro/og-image-v7.png">
+<meta name="apple-mobile-web-app-title" content="ShelfSpace">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+<style>
+  .qb-hero { position: relative; overflow: clip; background: radial-gradient(90% 120% at 85% 10%, #2d6a4f 0%, #1b4332 40%, #0f2a1f 100%); color: #e6f4ea; padding: 150px 48px 110px; }
+  .qb-hero::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(149,213,178,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(149,213,178,0.06) 1px, transparent 1px); background-size: 56px 56px; mask-image: radial-gradient(70% 70% at 50% 40%, #000, transparent); pointer-events: none; }
+  .qb-hero-in { position: relative; max-width: 1180px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1.05fr; gap: 64px; align-items: center; }
+  .qb-eyebrow { display: inline-flex; align-items: center; gap: 10px; font-family: var(--font-mono); font-size: 12px; font-weight: 700; letter-spacing: 1.8px; text-transform: uppercase; color: var(--green-accent); }
+  .qb-eyebrow::before { content: ''; width: 26px; height: 2px; background: var(--green-accent); }
+  .qb-hero h1 { font-size: clamp(42px, 5.6vw, 72px); line-height: 1.02; letter-spacing: -2.4px; color: #fff; margin: 18px 0 0; font-weight: 700; }
+  .qb-hero h1 em { font-style: normal; background: linear-gradient(90deg, #95d5b2, #d8f3dc 50%, #95d5b2); background-size: 200% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; animation: qbSheen 6s ease-in-out infinite; }
+  @keyframes qbSheen { 0%,100% { background-position: 0 0; } 50% { background-position: 100% 0; } }
+  .qb-hero-sub { font-size: 19px; line-height: 1.6; color: rgba(230,244,234,0.82); margin: 22px 0 0; max-width: 520px; }
+  .qb-hero-cta { margin-top: 34px; }
+  .qb-btn { box-sizing: border-box; max-width: 100%; display: inline-flex; align-items: center; gap: 12px; padding: 18px 32px; border-radius: 14px; background: var(--white); color: var(--green-deep); font-size: 17px; font-weight: 700; text-decoration: none; box-shadow: 0 18px 44px rgba(0,0,0,0.3); transition: transform .25s, background .25s; }
+  .qb-btn:hover { transform: translateY(-2px); background: var(--green-light); }
+  .qb-points { display: flex; flex-wrap: wrap; gap: 10px 22px; margin-top: 26px; font-size: 14.5px; color: rgba(230,244,234,0.8); }
+  .qb-points span { display: inline-flex; align-items: center; gap: 8px; }
+  .qb-points svg { width: 15px; height: 15px; color: var(--green-accent); }
+
+  /* sync visual */
+  .qb-sync { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) 64px minmax(0, 1fr); align-items: stretch; }
+  .qb-panel { position: relative; background: rgba(255,255,255,0.05); border: 1px solid rgba(149,213,178,0.22); border-radius: 18px; padding: 16px 14px; box-shadow: 0 30px 70px rgba(0,0,0,0.35); }
+  .qb-panel h3 { display: flex; align-items: center; gap: 8px; margin: 0 0 12px; font-size: 13px; font-weight: 700; color: #fff; letter-spacing: 0.2px; }
+  .qb-logo { width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; font-size: 11px; font-weight: 800; }
+  .qb-logo--qb { background: #2ca01c; color: #fff; }
+  .qb-logo--ss { background: var(--green-accent); color: #0f2a1f; border-radius: 6px; }
+  .qb-row { display: grid; grid-template-columns: 1fr auto; gap: 2px 8px; padding: 9px 10px; border-radius: 10px; background: rgba(255,255,255,0.04); margin-top: 6px; font-size: 12px; }
+  .qb-row .mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+  .qb-row > .mono:first-child { color: rgba(230,244,234,0.55); font-size: 10.5px; }
+  .qb-store { grid-column: 1; grid-row: 2; color: #fff; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .qb-amt { grid-column: 2; grid-row: 2; text-align: right; color: #fff; font-weight: 700; }
+  .qb-st { grid-column: 2; grid-row: 1; justify-self: end; position: relative; height: 16px; min-width: 40px; }
+  .qb-st b { position: absolute; right: 0; top: 0; font-size: 9.5px; letter-spacing: 0.8px; text-transform: uppercase; padding: 2px 7px; border-radius: 999px; transition: opacity .4s, transform .4s; }
+  .qb-open { background: rgba(252,211,77,0.16); color: #fcd34d; }
+  .qb-paid { background: rgba(149,213,178,0.2); color: var(--green-accent); opacity: 0; transform: scale(0.6); }
+  .qb-row.is-paid .qb-open { opacity: 0; transform: scale(0.6); }
+  .qb-row.is-paid .qb-paid { opacity: 1; transform: none; }
+  .qb-row.is-paid { background: rgba(149,213,178,0.1); box-shadow: inset 0 0 0 1px rgba(149,213,178,0.3); }
+  .qb-panel--ss .qb-row { opacity: 0; transform: translateX(-14px); transition: opacity .5s, transform .5s, background .4s, box-shadow .4s; }
+  .qb-panel--ss .qb-row.is-in { opacity: 1; transform: none; }
+  .qb-pipe { position: relative; }
+  .qb-pipe svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+  .qb-lane { fill: none; stroke: rgba(149,213,178,0.22); stroke-width: 2; stroke-dasharray: 4 6; }
+  .qb-dot { fill: var(--green-accent); filter: drop-shadow(0 0 6px rgba(149,213,178,0.9)); }
+  .qb-dot--back { fill: #fcd34d; filter: drop-shadow(0 0 6px rgba(252,211,77,0.9)); }
+  .qb-tag { position: absolute; left: 50%; transform: translateX(-50%); font-family: var(--font-mono); font-size: 9px; letter-spacing: 1px; text-transform: uppercase; color: rgba(230,244,234,0.6); white-space: nowrap; }
+  .qb-tag--top { top: 22%; } .qb-tag--bot { top: 72%; }
+  .qb-toast { position: absolute; left: 50%; bottom: -26px; transform: translate(-50%, 10px); background: #fff; color: var(--green-deep); font-size: 13px; font-weight: 700; padding: 10px 16px; border-radius: 12px; box-shadow: 0 16px 40px rgba(0,0,0,0.35); opacity: 0; transition: opacity .4s, transform .4s; white-space: nowrap; display: flex; align-items: center; gap: 8px; }
+  .qb-toast svg { width: 14px; height: 14px; color: var(--green-mid); }
+  .qb-toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+  /* sections */
+  .qb-sec { padding: 104px 48px; }
+  .qb-sec--white { background: var(--white); }
+  .qb-sec--ghost { background: linear-gradient(180deg, var(--white), var(--green-ghost)); }
+  .qb-sec--dark { background: #0f2a1f; color: #e6f4ea; position: relative; overflow: clip; }
+  .qb-head { text-align: center; max-width: 760px; margin: 0 auto 56px; }
+  .qb-head .qb-eyebrow { color: var(--green-mid); }
+  .qb-head .qb-eyebrow::before { background: var(--green-mid); }
+  .qb-sec--dark .qb-head .qb-eyebrow { color: var(--green-accent); }
+  .qb-sec--dark .qb-head .qb-eyebrow::before { background: var(--green-accent); }
+  .qb-head h2 { font-size: clamp(32px, 4.4vw, 54px); line-height: 1.06; letter-spacing: -1.8px; color: var(--green-deep); margin: 16px 0 0; }
+  .qb-sec--dark .qb-head h2 { color: #fff; }
+  .qb-head p { font-size: 18px; line-height: 1.6; color: var(--slate-600); margin: 16px auto 0; max-width: 620px; }
+  .qb-sec--dark .qb-head p { color: rgba(230,244,234,0.78); }
+
+  .qb-steps { position: relative; display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; max-width: 1140px; margin: 0 auto; counter-reset: step; }
+  .qb-steps::before { content: ''; position: absolute; left: 12%; right: 12%; top: 38px; height: 2px; background: linear-gradient(90deg, var(--green-light), var(--green-mid), var(--green-light)); }
+  .qb-step { position: relative; background: var(--white); border: 1px solid rgba(27,67,50,0.1); border-radius: 20px; padding: 30px 26px; box-shadow: 0 18px 44px rgba(27,67,50,0.1); text-align: left; }
+  .qb-num { width: 52px; height: 52px; border-radius: 16px; display: grid; place-items: center; background: var(--green-deep); color: var(--green-accent); font-family: var(--font-mono); font-size: 20px; font-weight: 700; box-shadow: 0 10px 24px rgba(27,67,50,0.3); margin-bottom: 20px; }
+  .qb-step b { display: block; font-size: 21px; color: var(--green-deep); letter-spacing: -0.4px; margin-bottom: 8px; }
+  .qb-step p { margin: 0; font-size: 15.5px; line-height: 1.6; color: var(--slate-600); }
+
+  .qb-two { position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: 22px; max-width: 1140px; margin: 0 auto; }
+  .qb-dir { position: relative; overflow: hidden; border-radius: 22px; padding: 36px 32px; background: linear-gradient(160deg, rgba(45,106,79,0.55), rgba(27,67,50,0.25)); border: 1px solid rgba(149,213,178,0.22); }
+  .qb-dir-h { display: flex; align-items: center; gap: 12px; font-family: var(--font-mono); font-size: 12px; font-weight: 700; letter-spacing: 1.4px; text-transform: uppercase; color: var(--green-accent); }
+  .qb-dir-h svg { width: 34px; height: 18px; }
+  .qb-dir h3 { font-size: clamp(22px, 2.4vw, 30px); line-height: 1.2; letter-spacing: -0.8px; color: #fff; margin: 16px 0 18px; }
+  .qb-dir ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
+  .qb-dir li { display: flex; gap: 12px; font-size: 16px; line-height: 1.5; color: rgba(230,244,234,0.86); }
+  .qb-dir li svg { flex: none; width: 22px; height: 22px; padding: 4px; border-radius: 50%; background: rgba(149,213,178,0.18); color: var(--green-accent); margin-top: 1px; }
+  .qb-dir-glow { position: absolute; right: -60px; top: -60px; width: 220px; height: 220px; border-radius: 50%; background: radial-gradient(circle, rgba(149,213,178,0.3), transparent 70%); pointer-events: none; }
+
+  .qb-ends { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; max-width: 1140px; margin: 0 auto; }
+  .qb-end { background: var(--white); border: 1px solid rgba(27,67,50,0.1); border-radius: 20px; padding: 28px 24px; box-shadow: 0 14px 34px rgba(27,67,50,0.08); transition: transform .3s, box-shadow .3s; }
+  .qb-end:hover { transform: translateY(-6px); box-shadow: 0 24px 50px rgba(27,67,50,0.16); }
+  .qb-x { display: block; font-size: 15px; color: var(--slate-500); text-decoration: line-through; text-decoration-color: #e76f51; text-decoration-thickness: 2px; margin-bottom: 12px; }
+  .qb-end b { display: block; font-size: 18px; line-height: 1.3; color: var(--green-deep); margin-bottom: 6px; }
+  .qb-end p { margin: 0; font-size: 14.5px; line-height: 1.55; color: var(--slate-600); }
+
+  .qb-final { background: radial-gradient(90% 140% at 50% 0%, #2d6a4f, #1b4332 45%, #0f2a1f); color: #fff; text-align: center; padding: 110px 48px; }
+  .qb-final h2 { font-size: clamp(34px, 4.8vw, 60px); line-height: 1.05; letter-spacing: -2px; margin: 0 auto; max-width: 820px; }
+  .qb-final p { font-size: 18px; color: rgba(230,244,234,0.8); margin: 18px auto 34px; max-width: 560px; line-height: 1.6; }
+
+  .qb-in { opacity: 0; transform: translateY(22px); transition: opacity .7s cubic-bezier(0.22,1,0.36,1), transform .7s cubic-bezier(0.22,1,0.36,1); }
+  .qb-in.is-visible { opacity: 1; transform: none; }
+
+  @media (max-width: 1000px) { .qb-hero-in { grid-template-columns: minmax(0, 1fr); gap: 56px; } .qb-ends { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 900px) { .qb-hero { padding: 120px 20px 90px; } .qb-sec, .qb-final { padding: 72px 20px; } .qb-steps, .qb-two { grid-template-columns: 1fr; } .qb-steps::before { display: none; } }
+  @media (max-width: 560px) { .qb-sync { grid-template-columns: minmax(0, 1fr) 34px minmax(0, 1fr); } .qb-row { font-size: 11px; padding: 8px; } .qb-store { font-size: 11px; } .qb-tag { display: none; } .qb-ends { grid-template-columns: 1fr; } .qb-btn { width: 100%; justify-content: center; } }
+  @media (prefers-reduced-motion: reduce) { .qb-hero h1 em { animation: none; } .qb-in { opacity: 1; transform: none; transition: none; } .qb-panel--ss .qb-row { opacity: 1; transform: none; } .qb-dot { display: none; } }
+</style>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-H2LBJT03WE"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-H2LBJT03WE');</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "ShelfSpace QuickBooks Integration — Two-Way Sync for Cannabis Brands",
+  "alternateName": ["QuickBooks Online integration", "QuickBooks two-way sync", "QuickBooks AR sync for cannabis brands"],
+  "serviceType": "QuickBooks Online accounts receivable sync",
+  "provider": { "@type": "Organization", "name": "ShelfSpace", "url": "https://shelfspace.pro" },
+  "areaServed": "US",
+  "audience": { "@type": "Audience", "audienceType": "Cannabis vendors, brands, cultivators and distributors" },
+  "description": "Connect QuickBooks Online once. ShelfSpace imports every open invoice and customer automatically. A payment collected in ShelfSpace posts to QuickBooks on its own, and a payment or write-off recorded in QuickBooks marks the invoice closed in ShelfSpace, so collection follow-up stops.",
+  "url": "https://shelfspace.pro/quickbooks"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://shelfspace.pro/" },
+    { "@type": "ListItem", "position": 2, "name": "Features", "item": "https://shelfspace.pro/accounts-receivable" },
+    { "@type": "ListItem", "position": 3, "name": "QuickBooks Integration", "item": "https://shelfspace.pro/quickbooks" }
+  ]
+}
+</script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="/" class="nav-logo">
+    <div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div>
+    <span class="nav-logo-text">ShelfSpace<sup class="nav-logo-tm">™</sup></span>
+  </a>
+  <ul class="nav-links">
+    <li class="nav-dropdown"><a href="/accounts-receivable" class="nav-dropdown-toggle active">Features <svg class="dropdown-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></a>
+      <div class="nav-dropdown-menu"><a href="/accounts-receivable">ShelfSpace overview</a><a href="/ai-calls">AI Calls</a><a href="/collections">Collections</a><a href="/payment-plans">Payment Plans</a><a href="/promise-to-pay">Promise to Pay</a><a href="/final-notice">Final Notice</a><a href="/ar-aging">AR Aging</a><a href="/rep-management">Rep Management</a><a href="/payments">Payments</a><a href="/quickbooks" class="active">QuickBooks</a></div></li>
+    <li class="nav-dropdown"><a href="/accounts-payable" class="nav-dropdown-toggle">For dispensaries <svg class="dropdown-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></a>
+      <div class="nav-dropdown-menu"><a href="/accounts-payable">ShelfPay overview</a><a href="/consignment">Consignment</a><a href="/credit-recovery">Credit Recovery</a><a href="/shelfverify">ShelfVerify</a></div></li>
+    <li><a href="/about">About</a></li>
+    <li><a href="/pricing">Pricing</a></li>
+    <li class="nav-login-mobile"><a href="https://ourshelf.space/login">Login</a></li>
+    <li class="nav-call"><a href="tel:+16162714585" aria-label="Call now: talk to Chelsea, our AI assistant, at (616) 271-4585"><span class="nav-call-icon" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span><span class="nav-call-text"><span class="nav-call-kicker">Call now</span><span class="nav-call-num">(616) 271-4585</span></span></a></li>
+    <li><a href="/contact?cta=quickbooks-nav" class="nav-cta">Schedule a call <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a></li>
+  </ul>
+  <a href="tel:+16162714585" class="nav-call-bar" aria-label="Call now: (616) 271-4585"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span>Call</span></a>
+  <div class="nav-hamburger" onclick="document.querySelector('.nav-links').classList.toggle('mobile-open'); event.stopPropagation();"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- HERO -->
+<section class="qb-hero">
+  <div class="qb-hero-in">
+    <div>
+      <div class="qb-eyebrow">QuickBooks integration</div>
+      <h1>Your books and your collections. <em>Always in sync.</em></h1>
+      <p class="qb-hero-sub">Connect QuickBooks once. Every open invoice comes in on its own. When a store pays, in ShelfSpace or in QuickBooks, both sides update automatically.</p>
+      <div class="qb-hero-cta"><span class="cta-stack"><a href="/contact?cta=quickbooks-hero" class="qb-btn">Schedule a call <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a><span class="cta-micro">30 minutes with Chris. See how it would run for your business.</span></span></div>
+      <div class="qb-points"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Two-way sync</span><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Every open invoice imported</span><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>No double entry</span></div>
+    </div>
+    <div class="qb-sync" aria-label="Animation: invoices flow from QuickBooks into ShelfSpace, and payments sync back both ways">
+      <div class="qb-panel qb-panel--qb"><h3><span class="qb-logo qb-logo--qb">qb</span>QuickBooks</h3><div class="qb-row qb-q" style="--r:0"><span class="mono">INV-1042</span><span class="qb-store">Green Leaf Dispensary</span><span class="mono qb-amt">$8,420.00</span><span class="qb-st"><b class="qb-open">Open</b><b class="qb-paid">Paid</b></span></div><div class="qb-row qb-q" style="--r:1"><span class="mono">INV-1043</span><span class="qb-store">Northside Cannabis Co.</span><span class="mono qb-amt">$3,150.00</span><span class="qb-st"><b class="qb-open">Open</b><b class="qb-paid">Paid</b></span></div><div class="qb-row qb-q" style="--r:2"><span class="mono">INV-1047</span><span class="qb-store">Elevate Wellness</span><span class="mono qb-amt">$12,600.00</span><span class="qb-st"><b class="qb-open">Open</b><b class="qb-paid">Paid</b></span></div><div class="qb-row qb-q" style="--r:3"><span class="mono">INV-1051</span><span class="qb-store">High Tide Provisions</span><span class="mono qb-amt">$5,275.00</span><span class="qb-st"><b class="qb-open">Open</b><b class="qb-paid">Paid</b></span></div></div>
+      <div class="qb-pipe" aria-hidden="true">
+        <svg viewBox="0 0 64 300" preserveAspectRatio="none"><path class="qb-lane" d="M0 90 C 32 90, 32 90, 64 90"/><path class="qb-lane" d="M64 210 C 32 210, 32 210, 0 210"/>
+          <circle class="qb-dot" r="4" cy="90"><animate attributeName="cx" values="0;64" dur="1.6s" repeatCount="indefinite"/></circle>
+          <circle class="qb-dot" r="4" cy="90"><animate attributeName="cx" values="0;64" dur="1.6s" begin="0.8s" repeatCount="indefinite"/></circle>
+          <circle class="qb-dot qb-dot--back" r="4" cy="210"><animate attributeName="cx" values="64;0" dur="1.8s" begin="0.4s" repeatCount="indefinite"/></circle>
+          <circle class="qb-dot qb-dot--back" r="4" cy="210"><animate attributeName="cx" values="64;0" dur="1.8s" begin="1.3s" repeatCount="indefinite"/></circle>
+        </svg>
+        <span class="qb-tag qb-tag--top">Invoices</span><span class="qb-tag qb-tag--bot">Payments</span>
+      </div>
+      <div class="qb-panel qb-panel--ss"><h3><span class="qb-logo qb-logo--ss">S</span>ShelfSpace</h3><div class="qb-row qb-s" style="--r:0"><span class="mono">INV-1042</span><span class="qb-store">Green Leaf Dispensary</span><span class="mono qb-amt">$8,420.00</span><span class="qb-st"><b class="qb-open">Open</b><b class="qb-paid">Paid</b></span></div><div class="qb-row qb-s" style="--r:1"><span class="mono">INV-1043</span><span class="qb-store">Northside Cannabis Co.</span><span class="mono qb-amt">$3,150.00</span><span class="qb-st"><b class="qb-open">Open</b><b class="qb-paid">Paid</b></span></div><div class="qb-row qb-s" style="--r:2"><span class="mono">INV-1047</span><span class="qb-store">Elevate Wellness</span><span class="mono qb-amt">$12,600.00</span><span class="qb-st"><b class="qb-open">Open</b><b class="qb-paid">Paid</b></span></div><div class="qb-row qb-s" style="--r:3"><span class="mono">INV-1051</span><span class="qb-store">High Tide Provisions</span><span class="mono qb-amt">$5,275.00</span><span class="qb-st"><b class="qb-open">Open</b><b class="qb-paid">Paid</b></span></div></div>
+      <div class="qb-toast" role="status"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span class="qb-toast-t">Synced</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="qb-sec qb-sec--ghost">
+  <div class="qb-head qb-in"><div class="qb-eyebrow">How it works</div><h2>Connect once. Never re-enter an invoice again.</h2><p>Three steps, and the first is the only one you do.</p></div>
+  <div class="qb-steps">
+    <div class="qb-step qb-in"><div class="qb-num">01</div><b>Connect QuickBooks</b><p>Sign in to QuickBooks Online and approve the connection. That&rsquo;s the whole setup on your side.</p></div>
+    <div class="qb-step qb-in"><div class="qb-num">02</div><b>Every invoice comes in</b><p>We import every open invoice and every customer from your QuickBooks automatically. Nothing to export, nothing to retype.</p></div>
+    <div class="qb-step qb-in"><div class="qb-num">03</div><b>Payments sync both ways</b><p>A store pays in ShelfSpace or you record it in QuickBooks. Either way, both sides update on their own.</p></div>
+  </div>
+</section>
+
+<!-- TWO-WAY -->
+<section class="qb-sec qb-sec--dark">
+  <div class="qb-head qb-in"><div class="qb-eyebrow">Two-way sync</div><h2>It works in both directions. Automatically.</h2><p>Most tools push data one way and leave you to fix the rest. ShelfSpace and QuickBooks keep each other current.</p></div>
+  <div class="qb-two">
+    <div class="qb-dir qb-in"><div class="qb-dir-glow"></div><div class="qb-dir-h">ShelfSpace <svg viewBox="0 0 34 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="2" y1="9" x2="30" y2="9"/><polyline points="24 3 30 9 24 15"/></svg> QuickBooks</div>
+      <h3>A store pays you. QuickBooks already knows.</h3>
+      <ul><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Every payment collected in ShelfSpace posts to QuickBooks on its own.</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>The invoice closes in QuickBooks the moment it&rsquo;s paid.</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Your bookkeeper stops chasing deposits.</li></ul></div>
+    <div class="qb-dir qb-in"><div class="qb-dir-glow"></div><div class="qb-dir-h">QuickBooks <svg viewBox="0 0 34 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="2" y1="9" x2="30" y2="9"/><polyline points="24 3 30 9 24 15"/></svg> ShelfSpace</div>
+      <h3>You record it in QuickBooks. We stop chasing.</h3>
+      <ul><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Mark an invoice paid in QuickBooks and ShelfSpace marks it paid within minutes.</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Reminders and calls to that store stop on their own.</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Write an invoice off in QuickBooks and we stop chasing it too.</li></ul></div>
+  </div>
+</section>
+
+<!-- WHAT IT ENDS -->
+<section class="qb-sec qb-sec--white">
+  <div class="qb-head qb-in"><div class="qb-eyebrow">What it ends</div><h2>One source of truth. Zero cleanup.</h2></div>
+  <div class="qb-ends">
+    <div class="qb-end qb-in"><span class="qb-x">Double entry</span><b>Enter it once</b><p>Invoices live in QuickBooks. ShelfSpace picks them up on its own.</p></div>
+    <div class="qb-end qb-in"><span class="qb-x">Chasing a store that already paid</span><b>Paid means paid</b><p>The moment it&rsquo;s paid anywhere, the follow-up stops.</p></div>
+    <div class="qb-end qb-in"><span class="qb-x">Month-end catch-up</span><b>Books stay current</b><p>Payments land in QuickBooks as they happen, not at month end.</p></div>
+    <div class="qb-end qb-in"><span class="qb-x">Two numbers for one AR</span><b>Everything matches</b><p>Your collections and your books show the same open balance.</p></div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="qb-final">
+  <h2 class="qb-in">See your QuickBooks invoices collected.</h2>
+  <p class="qb-in">Connect QuickBooks on the call and watch your open invoices come in.</p>
+  <div class="qb-in"><span class="cta-stack"><a href="/contact?cta=quickbooks-qb-final" class="qb-btn">Schedule a call <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a><span class="cta-micro">30 minutes with Chris. See how it would run for your business.</span></span></div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="/" class="nav-logo"><div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div><span class="nav-logo-text">ShelfSpace<sup class="nav-logo-tm">™</sup></span></a>
+      <p>Financial tools built for cannabis operators.</p>
+      <p class="footer-phone">Questions? Call Chelsea, our AI assistant: <a href="tel:+16162714585">(616) 271-4585</a></p>
+    </div>
+    <div class="footer-col"><h3>Services</h3><ul><li><a href="/accounts-payable">ShelfPay (AP)</a></li><li><a href="/accounts-receivable">ShelfCollect (AR)</a></li><li><a href="/shelfverify">ShelfVerify</a></li><li><a href="/consignment">Consignment</a></li><li><a href="/credit-recovery">Credit Recovery</a></li><li><a href="/payments">Payments</a></li><li><a href="/shelfiq">ShelfiQ</a></li></ul></div>
+    <div class="footer-col"><h3>Platform</h3><ul><li><a href="/features">Features</a></li><li><a href="/integrations">Integrations</a></li><li><a href="/connect-your-ai">Connect Your AI</a></li><li><a href="/payment-plans">Payment Plans</a></li><li><a href="/vendor-management">Vendor Management</a></li><li><a href="/collections">Collections</a></li><li><a href="/ai-calls">AI Calls</a></li></ul></div>
+    <div class="footer-col"><h3>Resources</h3><ul><li><a href="/how-it-works">How It Works</a></li><li><a href="/pricing">Pricing</a></li><li><a href="/blog">Blog</a></li><li><a href="/docs">Docs</a></li><li><a href="/how-to">Guides</a></li><li><a href="/tutorials">Tutorials</a></li></ul></div>
+    <div class="footer-col"><h3>Company</h3><ul><li><a href="/about">About</a></li><li><a href="/vendors">For Vendors</a></li><li><a href="/for-bookkeepers">For Bookkeepers</a></li><li><a href="/contact">Contact</a></li><li><a href="mailto:support@shelfspace.pro">Support</a></li><li><a href="https://ourshelf.space/login">Login</a></li><li><a href="https://linkedin.com/company/shelfspace-pro" target="_blank" rel="noopener" class="footer-social-link"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> LinkedIn</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><p>&copy; 2026 ShelfSpace Technologies Inc.</p><div style="display:flex;align-items:center;gap:8px;justify-content:center;margin-top:12px;"><img src="/metrc-logo-v2.png" alt="Metrc" loading="lazy" style="height:18px;opacity:0.4;filter:brightness(0) invert(1);"><span style="font-size:11px;color:rgba(255,255,255,0.35);">Certified Metrc Third-Party Vendor</span></div><div class="footer-bottom-links"><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div></div>
+</footer>
+
+<script>
+(function() {
+  var nav = document.getElementById('nav');
+  var pageHero = document.querySelector('.page-hero');
+  var ctaSection = document.querySelector('.cta-section');
+
+  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var isMobile = window.innerWidth < 900;
+  var ticking = false;
+
+  /* ── Hero entrance ── */
+  requestAnimationFrame(function() {
+    nav.classList.toggle('scrolled', window.scrollY > 20);
+    if (pageHero) pageHero.classList.add('hero-loaded');
+  });
+
+  /* ── Scroll-triggered reveals ── */
+  var revealObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(function(el) { revealObserver.observe(el); });
+
+  /* ── Scroll handler (rAF + ticking) ── */
+  function onScroll() {
+    var scrollY = window.scrollY;
+    nav.classList.toggle('scrolled', scrollY > 20);
+    if (prefersReduced || isMobile) return;
+    var wh = window.innerHeight;
+    if (ctaSection) {
+      var rect = ctaSection.getBoundingClientRect();
+      if (rect.bottom >= 0 && rect.top <= wh) {
+        var center = rect.top + rect.height / 2 - wh / 2;
+        ctaSection.style.setProperty('--parallax-y', (center * 0.08) + 'px');
+      }
+    }
+  }
+  window.addEventListener('scroll', function() {
+    if (!ticking) { requestAnimationFrame(function() { onScroll(); ticking = false; }); ticking = true; }
+  }, { passive: true });
+  onScroll();
+  window.addEventListener('resize', function() {
+    isMobile = window.innerWidth < 900;
+    if (isMobile && ctaSection) ctaSection.style.setProperty('--parallax-y', '0px');
+  });
+
+  /* ── Close mobile nav on outside click ── */
+  document.addEventListener('click', function() {
+    var navLinks = document.querySelector('.nav-links');
+    if (navLinks && navLinks.classList.contains('mobile-open')) {
+      navLinks.classList.remove('mobile-open');
+    }
+  });
+})();
+</script>
+<script>
+(function () {
+  var els = document.querySelectorAll('.qb-in');
+  if (!('IntersectionObserver' in window)) { els.forEach(function (e) { e.classList.add('is-visible'); }); }
+  else {
+    var io = new IntersectionObserver(function (es) { es.forEach(function (e, i) { if (e.isIntersecting) { setTimeout(function () { e.target.classList.add('is-visible'); }, i * 90); io.unobserve(e.target); } }); }, { threshold: 0.15 });
+    els.forEach(function (e) { io.observe(e); });
+  }
+  // Hero loop: invoices import into ShelfSpace, then get paid one by one; both panels flip to Paid together.
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var q = document.querySelectorAll('.qb-q'), s = document.querySelectorAll('.qb-s'), toast = document.querySelector('.qb-toast'), tt = document.querySelector('.qb-toast-t');
+  var MSG = ['Paid in ShelfSpace. Posted to QuickBooks.', 'Paid in QuickBooks. Marked paid in ShelfSpace.'];
+  function reset() { q.forEach(function (r) { r.classList.remove('is-paid'); }); s.forEach(function (r) { r.classList.remove('is-in', 'is-paid'); }); toast.classList.remove('show'); }
+  if (reduced) { s.forEach(function (r) { r.classList.add('is-in'); }); [0, 2].forEach(function (i) { q[i].classList.add('is-paid'); s[i].classList.add('is-paid'); }); return; }
+  function run() {
+    reset(); var t = 400;
+    s.forEach(function (r, i) { setTimeout(function () { r.classList.add('is-in'); }, t + i * 260); });
+    t += s.length * 260 + 700;
+    [0, 2, 1].forEach(function (i, k) {
+      setTimeout(function () { q[i].classList.add('is-paid'); s[i].classList.add('is-paid'); tt.textContent = MSG[k % 2]; toast.classList.add('show'); }, t + k * 1900);
+      setTimeout(function () { toast.classList.remove('show'); }, t + k * 1900 + 1500);
+    });
+    setTimeout(run, t + 3 * 1900 + 1800);
+  }
+  run();
+})();
+</script>
+<script src="/shelfiq-widget.js"></script>
+<script src="/nav.js" defer></script>
+</body>
+</html>
