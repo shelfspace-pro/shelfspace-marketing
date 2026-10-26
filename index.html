@@ -627,6 +627,11 @@
 .hm-watch-play svg { width: 14px; height: 14px; fill: var(--white); margin-left: 2px; }
 .hm-watch-len { font-family: var(--font-mono); font-size: 12px; color: var(--slate-500); font-weight: 400; }
 @media (prefers-reduced-motion: reduce) { .hm-watch { animation: none; } }
+.hm-vbox { position: fixed; inset: 0; z-index: 1000; display: none; align-items: center; justify-content: center; padding: 16px; background: rgba(8,24,17,0.82); }
+.hm-vbox.open { display: flex; }
+.hm-vbox-frame { position: relative; width: min(960px, 100%); aspect-ratio: 16 / 9; border-radius: 16px; overflow: hidden; background: #0b1f16; box-shadow: 0 30px 70px -28px rgba(27,67,50,0.6); }
+.hm-vbox-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.hm-vbox-close { position: absolute; top: 16px; right: 16px; width: 40px; height: 40px; border-radius: 50%; border: 0; background: var(--white); color: var(--green-deep); font: 700 22px/1 var(--font-sans); cursor: pointer; }
 
 /* ===== HERO v2 — motion hero (10/18/2026) ===== */
 .hero--motion { min-height: 100vh; padding: 112px 48px 64px; overflow-x: clip; }
@@ -1996,12 +2001,22 @@ a.cs-stat:hover .cs-stat-go span { transform: translateX(4px); }
 <script>
 (function() {
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // The hero button plays the video in a popup right where you are (no scroll down the page).
+  var vbox = document.createElement('div');
+  vbox.className = 'hm-vbox';
+  vbox.setAttribute('role', 'dialog');
+  vbox.setAttribute('aria-modal', 'true');
+  vbox.setAttribute('aria-label', 'ShelfSpace in 60 seconds');
+  vbox.innerHTML = '<button type="button" class="hm-vbox-close" aria-label="Close video">&times;</button><div class="hm-vbox-frame"></div>';
+  document.body.appendChild(vbox);
+  var vframe = vbox.querySelector('.hm-vbox-frame');
+  function closeVbox() { vbox.classList.remove('open'); vframe.innerHTML = ''; }
+  vbox.addEventListener('click', function(e) { if (e.target === vbox || e.target.classList.contains('hm-vbox-close')) closeVbox(); });
+  document.addEventListener('keydown', function(e) { if (e.key === 'Escape' && vbox.classList.contains('open')) closeVbox(); });
   document.querySelectorAll('.hm-watch[data-watch]').forEach(function(w) {
     w.addEventListener('click', function() {
-      var thumb = document.querySelector('.vf-thumb[data-yt="' + w.getAttribute('data-watch') + '"]');
-      if (!thumb) return;
-      thumb.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'center' });
-      thumb.click();
+      vframe.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/' + w.getAttribute('data-watch') + '?autoplay=1&rel=0&modestbranding=1" title="ShelfSpace in 60 seconds" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>';
+      vbox.classList.add('open');
     });
   });
   document.querySelectorAll('.vf-thumb[data-yt]').forEach(function(btn) {
