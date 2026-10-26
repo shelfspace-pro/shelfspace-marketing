@@ -501,24 +501,6 @@
   </div>
 </section>
 
-<!-- 7 · FINAL CTA -->
-<section class="o-final" id="final-cta">
-  <div class="o-final-inner">
-    <h2 class="reveal show-retailer">See what your vendors owe you. Free.</h2>
-    <h2 class="reveal show-vendor">See the cash stuck in your AR. Free.</h2>
-    <p class="o-final-lede reveal">Tell us about your business. We'll show you exactly how much is slipping through. If it doesn't add up, you've lost nothing.</p>
-    <div class="reveal"><span class="cta-stack"><a href="/contact?cta=pricing-cta" class="btn-primary pv-btn">Schedule a call <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a><span class="cta-micro cta-micro--on-dark show-retailer">30 minutes with Chris. See how your vendor payments would run.</span><span class="cta-micro cta-micro--on-dark show-vendor">30 minutes with Chris. See how you'd get paid faster.</span></span></div>
-    <p class="o-note reveal">Free. No commitment. Guaranteed to pay for itself once you start.</p>
-    <div class="o-founder reveal">
-      <img src="/chris-avatar.jpg" alt="Chris Mitchem, ShelfSpace founder" loading="lazy">
-      <div>
-        <p style="font-size:14px;color:var(--slate-700);line-height:1.5;margin:0 0 6px;font-style:italic;">"I've been a cannabis operator since 2015. I built ShelfSpace to do the money work I never had time for, and I stand behind it with a guarantee."</p>
-        <p style="font-size:13px;color:var(--slate-500);">— Chris Mitchem, Founder</p>
-      </div>
-    </div>
-  </div>
-</section>
-
 <div class="sticky-bar" id="sticky-bar" aria-hidden="true">
   <p class="show-retailer">Free money review. It pays for itself, or we refund the difference.</p>
   <p class="show-vendor">Free AR review. We collect 25% of your past-due invoices in month one, or it&#39;s free.</p>
@@ -577,8 +559,8 @@
   }, { threshold: 0.1 });
   document.querySelectorAll('.reveal').forEach(function(el) { revealObserver.observe(el); });
 
-  // Sticky bar: after the hero, hidden again once the final CTA is on screen.
-  var bar = document.getElementById('sticky-bar'), finalCta = document.getElementById('final-cta'), finalVisible = false;
+  // Sticky bar: after the hero, hidden again once the footer is on screen.
+  var bar = document.getElementById('sticky-bar'), finalCta = document.querySelector('footer'), finalVisible = false;
   new IntersectionObserver(function(e) { finalVisible = e[0].isIntersecting; onScroll(); }, { threshold: 0.2 }).observe(finalCta);
   function onScroll() {
     nav.classList.toggle('scrolled', window.scrollY > 20);
