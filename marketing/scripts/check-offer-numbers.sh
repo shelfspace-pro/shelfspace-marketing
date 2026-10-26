@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # check-offer-numbers.sh — the "Total value, first year" numbers must agree on every page.
 #
-# Canonical source: the value stacks in pricing.html (dispensary + brand cards).
+# Canonical source: the hero value cards in pricing.html (dispensary + brand, data-pv-count).
 # Mirrors that must match it:
 #   - accounts-payable.html  (ShelfPay stack, copied from pricing)
 #   - accounts-receivable.html (ShelfCollect stack, copied from pricing)
@@ -23,7 +23,10 @@ const totals = (html, f) => {
 let bad = 0;
 const fail = msg => { console.log('🔴 ' + msg); bad++; };
 
-const pricing = totals(read('pricing.html'), 'pricing.html');
+// pricing.html carries its totals on the hero value cards (the value-stack section was cut 10/26/2026):
+// data-pv-count="<n>" on the dispensary card, then the brand card. The brand slider defaults to this value.
+const pricing = [...read('pricing.html').matchAll(/class="pv-big mono" data-pv-count="(\d+)"/g)].map(x => Number(x[1]).toLocaleString('en-US'));
+if (!pricing.length) throw new Error('pricing.html: no data-pv-count totals found — region is empty, check the markup');
 if (pricing.length !== 2) fail(`pricing.html: expected 2 totals (dispensary, brand), found ${pricing.length}`);
 const [pay, col] = pricing;
 
