@@ -398,6 +398,18 @@
   ]
 }
 </script>
+<style>
+  .ar-watch { display: inline-flex; align-items: center; gap: 10px; margin-top: 18px; padding: 6px 14px 6px 6px; border: 1px solid var(--green-accent); border-radius: 999px; background: var(--white); color: var(--green-deep); font: 600 14px/1 var(--font-display); cursor: pointer; box-shadow: 0 6px 18px -8px rgba(27,67,50,0.35); transition: transform .25s cubic-bezier(0.22,1,0.36,1), box-shadow .25s; }
+  .ar-watch:hover { transform: translateY(-2px); box-shadow: 0 10px 24px -8px rgba(27,67,50,0.45); }
+  .ar-watch-play { display: inline-flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 50%; background: var(--green-deep); }
+  .ar-watch-play svg { width: 14px; height: 14px; fill: var(--white); margin-left: 2px; }
+  .ar-watch-len { font-family: var(--font-mono); font-size: 12px; color: var(--slate-500); font-weight: 400; }
+  .ar-vbox { position: fixed; inset: 0; z-index: 1000; display: none; align-items: center; justify-content: center; padding: 16px; background: rgba(8,24,17,0.82); }
+  .ar-vbox.open { display: flex; }
+  .ar-vbox-frame { position: relative; width: min(960px, 100%); aspect-ratio: 16 / 9; border-radius: 16px; overflow: hidden; background: #0b1f16; box-shadow: 0 30px 70px -28px rgba(27,67,50,0.6); }
+  .ar-vbox-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  .ar-vbox-close { position: absolute; top: 16px; right: 16px; width: 40px; height: 40px; border-radius: 50%; border: 0; background: var(--white); color: var(--green-deep); font: 700 22px/1 var(--font-sans); cursor: pointer; }
+</style>
 </head>
 <body>
 
@@ -438,6 +450,7 @@
     <div class="hero-actions-centered">
       <span class="cta-stack"><a href="/contact?cta=accounts-receivable-hero" class="btn-primary">Schedule a call <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a><span class="cta-micro">30 minutes with Chris. See how you'd get paid faster.</span></span>
     </div>
+    <button type="button" class="ar-watch" data-watch="rCu5tQu_FGo"><span class="ar-watch-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>Watch it in 60 seconds <span class="ar-watch-len">1:07</span></button>
     <div class="lp-guar"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6z"/><polyline points="8.5 12 11 14.5 15.5 9.5"/></svg> We collect 25% of your past-due invoices in month one, or it&#39;s free</div>
     <div class="hero-trust">
       <img src="/metrc-logo-v2.png" alt="Metrc">
@@ -1360,6 +1373,22 @@
     });
     compute();
   }
+})();
+</script>
+<div class="ar-vbox" id="ar-vbox" role="dialog" aria-modal="true" aria-label="ShelfSpace in 60 seconds"><button type="button" class="ar-vbox-close" aria-label="Close video">&times;</button><div class="ar-vbox-frame"></div></div>
+<script>
+(function() {
+  var box = document.getElementById('ar-vbox');
+  var frame = box.querySelector('.ar-vbox-frame');
+  function close() { box.classList.remove('open'); frame.innerHTML = ''; }
+  document.querySelectorAll('.ar-watch[data-watch]').forEach(function(b) {
+    b.addEventListener('click', function() {
+      frame.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/' + b.getAttribute('data-watch') + '?autoplay=1&rel=0&modestbranding=1" title="ShelfSpace in 60 seconds" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>';
+      box.classList.add('open');
+    });
+  });
+  box.addEventListener('click', function(e) { if (e.target === box || e.target.classList.contains('ar-vbox-close')) close(); });
+  document.addEventListener('keydown', function(e) { if (e.key === 'Escape' && box.classList.contains('open')) close(); });
 })();
 </script>
 <script src="/hero-motion.js" defer></script>
