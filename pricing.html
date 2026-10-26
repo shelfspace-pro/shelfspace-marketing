@@ -351,10 +351,6 @@
   <div class="pv-split">
     <div class="pv-text">
       <div class="section-label reveal" style="margin-bottom:14px;">Pricing</div>
-      <div class="persona-switch reveal" role="tablist" aria-label="Choose your side">
-        <button class="persona-btn" data-persona="retailer" role="tab" aria-selected="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l1.5-5h15L21 9"/><path d="M3 9h18v2a3 3 0 0 1-6 0 3 3 0 0 1-6 0 3 3 0 0 1-6 0z"/><path d="M5 13v8h14v-8"/><path d="M10 21v-5h4v5"/></svg>I run a dispensary</button>
-        <button class="persona-btn is-active" data-persona="vendor" role="tab" aria-selected="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="6" width="14" height="10" rx="1"/><path d="M15 9h4l3 3v4h-7z"/><circle cx="6" cy="18" r="2"/><circle cx="18" cy="18" r="2"/></svg>I run a brand</button>
-      </div>
       <h1 class="reveal"><span class="show-retailer">Worth <span class="hl mono-ish">$224,500</span> a year.</span><span class="show-vendor">Worth <span class="hl mono-ish">$301,000</span> a year.</span> <span class="pv-sub">You pay a fraction. Guaranteed.</span></h1>
       <p class="o-mirror reveal show-retailer">We pay your vendors, check every invoice against Metrc, and get your credits back. The credits are built to cover the fee.</p>
       <p class="o-mirror reveal show-vendor">We send your invoices, chase every past-due store in your name, and get you paid sooner. What we collect is built to cover the fee.</p>
@@ -614,7 +610,6 @@
   }
   setTimeout(playValue, 350);
   btns.forEach(function (b) { b.addEventListener('click', function () { setTimeout(playValue, 30); }); });
-  if (/[?&]for=(dispensary|retailer|store)/.test(location.search)) btns[0].click();
 
   document.addEventListener('click', function(e) {
     var navLinks = document.querySelector('.nav-links');
