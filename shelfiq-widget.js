@@ -252,7 +252,7 @@
   function renderChips() {
     var c = el('div', 'cw-chips');
     c.id = 'cwChips';
-    [['How does ShelfCollect work for a brand?', null], ['I run a dispensary. How does ShelfPay work?', null], ['Schedule a call', 'card']].forEach(function (pair) {
+    [['How does ShelfSpace work for a brand?', null], ['I run a dispensary. How does ShelfPay work?', null], ['Schedule a call', 'card']].forEach(function (pair) {
       var b = el('button', 'cw-chip', pair[0]);
       b.addEventListener('click', function () { c.remove(); if (pair[1] === 'card') openCard(); else sendMessage(pair[0]); });
       c.appendChild(b);

@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow, noarchive">
 <title>ShelfSpace Quote</title>
-<meta name="description" content="Build a ShelfPay or ShelfCollect quote.">
+<meta name="description" content="Build a ShelfPay or ShelfSpace quote.">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -131,7 +131,7 @@
       <legend><span class="step">1</span>Which service?</legend>
       <div class="opts opts-2">
         <label class="opt"><input type="radio" name="product" value="pay" checked><span class="box"><span class="dot"></span><span><span class="t">ShelfPay</span><span class="d">For dispensaries. We pay your vendors, verify every invoice, and recover the credits vendors owe you.</span></span></span></label>
-        <label class="opt"><input type="radio" name="product" value="collect"><span class="box"><span class="dot"></span><span><span class="t">ShelfCollect</span><span class="d">For brands. We send your invoices, follow up, and collect what dispensaries owe you.</span></span></span></label>
+        <label class="opt"><input type="radio" name="product" value="collect"><span class="box"><span class="dot"></span><span><span class="t">ShelfSpace</span><span class="d">For brands. We send your invoices, follow up, and collect what dispensaries owe you.</span></span></span></label>
       </div>
     </fieldset>
 
@@ -206,7 +206,7 @@
     { id: "t4", label: "$2M–$4M",      rep: 3000000, max: 4000000, rate: 6500 },
     { id: "t5", label: "Over $4M · Enterprise", rep: 5000000, max: Infinity, custom: true, from: 8000, over: "$4M" }
   ];
-  // ShelfCollect: the brand's monthly wholesale sales; over $2M is Enterprise (10/20/2026).
+  // ShelfSpace: the brand's monthly wholesale sales; over $2M is Enterprise (10/20/2026).
   // Older links carrying "t1" (the old "Under $500k" range) land on $250k–$500k, the same price.
   var COLLECT_RANGES = [
     { id: "s0", label: "Under $50k",   rep: 30000,   max: 50000,   rate: 399 },
@@ -316,7 +316,7 @@
       var cr = range(COLLECT_RANGES, state.c);
       base = cr.custom ? 0 : price(cr.rate);
       listBase = cr.custom ? 0 : cr.rate;
-      lines.push({ item: "ShelfCollect", range: cr.label + " wholesale", price: base, list: discounted() && !cr.custom ? cr.rate : 0, sub: cr.label + " monthly wholesale sales", amt: usd(base) + "/mo" });
+      lines.push({ item: "ShelfSpace", range: cr.label + " wholesale", price: base, list: discounted() && !cr.custom ? cr.rate : 0, sub: cr.label + " monthly wholesale sales", amt: usd(base) + "/mo" });
     }
     var fee = Math.round(credits * CREDIT_SHARE);
     var custom = p === "pay" ? !!range(PAY_RANGES, state.g).custom : !!range(COLLECT_RANGES, state.c).custom;
@@ -331,7 +331,7 @@
   var summaryText = "";
   function renderQuote() {
     var v = compute();
-    var product = v.p === "pay" ? "ShelfPay" : "ShelfCollect";
+    var product = v.p === "pay" ? "ShelfPay" : "ShelfSpace";
     var today = new Date(), valid = new Date(today.getTime() + VALID_DAYS * 864e5);
     var name = state.name.trim();
     if (v.custom) return renderEnterprise(v, product, today, valid, name);
@@ -368,7 +368,7 @@
     summaryText = t.join("\n");
   }
 
-  // Top range is Enterprise (over $4M ShelfPay, over $2M ShelfCollect): no list price, we price it to the account.
+  // Top range is Enterprise (over $4M ShelfPay, over $2M ShelfSpace): no list price, we price it to the account.
   function renderEnterprise(v, product, today, valid, name) {
     var ent = v.p === "pay" ? range(PAY_RANGES, state.g) : range(COLLECT_RANGES, state.c);
     var termName = TERM_NAME;

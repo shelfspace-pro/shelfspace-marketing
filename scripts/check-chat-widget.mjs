@@ -35,7 +35,7 @@ const DISCLOSURE = { version: '2026-10-18-f', html: '<p class="sales-consent">By
 const GREETING = "Hi, I'm Chelsea, ShelfSpace's AI assistant.";
 const TURNSTILE_STUB = `window.turnstile={_n:0,render:function(el,o){var id=++this._n;setTimeout(function(){o.callback('tok-'+id)},50);return id},reset:function(){}};`;
 
-async function scenario(name, { offers = { booking: true, callNow: true }, fail = false, captureFail = false, reply = 'ShelfCollect sends reminders from your name. Read shelfspace.pro/accounts-receivable or evil.example.com/x', width = 1440, url = '/accounts-receivable.html?utm_source=li&fbclid=fb9&rep=JAKE_R3-x' } = {}) {
+async function scenario(name, { offers = { booking: true, callNow: true }, fail = false, captureFail = false, reply = 'ShelfSpace sends reminders from your name. Read shelfspace.pro/accounts-receivable or evil.example.com/x', width = 1440, url = '/accounts-receivable.html?utm_source=li&fbclid=fb9&rep=JAKE_R3-x' } = {}) {
   console.log('\n# ' + name);
   const browser = await launch();
   const ctx = await browser.newContext({ viewport: { width, height: 900 } });

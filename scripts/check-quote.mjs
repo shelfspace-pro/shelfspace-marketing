@@ -3,7 +3,7 @@
 // agreement, no x1.25 month-to-month markup, no onboarding fee, no "Save 20%". Saved quote links
 // made before that carry `term: "annual"` or `term: "monthly"` in the hash; they must still open,
 // at today's month-to-month list price. Opens /quote with saved hashes and asserts the rendered
-// price, plus the new ShelfCollect table and that no annual/onboarding copy is left on the page.
+// price, plus the new ShelfSpace table and that no annual/onboarding copy is left on the page.
 // Usage: npm run check:quote   (CHROME_PATH overrides the Chrome binary). Exits 1 on any failure.
 // Runs on every push to main (.github/workflows/checks.yml).
 import http from "node:http";
@@ -77,21 +77,21 @@ async function open(state) {
 // [name, saved hash state, expected #qd-price text]
 const CASES = [
   // The fence: a saved 12-month link renders the month-to-month price (and so does an old m2m link).
-  ["ShelfCollect $500k–$1M, saved term=annual", { product: "collect", term: "annual", c: "t2", q: "SS-AAAAAA" }, "$2,500/month"],
-  ["ShelfCollect $500k–$1M, saved term=monthly (no x1.25)", { product: "collect", term: "monthly", c: "t2", q: "SS-AAAAAB" }, "$2,500/month"],
+  ["ShelfSpace $500k–$1M, saved term=annual", { product: "collect", term: "annual", c: "t2", q: "SS-AAAAAA" }, "$2,500/month"],
+  ["ShelfSpace $500k–$1M, saved term=monthly (no x1.25)", { product: "collect", term: "monthly", c: "t2", q: "SS-AAAAAB" }, "$2,500/month"],
   ["ShelfPay under $500k + 2 extra stores, saved term=annual", { product: "pay", term: "annual", g: "t1", n: 3, q: "SS-AAAAAC" }, "$2,000/month"],
   ["ShelfPay under $500k + 2 extra stores, saved term=monthly (no x1.25)", { product: "pay", term: "monthly", g: "t1", n: 3, q: "SS-AAAAAD" }, "$2,000/month"],
   ["ShelfPay $1M–$2M, saved term=monthly, 10% discount", { product: "pay", term: "monthly", g: "t3", n: 1, dn: "Spring", dp: 10, q: "SS-AAAAAE" }, "$3,600/month"],
-  ["ShelfCollect old 'Under $500k' (t1) lands on $250k–$500k", { product: "collect", term: "annual", c: "t1", q: "SS-AAAAAF" }, "$1,500/month"],
-  ["ShelfCollect oldest '<$150k' letter (a) lands on $50k–$100k", { product: "collect", term: "annual", c: "a", q: "SS-AAAAAP" }, "$750/month"],
+  ["ShelfSpace old 'Under $500k' (t1) lands on $250k–$500k", { product: "collect", term: "annual", c: "t1", q: "SS-AAAAAF" }, "$1,500/month"],
+  ["ShelfSpace oldest '<$150k' letter (a) lands on $50k–$100k", { product: "collect", term: "annual", c: "a", q: "SS-AAAAAP" }, "$750/month"],
   // Every band of both tables.
-  ["ShelfCollect under $50k (10/25/2026 entry band)", { product: "collect", c: "s0", q: "SS-AAAAAS" }, "$399/month"],
-  ["ShelfCollect $50k–$100k", { product: "collect", c: "c0", q: "SS-AAAAAG" }, "$750/month"],
-  ["ShelfCollect $100k–$250k", { product: "collect", c: "c1", q: "SS-AAAAAH" }, "$1,000/month"],
-  ["ShelfCollect $250k–$500k", { product: "collect", c: "c2", q: "SS-AAAAAJ" }, "$1,500/month"],
-  ["ShelfCollect $1M–$1.5M", { product: "collect", c: "c3", q: "SS-AAAAAK" }, "$3,500/month"],
-  ["ShelfCollect $1.5M–$2M", { product: "collect", c: "c4", q: "SS-AAAAAL" }, "$4,500/month"],
-  ["ShelfCollect Enterprise, saved term=annual", { product: "collect", term: "annual", c: "c5", q: "SS-AAAAAM" }, "Custom from $5,500/month"],
+  ["ShelfSpace under $50k (10/25/2026 entry band)", { product: "collect", c: "s0", q: "SS-AAAAAS" }, "$399/month"],
+  ["ShelfSpace $50k–$100k", { product: "collect", c: "c0", q: "SS-AAAAAG" }, "$750/month"],
+  ["ShelfSpace $100k–$250k", { product: "collect", c: "c1", q: "SS-AAAAAH" }, "$1,000/month"],
+  ["ShelfSpace $250k–$500k", { product: "collect", c: "c2", q: "SS-AAAAAJ" }, "$1,500/month"],
+  ["ShelfSpace $1M–$1.5M", { product: "collect", c: "c3", q: "SS-AAAAAK" }, "$3,500/month"],
+  ["ShelfSpace $1.5M–$2M", { product: "collect", c: "c4", q: "SS-AAAAAL" }, "$4,500/month"],
+  ["ShelfSpace Enterprise, saved term=annual", { product: "collect", term: "annual", c: "c5", q: "SS-AAAAAM" }, "Custom from $5,500/month"],
   ["ShelfPay $500k–$1M", { product: "pay", g: "t2", n: 1, q: "SS-AAAAAN" }, "$2,500/month"],
   ["ShelfPay $1M–$2M", { product: "pay", g: "t3", n: 1, q: "SS-AAAAAQ" }, "$4,000/month"],
   ["ShelfPay $2M–$4M", { product: "pay", g: "t4", n: 1, q: "SS-AAAAAR" }, "$6,500/month"],
@@ -118,7 +118,7 @@ ok(!blank.shown, "blank form: no quote until a range is picked");
 ok(!RETIRED.test(blank.body), "blank form (empty state): no retired copy");
 ok(blank.termInputs === 0, `no agreement-term choice on the form (found ${blank.termInputs})`);
 const WANT_COLLECT = ["Under $50k", "$50k–$100k", "$100k–$250k", "$250k–$500k", "$500k–$1M", "$1M–$1.5M", "$1.5M–$2M", "Over $2M · Enterprise"];
-ok(JSON.stringify(blank.collectChips) === JSON.stringify(WANT_COLLECT), `ShelfCollect table = ${JSON.stringify(blank.collectChips)}`);
+ok(JSON.stringify(blank.collectChips) === JSON.stringify(WANT_COLLECT), `ShelfSpace table = ${JSON.stringify(blank.collectChips)}`);
 const WANT_PAY = ["Under $500k", "$500k–$1M", "$1M–$2M", "$2M–$4M", "Over $4M · Enterprise"];
 ok(JSON.stringify(blank.payChips) === JSON.stringify(WANT_PAY), `ShelfPay table = ${JSON.stringify(blank.payChips)}`);
 
