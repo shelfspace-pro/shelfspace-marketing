@@ -651,6 +651,50 @@
   .ab-final .ab-btn { display: flex; width: 100%; max-width: 340px; margin: 0 auto; }
 }
 </style>
+<style>
+/* ===== ABOUT v2 (10/27/2026) — same language as the homepage hero: chip CTA with a sheen (replaces the pulse ring),
+   left-aligned phone hero, dark blocks as rounded panels, light sections fading into each other. ===== */
+html body .ab-btn { position: relative; overflow: hidden; justify-content: space-between; gap: 40px; min-height: 64px; padding: 8px 8px 8px 28px;
+    border-radius: 18px; font-size: 18px; letter-spacing: -0.2px; animation: none;
+    background: linear-gradient(180deg, #b7e4c7 0%, var(--green-accent) 60%, #7cc49e 100%);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.55), inset 0 -2px 0 rgba(27,67,50,0.15), 0 18px 36px -14px rgba(0,0,0,0.55); }
+html body .ab-btn--dark { background: linear-gradient(180deg, #2a6a50 0%, var(--green-deep) 55%, #143528 100%);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.18), inset 0 -2px 0 rgba(0,0,0,0.18), 0 16px 32px -12px rgba(27,67,50,0.6); }
+html body .ab-btn:hover { transform: translateY(-2px); }
+html body .ab-btn svg { width: 48px; height: 48px; padding: 14px; box-sizing: border-box; border-radius: 14px; flex: none; background: var(--green-deep); color: var(--green-accent); }
+html body .ab-btn--dark svg { background: var(--green-accent); color: var(--green-deep); }
+html body .ab-btn::after { content: ""; position: absolute; top: 0; bottom: 0; left: -60%; width: 40%; pointer-events: none;
+    background: linear-gradient(100deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.35) 50%, rgba(255,255,255,0) 100%);
+    transform: skewX(-20deg); animation: abSheen 4.5s ease-in-out 1.6s infinite; }
+html body .ab-btn--dark::after { background: linear-gradient(100deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.22) 50%, rgba(255,255,255,0) 100%); }
+@keyframes abSheen { 0% { left: -60%; } 30%, 100% { left: 130%; } }
+
+/* seams: the white page slides up over the ticker as a sheet; slate sections fade; mission is a rounded panel; rounded footer */
+html body .ab-hero + .brand-ticker { padding-bottom: 72px; }
+html body .ab-stats { position: relative; z-index: 2; margin-top: -40px; border-radius: 40px 40px 0 0; border-bottom: 0; box-shadow: 0 -18px 40px -24px rgba(0,0,0,0.45); }
+html body .ab-journey, html body .ab-letter-sec { background: linear-gradient(180deg, var(--white) 0, var(--slate-50) 160px, var(--slate-50) calc(100% - 160px), var(--white) 100%); }
+html body .ab-mission { border-radius: 40px; width: calc(100% - 48px); max-width: 1344px; margin: 0 auto; box-shadow: 0 30px 60px -30px rgba(27,67,50,0.6); }
+html body > footer { border-radius: 40px 40px 0 0; }
+
+@media (max-width: 640px) {
+  html body .ab-split { text-align: left; }
+  html body .ab-hero .section-label { justify-content: flex-start; }
+  html body .ab-h1 { font-size: clamp(44px, 12.6vw, 54px); letter-spacing: -2.2px; line-height: 0.98; }
+  html body .ab-sub { margin-left: 0; margin-right: 0; font-size: 18px; line-height: 1.45; }
+  html body .ab-actions { margin: 0; max-width: none; }
+  html body .ab-actions .cta-micro { text-align: left; }
+  html body .ab-btn { min-height: 60px; padding: 8px 8px 8px 24px; }
+  html body .ab-btn svg { width: 44px; height: 44px; padding: 13px; border-radius: 13px; }
+  html body .ab-trust { align-items: flex-start; }
+  html body .ab-final .ab-btn { max-width: none; }
+  html body .ab-hero + .brand-ticker { padding-bottom: 56px; }
+  html body .ab-stats { margin-top: -28px; border-radius: 28px 28px 0 0; }
+  html body .ab-journey, html body .ab-letter-sec { background: linear-gradient(180deg, var(--white) 0, var(--slate-50) 96px, var(--slate-50) calc(100% - 96px), var(--white) 100%); }
+  html body .ab-mission { border-radius: 28px; width: calc(100% - 40px); }
+  html body > footer { border-radius: 28px 28px 0 0; }
+}
+@media (prefers-reduced-motion: reduce) { html body .ab-btn::after { animation: none; display: none; } }
+</style>
 <!-- FOOTER -->
 <footer>
   <div class="footer-top">

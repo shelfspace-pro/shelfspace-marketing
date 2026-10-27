@@ -569,6 +569,44 @@
     body:has(.sticky-bar.show) .cw-toggle { bottom: calc(140px + env(safe-area-inset-bottom)); }
   }
 </style>
+<style>
+/* ===== PRICING v2 (10/27/2026) — homepage language: chip CTA with a sheen (replaces the pulse ring), mint mesh,
+   left-aligned phone hero, the guarantee as a rounded dark panel, light sections fading, rounded footer. ===== */
+html body .pv-hero { background:
+    radial-gradient(55% 70% at 85% 35%, rgba(149,213,178,0.40) 0%, rgba(149,213,178,0) 65%),
+    radial-gradient(45% 60% at 0% 100%, rgba(64,145,108,0.12) 0%, rgba(64,145,108,0) 70%), var(--white); }
+html body .pv-btn { position: relative; overflow: hidden; justify-content: space-between; gap: 40px; min-height: 64px; padding: 8px 8px 8px 28px;
+    border-radius: 18px; font-size: 18px; font-weight: 700; letter-spacing: -0.2px; animation: none;
+    background: linear-gradient(180deg, #2a6a50 0%, var(--green-deep) 55%, #143528 100%);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.18), inset 0 -2px 0 rgba(0,0,0,0.18), 0 16px 32px -12px rgba(27,67,50,0.6), 0 2px 6px rgba(27,67,50,0.2); }
+html body .pv-btn:hover { transform: translateY(-2px); }
+html body .pv-btn svg { width: 48px; height: 48px; padding: 14px; box-sizing: border-box; border-radius: 14px; flex: none; background: var(--green-accent); color: var(--green-deep); }
+html body .pv-btn::after { content: ""; position: absolute; top: 0; bottom: 0; left: -60%; width: 40%; pointer-events: none;
+    background: linear-gradient(100deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.22) 50%, rgba(255,255,255,0) 100%);
+    transform: skewX(-20deg); animation: pvSheen 4.5s ease-in-out 1.6s infinite; }
+@keyframes pvSheen { 0% { left: -60%; } 30%, 100% { left: 130%; } }
+
+html body .o-incl { background: linear-gradient(180deg, var(--white) 0%, var(--green-ghost) 55%, var(--white) 100%); }
+html body .o-guarantee { border-radius: 40px; width: calc(100% - 48px); max-width: 1344px; margin: 0 auto; box-shadow: 0 30px 60px -30px rgba(27,67,50,0.6); }
+html body .faq-section { background: var(--white); }
+html body > footer { border-radius: 40px 40px 0 0; }
+
+@media (max-width: 640px) {
+  html body .pv-hero { background:
+      radial-gradient(120% 60% at 100% 0%, rgba(149,213,178,0.38) 0%, rgba(149,213,178,0) 60%),
+      radial-gradient(90% 50% at 0% 100%, rgba(64,145,108,0.14) 0%, rgba(64,145,108,0) 70%), var(--white); }
+  html body .pv-text { text-align: left; }
+  html body .pv-text .section-label { justify-content: flex-start; }
+  html body .pv-hero h1 { font-size: clamp(42px, 12vw, 52px); letter-spacing: -2.2px; line-height: 0.98; }
+  html body .pv-hero .o-mirror { margin-left: 0; margin-right: 0; font-size: 18px; line-height: 1.45; }
+  html body .pv-cta .cta-stack { max-width: none; margin: 0; }
+  html body .pv-cta .btn-primary.pv-btn { justify-content: space-between; min-height: 60px; padding: 8px 8px 8px 24px; }
+  html body .pv-btn svg { width: 44px; height: 44px; padding: 13px; border-radius: 13px; }
+  html body .o-guarantee { border-radius: 28px; width: calc(100% - 40px); }
+  html body > footer { border-radius: 28px 28px 0 0; }
+}
+@media (prefers-reduced-motion: reduce) { html body .pv-btn::after { animation: none; display: none; } }
+</style>
 <!-- FOOTER -->
 <footer>
   <div class="footer-top">
