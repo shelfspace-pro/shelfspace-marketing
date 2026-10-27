@@ -1549,3 +1549,21 @@ footer::before { content: ''; position: absolute; bottom: -100px; right: -100px;
 /* 10/26/2026 (Chris): not taking new dispensary clients — hide the "For dispensaries" nav dropdown sitewide
    (desktop + mobile). Markup stays on every page; delete this rule to bring it back. Footer links unchanged. */
 .nav-links > li.nav-dropdown:has(> a.nav-dropdown-toggle[href="/accounts-payable"]) { display: none !important; }
+
+/* ===== NAV CTA v2 (10/27/2026) — the header "Schedule a call" in the 10/27 page style (CLAUDE.md § Page style):
+   glossy gradient, arrow in a mint chip, sheen sweep. Desktop only; the phone menu keeps its full-width mint button. ===== */
+@media (min-width: 901px) {
+  html body .nav-cta { position: relative; overflow: hidden; gap: 14px; height: 44px; padding: 4px 4px 4px 18px; border-radius: 14px; font-weight: 700;
+      background: linear-gradient(180deg, #2a6a50 0%, var(--green-deep) 55%, #143528 100%);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.18), inset 0 -2px 0 rgba(0,0,0,0.18), 0 10px 22px -10px rgba(27,67,50,0.6); }
+  html body .nav-cta:hover { background: linear-gradient(180deg, #2f7357 0%, var(--green-deep) 55%, #143528 100%); transform: translateY(-1px);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.18), inset 0 -2px 0 rgba(0,0,0,0.18), 0 14px 28px -10px rgba(27,67,50,0.65); }
+  html body .nav-cta svg { width: 36px; height: 36px; padding: 11px; box-sizing: border-box; border-radius: 10px; flex: none;
+      background: var(--green-accent); color: var(--green-deep); transition: transform .25s; }
+  html body .nav-cta:hover svg { transform: translateX(2px); }
+  html body .nav-cta::after { content: ""; position: absolute; top: 0; bottom: 0; left: -60%; width: 40%; pointer-events: none;
+      background: linear-gradient(100deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.22) 50%, rgba(255,255,255,0) 100%);
+      transform: skewX(-20deg); animation: navSheen 5s ease-in-out 2s infinite; }
+  @keyframes navSheen { 0% { left: -60%; } 28%, 100% { left: 130%; } }
+}
+@media (min-width: 901px) and (prefers-reduced-motion: reduce) { html body .nav-cta::after { animation: none; display: none; } }
