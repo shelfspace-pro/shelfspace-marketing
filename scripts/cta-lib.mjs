@@ -102,7 +102,7 @@ export function audience(rel) {
   if (/^docs\/(consignment|credit-recovery|accounts-payable|ap|retailer|deliveries|settlements)/.test(r)) return "store";
   const slug = r.replace(/^blog\//, "").replace(/\.html$/, "");
   if (r.startsWith("blog/")) {
-    if (/(get-paid|collect|receivable|(^|-)ar(-|$)|overdue|brand|for-vendors|vendor-side|getting-paid|dso|late-pay|past-due|unpaid)/.test(slug)) return "brand";
+    if (/(get-paid|collect|receivable|(^|-)ar(-|$)|overdue|brand|for-vendors|vendor-side|getting-paid|dso|late-pay|past-due|unpaid|delinquent|payment-rules)/.test(slug)) return "brand";
     if (/(dispensar|retailer|consignment|credit|payable|(^|-)ap(-|$)|budtender|manifest|invoice|store)/.test(slug)) return "store";
   }
   return "general";

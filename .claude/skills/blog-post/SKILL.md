@@ -56,7 +56,7 @@ Also check for AI-residue: em-dash overuse, "X, then Y, but Z" cadence, "this is
 
 - `sitemap.xml`: add `<url>` entry with today's `lastmod` and `<priority>0.6</priority>`
 - `llms.txt`: add line under "Blog Articles" — `- {Title}: https://shelfspace.pro/blog/{slug}`
-- `blog.html` (REQUIRED — landing page sectioned layout): insert a new compact-row card at the top of the matching category section's `.section-list` (e.g., for an AP post: top of `<div class="section-list">` inside `<section class="blog-section" data-section-cat="AP">`). Set `data-rank="1"` and bump existing cards' ranks. Pick `data-category` from the 5 valid values: `AP`, `Case Study`, `Consignment`, `Credit Recovery`, `Vendor Management`. **Small categories** (Credit Recovery, Vendor Management) go in `<div class="blog-section-rest">` instead — all cards there carry `data-rank="99"`. Card structure:
+- `blog.html` (REQUIRED — landing page sectioned layout): insert a new compact-row card at the top of the matching category section's `.section-list` (e.g., for an AP post: top of `<div class="section-list">` inside `<section class="blog-section" data-section-cat="AP">`). Set `data-rank="1"` and bump existing cards' ranks. Pick `data-category` from the 6 valid values: `Collections` (brand-side collections posts), `AP`, `Case Study`, `Consignment`, `Credit Recovery`, `Vendor Management`. **Small categories** (Credit Recovery, Vendor Management) go in `<div class="blog-section-rest">` instead — all cards there carry `data-rank="99"`. Card structure:
   ```html
   <a href="/blog/{slug}" class="blog-card" data-category="{Category}" data-rank="1">
     <span class="blog-card-tag">{Category}</span>
