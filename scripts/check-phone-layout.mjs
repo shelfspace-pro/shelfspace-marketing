@@ -67,7 +67,7 @@ for (const pg of pages.filter((p) => !ONLY || ONLY.includes(p))) {
         return true;
       };
       return [...document.querySelectorAll('a, button, input, select, textarea, summary')]
-        .filter((el) => !el.closest('nav, .cw-window, .cw-toggle') && shown(el))
+        .filter((el) => !el.closest('nav') && shown(el))
         .filter((el) => { const r = el.getBoundingClientRect(); return r.right > iw + 1 || r.left < -1; })
         .filter((el) => !scrollsSideways(el))
         .slice(0, 5)
