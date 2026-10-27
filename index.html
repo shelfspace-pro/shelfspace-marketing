@@ -996,6 +996,7 @@ a.cs-stat:hover .cs-stat-go span { transform: translateX(4px); }
   </div>
   <div class="hero-split">
     <div class="hero-content">
+      <div class="hm-eyebrow show-brand" aria-hidden="true"><span class="hm-eyebrow-dot"></span>Built for cannabis brands</div>
       <h1 class="hm-h1"><span class="show-brand">We get you <em>paid.</em></span></h1>
       <p class="hm-sub show-brand">Imagine QuickBooks and a collections agency had a baby, that's ShelfSpace.</p>
       <div class="hero-actions">
@@ -1006,11 +1007,14 @@ a.cs-stat:hover .cs-stat-go span { transform: translateX(4px); }
 
     <div class="hm-stage">
       <div class="hm-glow"></div>
+      <div class="hm-ghost hm-ghost--2" aria-hidden="true"></div>
+      <div class="hm-ghost hm-ghost--1" aria-hidden="true"></div>
       <div class="hm-card show-brand" aria-label="Example: a 34-day-late invoice from a dispensary gets paid">
         <div class="hm-card-top">Invoice #1182 · Green Leaf Dispensary</div>
         <div class="hm-card-num">$3,280.00</div>
         <div class="hm-status"><span class="hm-late">34 days late</span><span class="hm-paid">Paid</span></div>
       </div>
+      <div class="hm-toast show-brand" aria-hidden="true"><span class="hm-toast-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="5 12.5 10 17 19 7"/></svg></span><span class="hm-toast-txt"><b>Payment received</b><span>+$3,280.00 · just now</span></span></div>
       <div class="hm-caption">Illustration with example numbers</div>
     </div>
   </div>
@@ -1434,6 +1438,63 @@ a.cs-stat:hover .cs-stat-go span { transform: translateX(4px); }
 </section>
 
 
+
+<style>
+/* ===== HOMEPAGE PHONE HERO v2 (10/27/2026) — fintech composition: left-aligned display type, eyebrow,
+   mint mesh, layered invoice stack + payment toast. Phones only; desktop hides the new pieces. ===== */
+.hm-eyebrow, .hm-ghost, .hm-toast { display: none; }
+@media (max-width: 640px) {
+  html body .hero--motion { padding: 96px 20px 56px; background:
+      radial-gradient(120% 60% at 100% 0%, rgba(149,213,178,0.38) 0%, rgba(149,213,178,0) 60%),
+      radial-gradient(90% 50% at 0% 100%, rgba(64,145,108,0.16) 0%, rgba(64,145,108,0) 70%),
+      var(--white); }
+  html body .hero--motion .hero-grid-lines { opacity: 0.05; background-size: 40px 40px;
+      -webkit-mask-image: linear-gradient(180deg, #000 0%, transparent 55%); mask-image: linear-gradient(180deg, #000 0%, transparent 55%); }
+  html body .hero--motion .hero-content { text-align: left; }
+  html body .hm-eyebrow { display: inline-flex; align-items: center; gap: 8px; margin-bottom: 16px; padding: 6px 12px 6px 10px;
+      border-radius: 999px; background: rgba(255,255,255,0.75); border: 1px solid var(--green-light);
+      box-shadow: 0 4px 14px -6px rgba(27,67,50,0.25); font-size: 12px; font-weight: 700; letter-spacing: 0.4px;
+      color: var(--green-dark); text-transform: uppercase; -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+      animation: fadeUp 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s both; }
+  html body .hm-eyebrow-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green-mid); box-shadow: 0 0 0 0 rgba(64,145,108,0.6); animation: hmPing 2s ease-out infinite; }
+  html body .hm-h1 { font-size: clamp(48px, 14vw, 60px) !important; line-height: 0.94 !important; letter-spacing: -2.6px !important; margin-bottom: 16px !important; text-align: left; }
+  html body .hm-h1 em { background: linear-gradient(100deg, var(--green-mid) 0%, #2d9d6a 100%); -webkit-background-clip: text; background-clip: text; color: transparent; padding-right: 2px; }
+  html body .hero--motion .hm-sub { margin: 0 0 32px; font-size: 18px; line-height: 1.45; max-width: 30ch; color: var(--slate-600); }
+  html body .hero--motion .hero-actions { margin: 0; max-width: none; }
+  html body .hero--motion .hero-actions .btn-primary { border-radius: 16px; font-size: 17px; box-shadow: 0 14px 30px -10px rgba(27,67,50,0.55); }
+  html body .hm-watch { margin-top: 16px; min-height: 44px; }
+  html body .hero--motion .hero-split { gap: 48px; align-items: stretch; }
+
+  /* the stack: two ghost invoices peeking above the live one */
+  html body .hm-stage { padding-top: 24px; }
+  html body .hm-glow { inset: 0 -20px -24px; background: radial-gradient(60% 55% at 50% 60%, rgba(64,145,108,0.38), rgba(64,145,108,0) 72%); filter: blur(14px); }
+  html body .hm-ghost { display: block; position: absolute; left: 0; right: 0; height: 120px; border-radius: 20px; background: #163a2b;
+      box-shadow: 0 18px 40px -16px rgba(27,67,50,0.45); }
+  html body .hm-ghost--1 { top: 12px; transform: scaleX(0.93); background: linear-gradient(180deg, #2f6b51 0%, #1d4a37 100%); }
+  html body .hm-ghost--2 { top: 0; transform: scaleX(0.86); background: linear-gradient(180deg, #a9d8bf 0%, #7fb89b 100%); box-shadow: none; }
+  html body .hm-card { padding: 20px 20px 22px; border-radius: 20px;
+      background: linear-gradient(160deg, #15392a 0%, #0c241a 100%); }
+  html body .hm-card-top { font-size: 13px; letter-spacing: 0.1px; }
+  html body .hm-card-num { font-size: clamp(38px, 11vw, 46px); margin: 10px 0 16px; letter-spacing: -1.5px; }
+
+  /* toast: drops in over the card's top edge when the stamp lands */
+  html body .hm-toast { display: flex; align-items: center; gap: 12px; position: absolute; z-index: 3; top: 0; right: -4px; left: auto;
+      padding: 10px 16px 10px 10px; border-radius: 16px; background: var(--white); border: 1px solid rgba(149,213,178,0.7);
+      -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); box-shadow: 0 18px 40px -12px rgba(27,67,50,0.45);
+      opacity: 0; transform: translateY(-14px) scale(0.96); transition: opacity .35s, transform .5s cubic-bezier(0.34,1.56,0.64,1); pointer-events: none; }
+  html body .hm-stage:has(.hm-card.done) .hm-toast { opacity: 1; transform: translateY(-30px) rotate(-1.5deg) scale(1); transition-delay: .25s; }
+  html body .hm-toast-ic { flex: none; display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 10px; background: var(--green-accent); color: #0f2a1f; }
+  html body .hm-toast-ic svg { width: 16px; height: 16px; }
+  html body .hm-toast-txt { display: flex; flex-direction: column; gap: 2px; line-height: 1.2; }
+  html body .hm-toast-txt b { font-size: 14px; color: var(--green-deep); }
+  html body .hm-toast-txt span { font: 400 12px/1.2 var(--font-mono); font-variant-numeric: tabular-nums; color: var(--slate-500); }
+  html body .hm-caption { margin-top: 16px; }
+  @keyframes hmPing { 0% { box-shadow: 0 0 0 0 rgba(64,145,108,0.55); } 80%,100% { box-shadow: 0 0 0 8px rgba(64,145,108,0); } }
+}
+@media (max-width: 640px) and (prefers-reduced-motion: reduce) {
+  html body .hm-eyebrow, html body .hm-eyebrow-dot, html body .hm-toast { animation: none !important; transition: none !important; }
+}
+</style>
 
 <!-- FOOTER -->
 <style>
