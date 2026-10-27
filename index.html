@@ -1565,6 +1565,29 @@ a.cs-stat:hover .cs-stat-go span { transform: translateX(4px); }
 }
 </style>
 
+<style>
+/* ===== HOMEPAGE SECTION SEAMS (10/27/2026) — dark blocks are rounded panels that overlap their neighbours (same
+   move as the hero → results sheet); light sections fade into each other instead of meeting at a hard line. ===== */
+html body .hero--motion + .cs-v2 { border-radius: 40px; margin-bottom: -40px; }
+html body .tq { position: relative; z-index: 1; padding-top: 152px;
+    background: linear-gradient(180deg, var(--green-ghost) 0%, var(--green-ghost) 60%, var(--white) 100%); }
+html body .tq ~ .brand-ticker { position: relative; z-index: 1; max-width: 1344px; width: calc(100% - 48px); margin: 0 auto; border-radius: 24px; overflow: hidden;
+    box-shadow: 0 24px 48px -24px rgba(27,67,50,0.5); }
+html body .vf-band { background: linear-gradient(180deg, var(--white) 0, var(--slate-50) 160px, var(--slate-50) calc(100% - 160px), var(--white) 100%); }
+html body .faq-section { background: var(--white); }
+html body > footer { border-radius: 40px 40px 0 0; }
+@media (max-width: 640px) {
+  html body .hero--motion + .cs-v2 { border-radius: 28px; margin-bottom: -28px; }
+  html body .tq { padding-top: 92px; }
+  html body .tq ~ .brand-ticker { width: calc(100% - 40px); border-radius: 20px; }
+  html body .tq ~ .brand-ticker .brand-ticker-label { white-space: nowrap; letter-spacing: 1.2px; font-size: 10px; gap: 8px; }
+  html body .tq ~ .brand-ticker .brand-ticker-label::before, html body .tq ~ .brand-ticker .brand-ticker-label::after { width: 16px; }
+  html body .vf-band { background: linear-gradient(180deg, var(--white) 0, var(--slate-50) 96px, var(--slate-50) calc(100% - 96px), var(--white) 100%); }
+  html body > footer { border-radius: 28px 28px 0 0; }
+}
+@media (max-width: 360px) { html body .tq ~ .brand-ticker .brand-ticker-label::before, html body .tq ~ .brand-ticker .brand-ticker-label::after { display: none; } }
+</style>
+
 <!-- FOOTER -->
 <style>
 /* ===== HOMEPAGE PHONE PASS (10/22/2026) — layout/size only; copy + sections unchanged ===== */
