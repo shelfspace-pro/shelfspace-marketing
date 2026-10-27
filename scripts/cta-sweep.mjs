@@ -16,7 +16,7 @@
 import { readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { LABEL, labelFor, NO_MICRO, MICRO, ON_DARK, isPartnerCta, listPages, GENERATED, pageId, ctaId, audience, findContactAnchors, kind, slotFor, attr } from "./cta-lib.mjs";
+import { LABEL, NAV_LABEL, labelFor, NO_MICRO, MICRO, ON_DARK, isPartnerCta, listPages, GENERATED, pageId, ctaId, audience, findContactAnchors, kind, slotFor, attr } from "./cta-lib.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const DRY = process.argv.includes("--dry");
@@ -89,7 +89,7 @@ export function sweep(rel, html) {
     const href = newHref(a.href, id, partner);
     let tag = a.tag.replace(/(\shref\s*=\s*")[^"]*(")/i, `$1${href}$2`);
     let inner = a.inner;
-    if (k === "nav" || k === "primary") inner = relabel(inner, k === "primary" ? labelFor(id) : LABEL);
+    if (k === "nav" || k === "primary") inner = relabel(inner, k === "primary" ? labelFor(id) : NAV_LABEL);
     let out = `${tag}${inner}</a>`;
     if (k === "primary" && !NO_MICRO.has(id)) {
       const inDocsCta = a.parent && /\bdocs-cta\b/.test(attr(a.parent.tag, "class") || "");

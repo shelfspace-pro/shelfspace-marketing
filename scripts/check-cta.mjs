@@ -13,7 +13,7 @@
 import { readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { LABEL, labelFor, NO_MICRO, MICRO, ON_DARK, isPartnerCta, OLD_LABELS, CTA_RE, listPages, GENERATED, findContactAnchors, kind, visibleText, attr } from "./cta-lib.mjs";
+import { LABEL, NAV_LABEL, labelFor, NO_MICRO, MICRO, ON_DARK, isPartnerCta, OLD_LABELS, CTA_RE, listPages, GENERATED, findContactAnchors, kind, visibleText, attr } from "./cta-lib.mjs";
 import { sweep } from "./cta-sweep.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
@@ -56,7 +56,7 @@ for (const rel of listPages(ROOT)) {
     primaries++;
     // B
     const label = visibleText(a.inner);
-    const want = k === "primary" ? labelFor(cta) : LABEL;
+    const want = k === "primary" ? labelFor(cta) : NAV_LABEL;
     if (label !== want) fail(rel, "B", `primary /contact CTA says "${label}"`);
     // D
     if (k !== "primary" || NO_MICRO.has(cta)) continue;

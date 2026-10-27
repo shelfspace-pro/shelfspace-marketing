@@ -12,13 +12,15 @@ import { readdirSync, statSync } from "node:fs";
 import { join, relative, sep } from "node:path";
 
 export const LABEL = "Schedule a call";
+// 10/27/2026 (Chris): the header nav button on every page reads "Schedule a Demo" (in-page buttons keep LABEL).
+export const NAV_LABEL = "Schedule a Demo";
 
-// Named exceptions (Chris, 10/22/2026): the homepage hero buttons read "Get Paid" (brand side)
+// Named exceptions (Chris, 10/22/2026): the homepage hero buttons read "Get Paid" (brand side; "Schedule a Demo" since 10/27/2026)
 // and "Get Profitable" (dispensary side, home-hero-2) with no microcopy line under them. Keyed by cta id; the link stays /contact?cta=home-hero.
 // Same day: the homepage bottom CTA (home-cta) is one huge "Upgrade your business" button, no card, no microcopy.
 // 10/26/2026 (Chris): every in-page /pricing button reads "Schedule a Demo", no microcopy line (the nav button stays sitewide).
 export const PRICING_DEMO = ["pricing-hero", "pricing-o-stack", "pricing-o-stack-2", "pricing-o-trial", "pricing-body"];
-export const LABEL_OVERRIDES = new Map([["home-hero", "Get Paid"], ["home-hero-2", "Get Profitable"], ["home-cta", "Upgrade your business"], ...PRICING_DEMO.map((id) => [id, "Schedule a Demo"]), ["pricing-o-guarantee", "Try it free for 30 days"]]);
+export const LABEL_OVERRIDES = new Map([["home-hero", "Schedule a Demo"], ["home-hero-2", "Get Profitable"], ["home-cta", "Upgrade your business"], ...PRICING_DEMO.map((id) => [id, "Schedule a Demo"]), ["pricing-o-guarantee", "Try it free for 30 days"]]);
 // pricing-o-guarantee (10/26): the big white trial button on the guarantee — it books a DEMO, never the self-serve signup.
 export const NO_MICRO = new Set(["home-hero", "home-hero-2", "home-cta", ...PRICING_DEMO, "pricing-o-guarantee"]);
 export const labelFor = (id) => LABEL_OVERRIDES.get(id) || LABEL;
