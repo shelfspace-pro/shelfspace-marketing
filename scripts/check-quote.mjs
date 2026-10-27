@@ -57,7 +57,7 @@ async function open(state) {
     await page.click("#copy-text");
     summary = await page.evaluate(() => window.__copied || "");
   }
-  await page.waitForTimeout(100); // let a late script error surface
+  await page.waitForTimeout(1100); // let a late script error surface + the value count-up finish
   const out = {
     errors,
     shown,
@@ -68,7 +68,9 @@ async function open(state) {
     body: await page.$eval("body", (el) => el.innerText),
     termInputs: (await page.$$('input[name="term"]')).length,
     collectChips: await page.$$eval("#collect-chips label", (els) => els.map((e) => e.textContent.trim())),
-    payChips: await page.$$eval("#pay-chips label", (els) => els.map((e) => e.textContent.trim())),
+    productInputs: (await page.$$('input[name="product"]')).length,
+    valueTotal: (await page.$eval("#pv-count", (el) => el.textContent)).trim(),
+    docValue: await page.$eval("#qd-value", (el) => el.innerText),
   };
   await page.close();
   return out;
@@ -79,9 +81,6 @@ const CASES = [
   // The fence: a saved 12-month link renders the month-to-month price (and so does an old m2m link).
   ["ShelfSpace $500k–$1M, saved term=annual", { product: "collect", term: "annual", c: "t2", q: "SS-AAAAAA" }, "$2,500/month"],
   ["ShelfSpace $500k–$1M, saved term=monthly (no x1.25)", { product: "collect", term: "monthly", c: "t2", q: "SS-AAAAAB" }, "$2,500/month"],
-  ["ShelfPay under $500k + 2 extra stores, saved term=annual", { product: "pay", term: "annual", g: "t1", n: 3, q: "SS-AAAAAC" }, "$2,000/month"],
-  ["ShelfPay under $500k + 2 extra stores, saved term=monthly (no x1.25)", { product: "pay", term: "monthly", g: "t1", n: 3, q: "SS-AAAAAD" }, "$2,000/month"],
-  ["ShelfPay $1M–$2M, saved term=monthly, 10% discount", { product: "pay", term: "monthly", g: "t3", n: 1, dn: "Spring", dp: 10, q: "SS-AAAAAE" }, "$3,600/month"],
   ["ShelfSpace old 'Under $500k' (t1) lands on $250k–$500k", { product: "collect", term: "annual", c: "t1", q: "SS-AAAAAF" }, "$1,500/month"],
   ["ShelfSpace oldest '<$150k' letter (a) lands on $50k–$100k", { product: "collect", term: "annual", c: "a", q: "SS-AAAAAP" }, "$750/month"],
   // Every band of both tables.
@@ -92,10 +91,6 @@ const CASES = [
   ["ShelfSpace $1M–$1.5M", { product: "collect", c: "c3", q: "SS-AAAAAK" }, "$3,500/month"],
   ["ShelfSpace $1.5M–$2M", { product: "collect", c: "c4", q: "SS-AAAAAL" }, "$4,500/month"],
   ["ShelfSpace Enterprise, saved term=annual", { product: "collect", term: "annual", c: "c5", q: "SS-AAAAAM" }, "Custom from $5,500/month"],
-  ["ShelfPay $500k–$1M", { product: "pay", g: "t2", n: 1, q: "SS-AAAAAN" }, "$2,500/month"],
-  ["ShelfPay $1M–$2M", { product: "pay", g: "t3", n: 1, q: "SS-AAAAAQ" }, "$4,000/month"],
-  ["ShelfPay $2M–$4M", { product: "pay", g: "t4", n: 1, q: "SS-AAAAAR" }, "$6,500/month"],
-  ["ShelfPay Enterprise + 3 stores, saved term=annual", { product: "pay", term: "annual", g: "t5", n: 4, q: "SS-AAAAAS" }, "Custom from $8,000/month"],
 ];
 
 console.log("# saved quote links open at the month-to-month price");
@@ -107,7 +102,7 @@ for (const [name, state, want] of CASES) {
   ok(r.summary.length > 0 && !RETIRED.test(r.summary), `${name}: copied summary has none either (${r.summary.length} chars)`);
   ok(/^Month to month/.test(r.terms), `${name}: terms line reads month to month (${JSON.stringify(r.terms)})`);
   ok(r.summary.includes("Month to month"), `${name}: copied summary says month to month`);
-  if (state.product === "pay") ok(/Credit recovery[\s\S]*20%/.test(r.list), `${name}: 20% credit-recovery line present`);
+  ok(/What you get[\s\S]*What you pay/.test(r.docValue), `${name}: the quote (and its PDF) carries the first-year value block`);
   ok(!/monthly sales monthly sales/.test(r.summary), `${name}: summary has no doubled range text`);
 }
 
@@ -119,8 +114,19 @@ ok(!RETIRED.test(blank.body), "blank form (empty state): no retired copy");
 ok(blank.termInputs === 0, `no agreement-term choice on the form (found ${blank.termInputs})`);
 const WANT_COLLECT = ["Under $50k", "$50k–$100k", "$100k–$250k", "$250k–$500k", "$500k–$1M", "$1M–$1.5M", "$1.5M–$2M", "Over $2M · Enterprise"];
 ok(JSON.stringify(blank.collectChips) === JSON.stringify(WANT_COLLECT), `ShelfSpace table = ${JSON.stringify(blank.collectChips)}`);
-const WANT_PAY = ["Under $500k", "$500k–$1M", "$1M–$2M", "$2M–$4M", "Over $4M · Enterprise"];
-ok(JSON.stringify(blank.payChips) === JSON.stringify(WANT_PAY), `ShelfPay table = ${JSON.stringify(blank.payChips)}`);
+
+// ShelfPay retired from /quote (10/27/2026): brand-only. An old ShelfPay link opens a blank brand quote.
+console.log("# ShelfPay is gone");
+ok(blank.productInputs === 0, `no ShelfPay/ShelfSpace service choice on the form (found ${blank.productInputs})`);
+ok(!/ShelfPay/.test(blank.body), "blank form: the word ShelfPay is nowhere on the page");
+const oldPay = await open({ product: "pay", name: "", g: "t2", n: 3, c: "", q: "", dn: "", dp: 0 });
+ok(oldPay.errors.length === 0 && !oldPay.shown && !/ShelfPay|stores? after the first/.test(oldPay.body), "old ShelfPay link: opens a blank brand quote, no ShelfPay copy");
+
+// The value card matches /pricing's slider: $500k a month = $301,000 a year (the published stack).
+console.log("# first-year value matches /pricing");
+const v500 = await open({ product: "collect", c: "t2", s: 500000, q: "SS-AAAAAV" });
+ok(v500.valueTotal === "$301,000", `$500k/mo value card = ${JSON.stringify(v500.valueTotal)} (want "$301,000")`);
+ok(v500.price === "$2,500/month" && /\$301,000[\s\S]*\$30,000/.test(v500.docValue), `$500k/mo quote doc: get $301,000, pay $30,000 (${JSON.stringify(v500.docValue)})`);
 
 await browser.close();
 server.close();

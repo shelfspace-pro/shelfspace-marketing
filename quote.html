@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow, noarchive">
 <title>ShelfSpace Quote</title>
-<meta name="description" content="Build a ShelfPay or ShelfSpace quote.">
+<meta name="description" content="Build a ShelfSpace quote.">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,242 +13,388 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 <style>
-  body { background: var(--green-ghost); }
-  .q-wrap { max-width: 1280px; margin: 0 auto; padding: 40px 16px 80px; }
-  .q-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: 24px; align-items: start; }
-  .q-side { position: sticky; top: 24px; }
-  @media (max-width: 960px) { .q-layout { grid-template-columns: minmax(0, 1fr); } .q-side { position: static; } }
-  .q-empty { background: var(--white); border: 1.5px dashed var(--green-accent); border-radius: 16px; padding: 48px 28px; text-align: center; color: var(--slate-600); font-size: 15px; line-height: 1.55; }
-  .q-empty strong { display: block; color: var(--green-deep); font-size: 18px; margin-bottom: 6px; }
-  .q-brand { display: inline-flex; align-items: center; gap: 10px; margin-bottom: 28px; text-decoration: none; color: var(--green-deep); font-weight: 700; font-size: 18px; }
-  .q-brand img { width: 32px; height: 32px; }
-  h1.q-title { font-size: clamp(28px, 4vw, 40px); color: var(--green-deep); letter-spacing: -0.02em; margin: 0 0 8px; }
-  .q-sub { color: var(--slate-600); font-size: 16px; margin: 0 0 28px; line-height: 1.55; }
-  .q-card { background: var(--white); border-radius: 16px; padding: 28px; box-shadow: 0 8px 32px rgba(27,67,50,0.08); border: 1px solid var(--green-light); }
-  @media (max-width: 600px) { .q-card { padding: 20px 16px; } }
-  fieldset { border: 0; margin: 0 0 28px; padding: 0; min-width: 0; }
+  /* ===== QUOTE v2 (10/27/2026) — brand-only (ShelfPay retired from this page), the pricing page's
+     "Your first year with us" value card driven by the same sales figure as the quote, 10/27 page style:
+     mint mesh + faint grid, dark rounded value card, chip CTA with a sheen. Prints as a one-page quote. ===== */
+  body { background: var(--white); }
+  .mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+  [hidden] { display: none !important; }
+
+  .q-page { position: relative; overflow-x: clip; min-height: 100vh;
+    background:
+      radial-gradient(55% 60% at 88% 8%, rgba(149,213,178,0.42) 0%, rgba(149,213,178,0) 65%),
+      radial-gradient(45% 55% at 0% 70%, rgba(64,145,108,0.13) 0%, rgba(64,145,108,0) 70%),
+      linear-gradient(180deg, var(--white) 0%, var(--green-ghost) 100%); }
+  .q-page::before { content: ""; position: absolute; inset: 0; opacity: 0.035; pointer-events: none;
+    background-image: linear-gradient(var(--green-deep) 1px, transparent 1px), linear-gradient(90deg, var(--green-deep) 1px, transparent 1px); background-size: 80px 80px; }
+  .q-wrap { position: relative; z-index: 1; max-width: 1240px; margin: 0 auto; padding: 28px 24px 96px; }
+
+  .q-bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 56px; }
+  .q-brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: var(--green-deep); font-weight: 700; font-size: 19px; letter-spacing: -0.3px; }
+  .q-brand-ic { width: 36px; height: 36px; border-radius: 11px; display: grid; place-items: center; background: linear-gradient(180deg, #2a6a50, var(--green-deep)); box-shadow: 0 6px 14px -6px rgba(27,67,50,0.6); }
+  .q-brand-ic svg { width: 20px; height: 20px; }
+  .q-pill { display: inline-flex; align-items: center; gap: 8px; padding: 7px 14px 7px 10px; border-radius: 999px; background: rgba(255,255,255,0.75); border: 1px solid var(--green-light); font-size: 12.5px; font-weight: 600; color: var(--green-dark); box-shadow: 0 6px 18px -10px rgba(27,67,50,0.35); }
+  .q-pill i { width: 8px; height: 8px; border-radius: 50%; background: var(--green-mid); box-shadow: 0 0 0 0 rgba(64,145,108,0.6); animation: qLive 2s ease-out infinite; }
+  @keyframes qLive { 0% { box-shadow: 0 0 0 0 rgba(64,145,108,0.55); } 100% { box-shadow: 0 0 0 9px rgba(64,145,108,0); } }
+
+  .q-head { max-width: 760px; margin-bottom: 40px; }
+  .q-head .section-label { margin-bottom: 14px; color: var(--green-mid); }
+  h1.q-title { font-size: clamp(40px, 5.4vw, 68px); letter-spacing: -2.5px; line-height: 1; color: var(--green-deep); margin: 0 0 18px; }
+  h1.q-title .hl { color: var(--green-mid); white-space: nowrap; }
+  .q-title .q-sub2 { display: block; font-size: 0.5em; letter-spacing: -1px; color: var(--slate-700); margin-top: 14px; }
+  .q-title .q-sub2 b { color: var(--green-deep); font-weight: 700; }
+  .q-sub { color: var(--slate-600); font-size: 18px; margin: 0; line-height: 1.5; max-width: 560px; }
+
+  .q-layout { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: 32px; align-items: start; }
+  .q-left { display: grid; gap: 24px; min-width: 0; }
+  .q-side { position: sticky; top: 24px; min-width: 0; }
+  @media (max-width: 980px) { .q-layout { grid-template-columns: minmax(0, 1fr); } .q-side { position: static; } }
+
+  /* ---- Value card (from /pricing "Your first year with us") ---- */
+  .pv-visual { position: relative; }
+  .pv-visual::before { content: ''; position: absolute; inset: -40px; background: radial-gradient(60% 60% at 55% 45%, rgba(64,145,108,0.32), rgba(64,145,108,0) 70%); filter: blur(10px); pointer-events: none; }
+  .pv-stack { position: relative; }
+  .pv-ghost { position: absolute; left: 6%; right: 6%; bottom: -10px; height: 40px; border-radius: 22px; background: linear-gradient(180deg, #2d6a4f, #1b4332); }
+  .pv-ghost--2 { left: 12%; right: 12%; bottom: -20px; background: linear-gradient(180deg, #b7e4c7, #95d5b2); }
+  .pv-card { position: relative; background: #0f2a1f; color: #e6f4ea; border-radius: 24px; padding: 26px 26px 24px; box-shadow: 0 40px 90px rgba(27,67,50,0.35), 0 0 0 1px rgba(149,213,178,0.12) inset; }
+  .pv-head { display: flex; justify-content: space-between; font-size: 11px; font-weight: 700; letter-spacing: 1.4px; text-transform: uppercase; color: var(--green-accent); margin-bottom: 18px; }
+  .pv-size { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; font-size: 13px; color: rgba(230,244,234,0.82); }
+  .pv-size output { font-size: 18px; font-weight: 700; color: #fff; }
+  .pv-range { width: 100%; margin: 10px 0 20px; accent-color: var(--green-accent); height: 22px; cursor: pointer; }
+  .pv-row { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 10px; }
+  .pv-lab { font-size: 14px; font-weight: 700; color: #fff; }
+  .pv-big { font-size: clamp(30px, 3.6vw, 46px); font-weight: 700; color: var(--green-accent); letter-spacing: -1px; }
+  .pv-bar { display: flex; height: 46px; border-radius: 12px; overflow: hidden; background: rgba(255,255,255,0.06); }
+  .pv-bar i { display: block; height: 100%; width: 0; background: var(--c); transition: width 0.9s cubic-bezier(0.22,1,0.36,1) var(--d); box-shadow: inset -2px 0 0 rgba(15,42,31,0.6); }
+  .pv-card.go .pv-bar i { width: var(--w); }
+  .pv-legend { list-style: none; margin: 14px 0 22px; padding: 0; display: grid; gap: 8px; }
+  .pv-legend li { display: grid; grid-template-columns: 12px 1fr auto; gap: 10px; align-items: center; font-size: 13px; opacity: 0; transform: translateX(-8px); transition: all .5s var(--d); }
+  .pv-card.go .pv-legend li { opacity: 1; transform: none; }
+  .pv-legend .dot { width: 12px; height: 12px; border-radius: 4px; background: var(--c); }
+  .pv-legend .lbl { color: rgba(230,244,234,0.82); }
+  .pv-legend b { font-size: 13px; color: #fff; }
+  .pv-row--pay { padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.08); }
+  .pv-frac { font-size: 15px; font-weight: 700; color: #fcd34d; }
+  .pv-bar--pay { position: relative; height: 34px; overflow: visible; background: rgba(255,255,255,0.04); }
+  .pv-bar--pay i { position: absolute; left: 0; top: 0; bottom: 0; width: 0; border-radius: 10px; background: #fcd34d; transition: width .8s cubic-bezier(0.22,1,0.36,1) .4s; box-shadow: none; }
+  .pv-card.go .pv-bar--pay i { width: var(--pw, 7%); }
+  .pv-cover { position: absolute; left: calc(var(--pw, 7%) + 12px); top: 50%; transform: translateY(-50%); font-size: 12.5px; color: rgba(230,244,234,0.75); white-space: nowrap; opacity: 0; transition: opacity .5s .9s, left .8s cubic-bezier(0.22,1,0.36,1) .4s; }
+  .pv-cover::before { content: '← '; color: #fcd34d; }
+  .pv-card.go .pv-cover { opacity: 1; }
+  .pv-mult { margin-top: 18px; display: flex; align-items: center; gap: 14px; padding: 14px 16px; border-radius: 14px; background: rgba(149,213,178,0.12); border: 1px solid rgba(149,213,178,0.4); }
+  .pv-mult .pv-mult-n { flex: none; font-size: 26px; font-weight: 700; color: var(--green-accent); letter-spacing: -0.5px; }
+  .pv-mult b { display: block; font-size: 14px; color: #fff; }
+  .pv-mult span { font-size: 12px; color: rgba(230,244,234,0.65); }
+  .pv-cap { margin: 34px 0 0; text-align: center; font-size: 12px; color: var(--slate-500); }
+
+  .stack-more summary { list-style: none; display: flex; align-items: center; gap: 8px; cursor: pointer; font-weight: 700; }
+  .stack-more summary::-webkit-details-marker { display: none; }
+  .stack-more summary svg { width: 16px; height: 16px; transition: transform .25s; }
+  .stack-more[open] summary svg { transform: rotate(180deg); }
+  .pv-more { margin: -8px 0 18px; border-radius: 12px; background: rgba(255,255,255,0.04); }
+  .pv-more summary { padding: 11px 14px; font-size: 13.5px; color: var(--green-accent); border-radius: 12px; }
+  .pv-more summary:hover { background: rgba(255,255,255,0.06); }
+  .pv-more[open] summary { border-bottom: 1px solid rgba(255,255,255,0.08); border-radius: 12px 12px 0 0; }
+  .stack-cols { display: flex; justify-content: space-between; padding: 12px 14px 0; font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: rgba(230,244,234,0.5); }
+  .stack-list { list-style: none; margin: 0; padding: 0 14px 6px; }
+  .stack-list li { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.08); }
+  .stack-list li:last-child { border-bottom: 0; }
+  .stack-item { display: flex; gap: 12px; align-items: flex-start; }
+  .stack-item svg { flex: none; width: 18px; height: 18px; margin-top: 2px; color: var(--green-accent); }
+  .stack-item b { display: block; font-size: 14px; font-weight: 600; color: #fff; line-height: 1.4; }
+  .stack-item span { display: block; font-size: 12.5px; color: rgba(230,244,234,0.7); line-height: 1.5; margin-top: 2px; }
+  .stack-val { flex: none; font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-size: 14px; font-weight: 700; color: #fff; text-align: right; white-space: nowrap; }
+  .stack-val small { display: block; font-size: 11px; font-weight: 400; color: rgba(230,244,234,0.5); }
+
+  /* ---- Form card ---- */
+  .q-card { background: rgba(255,255,255,0.92); border-radius: 24px; padding: 28px; box-shadow: 0 24px 60px -30px rgba(27,67,50,0.35), 0 2px 8px rgba(27,67,50,0.05); border: 1px solid var(--green-light); }
+  fieldset { border: 0; margin: 0 0 26px; padding: 0; min-width: 0; }
+  fieldset:last-child { margin-bottom: 0; }
   legend { display: flex; align-items: center; gap: 10px; font-size: 16px; font-weight: 700; color: var(--green-deep); margin-bottom: 12px; padding: 0; }
-  legend .step { display: inline-flex; width: 26px; height: 26px; border-radius: 50%; background: var(--green-deep); color: var(--white); font-size: 13px; align-items: center; justify-content: center; font-family: var(--font-mono); }
-  .opts { display: grid; gap: 10px; }
-  .opts-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  @media (max-width: 600px) { .opts-2 { grid-template-columns: minmax(0, 1fr); } }
-  .opt { position: relative; display: block; cursor: pointer; }
-  .opt input { position: absolute; opacity: 0; pointer-events: none; }
-  .opt .box { display: flex; gap: 12px; align-items: flex-start; border: 1.5px solid var(--slate-200); border-radius: 12px; padding: 14px 16px; background: var(--white); transition: border-color .15s, background .15s, box-shadow .15s; height: 100%; box-sizing: border-box; }
-  .opt .dot { flex: 0 0 18px; height: 18px; border-radius: 50%; border: 2px solid var(--slate-400); margin-top: 2px; box-sizing: border-box; }
-  .opt .t { display: block; font-weight: 600; color: var(--slate-800); font-size: 15px; }
-  .opt .d { display: block; color: var(--slate-500); font-size: 13px; margin-top: 2px; line-height: 1.4; }
-  .opt:hover .box { border-color: var(--green-accent); }
-  .opt input:checked + .box { border-color: var(--green-mid); background: var(--green-ghost); box-shadow: 0 2px 10px rgba(27,67,50,0.1); }
-  .opt input:checked + .box .dot { border-color: var(--green-deep); border-width: 5px; }
-  .opt input:focus-visible + .box { box-shadow: 0 0 0 3px rgba(27,67,50,0.2); }
+  legend .step { display: inline-flex; width: 28px; height: 28px; border-radius: 9px; background: linear-gradient(180deg, #2a6a50, var(--green-deep)); color: var(--white); font-size: 13px; align-items: center; justify-content: center; font-family: var(--font-mono); box-shadow: 0 4px 10px -4px rgba(27,67,50,0.5); }
   .chips { display: flex; flex-wrap: wrap; gap: 8px; }
   .chip { position: relative; cursor: pointer; }
   .chip input { position: absolute; opacity: 0; pointer-events: none; }
   .chip span { display: inline-block; border: 1.5px solid var(--slate-200); border-radius: 12px; padding: 9px 14px; font-size: 14px; font-weight: 500; color: var(--slate-700); background: var(--white); font-variant-numeric: tabular-nums; transition: all .15s; }
-  .chip:hover span { border-color: var(--green-accent); }
-  .chip input:checked + span { background: var(--green-deep); border-color: var(--green-deep); color: var(--white); }
+  .chip:hover span { border-color: var(--green-accent); background: var(--green-ghost); }
+  .chip input:checked + span { background: linear-gradient(180deg, #2a6a50, var(--green-deep)); border-color: var(--green-deep); color: var(--white); box-shadow: 0 8px 18px -8px rgba(27,67,50,0.6); }
   .chip input:focus-visible + span { box-shadow: 0 0 0 3px rgba(27,67,50,0.2); }
-  .stepper { display: inline-flex; align-items: center; gap: 4px; border: 1.5px solid var(--slate-200); border-radius: 12px; background: var(--white); padding: 4px; }
-  .stepper button { width: 38px; height: 38px; border: 0; border-radius: 10px; background: var(--green-ghost); color: var(--green-deep); font: inherit; font-size: 20px; font-weight: 600; cursor: pointer; }
-  .stepper button:disabled { opacity: 0.35; cursor: default; }
-  .stepper span { min-width: 44px; text-align: center; font-size: 16px; font-weight: 600; font-variant-numeric: tabular-nums; color: var(--slate-800); }
-  .store { border: 1.5px solid var(--slate-100); border-radius: 12px; padding: 14px; margin-bottom: 10px; background: var(--slate-50); }
-  .store.err { border-color: #e5a4a4; background: #fdf5f5; }
-  .store-top { display: flex; gap: 8px; align-items: center; margin-bottom: 10px; }
-  .store-top .q-input { flex: 1; }
-  .store-sub { font-size: 12px; font-weight: 600; color: var(--slate-500); text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 8px; }
   .q-input { width: 100%; box-sizing: border-box; border: 1.5px solid var(--slate-200); border-radius: 12px; padding: 11px 14px; font: inherit; font-size: 15px; color: var(--slate-800); background: var(--white); }
   .q-input:focus { outline: none; border-color: var(--green-mid); box-shadow: 0 0 0 3px rgba(27,67,50,0.12); }
-  .x { flex: 0 0 auto; border: 1.5px solid var(--slate-200); border-radius: 12px; background: var(--white); color: var(--slate-500); cursor: pointer; font: inherit; font-size: 13px; font-weight: 600; padding: 11px 12px; text-transform: none; letter-spacing: normal; }
-  .x:hover { border-color: var(--green-accent); color: var(--green-deep); }
-  .add { border: 1.5px dashed var(--green-accent); background: var(--green-ghost); color: var(--green-deep); border-radius: 12px; padding: 11px 14px; font: inherit; font-size: 14px; font-weight: 600; cursor: pointer; width: 100%; text-transform: none; letter-spacing: normal; }
   .disc { display: grid; grid-template-columns: minmax(0, 1fr) 120px; gap: 8px; }
   .pct { position: relative; }
-  .pct .q-input { padding-right: 32px; text-align: right; font-variant-numeric: tabular-nums; }
+  .pct .q-input { padding-right: 32px; text-align: right; font-variant-numeric: tabular-nums; -moz-appearance: textfield; }
   .pct .q-input::-webkit-inner-spin-button, .pct .q-input::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
-  .pct .q-input { -moz-appearance: textfield; }
   .pct::after { content: "%"; position: absolute; right: 14px; top: 50%; transform: translateY(-50%); color: var(--slate-500); font-size: 15px; pointer-events: none; }
   .help { font-size: 13px; color: var(--slate-500); margin: 8px 0 0; line-height: 1.5; }
-  .err-msg { color: #b42318; font-size: 13px; font-weight: 600; margin-top: 8px; }
-  .gen { width: 100%; justify-content: center; }
-  .q-doc { background: var(--white); border-radius: 16px; box-shadow: 0 8px 32px rgba(27,67,50,0.1); border: 1px solid var(--green-light); overflow: hidden; }
-  .qd { padding: 28px 32px; }
-  @media (max-width: 600px) { .qd { padding: 22px 18px; } }
-  .qd-top { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; }
-  .qd-eyebrow { font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--green-mid); }
-  .qd-meta { font-family: var(--font-mono); font-size: 12px; color: var(--slate-400); font-variant-numeric: tabular-nums; }
-  .qd-name { margin: 6px 0 0; font-size: 22px; font-weight: 700; color: var(--slate-800); letter-spacing: -0.01em; }
-  .qd-hero { margin: 24px 0 0; }
-  .qd-price { font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-size: clamp(40px, 5vw, 52px); font-weight: 700; color: var(--green-deep); line-height: 1; letter-spacing: -0.02em; }
-  .qd-price small { font-family: var(--font-display); font-size: 16px; font-weight: 500; color: var(--slate-500); letter-spacing: 0; margin-left: 4px; }
-  .qd-terms { margin-top: 10px; font-size: 14px; color: var(--slate-600); }
-  .qd-list { margin-top: 28px; }
+
+  /* ---- Quote document (also the PDF) ---- */
+  .q-empty { background: rgba(255,255,255,0.8); border: 1.5px dashed var(--green-accent); border-radius: 24px; padding: 56px 28px; text-align: center; color: var(--slate-600); font-size: 15px; line-height: 1.55; }
+  .q-empty strong { display: block; color: var(--green-deep); font-size: 18px; margin-bottom: 6px; }
+  .q-doc { position: relative; background: var(--white); border-radius: 24px; box-shadow: 0 40px 90px -40px rgba(27,67,50,0.45), 0 2px 8px rgba(27,67,50,0.06); border: 1px solid var(--green-light); overflow: hidden; }
+  .qd-band { position: relative; overflow: hidden; background: linear-gradient(150deg, #1b4332 0%, #0f2a1f 100%); color: #e6f4ea; padding: 22px 32px 26px; }
+  .qd-band::after { content: ""; position: absolute; right: -60px; top: -80px; width: 260px; height: 260px; border-radius: 50%; background: radial-gradient(circle, rgba(149,213,178,0.28), rgba(149,213,178,0) 70%); pointer-events: none; }
+  .qd-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .qd-logo { display: inline-flex; align-items: center; gap: 8px; font-weight: 700; font-size: 15px; color: #fff; }
+  .qd-logo span.ic { width: 26px; height: 26px; border-radius: 8px; display: grid; place-items: center; background: var(--green-accent); }
+  .qd-logo span.ic svg { width: 15px; height: 15px; }
+  .qd-meta { font-family: var(--font-mono); font-size: 12px; color: rgba(230,244,234,0.6); font-variant-numeric: tabular-nums; }
+  .qd-eyebrow { margin-top: 22px; font-size: 11px; font-weight: 700; letter-spacing: 1.4px; text-transform: uppercase; color: var(--green-accent); }
+  .qd-name { margin: 6px 0 0; font-size: 24px; font-weight: 700; color: #fff; letter-spacing: -0.3px; }
+  .qd-hero { margin: 18px 0 0; position: relative; z-index: 1; }
+  .qd-price { font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-size: clamp(40px, 5vw, 54px); font-weight: 700; color: var(--green-accent); line-height: 1; letter-spacing: -1.5px; }
+  .qd-price small { font-family: var(--font-display); font-size: 16px; font-weight: 500; color: rgba(230,244,234,0.7); letter-spacing: 0; margin-left: 4px; }
+  .qd-terms { margin-top: 10px; font-size: 14px; color: rgba(230,244,234,0.75); }
+  .qd { padding: 24px 32px 28px; }
+  .qd-value { border-radius: 16px; background: var(--green-ghost); border: 1px solid var(--green-light); padding: 16px 18px; }
+  .qd-vhead { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; font-size: 11px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: var(--green-dark); margin-bottom: 10px; }
+  .qd-vhead span:last-child { font-family: var(--font-mono); letter-spacing: 0; text-transform: none; font-weight: 400; color: var(--slate-500); }
+  .qd-vbar { display: flex; height: 12px; border-radius: 6px; overflow: hidden; background: var(--slate-100); margin-bottom: 10px; }
+  .qd-vbar i { display: block; height: 100%; }
+  .qd-vrow { display: grid; grid-template-columns: 10px 1fr auto; gap: 10px; align-items: center; font-size: 13.5px; padding: 4px 0; color: var(--slate-700); }
+  .qd-vrow .dot { width: 10px; height: 10px; border-radius: 3px; }
+  .qd-vrow b, .qd-vtot b { font-family: var(--font-mono); font-variant-numeric: tabular-nums; color: var(--slate-800); }
+  .qd-vtot { display: flex; justify-content: space-between; gap: 12px; padding-top: 8px; margin-top: 6px; border-top: 1px solid var(--green-light); font-size: 14px; font-weight: 700; color: var(--green-deep); }
+  .qd-vtot b { color: var(--green-deep); }
+  .qd-vtot.pay b { color: #a16207; }
+  .qd-list { margin-top: 18px; }
   .qd-row { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding: 11px 0; border-top: 1px solid var(--slate-100); font-size: 15px; }
   .qd-row:first-child { border-top: 0; }
-  .qd-row .n { color: var(--slate-800); font-weight: 500; min-width: 0; }
-  .qd-row .n span { color: var(--slate-400); font-weight: 400; font-size: 13px; margin-left: 8px; white-space: nowrap; }
+  .qd-row .n { flex: 1 1 auto; color: var(--slate-800); font-weight: 500; min-width: 0; }
+  .qd-row .n span { color: var(--slate-400); font-weight: 400; font-size: 13px; margin-left: 8px; }
   .qd-row .a { font-family: var(--font-mono); font-variant-numeric: tabular-nums; color: var(--slate-800); white-space: nowrap; }
   .qd-row .a s { color: var(--slate-400); margin-right: 8px; font-size: 13px; }
-  .qd-row .n { flex: 1 1 auto; }
-  @media (max-width: 640px) { .qd-row .n span { display: block; margin-left: 0; margin-top: 2px; white-space: normal; } .qd-row .a { align-self: flex-start; } }
   .qd-row.total { border-top: 1.5px solid var(--slate-200); font-weight: 700; }
   .qd-row.total .n, .qd-row.total .a { color: var(--green-deep); font-weight: 700; }
-  .qd-fine { margin-top: 20px; font-size: 12px; color: var(--slate-500); line-height: 1.6; }
+  .qd-fine { margin-top: 16px; font-size: 12px; color: var(--slate-500); line-height: 1.6; }
   .qd-fine p { margin: 0 0 4px; }
-  .qd-actions { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; padding: 0 32px 28px; }
-  @media (max-width: 600px) { .qd-actions { padding: 0 18px 22px; } }
-  .qd-go { background: var(--green-deep); color: var(--white); border-radius: 12px; padding: 12px 22px; font-size: 15px; font-weight: 600; text-decoration: none; }
-  .qd-go:hover { background: var(--green-dark); }
+  .qd-actions { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; padding: 0 32px 30px; }
+  .qd-go { position: relative; overflow: hidden; display: inline-flex; align-items: center; justify-content: space-between; gap: 28px; min-height: 60px; padding: 6px 6px 6px 24px; box-sizing: border-box;
+    border-radius: 18px; font-size: 17px; font-weight: 700; letter-spacing: -0.2px; color: var(--white); text-decoration: none;
+    background: linear-gradient(180deg, #2a6a50 0%, var(--green-deep) 55%, #143528 100%);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.18), inset 0 -2px 0 rgba(0,0,0,0.18), 0 16px 32px -12px rgba(27,67,50,0.6), 0 2px 6px rgba(27,67,50,0.2); transition: transform .15s; }
+  .qd-go:hover { transform: translateY(-2px); }
+  .qd-go svg { width: 48px; height: 48px; padding: 14px; box-sizing: border-box; border-radius: 14px; flex: none; background: var(--green-accent); color: var(--green-deep); }
+  .qd-go::after { content: ""; position: absolute; top: 0; bottom: 0; left: -60%; width: 40%; pointer-events: none;
+    background: linear-gradient(100deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.22) 50%, rgba(255,255,255,0) 100%); transform: skewX(-20deg); animation: qSheen 4.5s ease-in-out 1.6s infinite; }
+  @keyframes qSheen { 0% { left: -60%; } 30%, 100% { left: 130%; } }
   .qd-links { display: flex; gap: 16px; flex-wrap: wrap; }
-  .qd-links button { background: none; border: 0; padding: 0; font: inherit; font-size: 14px; font-weight: 600; color: var(--green-mid); cursor: pointer; text-transform: none; letter-spacing: normal; }
+  .qd-links button { display: inline-flex; align-items: center; gap: 6px; background: none; border: 0; padding: 0; font: inherit; font-size: 14px; font-weight: 600; color: var(--green-mid); cursor: pointer; text-transform: none; letter-spacing: normal; }
+  .qd-links button svg { width: 15px; height: 15px; }
   .qd-links button:hover { color: var(--green-deep); text-decoration: underline; }
-  .toast { position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%) translateY(20px); background: var(--green-deep); color: var(--white); padding: 12px 18px; border-radius: 12px; font-size: 14px; font-weight: 600; box-shadow: 0 8px 32px rgba(27,67,50,0.3); opacity: 0; transition: all .2s; pointer-events: none; }
+  .qd-print-foot { display: none; }
+
+  .toast { position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%) translateY(20px); background: var(--white); color: var(--green-deep); border: 1px solid var(--green-light); padding: 12px 18px; border-radius: 14px; font-size: 14px; font-weight: 600; box-shadow: 0 16px 40px -12px rgba(27,67,50,0.45); opacity: 0; transition: all .2s; pointer-events: none; z-index: 10; }
   .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
-  [hidden] { display: none !important; }
+
+  @media (max-width: 640px) {
+    .q-wrap { padding: 20px 16px 72px; }
+    .q-bar { margin-bottom: 36px; }
+    h1.q-title { font-size: clamp(42px, 12vw, 52px); letter-spacing: -2.2px; line-height: 0.98; }
+    .q-title .q-sub2 { font-size: 0.48em; letter-spacing: -0.6px; }
+    .q-sub { font-size: 17px; }
+    .pv-card { padding: 20px 16px; border-radius: 22px; }
+    .pv-cover { font-size: 11px; }
+    .pv-legend li { font-size: 12px; }
+    .stack-item svg { display: none; }
+    .q-card { padding: 22px 16px; border-radius: 22px; }
+    .qd-band, .qd { padding-left: 18px; padding-right: 18px; }
+    .qd-actions { padding: 0 18px 24px; }
+    .qd-go { width: 100%; min-height: 58px; }
+    .qd-go svg { width: 44px; height: 44px; padding: 13px; border-radius: 13px; }
+    .qd-row .n span { display: block; margin-left: 0; margin-top: 2px; }
+    .disc { grid-template-columns: minmax(0, 1fr) 96px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .qd-go::after, .q-pill i { animation: none; }
+    .pv-bar i, .pv-legend li, .pv-cover, .pv-bar--pay i { transition: none !important; }
+  }
+
   @media print {
-    @page { margin: 0.5in; }
-    body { background: #fff; }
+    @page { margin: 0.45in; }
+    * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    body, .q-page { background: #fff !important; }
+    .q-page::before { display: none; }
     .no-print { display: none !important; }
     .q-wrap { padding: 0; max-width: none; }
     .q-layout { display: block; }
     .q-side { position: static; }
-    .q-doc { margin: 0; box-shadow: none; border: 1px solid var(--slate-200); }
+    .q-doc { margin: 0; box-shadow: none; border: 1px solid var(--slate-200); border-radius: 16px; }
+    .qd-band { padding: 20px 28px 22px; }
+    .qd { padding: 20px 28px 22px; }
+    .qd-row { padding: 8px 0; font-size: 14px; }
+    .qd-print-foot { display: block; margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--slate-100); font-size: 11.5px; color: var(--slate-500); }
+    .qd-print-foot b { color: var(--green-deep); }
   }
 </style>
 </head>
 <body>
+<div class="q-page">
 <div class="q-wrap">
-  <a class="q-brand no-print" href="/"><img src="/favicon.svg" alt="">ShelfSpace</a>
-  <div class="no-print">
-    <h1 class="q-title">Build your quote</h1>
-    <p class="q-sub">Answer a few questions and watch your quote update. Pricing is based on monthly sales, never on how many invoices or payments you run.</p>
+  <div class="q-bar no-print">
+    <a class="q-brand" href="/"><span class="q-brand-ic"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></span>ShelfSpace</a>
+    <span class="q-pill"><i></i>Live quote</span>
+  </div>
+
+  <div class="q-head no-print">
+    <div class="section-label">Your quote</div>
+    <h1 class="q-title">Worth <span class="hl mono" data-v="total">$301,000</span> a year. <span class="q-sub2" id="q-pay-line">You pay a fraction.</span></h1>
+    <p class="q-sub">Pricing is based on your monthly wholesale sales, never on how many invoices or payments you run.</p>
   </div>
 
   <div class="q-layout">
-  <form class="q-card no-print" id="form" novalidate>
-    <fieldset>
-      <legend><span class="step">1</span>Which service?</legend>
-      <div class="opts opts-2">
-        <label class="opt"><input type="radio" name="product" value="pay" checked><span class="box"><span class="dot"></span><span><span class="t">ShelfPay</span><span class="d">For dispensaries. We pay your vendors, verify every invoice, and recover the credits vendors owe you.</span></span></span></label>
-        <label class="opt"><input type="radio" name="product" value="collect"><span class="box"><span class="dot"></span><span><span class="t">ShelfSpace</span><span class="d">For brands. We send your invoices, follow up, and collect what dispensaries owe you.</span></span></span></label>
+  <div class="q-left no-print">
+    <div class="pv-visual" aria-label="Chart: first-year value compared with the fee">
+      <div class="pv-stack">
+      <span class="pv-ghost pv-ghost--2" aria-hidden="true"></span><span class="pv-ghost" aria-hidden="true"></span>
+      <div class="pv-card" id="pv-card">
+        <div class="pv-head"><span>Your first year with us</span></div>
+        <div class="pv-size"><label for="pv-sales">Your monthly wholesale sales</label><output class="mono" for="pv-sales" data-v="sales">$500k</output></div>
+        <input type="range" id="pv-sales" class="pv-range" min="0" max="18" step="1" value="9" aria-valuetext="$500k a month">
+        <div class="pv-row"><div class="pv-lab">What you get</div><div class="pv-big mono" id="pv-count" data-v="total">$301,000</div></div>
+        <div class="pv-bar"><i style="--w:39.87%;--c:#95d5b2;--d:0.30s"></i><i style="--w:32.19%;--c:#52b788;--d:0.65s"></i><i style="--w:27.94%;--c:#40916c;--d:1.00s"></i></div>
+        <ul class="pv-legend"><li style="--c:#95d5b2;--d:0.30s"><span class="dot"></span><span class="lbl">Sales your reps add back</span><b class="mono" data-v="g1">$120,000</b></li><li style="--c:#52b788;--d:0.65s"><span class="dot"></span><span class="lbl">Bad debt avoided + cash sooner</span><b class="mono" data-v="g2">$96,900</b></li><li style="--c:#40916c;--d:1.00s"><span class="dot"></span><span class="lbl">AR desk run for you + setup</span><b class="mono" data-v="g3">$84,100</b></li></ul>
+        <details class="stack-more pv-more">
+          <summary>See the full breakdown <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></summary>
+          <div class="stack-cols"><span>What we do</span><span>Worth a month</span></div>
+          <ul class="stack-list">
+            <li><div class="stack-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>Your reps back to selling</b><span>The 10+ hours a week they spend chasing checks goes back into selling. Just 2% more sales is real money.</span></div></div><div class="stack-val"><span data-v="reps">$10,000</span><small>added sales</small></div></li>
+            <li><div class="stack-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>Cash in the bank, sooner</b><span>Stores pay you about 15 days faster. That frees about <i data-v="freed" style="font-style:normal">$246,000</i> you no longer have to borrow, worth 15% a year at cannabis lending rates.</span></div></div><div class="stack-val"><span data-v="cash">$3,075</span></div></li>
+            <li><div class="stack-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>Bad debt you stop writing off</b><span>Every past-due store worked until it pays, with 0% installment plans for the slow ones. About 1% of sales.</span></div></div><div class="stack-val"><span data-v="bad">$5,000</span></div></li>
+            <li><div class="stack-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>Follow-up on a steady schedule, in your name</b><span>Every past-due store, worked oldest first. Replaces the AR clerk hours a brand your size needs.</span></div></div><div class="stack-val"><span data-v="clerk">$4,500</span></div></li>
+            <li><div class="stack-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>Every invoice sent with a one-click Pay Now link</b><span>Stores pay from the email. No login, no processor in the middle.</span></div></div><div class="stack-val"><span data-v="paynow">$500</span></div></li>
+            <li><div class="stack-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>Store replies handled for you</b><span>"Send me the invoice again," "we paid that," "can we split it": answered fast.</span></div></div><div class="stack-val"><span data-v="replies">$750</span></div></li>
+            <li><div class="stack-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>A weekly "who owes what" list for every sales rep</b><span>Your reps walk into each store knowing exactly what's open.</span></div></div><div class="stack-val"><span data-v="replist">$300</span></div></li>
+            <li><div class="stack-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>QuickBooks kept current</b><span>Payments recorded as they land. Your bookkeeper stops chasing deposits.</span></div></div><div class="stack-val"><span data-v="qbo">$750</span></div></li>
+            <li><div class="stack-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>Setup, done by us</b><span>Open invoices and customers loaded, every past-due store contacted. Included for every client.</span></div></div><div class="stack-val"><span data-v="setup">$2,500</span><small>at the start</small></div></li>
+          </ul>
+        </details>
+        <div class="pv-row pv-row--pay"><div class="pv-lab">What you pay</div><div class="pv-frac mono" id="pv-pay">A fraction</div></div>
+        <div class="pv-bar pv-bar--pay" id="pv-paybar"><i></i><span class="pv-cover">Covered by what we collect</span></div>
+        <div class="pv-mult" id="pv-mult" hidden><span class="pv-mult-n mono" id="pv-mult-n"></span><div><b>In value for every $1 you pay</b><span>Plus our guarantee: 25% of your past-due collected in month one, or that month is free.</span></div></div>
       </div>
-    </fieldset>
-
-    <fieldset id="pay-fs">
-      <legend><span class="step">2</span>Your monthly sales and stores</legend>
-      <div class="store-sub">Monthly sales, all stores combined</div>
-      <div class="chips" id="pay-chips"></div>
-      <div class="store-sub" style="margin-top:16px">Number of stores</div>
-      <div class="stepper"><button type="button" id="st-minus" aria-label="Fewer stores">&minus;</button><span id="st-n">1</span><button type="button" id="st-plus" aria-label="More stores">+</button></div>
-      <p class="help">One price for your sales, plus a flat monthly fee for each store after the first.</p>
-    </fieldset>
-
-    <fieldset id="collect-fs" hidden>
-      <legend><span class="step">2</span>Your monthly wholesale sales</legend>
-      <div class="chips" id="collect-chips"></div>
-      <p class="help">What you invoice dispensaries in a typical month.</p>
-    </fieldset>
-
-    <fieldset>
-      <legend><span class="step">3</span>Business name</legend>
-      <input class="q-input" id="bizname" maxlength="80" placeholder="Business name (optional)" autocomplete="organization">
-    </fieldset>
-
-    <fieldset>
-      <legend><span class="step">4</span>Discount</legend>
-      <div class="disc">
-        <input class="q-input" id="disc-name" maxlength="60" placeholder="Discount name (optional)" autocomplete="off">
-        <span class="pct"><input class="q-input" id="disc-pct" type="number" inputmode="decimal" min="0" max="100" step="0.5" placeholder="0" aria-label="Discount percent"></span>
       </div>
-      <p class="help">Comes off the monthly rate. Leave at 0 for list price.</p>
-    </fieldset>
+      <p class="pv-cap">Estimates for a brand your size. Move the slider to match your sales.</p>
+    </div>
 
-  </form>
+    <form class="q-card" id="form" novalidate>
+      <fieldset>
+        <legend><span class="step">1</span>Your monthly wholesale sales</legend>
+        <div class="chips" id="collect-chips"></div>
+        <p class="help">What you invoice dispensaries in a typical month.</p>
+      </fieldset>
+      <fieldset>
+        <legend><span class="step">2</span>Business name</legend>
+        <input class="q-input" id="bizname" maxlength="80" placeholder="Business name (optional)" autocomplete="organization">
+      </fieldset>
+      <fieldset>
+        <legend><span class="step">3</span>Discount</legend>
+        <div class="disc">
+          <input class="q-input" id="disc-name" maxlength="60" placeholder="Discount name (optional)" autocomplete="off">
+          <span class="pct"><input class="q-input" id="disc-pct" type="number" inputmode="decimal" min="0" max="100" step="0.5" placeholder="0" aria-label="Discount percent"></span>
+        </div>
+        <p class="help">Comes off the monthly rate. Leave at 0 for list price.</p>
+      </fieldset>
+    </form>
+  </div>
 
   <div class="q-side">
-  <div class="q-empty no-print" id="q-empty"><strong>Your quote appears here</strong>Pick your monthly sales and number of stores, and the quote updates as you go.</div>
+    <div class="q-empty no-print" id="q-empty"><strong>Your quote appears here</strong>Pick your monthly wholesale sales and the quote updates as you go.</div>
 
-  <div class="q-doc" id="quote" hidden>
-    <div class="qd">
-      <div class="qd-top"><div class="qd-eyebrow" id="qd-eyebrow">ShelfPay quote</div><div class="qd-meta" id="qd-meta"></div></div>
-      <h2 class="qd-name" id="qd-name"></h2>
-      <div class="qd-hero">
-        <div class="qd-price" id="qd-price"></div>
-        <div class="qd-terms" id="qd-terms"></div>
+    <div class="q-doc" id="quote" hidden>
+      <div class="qd-band">
+        <div class="qd-top">
+          <span class="qd-logo"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#1b4332" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></span>ShelfSpace</span>
+          <span class="qd-meta" id="qd-meta"></span>
+        </div>
+        <div class="qd-eyebrow" id="qd-eyebrow">ShelfSpace quote</div>
+        <h2 class="qd-name" id="qd-name"></h2>
+        <div class="qd-hero">
+          <div class="qd-price" id="qd-price"></div>
+          <div class="qd-terms" id="qd-terms"></div>
+        </div>
       </div>
-      <div class="qd-list" id="qd-list"></div>
-      <div class="qd-fine" id="qd-fine"></div>
-    </div>
-    <div class="qd-actions no-print">
-      <a class="qd-go" href="/contact?cta=quote-body">Schedule a call</a>
-      <div class="qd-links">
-        <button type="button" id="print">Save as PDF</button>
-        <button type="button" id="copy-link">Copy link</button>
-        <button type="button" id="copy-text">Copy summary</button>
+      <div class="qd">
+        <div class="qd-value" id="qd-value"></div>
+        <div class="qd-list" id="qd-list"></div>
+        <div class="qd-fine" id="qd-fine"></div>
+        <div class="qd-print-foot"><b>ShelfSpace</b> · shelfspace.pro · chris@shelfspace.pro</div>
+      </div>
+      <div class="qd-actions no-print">
+        <a class="qd-go" href="/contact?cta=quote-body">Schedule a call <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        <div class="qd-links">
+          <button type="button" id="print"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Save as PDF</button>
+          <button type="button" id="copy-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>Copy link</button>
+          <button type="button" id="copy-text"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copy summary</button>
+        </div>
       </div>
     </div>
   </div>
   </div>
-  </div>
+</div>
 </div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
 (function () {
   // ---- Rates (whole dollars) -------------------------------------------------
-  // ShelfPay: the GROUP's combined monthly sales, plus a flat fee per extra store.
-  // Each range is twice the size of the one before; over $4M is Enterprise.
-  var RANGES = [
-    { id: "t1", label: "Under $500k",  rep: 300000,  max: 500000,  rate: 1500 },
-    { id: "t2", label: "$500k–$1M",    rep: 750000,  max: 1000000, rate: 2500 },
-    { id: "t3", label: "$1M–$2M",      rep: 1500000, max: 2000000, rate: 4000 },
-    { id: "t4", label: "$2M–$4M",      rep: 3000000, max: 4000000, rate: 6500 },
-    { id: "t5", label: "Over $4M · Enterprise", rep: 5000000, max: Infinity, custom: true, from: 8000, over: "$4M" }
-  ];
-  // ShelfSpace: the brand's monthly wholesale sales; over $2M is Enterprise (10/20/2026).
+  // ShelfSpace (brands) only since 10/27/2026: the ShelfPay side is retired from this page. Old
+  // ShelfPay links (product "pay") open as a blank ShelfSpace quote. Fence: npm run check:quote.
+  // The brand's monthly wholesale sales; over $2M is Enterprise (10/20/2026).
   // Older links carrying "t1" (the old "Under $500k" range) land on $250k–$500k, the same price.
+  // Each band's `s` = where the value slider lands when the band is picked.
   var COLLECT_RANGES = [
-    { id: "s0", label: "Under $50k",   rep: 30000,   max: 50000,   rate: 399 },
-    { id: "c0", label: "$50k–$100k",   rep: 75000,   max: 100000,  rate: 750 },
-    { id: "c1", label: "$100k–$250k",  rep: 175000,  max: 250000,  rate: 1000 },
-    { id: "c2", label: "$250k–$500k",  rep: 375000,  max: 500000,  rate: 1500 },
-    { id: "t2", label: "$500k–$1M",    rep: 750000,  max: 1000000, rate: 2500 },
-    { id: "c3", label: "$1M–$1.5M",    rep: 1250000, max: 1500000, rate: 3500 },
-    { id: "c4", label: "$1.5M–$2M",    rep: 1750000, max: 2000000, rate: 4500 },
-    { id: "c5", label: "Over $2M · Enterprise", rep: 2500000, max: Infinity, custom: true, from: 5500, over: "$2M" }
+    { id: "s0", label: "Under $50k",   rep: 30000,   max: 50000,   rate: 399, s: 25000 },
+    { id: "c0", label: "$50k–$100k",   rep: 75000,   max: 100000,  rate: 750, s: 75000 },
+    { id: "c1", label: "$100k–$250k",  rep: 175000,  max: 250000,  rate: 1000, s: 150000 },
+    { id: "c2", label: "$250k–$500k",  rep: 375000,  max: 500000,  rate: 1500, s: 300000 },
+    { id: "t2", label: "$500k–$1M",    rep: 750000,  max: 1000000, rate: 2500, s: 750000 },
+    { id: "c3", label: "$1M–$1.5M",    rep: 1250000, max: 1500000, rate: 3500, s: 1250000 },
+    { id: "c4", label: "$1.5M–$2M",    rep: 1750000, max: 2000000, rate: 4500, s: 1750000 },
+    { id: "c5", label: "Over $2M · Enterprise", rep: 2500000, max: Infinity, custom: true, from: 5500, over: "$2M", s: 3000000 }
   ];
-  var PAY_RANGES = RANGES;
-  var PER_STORE = 250, MAX_STORES = 50;
-  function rangeForSales(total, list) { list = list || RANGES; for (var i = 0; i < list.length; i++) if (total < list[i].max) return list[i].id; return list[list.length - 1].id; }
-  // Older quote links: map each old range to the new one by its typical sales.
-  var LEGACY_STORE_SALES = { a: 100000, b: 125000, c: 225000, d: 400000, e: 625000, f: 700000, h: 875000, g: 1200000 };
-  var LEGACY_PAY = { p1: 100000, p2: 225000, p3: 400000, p4: 625000, p5: 875000, p6: 1250000, p7: 1750000, p8: 2500000, p9: 3500000 };
+  // The retired ShelfPay table, kept only to map an old ShelfPay-era "c" id ("t1") onto this table.
+  var OLD_PAY_REP = { t1: 300000, t3: 1500000, t4: 3000000, t5: 5000000 };
   var LEGACY_COLLECT = { a: 60000, b: 60000, c: 225000, d: 400000, e: 625000, h: 875000, g: 1200000, f: 1200000 };
-  var CREDIT_SHARE = 0.20;
-  // Credits recovered run ~0.6%–1.1% of a store's monthly sales in live accounts;
-  // quote the conservative end.
-  var CREDIT_RATE_OF_SALES = 0.0075;
+  function rangeForSales(total) { for (var i = 0; i < COLLECT_RANGES.length; i++) if (total < COLLECT_RANGES[i].max) return COLLECT_RANGES[i].id; return COLLECT_RANGES[COLLECT_RANGES.length - 1].id; }
   // Month to month only, for everyone (10/20/2026): the list price IS the monthly price.
   // No 12-month agreement, no month-to-month markup, no onboarding fee. Older quote links
   // may still carry term "annual" or "monthly"; it is ignored and they open at this price.
-  // Fence: npm run check:quote.
   var VALID_DAYS = 30;
   var TERM_NAME = "Month to month, billed monthly";
 
-  var state = { product: "pay", name: "", g: "", n: 1, c: "", q: "", dn: "", dp: 0 };
+  // ---- Value model: identical to /pricing's "Your first year with us" slider ----
+  var STEPS = [25e3, 50e3, 75e3, 100e3, 150e3, 200e3, 250e3, 300e3, 400e3, 500e3, 750e3, 1e6, 1.25e6, 1.5e6, 1.75e6, 2e6, 3e6, 4e6, 5e6];
+  var RATE = { reps: 0.02, bad: 0.01 };                                                    // share of sales: linear
+  var WORK = { clerk: 4500, paynow: 500, replies: 750, replist: 300, qbo: 750, setup: 2500 }; // labor at $500k: grows with the square root of size
+  var r5 = function (n) { return Math.round(n / 5) * 5; };
+  function valueAt(S) {
+    var v = {};
+    Object.keys(RATE).forEach(function (k) { v[k] = r5(S * RATE[k]); });
+    Object.keys(WORK).forEach(function (k) { v[k] = r5(WORK[k] * Math.sqrt(S / 500e3)); });
+    v.freed = Math.floor(S * 12 * 15 / 365 / 1000) * 1000; // 15 days faster
+    v.cash = r5(v.freed * 0.15 / 12);                        // valued at 15% a year
+    var monthly = v.reps + v.cash + v.bad + v.clerk + v.paynow + v.replies + v.replist + v.qbo;
+    v.total = monthly * 12 + v.setup;
+    v.g = [v.reps * 12, (v.bad + v.cash) * 12, (v.clerk + v.paynow + v.replies + v.replist + v.qbo) * 12 + v.setup];
+    return v;
+  }
+  var SEG = [["#95d5b2", "Sales your reps add back"], ["#52b788", "Bad debt avoided + cash sooner"], ["#40916c", "AR desk run for you + setup"]];
+
+  var state = { product: "collect", name: "", g: "", n: 1, c: "", q: "", dn: "", dp: 0, s: 500000 };
 
   function $(id) { return document.getElementById(id); }
   function usd(n) { return "$" + Math.round(n).toLocaleString("en-US"); }
+  function short(n) { return n >= 1e6 ? "$" + (n / 1e6) + "M" : "$" + (n / 1e3) + "k"; }
   function mdy(d) { return String(d.getMonth() + 1).padStart(2, "0") + "/" + String(d.getDate()).padStart(2, "0") + "/" + d.getFullYear(); }
   function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
-  function range(list, id) { for (var i = 0; i < list.length; i++) if (list[i].id === id) return list[i]; return null; }
-  // Custom discount: a % off the monthly rate (not the credit share), rounded to $5.
+  function range(id) { for (var i = 0; i < COLLECT_RANGES.length; i++) if (COLLECT_RANGES[i].id === id) return COLLECT_RANGES[i]; return null; }
+  function nearestStep(S) { var b = 0; for (var i = 0; i < STEPS.length; i++) if (Math.abs(STEPS[i] - S) < Math.abs(STEPS[b] - S)) b = i; return b; }
+  // Custom discount: a % off the monthly rate, rounded to $5.
   function discounted() { return state.dp > 0; }
   function discName() { return state.dn.trim() || "Discount"; }
   function pctText() { return (Math.round(state.dp * 10) / 10) + "%"; }
   function price(n) { return discounted() ? Math.round(n * (1 - state.dp / 100) / 5) * 5 : n; }
-  function round50(n) { return Math.round(n / 50) * 50; }
   function newQuoteNum() { var c = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789", s = ""; for (var i = 0; i < 6; i++) s += c[Math.floor(Math.random() * c.length)]; return "SS-" + s; }
 
   // ---- Hash state (shareable quote links) -----------------------------------
@@ -258,163 +404,138 @@
       var h = location.hash.slice(1); if (!h) return;
       var s = JSON.parse(decodeURIComponent(escape(atob(decodeURIComponent(h)))));
       if (!s || typeof s !== "object") return;
-      if (s.product === "pay" || s.product === "collect") state.product = s.product;
       if (typeof s.name === "string") state.name = s.name.slice(0, 80);
-      if (typeof s.c === "string") state.c = range(COLLECT_RANGES, s.c) ? s.c : range(RANGES, s.c) ? rangeForSales(range(RANGES, s.c).rep, COLLECT_RANGES) : (LEGACY_COLLECT[s.c] ? rangeForSales(LEGACY_COLLECT[s.c], COLLECT_RANGES) : "");
+      if (s.product !== "pay" && typeof s.c === "string") state.c = range(s.c) ? s.c : OLD_PAY_REP[s.c] ? rangeForSales(OLD_PAY_REP[s.c]) : (LEGACY_COLLECT[s.c] ? rangeForSales(LEGACY_COLLECT[s.c]) : "");
       if (typeof s.q === "string") state.q = s.q.slice(0, 12);
       if (typeof s.dn === "string") state.dn = s.dn.slice(0, 60);
       if (typeof s.dp === "number" && isFinite(s.dp)) state.dp = Math.min(100, Math.max(0, s.dp));
-      if (typeof s.g === "string") state.g = range(RANGES, s.g) ? s.g : (LEGACY_PAY[s.g] ? rangeForSales(LEGACY_PAY[s.g]) : "");
-      if (typeof s.n === "number" && s.n >= 1) state.n = Math.min(MAX_STORES, Math.floor(s.n));
-      if (Array.isArray(s.stores) && s.stores.length) {
-        var picked = s.stores.slice(0, MAX_STORES).map(function (x) { return LEGACY_STORE_SALES[String(x && x.r || "")]; });
-        state.n = picked.length;
-        if (picked.every(function (v) { return v; })) state.g = rangeForSales(picked.reduce(function (a, b) { return a + b; }, 0));
-      }
+      var r = range(state.c);
+      if (typeof s.s === "number" && isFinite(s.s) && s.s > 0 && (!r || rangeForSales(STEPS[nearestStep(s.s)]) === r.id)) state.s = STEPS[nearestStep(s.s)];
+      else if (r) state.s = r.s;
     } catch (e) { /* ignore a malformed link */ }
   }
 
   // ---- Form rendering --------------------------------------------------------
-  function chipsHtml(name, list, selected) {
-    return list.map(function (r) {
-      return '<label class="chip"><input type="radio" name="' + name + '" value="' + r.id + '"' + (selected === r.id ? " checked" : "") + '><span>' + r.label + "</span></label>";
-    }).join("");
-  }
-  function renderPay() {
-    $("pay-chips").innerHTML = chipsHtml("pay-sales", PAY_RANGES, state.g);
-    $("pay-chips").querySelectorAll("input").forEach(function (r) { r.addEventListener("change", function () { state.g = r.value; update(); }); });
-    renderCount();
-  }
-  function renderCount() {
-    $("st-n").textContent = state.n;
-    $("st-minus").disabled = state.n <= 1; $("st-plus").disabled = state.n >= MAX_STORES;
-  }
-
   function renderStatic() {
-    $("collect-chips").innerHTML = chipsHtml("collect-sales", COLLECT_RANGES, state.c);
-    $("collect-chips").querySelectorAll("input").forEach(function (r) { r.addEventListener("change", function () { state.c = r.value; update(); }); });
-    document.querySelectorAll('input[name="product"]').forEach(function (r) { r.checked = r.value === state.product; });
+    $("collect-chips").innerHTML = COLLECT_RANGES.map(function (r) {
+      return '<label class="chip"><input type="radio" name="collect-sales" value="' + r.id + '"' + (state.c === r.id ? " checked" : "") + '><span>' + r.label + "</span></label>";
+    }).join("");
+    $("collect-chips").querySelectorAll("input").forEach(function (r) {
+      r.addEventListener("change", function () { state.c = r.value; state.s = range(r.value).s; $("pv-sales").value = nearestStep(state.s); update(true); });
+    });
     $("bizname").value = state.name;
     $("disc-name").value = state.dn;
     $("disc-pct").value = state.dp ? String(state.dp) : "";
-    $("pay-fs").hidden = state.product !== "pay";
-    $("collect-fs").hidden = state.product !== "collect";
+    $("pv-sales").value = nearestStep(state.s);
   }
+  function syncChips() { document.querySelectorAll('input[name="collect-sales"]').forEach(function (r) { r.checked = r.value === state.c; }); }
 
   // ---- Quote math ------------------------------------------------------------
-  function compute() {
-    var p = state.product, lines = [], base = 0, listBase = 0, credits = 0;
-    if (p === "pay") {
-      var g = range(PAY_RANGES, state.g), extra = state.n - 1;
-      var main = g.custom ? 0 : price(g.rate), addl = price(PER_STORE) * extra;
-      base = g.custom ? 0 : main + addl;
-      listBase = g.custom ? 0 : g.rate + PER_STORE * extra;
-      lines.push({ item: "ShelfPay", range: g.label + " monthly sales", price: main, list: discounted() && !g.custom ? g.rate : 0, sub: g.label + " combined monthly sales", amt: usd(main) + "/mo" });
-      if (extra > 0) lines.push({ item: "Additional stores", range: g.custom ? extra + (extra === 1 ? " store" : " stores") + " after the first" : extra + " × " + usd(price(PER_STORE)), price: addl, list: discounted() ? PER_STORE * extra : 0, sub: extra + (extra === 1 ? " store" : " stores") + " after the first", amt: usd(addl) + "/mo" });
-      credits = round50(g.rep * CREDIT_RATE_OF_SALES);
-    } else {
-      var cr = range(COLLECT_RANGES, state.c);
-      base = cr.custom ? 0 : price(cr.rate);
-      listBase = cr.custom ? 0 : cr.rate;
-      lines.push({ item: "ShelfSpace", range: cr.label + " wholesale", price: base, list: discounted() && !cr.custom ? cr.rate : 0, sub: cr.label + " monthly wholesale sales", amt: usd(base) + "/mo" });
-    }
-    var fee = Math.round(credits * CREDIT_SHARE);
-    var custom = p === "pay" ? !!range(PAY_RANGES, state.g).custom : !!range(COLLECT_RANGES, state.c).custom;
-    return { custom: custom, p: p, lines: lines, base: base, listBase: listBase, credits: credits, fee: fee, keep: credits - fee, monthly: base + fee, stores: state.n };
-  }
+  function yearlyFee() { var r = range(state.c); if (!r) return 0; return (r.custom ? r.from : price(r.rate)) * 12; }
 
-  function complete() {
-    if (state.product === "pay") return !!range(PAY_RANGES, state.g);
-    return !!range(COLLECT_RANGES, state.c);
+  function set(key, text) { document.querySelectorAll('[data-v="' + key + '"]').forEach(function (el) { el.textContent = text; }); }
+  var counted = 0;
+  function renderValue(animate) {
+    var v = valueAt(state.s), card = $("pv-card");
+    ["reps", "bad", "cash", "clerk", "paynow", "replies", "replist", "qbo", "setup", "freed"].forEach(function (k) { set(k, usd(v[k])); });
+    set("sales", short(state.s));
+    set("g1", usd(v.g[0])); set("g2", usd(v.g[1])); set("g3", usd(v.g[2]));
+    document.querySelectorAll('[data-v="total"]').forEach(function (el) { if (el.id !== "pv-count") el.textContent = usd(v.total); });
+    card.querySelectorAll(".pv-bar:not(.pv-bar--pay) i").forEach(function (el, i) { el.style.setProperty("--w", (v.g[i] / v.total * 100).toFixed(2) + "%"); });
+    $("pv-sales").setAttribute("aria-valuetext", short(state.s) + " a month");
+
+    var r = range(state.c), fee = yearlyFee();
+    if (r) {
+      var pw = Math.max(1.5, Math.min(60, fee / v.total * 100));
+      card.style.setProperty("--pw", pw.toFixed(2) + "%");
+      $("pv-pay").textContent = (r.custom ? "From " : "") + usd(fee) + " a year";
+      $("q-pay-line").innerHTML = "You pay <b>" + (r.custom ? "from " : "") + usd(r.custom ? r.from : price(r.rate)) + "</b> a month.";
+      $("pv-mult").hidden = false;
+      $("pv-mult-n").textContent = "$" + (Math.floor(v.total / fee * 10) / 10).toFixed(1).replace(/\.0$/, "");
+    } else {
+      card.style.removeProperty("--pw");
+      $("pv-pay").textContent = "A fraction";
+      $("q-pay-line").textContent = "You pay a fraction.";
+      $("pv-mult").hidden = true;
+    }
+
+    var el = $("pv-count"), target = v.total, from = counted;
+    counted = target;
+    if (!animate || window.matchMedia("(prefers-reduced-motion: reduce)").matches) { el.textContent = usd(target); return; }
+    var t0 = null;
+    (function step(ts) { if (!t0) t0 = ts; var p = Math.min((ts - t0) / 900, 1), e = 1 - Math.pow(1 - p, 3);
+      el.textContent = usd(from + (target - from) * e); if (p < 1 && counted === target) requestAnimationFrame(step); })(performance.now());
   }
 
   var summaryText = "";
+  function valueHtml(v, fee, custom) {
+    var rows = '<div class="qd-vhead"><span>Your first year with us</span><span>at ' + short(state.s) + "/mo in wholesale sales</span></div>";
+    rows += '<div class="qd-vbar">' + v.g.map(function (g, i) { return '<i style="width:' + (g / v.total * 100).toFixed(2) + "%;background:" + SEG[i][0] + '"></i>'; }).join("") + "</div>";
+    rows += v.g.map(function (g, i) { return '<div class="qd-vrow"><span class="dot" style="background:' + SEG[i][0] + '"></span><span>' + SEG[i][1] + "</span><b>" + usd(g) + "</b></div>"; }).join("");
+    rows += '<div class="qd-vtot"><span>What you get</span><b>' + usd(v.total) + "</b></div>";
+    rows += '<div class="qd-vtot pay"><span>What you pay</span><b>' + (custom ? "From " : "") + usd(fee) + "</b></div>";
+    return rows;
+  }
+
   function renderQuote() {
-    var v = compute();
-    var product = v.p === "pay" ? "ShelfPay" : "ShelfSpace";
+    var r = range(state.c), v = valueAt(state.s), fee = yearlyFee();
     var today = new Date(), valid = new Date(today.getTime() + VALID_DAYS * 864e5);
     var name = state.name.trim();
-    if (v.custom) return renderEnterprise(v, product, today, valid, name);
+    var base = r.custom ? 0 : price(r.rate);
 
-    $("qd-eyebrow").textContent = product + " quote";
+    $("qd-eyebrow").textContent = r.custom ? "ShelfSpace Enterprise quote" : "ShelfSpace quote";
     $("qd-meta").textContent = state.q + " · " + mdy(today);
-    $("qd-name").textContent = name || (v.p === "pay" ? v.stores + (v.stores === 1 ? " store" : " stores") : "Your brand");
-    $("qd-price").innerHTML = usd(v.base) + "<small>/month</small>";
+    $("qd-name").textContent = name || "Your brand";
+    $("qd-price").innerHTML = r.custom ? "Custom<small> from " + usd(r.from) + "/month</small>" : usd(base) + "<small>/month</small>";
     $("qd-terms").textContent = TERM_NAME;
+    $("qd-value").innerHTML = valueHtml(v, fee, r.custom);
 
-    var rows = v.lines.map(function (l) {
-      return '<div class="qd-row"><div class="n">' + esc(l.item) + "<span>" + esc(l.range) + '</span></div><div class="a">' + (l.list ? "<s>" + usd(l.list) + "</s>" : "") + usd(l.price) + "</div></div>";
-    }).join("");
-    rows += '<div class="qd-row total"><div class="n">Monthly rate' + (discounted() ? "<span>" + esc(discName()) + ", " + pctText() + " off</span>" : "") + '</div><div class="a">' + usd(v.base) + "</div></div>";
-    if (v.p === "pay") rows += '<div class="qd-row"><div class="n">Credit recovery<span>of credits we recover. Nothing recovered, nothing owed</span></div><div class="a">20%</div></div>';
-    rows += '<div class="qd-row"><div class="n">Guarantee<span>' + (v.p === "pay" ? "Credits cover your fee in 90 days" : "We collect more than our fee in 90 days") + ', or we refund the difference</span></div><div class="a">Included</div></div>';
+    var guarantee = '<div class="qd-row"><div class="n">Guarantee<span>We collect 25% of your past-due invoices in month one, or that month is free</span></div><div class="a">Included</div></div>';
+    var rows, fine, t = ["ShelfSpace quote " + state.q + " · " + mdy(today)];
+    if (r.custom) {
+      rows = '<div class="qd-row"><div class="n">ShelfSpace<span>' + esc(r.label.replace(" · Enterprise", "")) + ' wholesale</span></div><div class="a">Custom</div></div>' + guarantee;
+      fine = ["Over " + r.over + " a month in sales is Enterprise pricing, starting at " + usd(r.from) + " a month and set to your volume. Send us your monthly numbers and we'll come back with your rate.",
+              "Valid through " + mdy(valid) + ". No contract: stop whenever you like."];
+      t.push((name ? name + " · " : "") + "ShelfSpace Enterprise · " + TERM_NAME);
+      t.push("  ShelfSpace (" + r.label.replace(" · Enterprise", "") + " monthly wholesale sales): Custom");
+      t.push("Monthly rate: Custom, from " + usd(r.from) + "/mo (Enterprise, over " + r.over + " a month in sales)");
+    } else {
+      rows = '<div class="qd-row"><div class="n">ShelfSpace<span>' + esc(r.label) + ' wholesale</span></div><div class="a">' + (discounted() ? "<s>" + usd(r.rate) + "</s>" : "") + usd(base) + "</div></div>";
+      rows += '<div class="qd-row total"><div class="n">Monthly rate' + (discounted() ? "<span>" + esc(discName()) + ", " + pctText() + " off</span>" : "") + '</div><div class="a">' + usd(base) + "</div></div>" + guarantee;
+      fine = ["Billed monthly, nothing up front. No contract and no onboarding fee.",
+              "We collect 25% of your past-due invoices in month one, or it's free: if we don't, you don't pay for that month."];
+      if (discounted()) fine.push(discName() + ": " + pctText() + " off our list price of " + usd(r.rate) + " a month.");
+      fine.push("Valid through " + mdy(valid) + ".");
+      t.push((name ? name + " · " : "") + "ShelfSpace · " + TERM_NAME);
+      t.push("  ShelfSpace (" + r.label + " monthly wholesale sales): " + usd(base) + "/mo");
+      t.push("Monthly rate: " + usd(base) + "/mo" + (discounted() ? " (" + discName() + ": " + pctText() + " off the " + usd(r.rate) + "/mo list price)" : ""));
+      t.push("No contract, no onboarding fee.");
+    }
+    fine.push("Value figures are estimates for a brand with " + short(state.s) + " a month in wholesale sales.");
     $("qd-list").innerHTML = rows;
-
-    var fine = [];
-    fine.push("Billed monthly, nothing up front. No contract and no onboarding fee.");
-    if (v.p === "collect") fine.push("We collect 25% of your past-due invoices in month one, or it's free: if we don't, you don't pay for that month.");
-    if (v.p === "pay" && v.stores > 1) fine.push("One price for your combined sales, plus " + usd(PER_STORE) + " a month for each store after the first.");
-    if (v.p === "pay") fine.push("The credits pay for it: if the credits we recover in your first 90 days come to less than you paid us, we refund the difference. Your estimated credits are in your eval.");
-    if (discounted()) fine.push(discName() + ": " + pctText() + " off our list price of " + usd(v.listBase) + " a month.");
-    fine.push("Valid through " + mdy(valid) + ".");
     $("qd-fine").innerHTML = fine.map(function (f) { return "<p>" + esc(f) + "</p>"; }).join("");
-
-    var t = ["ShelfSpace quote " + state.q + " · " + mdy(today), (name ? name + " · " : "") + product + " · " + TERM_NAME];
-    v.lines.forEach(function (l) { t.push("  " + l.item + " (" + l.sub + "): " + l.amt); });
-    t.push("Monthly rate: " + usd(v.base) + "/mo" + (discounted() ? " (" + discName() + ": " + pctText() + " off the " + usd(v.listBase) + "/mo list price)" : ""));
-    t.push("No contract, no onboarding fee.");
-    if (v.p === "pay") { t.push("Credit recovery: 20% of credits we recover. Nothing recovered, nothing owed."); t.push("Guarantee: If the credits we recover in your first 90 days come to less than you paid us, we refund the difference."); } else t.push("Guarantee: If we don't collect 25% of your past-due invoices in the first month, you don't pay.");
+    t.push("Your first year: about " + usd(v.total) + " in value (" + SEG.map(function (s, i) { return s[1].toLowerCase() + " " + usd(v.g[i]); }).join(", ") + "), for " + (r.custom ? "from " : "") + usd(fee) + " a year.");
+    t.push("Guarantee: If we don't collect 25% of your past-due invoices in the first month, you don't pay.");
     t.push("Valid through " + mdy(valid));
     summaryText = t.join("\n");
   }
 
-  // Top range is Enterprise (over $4M ShelfPay, over $2M ShelfSpace): no list price, we price it to the account.
-  function renderEnterprise(v, product, today, valid, name) {
-    var ent = v.p === "pay" ? range(PAY_RANGES, state.g) : range(COLLECT_RANGES, state.c);
-    var termName = TERM_NAME;
-    var where = v.p === "pay" ? "store" : "brand";
-    $("qd-eyebrow").textContent = product + " Enterprise quote";
-    $("qd-meta").textContent = state.q + " · " + mdy(today);
-    $("qd-name").textContent = name || (v.p === "pay" ? v.stores + (v.stores === 1 ? " store" : " stores") : "Your brand");
-    $("qd-price").innerHTML = "Custom<small> from " + usd(ent.from) + "/month</small>";
-    $("qd-terms").textContent = termName;
-    var rows = v.lines.map(function (l) {
-      return '<div class="qd-row"><div class="n">' + esc(l.item) + "<span>" + esc(l.range.replace(" · Enterprise", "")) + '</span></div><div class="a">Custom</div></div>';
-    }).join("");
-    if (v.p === "pay") rows += '<div class="qd-row"><div class="n">Credit recovery<span>of credits we recover. Nothing recovered, nothing owed</span></div><div class="a">20%</div></div>';
-    rows += '<div class="qd-row"><div class="n">Guarantee<span>' + (v.p === "pay" ? "Credits cover your fee in 90 days" : "We collect more than our fee in 90 days") + ', or we refund the difference</span></div><div class="a">Included</div></div>';
-    $("qd-list").innerHTML = rows;
-    var fine = ["Over " + ent.over + " a month in sales is Enterprise pricing, starting at " + usd(ent.from) + " a month and set to your volume. Send us your monthly numbers and we'll come back with your rate.",
-                "Valid through " + mdy(valid) + ". No contract: stop whenever you like."];
-    $("qd-fine").innerHTML = fine.map(function (f) { return "<p>" + esc(f) + "</p>"; }).join("");
-    var t = ["ShelfSpace quote " + state.q + " · " + mdy(today), (name ? name + " · " : "") + product + " Enterprise · " + termName];
-    v.lines.forEach(function (l) { t.push("  " + l.item + " (" + l.range.replace(" · Enterprise", "") + "): Custom"); });
-    t.push("Monthly rate: Custom, from " + usd(ent.from) + "/mo (Enterprise, over " + ent.over + " a month in sales)");
-    if (v.p === "pay") { t.push("Credit recovery: 20% of credits we recover. Nothing recovered, nothing owed."); t.push("Guarantee: If the credits we recover in your first 90 days come to less than you paid us, we refund the difference."); } else t.push("Guarantee: If we don't collect 25% of your past-due invoices in the first month, you don't pay.");
-    t.push("Valid through " + mdy(valid));
-    summaryText = t.join("\n");
-  }
-
-  function update() {
-    var ok = complete();
+  function update(animate) {
+    var ok = !!range(state.c);
     if (ok && !state.q) state.q = newQuoteNum();
     saveHash();
     $("quote").hidden = !ok; $("q-empty").hidden = ok;
-    $("q-empty").innerHTML = state.product === "pay"
-      ? "<strong>Your quote appears here</strong>Pick your monthly sales and number of stores, and the quote updates as you go."
-      : "<strong>Your quote appears here</strong>Pick your monthly wholesale sales and the quote updates as you go.";
+    renderValue(animate);
     if (ok) renderQuote();
   }
 
   // ---- Events ---------------------------------------------------------------
-  document.querySelectorAll('input[name="product"]').forEach(function (r) {
-    r.addEventListener("change", function () { state.product = r.value; renderStatic(); update(); });
+  $("pv-sales").addEventListener("input", function () {
+    state.s = STEPS[+$("pv-sales").value]; state.c = rangeForSales(state.s); syncChips(); update(true);
   });
   $("bizname").addEventListener("input", function () { state.name = $("bizname").value; update(); });
   $("disc-name").addEventListener("input", function () { state.dn = $("disc-name").value.slice(0, 60); update(); });
   $("disc-pct").addEventListener("input", function () { var n = parseFloat($("disc-pct").value); state.dp = isFinite(n) ? Math.min(100, Math.max(0, n)) : 0; update(); });
-  $("st-minus").addEventListener("click", function () { if (state.n > 1) { state.n--; renderCount(); update(); } });
-  $("st-plus").addEventListener("click", function () { if (state.n < MAX_STORES) { state.n++; renderCount(); update(); } });
   $("form").addEventListener("submit", function (e) { e.preventDefault(); });
   function toast(msg) { var t = $("toast"); t.textContent = msg; t.classList.add("show"); setTimeout(function () { t.classList.remove("show"); }, 1800); }
   function copy(text, msg) {
@@ -425,7 +546,8 @@
   $("copy-link").addEventListener("click", function () { saveHash(); copy(location.href, "Link copied"); });
   $("copy-text").addEventListener("click", function () { copy(summaryText, "Summary copied"); });
 
-  readHash(); renderStatic(); renderPay(); update();
+  readHash(); renderStatic(); update(true);
+  setTimeout(function () { $("pv-card").classList.add("go"); }, 250);
 })();
 </script>
 </body>
