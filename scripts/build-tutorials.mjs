@@ -19,6 +19,16 @@ import { fileURLToPath } from "node:url";
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const catalog = JSON.parse(readFileSync(join(ROOT, "video-catalog.json"), "utf8"));
 const videos = catalog.videos.filter((v) => v.privacy === "public");
+// Number episodes over the videos actually shown, so hiding one never leaves a series
+// starting at "Episode 2" or skipping a number.
+{
+  const seen = new Map();
+  for (const v of [...videos].sort((a, b) => a.episode - b.episode)) {
+    if (!v.series) continue;
+    seen.set(v.series, (seen.get(v.series) || 0) + 1);
+    v.episode = seen.get(v.series);
+  }
+}
 
 const esc = (s) => String(s ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 
@@ -174,7 +184,7 @@ function card(v) {
   return `    <a class="tut-card reveal" href="/tutorials/${v.slug}">
       <div class="tut-thumb">
         <img src="${v.thumbHq}" alt="${esc(v.title)} — video thumbnail" loading="lazy" width="480" height="270">
-        <span class="tut-badge">Episode ${v.episode}</span>
+        ${v.series ? `<span class="tut-badge">Episode ${v.episode}</span>` : ""}
         ${v.durationLabel ? `<span class="tut-len">${v.durationLabel}</span>` : ""}
         <span class="tut-play">${PLAY_SVG}</span>
       </div>
@@ -214,8 +224,8 @@ ${vids.map(card).join("\n")}
   }).join("\n\n");
 
   return head(
-    "ShelfSpace Tutorials — Cannabis Dispensary Software Video Guides",
-    "Step-by-step video tutorials for ShelfSpace — cannabis delivery tracking, invoice verification against Metrc, vendor payments, and credit recovery. Every video with a full transcript.",
+    "ShelfSpace Tutorials — Video Guides for Cannabis Brands",
+    "Step-by-step video tutorials for cannabis brands on ShelfSpace — billing stores, collecting overdue invoices, payment plans, and QuickBooks. Every video with a full transcript.",
     "https://shelfspace.pro/tutorials",
   ) + `
 <div class="page-hero">
