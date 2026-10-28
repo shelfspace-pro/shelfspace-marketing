@@ -318,6 +318,14 @@ mkdirSync(join(ROOT, "tutorials"), { recursive: true });
 // "More in </h2>" on 7 pages. Refuse to write a page with an empty heading.
 const guard = (name, html) => {
   if (/<h2>\s*<\/h2>|More in\s*<\/h2>|Episode (?:undefined|null)/.test(html)) throw new Error(`build-tutorials: empty series heading in ${name}`);
+  // Hiding a video (10/28/2026) once left the brand series starting at "Episode 2".
+  // On the hub every series must count 1, 2, 3 ... with no gap.
+  if (name === "tutorials.html") {
+    for (const block of html.split('<section class="tut-series">').slice(1)) {
+      const eps = [...block.matchAll(/tut-badge">Episode (\d+)</g)].map((m) => Number(m[1]));
+      if (eps.some((n, i) => n !== i + 1)) throw new Error(`build-tutorials: hub episodes ${eps.join(",")} are not 1..${eps.length}`);
+    }
+  }
   // nav CTA tag ?cta=<page>-nav (sales row D3; same page ids as scripts/cta-lib.mjs pageId)
   const page = name === "tutorials.html" ? "tutorials" : `tutorials-${name}`;
   return html.replace(/__CTA_PAGE__/g, page.toLowerCase().replace(/[^a-z0-9]+/g, "-"));
