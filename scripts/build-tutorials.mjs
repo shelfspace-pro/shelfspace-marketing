@@ -151,7 +151,7 @@ function head(title, desc, canonical, extraStyle = "", extraHead = "") {
 <meta property="og:url" content="${canonical}">
 <meta property="og:title" content="${esc(title)}">
 <meta property="og:description" content="${esc(desc)}">
-<meta property="og:image" content="https://shelfspace.pro/og-image-v7.png">
+<meta property="og:image" content="https://shelfspace.pro/og-image-v8.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="apple-mobile-web-app-title" content="ShelfSpace">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>OG · Homepage (v8)</title>
+<!--
+  1200x630 sitewide share card (og-image-v8.png) — mirrors the 10/27/2026 homepage hero:
+  mint mesh, "We get you paid.", dark invoice card stamped PAID + payment toast.
+  Render at 1200x630 (deviceScaleFactor 1), save as /og-image-v8.png, then bump every
+  og:image / twitter:image (incl. scripts/build-tutorials.mjs). iMessage caches by URL,
+  so always ship a NEW filename.
+-->
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 1200px; height: 630px; overflow: hidden; }
+  body {
+    font-family: 'DM Sans', sans-serif; color: #1b4332; position: relative;
+    background:
+      radial-gradient(700px 520px at 92% 18%, rgba(149,213,178,0.55), transparent 65%),
+      radial-gradient(600px 420px at 8% 100%, rgba(216,243,220,0.9), transparent 70%),
+      linear-gradient(180deg, #f6fbf7 0%, #ffffff 100%);
+  }
+  .grid { position: absolute; inset: 0;
+    background-image: linear-gradient(rgba(27,67,50,0.045) 1px, transparent 1px), linear-gradient(90deg, rgba(27,67,50,0.045) 1px, transparent 1px);
+    background-size: 80px 80px; }
+  .logo { position: absolute; left: 72px; top: 60px; display: flex; align-items: center; gap: 14px; font-weight: 700; font-size: 30px; letter-spacing: -0.6px; }
+  .logo-icon { width: 50px; height: 50px; border-radius: 13px; background: #1b4332; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 20px rgba(27,67,50,0.25); }
+  h1 { position: absolute; left: 68px; top: 168px; font-size: 128px; font-weight: 700; line-height: 0.95; letter-spacing: -6px; }
+  h1 em { font-style: normal; color: #40916c; }
+  .sub { position: absolute; left: 72px; top: 438px; font-size: 30px; font-weight: 500; color: #475569; letter-spacing: -0.4px; line-height: 1.25; }
+  .url { position: absolute; left: 72px; bottom: 56px; font-family: 'Space Mono', monospace; font-size: 20px; font-weight: 700; color: #2d6a4f; letter-spacing: 0.5px; }
+
+  .stage { position: absolute; left: 640px; top: 170px; width: 500px; }
+  .ghost { position: absolute; left: 30px; right: 30px; top: -34px; height: 80px; border-radius: 24px; background: linear-gradient(180deg, #8fc9a6, #6fae8a); }
+  .ghost.g2 { left: 14px; right: 14px; top: -18px; background: linear-gradient(180deg, #3f7a5c, #2d6a4f); }
+  .card { position: relative; background: #0f2a1f; border-radius: 26px; padding: 34px 36px 40px; color: #e6f4ea;
+    box-shadow: 0 40px 90px rgba(27,67,50,0.45), 0 0 0 3px #95d5b2 inset, 0 0 80px rgba(149,213,178,0.35); }
+  .card-top { font-size: 19px; font-weight: 600; color: rgba(230,244,234,0.72); }
+  .num { font-family: 'Space Mono', monospace; font-variant-numeric: tabular-nums; font-size: 66px; font-weight: 700; letter-spacing: -2px; color: #95d5b2; margin: 18px 0 22px; }
+  .paid { display: inline-block; font-size: 76px; font-weight: 800; letter-spacing: -2px; line-height: 1; padding: 12px 32px 16px; border-radius: 16px;
+    background: #95d5b2; color: #0f2a1f; transform: rotate(-5deg); box-shadow: 0 10px 34px rgba(149,213,178,0.5); }
+  .toast { position: absolute; right: -26px; top: -78px; display: flex; align-items: center; gap: 14px; background: #fff; border-radius: 18px; padding: 16px 22px 16px 16px;
+    box-shadow: 0 18px 40px rgba(27,67,50,0.22); transform: rotate(-2deg); }
+  .toast-check { width: 46px; height: 46px; border-radius: 12px; background: #95d5b2; display: flex; align-items: center; justify-content: center; }
+  .toast-t { font-size: 21px; font-weight: 700; color: #1b4332; }
+  .toast-s { font-family: 'Space Mono', monospace; font-size: 15px; color: #64748b; margin-top: 2px; }
+  .note { position: absolute; right: 60px; bottom: 30px; font-size: 13px; color: #94a3b8; }
+</style>
+</head>
+<body>
+  <div class="grid"></div>
+  <div class="logo">
+    <span class="logo-icon">
+      <svg width="30" height="30" viewBox="0 0 18 18" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none">
+        <line x1="9" y1="1" x2="9" y2="16"/><line x1="6" y1="16" x2="12" y2="16"/>
+        <polyline points="3.5,4.5 9,1 14.5,4.5"/><polyline points="2,9.5 3.5,4.5 5,9.5"/><polyline points="13,9.5 14.5,4.5 16,9.5"/>
+        <path d="M2 9.5a1.5 1.5 0 0 0 3 0"/><path d="M13 9.5a1.5 1.5 0 0 0 3 0"/>
+      </svg>
+    </span>ShelfSpace
+  </div>
+  <h1>We get<br>you <em>paid.</em></h1>
+  <div class="sub">Collections software for<br>cannabis brands.</div>
+  <div class="url">shelfspace.pro</div>
+
+  <div class="stage">
+    <div class="ghost"></div><div class="ghost g2"></div>
+    <div class="card">
+      <div class="card-top">Invoice #1182 · Green Leaf Dispensary</div>
+      <div class="num">$3,280.00</div>
+      <div class="paid">PAID</div>
+    </div>
+    <div class="toast">
+      <span class="toast-check"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0f2a1f" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+      <div><div class="toast-t">Payment received</div><div class="toast-s">+$3,280.00 · just now</div></div>
+    </div>
+  </div>
+  <div class="note">Illustration with example numbers</div>
+</body>
+</html>

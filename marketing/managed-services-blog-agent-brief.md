@@ -44,7 +44,7 @@ just A but B", em-dash pile-ups.
 ## Required structure
 - **head**: unique `<title>` ≤60 chars incl. the primary keyword; unique `<meta name="description">`
   ≤160 chars written as a direct answer; canonical `https://shelfspace.pro/blog/{slug}`; OG +
-  Twitter tags (image `https://shelfspace.pro/og-image-v7.png`, width 1200 height 630); three
+  Twitter tags (image `https://shelfspace.pro/og-image-v8.png`, width 1200 height 630); three
   `application/ld+json` blocks — **Article** (headline, description, author Chris Mitchem, publisher
   ShelfSpace, `datePublished` "2026-09-07", url, image), **BreadcrumbList** (Home → Blog → title),
   **FAQPage** (every FAQ Q/A, text matching the visible answers verbatim).
