@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your Reps Collect From Their Phone — ShelfSpace Tutorial</title>
+<meta name="description" content="Each rep sees only their own stores: what's owed, what's late, and one-tap reminders, pay links, AI calls and promises to pay.">
+<link rel="canonical" href="https://shelfspace.pro/tutorials/rep-phone">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://shelfspace.pro/tutorials/rep-phone">
+<meta property="og:title" content="Your Reps Collect From Their Phone — ShelfSpace Tutorial">
+<meta property="og:description" content="Each rep sees only their own stores: what's owed, what's late, and one-tap reminders, pay links, AI calls and promises to pay.">
+<meta property="og:image" content="https://shelfspace.pro/og-image-v8.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="apple-mobile-web-app-title" content="ShelfSpace">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+<style>
+  @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-12px); } }
+  .page-hero { padding-bottom: 40px; }
+  .hero-bg-gradient { position: absolute; top: -30%; right: -20%; width: 700px; height: 700px; background: radial-gradient(circle, rgba(149,213,178,0.18) 0%, rgba(149,213,178,0) 70%); animation: float 8s ease-in-out infinite; pointer-events: none; }
+  .hero-bg-gradient-2 { position: absolute; bottom: -20%; left: -15%; width: 550px; height: 550px; background: radial-gradient(circle, rgba(27,67,50,0.06) 0%, rgba(27,67,50,0) 70%); animation: float 10s ease-in-out infinite; animation-delay: -3s; pointer-events: none; }
+  .page-hero .section-label, .page-hero .section-title, .page-hero .section-desc { opacity: 0; transform: translateY(30px); }
+  .page-hero .section-label { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1); }
+  .page-hero .section-title { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s, transform 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s; }
+  .page-hero .section-desc { transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1) 0.25s, transform 0.8s cubic-bezier(0.22,1,0.36,1) 0.25s; }
+  .page-hero.hero-loaded .section-label, .page-hero.hero-loaded .section-title, .page-hero.hero-loaded .section-desc { opacity: 1; transform: translateY(0); }
+  .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1); }
+  .reveal.is-visible { opacity: 1; transform: translateY(0); }
+  .tut-wrap { background: var(--white); padding: 64px 0 96px; }
+  .tut-series { max-width: 1180px; margin: 0 auto 56px; padding: 0 32px; }
+  .tut-series-head { margin-bottom: 24px; }
+  .tut-series-head h2 { font-size: 1.5rem; color: var(--green-deep); margin: 0 0 4px; }
+  .tut-series-head p { color: var(--green-mid); font-size: 0.95rem; margin: 0; }
+  .tut-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 28px; }
+  .tut-card { display: flex; flex-direction: column; background: var(--white); border: 1px solid var(--green-light); border-radius: 16px; overflow: hidden; text-decoration: none; box-shadow: 0 10px 30px -18px rgba(27,67,50,0.35); transition: transform .25s ease, box-shadow .25s ease; }
+  .tut-card:hover { transform: translateY(-4px); box-shadow: 0 22px 44px -20px rgba(27,67,50,0.45); }
+  .tut-thumb { position: relative; aspect-ratio: 16/9; background: var(--green-ghost); overflow: hidden; }
+  .tut-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .tut-badge { position: absolute; top: 10px; left: 10px; background: rgba(27,67,50,0.92); color: #fff; font-size: 11px; font-weight: 600; letter-spacing: .04em; padding: 4px 9px; border-radius: 999px; }
+  .tut-len { position: absolute; bottom: 10px; right: 10px; background: rgba(8,28,17,0.82); color: #fff; font-family: var(--font-mono); font-size: 12px; padding: 3px 8px; border-radius: 7px; }
+  .tut-play { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity .25s ease; }
+  .tut-card:hover .tut-play { opacity: 1; }
+  .tut-play span { width: 58px; height: 58px; border-radius: 50%; background: rgba(255,255,255,0.92); display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 24px rgba(27,67,50,0.4); }
+  .tut-body { padding: 18px 20px 22px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+  .tut-body h3 { font-size: 1.12rem; color: var(--green-deep); margin: 0; line-height: 1.3; }
+  .tut-body p { font-size: 0.92rem; color: #52616b; margin: 0; line-height: 1.5; flex: 1; }
+  .tut-cta { color: var(--green-mid); font-weight: 600; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 6px; margin-top: 4px; }
+  /* per-video page */
+  .tut-video-wrap { background: var(--white); padding: 40px 0 96px; }
+  .tut-video-inner { max-width: 860px; margin: 0 auto; padding: 0 24px; }
+  .tut-crumbs { font-size: 0.85rem; color: var(--green-mid); margin-bottom: 18px; }
+  .tut-crumbs a { color: var(--green-mid); text-decoration: none; }
+  .tut-crumbs a:hover { text-decoration: underline; }
+  .tut-embed { position: relative; padding-bottom: 56.25%; height: 0; border-radius: 16px; overflow: hidden; box-shadow: 0 20px 46px -20px rgba(27,67,50,0.4); margin-bottom: 24px; }
+  .tut-embed iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  .tut-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 32px; }
+  .tut-actions a { display: inline-flex; align-items: center; gap: 8px; padding: 11px 20px; border-radius: 12px; font-weight: 600; font-size: 0.92rem; text-decoration: none; }
+  .tut-actions .primary { background: var(--green-deep); color: #fff; }
+  .tut-actions .secondary { background: var(--green-ghost); color: var(--green-deep); border: 1px solid var(--green-light); }
+  .tut-chapters { margin: 0 0 28px; }
+  .tut-chapters h2, .tut-transcript-wrap summary { font-size: 1.15rem; color: var(--green-deep); }
+  .tut-chapters ol { list-style: none; padding: 0; margin: 12px 0 0; display: grid; gap: 6px; }
+  .tut-chapters li { display: flex; gap: 12px; font-size: 0.95rem; color: #334; }
+  .tut-chapters .at { font-family: var(--font-mono); color: var(--green-mid); min-width: 46px; }
+  .tut-transcript-wrap { border-top: 1px solid var(--green-light); padding-top: 20px; }
+  .tut-transcript-wrap summary { cursor: pointer; font-weight: 600; }
+  .tut-transcript { margin-top: 16px; color: #3d4a52; line-height: 1.7; }
+  .tut-transcript p { margin: 0 0 12px; }
+  @media (max-width: 640px) { .tut-actions { flex-direction: column; } .tut-actions a { justify-content: center; } }</style>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-H2LBJT03WE"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-H2LBJT03WE');</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "VideoObject",
+  "name": "Your Reps Collect From Their Phone",
+  "description": "Every store they cover, what's late, and one-tap follow-ups",
+  "thumbnailUrl": [
+    "https://i.ytimg.com/vi/Lj7AMVKEthw/maxresdefault.jpg",
+    "https://i.ytimg.com/vi/Lj7AMVKEthw/hqdefault.jpg"
+  ],
+  "uploadDate": "2026-10-28",
+  "contentUrl": "https://youtu.be/Lj7AMVKEthw",
+  "embedUrl": "https://www.youtube-nocookie.com/embed/Lj7AMVKEthw?rel=0&modestbranding=1",
+  "publisher": {
+    "@type": "Organization",
+    "name": "ShelfSpace",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://ourshelf.space/email/icon-white.png"
+    }
+  },
+  "duration": "PT1M59S",
+  "hasPart": [
+    {
+      "@type": "Clip",
+      "name": "Intro",
+      "startOffset": 0,
+      "url": "https://www.youtube.com/watch?v=Lj7AMVKEthw&t=0s",
+      "endOffset": 3
+    },
+    {
+      "@type": "Clip",
+      "name": "Every rep gets a login of their own",
+      "startOffset": 3,
+      "url": "https://www.youtube.com/watch?v=Lj7AMVKEthw&t=3s",
+      "endOffset": 27
+    },
+    {
+      "@type": "Clip",
+      "name": "Tap Late, and the list drops to just those…",
+      "startOffset": 27,
+      "url": "https://www.youtube.com/watch?v=Lj7AMVKEthw&t=27s",
+      "endOffset": 45
+    },
+    {
+      "@type": "Clip",
+      "name": "Walking into a store? Type its name, and only…",
+      "startOffset": 45,
+      "url": "https://www.youtube.com/watch?v=Lj7AMVKEthw&t=45s",
+      "endOffset": 56
+    },
+    {
+      "@type": "Clip",
+      "name": "Send a reminder email with a pay link, or…",
+      "startOffset": 56,
+      "url": "https://www.youtube.com/watch?v=Lj7AMVKEthw&t=56s",
+      "endOffset": 69
+    },
+    {
+      "@type": "Clip",
+      "name": "Handed a check in person? Tap Mark as paid,…",
+      "startOffset": 69,
+      "url": "https://www.youtube.com/watch?v=Lj7AMVKEthw&t=69s",
+      "endOffset": 92
+    },
+    {
+      "@type": "Clip",
+      "name": "The card now says it's on hold, promised by…",
+      "startOffset": 92,
+      "url": "https://www.youtube.com/watch?v=Lj7AMVKEthw&t=92s",
+      "endOffset": 119
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<nav id="nav">
+  <a href="/" class="nav-logo">
+    <div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div>
+    <span class="nav-logo-text">ShelfSpace<sup class="nav-logo-tm">™</sup></span>
+  </a>
+  <ul class="nav-links">
+    <li class="nav-dropdown"><a href="/accounts-receivable" class="nav-dropdown-toggle">Features <svg class="dropdown-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></a>
+      <div class="nav-dropdown-menu"><a href="/accounts-receivable">ShelfSpace overview</a><a href="/ai-calls">AI Calls</a><a href="/collections">Collections</a><a href="/payment-plans">Payment Plans</a><a href="/promise-to-pay">Promise to Pay</a><a href="/final-notice">Final Notice</a><a href="/ar-aging">AR Aging</a><a href="/rep-management">Rep Management</a><a href="/payments">Payments</a><a href="/quickbooks">QuickBooks</a></div></li>
+    <li class="nav-dropdown"><a href="/accounts-payable" class="nav-dropdown-toggle">For dispensaries <svg class="dropdown-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></a>
+      <div class="nav-dropdown-menu"><a href="/accounts-payable">ShelfPay overview</a><a href="/consignment">Consignment</a><a href="/credit-recovery">Credit Recovery</a><a href="/shelfverify">ShelfVerify</a></div></li>
+    <li><a href="/pricing">Pricing</a></li>
+    <li><a href="/about">About</a></li>
+    <li class="nav-login-mobile"><a href="https://ourshelf.space/login">Login</a></li>
+    <li class="nav-call"><a href="tel:+16162714585" aria-label="Call now: talk to Chelsea, our AI assistant, at (616) 271-4585"><span class="nav-call-icon" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span><span class="nav-call-text"><span class="nav-call-kicker">Call now</span><span class="nav-call-num">(616) 271-4585</span></span></a></li>
+    <li><a href="/contact?cta=tutorials-rep-phone-nav" class="nav-cta">Schedule a Demo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a></li>
+  </ul>
+  <a href="tel:+16162714585" class="nav-call-bar" aria-label="Call now: (616) 271-4585"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span>Call</span></a>
+  <div class="nav-hamburger" onclick="document.querySelector('.nav-links').classList.toggle('mobile-open'); event.stopPropagation();"><span></span><span></span><span></span></div>
+</nav>
+<div class="page-hero" style="padding-bottom:24px;">
+  <div class="hero-bg-gradient"></div>
+  <div class="section-label">Tutorial</div>
+  <h1 class="section-title" style="font-size:2.2rem;">Your Reps Collect From Their Phone</h1>
+  <p class="section-desc">Every store they cover, what's late, and one-tap follow-ups</p>
+</div>
+
+<div class="tut-video-wrap">
+  <div class="tut-video-inner">
+    <div class="tut-crumbs"><a href="/tutorials">Tutorials</a> &rsaquo;  &rsaquo; Your Reps Collect From Their Phone</div>
+
+    <div class="tut-embed">
+      <iframe src="https://www.youtube-nocookie.com/embed/Lj7AMVKEthw?rel=0&amp;modestbranding=1" title="Your Reps Collect From Their Phone — ShelfSpace" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+
+    <div class="tut-actions">
+      <a class="primary" href="https://ourshelf.space">Open this screen in ShelfSpace <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a>
+      <a class="secondary" href="/blog/cannabis-sales-reps-collect-from-phone">Read the full guide</a>
+      <a class="secondary" href="https://youtu.be/Lj7AMVKEthw">Watch on YouTube</a>
+    </div>
+
+    <div class="tut-chapters">
+      <h2>Chapters</h2>
+      <ol>
+        <li><span class="at">0:00</span><span>Intro</span></li>
+        <li><span class="at">0:03</span><span>Every rep gets a login of their own</span></li>
+        <li><span class="at">0:27</span><span>Tap Late, and the list drops to just those…</span></li>
+        <li><span class="at">0:45</span><span>Walking into a store? Type its name, and only…</span></li>
+        <li><span class="at">0:56</span><span>Send a reminder email with a pay link, or…</span></li>
+        <li><span class="at">1:09</span><span>Handed a check in person? Tap Mark as paid,…</span></li>
+        <li><span class="at">1:32</span><span>The card now says it's on hold, promised by…</span></li>
+      </ol>
+    </div>
+    <div class="tut-transcript-wrap">
+      <details>
+        <summary>Full transcript</summary>
+        <div class="tut-transcript">
+<p>Every rep gets a login of their own. It shows only the stores assigned to them, and never another rep's customers.</p>
+<p>Two numbers sit at the top. Owed to you is everything those stores haven't paid yet. Late is the part that's past its due date. Here, that's sixty-six thousand dollars, across ten invoices.</p>
+<p>Tap Late, and the list drops to just those ten invoices, with the most overdue on top.</p>
+<p>Each card shows the store, the amount, and how many days late it is. This Opens tag means someone at Hollowbrook opened the email, so they've seen the bill.</p>
+<p>Walking into a store? Type its name, and only that store's invoices are left.</p>
+<p>Tap any invoice, and every follow-up is one tap away.</p>
+<p>Send a reminder email with a pay link, or share that link in a text, so the buyer can pay right there.</p>
+<p>Call with AI has our assistant phone the store about the bill, so you don't have to.</p>
+<p>Handed a check in person? Tap Mark as paid, so nobody chases a bill that's already been paid.</p>
+<p>Now say the buyer promises to pay on Friday. Log a promise to pay. Pick the day, and how they told you. The automatic reminders pause until then. And if the money doesn't come, it gets flagged so a person follows up.</p>
+<p>The card now says it's on hold, promised by Friday. Anyone who opens it knows the plan.</p>
+<p>Reps see only their own stores, and they can't write off or delete anything. Every follow-up, right in their pocket.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <section class="tut-series" style="margin-top:16px;">
+    <div class="tut-series-head"><h2>More tutorials</h2></div>
+    <div class="tut-grid">
+    <a class="tut-card reveal" href="/tutorials/free-dispensary-eval">
+      <div class="tut-thumb">
+        <img src="https://i.ytimg.com/vi/LWPV4Xsnf5Y/hqdefault.jpg" alt="Your Free Dispensary Evaluation — video thumbnail" loading="lazy" width="480" height="270">
+        <span class="tut-badge">Episode 1</span>
+        <span class="tut-len">2:32</span>
+        <span class="tut-play"><span><svg width="24" height="24" viewBox="0 0 24 24" fill="var(--green-deep)"><path d="M8 5v14l11-7z"/></svg></span></span>
+      </div>
+      <div class="tut-body">
+        <h3>Your Free Dispensary Evaluation</h3>
+        <p>See what the free eval asks for, what to have ready, and what you get back — a savings report built from your own Metrc and POS numbers, within 7 business days.</p>
+        <span class="tut-cta">Watch + transcript <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></span>
+      </div>
+    </a>
+    <a class="tut-card reveal" href="/tutorials/vendor-onboarding">
+      <div class="tut-thumb">
+        <img src="https://i.ytimg.com/vi/aCDNCDE4C7E/hqdefault.jpg" alt="Welcome to ShelfSpace — video thumbnail" loading="lazy" width="480" height="270">
+        <span class="tut-badge">Episode 2</span>
+        <span class="tut-len">2:10</span>
+        <span class="tut-play"><span><svg width="24" height="24" viewBox="0 0 24 24" fill="var(--green-deep)"><path d="M8 5v14l11-7z"/></svg></span></span>
+      </div>
+      <div class="tut-body">
+        <h3>Welcome to ShelfSpace</h3>
+        <p>A two-minute walkthrough of the vendor onboarding form — what ShelfSpace is, what the form asks for, that your information is safe, and what happens after you submit.</p>
+        <span class="tut-cta">Watch + transcript <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></span>
+      </div>
+    </a>
+    <a class="tut-card reveal" href="/tutorials/setting-vendor-terms">
+      <div class="tut-thumb">
+        <img src="https://i.ytimg.com/vi/sdbuCrKOy_I/hqdefault.jpg" alt="Setting Vendor Terms — video thumbnail" loading="lazy" width="480" height="270">
+        <span class="tut-badge">Episode 5</span>
+        <span class="tut-len">5:34</span>
+        <span class="tut-play"><span><svg width="24" height="24" viewBox="0 0 24 24" fill="var(--green-deep)"><path d="M8 5v14l11-7z"/></svg></span></span>
+      </div>
+      <div class="tut-body">
+        <h3>Setting Vendor Terms</h3>
+        <p>Set the split and payment terms you use with most vendors, then give any single vendor a different deal in about ten seconds.</p>
+        <span class="tut-cta">Watch + transcript <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></span>
+      </div>
+    </a>
+    <a class="tut-card reveal" href="/tutorials/optimize-every-sku">
+      <div class="tut-thumb">
+        <img src="https://i.ytimg.com/vi/LiAi1niGGp8/hqdefault.jpg" alt="Optimize the Profitability and Velocity of Every SKU — video thumbnail" loading="lazy" width="480" height="270">
+        <span class="tut-badge">Episode 6</span>
+        <span class="tut-len">3:16</span>
+        <span class="tut-play"><span><svg width="24" height="24" viewBox="0 0 24 24" fill="var(--green-deep)"><path d="M8 5v14l11-7z"/></svg></span></span>
+      </div>
+      <div class="tut-body">
+        <h3>Optimize the Profitability and Velocity of Every SKU</h3>
+        <p>Three moves produce it: stop overpaying vendors, recover the credits you're owed, and take the labor out of AP.</p>
+        <span class="tut-cta">Watch + transcript <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></span>
+      </div>
+    </a>
+    <a class="tut-card reveal" href="/tutorials/quickbooks-how-it-works">
+      <div class="tut-thumb">
+        <img src="https://i.ytimg.com/vi/imrgiA5tH8Y/hqdefault.jpg" alt="How QuickBooks Works with ShelfSpace — video thumbnail" loading="lazy" width="480" height="270">
+        <span class="tut-badge">Episode 7</span>
+        <span class="tut-len">3:59</span>
+        <span class="tut-play"><span><svg width="24" height="24" viewBox="0 0 24 24" fill="var(--green-deep)"><path d="M8 5v14l11-7z"/></svg></span></span>
+      </div>
+      <div class="tut-body">
+        <h3>How QuickBooks Works with ShelfSpace</h3>
+        <p>What lands in your books and when, your accounting method, and the six-step setup.</p>
+        <span class="tut-cta">Watch + transcript <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></span>
+      </div>
+    </a>
+    <a class="tut-card reveal" href="/tutorials/qbo-accounting-method">
+      <div class="tut-thumb">
+        <img src="https://i.ytimg.com/vi/0NyWnqWztmQ/hqdefault.jpg" alt="Choosing your QuickBooks accounting method — video thumbnail" loading="lazy" width="480" height="270">
+        <span class="tut-badge">Episode 8</span>
+        <span class="tut-len">2:41</span>
+        <span class="tut-play"><span><svg width="24" height="24" viewBox="0 0 24 24" fill="var(--green-deep)"><path d="M8 5v14l11-7z"/></svg></span></span>
+      </div>
+      <div class="tut-body">
+        <h3>Choosing your QuickBooks accounting method</h3>
+        <p>Cash, expense at receipt, or capitalize inventory — what each means, and how to switch.</p>
+        <span class="tut-cta">Watch + transcript <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></span>
+      </div>
+    </a>
+    <a class="tut-card reveal" href="/tutorials/vendor-quickbooks-how-it-works">
+      <div class="tut-thumb">
+        <img src="https://i.ytimg.com/vi/oL-V67JAXWo/hqdefault.jpg" alt="How QuickBooks Works for Brands on ShelfSpace — video thumbnail" loading="lazy" width="480" height="270">
+        <span class="tut-badge">Episode 9</span>
+        <span class="tut-len">3:42</span>
+        <span class="tut-play"><span><svg width="24" height="24" viewBox="0 0 24 24" fill="var(--green-deep)"><path d="M8 5v14l11-7z"/></svg></span></span>
+      </div>
+      <div class="tut-body">
+        <h3>How QuickBooks Works for Brands on ShelfSpace</h3>
+        <p>Connect QuickBooks so settlements post as Invoices and payments post as Payments Received.</p>
+        <span class="tut-cta">Watch + transcript <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></span>
+      </div>
+    </a>
+    <a class="tut-card reveal" href="/tutorials/connect-your-ai">
+      <div class="tut-thumb">
+        <img src="https://i.ytimg.com/vi/Y-2MA1IceC8/hqdefault.jpg" alt="Connect Your Own AI to ShelfSpace — video thumbnail" loading="lazy" width="480" height="270">
+        <span class="tut-badge">Episode 10</span>
+        <span class="tut-len">2:05</span>
+        <span class="tut-play"><span><svg width="24" height="24" viewBox="0 0 24 24" fill="var(--green-deep)"><path d="M8 5v14l11-7z"/></svg></span></span>
+      </div>
+      <div class="tut-body">
+        <h3>Connect Your Own AI to ShelfSpace</h3>
+        <p>Plug ChatGPT, Claude, Meta Muse or any MCP assistant into your cannabis back office.</p>
+        <span class="tut-cta">Watch + transcript <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></span>
+      </div>
+    </a>
+    <a class="tut-card reveal" href="/tutorials/shelfspace-hype">
+      <div class="tut-thumb">
+        <img src="https://i.ytimg.com/vi/rCu5tQu_FGo/hqdefault.jpg" alt="ShelfSpace: Get Your Unpaid Invoices Paid — video thumbnail" loading="lazy" width="480" height="270">
+        <span class="tut-badge">Episode 11</span>
+        <span class="tut-len">1:07</span>
+        <span class="tut-play"><span><svg width="24" height="24" viewBox="0 0 24 24" fill="var(--green-deep)"><path d="M8 5v14l11-7z"/></svg></span></span>
+      </div>
+      <div class="tut-body">
+        <h3>ShelfSpace: Get Your Unpaid Invoices Paid</h3>
+        <p>Load an invoice, pick how we reach the store, and the money lands in your bank. We don't take a cut.</p>
+        <span class="tut-cta">Watch + transcript <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></span>
+      </div>
+    </a>
+    </div>
+  </section>
+</div>
+
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="/" class="nav-logo"><div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div><span class="nav-logo-text">ShelfSpace<sup class="nav-logo-tm">™</sup></span></a>
+      <p>Operations and Payments Intelligence</p>
+      <p class="footer-phone">Questions? Call Chelsea, our AI assistant: <a href="tel:+16162714585">(616) 271-4585</a></p>
+    </div>
+    <div class="footer-col"><h3>Services</h3><ul><li><a href="/accounts-receivable">Accounts Receivable</a></li><li><a href="/collections">Collections</a></li><li><a href="/payment-plans">Payment Plans</a></li><li><a href="/ai-calls">AI Calls</a></li></ul></div>
+    <div class="footer-col"><h3>Platform</h3><ul><li><a href="/features">Features</a></li><li><a href="/payments">Payments</a></li><li><a href="/integrations">Integrations</a></li><li><a href="/connect-your-ai">Connect Your AI</a></li></ul></div>
+    <div class="footer-col"><h3>Resources</h3><ul><li><a href="/pricing">Pricing</a></li><li><a href="/blog">Blog</a></li><li><a href="/docs">Docs</a></li><li><a href="/how-to">Guides</a></li><li><a href="/tutorials">Tutorials</a></li></ul></div>
+    <div class="footer-col"><h3>Company</h3><ul><li><a href="/about">About</a></li><li><a href="/vendors">For Vendors</a></li><li><a href="/for-bookkeepers">For Bookkeepers</a></li><li><a href="/contact">Contact</a></li><li><a href="mailto:support@shelfspace.pro">Support</a></li><li><a href="https://ourshelf.space/login">Login</a></li><li><a href="https://linkedin.com/company/shelfspace-pro" target="_blank" rel="noopener" class="footer-social-link"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> LinkedIn</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><p>&copy; 2026 ShelfSpace Technologies Inc.</p><div style="display:flex;align-items:center;gap:8px;justify-content:center;margin-top:12px;"><img src="/metrc-logo-v2.png" alt="Metrc" style="height:18px;opacity:0.4;filter:brightness(0) invert(1);"><span style="font-size:11px;color:rgba(255,255,255,0.35);">Certified Metrc Third-Party Vendor</span></div><div class="footer-bottom-links"><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div></div>
+</footer>
+<script>
+(function(){
+  var nav=document.getElementById('nav');
+  var pageHero=document.querySelector('.page-hero');
+  requestAnimationFrame(function(){ nav.classList.toggle('scrolled',window.scrollY>20); if(pageHero)pageHero.classList.add('hero-loaded'); });
+  window.addEventListener('scroll',function(){ nav.classList.toggle('scrolled',window.scrollY>20); },{passive:true});
+  var ro=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('is-visible');ro.unobserve(e.target);}})},{threshold:0.1});
+  document.querySelectorAll('.reveal').forEach(function(el){ro.observe(el);});
+})();
+</script>
+<script src="/shelfiq-widget.js"></script>
+<script src="/nav.js" defer></script>
+</body>
+</html>
