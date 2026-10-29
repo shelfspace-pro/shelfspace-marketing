@@ -104,7 +104,13 @@ for (const [dir, up] of Object.entries(SKILLS)) {
   if (!s.includes(`upstream commit ${UPSTREAM_SHA}`)) fail(`${dir}/SKILL.md: upstream commit pin missing`);
   if (!s.includes("MIT License") || !s.includes("./LICENSE")) fail(`${dir}/SKILL.md: MIT license reference missing`);
   if (!s.includes(HOUSE)) fail(`${dir}/SKILL.md: does not point at ${HOUSE}`);
-  if (!/## ShelfSpace rules \(read first; they override everything below\)\n\n[\s\S]{200,}?\n---\n/.test(s)) fail(`${dir}/SKILL.md: ShelfSpace rules block missing or empty`);
+  // the block runs from its heading to the FIRST --- rule; bound it there (a lazy regex would run on
+  // to a later rule and pass an emptied block).
+  const H = "## ShelfSpace rules (read first; they override everything below)\n";
+  const hi = s.indexOf(H), he = hi < 0 ? -1 : s.indexOf("\n---\n", hi);
+  const block = hi < 0 || he < 0 ? "" : s.slice(hi + H.length, he);
+  const bullets = (block.match(/^- \*\*/gm) || []).length;
+  if (block.trim().length < 400 || bullets < 2) fail(`${dir}/SKILL.md: ShelfSpace rules block missing or thin (${block.trim().length} chars, ${bullets} rules; need 400+ and 2+)`);
   const lines = s.split("\n").length;
   if (lines > 500) fail(`${dir}/SKILL.md: ${lines} lines (cap 500; move detail to references/)`);
   const lic = join(base, "LICENSE");
