@@ -215,6 +215,25 @@ else
   fi
 fi
 
+# ──────────────────────────────────────
+# Scan E — one outward brand (SEO C3, Z-A3b-a, 10/29/2026). The retired product
+# names ShelfPay / ShelfCollect never appear on a served page or in llms.txt.
+# Exempt: terms.html + privacy.html (legal documents, repo CLAUDE.md) and
+# quote.html (noindex sales link; the names survive only in code comments).
+# The file region must be non-empty.
+# ──────────────────────────────────────
+BRAND_FILES=$(find . -path ./node_modules -prune -o -path ./_pdf-source -prune -o -path ./scripts -prune -o -path ./marketing -prune -o -path ./og-templates -prune -o -path ./.git -prune -o \( -name '*.html' -o -name 'llms.txt' \) -type f -print | grep -v -x -E '\./(terms|privacy|quote)\.html')
+if [ -z "$BRAND_FILES" ] || ! echo "$BRAND_FILES" | grep -q -x './index.html' || ! echo "$BRAND_FILES" | grep -q -x './llms.txt'; then
+  HITS=$((HITS + 1)); echo "🔴 ONE-BRAND scan: file region empty (index.html / llms.txt not scanned) — scan proves nothing"
+else
+  BRAND_HITS=$(echo "$BRAND_FILES" | tr '\n' '\0' | xargs -0 grep -n -E 'Shelf[ -]?(Pay|Collect)|SHELF[ -]?(PAY|COLLECT)' 2>/dev/null)
+  if [ -n "$BRAND_HITS" ]; then
+    HITS=$((HITS + 1))
+    echo "🔴 ONE-BRAND: say ShelfSpace (or ShelfSpace AR / accounts payable), never the retired product names:"
+    echo "$BRAND_HITS" | cut -c1-200 | sed 's/^/     /'
+  fi
+fi
+
 # ─────────────────────────────────────────────────────────────────────
 # Scan C — Apollo.io tracker, sitewide. Removed 10/06/2026 (Chris: "rip
 # apollo out"); page templates used to copy it forward, so block a re-add.

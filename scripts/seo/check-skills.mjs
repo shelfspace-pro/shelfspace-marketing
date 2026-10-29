@@ -8,8 +8,8 @@
 //   2. Wiring: every relative Markdown link resolves, and no skill sends the agent to an upstream
 //      skill that was not vendored (it would silently not exist here).
 //   3. Copy law, over every skill file + the house rules + the blog brief: no retired product
-//      names, never "collections agency", no SBT / Diem, no payment-partner names (matched by
-//      hash so this public file doesn't print them), no human-handoff steps (drafts for someone to
+//      names, never "collections agency", no SBT / Diem (payment / bank partners MAY be named:
+//      Chris, 10/29/2026; the hashed partner scan was removed in SEO C3), no human-handoff steps (drafts for someone to
 //      send, "ask the user", posting on social sites), no private-strategy paths, no pricing file,
 //      no stale ACH wording. The brief may quote the banned words only inside ONE non-empty
 //      <!-- forbidden-list:start --> … <!-- forbidden-list:end --> region.
@@ -40,18 +40,8 @@ const NOT_VENDORED = ["ab-testing", "ad-creative", "ads", "analytics", "aso", "a
   "onboarding", "paywalls", "popups", "pricing", "product-marketing", "prospecting", "public-relations",
   "referrals", "revops", "sales-enablement", "signup", "sms", "social", "video",
   "ai-seo", "schema", "programmatic-seo", "competitors", "site-architecture", "link-building"];
-// sha256 of each lowercase payment / bank partner name (unigram or bigram). Names never printed here.
-const PARTNER_HASHES = new Set([
-  "67f482329f59610686bda697fd319135458f1a1f100b2412f4517424052c035a", "7d7ff99dfc7bab4fe4a718cfc347dc72f6b5b812232bd1ed4a18ff8472f2a05d",
-  "9c4e17b55dbc9b4f47860e5a543699fccb3c7df6488a9d5ababc155818f815f9", "a1d85b21b8f7ec2dc46c8602b55ab148f42a28f1f892dcbb234a03eb53830b30",
-  "4da634c7024c201a7cbb30b8fdc94ce14e6f95ab12bc09d27db81417a8e8fb1f", "90b047ecc97ee62cbc19a859b6a5a441203478baa7ee91d402163629af6c650f",
-  "8e3461219222ff7d7dfe8134c8f38e2512db521edefd22656db402cee9a4dd29", "310c693989dbe0804dc7c0b3238bda0826309a29ce0d31ddf6fe7a135b83e877",
-  "f9ed074a34038c15e19d5cd57b3136055aaf6538127457a103cd152589d93156", "36fdf8d982a553a977cf3492aad6cb97db793d60e3a1d604e7eaa5ea855b7f0f", // spacing variants
-]);
-const PARTNER_SAMPLE_HASHED = "7d7ff99dfc7bab4fe4a718cfc347dc72f6b5b812232bd1ed4a18ff8472f2a05d";
-
 // [id, regex, reason, bad sample the regex must match, exempt inside the brief's forbidden-list region?]
-// Only copy-word rules are exempt there; partner names and private paths are never allowed anywhere.
+// Only copy-word rules are exempt there; private paths are never allowed anywhere.
 const RULES = [
   ["retired-name", /\bShelf[ -]?(Collect|Pay)\b|\bshelf-?(collect|pay)\b|\bSHELF[ -]?(COLLECT|PAY)\b/, "retired product name: the one brand is ShelfSpace", "try " + "Shelf" + " Collect today", true],
   ["agency", /\bcollections?[\s-]+agenc(y|ies)\b(?!-vs-software)/i, "never call it a collections agency: it is collections software (the /blog/cannabis-collections-agency-vs-software URL is allowed)", "a cannabis collections agency", true],
@@ -67,7 +57,7 @@ const RULES = [
   ["ach-stale", /\bACH\b[^.\n]{0,40}\b(coming soon|launch(es|ing)?( soon| next)?|will launch|rolling out|rolls out|not (available )?yet|isn.t live|in beta|planned|available soon|on the roadmap)\b|\b(coming soon|launching soon|rolling out|not (available )?yet|will launch)\b[^.\n]{0,40}\bACH\b/i, "ACH is live", "Coming soon: ACH transfers", true],
 ];
 // Rules whose prohibition is itself stated in these files ("never X"): a negated sentence is skipped.
-// Names, agency, partners and private paths are NOT guarded: those words never belong here at all.
+// Names, agency and private paths are NOT guarded: those words never belong here at all.
 const NEG_GUARDED = new Set(["handoff-for", "handoff-ask", "handoff-draft", "handoff-social", "pricing-file", "free-trial", "ach-stale"]);
 // Sentences the law depends on: deleting one is a red, not a silent loosening.
 const PINS = {
@@ -81,19 +71,8 @@ const fails = [];
 const fail = (m) => fails.push(m);
 const sha = (s) => createHash("sha256").update(s).digest("hex");
 
-// ---- self-test: every rule bites its own sample, and the hash matcher bites a hashed partner name.
+// ---- self-test: every rule bites its own sample.
 for (const [id, rx, , sample] of RULES) if (!rx.test(sample)) fail(`self-test: rule ${id} no longer matches its sample`);
-if (!PARTNER_HASHES.has(PARTNER_SAMPLE_HASHED)) fail("self-test: partner hash list lost its sample entry");
-const partnerHits = (text) => {
-  const w = text.toLowerCase().match(/[a-z0-9]+/g) || [];
-  const hits = new Set();
-  for (let i = 0; i < w.length; i++) {
-    if (PARTNER_HASHES.has(sha(w[i]))) hits.add(w[i]);
-    if (i + 1 < w.length && PARTNER_HASHES.has(sha(w[i] + " " + w[i + 1]))) hits.add(w[i] + " " + w[i + 1]);
-  }
-  return [...hits];
-};
-if (partnerHits("we pay through " + "safe" + " " + "harbor here").length !== 1) fail("self-test: bigram partner matcher does not bite");
 
 // ---- 1. provenance
 const seoDirs = readdirSync(SKILLS_DIR).filter((d) => d.startsWith("seo-") && statSync(join(SKILLS_DIR, d)).isDirectory());
@@ -164,7 +143,7 @@ for (const p of scanned) {
   const raw = readFileSync(p, "utf8");
   const text = blankRegion(rel, raw);
   // Scan the WHOLE text with line breaks folded to spaces: these files are hard-wrapped, so a
-  // per-line scan would miss "collections\nagency" or a partner name split across a wrap.
+  // per-line scan would miss "collections\nagency" split across a wrap.
   const flat = text.replace(/\n/g, " ");
   const lineAt = (idx) => text.slice(0, idx).split("\n").length;
   // A rule stated as a prohibition ("Never ask the user…", "No `/pricing.md` on this site") is the law,
@@ -184,7 +163,6 @@ for (const p of scanned) {
       fail(`${rel}:${lineAt(m.index)}: [${id}] ${reason}\n      …${flat.slice(Math.max(0, m.index - 40), m.index + 80).trim()}…`);
     }
   }
-  for (const h of partnerHits(flatRaw)) fail(`${rel}: [partner] names a payment or bank partner ("${h}") — never name it`);
   if (rel === BRIEF) continue;
   for (const m of raw.matchAll(/\]\(([^)\s]+)\)/g)) {
     const t = m[1].split("#")[0];
@@ -212,4 +190,4 @@ if (fails.length) {
   for (const f of fails) console.log("   " + f);
   process.exit(1);
 }
-console.log(`✅ check:skills clean — ${Object.keys(SKILLS).length} vendored seo-* skills, ${scanned.length} files, ${RULES.length + 1} copy rules (self-tested).`);
+console.log(`✅ check:skills clean — ${Object.keys(SKILLS).length} vendored seo-* skills, ${scanned.length} files, ${RULES.length} copy rules (self-tested).`);

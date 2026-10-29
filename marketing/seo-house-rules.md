@@ -33,9 +33,8 @@ a tracker", "build a prospect list" or "write a strategy document", it is not ke
   comparison post, `/blog/cannabis-collections-agency-vs-software`.
 - Brand-first: the buyer is a cannabis **brand** (vendor) getting paid by dispensaries. Dispensary
   pages stay up and stay accurate, but new work leads with brands.
-- **ACH is live.** Never say it is coming, rolling out or in beta. Never name the bank, ACH or
-  payment provider behind it. No gate scans pages for those names
-  (`check:forbidden` covers only `docs/`), so this one is on you.
+- **ACH is live.** Never say it is coming, rolling out or in beta. Banking and payment partners
+  may be named on any page (Chris, 10/29/2026); describe only what `/payments` already says.
 - Say "consignment", never the scan-based trade term or its acronym. No customer names; proof is the anonymized
   case studies in `blog/case-study-*.html`.
 

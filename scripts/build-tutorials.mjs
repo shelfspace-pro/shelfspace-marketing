@@ -12,7 +12,7 @@
 //
 //   node scripts/build-tutorials.mjs
 
-import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
+import { readFileSync, writeFileSync, mkdirSync, existsSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { execFileSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
@@ -22,6 +22,11 @@ import { applyStrip, THUMB_V } from "./video-strip.mjs";
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const catalog = JSON.parse(readFileSync(join(ROOT, "video-catalog.json"), "utf8"));
 const videos = catalog.videos.filter((v) => v.privacy === "public");
+// Unlisted videos whose page already exists keep their page, regenerated from this template with
+// robots noindex (SEO C3, Z-A3b-c, Chris 10/29/2026: "keep the pages, add noindex"). They stay off the
+// hub, the homepage strip, the sitemap and llms.txt. A non-public video with no page gets none.
+const unlistedWithPage = catalog.videos.filter((v) => v.privacy !== "public" && existsSync(join(ROOT, "tutorials", `${v.slug}.html`)));
+const NOINDEX = '<meta name="robots" content="noindex">';
 // Number episodes over the videos actually shown, so hiding one never leaves a series
 // starting at "Episode 2" or skipping a number.
 {
@@ -163,13 +168,13 @@ const TUT_STYLE = `
   .tut-transcript p { margin: 0 0 12px; }
   @media (max-width: 640px) { .tut-actions { flex-direction: column; } .tut-actions a { justify-content: center; } }`;
 
-function head(title, desc, canonical, extraStyle = "", extraHead = "") {
+function head(title, desc, canonical, extraStyle = "", extraHead = "", robots = "") {
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>${esc(title)}</title>
+${robots ? robots + "\n" : ""}<title>${esc(title)}</title>
 <meta name="description" content="${esc(desc)}">
 <link rel="canonical" href="${canonical}">
 <meta property="og:type" content="website">
@@ -263,7 +268,7 @@ ${REVEAL_SCRIPT}
 </html>`;
 }
 
-function buildVideoPage(v) {
+function buildVideoPage(v, { noindex = false } = {}) {
   const related = videos.filter((x) => x.series === v.series && x.slug !== v.slug)
     .sort((a, b) => a.episode - b.episode);
   const chapters = Array.isArray(v.chapters) ? v.chapters : [];
@@ -289,6 +294,7 @@ ${related.map(card).join("\n")}
     "",
     // The VideoObject JSON-LD lives in <head> so Google associates it with the page.
     v.jsonld + "\n",
+    noindex ? NOINDEX : "",
   ) + `
 <div class="page-hero" style="padding-bottom:24px;">
   <div class="hero-bg-gradient"></div>
@@ -353,6 +359,12 @@ for (const v of videos) {
   writeFileSync(join(ROOT, "tutorials", `${v.slug}.html`), guard(v.slug, buildVideoPage(v)));
   console.log(`   tutorials/${v.slug}.html`);
 }
+for (const v of unlistedWithPage) {
+  const html = guard(v.slug, buildVideoPage(v, { noindex: true }));
+  if (!html.includes(NOINDEX)) throw new Error(`build-tutorials: unlisted ${v.slug} lost its noindex`);
+  writeFileSync(join(ROOT, "tutorials", `${v.slug}.html`), html);
+}
+console.log(`✅ ${unlistedWithPage.length} unlisted tutorial pages kept, noindex`);
 
 // The homepage video strip lists the same public videos (scripts/video-strip.mjs).
 {

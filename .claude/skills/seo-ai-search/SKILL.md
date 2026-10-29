@@ -19,8 +19,8 @@ naming, the claims registry, price and trial copy, voice, page style and the gat
 - **Owned pages only.** We make our own pages citable; nobody posts in communities, on social
   sites or review sites from this repo (see Pillar 3 below).
 - **If an AI answer gets ShelfSpace wrong**, fix the page that should state the fact plainly
-  (`references/answer-accuracy.md`), then `llms.txt`. Never call ShelfSpace an agency, never name
-  the payment partner, never state a price.
+  (`references/answer-accuracy.md`), then `llms.txt`. Never call ShelfSpace an agency and never
+  state a price.
 - **Keep the existing FAQPage JSON-LD.** Google retired FAQ rich results, but engines still read
   it and `check:seo` requires visible-FAQ parity.
 - **Measurement is non-deterministic**: report rates with sample sizes ("cited 3/5"), never one run.
