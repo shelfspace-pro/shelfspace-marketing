@@ -270,7 +270,7 @@ Once the foundations are sound, the fastest wins are usually pages already ranki
 - Not competing with other pages (cannibalization)
 
 **Site-Wide**
-- Keyword mapping document
+- A keyword map (in your head or your final reply, never a file in this public repo)
 - No major gaps in coverage
 - No keyword cannibalization
 - Logical topical clusters

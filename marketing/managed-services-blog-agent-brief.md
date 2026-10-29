@@ -96,7 +96,7 @@ it's Y", "not just A but B", em-dash pile-ups.
   `<details><summary>Q</summary><p>A</p></details>`. The FAQPage JSON-LD mirrors them exactly.
 - **CTA + footer**: boilerplate.
 
-## Visual kit — copy the markup; the classes already exist in styles.css (add no CSS for them)
+## Visual kit — copy the markup; the classes already exist (in `styles.css` or the reference post's `<style>`, which you copy whole), so add no CSS for them
 
 stat-trio (3 big numbers; drop `is-loss` on positive items):
 ```html

@@ -76,7 +76,7 @@ Never promise that a source fix will change the answer. Models retrain and re-re
 1. Accuracy rate across the cohort, the riskiest narrative, and the main source problem
 2. The claim ledger
 3. Owned-source fixes, each with the exact fact and the page that should state it
-4. Third-party correction requests, factual and sourced
+4. The third-party sources carrying a wrong fact, named in your final reply (corrections there happen outside this repo)
 5. The retest plan and date
 6. Unknowns
 

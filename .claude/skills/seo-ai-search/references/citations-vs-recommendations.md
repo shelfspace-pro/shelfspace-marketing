@@ -54,11 +54,11 @@ Recommendation is a consensus signal. The inputs the models weigh live mostly of
 
 | Channel | Why it moves recommendations | Related skill |
 |---|---|---|
-| **Review platforms** (G2, Capterra, TrustRadius, app stores) | Third-party validation models treat as evidence of legitimacy | customer-research (review generation loops) |
-| **Analyst coverage** (Gartner, Forrester, industry reports) | High-authority category framing; models echo analyst shortlists | public-relations |
-| **Communities and forums** (Reddit, HN, Slack/Discord, niche forums) | Unprompted practitioner discussion is heavily retrieved and hard to fake | community-marketing |
-| **Earned media and PR** | Independent sources repeating your positioning beyond your own site | public-relations |
-| **Video and podcasts** | Increasingly retrieved; transcripts carry brand + category associations | video, social |
+| **Review platforms** (G2, Capterra, TrustRadius, app stores) | Third-party validation models treat as evidence of legitimacy | off-site (not this repo) |
+| **Analyst coverage** (Gartner, Forrester, industry reports) | High-authority category framing; models echo analyst shortlists | off-site (not this repo) |
+| **Communities and forums** (Reddit, HN, Slack/Discord, niche forums) | Unprompted practitioner discussion is heavily retrieved and hard to fake | off-site (not this repo) |
+| **Earned media and PR** | Independent sources repeating your positioning beyond your own site | off-site (not this repo) |
+| **Video and podcasts** | Increasingly retrieved; transcripts carry brand + category associations | off-site (not this repo) |
 
 The test to apply before investing in another self-ranked guide: *if a model ignored everything on our domain, would the rest of the web still put us on the shortlist?* If not, that gap is the priority. AEO discourse often stops at "are we in the answer?" — the better question is "are we credible enough to be recommended?"
 
@@ -88,8 +88,8 @@ Diagnose with the granular classes; report to executives with the three roll-ups
 **Then follow the mix:**
 
 - **Engines already cite company sites, and yours lacks the facts:** strengthen owned content first. State specific, current facts on the page that should own them.
-- **Editorial or institutional sources dominate:** pursue earned coverage and analyst inclusion. The **seo-link-building** skill turns the cited pages into a prospect list.
-- **Communities contribute materially:** participate where you can do it honestly and in your own name. Skip communities the engines don't cite.
+- **Editorial or institutional sources dominate:** earned coverage and analyst inclusion matter most. Earning them happens outside this repo; here, build the data and assets those sources cite (**seo-link-building**), and name the cited pages in your final reply.
+- **Communities contribute materially:** note it in your final reply. Nothing in this repo posts in communities.
 - **Competitor pages get cited:** read them for the facts and framing you're missing. Don't copy them.
 - **Engines disagree:** plan per engine. A blended average can hide opposite behavior.
 

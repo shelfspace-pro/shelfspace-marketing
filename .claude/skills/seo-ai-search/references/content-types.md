@@ -47,7 +47,7 @@ For the cross-cutting strategy, see [SKILL.md](../SKILL.md).
 - Fair and balanced (AI penalizes obviously biased comparisons)
 - Specific criteria with ratings or scores
 - Updated pricing and feature data
-- Cite the `competitors` skill for building these pages
+- Use the **seo-competitors** skill for building these pages
 
 ---
 
@@ -57,7 +57,7 @@ For the cross-cutting strategy, see [SKILL.md](../SKILL.md).
 
 **Optimize:**
 - One page per core industry or segment you actually serve, with industry-specific workflows, integrations, compliance, and customer proof
-- Start with core segments. Many pages are fine if each adds real, segment-specific value; templated pages that only swap the industry name are what the scaled-content policy targets (see the `programmatic-seo` skill)
+- Start with core segments. Many pages are fine if each adds real, segment-specific value; templated pages that only swap the industry name are what the scaled-content policy targets (see the **seo-programmatic** skill)
 - Match the segment language used on your third-party profiles (see [positioning-and-consensus.md](positioning-and-consensus.md))
 
 ---

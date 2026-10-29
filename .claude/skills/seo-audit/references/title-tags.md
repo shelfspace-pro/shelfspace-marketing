@@ -82,7 +82,7 @@ Change one page at a time and record the baseline CTR, so a gain is attributable
 
 ## Bulk audits
 
-Work from a crawl export (URL, title, H1, length, indexable status) and, if available, Search Console queries per page. Return changes as a table the owner can approve line by line:
+Work from a crawl export (URL, title, H1, length, indexable status) and, if available, Search Console queries per page. Apply the changes and list them in your final reply as a table:
 
 ```markdown
 | Page | Current title | Proposed title | Reason |

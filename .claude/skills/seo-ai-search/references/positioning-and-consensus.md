@@ -41,7 +41,7 @@ A brand known for one segment for years doesn't become known for another because
 **How to apply before a repositioning, rebrand, or merger** (a practitioner sequence, not a tested playbook):
 1. Record a baseline for the old segment's prompts *and* the target segment's prompts.
 2. Watch for a dip and warn stakeholders it may happen. This rests on practitioner reports, not controlled data.
-3. Move off-site signals first (profiles, reviews, press, analyst listings, partner pages), then stage the on-site rewrite, rather than switching everything at once.
+3. Off-site signals (profiles, reviews, press, analyst listings, partner pages) move outside this repo; stage the on-site rewrite here rather than switching everything at once.
 4. Keep pages that still win old-segment prompts until the new association shows up in tracking.
 
 ---
@@ -80,8 +80,8 @@ AI answers are increasingly personalized and segment-aware: models place brands 
 
 Affiliates and review aggregators list a con for every product to look balanced. Find what they say about you.
 
-- If a listed con reinforces a known weakness models already repeat (for example, long implementation), ask the publisher to use a different con that is also true and less central.
-- Never ask for negatives to be removed or for false claims. The goal is accuracy, not a clean sheet.
+- If a listed con reinforces a known weakness models already repeat (for example, long implementation), answer it on our own page with specifics, and name the third-party page in your final reply. Nothing in this repo contacts the publisher.
+- The goal is accuracy, not a clean sheet: never argue with a true negative.
 
 To repair a weakness models repeat, address it in public with specifics: one practitioner's client turned "implementation takes forever" around over 1.5–2 years with founder posts about the process, guides on real timelines, and a concrete "4–8 weeks" on the implementation page (anecdote). See also the "recommended against" section of [citations-vs-recommendations.md](citations-vs-recommendations.md).
 

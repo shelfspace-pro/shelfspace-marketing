@@ -46,24 +46,33 @@ const PARTNER_HASHES = new Set([
   "9c4e17b55dbc9b4f47860e5a543699fccb3c7df6488a9d5ababc155818f815f9", "a1d85b21b8f7ec2dc46c8602b55ab148f42a28f1f892dcbb234a03eb53830b30",
   "4da634c7024c201a7cbb30b8fdc94ce14e6f95ab12bc09d27db81417a8e8fb1f", "90b047ecc97ee62cbc19a859b6a5a441203478baa7ee91d402163629af6c650f",
   "8e3461219222ff7d7dfe8134c8f38e2512db521edefd22656db402cee9a4dd29", "310c693989dbe0804dc7c0b3238bda0826309a29ce0d31ddf6fe7a135b83e877",
+  "f9ed074a34038c15e19d5cd57b3136055aaf6538127457a103cd152589d93156", "36fdf8d982a553a977cf3492aad6cb97db793d60e3a1d604e7eaa5ea855b7f0f", // spacing variants
 ]);
 const PARTNER_SAMPLE_HASHED = "7d7ff99dfc7bab4fe4a718cfc347dc72f6b5b812232bd1ed4a18ff8472f2a05d";
 
-// [id, regex, reason, bad sample the regex must match]
+// [id, regex, reason, bad sample the regex must match, exempt inside the brief's forbidden-list region?]
+// Only copy-word rules are exempt there; partner names and private paths are never allowed anywhere.
 const RULES = [
-  ["retired-name", /\bShelf(Collect|Pay)\b/i, "retired product name: the one brand is ShelfSpace", "try " + "Shelf" + "Collect today"],
-  ["agency", /\bcollections?[\s-]+agenc(y|ies)\b(?!-vs-software)/i, "never call it a collections agency: it is collections software (the /blog/cannabis-collections-agency-vs-software URL is allowed)", "a cannabis collections agency"],
-  ["sbt", /scan-based trading|\bSBT\b/i, "say consignment", "SBT settlements"],
-  ["diem", /\bDiem\b/i, "Diem is Chris's bio only, never in skill or brief copy", "Diem Cannabis"],
-  ["handoff-for", /\bfor (the user|chris|a person|a human|someone|you) to (send|post|approve|review|sign)\b/i, "no drafts for a person to send or post: Chris posts nothing", "a draft for the user to send"],
-  ["handoff-ask", /\bask the user\b|\bsend the user to\b|\bfor approval\b|\bget (their|the user's|chris's) approval\b/i, "unattended: never ask, never wait for approval", "drafts for approval"],
-  ["handoff-draft", /\b(draft|write) (an? |the )?(outreach|pitch|cold email|guest post)/i, "no outreach drafts from this repo", "draft outreach to editors"],
-  ["handoff-social", /\b(post|participate|comment) (on|in) (reddit|linkedin|quora|x\.com|twitter)\b/i, "nobody posts on social sites from this repo", "post on Reddit weekly"],
-  ["private-path", /docs\/seo\b|(?<![-\w])claims\.json|\b(keywords|backlog|competitors|prompts|budget)\.json\b|\b(OPERATOR|DISTRIBUTION)\.md\b|shelfspace-platform|seo_snapshots/, "private strategy paths stay in the private repo; reference only marketing/seo-claims.json", "see docs/seo/keywords.json"],
-  ["pricing-file", /\b(add|publish|create|ship)( an?)? `?\/?pricing\.(md|txt)\b/i, "no machine-readable price file: no public pricing", "add a /pricing.md file"],
-  ["free-trial", /\bfree trial\b|\bstart (your )?free\b/i, "trial copy lives only in trial-ok regions on allow-listed pages", "Start your free account"],
-  ["ach-stale", /\bACH\b[^.\n]{0,40}\b(coming soon|rolling out|rolls out|not yet|in beta)\b/i, "ACH is live", "ACH is coming soon"],
+  ["retired-name", /\bShelf\s?(Collect|Pay)\b/i, "retired product name: the one brand is ShelfSpace", "try " + "Shelf" + " Collect today", true],
+  ["agency", /\bcollections?[\s-]+agenc(y|ies)\b(?!-vs-software)/i, "never call it a collections agency: it is collections software (the /blog/cannabis-collections-agency-vs-software URL is allowed)", "a cannabis collections agency", true],
+  ["sbt", /scan-based trading|\bSBT\b/i, "say consignment", "SBT settlements", true],
+  ["diem", /\bDiem\b/i, "Diem is Chris's bio only, never in skill or brief copy", "Diem Cannabis", true],
+  ["handoff-for", /\bfor (the user|chris|a person|a human|someone|you|the owner|the client|the team) to (send|post|approve|review|sign|email|publish|share)\b/i, "no drafts for a person to send or post: Chris posts nothing", "a list for Chris to email", true],
+  ["handoff-ask", /\bask (the user|chris|the owner|the client|which|them)\b|\bconfirm with (the user|chris|the owner|the client)\b|\bsend the user to\b|\bfor approval\b|\b(owner|user|chris|client) can approve\b|\bget (their|the user's|chris's|the owner's) (approval|sign-off)\b|\bhand (it|them|this) (off )?to (chris|the user|the owner|someone)\b/i, "unattended: never ask, never wait for approval, never hand work to a person", "hand it to Chris to send", true],
+  ["handoff-draft", /\b(draft|write|prepare) (an? |the )?(outreach|pitch|cold email|guest post|(message|email|dm|note) to|list of (editors|journalists|prospects|contacts|publishers))|\b(send|email) (it |them |this )?to (the |each )?(editor|journalist|publisher|author|prospect)s?\b/i, "no outreach from this repo: no drafts, no lists, no messages", "Draft a message to the editor", true],
+  ["handoff-social", /\b(post|participate|comment|answer|share|reply) (on|in|to) (reddit|linkedin|quora|x\.com|twitter|hacker news|facebook)\b/i, "nobody posts on social sites from this repo", "answer on Quora", true],
+  ["private-path", /docs\/seo\b|(?<![-\w])claims\.json|\b(keywords|backlog|competitors|prompts|budget)\.json\b|\b(OPERATOR|DISTRIBUTION)\.md\b|shelfspace-platform|seo_snapshots/, "private strategy paths stay in the private repo; reference only marketing/seo-claims.json", "see docs/seo/keywords.json", false],
+  ["pricing-file", /\b(add|publish|create|ship|serve)( an?| the)? `?\/?pricing\.(md|txt|json)\b/i, "no machine-readable price file: no public pricing", "Publish the pricing.md", true],
+  ["free-trial", /\bfree trial\b|\bstart (your )?free\b|\btry it free\b|\b\d+[- ]day (free )?trial\b|\b(subscription|monthly) price\b/i, "trial and price copy live only in trial-ok regions on allow-listed pages", "name the 30-day trial", true],
+  ["ach-stale", /\bACH\b[^.\n]{0,40}\b(coming soon|launching soon|launches soon|rolling out|rolls out|not yet|in beta)\b|\b(coming soon|launching soon|rolling out)\b[^.\n]{0,40}\bACH\b/i, "ACH is live", "Coming soon: ACH transfers", true],
 ];
+// Sentences the law depends on: deleting one is a red, not a silent loosening.
+const PINS = {
+  "marketing/seo-house-rules.md": ["## 1. You run unattended", "**Nobody posts, sends or approves anything by hand.**", "## 2. This repo is public",
+    "## 3. Naming", "never an \"agency\" of any kind", "## 4. Numbers", "**No fabricated figures.**", "## 5. Price and trial", "Never ship a machine-readable price file"],
+  "marketing/managed-services-blog-agent-brief.md": ["(brand-first)", "## Price and trial: none in a post", "A blog post never carries a price",
+    "## Numbers: no fabricated figures", "marketing/seo-claims.json", "never called an agency of any kind"],
+};
 
 const fails = [];
 const fail = (m) => fails.push(m);
@@ -127,6 +136,11 @@ for (const f of [HOUSE, BRIEF]) {
   if (!existsSync(p) || readFileSync(p, "utf8").trim().length < 1000) fail(`${f}: missing or empty (the scan would prove nothing)`);
   else scanned.push(p);
 }
+for (const [f, pins] of Object.entries(PINS)) {
+  const p = join(ROOT, f); if (!existsSync(p)) continue;
+  const t = readFileSync(p, "utf8");
+  for (const pin of pins) if (!t.includes(pin)) fail(`${f}: load-bearing sentence removed: ${JSON.stringify(pin)}`);
+}
 if (scanned.length < Object.keys(SKILLS).length * 2 + 2) fail(`only ${scanned.length} files scanned: region empty`);
 
 // brief: the one forbidden-list region (exempt from the copy rules) must exist exactly once and be non-empty
@@ -150,19 +164,32 @@ for (const p of scanned) {
   // per-line scan would miss "collections\nagency" or a partner name split across a wrap.
   const flat = text.replace(/\n/g, " ");
   const lineAt = (idx) => text.slice(0, idx).split("\n").length;
-  for (const [id, rx, reason] of RULES) {
-    for (const m of flat.matchAll(new RegExp(rx.source, rx.flags.includes("g") ? rx.flags : rx.flags + "g"))) {
+  const flatRaw = raw.replace(/\n/g, " ");
+  for (const [id, rx, reason, , exempt] of RULES) {
+    for (const m of (exempt ? flat : flatRaw).matchAll(new RegExp(rx.source, rx.flags.includes("g") ? rx.flags : rx.flags + "g"))) {
       fail(`${rel}:${lineAt(m.index)}: [${id}] ${reason}\n      …${flat.slice(Math.max(0, m.index - 40), m.index + 80).trim()}…`);
     }
   }
-  for (const h of partnerHits(flat)) fail(`${rel}: [partner] names a payment or bank partner ("${h}") — never name it`);
+  for (const h of partnerHits(flatRaw)) fail(`${rel}: [partner] names a payment or bank partner ("${h}") — never name it`);
   if (rel === BRIEF) continue;
   for (const m of raw.matchAll(/\]\(([^)\s]+)\)/g)) {
     const t = m[1].split("#")[0];
     if (!t || /^(https?:|mailto:|\/)/.test(t)) continue; // site-absolute paths in examples are illustrative
     if (!existsSync(resolve(dirname(p), t))) fail(`${rel}: dead link (${m[1]})`);
   }
-  for (const n of NOT_VENDORED) if (raw.includes(`**${n}**`)) fail(`${rel}: hands off to **${n}**, an upstream skill not vendored here`);
+  for (const n of NOT_VENDORED) {
+    const e = n.replace(/[-]/g, "\\-");
+    if (raw.includes(`**${n}**`) || new RegExp("`" + e + "` skill\\b|\\bthe `?" + e + "`? skill\\b|\\bsee `" + e + "`\\)|\\b" + e + "'s [a-z-]+ reference\\b", "i").test(raw.replace(/\n/g, " ")))
+      fail(`${rel}: hands off to "${n}", an upstream skill not vendored here (or renamed)`);
+  }
+  // backticked reference paths (`references/x.md`) must resolve too, relative to the skill dir
+  const skillDir = p.slice(0, p.indexOf("/", SKILLS_DIR.length + 1));
+  for (const m of raw.matchAll(/`(references\/[a-z0-9-]+\.md)`/g)) {
+    const t = m[1];
+    if (t === "SKILL.md" || t === "CLAUDE.md") continue;
+    if (!existsSync(resolve(dirname(p), t)) && !existsSync(join(skillDir, t)) && !existsSync(join(skillDir, "references", t)) && !existsSync(join(ROOT, t)))
+      fail(`${rel}: dead backticked path (${t})`);
+  }
 }
 
 if (fails.length) {

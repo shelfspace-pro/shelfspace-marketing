@@ -83,7 +83,7 @@ rules § 1): no prospect lists, no outreach drafts, no messages. What this repo 
 
 | On-site work | Why it earns links |
 |---|---|
-| **Linkable assets** (tools, templates, data pages, the honest comparison pages) | The asset is the reason anyone links; ship one per week at most, per the operator caps |
+| **Linkable assets** (tools, templates, data pages, the honest comparison pages) | The asset is the reason anyone links; ship no more than the weekly caps in your prompt |
 | **Embed snippets** on every tool: copy-paste HTML with a branded credit link back to the tool page | Each embed is a link; keep the anchor branded ("ShelfSpace"), never keyword-stuffed (widget links with optimized anchors are named link spam) |
 | **Cite-this lines** on data pages: the figure, the date, the URL | Makes it easy for a writer to cite us correctly |
 | **Broken and moved URLs**: a permanent redirect in `vercel.json` for any URL that 404s | Recovers links already earned, with no outreach |

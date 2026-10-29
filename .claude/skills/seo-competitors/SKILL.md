@@ -19,7 +19,8 @@ naming, the claims registry, price and trial copy, voice, page style and the gat
   without a valid complaint. Facts from their public pages only, each linked and dated.
 - **Positioning:** ShelfSpace is cannabis collections software / accounts receivable software for
   brands, done for you. Never an agency. One brand name.
-- **Page format:** a post in `blog/` following `marketing/managed-services-blog-agent-brief.md`, with
+- **Page format:** a post in `blog/` following `marketing/managed-services-blog-agent-brief.md` and
+  `marketing/landing-page-playbook.md`, with
   a compare-table, the 10/27/2026 page style and the script-owned CTA.
 - **Our side of every table** uses only capabilities already described on this site; no new
   claims, no timelines, no price.
@@ -83,14 +84,13 @@ Before creating competitor pages, understand:
 - Reduce evaluation friction
 
 ### 4. Modular Content Architecture
-- Competitor data should be centralized
-- Updates propagate to all pages
-- Single source of truth per competitor
+- Each competitor fact lives on the page that uses it, with its source and date (no central data file in this public repo; see Content Architecture)
+- When a fact changes, fix every page that repeats it
 
 ### 5. Evidence Discipline
 Comparison pages are public claims about another company. Every one should survive the competitor's own team reading it.
-- **"Not observed" is not "doesn't have."** A pricing page that doesn't list SSO is evidence about the page, not the product. Write "not listed on their pricing page (as of Mar 2026)" or drop the row. Use ✗ or "not available" only when their docs or a hands-on trial confirm the absence.
-- **Date competitor facts.** Pricing and features change. Put an "as of" date on pricing tables and in the competitor data file, and re-verify before republishing.
+- **"Not observed" is not "doesn't have."** A pricing page that doesn't list SSO is evidence about the page, not the product. Write "not listed on their pricing page (as of Mar 2026)" or drop the row. Use ✗ or "not available" only when their public docs confirm the absence.
+- **Date competitor facts.** Pricing and features change. Put an "as of" date on pricing tables, and re-verify before republishing.
 - **One look is a snapshot.** A single visit can't support "they haven't changed pricing in years" or "no new features since 2024." That needs dated history (changelog, archived pages).
 - **State what changed, not why.** "They moved SSO to the Enterprise tier" is a fact. "Because they're squeezing upmarket" is a guess. Leave motive out unless they've said it publicly.
 - **Separate fact from interpretation.** Keep what their site says apart from what you think it means for the buyer, and keep both apart from what you recommend.
@@ -137,7 +137,7 @@ Comparison pages are public claims about another company. Every one should survi
 
 **Important**: Include 4-7 real alternatives. Being genuinely helpful builds trust and ranks better.
 
-**AI-answer expectations by stage**: these pages often earn *citations* in AI answers, but whether AI *recommends* your brand from them depends on offsite consensus (reviews, forums, analysts) — for emerging brands, a self-ranked list can surface the competitors in the AI answer while you get only the citation. Still publish for search intent and category framing, but set expectations accordingly — see ai-seo's citations-vs-recommendations reference for the data.
+**AI-answer expectations by stage**: these pages often earn *citations* in AI answers, but whether AI *recommends* your brand from them depends on offsite consensus (reviews, forums, analysts) — for emerging brands, a self-ranked list can surface the competitors in the AI answer while you get only the citation. Still publish for search intent and category framing, but set expectations accordingly — see seo-ai-search's citations-vs-recommendations reference for the data.
 
 ---
 

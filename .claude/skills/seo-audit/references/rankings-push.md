@@ -54,10 +54,10 @@ A new page should launch with everything it needs to be found, so it doesn't spe
 - [ ] One H1, aligned with the title
 - [ ] Self-referencing canonical
 - [ ] Added to the XML sitemap
-- [ ] Structured data where the page type supports it (see `schema`)
+- [ ] Structured data where the page type supports it (see **seo-schema**)
 - [ ] Main content present in the server-rendered HTML, not only after JavaScript runs
 - [ ] Indexable: no stray `noindex`, not blocked in robots.txt
-- [ ] Linked to the right conversion path (see `cro`)
+- [ ] Linked to the right conversion path (the script-owned consult CTA)
 
 After it ships, request indexing once in Search Console. Requesting again doesn't speed anything up. If the page isn't indexed after a few weeks, check the causes in the Indexation section of the audit instead of resubmitting.
 

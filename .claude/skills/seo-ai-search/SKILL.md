@@ -14,7 +14,7 @@ Read `marketing/seo-house-rules.md` before anything else. It covers unattended r
 questions, no human steps, nothing posted or sent), what never goes in this public repo,
 naming, the claims registry, price and trial copy, voice, page style and the gates. Then:
 
-- **Why this matters here:** Google shows an AI Overview on cannabis AR queries, so being the cited
+- **Why this matters here:** Google often shows an AI Overview above the results, so being the cited
   source can beat ranking below it. Lead each section with a 40-60 word answer a model can lift.
 - **Owned pages only.** We make our own pages citable; nobody posts in communities, on social
   sites or review sites from this repo (see Pillar 3 below).
@@ -300,7 +300,7 @@ starts from a consistent source. See [references/positioning-and-consensus.md](r
 >
 > **Why include them anyway**: non-Google AI engines (ChatGPT, Claude, Perplexity) and autonomous buying agents do reward extractable structure. The files below help with those engines without harming Google.
 
-AI agents aren't just answering questions — they're becoming buyers. When an AI agent evaluates tools on behalf of a user, it needs structured, parseable information. If your pricing is locked in a JavaScript-rendered page or a "contact sales" wall, agents will skip you and recommend competitors whose information they can actually read.
+AI agents aren't just answering questions — they're becoming buyers. When an AI agent evaluates tools on behalf of a user, it needs structured, parseable information. If what you do is locked in a JavaScript-rendered page, agents will skip you and recommend competitors whose information they can actually read. (Price is a deliberate exception here; see the next paragraph.)
 
 **Audit this layer first**: [references/agent-readiness.md](references/agent-readiness.md) — the access/discovery/parseability checklist, free scoring tools (`npx is-agentic`, Frase's checker), Markdown content negotiation + `Link` headers, `llms-full.txt`, and the emerging agent-*actionable* layer (WebMCP).
 
@@ -347,7 +347,7 @@ Beyond AI search engines summarizing content, autonomous agents are starting to 
 - **Clean accessibility tree** — every interactive element labelled; ARIA used correctly (or not at all when native HTML suffices)
 - **Stable selectors / predictable layouts** — agents struggle with sites that re-render every interaction
 - **Visible specs and contact info** — what the product does, who it is for, how to reach us, on a public, indexable page. Date the facts that change so an agent can judge freshness. Price stays off the site (house rules § 5)
-- **Proof as text** — testimonials, ratings, and named customer logos in the HTML as text, not baked into images or injected by a widget script. If you can't select it with the mouse, an agent may not read it
+- **Proof as text** — the anonymized case-study figures (no customer names; house rules § 3) in the HTML as text, not baked into images or injected by a widget script. If you can't select it with the mouse, an agent may not read it
 
 **Emerging — Universal Commerce Protocol (UCP):**
 Google references UCP as a forthcoming protocol that will give agents standardized hooks for commerce interactions (catalog discovery, pricing, checkout). Watch for adoption; for now, the structural recommendations above are the precursor.
@@ -395,7 +395,7 @@ Not all content is equally citable — and the format mix is **volatile**. The l
 Monthly manual check:
 1. Pick your top 20 queries
 2. Run each through ChatGPT, Perplexity, and Google
-3. Record: Are you cited? Who is? What page? Log it in a spreadsheet and track month-over-month
+3. Record: Are you cited? Who is? What page? Report it in your final reply and compare month over month (never a log file in this repo)
 
 AI answers are **non-deterministic** — one run is an anecdote, not a measurement. Run each query 3–5 times per platform and track the mention *rate* with its sample size ("cited 3/5, n=5"), comparing rates over time rather than single runs. Full rigor checklist in [references/format-volatility.md](references/format-volatility.md).
 

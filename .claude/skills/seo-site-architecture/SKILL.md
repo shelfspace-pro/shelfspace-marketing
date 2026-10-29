@@ -195,10 +195,10 @@ Breadcrumbs should mirror the URL hierarchy. Every breadcrumb segment should be 
 | Pricing | `/pricing` | `/pricing` |
 | Blog post | `/blog/{slug}` | `/blog/seo-guide` |
 | Blog category | `/blog/category/{slug}` | `/blog/category/seo` |
-| Case study | `/customers/{slug}` | `/customers/acme-corp` |
+| Case study | `/blog/case-study-{slug}` | `/blog/case-study-shorted-delivery` |
 | Documentation | `/docs/{section}/{page}` | `/docs/api/authentication` |
 | Legal | `/{page}` | `/privacy`, `/terms` |
-| Landing page | `/{slug}` or `/lp/{slug}` | `/free-trial`, `/lp/webinar` |
+| Landing page | `/{slug}` or `/lp/{slug}` | `/collections`, `/lp/webinar` |
 | Comparison | `/compare/{competitor}` or `/vs/{competitor}` | `/compare/competitor-name` |
 | Integration | `/integrations/{name}` | `/integrations/slack` |
 | Template | `/templates/{slug}` | `/templates/marketing-plan` |
@@ -254,7 +254,7 @@ graph TD
         FEAT[Features]
         PRICE[Pricing]
         BLOG[Blog]
-        CTA[Get Started]
+        CTA[Schedule a Demo]
     end
 
     subgraph Footer Nav
@@ -284,7 +284,7 @@ graph TD
 | Type | Purpose | Example |
 |------|---------|---------|
 | Navigational | Move between sections | Header, footer, sidebar links |
-| Contextual | Related content within text | "Learn more about [analytics](/features/analytics)" |
+| Contextual | Related content within text | "how [payment plans](/blog/cannabis-payment-plans-getting-paid-by-dispensaries) work" |
 | Hub-and-spoke | Connect cluster content to hub | Blog posts linking to pillar page |
 | Cross-section | Connect related pages across sections | Feature page linking to related case study |
 

@@ -34,7 +34,8 @@ a tracker", "build a prospect list" or "write a strategy document", it is not ke
 - Brand-first: the buyer is a cannabis **brand** (vendor) getting paid by dispensaries. Dispensary
   pages stay up and stay accurate, but new work leads with brands.
 - **ACH is live.** Never say it is coming, rolling out or in beta. Never name the bank, ACH or
-  payment provider behind it (`check:forbidden`).
+  payment provider behind it. No gate scans pages for those names
+  (`check:forbidden` covers only `docs/`), so this one is on you.
 - Say "consignment", never the scan-based trade term or its acronym. No customer names; proof is the anonymized
   case studies in `blog/case-study-*.html`.
 
@@ -61,12 +62,14 @@ a tracker", "build a prospect list" or "write a strategy document", it is not ke
   ShelfSpace, "the platform" for software actions. No questions as headlines, no `<br>` in
   headings, no "learn more", no AI-residue cadence ("not just X, it's Y").
 - New and rebuilt pages use the 10/27/2026 page style (`CLAUDE.md` § Design System → Page style).
-  Copy the reference code; don't invent new components.
+  Copy the reference code; don't invent new components. Build every page from
+  `marketing/landing-page-playbook.md` (posts follow the blog brief).
 - CTA labels are script-owned: add the button, then `npm run cta:sweep` and `npm run check:cta`.
 - Blog posts follow `marketing/managed-services-blog-agent-brief.md`.
 
 ## 7. Gates before every push
 `npm run -s check:seo && npm run -s check:sitemap && npm run -s check:head && npm run -s check:forbidden && npm run -s check:cta && npm run -s check:phone && npm run -s check:skills`,
+plus `npm run -s check:dates` and, for a post, `bash marketing/scripts/check-blog-sync.sh`;
 plus `check:claims` and `check:dupe` once they exist. Screenshot every changed visible page at
 1440 and 390 and look at the images. A new page also goes into `sitemap.xml`
 (`scripts/seo/build-sitemap.mjs`), `llms.txt` and, for a post, `blog.html`.

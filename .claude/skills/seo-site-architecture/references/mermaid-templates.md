@@ -40,7 +40,7 @@ graph TD
         FEAT["Features"]
         PRICE["Pricing"]
         BLOG["Blog"]
-        CTA["Get Started ★"]
+        CTA["Schedule a Demo ★"]
     end
 
     subgraph "Feature Pages"
