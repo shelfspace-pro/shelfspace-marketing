@@ -17,6 +17,7 @@ import { dirname, join } from "node:path";
 import { execFileSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import { LIMITS } from "./seo/check-seo.mjs";
+import { applyStrip } from "./video-strip.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const catalog = JSON.parse(readFileSync(join(ROOT, "video-catalog.json"), "utf8"));
@@ -351,6 +352,13 @@ console.log(`✅ tutorials.html  (${videos.length} videos, ${new Set(videos.map(
 for (const v of videos) {
   writeFileSync(join(ROOT, "tutorials", `${v.slug}.html`), guard(v.slug, buildVideoPage(v)));
   console.log(`   tutorials/${v.slug}.html`);
+}
+
+// The homepage video strip lists the same public videos (scripts/video-strip.mjs).
+{
+  const index = join(ROOT, "index.html");
+  writeFileSync(index, applyStrip(readFileSync(index, "utf8"), catalog));
+  console.log("✅ index.html video strip");
 }
 
 // Keep sitemap.xml in step with the pages just written (SEO engine A1).

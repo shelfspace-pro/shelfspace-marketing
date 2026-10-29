@@ -44,6 +44,10 @@ jobs:
       - name: Forbidden copy
         run: npm run check:forbidden
 
+      # Homepage videos: public (brand) videos only, current thumbnails (10/29/2026).
+      - name: Homepage video strip
+        run: npm run check:video-strip
+
       # /quote is month to month only: a saved 12-month link must open at the month-to-month price.
       - name: Quote builder
         run: npm run check:quote
