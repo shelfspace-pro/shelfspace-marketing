@@ -1,0 +1,44 @@
+name: IndexNow
+
+# Tell Bing / Yandex / Seznam / Naver (and anything else that reads IndexNow) the moment a page changes.
+# Never fails the workflow: a non-200 from IndexNow is logged and ignored.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '24'
+
+      - name: Submit changed pages
+        env:
+          BEFORE: ${{ github.event.before }}
+          AFTER: ${{ github.sha }}
+        run: |
+          set +e
+          node scripts/seo/indexnow-urls.mjs "$BEFORE" "$AFTER" > urls.txt
+          echo "indexable changed URLs: $(wc -l < urls.txt)"
+          cat urls.txt
+          if [ ! -s urls.txt ]; then echo "nothing to submit"; exit 0; fi
+          KEY=f403fbcba6fd1a3fa31d7d0979633ee8
+          node -e '
+            const fs = require("fs");
+            const urlList = fs.readFileSync("urls.txt", "utf8").split("\n").filter(Boolean);
+            fs.writeFileSync("body.json", JSON.stringify({ host: "shelfspace.pro", key: process.argv[1], keyLocation: "https://shelfspace.pro/" + process.argv[1] + ".txt", urlList }));
+          ' "$KEY"
+          CODE=$(curl -sS -o resp.txt -w '%{http_code}' -X POST https://api.indexnow.org/indexnow \
+            -H 'Content-Type: application/json; charset=utf-8' --data @body.json)
+          echo "IndexNow HTTP $CODE"
+          cat resp.txt
+          if [ "$CODE" != "200" ] && [ "$CODE" != "202" ]; then echo "::warning::IndexNow returned $CODE (ignored)"; fi
+          exit 0
