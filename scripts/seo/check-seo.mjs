@@ -230,6 +230,8 @@ export function selfTest() {
   const g = scan(good);
   if (g.pages < 3) fails.push(`good fixture: only ${g.pages} indexable pages (region empty)`);
   if (g.violations.size) fails.push(`good fixture is not clean: ${JSON.stringify(counts(g.violations))}`);
+  const gs = scan(good + "/"); // --root with a trailing slash must scan the same tree
+  if (gs.pages !== g.pages || gs.violations.size) fails.push(`good fixture scanned as "${good}/" differs: ${gs.pages} pages, ${JSON.stringify(counts(gs.violations))}`);
   const cases = readdirSync(join(FIXTURES, "cases")).sort();
   if (cases.length < 12) fails.push(`only ${cases.length} fixture cases (expected one per check)`);
   for (const c of cases) {
