@@ -51,10 +51,10 @@ const PARTNER_SAMPLE_HASHED = "7d7ff99dfc7bab4fe4a718cfc347dc72f6b5b812232bd1ed4
 
 // [id, regex, reason, bad sample the regex must match]
 const RULES = [
-  ["retired-name", /\bShelf(Collect|Pay)\b/, "retired product name: the one brand is ShelfSpace", "try " + "Shelf" + "Collect today"],
+  ["retired-name", /\bShelf(Collect|Pay)\b/i, "retired product name: the one brand is ShelfSpace", "try " + "Shelf" + "Collect today"],
   ["agency", /\bcollections?[\s-]+agenc(y|ies)\b(?!-vs-software)/i, "never call it a collections agency: it is collections software (the /blog/cannabis-collections-agency-vs-software URL is allowed)", "a cannabis collections agency"],
   ["sbt", /scan-based trading|\bSBT\b/i, "say consignment", "SBT settlements"],
-  ["diem", /\bDiem\b/, "Diem is Chris's bio only, never in skill or brief copy", "Diem Cannabis"],
+  ["diem", /\bDiem\b/i, "Diem is Chris's bio only, never in skill or brief copy", "Diem Cannabis"],
   ["handoff-for", /\bfor (the user|chris|a person|a human|someone|you) to (send|post|approve|review|sign)\b/i, "no drafts for a person to send or post: Chris posts nothing", "a draft for the user to send"],
   ["handoff-ask", /\bask the user\b|\bsend the user to\b|\bfor approval\b|\bget (their|the user's|chris's) approval\b/i, "unattended: never ask, never wait for approval", "drafts for approval"],
   ["handoff-draft", /\b(draft|write) (an? |the )?(outreach|pitch|cold email|guest post)/i, "no outreach drafts from this repo", "draft outreach to editors"],
@@ -143,14 +143,19 @@ const blankRegion = (rel, text) => {
 // ---- 2 + 3. links, hand-offs, copy law
 for (const p of scanned) {
   const rel = relative(ROOT, p);
-  if (!/\.(md|txt)$/.test(p) && !p.endsWith("LICENSE")) continue;
-  if (p.endsWith("LICENSE")) continue;
+  if (p.endsWith("LICENSE")) continue; // every other file in a skill dir is scanned, whatever its extension
   const raw = readFileSync(p, "utf8");
   const text = blankRegion(rel, raw);
-  text.split("\n").forEach((line, i) => {
-    for (const [id, rx, reason] of RULES) if (rx.test(line)) fail(`${rel}:${i + 1}: [${id}] ${reason}\n      ${line.trim().slice(0, 160)}`);
-    for (const h of partnerHits(line)) fail(`${rel}:${i + 1}: [partner] names a payment or bank partner ("${h}") — never name it`);
-  });
+  // Scan the WHOLE text with line breaks folded to spaces: these files are hard-wrapped, so a
+  // per-line scan would miss "collections\nagency" or a partner name split across a wrap.
+  const flat = text.replace(/\n/g, " ");
+  const lineAt = (idx) => text.slice(0, idx).split("\n").length;
+  for (const [id, rx, reason] of RULES) {
+    for (const m of flat.matchAll(new RegExp(rx.source, rx.flags.includes("g") ? rx.flags : rx.flags + "g"))) {
+      fail(`${rel}:${lineAt(m.index)}: [${id}] ${reason}\n      …${flat.slice(Math.max(0, m.index - 40), m.index + 80).trim()}…`);
+    }
+  }
+  for (const h of partnerHits(flat)) fail(`${rel}: [partner] names a payment or bank partner ("${h}") — never name it`);
   if (rel === BRIEF) continue;
   for (const m of raw.matchAll(/\]\(([^)\s]+)\)/g)) {
     const t = m[1].split("#")[0];

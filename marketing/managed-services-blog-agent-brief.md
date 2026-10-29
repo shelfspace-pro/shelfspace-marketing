@@ -36,8 +36,9 @@ primary CTA button → `/contact`. Its label is script-owned: don't hand-edit it
 - **Verb split:** "we" for ShelfSpace and the done-for-you work; "the platform" for software
   actions; "you" for what the reader decides ("you approve the payment plan, we run it"). Never
   "ShelfSpace does X".
-- **Payments:** stores pay by ACH bank transfer or digital check; ACH is live. Never say it is
-  coming, and never name the bank, ACH or payment provider behind it.
+- **Payments:** ACH is live. When a post mentions how stores pay, link `/payments` and describe
+  only what that page says. Never say ACH is coming, and never name the bank, ACH or payment
+  provider behind it.
 - Operator to operator, direct. Specific beats adjectives; loss framing beats gain framing. Short
   paragraphs. Dates in visible copy are MM/DD/YYYY.
 
