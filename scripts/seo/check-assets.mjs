@@ -68,9 +68,8 @@ else {
   // past-terms cash from the UNROUNDED DSO: (100000 x 7 - 2 x 300000) / 7 = 14285.71 -> 14286 (the rounded DSO
   // of 2.3 days would give 12857)
   eq("dso(1000.00, 3000.00, 7d, net 2)", T.dso(100000, 300000, 7, 2), { dsoTenths: 23, pastTermsCents: 14286 });
-  // the largest accepted amount at 100% for ten years: the product passes 2^53, so plain Number math drifts
-  { const big = 99999999999, want = Number((2n * BigInt(big) * 10000n * 3650n + 3650000n) / 7300000n);
-    eq("lateCost(max amount, 100%, 3650d)", T.lateCost(big, 10000, 3650, 0, 0).carryingCents, want); }
+  // a product past 2^53: Math.round(a * b * d / 3650000) in plain Numbers gives 109167157640; exact is ...639
+  eq("lateCost(970,122,414.15 @36.87% 1114d)", T.lateCost(97012241415, 3687, 1114, 0, 0).carryingCents, 109167157639);
   eq('parseCents("1000000000")', T.parseCents("1000000000"), null);
   eq('parseBps("12.5")', T.parseBps("12.5"), 1250);
   eq('parseTenths("2.5")', T.parseTenths("2.5"), 25);
