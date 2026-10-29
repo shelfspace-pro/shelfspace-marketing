@@ -16,7 +16,8 @@
 //   orphan                                    >=1 inbound <a href> from another served page (not the homepage)
 //   broken-link / broken-anchor               internal link resolves (cleanUrls, rewrites, redirects) / #id exists
 //   img-alt                                   non-empty alt, or alt="" with aria-hidden="true" / role=presentation|none
-// Warning only (never fails, never baselined): link-redirect — a link to a redirect source or a *.html URL.
+// Warning only (never fails, never baselined): link-redirect — a link to a redirect source, a *.html URL or a
+// trailing-slash URL (each costs a hop).
 //
 // Baseline (scripts/seo/check-seo-baseline.json): { file: { code: count } }. A count above the baseline fails;
 // below it prints "baseline can shrink". Delete the file and every violation fails.
@@ -66,7 +67,7 @@ function loadSite(root) {
   const redirects = (idx.vercel.redirects || []).filter((r) => !r.has).map((r) => toRe(r.source));
   const cache = new Map();
   const read = (f) => { if (!cache.has(f)) cache.set(f, readFileSync(join(root, f), "utf8")); return cache.get(f); };
-  return { root, idx, files, rewrites, redirects, read };
+  return { root, idx, files, rewrites, redirects, read, trailingSlashOff: idx.vercel.trailingSlash === false };
 }
 
 // A path on the site -> { kind: "file", file } | { kind: "rewrite" } | { kind: "redirect" } | { kind: "missing" }
@@ -75,6 +76,7 @@ function resolvePath(site, path) {
   try { p = decodeURI(p); } catch {}
   if (site.redirects.some((r) => r.test(p))) return { kind: "redirect" };
   if (site.rewrites.some((r) => r.test(p))) return { kind: "rewrite" };
+  if (site.trailingSlashOff && p.length > 1 && p.endsWith("/")) return { kind: "redirect" }; // 308 to the no-slash URL
   const rel = p.replace(/^\//, "");
   if (rel.endsWith(".html") && site.files.has(rel)) return { kind: "redirect", file: rel }; // cleanUrls 308s *.html
   const base = rel.replace(/\/$/, "");
@@ -86,7 +88,8 @@ function resolvePath(site, path) {
 // Internal hrefs on a page -> [{ href, path, hash }]
 function internalLinks(html, file) {
   const out = [];
-  const pageUrl = new URL(ORIGIN + urlPath(file) + (file.endsWith("index.html") && file !== "index.html" ? "/" : ""));
+  // trailingSlash:false serves docs/index.html at /docs (no slash), so a relative href resolves against "/".
+  const pageUrl = new URL(ORIGIN + urlPath(file));
   for (const m of stripScripts(stripComments(html)).matchAll(/<a\b[^>]*>/gi)) {
     const href = attr(m[0], "href");
     if (href == null || href === "" || /^(mailto|tel|sms|javascript|data):/i.test(href)) continue;
@@ -98,7 +101,7 @@ function internalLinks(html, file) {
   return out;
 }
 
-const ids = (html) => new Set([...stripComments(html).matchAll(/\s(?:id|name)\s*=\s*["']([^"']+)["']/gi)].map((m) => m[1]));
+const ids = (html) => new Set([...stripComments(html).matchAll(/<(?:[a-z][a-z0-9]*\b[^>]*\sid|a\b[^>]*\sname)\s*=\s*["']([^"']+)["']/gi)].map((m) => m[1]));
 
 // FAQPage questions anywhere in a JSON-LD value (top level, arrays, @graph).
 function faqQuestions(node, out = []) {
