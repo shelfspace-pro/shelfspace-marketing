@@ -196,8 +196,18 @@ ACH_FILES=$(find . -path ./node_modules -prune -o -path ./_pdf-source -prune -o 
 if [ -z "$ACH_FILES" ] || [ ! -s llms.txt ] || [ ! -s payments.html ]; then
   HITS=$((HITS + 1)); echo "🔴 ACH-LIVE scan: file region empty (llms.txt / payments.html missing) — scan proves nothing"
 else
-  # shellcheck disable=SC2086
-  ACH_STALE=$(grep -nIiE -H '\bACH\b.*(rolling out|rolls out|coming soon|not yet (available|live)|live for no one)|(rolling out|coming soon|not yet (available|live)).*\bACH\b' $ACH_FILES 2>/dev/null)
+  # Windowed: a stale phrase with the word ACH on the same line, within 4 lines after it (a tag
+  # above its <h3>, pretty-printed JSON-LD) or 1 line before it.
+  # POSIX awk only (BSD / mawk / gawk): one awk per file, buffer lines, scan in END.
+  ACH_STALE=""
+  for f in $ACH_FILES; do
+    OUT=$(awk -v F="$f" -v STALE='[Rr]olling out|[Rr]olls out|[Cc]oming soon|[Nn]ot yet (available|live)|[Ll]ive for no one|[Pp]lanned|[Aa]vailable soon|[Ww]ill launch|[Nn]ot (available )?yet|[Ii]sn.t live|[Oo]n the roadmap|[Ii]n beta|[Tt]oday every payment is delivered as a check|[Uu]ntil it.s on for' '
+      { L[NR]=$0 }
+      END { for (i=1;i<=NR;i++) if (L[i] ~ STALE) { hit=0; for (j=i-1;j<=i+4;j++) if (j>=1 && j<=NR && L[j] ~ /(^|[^A-Za-z])[Aa][Cc][Hh]([^A-Za-z]|$)/) hit=1; if (hit) print F ":" i ": " substr(L[i],1,200) } }
+    ' "$f")
+    [ -n "$OUT" ] && ACH_STALE="${ACH_STALE}${OUT}"$'\n'
+  done
+  ACH_STALE="${ACH_STALE%$'\n'}"
   if [ -n "$ACH_STALE" ]; then
     HITS=$((HITS + 1))
     echo "🔴 ACH-LIVE: ACH is live (Chris, 10/28/2026) — remove rolling out / coming soon / not yet wording about ACH"

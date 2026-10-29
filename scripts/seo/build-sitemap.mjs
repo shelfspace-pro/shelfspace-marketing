@@ -24,7 +24,7 @@ const vercel = JSON.parse(readFileSync(join(ROOT, "vercel.json"), "utf8"));
 const redirectSources = new Set((vercel.redirects || []).map((r) => r.source).filter((s) => !s.includes(":")));
 const noindexSources = new Set((vercel.headers || []).filter((h) => (h.headers || []).some((x) => /x-robots-tag/i.test(x.key) && /noindex/i.test(x.value))).map((h) => h.source));
 
-function walk(dir) {
+export function walk(dir) {
   const out = [];
   for (const name of readdirSync(dir).sort()) {
     const p = join(dir, name);
