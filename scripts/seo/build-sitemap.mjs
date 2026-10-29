@@ -48,7 +48,7 @@ export function siteIndex(root = ROOT) {
     if (noindexSources.has(path)) return "X-Robots-Tag noindex";
     // Attribute order and quoting vary, and a commented-out tag is not a tag (Google ignores it).
     const live = html.replace(/<!--[\s\S]*?-->/g, "");
-    const tagAttr = (tag, name) => { const m = tag.match(new RegExp(`\\s${name}\\s*=\\s*(?:"([^"]*)"|'([^']*)'|([^\\s>]+))`, "i")); return m ? (m[1] ?? m[2] ?? m[3]) : null; };
+    const tagAttr = (tag, name) => { const m = tag.match(new RegExp(`(?:\\s|(?<=["']))${name}\\s*=\\s*(?:"([^"]*)"|'([^']*)'|([^\\s>]+))`, "i")); return m ? (m[1] ?? m[2] ?? m[3]) : null; };
     const metas = live.match(/<meta\b[^>]*>/gi) || [];
     if (metas.some((t) => /^robots$/i.test(tagAttr(t, "name") || "") && /noindex/i.test(tagAttr(t, "content") || ""))) return "meta noindex";
     const canon = (live.match(/<link\b[^>]*>/gi) || []).find((t) => /(^|\s)canonical(\s|$)/i.test(tagAttr(t, "rel") || ""));

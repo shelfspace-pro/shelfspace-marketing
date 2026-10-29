@@ -44,7 +44,8 @@ export const decode = (s) => s
 export const norm = (s) => decode(String(s).replace(/<[^>]*>/g, " "))
   .replace(/[\u2018\u2019]/g, "'").replace(/[\u201c\u201d]/g, '"')
   .replace(/\s+/g, " ").trim();
-const attr = (tag, name) => { const m = tag.match(new RegExp(`\\s${name}\\s*=\\s*(?:"([^"]*)"|'([^']*)'|([^\\s>]+))`, "i")); return m ? (m[1] ?? m[2] ?? m[3]) : null; };
+// An attribute may follow whitespace OR a closing quote (`rel="canonical"href=…` is a parse error browsers recover from).
+const attr = (tag, name) => { const m = tag.match(new RegExp(`(?:\\s|(?<=["']))${name}\\s*=\\s*(?:"([^"]*)"|'([^']*)'|([^\\s>]+))`, "i")); return m ? (m[1] ?? m[2] ?? m[3]) : null; };
 const stripComments = (h) => h.replace(/<!--[\s\S]*?-->/g, "");
 const stripScripts = (h) => h.replace(/<script\b[\s\S]*?<\/script>/gi, "").replace(/<style\b[\s\S]*?<\/style>/gi, "").replace(/<template\b[\s\S]*?<\/template>/gi, "");
 
@@ -133,12 +134,13 @@ export function scan(root = ROOT) {
   for (const f of candidates) {
     const html = site.read(f);
     const reason = site.idx.exclusionReason(f, html);
-    const tags = [...stripComments(html).matchAll(/<link\b[^>]*\srel\s*=\s*["']?canonical\b[^>]*>/gi)];
+    const tags = (stripComments(html).match(/<link\b[^>]*>/gi) || []).filter((t) => /(^|\s)canonical(\s|$)/i.test(attr(t, "rel") || "")).map((t) => [t]);
     const self = ORIGIN + (urlPath(f) === "/" ? "/" : urlPath(f));
     if (reason && !/canonical/.test(reason)) continue;
     if (tags.length > 1) { add(f, "canonical", `${tags.length} canonical tags`); continue; }
     if (!tags.length) { add(f, "canonical", "no canonical"); continue; }
-    const href = attr(tags[0][0], "href") || "";
+    const href = attr(tags[0][0], "href");
+    if (!href) { add(f, "canonical", "canonical href unreadable"); continue; }
     // Elsewhere on purpose (consolidating a stub into another page) is allowed; a near-miss of self is not.
     const loose = (h) => h.replace(/^http:/, "https:").replace("//www.", "//").replace(/\.html$/, "").replace(/\/index$/, "/").replace(/(.)\/$/, "$1");
     if (href !== self && loose(href) === loose(self)) add(f, "canonical", `not exactly self: ${href}`);
@@ -156,7 +158,7 @@ export function scan(root = ROOT) {
       if ([...t[0]].length > LIMITS.title) add(f, "title-long", `${[...t[0]].length} chars`);
       if (!titles.has(t[0])) titles.set(t[0], []); titles.get(t[0]).push(f);
     }
-    const d = [...html.matchAll(/<meta\b[^>]*name=["']description["'][^>]*>/gi)].map((m) => norm(attr(m[0], "content") || ""));
+    const d = (html.match(/<meta\b[^>]*>/gi) || []).filter((t) => /^description$/i.test(attr(t, "name") || "")).map((t) => norm(attr(t, "content") || ""));
     if (d.length > 1) add(f, "desc-count", `${d.length} descriptions`);
     if (!d.length || !d[0]) add(f, "desc-missing", d.length ? "empty" : "none");
     else {
