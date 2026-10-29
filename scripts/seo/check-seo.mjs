@@ -6,7 +6,7 @@
 // "Indexable" comes from siteIndex() in build-sitemap.mjs, so this, the sitemap and IndexNow agree.
 // Checks (violation codes):
 //   title-count / title-long / title-dup     exactly 1 <title> (svg titles ignored), <=60 chars, unique
-//   desc-missing / desc-long / desc-short / desc-dup   one meta description, 50..160 chars, unique
+//   desc-count / desc-missing / desc-long / desc-short / desc-dup   one non-empty meta description, 50..160, unique
 //   canonical                                 exactly 1 rel=canonical and it is self (checked on noindex-free pages
 //                                             BEFORE the indexable filter, so a missing one cannot hide the page)
 //   h1-count                                  exactly 1 <h1>
@@ -22,7 +22,7 @@
 // Baseline (scripts/seo/check-seo-baseline.json): { file: { code: count } }. A count above the baseline fails;
 // below it prints "baseline can shrink". Delete the file and every violation fails.
 import { readFileSync, writeFileSync, existsSync, statSync, readdirSync, mkdtempSync, cpSync } from "node:fs";
-import { join, dirname, posix } from "node:path";
+import { join, dirname, posix, resolve } from "node:path";
 import { tmpdir } from "node:os";
 import { fileURLToPath } from "node:url";
 import { execFileSync } from "node:child_process";
@@ -76,16 +76,19 @@ function resolvePath(site, path) {
   try { p = decodeURI(p); } catch {}
   if (site.redirects.some((r) => r.test(p))) return { kind: "redirect" };
   if (site.rewrites.some((r) => r.test(p))) return { kind: "rewrite" };
-  if (site.trailingSlashOff && p.length > 1 && p.endsWith("/")) return { kind: "redirect" }; // 308 to the no-slash URL
+  // trailingSlash:false 308s /x/ to /x, and cleanUrls 308s /x.html to /x: a hop (warning) when the target exists,
+  // a broken link when it does not.
+  if (site.trailingSlashOff && p.length > 1 && p.endsWith("/")) { const t = resolvePath(site, p.replace(/\/+$/, "")); return t.kind === "file" ? { kind: "redirect", file: t.file } : t; }
   const rel = p.replace(/^\//, "");
-  if (rel.endsWith(".html") && site.files.has(rel)) return { kind: "redirect", file: rel }; // cleanUrls 308s *.html
+  if (rel.endsWith(".html")) return site.files.has(rel) ? { kind: "redirect", file: rel } : { kind: "missing" };
   const base = rel.replace(/\/$/, "");
   for (const cand of rel === "" ? ["index.html"] : [rel, base + ".html", (base ? base + "/" : "") + "index.html"])
     if (cand && !cand.endsWith("/") && site.files.has(cand)) return { kind: "file", file: cand };
   return { kind: "missing" };
 }
 
-// Internal hrefs on a page -> [{ href, path, hash }]
+const safeDecode = (x) => { try { return decodeURIComponent(x); } catch { return x; } };
+// Internal hrefs on a page -> [{ href, path, hash, hop }] (hop = http: or www., a 308 on Vercel)
 function internalLinks(html, file) {
   const out = [];
   // trailingSlash:false serves docs/index.html at /docs (no slash), so a relative href resolves against "/".
@@ -96,12 +99,12 @@ function internalLinks(html, file) {
     let u;
     try { u = new URL(decode(href), pageUrl); } catch { continue; }
     if (!/^https?:$/.test(u.protocol) || !/^(www\.)?shelfspace\.pro$/i.test(u.hostname)) continue; // external: ignored
-    out.push({ href, path: u.pathname, hash: u.hash ? decodeURIComponent(u.hash.slice(1)) : "" });
+    out.push({ href, path: u.pathname, hash: u.hash ? safeDecode(u.hash.slice(1)) : "", hop: u.protocol === "http:" || /^www\./i.test(u.hostname) });
   }
   return out;
 }
 
-const ids = (html) => new Set([...stripComments(html).matchAll(/<(?:[a-z][a-z0-9]*\b[^>]*\sid|a\b[^>]*\sname)\s*=\s*["']([^"']+)["']/gi)].map((m) => m[1]));
+const ids = (html) => new Set([...stripComments(html).matchAll(/<(?:[a-z][a-z0-9]*\b[^>]*\sid|a\b[^>]*\sname)\s*=\s*(?:"([^"]+)"|'([^']+)'|([^\s>"']+))/gi)].map((m) => m[1] ?? m[2] ?? m[3]));
 
 // FAQPage questions anywhere in a JSON-LD value (top level, arrays, @graph).
 function faqQuestions(node, out = []) {
@@ -118,6 +121,7 @@ function faqQuestions(node, out = []) {
 
 // ---------- the scan ----------
 export function scan(root = ROOT) {
+  root = resolve(root);
   const site = loadSite(root);
   const v = new Map(); // file -> Map(code -> [detail])
   const warnings = [];
@@ -129,7 +133,7 @@ export function scan(root = ROOT) {
   for (const f of candidates) {
     const html = site.read(f);
     const reason = site.idx.exclusionReason(f, html);
-    const tags = [...html.matchAll(/<link\b[^>]*rel=["']canonical["'][^>]*>/gi)];
+    const tags = [...stripComments(html).matchAll(/<link\b[^>]*\srel\s*=\s*["']?canonical\b[^>]*>/gi)];
     const self = ORIGIN + (urlPath(f) === "/" ? "/" : urlPath(f));
     if (reason && !/canonical/.test(reason)) continue;
     if (tags.length > 1) { add(f, "canonical", `${tags.length} canonical tags`); continue; }
@@ -153,9 +157,9 @@ export function scan(root = ROOT) {
       if (!titles.has(t[0])) titles.set(t[0], []); titles.get(t[0]).push(f);
     }
     const d = [...html.matchAll(/<meta\b[^>]*name=["']description["'][^>]*>/gi)].map((m) => norm(attr(m[0], "content") || ""));
-    if (!d.length || !d[0]) add(f, "desc-missing", d.length > 1 ? "" : "none");
+    if (d.length > 1) add(f, "desc-count", `${d.length} descriptions`);
+    if (!d.length || !d[0]) add(f, "desc-missing", d.length ? "empty" : "none");
     else {
-      if (d.length > 1) add(f, "desc-missing", `${d.length} descriptions`);
       const n = [...d[0]].length;
       if (n > LIMITS.descMax) add(f, "desc-long", `${n} chars`);
       if (n < LIMITS.descMin) add(f, "desc-short", `${n} chars`);
@@ -201,11 +205,11 @@ export function scan(root = ROOT) {
     const html = site.read(f);
     for (const l of internalLinks(html, f)) {
       const r = resolvePath(site, l.path);
-      if (r.kind === "file" && r.file !== f && inbound.has(r.file)) inbound.set(r.file, inbound.get(r.file) + 1);
+      if (r.file && r.file !== f && inbound.has(r.file)) inbound.set(r.file, inbound.get(r.file) + 1); // a 308 hop still reaches the page
       if (!indexable.has(f)) continue;
-      if (r.kind === "missing") add(f, "broken-link", l.href);
-      else if (r.kind === "redirect") warnings.push(`${f}: link-redirect ${l.href}`);
-      else if (r.kind === "file" && l.hash && r.file.endsWith(".html") && l.hash !== "top" && !ids(site.read(r.file)).has(l.hash)) add(f, "broken-anchor", l.href);
+      if (r.kind === "missing") { add(f, "broken-link", l.href); continue; }
+      if (r.kind === "redirect" || l.hop) warnings.push(`${f}: link-redirect ${l.href}`);
+      if (r.file && l.hash && r.file.endsWith(".html") && l.hash !== "top" && !ids(site.read(r.file)).has(l.hash)) add(f, "broken-anchor", l.href);
     }
   }
   for (const [f, n] of inbound) if (n === 0 && f !== "index.html") add(f, "orphan", "no inbound link");
@@ -251,7 +255,7 @@ export function selfTest() {
 if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
   const args = process.argv.slice(2);
   const opt = (n) => { const i = args.indexOf(n); return i > -1 ? args[i + 1] : null; };
-  const root = opt("--root") || ROOT;
+  const root = opt("--root") ? resolve(opt("--root")) : ROOT;
   if (args.includes("--json")) { const r = scan(root); console.log(JSON.stringify({ pages: r.pages, violations: counts(r.violations), warnings: r.warnings }, null, 1)); process.exit(0); }
 
   if (!args.includes("--skip-self-test") && root === ROOT) {

@@ -4,7 +4,7 @@ import { readFileSync, writeFileSync } from "node:fs";
 import { execFileSync } from "node:child_process";
 export const SI_TAG = `<script>window.si=window.si||function(){(window.siq=window.siq||[]).push(arguments)};</script>\n<script defer src="/_vercel/speed-insights/script.js"></script>\n`;
 const files = execFileSync("git", ["ls-files", "*.html"], { encoding: "utf8" }).split("\n").filter(Boolean)
-  .filter((f) => !/^(email|_pdf-source|og-templates|node_modules)\//.test(f) && !/^google[0-9a-f]+\.html$/.test(f));
+  .filter((f) => !/^(email|_pdf-source|og-templates|node_modules|scripts)\//.test(f) && !/^google[0-9a-f]+\.html$/.test(f));
 let n = 0;
 for (const f of files) {
   let h = readFileSync(f, "utf8"); const o = h;

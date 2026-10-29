@@ -192,7 +192,7 @@ fi
 # Line-based: a line that mentions ACH (word-bounded) AND a stale phrase.
 # The file region must be non-empty (a broken file list must not pass clean).
 # ──────────────────────────────────────
-ACH_FILES=$(find . -path ./node_modules -prune -o -path ./_pdf-source -prune -o -path ./.git -prune -o \( -name '*.html' -o -name 'llms.txt' \) -type f -print)
+ACH_FILES=$(find . -path ./node_modules -prune -o -path ./_pdf-source -prune -o -path ./scripts -prune -o -path ./.git -prune -o \( -name '*.html' -o -name 'llms.txt' \) -type f -print)
 if [ -z "$ACH_FILES" ] || [ ! -s llms.txt ] || [ ! -s payments.html ]; then
   HITS=$((HITS + 1)); echo "🔴 ACH-LIVE scan: file region empty (llms.txt / payments.html missing) — scan proves nothing"
 else
