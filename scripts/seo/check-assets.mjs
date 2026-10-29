@@ -166,6 +166,7 @@ for (const t of TEMPLATES) {
     if (!bytes.equals(built)) fail(`templates: ${docx} is not the current render of its content`);
     const xml = unzipEntry(bytes, "word/document.xml") || "";
     if (!xml.includes("<w:rPr>") || !xml.includes("<w:pPr>")) fail(`templates: ${docx} has no run/paragraph properties to order-check (region empty)`);
+    if (!(unzipEntry(bytes, "word/styles.xml") || "").includes("<w:rPr>")) fail(`templates: ${docx} word/styles.xml missing or empty (region empty)`);
     for (const part of ["word/document.xml", "word/styles.xml"]) for (const e of new Set(ooxmlOrderErrors(unzipEntry(bytes, part) || ""))) fail(`templates: ${docx} ${part} out of schema order (Word reports unreadable content): ${e}`);
     const text = xml.replace(/<[^>]+>/g, "");
     for (const rx of DISC_RX) if (!rx.test(text)) fail(`templates: ${docx} lost the disclaimer (${rx.source})`);

@@ -301,19 +301,19 @@
     [co, limit, cod, hold, eff].forEach(function (f) { f.input.addEventListener("input", run); });
     [terms, rem, app.input, gty.input, mE.input, mA.input, mC.input].forEach(function (i) { i.addEventListener("change", run); });
     bCopy.addEventListener("click", function () {
-      if (!text) { msg.textContent = "Fix the highlighted field first."; return; }
+      if (!text) { if (!msg.textContent) msg.textContent = "Fix the field above first."; return; }
       if (root.navigator && root.navigator.clipboard) root.navigator.clipboard.writeText(text).then(function () { msg.textContent = "Copied."; }, function () { msg.textContent = "Select the text and copy it."; });
       else msg.textContent = "Select the text and copy it.";
     });
     bDl.addEventListener("click", function () {
-      if (!text) { msg.textContent = "Fix the highlighted field first."; return; }
+      if (!text) { if (!msg.textContent) msg.textContent = "Fix the field above first."; return; }
       var url = root.URL.createObjectURL(new root.Blob([text], { type: "text/plain;charset=utf-8" }));
       var a = doc.createElement("a"); a.href = url; a.download = "net-terms-policy.txt";
       doc.body.appendChild(a); a.click(); a.remove();
       setTimeout(function () { root.URL.revokeObjectURL(url); }, 1000);
     });
     bPr.addEventListener("click", function () {
-      if (!text) { msg.textContent = "Fix the highlighted field first."; return; }
+      if (!text) { if (!msg.textContent) msg.textContent = "Fix the field above first."; return; }
       var w = root.open("", "_blank"); if (!w) { msg.textContent = "Allow pop-ups to print, or use Copy."; return; }
       var p = w.document.createElement("pre"); p.style.cssText = "font:14px/1.6 Georgia,serif;white-space:pre-wrap;max-width:680px;margin:40px auto;";
       p.textContent = text; w.document.body.appendChild(p); w.print();

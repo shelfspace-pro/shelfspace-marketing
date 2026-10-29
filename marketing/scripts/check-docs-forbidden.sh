@@ -228,7 +228,12 @@ BRAND_FILES=$(find . -path ./node_modules -prune -o -path ./_pdf-source -prune -
 if [ -z "$BRAND_FILES" ] || ! echo "$BRAND_FILES" | grep -q -x './index.html' || ! echo "$BRAND_FILES" | grep -q -x './llms.txt'; then
   HITS=$((HITS + 1)); echo "🔴 ONE-BRAND scan: file region empty (index.html / llms.txt not scanned) — scan proves nothing"
 else
-  BRAND_HITS=$(echo "$BRAND_FILES" | tr '\n' '\0' | xargs -0 grep -n -E 'Shelf(&nbsp;|&#160;|<[^>]*>|[[:space:]]|-|–)*([Pp]ay|[Cc]ollect)([^a-z]|$)|SHELF[^A-Za-z]{0,6}(PAY|COLLECT)' 2>/dev/null)
+  NBSP=$(printf '\302\240')
+  BRAND_RX="Shelf(&[A-Za-z]+;|&#[xX]?[0-9A-Fa-f]+;|<[^>]*>|[[:space:]]|${NBSP}|_|-|–)*([Pp][Aa][Yy]|[Cc][Oo][Ll][Ll][Ee][Cc][Tt])([^a-z]|\$)|SHELF[^A-Za-z]{0,6}(PAY|COLLECT)"
+  # A pattern that does not compile makes grep exit 2 with no output, which would read as clean: refuse it.
+  echo "Shelf Pay" | grep -E "$BRAND_RX" >/dev/null 2>&1
+  if [ $? -ne 0 ]; then HITS=$((HITS + 1)); echo "🔴 ONE-BRAND scan: the pattern does not compile or no longer matches its own sample — scan proves nothing"; fi
+  BRAND_HITS=$(echo "$BRAND_FILES" | tr '\n' '\0' | xargs -0 grep -n -E "$BRAND_RX" 2>/dev/null)
   if [ -n "$BRAND_HITS" ]; then
     HITS=$((HITS + 1))
     echo "🔴 ONE-BRAND: say ShelfSpace (or ShelfSpace AR / accounts payable), never the retired product names:"
