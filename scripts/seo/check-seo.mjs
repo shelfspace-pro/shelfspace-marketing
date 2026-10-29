@@ -1,7 +1,6 @@
 // check:seo — on-page SEO fence for every indexable page (SEO engine row A3a).
-//   node scripts/seo/check-seo.mjs                  self-test on fixtures, then scan the site against the baseline
-//   node scripts/seo/check-seo.mjs --write-baseline  record today's violations (A3b ratchets this down, then deletes it)
-//   node scripts/seo/check-seo.mjs --root <dir> --no-baseline --json   scan another tree (the self-test uses this)
+//   node scripts/seo/check-seo.mjs                  self-test on fixtures, then scan the site: ANY violation fails
+//   node scripts/seo/check-seo.mjs --root <dir> --json   scan another tree / dump every violation as JSON
 //
 // "Indexable" comes from siteIndex() in build-sitemap.mjs, so this, the sitemap and IndexNow agree.
 // Checks (violation codes):
@@ -16,16 +15,15 @@
 //   orphan                                    >=1 inbound <a href> from another served page (not the homepage)
 //   broken-link / broken-anchor               internal link resolves (cleanUrls, rewrites, redirects) / #id exists
 //   img-alt                                   non-empty alt, or alt="" with aria-hidden="true" / role=presentation|none
-// Warning only (never fails, never baselined): link-redirect — a link to a redirect source, a *.html URL or a
+// Warning only (never fails): link-redirect — a link to a redirect source, a *.html URL or a
 // trailing-slash URL (each costs a hop).
 //
-// Baseline (scripts/seo/check-seo-baseline.json): { file: { code: count } }. A count above the baseline fails;
-// below it prints "baseline can shrink". Delete the file and every violation fails.
-import { readFileSync, writeFileSync, existsSync, statSync, readdirSync, mkdtempSync, cpSync } from "node:fs";
+// No baseline (SEO A3b, 10/28/2026): the site was fixed to zero and every violation fails. A baseline file
+// (scripts/seo/check-seo-baseline.json) is refused outright, so the ratchet cannot quietly come back.
+import { readFileSync, existsSync, statSync, readdirSync, mkdtempSync, cpSync } from "node:fs";
 import { join, dirname, posix, resolve } from "node:path";
 import { tmpdir } from "node:os";
 import { fileURLToPath } from "node:url";
-import { execFileSync } from "node:child_process";
 import { ROOT, siteIndex, urlPath } from "./build-sitemap.mjs";
 
 const ORIGIN = "https://shelfspace.pro";
@@ -40,10 +38,12 @@ export const decode = (s) => s
   .replace(/&#x([0-9a-f]+);/gi, (_, h) => String.fromCodePoint(parseInt(h, 16)))
   .replace(/&#(\d+);/g, (_, d) => String.fromCodePoint(+d))
   .replace(/&([a-z][a-z0-9]*);/gi, (m, n) => (n in NAMED ? NAMED[n] : m));
-// Visible text: tags out, entities decoded, whitespace collapsed, typographic quotes/dashes unified.
+// Visible text: tags out, entities decoded, whitespace collapsed, typographic quotes unified. A tag becomes a
+// space, so `<a>x</a>.` reads "x ." — the space a tag leaves before closing punctuation (or after an opening
+// bracket) is dropped, so plain schema text "x." equals it (SEO A3b).
 export const norm = (s) => decode(String(s).replace(/<[^>]*>/g, " "))
   .replace(/[\u2018\u2019]/g, "'").replace(/[\u201c\u201d]/g, '"')
-  .replace(/\s+/g, " ").trim();
+  .replace(/\s+/g, " ").replace(/ ([.,;:!?)\]])/g, "$1").replace(/([(\[]) /g, "$1").trim();
 // An attribute may follow whitespace OR a CLOSING quote (`rel="canonical"href=…` is a parse error browsers recover from).
 // Never an opening quote: in `title="alt=decoy"` the alt= is inside a value.
 const attr = (tag, name) => { const m = tag.match(new RegExp(`(?:\\s|(?<=[^=\\s]["']))${name}\\s*=\\s*(?:"([^"]*)"|'([^']*)'|([^\\s>]+))`, "i")); return m ? (m[1] ?? m[2] ?? m[3]) : null; };
@@ -271,22 +271,12 @@ if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
   const r = scan(root);
   const now = counts(r.violations);
   if (r.pages < (root === ROOT ? 200 : 1)) { console.error(`check:seo FAILED: only ${r.pages} indexable pages (enumeration broken)`); process.exit(1); }
-  if (args.includes("--write-baseline")) {
-    writeFileSync(BASELINE, JSON.stringify(now, null, 1) + "\n");
-    const n = Object.values(now).reduce((s, m) => s + Object.values(m).reduce((a, b) => a + b, 0), 0);
-    console.log(`check:seo baseline written: ${n} violations on ${Object.keys(now).length} pages -> ${BASELINE}`);
-    process.exit(0);
+  if (existsSync(BASELINE) || args.includes("--write-baseline") || args.includes("--no-baseline")) {
+    console.error(`check:seo FAILED: the baseline is gone (SEO A3b). Fix the page instead; delete ${BASELINE} if present.`);
+    process.exit(1);
   }
-  const base = !args.includes("--no-baseline") && root === ROOT && existsSync(BASELINE) ? JSON.parse(readFileSync(BASELINE, "utf8")) : {};
-  const fails = [], shrink = [];
-  for (const [f, m] of Object.entries(now)) for (const [c, n] of Object.entries(m)) {
-    const b = base[f]?.[c] || 0;
-    if (n > b) fails.push(`${f}: ${c} ${n}${b ? ` (baseline ${b})` : ""} — ${r.violations.get(f).get(c).slice(0, 3).join(" | ")}`);
-  }
-  for (const [f, m] of Object.entries(base)) for (const [c, b] of Object.entries(m)) if ((now[f]?.[c] || 0) < b) shrink.push(`${f}: ${c} ${b} -> ${now[f]?.[c] || 0}`);
   if (r.warnings.length) console.log(`check:seo warnings (${r.warnings.length}, not failing):\n  ${r.warnings.slice(0, 15).join("\n  ")}${r.warnings.length > 15 ? `\n  … ${r.warnings.length - 15} more` : ""}`);
-  if (shrink.length) console.log(`check:seo: baseline can shrink (${shrink.length} entries fixed; run with --write-baseline):\n  ${shrink.slice(0, 20).join("\n  ")}`);
-  if (fails.length) { console.error(`check:seo FAILED: ${fails.length} new violation(s)\n  ${fails.join("\n  ")}`); process.exit(1); }
-  const total = Object.values(base).reduce((s, m) => s + Object.values(m).reduce((a, b) => a + b, 0), 0);
-  console.log(`check:seo OK (${r.pages} pages; ${total} baselined violations)`);
+  const fails = Object.entries(now).flatMap(([f, m]) => Object.entries(m).map(([c, n]) => `${f}: ${c} ${n} — ${r.violations.get(f).get(c).slice(0, 3).join(" | ")}`));
+  if (fails.length) { console.error(`check:seo FAILED: ${fails.length} violation(s)\n  ${fails.join("\n  ")}`); process.exit(1); }
+  console.log(`check:seo OK (${r.pages} pages; 0 violations)`);
 }

@@ -16,6 +16,7 @@ import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { execFileSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
+import { LIMITS } from "./seo/check-seo.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const catalog = JSON.parse(readFileSync(join(ROOT, "video-catalog.json"), "utf8"));
@@ -31,6 +32,15 @@ const videos = catalog.videos.filter((v) => v.privacy === "public");
   }
 }
 
+// <title> for a video page: the longest form that fits the check:seo title limit (SEO A3b).
+const pageTitle = (t) => [`${t} — ShelfSpace Tutorial`, ...(/ShelfSpace/.test(t) ? [] : [`${t} — ShelfSpace`]), t]
+  .find((c) => [...c].length <= LIMITS.title) ?? t;
+// Meta descriptions for videos whose catalog blurb runs past the check:seo limit (160). The catalog is
+// regenerated from the platform repo, so the shorter text lives here, keyed by slug (SEO A3b).
+const META_DESC = {
+  "final-notice": "When an invoice is badly late, send a one-page letter on your letterhead: your words, a pay-by date, a scan-to-pay code, and the consequences you choose.",
+  "store-accounts": "A buyer orders for several stores? Give each store its own ShelfSpace account so its invoices and payment reminders go to the store that actually pays.",
+};
 const esc = (s) => String(s ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 
 // Which in-app screen each video opens (login-gated; ourshelf.space is the app).
@@ -228,7 +238,7 @@ ${vids.map(card).join("\n")}
 
   return head(
     "ShelfSpace Tutorials — Video Guides for Cannabis Brands",
-    "Step-by-step video tutorials for cannabis brands on ShelfSpace — billing stores, collecting overdue invoices, payment plans, and QuickBooks. Every video with a full transcript.",
+    "Video tutorials for cannabis brands on ShelfSpace: billing stores, collecting overdue invoices, payment plans and QuickBooks. Each with a full transcript.",
     "https://shelfspace.pro/tutorials",
   ) + `
 <div class="page-hero">
@@ -269,8 +279,8 @@ ${related.map(card).join("\n")}
   </section>` : "";
 
   return head(
-    `${v.title} — ShelfSpace Tutorial`,
-    v.blurb || v.description,
+    pageTitle(v.title),
+    META_DESC[v.slug] || v.blurb || v.description,
     `https://shelfspace.pro/tutorials/${v.slug}`,
     "",
     // The VideoObject JSON-LD lives in <head> so Google associates it with the page.

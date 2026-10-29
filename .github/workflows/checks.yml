@@ -26,8 +26,8 @@ jobs:
         run: npm run check:sitemap
 
       # On-page SEO on every indexable page: title/description/canonical/H1/JSON-LD/FAQ parity/orphans/
-      # broken links/alt text. Self-tests each check on fixtures first; fails only on violations not in
-      # scripts/seo/check-seo-baseline.json (SEO A3a; A3b fixes them and deletes the baseline).
+      # broken links/alt text. Self-tests each check on fixtures first, then fails on ANY violation
+      # (SEO A3a built the fence; A3b fixed the site to zero and removed the baseline).
       - name: On-page SEO
         run: npm run check:seo
 
