@@ -1,81 +1,115 @@
-# Agent brief — writing ONE managed-services blog post
+# Agent brief — writing ONE blog post
 
-You are writing ONE blog post for the ShelfSpace cannabis marketing site (static HTML) at
-`~/shelfspace-marketing`. Your specific post (slug, keyword, angle, cross-links) is in the prompt
-that pointed you here. Produce a finished, high-effort, visually-rich HTML file. Real effort — this
-must not read like filler.
+You are writing ONE blog post for shelfspace.pro (static HTML) in this repo. Your post's slug,
+keyword, angle and cross-links are in the prompt that pointed you here. Produce a finished,
+visually rich HTML file that a cannabis operator would forward to a colleague. You run
+unattended: never stop to ask; decide from this brief, the repo `CLAUDE.md` and
+`marketing/seo-house-rules.md` (it wins where this brief is silent).
 
-## Boilerplate — copy VERBATIM, do not redesign
-Read `~/shelfspace-marketing/blog/outsourced-cannabis-back-office.html`. Copy these parts into your
-new file **unchanged**: the entire `<style>` block, the `gtag` `<script>` tags, the whole
-`<nav>`, the `<!-- CTA -->` section wrapper, the `<footer>`, and the two trailing `<script>` blocks
-(the IIFE + `/shelfiq-widget.js`). Structure your file in the same order as that file.
+## Who it's for (brand-first)
+The default reader is a cannabis **brand**: the cultivator, manufacturer or distributor whose
+dispensary customers pay late or not at all. Write to them unless your prompt names a dispensary
+audience. ShelfSpace gets brands paid: invoices sent, reminders, payment plans, final notices and AI
+calls, in the brand's own name, so the store relationship stays intact. Dispensary posts (AP,
+consignment, credit recovery) still exist; write one only when your prompt asks.
 
-Change per post ONLY: `<title>`, meta description (og/twitter/name — all identical text), canonical
-URL, the 3 JSON-LD blocks, the hero (section-label / h1 / section-desc), the At-a-glance card, the
-`article-body` content, the FAQ `<details>` list, and the CTA headline + subhead. Keep the primary
-CTA button → `/contact` (label "Schedule a call" — then run `npm run cta:sweep` + `npm run check:cta`), no
-second /contact button.
+## Boilerplate — copy VERBATIM, don't redesign
+Read `blog/how-to-get-paid-by-dispensaries.html` (the 10/27/2026 reference post). Copy these parts
+into your new file unchanged: the whole `<head>` apart from the per-post fields below (keep the
+`<style>` blocks, the gtag scripts and the Speed Insights tags), the `<nav>`, the
+`<!-- CTA -->` section wrapper, the `<footer>`, and the trailing `<script>` tags. Keep the same
+section order.
 
-## Voice (the current law — 2026-09-04 overhaul)
-- Sell the OUTCOME, delivery-model-agnostic. Managed-service framing is ALLOWED and encouraged: "we
-  run your AP/AR", "done for you", "hands-off". ShelfSpace is an AI-driven managed-services money
-  rail for cannabis retailer↔vendor money (AP, AR/collections, consignment settlements, vendor
-  credit recovery, Check 21 payments), sold to DISPLACE the manual AP/bookkeeping firm operators
-  already pay. **Never put a dollar price, tier, subscription, or trial on the page.**
-- Verb split: "we" for ShelfSpace + managed delivery; "the platform" / "ShelfiQ" for software
-  actions; "you" for operator actions. Outcome voice in the hero ("your vendors get paid"). Never
-  write "ShelfSpace does X" — pick "we" or "the platform".
-- Operator-to-operator, direct. Specific numbers beat adjectives. Loss framing beats gain framing.
-  Short paragraphs. **Every number that appears in a visual MUST also appear in the body prose** —
-  no fabricated figures. Reuse the anchor figures the series already uses where they fit: 10–15
-  hrs/week of back-office labor; $200K+/yr untracked credits at a multi-location operator; $8K–$25K
-  a month in recoverable credits found at one Massachusetts client; collection agencies take a
-  25%–50% contingency cut; the incumbent AP/bookkeeping firm bills a few thousand a month.
+Change per post ONLY: `<title>`, the meta description (name, og and twitter: identical text),
+canonical URL, the JSON-LD blocks, the hero (`section-label` / `h1` / `section-desc`), the At a
+glance card, the `article-body`, the FAQ `<details>`, and the CTA headline + subhead. Keep the one
+primary CTA button → `/contact`. Its label is script-owned: don't hand-edit it; the parent runs
+`npm run cta:sweep` and `npm run check:cta`. No second /contact button.
 
-## Forbidden — grep your finished file, every one must be absent
-`automate` / `automated` / `automatically` (anywhere — AI is the engine, never the pitch),
-`scan-based trading`, `SBT`, `Diem`, `pilot`, `trial`, `60-day`, any public pricing
-(`$999`/`$899`/`$799`/`$749`/`$499`, "subscription", "cancel anytime", "$X/location", "$20/artifact",
-"free trial"), `<br>` inside an `h1`/`h2`/`h3`, a headline ending in `?` (no questions as
-headlines), "learn more" as a CTA. Avoid AI-residue cadence: "this isn't just X — it's Y", "not
-just A but B", em-dash pile-ups.
+## Voice (the current law)
+- **Outcome first, done for you.** "We get brands paid." Managed-service framing is the point:
+  "we send the reminders", "we make the calls". Lead with the money the reader gets back.
+- **Naming.** One brand: ShelfSpace. The AR product is "ShelfSpace AR". The category is
+  **cannabis collections software** or **cannabis accounts receivable software**. ShelfSpace is
+  never called an agency of any kind; brands collect in their own name. For agency-intent
+  keywords, link `/blog/cannabis-collections-agency-vs-software` instead of borrowing the word.
+- **Verb split:** "we" for ShelfSpace and the done-for-you work; "the platform" for software
+  actions; "you" for what the reader decides ("you approve the payment plan, we run it"). Never
+  "ShelfSpace does X".
+- **Payments:** stores pay by ACH bank transfer or digital check; ACH is live. Never say it is
+  coming, and never name the bank, ACH or payment provider behind it.
+- Operator to operator, direct. Specific beats adjectives; loss framing beats gain framing. Short
+  paragraphs. Dates in visible copy are MM/DD/YYYY.
+
+## Price and trial: none in a post
+A blog post never carries a price, a tier, a plan, a subscription, a per-invoice fee or trial
+copy. Those live only inside `<!-- trial-ok:start -->` … `<!-- trial-ok:end -->` regions on the
+pages `check:forbidden` allows (today the brand side of `/accounts-receivable` and `/pricing`).
+When the reader would want to know about starting, link `/accounts-receivable` in the prose and
+let that page say it. The CTA stays the consult.
+
+## Numbers: no fabricated figures
+- Every `$`, `%` and count in the body, the At a glance card, the visuals and the FAQ must be in
+  `marketing/seo-claims.json` (the public registry of figures already published, with sources),
+  or come from a primary source you cite inline with a link. If you add a sourced figure, list it
+  in your reply so the parent adds it to the registry. Can't source it? Cut it.
+- **Every number in a visual also appears in the body prose.**
+- Worked examples may use example amounts if the copy says they are an example ("say a $7,200
+  invoice"). Never present an example as a customer result.
+- No customer names. Proof is the anonymized case studies (`blog/case-study-*.html`); link them,
+  and use only figures those pages already publish.
+- Anything state-specific (payment rules, terms limits, license rules) cites the statute,
+  regulation or regulator page. A template carries "Not legal advice. Have your counsel review it."
+
+## Forbidden — grep your finished file; every one must be absent
+<!-- forbidden-list:start -->
+`ShelfCollect` and `ShelfPay` (retired public names: say ShelfSpace / ShelfSpace AR),
+`collections agency` used about ShelfSpace, `automate` / `automated` / `automatically` in the hero
+or headings, `scan-based trading`, `SBT`, `Diem`, `pilot`, `free trial`, `30-day`, `trial`,
+`subscription`, `cancel anytime`, `per location`, any plan or tier price, any bank / ACH / payment
+provider name, ACH "coming soon" / "rolling out", `<br>` inside an `h1` / `h2` / `h3`, a headline
+ending in `?`, "learn more" as a link or button. Avoid AI-residue cadence: "this isn't just X,
+it's Y", "not just A but B", em-dash pile-ups.
+<!-- forbidden-list:end -->
 
 ## Required structure
-- **head**: unique `<title>` ≤60 chars incl. the primary keyword; unique `<meta name="description">`
-  ≤160 chars written as a direct answer; canonical `https://shelfspace.pro/blog/{slug}`; OG +
-  Twitter tags (image `https://shelfspace.pro/og-image-v8.png`, width 1200 height 630); three
-  `application/ld+json` blocks — **Article** (headline, description, author Chris Mitchem, publisher
-  ShelfSpace, `datePublished` "2026-09-07", url, image), **BreadcrumbList** (Home → Blog → title),
-  **FAQPage** (every FAQ Q/A, text matching the visible answers verbatim).
-- **page-hero**: `section-label` (2–3 words), `h1` `section-title` containing the primary keyword
-  naturally, `section-desc` outcome subhead.
-- **article-glance**: `<div class="article-glance"><h2>At a glance</h2><ul>…4–6 `<li>`…</ul></div>`.
-- **article-body** (`<div class="article-body reveal">`): 1,600–2,400 words, 5-beat arc (recognition
-  pain → the real cost → what "handled" looks like → how it's delivered, software-or-done-for-you →
-  who it's for + soft close). `<h2>` section heads. Cross-link 2–4 of the related posts named in
-  your spec inline as `<a href="/blog/{slug}">…</a>` (or `/{page}` for site pages). End with a
+- **head**: unique `<title>` ≤ 60 characters with the primary keyword; unique meta description
+  ≤ 160 characters, written as a direct answer; canonical `https://shelfspace.pro/blog/{slug}`;
+  OG + Twitter tags (copy the reference post's image tags); three `application/ld+json` blocks:
+  **Article** (headline, description, author Chris Mitchem, publisher ShelfSpace, `datePublished`
+  and `dateModified` = today in ISO `YYYY-MM-DD`, url, image), **BreadcrumbList** (Home → Blog →
+  title) and **FAQPage** (every FAQ question and answer, text matching the visible answers
+  verbatim; `check:seo` enforces it).
+- **page-hero**: `section-label` (2–3 words), `h1 class="section-title"` holding the primary
+  keyword naturally, `section-desc` outcome subhead.
+- **At a glance**: `<div class="article-glance"><h2>At a glance</h2><ul>` with 4–6 `<li>`.
+- **article-body** (`<div class="article-body reveal">`): 1,600–2,400 words on the 5-beat arc:
+  recognition pain → the real cost → what "handled" looks like → how it runs (we do it, you
+  approve) → who it's for + a soft close. Open each `<h2>` section with a 40–60 word answer an AI
+  answer can lift on its own. Cross-link 2–4 of the related posts named in your prompt inline
+  (`<a href="/blog/{slug}">`, or `/{page}` for site pages), plus the brand hub
+  `/blog/how-to-get-paid-by-dispensaries` when the post is about getting paid. End with a
   `<blockquote>` that lands the thesis. Include 2–4 visuals from the kit below.
-- **FAQ**: `<section style="max-width: 720px; margin: 0 auto; padding: 0 48px 60px;">` → `<h2 …>Frequently
-  asked questions</h2>` → `<div class="faq-list">` of 3–5 `<details><summary>Q</summary><p>A</p></details>`.
-  The FAQPage JSON-LD must mirror these exactly.
+- **FAQ**: `<section style="max-width: 720px; margin: 0 auto; padding: 0 48px 60px;">` →
+  `<h2 …>Frequently asked questions</h2>` → `<div class="faq-list">` with 3–5
+  `<details><summary>Q</summary><p>A</p></details>`. The FAQPage JSON-LD mirrors them exactly.
 - **CTA + footer**: boilerplate.
 
-## Visual kit — copy the markup; the classes already exist in styles.css (do NOT add CSS for them)
+## Visual kit — copy the markup; the classes already exist in styles.css (add no CSS for them)
 
 stat-trio (3 big numbers; drop `is-loss` on positive items):
 ```html
 <div class="stat-trio reveal">
   <div class="stat-trio-item is-loss">
     <svg class="stat-trio-ico" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-    <p class="stat-trio-num">10&ndash;15 hrs</p>
+    <p class="stat-trio-num">{a figure from seo-claims.json}</p>
     <p class="stat-trio-label">short label that reads as a sentence fragment</p>
   </div>
   <!-- 2 more stat-trio-item -->
 </div>
 ```
 
-vs-split (before/after — negative col then positive col):
+vs-split (before/after: negative column, then positive column):
 ```html
 <div class="vs-split reveal">
   <div class="vs-col vs-neg">
@@ -107,7 +141,7 @@ blog-callout (one-line emphasis):
 </div>
 ```
 
-meter (a proportion — green fill + hatched loss tail; fill+loss should sum to 100%):
+meter (a proportion: green fill + hatched loss tail; fill + loss sum to 100%):
 ```html
 <div class="meter reveal">
   <div class="meter-head"><p class="meter-head-label">…</p><p class="meter-head-val">…</p></div>
@@ -116,12 +150,15 @@ meter (a proportion — green fill + hatched loss tail; fill+loss should sum to 
 </div>
 ```
 
-compare-table (3 cols: capability | them | ShelfSpace; use `<span class="compare-check">&#10003;</span>`,
-`<span class="compare-x">&#10007;</span>`, `<span class="compare-plus">note</span>`). Wrap in
-`<div style="max-width: 720px; margin: 0 auto; padding: 0 48px;" class="reveal">`.
+compare-table (3 columns: capability | them | ShelfSpace; use `<span class="compare-check">&#10003;</span>`,
+`<span class="compare-x">&#10007;</span>`, `<span class="compare-plus">note</span>`). Wrap it in
+`<div style="max-width: 720px; margin: 0 auto; padding: 0 48px;" class="reveal">`. A competitor
+fact carries its source link and "as of MM/DD/YYYY"; ShelfSpace's side uses only capabilities this
+site already describes, and a price row reads "Quoted after a free review".
 
 ## Output rules
-Create ONLY `~/shelfspace-marketing/blog/{slug}.html`. Do NOT edit `blog.html`, `llms.txt`,
-`sitemap.xml`, or any other existing file. Do NOT run git, any check script, or commit anything.
-When done, reply with exactly: the slug; the final `<title>`; the meta description; a ≤170-char
-one-line card summary (for blog.html); the category; and the list of cross-link slugs you used.
+Create ONLY `blog/{slug}.html`. Don't edit `blog.html`, `llms.txt`, `sitemap.xml` or any other
+file; don't run git or commit. Reply with exactly: the slug; the final `<title>`; the meta
+description; a ≤ 170-character card summary for `blog.html`; the category (`Collections` for brand
+posts); the cross-link slugs you used; and every figure you used with its source (registry entry
+or cited URL).
