@@ -25,6 +25,7 @@ function tile(v) {
 /** One row. The track scrolls -50%, so each half repeats the set until it is wider than a wide screen. */
 export function buildStrip(catalog) {
   const vids = publicVideos(catalog);
+  if (!vids.length) throw new Error("video-strip: video-catalog.json has no public videos");
   const reps = Math.max(1, Math.ceil(8 / vids.length)); // ≥ 8 tiles (~2,000px) per half
   const half = Array.from({ length: reps }, () => vids.map(tile).join("")).join("");
   return `${START}

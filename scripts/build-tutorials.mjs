@@ -17,7 +17,7 @@ import { dirname, join } from "node:path";
 import { execFileSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import { LIMITS } from "./seo/check-seo.mjs";
-import { applyStrip } from "./video-strip.mjs";
+import { applyStrip, THUMB_V } from "./video-strip.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const catalog = JSON.parse(readFileSync(join(ROOT, "video-catalog.json"), "utf8"));
@@ -200,7 +200,7 @@ const PLAY_SVG = `<span><svg width="24" height="24" viewBox="0 0 24 24" fill="va
 function card(v) {
   return `    <a class="tut-card reveal" href="/tutorials/${v.slug}">
       <div class="tut-thumb">
-        <img src="${v.thumbHq}" alt="${esc(v.title)} — video thumbnail" loading="lazy" width="480" height="270">
+        <img src="${v.thumbHq}?v=${THUMB_V}" alt="${esc(v.title)} — video thumbnail" loading="lazy" width="480" height="270">
         ${v.series ? `<span class="tut-badge">Episode ${v.episode}</span>` : ""}
         ${v.durationLabel ? `<span class="tut-len">${v.durationLabel}</span>` : ""}
         <span class="tut-play">${PLAY_SVG}</span>
