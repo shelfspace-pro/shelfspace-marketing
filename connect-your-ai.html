@@ -409,7 +409,7 @@
     <li class="nav-dropdown"><a href="/accounts-receivable" class="nav-dropdown-toggle active">Features <svg class="dropdown-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></a>
       <div class="nav-dropdown-menu"><a href="/accounts-receivable">ShelfSpace overview</a><a href="/ai-calls">AI Calls</a><a href="/collections">Collections</a><a href="/payment-plans">Payment Plans</a><a href="/promise-to-pay">Promise to Pay</a><a href="/final-notice">Final Notice</a><a href="/ar-aging">AR Aging</a><a href="/rep-management">Rep Management</a><a href="/payments">Payments</a><a href="/quickbooks">QuickBooks</a></div></li>
     <li class="nav-dropdown"><a href="/accounts-payable" class="nav-dropdown-toggle">For dispensaries <svg class="dropdown-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></a>
-      <div class="nav-dropdown-menu"><a href="/accounts-payable">ShelfPay overview</a><a href="/consignment">Consignment</a><a href="/credit-recovery">Credit Recovery</a><a href="/shelfverify">ShelfVerify</a></div></li>
+      <div class="nav-dropdown-menu"><a href="/accounts-payable">Accounts payable overview</a><a href="/consignment">Consignment</a><a href="/credit-recovery">Credit Recovery</a><a href="/shelfverify">ShelfVerify</a></div></li>
     <li><a href="/about">About</a></li>
     <li><a href="/pricing">Pricing</a></li>
     <li class="nav-login-mobile"><a href="https://ourshelf.space/login">Login</a></li>
@@ -444,7 +444,7 @@
     <div class="reveal-h">
       <div class="aud-toggle-wrap">
       <div class="aud-toggle" role="group" aria-label="Show examples for">
-        <button type="button" data-aud-btn="pay" class="on" aria-pressed="true">I run a dispensary <small>ShelfPay</small></button>
+        <button type="button" data-aud-btn="pay" class="on" aria-pressed="true">I run a dispensary</button>
         <button type="button" data-aud-btn="collect" aria-pressed="false">I run a brand</button>
       </div>
       </div>
@@ -505,14 +505,14 @@
   <p class="section-desc reveal" style="margin:0 auto;">Dispensaries run payables, Metrc checks and credits. Brands run receivables and collections. One conversation either way.</p>
   <div class="aud-toggle-wrap aud-toggle-wrap--section reveal">
     <div class="aud-toggle" role="group" aria-label="Show examples for">
-        <button type="button" data-aud-btn="pay" class="on" aria-pressed="true">I run a dispensary <small>ShelfPay</small></button>
+        <button type="button" data-aud-btn="pay" class="on" aria-pressed="true">I run a dispensary</button>
         <button type="button" data-aud-btn="collect" aria-pressed="false">I run a brand</button>
       </div>
   </div>
   <div class="cap-grid">
     <div class="cap aud-pay reveal">
       <div class="cap-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg></div>
-      <span class="cap-tag">ShelfPay</span><h3>Pay vendors</h3>
+      <span class="cap-tag">ShelfSpace</span><h3>Pay vendors</h3>
       <p>See what's due, what's ready and what's blocked. Line up the week's payments and send them within the limits your company sets.</p>
       <div class="cap-ask">Line up everything due Friday and tell me the total by store.</div>
     </div>
@@ -530,13 +530,13 @@
     </div>
     <div class="cap aud-pay reveal reveal-delay-1">
       <div class="cap-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
-      <span class="cap-tag">ShelfPay</span><h3>Write to vendors</h3>
+      <span class="cap-tag">ShelfSpace</span><h3>Write to vendors</h3>
       <p>Ask for a corrected invoice, a missing copy or a credit, with the numbers already in the note. Every message is labeled as written by your AI.</p>
       <div class="cap-ask">Ask Verdant Hill for a corrected invoice on the short shipment.</div>
     </div>
     <div class="cap aud-pay reveal reveal-delay-2">
       <div class="cap-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><polyline points="9 15 12 12 15 15"/></svg></div>
-      <span class="cap-tag">ShelfPay</span><h3>Upload invoices and documents</h3>
+      <span class="cap-tag">ShelfSpace</span><h3>Upload invoices and documents</h3>
       <p>Hand your AI a photo or PDF of an invoice, a COA or a manifest. It lands in the right store for review, tagged as added by your AI.</p>
       <div class="cap-ask">Here's the invoice the driver just handed me. Add it.</div>
     </div>
@@ -938,7 +938,7 @@
   });
   chatObs.observe(body);
 
-  /* ── Audience toggle (dispensary = ShelfPay, brand = ShelfSpace) ── */
+  /* ── Audience toggle (dispensary / brand) ── */
   function setAud(aud, restart) {
     if (aud !== 'pay' && aud !== 'collect') aud = 'pay';
     document.body.setAttribute('data-aud', aud);

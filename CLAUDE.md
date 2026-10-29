@@ -48,7 +48,7 @@ Homepage story order (10/22/2026): toggle hero ("I run a brand" default / "I run
 
 For brands ▾ | For dispensaries ▾ | Features ▾ | About | Pricing | Login | **CTA**
 
-- **Audience labels (10/22/2026, Chris):** the two product toggles read **"For brands"** (→ `/accounts-receivable`, ShelfCollect menu) and **"For dispensaries"** (→ `/accounts-payable`, ShelfPay menu), matching the homepage toggle. The product names live inside the menus ("ShelfCollect overview" / "ShelfPay overview") and in the footer, which keeps "ShelfPay (AP)" / "ShelfCollect (AR)".
+- **Audience labels (10/22/2026, Chris):** the two product toggles read **"For brands"** (→ `/accounts-receivable`, ShelfCollect menu) and **"For dispensaries"** (→ `/accounts-payable`, ShelfPay menu), matching the homepage toggle. The product names live inside the menus ("ShelfCollect overview" / "Accounts payable overview"; no "ShelfPay" in the nav since 10/29/2026, Chris) and in the footer, which keeps "ShelfPay (AP)" / "ShelfCollect (AR)".
 
 - **Features ▾ (10/18/2026, Chris):** replaced the standalone "ShelfVerify" link. Toggle → `/features`; menu = ShelfVerify (`/shelfverify`) · Connect Your AI (`/connect-your-ai`) · Payments (`/payments`) · Integrations (`/integrations`). Toggle carries `active` on those five pages. Same markup on every page + `scripts/build-tutorials.mjs`. (The "Platform ▾" notes below are historical — that dropdown is no longer in the nav.)
 
