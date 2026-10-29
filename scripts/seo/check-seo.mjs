@@ -218,7 +218,7 @@ const counts = (violations) => Object.fromEntries([...violations].sort(([a], [b]
 
 // ---------- self-test: each check against literal fixture pages ----------
 // fixtures/check-seo/good/ is a clean mini-site (must scan clean). Each fixtures/check-seo/cases/<name>/ holds
-// literal pages copied OVER good/ plus expect.json { "violations": { file: [codes] }, "warnings": [substr] }.
+// literal pages copied OVER good/ plus expect.json { "violations": { file: [codes, one per hit] }, "warnings": [exact] }.
 // The case must produce EXACTLY those codes — so a check that stops firing, or fires on the wrong page, goes red.
 export function selfTest() {
   const fails = [];
@@ -235,12 +235,14 @@ export function selfTest() {
     cpSync(good, T, { recursive: true });
     cpSync(dir, T, { recursive: true, filter: (s) => !s.endsWith("expect.json") });
     const r = scan(T);
-    const got = Object.fromEntries([...r.violations].map(([f, m]) => [f, [...m.keys()].sort()]));
+    // One entry per violation (a code listed twice = two hits), so a check that under-counts goes red too.
+    const got = Object.fromEntries([...r.violations].map(([f, m]) => [f, [...m].flatMap(([c, d]) => d.map(() => c)).sort()]));
     const want = Object.fromEntries(Object.entries(expect.violations || {}).map(([f, cs]) => [f, [...cs].sort()]));
     const key = (o) => JSON.stringify(Object.keys(o).sort().map((k) => [k, o[k]]));
     if (key(got) !== key(want)) fails.push(`case ${c}: want ${JSON.stringify(want)} got ${JSON.stringify(got)}`);
-    for (const w of expect.warnings || []) if (!r.warnings.some((x) => x.includes(w))) fails.push(`case ${c}: missing warning "${w}" (got ${JSON.stringify(r.warnings)})`);
-    if (!expect.warnings?.length && r.warnings.length) fails.push(`case ${c}: unexpected warnings ${JSON.stringify(r.warnings)}`);
+    for (const w of expect.warnings || []) if (!r.warnings.includes(w)) fails.push(`case ${c}: missing warning "${w}" (got ${JSON.stringify(r.warnings)})`);
+    const extraW = r.warnings.filter((x) => !(expect.warnings || []).includes(x));
+    if (extraW.length) fails.push(`case ${c}: unexpected warnings ${JSON.stringify(extraW)}`);
   }
   return { fails, cases: cases.length };
 }
