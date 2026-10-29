@@ -154,7 +154,7 @@ compare-table (3 columns: capability | them | ShelfSpace; use `<span class="comp
 `<span class="compare-x">&#10007;</span>`, `<span class="compare-plus">note</span>`). Wrap it in
 `<div style="max-width: 720px; margin: 0 auto; padding: 0 48px;" class="reveal">`. A competitor
 fact carries its source link and "as of MM/DD/YYYY"; ShelfSpace's side uses only capabilities this
-site already describes, and a price row reads "Quoted after a free review".
+site already describes, and a price row reads "Flat monthly price based on your brand's size, month-to-month, no contract."
 
 ## Output rules
 Create ONLY `blog/{slug}.html`. Don't edit `blog.html`, `llms.txt`, `sitemap.xml` or any other

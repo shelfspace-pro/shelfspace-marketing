@@ -304,7 +304,7 @@ AI agents aren't just answering questions — they're becoming buyers. When an A
 
 **Audit this layer first**: [references/agent-readiness.md](references/agent-readiness.md) — the access/discovery/parseability checklist, free scoring tools (`npx is-agentic`, Frase's checker), Markdown content negotiation + `Link` headers, `llms-full.txt`, and the emerging agent-*actionable* layer (WebMCP).
 
-**No `/pricing.md` on this site.** Generic AI-search advice says to publish machine-readable prices; ShelfSpace shows no public price (house rules § 5). Agents asking about price should find the `/pricing` page's honest answer: quoted after a free review, set by monthly sales.
+**No `/pricing.md` on this site.** Generic AI-search advice says to publish machine-readable prices; ShelfSpace shows no public price (house rules § 5). Agents asking about price should find the `/pricing` page's honest answer: "Flat monthly price based on your brand's size, month-to-month, no contract."
 
 **`/llms.txt`** — Context file for AI systems (see [llmstxt.org](https://llmstxt.org))
 

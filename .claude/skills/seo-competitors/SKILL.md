@@ -193,7 +193,7 @@ Go beyond tables. For each dimension, write a paragraph explaining the differenc
 For each category: describe how each handles it, list strengths and limitations, give bottom line recommendation.
 
 ### Pricing Comparison
-Only the competitor's own published prices, linked and dated "as of MM/DD/YYYY". ShelfSpace's cell reads "Quoted after a free review". No total-cost math that implies our price.
+Only the competitor's own published prices, linked and dated "as of MM/DD/YYYY". ShelfSpace's cell reads "Flat monthly price based on your brand's size, month-to-month, no contract." Never a dollar figure for ShelfSpace (Chris, 10/29/2026). No total-cost math that implies our price.
 
 ### Who It's For
 Be explicit about ideal customer for each option. Honest recommendations build trust.

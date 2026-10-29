@@ -53,13 +53,14 @@ a tracker", "build a prospect list" or "write a strategy document", it is not ke
 - Visible dates are MM/DD/YYYY. JSON-LD, sitemaps and `<time datetime>` stay ISO.
 
 ## 5. Price and trial
+- Never a dollar figure for ShelfSpace anywhere public, trial-ok regions included (Chris, 10/29/2026).
 - No public price, tier, plan, subscription or per-unit fee anywhere, except inside a
   `<!-- trial-ok:start -->` … `<!-- trial-ok:end -->` region on a page `check:forbidden` allows
   (today the brand side of `accounts-receivable.html` and `pricing.html`). A blog post, tool or
   comparison page never carries trial or price copy; it links to `/accounts-receivable`.
 - Never ship a machine-readable price file (`pricing.md` / `pricing.txt`), even though generic
   AI-search advice says to.
-- When a comparison table has a price row, ShelfSpace's cell reads "Quoted after a free review".
+- When a comparison table has a price row, ShelfSpace's cell reads "Flat monthly price based on your brand's size, month-to-month, no contract." Never a dollar figure for ShelfSpace (Chris, 10/29/2026).
 
 ## 6. Voice and page style
 - The repo `CLAUDE.md` § Positioning & Voice is the law: outcome first, done for you, "we" for
