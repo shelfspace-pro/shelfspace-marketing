@@ -186,6 +186,25 @@ if [ "${#EXISTING_PRICING[@]}" -gt 0 ]; then
   done
 fi
 
+# ──────────────────────────────────────
+# Scan D — ACH is LIVE (Chris, 10/28/2026). No public page or llms.txt may say
+# ACH is "rolling out" / "coming soon" / "not yet available" / "live for no one".
+# Line-based: a line that mentions ACH (word-bounded) AND a stale phrase.
+# The file region must be non-empty (a broken file list must not pass clean).
+# ──────────────────────────────────────
+ACH_FILES=$(find . -path ./node_modules -prune -o -path ./_pdf-source -prune -o -path ./.git -prune -o \( -name '*.html' -o -name 'llms.txt' \) -type f -print)
+if [ -z "$ACH_FILES" ] || [ ! -s llms.txt ] || [ ! -s payments.html ]; then
+  HITS=$((HITS + 1)); echo "🔴 ACH-LIVE scan: file region empty (llms.txt / payments.html missing) — scan proves nothing"
+else
+  # shellcheck disable=SC2086
+  ACH_STALE=$(grep -nIiE -H '\bACH\b.*(rolling out|rolls out|coming soon|not yet (available|live)|live for no one)|(rolling out|coming soon|not yet (available|live)).*\bACH\b' $ACH_FILES 2>/dev/null)
+  if [ -n "$ACH_STALE" ]; then
+    HITS=$((HITS + 1))
+    echo "🔴 ACH-LIVE: ACH is live (Chris, 10/28/2026) — remove rolling out / coming soon / not yet wording about ACH"
+    echo "$ACH_STALE" | cut -c1-220 | sed 's/^/     /'
+  fi
+fi
+
 # ─────────────────────────────────────────────────────────────────────
 # Scan C — Apollo.io tracker, sitewide. Removed 10/06/2026 (Chris: "rip
 # apollo out"); page templates used to copy it forward, so block a re-add.

@@ -4,7 +4,7 @@
 
 ## Tech Stack
 - Next.js 16 (App Router), Supabase (PostgreSQL + RLS), React 19, Tailwind CSS 4
-- Payments: Check 21 (RCC), ACH planned
+- Payments: Check 21 (RCC), ACH live (10/28/2026)
 - AI: Anthropic Claude (ShelfiQ)
 - Integrations: QuickBooks Online, any cannabis POS, METRC
 - Email: Resend
