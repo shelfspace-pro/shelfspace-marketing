@@ -85,9 +85,9 @@ Change one page at a time and record the baseline CTR, so a gain is attributable
 Work from a crawl export (URL, title, H1, length, indexable status) and, if available, Search Console queries per page. Apply the changes and list them in your final reply as a table:
 
 ```markdown
-| Page | Current title | Proposed title | Reason |
+| Page | Old title | New title | Reason |
 |------|---------------|----------------|--------|
 | /pricing | Plans That Grow With You | Acme Pricing: Plans and Costs | Matches the "acme pricing" query |
 ```
 
-Give 2–3 options only for the pages that matter most (top revenue pages, top-5 rankings with weak CTR). For the long tail, one proposal per page keeps the review fast.
+Spend the most care on the pages that matter most (top-5 rankings with weak CTR, the brand product pages). For the long tail, one considered rewrite per page is enough. Every title still passes `check:seo` (length, uniqueness).

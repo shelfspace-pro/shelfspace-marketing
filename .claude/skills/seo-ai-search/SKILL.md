@@ -300,7 +300,7 @@ starts from a consistent source. See [references/positioning-and-consensus.md](r
 >
 > **Why include them anyway**: non-Google AI engines (ChatGPT, Claude, Perplexity) and autonomous buying agents do reward extractable structure. The files below help with those engines without harming Google.
 
-AI agents aren't just answering questions — they're becoming buyers. When an AI agent evaluates tools on behalf of a user, it needs structured, parseable information. If what you do is locked in a JavaScript-rendered page, agents will skip you and recommend competitors whose information they can actually read. (Price is a deliberate exception here; see the next paragraph.)
+AI agents aren't just answering questions — they're becoming buyers. When an AI agent evaluates tools on behalf of a user, it needs structured, parseable information. If what you do is locked in a JavaScript-rendered page, agents will skip you and recommend competitors whose information they can actually read. (Price is a deliberate exception here; see "No `/pricing.md` on this site" below.)
 
 **Audit this layer first**: [references/agent-readiness.md](references/agent-readiness.md) — the access/discovery/parseability checklist, free scoring tools (`npx is-agentic`, Frase's checker), Markdown content negotiation + `Link` headers, `llms-full.txt`, and the emerging agent-*actionable* layer (WebMCP).
 
@@ -395,7 +395,7 @@ Not all content is equally citable — and the format mix is **volatile**. The l
 Monthly manual check:
 1. Pick your top 20 queries
 2. Run each through ChatGPT, Perplexity, and Google
-3. Record: Are you cited? Who is? What page? Report it in your final reply and compare month over month (never a log file in this repo)
+3. Record: Are you cited? Who is? What page? Report it in your final reply, against the prior results your prompt supplies if any (never a log file in this repo)
 
 AI answers are **non-deterministic** — one run is an anecdote, not a measurement. Run each query 3–5 times per platform and track the mention *rate* with its sample size ("cited 3/5, n=5"), comparing rates over time rather than single runs. Full rigor checklist in [references/format-volatility.md](references/format-volatility.md).
 

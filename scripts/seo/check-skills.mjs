@@ -53,19 +53,22 @@ const PARTNER_SAMPLE_HASHED = "7d7ff99dfc7bab4fe4a718cfc347dc72f6b5b812232bd1ed4
 // [id, regex, reason, bad sample the regex must match, exempt inside the brief's forbidden-list region?]
 // Only copy-word rules are exempt there; partner names and private paths are never allowed anywhere.
 const RULES = [
-  ["retired-name", /\bShelf\s?(Collect|Pay)\b/i, "retired product name: the one brand is ShelfSpace", "try " + "Shelf" + " Collect today", true],
+  ["retired-name", /\bShelf[ -]?(Collect|Pay)\b|\bshelf-?(collect|pay)\b|\bSHELF[ -]?(COLLECT|PAY)\b/, "retired product name: the one brand is ShelfSpace", "try " + "Shelf" + " Collect today", true],
   ["agency", /\bcollections?[\s-]+agenc(y|ies)\b(?!-vs-software)/i, "never call it a collections agency: it is collections software (the /blog/cannabis-collections-agency-vs-software URL is allowed)", "a cannabis collections agency", true],
   ["sbt", /scan-based trading|\bSBT\b/i, "say consignment", "SBT settlements", true],
   ["diem", /\bDiem\b/i, "Diem is Chris's bio only, never in skill or brief copy", "Diem Cannabis", true],
-  ["handoff-for", /\bfor (the user|chris|a person|a human|someone|you|the owner|the client|the team) to (send|post|approve|review|sign|email|publish|share)\b/i, "no drafts for a person to send or post: Chris posts nothing", "a list for Chris to email", true],
-  ["handoff-ask", /\bask (the user|chris|the owner|the client|which|them)\b|\bconfirm with (the user|chris|the owner|the client)\b|\bsend the user to\b|\bfor approval\b|\b(owner|user|chris|client) can approve\b|\bget (their|the user's|chris's|the owner's) (approval|sign-off)\b|\bhand (it|them|this) (off )?to (chris|the user|the owner|someone)\b/i, "unattended: never ask, never wait for approval, never hand work to a person", "hand it to Chris to send", true],
-  ["handoff-draft", /\b(draft|write|prepare) (an? |the )?(outreach|pitch|cold email|guest post|(message|email|dm|note) to|list of (editors|journalists|prospects|contacts|publishers))|\b(send|email) (it |them |this )?to (the |each )?(editor|journalist|publisher|author|prospect)s?\b/i, "no outreach from this repo: no drafts, no lists, no messages", "Draft a message to the editor", true],
-  ["handoff-social", /\b(post|participate|comment|answer|share|reply) (on|in|to) (reddit|linkedin|quora|x\.com|twitter|hacker news|facebook)\b/i, "nobody posts on social sites from this repo", "answer on Quora", true],
+  ["handoff-for", /\bfor (the user|chris|a person|a human|the owner|the client|the team) to (send|post|approve|review|sign|email|publish)\b|\bfor someone to (send|post|approve|email)\b/i, "no drafts for a person to send or post: Chris posts nothing", "a list for Chris to email", true],
+  ["handoff-ask", /\bask (the user|chris|the owner|the client)\b|\bconfirm with (the user|chris|the owner|the client)\b|\bsend the user to\b|\bfor approval\b|\b(owner|user|chris|client) can approve\b|\bget (their |the user's |chris's |the owner's )?(approval|sign-off)\b|\bhand (it|them|this) (off )?to (chris|the user|the owner|someone)\b|\bwait for (chris|the user|the owner)\b|\bgo-ahead\b|\bleave (it|them|the [a-z]+) for (chris|the user|the owner)\b/i, "unattended: never ask, never wait for approval, never hand work to a person", "hand it to Chris to send", true],
+  ["handoff-draft", /\b(draft|write|prepare) (an? |the )?(outreach|pitch|cold email|guest post|(message|email|dm) to (the |each |an? )?(editor|journalist|publisher|author|writer|site owner|prospect)|list of (editors|journalists|prospects|contacts|publishers))|\b(send|email) (it |them |this |a [a-z]+ )?to (the |each )?(editor|journalist|publisher|author|prospect|writer)s?\b(?! field)|\breach out to\b|\bcontact the (editor|author|publisher|journalist|site owner|writer)s?\b|\bemail the (editor|author|publisher|journalist|writer)s?\b|\bpitch (the|a|this) (story|post|data|piece|study)\b|\bask (the |each )?(editor|author|publisher|site owner|writer)s? (to|for)\b|\b(request|ask for) a link\b|\bsubmit (the site|it|us|shelfspace) to\b|\boffer the data to\b|\bprospect list/i, "no outreach from this repo: no drafts, no lists, no messages", "Draft a message to the editor", true],
+  ["handoff-social", /\b(post|participate|comment|answer|share|reply) (on|in|to) (reddit|linkedin|quora|x\.com|x|twitter|hacker news|facebook)\b|\b(draft|write|schedule|publish) (a |an |the )?(linkedin|reddit|quora|facebook|x) (post|comment|answer|thread)\b|\b(schedule|send|post) a tweet\b/i, "nobody posts on social sites from this repo", "answer on Quora", true],
   ["private-path", /docs\/seo\b|(?<![-\w])claims\.json|\b(keywords|backlog|competitors|prompts|budget)\.json\b|\b(OPERATOR|DISTRIBUTION)\.md\b|shelfspace-platform|seo_snapshots/, "private strategy paths stay in the private repo; reference only marketing/seo-claims.json", "see docs/seo/keywords.json", false],
-  ["pricing-file", /\b(add|publish|create|ship|serve)( an?| the)? `?\/?pricing\.(md|txt|json)\b/i, "no machine-readable price file: no public pricing", "Publish the pricing.md", true],
-  ["free-trial", /\bfree trial\b|\bstart (your )?free\b|\btry it free\b|\b\d+[- ]day (free )?trial\b|\b(subscription|monthly) price\b/i, "trial and price copy live only in trial-ok regions on allow-listed pages", "name the 30-day trial", true],
-  ["ach-stale", /\bACH\b[^.\n]{0,40}\b(coming soon|launching soon|launches soon|rolling out|rolls out|not yet|in beta)\b|\b(coming soon|launching soon|rolling out)\b[^.\n]{0,40}\bACH\b/i, "ACH is live", "Coming soon: ACH transfers", true],
+  ["pricing-file", /\bpricing\.(md|txt|json)\b/i, "no machine-readable price file: no public pricing", "Publish the pricing.md", true],
+  ["free-trial", /\bfree trial\b|\bstart (your )?free\b|\btry it free\b|\b\d+[- ]day (free )?trial\b|\b(subscription|monthly) price\b|\bstart (a|the|your) trial\b|\bpayment details to start\b|\bno credit card\b|\$\d[\d,]*\s*(\/|per |a )\s?(mo|month)\b|\bstarts? at \$\d/i, "trial and price copy live only in trial-ok regions on allow-listed pages", "name the 30-day trial", true],
+  ["ach-stale", /\bACH\b[^.\n]{0,40}\b(coming soon|launch(es|ing)?( soon| next)?|will launch|rolling out|rolls out|not (available )?yet|isn.t live|in beta|planned|available soon|on the roadmap)\b|\b(coming soon|launching soon|rolling out|not (available )?yet|will launch)\b[^.\n]{0,40}\bACH\b/i, "ACH is live", "Coming soon: ACH transfers", true],
 ];
+// Rules whose prohibition is itself stated in these files ("never X"): a negated sentence is skipped.
+// Names, agency, partners and private paths are NOT guarded: those words never belong here at all.
+const NEG_GUARDED = new Set(["handoff-for", "handoff-ask", "handoff-draft", "handoff-social", "pricing-file", "free-trial", "ach-stale"]);
 // Sentences the law depends on: deleting one is a red, not a silent loosening.
 const PINS = {
   "marketing/seo-house-rules.md": ["## 1. You run unattended", "**Nobody posts, sends or approves anything by hand.**", "## 2. This repo is public",
@@ -164,9 +167,20 @@ for (const p of scanned) {
   // per-line scan would miss "collections\nagency" or a partner name split across a wrap.
   const flat = text.replace(/\n/g, " ");
   const lineAt = (idx) => text.slice(0, idx).split("\n").length;
+  // A rule stated as a prohibition ("Never ask the user…", "No `/pricing.md` on this site") is the law,
+  // not a breach: skip a match whose sentence carries a negation. Sentence = back to the previous
+  // . ! ? ; or line-leading bullet/table/heading, forward to the next.
+  const NEG = /\b(never|nobody|no|not|don't|do not|none|nothing|isn't|aren't|without)\b/i;
+  const sentenceAt = (idx, len) => {
+    const stop = (i) => /[.!?;]/.test(text[i]) && (i + 1 >= text.length || /\s/.test(text[i + 1]));
+    let a = idx; while (a > 0 && !stop(a - 1) && !(text[a - 1] === "\n" && /^[\s]*([-*|#]|\d+\.|\n)/.test(text.slice(a, a + 4)))) a--;
+    let b = idx + len; while (b < text.length && !stop(b) && !(text[b] === "\n" && /^\n?\s*([-*|#]|\d+\.|\n)/.test(text.slice(b + 1, b + 5)))) b++;
+    return text.slice(a, b);
+  };
   const flatRaw = raw.replace(/\n/g, " ");
   for (const [id, rx, reason, , exempt] of RULES) {
     for (const m of (exempt ? flat : flatRaw).matchAll(new RegExp(rx.source, rx.flags.includes("g") ? rx.flags : rx.flags + "g"))) {
+      if (NEG_GUARDED.has(id) && NEG.test(sentenceAt(m.index, m[0].length))) continue;
       fail(`${rel}:${lineAt(m.index)}: [${id}] ${reason}\n      …${flat.slice(Math.max(0, m.index - 40), m.index + 80).trim()}…`);
     }
   }
@@ -179,10 +193,11 @@ for (const p of scanned) {
   }
   for (const n of NOT_VENDORED) {
     const e = n.replace(/[-]/g, "\\-");
-    if (raw.includes(`**${n}**`) || new RegExp("`" + e + "` skill\\b|\\bthe `?" + e + "`? skill\\b|\\bsee `" + e + "`\\)|\\b" + e + "'s [a-z-]+ reference\\b", "i").test(raw.replace(/\n/g, " ")))
+    if (raw.includes(`**${n}**`) || new RegExp("`" + e + "` skill\\b|\\bthe `?" + e + "`? skill\\b|\\bsee `" + e + "`\\)|(?<![-\\w])" + e + "'s [a-z-]+ reference\\b", "i").test(raw.replace(/\n/g, " ")))
       fail(`${rel}: hands off to "${n}", an upstream skill not vendored here (or renamed)`);
   }
   // backticked reference paths (`references/x.md`) must resolve too, relative to the skill dir
+  if (!p.startsWith(SKILLS_DIR + "/")) continue;
   const skillDir = p.slice(0, p.indexOf("/", SKILLS_DIR.length + 1));
   for (const m of raw.matchAll(/`(references\/[a-z0-9-]+\.md)`/g)) {
     const t = m[1];

@@ -59,7 +59,7 @@ Mega menu rules:
 Best for: apps with both marketing and product nav.
 
 ```
-[Logo]   Features   Pricing   Blog        [Login]   [Demo] 
+[Logo]   Features   Pricing   Blog        [Login]   [Demo]   
 ├── Marketing nav (left) ──────┘          └── Auth nav (right) ──┤
 ```
 

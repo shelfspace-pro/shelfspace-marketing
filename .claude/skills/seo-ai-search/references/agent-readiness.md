@@ -74,7 +74,7 @@ Reading is close to solved: in Ora's April 2026 scan, 80% of sites were reachabl
 - **Auth an agent can finish** (AR-ACT-01) — self-serve API keys with documented scopes; for user-delegated access, OAuth 2.0 with discoverable metadata under `/.well-known` (RFC 8414, RFC 9728).
 - **A public API with OpenAPI** (AR-ACT-02) — operation IDs, typed responses and errors, documented rate limits.
 
-The next race is whether an agent can *act* on your site — fill the form, book the meeting, start the trial. **WebMCP** is the emerging standard here: a page declares its forms and CTAs as callable tools with input schemas, so an agent doesn't have to reverse-engineer your UI. Early days (label: emerging, not yet a ranking/citation signal), but the direction is clear — if agents are becoming buyers, the site that exposes "start trial" as a structured action wins the agent-mediated conversion that a pretty button loses.
+The next race is whether an agent can *act* on your site — fill the form, book the meeting. **WebMCP** is the emerging standard here: a page declares its forms and CTAs as callable tools with input schemas, so an agent doesn't have to reverse-engineer your UI. Early days (label: emerging, not yet a ranking/citation signal), but the direction is clear — if agents are becoming buyers, the site that exposes "book a demo" as a structured action wins the agent-mediated conversion that a pretty button loses.
 
 Practical today: make sure your highest-intent actions (demo booking, contact) work without JavaScript-only flows, have labeled semantic form fields, and return machine-readable confirmation.
 
