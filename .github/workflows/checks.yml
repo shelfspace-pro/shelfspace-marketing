@@ -61,6 +61,10 @@ jobs:
       # No page shares 60%+ of its 5-word phrases with another page (template families baselined) (SEO C2).
       - name: Duplicate pages
         run: npm run check:dupe
+      # SEO C3: tool math (integer cents, MM/DD/YYYY), embeds + framing exception, templates built from
+      # their source with the disclaimer, unlisted tutorials noindex, the pricing no-number line.
+      - name: Tools, templates, tutorials, pricing line
+        run: npm run check:assets
 
       # No provider leaks, no retired pricing; trial copy only inside brand-page trial-ok regions (Z-33).
       - name: Forbidden copy

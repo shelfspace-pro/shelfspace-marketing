@@ -98,6 +98,13 @@ The `/blog-post` and `/case-study` skills handle the full rollout. Manual checkl
 4. Add a `<url>` to `sitemap.xml`
 5. Run `marketing/scripts/check-blog-sync.sh` to verify
 
+## Free tools and templates (SEO C3, 10/29/2026)
+
+- `/tools` (`tools.html`) is the hub. Calculators live in `tools/<slug>.html`; ALL widget code is `tools/tools.js` (renders into `<div data-ss-tool>`, integer cents, MM/DD/YYYY, no storage). Each tool has a noindex embed page `tools/embed/<slug>.html`; `vercel.json` lets ONLY `/tools/embed/*` be framed. The embed snippet's credit link sits OUTSIDE the iframe (that is the backlink).
+- Templates: content is ONE file, `scripts/templates/content.mjs`; `npm run build:templates` writes `templates/files/<slug>.{docx,pdf}`, the preview between `<!-- template-preview:start/end -->` on `templates/<slug>.html`, and `templates/files/manifest.json`. Never hand-edit a preview or a file. Every template carries "Not legal advice — have your counsel review it before you use it." and states no state law.
+- Shared page shell CSS: `seo-assets.css` (10/27 style). Comparison posts live in `blog/` (`shelfspace-vs-distru`, `shelfspace-vs-leaflink-cannabis-ar`, `shelfspace-vs-nabis`, `best-cannabis-ar-collections-tools-2026`): competitor facts from their own pages with a link and an as-of date; a competitor price sits inside `data-price-note="competitor"` and in `marketing/seo-claims.json`.
+- Fence: `npm run check:assets` (tool math, embeds + framing, templates vs source, unlisted tutorials noindex, the pricing no-number line).
+
 ## Documentation System
 
 ### How it works
