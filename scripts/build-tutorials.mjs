@@ -32,9 +32,12 @@ const videos = catalog.videos.filter((v) => v.privacy === "public");
   }
 }
 
-// <title> for a video page: the longest form that fits the check:seo title limit (SEO A3b).
-const pageTitle = (t) => [`${t} — ShelfSpace Tutorial`, ...(/ShelfSpace/.test(t) ? [] : [`${t} — ShelfSpace`]), t]
-  .find((c) => [...c].length <= LIMITS.title) ?? t;
+// <title> for a video page: the longest form that fits the check:seo title limit (SEO A3b). A video title
+// that is itself over the limit needs a TITLE override here (the catalog is regenerated from the platform repo);
+// without one it ships as-is and check:seo fails, loudly.
+const TITLE = {};
+const pageTitle = (v) => TITLE[v.slug] || [`${v.title} — ShelfSpace Tutorial`, ...(/ShelfSpace/.test(v.title) ? [] : [`${v.title} — ShelfSpace`]), v.title]
+  .find((c) => [...c].length <= LIMITS.title) || v.title;
 // Meta descriptions for videos whose catalog blurb runs past the check:seo limit (160). The catalog is
 // regenerated from the platform repo, so the shorter text lives here, keyed by slug (SEO A3b).
 const META_DESC = {
@@ -279,7 +282,7 @@ ${related.map(card).join("\n")}
   </section>` : "";
 
   return head(
-    pageTitle(v.title),
+    pageTitle(v),
     META_DESC[v.slug] || v.blurb || v.description,
     `https://shelfspace.pro/tutorials/${v.slug}`,
     "",

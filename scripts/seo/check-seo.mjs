@@ -1,6 +1,6 @@
 // check:seo — on-page SEO fence for every indexable page (SEO engine row A3a).
 //   node scripts/seo/check-seo.mjs                  self-test on fixtures, then scan the site: ANY violation fails
-//   node scripts/seo/check-seo.mjs --root <dir> --json   scan another tree / dump every violation as JSON
+//   node scripts/seo/check-seo.mjs --root <dir> --json   scan another tree / dump every violation as JSON (exit 1 if any)
 //
 // "Indexable" comes from siteIndex() in build-sitemap.mjs, so this, the sitemap and IndexNow agree.
 // Checks (violation codes):
@@ -261,7 +261,8 @@ if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
   const args = process.argv.slice(2);
   const opt = (n) => { const i = args.indexOf(n); return i > -1 ? args[i + 1] : null; };
   const root = opt("--root") ? resolve(opt("--root")) : ROOT;
-  if (args.includes("--json")) { const r = scan(root); console.log(JSON.stringify({ pages: r.pages, violations: counts(r.violations), warnings: r.warnings }, null, 1)); process.exit(0); }
+  // --json is a dump, never a pass: it exits 1 when there is any violation, like the plain run (SEO A3b).
+  if (args.includes("--json")) { const r = scan(root); console.log(JSON.stringify({ pages: r.pages, violations: counts(r.violations), warnings: r.warnings }, null, 1)); process.exit(r.violations.size ? 1 : 0); }
 
   if (!args.includes("--skip-self-test") && root === ROOT) {
     const st = selfTest();
