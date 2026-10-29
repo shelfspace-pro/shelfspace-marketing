@@ -25,7 +25,7 @@ const videos = catalog.videos.filter((v) => v.privacy === "public");
 // Unlisted videos whose page already exists keep their page, regenerated from this template with
 // robots noindex (SEO C3, Z-A3b-c, Chris 10/29/2026: "keep the pages, add noindex"). They stay off the
 // hub, the homepage strip, the sitemap and llms.txt. A non-public video with no page gets none.
-const unlistedWithPage = catalog.videos.filter((v) => v.privacy !== "public" && existsSync(join(ROOT, "tutorials", `${v.slug}.html`)));
+const unlistedWithPage = catalog.videos.filter((v) => v.privacy === "unlisted" && existsSync(join(ROOT, "tutorials", `${v.slug}.html`)));
 const NOINDEX = '<meta name="robots" content="noindex">';
 // Number episodes over the videos actually shown, so hiding one never leaves a series
 // starting at "Episode 2" or skipping a number.

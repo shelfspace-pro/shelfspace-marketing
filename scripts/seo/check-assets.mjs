@@ -25,7 +25,7 @@ import { fileURLToPath } from "node:url";
 import { execFileSync } from "node:child_process";
 import vm from "node:vm";
 import { TEMPLATES, DISCLAIMER } from "../templates/content.mjs";
-import { renderPreview, renderDocx, sourceHash, sha256, unzipEntry, MARK_A, MARK_B } from "../build-templates.mjs";
+import { renderPreview, renderDocx, sourceHash, sha256, unzipEntry, ooxmlOrderErrors, MARK_A, MARK_B } from "../build-templates.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..", "..");
 const fails = [];
@@ -53,7 +53,7 @@ else {
   const eq = (name, got, want) => { if (JSON.stringify(got) !== JSON.stringify(want)) fail(`math: ${name} = ${JSON.stringify(got)}, want ${JSON.stringify(want)}`); };
   eq('parseCents("$1,234.56")', T.parseCents("$1,234.56"), 123456);
   eq('parseCents("0.1")+parseCents("0.2")', T.parseCents("0.1") + T.parseCents("0.2"), 30);
-  eq('parseCents("19.99")', T.parseCents("19.99"), 1999); // float: 19.99*100 = 1998.9999999999998
+  eq('parseCents("19.99")', T.parseCents("19.99"), 1999); // catches a truncating float parse (floor of 1998.9999999999998); a Math.round parse also passes here
   eq('parseCents("1.005")', T.parseCents("1.005"), null);
   eq('parseCents("-5")', T.parseCents("-5"), null);
   eq("fmtCents(123456)", T.fmtCents(123456), "$1,234.56");
@@ -165,6 +165,8 @@ for (const t of TEMPLATES) {
     if (sha256(bytes) !== m.docx_sha256) fail(`templates: ${docx} does not match the manifest`);
     if (!bytes.equals(built)) fail(`templates: ${docx} is not the current render of its content`);
     const xml = unzipEntry(bytes, "word/document.xml") || "";
+    if (!xml.includes("<w:rPr>") || !xml.includes("<w:pPr>")) fail(`templates: ${docx} has no run/paragraph properties to order-check (region empty)`);
+    for (const part of ["word/document.xml", "word/styles.xml"]) for (const e of new Set(ooxmlOrderErrors(unzipEntry(bytes, part) || ""))) fail(`templates: ${docx} ${part} out of schema order (Word reports unreadable content): ${e}`);
     const text = xml.replace(/<[^>]+>/g, "");
     for (const rx of DISC_RX) if (!rx.test(text)) fail(`templates: ${docx} lost the disclaimer (${rx.source})`);
   }

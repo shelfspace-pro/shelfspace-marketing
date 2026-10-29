@@ -70,6 +70,7 @@
     var m = /^\s*(\d{1,2})\/(\d{1,2})\/(\d{4})\s*$/.exec(String(s == null ? "" : s));
     if (!m) return null;
     var mo = Number(m[1]), da = Number(m[2]), y = Number(m[3]);
+    if (y < 1900 || y > 2199) return null;
     var d = new Date(Date.UTC(y, mo - 1, da));
     return d.getUTCFullYear() === y && d.getUTCMonth() === mo - 1 && d.getUTCDate() === da ? d : null;
   }
@@ -281,15 +282,17 @@
       f: "We send a reminder a few days before each invoice is due, another on the due date, then one every 3 days until it is paid.",
       l: "We send a reminder on the due date, then one every 2 weeks until it is paid." };
     var text = "";
+    function fail(m) { msg.textContent = m; text = ""; pre.textContent = "Fix the field above to see your policy."; }
     function run() {
       msg.textContent = "";
+      var cod0 = Number(terms.value) === 0;
       var e = parseMDY(eff.input.value);
       var lc = limit.input.value.trim() ? parseCents(limit.input.value) : null;
       var c = parseInt10(cod.input.value || "0", 0, 12), hd = parseInt10(hold.input.value || "0", 1, 120);
-      if (!e) { msg.textContent = "Enter the effective date as MM/DD/YYYY."; return; }
-      if (limit.input.value.trim() && lc == null) { msg.textContent = "Credit limit should be a dollar amount."; return; }
-      if (c == null) { msg.textContent = "First cash-on-delivery orders: a whole number from 0 to 12."; return; }
-      if (hd == null) { msg.textContent = "Hold days: a whole number from 1 to 120."; return; }
+      if (!e) return fail("Enter the effective date as MM/DD/YYYY.");
+      if (!cod0 && limit.input.value.trim() && lc == null) return fail("Credit limit should be a dollar amount.");
+      if (!cod0 && c == null) return fail("First cash-on-delivery orders: a whole number from 0 to 12.");
+      if (!cod0 && hd == null) return fail("Hold days: a whole number from 1 to 120.");
       var methods = []; if (mE.input.checked) methods.push("e-check"); if (mA.input.checked) methods.push("ACH bank transfer"); if (mC.input.checked) methods.push("paper check");
       text = buildPolicy({ company: co.input.value, termsDays: Number(terms.value), limitCents: lc, requireApplication: app.input.checked, requireGuaranty: gty.input.checked,
         codOrders: c, holdDays: hd, methods: methods, reminders: REM[rem.value], effective: fmtMDY(e) });
@@ -298,16 +301,19 @@
     [co, limit, cod, hold, eff].forEach(function (f) { f.input.addEventListener("input", run); });
     [terms, rem, app.input, gty.input, mE.input, mA.input, mC.input].forEach(function (i) { i.addEventListener("change", run); });
     bCopy.addEventListener("click", function () {
+      if (!text) { msg.textContent = "Fix the highlighted field first."; return; }
       if (root.navigator && root.navigator.clipboard) root.navigator.clipboard.writeText(text).then(function () { msg.textContent = "Copied."; }, function () { msg.textContent = "Select the text and copy it."; });
       else msg.textContent = "Select the text and copy it.";
     });
     bDl.addEventListener("click", function () {
+      if (!text) { msg.textContent = "Fix the highlighted field first."; return; }
       var url = root.URL.createObjectURL(new root.Blob([text], { type: "text/plain;charset=utf-8" }));
       var a = doc.createElement("a"); a.href = url; a.download = "net-terms-policy.txt";
       doc.body.appendChild(a); a.click(); a.remove();
       setTimeout(function () { root.URL.revokeObjectURL(url); }, 1000);
     });
     bPr.addEventListener("click", function () {
+      if (!text) { msg.textContent = "Fix the highlighted field first."; return; }
       var w = root.open("", "_blank"); if (!w) { msg.textContent = "Allow pop-ups to print, or use Copy."; return; }
       var p = w.document.createElement("pre"); p.style.cssText = "font:14px/1.6 Georgia,serif;white-space:pre-wrap;max-width:680px;margin:40px auto;";
       p.textContent = text; w.document.body.appendChild(p); w.print();

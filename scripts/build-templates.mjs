@@ -20,7 +20,7 @@ export const FILES_DIR = join(ROOT, "templates", "files");
 export const MANIFEST = join(FILES_DIR, "manifest.json");
 export const MARK_A = "<!-- template-preview:start -->";
 export const MARK_B = "<!-- template-preview:end -->";
-const RENDERER_VERSION = "1";
+const RENDERER_VERSION = "2"; // 2: OOXML child order fixed (w:color before w:sz, w:pBdr before w:spacing)
 
 const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 export const sha256 = (b) => createHash("sha256").update(b).digest("hex");
@@ -101,10 +101,10 @@ function documentXml(t) {
       const rows = Array.from({ length: b.rows }, () => `<w:tr><w:trPr><w:trHeight w:val="400"/></w:trPr>${b.head.map(() => cell(para(""), w, false)).join("")}</w:tr>`).join("");
       body.push(`<w:tbl><w:tblPr><w:tblW w:w="9360" w:type="dxa"/>${border}</w:tblPr><w:tblGrid>${b.head.map(() => `<w:gridCol w:w="${w}"/>`).join("")}</w:tblGrid>${head}${rows}</w:tbl>`, para(""));
     } else if (b.t === "sig") {
-      for (const x of b.x) body.push(para("<w:r><w:tab/></w:r>", `${LEADER}<w:spacing w:before="360" w:after="0"/>`), para(run(x, '<w:sz w:val="18"/><w:color w:val="475569"/>'), '<w:spacing w:after="120"/>'));
-    } else if (b.t === "disc") body.push(para(run(DISCLAIMER, '<w:b/><w:color w:val="2D6A4F"/>'), '<w:spacing w:before="360"/><w:pBdr><w:top w:val="single" w:sz="4" w:space="6" w:color="CBD5E1"/></w:pBdr>'));
+      for (const x of b.x) body.push(para("<w:r><w:tab/></w:r>", `${LEADER}<w:spacing w:before="360" w:after="0"/>`), para(run(x, '<w:color w:val="475569"/><w:sz w:val="18"/>'), '<w:spacing w:after="120"/>'));
+    } else if (b.t === "disc") body.push(para(run(DISCLAIMER, '<w:b/><w:color w:val="2D6A4F"/>'), '<w:pBdr><w:top w:val="single" w:sz="4" w:space="6" w:color="CBD5E1"/></w:pBdr><w:spacing w:before="360"/>'));
   }
-  body.push(para(run(CREDIT(t.slug), '<w:sz w:val="16"/><w:color w:val="64748B"/>')));
+  body.push(para(run(CREDIT(t.slug), '<w:color w:val="64748B"/><w:sz w:val="16"/>')));
   return `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n<w:document ${W}><w:body>${body.join("")}<w:sectPr><w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="1152" w:right="1224" w:bottom="1152" w:left="1224" w:header="720" w:footer="720" w:gutter="0"/></w:sectPr></w:body></w:document>`;
 }
 
@@ -161,6 +161,28 @@ export function unzipEntry(buf, want) {
   return null;
 }
 
+// ECMA-376 xsd:sequence order for the property children this builder emits. Word rejects ("unreadable content")
+// a w:rPr / w:pPr whose children are out of this order, while LibreOffice opens it; check:assets enforces it.
+export const RPR_ORDER = ["rStyle", "rFonts", "b", "bCs", "i", "iCs", "caps", "strike", "color", "spacing", "w", "kern", "position", "sz", "szCs", "highlight", "u"];
+export const PPR_ORDER = ["pStyle", "keepNext", "keepLines", "pageBreakBefore", "framePr", "widowControl", "numPr", "suppressLineNumbers", "pBdr", "shd", "tabs", "suppressAutoHyphens", "bidi", "spacing", "ind", "jc", "outlineLvl"];
+/** Every out-of-order or unknown property child in a WordprocessingML part, as "pPr: spacing before pBdr". */
+export function ooxmlOrderErrors(xml) {
+  const errs = [];
+  for (const [tag, order] of [["rPr", RPR_ORDER], ["pPr", PPR_ORDER]]) {
+    for (const m of xml.matchAll(new RegExp(`<w:${tag}>([\\s\\S]*?)</w:${tag}>`, "g"))) {
+      const kids = [...m[1].matchAll(/<w:([A-Za-z]+)\b[^>]*?(?:\/>|>[\s\S]*?<\/w:\1>)/g)].map((k) => k[1]);
+      let last = -1;
+      for (const k of kids) {
+        const i = order.indexOf(k);
+        if (i < 0) { errs.push(`${tag}: unknown child ${k}`); continue; }
+        if (i < last) errs.push(`${tag}: ${k} after ${order[last]}`);
+        last = Math.max(last, i);
+      }
+    }
+  }
+  return errs;
+}
+
 export function renderDocx(t) {
   return zipStore([
     ["[Content_Types].xml", CONTENT_TYPES], ["_rels/.rels", RELS], ["docProps/core.xml", core(t)],
@@ -205,4 +227,4 @@ async function main() {
   console.log(`✅ ${TEMPLATES.length} templates built; manifest written`);
 }
 
-if (import.meta.url === pathToFileURL(process.argv[1]).href) await main();
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) await main();
