@@ -44,8 +44,9 @@ export const decode = (s) => s
 export const norm = (s) => decode(String(s).replace(/<[^>]*>/g, " "))
   .replace(/[\u2018\u2019]/g, "'").replace(/[\u201c\u201d]/g, '"')
   .replace(/\s+/g, " ").trim();
-// An attribute may follow whitespace OR a closing quote (`rel="canonical"href=…` is a parse error browsers recover from).
-const attr = (tag, name) => { const m = tag.match(new RegExp(`(?:\\s|(?<=["']))${name}\\s*=\\s*(?:"([^"]*)"|'([^']*)'|([^\\s>]+))`, "i")); return m ? (m[1] ?? m[2] ?? m[3]) : null; };
+// An attribute may follow whitespace OR a CLOSING quote (`rel="canonical"href=…` is a parse error browsers recover from).
+// Never an opening quote: in `title="alt=decoy"` the alt= is inside a value.
+const attr = (tag, name) => { const m = tag.match(new RegExp(`(?:\\s|(?<=[^=\\s]["']))${name}\\s*=\\s*(?:"([^"]*)"|'([^']*)'|([^\\s>]+))`, "i")); return m ? (m[1] ?? m[2] ?? m[3]) : null; };
 const stripComments = (h) => h.replace(/<!--[\s\S]*?-->/g, "");
 const stripScripts = (h) => h.replace(/<script\b[\s\S]*?<\/script>/gi, "").replace(/<style\b[\s\S]*?<\/style>/gi, "").replace(/<template\b[\s\S]*?<\/template>/gi, "");
 
