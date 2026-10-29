@@ -20,52 +20,70 @@ const SKIP_PATTERNS = [/^google[0-9a-f]+\.html$/];
 // Served by rewrites to the app: no local file, but indexable. Keep in the sitemap.
 export const STATIC_EXTRAS = ["/how-to", "/how-to/retailer", "/how-to/vendor"];
 
-const vercel = JSON.parse(readFileSync(join(ROOT, "vercel.json"), "utf8"));
-const redirectSources = new Set((vercel.redirects || []).map((r) => r.source).filter((s) => !s.includes(":")));
-const noindexSources = new Set((vercel.headers || []).filter((h) => (h.headers || []).some((x) => /x-robots-tag/i.test(x.key) && /noindex/i.test(x.value))).map((h) => h.source));
-
-export function walk(dir) {
-  const out = [];
-  for (const name of readdirSync(dir).sort()) {
-    const p = join(dir, name);
-    if (statSync(p).isDirectory()) { if (!SKIP_DIRS.has(name)) out.push(...walk(p)); }
-    else if (name.endsWith(".html")) out.push(relative(ROOT, p));
-  }
-  return out;
-}
-
+// siteIndex(root) is the ONE definition of "indexable" (shared by check:sitemap, IndexNow and
+// check:seo, so all three agree). The bare exports below are siteIndex(ROOT).
 export const urlPath = (file) => file === "index.html" ? "/" : "/" + file.replace(/(?:^|\/)index\.html$/, "").replace(/\.html$/, "");
 
-// Why a file is not indexable, or null when it is.
-export function exclusionReason(file, html) {
-  if (SKIP_FILES.has(file) || SKIP_PATTERNS.some((r) => r.test(file))) return "internal/utility file";
-  const path = urlPath(file);
-  if (redirectSources.has(path)) return "redirect source";
-  if (noindexSources.has(path)) return "X-Robots-Tag noindex";
-  if (/<meta[^>]+name=["']robots["'][^>]*noindex/i.test(html)) return "meta noindex";
-  const m = html.match(/<link[^>]+rel=["']canonical["'][^>]*href=["']([^"']+)["']/i);
-  if (!m) return "no canonical";
-  if (m[1] !== ORIGIN + (path === "/" ? "/" : path)) return `canonical elsewhere (${m[1]})`;
-  return null;
-}
+export function siteIndex(root = ROOT) {
+  const vercelFile = join(root, "vercel.json");
+  const vercel = existsSync(vercelFile) ? JSON.parse(readFileSync(vercelFile, "utf8")) : {};
+  const redirectSources = new Set((vercel.redirects || []).map((r) => r.source).filter((s) => !s.includes(":")));
+  const noindexSources = new Set((vercel.headers || []).filter((h) => (h.headers || []).some((x) => /x-robots-tag/i.test(x.key) && /noindex/i.test(x.value))).map((h) => h.source));
 
-function publishedTutorials() {
-  const cat = JSON.parse(readFileSync(join(ROOT, "video-catalog.json"), "utf8"));
-  return new Set(cat.videos.filter((v) => v.privacy === "public").map((v) => `tutorials/${v.slug}.html`));
-}
-
-// All indexable pages: [{ file|null, path }]
-export function indexablePages() {
-  const files = walk(ROOT);
-  const tutorials = [...publishedTutorials()].filter((f) => existsSync(join(ROOT, f)));
-  const pages = [];
-  for (const file of [...files, ...tutorials]) {
-    const reason = exclusionReason(file, readFileSync(join(ROOT, file), "utf8"));
-    if (!reason) pages.push({ file, path: urlPath(file) });
+  function walk(dir = root) {
+    const out = [];
+    for (const name of readdirSync(dir).sort()) {
+      const p = join(dir, name);
+      if (statSync(p).isDirectory()) { if (!SKIP_DIRS.has(name)) out.push(...walk(p)); }
+      else if (name.endsWith(".html")) out.push(relative(root, p));
+    }
+    return out;
   }
-  for (const path of STATIC_EXTRAS) pages.push({ file: null, path });
-  return pages.sort((a, b) => (a.path < b.path ? -1 : a.path > b.path ? 1 : 0));
+
+  // Why a file is not indexable, or null when it is.
+  function exclusionReason(file, html) {
+    if (SKIP_FILES.has(file) || SKIP_PATTERNS.some((r) => r.test(file))) return "internal/utility file";
+    const path = urlPath(file);
+    if (redirectSources.has(path)) return "redirect source";
+    if (noindexSources.has(path)) return "X-Robots-Tag noindex";
+    if (/<meta[^>]+name=["']robots["'][^>]*noindex/i.test(html)) return "meta noindex";
+    const m = html.match(/<link[^>]+rel=["']canonical["'][^>]*href=["']([^"']+)["']/i);
+    if (!m) return "no canonical";
+    if (m[1] !== ORIGIN + (path === "/" ? "/" : path)) return `canonical elsewhere (${m[1]})`;
+    return null;
+  }
+
+  function publishedTutorials() {
+    const f = join(root, "video-catalog.json");
+    if (!existsSync(f)) return new Set();
+    const cat = JSON.parse(readFileSync(f, "utf8"));
+    return new Set(cat.videos.filter((v) => v.privacy === "public").map((v) => `tutorials/${v.slug}.html`));
+  }
+
+  // Every candidate page file (walked pages + published tutorials that exist).
+  function pageFiles() {
+    const tutorials = [...publishedTutorials()].filter((f) => existsSync(join(root, f)));
+    return [...walk(root), ...tutorials];
+  }
+
+  // All indexable pages: [{ file|null, path }]
+  function indexablePages({ extras = root === ROOT } = {}) {
+    const pages = [];
+    for (const file of pageFiles()) {
+      const reason = exclusionReason(file, readFileSync(join(root, file), "utf8"));
+      if (!reason) pages.push({ file, path: urlPath(file) });
+    }
+    if (extras) for (const path of STATIC_EXTRAS) pages.push({ file: null, path });
+    return pages.sort((a, b) => (a.path < b.path ? -1 : a.path > b.path ? 1 : 0));
+  }
+
+  return { root, vercel, redirectSources, noindexSources, walk, exclusionReason, publishedTutorials, pageFiles, indexablePages };
 }
+
+const site = siteIndex(ROOT);
+export const walk = (dir = ROOT) => site.walk(dir);
+export const exclusionReason = site.exclusionReason;
+export const indexablePages = () => site.indexablePages();
 
 function lastmod(file) {
   if (file) {

@@ -1,0 +1,278 @@
+// check:seo — on-page SEO fence for every indexable page (SEO engine row A3a).
+//   node scripts/seo/check-seo.mjs                  self-test on fixtures, then scan the site against the baseline
+//   node scripts/seo/check-seo.mjs --write-baseline  record today's violations (A3b ratchets this down, then deletes it)
+//   node scripts/seo/check-seo.mjs --root <dir> --no-baseline --json   scan another tree (the self-test uses this)
+//
+// "Indexable" comes from siteIndex() in build-sitemap.mjs, so this, the sitemap and IndexNow agree.
+// Checks (violation codes):
+//   title-count / title-long / title-dup     exactly 1 <title> (svg titles ignored), <=60 chars, unique
+//   desc-missing / desc-long / desc-short / desc-dup   one meta description, 50..160 chars, unique
+//   canonical                                 exactly 1 rel=canonical and it is self (checked on noindex-free pages
+//                                             BEFORE the indexable filter, so a missing one cannot hide the page)
+//   h1-count                                  exactly 1 <h1>
+//   jsonld-parse                              every application/ld+json block parses
+//   faq-mismatch                              FAQPage Question.name / acceptedAnswer.text == visible <details><summary>
+//                                             text (or the older .faq-question / .faq-answer-inner accordion)
+//   orphan                                    >=1 inbound <a href> from another served page (not the homepage)
+//   broken-link / broken-anchor               internal link resolves (cleanUrls, rewrites, redirects) / #id exists
+//   img-alt                                   non-empty alt, or alt="" with aria-hidden="true" / role=presentation|none
+// Warning only (never fails, never baselined): link-redirect — a link to a redirect source or a *.html URL.
+//
+// Baseline (scripts/seo/check-seo-baseline.json): { file: { code: count } }. A count above the baseline fails;
+// below it prints "baseline can shrink". Delete the file and every violation fails.
+import { readFileSync, writeFileSync, existsSync, statSync, readdirSync, mkdtempSync, cpSync } from "node:fs";
+import { join, dirname, posix } from "node:path";
+import { tmpdir } from "node:os";
+import { fileURLToPath } from "node:url";
+import { execFileSync } from "node:child_process";
+import { ROOT, siteIndex, urlPath } from "./build-sitemap.mjs";
+
+const ORIGIN = "https://shelfspace.pro";
+const HERE = dirname(fileURLToPath(import.meta.url));
+const BASELINE = join(HERE, "check-seo-baseline.json");
+const FIXTURES = join(HERE, "fixtures", "check-seo");
+export const LIMITS = { title: 60, descMax: 160, descMin: 50 };
+
+// ---------- text helpers ----------
+const NAMED = { amp: "&", lt: "<", gt: ">", quot: '"', apos: "'", nbsp: " ", mdash: "—", ndash: "–", hellip: "…", rsquo: "’", lsquo: "‘", rdquo: "”", ldquo: "“", middot: "·", copy: "©", reg: "®", trade: "™", times: "×", rarr: "→", larr: "←", bull: "•", deg: "°", frac12: "½", cent: "¢", euro: "€", pound: "£", sect: "§", para: "¶", eacute: "é", shy: "" };
+export const decode = (s) => s
+  .replace(/&#x([0-9a-f]+);/gi, (_, h) => String.fromCodePoint(parseInt(h, 16)))
+  .replace(/&#(\d+);/g, (_, d) => String.fromCodePoint(+d))
+  .replace(/&([a-z][a-z0-9]*);/gi, (m, n) => (n in NAMED ? NAMED[n] : m));
+// Visible text: tags out, entities decoded, whitespace collapsed, typographic quotes/dashes unified.
+export const norm = (s) => decode(String(s).replace(/<[^>]*>/g, " "))
+  .replace(/[\u2018\u2019]/g, "'").replace(/[\u201c\u201d]/g, '"')
+  .replace(/\s+/g, " ").trim();
+const attr = (tag, name) => { const m = tag.match(new RegExp(`\\s${name}\\s*=\\s*(?:"([^"]*)"|'([^']*)'|([^\\s>]+))`, "i")); return m ? (m[1] ?? m[2] ?? m[3]) : null; };
+const stripComments = (h) => h.replace(/<!--[\s\S]*?-->/g, "");
+const stripScripts = (h) => h.replace(/<script\b[\s\S]*?<\/script>/gi, "").replace(/<style\b[\s\S]*?<\/style>/gi, "").replace(/<template\b[\s\S]*?<\/template>/gi, "");
+
+// ---------- the site model ----------
+function loadSite(root) {
+  const idx = siteIndex(root);
+  const vercelIgnore = existsSync(join(root, ".vercelignore"))
+    ? readFileSync(join(root, ".vercelignore"), "utf8").split("\n").map((l) => l.trim()).filter((l) => l && !l.startsWith("#")) : [];
+  const ignored = (rel) => vercelIgnore.some((p) => p.endsWith("/") ? rel.startsWith(p) : rel === p);
+  const files = new Set();
+  (function all(dir) {
+    for (const name of readdirSync(dir)) {
+      if (name === "node_modules" || name === ".git") continue;
+      const p = join(dir, name), rel = posix.normalize(p.slice(root.length + 1).split("\\").join("/"));
+      if (statSync(p).isDirectory()) all(p); else if (!ignored(rel)) files.add(rel);
+    }
+  })(root);
+  const toRe = (src) => new RegExp("^" + src.replace(/[.+?^${}()|[\]\\]/g, "\\$&").replace(/\/:[a-z_]+\*/gi, "(?:/.*)?").replace(/:[a-z_]+\*/gi, ".*").replace(/:[a-z_]+/gi, "[^/]+") + "$");
+  const rewrites = (idx.vercel.rewrites || []).map((r) => toRe(r.source));
+  const redirects = (idx.vercel.redirects || []).filter((r) => !r.has).map((r) => toRe(r.source));
+  const cache = new Map();
+  const read = (f) => { if (!cache.has(f)) cache.set(f, readFileSync(join(root, f), "utf8")); return cache.get(f); };
+  return { root, idx, files, rewrites, redirects, read };
+}
+
+// A path on the site -> { kind: "file", file } | { kind: "rewrite" } | { kind: "redirect" } | { kind: "missing" }
+function resolvePath(site, path) {
+  let p = path.replace(/\/{2,}/g, "/");
+  try { p = decodeURI(p); } catch {}
+  if (site.redirects.some((r) => r.test(p))) return { kind: "redirect" };
+  if (site.rewrites.some((r) => r.test(p))) return { kind: "rewrite" };
+  const rel = p.replace(/^\//, "");
+  if (rel.endsWith(".html") && site.files.has(rel)) return { kind: "redirect", file: rel }; // cleanUrls 308s *.html
+  const base = rel.replace(/\/$/, "");
+  for (const cand of rel === "" ? ["index.html"] : [rel, base + ".html", (base ? base + "/" : "") + "index.html"])
+    if (cand && !cand.endsWith("/") && site.files.has(cand)) return { kind: "file", file: cand };
+  return { kind: "missing" };
+}
+
+// Internal hrefs on a page -> [{ href, path, hash }]
+function internalLinks(html, file) {
+  const out = [];
+  const pageUrl = new URL(ORIGIN + urlPath(file) + (file.endsWith("index.html") && file !== "index.html" ? "/" : ""));
+  for (const m of stripScripts(stripComments(html)).matchAll(/<a\b[^>]*>/gi)) {
+    const href = attr(m[0], "href");
+    if (href == null || href === "" || /^(mailto|tel|sms|javascript|data):/i.test(href)) continue;
+    let u;
+    try { u = new URL(decode(href), pageUrl); } catch { continue; }
+    if (!/^https?:$/.test(u.protocol) || !/^(www\.)?shelfspace\.pro$/i.test(u.hostname)) continue; // external: ignored
+    out.push({ href, path: u.pathname, hash: u.hash ? decodeURIComponent(u.hash.slice(1)) : "" });
+  }
+  return out;
+}
+
+const ids = (html) => new Set([...stripComments(html).matchAll(/\s(?:id|name)\s*=\s*["']([^"']+)["']/gi)].map((m) => m[1]));
+
+// FAQPage questions anywhere in a JSON-LD value (top level, arrays, @graph).
+function faqQuestions(node, out = []) {
+  if (Array.isArray(node)) { node.forEach((n) => faqQuestions(n, out)); return out; }
+  if (!node || typeof node !== "object") return out;
+  const types = [].concat(node["@type"] || []);
+  if (types.includes("FAQPage")) for (const q of [].concat(node.mainEntity || [])) {
+    const a = [].concat(q?.acceptedAnswer || [])[0];
+    out.push({ q: norm(q?.name ?? ""), a: norm(a?.text ?? "") });
+  }
+  for (const k of Object.keys(node)) if (k !== "mainEntity" || !types.includes("FAQPage")) faqQuestions(node[k], out);
+  return out;
+}
+
+// ---------- the scan ----------
+export function scan(root = ROOT) {
+  const site = loadSite(root);
+  const v = new Map(); // file -> Map(code -> [detail])
+  const warnings = [];
+  const add = (file, code, detail = "") => { if (!v.has(file)) v.set(file, new Map()); const m = v.get(file); if (!m.has(code)) m.set(code, []); m.get(code).push(detail); };
+
+  const candidates = site.idx.pageFiles();
+  // Canonical: every page that is not deliberately excluded (internal, redirect, noindex) and does not
+  // canonical to a DIFFERENT page must carry exactly one self canonical.
+  for (const f of candidates) {
+    const html = site.read(f);
+    const reason = site.idx.exclusionReason(f, html);
+    const tags = [...html.matchAll(/<link\b[^>]*rel=["']canonical["'][^>]*>/gi)];
+    const self = ORIGIN + (urlPath(f) === "/" ? "/" : urlPath(f));
+    if (reason && !/canonical/.test(reason)) continue;
+    if (tags.length > 1) { add(f, "canonical", `${tags.length} canonical tags`); continue; }
+    if (!tags.length) { add(f, "canonical", "no canonical"); continue; }
+    const href = attr(tags[0][0], "href") || "";
+    // Elsewhere on purpose (consolidating a stub into another page) is allowed; a near-miss of self is not.
+    const loose = (h) => h.replace(/^http:/, "https:").replace("//www.", "//").replace(/\.html$/, "").replace(/\/index$/, "/").replace(/(.)\/$/, "$1");
+    if (href !== self && loose(href) === loose(self)) add(f, "canonical", `not exactly self: ${href}`);
+  }
+
+  const pages = site.idx.indexablePages({ extras: false });
+  const titles = new Map(), descs = new Map();
+  for (const { file: f } of pages) {
+    const raw = site.read(f);
+    const html = stripComments(raw);
+    const head = html.replace(/<svg\b[\s\S]*?<\/svg>/gi, "");
+    const t = [...head.matchAll(/<title\b[^>]*>([\s\S]*?)<\/title>/gi)].map((m) => norm(m[1]));
+    if (t.length !== 1) add(f, "title-count", `${t.length} <title>`);
+    if (t[0] !== undefined) {
+      if ([...t[0]].length > LIMITS.title) add(f, "title-long", `${[...t[0]].length} chars`);
+      if (!titles.has(t[0])) titles.set(t[0], []); titles.get(t[0]).push(f);
+    }
+    const d = [...html.matchAll(/<meta\b[^>]*name=["']description["'][^>]*>/gi)].map((m) => norm(attr(m[0], "content") || ""));
+    if (!d.length || !d[0]) add(f, "desc-missing", d.length > 1 ? "" : "none");
+    else {
+      if (d.length > 1) add(f, "desc-missing", `${d.length} descriptions`);
+      const n = [...d[0]].length;
+      if (n > LIMITS.descMax) add(f, "desc-long", `${n} chars`);
+      if (n < LIMITS.descMin) add(f, "desc-short", `${n} chars`);
+      if (!descs.has(d[0])) descs.set(d[0], []); descs.get(d[0]).push(f);
+    }
+    const body = stripScripts(html);
+    const h1 = (body.match(/<h1\b/gi) || []).length;
+    if (h1 !== 1) add(f, "h1-count", `${h1} <h1>`);
+
+    const faqs = [];
+    for (const m of html.matchAll(/<script\b[^>]*type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi)) {
+      try { faqs.push(...faqQuestions(JSON.parse(m[1]))); } catch (e) { add(f, "jsonld-parse", String(e.message).slice(0, 80)); }
+    }
+    if (faqs.length) {
+      const visible = new Map();
+      for (const m of body.matchAll(/<details\b[^>]*>([\s\S]*?)<\/details>/gi)) {
+        const s = m[1].match(/<summary\b[^>]*>([\s\S]*?)<\/summary>/i);
+        if (s) visible.set(norm(s[1]), norm(m[1].replace(s[0], "")));
+      }
+      // The older accordion: <button class="faq-question">Q<svg/></button><div class="faq-answer"><div class="faq-answer-inner">A</div></div>
+      for (const m of body.matchAll(/<button\b[^>]*class=["'][^"']*\bfaq-question\b[^"']*["'][^>]*>([\s\S]*?)<\/button>\s*<div\b[^>]*class=["'][^"']*\bfaq-answer\b[^"']*["'][^>]*>\s*<div\b[^>]*class=["'][^"']*\bfaq-answer-inner\b[^"']*["'][^>]*>([\s\S]*?)<\/div>/gi))
+        visible.set(norm(m[1].replace(/<svg\b[\s\S]*?<\/svg>/gi, "")), norm(m[2]));
+      for (const { q, a } of faqs) {
+        if (!visible.has(q)) add(f, "faq-mismatch", `no visible question for: ${q.slice(0, 60)}`);
+        else if (visible.get(q) !== a) add(f, "faq-mismatch", `answer differs for: ${q.slice(0, 60)}`);
+      }
+    }
+
+    for (const m of body.matchAll(/<img\b[^>]*>/gi)) {
+      const alt = attr(m[0], "alt");
+      const decorative = /\saria-hidden\s*=\s*["']?true/i.test(m[0]) || /\srole\s*=\s*["']?(presentation|none)\b/i.test(m[0]);
+      if (alt === null || (alt.trim() === "" && !decorative)) add(f, "img-alt", attr(m[0], "src") || "?");
+    }
+  }
+  for (const [t, fs] of titles) if (fs.length > 1) for (const f of fs) add(f, "title-dup", t.slice(0, 60));
+  for (const [d, fs] of descs) if (fs.length > 1) for (const f of fs) add(f, "desc-dup", d.slice(0, 60));
+
+  // Links: outbound checks on indexable pages; inbound counts from every served page.
+  const indexable = new Set(pages.map((p) => p.file));
+  const inbound = new Map([...indexable].map((f) => [f, 0]));
+  const served = candidates.filter((f) => { const r = site.idx.exclusionReason(f, site.read(f)); return !r || !/internal|redirect/.test(r); });
+  for (const f of served) {
+    const html = site.read(f);
+    for (const l of internalLinks(html, f)) {
+      const r = resolvePath(site, l.path);
+      if (r.kind === "file" && r.file !== f && inbound.has(r.file)) inbound.set(r.file, inbound.get(r.file) + 1);
+      if (!indexable.has(f)) continue;
+      if (r.kind === "missing") add(f, "broken-link", l.href);
+      else if (r.kind === "redirect") warnings.push(`${f}: link-redirect ${l.href}`);
+      else if (r.kind === "file" && l.hash && r.file.endsWith(".html") && l.hash !== "top" && !ids(site.read(r.file)).has(l.hash)) add(f, "broken-anchor", l.href);
+    }
+  }
+  for (const [f, n] of inbound) if (n === 0 && f !== "index.html") add(f, "orphan", "no inbound link");
+
+  return { pages: pages.length, violations: v, warnings };
+}
+
+const counts = (violations) => Object.fromEntries([...violations].sort(([a], [b]) => (a < b ? -1 : 1))
+  .map(([f, m]) => [f, Object.fromEntries([...m].sort(([a], [b]) => (a < b ? -1 : 1)).map(([c, d]) => [c, d.length]))]));
+
+// ---------- self-test: each check against literal fixture pages ----------
+// fixtures/check-seo/good/ is a clean mini-site (must scan clean). Each fixtures/check-seo/cases/<name>/ holds
+// literal pages copied OVER good/ plus expect.json { "violations": { file: [codes] }, "warnings": [substr] }.
+// The case must produce EXACTLY those codes — so a check that stops firing, or fires on the wrong page, goes red.
+export function selfTest() {
+  const fails = [];
+  const good = join(FIXTURES, "good");
+  const g = scan(good);
+  if (g.pages < 3) fails.push(`good fixture: only ${g.pages} indexable pages (region empty)`);
+  if (g.violations.size) fails.push(`good fixture is not clean: ${JSON.stringify(counts(g.violations))}`);
+  const cases = readdirSync(join(FIXTURES, "cases")).sort();
+  if (cases.length < 12) fails.push(`only ${cases.length} fixture cases (expected one per check)`);
+  for (const c of cases) {
+    const dir = join(FIXTURES, "cases", c);
+    const expect = JSON.parse(readFileSync(join(dir, "expect.json"), "utf8"));
+    const T = mkdtempSync(join(tmpdir(), `seo-${c}-`));
+    cpSync(good, T, { recursive: true });
+    cpSync(dir, T, { recursive: true, filter: (s) => !s.endsWith("expect.json") });
+    const r = scan(T);
+    const got = Object.fromEntries([...r.violations].map(([f, m]) => [f, [...m.keys()].sort()]));
+    const want = Object.fromEntries(Object.entries(expect.violations || {}).map(([f, cs]) => [f, [...cs].sort()]));
+    const key = (o) => JSON.stringify(Object.keys(o).sort().map((k) => [k, o[k]]));
+    if (key(got) !== key(want)) fails.push(`case ${c}: want ${JSON.stringify(want)} got ${JSON.stringify(got)}`);
+    for (const w of expect.warnings || []) if (!r.warnings.some((x) => x.includes(w))) fails.push(`case ${c}: missing warning "${w}" (got ${JSON.stringify(r.warnings)})`);
+    if (!expect.warnings?.length && r.warnings.length) fails.push(`case ${c}: unexpected warnings ${JSON.stringify(r.warnings)}`);
+  }
+  return { fails, cases: cases.length };
+}
+
+// ---------- CLI ----------
+if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
+  const args = process.argv.slice(2);
+  const opt = (n) => { const i = args.indexOf(n); return i > -1 ? args[i + 1] : null; };
+  const root = opt("--root") || ROOT;
+  if (args.includes("--json")) { const r = scan(root); console.log(JSON.stringify({ pages: r.pages, violations: counts(r.violations), warnings: r.warnings }, null, 1)); process.exit(0); }
+
+  if (!args.includes("--skip-self-test") && root === ROOT) {
+    const st = selfTest();
+    if (st.fails.length) { console.error(`check:seo FAILED (self-test)\n- ${st.fails.join("\n- ")}`); process.exit(1); }
+    console.log(`check:seo self-test ok (${st.cases} fixture cases)`);
+  }
+  const r = scan(root);
+  const now = counts(r.violations);
+  if (r.pages < (root === ROOT ? 200 : 1)) { console.error(`check:seo FAILED: only ${r.pages} indexable pages (enumeration broken)`); process.exit(1); }
+  if (args.includes("--write-baseline")) {
+    writeFileSync(BASELINE, JSON.stringify(now, null, 1) + "\n");
+    const n = Object.values(now).reduce((s, m) => s + Object.values(m).reduce((a, b) => a + b, 0), 0);
+    console.log(`check:seo baseline written: ${n} violations on ${Object.keys(now).length} pages -> ${BASELINE}`);
+    process.exit(0);
+  }
+  const base = !args.includes("--no-baseline") && root === ROOT && existsSync(BASELINE) ? JSON.parse(readFileSync(BASELINE, "utf8")) : {};
+  const fails = [], shrink = [];
+  for (const [f, m] of Object.entries(now)) for (const [c, n] of Object.entries(m)) {
+    const b = base[f]?.[c] || 0;
+    if (n > b) fails.push(`${f}: ${c} ${n}${b ? ` (baseline ${b})` : ""} — ${r.violations.get(f).get(c).slice(0, 3).join(" | ")}`);
+  }
+  for (const [f, m] of Object.entries(base)) for (const [c, b] of Object.entries(m)) if ((now[f]?.[c] || 0) < b) shrink.push(`${f}: ${c} ${b} -> ${now[f]?.[c] || 0}`);
+  if (r.warnings.length) console.log(`check:seo warnings (${r.warnings.length}, not failing):\n  ${r.warnings.slice(0, 15).join("\n  ")}${r.warnings.length > 15 ? `\n  … ${r.warnings.length - 15} more` : ""}`);
+  if (shrink.length) console.log(`check:seo: baseline can shrink (${shrink.length} entries fixed; run with --write-baseline):\n  ${shrink.slice(0, 20).join("\n  ")}`);
+  if (fails.length) { console.error(`check:seo FAILED: ${fails.length} new violation(s)\n  ${fails.join("\n  ")}`); process.exit(1); }
+  const total = Object.values(base).reduce((s, m) => s + Object.values(m).reduce((a, b) => a + b, 0), 0);
+  console.log(`check:seo OK (${r.pages} pages; ${total} baselined violations)`);
+}

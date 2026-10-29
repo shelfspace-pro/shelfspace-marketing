@@ -25,6 +25,12 @@ jobs:
       - name: Sitemap
         run: npm run check:sitemap
 
+      # On-page SEO on every indexable page: title/description/canonical/H1/JSON-LD/FAQ parity/orphans/
+      # broken links/alt text. Self-tests each check on fixtures first; fails only on violations not in
+      # scripts/seo/check-seo-baseline.json (SEO A3a; A3b fixes them and deletes the baseline).
+      - name: On-page SEO
+        run: npm run check:seo
+
       # Speed Insights tag on every page, deferred widget, IndexNow URL mapping + workflow shape (SEO A4).
       - name: Head + IndexNow
         run: npm run check:head

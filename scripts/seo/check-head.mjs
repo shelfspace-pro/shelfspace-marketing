@@ -12,7 +12,7 @@ const SI = "/_vercel/speed-insights/script.js";
 
 // 1. every served page (not email/pdf-source/og templates/google verification) carries Speed Insights; the widget is deferred.
 const files = execFileSync("git", ["ls-files", "*.html"], { cwd: ROOT, encoding: "utf8" }).split("\n").filter(Boolean)
-  .filter((f) => !/^(email|_pdf-source|og-templates)\//.test(f) && !/^google[0-9a-f]+\.html$/.test(f));
+  .filter((f) => !/^(email|_pdf-source|og-templates|scripts)\//.test(f) && !/^google[0-9a-f]+\.html$/.test(f));
 if (files.length < 200) fail(`only ${files.length} html files found (expected 200+): region empty`);
 for (const f of files) {
   const h = readFileSync(join(ROOT, f), "utf8");
