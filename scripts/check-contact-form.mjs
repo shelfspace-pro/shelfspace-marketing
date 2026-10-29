@@ -44,6 +44,7 @@ async function scenario(name, { status, lead, interest, url = '/contact.html?utm
   page.on('pageerror', e => seen.consoleErr.push('pageerror ' + e.message));
   await page.route('**/turnstile/v0/api.js*', r => r.fulfill({ contentType: 'application/javascript', body: TURNSTILE_STUB }));
   await page.route('**/googletagmanager.com/**', r => r.fulfill({ body: '' }));
+  await page.route('**/_vercel/**', r => r.fulfill({ contentType: 'application/javascript', body: '' })); // Vercel-only Speed Insights script: absent on the local static server
   await page.route('https://ourshelf.space/api/public/sales-status', r => { seen.status++; return status === 'fail' ? r.abort() : r.fulfill({ contentType: 'application/json', headers: { 'access-control-allow-origin': '*' }, body: JSON.stringify(status) }); });
   await page.route('https://ourshelf.space/api/public/sales-lead', async r => {
     const body = JSON.parse(r.request().postData() || '{}'); seen.lead.push(body);
@@ -363,6 +364,7 @@ for (const [label, fn] of [['500', () => ({ status: 500, body: { ok: false } })]
   await page.addInitScript(() => { try { sessionStorage.setItem('ss-session-touch', JSON.stringify({ utmSource: 'li', utmMedium: 'social', landing: '/ai-calls?utm_source=li', referrer: 'https://www.linkedin.com/', at: '2026-10-19T00:00:00Z' })); } catch (e) {} });
   await page.route('**/turnstile/v0/api.js*', r => r.fulfill({ contentType: 'application/javascript', body: TURNSTILE_STUB }));
   await page.route('**/googletagmanager.com/**', r => r.fulfill({ body: '' }));
+  await page.route('**/_vercel/**', r => r.fulfill({ contentType: 'application/javascript', body: '' })); // Vercel-only Speed Insights script: absent on the local static server
   const posts = [];
   await page.route('https://ourshelf.space/**', r => { if (r.request().method() === 'POST') posts.push(JSON.parse(r.request().postData() || '{}')); return r.fulfill({ status: 200, contentType: 'application/json', headers: { 'access-control-allow-origin': '*' }, body: r.request().method() === 'POST' ? '{"ok":true,"leadId":"11111111-2222-4333-8444-555555555555"}' : '{"live":false,"capture":true}' }); });
   for (const [label, url, want] of [['url campaign wins', '/contact.html?utm_campaign=q4', { utm_campaign: 'q4' }], ['session touch when url has none', '/contact.html?cta=x1', { utm_source: 'li', utm_medium: 'social', landing_path: '/ai-calls?utm_source=li' }]]) {

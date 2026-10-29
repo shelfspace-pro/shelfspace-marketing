@@ -17,7 +17,8 @@ if (files.length < 200) fail(`only ${files.length} html files found (expected 20
 for (const f of files) {
   const h = readFileSync(join(ROOT, f), "utf8");
   if (!h.includes(`<script defer src="${SI}"></script>`)) fail(`${f}: missing deferred Speed Insights script`);
-  if (/<script src="\/shelfiq-widget\.js"><\/script>/.test(h)) fail(`${f}: shelfiq-widget.js is not deferred`);
+  if (/<script(?![^>]*\bdefer\b)[^>]*shelfiq-widget\.js/.test(h)) fail(`${f}: shelfiq-widget.js is not deferred`);
+  if (/<script[^>]*shelfiq-widget\.js/.test(h) && !/<script defer src="\/shelfiq-widget\.js"><\/script>/.test(h)) fail(`${f}: shelfiq-widget.js tag is not the canonical deferred form`);
 }
 const bt = readFileSync(join(ROOT, "scripts/build-tutorials.mjs"), "utf8");
 if (!bt.includes(SI)) fail("build-tutorials.mjs template lacks Speed Insights (tutorials would lose it on regenerate)");

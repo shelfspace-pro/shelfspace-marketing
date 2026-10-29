@@ -27,6 +27,8 @@ jobs:
         run: |
           set +e
           node scripts/seo/indexnow-urls.mjs "$BEFORE" "$AFTER" > urls.txt
+          RC=$?
+          if [ "$RC" != "0" ]; then echo "::warning::indexnow-urls.mjs exited $RC (nothing submitted)"; exit 0; fi
           echo "indexable changed URLs: $(wc -l < urls.txt)"
           cat urls.txt
           if [ ! -s urls.txt ]; then echo "nothing to submit"; exit 0; fi
