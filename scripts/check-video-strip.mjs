@@ -20,12 +20,21 @@ const a = html.indexOf(START), b = html.indexOf(END);
 if (a < 0 || b < a) fails.push("no VIDEO-STRIP markers in index.html");
 else if (html.slice(a, b + END.length) !== buildStrip(catalog)) fails.push("strip is stale: run node scripts/build-tutorials.mjs");
 
-const ids = new Set([...html.matchAll(/i\.ytimg\.com\/vi\/([\w-]{11})\//g), ...html.matchAll(/data-yt="([\w-]{11})"/g)].map((m) => m[1]));
+// Every way the page names a video: thumbnails (any YouTube image host), play buttons, embeds, links.
+const ID_PATTERNS = [
+  /(?:i\.ytimg\.com|img\.youtube\.com)\/(?:vi|vi_webp)\/([\w-]{11})\//g,
+  /data-(?:yt|watch)="([\w-]{11})"/g,
+  /youtube(?:-nocookie)?\.com\/(?:embed|watch\?v=)\/?([\w-]{11})/g,
+  /youtu\.be\/([\w-]{11})/g,
+];
+const ids = new Set(ID_PATTERNS.flatMap((re) => [...html.matchAll(re)].map((m) => m[1])));
 if (!ids.size) fails.push("found no YouTube ids in index.html (pattern broke?)");
 for (const id of ids) if (!pub.has(id)) fails.push(`${id} is on the homepage but not a public video in video-catalog.json`);
-for (const page of ["index.html", "tutorials.html"])
-  for (const m of readFileSync(join(ROOT, page), "utf8").matchAll(/https:\/\/i\.ytimg\.com\/vi\/[\w-]{11}\/\w+\.jpg(\?v=\w+)?/g))
-    if (m[1] !== `?v=${THUMB_V}`) fails.push(`${page}: ${m[0]} lacks ?v=${THUMB_V} (browsers keep the old thumbnail)`);
+for (const page of ["index.html", "tutorials.html"]) {
+  const thumbs = [...readFileSync(join(ROOT, page), "utf8").matchAll(/(?:https?:)?\/\/(?:i\.ytimg\.com|img\.youtube\.com)\/(?:vi|vi_webp)\/[\w-]{11}\/[\w-]+\.(?:jpg|webp)(\?v=\w+)?/g)];
+  if (!thumbs.length) fails.push(`${page}: no YouTube thumbnails found (pattern broke?)`);
+  for (const m of thumbs) if (m[1] !== `?v=${THUMB_V}`) fails.push(`${page}: ${m[0]} lacks ?v=${THUMB_V} (browsers keep the old thumbnail)`);
+}
 
 if (fails.length) { console.error(`check:video-strip FAIL\n  ${fails.join("\n  ")}`); process.exit(1); }
 console.log(`check:video-strip OK (${ids.size} public videos on the homepage)`);
