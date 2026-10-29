@@ -21,6 +21,10 @@ jobs:
 
       - run: npm ci
 
+      # sitemap.xml must equal what scripts/seo/build-sitemap.mjs emits and list every indexable page.
+      - name: Sitemap
+        run: npm run check:sitemap
+
       # No provider leaks, no retired pricing; trial copy only inside brand-page trial-ok regions (Z-33).
       - name: Forbidden copy
         run: npm run check:forbidden

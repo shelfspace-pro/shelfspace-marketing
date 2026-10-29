@@ -14,6 +14,7 @@
 
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { dirname, join } from "node:path";
+import { execFileSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
@@ -336,3 +337,6 @@ for (const v of videos) {
   writeFileSync(join(ROOT, "tutorials", `${v.slug}.html`), guard(v.slug, buildVideoPage(v)));
   console.log(`   tutorials/${v.slug}.html`);
 }
+
+// Keep sitemap.xml in step with the pages just written (SEO engine A1).
+execFileSync("node", [join(ROOT, "scripts", "seo", "build-sitemap.mjs")], { stdio: "inherit" });
