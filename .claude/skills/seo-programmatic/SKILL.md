@@ -20,7 +20,7 @@ naming, the claims registry, price and trial copy, voice, page style and the gat
 - **Nothing state-specific without a cited primary source** (the statute, regulation or regulator
   page), linked on the page with the date you checked it. A state you can't source doesn't get a page.
 - **Templates are legal documents**: each carries "Not legal advice. Have your counsel review it."
-- **Unique value per page or no page.** `check:dupe` (once it exists) fails a
+- **Unique value per page or no page.** `check:dupe` fails a
   page with heavy five-word-shingle overlap with an existing one; swapping a state name into the same copy fails it.
 - **Weekly caps come from the prompt that started you**, not this skill.
 - Build pages from `marketing/landing-page-playbook.md` (posts: the blog brief).

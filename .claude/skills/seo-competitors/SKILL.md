@@ -24,6 +24,8 @@ naming, the claims registry, price and trial copy, voice, page style and the gat
   a compare-table, the 10/27/2026 page style and the script-owned CTA.
 - **Our side of every table** uses only capabilities already described on this site; no new
   claims, no timelines, no price.
+- **A competitor's price** (with its source link and "as of MM/DD/YYYY") sits inside an element marked
+  `data-price-note="competitor"`, or `check:claims` reads it as a ShelfSpace price and fails the page.
 - **Self-ranked "best" lists can hand the recommendation to competitors** (see seo-ai-search,
   citations vs recommendations): include real options, and be the honest pick for brands that
   want collections handled.

@@ -13,6 +13,8 @@ jobs:
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v5
+        with:
+          fetch-depth: 2   # check:claims / check:dupe compare their baselines with HEAD~1 (the ratchet)
 
       - uses: actions/setup-node@v5
         with:
@@ -20,6 +22,16 @@ jobs:
           cache: 'npm'
 
       - run: npm ci
+
+      # The baselines of check:claims / check:dupe only shrink. Fetch the commit main was at before this push (or
+      # the PR base) so a multi-commit push that deletes + re-seeds a baseline is compared with the real "before".
+      - name: Fetch baseline ref
+        env:
+          BASE: ${{ github.event.pull_request.base.sha || github.event.before }}
+        run: |
+          if [ -n "$BASE" ] && [ "${BASE//0/}" != "" ]; then
+            git fetch --no-tags --depth=1 origin "$BASE" && echo "SEO_BASELINE_REF=$BASE" >> "$GITHUB_ENV" || echo "could not fetch $BASE"
+          fi
 
       # sitemap.xml must equal what scripts/seo/build-sitemap.mjs emits and list every indexable page.
       - name: Sitemap
@@ -39,6 +51,16 @@ jobs:
       # names, never "collections agency", no partner names, no human-outreach steps, no private paths).
       - name: SEO skills
         run: npm run check:skills
+
+      # Every figure in an article body, "at a glance" box or case-study result strip is in the public registry
+      # marketing/seo-claims.json (or grandfathered in a baseline that only shrinks); no ShelfSpace price anywhere
+      # outside a trial-ok region (SEO C2).
+      - name: Claims registry
+        run: npm run check:claims
+
+      # No page shares 60%+ of its 5-word phrases with another page (template families baselined) (SEO C2).
+      - name: Duplicate pages
+        run: npm run check:dupe
 
       # No provider leaks, no retired pricing; trial copy only inside brand-page trial-ok regions (Z-33).
       - name: Forbidden copy

@@ -42,7 +42,12 @@ a tracker", "build a prospect list" or "write a strategy document", it is not ke
 ## 4. Numbers
 - **No fabricated figures.** Every `$`, `%` and count in page copy traces to a source.
 - Use a figure only if it is already in the public claims registry `marketing/seo-claims.json`, or you cite a primary source on the page and add the figure to `marketing/seo-claims.json`
-  in the same change. `check:claims` holds article bodies to this once it exists.
+  in the same change. `check:claims` holds the article body, the "at a glance" box and case-study result strips
+  to this, and fails any dollar price for ShelfSpace itself outside a `trial-ok` region, registered or not. Any
+  price-shaped dollar figure ("$X a month", "/mo", "starts at $X", a `$X` pricing card) that is NOT our money (a
+  competitor's list price with its source, a customer's savings, a calculator output) goes inside an element marked
+  `data-price-note="competitor"` (or `customer`, `example`, `market`, `calculator`). A sentence that names ShelfSpace
+  next to a price-shaped figure fails even there: reword it.
 - Never invent statistics, ratings, review counts, awards, testimonials, quotes, logos or "our
   customers see 3x" claims. A worked example's numbers are labeled as an example.
 - Competitor facts (features, prices) carry a source link and an "as of MM/DD/YYYY" date.
@@ -70,6 +75,6 @@ a tracker", "build a prospect list" or "write a strategy document", it is not ke
 ## 7. Gates before every push
 `npm run -s check:seo && npm run -s check:sitemap && npm run -s check:head && npm run -s check:forbidden && npm run -s check:cta && npm run -s check:phone && npm run -s check:skills`,
 plus `npm run -s check:dates` and, for a post, `bash marketing/scripts/check-blog-sync.sh`;
-plus `check:claims` and `check:dupe` once they exist. Screenshot every changed visible page at
+plus `npm run -s check:claims && npm run -s check:dupe`. Screenshot every changed visible page at
 1440 and 390 and look at the images. A new page also goes into `sitemap.xml`
 (`scripts/seo/build-sitemap.mjs`), `llms.txt` and, for a post, `blog.html`.
