@@ -302,8 +302,10 @@
       else msg.textContent = "Select the text and copy it.";
     });
     bDl.addEventListener("click", function () {
-      var a = doc.createElement("a"); a.href = "data:text/plain;charset=utf-8," + encodeURIComponent(text); a.download = "net-terms-policy.txt";
+      var url = root.URL.createObjectURL(new root.Blob([text], { type: "text/plain;charset=utf-8" }));
+      var a = doc.createElement("a"); a.href = url; a.download = "net-terms-policy.txt";
       doc.body.appendChild(a); a.click(); a.remove();
+      setTimeout(function () { root.URL.revokeObjectURL(url); }, 1000);
     });
     bPr.addEventListener("click", function () {
       var w = root.open("", "_blank"); if (!w) { msg.textContent = "Allow pop-ups to print, or use Copy."; return; }

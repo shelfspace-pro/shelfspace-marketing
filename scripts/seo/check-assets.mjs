@@ -61,7 +61,7 @@ else {
   eq("dso(180000.00 AR, 270000.00 sales, 90d, net 30)", T.dso(18000000, 27000000, 90, 30), { dsoTenths: 600, pastTermsCents: 9000000 });
   eq("dso(1000.00, 3000.00, 30d)", T.dso(100000, 300000, 30, null), { dsoTenths: 100, pastTermsCents: null });
   eq("dso(sales 0)", T.dso(100, 0, 30, null), null);
-  // 720000c x 1200bps x 45d / 3,650,000 = 10652.05 -> 10652; a float path that rounds per day gives 10652.00 or drifts
+  // 720000c x 1200bps x 45d / 3,650,000 = 10652.05 -> 10652 (one rounding, whole cents)
   eq("lateCost($7,200 @12% 45d, 3.0h @ $35)", T.lateCost(720000, 1200, 45, 30, 3500), { carryingCents: 10652, chasingCents: 10500, totalCents: 21152 });
   // 1999c x 1999bps x 1d / 3,650,000 = 1.0948 -> 1 (cent-exact half-up)
   eq("lateCost(19.99 @19.99% 1d)", T.lateCost(1999, 1999, 1, 0, 0), { carryingCents: 1, chasingCents: 0, totalCents: 1 });
