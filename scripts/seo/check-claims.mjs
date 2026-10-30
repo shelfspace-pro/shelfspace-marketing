@@ -126,6 +126,15 @@ export function scopedClaims(html, rel) {
 const D = String.raw`\$\s?\d[\d,]*(?:\.\d+)?(?:\s?(?:[KkMm]\b|thousand))?\+?`;
 const NAMES = String.raw`(?:ShelfSpace|ShelfCollect|ShelfPay|ShelfiQ|ShelfVerify)(?:'s|’s)?(?:\s+AR)?`;
 const NAMED = new RegExp(String.raw`\b${NAMES}\b`, "i");
+// Z-C2d: inside a note, a sentence that calls the money "the platform's" / "our software's" is about us.
+const SYNONYM = /\b(?:the|our|this)\s+(?:platform|software|service)\b/i;
+// Z-C2d: lookalike dollar signs (full-width U+FF04, small U+FE69) read as "$".
+const DOLLAR_LOOKALIKE = /[\uFF04\uFE69]/g;
+function foldDollars(doc) {
+  const w = doc.createTreeWalker(doc, 4 /* SHOW_TEXT */);
+  while (w.nextNode()) if (DOLLAR_LOOKALIKE.test(w.currentNode.data)) w.currentNode.data = w.currentNode.data.replace(DOLLAR_LOOKALIKE, "$");
+  for (const el of doc.querySelectorAll("*")) for (const a of [...el.attributes]) if (DOLLAR_LOOKALIKE.test(a.value)) el.setAttribute(a.name, a.value.replace(DOLLAR_LOOKALIKE, "$"));
+}
 export const PRICE_NOTES = new Set(["competitor", "customer", "example", "market", "calculator"]);
 const UNIT_WORDS = String.raw`(?:month|mo|year|yr|week|wk|user|seat|login|location|store|license|brand|invoice|check|credit memo|memo|reminder|call|transaction|payment)`;
 const PERIOD_AFTER = new RegExp(String.raw`^${D}(?:\s*USD)?\s*(?:-\s*(?:a|per)\s*-\s*${UNIT_WORDS}\b|\/\s?${UNIT_WORDS}\b|(?:per|a|an|each|every)\s+${UNIT_WORDS}\b|monthly\b|annually\b|yearly\b|flat\b|(?:plan|tier|package|subscription)\b)`, "i");
@@ -187,6 +196,7 @@ function shapedIn(root, sentences, doc) {
  */
 export function priceHits(html, { trialOk = false, file = "page.html" } = {}) {
   const doc = parse(trialOk ? blankTrialOk(html) : html);
+  foldDollars(doc);
   const hits = [];
   const seen = new Set();
   const push = (h) => { const id = priceId(file, h.value, h.text); if (seen.has(id)) return; seen.add(id); hits.push({ ...h, id }); };
@@ -209,9 +219,15 @@ export function priceHits(html, { trialOk = false, file = "page.html" } = {}) {
       if (!o || typeof o !== "object") return;
       const t = [].concat(o["@type"] || []).join(" ");
       const priced = ["price", "lowPrice", "highPrice"].some((k) => o[k] !== undefined && /[1-9]/.test(String(o[k])));
-      if (priced && (/Offer|PriceSpecification/.test(t) || o.priceCurrency !== undefined || !t)) push({ rule: "jsonld-offer", value: String(o.price ?? o.lowPrice ?? o.highPrice), text: `JSON-LD ${t || "untyped"} price`, reviewable: false });
+      // Any priced object, whatever its @type or currency (Z-C2d: a bare Product.price slipped through).
+      if (priced) push({ rule: "jsonld-offer", value: String(o.price ?? o.lowPrice ?? o.highPrice), text: `JSON-LD ${t || "untyped"} price`, reviewable: false });
+      if (/MonetaryAmount/.test(t) && ["value", "minValue", "maxValue"].some((k) => o[k] !== undefined && /[1-9]/.test(JSON.stringify(o[k])))) push({ rule: "jsonld-offer", value: JSON.stringify(o.value ?? o.minValue ?? o.maxValue), text: "JSON-LD MonetaryAmount value", reviewable: false });
       Object.values(o).forEach(walk);
     })(data);
+  }
+  for (const el of doc.querySelectorAll('meta[property^="product:price"], meta[property^="og:price"], meta[name^="product:price"], meta[name^="og:price"]')) {
+    const v = el.getAttribute("content") || "";
+    if (/[1-9]/.test(v)) push({ rule: "meta-price", value: v.trim(), text: `<meta ${el.getAttribute("property") ? "property" : "name"}="${el.getAttribute("property") || el.getAttribute("name")}">`, reviewable: false });
   }
   for (const el of doc.querySelectorAll('[itemprop="price"], [itemprop="lowPrice"], [itemprop="highPrice"]')) {
     const v = el.getAttribute("content") ?? el.textContent ?? "";
@@ -232,6 +248,23 @@ export function priceHits(html, { trialOk = false, file = "page.html" } = {}) {
   for (const el of doc.body?.querySelectorAll("script, style, noscript, svg, template") || []) el.remove();
   if (!doc.body) return hits;
   sentences.named = () => [];
+  // Z-C2d: alt / aria-label / title text is read too (screen readers and image search show it). Inside a note it
+  // is the note's money unless it names us; outside, the same default-deny as body text.
+  for (const el of doc.body.querySelectorAll("[alt], [aria-label], [title]")) {
+    const inNote = !!el.closest("[data-price-note]");
+    for (const attr of ["alt", "aria-label", "title"]) {
+      const text = norm(el.getAttribute(attr) || "");
+      if (!text) continue;
+      sentences(text, (m, sent, idx) => {
+        const named = NAMED_RULES.find(([, re]) => re.test(sent));
+        const where = `${attr}="${sent.slice(0, 160)}"`;
+        if (named) push({ rule: named[0], value: m[0], text: where, reviewable: false });
+        else if (!priceShaped(sent, idx, m[0])) return;
+        else if (inNote) { if (NAMED.test(sent) || SYNONYM.test(sent)) push({ rule: "named-in-note", value: m[0], text: where, reviewable: false }); }
+        else push({ rule: NAMED.test(sent) ? "named-price" : "price-shaped", value: m[0], text: where, reviewable: true });
+      });
+    }
+  }
   const notes = [...doc.body.querySelectorAll("[data-price-note]")].filter((el) => !el.parentElement?.closest("[data-price-note]"));
   // Inside a note: an explicit named shape, or ANY price-shaped money in a note whose text names ShelfSpace (a
   // compare table with a ShelfSpace row) or that sits under a heading naming ShelfSpace pricing, still fails.
@@ -249,7 +282,7 @@ export function priceHits(html, { trialOk = false, file = "page.html" } = {}) {
     const namedNote = NAMED.test(noteText) || (NAMED.test(heading) && /pricing|price|plans?|cost/i.test(heading));
     for (const f of shapedIn(note, sentences, doc)) {
       if (f.named) push({ rule: f.named[0], value: f.value, text: f.s.slice(0, 200), reviewable: false });
-      else if (namedNote) push({ rule: "named-in-note", value: f.value, text: `${f.s.slice(0, 160)}${heading ? ` (under "${heading.slice(0, 60)}")` : ""}`, reviewable: false });
+      else if (namedNote || SYNONYM.test(f.s)) push({ rule: "named-in-note", value: f.value, text: `${f.s.slice(0, 160)}${heading ? ` (under "${heading.slice(0, 60)}")` : ""}`, reviewable: false });
     }
   }
   for (const note of notes) note.remove();
@@ -458,6 +491,16 @@ const PRICE_FIRE = [
   `<p data-price-note="market">shelfspace is $399 a month.</p>`,
   `<meta itemprop="price" content="399">`,
   `<script type="application/ld+json">{"@type":"Product","offers":{"price":399,"priceCurrency":"USD"}}</script>`,
+  // Z-C2d residuals
+  `<div data-price-note="competitor"><p>The platform is $399 a month.</p></div>`,
+  `<p data-price-note="example">Our software runs $399/month for most brands.</p>`,
+  `<img src="/x.png" alt="ShelfSpace pricing: $399 a month">`, `<img src="/x.png" alt="Plans from $399 a month">`,
+  `<a href="/x" aria-label="Start for $399 a month">Start</a>`, `<span title="Just $399/mo">i</span>`,
+  `<meta property="product:price:amount" content="399"><meta property="product:price:currency" content="USD">`,
+  `<meta property="og:price:amount" content="399">`,
+  `<script type="application/ld+json">{"@type":"Product","name":"ShelfSpace","price":"399"}</script>`,
+  `<script type="application/ld+json">{"@type":"MonetaryAmount","currency":"USD","value":399}</script>`,
+  `<p>ShelfSpace is \uFF04399 a month.</p>`, `<p>Just \uFF04399/month.</p>`, `<p>Just &#65284;399/month.</p>`, `<p>Plans from \uFE69399.</p>`,
 ];
 const PRICE_NOT = [
   `<p>The agency collected $417,560 for us in 30 days.</p>`, `<p>ShelfSpace is how One Garden got $152,430 paid in 18 invoices.</p>`,
@@ -469,6 +512,9 @@ const PRICE_NOT = [
   `<div data-price-note="calculator"><p>Credits you could recover each month</p><div class="calc-range-month"><span>$3,000</span>/month</div></div>`,
   `<div data-price-note="market"><p>In the US, most AR firms charge $500 a month plus a percentage.</p></div>`,
   `<p>We charged back $784 to the vendor.</p>`, `<p>A vendor billed us $784 short.</p>`,
+  `<div data-price-note="competitor"><p>LeafLink's platform is $299 a month (as of 10/29/2026).</p></div>`,
+  `<img src="/x.png" alt="A dashboard of open invoices">`, `<img src="/x.png" alt="One Garden got $152,430 paid">`,
+  `<script type="application/ld+json">{"@type":"Article","headline":"x"}</script>`,
 ];
 
 export function selfTest() {
