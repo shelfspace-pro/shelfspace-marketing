@@ -45,7 +45,7 @@ export function blogIndexErrors(html) {
   // A LIVE rule: comments stripped, line endings and whitespace normalized, then a TOP-LEVEL rule (not inside an
   // @media / @supports block) whose selector list has HIDE as one whole item and whose body sets display: none — in
   // the page <style> AND in a <style> inside <noscript>. (A substring count once passed a commented-out rule.)
-  const live = html.replace(/<!--[\s\S]*?-->/g, "").replace(/\r\n?/g, "\n");
+  const live = html.replace(/<!--[\s\S]*?-->/g, "").replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, "").replace(/\r\n?/g, "\n");
   const styles = (h) => [...h.matchAll(/<style[^>]*>([\s\S]*?)<\/style>/g)].map((m) => m[1]).join("\n");
   const noscript = styles((live.match(/<noscript>[\s\S]*?<\/noscript>/g) || []).join("\n"));
   const page = styles(live.replace(/<noscript>[\s\S]*?<\/noscript>/g, ""));
@@ -85,13 +85,15 @@ if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
   expectBad("the page rule commented out", html.replace(HIDE + " {", `/* ${HIDE} { */ .zz-nothing {`));
   const ns = html.indexOf("<noscript>", html.indexOf(HIDE) + 1);
   expectBad("the noscript rule gone", html.slice(0, ns) + html.slice(ns).replace(HIDE + ",", ""));
-  expectBad("the page rule inside @media", html.replace(HIDE + " {", `@media (max-width: 1px) { ${HIDE} {`).replace("/* Every rank past 3", "} /* Every rank past 3"));
+  expectBad("the page rule inside @media", html.replace(HIDE + " {", `@media (max-width: 1px) { ${HIDE} {`).replace("/* Zero only the vertical", "} /* Zero only the vertical"));
+  expectBad("the page rule only injected by a script", html.replace(HIDE + " {", ".zz-gone {").replace("</body>", `<script>document.head.insertAdjacentHTML("beforeend","<style>${HIDE}{display:none}</style>")</script></body>`));
   expectBad("the page rule prefixed to flat mode", html.replace(HIDE + " {", `body.blog-flat-mode ${HIDE} {`));
   expectBad("the page rule shows instead of hides", html.replace(/(\.blog-card\[data-rank\]:not\(\[data-rank="1"\], \[data-rank="2"\], \[data-rank="3"\]\) \{\s*)display: none !important;/, "$1display: block !important;"));
   // legitimate formatting must stay green
   for (const [name, h] of [["CRLF line endings", html.replace(/\n/g, "\r\n")], ["no space before {", html.replace(HIDE + " {", HIDE + "{")],
     ["selector mid-list", html.replace(HIDE + " {", HIDE + ", .zz-other {")], ["<noscript> then a newline", html.replace("<noscript><style>", "<noscript>\n<style>")]])
-    if (blogIndexErrors(h).length) st.push(`self-test: legitimate formatting (${name}) went red: ${blogIndexErrors(h)[0]}`);
+    if (h === html) st.push(`self-test: legitimate-formatting fixture (${name}) did not change the page (vacuous)`);
+    else if (blogIndexErrors(h).length) st.push(`self-test: legitimate formatting (${name}) went red: ${blogIndexErrors(h)[0]}`);
   const errs = blogIndexErrors(html);
   if (st.length || errs.length) { console.error(`check:blog-index FAILED\n- ${[...st, ...errs].join("\n- ")}`); process.exit(1); }
   console.log("check:blog-index OK (counts, categories, ranks 1..n, rest = 99, curated CSS hides rank 4+)");
