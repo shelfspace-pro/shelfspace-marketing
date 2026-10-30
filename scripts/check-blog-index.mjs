@@ -42,14 +42,34 @@ export function blogIndexErrors(html) {
     if (!/class="blog-card"/.test(rest)) errs.push(".blog-section-rest has no cards (region empty)");
     if (bad.length) errs.push(`.blog-section-rest: ${bad.length} card(s) not rank 99`);
   }
-  // A live rule, not a substring: comments stripped, then the selector must open a rule (or lead a selector list) in
-  // the page <style> AND in the <noscript> <style> (a commented-out rule once passed a substring count).
-  const live = html.replace(/<!--[\s\S]*?-->/g, "");
-  const noscript = (live.match(/<noscript>\s*<style>([\s\S]*?)<\/style>\s*<\/noscript>/g) || []).join("\n");
-  const page = [...live.replace(/<noscript>[\s\S]*?<\/noscript>/g, "").matchAll(/<style[^>]*>([\s\S]*?)<\/style>/g)].map((m) => m[1]).join("\n");
-  const rule = (css) => { const c = css.replace(/\/\*[\s\S]*?\*\//g, ""); return c.includes(HIDE + " {") || c.includes(HIDE + ",\n"); };
-  if (!rule(page)) errs.push(`curated CSS must hide every rank past 3 with a live \`${HIDE} {\` rule in the page <style>`);
-  if (!rule(noscript)) errs.push(`the <noscript> <style> must hide every rank past 3 with ${HIDE}`);
+  // A LIVE rule: comments stripped, line endings and whitespace normalized, then a TOP-LEVEL rule (not inside an
+  // @media / @supports block) whose selector list has HIDE as one whole item and whose body sets display: none — in
+  // the page <style> AND in a <style> inside <noscript>. (A substring count once passed a commented-out rule.)
+  const live = html.replace(/<!--[\s\S]*?-->/g, "").replace(/\r\n?/g, "\n");
+  const styles = (h) => [...h.matchAll(/<style[^>]*>([\s\S]*?)<\/style>/g)].map((m) => m[1]).join("\n");
+  const noscript = styles((live.match(/<noscript>[\s\S]*?<\/noscript>/g) || []).join("\n"));
+  const page = styles(live.replace(/<noscript>[\s\S]*?<\/noscript>/g, ""));
+  const norm = (x) => x.replace(/\s+/g, " ").trim();
+  const want = norm(HIDE);
+  // split a selector list on TOP-LEVEL commas only (":not(a, b, c)" holds commas of its own)
+  const items = (sel) => { const out = []; let d = 0, cur = ""; for (const ch of sel) { if (ch === "(") d++; if (ch === ")") d--; if (ch === "," && !d) { out.push(norm(cur)); cur = ""; } else cur += ch; } out.push(norm(cur)); return out; };
+  const rule = (css) => {
+    const c = css.replace(/\/\*[\s\S]*?\*\//g, " ");
+    for (let k = 0, depth = 0, start = 0; k < c.length; k++) {
+      if (c[k] === "{") {
+        if (depth === 0) {
+          const sel = norm(c.slice(start, k));
+          let d = 1, e = k + 1; for (; e < c.length && d; e++) d += c[e] === "{" ? 1 : c[e] === "}" ? -1 : 0;
+          const body = c.slice(k + 1, e - 1);
+          if (!sel.startsWith("@") && items(sel).map((x) => x.replace(/\(\s+/g, "(").replace(/\s+\)/g, ")").replace(/\s*,\s*/g, ", ")).includes(want) && /(^|;|\s)display\s*:\s*none\b/.test(body)) return true;
+          k = e - 1; start = e; continue;
+        }
+      } else if (c[k] === "}" && depth === 0) start = k + 1;
+    }
+    return false;
+  };
+  if (!rule(page)) errs.push(`curated CSS must hide every rank past 3: a top-level \`${HIDE} { display: none }\` rule in the page <style>`);
+  if (!rule(noscript)) errs.push(`the <noscript> <style> must hide every rank past 3 with a top-level ${HIDE} … { display: none } rule`);
   return errs;
 }
 
@@ -63,7 +83,15 @@ if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
   expectBad("a rest card ranked 1", html.replace(/(blog-section-rest[\s\S]*?data-rank=")99(")/, "$11$2"));
   expectBad("the old 4-20 list", html.replace(HIDE, '.blog-card[data-rank="4"]'));
   expectBad("the page rule commented out", html.replace(HIDE + " {", `/* ${HIDE} { */ .zz-nothing {`));
-  expectBad("the noscript rule gone", html.replace(new RegExp(`(<noscript><style>[\\s\\S]*?)${HIDE.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")},`), "$1"));
+  const ns = html.indexOf("<noscript>", html.indexOf(HIDE) + 1);
+  expectBad("the noscript rule gone", html.slice(0, ns) + html.slice(ns).replace(HIDE + ",", ""));
+  expectBad("the page rule inside @media", html.replace(HIDE + " {", `@media (max-width: 1px) { ${HIDE} {`).replace("/* Every rank past 3", "} /* Every rank past 3"));
+  expectBad("the page rule prefixed to flat mode", html.replace(HIDE + " {", `body.blog-flat-mode ${HIDE} {`));
+  expectBad("the page rule shows instead of hides", html.replace(/(\.blog-card\[data-rank\]:not\(\[data-rank="1"\], \[data-rank="2"\], \[data-rank="3"\]\) \{\s*)display: none !important;/, "$1display: block !important;"));
+  // legitimate formatting must stay green
+  for (const [name, h] of [["CRLF line endings", html.replace(/\n/g, "\r\n")], ["no space before {", html.replace(HIDE + " {", HIDE + "{")],
+    ["selector mid-list", html.replace(HIDE + " {", HIDE + ", .zz-other {")], ["<noscript> then a newline", html.replace("<noscript><style>", "<noscript>\n<style>")]])
+    if (blogIndexErrors(h).length) st.push(`self-test: legitimate formatting (${name}) went red: ${blogIndexErrors(h)[0]}`);
   const errs = blogIndexErrors(html);
   if (st.length || errs.length) { console.error(`check:blog-index FAILED\n- ${[...st, ...errs].join("\n- ")}`); process.exit(1); }
   console.log("check:blog-index OK (counts, categories, ranks 1..n, rest = 99, curated CSS hides rank 4+)");
