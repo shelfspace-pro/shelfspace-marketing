@@ -129,11 +129,12 @@ const NAMED = new RegExp(String.raw`\b${NAMES}\b`, "i");
 // Z-C2d: inside a note, a sentence that calls the money "the platform's" / "our software's" is about us.
 const SYNONYM = /\b(?:the|our|this)\s+(?:platform|software|service)\b/i;
 // Z-C2d: lookalike dollar signs (full-width U+FF04, small U+FE69) read as "$".
-const DOLLAR_LOOKALIKE = /[\uFF04\uFE69]/g;
+const DOLLAR_LOOKALIKE = /[\uFF04\uFE69]/g; // for .replace only
+const HAS_LOOKALIKE = /[\uFF04\uFE69]/; // for .test (no /g: lastIndex state)
 function foldDollars(doc) {
   const w = doc.createTreeWalker(doc, 4 /* SHOW_TEXT */);
-  while (w.nextNode()) if (DOLLAR_LOOKALIKE.test(w.currentNode.data)) w.currentNode.data = w.currentNode.data.replace(DOLLAR_LOOKALIKE, "$");
-  for (const el of doc.querySelectorAll("*")) for (const a of [...el.attributes]) if (DOLLAR_LOOKALIKE.test(a.value)) el.setAttribute(a.name, a.value.replace(DOLLAR_LOOKALIKE, "$"));
+  while (w.nextNode()) if (HAS_LOOKALIKE.test(w.currentNode.data)) w.currentNode.data = w.currentNode.data.replace(DOLLAR_LOOKALIKE, "$");
+  for (const el of doc.querySelectorAll("*")) for (const a of [...el.attributes]) if (HAS_LOOKALIKE.test(a.value)) el.setAttribute(a.name, a.value.replace(DOLLAR_LOOKALIKE, "$"));
 }
 export const PRICE_NOTES = new Set(["competitor", "customer", "example", "market", "calculator"]);
 const UNIT_WORDS = String.raw`(?:month|mo|year|yr|week|wk|user|seat|login|location|store|license|brand|invoice|check|credit memo|memo|reminder|call|transaction|payment)`;

@@ -24,13 +24,13 @@ jobs:
       - run: npm ci
 
       # The baselines of check:claims / check:dupe only shrink. Fetch the commit main was at before this push (or
-      # the PR base) so a multi-commit push that deletes + re-seeds a baseline is compared with the real "before".
+      # the PR base; NO --depth: a depth-1 fetch writes .git/shallow and check:sitemap would skip its lastmod compare, Z-A4b) so a multi-commit push that deletes + re-seeds a baseline is compared with the real "before".
       - name: Fetch baseline ref
         env:
           BASE: ${{ github.event.pull_request.base.sha || github.event.before }}
         run: |
           if [ -n "$BASE" ] && [ "${BASE//0/}" != "" ]; then
-            git fetch --no-tags --depth=1 origin "$BASE" && echo "SEO_BASELINE_REF=$BASE" >> "$GITHUB_ENV" || echo "could not fetch $BASE"
+            git fetch --no-tags origin "$BASE" && echo "SEO_BASELINE_REF=$BASE" >> "$GITHUB_ENV" || echo "could not fetch $BASE"
           fi
 
       # sitemap.xml must equal what scripts/seo/build-sitemap.mjs emits and list every indexable page.
@@ -93,7 +93,7 @@ jobs:
         env:
           CHROME_PATH: /usr/bin/google-chrome
 
-      # Phones: no link, button or field on a header-nav page runs past the screen edge at 320-430px.
+      # Phones: no link, button or field runs past the screen edge: header-nav pages at 320-430px, every other indexable page at 320px (Z-C3a).
       - name: Phone layout
         run: npm run check:phone
         env:

@@ -38,7 +38,7 @@ export function indexablePathsAt(sha) {
     .filter((f) => f.endsWith(".html") || f === "vercel.json" || f === "video-catalog.json");
   const T = mkdtempSync(join(tmpdir(), "indexnow-before-"));
   try {
-    if (files.length) execFileSync("tar", ["-x", "-C", T], { input: git(["archive", "--format=tar", sha, "--", ...files], { encoding: "buffer" }), maxBuffer: 1 << 28 });
+    if (files.length) execFileSync("tar", ["-x", "-f", "-", "-C", T], { input: git(["archive", "--format=tar", sha, "--", ...files], { encoding: "buffer" }), maxBuffer: 1 << 28 });
     return new Set(siteIndex(T).indexablePages({ extras: true }).map((p) => p.path));
   } finally { rmSync(T, { recursive: true, force: true }); }
 }
@@ -47,7 +47,10 @@ export function urlsFor(before, after) {
   const pages = indexablePages();
   const changed = changedHtml(before, after);
   if (changed === null) return pages.map((p) => ORIGIN + p.path);
-  const was = indexablePathsAt(before);
+  let was;
+  // The before-tree read is an addition: if it fails (no tar, archive error), still submit the changed pages.
+  try { was = indexablePathsAt(before); } catch (e) { console.error(`indexnow: before-tree read failed (${e.message}); submitting changed pages only`); was = null; }
+  if (!was) { const set = new Set(changed); return pages.filter((p) => p.file && set.has(p.file) && existsSync(join(ROOT, p.file))).map((p) => ORIGIN + p.path); }
   const now = new Set(pages.map((p) => p.path));
   const set = new Set(changed);
   const out = new Set();

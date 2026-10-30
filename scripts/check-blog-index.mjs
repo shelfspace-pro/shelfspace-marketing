@@ -42,8 +42,14 @@ export function blogIndexErrors(html) {
     if (!/class="blog-card"/.test(rest)) errs.push(".blog-section-rest has no cards (region empty)");
     if (bad.length) errs.push(`.blog-section-rest: ${bad.length} card(s) not rank 99`);
   }
-  const hides = html.split(HIDE).length - 1;
-  if (hides !== 2) errs.push(`curated CSS must hide every rank past 3 with ${HIDE} (in the page CSS and the <noscript> block): found ${hides}`);
+  // A live rule, not a substring: comments stripped, then the selector must open a rule (or lead a selector list) in
+  // the page <style> AND in the <noscript> <style> (a commented-out rule once passed a substring count).
+  const live = html.replace(/<!--[\s\S]*?-->/g, "");
+  const noscript = (live.match(/<noscript>\s*<style>([\s\S]*?)<\/style>\s*<\/noscript>/g) || []).join("\n");
+  const page = [...live.replace(/<noscript>[\s\S]*?<\/noscript>/g, "").matchAll(/<style[^>]*>([\s\S]*?)<\/style>/g)].map((m) => m[1]).join("\n");
+  const rule = (css) => { const c = css.replace(/\/\*[\s\S]*?\*\//g, ""); return c.includes(HIDE + " {") || c.includes(HIDE + ",\n"); };
+  if (!rule(page)) errs.push(`curated CSS must hide every rank past 3 with a live \`${HIDE} {\` rule in the page <style>`);
+  if (!rule(noscript)) errs.push(`the <noscript> <style> must hide every rank past 3 with ${HIDE}`);
   return errs;
 }
 
@@ -56,6 +62,8 @@ if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
   expectBad("a repeated rank", html.replace(/(data-section-cat="Collections"[\s\S]*?data-rank=")2(")/, "$11$2"));
   expectBad("a rest card ranked 1", html.replace(/(blog-section-rest[\s\S]*?data-rank=")99(")/, "$11$2"));
   expectBad("the old 4-20 list", html.replace(HIDE, '.blog-card[data-rank="4"]'));
+  expectBad("the page rule commented out", html.replace(HIDE + " {", `/* ${HIDE} { */ .zz-nothing {`));
+  expectBad("the noscript rule gone", html.replace(new RegExp(`(<noscript><style>[\\s\\S]*?)${HIDE.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")},`), "$1"));
   const errs = blogIndexErrors(html);
   if (st.length || errs.length) { console.error(`check:blog-index FAILED\n- ${[...st, ...errs].join("\n- ")}`); process.exit(1); }
   console.log("check:blog-index OK (counts, categories, ranks 1..n, rest = 99, curated CSS hides rank 4+)");
