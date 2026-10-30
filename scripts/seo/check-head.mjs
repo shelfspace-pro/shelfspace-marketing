@@ -11,8 +11,16 @@ const fail = (m) => fails.push(m);
 const SI = "/_vercel/speed-insights/script.js";
 
 // 1. every served page (not email/pdf-source/og templates/google verification) carries Speed Insights; the widget is deferred.
-const files = execFileSync("git", ["ls-files", "*.html"], { cwd: ROOT, encoding: "utf8" }).split("\n").filter(Boolean)
-  .filter((f) => !/^(email|_pdf-source|og-templates|scripts)\//.test(f) && !/^google[0-9a-f]+\.html$/.test(f));
+// The WORKING TREE, not `git ls-files`: a new page is checked before it is staged (Z-C3b: three embed pages
+// shipped without Speed Insights while a staged-only list printed ok). Dot-dirs, node_modules and the unserved
+// dirs (.vercelignore: marketing/, scripts/ …) are skipped.
+const SKIP_DIRS = new Set(["node_modules", "email", "_pdf-source", "og-templates", "scripts", "marketing"]);
+const servedHtml = (root = ROOT, dir = "") => readdirSync(join(root, dir), { withFileTypes: true }).flatMap((e) => {
+  const rel = dir ? `${dir}/${e.name}` : e.name;
+  if (e.isDirectory()) return e.name.startsWith(".") || SKIP_DIRS.has(e.name) ? [] : servedHtml(root, rel);
+  return e.name.endsWith(".html") && !/^google[0-9a-f]+\.html$/.test(e.name) ? [rel] : [];
+}).sort();
+const files = servedHtml();
 if (files.length < 200) fail(`only ${files.length} html files found (expected 200+): region empty`);
 for (const f of files) {
   const h = readFileSync(join(ROOT, f), "utf8");
@@ -43,6 +51,22 @@ if (got !== "https://shelfspace.pro/,https://shelfspace.pro/blog/post") fail(`ch
 const all = urls("0".repeat(40)).join(",");
 if (all !== "https://shelfspace.pro/,https://shelfspace.pro/about,https://shelfspace.pro/blog/post,https://shelfspace.pro/how-to,https://shelfspace.pro/how-to/retailer,https://shelfspace.pro/how-to/vendor") fail(`all-zeros should submit every indexable page: ${all}`);
 if (urls("deadbeef").join(",") !== all) fail("an unresolvable before-SHA (force push) must submit every indexable page");
+// Z-A4a: a page whose index state flips with NO html change, and a deleted page, are submitted too.
+//   A: /about noindexed by a vercel.json header, tutorial zz-demo private, blog/old.html live.
+//   B: header removed, zz-demo public, blog/old.html deleted. Nothing else changes.
+const vj = JSON.parse(readFileSync(join(T, "vercel.json"), "utf8"));
+const cat = JSON.parse(readFileSync(join(T, "video-catalog.json"), "utf8"));
+mkdirSync(join(T, "tutorials"), { recursive: true });
+write("tutorials/zz-demo.html", page("/tutorials/zz-demo")); write("blog/old.html", page("/blog/old"));
+write("vercel.json", JSON.stringify({ ...vj, headers: [...(vj.headers || []), { source: "/about", headers: [{ key: "X-Robots-Tag", value: "noindex" }] }] }));
+write("video-catalog.json", JSON.stringify({ ...cat, videos: [...cat.videos, { slug: "zz-demo", privacy: "private" }] }));
+run("add", "-A"); run("commit", "-qm", "A");
+const a = run("rev-parse", "HEAD").trim();
+write("vercel.json", JSON.stringify(vj));
+write("video-catalog.json", JSON.stringify({ ...cat, videos: [...cat.videos, { slug: "zz-demo", privacy: "public" }] }));
+run("rm", "-q", "blog/old.html"); run("commit", "-qm", "B");
+const flip = urls(a).join(",");
+if (flip !== "https://shelfspace.pro/about,https://shelfspace.pro/blog/old,https://shelfspace.pro/tutorials/zz-demo") fail(`index-state flips / deletions not submitted: ${flip}`);
 
 // 3. workflow shape.
 const wf = readFileSync(join(ROOT, ".github/workflows/indexnow.yml"), "utf8");
