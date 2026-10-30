@@ -1,86 +1,72 @@
 ---
 name: blog-post
-description: Workflow for creating a new blog post. Reads the playbook, picks template (educational guide, case study, competitor comparison, platform feature explainer), writes the HTML, adds schema, updates sitemap and llms.txt, cross-links from related posts, runs the voice check, and commits. Use when adding a new blog article. For editing an existing post, use direct Edit instead.
+description: Workflow for creating a new blog post on shelfspace.pro. Writes the post from the blog brief (marketing/managed-services-blog-agent-brief.md) under the house rules (marketing/seo-house-rules.md), registers every figure in marketing/seo-claims.json, adds the blog.html card, llms.txt line and regenerated sitemap, cross-links related posts, runs the gates and commits. Use when adding a new blog article. For editing an existing post, use direct Edit instead.
 ---
 
 # /blog-post — create a new blog post
 
 ultrathink
 
-You are creating a new blog post. Topic from $ARGUMENTS.
+You are creating a new blog post. Topic from $ARGUMENTS. You run unattended: decide from the brief, the
+house rules and the repo `CLAUDE.md`, and keep going. Never stop to ask; where the topic leaves something
+open, pick the brand-first answer and note the choice in your final reply.
 
-# Step 1 — Pin down the basics
+# Step 1 — Read the law (every time, in this order)
 
-Confirm with the user (or infer from $ARGUMENTS if clear):
-- Topic and angle
-- Audience (default: dispensary operator; rare: vendor)
-- Primary keyword target
-- Slug (kebab-case, descriptive, ≤8 words)
-- Type: educational guide · case study · competitor comparison · platform feature explainer
-- Length target (default ~1,500-2,500 words)
+1. `marketing/managed-services-blog-agent-brief.md` — THE brief for one post: brand-first audience, the
+   reference post to copy, voice, the forbidden list, required structure, the visual kit, output rules.
+2. `marketing/seo-house-rules.md` — unattended running, what never goes in this public repo, naming, numbers,
+   price and trial copy, page style and the gates. It wins where the brief is silent.
+3. The repo `CLAUDE.md` — voice law, naming, CTA labels, footer, blog system.
 
-If anything material is unclear, ASK before writing. Do NOT proceed past this step on assumptions.
+Where this skill and those files disagree, the files win.
 
-# Step 2 — Read the playbook + similar posts
+# Step 2 — Pin down the basics (decide, don't ask)
 
-- Always: `CLAUDE.md` voice rules
-- Educational guides: `marketing/landing-page-playbook.md`
-- Case studies: `marketing/case-studies.md` (de-identification rules, blog template, homepage cards, SEO targets)
-- Read 1-2 most-similar existing blog posts in `blog/` to confirm visual conventions (CSS reuse, schema patterns, At-a-glance card, FAQ structure)
+- Topic and angle, from $ARGUMENTS.
+- Audience: a cannabis **brand** by default (brand-first, per the brief). A dispensary post only when the
+  topic is plainly AP, consignment or credit recovery.
+- Primary keyword, slug (kebab-case, ≤ 8 words, unique in `blog/`), category (`Collections` for brand
+  posts; `AP`, `Consignment`, `Case Study`, `Credit Recovery`, `Vendor Management` otherwise).
+- Length: the brief's 1,600–2,400 words.
 
-# Step 3 — Draft the HTML
+# Step 3 — Write `blog/{slug}.html` exactly as the brief says
 
-Required elements:
-- `<head>`: unique title (≤60 chars, includes "ShelfSpace" where appropriate), unique meta description (≤160 chars, direct-answer style), canonical, OG, Twitter, JSON-LD schema (Article + BreadcrumbList; FAQPage if there's an FAQ section)
-- Standard nav (current site format — includes "For Vendors" link with `class="nav-secondary"`)
-- Hero with `section-label`, H1, optional subhead
-- "At a glance" green-ghost card (`article-glance` primitive — 4-6 bullets max)
-- Article body: ~1,500-2,500 words following the 5-beat arc where applicable. Educational posts: opening pain → claim → evidence → solution → CTA. Case studies: setup → problem → resolution → result → quote → CTA.
-- Visuals (REQUIRED — never ship a text-wall post): compose 2–4 on-brand visuals from the BLOG VISUAL KIT in styles.css — `stat-trio`, `vs-split`, `meter`, `flow-steps`, `blog-callout`, `blog-figure` — plus inline-SVG icons. Every number in a stat-trio/meter MUST be copied verbatim from the post's own copy (no fabricated figures, per `feedback_verify_product_claims`). A custom hero illustration (e.g. an animated SVG) goes in the page's own `<style>`. Reference: `feedback_blog_visual_kit` + /blog/cannabis-moisture-loss-consignment.
-- FAQ section (optional but recommended for SEO — AI search models pull FAQPage answers verbatim)
-- CTA section (existing primitive)
-- Footer (current standard, includes "For Vendors" link in Access column)
+Copy the reference post's boilerplate verbatim, change only the per-post fields, use 2–4 visuals from the
+brief's kit. Every `$`, `%` and count must already be in `marketing/seo-claims.json` or come from a primary
+source cited inline; add each new sourced figure to `marketing/seo-claims.json` (value, page, the exact
+sentence, the source URL, as-of date). No fabricated figures, no customer names, no ShelfSpace price.
 
-# Step 4 — Verify voice
+# Step 4 — Voice check
 
-Grep the new file for forbidden tokens. Fix any found.
-- `automate`, `automated`, `automatically`
-- `scan-based trading`, `SBT`
-- `Diem`
-- `pilot`, `trial`, `60-day`
-- `<br>` inside `<h1>`, `<h2>`, `<h3>`
+Grep the new file for every term on the brief's forbidden list (between its `forbidden-list` markers) and fix
+each hit. Also edit out AI-residue cadence. The word list lives only in the brief; don't copy it here.
 
-Also check for AI-residue: em-dash overuse, "X, then Y, but Z" cadence, "this isn't just X — it's Y", "not just A but B" patterns. Edit out.
+# Step 5 — Site infrastructure
 
-# Step 5 — Update site infrastructure
+- `blog.html`: a compact-row card at the TOP of the matching section's `<div class="section-list">`
+  (`data-rank="1"`), every other card in that section moves down one rank (ranks stay 1..n, no gaps or
+  repeats), and the section's `section-count` goes up by one. Small categories (Credit Recovery, Vendor
+  Management) go in `<div class="blog-section-rest">` with `data-rank="99"`. Card markup: copy an existing
+  card; the description is the brief's ≤ 170-character summary.
+- `llms.txt`: a line under "Blog Articles": `- {Title}: https://shelfspace.pro/blog/{slug} ({one-line summary})`.
+- Cross-link from 1–3 related posts at a natural pivot.
+- Case studies: also follow `marketing/case-studies.md` (homepage card).
+- `npm run cta:sweep` (CTA labels are script-owned), then regenerate the sitemap LAST:
+  `node scripts/seo/build-sitemap.mjs` (lastmod comes from git; `check:sitemap` fails on a stale value).
 
-- `sitemap.xml`: add `<url>` entry with today's `lastmod` and `<priority>0.6</priority>`
-- `llms.txt`: add line under "Blog Articles" — `- {Title}: https://shelfspace.pro/blog/{slug}`
-- `blog.html` (REQUIRED — landing page sectioned layout): insert a new compact-row card at the top of the matching category section's `.section-list` (e.g., for an AP post: top of `<div class="section-list">` inside `<section class="blog-section" data-section-cat="AP">`). Set `data-rank="1"` and bump existing cards' ranks. Pick `data-category` from the 6 valid values: `Collections` (brand-side collections posts), `AP`, `Case Study`, `Consignment`, `Credit Recovery`, `Vendor Management`. **Small categories** (Credit Recovery, Vendor Management) go in `<div class="blog-section-rest">` instead — all cards there carry `data-rank="99"`. Card structure:
-  ```html
-  <a href="/blog/{slug}" class="blog-card" data-category="{Category}" data-rank="1">
-    <span class="blog-card-tag">{Category}</span>
-    <div class="blog-card-content">
-      <div class="blog-card-title">{post-title minus " — ShelfSpace" suffix}</div>
-      <div class="blog-card-desc">{≤170-char one-line summary; trim from meta description}</div>
-    </div>
-    <svg class="blog-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
-  </a>
-  ```
-  Optionally promote the new post to the **featured slot** at the top of the page (replace `.featured-card` body). The previous featured drops back into its category's `.section-list` at `data-rank="1"`.
-- Cross-link from 1-3 related existing blog posts (find adjacent topics; add a one-line "See also" reference at a natural pivot point — usually toward the end of a related section or near the post's CTA)
-- Case studies: also add the homepage card per `marketing/case-studies.md` rules
-- After all infrastructure edits, run `marketing/scripts/check-blog-sync.sh` to verify zero orphans across blog.html ↔ filesystem ↔ llms.txt
+# Step 6 — Gates (all must pass)
 
-# Step 6 — Audit before commit
-
-Invoke `/audit` against the modified files. Fix any Critical or Real issues. Nits optional.
-
-# Step 7 — Commit + push
-
-Per CLAUDE.md "Always push to production." Commit with a message like:
-```
-feat: blog post — {short title}
+```bash
+npm run -s check:blog-sync && npm run -s check:sitemap && npm run -s check:seo && npm run -s check:claims \
+  && npm run -s check:dupe && npm run -s check:cta && npm run -s check:forbidden && npm run -s check:footer
+PAGES=/blog/{slug} npm run -s check:phone
 ```
 
-End with: live URL of the post + which existing posts cross-link to it.
+Then screenshot the post at 1440 and 390 and read the PNGs.
+
+# Step 7 — Audit, commit, push
+
+Invoke `/audit` against the modified files and fix every Critical or Real issue. Commit path-scoped
+(`feat: blog post — {short title}`) and push to `main` per the repo `CLAUDE.md`. End with the live URL and the
+posts that now link to it.

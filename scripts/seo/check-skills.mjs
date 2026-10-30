@@ -59,13 +59,21 @@ const RULES = [
 // Rules whose prohibition is itself stated in these files ("never X"): a negated sentence is skipped.
 // Names, agency and private paths are NOT guarded: those words never belong here at all.
 const NEG_GUARDED = new Set(["handoff-for", "handoff-ask", "handoff-draft", "handoff-social", "pricing-file", "free-trial", "ach-stale"]);
+// Z-C1e: the opener every vendored skill's ShelfSpace rules block starts with (whitespace-normalized).
+const RULES_OPENER = "Read `marketing/seo-house-rules.md` before anything else. It covers unattended running (no questions, no human steps, nothing posted or sent), what never goes in this public repo, naming, the claims registry, price and trial copy, voice, page style and the gates.";
+// Z-C1b: the in-house blog-post skill is held to the same copy law and must point at the brief, the house rules
+// and the claims registry (it once said "confirm with the user", defaulted to dispensaries and ignored the brief).
+const BLOG_SKILL = ".claude/skills/blog-post/SKILL.md";
 // Sentences the law depends on: deleting one is a red, not a silent loosening.
 const PINS = {
   "marketing/seo-house-rules.md": ["## 1. You run unattended", "**Nobody posts, sends or approves anything by hand.**", "## 2. This repo is public",
     "## 3. Naming", "never an \"agency\" of any kind", "## 4. Numbers", "**No fabricated figures.**", "## 5. Price and trial", "Never ship a machine-readable price file"],
+  [BLOG_SKILL]: ["marketing/managed-services-blog-agent-brief.md", "marketing/seo-house-rules.md", "marketing/seo-claims.json",
+    "You run unattended", "a cannabis **brand** by default", "Never stop to ask", "node scripts/seo/build-sitemap.mjs"],
   "marketing/managed-services-blog-agent-brief.md": ["(brand-first)", "## Price and trial: none in a post", "A blog post never carries a price",
     "## Numbers: no fabricated figures", "marketing/seo-claims.json", "never called an agency of any kind"],
 };
+
 
 const fails = [];
 const fail = (m) => fails.push(m);
@@ -102,6 +110,14 @@ for (const [dir, up] of Object.entries(SKILLS)) {
   const block = hi < 0 || he < 0 ? "" : s.slice(hi + H.length, he);
   const bullets = (block.match(/^- \*\*/gm) || []).length;
   if (block.trim().length < 400 || bullets < 2) fail(`${dir}/SKILL.md: ShelfSpace rules block missing or thin (${block.trim().length} chars, ${bullets} rules; need 400+ and 2+)`);
+  // Z-C1e: length + a bullet count let filler pass. The block must OPEN with the canonical pointer at the house
+  // rules (whitespace-normalized), and its rules must be distinct, each a real sentence (5+ words).
+  if (!block.replace(/\s+/g, " ").trim().startsWith(RULES_OPENER)) fail(`${dir}/SKILL.md: ShelfSpace rules block does not open with the canonical house-rules pointer`);
+  const items = block.split(/^(?=- \*\*)/m).slice(1).map((b) => b.replace(/\s+/g, " ").trim());
+  if (new Set(items).size !== items.length) fail(`${dir}/SKILL.md: ShelfSpace rules block repeats a rule`);
+  const leads = items.map((b) => (b.match(/^- \*\*([^*]+)\*\*/) || [])[1]);
+  if (new Set(leads).size !== leads.length) fail(`${dir}/SKILL.md: two ShelfSpace rules share a bold lead`);
+  for (const b of items) if (b.split(" ").length < 6) fail(`${dir}/SKILL.md: ShelfSpace rule too thin to be a rule: ${b.slice(0, 60)}`);
   const lines = s.split("\n").length;
   if (lines > 500) fail(`${dir}/SKILL.md: ${lines} lines (cap 500; move detail to references/)`);
   const lic = join(base, "LICENSE");
@@ -113,7 +129,7 @@ for (const [dir, up] of Object.entries(SKILLS)) {
     if (f.endsWith(".md") && f !== skill && !readFileSync(f, "utf8").slice(0, 300).includes(UPSTREAM_SHA)) fail(`${relative(ROOT, f)}: reference lacks the upstream commit pin`);
   }
 }
-for (const f of [HOUSE, BRIEF]) {
+for (const f of [HOUSE, BRIEF, BLOG_SKILL]) {
   const p = join(ROOT, f);
   if (!existsSync(p) || readFileSync(p, "utf8").trim().length < 1000) fail(`${f}: missing or empty (the scan would prove nothing)`);
   else scanned.push(p);
@@ -133,7 +149,12 @@ const blankRegion = (rel, text) => {
   if (starts !== 1 || ends !== 1) { fail(`${BRIEF}: needs exactly one forbidden-list region (found ${starts} start / ${ends} end)`); return text; }
   const a = text.indexOf("<!-- forbidden-list:start -->"), b = text.indexOf("<!-- forbidden-list:end -->");
   if (b < a || text.slice(a + 29, b).trim().length < 40) { fail(`${BRIEF}: forbidden-list region empty or reversed`); return text; }
-  return text.slice(0, a) + text.slice(a, b).replace(/[^\n]/g, " ") + text.slice(b);
+  // Z-C1e shape check: ONLY the backticked terms in the region are exempt. Prose placed inside it is still read by
+  // every copy rule (blanking the whole region let any sentence hide there).
+  const region = text.slice(a, b);
+  const terms = region.match(/`[^`\n]+`/g) || [];
+  if (terms.length < 10) fail(`${BRIEF}: forbidden-list region must list the banned terms in backticks (found ${terms.length})`);
+  return text.slice(0, a) + region.replace(/`[^`\n]+`/g, (m) => m.replace(/[^\n]/g, " ")) + text.slice(b);
 };
 
 // ---- 2 + 3. links, hand-offs, copy law

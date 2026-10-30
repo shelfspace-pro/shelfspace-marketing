@@ -66,9 +66,9 @@ let that page say it. The CTA stays the consult.
 `ShelfCollect` and `ShelfPay` (retired public names: say ShelfSpace / ShelfSpace AR),
 `collections agency` used about ShelfSpace, `automate` / `automated` / `automatically` in the hero
 or headings, `scan-based trading`, `SBT`, `Diem`, `pilot`, `free trial`, `30-day`, `trial`,
-`subscription`, `cancel anytime`, `per location`, any plan or tier price, ACH "coming soon" /
-"rolling out", `<br>` inside an `h1` / `h2` / `h3`, a headline
-ending in `?`, "learn more" as a link or button. Avoid AI-residue cadence: "this isn't just X,
+`subscription`, `cancel anytime`, `per location`, any plan or tier price, `ACH coming soon` /
+`ACH rolling out`, `<br>` inside an `h1` / `h2` / `h3`, a headline
+ending in `?`, `learn more` as a link or button. Avoid AI-residue cadence: "this isn't just X,
 it's Y", "not just A but B", em-dash pile-ups.
 <!-- forbidden-list:end -->
 
