@@ -3,7 +3,7 @@
 // A page is listed when it is indexable: no robots noindex, canonical points at itself,
 // not an internal/utility file, not a redirect source, not X-Robots-Tag noindex in
 // vercel.json, and (tutorials only) published on the hub (video-catalog.json privacy=public).
-// lastmod = `git log -1 --format=%cs -- <file>`. Output is sorted, so it is deterministic.
+// lastmod = `git log -1 --format=%cs -- <file>` (today for a page with uncommitted changes). Output is sorted.
 import { readFileSync, writeFileSync, readdirSync, statSync, existsSync } from "node:fs";
 import { join, relative, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -90,15 +90,24 @@ export const walk = (dir = ROOT) => site.walk(dir);
 export const exclusionReason = site.exclusionReason;
 export const indexablePages = () => site.indexablePages();
 
-function lastmod(file) {
-  if (file) {
-    try {
-      const d = execFileSync("git", ["log", "-1", "--format=%cs", "--", file], { cwd: ROOT, encoding: "utf8" }).trim();
-      if (d) return d;
-    } catch {}
-    return new Date(statSync(join(ROOT, file)).mtime).toISOString().slice(0, 10); // untracked
-  }
-  return null;
+// lastmod = the page's last commit date (%cs). A page with uncommitted changes (or untracked) takes TODAY, so a
+// sitemap regenerated before the commit already holds the date that commit will carry (Z-A4b: check:sitemap
+// compares lastmod too, so a page edit that skips the regeneration goes red).
+const today = () => { const d = new Date(); return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`; };
+let dirtyCache = null;
+function dirty(root = ROOT) {
+  if (dirtyCache) return dirtyCache;
+  const run = (a) => { try { return execFileSync("git", a, { cwd: root, encoding: "utf8" }).split("\n").filter(Boolean); } catch { return []; } };
+  return (dirtyCache = new Set([...run(["diff", "--name-only", "HEAD"]), ...run(["ls-files", "--others", "--exclude-standard"])]));
+}
+export function lastmod(file) {
+  if (!file) return null;
+  if (dirty().has(file)) return today();
+  try {
+    const d = execFileSync("git", ["log", "-1", "--format=%cs", "--", file], { cwd: ROOT, encoding: "utf8" }).trim();
+    if (d) return d;
+  } catch {}
+  return today();
 }
 
 export function buildSitemapXml() {

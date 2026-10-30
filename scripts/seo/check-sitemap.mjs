@@ -24,9 +24,20 @@ if (badCanon.length) fail.push(`pages with a missing or non-self canonical (add 
 
 const tmp = join(mkdtempSync(join(tmpdir(), "sitemap-")), "sitemap.xml");
 execFileSync("node", [join(ROOT, "scripts/seo/build-sitemap.mjs"), "--out", tmp], { stdio: "pipe" });
-// lastmod is excluded: it comes from git history, which a shallow CI clone rewrites (every file = HEAD date).
+// lastmod is compared too (Z-A4b: a page edited without regenerating kept its old lastmod for weeks). It comes
+// from git history, which only a full clone has: a shallow clone (every file = the HEAD date) compares the URLs
+// alone and says so; CI checks out with fetch-depth 0.
 const noLastmod = (x) => x.replace(/<lastmod>[^<]*<\/lastmod>/g, "");
-if (noLastmod(readFileSync(tmp, "utf8")) !== noLastmod(committed)) fail.push("sitemap.xml differs from a fresh build (run: node scripts/seo/build-sitemap.mjs)");
+const fresh = readFileSync(tmp, "utf8");
+let shallow = false;
+try { shallow = execFileSync("git", ["rev-parse", "--is-shallow-repository"], { cwd: ROOT, encoding: "utf8" }).trim() === "true"; } catch {}
+if (noLastmod(fresh) !== noLastmod(committed)) fail.push("sitemap.xml differs from a fresh build (run: node scripts/seo/build-sitemap.mjs)");
+else if (shallow) console.log("check:sitemap: shallow clone, lastmod not compared");
+else if (fresh !== committed) {
+  const want = new Map([...fresh.matchAll(/<loc>([^<]*)<\/loc>\s*<lastmod>([^<]*)<\/lastmod>/g)].map((m) => [m[1], m[2]]));
+  const stale = [...committed.matchAll(/<loc>([^<]*)<\/loc>\s*<lastmod>([^<]*)<\/lastmod>/g)].filter((m) => want.get(m[1]) !== m[2]).map((m) => `${m[1]}: ${m[2]} (page last changed ${want.get(m[1])})`);
+  fail.push(`sitemap.xml lastmod stale on ${stale.length} URL(s) (run: node scripts/seo/build-sitemap.mjs):\n  ${stale.slice(0, 20).join("\n  ")}`);
+}
 
 if (fail.length) { console.error("check:sitemap FAILED\n" + fail.join("\n")); process.exit(1); }
 console.log(`check:sitemap OK (${pages.length} URLs)`);
