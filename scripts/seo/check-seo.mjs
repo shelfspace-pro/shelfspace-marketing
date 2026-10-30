@@ -20,7 +20,7 @@
 //
 // No baseline (SEO A3b, 10/28/2026): the site was fixed to zero and every violation fails. A baseline file
 // (scripts/seo/check-seo-baseline.json) is refused outright, so the ratchet cannot quietly come back.
-import { readFileSync, existsSync, statSync, readdirSync, mkdtempSync, cpSync } from "node:fs";
+import { readFileSync, existsSync, statSync, readdirSync, mkdtempSync, cpSync, realpathSync, symlinkSync, rmSync } from "node:fs";
 import { join, dirname, posix, resolve } from "node:path";
 import { tmpdir } from "node:os";
 import { fileURLToPath } from "node:url";
@@ -122,8 +122,13 @@ function faqQuestions(node, out = []) {
 }
 
 // ---------- the scan ----------
+// The ONE answer to "is this path the site itself?" (Z-A3b-d): compared by realpath, so "./", a trailing slash
+// or the macOS /tmp -> /private/tmp alias still runs the self-test, the 200-page floor and the extras.
+const real = (p) => { try { return realpathSync(resolve(p)); } catch { return resolve(p); } };
+export const canonicalRoot = (p) => (real(p) === real(ROOT) ? ROOT : resolve(p));
+
 export function scan(root = ROOT) {
-  root = resolve(root);
+  root = canonicalRoot(root);
   const site = loadSite(root);
   const v = new Map(); // file -> Map(code -> [detail])
   const warnings = [];
@@ -235,6 +240,13 @@ export function selfTest() {
   if (g.violations.size) fails.push(`good fixture is not clean: ${JSON.stringify(counts(g.violations))}`);
   const gs = scan(good + "/"); // --root with a trailing slash must scan the same tree
   if (gs.pages !== g.pages || gs.violations.size) fails.push(`good fixture scanned as "${good}/" differs: ${gs.pages} pages, ${JSON.stringify(counts(gs.violations))}`);
+  // --root spelled any other way than ROOT must still be the site (realpath), and a different tree must not be.
+  const alias = join(mkdtempSync(join(tmpdir(), "seo-root-")), "site");
+  try {
+    symlinkSync(ROOT, alias);
+    for (const p of [ROOT + "/", alias, alias + "/", join(ROOT, "scripts", "..")]) if (canonicalRoot(p) !== ROOT) fails.push(`--root ${p} is the site but was not recognized as ROOT (realpath)`);
+  } finally { rmSync(dirname(alias), { recursive: true, force: true }); }
+  if (canonicalRoot(good) === ROOT) fails.push("canonicalRoot: the good fixture was taken for the site");
   const cases = readdirSync(join(FIXTURES, "cases")).sort();
   if (cases.length < 12) fails.push(`only ${cases.length} fixture cases (expected one per check)`);
   for (const c of cases) {
@@ -260,7 +272,7 @@ export function selfTest() {
 if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
   const args = process.argv.slice(2);
   const opt = (n) => { const i = args.indexOf(n); return i > -1 ? args[i + 1] : null; };
-  const root = opt("--root") ? resolve(opt("--root")) : ROOT;
+  const root = opt("--root") ? canonicalRoot(opt("--root")) : ROOT;
   // --json is a dump, never a pass: it exits 1 when there is any violation, like the plain run (SEO A3b).
   if (args.includes("--json")) { const r = scan(root); console.log(JSON.stringify({ pages: r.pages, violations: counts(r.violations), warnings: r.warnings }, null, 1)); process.exit(r.violations.size ? 1 : 0); }
 
