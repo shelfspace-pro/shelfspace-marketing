@@ -58,7 +58,10 @@ async function check(pg, width) {
     // a page that didn't load would pass vacuously (a 404 has no controls to measure), so it fails
     if (!res || !res.ok()) { failN++; console.log(`  FAIL ${pg} @${width}px: HTTP ${res ? res.status() : 'no response'}`); await ctx.close(); return; }
     if (!(await page.locator('a').count())) { failN++; console.log(`  FAIL ${pg} @${width}px: page has no links (did it load?)`); await ctx.close(); return; }
-    const off = await page.evaluate(() => {
+    await page.evaluate(() => document.fonts && document.fonts.ready);
+    // measured twice when the first look fails: under the parallel pool a page can be measured mid-layout (a
+    // one-off /integrations hit, 10/30/2026); a real overflow is still there a moment later.
+    const measure = () => page.evaluate(() => {
       document.querySelectorAll('details').forEach((d) => { d.open = true; });
       const iw = window.innerWidth;
       const scrollsSideways = (el) => {
@@ -86,6 +89,8 @@ async function check(pg, width) {
         .slice(0, 5)
         .map((el) => `${el.tagName.toLowerCase()}.${[...el.classList].join('.') || '-'} "${(el.innerText || el.value || el.getAttribute('aria-label') || '').trim().slice(0, 30)}" spans ${Math.round(el.getBoundingClientRect().left)}-${Math.round(el.getBoundingClientRect().right)}px`);
     });
+    let off = await measure();
+    if (off.length) { await page.waitForTimeout(1500); off = await measure(); }
     if (off.length) { failN++; console.log(`  FAIL ${pg} @${width}px: ${off.join(' | ')}`); } else pass++;
     await ctx.close();
 }
