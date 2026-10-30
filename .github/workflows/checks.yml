@@ -66,6 +66,11 @@ jobs:
       - name: Tools, templates, tutorials, pricing line
         run: npm run check:assets
 
+      # SEO E3: the Days-to-Pay Index template (unserved, every slot) + each published Index page (no preview
+      # banner, no noindex, a methodology block, CC BY).
+      - name: Days-to-Pay Index template and releases
+        run: npm run check:index-template
+
       # No provider leaks, no retired pricing; trial copy only inside brand-page trial-ok regions (Z-33).
       - name: Forbidden copy
         run: npm run check:forbidden
