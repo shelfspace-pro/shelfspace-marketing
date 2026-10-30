@@ -1,6 +1,6 @@
 // check:sitemap — fails when the committed sitemap.xml drifts from what the generator emits,
 // when an indexable page is missing, or when a non-indexable page is listed.
-import { readFileSync, mkdtempSync } from "node:fs";
+import { readFileSync, writeFileSync, mkdtempSync, mkdirSync, copyFileSync, realpathSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { execFileSync } from "node:child_process";
@@ -37,6 +37,25 @@ else if (fresh !== committed) {
   const want = new Map([...fresh.matchAll(/<loc>([^<]*)<\/loc>\s*<lastmod>([^<]*)<\/lastmod>/g)].map((m) => [m[1], m[2]]));
   const stale = [...committed.matchAll(/<loc>([^<]*)<\/loc>\s*<lastmod>([^<]*)<\/lastmod>/g)].filter((m) => want.get(m[1]) !== m[2]).map((m) => `${m[1]}: ${m[2]} (page last changed ${want.get(m[1])})`);
   fail.push(`sitemap.xml lastmod stale on ${stale.length} URL(s) (run: node scripts/seo/build-sitemap.mjs):\n  ${stale.slice(0, 20).join("\n  ")}`);
+}
+
+// Self-test of the lastmod source (Z-A4b), in a throwaway repo: a clean page carries its commit date, a page with
+// uncommitted edits carries TODAY (so a sitemap regenerated before the commit already matches it).
+{
+  const T = realpathSync(mkdtempSync(join(tmpdir(), "sitemap-lastmod-"))); // realpath: the CLI guard compares argv[1] with import.meta.url (macOS /var -> /private/var)
+  const g = (...a) => execFileSync("git", a, { cwd: T, encoding: "utf8", stdio: ["ignore", "pipe", "pipe"], env: { ...process.env, GIT_AUTHOR_DATE: "2020-01-02T12:00:00", GIT_COMMITTER_DATE: "2020-01-02T12:00:00" } });
+  mkdirSync(join(T, "scripts/seo"), { recursive: true });
+  copyFileSync(join(ROOT, "scripts/seo/build-sitemap.mjs"), join(T, "scripts/seo/build-sitemap.mjs"));
+  const pg = (p) => `<!DOCTYPE html><html><head><link rel="canonical" href="https://shelfspace.pro${p}"></head><body>x</body></html>`;
+  writeFileSync(join(T, "index.html"), pg("/")); writeFileSync(join(T, "a.html"), pg("/a"));
+  g("init", "-q"); g("config", "user.email", "t@t"); g("config", "user.name", "t"); g("add", "-A"); g("commit", "-qm", "base");
+  writeFileSync(join(T, "a.html"), pg("/a").replace("x</body>", "y</body>"));
+  execFileSync("node", [join(T, "scripts/seo/build-sitemap.mjs")], { cwd: T, stdio: "pipe" });
+  const xml = readFileSync(join(T, "sitemap.xml"), "utf8");
+  const lm = (p) => (xml.match(new RegExp(`<loc>https://shelfspace\\.pro${p}</loc>\\s*<lastmod>([^<]*)</lastmod>`)) || [])[1];
+  const d = new Date(), today = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+  if (lm("/") !== "2020-01-02") fail.push(`self-test: a clean page's lastmod must be its commit date (got ${lm("/")})`);
+  if (lm("/a") !== today) fail.push(`self-test: a page with uncommitted edits must carry today's lastmod (got ${lm("/a")})`);
 }
 
 if (fail.length) { console.error("check:sitemap FAILED\n" + fail.join("\n")); process.exit(1); }
