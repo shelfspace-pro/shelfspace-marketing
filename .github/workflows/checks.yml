@@ -14,7 +14,7 @@ jobs:
     steps:
       - uses: actions/checkout@v5
         with:
-          fetch-depth: 2   # check:claims / check:dupe compare their baselines with HEAD~1 (the ratchet)
+          fetch-depth: 0   # full history: check:sitemap compares lastmod with each page's last commit (Z-A4b); check:claims / check:dupe compare their baselines with HEAD~1 (the ratchet)
 
       - uses: actions/setup-node@v5
         with:
@@ -70,6 +70,14 @@ jobs:
       # banner, no noindex, a methodology block, CC BY).
       - name: Days-to-Pay Index template and releases
         run: npm run check:index-template
+
+      # Every blog post linked from blog.html + llms.txt; blog.html section counts and ranks 1..n (Z-C1a, Z-E3b).
+      - name: Blog index
+        run: npm run check:blog-sync
+
+      # ONE footer sitewide, Resources carries "Free tools" -> /tools (Z-C3d).
+      - name: Footer
+        run: npm run check:footer
 
       # No provider leaks, no retired pricing; trial copy only inside brand-page trial-ok regions (Z-33).
       - name: Forbidden copy

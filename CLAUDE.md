@@ -40,7 +40,7 @@ Homepage story order (10/22/2026): toggle hero ("I run a brand" default / "I run
 - `/shelfiq-widget.js` (file name kept) is included on ALL pages as last script. It holds two blocks: first-touch attribution (`ss-session-touch`, read by /contact — keep it) and the nav-dropdown JS. The Chelsea chat widget was removed 10/27/2026 (Chris: 0 real leads in 8 days, the button got in the way); visitors reach Chelsea by the header "Call now" link.
 - **CTA labels (10/27/2026, Chris):** the header nav button reads **"Schedule a Demo"** on every page (`NAV_LABEL` in `scripts/cta-lib.mjs`, also in `scripts/build-tutorials.mjs`), and the homepage hero (`home-hero`) reads "Schedule a Demo" (was "Get Paid"). In-page buttons elsewhere keep "Schedule a call". This supersedes the nav/hero lines in § Consult-first CTAs.
 - **Page style (10/27/2026, Chris: "this new style is dope… the style of new pages moving forward").** Every new or rebuilt page uses it. Reference code — copy, don't reinvent — is the `<style>` just before `<!-- FOOTER -->` in `index.html` (`HOMEPAGE HERO v2`, `HOMEPAGE SECTION SEAMS`), `about.html` (`ABOUT v2`, CTA on a dark hero) and `pricing.html` (`PRICING v2`, CTA on a light hero). (1) **Hero CTA:** glossy gradient, label left + arrow in a 48px chip right (44px on phones), 18px radius, 60–64px tall, a white sheen sweep every 4.5s; dark button + mint chip on light heroes, mint button + dark chip on dark heroes. It replaces the old pulse ring (screenshots as a "double outline"). Labels stay script-owned (`cta:sweep`). (2) **Secondary action:** a quiet text row (play circle + text), never a second bordered pill. (3) **Phone hero:** left-aligned, 42–60px headline, tight tracking, ~18px lede, full-width CTA. (4) **Light heroes:** mint radial mesh, not flat white. (5) **Product visual:** dark card with solid-tint ghost cards stacked behind it (opacity ghosts go gray) + a white event toast that pops on the state change; "Illustration with example numbers". (6) **Trust signal:** swap it into an existing slot (e.g. the eyebrow pill = live `[data-paid-count]` total). Never stack another line; the hero must not get busy. (7) **Seams:** dark blocks are rounded panels (40px / 28px on phones), inset `calc(100% - 48px|40px)` or overlapping their neighbour with a negative margin; slate sections fade white→slate→white; FAQ white; footer top rounded; no hard color lines. Verify at 1440/1280/768/390/320.
-- Phones (10/22/2026): the sitewide phone rules live in the `PHONE LAYER` block at the end of `styles.css` (8px scale: 20px gutters, 64px sections, full-width hero buttons, 44px tap targets, solid header, two-column footer, chat button hidden until the first screen is scrolled past). A page's own phone rules go in a `<style>` just before its footer, so they come after the page's other style blocks. Prefix them `html body` to beat the page's own rules (and `.page-hero.page-hero` to beat `hero-motion.css`). Fence: `npm run check:phone`, which fails when a link, button or field on a header-nav page runs past the screen edge at 320/375/390/430px with every `<details>` opened. Sections clip sideways overflow, so `scrollWidth` alone never catches this.
+- Phones (10/22/2026): the sitewide phone rules live in the `PHONE LAYER` block at the end of `styles.css` (8px scale: 20px gutters, 64px sections, full-width hero buttons, 44px tap targets, solid header, two-column footer, chat button hidden until the first screen is scrolled past). A page's own phone rules go in a `<style>` just before its footer, so they come after the page's other style blocks. Prefix them `html body` to beat the page's own rules (and `.page-hero.page-hero` to beat `hero-motion.css`). Fence: `npm run check:phone`, which fails when a link, button or field runs past the screen edge with every `<details>` opened: header-nav pages at 320/375/390/430px, every other indexable page (blog, docs, tools, templates, tutorials, …) at 320px (Z-C3a). `PAGES=/a,/blog/b` checks exactly those paths. Sections clip sideways overflow, so `scrollWidth` alone never catches this.
 - **No Apollo** — the Apollo.io tracker was removed sitewide 10/06/2026 (Chris: "rip apollo out"). Never re-add it; Google Analytics (`G-H2LBJT03WE`) is the only tracker on every page.
 - fi ligature fix: `font-variant-ligatures: none` when "Shelf" and "iQ" span split
 
@@ -55,7 +55,7 @@ For brands ▾ | For dispensaries ▾ | Features ▾ | About | Pricing | Login |
 - **2026-10-02 (Chris):** Consignment and Credit Recovery are NOT top-nav items — they're part of ShelfPay, linked from the "Included for dispensaries" section on `/accounts-payable` (and still in the footer). Don't re-add them to the nav.
 
 - **`/payments` (10/18/2026, Chris):** the unified payments page — e-check, mailed paper check, ACH bank transfer (**live** since 10/28/2026, Chris: "ACH is live"; never say "rolling out" or "coming soon" about ACH, `check:forbidden` scan D enforces it; state no fees, timelines or limits beyond what the page already says). Pitch = paying and getting paid is effortless; every visual is a REAL screenshot (demo sandbox / stubbed pay page) in `screenshots/payments/`. Plaid and the banking partners may be named (Chris, 10/29/2026). Linked from Features ▾ "Payments" and footer Services "Payments".
-- **Footer (10/18/2026, Chris — "wonky"; brand-only since 10/27/2026):** ONE canonical footer on every page and in `scripts/build-tutorials.mjs`: four columns — **Services** (Accounts Receivable, Collections, Payment Plans, AI Calls) · **Platform** (Features, Payments, Integrations, Connect Your AI) · **Resources** (Pricing, Blog, Docs, Guides, Tutorials) · **Company** (About, For Vendors, For Bookkeepers, Contact, Support, Login, LinkedIn). 10/27 (Chris): links to dispensary pages (ShelfPay (AP), ShelfVerify, Consignment, Credit Recovery, ShelfiQ, Vendor Management, How It Works) were cut; the pages stay up, unlinked from the footer. Keep columns ≤7 links. Adding a link = add it to EVERY page (it had drifted into 12 variants with a 13-link "Platform" column). Check: all `footer-col` blocks must be byte-identical sitewide. **Chelsea's phone (10/23/2026, Chris):** every footer-brand block ends with `<p class="footer-phone">Questions? Call Chelsea, our AI assistant: <a href="tel:+16162714585">(616) 271-4585</a></p>` (the MI line; styles in `styles.css`), also in `scripts/build-tutorials.mjs`; `/contact` carries a `.cx-phone` line under the form. **Header "Call now" (10/24/2026, Chris):** every page's nav also carries `<li class="nav-call">` (tel: link, "Call now" + the MI number) immediately before the CTA `<li>`, and a `.nav-call-bar` "Call" pill before the hamburger (phones only); both in `scripts/build-tutorials.mjs` too. Desktop ≤1240px shows the icon only. Styles: `styles.css` § Call now. Never in the hero.
+- **Footer (10/18/2026, Chris — "wonky"; brand-only since 10/27/2026):** ONE canonical footer on every page and in `scripts/build-tutorials.mjs`: four columns — **Services** (Accounts Receivable, Collections, Payment Plans, AI Calls) · **Platform** (Features, Payments, Integrations, Connect Your AI) · **Resources** (Pricing, Blog, Docs, Guides, Tutorials, Free tools) · **Company** (About, For Vendors, For Bookkeepers, Contact, Support, Login, LinkedIn). 10/27 (Chris): links to dispensary pages (ShelfPay (AP), ShelfVerify, Consignment, Credit Recovery, ShelfiQ, Vendor Management, How It Works) were cut; the pages stay up, unlinked from the footer. Keep columns ≤7 links. Adding a link = add it to EVERY page (it had drifted into 12 variants with a 13-link "Platform" column). Check: all `footer-col` blocks must be byte-identical sitewide (`npm run check:footer`; "Free tools" → `/tools` added 10/30/2026, Z-C3d). **Chelsea's phone (10/23/2026, Chris):** every footer-brand block ends with `<p class="footer-phone">Questions? Call Chelsea, our AI assistant: <a href="tel:+16162714585">(616) 271-4585</a></p>` (the MI line; styles in `styles.css`), also in `scripts/build-tutorials.mjs`; `/contact` carries a `.cx-phone` line under the form. **Header "Call now" (10/24/2026, Chris):** every page's nav also carries `<li class="nav-call">` (tel: link, "Call now" + the MI number) immediately before the CTA `<li>`, and a `.nav-call-bar` "Call" pill before the hamburger (phones only); both in `scripts/build-tutorials.mjs` too. Desktop ≤1240px shows the icon only. Styles: `styles.css` § Call now. Never in the hero.
 - **Service labels (2026-09-28, Chris; nav toggles superseded 10/22 by the audience labels above, footer unchanged):** (SUPERSEDED 10/29/2026 by the one-brand rule above: no retired product names on any page.) The product name "Get Paid" is retired sitewide — use ShelfCollect (URL slugs like `/get-paid` stay).
 - **Never remove an existing `.brand-ticker` logo strip** when rebuilding a page — Chris reverted exactly that on the ShelfCollect page (2026-09-28).
 
@@ -80,7 +80,7 @@ When the user drops an email chain, PDF, or describes a situation they want turn
 2. De-identify (no names, no round dollar amounts, no dates)
 3. Create the blog post at `/blog/case-study-{slug}.html`
 4. Add a card to the homepage case study section in `index.html`
-5. Update sitemap.xml and llms.txt
+5. Regenerate sitemap.xml (`node scripts/seo/build-sitemap.mjs`) and update llms.txt
 6. Add a card to `blog.html` (see Blog System below)
 
 ## Blog System
@@ -92,11 +92,11 @@ When the user drops an email chain, PDF, or describes a situation they want turn
 
 ### When creating a new blog post
 The `/blog-post` and `/case-study` skills handle the full rollout. Manual checklist if you bypass the skills:
-1. Add a compact-row card to the matching category section's `.section-list` in `blog.html` (e.g., for an AP post: top of `<div class="section-list">` inside `<section class="blog-section" data-section-cat="AP">`). Set `data-rank="1"` and bump prior cards' ranks. Categories: `Collections` (brand-side: getting paid by dispensaries, state payment rules, templates — first section on the page), `AP`, `Case Study`, `Consignment`, `Credit Recovery`, `Vendor Management`. Small categories (Credit Recovery, Vendor Management) live in `<div class="blog-section-rest">` instead — all cards there carry `data-rank="99"`.
+1. Add a compact-row card to the matching category section's `.section-list` in `blog.html` (e.g., for an AP post: top of `<div class="section-list">` inside `<section class="blog-section" data-section-cat="AP">`). Set `data-rank="1"` and bump prior cards' ranks, and the section's `section-count` (ranks stay 1..n with no gaps or repeats; only ranks 1-3 show in the curated view). Categories: `Collections` (brand-side: getting paid by dispensaries, state payment rules, templates — first section on the page), `AP`, `Case Study`, `Consignment`, `Credit Recovery`, `Vendor Management`. Small categories (Credit Recovery, Vendor Management) live in `<div class="blog-section-rest">` instead — all cards there carry `data-rank="99"`.
 2. Optionally promote to the **featured slot** at the top of `blog.html` (replace the existing `.featured-card` body). The previous featured drops back to its category's section list.
 3. Add a line to `llms.txt` under the "Blog Articles" section
-4. Add a `<url>` to `sitemap.xml`
-5. Run `marketing/scripts/check-blog-sync.sh` to verify
+4. Regenerate `sitemap.xml`: `node scripts/seo/build-sitemap.mjs`
+5. Run `npm run check:blog-sync` (orphans + every section's count and ranks) to verify
 
 ## Free tools and templates (SEO C3, 10/29/2026)
 
@@ -120,14 +120,14 @@ The `/blog-post` and `/case-study` skills handle the full rollout. Manual checkl
 3. Read the existing doc page
 4. Update only what changed (preserve SEO juice)
 5. Update `lastSynced` in docs-manifest.json
-6. Update sitemap.xml lastmod date
+6. Regenerate sitemap.xml (`node scripts/seo/build-sitemap.mjs`): lastmod comes from each page's last commit
 
 ### When creating new docs
 1. Read `marketing/platform-map.md` for context
 2. Read `marketing/docs-plan.md` for the planned page
 3. Follow ALL rules in `marketing/docs-instructions.md`
 4. Add entry to `docs-manifest.json`
-5. Add entry to `sitemap.xml`
+5. Regenerate `sitemap.xml` (`node scripts/seo/build-sitemap.mjs`)
 6. Add entry to the DOCS array in `/docs-search.js` (title, description, section, url, optional synonym keywords) and bump `?v=N` on every `<script src="/docs-search.js?v=N">` reference site-wide
 7. **Link the new page from every sibling in the same `docs/<section>/` directory** — add it to each sibling's `<div class="docs-related-links">` block. The `/docs` section card routes to one article, not a section index; without sibling Related links the new page is invisible to anyone whose search-index cache is stale.
 8. Bump the section-card article count and description on `docs/index.html`
@@ -146,7 +146,7 @@ The `/blog-post` and `/case-study` skills handle the full rollout. Manual checkl
 /shelfiq-widget.js    — Attribution + nav JS (included on all pages)
 /docs-search.js       — Docs search (DOCS index + auto-mount; included on all /docs pages)
 /llms.txt             — AI-readable site reference
-/sitemap.xml          — All indexable URLs
+/sitemap.xml          — All indexable URLs. GENERATED: after editing ANY page run `node scripts/seo/build-sitemap.mjs` and commit it with the page (`check:sitemap` fails on a stale lastmod, Z-A4b)
 /robots.txt           — Crawl rules
 /vercel.json          — Vercel config (rewrites, redirects, headers)
 ```

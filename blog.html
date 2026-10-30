@@ -216,24 +216,9 @@
      or search is active to switch behavior. Belt-and-suspenders: also
      zero out height/margin/padding/border to guarantee zero layout
      contribution under any browser/spec edge case. */
-  .blog-card[data-rank="4"],
-  .blog-card[data-rank="5"],
-  .blog-card[data-rank="6"],
-  .blog-card[data-rank="7"],
-  .blog-card[data-rank="8"],
-  .blog-card[data-rank="9"],
-  .blog-card[data-rank="10"],
-  .blog-card[data-rank="11"],
-  .blog-card[data-rank="12"],
-  .blog-card[data-rank="13"],
-  .blog-card[data-rank="14"],
-  .blog-card[data-rank="15"],
-  .blog-card[data-rank="16"],
-  .blog-card[data-rank="17"],
-  .blog-card[data-rank="18"],
-  .blog-card[data-rank="19"],
-  .blog-card[data-rank="20"],
-  .blog-card[data-rank="99"] {
+  /* Every rank past 3 (Z-E3b: the old list stopped at 20, so ranks 21+ leaked into the curated view).
+     :not() with a list keeps specificity at 0,3,0, under the flat-mode 0,3,1 below. */
+  .blog-card[data-rank]:not([data-rank="1"], [data-rank="2"], [data-rank="3"]) {
     display: none !important;
     height: 0 !important;
     margin: 0 !important;
@@ -337,12 +322,7 @@
 </style>
 <noscript><style>
   .reveal,.page-hero .section-label,.page-hero .section-title,.page-hero .section-desc{opacity:1;transform:none;transition:none;}
-  .blog-card[data-rank="4"], .blog-card[data-rank="5"], .blog-card[data-rank="6"],
-  .blog-card[data-rank="7"], .blog-card[data-rank="8"], .blog-card[data-rank="9"],
-  .blog-card[data-rank="10"], .blog-card[data-rank="11"], .blog-card[data-rank="12"],
-  .blog-card[data-rank="13"], .blog-card[data-rank="14"], .blog-card[data-rank="15"],
-  .blog-card[data-rank="16"], .blog-card[data-rank="17"], .blog-card[data-rank="18"],
-  .blog-card[data-rank="19"], .blog-card[data-rank="20"], .blog-card[data-rank="99"],
+  .blog-card[data-rank]:not([data-rank="1"], [data-rank="2"], [data-rank="3"]),
   .blog-section-rest, .section-view-all, .blog-controls { display: none; }
 </style></noscript>
 <script type="application/ld+json">
@@ -440,7 +420,7 @@
   <!-- SECTION: COLLECTIONS (brands getting paid by dispensaries) -->
   <section class="blog-section" data-section-cat="Collections">
     <div class="section-header">
-      <h2>Collections <span class="section-count">32</span></h2>
+      <h2>Collections <span class="section-count">34</span></h2>
       <a href="#" class="section-view-all" data-filter-target="Collections" role="button">View all <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg></a>
     </div>
     <div class="section-list">
@@ -733,7 +713,7 @@
         <svg class="blog-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
       </a>
 
-      <a href="/blog/cannabis-sales-rep-weekly-collections-email" class="blog-card" data-category="Collections" data-rank="32">
+      <a href="/blog/cannabis-sales-rep-weekly-collections-email" class="blog-card" data-category="Collections" data-rank="33">
         <span class="blog-card-tag">Collections</span>
         <div class="blog-card-content">
           <div class="blog-card-title">Every Sales Rep Gets Their Collections List Every Monday</div>
@@ -742,7 +722,7 @@
         <svg class="blog-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
       </a>
 
-      <a href="/blog/cannabis-cash-flow-ap-ar-gap" class="blog-card" data-category="Collections" data-rank="33">
+      <a href="/blog/cannabis-cash-flow-ap-ar-gap" class="blog-card" data-category="Collections" data-rank="34">
         <span class="blog-card-tag">Collections</span>
         <div class="blog-card-content">
           <div class="blog-card-title">Cannabis Cash Flow Management: The AP/AR Gap</div>
@@ -757,7 +737,7 @@
   <!-- SECTION: CASE STUDIES -->
   <section class="blog-section" data-section-cat="Case Study">
     <div class="section-header">
-      <h2>Case Studies <span class="section-count">24</span></h2>
+      <h2>Case Studies <span class="section-count">25</span></h2>
       <a href="#" class="section-view-all" data-filter-target="Case Study" role="button">View all <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg></a>
     </div>
     <div class="section-list">
@@ -780,7 +760,7 @@
         <svg class="blog-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
       </a>
 
-      <a href="/blog/case-study-cannabis-farm-past-due-paid" class="blog-card" data-category="Case Study" data-rank="2">
+      <a href="/blog/case-study-cannabis-farm-past-due-paid" class="blog-card" data-category="Case Study" data-rank="3">
         <span class="blog-card-tag">Case Study</span>
         <div class="blog-card-content">
           <div class="blog-card-title">88% of a Cannabis Farm's Past-Due Balance Paid in Month One</div>
@@ -789,7 +769,7 @@
         <svg class="blog-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
       </a>
 
-      <a href="/blog/case-study-brand-past-due-reminders" class="blog-card" data-category="Case Study" data-rank="2">
+      <a href="/blog/case-study-brand-past-due-reminders" class="blog-card" data-category="Case Study" data-rank="4">
         <span class="blog-card-tag">Case Study</span>
         <div class="blog-card-content">
           <div class="blog-card-title">94 Past-Due Reminders, Sent in a Brand's Name</div>
@@ -798,7 +778,7 @@
         <svg class="blog-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
       </a>
 
-      <a href="/blog/case-study-vendor-underbilled" class="blog-card" data-category="Case Study" data-rank="3">
+      <a href="/blog/case-study-vendor-underbilled" class="blog-card" data-category="Case Study" data-rank="5">
         <span class="blog-card-tag">Case Study</span>
         <div class="blog-card-content">
           <div class="blog-card-title">A Vendor Under-Billed Us by $784. We Caught It and Made It Right.</div>
@@ -807,7 +787,7 @@
         <svg class="blog-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
       </a>
 
-      <a href="/blog/case-study-vendor-credit-recovery" class="blog-card" data-category="Case Study" data-rank="4">
+      <a href="/blog/case-study-vendor-credit-recovery" class="blog-card" data-category="Case Study" data-rank="6">
         <span class="blog-card-tag">Case Study</span>
         <div class="blog-card-content">
           <div class="blog-card-title">How We Recovered $2,340 in Co-Marketing Credits a Dispensary Didn't Know It Was Owed</div>
@@ -816,7 +796,7 @@
         <svg class="blog-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
       </a>
 
-      <a href="/blog/case-study-duplicate-invoice" class="blog-card" data-category="Case Study" data-rank="4">
+      <a href="/blog/case-study-duplicate-invoice" class="blog-card" data-category="Case Study" data-rank="7">
         <span class="blog-card-tag">Case Study</span>
         <div class="blog-card-content">
           <div class="blog-card-title">How a $4,873 Duplicate Invoice Got Caught in One Morning</div>
@@ -825,7 +805,7 @@
         <svg class="blog-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
       </a>
 
-      <a href="/blog/case-study-consignment-conversion" class="blog-card" data-category="Case Study" data-rank="5">
+      <a href="/blog/case-study-consignment-conversion" class="blog-card" data-category="Case Study" data-rank="8">
         <span class="blog-card-tag">Case Study</span>
         <div class="blog-card-content">
           <div class="blog-card-title">How One Vendor Switch Freed $27,350 in Trapped Inventory</div>
@@ -834,7 +814,7 @@
         <svg class="blog-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
       </a>
 
-      <a href="/blog/case-study-ap-time-savings" class="blog-card" data-category="Case Study" data-rank="6">
+      <a href="/blog/case-study-ap-time-savings" class="blog-card" data-category="Case Study" data-rank="9">
         <span class="blog-card-tag">Case Study</span>
         <div class="blog-card-content">
           <div class="blog-card-title">15 Hours to 15 Minutes: Dispensary AP Case Study</div>
@@ -843,7 +823,7 @@
         <svg class="blog-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
       </a>
 
-      <a href="/blog/case-study-buyer-reorder-data" class="blog-card" data-category="Case Study" data-rank="7">
+      <a href="/blog/case-study-buyer-reorder-data" class="blog-card" data-category="Case Study" data-rank="10">
         <span class="blog-card-tag">Case Study</span>
         <div class="blog-card-content">
           <div class="blog-card-title">Buyer Cut Waste 23% With Sell-Through Data</div>
@@ -852,7 +832,7 @@
         <svg class="blog-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
       </a>
 
-      <a href="/blog/case-study-ceo-email-relief" class="blog-card" data-category="Case Study" data-rank="8">
+      <a href="/blog/case-study-ceo-email-relief" class="blog-card" data-category="Case Study" data-rank="11">
         <span class="blog-card-tag">Case Study</span>
         <div class="blog-card-content">
           <div class="blog-card-title">Owner Stopped Answering Vendor Emails</div>
@@ -861,7 +841,7 @@
         <svg class="blog-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
       </a>
 
-      <a href="/blog/case-study-consignment-new-product" class="blog-card" data-category="Case Study" data-rank="9">
+      <a href="/blog/case-study-consignment-new-product" class="blog-card" data-category="Case Study" data-rank="12">
         <span class="blog-card-tag">Case Study</span>
         <div class="blog-card-content">
           <div class="blog-card-title">Consignment Turned a "No" Into $14,230</div>
@@ -870,7 +850,7 @@
         <svg class="blog-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
       </a>
 
-      <a href="/blog/case-study-delivery-dashboard" class="blog-card" data-category="Case Study" data-rank="10">
+      <a href="/blog/case-study-delivery-dashboard" class="blog-card" data-category="Case Study" data-rank="13">
         <span class="blog-card-tag">Case Study</span>
         <div class="blog-card-content">
           <div class="blog-card-title">Dispensary Delivery Reconciliation: A Case Study</div>
@@ -879,7 +859,7 @@
         <svg class="blog-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
       </a>
 
-      <a href="/blog/case-study-ebitda-credit-recovery" class="blog-card" data-category="Case Study" data-rank="11">
+      <a href="/blog/case-study-ebitda-credit-recovery" class="blog-card" data-category="Case Study" data-rank="14">
         <span class="blog-card-tag">Case Study</span>
         <div class="blog-card-content">
           <div class="blog-card-title">Credit Recovery Lifted EBITDA 15%</div>
@@ -888,7 +868,7 @@
         <svg class="blog-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
       </a>
 
-      <a href="/blog/case-study-expiration-credit" class="blog-card" data-category="Case Study" data-rank="12">
+      <a href="/blog/case-study-expiration-credit" class="blog-card" data-category="Case Study" data-rank="15">
         <span class="blog-card-tag">Case Study</span>
         <div class="blog-card-content">
           <div class="blog-card-title">Expiration Credits From a Vendor Agreement — $3,180 Recovered</div>
@@ -897,7 +877,7 @@
         <svg class="blog-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
       </a>
 
-      <a href="/blog/case-study-expired-returns" class="blog-card" data-category="Case Study" data-rank="13">
+      <a href="/blog/case-study-expired-returns" class="blog-card" data-category="Case Study" data-rank="16">
         <span class="blog-card-tag">Case Study</span>
         <div class="blog-card-content">
           <div class="blog-card-title">$8,370 in Expired Product Returned at Zero Cost</div>
@@ -906,7 +886,7 @@
         <svg class="blog-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
       </a>
 
-      <a href="/blog/case-study-metrc-invoice-accuracy" class="blog-card" data-category="Case Study" data-rank="14">
+      <a href="/blog/case-study-metrc-invoice-accuracy" class="blog-card" data-category="Case Study" data-rank="17">
         <span class="blog-card-tag">Case Study</span>
         <div class="blog-card-content">
           <div class="blog-card-title">We Caught 12 Wrong Invoices in One Month</div>
@@ -915,7 +895,7 @@
         <svg class="blog-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
       </a>
 
-      <a href="/blog/case-study-non-cannabis-vendors" class="blog-card" data-category="Case Study" data-rank="15">
+      <a href="/blog/case-study-non-cannabis-vendors" class="blog-card" data-category="Case Study" data-rank="18">
         <span class="blog-card-tag">Case Study</span>
         <div class="blog-card-content">
           <div class="blog-card-title">Every Vendor in One System</div>
@@ -924,7 +904,7 @@
         <svg class="blog-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
       </a>
 
-      <a href="/blog/case-study-quickbooks-sync" class="blog-card" data-category="Case Study" data-rank="16">
+      <a href="/blog/case-study-quickbooks-sync" class="blog-card" data-category="Case Study" data-rank="19">
         <span class="blog-card-tag">Case Study</span>
         <div class="blog-card-content">
           <div class="blog-card-title">Cannabis AP to QuickBooks: Real-Time Sync</div>
@@ -933,7 +913,7 @@
         <svg class="blog-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
       </a>
 
-      <a href="/blog/case-study-return-credit" class="blog-card" data-category="Case Study" data-rank="17">
+      <a href="/blog/case-study-return-credit" class="blog-card" data-category="Case Study" data-rank="20">
         <span class="blog-card-tag">Case Study</span>
         <div class="blog-card-content">
           <div class="blog-card-title">Return Credit Nobody Filed — $1,847 Recovered</div>
@@ -942,7 +922,7 @@
         <svg class="blog-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
       </a>
 
-      <a href="/blog/case-study-settlement-dispute" class="blog-card" data-category="Case Study" data-rank="18">
+      <a href="/blog/case-study-settlement-dispute" class="blog-card" data-category="Case Study" data-rank="21">
         <span class="blog-card-tag">Case Study</span>
         <div class="blog-card-content">
           <div class="blog-card-title">Settlement Dispute Resolved in 24 Hours</div>
@@ -951,7 +931,7 @@
         <svg class="blog-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
       </a>
 
-      <a href="/blog/case-study-shelfiq-vendor-emails" class="blog-card" data-category="Case Study" data-rank="19">
+      <a href="/blog/case-study-shelfiq-vendor-emails" class="blog-card" data-category="Case Study" data-rank="22">
         <span class="blog-card-tag">Case Study</span>
         <div class="blog-card-content">
           <div class="blog-card-title">AI Handles Vendor Emails for Dispensaries</div>
@@ -960,7 +940,7 @@
         <svg class="blog-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
       </a>
 
-      <a href="/blog/case-study-shorted-delivery" class="blog-card" data-category="Case Study" data-rank="20">
+      <a href="/blog/case-study-shorted-delivery" class="blog-card" data-category="Case Study" data-rank="23">
         <span class="blog-card-tag">Case Study</span>
         <div class="blog-card-content">
           <div class="blog-card-title">Shorted Delivery Caught Before Payment</div>
@@ -969,7 +949,7 @@
         <svg class="blog-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
       </a>
 
-      <a href="/blog/case-study-vendor-portal" class="blog-card" data-category="Case Study" data-rank="21">
+      <a href="/blog/case-study-vendor-portal" class="blog-card" data-category="Case Study" data-rank="24">
         <span class="blog-card-tag">Case Study</span>
         <div class="blog-card-content">
           <div class="blog-card-title">Vendor Portal Ends Payment Status Calls</div>
@@ -978,7 +958,7 @@
         <svg class="blog-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
       </a>
 
-      <a href="/blog/case-study-vendor-replenishment" class="blog-card" data-category="Case Study" data-rank="22">
+      <a href="/blog/case-study-vendor-replenishment" class="blog-card" data-category="Case Study" data-rank="25">
         <span class="blog-card-tag">Case Study</span>
         <div class="blog-card-content">
           <div class="blog-card-title">Vendor Started Restocking From Settlement Data</div>
@@ -1052,7 +1032,7 @@
         <svg class="blog-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
       </a>
 
-      <a href="/blog/switch-vendor-to-mailed-checks" class="blog-card" data-category="AP" data-rank="6">
+      <a href="/blog/switch-vendor-to-mailed-checks" class="blog-card" data-category="AP" data-rank="7">
         <span class="blog-card-tag">AP</span>
         <div class="blog-card-content">
           <div class="blog-card-title">When a Vendor Won't Accept Digital Checks</div>
@@ -1061,7 +1041,7 @@
         <svg class="blog-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
       </a>
 
-      <a href="/blog/quickbooks-bill-pay-cannabis-alternative" class="blog-card" data-category="AP" data-rank="6">
+      <a href="/blog/quickbooks-bill-pay-cannabis-alternative" class="blog-card" data-category="AP" data-rank="8">
         <span class="blog-card-tag">AP</span>
         <div class="blog-card-content">
           <div class="blog-card-title">QuickBooks Bill Pay Doesn't Serve Cannabis. Here's the Fix.</div>
@@ -1070,7 +1050,7 @@
         <svg class="blog-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
       </a>
 
-      <a href="/blog/cannabis-inventory-freshness" class="blog-card" data-category="AP" data-rank="6">
+      <a href="/blog/cannabis-inventory-freshness" class="blog-card" data-category="AP" data-rank="9">
         <span class="blog-card-tag">AP</span>
         <div class="blog-card-content">
           <div class="blog-card-title">Never Pay Full Price for Stale Cannabis Product</div>
@@ -1079,7 +1059,7 @@
         <svg class="blog-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
       </a>
 
-      <a href="/blog/cannabis-ap-aging-which-vendors-to-pay" class="blog-card" data-category="AP" data-rank="6">
+      <a href="/blog/cannabis-ap-aging-which-vendors-to-pay" class="blog-card" data-category="AP" data-rank="10">
         <span class="blog-card-tag">AP</span>
         <div class="blog-card-content">
           <div class="blog-card-title">AP Aging: Deciding Which Vendors to Pay</div>
@@ -1088,7 +1068,7 @@
         <svg class="blog-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
       </a>
 
-      <a href="/blog/partial-payments-vendor-invoices" class="blog-card" data-category="AP" data-rank="6">
+      <a href="/blog/partial-payments-vendor-invoices" class="blog-card" data-category="AP" data-rank="11">
         <span class="blog-card-tag">AP</span>
         <div class="blog-card-content">
           <div class="blog-card-title">Partial Payments: Pay a Vendor Invoice in Parts</div>
@@ -1097,7 +1077,7 @@
         <svg class="blog-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
       </a>
 
-      <a href="/blog/cannabis-vendor-w9-tax-forms" class="blog-card" data-category="AP" data-rank="6">
+      <a href="/blog/cannabis-vendor-w9-tax-forms" class="blog-card" data-category="AP" data-rank="12">
         <span class="blog-card-tag">AP</span>
         <div class="blog-card-content">
           <div class="blog-card-title">Stop Chasing Vendor W-9s: Cannabis Tax Forms, Handled</div>
@@ -1106,7 +1086,7 @@
         <svg class="blog-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
       </a>
 
-      <a href="/blog/cannabis-invoice-metrc-verification" class="blog-card" data-category="AP" data-rank="6">
+      <a href="/blog/cannabis-invoice-metrc-verification" class="blog-card" data-category="AP" data-rank="13">
         <span class="blog-card-tag">AP</span>
         <div class="blog-card-content">
           <div class="blog-card-title">How ShelfSpace Checks Invoices Against Metrc Before You Pay</div>
@@ -1115,7 +1095,7 @@
         <svg class="blog-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
       </a>
 
-      <a href="/blog/how-to-receive-a-cannabis-delivery" class="blog-card" data-category="AP" data-rank="6">
+      <a href="/blog/how-to-receive-a-cannabis-delivery" class="blog-card" data-category="AP" data-rank="14">
         <span class="blog-card-tag">AP</span>
         <div class="blog-card-content">
           <div class="blog-card-title">How to Receive a Cannabis Delivery in ShelfSpace</div>
@@ -1124,7 +1104,7 @@
         <svg class="blog-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
       </a>
 
-      <a href="/blog/cannabis-bank-shutdown-payment-infrastructure" class="blog-card" data-category="AP" data-rank="6">
+      <a href="/blog/cannabis-bank-shutdown-payment-infrastructure" class="blog-card" data-category="AP" data-rank="15">
         <span class="blog-card-tag">AP</span>
         <div class="blog-card-content">
           <div class="blog-card-title">When Your Cannabis Bank Drops You</div>
@@ -1133,7 +1113,7 @@
         <svg class="blog-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
       </a>
 
-      <a href="/blog/anatomy-of-an-invoice-payment" class="blog-card" data-category="AP" data-rank="6">
+      <a href="/blog/anatomy-of-an-invoice-payment" class="blog-card" data-category="AP" data-rank="16">
         <span class="blog-card-tag">AP</span>
         <div class="blog-card-content">
           <div class="blog-card-title">Anatomy of a Cannabis Vendor Invoice Payment</div>
@@ -1142,7 +1122,7 @@
         <svg class="blog-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
       </a>
 
-      <a href="/blog/deposit-shelfspace-check-with-scanner" class="blog-card" data-category="AP" data-rank="6">
+      <a href="/blog/deposit-shelfspace-check-with-scanner" class="blog-card" data-category="AP" data-rank="17">
         <span class="blog-card-tag">AP</span>
         <div class="blog-card-content">
           <div class="blog-card-title">How to Deposit a ShelfSpace Check with a Check Scanner</div>
@@ -1151,7 +1131,7 @@
         <svg class="blog-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
       </a>
 
-      <a href="/blog/anatomy-of-an-ap-email-thread" class="blog-card" data-category="AP" data-rank="6">
+      <a href="/blog/anatomy-of-an-ap-email-thread" class="blog-card" data-category="AP" data-rank="18">
         <span class="blog-card-tag">AP</span>
         <div class="blog-card-content">
           <div class="blog-card-title">Anatomy of a ShelfSpace AP Email Thread</div>
@@ -1160,7 +1140,7 @@
         <svg class="blog-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
       </a>
 
-      <a href="/blog/shelfspace-vs-stampli-cannabis-ap" class="blog-card" data-category="AP" data-rank="6">
+      <a href="/blog/shelfspace-vs-stampli-cannabis-ap" class="blog-card" data-category="AP" data-rank="19">
         <span class="blog-card-tag">AP</span>
         <div class="blog-card-content">
           <div class="blog-card-title">Cannabis AP Software: ShelfSpace vs Stampli — What Dispensaries Actually Need</div>
@@ -1170,7 +1150,7 @@
       </a>
 
 
-      <a href="/blog/shelfspace-vs-plateiq-cannabis-ap" class="blog-card" data-category="AP" data-rank="6">
+      <a href="/blog/shelfspace-vs-plateiq-cannabis-ap" class="blog-card" data-category="AP" data-rank="20">
         <span class="blog-card-tag">AP</span>
         <div class="blog-card-content">
           <div class="blog-card-title">PlateIQ Was Built for Restaurants. Cannabis AP Needs Something Different.</div>
@@ -1178,7 +1158,7 @@
         </div>
         <svg class="blog-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
       </a>
-      <a href="/blog/shelfspace-vs-quickbooks-cannabis-ap" class="blog-card" data-category="AP" data-rank="7">
+      <a href="/blog/shelfspace-vs-quickbooks-cannabis-ap" class="blog-card" data-category="AP" data-rank="21">
         <span class="blog-card-tag">AP</span>
         <div class="blog-card-content">
           <div class="blog-card-title">QuickBooks Is Not an AP System. Here's What Cannabis Dispensaries Actually Need.</div>
@@ -1187,7 +1167,7 @@
         <svg class="blog-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
       </a>
 
-      <a href="/blog/shelfspace-vs-bill-cannabis-ap" class="blog-card" data-category="AP" data-rank="8">
+      <a href="/blog/shelfspace-vs-bill-cannabis-ap" class="blog-card" data-category="AP" data-rank="22">
         <span class="blog-card-tag">AP</span>
         <div class="blog-card-content">
           <div class="blog-card-title">BILL vs ShelfSpace: Why the Biggest AP Platform Doesn't Work for Cannabis</div>
@@ -1196,7 +1176,7 @@
         <svg class="blog-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
       </a>
 
-      <a href="/blog/shelfspace-vs-bank-bill-pay-cannabis" class="blog-card" data-category="AP" data-rank="9">
+      <a href="/blog/shelfspace-vs-bank-bill-pay-cannabis" class="blog-card" data-category="AP" data-rank="23">
         <span class="blog-card-tag">AP</span>
         <div class="blog-card-content">
           <div class="blog-card-title">Cannabis Bank Bill Pay vs ShelfSpace — Moving Money ≠ Managing AP</div>
@@ -1205,7 +1185,7 @@
         <svg class="blog-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
       </a>
 
-      <a href="/blog/shelfspace-vs-centime-cannabis-ap" class="blog-card" data-category="AP" data-rank="10">
+      <a href="/blog/shelfspace-vs-centime-cannabis-ap" class="blog-card" data-category="AP" data-rank="24">
         <span class="blog-card-tag">AP</span>
         <div class="blog-card-content">
           <div class="blog-card-title">Centime vs ShelfSpace — Generic vs Cannabis-Specific AP Software</div>
@@ -1214,7 +1194,7 @@
         <svg class="blog-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
       </a>
 
-      <a href="/blog/shelfspace-vs-diy-cannabis-ap" class="blog-card" data-category="AP" data-rank="11">
+      <a href="/blog/shelfspace-vs-diy-cannabis-ap" class="blog-card" data-category="AP" data-rank="25">
         <span class="blog-card-tag">AP</span>
         <div class="blog-card-content">
           <div class="blog-card-title">The Real Cost of Managing Cannabis AP Yourself</div>
@@ -1223,7 +1203,7 @@
         <svg class="blog-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
       </a>
 
-      <a href="/blog/shelfspace-vs-orderco-cannabis-ap" class="blog-card" data-category="AP" data-rank="12">
+      <a href="/blog/shelfspace-vs-orderco-cannabis-ap" class="blog-card" data-category="AP" data-rank="26">
         <span class="blog-card-tag">AP</span>
         <div class="blog-card-content">
           <div class="blog-card-title">Order.co vs ShelfSpace — Procurement Platform vs Managed Cannabis AP</div>
@@ -1232,7 +1212,7 @@
         <svg class="blog-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
       </a>
 
-      <a href="/blog/shelfspace-vs-cannabis-cpa-firm" class="blog-card" data-category="AP" data-rank="13">
+      <a href="/blog/shelfspace-vs-cannabis-cpa-firm" class="blog-card" data-category="AP" data-rank="27">
         <span class="blog-card-tag">AP</span>
         <div class="blog-card-content">
           <div class="blog-card-title">Your Cannabis CPA Doesn't Do AP. Here's What's Missing.</div>
@@ -1241,7 +1221,7 @@
         <svg class="blog-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
       </a>
 
-      <a href="/blog/dispensaries-overpay-vendors" class="blog-card" data-category="AP" data-rank="14">
+      <a href="/blog/dispensaries-overpay-vendors" class="blog-card" data-category="AP" data-rank="28">
         <span class="blog-card-tag">AP</span>
         <div class="blog-card-content">
           <div class="blog-card-title">Why Most Dispensaries Overpay Their Vendors</div>
@@ -1250,7 +1230,7 @@
         <svg class="blog-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
       </a>
 
-      <a href="/blog/cannabis-accounts-payable-cost" class="blog-card" data-category="AP" data-rank="15">
+      <a href="/blog/cannabis-accounts-payable-cost" class="blog-card" data-category="AP" data-rank="29">
         <span class="blog-card-tag">AP</span>
         <div class="blog-card-content">
           <div class="blog-card-title">Cannabis Accounts Payable: The Hidden Cost of Doing It Yourself</div>
@@ -1259,7 +1239,7 @@
         <svg class="blog-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
       </a>
 
-      <a href="/blog/dispensary-vendor-costs" class="blog-card" data-category="AP" data-rank="16">
+      <a href="/blog/dispensary-vendor-costs" class="blog-card" data-category="AP" data-rank="30">
         <span class="blog-card-tag">AP</span>
         <div class="blog-card-content">
           <div class="blog-card-title">What Does a Cannabis Dispensary Pay in Vendor Costs Per Year?</div>
@@ -1268,7 +1248,7 @@
         <svg class="blog-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
       </a>
 
-      <a href="/blog/manage-cannabis-deliveries-by-email" class="blog-card" data-category="AP" data-rank="100">
+      <a href="/blog/manage-cannabis-deliveries-by-email" class="blog-card" data-category="AP" data-rank="31">
         <span class="blog-card-tag">AP</span>
         <div class="blog-card-content">
           <div class="blog-card-title">Cannabis Deliveries by Email: A Buyer's Guide</div>
@@ -1277,7 +1257,7 @@
         <svg class="blog-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
       </a>
 
-      <a href="/blog/cannabis-retailer-quickbooks-setup" class="blog-card" data-category="AP" data-rank="100">
+      <a href="/blog/cannabis-retailer-quickbooks-setup" class="blog-card" data-category="AP" data-rank="32">
         <span class="blog-card-tag">AP</span>
         <div class="blog-card-content">
           <div class="blog-card-title">Cannabis Dispensary QuickBooks Setup: A Step-by-Step Guide</div>
@@ -1286,7 +1266,7 @@
         <svg class="blog-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
       </a>
 
-      <a href="/blog/cannabis-perpetual-inventory-quickbooks" class="blog-card" data-category="AP" data-rank="100">
+      <a href="/blog/cannabis-perpetual-inventory-quickbooks" class="blog-card" data-category="AP" data-rank="33">
         <span class="blog-card-tag">AP</span>
         <div class="blog-card-content">
           <div class="blog-card-title">Cannabis Perpetual Inventory in QuickBooks</div>
@@ -1301,7 +1281,7 @@
   <!-- SECTION: CONSIGNMENT -->
   <section class="blog-section" data-section-cat="Consignment">
     <div class="section-header">
-      <h2>Consignment <span class="section-count">15</span></h2>
+      <h2>Consignment <span class="section-count">16</span></h2>
       <a href="#" class="section-view-all" data-filter-target="Consignment" role="button">View all <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg></a>
     </div>
     <div class="section-list">
@@ -1360,7 +1340,7 @@
         <svg class="blog-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
       </a>
 
-      <a href="/blog/consignment-invoice-payoff-reconciliation" class="blog-card" data-category="Consignment" data-rank="6">
+      <a href="/blog/consignment-invoice-payoff-reconciliation" class="blog-card" data-category="Consignment" data-rank="7">
         <span class="blog-card-tag">Consignment</span>
         <div class="blog-card-content">
           <div class="blog-card-title">Consignment Invoice Payoff: Prove Where Every Unit Went</div>
@@ -1369,7 +1349,7 @@
         <svg class="blog-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
       </a>
 
-      <a href="/blog/anatomy-of-a-consignment-settlement-report" class="blog-card" data-category="Consignment" data-rank="7">
+      <a href="/blog/anatomy-of-a-consignment-settlement-report" class="blog-card" data-category="Consignment" data-rank="8">
         <span class="blog-card-tag">Consignment</span>
         <div class="blog-card-content">
           <div class="blog-card-title">Anatomy of a Consignment Settlement Report</div>
@@ -1378,7 +1358,7 @@
         <svg class="blog-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
       </a>
 
-      <a href="/blog/leaflink-sell-through-vs-shelfspace" class="blog-card" data-category="Consignment" data-rank="8">
+      <a href="/blog/leaflink-sell-through-vs-shelfspace" class="blog-card" data-category="Consignment" data-rank="9">
         <span class="blog-card-tag">Consignment</span>
         <div class="blog-card-content">
           <div class="blog-card-title">LeafLink Payment on Sell-Through vs ShelfSpace — What's Actually Managed?</div>
@@ -1387,7 +1367,7 @@
         <svg class="blog-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
       </a>
 
-      <a href="/blog/cannabis-consignment-erp-vs-managed-service" class="blog-card" data-category="Consignment" data-rank="9">
+      <a href="/blog/cannabis-consignment-erp-vs-managed-service" class="blog-card" data-category="Consignment" data-rank="10">
         <span class="blog-card-tag">Consignment</span>
         <div class="blog-card-content">
           <div class="blog-card-title">Cannabis Consignment: ERP Software vs Cannabis-Specific Software</div>
@@ -1396,7 +1376,7 @@
         <svg class="blog-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
       </a>
 
-      <a href="/blog/why-general-consignment-software-doesnt-work-cannabis" class="blog-card" data-category="Consignment" data-rank="10">
+      <a href="/blog/why-general-consignment-software-doesnt-work-cannabis" class="blog-card" data-category="Consignment" data-rank="11">
         <span class="blog-card-tag">Consignment</span>
         <div class="blog-card-content">
           <div class="blog-card-title">Why General Consignment Software Doesn't Work for Cannabis Dispensaries</div>
@@ -1405,7 +1385,7 @@
         <svg class="blog-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
       </a>
 
-      <a href="/blog/cannabis-consignment-spreadsheets-cost" class="blog-card" data-category="Consignment" data-rank="11">
+      <a href="/blog/cannabis-consignment-spreadsheets-cost" class="blog-card" data-category="Consignment" data-rank="12">
         <span class="blog-card-tag">Consignment</span>
         <div class="blog-card-content">
           <div class="blog-card-title">Running Cannabis Consignment on Spreadsheets? Here's What It's Costing You.</div>
@@ -1414,7 +1394,7 @@
         <svg class="blog-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
       </a>
 
-      <a href="/blog/cannabis-reciprocal-buying-consignment" class="blog-card" data-category="Consignment" data-rank="12">
+      <a href="/blog/cannabis-reciprocal-buying-consignment" class="blog-card" data-category="Consignment" data-rank="13">
         <span class="blog-card-tag">Consignment</span>
         <div class="blog-card-content">
           <div class="blog-card-title">Reciprocal Buying in Cannabis: How Consignment Eliminates the Risk</div>
@@ -1423,7 +1403,7 @@
         <svg class="blog-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
       </a>
 
-      <a href="/blog/vertically-integrated-cannabis-shelfspace" class="blog-card" data-category="Consignment" data-rank="13">
+      <a href="/blog/vertically-integrated-cannabis-shelfspace" class="blog-card" data-category="Consignment" data-rank="14">
         <span class="blog-card-tag">Consignment</span>
         <div class="blog-card-content">
           <div class="blog-card-title">Why Vertically Integrated Cannabis Companies Use ShelfSpace</div>
@@ -1432,7 +1412,7 @@
         <svg class="blog-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
       </a>
 
-      <a href="/blog/how-cannabis-consignment-works" class="blog-card" data-category="Consignment" data-rank="14">
+      <a href="/blog/how-cannabis-consignment-works" class="blog-card" data-category="Consignment" data-rank="15">
         <span class="blog-card-tag">Consignment</span>
         <div class="blog-card-content">
           <div class="blog-card-title">How Cannabis Consignment Works: A Guide for Dispensary Operators</div>
@@ -1441,7 +1421,7 @@
         <svg class="blog-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
       </a>
 
-      <a href="/blog/get-started-cannabis-consignment" class="blog-card" data-category="Consignment" data-rank="15">
+      <a href="/blog/get-started-cannabis-consignment" class="blog-card" data-category="Consignment" data-rank="16">
         <span class="blog-card-tag">Consignment</span>
         <div class="blog-card-content">
           <div class="blog-card-title">How to Get Started with Cannabis Consignment at Your Dispensary</div>
@@ -1457,7 +1437,7 @@
   <div class="blog-section-rest">
     <div class="section-list">
 
-      <a href="/blog/the-shelfspace-how-to-guide" class="blog-card" data-category="Vendor Management" data-rank="1">
+      <a href="/blog/the-shelfspace-how-to-guide" class="blog-card" data-category="Vendor Management" data-rank="99">
         <span class="blog-card-tag">Vendor Management</span>
         <div class="blog-card-content">
           <div class="blog-card-title">Meet the ShelfSpace How-To Guide</div>
@@ -1830,7 +1810,7 @@
     </div>
     <div class="footer-col"><h3>Services</h3><ul><li><a href="/accounts-receivable">Accounts Receivable</a></li><li><a href="/collections">Collections</a></li><li><a href="/payment-plans">Payment Plans</a></li><li><a href="/ai-calls">AI Calls</a></li></ul></div>
     <div class="footer-col"><h3>Platform</h3><ul><li><a href="/features">Features</a></li><li><a href="/payments">Payments</a></li><li><a href="/integrations">Integrations</a></li><li><a href="/connect-your-ai">Connect Your AI</a></li></ul></div>
-    <div class="footer-col"><h3>Resources</h3><ul><li><a href="/pricing">Pricing</a></li><li><a href="/blog">Blog</a></li><li><a href="/docs">Docs</a></li><li><a href="/how-to">Guides</a></li><li><a href="/tutorials">Tutorials</a></li></ul></div>
+    <div class="footer-col"><h3>Resources</h3><ul><li><a href="/pricing">Pricing</a></li><li><a href="/blog">Blog</a></li><li><a href="/docs">Docs</a></li><li><a href="/how-to">Guides</a></li><li><a href="/tutorials">Tutorials</a></li><li><a href="/tools">Free tools</a></li></ul></div>
     <div class="footer-col"><h3>Company</h3><ul><li><a href="/about">About</a></li><li><a href="/vendors">For Vendors</a></li><li><a href="/for-bookkeepers">For Bookkeepers</a></li><li><a href="/contact">Contact</a></li><li><a href="mailto:support@shelfspace.pro">Support</a></li><li><a href="https://ourshelf.space/login">Login</a></li><li><a href="https://linkedin.com/company/shelfspace-pro" target="_blank" rel="noopener" class="footer-social-link"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> LinkedIn</a></li></ul></div>
   </div>
   <div class="footer-bottom"><p>&copy; 2026 ShelfSpace Technologies Inc.</p><div style="display:flex;align-items:center;gap:8px;justify-content:center;margin-top:12px;"><img loading="lazy" decoding="async" src="/metrc-logo-v2.png" alt="Metrc" style="height:18px;opacity:0.4;filter:brightness(0) invert(1);"><span style="font-size:11px;color:rgba(255,255,255,0.35);">Certified Metrc Third-Party Vendor</span></div><div class="footer-bottom-links"><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div></div>
