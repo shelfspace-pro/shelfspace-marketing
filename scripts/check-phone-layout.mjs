@@ -59,8 +59,10 @@ async function check(pg, width) {
     if (!res || !res.ok()) { failN++; console.log(`  FAIL ${pg} @${width}px: HTTP ${res ? res.status() : 'no response'}`); await ctx.close(); return; }
     if (!(await page.locator('a').count())) { failN++; console.log(`  FAIL ${pg} @${width}px: page has no links (did it load?)`); await ctx.close(); return; }
     await page.evaluate(() => document.fonts && document.fonts.ready);
-    // measured twice when the first look fails: under the parallel pool a page can be measured mid-layout (a
-    // one-off /integrations hit, 10/30/2026); a real overflow is still there a moment later.
+    // Measured AFTER the hero's scroll-in has run (1.2s): /integrations only overflowed once its .go transition had
+    // fired, so a measure at "load" passed a page that was off-screen for every real visitor (10/30/2026). A failing
+    // page is re-measured 1.5s later, so a control caught mid-animation is not a failure; a real overflow persists.
+    await page.waitForTimeout(1200);
     const measure = () => page.evaluate(() => {
       document.querySelectorAll('details').forEach((d) => { d.open = true; });
       const iw = window.innerWidth;

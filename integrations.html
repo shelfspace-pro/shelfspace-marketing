@@ -226,7 +226,8 @@
 
   @media (max-width: 980px) {
     .ig-hero { padding: 120px 20px 64px; }
-    .ig-split { grid-template-columns: 1fr; gap: 40px; text-align: center; }
+    .ig-split { grid-template-columns: minmax(0, 1fr); gap: 40px; text-align: center; } /* minmax(0,…): a 1fr track grew to its widest child and ran past a 320px screen (Z-C3a) */
+    .ig-split > * { min-width: 0; }
     .ig-sub { margin-left: auto; margin-right: auto; }
     .ig-actions, .ig-trust { justify-content: center; }
     .ig-stage { max-width: 380px; }
