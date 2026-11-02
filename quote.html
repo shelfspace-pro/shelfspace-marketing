@@ -273,7 +273,7 @@
         </details>
         <div class="pv-row pv-row--pay"><div class="pv-lab">What you pay</div><div class="pv-frac mono" id="pv-pay">A fraction</div></div>
         <div class="pv-bar pv-bar--pay" id="pv-paybar"><i></i><span class="pv-cover">Covered by what we collect</span></div>
-        <div class="pv-mult" id="pv-mult" hidden><span class="pv-mult-n mono" id="pv-mult-n"></span><div><b>In value for every $1 you pay</b><span>Plus our guarantee: 25% of your past-due collected in month one, or that month is free.</span></div></div>
+        <div class="pv-mult" id="pv-mult" hidden><span class="pv-mult-n mono" id="pv-mult-n"></span><div><b>In value for every $1 you pay</b><span>Plus our guarantee: 25% off your past-dues in 90 days, or your first year is free.</span></div></div>
       </div>
       </div>
       <p class="pv-cap">Estimates for a brand your size. Move the slider to match your sales.</p>
@@ -492,7 +492,7 @@
     $("qd-terms").textContent = TERM_NAME;
     $("qd-value").innerHTML = valueHtml(v, fee, r.custom);
 
-    var guarantee = '<div class="qd-row"><div class="n">Guarantee<span>We collect 25% of your past-due invoices in month one, or that month is free</span></div><div class="a">Included</div></div>';
+    var guarantee = '<div class="qd-row"><div class="n">Guarantee<span>25% off your past-dues in 90 days, or your first year is free</span></div><div class="a">Included</div></div>';
     var rows, fine, t = ["ShelfSpace quote " + state.q + " · " + mdy(today)];
     if (r.custom) {
       rows = '<div class="qd-row"><div class="n">ShelfSpace<span>' + esc(r.label.replace(" · Enterprise", "")) + ' wholesale</span></div><div class="a">Custom</div></div>' + guarantee;
@@ -505,7 +505,7 @@
       rows = '<div class="qd-row"><div class="n">ShelfSpace<span>' + esc(r.label) + ' wholesale</span></div><div class="a">' + (discounted() ? "<s>" + usd(r.rate) + "</s>" : "") + usd(base) + "</div></div>";
       rows += '<div class="qd-row total"><div class="n">Monthly rate' + (discounted() ? "<span>" + esc(discName()) + ", " + pctText() + " off</span>" : "") + '</div><div class="a">' + usd(base) + "</div></div>" + guarantee;
       fine = ["Billed monthly, nothing up front. No contract and no onboarding fee.",
-              "We collect 25% of your past-due invoices in month one, or it's free: if we don't, you don't pay for that month."];
+              "Your first 30 days are free. We total the past-due invoices you hand us when we start; if stores haven't paid at least 25% of that total within 90 days, your first year is free."];
       if (discounted()) fine.push(discName() + ": " + pctText() + " off our list price of " + usd(r.rate) + " a month.");
       fine.push("Valid through " + mdy(valid) + ".");
       t.push((name ? name + " · " : "") + "ShelfSpace · " + TERM_NAME);
@@ -517,7 +517,7 @@
     $("qd-list").innerHTML = rows;
     $("qd-fine").innerHTML = fine.map(function (f) { return "<p>" + esc(f) + "</p>"; }).join("");
     t.push("Your first year: about " + usd(v.total) + " in value (" + SEG.map(function (s, i) { return s[1].toLowerCase() + " " + usd(v.g[i]); }).join(", ") + "), for " + (r.custom ? "from " : "") + usd(fee) + " a year.");
-    t.push("Guarantee: If we don't collect 25% of your past-due invoices in the first month, you don't pay.");
+    t.push("Guarantee: Free for 30 days. If we don't cut your past-due invoices by 25% in 90 days, your first year is free.");
     t.push("Valid through " + mdy(valid));
     summaryText = t.join("\n");
   }
