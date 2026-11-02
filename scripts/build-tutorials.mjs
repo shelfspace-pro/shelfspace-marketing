@@ -47,6 +47,7 @@ const pageTitle = (v) => TITLE[v.slug] || [`${v.title} — ShelfSpace Tutorial`,
 // Meta descriptions for videos whose catalog blurb runs past the check:seo limit (160). The catalog is
 // regenerated from the platform repo, so the shorter text lives here, keyed by slug (SEO A3b).
 const META_DESC = {
+  "rep-contacts": "Add or change any customer's emails and phone numbers on your computer or phone. Everyone on the list gets that store's invoices and reminders.",
   "final-notice": "When an invoice is badly late, send a one-page letter on your letterhead: your words, a pay-by date, a scan-to-pay code, and the consequences you choose.",
   "store-accounts": "A buyer orders for several stores? Give each store its own ShelfSpace account so its invoices and payment reminders go to the store that actually pays.",
 };
