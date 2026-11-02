@@ -159,6 +159,14 @@
 </style>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-H2LBJT03WE"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-H2LBJT03WE');</script>
+<!-- LinkedIn Insight Tag (ShelfSpace Ads). Conversions: LINKEDIN_CONVERSIONS in the form script. -->
+<script>
+window._linkedin_partner_id='10326668';window._linkedin_data_partner_ids=window._linkedin_data_partner_ids||[];window._linkedin_data_partner_ids.push(window._linkedin_partner_id);
+(function(l){if(!l){window.lintrk=function(a,b){window.lintrk.q.push([a,b])};window.lintrk.q=[]}var s=document.getElementsByTagName('script')[0];var b=document.createElement('script');b.type='text/javascript';b.async=true;b.src='https://snap.licdn.com/li.lms-analytics/insight.min.js';s.parentNode.insertBefore(b,s)})(window.lintrk);
+// LinkedIn ad traffic lands on /contact?lp=brand&role=brand: same form, brand headline, no menu to wander off through.
+if(/[?&]lp=brand(&|$)/.test(location.search))document.documentElement.classList.add('lp-brand');
+</script>
+<style>html.lp-brand .nav-links,html.lp-brand .nav-hamburger,html.lp-brand .nav-call-bar{display:none}</style>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -206,6 +214,7 @@
 <section class="cx-hero">
   <div class="cx-wrap">
     <h1 class="cx-promise">Give us <u>7 days</u> and we'll transform your finances.</h1>
+    <script>if(document.documentElement.classList.contains('lp-brand'))document.querySelector('.cx-promise').innerHTML='Cannabis brands: get <u>paid on time</u>.';</script>
     <p class="cx-pill">Free for 30 days. 25% off your past&#8209;dues in 90 days, or your first year is free.</p>
     <div class="cx-progress" aria-hidden="true"><div class="cx-progress-bar" id="cxProgress"></div></div>
     <div class="cx-card" id="cxCard">
@@ -411,7 +420,12 @@ html body > footer { border-radius: 40px 40px 0 0; }
   var isPartner = params.get('path') === 'partner' || params.get('subject') === 'partner-call';
   var lead = { id: null, name: '', email: '', company: '', viaFallback: false };
 
-  function track(name, p) { try { if (window.gtag) gtag('event', name, p || {}); } catch (e) { /* never block the lead */ } }
+  // LinkedIn conversion ids from Campaign Manager (Measure -> Conversion tracking, "Event-specific"). Empty sends nothing.
+  var LINKEDIN_CONVERSIONS = { generate_lead: '', demo_booked: '' };
+  function track(name, p) {
+    try { if (window.gtag) gtag('event', name, p || {}); } catch (e) { /* never block the lead */ }
+    try { if (LINKEDIN_CONVERSIONS[name] && window.lintrk) lintrk('track', { conversion_id: Number(LINKEDIN_CONVERSIONS[name]) }); } catch (e) { /* never block the lead */ }
+  }
   function escapeText(s) {
     return String(s).replace(/[&<>"']/g, function(c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; });
   }
@@ -613,7 +627,9 @@ html body > footer { border-radius: 40px 40px 0 0; }
   function showStep2() {
     document.getElementById('cxStep1').hidden = true;
     document.getElementById('cxStep2').hidden = false;
-    if (isPartner) show2('qPartner', 5); else show2('qRole', 5);
+    if (isPartner) show2('qPartner', 5);
+    else if (preRole === 'brand' && document.documentElement.classList.contains('lp-brand')) show2('qBand', 6); // the ad already said who it's for
+    else show2('qRole', 5);
   }
 
   function showThanks() {
