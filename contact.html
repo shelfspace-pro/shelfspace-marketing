@@ -421,7 +421,7 @@ html body > footer { border-radius: 40px 40px 0 0; }
   var lead = { id: null, name: '', email: '', company: '', viaFallback: false };
 
   // LinkedIn conversion ids from Campaign Manager (Measure -> Conversion tracking, "Event-specific"). Empty sends nothing.
-  var LINKEDIN_CONVERSIONS = { generate_lead: '', demo_booked: '' };
+  var LINKEDIN_CONVERSIONS = { generate_lead: '30336876', demo_booked: '30336868' };
   function track(name, p) {
     try { if (window.gtag) gtag('event', name, p || {}); } catch (e) { /* never block the lead */ }
     try { if (LINKEDIN_CONVERSIONS[name] && window.lintrk) lintrk('track', { conversion_id: Number(LINKEDIN_CONVERSIONS[name]) }); } catch (e) { /* never block the lead */ }
