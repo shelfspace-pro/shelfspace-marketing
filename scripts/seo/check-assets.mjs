@@ -37,6 +37,8 @@ const TOOLS = [
   { slug: "dso-calculator", tool: "dso" },
   { slug: "late-ar-cost-calculator", tool: "late-ar" },
   { slug: "net-terms-policy-builder", tool: "net-terms" },
+  { slug: "280e-tax-calculator", tool: "280e" },
+  { slug: "cannabis-loan-calculator", tool: "loan" },
 ];
 const robotsNoindex = (html) => /<meta\s+name="robots"\s+content="[^"]*noindex[^"]*"\s*\/?>/i.test(html.replace(/<!--[\s\S]*?-->/g, ""));
 
@@ -73,6 +75,20 @@ else {
   eq('parseCents("1000000000")', T.parseCents("1000000000"), null);
   eq('parseBps("12.5")', T.parseBps("12.5"), 1250);
   eq('parseTenths("2.5")', T.parseTenths("2.5"), 25);
+  // 280E: $1,000,000 revenue, $500,000 COGS, $400,000 opex at 21%. Base ignores opex: 21% x 500,000 = 105,000; real profit 100,000
+  eq("tax280e(1m, 500k, 400k, 21%)", T.tax280e(100000000, 50000000, 40000000, 2100), { taxableCents: 50000000, taxUnderCents: 10500000, taxWithoutCents: 2100000, extraCents: 8400000, profitCents: 10000000, shareOfProfitBps: 10500 });
+  // a loss still owes tax on gross profit, and no share-of-profit is claimed
+  eq("tax280e(loss)", T.tax280e(100000000, 50000000, 60000000, 2100), { taxableCents: 50000000, taxUnderCents: 10500000, taxWithoutCents: 0, extraCents: 10500000, profitCents: -10000000, shareOfProfitBps: null });
+  // standard amortization table value: $50,000 at 12% for 60 months = $1,112.22
+  eq("loanPayment(50000 @12% 60m)", T.loanPayment(5000000, 1200, 60), 111222);
+  eq("loanPayment(0%)", T.loanPayment(1200000, 0, 12), 100000);
+  const lc = T.loanCost(5000000, 1200, 60, 200);
+  eq("loanCost fee", lc.feeCents, 100000);
+  eq("loanCost interest", lc.interestCents, 111222 * 60 - 5000000);
+  eq("loanCost total", lc.totalCostCents, 111222 * 60 - 5000000 + 100000);
+  // a fee taken from proceeds must lift the APR above the note rate; no fee must leave it exactly there
+  if (!(lc.effectiveAprBps > 1200 && lc.effectiveAprBps < 1400)) fail(`math: loanCost effective APR ${lc.effectiveAprBps} not above the 12% note rate`);
+  eq("loanCost no fee APR", T.loanCost(5000000, 1200, 60, 0).effectiveAprBps, 1200);
   const d = T.parseMDY("3/2/2026");
   eq('fmtMDY(parseMDY("3/2/2026"))', d && T.fmtMDY(d), "03/02/2026");
   eq('parseMDY("2026-03-02")', T.parseMDY("2026-03-02"), null);

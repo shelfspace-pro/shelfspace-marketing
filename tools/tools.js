@@ -1,5 +1,5 @@
 /* ShelfSpace free tools (SEO row C3, 10/29/2026): DSO calculator, late-AR cost calculator,
- * net-terms policy builder. One file renders every widget into <div data-ss-tool="dso|late-ar|net-terms">
+ * net-terms policy builder, 280E tax calculator, cannabis loan calculator. One file renders every widget into <div data-ss-tool="dso|late-ar|net-terms">
  * on both the tool page and its /tools/embed/ page, so the two can never drift.
  *
  * Money is integer cents end to end: parseCents() reads "$1,234.56" without floats, every formula
@@ -107,6 +107,51 @@
     return { carryingCents: carrying, chasingCents: chasing, totalCents: carrying + chasing };
   }
 
+  /**
+   * 280E estimate. Under IRC 280E the deduction for ordinary business expenses is lost, so the tax base is
+   * revenue less cost of goods sold. Integer cents and basis points; each tax rounded once.
+   */
+  function tax280e(revenueCents, cogsCents, opexCents, rateBps) {
+    var gross = Math.max(0, revenueCents - cogsCents);
+    var profit = revenueCents - cogsCents - opexCents;
+    var normalBase = Math.max(0, profit);
+    var under = divRound(BigInt(gross) * BigInt(rateBps), 10000);
+    var without = divRound(BigInt(normalBase) * BigInt(rateBps), 10000);
+    return { taxableCents: gross, taxUnderCents: under, taxWithoutCents: without, extraCents: under - without,
+      profitCents: profit, shareOfProfitBps: profit > 0 ? divRound(BigInt(under) * 10000n, profit) : null };
+  }
+
+  /** Level monthly payment in cents: P x r / (1 - (1+r)^-n), with r = bps / 120000, in exact BigInt. */
+  function loanPayment(principalCents, rateBps, months) {
+    if (!(months > 0)) return null;
+    if (rateBps === 0) return divRound(principalCents, months);
+    var x = BigInt(120000 + rateBps), base = 120000n, xn = x ** BigInt(months), bn = base ** BigInt(months);
+    return divRound(BigInt(principalCents) * BigInt(rateBps) * xn, base * (xn - bn));
+  }
+
+  /**
+   * What a loan really costs. The fee comes out of the money you receive, so the effective APR is the rate at
+   * which the cash actually received amortizes to the same payment; found by integer bisection on basis points.
+   */
+  function loanCost(principalCents, rateBps, months, feeBps) {
+    var pay = loanPayment(principalCents, rateBps, months);
+    if (pay == null) return null;
+    var totalPaid = pay * months;
+    var fee = divRound(BigInt(principalCents) * BigInt(feeBps), 10000);
+    var net = principalCents - fee;
+    var apr = rateBps;
+    if (fee > 0 && net > 0) {
+      var lo = rateBps, hi = 200000;
+      while (lo < hi) {
+        var mid = Math.floor((lo + hi) / 2);
+        if (loanPayment(net, mid, months) >= pay) hi = mid; else lo = mid + 1;
+      }
+      apr = lo;
+    }
+    return { paymentCents: pay, totalPaidCents: totalPaid, interestCents: totalPaid - principalCents, feeCents: fee,
+      netCents: net, totalCostCents: totalPaid - principalCents + fee, effectiveAprBps: apr };
+  }
+
   var DISCLAIMER = "Not legal advice — have your counsel review it before you use it.";
 
   /** Plain-text net-terms policy from the builder's answers. */
@@ -154,7 +199,7 @@
 
   var api = { parseCents: parseCents, parseInt10: parseInt10, parseBps: parseBps, parseTenths: parseTenths, divRound: divRound,
     fmtCents: fmtCents, fmtMDY: fmtMDY, parseMDY: parseMDY, dso: dso, daysLate: daysLate, lateCost: lateCost,
-    buildPolicy: buildPolicy, DISCLAIMER: DISCLAIMER };
+    buildPolicy: buildPolicy, DISCLAIMER: DISCLAIMER, tax280e: tax280e, loanPayment: loanPayment, loanCost: loanCost };
   root.SSTools = api;
 
   // ---------- widgets ----------
@@ -321,6 +366,57 @@
     run();
   }
 
+  function mountTax280e(el) {
+    var rev = field("Revenue for the year", { inputmode: "decimal", autocomplete: "off", placeholder: "e.g. 1,000,000" });
+    var cogs = field("Cost of goods sold", { inputmode: "decimal", autocomplete: "off", placeholder: "e.g. 500,000" }, "What you can still subtract under 280E");
+    var opex = field("Operating expenses", { inputmode: "decimal", autocomplete: "off", placeholder: "e.g. 400,000" }, "Rent, payroll, marketing and the rest");
+    var rate = field("Federal tax rate, %", { inputmode: "decimal", autocomplete: "off", value: "21" }, "Ask your CPA which rate applies to you");
+    var o1 = out("Taxable income under 280E"), o2 = out("Federal tax under 280E"), o3 = out("Federal tax without 280E"), o4 = out("Extra tax from 280E"), o5 = out("Tax as a share of real profit");
+    var msg = h("p", { class: "ss-msg", role: "status" });
+    var form = h("div", { class: "ss-form" }, [rev.wrap, cogs.wrap, opex.wrap, rate.wrap]);
+    var res = h("div", { class: "ss-results", "data-price-note": "calculator", "aria-live": "polite" }, [o1.wrap, o2.wrap, o3.wrap, o4.wrap, o5.wrap, msg]);
+    el.appendChild(h("div", { class: "ss-card" }, [h("div", { class: "ss-card-h", text: "280E tax calculator" }), form, res]));
+    function run() {
+      [o1, o2, o3, o4, o5].forEach(function (o) { o.v.textContent = "—"; }); msg.textContent = "";
+      var r = parseCents(rev.input.value), c = parseCents(cogs.input.value), x = parseCents(opex.input.value), b = parseBps(rate.input.value);
+      if (r == null || c == null || x == null) { msg.textContent = "Enter revenue, cost of goods sold and operating expenses as dollar amounts."; return; }
+      if (b == null || b > 10000) { msg.textContent = "Tax rate should be a percentage, like 21."; return; }
+      var t = tax280e(r, c, x, b);
+      o1.v.textContent = fmtCents(t.taxableCents); o2.v.textContent = fmtCents(t.taxUnderCents); o3.v.textContent = fmtCents(t.taxWithoutCents); o4.v.textContent = fmtCents(t.extraCents);
+      if (t.shareOfProfitBps == null) { o5.v.textContent = "No profit"; msg.textContent = t.taxUnderCents > 0 ? "You'd owe this tax without earning a profit." : "No federal income tax on these numbers."; }
+      else { o5.v.textContent = (t.shareOfProfitBps / 100).toFixed(1) + "%"; msg.textContent = "An estimate for planning, not tax advice. Take it to your CPA."; }
+    }
+    [rev, cogs, opex, rate].forEach(function (f) { f.input.addEventListener("input", run); });
+    run();
+  }
+
+  function mountLoan(el) {
+    var amt = field("Loan amount", { inputmode: "decimal", autocomplete: "off", placeholder: "e.g. 50,000" });
+    var rate = field("Annual interest rate, %", { inputmode: "decimal", autocomplete: "off", placeholder: "From your term sheet" });
+    var term = field("Term, in months", { inputmode: "numeric", autocomplete: "off", placeholder: "e.g. 60" });
+    var fee = field("Origination fee, % (optional)", { inputmode: "decimal", autocomplete: "off", placeholder: "From your term sheet" }, "Taken out of the money you receive");
+    var o1 = out("Monthly payment"), o2 = out("Total interest"), o3 = out("Origination fee"), o4 = out("Total cost of the loan"), o5 = out("Effective APR");
+    var msg = h("p", { class: "ss-msg", role: "status" });
+    var form = h("div", { class: "ss-form" }, [amt.wrap, rate.wrap, term.wrap, fee.wrap]);
+    var res = h("div", { class: "ss-results", "data-price-note": "calculator", "aria-live": "polite" }, [o1.wrap, o2.wrap, o3.wrap, o4.wrap, o5.wrap, msg]);
+    el.appendChild(h("div", { class: "ss-card" }, [h("div", { class: "ss-card-h", text: "Cannabis loan calculator" }), form, res]));
+    function run() {
+      [o1, o2, o3, o4, o5].forEach(function (o) { o.v.textContent = "—"; }); msg.textContent = "";
+      var a = parseCents(amt.input.value), b = parseBps(rate.input.value), n = parseInt10(term.input.value, 1, 480);
+      var f = fee.input.value.trim() ? parseBps(fee.input.value) : 0;
+      if (a == null || a === 0) { msg.textContent = "Enter the loan amount."; return; }
+      if (b == null || b > 100000) { msg.textContent = "Enter the annual rate as a percentage, like 12.5."; return; }
+      if (n == null) { msg.textContent = "Enter the term as a whole number of months."; return; }
+      if (f == null || f >= 10000) { msg.textContent = "The fee should be a percentage under 100."; return; }
+      var c = loanCost(a, b, n, f);
+      o1.v.textContent = fmtCents(c.paymentCents); o2.v.textContent = fmtCents(c.interestCents); o3.v.textContent = fmtCents(c.feeCents); o4.v.textContent = fmtCents(c.totalCostCents);
+      o5.v.textContent = (c.effectiveAprBps / 100).toFixed(2) + "%";
+      msg.textContent = "You'd receive " + fmtCents(c.netCents) + " and repay " + fmtCents(c.totalPaidCents) + ".";
+    }
+    [amt, rate, term, fee].forEach(function (f) { f.input.addEventListener("input", run); });
+    run();
+  }
+
   // Copy buttons for embed snippets: <button data-ss-copy="#id">
   function wireCopy() {
     doc.querySelectorAll("[data-ss-copy]").forEach(function (b) {
@@ -338,7 +434,7 @@
       if (el.getAttribute("data-ss-mounted")) return;
       el.setAttribute("data-ss-mounted", "1");
       var k = el.getAttribute("data-ss-tool");
-      if (k === "dso") mountDso(el); else if (k === "late-ar") mountLateAr(el); else if (k === "net-terms") mountNetTerms(el);
+      if (k === "dso") mountDso(el); else if (k === "late-ar") mountLateAr(el); else if (k === "net-terms") mountNetTerms(el); else if (k === "280e") mountTax280e(el); else if (k === "loan") mountLoan(el);
     });
     wireCopy();
   }
