@@ -136,20 +136,24 @@
   function loanCost(principalCents, rateBps, months, feeBps) {
     var pay = loanPayment(principalCents, rateBps, months);
     if (pay == null) return null;
-    var totalPaid = pay * months;
+    // Cent rounding on the level payment must never read as negative interest: at 0% you repay exactly what you borrowed.
+    var totalPaid = rateBps === 0 ? principalCents : Math.max(pay * months, principalCents);
     var fee = divRound(BigInt(principalCents) * BigInt(feeBps), 10000);
     var net = principalCents - fee;
-    var apr = rateBps;
+    var apr = rateBps, aboveCap = false, CAP = 200000;
     if (fee > 0 && net > 0) {
-      var lo = rateBps, hi = 200000;
-      while (lo < hi) {
-        var mid = Math.floor((lo + hi) / 2);
-        if (loanPayment(net, mid, months) >= pay) hi = mid; else lo = mid + 1;
+      if (loanPayment(net, CAP, months) < pay) { apr = CAP; aboveCap = true; }
+      else {
+        var lo = rateBps, hi = CAP;
+        while (lo < hi) {
+          var mid = Math.floor((lo + hi) / 2);
+          if (loanPayment(net, mid, months) >= pay) hi = mid; else lo = mid + 1;
+        }
+        apr = lo;
       }
-      apr = lo;
     }
     return { paymentCents: pay, totalPaidCents: totalPaid, interestCents: totalPaid - principalCents, feeCents: fee,
-      netCents: net, totalCostCents: totalPaid - principalCents + fee, effectiveAprBps: apr };
+      netCents: net, totalCostCents: totalPaid - principalCents + fee, effectiveAprBps: apr, aprAboveCap: aboveCap };
   }
 
   var DISCLAIMER = "Not legal advice — have your counsel review it before you use it.";
@@ -406,11 +410,11 @@
       var f = fee.input.value.trim() ? parseBps(fee.input.value) : 0;
       if (a == null || a === 0) { msg.textContent = "Enter the loan amount."; return; }
       if (b == null || b > 100000) { msg.textContent = "Enter the annual rate as a percentage, like 12.5."; return; }
-      if (n == null) { msg.textContent = "Enter the term as a whole number of months."; return; }
+      if (n == null) { msg.textContent = "Enter the term as a whole number of months, up to 480."; return; }
       if (f == null || f >= 10000) { msg.textContent = "The fee should be a percentage under 100."; return; }
       var c = loanCost(a, b, n, f);
       o1.v.textContent = fmtCents(c.paymentCents); o2.v.textContent = fmtCents(c.interestCents); o3.v.textContent = fmtCents(c.feeCents); o4.v.textContent = fmtCents(c.totalCostCents);
-      o5.v.textContent = (c.effectiveAprBps / 100).toFixed(2) + "%";
+      o5.v.textContent = c.aprAboveCap ? "Over 2000%" : (c.effectiveAprBps / 100).toFixed(2) + "%";
       msg.textContent = "You'd receive " + fmtCents(c.netCents) + " and repay " + fmtCents(c.totalPaidCents) + ".";
     }
     [amt, rate, term, fee].forEach(function (f) { f.input.addEventListener("input", run); });

@@ -21,6 +21,13 @@ export function blogIndexErrors(html) {
   for (const [, cat, body] of sections) {
     const cards = [...body.matchAll(/<a [^>]*class="blog-card"[^>]*>/g)].map((m) => m[0]);
     if (!cards.length) { errs.push(`${cat}: no cards`); continue; }
+    // Structure: the header closes before the card list opens. A card inside .section-header renders outside the list
+    // and vanishes under the category filter, while every count and rank above still reads correct (11/04/2026).
+    const headerEnd = body.indexOf("</div>", body.indexOf('<div class="section-header">'));
+    const listAt = body.indexOf('<div class="section-list">');
+    if (listAt < 0 || headerEnd < 0 || headerEnd > listAt || body.indexOf('class="blog-card"') < listAt) errs.push(`${cat}: cards must sit inside .section-list, after a closed .section-header`);
+    if (!body.includes(`data-filter-target="${cat}"`)) errs.push(`${cat}: no View all link for its filter`);
+    if (!html.includes(`data-filter="${cat}"`)) errs.push(`${cat}: no filter button`);
     const count = body.match(/<span class="section-count">(\d+)<\/span>/);
     if (!count) errs.push(`${cat}: no section-count`);
     else if (Number(count[1]) !== cards.length) errs.push(`${cat}: section-count ${count[1]} but ${cards.length} cards`);
@@ -78,6 +85,8 @@ if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
   // self-test: each rule fires on a literal mutation of the real page
   const st = [];
   const expectBad = (name, h) => { if (!blogIndexErrors(h).length) st.push(`self-test: ${name} not caught`); };
+  expectBad("cards inside the section header", html.replace(/(<section class="blog-section" data-section-cat="Collections">[\s\S]*?)<\/div>\s*<div class="section-list">/, "$1"));
+  expectBad("a section with no filter button", html.replace('data-filter="Collections"', 'data-filter="Nope"'));
   expectBad("a count off by one", html.replace(/(data-section-cat="Collections">[\s\S]*?<span class="section-count">)(\d+)/, (_m, a, n) => a + (Number(n) - 1)));
   expectBad("a repeated rank", html.replace(/(data-section-cat="Collections"[\s\S]*?data-rank=")2(")/, "$11$2"));
   expectBad("a rest card ranked 1", html.replace(/(blog-section-rest[\s\S]*?data-rank=")99(")/, "$11$2"));

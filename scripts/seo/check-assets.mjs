@@ -88,6 +88,15 @@ else {
   eq("loanCost total", lc.totalCostCents, 111222 * 60 - 5000000 + 100000);
   // a fee taken from proceeds must lift the APR above the note rate; no fee must leave it exactly there
   if (!(lc.effectiveAprBps > 1200 && lc.effectiveAprBps < 1400)) fail(`math: loanCost effective APR ${lc.effectiveAprBps} not above the 12% note rate`);
+  // 83333c x 60 = 4,999,980: cent rounding once read as "-$0.20" interest at 0%; the reverse rounding read as +1c
+  eq("loanCost 0% interest, rounding down", T.loanCost(5000000, 0, 60, 0).interestCents, 0);
+  eq("loanCost 0% interest, rounding up", T.loanCost(20000, 0, 3, 0).interestCents, 0);
+  eq("loanCost 0% total is the fee", T.loanCost(5000000, 0, 60, 100).totalCostCents, 50000);
+  // past the bisection ceiling the APR must say so, never print the ceiling as an exact figure
+  eq("loanCost APR above ceiling flagged", T.loanCost(5000000, 1200, 1, 6300).aprAboveCap, true);
+  eq("loanCost ordinary APR not flagged", T.loanCost(5000000, 1200, 60, 200).aprAboveCap, false);
+  eq("loanCost worked example 36m", (() => { const c = T.loanCost(5000000, 1200, 36, 200); return [c.paymentCents, c.interestCents, c.totalCostCents, c.effectiveAprBps]; })(), [166072, 978592, 1078592, 1342]);
+  eq("loanCost worked example 60m", (() => { const c = T.loanCost(5000000, 1200, 60, 200); return [c.paymentCents, c.totalCostCents, c.effectiveAprBps]; })(), [111222, 1773320, 1290]);
   eq("loanCost no fee APR", T.loanCost(5000000, 1200, 60, 0).effectiveAprBps, 1200);
   const d = T.parseMDY("3/2/2026");
   eq('fmtMDY(parseMDY("3/2/2026"))', d && T.fmtMDY(d), "03/02/2026");
