@@ -42,6 +42,9 @@
   /** "1.5" hours -> 15 tenths, or null. */
   function parseTenths(input) {
     var s = String(input == null ? "" : input).trim();
+    // commas only as thousands groups: "1,234.5" reads, "2,5" (a decimal comma) does not
+    if (s.indexOf(",") !== -1 && !/^\d{1,3}(,\d{3})+(\.\d)?$/.test(s)) return null;
+    s = s.replace(/,/g, "");
     if (!/^\d{1,4}(\.\d)?$/.test(s)) return null;
     var parts = s.split(".");
     return Number(parts[0]) * 10 + Number(parts[1] || 0);
@@ -162,8 +165,8 @@
    * from 07/01/2026 (Announcement 2026-11). The rate follows the trip date, never the date it's submitted.
    */
   var MILEAGE_RATES = [
-    { from: Date.UTC(2026, 0, 1), to: Date.UTC(2026, 5, 30), tenths: 725 },
-    { from: Date.UTC(2026, 6, 1), to: Date.UTC(2026, 11, 31), tenths: 760 },
+    { from: Date.UTC(2026, 0, 1), to: Date.UTC(2026, 6, 1) - 1, tenths: 725 },
+    { from: Date.UTC(2026, 6, 1), to: Date.UTC(2027, 0, 1) - 1, tenths: 760 },
   ];
   function mileageRate(d) {
     if (!d) return null;
@@ -468,13 +471,13 @@
     el.appendChild(h("div", { class: "ss-card ss-card--wide" }, [h("div", { class: "ss-card-h", text: "2026 mileage reimbursement calculator" }),
       h("p", { class: "ss-hint ss-trip-note", text: "72.5\u00a2 a mile for trips through 06/30/2026, 76\u00a2 from 07/01/2026. Each trip gets the rate for its date." }),
       list, h("div", { class: "ss-actions" }, [add]), res]));
-    var rows = [];
+    var rows = [], seq = 0;
     function addRow(date, miles) {
-      var n = rows.length + 1;
-      var d = field("Date (MM/DD/YYYY)", { inputmode: "numeric", autocomplete: "off", placeholder: "MM/DD/YYYY", value: date || "" });
-      var m = field("Business miles", { inputmode: "decimal", autocomplete: "off", placeholder: "e.g. 42.5", value: miles || "" });
+      var n = ++seq;
+      var d = field("Date (MM/DD/YYYY)", { "aria-label": "Trip " + n + " Date (MM/DD/YYYY)", inputmode: "numeric", autocomplete: "off", placeholder: "MM/DD/YYYY", value: date || "" });
+      var m = field("Business miles", { "aria-label": "Trip " + n + " business miles", inputmode: "decimal", autocomplete: "off", placeholder: "e.g. 42.5", value: miles || "" });
       var amt = h("output", { class: "ss-trip-amt" });
-      var rm = h("button", { type: "button", class: "ss-trip-rm", "aria-label": "Remove trip", text: "\u00d7" });
+      var rm = h("button", { type: "button", class: "ss-trip-rm", "aria-label": "Remove trip " + n, text: "\u00d7" });
       var row = h("div", { class: "ss-trip" }, [d.wrap, m.wrap, h("div", { class: "ss-trip-end" }, [amt, rm])]);
       var rec = { row: row, d: d.input, m: m.input, amt: amt };
       rows.push(rec); list.appendChild(row);
@@ -484,25 +487,26 @@
     }
     function run() {
       oM.v.textContent = "\u2014"; oT.v.textContent = "\u2014"; msg.textContent = "";
-      var trips = [], bad = null, used = 0, outside = 0;
+      var trips = [], bad = null, used = 0, outside = 0, incomplete = 0;
       rows.forEach(function (r) {
         r.amt.textContent = "";
         var ds = r.d.value.trim(), ms = r.m.value.trim();
         if (!ds && !ms) return;
         var dt = parseMDY(ds), mt = parseTenths(ms);
+        if (!ds || !ms) { incomplete++; return; }
         if (!dt) { bad = bad || "Enter each trip date as MM/DD/YYYY."; return; }
-        if (mt == null) { bad = bad || "Miles should be a number with up to one decimal, like 42 or 42.5."; return; }
+        if (mt == null) { bad = bad || "Miles should be a number up to 9999 with one decimal at most, like 42 or 42.5."; return; }
         var rate = mileageRate(dt);
         if (rate == null) { outside++; r.amt.textContent = "No 2026 rate"; return; }
         r.amt.textContent = fmtCents(mileageTrip(mt, rate)) + " at " + fmtRate(rate);
         trips.push({ date: dt, milesTenths: mt }); used++;
       });
       if (bad) { msg.textContent = bad; return; }
-      if (!used) { msg.textContent = outside ? "This calculator carries the 2026 rates. Enter trips dated in 2026." : "Enter a trip date and the business miles."; return; }
+      if (!used) { msg.textContent = incomplete ? "A trip needs both a date and miles to count." : outside ? "This calculator carries the 2026 rates. Enter trips dated in 2026." : "Enter a trip date and the business miles."; return; }
       var r = mileage(trips);
       oM.v.textContent = (r.milesTenths / 10).toFixed(1).replace(/\.0$/, "") + " mi";
       oT.v.textContent = fmtCents(r.totalCents);
-      msg.textContent = outside ? "Trips outside 2026 are left out of the total." : "Each trip is rounded to the cent, then added up.";
+      msg.textContent = incomplete ? "A trip needs both a date and miles to count." : outside ? "Trips outside 2026 are left out of the total." : "Each trip is rounded to the cent, then added up.";
     }
     add.addEventListener("click", function () { var r = addRow(); r.d.focus(); run(); });
     addRow(); addRow();

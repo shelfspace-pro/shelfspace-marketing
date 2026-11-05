@@ -109,6 +109,17 @@ else {
   eq("mileage(100 mi 06/30 + 100 mi 07/01)", T.mileage([{ date: T.parseMDY("06/30/2026"), milesTenths: 1000 }, { date: T.parseMDY("07/01/2026"), milesTenths: 1000 }]),
     { lines: [{ rateTenths: 725, cents: 7250 }, { rateTenths: 760, cents: 7600 }], totalCents: 14850, milesTenths: 2000, missing: 0 });
   eq("mileageTrip(12.3 mi @ 76c)", T.mileageTrip(123, 760), 935);
+  // 0.2 mi at 72.5c is exactly 14.5c: half up gives 15, banker's rounding would give 14
+  eq("mileageTrip(0.2 mi @ 72.5c) rounds half up", T.mileageTrip(2, 725), 15);
+  // the last instant of 06/30 and 12/31 still has a rate (a local-time or new Date() caller must not lose the day)
+  eq("mileageRate(06/30/2026 23:59:59Z)", T.mileageRate(new Date(Date.UTC(2026, 5, 30, 23, 59, 59))), 725);
+  eq("mileageRate(12/31/2026 23:59:59Z)", T.mileageRate(new Date(Date.UTC(2026, 11, 31, 23, 59, 59))), 760);
+  eq("mileageRate(01/01/2027 00:00Z)", T.mileageRate(new Date(Date.UTC(2027, 0, 1))), null);
+  eq('parseTenths("1,234.5")', T.parseTenths("1,234.5"), 12345);
+  // a decimal comma or a stray comma is refused, never read as 10x the miles
+  eq('parseTenths("2,5")', T.parseTenths("2,5"), null);
+  eq('parseTenths("1,2,3")', T.parseTenths("1,2,3"), null);
+  eq('parseTenths(",,5")', T.parseTenths(",,5"), null);
   // each trip rounds to the cent BEFORE the total: two 0.1-mile trips at 72.5c are 7c + 7c = 14c (summing first would give 15c)
   eq("mileage rounds per line", T.mileage([{ date: T.parseMDY("03/02/2026"), milesTenths: 1 }, { date: T.parseMDY("03/02/2026"), milesTenths: 1 }]).totalCents, 14);
   eq("mileage leaves an undated-rate trip out", T.mileage([{ date: T.parseMDY("12/31/2025"), milesTenths: 100 }, { date: T.parseMDY("07/01/2026"), milesTenths: 100 }]),
