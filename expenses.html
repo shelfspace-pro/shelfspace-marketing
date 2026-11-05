@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Expense Reports for Cannabis Companies | ShelfSpace</title>
+<meta name="description" content="Expense reports for cannabis companies: receipts by phone or email, read, coded, approved and posted to Xero, with staff paid back by bank transfer or check.">
+<link rel="canonical" href="https://shelfspace.pro/expenses">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ShelfSpace">
+<meta property="og:locale" content="en_US">
+<meta property="og:url" content="https://shelfspace.pro/expenses">
+<meta property="og:title" content="Expenses — ShelfSpace">
+<meta property="og:description" content="Expense reports and employee reimbursement built for cannabis companies, posted to Xero.">
+<meta property="og:image" content="https://shelfspace.pro/og-image-v8.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Expenses — ShelfSpace">
+<meta name="twitter:description" content="Expense reports and employee reimbursement built for cannabis companies, posted to Xero.">
+<meta name="twitter:image" content="https://shelfspace.pro/og-image-v8.png">
+<meta name="apple-mobile-web-app-title" content="ShelfSpace">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+<link rel="stylesheet" href="/hero-motion.css">
+<style>
+  @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-12px); } }
+  .page-hero { display: flex; align-items: center; justify-content: center; padding: 140px 48px 60px; position: relative; overflow: hidden; background: var(--white); }
+  .hero-bg-gradient { position: absolute; top: -30%; right: -20%; width: 700px; height: 700px; background: radial-gradient(circle, rgba(149,213,178,0.18) 0%, rgba(149,213,178,0) 70%); animation: float 8s ease-in-out infinite; pointer-events: none; }
+  .hero-bg-gradient-2 { position: absolute; bottom: -20%; left: -15%; width: 550px; height: 550px; background: radial-gradient(circle, rgba(27,67,50,0.06) 0%, rgba(27,67,50,0) 70%); animation: float 10s ease-in-out infinite; animation-delay: -3s; pointer-events: none; }
+  .hero-grid-lines { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 1200px; height: 100%; opacity: 0.035; background-image: linear-gradient(var(--green-deep) 1px, transparent 1px), linear-gradient(90deg, var(--green-deep) 1px, transparent 1px); background-size: 80px 80px; pointer-events: none; }
+  .hero-text--solo { position: relative; z-index: 2; }
+  .page-hero .hero-h1 { font-weight: 700; color: var(--green-deep); }
+  .hero-lede { color: var(--slate-600); line-height: 1.5; }
+  .hero-actions-centered { display: flex; }
+  .hero-trust { display: inline-flex; align-items: center; gap: 10px; margin-top: 22px; font-size: 13px; color: var(--slate-500); }
+  .hero-trust img { height: 18px; opacity: 0.7; }
+  .lp-text > * { opacity: 0; transform: translateY(24px); transition: opacity .8s cubic-bezier(0.22,1,0.36,1), transform .8s cubic-bezier(0.22,1,0.36,1); }
+  .page-hero.hero-loaded .lp-text > * { opacity: 1; transform: none; }
+  .page-hero.hero-loaded .lp-text > :nth-child(2) { transition-delay: .06s; }
+  .page-hero.hero-loaded .lp-text > :nth-child(3) { transition-delay: .12s; }
+  .page-hero.hero-loaded .lp-text > :nth-child(4) { transition-delay: .22s; }
+  .page-hero.hero-loaded .lp-text > :nth-child(5) { transition-delay: .32s; }
+  .page-hero.hero-loaded .lp-text > :nth-child(6) { transition-delay: .42s; }
+
+  /* hero window extras: phone, waveform, transcript */
+  .ac-dial { display: flex; align-items: center; gap: 16px; padding: 14px 16px; border-radius: 16px; background: rgba(255,255,255,0.05); margin-bottom: 12px; }
+  .ac-phone { position: relative; width: 54px; height: 54px; flex: none; border-radius: 50%; background: var(--green-accent); color: #0f2a1f; display: grid; place-items: center; animation: acShake 1.6s ease-in-out infinite; }
+  .ac-phone::before, .ac-phone::after { content: ''; position: absolute; inset: 0; border-radius: 50%; border: 2px solid var(--green-accent); animation: acRing 1.6s ease-out infinite; }
+  .ac-phone::after { animation-delay: .8s; }
+  .ac-phone.in { animation: none; background: #fff; }
+  .ac-phone.in::before, .ac-phone.in::after { animation: none; opacity: 0; }
+  @keyframes acRing { 0% { transform: scale(1); opacity: .8; } 100% { transform: scale(1.9); opacity: 0; } }
+  @keyframes acShake { 0%,40%,100% { transform: rotate(0); } 5%,15%,25% { transform: rotate(-12deg); } 10%,20%,30% { transform: rotate(12deg); } }
+  .ac-who { flex: 1; min-width: 0; }
+  .ac-who b { display: block; font-size: 14px; color: #fff; }
+  .ac-who small { font-size: 11px; color: rgba(230,244,234,0.6); }
+  .ac-wave { display: flex; align-items: center; gap: 3px; height: 26px; margin-left: auto; }
+  .ac-wave i { width: 3px; border-radius: 2px; background: var(--green-accent); height: 30%; animation: acWave 1s ease-in-out infinite; }
+  .ac-wave i:nth-child(2) { animation-delay: -.2s; } .ac-wave i:nth-child(3) { animation-delay: -.5s; } .ac-wave i:nth-child(4) { animation-delay: -.1s; } .ac-wave i:nth-child(5) { animation-delay: -.7s; } .ac-wave i:nth-child(6) { animation-delay: -.35s; } .ac-wave i:nth-child(7) { animation-delay: -.6s; }
+  @keyframes acWave { 0%,100% { height: 25%; } 50% { height: 100%; } }
+  .hm-qrow .a { font-family: var(--font-mono); }
+  .ac-b { font-size: 12.5px; line-height: 1.45; padding: 9px 12px; border-radius: 14px; max-width: 84%; margin-bottom: 8px; opacity: 0; transform: translateY(8px) scale(.97); transition: opacity .4s ease, transform .4s cubic-bezier(0.34,1.56,0.64,1); }
+  .ac-b.in { opacity: 1; transform: none; }
+  .ac-b--ai { background: rgba(149,213,178,0.14); border: 1px solid rgba(149,213,178,0.32); border-bottom-left-radius: 4px; }
+  .ac-b--st { background: rgba(246,215,122,0.14); border: 1px solid rgba(246,215,122,0.4); margin-left: auto; border-bottom-right-radius: 4px; }
+  .ac-b small { display: block; font-family: var(--font-mono); font-size: 9.5px; letter-spacing: 1px; text-transform: uppercase; color: rgba(230,244,234,0.5); margin-bottom: 2px; }
+  .ac-ptp { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .ac-ptp > div { padding: 10px 12px; border-radius: 12px; background: rgba(255,255,255,0.05); }
+  .ac-ptp span { display: block; font-size: 10.5px; color: rgba(230,244,234,0.55); }
+  .ac-ptp b { font-family: var(--font-mono); font-size: 15px; color: #fff; font-variant-numeric: tabular-nums; }
+  .ac-ptp .ac-amt { grid-column: span 2; display: flex; justify-content: space-between; align-items: center; }
+  .ac-ptp .ac-amt b { font-size: 22px; color: #fcd34d; }
+
+  /* ─── REVEAL ─── */
+  .reveal { opacity: 0; transform: translateY(36px); transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1); }
+  .reveal.is-visible { opacity: 1; transform: none; }
+  .reveal-delay-1 { transition-delay: 0.15s; } .reveal-delay-2 { transition-delay: 0.3s; } .reveal-delay-3 { transition-delay: 0.45s; }
+
+  .ac-head { max-width: 760px; margin: 0 auto 52px; text-align: center; }
+  .ac-eyebrow { display: inline-flex; align-items: center; gap: 10px; font-family: var(--font-mono); font-size: 12px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--green-dark); margin-bottom: 16px; }
+  .ac-eyebrow::before { content: ''; width: 22px; height: 2px; border-radius: 2px; background: var(--green-mid); }
+  .ac-head h2 { font-size: clamp(30px, 4vw, 48px); font-weight: 700; letter-spacing: -1.4px; color: var(--green-deep); line-height: 1.1; margin: 0; }
+  .ac-head h2 em { font-style: normal; color: var(--green-mid); }
+  .ac-head p { font-size: 17px; color: var(--slate-600); line-height: 1.6; margin: 14px auto 0; max-width: 620px; }
+  .ac-dark .ac-head h2 { color: #fff; } .ac-dark .ac-head h2 em { color: var(--green-accent); } .ac-dark .ac-head p { color: rgba(255,255,255,0.7); } .ac-dark .ac-eyebrow { color: var(--green-accent); } .ac-dark .ac-eyebrow::before { background: var(--green-accent); }
+  .ac-dark .ac-head p strong { color: #fff; }
+
+  /* ─── STATS ─── */
+  .ac-stats { background: #fff; padding: 60px 48px; border-bottom: 1px solid var(--slate-100); }
+  .ac-stats-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+  .ac-stat { text-align: center; padding: 24px 14px; border-radius: 16px; background: linear-gradient(180deg, #f0faf4, #fff); border: 1px solid #e3f2e9; }
+  .ac-stat-n { font-family: var(--font-mono); font-size: clamp(34px, 4vw, 48px); font-weight: 700; color: var(--green-deep); line-height: 1; letter-spacing: -1px; font-variant-numeric: tabular-nums; }
+  .ac-stat-n span { color: var(--green-mid); font-size: .6em; letter-spacing: 0; }
+  .ac-stat-l { margin-top: 10px; font-size: 14px; color: var(--slate-600); line-height: 1.45; font-weight: 500; }
+
+  /* ─── VIDEO (dark) ─── */
+  .ac-video-sec { position: relative; overflow: hidden; background: radial-gradient(ellipse at 50% 0%, #2d6a4f 0%, #1b4332 50%, #0f2a1f 100%); padding: 96px 48px; }
+  .ac-video { position: relative; max-width: 980px; margin: 0 auto; }
+  .ac-video::before { content: ''; position: absolute; inset: -30px; border-radius: 40px; background: radial-gradient(circle, rgba(149,213,178,0.28), transparent 65%); animation: acGlow 5s ease-in-out infinite; pointer-events: none; }
+  @keyframes acGlow { 0%,100% { opacity: .55; transform: scale(.97); } 50% { opacity: 1; transform: scale(1.02); } }
+  .ac-video-frame { position: relative; padding-bottom: 56.25%; height: 0; border-radius: 20px; overflow: hidden; box-shadow: 0 40px 90px -30px rgba(0,0,0,0.7), 0 0 0 1px rgba(149,213,178,0.25); background: #0b1f16; }
+  .ac-video-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  .ac-video-cap { position: relative; text-align: center; font-size: 14px; color: rgba(255,255,255,0.65); margin: 20px 0 0; }
+  .ac-video-cap a { color: var(--green-accent); font-weight: 600; text-decoration: none; }
+
+  /* ─── EMAIL VS CALL ─── */
+  .ac-vs-sec { background: var(--slate-50); padding: 96px 48px; }
+  .ac-vs { max-width: 1000px; margin: 0 auto 44px; display: grid; grid-template-columns: 1fr auto 1fr; gap: 28px; align-items: center; }
+  .ac-vs-col { border-radius: 22px; padding: 26px; min-height: 280px; position: relative; }
+  .ac-vs-col h3 { font-size: 13px; font-family: var(--font-mono); letter-spacing: 1.6px; text-transform: uppercase; margin: 0 0 16px; }
+  .ac-vs-col--email { background: #fff; border: 1px solid var(--slate-200); }
+  .ac-vs-col--email h3 { color: var(--slate-500); }
+  .ac-vs-col--call { background: #0f2a1f; color: #e6f4ea; box-shadow: 0 30px 70px -30px rgba(27,67,50,0.7); }
+  .ac-vs-col--call h3 { color: var(--green-accent); }
+  .ac-mail { display: flex; align-items: center; gap: 12px; padding: 11px 13px; border-radius: 12px; border: 1px solid var(--slate-100); background: var(--slate-50); margin-bottom: 8px; font-size: 13px; color: var(--slate-500); opacity: 0; transform: translateY(-10px); transition: opacity .45s, transform .45s cubic-bezier(0.34,1.56,0.64,1); }
+  .ac-vs.go .ac-mail { opacity: 1; transform: none; }
+  .ac-vs.go .ac-mail:nth-child(3) { transition-delay: .25s; } .ac-vs.go .ac-mail:nth-child(4) { transition-delay: .5s; } .ac-vs.go .ac-mail:nth-child(5) { transition-delay: .75s; }
+  .ac-mail i { width: 8px; height: 8px; border-radius: 50%; background: #cbd5e1; flex: none; }
+  .ac-mail b { color: var(--slate-600); font-weight: 600; }
+  .ac-mail em { margin-left: auto; font-style: normal; font-family: var(--font-mono); font-size: 11px; color: #b91c1c; background: #fee2e2; padding: 2px 8px; border-radius: 999px; }
+  .ac-vs-note { font-size: 14px; color: var(--slate-500); margin-top: 14px; font-weight: 600; }
+  .ac-vs-mid { width: 54px; height: 54px; border-radius: 50%; background: var(--green-deep); color: var(--green-accent); display: grid; place-items: center; font-family: var(--font-mono); font-weight: 700; font-size: 14px; box-shadow: 0 10px 26px rgba(27,67,50,0.25); }
+  .ac-callcard { display: flex; align-items: center; gap: 14px; padding: 14px; border-radius: 16px; background: rgba(255,255,255,0.06); }
+  .ac-callcard .ac-phone { width: 48px; height: 48px; }
+  .ac-steps-mini { list-style: none; padding: 0; margin: 14px 0 0; display: grid; gap: 8px; }
+  .ac-steps-mini li { display: flex; align-items: center; gap: 10px; font-size: 13.5px; opacity: 0; transform: translateX(-10px); transition: opacity .45s, transform .45s cubic-bezier(0.34,1.56,0.64,1); }
+  .ac-vs.go .ac-steps-mini li { opacity: 1; transform: none; }
+  .ac-vs.go .ac-steps-mini li:nth-child(1) { transition-delay: .9s; } .ac-vs.go .ac-steps-mini li:nth-child(2) { transition-delay: 1.2s; } .ac-vs.go .ac-steps-mini li:nth-child(3) { transition-delay: 1.5s; }
+  .ac-steps-mini li span { width: 22px; height: 22px; border-radius: 50%; background: var(--green-accent); color: #0f2a1f; display: grid; place-items: center; font-size: 12px; font-weight: 800; flex: none; }
+  .ac-pains { max-width: 1040px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .ac-pain { position: relative; background: #fff; border-radius: 18px; padding: 26px 22px 24px; box-shadow: 0 12px 30px rgba(27,67,50,0.06); overflow: hidden; }
+  .ac-pain::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 4px; background: linear-gradient(90deg, #ef4444, #f59e0b); }
+  .ac-pain-ic { width: 46px; height: 46px; border-radius: 50%; background: #fee2e2; color: #dc2626; display: grid; place-items: center; margin-bottom: 14px; transform: scale(.6); opacity: 0; transition: all .5s cubic-bezier(0.34,1.56,0.64,1) .2s; }
+  .ac-pain.is-visible .ac-pain-ic { transform: none; opacity: 1; }
+  .ac-pain-ic svg { width: 22px; height: 22px; }
+  .ac-pain h3 { font-size: 18px; font-weight: 700; color: var(--green-deep); margin: 0 0 8px; letter-spacing: -0.3px; }
+  .ac-pain p { font-size: 14.5px; line-height: 1.6; color: var(--slate-600); margin: 0; }
+
+  /* ─── HOW IT WORKS (timeline) ─── */
+  .ac-how { background: #fff; padding: 96px 48px; overflow: hidden; }
+  .ac-tl { position: relative; max-width: 1120px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; }
+  .ac-tl-track { position: absolute; left: 12.5%; right: 12.5%; top: 31px; height: 4px; border-radius: 4px; background: #d8e9df; }
+  .ac-tl-fill { position: absolute; left: 0; top: 0; bottom: 0; width: 0; border-radius: 4px; background: linear-gradient(90deg, var(--green-mid), var(--green-accent)); transition: width 2.2s cubic-bezier(0.65,0,0.35,1) .2s; }
+  .ac-tl.go .ac-tl-fill { width: 100%; }
+  .ac-step { position: relative; text-align: center; opacity: 0; transform: translateY(22px); transition: opacity .6s ease, transform .6s cubic-bezier(0.34,1.56,0.64,1); }
+  .ac-tl.go .ac-step { opacity: 1; transform: none; }
+  .ac-tl.go .ac-step:nth-of-type(1) { transition-delay: .2s; } .ac-tl.go .ac-step:nth-of-type(2) { transition-delay: .8s; } .ac-tl.go .ac-step:nth-of-type(3) { transition-delay: 1.4s; } .ac-tl.go .ac-step:nth-of-type(4) { transition-delay: 2s; }
+  .ac-dot { position: relative; width: 66px; height: 66px; margin: 0 auto 18px; border-radius: 50%; background: #fff; border: 3px solid var(--green-accent); display: grid; place-items: center; color: var(--green-dark); box-shadow: 0 10px 26px rgba(27,67,50,0.12); }
+  .ac-step--end .ac-dot { background: var(--green-deep); border-color: var(--green-deep); color: var(--green-accent); }
+  .ac-step--end .ac-dot::before, .ac-step--end .ac-dot::after { content: ''; position: absolute; inset: -3px; border-radius: 50%; border: 2px solid var(--green-mid); animation: acPulse 2.4s ease-out infinite; }
+  .ac-step--end .ac-dot::after { animation-delay: 1.2s; }
+  @keyframes acPulse { 0% { transform: scale(1); opacity: .8; } 100% { transform: scale(1.7); opacity: 0; } }
+  .ac-num { font-family: var(--font-mono); font-size: 12px; font-weight: 700; letter-spacing: 1.4px; color: var(--green-mid); margin-bottom: 6px; }
+  .ac-step h3 { font-size: 18px; font-weight: 700; color: var(--green-deep); margin: 0 0 8px; letter-spacing: -0.3px; }
+  .ac-step p { font-size: 14px; line-height: 1.55; color: var(--slate-600); max-width: 240px; margin: 0 auto; }
+
+  /* ─── ON THE CALL (icon cards) ─── */
+  .ac-can { background: var(--green-ghost); padding: 96px 48px; }
+  .ac-cards { max-width: 1080px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .ac-card { background: #fff; border-radius: 18px; padding: 26px 22px; box-shadow: 0 8px 24px rgba(27,67,50,0.07); transition: transform .3s cubic-bezier(0.34,1.56,0.64,1), box-shadow .3s; }
+  .ac-card:hover { transform: translateY(-6px); box-shadow: 0 20px 44px rgba(27,67,50,0.16); }
+  .ac-card-ic { width: 48px; height: 48px; border-radius: 14px; background: var(--green-deep); color: var(--green-accent); display: grid; place-items: center; margin-bottom: 16px; transition: transform .3s; }
+  .ac-card:hover .ac-card-ic { transform: rotate(-8deg) scale(1.08); }
+  .ac-card-ic svg { width: 22px; height: 22px; }
+  .ac-card h3 { font-size: 18px; font-weight: 700; color: var(--green-deep); margin: 0 0 8px; letter-spacing: -0.3px; }
+  .ac-card p { font-size: 14.5px; line-height: 1.6; color: var(--slate-600); margin: 0; }
+
+  /* ─── PREVIEW (dark) ─── */
+  .ac-dark { position: relative; overflow: hidden; background: radial-gradient(ellipse at 70% 20%, #2d6a4f 0%, #1b4332 45%, #0f2a1f 100%); padding: 100px 48px; color: #fff; }
+  .ac-prev { max-width: 1080px; margin: 0 auto; display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 56px; align-items: center; }
+  .ac-handset { position: relative; width: 230px; height: 440px; margin: 0 auto; border-radius: 38px; background: #0b1f16; border: 2px solid rgba(149,213,178,0.35); box-shadow: 0 40px 80px -30px rgba(0,0,0,0.8); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; text-align: center; padding: 26px; animation: acBob 5s ease-in-out infinite; }
+  @keyframes acBob { 0%,100% { transform: translateY(0) rotate(-3deg); } 50% { transform: translateY(-10px) rotate(-3deg); } }
+  .ac-handset::before { content: ''; position: absolute; top: 14px; width: 70px; height: 6px; border-radius: 6px; background: rgba(255,255,255,0.12); }
+  .ac-handset .ac-phone { width: 76px; height: 76px; }
+  .ac-handset .ac-phone svg { width: 32px; height: 32px; }
+  .ac-handset b { font-size: 18px; } .ac-handset small { font-size: 12px; color: rgba(230,244,234,0.6); }
+  .ac-handset .ac-tagp { font-family: var(--font-mono); font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--green-accent); border: 1px solid rgba(149,213,178,0.5); border-radius: 999px; padding: 4px 10px; }
+  .ac-handset .ac-btns { display: flex; gap: 28px; margin-top: 30px; }
+  .ac-handset .ac-btns i { width: 50px; height: 50px; border-radius: 50%; display: grid; place-items: center; }
+  .ac-handset .ac-btns i:first-child { background: #dc2626; } .ac-handset .ac-btns i:last-child { background: #16a34a; animation: acAns 1.4s ease-out infinite; }
+  @keyframes acAns { 0% { box-shadow: 0 0 0 0 rgba(22,163,74,0.6); } 100% { box-shadow: 0 0 0 16px rgba(22,163,74,0); } }
+  .ac-prev .ac-head { text-align: left; margin: 0 0 26px; }
+  .aic-call { background: rgba(255,255,255,0.05); border: 1px solid rgba(149,213,178,0.25); border-radius: 18px; padding: 20px; text-align: left; }
+  .aic-call-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 14px; }
+  .aic-call-who { color: #fff; font-weight: 700; font-size: 15px; }
+  .aic-call-sub { color: #a7cfba; font-size: 12px; margin-top: 2px; }
+  .aic-tag { font-family: var(--font-mono); font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: #95d5b2; border: 1px solid rgba(149,213,178,0.5); border-radius: 100px; padding: 4px 10px; white-space: nowrap; }
+  .aic-bubble { border-radius: 14px; padding: 10px 14px; font-size: 14px; line-height: 1.5; margin-bottom: 9px; max-width: 88%; opacity: 0; transform: translateY(10px); transition: opacity .45s, transform .45s cubic-bezier(0.34,1.56,0.64,1); }
+  .aic-call.go .aic-bubble { opacity: 1; transform: none; }
+  .aic-call.go .aic-bubble:nth-child(3) { transition-delay: .6s; } .aic-call.go .aic-bubble:nth-child(4) { transition-delay: 1.2s; } .aic-call.go .aic-bubble:nth-child(5) { transition-delay: 1.8s; }
+  .aic-bubble--ai { background: rgba(149,213,178,0.12); border: 1px solid rgba(149,213,178,0.3); color: #fff; border-bottom-left-radius: 4px; }
+  .aic-bubble--store { background: rgba(246,215,122,0.14); border: 1px solid rgba(246,215,122,0.4); color: #fff; margin-left: auto; border-bottom-right-radius: 4px; }
+  .aic-result { display: flex; align-items: center; gap: 12px; background: #fff; border-radius: 14px; padding: 13px 15px; margin-top: 12px; opacity: 0; transform: scale(.94); transition: opacity .5s 2.5s, transform .5s cubic-bezier(0.34,1.56,0.64,1) 2.5s; }
+  .aic-call.go .aic-result { opacity: 1; transform: none; }
+  .aic-result-icon { width: 36px; height: 36px; border-radius: 10px; background: var(--green-ghost); color: var(--green-dark); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .aic-result b { display: block; color: var(--green-deep); font-size: 14.5px; }
+  .aic-result span { font-size: 12.5px; color: var(--slate-500); font-variant-numeric: tabular-nums; }
+  .ac-why { margin-top: 18px; font-size: 15px; color: rgba(255,255,255,0.75); }
+
+  /* ─── POLITE ─── */
+  .ac-polite { background: #fff; padding: 96px 48px; }
+  .ac-week { max-width: 760px; margin: 0 auto 40px; padding: 24px; border-radius: 20px; background: var(--slate-50); border: 1px solid var(--slate-100); }
+  .ac-week-h { display: flex; justify-content: space-between; font-size: 13px; font-weight: 700; color: var(--green-deep); margin-bottom: 14px; }
+  .ac-week-h span { font-family: var(--font-mono); font-size: 11px; color: var(--slate-500); font-weight: 400; }
+  .ac-days { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; }
+  .ac-day { text-align: center; font-size: 12px; font-weight: 700; color: var(--slate-500); }
+  .ac-day i { display: block; height: 70px; margin-top: 8px; border-radius: 10px; background: #e2e8f0; position: relative; overflow: hidden; }
+  .ac-day i::after { content: ''; position: absolute; left: 0; right: 0; top: 30%; height: 0; background: linear-gradient(180deg, var(--green-accent), var(--green-mid)); border-radius: 6px; transition: height .7s cubic-bezier(0.22,1,0.36,1); }
+  .ac-week.go .ac-day--on i::after { height: 40%; }
+  .ac-week.go .ac-day--on:nth-child(2) i::after { transition-delay: .12s; } .ac-week.go .ac-day--on:nth-child(3) i::after { transition-delay: .24s; } .ac-week.go .ac-day--on:nth-child(4) i::after { transition-delay: .36s; } .ac-week.go .ac-day--on:nth-child(5) i::after { transition-delay: .48s; }
+  .ac-day--off i { background: repeating-linear-gradient(45deg, #f1f5f9, #f1f5f9 6px, #e2e8f0 6px, #e2e8f0 12px); }
+  .ac-day--on { color: var(--green-deep); }
+  .ac-week-f { margin-top: 12px; font-size: 13px; color: var(--slate-500); text-align: center; }
+  .ac-link { display: inline-flex; align-items: center; gap: 8px; margin-top: 34px; font-weight: 700; font-size: 15px; color: var(--green-deep); text-decoration: none; border-bottom: 2px solid var(--green-accent); padding-bottom: 3px; transition: gap .2s; }
+  .ac-link:hover { gap: 12px; }
+
+  /* ─── FINAL CTA ─── */
+  .ac-final { background: var(--slate-50); padding: 100px 48px 108px; text-align: center; }
+  .ac-final h2 { font-size: clamp(32px, 4.4vw, 52px); font-weight: 700; letter-spacing: -1.6px; color: var(--green-deep); line-height: 1.08; margin: 0 0 14px; }
+  .ac-final > p { font-size: 18px; color: var(--slate-600); margin: 0 auto 32px; max-width: 580px; line-height: 1.6; }
+  .ac-btn { display: inline-flex; align-items: center; gap: 10px; background: var(--green-deep); color: #fff; font-weight: 700; font-size: 17px; padding: 18px 30px; border-radius: 12px; text-decoration: none; animation: acCta 2.4s ease-in-out infinite; transition: transform .2s, background .2s; }
+  .ac-btn:hover { transform: translateY(-2px) scale(1.03); background: var(--green-dark); }
+  @keyframes acCta { 0%,100% { box-shadow: 0 10px 30px rgba(27,67,50,0.25), 0 0 0 0 rgba(27,67,50,0.45); } 50% { box-shadow: 0 10px 30px rgba(27,67,50,0.25), 0 0 0 14px rgba(27,67,50,0); } }
+  .ac-final-actions { display: flex; gap: 22px; align-items: center; justify-content: center; flex-wrap: wrap; }
+  .ac-final-actions .ac-sub { font-size: 15px; font-weight: 600; color: var(--green-dark); text-decoration: none; }
+  .ac-final-note { margin-top: 18px; font-size: 14px; color: var(--slate-500); }
+
+  .footer-top { grid-template-columns: 2fr 1fr 1fr 1fr 1fr; }
+  @media (max-width: 900px) { .footer-top { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px) { .footer-top { grid-template-columns: 1fr; } }
+
+  @media (max-width: 900px) {
+    .hero-grid-lines { width: 100%; }
+    .hero-bg-gradient, .hero-bg-gradient-2 { display: none; }
+    .ac-stats, .ac-video-sec, .ac-vs-sec, .ac-how, .ac-can, .ac-dark, .ac-polite, .ac-final { padding-left: 20px; padding-right: 20px; }
+    .ac-video-sec, .ac-vs-sec, .ac-how, .ac-can, .ac-dark, .ac-polite, .ac-final { padding-top: 72px; padding-bottom: 72px; }
+    .ac-stats { padding-top: 44px; padding-bottom: 44px; }
+    .ac-stats-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+    .ac-vs { grid-template-columns: 1fr; gap: 16px; }
+    .ac-vs-mid { margin: 0 auto; }
+    .ac-vs-col { min-height: 0; padding: 22px 18px; }
+    .ac-pains, .ac-cards { grid-template-columns: 1fr; }
+    .ac-tl { grid-template-columns: 1fr; gap: 26px; max-width: 460px; }
+    .ac-tl-track { left: 31px; right: auto; top: 20px; bottom: 20px; width: 4px; height: auto; }
+    .ac-tl-fill { width: 100% !important; height: 0; bottom: auto; transition-property: height; }
+    .ac-tl.go .ac-tl-fill { height: 100%; }
+    .ac-step { display: grid; grid-template-columns: 66px 1fr; gap: 0 18px; text-align: left; align-items: start; }
+    .ac-dot { grid-row: span 3; margin: 0; }
+    .ac-num { margin-top: 6px; }
+    .ac-step p { margin: 0; max-width: none; }
+    .ac-prev { grid-template-columns: 1fr; gap: 40px; }
+    .ac-prev .ac-head { text-align: center; }
+    .ac-handset { width: 200px; height: 360px; }
+    .ac-week { padding: 18px 14px; }
+    .page-hero .hm-scenes { height: 404px; }
+    .ac-b { font-size: 11.5px; padding: 7px 10px; margin-bottom: 6px; max-width: 90%; }
+    .ac-b small { font-size: 8.5px; margin-bottom: 1px; }
+    .ac-ptp .ac-amt b { font-size: 19px; }
+    .page-hero .hm-ev em { display: none; }
+    .page-hero .hm-paidbar b { font-size: 12px !important; }
+    .ac-days { gap: 5px; }
+    .ac-day { font-size: 11px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .ac-phone, .ac-phone::before, .ac-phone::after, .ac-wave i, .ac-handset, .ac-btn, .ac-video::before, .ac-step--end .ac-dot::before, .ac-step--end .ac-dot::after, .ac-handset .ac-btns i { animation: none !important; }
+    .reveal, .lp-text > *, .ac-mail, .ac-steps-mini li, .ac-step, .aic-bubble, .aic-result, .ac-pain-ic, .ac-b { opacity: 1 !important; transform: none !important; transition: none !important; }
+    .ac-tl-fill { width: 100%; } .ac-day--on i::after { height: 40% !important; }
+  }
+
+  .ac-pain a, .ac-card a, .ac-head p a, .exp-src a { color: var(--green-dark); font-weight: 600; text-decoration: underline; text-underline-offset: 2px; }
+  .ac-dark .ac-head p a { color: var(--green-accent); }
+  .exp-src { max-width: 760px; margin: 34px auto 0; text-align: center; font-size: 13.5px; color: var(--slate-500); line-height: 1.6; }
+  .exp-faq { background: #fff; padding: 96px 48px; }
+  .exp-faq-list { max-width: 820px; margin: 0 auto; display: grid; gap: 12px; }
+  .exp-faq details { border: 1px solid var(--slate-100); border-radius: 16px; background: var(--slate-50); padding: 0 22px; }
+  .exp-faq summary { cursor: pointer; list-style: none; padding: 20px 0; font-weight: 700; font-size: 17px; color: var(--green-deep); }
+  .exp-faq summary::-webkit-details-marker { display: none; }
+  .exp-faq summary::after { content: '+'; float: right; font-family: var(--font-mono); color: var(--green-mid); }
+  .exp-faq details[open] summary::after { content: '\2212'; }
+  .exp-faq details p { margin: 0 0 20px; font-size: 15.5px; line-height: 1.65; color: var(--slate-600); }
+  .ac-final > .ac-eyebrow { justify-content: center; }
+  @media (max-width: 900px) { .exp-faq { padding: 72px 20px; } .exp-faq summary { font-size: 16px; } }
+</style>
+<noscript><style>.reveal,.lp-text > *,.ac-mail,.ac-steps-mini li,.ac-step,.aic-bubble,.aic-result,.ac-pain-ic,.ac-b{opacity:1!important;transform:none!important}.ac-tl-fill{width:100%}.ac-day--on i::after{height:40%!important}</style></noscript>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-H2LBJT03WE"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-H2LBJT03WE');</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "ShelfSpace Expenses — expense reports and employee reimbursement for cannabis companies",
+  "serviceType": "Expense management",
+  "provider": {
+    "@type": "Organization",
+    "name": "ShelfSpace",
+    "url": "https://shelfspace.pro"
+  },
+  "areaServed": "US",
+  "audience": {
+    "@type": "Audience",
+    "audienceType": "Cannabis dispensaries, cultivators, processors and brands"
+  },
+  "description": "Expense reports for cannabis companies: receipts by phone or email, read, coded, approved and posted to Xero, with staff paid back by bank transfer or check.",
+  "url": "https://shelfspace.pro/expenses"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Does it work for plant-touching cannabis businesses?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. ShelfSpace is built for cannabis companies: dispensaries, cultivators, processors and brands. Employees are paid back from your own account by bank transfer or digital check."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do employees need to download an app?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. It runs in the phone’s browser and can be saved to the home screen like an app. Employees can also forward receipt emails to your company’s receipts address, which creates a draft for them to finish."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How does it post to Xero?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Each approved report becomes one bill to the employee in the right company’s Xero, with each line on its account and tracking categories, and every receipt merged into one attached PDF. When the employee is paid, the payment is recorded on the bill."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can one person work across several of our companies?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Each expense names the company it belongs to, and a report with lines for two companies is split into two reports, one for each company’s books."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How is mileage paid?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The employee types where they went and how many miles. Each trip is paid at the IRS standard rate for its date: 72.5 cents a mile before 07/01/2026 and 76 cents from 07/01/2026."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Who can approve expenses?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "You set it: the employee’s manager, a second approver above an amount you choose, then finance, with a backup for each approver. Nobody can approve their own expense, and approvers sign in with a second factor."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What about company cards?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Today ShelfSpace handles out-of-pocket spending and mileage, the money you owe your people. Ask us on the call about company card spending."
+      }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://shelfspace.pro/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Features",
+      "item": "https://shelfspace.pro/features"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Expenses",
+      "item": "https://shelfspace.pro/expenses"
+    }
+  ]
+}
+</script>
+<script>window.si=window.si||function(){(window.siq=window.siq||[]).push(arguments)};</script>
+<script defer src="/_vercel/speed-insights/script.js"></script>
+</head>
+<body>
+<!-- NAV -->
+<nav id="nav">
+  <a href="/" class="nav-logo">
+    <div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div>
+    <span class="nav-logo-text">ShelfSpace<sup class="nav-logo-tm">™</sup></span>
+  </a>
+  <ul class="nav-links">
+    <li class="nav-dropdown"><a href="/accounts-receivable" class="nav-dropdown-toggle">Features <svg class="dropdown-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></a>
+      <div class="nav-dropdown-menu"><a href="/accounts-receivable">ShelfSpace overview</a><a href="/ai-calls">AI Calls</a><a href="/collections">Collections</a><a href="/payment-plans">Payment Plans</a><a href="/promise-to-pay">Promise to Pay</a><a href="/final-notice">Final Notice</a><a href="/ar-aging">AR Aging</a><a href="/rep-management">Rep Management</a><a href="/payments">Payments</a><a href="/quickbooks">QuickBooks</a></div></li>
+    <li class="nav-dropdown"><a href="/accounts-payable" class="nav-dropdown-toggle">For dispensaries <svg class="dropdown-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></a>
+      <div class="nav-dropdown-menu"><a href="/accounts-payable">Accounts payable overview</a><a href="/consignment">Consignment</a><a href="/credit-recovery">Credit Recovery</a><a href="/shelfverify">ShelfVerify</a></div></li>
+    <li><a href="/about">About</a></li>
+    <li><a href="/pricing">Pricing</a></li>
+    <li class="nav-login-mobile"><a href="https://ourshelf.space/login">Login</a></li>
+    <li class="nav-call"><a href="sms:+19713194085?&amp;body=Hi%20Chris%2C%20I%20have%20a%20question%20about%20ShelfSpace." aria-label="Text Chris now at 971-319-4085"><span class="nav-call-icon" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2z"/></svg></span><span class="nav-call-text"><span class="nav-call-kicker">Text Chris now</span><span class="nav-call-num">971-319-4085</span></span></a></li>
+    <li><a href="/contact?cta=expenses-nav" class="nav-cta">Schedule a Demo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a></li>
+  </ul>
+  <a href="sms:+19713194085?&amp;body=Hi%20Chris%2C%20I%20have%20a%20question%20about%20ShelfSpace." class="nav-call-bar" aria-label="Text Chris now at 971-319-4085"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2z"/></svg><span>Text</span></a>
+  <div class="nav-hamburger" onclick="document.querySelector('.nav-links').classList.toggle('mobile-open'); event.stopPropagation();"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero page-hero--motion">
+  <div class="hero-bg-gradient"></div>
+  <div class="hero-bg-gradient-2"></div>
+  <div class="hero-grid-lines"></div>
+  <div class="lp-split">
+  <div class="hero-text--solo lp-text">
+    <div class="aud-badge aud-vendor">For cannabis companies</div>
+    <div class="section-label">ShelfSpace &middot; Expenses</div>
+    <h1 class="hero-h1">Expense reports for cannabis companies. <em>Your people, paid back.</em></h1>
+    <p class="hero-lede">Snap a receipt or forward it by email. It gets read, coded, approved and posted to Xero, and the employee is paid back by bank transfer or check.</p>
+    <div class="hero-actions-centered">
+      <span class="cta-stack"><a href="/contact?cta=expenses-hero" class="btn-primary">Schedule a call <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a><span class="cta-micro">30 minutes with Chris. See how it would run for your business.</span></span>
+    </div>
+    <div class="hero-trust">
+      <span>Built for plant-touching businesses · No app to download</span>
+    </div>
+  </div>
+    <div class="hm-stage" data-price-note="example" data-engine data-ms="6800" aria-label="Animated example: a receipt is read and coded, approved in two steps, posted to Xero and paid back to the employee">
+      <div class="hm-glow"></div>
+      <div class="hm-window" aria-hidden="true">
+        <div class="hm-chrome"><i></i><i></i><i></i>
+          <div class="hm-tabs"><span class="hm-tab on" data-s="0">Snap</span><span class="hm-tab" data-s="1">Approve</span><span class="hm-tab" data-s="2">Paid</span></div>
+        </div>
+        <div class="hm-scenes">
+          <div class="hm-scene on">
+            <div class="hm-title"><b>Receipt from a phone</b><span class="hm-pstack"><span class="hm-pill wait">Reading</span><span class="hm-pill sent" data-at="1400">Read</span><span class="hm-pill paid" data-at="3000">Ready to submit</span></span></div>
+            <div class="hm-q">
+              <div class="hm-qrow hm-r" data-at="300"><span class="v">Merchant<small>Valley Irrigation Supply</small></span><span class="a">$214.37</span><span class="hm-pill chk">Total</span></div>
+              <div class="hm-qrow hm-r" data-at="700"><span class="v">Date<small>10/28/2026</small></span><span class="a">$13.37</span><span class="hm-pill chk">Tax</span></div>
+              <div class="hm-qrow hm-r" data-at="1400"><span class="v">Account<small>Suggested: Cultivation supplies</small></span><span class="a">Grow, MI</span><span class="hm-pill sent">Entity</span></div>
+            </div>
+            <div class="hm-result" data-at="2400"><div><b>Coded and matched to the right company</b><small>A person confirms every suggestion.</small></div><div class="hm-big" data-count="214.37" data-count-ms="900">$0.00</div></div>
+          </div>
+          <div class="hm-scene">
+            <div class="hm-title"><b>Report EXP-1042 &middot; 4 lines</b><span class="hm-pstack"><span class="hm-pill wait">Submitted</span><span class="hm-pill sent" data-at="1500">Approved</span><span class="hm-pill paid" data-at="3100">Final approval</span></span></div>
+            <div class="hm-q">
+              <div class="hm-qrow hm-r" data-at="300"><span class="v">Manager<small>Store or site lead</small></span><span class="a">10/29</span><span class="hm-pill paid">Approved</span></div>
+              <div class="hm-qrow hm-r" data-at="1300"><span class="v">Over $500<small>A second approver</small></span><span class="a">10/29</span><span class="hm-pill paid">Approved</span></div>
+              <div class="hm-qrow hm-r" data-at="2400"><span class="v">Finance<small>Final check</small></span><span class="a">10/30</span><span class="hm-pill paid">Approved</span></div>
+            </div>
+            <div class="hm-result" data-at="3000"><div><b>Nobody approved their own report</b><small>One flag cleared: receipt over $75 attached.</small></div><div class="hm-big" data-count="612.48" data-count-ms="900">$0.00</div></div>
+          </div>
+          <div class="hm-scene">
+            <div class="hm-title"><b>Posted and paid</b><span class="hm-pstack"><span class="hm-pill wait">Posting</span><span class="hm-pill sent" data-at="1200">In Xero</span><span class="hm-pill paid" data-at="3000">Paid back</span></span></div>
+            <div class="hm-feed">
+              <div class="hm-ev" data-at="600"><i></i>Bill EXP-1042 posted to Xero, receipts attached<em>10/30/2026</em></div>
+              <div class="hm-ev" data-at="1800"><i></i>Bank transfer sent to the employee<em>10/30/2026</em></div>
+              <div class="hm-ev" data-at="2800"><i></i>Payment recorded on the bill in Xero<em>11/02/2026</em></div>
+            </div>
+            <div class="hm-paidbar" data-at="3500"><div><b style="font-size:13px;">Paid back, and the books already match</b></div><div class="hm-big" data-count="612.48" data-count-ms="900">$0.00</div></div>
+          </div>
+        </div>
+        <div class="hm-progress"><i></i></div>
+      </div>
+      <div class="hm-caption">Illustration with example numbers</div>
+    </div>
+  </div>
+</div>
+
+<!-- STATS -->
+<section class="ac-stats">
+  <div class="ac-stats-grid">
+    <div class="ac-stat reveal"><div class="ac-stat-n"><b data-ac-count="0">0</b></div><div class="ac-stat-l">apps to download. It runs in the phone&rsquo;s browser</div></div>
+    <div class="ac-stat reveal reveal-delay-1"><div class="ac-stat-n"><b data-ac-count="2">2</b></div><div class="ac-stat-l">IRS mileage rates this year, each applied by the trip&rsquo;s date</div></div>
+    <div class="ac-stat reveal reveal-delay-2"><div class="ac-stat-n"><b data-ac-count="1">1</b></div><div class="ac-stat-l">Xero bill per report, per company, with every receipt attached</div></div>
+    <div class="ac-stat reveal reveal-delay-3"><div class="ac-stat-n"><b data-ac-count="0">0</b></div><div class="ac-stat-l">people who can approve their own expenses</div></div>
+  </div>
+</section>
+
+<!-- THE PROBLEM -->
+<section class="ac-vs-sec" id="exp-problem">
+  <div class="ac-head reveal">
+    <div class="ac-eyebrow">The problem</div>
+    <h2>The big expense tools <em>weren&rsquo;t built for cannabis.</em></h2>
+    <p>Capturing a receipt is easy anywhere. Paying your people back from a cannabis company&rsquo;s bank account is where the mainstream tools stop.</p>
+  </div>
+  <div class="ac-pains">
+    <div class="ac-pain reveal">
+      <div class="ac-pain-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="4.9" y1="4.9" x2="19.1" y2="19.1"/></svg></div>
+      <h3>Card programs say no</h3>
+      <p>Brex&rsquo;s <a href="https://www.brex.com/legal/prohibited_activities" rel="noopener" target="_blank">prohibited activities list</a> names marijuana-related activity, including dispensing and deriving revenue from it.</p>
+    </div>
+    <div class="ac-pain reveal reveal-delay-1">
+      <div class="ac-pain-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg></div>
+      <h3>Reimbursements get fenced off</h3>
+      <p>Ramp lists cannabis-related businesses among the industries that <a href="https://support.ramp.com/limitations-for-international-reimbursements" rel="noopener" target="_blank">can&rsquo;t use its international reimbursements</a>. Expensify&rsquo;s <a href="https://help.expensify.com/articles/new-expensify/wallet-and-payments/Connect-a-Business-Bank-Account" rel="noopener" target="_blank">help center</a> lists marijuana-related businesses among those it can&rsquo;t process direct payments for.</p>
+    </div>
+    <div class="ac-pain reveal reveal-delay-2">
+      <div class="ac-pain-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+      <h3>Xero&rsquo;s old expenses are going away</h3>
+      <p>Xero is <a href="https://developer.xero.com/changelog" rel="noopener" target="_blank">retiring Classic Expenses</a> and its expense-claims connection for other apps. Spreadsheets and envelopes of receipts fill the gap.</p>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="ac-how" aria-labelledby="exp-how-h">
+  <div class="ac-head reveal">
+    <div class="ac-eyebrow">How it works</div>
+    <h2 id="exp-how-h">From a crumpled receipt <em>to money back in four steps.</em></h2>
+  </div>
+  <div class="ac-tl" data-ac-play>
+    <div class="ac-tl-track"><div class="ac-tl-fill"></div></div>
+    <div class="ac-step">
+      <div class="ac-dot"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></div>
+      <div class="ac-num">01</div><h3>Snap or forward</h3>
+      <p>Open the camera from a home-screen icon, or forward the receipt email to your company&rsquo;s receipts address. Mileage is typed in: from, to, miles.</p>
+    </div>
+    <div class="ac-step">
+      <div class="ac-dot"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="13" y2="17"/></svg></div>
+      <div class="ac-num">02</div><h3>It&rsquo;s read and coded</h3>
+      <p>AI reads the merchant, date, total and tax and suggests the account. The employee confirms, picks the company it belongs to, and submits.</p>
+    </div>
+    <div class="ac-step">
+      <div class="ac-dot"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><polyline points="16 11 18 13 22 9"/></svg></div>
+      <div class="ac-num">03</div><h3>It&rsquo;s approved</h3>
+      <p>The manager, a second approver above an amount you set, then finance. Policy flags show up next to the line so nobody has to hunt.</p>
+    </div>
+    <div class="ac-step ac-step--end">
+      <div class="ac-dot"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <div class="ac-num">04</div><h3>Posted and paid</h3>
+      <p>The report lands in Xero as a bill to the employee, and they&rsquo;re paid back by bank transfer, digital check, or through payroll.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT IT HANDLES -->
+<section class="ac-can" id="exp-features">
+  <div class="ac-head reveal">
+    <div class="ac-eyebrow">What it handles</div>
+    <h2>The parts that make cannabis <em>expenses messy.</em></h2>
+  </div>
+  <div class="ac-cards">
+    <div class="ac-card reveal">
+      <div class="ac-card-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div>
+      <h3>Several companies, one login</h3>
+      <p>Licenses usually mean separate companies. Each expense names the one it belongs to, and a report splits by company so nothing posts to the wrong books.</p>
+    </div>
+    <div class="ac-card reveal reveal-delay-1">
+      <div class="ac-card-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+      <h3>Mileage at the right rate</h3>
+      <p>The IRS rate was 72.5&cent; a mile until 07/01/2026 and 76&cent; after. Each trip gets the rate for its own date. <a href="/tools/mileage-reimbursement-calculator">Try the calculator</a>.</p>
+    </div>
+    <div class="ac-card reveal reveal-delay-2">
+      <div class="ac-card-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg></div>
+      <h3>Policy flags, not walls</h3>
+      <p>Set a limit per line, the amount that needs a receipt, and how old an expense can be. Breaks get flagged for the approver instead of blocking the employee.</p>
+    </div>
+    <div class="ac-card reveal">
+      <div class="ac-card-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></div>
+      <h3>Duplicate receipts caught</h3>
+      <p>The same receipt submitted twice, by two people, or under two companies gets flagged before anyone pays it.</p>
+    </div>
+    <div class="ac-card reveal reveal-delay-1">
+      <div class="ac-card-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+      <h3>Everyone sees only their part</h3>
+      <p>Employees see their own expenses. Approvers sign in with a second factor. Turn expenses on by company and by person, so your AR team never sees them.</p>
+    </div>
+    <div class="ac-card reveal reveal-delay-2">
+      <div class="ac-card-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+      <h3>Paid back three ways</h3>
+      <p>Bank transfer or a digital check from your account, or mark it paid through payroll and hand your payroll provider a CSV.</p>
+    </div>
+  </div>
+</section>
+
+<!-- XERO (dark) -->
+<section class="ac-dark" id="exp-xero">
+  <div class="ac-prev">
+    <div class="aic-call" data-price-note="example" data-ac-play aria-hidden="true">
+      <div class="aic-call-head">
+        <div><div class="aic-call-who">Bill EXP-1042</div><div class="aic-call-sub">To: the employee &middot; Grow, MI</div></div>
+        <span class="aic-tag">Awaiting payment</span>
+      </div>
+      <div class="aic-bubble aic-bubble--ai">Cultivation supplies &middot; Valley Irrigation Supply &middot; $214.37</div>
+      <div class="aic-bubble aic-bubble--ai">Vehicle &middot; 148 miles at 76&cent; &middot; $112.48</div>
+      <div class="aic-bubble aic-bubble--ai">Travel &middot; Lodging, two nights &middot; $285.63</div>
+      <div class="aic-result">
+        <div class="aic-result-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+        <div><b>3 receipts merged into one PDF</b><span>Attached to the bill &middot; $612.48 total</span></div>
+      </div>
+    </div>
+    <div>
+      <div class="ac-head reveal">
+        <div class="ac-eyebrow">Xero</div>
+        <h2>Lands in Xero the way <em>your bookkeeper would enter it.</em></h2>
+        <p>An approved report becomes <strong>one bill to the employee</strong> in that company&rsquo;s Xero, each line on its own account with up to two tracking categories, the receipts merged into one attached PDF. When the employee is paid, the payment goes on the bill, so the bank line matches.</p>
+      </div>
+      <p class="ac-why reveal">Using QuickBooks? Ask us on the call.</p>
+    </div>
+  </div>
+</section>
+
+<!-- IRS RULES -->
+<section class="ac-polite" id="exp-irs">
+  <div class="ac-head reveal">
+    <div class="ac-eyebrow">Keep reimbursements tax-free</div>
+    <h2>The IRS rules, <em>checked on every line.</em></h2>
+    <p>Reimbursements stay off an employee&rsquo;s W-2 when they&rsquo;re paid under an <a href="/blog/accountable-plan">accountable plan</a>. The platform flags the lines that would break one.</p>
+  </div>
+  <div class="ac-cards">
+    <div class="ac-card reveal">
+      <div class="ac-card-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+      <h3>Submitted within 60 days</h3>
+      <p>The IRS treats an expense accounted for within 60 days as on time. Older ones get flagged.</p>
+    </div>
+    <div class="ac-card reveal reveal-delay-1">
+      <div class="ac-card-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+      <h3>Receipts where they count</h3>
+      <p>Lodging needs a receipt, and so does anything else of $75 or more. A missing one is flagged before approval.</p>
+    </div>
+    <div class="ac-card reveal reveal-delay-2">
+      <div class="ac-card-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+      <h3>A written policy to start from</h3>
+      <p>Grab the free <a href="/templates/expense-reimbursement-policy">expense reimbursement policy template</a> and have your CPA set it up alongside your 280E plan.</p>
+    </div>
+  </div>
+  <p class="exp-src reveal">Source: <a href="https://www.irs.gov/publications/p463" rel="noopener" target="_blank">IRS Publication 463</a>. Not tax advice. Ask your CPA how <a href="/blog/280e-tax">280E</a> applies to your company.</p>
+</section>
+
+<!-- FAQ -->
+<section class="exp-faq" id="faq">
+  <div class="ac-head reveal">
+    <div class="ac-eyebrow">FAQ</div>
+    <h2>Expense reports, <em>answered.</em></h2>
+  </div>
+  <div class="exp-faq-list">
+    <details><summary>Does it work for plant-touching cannabis businesses?</summary><p>Yes. ShelfSpace is built for cannabis companies: dispensaries, cultivators, processors and brands. Employees are paid back from your own account by bank transfer or digital check.</p></details>
+    <details><summary>Do employees need to download an app?</summary><p>No. It runs in the phone&rsquo;s browser and can be saved to the home screen like an app. Employees can also forward receipt emails to your company&rsquo;s receipts address, which creates a draft for them to finish.</p></details>
+    <details><summary>How does it post to Xero?</summary><p>Each approved report becomes one bill to the employee in the right company&rsquo;s Xero, with each line on its account and tracking categories, and every receipt merged into one attached PDF. When the employee is paid, the payment is recorded on the bill.</p></details>
+    <details><summary>Can one person work across several of our companies?</summary><p>Yes. Each expense names the company it belongs to, and a report with lines for two companies is split into two reports, one for each company&rsquo;s books.</p></details>
+    <details><summary>How is mileage paid?</summary><p>The employee types where they went and how many miles. Each trip is paid at the IRS standard rate for its date: 72.5 cents a mile before 07/01/2026 and 76 cents from 07/01/2026.</p></details>
+    <details><summary>Who can approve expenses?</summary><p>You set it: the employee&rsquo;s manager, a second approver above an amount you choose, then finance, with a backup for each approver. Nobody can approve their own expense, and approvers sign in with a second factor.</p></details>
+    <details><summary>What about company cards?</summary><p>Today ShelfSpace handles out-of-pocket spending and mileage, the money you owe your people. Ask us on the call about company card spending.</p></details>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="ac-final">
+  <div class="ac-eyebrow reveal">Get started</div>
+  <h2 class="reveal">Stop chasing receipts. Start paying people back.</h2>
+  <p class="reveal">We set up your companies, approvers and Xero for you. Your team just snaps receipts.</p>
+  <div class="ac-final-actions reveal">
+    <span class="cta-stack"><a href="/contact?cta=expenses-ac-final" class="ac-btn">Schedule a call <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a><span class="cta-micro">30 minutes with Chris. See how it would run for your business.</span></span>
+  </div>
+</section>
+
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="/" class="nav-logo"><div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div><span class="nav-logo-text">ShelfSpace<sup class="nav-logo-tm">™</sup></span></a>
+      <p>Financial tools built for cannabis operators.</p>
+      <p class="footer-phone">Questions? <a href="sms:+19713194085?&amp;body=Hi%20Chris%2C%20I%20have%20a%20question%20about%20ShelfSpace.">Text Chris now: 971-319-4085</a></p>
+    </div>
+    <div class="footer-col"><h3>Services</h3><ul><li><a href="/accounts-receivable">Accounts Receivable</a></li><li><a href="/collections">Collections</a></li><li><a href="/payment-plans">Payment Plans</a></li><li><a href="/ai-calls">AI Calls</a></li></ul></div>
+    <div class="footer-col"><h3>Platform</h3><ul><li><a href="/features">Features</a></li><li><a href="/payments">Payments</a></li><li><a href="/integrations">Integrations</a></li><li><a href="/connect-your-ai">Connect Your AI</a></li></ul></div>
+    <div class="footer-col"><h3>Resources</h3><ul><li><a href="/pricing">Pricing</a></li><li><a href="/blog">Blog</a></li><li><a href="/docs">Docs</a></li><li><a href="/how-to">Guides</a></li><li><a href="/tutorials">Tutorials</a></li><li><a href="/tools">Free tools</a></li></ul></div>
+    <div class="footer-col"><h3>Company</h3><ul><li><a href="/about">About</a></li><li><a href="/vendors">For Vendors</a></li><li><a href="/for-bookkeepers">For Bookkeepers</a></li><li><a href="/contact">Contact</a></li><li><a href="mailto:support@shelfspace.pro">Support</a></li><li><a href="https://ourshelf.space/login">Login</a></li><li><a href="https://linkedin.com/company/shelfspace-pro" target="_blank" rel="noopener" class="footer-social-link"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> LinkedIn</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><p>&copy; 2026 ShelfSpace Technologies Inc.</p><div style="display:flex;align-items:center;gap:8px;justify-content:center;margin-top:12px;"><img src="/metrc-logo-v2.png" alt="Metrc" loading="lazy" style="height:18px;opacity:0.4;filter:brightness(0) invert(1);"><span style="font-size:11px;color:rgba(255,255,255,0.35);">Certified Metrc Third-Party Vendor</span></div><div class="footer-bottom-links"><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div></div>
+</footer>
+
+<script>
+(function() {
+  var nav = document.getElementById('nav');
+  var pageHero = document.querySelector('.page-hero');
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  requestAnimationFrame(function() {
+    nav.classList.toggle('scrolled', window.scrollY > 20);
+    if (pageHero) pageHero.classList.add('hero-loaded');
+  });
+  window.addEventListener('scroll', function() { nav.classList.toggle('scrolled', window.scrollY > 20); }, { passive: true });
+
+  function countUp(el) {
+    var to = +el.getAttribute('data-ac-count');
+    if (reduced || !to) { el.textContent = to; return; }
+    var t0 = null;
+    (function step(t) {
+      if (!t0) t0 = t;
+      var p = Math.min(1, (t - t0) / 1200);
+      el.textContent = Math.round(to * (1 - Math.pow(1 - p, 3)));
+      if (p < 1) requestAnimationFrame(step);
+    })(performance.now());
+  }
+
+  var io = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (!e.isIntersecting) return;
+      var el = e.target;
+      if (el.hasAttribute('data-ac-count')) countUp(el);
+      else el.classList.add(el.classList.contains('reveal') ? 'is-visible' : 'go');
+      io.unobserve(el);
+    });
+  }, { threshold: 0.2 });
+  document.querySelectorAll('.reveal, [data-ac-play]').forEach(function(el) { io.observe(el); });
+  document.querySelectorAll('[data-ac-count]').forEach(function(el) { if (!reduced) el.textContent = '0'; io.observe(el); });
+
+  document.addEventListener('click', function() {
+    var navLinks = document.querySelector('.nav-links');
+    if (navLinks && navLinks.classList.contains('mobile-open')) navLinks.classList.remove('mobile-open');
+  });
+})();
+</script>
+<script src="/hero-motion.js" defer></script>
+<script defer src="/shelfiq-widget.js"></script>
+<script src="/nav.js" defer></script>
+</body>
+</html>

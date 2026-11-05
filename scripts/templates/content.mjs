@@ -1,4 +1,4 @@
-// The ONE content source for the four free templates (SEO row C3, 10/29/2026).
+// The ONE content source for the free templates (SEO row C3, 10/29/2026; expense reimbursement policy added 11/05/2026).
 // scripts/build-templates.mjs renders each document three ways from these blocks: the .docx, the .pdf
 // and the preview on /templates/<slug>. Edit here, then run `npm run build:templates`;
 // `npm run check:assets` fails when a rendered file or preview no longer matches this source.
@@ -61,6 +61,41 @@ export const TEMPLATES = [
       { t: "h", x: "5. Everything else" },
       { t: "p", x: "Except for the schedule above, the original invoices and the parties' existing terms still apply. The seller does not give up any right by accepting a late or partial payment. Changes to this agreement must be in writing and signed by both parties." },
       { t: "sig", x: ["Seller signature", "Buyer signature", "Printed name and title", "Printed name and title", "Date (MM/DD/YYYY)", "Date (MM/DD/YYYY)"] },
+      { t: "disc" },
+    ],
+  },
+  {
+    slug: "expense-reimbursement-policy",
+    title: "Employee Expense Reimbursement Policy",
+    blocks: [
+      { t: "p", x: "This policy explains which business expenses the company pays back, how to submit them and when you'll be paid. It is written as an accountable plan: reimbursements that follow it are not added to your wages." },
+      { t: "fs", x: ["Company (legal name)", "Company entities this policy covers", "Effective date (MM/DD/YYYY)", "Policy owner (name and title)"] },
+      { t: "h", x: "1. What we reimburse" },
+      { t: "p", x: "We reimburse ordinary and necessary expenses you pay personally while doing your job for the company. Every expense needs a business purpose, written on the expense when you submit it." },
+      { t: "p", x: "Each expense names the company entity it belongs to. If you work for more than one entity, submit each expense under the entity it was for, and submit one report per entity." },
+      { t: "h", x: "2. Receipts" },
+      { t: "p", x: "Submit an itemized receipt for every lodging expense and for any other expense of $75 or more. A receipt shows the amount, the date, the place and what was bought. For an expense under $75 without a receipt, write down the amount, date, place and business purpose." },
+      { t: "p", x: "A photo of the receipt or a forwarded email receipt is acceptable. Keep the original until the expense is paid." },
+      { t: "h", x: "3. Mileage" },
+      { t: "p", x: "We reimburse business miles driven in your own vehicle at the IRS standard business mileage rate in effect on the date of each trip. For each trip, record the date, where you started and ended, the business purpose and the miles. Commuting between home and your regular workplace is not business mileage." },
+      { t: "h", x: "4. Deadlines" },
+      { t: "p", x: "Submit each expense within 60 days after you pay it. An expense submitted later may be paid as taxable wages or declined." },
+      { t: "p", x: "If you receive more than your accounted-for expenses, or an advance you don't fully use, return the excess within 120 days after the expense was paid or incurred." },
+      { t: "h", x: "5. Approvals" },
+      { t: "p", x: "Your manager approves your expenses first. Reports over the amount below need a second approval, and finance gives the final approval before payment. No one approves their own expenses. A report sent back for changes returns to the submitter and starts the approvals again once it's resubmitted." },
+      { t: "fs", x: ["Amount that needs a second approval", "Second approver (title)", "Finance approver (title)"] },
+      { t: "h", x: "6. How you're paid back" },
+      { t: "p", x: "Approved expenses are paid by the method below, within the time below after final approval." },
+      { t: "fs", x: ["Payment method (bank transfer, check, or through payroll)", "Paid within (days after final approval)"] },
+      { t: "h", x: "7. What we don't reimburse" },
+      { t: "p", x: "Personal expenses, including personal meals, entertainment for yourself, and personal travel added to a business trip." },
+      { t: "p", x: "Traffic tickets, parking fines and penalties, commuting costs, alcohol unless your manager approved it in advance, upgrades beyond the standard fare or room, and any expense without a business purpose." },
+      { t: "f", x: "Anything else the company does not reimburse" },
+      { t: "h", x: "8. Duplicate and false claims" },
+      { t: "p", x: "Submit each expense once. An expense already paid by a company card or another person can't be submitted for reimbursement. Submitting a false or duplicate expense may lead to discipline, up to and including termination." },
+      { t: "h", x: "Acknowledgment" },
+      { t: "p", x: "I have read this policy and will follow it when I submit expenses." },
+      { t: "sig", x: ["Employee signature", "Printed name", "Date (MM/DD/YYYY)", "Company entity"] },
       { t: "disc" },
     ],
   },

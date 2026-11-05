@@ -1,5 +1,5 @@
 /* ShelfSpace free tools (SEO row C3, 10/29/2026): DSO calculator, late-AR cost calculator,
- * net-terms policy builder, 280E tax calculator, cannabis loan calculator. One file renders every widget into <div data-ss-tool="dso|late-ar|net-terms">
+ * net-terms policy builder, 280E tax calculator, cannabis loan calculator, mileage reimbursement calculator. One file renders every widget into <div data-ss-tool="dso|late-ar|net-terms|280e|loan|mileage">
  * on both the tool page and its /tools/embed/ page, so the two can never drift.
  *
  * Money is integer cents end to end: parseCents() reads "$1,234.56" without floats, every formula
@@ -156,6 +156,41 @@
       netCents: net, totalCostCents: totalPaid - principalCents + fee, effectiveAprBps: apr, aprAboveCap: aboveCap };
   }
 
+  /**
+   * IRS business standard mileage rate for a trip date, in TENTHS of a cent per mile, or null when the date is
+   * outside the rates this tool carries. 2026 has two: 72.5 cents through 06/30/2026 (IR-2025-128) and 76 cents
+   * from 07/01/2026 (Announcement 2026-11). The rate follows the trip date, never the date it's submitted.
+   */
+  var MILEAGE_RATES = [
+    { from: Date.UTC(2026, 0, 1), to: Date.UTC(2026, 5, 30), tenths: 725 },
+    { from: Date.UTC(2026, 6, 1), to: Date.UTC(2026, 11, 31), tenths: 760 },
+  ];
+  function mileageRate(d) {
+    if (!d) return null;
+    var t = d.getTime();
+    for (var i = 0; i < MILEAGE_RATES.length; i++) if (t >= MILEAGE_RATES[i].from && t <= MILEAGE_RATES[i].to) return MILEAGE_RATES[i].tenths;
+    return null;
+  }
+
+  /** One trip: miles in tenths x rate in tenths of a cent / 100, rounded half up to whole cents. */
+  function mileageTrip(milesTenths, rateTenths) { return divRound(BigInt(milesTenths) * BigInt(rateTenths), 100); }
+
+  /**
+   * A list of trips [{ date: Date, milesTenths }] -> each line rounded to cents FIRST, then summed, the way a
+   * reimbursement report pays them. A line whose date has no rate is returned with cents null and left out of the total.
+   */
+  function mileage(trips) {
+    var lines = [], total = 0, miles = 0, missing = 0;
+    trips.forEach(function (tr) {
+      var r = mileageRate(tr.date);
+      if (r == null) { missing++; lines.push({ rateTenths: null, cents: null }); return; }
+      var c = mileageTrip(tr.milesTenths, r);
+      lines.push({ rateTenths: r, cents: c });
+      total += c; miles += tr.milesTenths;
+    });
+    return { lines: lines, totalCents: total, milesTenths: miles, missing: missing };
+  }
+
   var DISCLAIMER = "Not legal advice — have your counsel review it before you use it.";
 
   /** Plain-text net-terms policy from the builder's answers. */
@@ -203,7 +238,8 @@
 
   var api = { parseCents: parseCents, parseInt10: parseInt10, parseBps: parseBps, parseTenths: parseTenths, divRound: divRound,
     fmtCents: fmtCents, fmtMDY: fmtMDY, parseMDY: parseMDY, dso: dso, daysLate: daysLate, lateCost: lateCost,
-    buildPolicy: buildPolicy, DISCLAIMER: DISCLAIMER, tax280e: tax280e, loanPayment: loanPayment, loanCost: loanCost };
+    buildPolicy: buildPolicy, DISCLAIMER: DISCLAIMER, tax280e: tax280e, loanPayment: loanPayment, loanCost: loanCost,
+    mileageRate: mileageRate, mileageTrip: mileageTrip, mileage: mileage };
   root.SSTools = api;
 
   // ---------- widgets ----------
@@ -421,6 +457,58 @@
     run();
   }
 
+  function fmtRate(tenths) { return (tenths / 10).toFixed(1).replace(/\.0$/, "") + "\u00a2"; }
+
+  function mountMileage(el) {
+    var list = h("div", { class: "ss-trips" });
+    var add = h("button", { type: "button", class: "ss-btn", text: "+ Add a trip" });
+    var oM = out("Total miles"), oT = out("Reimbursement");
+    var msg = h("p", { class: "ss-msg", role: "status" });
+    var res = h("div", { class: "ss-results", "data-price-note": "calculator", "aria-live": "polite" }, [oM.wrap, oT.wrap, msg]);
+    el.appendChild(h("div", { class: "ss-card ss-card--wide" }, [h("div", { class: "ss-card-h", text: "2026 mileage reimbursement calculator" }),
+      h("p", { class: "ss-hint ss-trip-note", text: "72.5\u00a2 a mile for trips through 06/30/2026, 76\u00a2 from 07/01/2026. Each trip gets the rate for its date." }),
+      list, h("div", { class: "ss-actions" }, [add]), res]));
+    var rows = [];
+    function addRow(date, miles) {
+      var n = rows.length + 1;
+      var d = field("Date (MM/DD/YYYY)", { inputmode: "numeric", autocomplete: "off", placeholder: "MM/DD/YYYY", value: date || "" });
+      var m = field("Business miles", { inputmode: "decimal", autocomplete: "off", placeholder: "e.g. 42.5", value: miles || "" });
+      var amt = h("output", { class: "ss-trip-amt" });
+      var rm = h("button", { type: "button", class: "ss-trip-rm", "aria-label": "Remove trip", text: "\u00d7" });
+      var row = h("div", { class: "ss-trip" }, [d.wrap, m.wrap, h("div", { class: "ss-trip-end" }, [amt, rm])]);
+      var rec = { row: row, d: d.input, m: m.input, amt: amt };
+      rows.push(rec); list.appendChild(row);
+      [d.input, m.input].forEach(function (i) { i.addEventListener("input", run); });
+      rm.addEventListener("click", function () { if (rows.length === 1) { rec.d.value = ""; rec.m.value = ""; } else { rows.splice(rows.indexOf(rec), 1); row.remove(); } run(); });
+      return rec;
+    }
+    function run() {
+      oM.v.textContent = "\u2014"; oT.v.textContent = "\u2014"; msg.textContent = "";
+      var trips = [], bad = null, used = 0, outside = 0;
+      rows.forEach(function (r) {
+        r.amt.textContent = "";
+        var ds = r.d.value.trim(), ms = r.m.value.trim();
+        if (!ds && !ms) return;
+        var dt = parseMDY(ds), mt = parseTenths(ms);
+        if (!dt) { bad = bad || "Enter each trip date as MM/DD/YYYY."; return; }
+        if (mt == null) { bad = bad || "Miles should be a number with up to one decimal, like 42 or 42.5."; return; }
+        var rate = mileageRate(dt);
+        if (rate == null) { outside++; r.amt.textContent = "No 2026 rate"; return; }
+        r.amt.textContent = fmtCents(mileageTrip(mt, rate)) + " at " + fmtRate(rate);
+        trips.push({ date: dt, milesTenths: mt }); used++;
+      });
+      if (bad) { msg.textContent = bad; return; }
+      if (!used) { msg.textContent = outside ? "This calculator carries the 2026 rates. Enter trips dated in 2026." : "Enter a trip date and the business miles."; return; }
+      var r = mileage(trips);
+      oM.v.textContent = (r.milesTenths / 10).toFixed(1).replace(/\.0$/, "") + " mi";
+      oT.v.textContent = fmtCents(r.totalCents);
+      msg.textContent = outside ? "Trips outside 2026 are left out of the total." : "Each trip is rounded to the cent, then added up.";
+    }
+    add.addEventListener("click", function () { var r = addRow(); r.d.focus(); run(); });
+    addRow(); addRow();
+    run();
+  }
+
   // Copy buttons for embed snippets: <button data-ss-copy="#id">
   function wireCopy() {
     doc.querySelectorAll("[data-ss-copy]").forEach(function (b) {
@@ -438,7 +526,7 @@
       if (el.getAttribute("data-ss-mounted")) return;
       el.setAttribute("data-ss-mounted", "1");
       var k = el.getAttribute("data-ss-tool");
-      if (k === "dso") mountDso(el); else if (k === "late-ar") mountLateAr(el); else if (k === "net-terms") mountNetTerms(el); else if (k === "280e") mountTax280e(el); else if (k === "loan") mountLoan(el);
+      if (k === "dso") mountDso(el); else if (k === "late-ar") mountLateAr(el); else if (k === "net-terms") mountNetTerms(el); else if (k === "280e") mountTax280e(el); else if (k === "loan") mountLoan(el); else if (k === "mileage") mountMileage(el);
     });
     wireCopy();
   }

@@ -39,6 +39,7 @@ const TOOLS = [
   { slug: "net-terms-policy-builder", tool: "net-terms" },
   { slug: "280e-tax-calculator", tool: "280e" },
   { slug: "cannabis-loan-calculator", tool: "loan" },
+  { slug: "mileage-reimbursement-calculator", tool: "mileage" },
 ];
 const robotsNoindex = (html) => /<meta\s+name="robots"\s+content="[^"]*noindex[^"]*"\s*\/?>/i.test(html.replace(/<!--[\s\S]*?-->/g, ""));
 
@@ -98,6 +99,20 @@ else {
   eq("loanCost worked example 36m", (() => { const c = T.loanCost(5000000, 1200, 36, 200); return [c.paymentCents, c.interestCents, c.totalCostCents, c.effectiveAprBps]; })(), [166072, 978592, 1078592, 1342]);
   eq("loanCost worked example 60m", (() => { const c = T.loanCost(5000000, 1200, 60, 200); return [c.paymentCents, c.totalCostCents, c.effectiveAprBps]; })(), [111222, 1773320, 1290]);
   eq("loanCost no fee APR", T.loanCost(5000000, 1200, 60, 0).effectiveAprBps, 1200);
+  // Mileage 2026: the rate follows the TRIP date. 06/30/2026 is the last 72.5-cent day, 07/01/2026 the first 76-cent day.
+  eq("mileageRate(06/30/2026)", T.mileageRate(T.parseMDY("06/30/2026")), 725);
+  eq("mileageRate(07/01/2026)", T.mileageRate(T.parseMDY("07/01/2026")), 760);
+  eq("mileageRate(01/01/2026)", T.mileageRate(T.parseMDY("01/01/2026")), 725);
+  eq("mileageRate(12/31/2026)", T.mileageRate(T.parseMDY("12/31/2026")), 760);
+  eq("mileageRate(12/31/2025) has no rate", T.mileageRate(T.parseMDY("12/31/2025")), null);
+  eq("mileageRate(01/01/2027) has no rate", T.mileageRate(T.parseMDY("01/01/2027")), null);
+  eq("mileage(100 mi 06/30 + 100 mi 07/01)", T.mileage([{ date: T.parseMDY("06/30/2026"), milesTenths: 1000 }, { date: T.parseMDY("07/01/2026"), milesTenths: 1000 }]),
+    { lines: [{ rateTenths: 725, cents: 7250 }, { rateTenths: 760, cents: 7600 }], totalCents: 14850, milesTenths: 2000, missing: 0 });
+  eq("mileageTrip(12.3 mi @ 76c)", T.mileageTrip(123, 760), 935);
+  // each trip rounds to the cent BEFORE the total: two 0.1-mile trips at 72.5c are 7c + 7c = 14c (summing first would give 15c)
+  eq("mileage rounds per line", T.mileage([{ date: T.parseMDY("03/02/2026"), milesTenths: 1 }, { date: T.parseMDY("03/02/2026"), milesTenths: 1 }]).totalCents, 14);
+  eq("mileage leaves an undated-rate trip out", T.mileage([{ date: T.parseMDY("12/31/2025"), milesTenths: 100 }, { date: T.parseMDY("07/01/2026"), milesTenths: 100 }]),
+    { lines: [{ rateTenths: null, cents: null }, { rateTenths: 760, cents: 760 }], totalCents: 760, milesTenths: 100, missing: 1 });
   const d = T.parseMDY("3/2/2026");
   eq('fmtMDY(parseMDY("3/2/2026"))', d && T.fmtMDY(d), "03/02/2026");
   eq('parseMDY("2026-03-02")', T.parseMDY("2026-03-02"), null);

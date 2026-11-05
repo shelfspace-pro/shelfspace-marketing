@@ -236,3 +236,16 @@ html body .fin-text:hover { text-decoration: none; filter: brightness(1.05); }
 .fin-page .compare-table td:first-child { font-weight: 600; color: var(--green-deep); }
 .fin-page .compare-table tr:last-child td { border-bottom: 0; }
 @media (max-width: 760px) { .fin-page .compare-table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; font-size: 14px; } .fin-page .compare-table th, .fin-page .compare-table td { min-width: 120px; padding: 10px 12px; } }
+
+/* Mileage reimbursement calculator (11/05/2026): one row per trip, the amount beside it */
+.ss-trip-note { display: block; margin: -6px 0 14px; }
+.ss-trips { display: grid; gap: 12px; margin-bottom: 12px; }
+.ss-trip { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) 150px; gap: 12px; align-items: end; padding-bottom: 12px; border-bottom: 1px solid rgba(149,213,178,0.16); }
+.ss-trip-end { display: flex; align-items: center; justify-content: flex-end; gap: 8px; min-height: 46px; }
+.ss-trip-amt { font: 700 15px/1.2 var(--font-mono); font-variant-numeric: tabular-nums; color: var(--green-accent); text-align: right; }
+.ss-trip-rm { width: 44px; height: 44px; flex: 0 0 44px; border-radius: 12px; border: 1px solid rgba(149,213,178,0.35); background: transparent; color: rgba(255,255,255,0.75); font: 400 22px/1 'DM Sans', sans-serif; cursor: pointer; }
+.ss-trip-rm:hover { background: rgba(149,213,178,0.18); color: var(--white); }
+@media (max-width: 640px) {
+  .ss-trip { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .ss-trip-end { grid-column: 1 / -1; justify-content: space-between; min-height: 44px; }
+}
