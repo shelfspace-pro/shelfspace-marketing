@@ -205,6 +205,120 @@
     .qd-row .n span { display: block; margin-left: 0; margin-top: 2px; }
     .disc { grid-template-columns: minmax(0, 1fr) 96px; }
   }
+
+  /* ===== QUOTE v3 (11/05/2026, Chris): guarantee strip in the band, guarantee terms box (Send mail as,
+     AI calling, all AR through ShelfSpace), customer quotes + two printed proof pages condensed from the
+     three brand case studies (/blog/case-study-*). Figures copied from those pages; change them there first. ===== */
+  .qd-guar { position: relative; z-index: 1; margin-top: 18px; display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-radius: 14px;
+    background: linear-gradient(90deg, rgba(149,213,178,0.22), rgba(149,213,178,0.08)); border: 1px solid rgba(149,213,178,0.5); }
+  .qd-guar .sh { flex: none; width: 36px; height: 36px; border-radius: 10px; display: grid; place-items: center; background: var(--green-accent); }
+  .qd-guar .sh svg { width: 20px; height: 20px; }
+  .qd-guar b { display: block; font-size: 16px; font-weight: 700; color: #fff; letter-spacing: -0.2px; line-height: 1.3; }
+  .qd-guar span { display: block; font-size: 12px; color: rgba(230,244,234,0.7); margin-top: 2px; }
+  .qd-gterms { margin-top: 16px; border-radius: 14px; border: 1px solid var(--green-light); background: linear-gradient(180deg, #fff, var(--green-ghost)); padding: 14px 16px; }
+  .qd-gterms h3 { display: flex; align-items: center; gap: 8px; margin: 0 0 6px; font-size: 11px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: var(--green-dark); }
+  .qd-gterms h3 svg { width: 14px; height: 14px; color: var(--green-mid); }
+  .qd-gterms p { margin: 0 0 10px; font-size: 12px; line-height: 1.55; color: var(--slate-600); }
+  .qd-req { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; list-style: none; margin: 0; padding: 0; }
+  .qd-req li { display: flex; gap: 8px; align-items: flex-start; background: #fff; border: 1px solid var(--green-light); border-radius: 12px; padding: 9px 10px; }
+  .qd-req .n { flex: none; width: 20px; height: 20px; border-radius: 6px; display: grid; place-items: center; font-family: var(--font-mono); font-size: 11px; font-weight: 700; color: #fff; background: var(--green-deep); }
+  .qd-req b { display: block; font-size: 12.5px; color: var(--green-deep); line-height: 1.3; }
+  .qd-req span { display: block; font-size: 11px; color: var(--slate-500); line-height: 1.4; margin-top: 2px; }
+  @media (max-width: 640px) { .qd-req { grid-template-columns: minmax(0, 1fr); } .qd-guar b { font-size: 15px; } }
+
+  /* ---- Proof pages ---- */
+  .pf { max-width: 1040px; margin: 72px auto 0; display: grid; gap: 28px; }
+  .pf-page { display: grid; gap: 22px; align-content: start; padding: 0; background: transparent; }
+  .pf-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; flex-wrap: wrap; }
+  .pf-head .eb { font-size: 11px; font-weight: 700; letter-spacing: 1.4px; text-transform: uppercase; color: var(--green-mid); margin-bottom: 6px; }
+  .pf-head h2 { margin: 0; font-size: clamp(30px, 3.6vw, 40px); letter-spacing: -1.4px; line-height: 1.05; color: var(--green-deep); }
+  .pf-head p { margin: 8px 0 0; color: var(--slate-600); font-size: 15px; max-width: 520px; }
+  .pf-mark { font-family: var(--font-mono); font-size: 12px; color: var(--slate-400); }
+  .pf-tq { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+  .pf-q { position: relative; margin: 0; background: #fff; border: 1px solid var(--green-light); border-radius: 20px; padding: 22px 22px 18px; box-shadow: 0 18px 40px -26px rgba(27,67,50,0.4); overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; gap: 16px; }
+  .pf-q::before { content: "\201C"; position: absolute; right: 14px; top: -22px; font-size: 130px; font-weight: 700; color: rgba(149,213,178,0.35); line-height: 1; font-family: Georgia, serif; }
+  .pf-q blockquote { position: relative; margin: 0; font-size: 22px; font-weight: 700; letter-spacing: -0.6px; line-height: 1.22; color: var(--green-deep); }
+  .pf-q blockquote mark { color: inherit; background: linear-gradient(rgba(149,213,178,0.75), rgba(149,213,178,0.75)) 0 88% / 100% 0.36em no-repeat; padding: 0 2px; }
+  .pf-q figcaption { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-top: 14px; border-top: 1px solid var(--green-light); font-size: 13px; color: var(--slate-500); }
+  .pf-q figcaption b { display: block; color: var(--slate-800); font-size: 14px; }
+  .pf-q figcaption img { height: 34px; width: auto; flex: none; }
+
+  .pf-case { border-radius: 24px; overflow: hidden; background: #fff; border: 1px solid var(--green-light); box-shadow: 0 30px 70px -40px rgba(27,67,50,0.45); }
+  .pf-hero { position: relative; overflow: hidden; display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 20px; padding: 22px 26px; color: #e6f4ea; background: linear-gradient(140deg, #1b4332 0%, #0f2a1f 100%); }
+  .pf-hero::after { content: ""; position: absolute; right: 60px; top: -120px; width: 320px; height: 320px; border-radius: 50%; background: radial-gradient(circle, var(--glow, rgba(149,213,178,0.3)), rgba(149,213,178,0) 70%); pointer-events: none; }
+  .pf-tag { display: inline-flex; align-items: center; gap: 6px; font-size: 10.5px; font-weight: 700; letter-spacing: 1.3px; text-transform: uppercase; color: var(--acc, var(--green-accent)); }
+  .pf-tag i { width: 7px; height: 7px; border-radius: 50%; background: var(--acc, var(--green-accent)); }
+  .pf-big { font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-weight: 700; font-size: 54px; line-height: 1; letter-spacing: -2px; color: #fff; margin: 8px 0 6px; }
+  .pf-big small { font-size: 22px; color: rgba(230,244,234,0.6); letter-spacing: -0.5px; margin-left: 4px; }
+  .pf-hero p { position: relative; z-index: 1; margin: 0; font-size: 15px; color: rgba(230,244,234,0.82); max-width: 440px; line-height: 1.45; }
+  .pf-ring { position: relative; z-index: 1; width: 118px; height: 118px; }
+  .pf-ring svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+  .pf-ring .lab { position: absolute; inset: 0; display: grid; place-content: center; text-align: center; }
+  .pf-ring .lab b { font-family: var(--font-mono); font-size: 26px; color: #fff; line-height: 1; }
+  .pf-ring .lab span { font-size: 10px; color: rgba(230,244,234,0.7); margin-top: 4px; }
+  .pf-body { padding: 18px 26px 20px; display: grid; gap: 16px; }
+  .pf-tiles { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+  .pf-tiles--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .pf-tile { border-radius: 14px; background: var(--green-ghost); border: 1px solid var(--green-light); padding: 11px 12px; }
+  .pf-tile b { display: block; font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-size: 19px; color: var(--green-deep); letter-spacing: -0.5px; line-height: 1.1; }
+  .pf-tile span { display: block; font-size: 11.5px; color: var(--slate-500); margin-top: 4px; line-height: 1.35; }
+  .pf-h { display: flex; justify-content: space-between; gap: 12px; font-size: 11px; font-weight: 700; letter-spacing: 1.1px; text-transform: uppercase; color: var(--green-dark); margin-bottom: 8px; }
+  .pf-h span:last-child { display: inline-flex; gap: 12px; font-weight: 600; letter-spacing: 0; text-transform: none; color: var(--slate-500); }
+  .pf-key { display: inline-flex; align-items: center; gap: 5px; }
+  .pf-key::before { content: ""; width: 10px; height: 10px; border-radius: 3px; background: var(--k); }
+  .pf-bars { display: grid; gap: 7px; }
+  .pf-bar { display: grid; grid-template-columns: 76px minmax(0, 1fr) 150px; gap: 10px; align-items: center; font-size: 12.5px; color: var(--slate-700); }
+  .pf-bar .tr { position: relative; height: 18px; border-radius: 6px; background: var(--slate-100); overflow: hidden; }
+  .pf-bar .tr i { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 6px; }
+  .pf-bar .tr i.due { background: #d8efe0; }
+  .pf-bar .tr i.paid { background: linear-gradient(90deg, #40916c, #52b788); }
+  .pf-bar .v { font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-size: 11.5px; text-align: right; color: var(--slate-500); white-space: nowrap; }
+  .pf-bar .v b { color: var(--green-deep); }
+  .pf-split { display: flex; height: 34px; border-radius: 10px; overflow: hidden; font-size: 12px; font-weight: 700; }
+  .pf-split i { display: flex; align-items: center; padding: 0 12px; white-space: nowrap; font-style: normal; }
+  .pf-lesson { display: flex; gap: 10px; align-items: center; border-radius: 14px; padding: 11px 14px; background: #fffbeb; border: 1px solid #fde68a; font-size: 13.5px; color: #78350f; }
+  .pf-lesson svg { flex: none; width: 18px; height: 18px; color: #d97706; }
+  .pf-two { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 18px; align-items: start; }
+  .pf-inv { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 6px; }
+  .pf-inv i { display: grid; place-items: center; height: 40px; border-radius: 9px; font-style: normal; font-size: 10px; font-weight: 700; color: #fff; background: linear-gradient(180deg, #52b788, #40916c); }
+  .pf-inv i svg { width: 16px; height: 16px; }
+  .pf-inv i.open { background: var(--slate-100); color: var(--slate-500); border: 1px dashed var(--slate-300); }
+  .pf-tl { position: relative; list-style: none; margin: 0; padding: 0 0 0 18px; display: grid; gap: 9px; }
+  .pf-tl::before { content: ""; position: absolute; left: 5px; top: 6px; bottom: 6px; width: 2px; background: linear-gradient(180deg, #95d5b2, #40916c); border-radius: 2px; }
+  .pf-tl li { position: relative; font-size: 12.5px; color: var(--slate-600); line-height: 1.35; }
+  .pf-tl li::before { content: ""; position: absolute; left: -17px; top: 4px; width: 10px; height: 10px; border-radius: 50%; background: #fff; border: 2px solid #40916c; }
+  .pf-tl li b { color: var(--green-deep); font-family: var(--font-mono); font-size: 11.5px; margin-right: 6px; }
+  .pf-ba { display: grid; gap: 10px; }
+  .pf-ba-row { display: grid; grid-template-columns: 58px minmax(0, 1fr); gap: 10px; align-items: center; font-size: 12px; font-weight: 700; color: var(--slate-600); }
+  .pf-ba-row .tr { display: flex; height: 30px; border-radius: 8px; overflow: hidden; background: var(--slate-100); }
+  .pf-ba-row .tr i { display: flex; align-items: center; padding: 0 10px; font-style: normal; font-size: 11.5px; font-weight: 700; white-space: nowrap; }
+  .pf-reps { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; }
+  .pf-rep { text-align: center; font-size: 10.5px; color: var(--slate-500); }
+  .pf-rep svg { width: 30px; height: 30px; color: var(--green-dark); display: block; margin: 0 auto 4px; }
+  .pf-rep .m { height: 7px; border-radius: 4px; background: #d8efe0; overflow: hidden; display: flex; }
+  .pf-rep .m i { width: 25%; background: #f59e0b; }
+  .pf-rep .m i + i { width: 25%; background: #52b788; }
+  .pf-link { font-size: 12.5px; font-weight: 700; color: var(--green-mid); text-decoration: none; }
+  .pf-link:hover { text-decoration: underline; }
+  .pf-foot { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; font-size: 11px; color: var(--slate-400); padding: 0 4px; }
+  .pf-foot b { color: var(--green-deep); }
+  .pf-case--farm { --acc: #b4a7f5; --glow: rgba(180,167,245,0.32); }
+  .pf-case--time { --acc: #fcd34d; --glow: rgba(252,211,77,0.26); }
+  @media screen and (max-width: 760px) {
+    .pf { margin-top: 48px; }
+    .pf-tq, .pf-two { grid-template-columns: minmax(0, 1fr); }
+    .pf-tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .pf-tiles--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .pf-hero { grid-template-columns: minmax(0, 1fr); padding: 20px 18px; }
+    .pf-ring { width: 96px; height: 96px; }
+    .pf-big { font-size: 42px; }
+    .pf-body { padding: 16px 16px 18px; }
+    .pf-bar { grid-template-columns: 58px minmax(0, 1fr); }
+    .pf-bar .v { grid-column: 2; text-align: left; margin-top: -4px; }
+    .pf-q blockquote { font-size: 20px; }
+    .pf-split i { padding: 0 8px; font-size: 11px; }
+  }
+  @media screen and (max-width: 400px) { .pf-tiles--3 { grid-template-columns: minmax(0, 1fr); } }
   @media (prefers-reduced-motion: reduce) {
     .qd-go::after, .q-pill i { animation: none; }
     .pv-bar i, .pv-legend li, .pv-cover, .pv-bar--pay i { transition: none !important; }
@@ -220,9 +334,30 @@
     .q-layout { display: block; }
     .q-side { position: static; }
     .q-doc { margin: 0; box-shadow: none; border: 1px solid var(--slate-200); border-radius: 16px; }
-    .qd-band { padding: 20px 28px 22px; }
-    .qd { padding: 20px 28px 22px; }
-    .qd-row { padding: 8px 0; font-size: 14px; }
+    .qd-band { padding: 18px 26px 18px; }
+    .qd-guar { margin-top: 14px; padding: 10px 12px; }
+    .qd-hero { margin-top: 12px; }
+    .qd-eyebrow { margin-top: 16px; }
+    .qd { padding: 16px 26px 18px; }
+    .qd-list { margin-top: 12px; }
+    .qd-row { padding: 6px 0; font-size: 13.5px; }
+    .qd-fine { margin-top: 10px; font-size: 11px; }
+    .qd-gterms { margin-top: 10px; padding: 12px 14px; }
+    .pf { display: block; max-width: none; margin: 0; }
+    .pf-page { display: block; break-before: page; page-break-before: always; }
+    .pf-page > * + * { margin-top: 14px; }
+    .pf-case, .pf-q { box-shadow: none; break-inside: avoid; }
+    .pf-head h2 { font-size: 30px; }
+    .pf-hero { padding: 18px 22px; }
+    .pf-body { padding: 14px 22px 16px; gap: 12px; }
+    .pf-big { font-size: 46px; }
+    .pf-ring { width: 104px; height: 104px; }
+    .pf-q { padding: 18px 18px 14px; gap: 12px; }
+    .pf-q blockquote { font-size: 19px; }
+    .pf-link { display: none; }
+    .pf-hero p { font-size: 14px; }
+    .pf-tile { padding: 9px 11px; }
+    .pf-inv i { height: 34px; }
     .qd-print-foot { display: block; margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--slate-100); font-size: 11.5px; color: var(--slate-500); }
     .qd-print-foot b { color: var(--green-deep); }
   }
@@ -315,11 +450,21 @@
           <div class="qd-price" id="qd-price"></div>
           <div class="qd-terms" id="qd-terms"></div>
         </div>
+        <div class="qd-guar"><span class="sh"><svg viewBox="0 0 24 24" fill="none" stroke="#1b4332" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg></span><div><b>If we don&#39;t reduce your outstanding AR by 25%, it&#39;s free.</b><span>Our guarantee. Terms at the bottom of this page.</span></div></div>
       </div>
       <div class="qd">
         <div class="qd-value" id="qd-value"></div>
         <div class="qd-list" id="qd-list"></div>
         <div class="qd-fine" id="qd-fine"></div>
+        <div class="qd-gterms">
+          <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Guarantee terms</h3>
+          <p>Your first 30 days are free. We total the past-due invoices you hand us when we start; if stores haven&#39;t paid at least 25% of that total within 90 days, your first year is free. The guarantee requires all three of these:</p>
+          <ol class="qd-req">
+            <li><span class="n">1</span><div><b>Send mail as</b><span>Invoices and reminders go out from your own email address.</span></div></li>
+            <li><span class="n">2</span><div><b>AI calling on</b><span>Past-due stores get a phone call in your name, not just email.</span></div></li>
+            <li><span class="n">3</span><div><b>All of your AR</b><span>Every open invoice and every customer runs through ShelfSpace.</span></div></li>
+          </ol>
+        </div>
         <div class="qd-print-foot"><b>ShelfSpace</b> · shelfspace.pro · chris@shelfspace.pro</div>
       </div>
       <div class="qd-actions no-print">
@@ -332,6 +477,116 @@
       </div>
     </div>
   </div>
+  </div>
+
+  <!-- PROOF (11/05/2026): prints as pages 2 and 3 of the quote. Condensed from the three brand case studies;
+       every figure is copied from those pages. -->
+  <div class="pf" id="proof">
+    <section class="pf-page" aria-label="Proof">
+      <div class="pf-head">
+        <div><div class="eb">Proof</div><h2>Real brands. Real money back.</h2><p>What happened when brands handed their past-due invoices to ShelfSpace.</p></div>
+        <span class="pf-mark">shelfspace.pro</span>
+      </div>
+      <div class="pf-tq">
+        <figure class="pf-q"><blockquote>&ldquo;It&rsquo;s like <mark>QuickBooks on steroids</mark>.&rdquo;</blockquote><figcaption><div><b>Josh Covert</b>CEO, Meds Cafe</div><img src="/logos/customers/meds-cafe.png" alt="Meds Cafe" width="102" height="34"></figcaption></figure>
+        <figure class="pf-q"><blockquote>&ldquo;It&rsquo;s been a <mark>great addition</mark> to our AR efforts!&rdquo;</blockquote><figcaption><div><b>Shawna Gurgul</b>Sales Operations Administrator, One Garden</div><img src="/logos/customers/one-garden.png" alt="One Garden" width="113" height="34"></figcaption></figure>
+      </div>
+
+      <article class="pf-case">
+        <div class="pf-hero" data-price-note="customer">
+          <div><span class="pf-tag"><i></i>Case study · Wholesale brand</span><div class="pf-big">$417,560</div><p>in past-due invoices collected in the brand&rsquo;s first 30 days. Nobody on its team wrote or sent a single reminder.</p></div>
+          <div class="pf-ring" aria-hidden="true"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="42" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="10"/><circle cx="50" cy="50" r="42" fill="none" stroke="#95d5b2" stroke-width="10" stroke-linecap="round" stroke-dasharray="100.28 263.89"/></svg><div class="lab"><b>38%</b><span>of past due<br>paid</span></div></div>
+        </div>
+        <div class="pf-body" data-price-note="customer">
+          <div class="pf-tiles">
+            <div class="pf-tile"><b>$1,090,679</b><span>past due across 115 invoices at the start</span></div>
+            <div class="pf-tile"><b>52</b><span>invoices paid in 30 days</span></div>
+            <div class="pf-tile"><b>$172,876</b><span>landed in the first week</span></div>
+            <div class="pf-tile"><b>$39,684</b><span>biggest single payment</span></div>
+          </div>
+          <div>
+            <div class="pf-h"><span>The first 30 days</span><span></span></div>
+            <div class="pf-split"><i style="width:41.4%;background:#40916c;color:#fff">Week one: $172,876</i><i style="flex:1;background:#d8efe0;color:#1b4332">Weeks two to four</i></div>
+          </div>
+          <div>
+            <div class="pf-h"><span>Where the money came from</span><span><em class="pf-key" style="--k:#52b788;font-style:normal">Paid</em><em class="pf-key" style="--k:#d8efe0;font-style:normal">Past due at start</em></span></div>
+            <div class="pf-bars">
+              <div class="pf-bar"><span>1–30 days</span><span class="tr"><i class="due" style="width:100%"></i><i class="paid" style="width:41.63%"></i></span><span class="v"><b>$398,752</b> of $957,779</span></div>
+              <div class="pf-bar"><span>31–60 days</span><span class="tr"><i class="due" style="width:100%"></i><i class="paid" style="width:30.12%"></i></span><span class="v"><b>$18,807</b> of $62,446</span></div>
+              <div class="pf-bar"><span>61–90 days</span><span class="tr"><i class="due" style="width:100%"></i><i class="paid" style="width:0%"></i></span><span class="v"><b>$0</b> of $22,875</span></div>
+              <div class="pf-bar"><span>90+ days</span><span class="tr"><i class="due" style="width:100%"></i><i class="paid" style="width:0%"></i></span><span class="v"><b>$0</b> of $47,579</span></div>
+            </div>
+          </div>
+          <div class="pf-lesson"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.3h6c0-1 .4-1.8 1-2.3A7 7 0 0 0 12 2z"/></svg><span><b>The lesson:</b> a past-due invoice is easiest to collect while it&rsquo;s still fresh. Ask every time, on a schedule, in your own name.</span></div>
+          <a class="pf-link" href="/blog/case-study-brand-past-due-collected-30-days">Read the case study &rarr;</a>
+        </div>
+      </article>
+    </section>
+
+    <section class="pf-page" aria-label="More proof">
+      <article class="pf-case pf-case--farm">
+        <div class="pf-hero" data-price-note="customer">
+          <div><span class="pf-tag"><i></i>Case study · Small cannabis farm</span><div class="pf-big">88%</div><p>of a farm&rsquo;s past-due balance paid in month one. No AR department, just the people who grow it.</p></div>
+          <div class="pf-ring" aria-hidden="true"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="42" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="10"/><circle cx="50" cy="50" r="42" fill="none" stroke="#b4a7f5" stroke-width="10" stroke-linecap="round" stroke-dasharray="232.22 263.89"/></svg><div class="lab"><b>9/10</b><span>invoices<br>paid</span></div></div>
+        </div>
+        <div class="pf-body" data-price-note="customer">
+          <div class="pf-two">
+            <div>
+              <div class="pf-h"><span>10 past-due invoices</span><span></span></div>
+              <div class="pf-inv"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i><i class="open">90+</i></div>
+              <div class="pf-tiles pf-tiles--3" style="margin-top:10px">
+                <div class="pf-tile"><b>$19,531</b><span>collected of $22,099</span></div>
+                <div class="pf-tile"><b>16 days</b><span>median to pay</span></div>
+                <div class="pf-tile"><b>12</b><span>reminders, in all</span></div>
+              </div>
+            </div>
+            <div>
+              <div class="pf-h"><span>How it went</span><span></span></div>
+              <ol class="pf-tl">
+                <li><b>Day 0</b>Every open invoice sent with a Pay Now link, in the farm&rsquo;s name</li>
+                <li><b>Day 2</b>Four invoices paid</li>
+                <li><b>Day 16</b>The median invoice is paid</li>
+                <li><b>Day 30</b>9 of 10 paid. Every invoice under 60 days late, paid in full</li>
+              </ol>
+            </div>
+          </div>
+          <div class="pf-lesson"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.3h6c0-1 .4-1.8 1-2.3A7 7 0 0 0 12 2z"/></svg><span><b>The lesson:</b> most stores aren&rsquo;t dodging you. They just haven&rsquo;t been asked clearly, on time, with a way to pay in one click.</span></div>
+          <a class="pf-link" href="/blog/case-study-cannabis-farm-past-due-paid">Read the case study &rarr;</a>
+        </div>
+      </article>
+
+      <article class="pf-case pf-case--time">
+        <div class="pf-hero" data-price-note="customer">
+          <div><span class="pf-tag"><i></i>Case study · Five sales reps</span><div class="pf-big">50<small>hrs/wk</small></div><p>of sales-rep time back to selling, instead of chasing payments. Plus 12 more hours off the back office.</p></div>
+          <div class="pf-ring" aria-hidden="true"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="42" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="10"/><circle cx="50" cy="50" r="42" fill="none" stroke="#fcd34d" stroke-width="10" stroke-linecap="round" stroke-dasharray="131.94 263.89"/></svg><div class="lab"><b>&minus;50%</b><span>rep time on<br>collections</span></div></div>
+        </div>
+        <div class="pf-body" data-price-note="customer">
+          <div class="pf-two">
+            <div>
+              <div class="pf-h"><span>Rep time on collections, each week</span><span></span></div>
+              <div class="pf-ba">
+                <div class="pf-ba-row"><span>Before</span><span class="tr"><i style="width:100%;background:#fcd34d;color:#78350f">~100 hrs chasing payments</i></span></div>
+                <div class="pf-ba-row"><span>After</span><span class="tr"><i style="width:50%;background:#fcd34d;color:#78350f">~50 hrs</i><i style="width:50%;background:#52b788;color:#fff">50 hrs selling</i></span></div>
+              </div>
+              <div class="pf-reps" style="margin-top:14px"><div class="pf-rep"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg><div class="m"><i></i><i></i></div></div><div class="pf-rep"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg><div class="m"><i></i><i></i></div></div><div class="pf-rep"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg><div class="m"><i></i><i></i></div></div><div class="pf-rep"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg><div class="m"><i></i><i></i></div></div><div class="pf-rep"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg><div class="m"><i></i><i></i></div></div></div>
+              <div style="margin-top:6px;font-size:11px;color:var(--slate-500)"><em class="pf-key" style="--k:#f59e0b;font-style:normal">Collections</em> &nbsp; <em class="pf-key" style="--k:#52b788;font-style:normal">Freed up</em> &nbsp; <em class="pf-key" style="--k:#d8efe0;font-style:normal">Already selling</em></div>
+            </div>
+            <div>
+              <div class="pf-h"><span>Taken off their plate, month one</span><span></span></div>
+              <div class="pf-tiles pf-tiles--3" style="grid-template-columns:repeat(2,minmax(0,1fr))">
+                <div class="pf-tile"><b>38</b><span>invoices sent with a Pay Now link</span></div>
+                <div class="pf-tile"><b>195</b><span>payment reminders</span></div>
+                <div class="pf-tile"><b>120</b><span>who-owes-what lists to reps</span></div>
+                <div class="pf-tile"><b>62 hrs</b><span>a week saved in all</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="pf-lesson"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.3h6c0-1 .4-1.8 1-2.3A7 7 0 0 0 12 2z"/></svg><span><b>The lesson:</b> your reps should be the good news. Let AR be the reminder. Same month, the same brand collected $417,560.</span></div>
+          <a class="pf-link" href="/blog/case-study-back-office-labor-saved">Read the case study &rarr;</a>
+        </div>
+      </article>
+      <div class="pf-foot"><span>Figures are each brand&rsquo;s own results in its first month with ShelfSpace. Full stories at shelfspace.pro/blog.</span><span><b>ShelfSpace</b> · shelfspace.pro · chris@shelfspace.pro</span></div>
+    </section>
   </div>
 </div>
 </div>
@@ -504,8 +759,7 @@
     } else {
       rows = '<div class="qd-row"><div class="n">ShelfSpace<span>' + esc(r.label) + ' wholesale</span></div><div class="a">' + (discounted() ? "<s>" + usd(r.rate) + "</s>" : "") + usd(base) + "</div></div>";
       rows += '<div class="qd-row total"><div class="n">Monthly rate' + (discounted() ? "<span>" + esc(discName()) + ", " + pctText() + " off</span>" : "") + '</div><div class="a">' + usd(base) + "</div></div>" + guarantee;
-      fine = ["Billed monthly, nothing up front. No contract and no onboarding fee.",
-              "Your first 30 days are free. We total the past-due invoices you hand us when we start; if stores haven't paid at least 25% of that total within 90 days, your first year is free."];
+      fine = ["Billed monthly, nothing up front. No contract and no onboarding fee."];
       if (discounted()) fine.push(discName() + ": " + pctText() + " off our list price of " + usd(r.rate) + " a month.");
       fine.push("Valid through " + mdy(valid) + ".");
       t.push((name ? name + " · " : "") + "ShelfSpace · " + TERM_NAME);
@@ -517,7 +771,7 @@
     $("qd-list").innerHTML = rows;
     $("qd-fine").innerHTML = fine.map(function (f) { return "<p>" + esc(f) + "</p>"; }).join("");
     t.push("Your first year: about " + usd(v.total) + " in value (" + SEG.map(function (s, i) { return s[1].toLowerCase() + " " + usd(v.g[i]); }).join(", ") + "), for " + (r.custom ? "from " : "") + usd(fee) + " a year.");
-    t.push("Guarantee: Try it free for 30 days. We guarantee to reduce your outstanding AR by 25%, or it's free.");
+    t.push("Guarantee: Try it free for 30 days. We guarantee to reduce your outstanding AR by 25%, or it's free. Requires Send mail as (invoices go out from your own email address), AI calling, and all of your AR running through ShelfSpace.");
     t.push("Valid through " + mdy(valid));
     summaryText = t.join("\n");
   }
