@@ -4,163 +4,116 @@
 <meta charset="UTF-8">
 <title>ShelfSpace One-Pager</title>
 <!--
-  ShelfSpace one-pager (US Letter, portrait). Mirrors the shelfspace.pro homepage (11/06/2026).
-  Render: node guides/render-one-pager.mjs-style Playwright print, Letter, printBackground, margin 0.
-  Invoice mock is illustrative; case-study numbers are the homepage's de-identified results.
+  ShelfSpace one-pager v2 (US Letter, poster style). Mirrors the shelfspace.pro homepage (11/06/2026).
+  Render: Playwright + system Chrome, page.goto(file://), Letter, printBackground, margin 0.
+  Invoice card is illustrative; stats are the homepage's de-identified case studies.
 -->
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;0,9..40,800;0,9..40,900;1,9..40,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
-:root{--g9:#1b4332;--g8:#2d6a4f;--g6:#40916c;--g3:#95d5b2;--g2:#d8f3dc;--g1:#f0faf4;
---s2:#e2e8f0;--s3:#cbd5e1;--s4:#94a3b8;--s5:#64748b;--s6:#475569;--s7:#334155;--s8:#1e293b;--w:#fff}
+:root{--g9:#1b4332;--g10:#12301f;--g8:#2d6a4f;--g6:#40916c;--g5:#52b788;--g3:#95d5b2;--g2:#d8f3dc;--g1:#f0faf4;--s8:#1e293b;--s5:#64748b;--w:#fff}
 @page{size:8.5in 11in;margin:0}
 *{box-sizing:border-box;margin:0;padding:0;-webkit-print-color-adjust:exact;print-color-adjust:exact}
-html,body{font-family:'DM Sans',sans-serif;color:var(--s7);background:var(--w);-webkit-font-smoothing:antialiased}
-.page{width:8.5in;height:11in;overflow:hidden;display:flex;flex-direction:column}
+html,body{font-family:'DM Sans',sans-serif;-webkit-font-smoothing:antialiased}
+.page{width:8.5in;height:11in;overflow:hidden;position:relative;background:var(--g10);color:var(--w);display:flex;flex-direction:column;padding:0.5in 0.6in 0.45in}
 .mono{font-family:'Space Mono',monospace;font-variant-numeric:tabular-nums}
-.wrap{padding:0 0.55in}
-.top{display:flex;justify-content:space-between;align-items:center;padding-top:0.34in}
-.logo{display:flex;align-items:center;gap:9px;color:var(--g9);font-weight:700;font-size:18px}
-.logo-icon{width:30px;height:30px;border-radius:8px;background:var(--g9);display:flex;align-items:center;justify-content:center}
-.logo-icon svg{width:17px;height:17px}
-.logo sup{font-size:9px;font-weight:500}
-.metrc{display:flex;align-items:center;gap:8px;font-size:10px;color:var(--s5);font-weight:600}
-.metrc img{height:18px}
-.hero{display:grid;grid-template-columns:1fr 2.35in;gap:0.28in;align-items:center;margin-top:0.16in}
-.eyebrow{font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--g6)}
-h1{font-size:57px;line-height:.95;letter-spacing:-.035em;color:var(--g9);font-weight:800;margin:8px 0 10px;white-space:nowrap}
-.lede{font-size:15px;line-height:1.42;color:var(--s6);max-width:3.9in}
-.lede b{color:var(--s8)}
-.counter{margin-top:11px;display:inline-flex;align-items:baseline;gap:8px;background:var(--g1);border:1px solid var(--g2);border-radius:12px;padding:8px 13px}
-.counter .v{font-size:20px;font-weight:700;color:var(--g9)}
-.counter .l{font-size:11px;color:var(--s6);font-weight:600}
-.inv{background:var(--w);border:1px solid var(--s2);border-radius:18px;padding:16px 16px 14px;box-shadow:0 16px 44px rgba(27,67,50,.16)}
-.inv .t{font-size:10px;color:var(--s5);font-weight:600}
-.inv .a{font-size:30px;font-weight:700;color:var(--s8);margin-top:6px;letter-spacing:-.01em}
-.inv .row{display:flex;gap:6px;margin-top:9px}
-.pill{font-size:9.5px;font-weight:700;border-radius:999px;padding:3px 9px}
-.late{background:#fef3c7;color:#92400e}
+/* mint mesh + grid */
+.glow1{position:absolute;top:-2.2in;right:-2.4in;width:7in;height:7in;border-radius:50%;background:radial-gradient(circle,rgba(82,183,136,.42) 0%,rgba(82,183,136,0) 65%)}
+.glow2{position:absolute;bottom:-2.6in;left:-2.6in;width:7in;height:7in;border-radius:50%;background:radial-gradient(circle,rgba(149,213,178,.18) 0%,rgba(149,213,178,0) 65%)}
+.grid{position:absolute;inset:0;opacity:.06;background-image:linear-gradient(var(--g3) 1px,transparent 1px),linear-gradient(90deg,var(--g3) 1px,transparent 1px);background-size:0.6in 0.6in;-webkit-mask-image:linear-gradient(180deg,#000 0%,transparent 60%)}
+.z{position:relative;z-index:2}
+.top{display:flex;justify-content:space-between;align-items:center}
+.logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:20px}
+.logo-icon{width:34px;height:34px;border-radius:9px;background:var(--w);display:flex;align-items:center;justify-content:center}
+.logo-icon svg{width:19px;height:19px}
+.logo sup{font-size:9px;font-weight:500;opacity:.7}
+.url{font-size:12px;font-weight:600;color:var(--g3);letter-spacing:.02em}
+h1{margin-top:0.7in;font-size:122px;line-height:.88;letter-spacing:-.055em;font-weight:900}
+h1 em{font-style:italic;color:var(--g3)}
+.sub{margin-top:0.28in;font-size:23px;line-height:1.3;color:var(--g2);font-weight:500;max-width:4.2in}
+/* invoice card */
+.inv{position:absolute;right:0.6in;top:3.72in;width:2.85in;background:var(--w);color:var(--s8);border-radius:20px;padding:20px 21px;transform:rotate(-4deg);box-shadow:0 30px 60px rgba(0,0,0,.35),0 0 0 6px rgba(255,255,255,.06);z-index:3}
+.inv .t{font-size:11px;color:var(--s5);font-weight:600}
+.inv .a{font-size:33px;font-weight:700;margin-top:5px;letter-spacing:-.02em}
+.inv .row{display:flex;gap:6px;margin-top:8px;align-items:center}
+.pill{font-size:10.5px;font-weight:700;border-radius:999px;padding:4px 11px}
+.late{background:#fee2e2;color:#991b1b;text-decoration:line-through}
+.arrow{color:var(--s5);font-size:11px}
 .paid{background:var(--g9);color:var(--w)}
-.got{margin-top:12px;border-top:1px dashed var(--s2);padding-top:11px;display:flex;align-items:center;gap:9px}
-.got .ic{width:26px;height:26px;border-radius:50%;background:var(--g2);color:var(--g9);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px}
-.got .x{font-size:10.5px;white-space:nowrap;color:var(--s8);font-weight:700}
-.got .x small{display:block;font-weight:500;color:var(--s5);font-size:9px;margin-top:1px}
-.got .amt{margin-left:auto;font-size:11px;white-space:nowrap;font-weight:700;color:var(--g8)}
-.cap{text-align:center;font-size:8.5px;color:var(--s4);margin-top:8px}
-.guar{margin-top:0.24in;background:var(--g9);border-radius:18px;padding:14px 22px;display:flex;align-items:center;justify-content:space-between;gap:18px;box-shadow:0 10px 30px rgba(27,67,50,.18)}
-.guar h2{color:var(--w);font-size:23px;line-height:1.15;letter-spacing:-.015em;font-weight:800;max-width:4.6in}
-.guar h2 em{font-style:italic;color:var(--g3)}
-.guar .side{text-align:right;color:var(--g2);font-size:11px;line-height:1.55;font-weight:500;flex:0 0 auto}
-.guar .side b{color:var(--w);font-size:13px}
-.sec{display:flex;align-items:baseline;justify-content:space-between;margin-top:0.19in}
-.sec h3{font-size:15px;color:var(--s8);font-weight:800;letter-spacing:-.01em}
-.sec span{font-size:9px;color:var(--s4)}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:8px}
-.stat{border:1px solid var(--s2);border-radius:16px;padding:10px 14px;box-shadow:0 4px 16px rgba(27,67,50,.06)}
-.stat .v{font-size:28px;font-weight:700;color:var(--g9);letter-spacing:-.02em}
-.stat .v small{font-size:16px}
-.stat .l{font-size:10.5px;line-height:1.4;color:var(--s6);margin-top:4px}
-.does{display:grid;grid-template-columns:repeat(3,1fr);gap:7px 18px;margin-top:8px}
-.do{display:flex;gap:9px;align-items:flex-start}
-.tick{flex:0 0 18px;height:18px;border-radius:50%;background:var(--g2);color:var(--g9);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;margin-top:1px}
-.do div{font-size:10.5px;line-height:1.38;color:var(--s6)}
-.do b{display:block;color:var(--s8);font-size:11.5px}
-.never{margin-top:10px;font-size:11.5px;color:var(--s8);font-weight:700;text-align:center;background:var(--g1);border:1px solid var(--g2);border-radius:12px;padding:6px}
-.never span{color:var(--g6);margin:0 8px}
-.quotes{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}
-.q{border-left:3px solid var(--g3);padding:2px 0 2px 11px}
-.q p{font-size:12.5px;line-height:1.3;color:var(--s8);font-weight:600;letter-spacing:-.005em}
-.q div{font-size:9px;color:var(--s5);margin-top:5px}
-.q div b{color:var(--s7)}
-.band{margin-top:auto;background:var(--g9);color:var(--w);padding:0.17in 0.55in 0.24in}
-.band .lbl{font-size:9.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--g3);text-align:center}
-.logos{display:flex;justify-content:space-between;align-items:center;margin-top:11px;gap:10px}
-.logos img{height:19px;max-width:.68in;object-fit:contain;opacity:.92}
-.cta{display:flex;align-items:center;gap:22px;margin-top:.14in;padding-top:.15in;border-top:1px solid rgba(255,255,255,.14)}
-.cta .msg{flex:1}
-.cta h3{font-size:24px;font-weight:800;letter-spacing:-.015em;line-height:1.1}
-.cta .msg p{font-size:11px;color:var(--g2);margin-top:5px;line-height:1.45}
-.ways{display:flex;flex-direction:column;gap:7px;flex:0 0 auto}
-.way{display:flex;align-items:center;gap:9px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);border-radius:12px;padding:7px 12px}
-.way .k{font-size:8.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--g3);width:64px}
-.way .v{font-size:14px;font-weight:700;color:var(--w)}
-.qr{flex:0 0 auto;text-align:center}
-.qr .box{background:var(--w);border-radius:12px;padding:8px;width:1.12in;height:1.12in}
-.qr .box svg{width:100%;height:100%;display:block}
-.qr div.l{font-size:9px;color:var(--g2);margin-top:5px;font-weight:600}
+.stamp{position:absolute;right:-14px;bottom:-16px;background:var(--g5);color:var(--g10);font-weight:900;font-size:16px;border-radius:999px;padding:9px 16px;transform:rotate(6deg);box-shadow:0 8px 20px rgba(0,0,0,.25)}
+/* stats */
+.stats{margin-top:auto;display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid rgba(149,213,178,.25)}
+.stat{padding:18px 0 0}
+.stat+.stat{padding-left:20px;border-left:1px solid rgba(149,213,178,.25)}
+.stat .v{font-size:46px;font-weight:700;color:var(--g3);letter-spacing:-.03em;line-height:1}
+.stat .v small{font-size:20px}
+.stat .l{font-size:12px;color:var(--g2);margin-top:7px;font-weight:500}
+.fine{font-size:8.5px;color:rgba(216,243,220,.5);margin-top:9px}
+/* guarantee */
+.guar{margin-top:0.32in;display:flex;align-items:center;gap:20px}
+.guar .big{font-size:84px;font-weight:900;letter-spacing:-.05em;line-height:.9;color:var(--w)}
+.guar .txt{font-size:22px;line-height:1.15;font-weight:800;letter-spacing:-.02em}
+.guar .txt em{font-style:italic;color:var(--g3)}
+.guar .txt small{display:block;font-size:12px;font-weight:500;color:var(--g2);margin-top:6px;letter-spacing:0}
+/* logos */
+.logos-l{margin-top:0.3in;font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--g3);opacity:.85}
+.logos{display:flex;justify-content:space-between;align-items:center;margin-top:9px}
+.logos img{height:17px;max-width:.62in;object-fit:contain;opacity:.75}
+/* CTA card */
+.cta{margin-top:0.3in;background:var(--w);color:var(--s8);border-radius:22px;padding:18px 20px 18px 24px;display:flex;align-items:center;gap:20px;box-shadow:0 20px 50px rgba(0,0,0,.3)}
+.cta .m{flex:1}
+.cta .k{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--g6)}
+.cta .phone{font-size:34px;font-weight:700;color:var(--g9);letter-spacing:-.03em;margin-top:2px}
+.cta .mail{font-size:15px;font-weight:700;color:var(--s8);margin-top:4px}
+.cta .ek{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--g6);margin-right:6px}
+.cta .free{display:inline-block;margin-top:9px;font-size:10.5px;font-weight:700;color:var(--g9);background:var(--g2);border-radius:999px;padding:4px 11px}
+.qr{text-align:center}
+.qr svg{width:1.15in;height:1.15in;display:block}
+.qr div{font-size:9px;font-weight:700;color:var(--g6);margin-top:5px}
 </style>
 </head>
 <body>
 <div class="page">
- <div class="wrap">
-  <div class="top">
-   <div class="logo"><div class="logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div><span>ShelfSpace<sup>™</sup></span></div>
-   <div class="metrc"><img src="../metrc-logo-v2.png" alt="Metrc">Certified Metrc Third-Party Vendor</div>
-  </div>
+ <div class="glow1"></div><div class="glow2"></div><div class="grid"></div>
 
-  <div class="hero">
-   <div>
-    <div class="eyebrow">Collections for cannabis brands</div>
-    <h1>We get you paid.</h1>
-    <p class="lede">A high-powered collections team in your pocket, <b>for less than one hire.</b> Upload an invoice, click Collect, and the money lands in your bank.</p>
-    <div class="counter"><span class="v mono">$4.79M+</span><span class="l">paid to brands through ShelfSpace</span></div>
-   </div>
-   <div>
-    <div class="inv">
-     <div class="t">Invoice #1182 · Green Leaf Dispensary</div>
-     <div class="a mono">$3,280.00</div>
-     <div class="row"><span class="pill late">34 days late</span><span class="pill paid">✓ Paid</span></div>
-     <div class="got"><div class="ic">$</div><div class="x">Payment received<small>just now · to your bank</small></div><div class="amt mono">+$3,280.00</div></div>
-    </div>
-    <div class="cap">Illustration with example numbers</div>
-   </div>
-  </div>
-
-  <div class="guar">
-   <h2>We guarantee to reduce your outstanding AR by 25%. <em>Or it's free.</em></h2>
-   <div class="side"><b>Free for 30 days.</b><br>No contract.<br>Flat monthly price.</div>
-  </div>
-
-  <div class="sec"><h3>What it looks like for brands like yours</h3><span>Real results, de-identified to protect our clients.</span></div>
-  <div class="stats">
-   <div class="stat"><div class="v mono">$417,560</div><div class="l">in past-due invoices collected for one brand in its first 30 days</div></div>
-   <div class="stat"><div class="v mono">88<small>%</small></div><div class="l">of a cannabis farm's past-due balance paid in month one</div></div>
-   <div class="stat"><div class="v mono">50<small> hrs/wk</small></div><div class="l">of sales-rep time back to selling, instead of chasing payments</div></div>
-  </div>
-
-  <div class="sec"><h3>Everything a great AR department does. In your name.</h3></div>
-  <div class="does">
-   <div class="do"><span class="tick">✓</span><div><b>One-click Pay Now link</b>ACH or digital check from the store's bank. No login, no card fees.</div></div>
-   <div class="do"><span class="tick">✓</span><div><b>Reminders until it's paid</b>Every past-due store, on a steady schedule.</div></div>
-   <div class="do"><span class="tick">✓</span><div><b>AI phone calls</b>A polite call to the stores that ignore email.</div></div>
-   <div class="do"><span class="tick">✓</span><div><b>Final notice letters</b>One page, your letterhead, a scan-to-pay code.</div></div>
-   <div class="do"><span class="tick">✓</span><div><b>0% payment plans</b>The store sets it up, you approve, it runs on schedule.</div></div>
-   <div class="do"><span class="tick">✓</span><div><b>A Monday list for every rep</b>Who owes what, so reps sell instead of chase.</div></div>
-  </div>
-  <div class="never">We never hold your money<span>•</span>We never take a cut of what we collect<span>•</span>Works with QuickBooks, Metrc &amp; 60+ tools</div>
-
-  <div class="quotes">
-   <div class="q"><p>“Freed up much-needed time to go out and focus on sales.”</p><div><b>Avery Leveston</b> · CEO, Cowboy Kush</div></div>
-   <div class="q"><p>“It's been a great addition to our AR efforts!”</p><div><b>Shawna Gurgul</b> · Sales Ops, One Garden</div></div>
-   <div class="q"><p>“It's like QuickBooks on steroids.”</p><div><b>Josh Covert</b> · CEO, Meds Cafe</div></div>
-  </div>
+ <div class="top z">
+  <div class="logo"><div class="logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#1b4332" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div><span>ShelfSpace<sup>™</sup></span></div>
+  <div class="url">Collections for cannabis brands</div>
  </div>
 
- <div class="band">
-  <div class="lbl">Brands getting paid using ShelfSpace</div>
-  <div class="logos">
-   <img src="../logos/brands/curaleaf.png" alt="Curaleaf"><img src="../logos/brands/cresco.png" alt="Cresco Labs"><img src="../logos/brands/gti.png" alt="Green Thumb Industries"><img src="../logos/brands/holistic.png" alt="Holistic Industries"><img src="../logos/brands/kiva.png" alt="Kiva Confections"><img src="../logos/brands/wyld.png" alt="Wyld"><img src="../logos/brands/marimed.png" alt="MariMed"><img src="../logos/brands/jushi.png" alt="Jushi Holdings"><img src="../logos/brands/rove.png" alt="Rove"><img src="../logos/brands/fernway.png" alt="Fernway">
+ <h1 class="z">We get<br>you <em>paid.</em></h1>
+ <p class="sub z">A collections team in your pocket, for less than one hire.</p>
+
+ <div class="inv">
+  <div class="t">Invoice #1182 · Green Leaf Dispensary</div>
+  <div class="a mono">$3,280.00</div>
+  <div class="row"><span class="pill late">34 days late</span><span class="arrow">›</span><span class="pill paid">Paid</span></div>
+  <div class="stamp mono">+$3,280</div>
+ </div>
+
+ <div class="stats z">
+  <div class="stat"><div class="v mono">$417K</div><div class="l">past-due collected in 30 days</div></div>
+  <div class="stat"><div class="v mono">88<small>%</small></div><div class="l">of a farm's past-due paid, month one</div></div>
+  <div class="stat"><div class="v mono">50<small>hrs/wk</small></div><div class="l">of rep time back to selling</div></div>
+ </div>
+ <div class="fine z">Real client results, de-identified. Invoice card is illustrative.</div>
+
+ <div class="guar z">
+  <div class="big mono">25%</div>
+  <div class="txt">Less outstanding AR, guaranteed. <em>Or it's free.</em><small>Free for 30 days · No contract · We never take a cut</small></div>
+ </div>
+
+ <div class="logos-l z">Brands getting paid using ShelfSpace</div>
+ <div class="logos z">
+  <img src="../logos/brands/curaleaf.png" alt="Curaleaf"><img src="../logos/brands/cresco.png" alt="Cresco Labs"><img src="../logos/brands/gti.png" alt="Green Thumb Industries"><img src="../logos/brands/holistic.png" alt="Holistic Industries"><img src="../logos/brands/kiva.png" alt="Kiva Confections"><img src="../logos/brands/wyld.png" alt="Wyld"><img src="../logos/brands/marimed.png" alt="MariMed"><img src="../logos/brands/jushi.png" alt="Jushi Holdings"><img src="../logos/brands/rove.png" alt="Rove"><img src="../logos/brands/fernway.png" alt="Fernway">
+ </div>
+
+ <div class="cta z">
+  <div class="m">
+   <div class="k">Text Chris</div>
+   <div class="phone mono">971-319-4085</div>
+   <div class="mail"><span class="ek">Email</span> chris@shelfspace.pro</div>
   </div>
-  <div class="cta">
-   <div class="msg">
-    <h3>Let's get your money in.</h3>
-    <p>30 minutes with Chris. We look at your past-due invoices together, show you what's collectable, and give you a price.</p>
-   </div>
-   <div class="ways">
-    <div class="way"><span class="k">Text Chris</span><span class="v mono">971-319-4085</span></div>
-    <div class="way"><span class="k">Email</span><span class="v">chris@shelfspace.pro</span></div>
-   </div>
-   <div class="qr"><div class="box"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25" shape-rendering="crispEdges"><path fill="#ffffff" d="M0 0h25v25H0z"/><path stroke="#1b4332" d="M0 0.5h7m1 0h2m2 0h3m3 0h7M0 1.5h1m5 0h1m1 0h2m2 0h2m2 0h1m1 0h1m5 0h1M0 2.5h1m1 0h3m1 0h1m1 0h4m1 0h2m1 0h1m1 0h1m1 0h3m1 0h1M0 3.5h1m1 0h3m1 0h1m3 0h1m2 0h2m1 0h1m1 0h1m1 0h3m1 0h1M0 4.5h1m1 0h3m1 0h1m1 0h2m3 0h2m1 0h1m1 0h1m1 0h3m1 0h1M0 5.5h1m5 0h1m3 0h1m2 0h2m3 0h1m5 0h1M0 6.5h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7M9 7.5h2m2 0h2M0 8.5h1m2 0h10m1 0h4m2 0h1m1 0h3M0 9.5h6m1 0h2m2 0h2m2 0h1m3 0h5M0 10.5h2m1 0h5m2 0h3m1 0h2m1 0h1m1 0h1m1 0h1m2 0h1M3 11.5h1m1 0h1m1 0h3m1 0h2m3 0h3m2 0h4M2 12.5h3m1 0h4m1 0h1m3 0h1m2 0h1m5 0h1M0 13.5h2m1 0h3m1 0h3m2 0h2m1 0h2m3 0h1m2 0h1M0 14.5h2m1 0h2m1 0h1m1 0h1m6 0h1m1 0h2m1 0h5M0 15.5h1m1 0h3m5 0h1m1 0h1m1 0h6m1 0h2m1 0h1M0 16.5h1m2 0h1m1 0h3m2 0h4m1 0h6m1 0h2M8 17.5h1m1 0h2m1 0h1m1 0h2m3 0h1m1 0h2M0 18.5h7m1 0h1m3 0h1m3 0h1m1 0h1m1 0h1m3 0h1M0 19.5h1m5 0h1m1 0h4m1 0h1m1 0h2m3 0h1M0 20.5h1m1 0h3m1 0h1m1 0h1m2 0h1m1 0h1m1 0h6m2 0h2M0 21.5h1m1 0h3m1 0h1m1 0h3m1 0h3m2 0h2m4 0h2M0 22.5h1m1 0h3m1 0h1m4 0h1m1 0h1m3 0h1m2 0h5M0 23.5h1m5 0h1m2 0h5m5 0h2m1 0h3M0 24.5h7m1 0h6m2 0h3m2 0h1m2 0h1"/></svg></div><div class="l">shelfspace.pro</div></div>
-  </div>
+  <div class="qr"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25" shape-rendering="crispEdges"><path fill="#ffffff" d="M0 0h25v25H0z"/><path stroke="#1b4332" d="M0 0.5h7m1 0h2m2 0h3m3 0h7M0 1.5h1m5 0h1m1 0h2m2 0h2m2 0h1m1 0h1m5 0h1M0 2.5h1m1 0h3m1 0h1m1 0h4m1 0h2m1 0h1m1 0h1m1 0h3m1 0h1M0 3.5h1m1 0h3m1 0h1m3 0h1m2 0h2m1 0h1m1 0h1m1 0h3m1 0h1M0 4.5h1m1 0h3m1 0h1m1 0h2m3 0h2m1 0h1m1 0h1m1 0h3m1 0h1M0 5.5h1m5 0h1m3 0h1m2 0h2m3 0h1m5 0h1M0 6.5h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7M9 7.5h2m2 0h2M0 8.5h1m2 0h10m1 0h4m2 0h1m1 0h3M0 9.5h6m1 0h2m2 0h2m2 0h1m3 0h5M0 10.5h2m1 0h5m2 0h3m1 0h2m1 0h1m1 0h1m1 0h1m2 0h1M3 11.5h1m1 0h1m1 0h3m1 0h2m3 0h3m2 0h4M2 12.5h3m1 0h4m1 0h1m3 0h1m2 0h1m5 0h1M0 13.5h2m1 0h3m1 0h3m2 0h2m1 0h2m3 0h1m2 0h1M0 14.5h2m1 0h2m1 0h1m1 0h1m6 0h1m1 0h2m1 0h5M0 15.5h1m1 0h3m5 0h1m1 0h1m1 0h6m1 0h2m1 0h1M0 16.5h1m2 0h1m1 0h3m2 0h4m1 0h6m1 0h2M8 17.5h1m1 0h2m1 0h1m1 0h2m3 0h1m1 0h2M0 18.5h7m1 0h1m3 0h1m3 0h1m1 0h1m1 0h1m3 0h1M0 19.5h1m5 0h1m1 0h4m1 0h1m1 0h2m3 0h1M0 20.5h1m1 0h3m1 0h1m1 0h1m2 0h1m1 0h1m1 0h6m2 0h2M0 21.5h1m1 0h3m1 0h1m1 0h3m1 0h3m2 0h2m4 0h2M0 22.5h1m1 0h3m1 0h1m4 0h1m1 0h1m3 0h1m2 0h5M0 23.5h1m5 0h1m2 0h5m5 0h2m1 0h3M0 24.5h7m1 0h6m2 0h3m2 0h1m2 0h1"/></svg><div>shelfspace.pro</div></div>
  </div>
 </div>
 </body>
