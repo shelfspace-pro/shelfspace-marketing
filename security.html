@@ -341,7 +341,7 @@
       <h1>Your money moves only when <em>your people say so.</em></h1>
       <p class="hero-lede">Every payment passes the same checks: a signed-in person, a fresh two-factor code, access limited to your company, encrypted bank details and a permanent record of who approved it.</p>
       <div class="hero-actions-centered">
-        <span class="cta-stack"><a href="/contact?cta=security-hero" class="btn-primary">Schedule a call <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a><span class="cta-micro">30 minutes with Chris. See how it would run for your business.</span></span>
+        <span class="cta-stack"><a href="/contact?cta=security-hero" class="btn-primary sec-btn">Schedule a call <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a><span class="cta-micro">30 minutes with Chris. See how it would run for your business.</span></span>
       </div>
       <div class="sec-badges">
         <span class="sec-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>AES-256 encryption</span>
@@ -397,7 +397,7 @@
         <button class="sec-layer" role="tab" aria-selected="false" aria-controls="lp-id" id="lt-id" data-p="lp-id"><span class="n"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 18v3c0 .6.4 1 1 1h4v-3h3v-3h2l1.4-1.4a6.5 6.5 0 1 0-4-4Z"/><circle cx="16.5" cy="7.5" r=".5" fill="currentColor"/></svg></span><span><b>Identity</b><small>Two-factor sign-in for every person</small></span><span class="tag">Layer 2</span></button>
         <button class="sec-layer" role="tab" aria-selected="false" aria-controls="lp-acc" id="lt-acc" data-p="lp-acc"><span class="n"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span><span><b>Access</b><small>Your company's data, your people only</small></span><span class="tag">Layer 3</span></button>
         <button class="sec-layer" role="tab" aria-selected="false" aria-controls="lp-data" id="lt-data" data-p="lp-data"><span class="n"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14a9 3 0 0 0 18 0V5"/><path d="M3 12a9 3 0 0 0 18 0"/></svg></span><span><b>Data</b><small>Encrypted at rest, field by field</small></span><span class="tag">Layer 4</span></button>
-        <div class="sec-core">Your money + your records</div>
+        <div class="sec-core"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>Your money + your records</div>
       </div>
       <div class="sec-detail reveal">
         <div class="sec-panel on" id="lp-net" role="tabpanel" aria-labelledby="lt-net">
@@ -500,6 +500,7 @@
 <section class="sec-sec" id="encryption">
   <div class="sec-wrap sec-enc">
     <div class="sec-vault reveal" data-vault aria-label="Illustration: a bank account number is encrypted before it is saved">
+      <div class="sec-vault-head"><span class="dots"><i></i><i></i><i></i></span><span>Field encryption</span><span class="live">Live</span></div>
       <div class="row"><span class="lbl">You enter</span><span class="val" data-plain>Account 004417</span></div>
       <div class="row"><span class="lbl">We store</span><span class="val cipher" data-cipher>&nbsp;</span></div>
       <div class="row"><span class="lbl">Screens show</span><span class="val">&bull;&bull;&bull;&bull;4417</span></div>
@@ -536,7 +537,7 @@
 </section>
 
 <!-- AI -->
-<section class="sec-sec" id="ai">
+<section class="sec-sec sec-ai-dark" id="ai">
   <div class="sec-wrap">
     <div class="ac-head reveal">
       <div class="ac-eyebrow">AI safeguards</div>
@@ -591,19 +592,19 @@
   <div class="sec-subs reveal">
     <div class="sec-mx-scroll">
       <table>
-        <thead><tr><th>Provider</th><th>What it does for us</th></tr></thead>
+        <thead><tr><th>Provider</th><th>Category</th><th>What it does for us</th></tr></thead>
         <tbody>
-          <tr><td>Supabase (on AWS, US)</td><td>Database, sign-in and file storage</td></tr>
-          <tr><td>Vercel</td><td>Application hosting and encrypted secret storage</td></tr>
-          <tr><td>Alero Financial</td><td>Bank transfers (ACH)</td></tr>
-          <tr><td>Plaid</td><td>Connecting bank accounts, without sharing your bank login</td></tr>
-          <tr><td>Check processing partner</td><td>Printing and sending e-checks and mailed checks</td></tr>
-          <tr><td>Anthropic</td><td>AI that reads invoices and drafts replies; no training on your data</td></tr>
-          <tr><td>Resend</td><td>Email delivery</td></tr>
-          <tr><td>Twilio</td><td>Text messages</td></tr>
-          <tr><td>Sentry</td><td>Error monitoring</td></tr>
-          <tr><td>Cloudflare</td><td>Bot protection on public forms</td></tr>
-          <tr><td>Xero, QuickBooks, Metrc</td><td>Only the connections you turn on, to sync your books and state records</td></tr>
+          <tr><td><span class="sec-mono m-infrastructure" aria-hidden="true">S</span>Supabase (on AWS, US)</td><td><span class="sec-cat c-infrastructure">Infrastructure</span></td><td>Database, sign-in and file storage</td></tr>
+          <tr><td><span class="sec-mono m-infrastructure" aria-hidden="true">V</span>Vercel</td><td><span class="sec-cat c-infrastructure">Infrastructure</span></td><td>Application hosting and encrypted secret storage</td></tr>
+          <tr><td><span class="sec-mono m-payments" aria-hidden="true">A</span>Alero Financial</td><td><span class="sec-cat c-payments">Payments</span></td><td>Bank transfers (ACH)</td></tr>
+          <tr><td><span class="sec-mono m-payments" aria-hidden="true">P</span>Plaid</td><td><span class="sec-cat c-payments">Payments</span></td><td>Connecting bank accounts, without sharing your bank login</td></tr>
+          <tr><td><span class="sec-mono m-payments" aria-hidden="true">C</span>Check processing partner</td><td><span class="sec-cat c-payments">Payments</span></td><td>Printing and sending e-checks and mailed checks</td></tr>
+          <tr><td><span class="sec-mono m-ai" aria-hidden="true">A</span>Anthropic</td><td><span class="sec-cat c-ai">AI</span></td><td>AI that reads invoices and drafts replies; no training on your data</td></tr>
+          <tr><td><span class="sec-mono m-messaging" aria-hidden="true">R</span>Resend</td><td><span class="sec-cat c-messaging">Messaging</span></td><td>Email delivery</td></tr>
+          <tr><td><span class="sec-mono m-messaging" aria-hidden="true">T</span>Twilio</td><td><span class="sec-cat c-messaging">Messaging</span></td><td>Text messages</td></tr>
+          <tr><td><span class="sec-mono m-monitoring" aria-hidden="true">S</span>Sentry</td><td><span class="sec-cat c-monitoring">Monitoring</span></td><td>Error monitoring</td></tr>
+          <tr><td><span class="sec-mono m-security" aria-hidden="true">C</span>Cloudflare</td><td><span class="sec-cat c-security">Security</span></td><td>Bot protection on public forms</td></tr>
+          <tr><td><span class="sec-mono m-your" aria-hidden="true">X</span>Xero, QuickBooks, Metrc</td><td><span class="sec-cat c-your">Your connections</span></td><td>Only the connections you turn on, to sync your books and state records</td></tr>
         </tbody>
       </table>
     </div>
@@ -707,6 +708,139 @@
     html body .sw::after { width: 12px; height: 12px; }
     html body .sw.on::after { left: 15px; }
     html body .sec-mx-head, html body .sec-mx-foot { padding-left: 14px; padding-right: 14px; }
+  }
+</style>
+
+<style>
+  /* ===== SECURITY v2 (11/06/2026): dark fintech hero, sheet facts strip, cleaner layer stack,
+     brand-green vault, AI as a second dark panel, provider table with categories ===== */
+  html body .page-hero { padding: 150px 48px 140px; border-radius: 0 0 40px 40px;
+    background: radial-gradient(900px 560px at 82% 18%, rgba(82,183,136,0.22), transparent 62%), radial-gradient(800px 520px at 0% 100%, rgba(149,213,178,0.08), transparent 60%), linear-gradient(180deg, #0f2a1d 0%, #133524 100%); }
+  html body .sec-grid-lines { opacity: 0.07; background-image: linear-gradient(rgba(149,213,178,0.9) 1px, transparent 1px), linear-gradient(90deg, rgba(149,213,178,0.9) 1px, transparent 1px); }
+  html body .sec-hero .section-label { color: var(--green-accent); }
+  html body .sec-hero .section-label::before { background: var(--green-accent); }
+  html body .sec-hero h1 { color: #fff; }
+  html body .sec-hero h1 em { color: var(--green-accent); }
+  html body .sec-hero .hero-lede { color: rgba(255,255,255,0.72); }
+  html body .sec-hero .cta-micro { color: rgba(255,255,255,0.55); }
+  html body .sec-hero a.sec-btn { position: relative; overflow: hidden; display: inline-flex; align-items: center; justify-content: space-between; gap: 36px;
+    min-height: 64px; padding: 8px 8px 8px 28px; border-radius: 18px; font-size: 18px; letter-spacing: -0.2px; animation: none; color: var(--green-deep);
+    background: linear-gradient(180deg, #b7e4c7 0%, var(--green-accent) 60%, #7cc49e 100%);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.55), inset 0 -2px 0 rgba(27,67,50,0.15), 0 18px 36px -14px rgba(0,0,0,0.55); }
+  html body .sec-btn:hover { transform: translateY(-2px); }
+  html body .sec-btn svg { width: 48px; height: 48px; padding: 15px; box-sizing: border-box; border-radius: 14px; flex: none; background: var(--green-deep); color: var(--green-accent); }
+  html body .sec-btn::before, html body .sec-btn::after { animation: none; }
+  html body .sec-btn::after { content: ""; position: absolute; top: 0; bottom: 0; left: -60%; width: 40%; pointer-events: none; border: 0; border-radius: 0; inset: auto; height: 100%;
+    background: linear-gradient(100deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0) 100%); transform: skewX(-20deg); animation: secSheen2 4.5s ease-in-out 1.6s infinite; }
+  @keyframes secSheen2 { 0% { left: -60%; } 30%, 100% { left: 130%; } }
+  html body .sec-badges { display: grid; grid-template-columns: repeat(2, max-content); gap: 12px 36px; margin-top: 34px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.1); max-width: 540px; }
+  html body .sec-badge { background: none; border: 0; box-shadow: none; padding: 0; margin: 0; border-radius: 0;
+    color: rgba(255,255,255,0.82); font-size: 13px; font-weight: 500; white-space: nowrap; }
+  html body .sec-badge svg { color: var(--green-accent); }
+  html body .sec-ghost.g1 { background: linear-gradient(160deg, #285c44, #1d4a35); }
+  html body .sec-ghost.g2 { background: linear-gradient(160deg, #1f4a36, #183e2c); }
+  html body .sec-console { background: linear-gradient(165deg, #0c2318 0%, #081a11 100%); border: 1px solid rgba(149,213,178,0.18);
+    box-shadow: 0 40px 80px -20px rgba(0,0,0,0.6), 0 0 0 1px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.06); }
+  html body .sec-caption { color: rgba(255,255,255,0.45); }
+
+  /* facts strip: a sheet over the hero's bottom edge */
+  html body .sec-facts-sec { margin-top: -72px; }
+  html body .sec-facts { box-shadow: 0 30px 60px -20px rgba(27,67,50,0.28); border-color: rgba(27,67,50,0.08); }
+  html body .sec-fact { padding: 28px 28px 26px; position: relative; }
+  html body .sec-fact::before { content: ""; display: block; width: 28px; height: 3px; border-radius: 3px; background: var(--green-mid); margin-bottom: 16px; }
+  html body .sec-fact .k { font-size: 28px; }
+
+  /* tighter section rhythm */
+  html body .sec-sec { padding: 80px 48px; }
+  html body .exp-faq { padding: 80px 48px; }
+  html body .ac-head { margin-bottom: 48px; }
+
+  /* layers: even stack on a rail, solid core */
+  html body .sec-stack { gap: 10px; padding-left: 26px; }
+  html body .sec-stack::before { content: ""; position: absolute; left: 8px; top: 30px; bottom: 30px; width: 2px; border-radius: 2px; background: linear-gradient(180deg, rgba(64,145,108,0.15), rgba(64,145,108,0.55)); }
+  html body .sec-layer, html body .sec-layer:nth-child(n) { margin: 0; position: relative; }
+  html body .sec-layer::before { content: ""; position: absolute; left: -24px; top: 50%; width: 10px; height: 10px; margin-top: -5px; border-radius: 50%; background: #fff; border: 2px solid rgba(64,145,108,0.5); }
+  html body .sec-layer.on::before { background: var(--green-accent); border-color: var(--green-deep); box-shadow: 0 0 0 4px rgba(149,213,178,0.35); }
+  html body .sec-layer:hover, html body .sec-layer.on { transform: none; }
+  html body .sec-layer.on { background: linear-gradient(165deg, #1b4332, #12301f); }
+  html body .sec-core { margin: 6px 0 0; display: flex; align-items: center; justify-content: center; gap: 10px; border: 0; color: var(--green-accent);
+    background: linear-gradient(165deg, #12301f, #0c2318); padding: 16px; box-shadow: 0 14px 30px -12px rgba(27,67,50,0.5); }
+  html body .sec-core svg { width: 15px; height: 15px; }
+  html body .sec-detail { border-top: 3px solid var(--green-mid); }
+
+  /* vault in brand green */
+  html body .sec-vault { background: linear-gradient(165deg, #12301f 0%, #0a1f14 100%); border: 1px solid rgba(149,213,178,0.16); padding: 0 24px 24px; overflow: hidden;
+    box-shadow: 0 30px 70px -20px rgba(27,67,50,0.55); }
+  html body .sec-vault-head { display: flex; align-items: center; gap: 12px; margin: 0 -24px 6px; padding: 14px 24px; border-bottom: 1px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.03);
+    font-size: 11px; letter-spacing: 1.2px; text-transform: uppercase; color: rgba(255,255,255,0.55); }
+  html body .sec-vault-head .dots { display: inline-flex; gap: 6px; }
+  html body .sec-vault-head .dots i { width: 9px; height: 9px; border-radius: 50%; background: rgba(255,255,255,0.14); }
+  html body .sec-vault-head .live { margin-left: auto; color: var(--green-accent); display: inline-flex; align-items: center; gap: 6px; }
+  html body .sec-vault-head .live::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--green-accent); box-shadow: 0 0 0 3px rgba(149,213,178,0.2); animation: secPulse 2s ease-in-out infinite; }
+  @keyframes secPulse { 50% { box-shadow: 0 0 0 6px rgba(149,213,178,0.05); } }
+
+  /* AI: second dark panel */
+  html body .sec-ai-dark { background: linear-gradient(180deg, #133524 0%, #0f2a1d 100%); color: #fff; border-radius: 40px; width: calc(100% - 48px); margin: 24px auto; overflow: hidden; }
+  html body .sec-ai-dark::before { content: ""; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(700px 420px at 10% 0%, rgba(82,183,136,0.18), transparent 60%); }
+  html body .sec-ai-dark .ac-head h2 { color: #fff; } html body .sec-ai-dark .ac-head h2 em { color: var(--green-accent); }
+  html body .sec-ai-dark .ac-head p { color: rgba(255,255,255,0.72); } html body .sec-ai-dark .ac-eyebrow { color: var(--green-accent); }
+  html body .sec-ai-dark .sec-ai-rule { background: linear-gradient(90deg, rgba(149,213,178,0.16), rgba(149,213,178,0.06)); border-color: rgba(149,213,178,0.3); position: relative; }
+  html body .sec-ai-dark .sec-ai-rule p { color: rgba(255,255,255,0.85); } html body .sec-ai-dark .sec-ai-rule b { color: var(--green-accent); }
+  html body .sec-ai-dark .sec-ai-rule .ci { background: var(--green-accent); color: var(--green-deep); }
+  html body .sec-ai-dark .sec-card { background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.09); box-shadow: none; position: relative; }
+  html body .sec-ai-dark .sec-card:hover { background: rgba(255,255,255,0.08); box-shadow: none; }
+  html body .sec-ai-dark .sec-card .ci { background: rgba(149,213,178,0.14); color: var(--green-accent); }
+  html body .sec-ai-dark .sec-card h3 { color: #fff; } html body .sec-ai-dark .sec-card p { color: rgba(255,255,255,0.66); }
+
+  /* resilience: white card on the fade */
+  html body .sec-tl-track { background: repeating-linear-gradient(90deg, var(--green-ghost) 0 calc(100%/7 - 3px), transparent calc(100%/7 - 3px) calc(100%/7)); }
+  html body .sec-drill div { background: var(--white); border: 1px solid rgba(27,67,50,0.08); }
+
+  /* providers */
+  html body .sec-subs td { vertical-align: middle; }
+  html body .sec-subs td:first-child { display: flex; align-items: center; gap: 12px; }
+  html body .sec-mono { width: 30px; height: 30px; border-radius: 9px; display: grid; place-items: center; flex: none; font-size: 13px; font-weight: 700; color: #fff; background: var(--green-mid); }
+  html body .sec-mono.m-payments { background: #2d6a4f; } html body .sec-mono.m-infrastructure { background: #1b4332; } html body .sec-mono.m-ai { background: #40916c; }
+  html body .sec-mono.m-messaging { background: #52796f; } html body .sec-mono.m-monitoring, html body .sec-mono.m-security { background: #354f52; } html body .sec-mono.m-your { background: #74c69d; color: var(--green-deep); }
+  html body .sec-cat { display: inline-block; font-size: 11.5px; font-weight: 600; letter-spacing: .3px; padding: 4px 10px; border-radius: 999px; background: var(--slate-100, #f1f5f9); color: var(--slate-600); white-space: nowrap; }
+  html body .sec-cat.c-payments { background: var(--green-ghost); color: var(--green-dark); }
+  html body .sec-subs tbody tr:hover td { background: #f7fbf9; }
+
+  /* program: review card dark, report card light */
+  html body .sec-review .sec-card:first-child { background: linear-gradient(165deg, #1b4332, #12301f); border-color: transparent; }
+  html body .sec-review .sec-card:first-child h3 { color: #fff; } html body .sec-review .sec-card:first-child p { color: rgba(255,255,255,0.75); }
+  html body .sec-review .sec-card:first-child a { color: var(--green-accent); }
+  html body .sec-review .sec-card:last-child { background: var(--white); border-color: rgba(27,67,50,0.12); }
+  html body .sec-doc { transition: border-color .25s, box-shadow .25s; }
+  html body .sec-doc:hover { border-color: rgba(45,106,79,0.35); box-shadow: 0 10px 24px rgba(27,67,50,0.08); }
+
+  html body > footer { border-radius: 40px 40px 0 0; }
+  @media (prefers-reduced-motion: reduce) { html body .sec-btn::after, html body .sec-vault-head .live::before { animation: none; display: none; } }
+
+  @media (max-width: 1024px) {
+    html body .page-hero { padding-bottom: 120px; }
+  }
+  @media (max-width: 640px) {
+    html body .page-hero { padding: 112px 20px 104px; border-radius: 0 0 28px 28px; }
+    html body .sec-hero a.sec-btn { width: 100%; box-sizing: border-box; justify-content: space-between; min-height: 60px; padding: 8px 8px 8px 24px; }
+    html body .sec-ghost { display: none; }
+    html body .sec-fact { padding: 18px 16px; }
+    html body .sec-fact .k { font-size: 21px; }
+    html body .sec-btn svg { width: 44px; height: 44px; padding: 13px; border-radius: 13px; }
+    html body .sec-hero .cta-stack { width: 100%; }
+    html body .sec-badges { grid-template-columns: 1fr 1fr; gap: 12px 12px; }
+    html body .sec-badge { white-space: normal; font-size: 12.5px; }
+    html body .sec-facts-sec { margin-top: -56px; }
+    html body .sec-fact::before { margin-bottom: 12px; }
+    html body .sec-stack { padding-left: 22px; }
+    html body .sec-stack::before { left: 6px; }
+    html body .sec-layer::before { left: -21px; }
+    html body .sec-ai-dark { width: calc(100% - 24px); border-radius: 28px; }
+    html body .sec-vault { padding: 0 18px 18px; }
+    html body .sec-vault-head { margin: 0 -18px 6px; padding: 12px 18px; }
+    html body .sec-subs thead th:nth-child(2), html body .sec-subs td:nth-child(2) { display: none; }
+    html body .sec-mono { width: 26px; height: 26px; font-size: 12px; }
+    html body > footer { border-radius: 28px 28px 0 0; }
   }
 </style>
 
