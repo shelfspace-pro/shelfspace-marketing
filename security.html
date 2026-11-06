@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Security: Encryption, Access and Audit Trail | ShelfSpace</title>
+<meta name="description" content="How ShelfSpace protects your money and data: two-factor sign-in, per-person access, AES-256 encryption, an audit log, US hosting and tested backups.">
+<link rel="canonical" href="https://shelfspace.pro/security">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ShelfSpace">
+<meta property="og:locale" content="en_US">
+<meta property="og:url" content="https://shelfspace.pro/security">
+<meta property="og:title" content="Security — ShelfSpace">
+<meta property="og:description" content="Two-factor sign-in, per-person access, AES-256 encryption, an append-only audit log, US hosting and tested backups.">
+<meta property="og:image" content="https://shelfspace.pro/og-image-v8.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Security — ShelfSpace">
+<meta name="twitter:description" content="Two-factor sign-in, per-person access, AES-256 encryption, an append-only audit log, US hosting and tested backups.">
+<meta name="twitter:image" content="https://shelfspace.pro/og-image-v8.png">
+<meta name="apple-mobile-web-app-title" content="ShelfSpace">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+<link rel="stylesheet" href="/hero-motion.css">
+<style>
+  /* ===== SECURITY PAGE (11/06/2026) ===== */
+  .page-hero { display: flex; align-items: center; justify-content: center; padding: 140px 48px 72px; position: relative; overflow: hidden;
+    background: radial-gradient(900px 520px at 85% 10%, rgba(149,213,178,0.28), transparent 60%), radial-gradient(700px 480px at 0% 100%, rgba(27,67,50,0.07), transparent 60%), var(--white); }
+  .sec-grid-lines { position: absolute; inset: 0; opacity: 0.04; pointer-events: none;
+    background-image: linear-gradient(var(--green-deep) 1px, transparent 1px), linear-gradient(90deg, var(--green-deep) 1px, transparent 1px); background-size: 56px 56px;
+    -webkit-mask-image: radial-gradient(ellipse at 60% 40%, #000 30%, transparent 75%); mask-image: radial-gradient(ellipse at 60% 40%, #000 30%, transparent 75%); }
+  .sec-hero { position: relative; z-index: 2; display: grid; grid-template-columns: 1.05fr 1fr; gap: 64px; align-items: center; max-width: 1200px; width: 100%; }
+  .sec-hero .section-label { margin-bottom: 14px; }
+  .sec-hero h1 { font-size: clamp(40px, 5vw, 62px); line-height: 1.04; letter-spacing: -2.2px; font-weight: 700; color: var(--green-deep); margin: 0 0 20px; }
+  .sec-hero h1 em { font-style: normal; color: var(--green-mid); }
+  .sec-hero .hero-lede { font-size: 19px; color: var(--slate-600); line-height: 1.55; margin: 0 0 30px; max-width: 540px; }
+  .sec-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 26px; }
+  .sec-badge { display: inline-flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 600; color: var(--green-deep); background: var(--white); border: 1px solid rgba(27,67,50,0.12); border-radius: 999px; padding: 7px 12px; box-shadow: 0 2px 8px rgba(27,67,50,0.06); }
+  .sec-badge svg { width: 14px; height: 14px; color: var(--green-mid); flex: none; }
+
+  /* hero console */
+  .sec-stage { position: relative; }
+  .sec-ghost { position: absolute; border-radius: 22px; left: 22px; right: -14px; }
+  .sec-ghost.g1 { top: -16px; bottom: 26px; background: linear-gradient(160deg, #d8eee0, #c4e4d1); }
+  .sec-ghost.g2 { top: -30px; bottom: 50px; left: 46px; right: -30px; background: linear-gradient(160deg, #e9f6ee, #dcefe4); z-index: -1; }
+  .sec-console { position: relative; background: linear-gradient(165deg, #1b4332 0%, #12301f 100%); border-radius: 22px; padding: 22px 22px 18px; color: #fff; box-shadow: 0 30px 70px rgba(27,67,50,0.28), 0 6px 18px rgba(27,67,50,0.18); }
+  .sec-con-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-bottom: 14px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 14px; }
+  .sec-con-head b { font-size: 15px; font-weight: 600; }
+  .sec-con-head small { display: block; color: rgba(255,255,255,0.55); font-size: 12px; margin-top: 2px; }
+  .sec-amt { font-family: var(--font-mono); font-size: 20px; font-weight: 700; color: var(--green-accent); font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .sec-checks { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+  .sec-check { display: grid; grid-template-columns: 28px 1fr auto; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.06); opacity: 0.35; transition: opacity .4s ease, background .4s ease, border-color .4s ease; }
+  .sec-check .ic { width: 28px; height: 28px; border-radius: 9px; display: grid; place-items: center; background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.6); transition: background .4s, color .4s; }
+  .sec-check .ic svg { width: 15px; height: 15px; }
+  .sec-check span { font-size: 13.5px; line-height: 1.3; }
+  .sec-check span small { display: block; color: rgba(255,255,255,0.5); font-size: 11.5px; }
+  .sec-check em { font-style: normal; font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 1px; text-transform: uppercase; color: rgba(255,255,255,0.4); }
+  .sec-check.on { opacity: 1; background: rgba(149,213,178,0.08); border-color: rgba(149,213,178,0.22); }
+  .sec-check.on .ic { background: var(--green-accent); color: var(--green-deep); }
+  .sec-check.on em { color: var(--green-accent); }
+  .sec-con-foot { display: flex; justify-content: space-between; align-items: center; margin-top: 14px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.1); font-family: var(--font-mono); font-size: 11px; color: rgba(255,255,255,0.45); letter-spacing: .5px; }
+  .sec-bar { height: 3px; background: rgba(255,255,255,0.1); border-radius: 3px; overflow: hidden; flex: 1; margin-left: 14px; }
+  .sec-bar i { display: block; height: 100%; width: 0; background: var(--green-accent); transition: width .5s ease; }
+  .sec-toast { position: absolute; right: -18px; bottom: -26px; background: var(--white); color: var(--slate-900); border-radius: 14px; padding: 12px 16px; display: flex; gap: 12px; align-items: center; box-shadow: 0 18px 40px rgba(27,67,50,0.22); transform: translateY(14px) scale(.96); opacity: 0; transition: all .45s cubic-bezier(.2,.9,.3,1.2); max-width: 300px; }
+  .sec-toast.show { opacity: 1; transform: none; }
+  .sec-toast .tic { width: 34px; height: 34px; border-radius: 10px; background: var(--green-ghost); color: var(--green-mid); display: grid; place-items: center; flex: none; }
+  .sec-toast b { display: block; font-size: 13.5px; color: var(--green-deep); }
+  .sec-toast small { font-size: 12px; color: var(--slate-500); }
+  .sec-caption { margin-top: 40px; font-size: 12px; color: var(--slate-400); text-align: left; padding-left: 4px; }
+  html body .sec-hero, html body .sec-console { text-align: left; }
+  html body .sec-hero .section-label { justify-content: flex-start; }
+  html body .sec-hero .hero-lede { margin-left: 0; margin-right: 0; }
+  html body .sec-hero .hero-actions-centered { justify-content: flex-start; }
+  html body .sec-hero .cta-stack { align-items: flex-start; text-align: left; }
+
+  /* sections */
+  .sec-sec { padding: 104px 48px; position: relative; }
+  .sec-wrap { max-width: 1160px; margin: 0 auto; }
+  .ac-head { max-width: 760px; margin: 0 auto 52px; text-align: center; }
+  .ac-eyebrow { display: inline-flex; align-items: center; gap: 10px; font-family: var(--font-mono); font-size: 12px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--green-dark); margin-bottom: 16px; }
+  .ac-head h2 { font-size: clamp(30px, 4vw, 48px); font-weight: 700; letter-spacing: -1.4px; color: var(--green-deep); line-height: 1.1; margin: 0; }
+  .ac-head h2 em { font-style: normal; color: var(--green-mid); }
+  .ac-head p { font-size: 17px; color: var(--slate-600); line-height: 1.6; margin: 14px auto 0; max-width: 640px; }
+
+  /* facts strip */
+  .sec-facts-sec { padding: 0 48px; margin-top: -8px; position: relative; z-index: 3; }
+  .sec-facts { max-width: 1160px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); background: var(--white); border: 1px solid rgba(27,67,50,0.1); border-radius: 22px; box-shadow: 0 20px 50px rgba(27,67,50,0.10); overflow: hidden; }
+  .sec-fact { padding: 26px 26px 24px; border-right: 1px solid rgba(27,67,50,0.08); }
+  .sec-fact:last-child { border-right: 0; }
+  .sec-fact .k { font-family: var(--font-mono); font-size: 26px; font-weight: 700; color: var(--green-deep); letter-spacing: -0.5px; font-variant-numeric: tabular-nums; }
+  .sec-fact p { margin: 6px 0 0; font-size: 14px; color: var(--slate-600); line-height: 1.45; }
+
+  /* layers */
+  .sec-layers-sec { background: linear-gradient(180deg, var(--white) 0%, var(--slate-50) 30%, var(--slate-50) 70%, var(--white) 100%); }
+  .sec-layers { display: grid; grid-template-columns: 1fr 1.15fr; gap: 56px; align-items: center; }
+  .sec-stack { position: relative; display: grid; gap: 10px; perspective: 1200px; }
+  .sec-layer { display: grid; grid-template-columns: 46px 1fr auto; gap: 14px; align-items: center; padding: 16px 18px; border-radius: 16px; background: var(--white); border: 1px solid rgba(27,67,50,0.10); box-shadow: 0 6px 18px rgba(27,67,50,0.06); cursor: pointer; transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease, background .3s ease; text-align: left; font: inherit; color: inherit; width: 100%; }
+  .sec-layer:nth-child(1) { margin: 0 48px; } .sec-layer:nth-child(2) { margin: 0 36px; } .sec-layer:nth-child(3) { margin: 0 24px; } .sec-layer:nth-child(4) { margin: 0 12px; }
+  .sec-layer .n { width: 46px; height: 46px; border-radius: 13px; display: grid; place-items: center; background: var(--green-ghost); color: var(--green-mid); }
+  .sec-layer .n svg { width: 22px; height: 22px; }
+  .sec-layer b { display: block; font-size: 16px; color: var(--green-deep); }
+  .sec-layer small { display: block; font-size: 13px; color: var(--slate-500); margin-top: 2px; }
+  .sec-layer .tag { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 1.2px; text-transform: uppercase; color: var(--slate-400); }
+  .sec-layer:hover, .sec-layer.on { border-color: rgba(45,106,79,0.45); box-shadow: 0 14px 34px rgba(27,67,50,0.14); transform: translateY(-2px); }
+  .sec-layer.on { background: var(--green-deep); }
+  .sec-layer.on b { color: #fff; } .sec-layer.on small { color: rgba(255,255,255,0.65); } .sec-layer.on .tag { color: var(--green-accent); }
+  .sec-layer.on .n { background: var(--green-accent); color: var(--green-deep); }
+  .sec-core { text-align: center; margin: 6px 60px 0; padding: 14px; border-radius: 16px; border: 1.5px dashed rgba(45,106,79,0.4); font-family: var(--font-mono); font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--green-dark); background: var(--green-ghost); }
+  .sec-detail { scroll-margin-top: 96px; background: var(--white); border-radius: 22px; border: 1px solid rgba(27,67,50,0.10); box-shadow: 0 20px 50px rgba(27,67,50,0.10); padding: 34px 34px 30px; min-height: 360px; }
+  .sec-panel { display: none; }
+  .sec-panel.on { display: block; animation: secIn .35s ease; }
+  @keyframes secIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+  .sec-panel h3 { font-size: 24px; letter-spacing: -0.6px; color: var(--green-deep); margin: 0 0 8px; }
+  .sec-panel > p { font-size: 16px; color: var(--slate-600); line-height: 1.6; margin: 0 0 18px; }
+  .sec-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+  .sec-list li { display: grid; grid-template-columns: 22px 1fr; gap: 12px; font-size: 15px; line-height: 1.5; color: var(--slate-700); }
+  .sec-list li::before { content: ""; width: 22px; height: 22px; border-radius: 7px; margin-top: 1px; background: var(--green-ghost) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232d6a4f' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E") center/13px no-repeat; }
+  .sec-list li b { color: var(--green-deep); }
+
+  /* access matrix */
+  .sec-access { display: grid; grid-template-columns: 1fr 1.2fr; gap: 56px; align-items: center; }
+  .sec-copy h2 { font-size: clamp(30px, 3.6vw, 44px); font-weight: 700; letter-spacing: -1.3px; color: var(--green-deep); line-height: 1.1; margin: 0 0 16px; }
+  .sec-copy h2 em { font-style: normal; color: var(--green-mid); }
+  .sec-copy > p { font-size: 17px; color: var(--slate-600); line-height: 1.6; margin: 0 0 22px; }
+  .sec-matrix { background: var(--white); border: 1px solid rgba(27,67,50,0.10); border-radius: 22px; box-shadow: 0 20px 50px rgba(27,67,50,0.10); overflow: hidden; }
+  .sec-mx-head { display: flex; justify-content: space-between; align-items: center; padding: 16px 20px; border-bottom: 1px solid rgba(27,67,50,0.08); }
+  .sec-mx-head b { color: var(--green-deep); font-size: 15px; }
+  .sec-mx-head small { color: var(--slate-500); font-size: 12px; }
+  .sec-mx-scroll { overflow-x: auto; }
+  .sec-mx { width: 100%; border-collapse: collapse; font-size: 13.5px; min-width: 460px; }
+  .sec-mx th { text-align: center; font-weight: 600; color: var(--slate-500); font-size: 11.5px; letter-spacing: .4px; padding: 12px 8px; background: var(--slate-50); }
+  .sec-mx th:first-child, .sec-mx td:first-child { text-align: left; padding-left: 20px; }
+  .sec-mx td { padding: 13px 8px; border-top: 1px solid rgba(27,67,50,0.06); text-align: center; color: var(--slate-700); }
+  .sec-mx td:first-child b { display: block; color: var(--green-deep); font-size: 14px; }
+  .sec-mx td:first-child small { color: var(--slate-500); font-size: 12px; }
+  .sw { display: inline-block; width: 34px; height: 20px; border-radius: 999px; background: var(--slate-200); position: relative; vertical-align: middle; transition: background .3s; }
+  .sw::after { content: ""; position: absolute; top: 3px; left: 3px; width: 14px; height: 14px; border-radius: 50%; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.2); transition: left .3s; }
+  .sw.on { background: var(--green-mid); }
+  .sw.on::after { left: 17px; }
+  .sec-mx-foot { padding: 12px 20px; font-size: 12px; color: var(--slate-500); background: var(--slate-50); border-top: 1px solid rgba(27,67,50,0.06); }
+
+  /* money (dark panel) */
+  .sec-dark { background: var(--green-deep); color: #fff; border-radius: 40px; width: calc(100% - 48px); margin: 0 auto; padding: 100px 48px; position: relative; overflow: hidden; }
+  .sec-dark::before { content: ""; position: absolute; inset: 0; background: radial-gradient(700px 400px at 90% 0%, rgba(149,213,178,0.16), transparent 60%); pointer-events: none; }
+  .sec-dark .ac-head h2 { color: #fff; } .sec-dark .ac-head h2 em { color: var(--green-accent); } .sec-dark .ac-head p { color: rgba(255,255,255,0.72); } .sec-dark .ac-eyebrow { color: var(--green-accent); }
+  .sec-flow { position: relative; display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; max-width: 1160px; margin: 0 auto; }
+  .sec-step { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.10); border-radius: 18px; padding: 22px 20px; position: relative; }
+  .sec-step .num { font-family: var(--font-mono); font-size: 12px; color: var(--green-accent); letter-spacing: 1.5px; }
+  .sec-step b { display: block; font-size: 17px; margin: 10px 0 6px; }
+  .sec-step p { margin: 0; font-size: 14px; color: rgba(255,255,255,0.68); line-height: 1.5; }
+  .sec-step:not(:last-child)::after { content: ""; position: absolute; right: -13px; top: 50%; width: 10px; height: 10px; border-top: 2px solid var(--green-accent); border-right: 2px solid var(--green-accent); transform: translateY(-50%) rotate(45deg); opacity: .7; }
+  .sec-money-notes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; max-width: 1160px; margin: 26px auto 0; }
+  .sec-note { border-radius: 18px; padding: 20px; background: rgba(0,0,0,0.14); }
+  .sec-note b { display: block; color: var(--green-accent); font-size: 14px; margin-bottom: 6px; }
+  .sec-note p { margin: 0; font-size: 14px; color: rgba(255,255,255,0.75); line-height: 1.55; }
+
+  /* encryption */
+  .sec-enc { display: grid; grid-template-columns: 1.1fr 1fr; gap: 56px; align-items: center; }
+  .sec-vault { background: var(--slate-900); border-radius: 22px; padding: 22px; color: #e2e8f0; font-family: var(--font-mono); font-size: 12.5px; box-shadow: 0 24px 60px rgba(27,67,50,0.22); }
+  .sec-vault .row { display: grid; grid-template-columns: 120px 1fr; gap: 12px; padding: 12px 0; border-bottom: 1px dashed rgba(255,255,255,0.1); align-items: center; }
+  .sec-vault .row:last-of-type { border-bottom: 0; }
+  .sec-vault .lbl { color: rgba(255,255,255,0.45); font-size: 11px; letter-spacing: 1px; text-transform: uppercase; }
+  .sec-vault .val { color: #fff; word-break: break-all; min-height: 18px; }
+  .sec-vault .val.cipher { color: var(--green-accent); }
+  .sec-vault .key { display: inline-flex; gap: 6px; align-items: center; margin-top: 14px; padding: 6px 10px; border-radius: 8px; background: rgba(149,213,178,0.12); color: var(--green-accent); font-size: 11px; letter-spacing: .8px; }
+  .sec-vault .key svg { width: 13px; height: 13px; }
+
+  /* audit log */
+  .sec-log-sec { background: linear-gradient(180deg, var(--white) 0%, var(--slate-50) 30%, var(--slate-50) 70%, var(--white) 100%); }
+  .sec-log { max-width: 900px; margin: 0 auto; background: var(--white); border: 1px solid rgba(27,67,50,0.10); border-radius: 22px; box-shadow: 0 20px 50px rgba(27,67,50,0.10); overflow: hidden; }
+  .sec-log-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 16px 22px; border-bottom: 1px solid rgba(27,67,50,0.08); }
+  .sec-log-head b { color: var(--green-deep); }
+  .sec-lock { display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: var(--green-mid); background: var(--green-ghost); padding: 5px 10px; border-radius: 999px; white-space: nowrap; }
+  .sec-lock svg { width: 12px; height: 12px; }
+  .sec-entry { display: grid; grid-template-columns: 112px 1fr; gap: 18px; padding: 16px 22px; border-top: 1px solid rgba(27,67,50,0.06); opacity: 0; transform: translateY(8px); transition: all .5s ease; }
+  .sec-entry.in { opacity: 1; transform: none; }
+  .sec-entry:first-of-type { border-top: 0; }
+  .sec-entry time { font-family: var(--font-mono); font-size: 12px; color: var(--slate-500); font-variant-numeric: tabular-nums; padding-top: 2px; }
+  .sec-entry time span { display: block; }
+  .sec-entry b { color: var(--green-deep); font-size: 14.5px; }
+  .sec-entry .who { font-size: 13px; color: var(--slate-500); margin-top: 2px; }
+  .sec-diff { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; font-family: var(--font-mono); font-size: 12px; }
+  .sec-diff .old { background: #fdecec; color: #9b2c2c; padding: 3px 8px; border-radius: 6px; text-decoration: line-through; }
+  .sec-diff .new { background: var(--green-ghost); color: var(--green-dark); padding: 3px 8px; border-radius: 6px; }
+  .sec-log-foot { padding: 12px 22px; background: var(--slate-50); font-size: 12px; color: var(--slate-500); border-top: 1px solid rgba(27,67,50,0.06); }
+
+  /* AI cards + resilience grid */
+  .sec-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .sec-card { background: var(--white); border: 1px solid rgba(27,67,50,0.10); border-radius: 20px; padding: 26px 24px; box-shadow: 0 8px 24px rgba(27,67,50,0.06); transition: transform .3s ease, box-shadow .3s ease; }
+  .sec-card:hover { transform: translateY(-3px); box-shadow: 0 18px 40px rgba(27,67,50,0.12); }
+  .sec-card .ci { width: 44px; height: 44px; border-radius: 13px; display: grid; place-items: center; background: var(--green-ghost); color: var(--green-mid); margin-bottom: 16px; }
+  .sec-card .ci svg { width: 22px; height: 22px; }
+  .sec-card h3 { font-size: 18px; color: var(--green-deep); margin: 0 0 8px; letter-spacing: -0.3px; }
+  .sec-card p { font-size: 14.5px; color: var(--slate-600); line-height: 1.55; margin: 0; }
+  .sec-ai-rule { max-width: 1160px; margin: 0 auto 28px; display: flex; gap: 18px; align-items: center; background: var(--green-ghost); border: 1px solid rgba(45,106,79,0.18); border-radius: 20px; padding: 20px 24px; }
+  .sec-ai-rule .ci { width: 48px; height: 48px; border-radius: 14px; background: var(--green-deep); color: var(--green-accent); display: grid; place-items: center; flex: none; }
+  .sec-ai-rule .ci svg { width: 24px; height: 24px; }
+  .sec-ai-rule p { margin: 0; font-size: 16px; color: var(--green-deep); line-height: 1.5; }
+
+  .sec-res { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
+  .sec-timeline { position: relative; background: var(--white); border: 1px solid rgba(27,67,50,0.10); border-radius: 22px; padding: 26px; box-shadow: 0 20px 50px rgba(27,67,50,0.10); }
+  .sec-tl-label { display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 11px; color: var(--slate-500); letter-spacing: .5px; margin-bottom: 10px; }
+  .sec-tl-track { position: relative; height: 54px; border-radius: 12px; background: repeating-linear-gradient(90deg, var(--green-ghost) 0 calc(100%/7 - 2px), transparent calc(100%/7 - 2px) calc(100%/7)); }
+  .sec-tl-fill { position: absolute; inset: 0; border-radius: 12px; background: linear-gradient(90deg, rgba(64,145,108,0.25), rgba(64,145,108,0.55)); width: 0; transition: width 1.6s ease; }
+  .go .sec-tl-fill { width: 100%; }
+  .sec-tl-pin { position: absolute; top: -8px; bottom: -8px; left: 62%; width: 2px; background: var(--green-deep); }
+  .sec-tl-pin span { position: absolute; top: -26px; left: 50%; transform: translateX(-50%); white-space: nowrap; font-family: var(--font-mono); font-size: 11px; color: var(--white); background: var(--green-deep); padding: 3px 8px; border-radius: 6px; }
+  .sec-drill { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 22px; }
+  .sec-drill div { background: var(--slate-50); border-radius: 14px; padding: 14px; }
+  .sec-drill .k { font-family: var(--font-mono); font-size: 18px; white-space: nowrap; font-weight: 700; color: var(--green-deep); font-variant-numeric: tabular-nums; }
+  .sec-drill p { margin: 4px 0 0; font-size: 12.5px; color: var(--slate-600); line-height: 1.4; }
+
+  /* subprocessors */
+  .sec-subs { max-width: 1000px; margin: 0 auto; background: var(--white); border: 1px solid rgba(27,67,50,0.10); border-radius: 22px; overflow: hidden; box-shadow: 0 20px 50px rgba(27,67,50,0.08); }
+  .sec-subs table { width: 100%; border-collapse: collapse; font-size: 14.5px; }
+  .sec-subs th { text-align: left; font-size: 12px; letter-spacing: .5px; text-transform: uppercase; color: var(--slate-500); background: var(--slate-50); padding: 12px 20px; }
+  .sec-subs td { padding: 14px 20px; border-top: 1px solid rgba(27,67,50,0.06); color: var(--slate-700); vertical-align: top; line-height: 1.45; }
+  .sec-subs td:first-child { font-weight: 600; color: var(--green-deep); white-space: nowrap; }
+
+  /* program + disclosure */
+  .sec-prog { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; max-width: 1160px; margin: 0 auto; }
+  .sec-doc { display: flex; gap: 14px; align-items: flex-start; padding: 18px 20px; background: var(--white); border: 1px solid rgba(27,67,50,0.10); border-radius: 16px; }
+  .sec-doc svg { width: 20px; height: 20px; color: var(--green-mid); flex: none; margin-top: 2px; }
+  .sec-doc b { display: block; color: var(--green-deep); font-size: 15px; }
+  .sec-doc span { font-size: 13.5px; color: var(--slate-600); line-height: 1.5; }
+  .sec-review { max-width: 1160px; margin: 26px auto 0; display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .sec-review .sec-card { background: var(--green-ghost); border-color: rgba(45,106,79,0.18); }
+  .sec-review a { color: var(--green-mid); font-weight: 600; }
+
+  /* FAQ + final (shared look with other pages) */
+  .exp-faq { padding: 96px 48px; background: var(--white); }
+  .exp-faq-list { max-width: 820px; margin: 0 auto; }
+  .exp-faq details { border-bottom: 1px solid var(--slate-200); padding: 4px 0; }
+  .exp-faq summary { cursor: pointer; list-style: none; font-size: 18px; font-weight: 600; color: var(--green-deep); padding: 18px 40px 18px 0; position: relative; }
+  .exp-faq summary::-webkit-details-marker { display: none; }
+  .exp-faq summary::after { content: "+"; position: absolute; right: 4px; top: 14px; font-size: 24px; color: var(--green-mid); transition: transform .25s; }
+  .exp-faq details[open] summary::after { transform: rotate(45deg); }
+  .exp-faq details p { margin: 0 0 18px; font-size: 16px; color: var(--slate-600); line-height: 1.65; }
+  .ac-final { background: var(--slate-50); padding: 100px 48px 108px; text-align: center; border-radius: 40px 40px 0 0; }
+  .ac-final h2 { font-size: clamp(32px, 4.4vw, 52px); font-weight: 700; letter-spacing: -1.6px; color: var(--green-deep); line-height: 1.08; margin: 0 0 14px; }
+  .ac-final > p { font-size: 18px; color: var(--slate-600); margin: 0 auto 32px; max-width: 580px; line-height: 1.6; }
+  .ac-final > .ac-eyebrow { justify-content: center; }
+  .ac-final-actions { display: flex; gap: 22px; align-items: center; justify-content: center; flex-wrap: wrap; }
+  .ac-btn { display: inline-flex; align-items: center; gap: 14px; background: linear-gradient(180deg, #24573f, var(--green-deep)); color: #fff; font-weight: 600; font-size: 17px; padding: 8px 8px 8px 26px; border-radius: 18px; min-height: 62px; text-decoration: none; position: relative; overflow: hidden; box-shadow: 0 14px 30px rgba(27,67,50,0.25); }
+  .ac-btn svg { width: 48px; height: 48px; padding: 15px; border-radius: 13px; background: var(--green-accent); color: var(--green-deep); box-sizing: border-box; }
+  .ac-btn::after { content: ""; position: absolute; top: 0; left: -60%; width: 40%; height: 100%; background: linear-gradient(100deg, transparent, rgba(255,255,255,0.28), transparent); animation: secSheen 4.5s ease-in-out infinite; }
+  @keyframes secSheen { 0%, 70% { left: -60%; } 100% { left: 130%; } }
+
+  .reveal { opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s ease; }
+  .reveal.is-visible { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) { .reveal, .sec-entry { opacity: 1 !important; transform: none !important; transition: none !important; } .sec-check { opacity: 1; } .ac-btn::after { animation: none; } .sec-tl-fill { transition: none; } }
+
+  /* tablet */
+  @media (max-width: 1024px) {
+    .sec-hero, .sec-layers, .sec-access, .sec-enc, .sec-res { grid-template-columns: 1fr; gap: 44px; }
+    .sec-stage { max-width: 560px; margin: 0 auto; width: 100%; }
+    .sec-facts { grid-template-columns: repeat(2, 1fr); }
+    .sec-fact:nth-child(2) { border-right: 0; }
+    .sec-fact:nth-child(-n+2) { border-bottom: 1px solid rgba(27,67,50,0.08); }
+    .sec-flow { grid-template-columns: repeat(2, 1fr); }
+    .sec-step::after { display: none; }
+    .sec-money-notes, .sec-cards { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+<noscript><style>.reveal,.sec-entry{opacity:1!important;transform:none!important}.sec-check{opacity:1}.sec-tl-fill{width:100%}</style></noscript>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-H2LBJT03WE"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-H2LBJT03WE');</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Security at ShelfSpace",
+  "url": "https://shelfspace.pro/security",
+  "description": "How ShelfSpace protects your money and data: two-factor sign-in, per-person access, AES-256 encryption, an audit log, US hosting and tested backups.",
+  "publisher": { "@type": "Organization", "name": "ShelfSpace", "url": "https://shelfspace.pro" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://shelfspace.pro/" },
+    { "@type": "ListItem", "position": 2, "name": "Security", "item": "https://shelfspace.pro/security" }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "Where is my data stored?", "acceptedAnswer": { "@type": "Answer", "text": "In the United States. The application runs on Vercel, and the database and uploaded files are stored on AWS in us-east-1 (Virginia)." } },
+    { "@type": "Question", "name": "Do other customers share the database?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Every table enforces row-level security, so each request only returns rows that belong to the signed-in person's company, and our servers check access again before any action." } },
+    { "@type": "Question", "name": "Does ShelfSpace need my online banking login?", "acceptedAnswer": { "@type": "Answer", "text": "No. When you connect a bank for transfers, you sign in to your bank inside Plaid's window, and that login never reaches ShelfSpace or our banking partner." } },
+    { "@type": "Question", "name": "Can ShelfSpace staff see my data?", "acceptedAnswer": { "@type": "Answer", "text": "Production access is limited to the founder and one designated backup, behind multi-factor sign-in. Anyone else on our team gets a read-only account that cannot change anything, and viewing bank or tax details is logged." } },
+    { "@type": "Question", "name": "Is my data used to train AI models?", "acceptedAnswer": { "@type": "Answer", "text": "No. Our commercial agreement with Anthropic prohibits training on customer data, and Anthropic deletes API data within 30 days." } },
+    { "@type": "Question", "name": "Can you complete our security questionnaire?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Send it to chris@shelfspace.pro and we answer every question in writing. We can also share our written security policies and coordinate a third-party penetration test with your team." } }
+  ]
+}
+</script>
+<script>window.si=window.si||function(){(window.siq=window.siq||[]).push(arguments)};</script>
+<script defer src="/_vercel/speed-insights/script.js"></script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="/" class="nav-logo">
+    <div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div>
+    <span class="nav-logo-text">ShelfSpace<sup class="nav-logo-tm">™</sup></span>
+  </a>
+  <ul class="nav-links">
+    <li class="nav-dropdown"><a href="/accounts-receivable" class="nav-dropdown-toggle">Features <svg class="dropdown-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></a>
+      <div class="nav-dropdown-menu"><a href="/accounts-receivable">ShelfSpace overview</a><a href="/ai-calls">AI Calls</a><a href="/collections">Collections</a><a href="/payment-plans">Payment Plans</a><a href="/promise-to-pay">Promise to Pay</a><a href="/final-notice">Final Notice</a><a href="/ar-aging">AR Aging</a><a href="/rep-management">Rep Management</a><a href="/payments">Payments</a><a href="/quickbooks">QuickBooks</a></div></li>
+    <li><a href="/security" class="active" aria-current="page">Security</a></li>
+    <li class="nav-dropdown"><a href="/accounts-payable" class="nav-dropdown-toggle">For dispensaries <svg class="dropdown-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></a>
+      <div class="nav-dropdown-menu"><a href="/accounts-payable">Accounts payable overview</a><a href="/consignment">Consignment</a><a href="/credit-recovery">Credit Recovery</a><a href="/shelfverify">ShelfVerify</a></div></li>
+    <li><a href="/about">About</a></li>
+    <li><a href="/pricing">Pricing</a></li>
+    <li class="nav-login-mobile"><a href="https://ourshelf.space/login">Login</a></li>
+    <li class="nav-call"><a href="sms:+19713194085?&amp;body=Hi%20Chris%2C%20I%20have%20a%20question%20about%20ShelfSpace." aria-label="Text Chris now at 971-319-4085"><span class="nav-call-icon" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2z"/></svg></span><span class="nav-call-text"><span class="nav-call-kicker">Text Chris now</span><span class="nav-call-num">971-319-4085</span></span></a></li>
+    <li><a href="/contact?cta=security-nav" class="nav-cta">Schedule a Demo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a></li>
+  </ul>
+  <a href="sms:+19713194085?&amp;body=Hi%20Chris%2C%20I%20have%20a%20question%20about%20ShelfSpace." class="nav-call-bar" aria-label="Text Chris now at 971-319-4085"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2z"/></svg><span>Text</span></a>
+  <div class="nav-hamburger" onclick="document.querySelector('.nav-links').classList.toggle('mobile-open'); event.stopPropagation();"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="sec-grid-lines"></div>
+  <div class="sec-hero">
+    <div>
+      <div class="section-label">ShelfSpace &middot; Security</div>
+      <h1>Your money moves only when <em>your people say so.</em></h1>
+      <p class="hero-lede">Every payment passes the same checks: a signed-in person, a fresh two-factor code, access limited to your company, encrypted bank details and a permanent record of who approved it.</p>
+      <div class="hero-actions-centered">
+        <span class="cta-stack"><a href="/contact?cta=security-hero" class="btn-primary">Schedule a call <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a><span class="cta-micro">30 minutes with Chris. See how it would run for your business.</span></span>
+      </div>
+      <div class="sec-badges">
+        <span class="sec-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>AES-256 encryption</span>
+        <span class="sec-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg>Two-factor sign-in</span>
+        <span class="sec-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/></svg>US data storage</span>
+        <span class="sec-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Certified Metrc vendor</span>
+      </div>
+    </div>
+    <div class="sec-stage" data-price-note="example" aria-label="Animated example: a vendor payment passes five security checks before it is released">
+      <div class="sec-ghost g2"></div>
+      <div class="sec-ghost g1"></div>
+      <div class="sec-console" aria-hidden="true">
+        <div class="sec-con-head">
+          <div><b>Payment to Verdant Hill Botanical</b><small>Invoice INV-1042 &middot; e-check</small></div>
+          <div class="sec-amt">$4,820.00</div>
+        </div>
+        <ul class="sec-checks">
+          <li class="sec-check"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 0 0-16 0"/></svg></span><span>Signed in as an approver<small>Role allowed to pay at this company</small></span><em>Pass</em></li>
+          <li class="sec-check"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="20" x="5" y="2" rx="2"/><path d="M12 18h.01"/></svg></span><span>Fresh two-factor code<small>Confirmed seconds ago</small></span><em>Pass</em></li>
+          <li class="sec-check"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V7l7-4 7 4v14"/><path d="M9 21v-6h6v6"/></svg></span><span>Access limited to your company<small>No other customer's records in reach</small></span><em>Pass</em></li>
+          <li class="sec-check"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span><span>Bank details encrypted<small>AES-256, shown as &bull;&bull;&bull;&bull;4417</small></span><em>Pass</em></li>
+          <li class="sec-check"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 13h4"/><path d="M10 17h4"/></svg></span><span>Written to the audit log<small>Who, when, before and after</small></span><em>Pass</em></li>
+        </ul>
+        <div class="sec-con-foot"><span class="sec-con-status">Checking&hellip;</span><span class="sec-bar"><i></i></span></div>
+      </div>
+      <div class="sec-toast" aria-hidden="true"><span class="tic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span><b>Payment released</b><small>Approved by J. Rivera &middot; 11/06/2026</small></span></div>
+      <div class="sec-caption">Illustration with example numbers</div>
+    </div>
+  </div>
+</div>
+
+<!-- FACTS -->
+<section class="sec-facts-sec" aria-label="Security at a glance">
+  <div class="sec-facts reveal">
+    <div class="sec-fact"><div class="k">AES-256</div><p>Bank numbers, tax IDs and accounting tokens, each under its own key.</p></div>
+    <div class="sec-fact"><div class="k">2FA</div><p>Two-factor sign-in on every account, and again before money moves.</p></div>
+    <div class="sec-fact"><div class="k">US only</div><p>Your data is stored in the United States, on AWS in Virginia.</p></div>
+    <div class="sec-fact"><div class="k">7 days</div><p>Restore to any moment in the past week from continuous backups.</p></div>
+  </div>
+</section>
+
+<!-- LAYERS -->
+<section class="sec-sec sec-layers-sec" id="layers">
+  <div class="sec-wrap">
+    <div class="ac-head reveal">
+      <div class="ac-eyebrow">Defense in layers</div>
+      <h2>Four layers between anyone and <em>your money.</em></h2>
+      <p>Each layer works on its own, so getting past one still leaves the others in the way. Pick a layer to see what it does.</p>
+    </div>
+    <div class="sec-layers">
+      <div class="sec-stack reveal" role="tablist" aria-label="Security layers">
+        <button class="sec-layer on" role="tab" aria-selected="true" aria-controls="lp-net" id="lt-net" data-p="lp-net"><span class="n"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg></span><span><b>Network</b><small>Encrypted connections, bot protection</small></span><span class="tag">Layer 1</span></button>
+        <button class="sec-layer" role="tab" aria-selected="false" aria-controls="lp-id" id="lt-id" data-p="lp-id"><span class="n"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 18v3c0 .6.4 1 1 1h4v-3h3v-3h2l1.4-1.4a6.5 6.5 0 1 0-4-4Z"/><circle cx="16.5" cy="7.5" r=".5" fill="currentColor"/></svg></span><span><b>Identity</b><small>Two-factor sign-in for every person</small></span><span class="tag">Layer 2</span></button>
+        <button class="sec-layer" role="tab" aria-selected="false" aria-controls="lp-acc" id="lt-acc" data-p="lp-acc"><span class="n"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span><span><b>Access</b><small>Your company's data, your people only</small></span><span class="tag">Layer 3</span></button>
+        <button class="sec-layer" role="tab" aria-selected="false" aria-controls="lp-data" id="lt-data" data-p="lp-data"><span class="n"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14a9 3 0 0 0 18 0V5"/><path d="M3 12a9 3 0 0 0 18 0"/></svg></span><span><b>Data</b><small>Encrypted at rest, field by field</small></span><span class="tag">Layer 4</span></button>
+        <div class="sec-core">Your money + your records</div>
+      </div>
+      <div class="sec-detail reveal">
+        <div class="sec-panel on" id="lp-net" role="tabpanel" aria-labelledby="lt-net">
+          <h3>Network</h3>
+          <p>Everything between your browser and ShelfSpace travels encrypted, and automated traffic is screened before it reaches a sign-in form.</p>
+          <ul class="sec-list">
+            <li><span><b>HTTPS everywhere.</b> Every page and API call uses TLS, and browsers are told to refuse anything else (HSTS, preloaded).</span></li>
+            <li><span><b>Encrypted live updates.</b> Real-time screens use secure WebSockets only.</span></li>
+            <li><span><b>Bot protection</b> on public forms, so scripted sign-up and sign-in attempts are turned away.</span></li>
+            <li><span><b>Encrypted partner connections.</b> Calls to banks, accounting systems and Metrc all go over TLS.</span></li>
+          </ul>
+        </div>
+        <div class="sec-panel" id="lp-id" role="tabpanel" aria-labelledby="lt-id">
+          <h3>Identity</h3>
+          <p>A password alone never gets anyone in, and a signed-in session alone never moves money.</p>
+          <ul class="sec-list">
+            <li><span><b>Two-factor sign-in</b> is required on every account.</span></li>
+            <li><span><b>Step-up before money moves.</b> Approving a payment, sending a payment or connecting a bank asks for a fresh two-factor check, even mid-session.</span></li>
+            <li><span><b>No magic links.</b> Email links never sign anyone in to payments, settlements or bank details.</span></li>
+            <li><span><b>Passwords are hashed</b> by our authentication provider and never stored in readable form.</span></li>
+          </ul>
+        </div>
+        <div class="sec-panel" id="lp-acc" role="tabpanel" aria-labelledby="lt-acc">
+          <h3>Access</h3>
+          <p>Every table in the database enforces row-level security, so a request can only ever return rows that belong to the signed-in person's company.</p>
+          <ul class="sec-list">
+            <li><span><b>Row-level security on every table.</b> Customers share one database, but never each other's records.</span></li>
+            <li><span><b>Per person, per company, per feature.</b> Your admin decides who sees collections, bill pay or expenses at each of your companies.</span></li>
+            <li><span><b>Checked twice.</b> Our servers confirm the person's role again before any change, on top of the database rules.</span></li>
+            <li><span><b>Staff are read-only.</b> Anyone on our team besides the founder and one designated backup gets a read-only account.</span></li>
+          </ul>
+        </div>
+        <div class="sec-panel" id="lp-data" role="tabpanel" aria-labelledby="lt-data">
+          <h3>Data</h3>
+          <p>All stored data is encrypted on disk. The most sensitive fields are encrypted again inside the application before they are saved.</p>
+          <ul class="sec-list">
+            <li><span><b>AES-256-GCM field encryption</b> for bank routing and account numbers, tax IDs, system credentials and accounting tokens, including Xero and QuickBooks.</span></li>
+            <li><span><b>Separate keys by type,</b> so bank data, tax IDs and accounting tokens never share a key.</span></li>
+            <li><span><b>Last four only.</b> Screens show bank and tax numbers masked. Viewing a full tax document is logged and the owner is told.</span></li>
+            <li><span><b>Secrets stay out of code.</b> Keys live in our host's encrypted secret store and can't be read back once saved.</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ACCESS MATRIX -->
+<section class="sec-sec" id="access">
+  <div class="sec-wrap sec-access">
+    <div class="sec-copy reveal">
+      <div class="ac-eyebrow">Access control</div>
+      <h2>Each person sees <em>only what you allow.</em></h2>
+      <p>Running several companies? Put them all on one screen and decide, person by person, which companies they can reach and what they can do there. Your AR team can collect at one company without ever seeing expenses at another.</p>
+      <ul class="sec-list">
+        <li><span><b>Company admins</b> set access themselves, no ticket required.</span></li>
+        <li><span><b>Turning a feature off</b> blocks its pages, its data and its emails for that person, on the server, not just in the menu.</span></li>
+        <li><span><b>Every access change</b> is written to the audit log.</span></li>
+      </ul>
+    </div>
+    <div class="sec-matrix reveal" data-mx>
+      <div class="sec-mx-head"><b>Team access</b><small>Illustration</small></div>
+      <div class="sec-mx-scroll">
+        <table class="sec-mx">
+          <thead><tr><th>Person &middot; company</th><th>Collections</th><th>Bill pay</th><th>Expenses</th></tr></thead>
+          <tbody>
+            <tr><td><b>Maya Chen</b><small>AR lead &middot; North Farm LLC</small></td><td><span class="sw" data-on="1"></span></td><td><span class="sw"></span></td><td><span class="sw"></span></td></tr>
+            <tr><td><b>Sam Ortiz</b><small>AP clerk &middot; North Farm LLC</small></td><td><span class="sw"></span></td><td><span class="sw" data-on="1"></span></td><td><span class="sw"></span></td></tr>
+            <tr><td><b>J. Rivera</b><small>Controller &middot; all companies</small></td><td><span class="sw" data-on="1"></span></td><td><span class="sw" data-on="1"></span></td><td><span class="sw" data-on="1"></span></td></tr>
+            <tr><td><b>Dev Patel</b><small>Field sales &middot; South Labs Inc.</small></td><td><span class="sw"></span></td><td><span class="sw"></span></td><td><span class="sw" data-on="1"></span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="sec-mx-foot">Off means off: no page, no data, no email for that feature.</div>
+    </div>
+  </div>
+</section>
+
+<!-- MONEY (dark) -->
+<section class="sec-dark" id="payments">
+  <div class="ac-head reveal">
+    <div class="ac-eyebrow">Payments</div>
+    <h2>Money never moves <em>on its own.</em></h2>
+    <p>Payments go from your bank account straight to the person you're paying. ShelfSpace never holds your money, and nothing is sent until a person on your team approves it.</p>
+  </div>
+  <div class="sec-flow">
+    <div class="sec-step reveal"><div class="num">01 &middot; Prepare</div><b>Bill or invoice is ready</b><p>Matched, coded and waiting. Anyone with access can prepare it.</p></div>
+    <div class="sec-step reveal"><div class="num">02 &middot; Approve</div><b>A person approves</b><p>Signed in, with a fresh two-factor code, in a role allowed to pay.</p></div>
+    <div class="sec-step reveal"><div class="num">03 &middot; Send</div><b>Sent from your bank</b><p>By e-check or bank transfer through our banking partner, Alero Financial.</p></div>
+    <div class="sec-step reveal"><div class="num">04 &middot; Record</div><b>Logged and synced</b><p>The audit log records who approved it, and the payment posts to your books.</p></div>
+  </div>
+  <div class="sec-money-notes">
+    <div class="sec-note reveal"><b>Your bank login stays yours</b><p>Banks are connected through Plaid. You sign in to your bank in Plaid's window, and that login never reaches us or our banking partner.</p></div>
+    <div class="sec-note reveal"><b>Bank changes need a person</b><p>Adding or changing a bank account always takes a signed-in person and a fresh two-factor code. No email or AI can do it.</p></div>
+    <div class="sec-note reveal"><b>Duplicate and mismatch checks</b><p>Payments are checked against what was already paid and what was invoiced, and a warning has to be cleared by a person.</p></div>
+  </div>
+</section>
+
+<!-- ENCRYPTION -->
+<section class="sec-sec" id="encryption">
+  <div class="sec-wrap sec-enc">
+    <div class="sec-vault reveal" data-vault aria-label="Illustration: a bank account number is encrypted before it is saved">
+      <div class="row"><span class="lbl">You enter</span><span class="val" data-plain>Account 004417</span></div>
+      <div class="row"><span class="lbl">We store</span><span class="val cipher" data-cipher>&nbsp;</span></div>
+      <div class="row"><span class="lbl">Screens show</span><span class="val">&bull;&bull;&bull;&bull;4417</span></div>
+      <span class="key"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="7.5" cy="15.5" r="5.5"/><path d="m21 2-9.6 9.6"/><path d="m15.5 7.5 3 3L22 7l-3-3"/></svg>AES-256-GCM &middot; banking key</span>
+    </div>
+    <div class="sec-copy reveal">
+      <div class="ac-eyebrow">Encryption</div>
+      <h2>Encrypted twice. <em>Readable by no one who shouldn't.</em></h2>
+      <p>The disk underneath is encrypted. On top of that, each sensitive field is locked with its own key before it's saved, so a copy of the database alone shows nothing useful.</p>
+      <ul class="sec-list">
+        <li><span><b>In transit:</b> TLS on every connection, HSTS preloaded.</span></li>
+        <li><span><b>At rest:</b> full-disk encryption for the database and every uploaded document.</span></li>
+        <li><span><b>Field level:</b> AES-256-GCM with separate keys for banking, tax IDs and credentials, and for accounting connections.</span></li>
+        <li><span><b>Keys:</b> rotated at least once a year and immediately if anything looks wrong.</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- AUDIT LOG -->
+<section class="sec-sec sec-log-sec" id="audit">
+  <div class="ac-head reveal">
+    <div class="ac-eyebrow">Audit trail</div>
+    <h2>Every change, <em>on the record.</em></h2>
+    <p>Each create, change and delete is written to an append-only log with who did it, when, and the values before and after. No user can edit or delete an entry, and our read-only staff accounts are blocked from writing to it.</p>
+  </div>
+  <div class="sec-log" data-log>
+    <div class="sec-log-head"><b>Audit log</b><span class="sec-lock"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>Append-only</span></div>
+    <div class="sec-entry"><time>11/06/2026 <span>9:42 AM</span></time><div><b>Payment approved, INV-1042</b><div class="who">J. Rivera &middot; two-factor confirmed</div><div class="sec-diff"><span class="old">status: ready</span><span class="new">status: approved</span></div></div></div>
+    <div class="sec-entry"><time>11/06/2026 <span>9:15 AM</span></time><div><b>Access changed</b><div class="who">Company admin &middot; North Farm LLC</div><div class="sec-diff"><span class="old">Sam Ortiz &middot; bill pay: off</span><span class="new">Sam Ortiz &middot; bill pay: on</span></div></div></div>
+    <div class="sec-entry"><time>11/05/2026 <span>4:03 PM</span></time><div><b>Tax ID viewed</b><div class="who">Maya Chen &middot; owner notified</div><div class="sec-diff"><span class="new">W-9 opened &middot; logged</span></div></div></div>
+    <div class="sec-log-foot">Illustration. Logs are kept for at least three years; financial records for at least seven.</div>
+  </div>
+</section>
+
+<!-- AI -->
+<section class="sec-sec" id="ai">
+  <div class="sec-wrap">
+    <div class="ac-head reveal">
+      <div class="ac-eyebrow">AI safeguards</div>
+      <h2>AI that answers and prepares. <em>Never pays.</em></h2>
+      <p>Our assistants read invoices, answer questions and draft replies. The rules that keep them in bounds are written in code, not left to the AI.</p>
+    </div>
+    <div class="sec-ai-rule reveal"><span class="ci"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m4.9 4.9 14.2 14.2"/></svg></span><p><b>The hard line:</b> AI can't draw money, add or change a bank account, or change who a payment goes to. In the app, it can only prepare an action, and a signed-in person approves it with a fresh two-factor code.</p></div>
+    <div class="sec-cards">
+      <div class="sec-card reveal"><div class="ci"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V7l7-4 7 4v14"/></svg></div><h3>One account at a time</h3><p>Our servers set which account an assistant works for before it starts. The AI never picks an account, and no AI tool can read across customers.</p></div>
+      <div class="sec-card reveal"><div class="ci"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div><h3>Fake senders turned away</h3><p>Inbound mail must pass sender authentication. Anything that changes data needs the sender's domain proven and a known contact on the account.</p></div>
+      <div class="sec-card reveal"><div class="ci"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg></div><h3>Hidden instructions stripped</h3><p>Before the AI reads an email, we remove hidden text, scripts and invisible characters, and treat everything in it as information, never as instructions.</p></div>
+      <div class="sec-card reveal"><div class="ci"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><path d="M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9 9 4.03 9 9z"/></svg></div><h3>Replies checked by code</h3><p>Code masks bank, routing and tax numbers in every AI reply and stops claims that don't match our records before anything is sent.</p></div>
+      <div class="sec-card reveal"><div class="ci"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></div><h3>Your books, with consent</h3><p>Xero data reaches the AI only after someone on your team agrees when connecting, and only while that connection is live.</p></div>
+      <div class="sec-card reveal"><div class="ci"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></div><h3>Never used for training</h3><p>We use Anthropic's Claude under commercial terms that prohibit training on your data, and Anthropic deletes it within 30 days.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- RESILIENCE -->
+<section class="sec-sec sec-layers-sec" id="resilience">
+  <div class="sec-wrap sec-res">
+    <div class="sec-copy reveal">
+      <div class="ac-eyebrow">Backups and recovery</div>
+      <h2>Tested restores, <em>not just backups.</em></h2>
+      <p>The database is backed up daily and recorded continuously, so we can restore it to any moment in the past seven days and lose at most about five minutes of data.</p>
+      <ul class="sec-list">
+        <li><span><b>Restore drill on 08/04/2026:</b> a full restore finished in under three minutes, and every table matched the original exactly.</span></li>
+        <li><span><b>Hosting:</b> the application runs on Vercel, and the database and files are on AWS in us-east-1 (Virginia).</span></li>
+        <li><span><b>Written plans</b> for incident response and business continuity, with a designated backup who holds the keys.</span></li>
+        <li><span><b>Breach notice within 72 hours</b> of discovery.</span></li>
+      </ul>
+    </div>
+    <div class="sec-timeline reveal" data-tl>
+      <div class="sec-tl-label"><span>7 days ago</span><span>Now</span></div>
+      <div class="sec-tl-track"><div class="sec-tl-fill"></div><div class="sec-tl-pin"><span>Restore to any minute</span></div></div>
+      <div class="sec-drill">
+        <div><div class="k">&lt; 3 min</div><p>Full restore in our 08/04/2026 drill</p></div>
+        <div><div class="k">190 / 190</div><p>Tables matched exactly after restore</p></div>
+        <div><div class="k">~5 min</div><p>Most data that could be lost</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SUBPROCESSORS -->
+<section class="sec-sec" id="subprocessors">
+  <div class="ac-head reveal">
+    <div class="ac-eyebrow">Who else touches your data</div>
+    <h2>Our service providers, <em>in plain view.</em></h2>
+    <p>We share only what each provider needs to do its job, over encrypted connections.</p>
+  </div>
+  <div class="sec-subs reveal">
+    <div class="sec-mx-scroll">
+      <table>
+        <thead><tr><th>Provider</th><th>What it does for us</th></tr></thead>
+        <tbody>
+          <tr><td>Supabase (on AWS, US)</td><td>Database, sign-in and file storage</td></tr>
+          <tr><td>Vercel</td><td>Application hosting and encrypted secret storage</td></tr>
+          <tr><td>Alero Financial</td><td>Bank transfers (ACH)</td></tr>
+          <tr><td>Plaid</td><td>Connecting bank accounts, without sharing your bank login</td></tr>
+          <tr><td>Check processing partner</td><td>Printing and sending e-checks and mailed checks</td></tr>
+          <tr><td>Anthropic</td><td>AI that reads invoices and drafts replies; no training on your data</td></tr>
+          <tr><td>Resend</td><td>Email delivery</td></tr>
+          <tr><td>Twilio</td><td>Text messages</td></tr>
+          <tr><td>Sentry</td><td>Error monitoring</td></tr>
+          <tr><td>Cloudflare</td><td>Bot protection on public forms</td></tr>
+          <tr><td>Xero, QuickBooks, Metrc</td><td>Only the connections you turn on, to sync your books and state records</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- PROGRAM -->
+<section class="sec-sec sec-layers-sec" id="program">
+  <div class="ac-head reveal">
+    <div class="ac-eyebrow">Security program</div>
+    <h2>Written down, <em>reviewed every year.</em></h2>
+    <p>Our policies are reviewed at least once a year and whenever how we handle data changes. Customers can ask for copies.</p>
+  </div>
+  <div class="sec-prog">
+    <div class="sec-doc reveal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/></svg><div><b>Information security policy</b><span>Roles, access, change review and how we handle a security event.</span></div></div>
+    <div class="sec-doc reveal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/></svg><div><b>Data security and retention</b><span>How data is classified, encrypted, kept and disposed of.</span></div></div>
+    <div class="sec-doc reveal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/></svg><div><b>Key management</b><span>How encryption keys are created, stored, rotated and retired.</span></div></div>
+    <div class="sec-doc reveal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/></svg><div><b>Incident response and continuity</b><span>Severity levels, who does what, customer notice and restore steps.</span></div></div>
+    <div class="sec-doc reveal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/></svg><div><b>Payment controls and fraud monitoring</b><span>Payment validation, anti-money-laundering and red-flag procedures.</span></div></div>
+    <div class="sec-doc reveal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 12 2 2 4-4"/><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/></svg><div><b>Every change reviewed</b><span>Each code change gets a security review, and every release is scanned for known vulnerabilities.</span></div></div>
+  </div>
+  <div class="sec-review">
+    <div class="sec-card reveal"><h3>Security review for your team</h3><p>Send your questionnaire to <a href="mailto:chris@shelfspace.pro?subject=Security%20questionnaire">chris@shelfspace.pro</a> and we'll answer every question in writing. We're also glad to coordinate a third-party penetration test scoped with your team.</p></div>
+    <div class="sec-card reveal"><h3>Found a problem?</h3><p>Report a suspected vulnerability to <a href="mailto:chris@shelfspace.pro?subject=Security%20report">chris@shelfspace.pro</a> with "Security report" in the subject. We read every report and reply to you directly.</p></div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="exp-faq" id="faq">
+  <div class="ac-head reveal">
+    <div class="ac-eyebrow">FAQ</div>
+    <h2>Security, <em>answered.</em></h2>
+  </div>
+  <div class="exp-faq-list">
+    <details><summary>Where is my data stored?</summary><p>In the United States. The application runs on Vercel, and the database and uploaded files are stored on AWS in us-east-1 (Virginia).</p></details>
+    <details><summary>Do other customers share the database?</summary><p>Yes. Every table enforces row-level security, so each request only returns rows that belong to the signed-in person's company, and our servers check access again before any action.</p></details>
+    <details><summary>Does ShelfSpace need my online banking login?</summary><p>No. When you connect a bank for transfers, you sign in to your bank inside Plaid's window, and that login never reaches ShelfSpace or our banking partner.</p></details>
+    <details><summary>Can ShelfSpace staff see my data?</summary><p>Production access is limited to the founder and one designated backup, behind multi-factor sign-in. Anyone else on our team gets a read-only account that cannot change anything, and viewing bank or tax details is logged.</p></details>
+    <details><summary>Is my data used to train AI models?</summary><p>No. Our commercial agreement with Anthropic prohibits training on customer data, and Anthropic deletes API data within 30 days.</p></details>
+    <details><summary>Can you complete our security questionnaire?</summary><p>Yes. Send it to chris@shelfspace.pro and we answer every question in writing. We can also share our written security policies and coordinate a third-party penetration test with your team.</p></details>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="ac-final">
+  <div class="ac-eyebrow reveal">Get started</div>
+  <h2 class="reveal">See the controls on your own data.</h2>
+  <p class="reveal">We'll walk your team through access, approvals and the audit log on a live account.</p>
+  <div class="ac-final-actions reveal">
+    <span class="cta-stack"><a href="/contact?cta=security-ac-final" class="ac-btn">Schedule a call <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a><span class="cta-micro">30 minutes with Chris. See how it would run for your business.</span></span>
+  </div>
+</section>
+
+<style>
+  /* SECURITY phone layer */
+  @media (max-width: 640px) {
+    html body .page-hero { padding: 112px 20px 56px; }
+    html body .sec-hero { gap: 40px; }
+    html body .sec-hero h1 { font-size: 42px; letter-spacing: -1.6px; }
+    html body .sec-hero .hero-lede { font-size: 17px; }
+    html body .sec-console { padding: 16px 14px 14px; }
+    html body .sec-con-head { flex-direction: column; align-items: flex-start; }
+    html body .sec-check { grid-template-columns: 26px 1fr; padding: 9px 10px; }
+    html body .sec-check em { display: none; }
+    html body .sec-toast { right: 0; left: 12px; bottom: -34px; max-width: none; }
+    html body .sec-caption { margin-top: 72px; }
+    html body .sec-ghost.g1 { right: -6px; } html body .sec-ghost.g2 { right: -10px; left: 30px; }
+    html body .sec-facts-sec { padding: 0 20px; }
+    html body .sec-facts { grid-template-columns: 1fr 1fr; }
+    html body .sec-fact { padding: 18px 16px; }
+    html body .sec-fact .k { font-size: 21px; }
+    html body .sec-sec { padding: 64px 20px; }
+    html body .ac-head { margin-bottom: 36px; }
+    html body .sec-layer, html body .sec-layer:nth-child(n) { margin: 0; grid-template-columns: 40px 1fr; }
+    html body .sec-layer .tag { display: none; }
+    html body .sec-layer .n { width: 40px; height: 40px; }
+    html body .sec-core { margin: 6px 0 0; }
+    html body .sec-detail { padding: 24px 20px; min-height: 0; }
+    html body .sec-dark { width: calc(100% - 24px); border-radius: 28px; padding: 64px 20px; }
+    html body .sec-flow, html body .sec-money-notes, html body .sec-cards, html body .sec-prog, html body .sec-review { grid-template-columns: 1fr; }
+    html body .sec-vault .row { grid-template-columns: 1fr; gap: 4px; }
+    html body .sec-entry { grid-template-columns: 1fr; gap: 6px; padding: 14px 16px; }
+    html body .sec-entry time span { display: inline; margin-left: 6px; }
+    html body .sec-drill { grid-template-columns: 1fr; }
+    html body .sec-ai-rule { flex-direction: column; align-items: flex-start; }
+    html body .sec-subs td:first-child { white-space: normal; }
+    html body .sec-subs td, html body .sec-subs th { padding: 12px 14px; }
+    html body .exp-faq { padding: 64px 20px; }
+    html body .ac-final { padding: 64px 20px 72px; border-radius: 28px 28px 0 0; }
+    html body .ac-btn { width: 100%; justify-content: space-between; min-height: 60px; }
+    html body .ac-btn svg { width: 44px; height: 44px; padding: 13px; }
+    html body .sec-tl-pin span { top: auto; bottom: -30px; }
+    html body .sec-drill { margin-top: 48px; }
+    html body .sec-mx { min-width: 0; font-size: 12px; }
+    html body .sec-mx th { padding: 10px 4px; font-size: 10.5px; letter-spacing: 0; }
+    html body .sec-mx th:first-child, html body .sec-mx td:first-child { padding-left: 14px; }
+    html body .sec-mx td { padding: 11px 4px; }
+    html body .sec-mx td:first-child b { font-size: 13px; }
+    html body .sec-mx td:first-child small { font-size: 11px; }
+    html body .sw { width: 30px; height: 18px; }
+    html body .sw::after { width: 12px; height: 12px; }
+    html body .sw.on::after { left: 15px; }
+    html body .sec-mx-head, html body .sec-mx-foot { padding-left: 14px; padding-right: 14px; }
+  }
+</style>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="/" class="nav-logo"><div class="nav-logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="5,7 12,3 19,7"/><polyline points="3,13 5,7 7,13"/><polyline points="17,13 19,7 21,13"/><path d="M3 13a2 2 0 0 0 4 0"/><path d="M17 13a2 2 0 0 0 4 0"/></svg></div><span class="nav-logo-text">ShelfSpace<sup class="nav-logo-tm">™</sup></span></a>
+      <p>Financial tools built for cannabis operators.</p>
+      <p class="footer-phone">Questions? <a href="sms:+19713194085?&amp;body=Hi%20Chris%2C%20I%20have%20a%20question%20about%20ShelfSpace.">Text Chris now: 971-319-4085</a></p>
+    </div>
+    <div class="footer-col"><h3>Services</h3><ul><li><a href="/accounts-receivable">Accounts Receivable</a></li><li><a href="/collections">Collections</a></li><li><a href="/payment-plans">Payment Plans</a></li><li><a href="/ai-calls">AI Calls</a></li></ul></div>
+    <div class="footer-col"><h3>Platform</h3><ul><li><a href="/features">Features</a></li><li><a href="/payments">Payments</a></li><li><a href="/integrations">Integrations</a></li><li><a href="/connect-your-ai">Connect Your AI</a></li><li><a href="/security">Security</a></li></ul></div>
+    <div class="footer-col"><h3>Resources</h3><ul><li><a href="/pricing">Pricing</a></li><li><a href="/blog">Blog</a></li><li><a href="/docs">Docs</a></li><li><a href="/how-to">Guides</a></li><li><a href="/tutorials">Tutorials</a></li><li><a href="/tools">Free tools</a></li></ul></div>
+    <div class="footer-col"><h3>Company</h3><ul><li><a href="/about">About</a></li><li><a href="/vendors">For Vendors</a></li><li><a href="/for-bookkeepers">For Bookkeepers</a></li><li><a href="/contact">Contact</a></li><li><a href="mailto:support@shelfspace.pro">Support</a></li><li><a href="https://ourshelf.space/login">Login</a></li><li><a href="https://linkedin.com/company/shelfspace-pro" target="_blank" rel="noopener" class="footer-social-link"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> LinkedIn</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><p>&copy; 2026 ShelfSpace Technologies Inc.</p><div style="display:flex;align-items:center;gap:8px;justify-content:center;margin-top:12px;"><img src="/metrc-logo-v2.png" alt="Metrc" loading="lazy" style="height:18px;opacity:0.4;filter:brightness(0) invert(1);"><span style="font-size:11px;color:rgba(255,255,255,0.35);">Certified Metrc Third-Party Vendor</span></div><div class="footer-bottom-links"><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div></div>
+</footer>
+
+<script>
+(function() {
+  var nav = document.getElementById('nav');
+  var pageHero = document.querySelector('.page-hero');
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  requestAnimationFrame(function() {
+    nav.classList.toggle('scrolled', window.scrollY > 20);
+    if (pageHero) pageHero.classList.add('hero-loaded');
+  });
+  window.addEventListener('scroll', function() { nav.classList.toggle('scrolled', window.scrollY > 20); }, { passive: true });
+
+  // hero: run the five checks, then pop the toast; loop
+  var checks = [].slice.call(document.querySelectorAll('.sec-check'));
+  var bar = document.querySelector('.sec-bar i');
+  var status = document.querySelector('.sec-con-status');
+  var toast = document.querySelector('.sec-toast');
+  function runChecks() {
+    checks.forEach(function(c) { c.classList.remove('on'); });
+    toast.classList.remove('show'); bar.style.width = '0'; status.textContent = 'Checking…';
+    checks.forEach(function(c, i) {
+      setTimeout(function() { c.classList.add('on'); bar.style.width = ((i + 1) / checks.length * 100) + '%'; }, 600 + i * 650);
+    });
+    setTimeout(function() { status.textContent = '5 of 5 checks passed'; toast.classList.add('show'); }, 600 + checks.length * 650 + 200);
+  }
+  if (reduced) { checks.forEach(function(c) { c.classList.add('on'); }); bar.style.width = '100%'; status.textContent = '5 of 5 checks passed'; toast.classList.add('show'); }
+  else { runChecks(); setInterval(runChecks, 9000); }
+
+  // layer tabs
+  var tabs = [].slice.call(document.querySelectorAll('.sec-layer'));
+  function pick(t) {
+    tabs.forEach(function(x) { var on = x === t; x.classList.toggle('on', on); x.setAttribute('aria-selected', on ? 'true' : 'false'); x.tabIndex = on ? 0 : -1; });
+    document.querySelectorAll('.sec-panel').forEach(function(p) { p.classList.toggle('on', p.id === t.getAttribute('data-p')); });
+  }
+  tabs.forEach(function(t, i) {
+    t.tabIndex = i === 0 ? 0 : -1;
+    t.addEventListener('click', function() { pick(t); if (window.innerWidth <= 1024) { var d = document.querySelector('.sec-detail'); d.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' }); } });
+    t.addEventListener('keydown', function(e) {
+      var d = e.key === 'ArrowDown' || e.key === 'ArrowRight' ? 1 : e.key === 'ArrowUp' || e.key === 'ArrowLeft' ? -1 : 0;
+      if (!d) return; e.preventDefault(); var n = tabs[(i + d + tabs.length) % tabs.length]; pick(n); n.focus();
+    });
+  });
+
+  function play(el) {
+    if (el.hasAttribute('data-mx')) {
+      el.querySelectorAll('.sw[data-on]').forEach(function(s, i) { setTimeout(function() { s.classList.add('on'); }, reduced ? 0 : 250 + i * 220); });
+    } else if (el.hasAttribute('data-log')) {
+      el.querySelectorAll('.sec-entry').forEach(function(r, i) { setTimeout(function() { r.classList.add('in'); }, reduced ? 0 : i * 350); });
+    } else if (el.hasAttribute('data-vault')) {
+      var out = el.querySelector('[data-cipher]');
+      var target = 'q8Xv2kL0pR7wYz1T:Hc4Nd9sQ:4fJ2mA8eWb0kZ6uV1yPq3tLr';
+      if (reduced) { out.textContent = target; return; }
+      var hex = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'; var k = 0;
+      var iv = setInterval(function() {
+        k += 2; var s = '';
+        for (var j = 0; j < target.length; j++) s += j < k ? target[j] : hex[Math.floor(Math.random() * hex.length)];
+        out.textContent = s; if (k >= target.length) clearInterval(iv);
+      }, 40);
+    } else if (el.hasAttribute('data-tl')) {
+      el.classList.add('go');
+    }
+  }
+
+  var io = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (!e.isIntersecting) return;
+      var el = e.target;
+      if (el.classList.contains('reveal')) el.classList.add('is-visible');
+      play(el);
+      io.unobserve(el);
+    });
+  }, { threshold: 0.2 });
+  document.querySelectorAll('.reveal, [data-mx], [data-log], [data-vault], [data-tl]').forEach(function(el) { io.observe(el); });
+
+  document.addEventListener('click', function() {
+    var navLinks = document.querySelector('.nav-links');
+    if (navLinks && navLinks.classList.contains('mobile-open')) navLinks.classList.remove('mobile-open');
+  });
+})();
+</script>
+<script defer src="/shelfiq-widget.js"></script>
+<script src="/nav.js" defer></script>
+</body>
+</html>
