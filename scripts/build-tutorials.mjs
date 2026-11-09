@@ -18,6 +18,7 @@ import { execFileSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import { LIMITS } from "./seo/check-seo.mjs";
 import { applyStrip, THUMB_V } from "./video-strip.mjs";
+import { CSS_BLOCK } from './css-heal-snippet.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const catalog = JSON.parse(readFileSync(join(ROOT, "video-catalog.json"), "utf8"));
@@ -191,8 +192,7 @@ ${robots ? robots + "\n" : ""}<title>${esc(title)}</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/styles.css" id="ss-css">
-<script>/* css self-heal: if styles.css failed (flaky mobile network), fetch it again */(function(){var n=0;function ok(){return getComputedStyle(document.documentElement).getPropertyValue('--ss-css').trim()!=='';}function heal(){if(ok()||n>=2)return;n++;var l=document.createElement('link');l.rel='stylesheet';l.href='/styles.css?retry='+Date.now();l.onerror=function(){setTimeout(heal,1500);};document.head.appendChild(l);}var c=document.getElementById('ss-css');if(c)c.addEventListener('error',heal);window.addEventListener('load',heal);})();</script>
+${CSS_BLOCK}
 <style>${HERO_STYLE}${TUT_STYLE}${extraStyle}</style>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-H2LBJT03WE"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-H2LBJT03WE');</script>

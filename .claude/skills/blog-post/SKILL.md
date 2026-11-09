@@ -59,7 +59,7 @@ each hit. Also edit out AI-residue cadence. The word list lives only in the brie
 
 ```bash
 npm run -s check:blog-sync && npm run -s check:sitemap && npm run -s check:seo && npm run -s check:claims \
-  && npm run -s check:dupe && npm run -s check:cta && npm run -s check:forbidden && npm run -s check:footer
+  && npm run -s check:dupe && npm run -s check:cta && npm run -s check:forbidden && npm run -s check:footer && npm run -s check:css-heal
 PAGES=/blog/{slug} npm run -s check:phone
 ```
 
