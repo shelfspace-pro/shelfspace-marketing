@@ -79,6 +79,10 @@ jobs:
       - name: Footer
         run: npm run check:footer
 
+      # Every page re-fetches styles.css if the download failed (Safari bare page, 11/09/2026).
+      - name: Stylesheet self-heal
+        run: npm run check:css-heal
+
       # No provider leaks, no retired pricing; trial copy only inside brand-page trial-ok regions (Z-33).
       - name: Forbidden copy
         run: npm run check:forbidden

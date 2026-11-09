@@ -8,7 +8,8 @@
 <link rel="canonical" href="https://shelfspace.pro/docs">
 <meta http-equiv="refresh" content="0; url=/docs">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-<link rel="stylesheet" href="/styles.css">
+<link rel="stylesheet" href="/styles.css" id="ss-css">
+<script>/* css self-heal: if styles.css failed (flaky mobile network), fetch it again */(function(){var n=0;function ok(){return getComputedStyle(document.documentElement).getPropertyValue('--ss-css').trim()!=='';}function heal(){if(ok()||n>=2)return;n++;var l=document.createElement('link');l.rel='stylesheet';l.href='/styles.css?retry='+Date.now();l.onerror=function(){setTimeout(heal,1500);};document.head.appendChild(l);}var c=document.getElementById('ss-css');if(c)c.addEventListener('error',heal);window.addEventListener('load',heal);})();</script>
 <script>window.si=window.si||function(){(window.siq=window.siq||[]).push(arguments)};</script>
 <script defer src="/_vercel/speed-insights/script.js"></script>
 </head>

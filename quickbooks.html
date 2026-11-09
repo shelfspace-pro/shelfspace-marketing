@@ -26,7 +26,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/styles.css">
+<link rel="stylesheet" href="/styles.css" id="ss-css">
+<script>/* css self-heal: if styles.css failed (flaky mobile network), fetch it again */(function(){var n=0;function ok(){return getComputedStyle(document.documentElement).getPropertyValue('--ss-css').trim()!=='';}function heal(){if(ok()||n>=2)return;n++;var l=document.createElement('link');l.rel='stylesheet';l.href='/styles.css?retry='+Date.now();l.onerror=function(){setTimeout(heal,1500);};document.head.appendChild(l);}var c=document.getElementById('ss-css');if(c)c.addEventListener('error',heal);window.addEventListener('load',heal);})();</script>
 <style>
   .qb-hero { position: relative; overflow: clip; background: radial-gradient(90% 120% at 85% 10%, #2d6a4f 0%, #1b4332 40%, #0f2a1f 100%); color: #e6f4ea; padding: 150px 48px 110px; }
   .qb-hero::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(149,213,178,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(149,213,178,0.06) 1px, transparent 1px); background-size: 56px 56px; mask-image: radial-gradient(70% 70% at 50% 40%, #000, transparent); pointer-events: none; }
