@@ -128,6 +128,19 @@ const v500 = await open({ product: "collect", c: "t2", s: 500000, q: "SS-AAAAAV"
 ok(v500.valueTotal === "$301,000", `$500k/mo value card = ${JSON.stringify(v500.valueTotal)} (want "$301,000")`);
 ok(v500.price === "$2,500/month" && /\$301,000[\s\S]*\$30,000/.test(v500.docValue), `$500k/mo quote doc: get $301,000, pay $30,000 (${JSON.stringify(v500.docValue)})`);
 
+// Percent-of-collected quote (11/10/2026): a contingency quote, no range needed, no monthly rate.
+console.log("# percent of what we collect");
+const pct = await open({ product: "collect", pm: "pct", pp: 20, name: "True North", q: "SS-AAAAPC" });
+ok(pct.errors.length === 0, `pct: no script errors ${JSON.stringify(pct.errors)}`);
+ok(pct.shown && pct.price === "20%of what we collect", `pct: price ${JSON.stringify(pct.price)}`);
+ok(/You keep\s*\$80,000[\s\S]*Our fee \(20%\)\s*\$20,000/.test(pct.docValue), `pct: $100,000 example splits $80,000 / $20,000 (${JSON.stringify(pct.docValue)})`);
+ok(!/\/month|Monthly rate|25%, or it/.test(pct.list + pct.docValue + pct.terms), "pct: no monthly rate or 25% guarantee in the quote");
+ok(/20% of what we collect/.test(pct.summary) && !RETIRED.test(pct.summary + pct.body), "pct: summary names the percent, no retired copy");
+const pct15 = await open({ product: "collect", pm: "pct", pp: 15, q: "SS-AAAAPD" });
+ok(pct15.price === "15%of what we collect" && /\$85,000[\s\S]*\$15,000/.test(pct15.docValue), `pct 15%: ${JSON.stringify(pct15.price)} / example follows the percent`);
+const rateAgain = await open({ product: "collect", pm: "rate", c: "t2", q: "SS-AAAAPE" });
+ok(rateAgain.price === "$2,500/month", `pm=rate link still prices by the monthly rate (${JSON.stringify(rateAgain.price)})`);
+
 await browser.close();
 server.close();
 console.log(`\n${pass} passed, ${fail} failed`);

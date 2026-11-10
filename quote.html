@@ -122,6 +122,8 @@
   .chip input:focus-visible + span { box-shadow: 0 0 0 3px rgba(27,67,50,0.2); }
   .q-input { width: 100%; box-sizing: border-box; border: 1.5px solid var(--slate-200); border-radius: 12px; padding: 11px 14px; font: inherit; font-size: 15px; color: var(--slate-800); background: var(--white); }
   .q-input:focus { outline: none; border-color: var(--green-mid); box-shadow: 0 0 0 3px rgba(27,67,50,0.12); }
+  .pmode-pct { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 8px; align-items: center; margin-top: 10px; }
+  .pmode-pct .help { margin: 0; }
   .disc { display: grid; grid-template-columns: minmax(0, 1fr) 120px; gap: 8px; }
   .pct { position: relative; }
   .pct .q-input { padding-right: 32px; text-align: right; font-variant-numeric: tabular-nums; -moz-appearance: textfield; }
@@ -439,16 +441,27 @@
 
     <form class="q-card" id="form" novalidate>
       <fieldset>
-        <legend><span class="step">1</span>Your monthly wholesale sales</legend>
+        <legend><span class="step">1</span>How you charge</legend>
+        <div class="chips" id="pm-chips">
+          <label class="chip"><input type="radio" name="pm" value="rate" checked><span>Monthly rate</span></label>
+          <label class="chip"><input type="radio" name="pm" value="pct"><span>Percent of what we collect</span></label>
+        </div>
+        <div class="pmode-pct" id="pm-pct-row" hidden>
+          <span class="pct"><input class="q-input" id="pm-pct" type="number" inputmode="decimal" min="1" max="50" step="0.5" placeholder="20" aria-label="Percent of what we collect"></span>
+          <p class="help">Of each payment on the past-due invoices they hand us. No subscription.</p>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend><span class="step">2</span>Your monthly wholesale sales</legend>
         <div class="chips" id="collect-chips"></div>
         <p class="help">What you invoice dispensaries in a typical month.</p>
       </fieldset>
       <fieldset>
-        <legend><span class="step">2</span>Business name</legend>
+        <legend><span class="step">3</span>Business name</legend>
         <input class="q-input" id="bizname" maxlength="80" placeholder="Business name (optional)" autocomplete="organization">
       </fieldset>
-      <fieldset>
-        <legend><span class="step">3</span>Discount</legend>
+      <fieldset id="disc-set">
+        <legend><span class="step">4</span>Discount</legend>
         <div class="disc">
           <input class="q-input" id="disc-name" maxlength="60" placeholder="Discount name (optional)" autocomplete="off">
           <span class="pct"><input class="q-input" id="disc-pct" type="number" inputmode="decimal" min="0" max="100" step="0.5" placeholder="0" aria-label="Discount percent"></span>
@@ -476,7 +489,7 @@
           <div class="qd-terms" id="qd-terms"></div>
         </div>
         </div>
-        <div class="qd-guar"><span class="sh"><svg viewBox="0 0 24 24" fill="none" stroke="#1b4332" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg></span><div><b>If we don&#39;t reduce your outstanding AR by 25%, it&#39;s free.</b><span>Our guarantee. Terms below.</span></div></div>
+        <div class="qd-guar"><span class="sh"><svg viewBox="0 0 24 24" fill="none" stroke="#1b4332" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg></span><div><b id="qd-guar-b">If we don&#39;t reduce your outstanding AR by 25%, it&#39;s free.</b><span id="qd-guar-s">Our guarantee. Terms below.</span></div></div>
         </div>
       </div>
       <div class="qd">
@@ -487,7 +500,7 @@
         <figure class="pf-q"><blockquote>&ldquo;It&rsquo;s been a <mark>great addition</mark> to our AR efforts!&rdquo;</blockquote><figcaption><div><b>Shawna Gurgul</b>Sales Operations Administrator, One Garden</div><img src="/logos/customers/one-garden.png" alt="One Garden" width="113" height="34"></figcaption></figure>
         </div>
         <div class="qd-fine" id="qd-fine"></div>
-        <p class="qd-gfine">Guarantee: your first 30 days are free. We total the past-due invoices you hand us when we start; if stores haven&#39;t paid at least 25% of that total within 90 days, your first year is free. The guarantee requires all three of these: (1) Send mail as, so invoices and reminders go out from your own email address; (2) AI calling turned on; (3) all of your accounts receivable, every open invoice and every customer, running through ShelfSpace.</p>
+        <p class="qd-gfine" id="qd-gfine">Guarantee: your first 30 days are free. We total the past-due invoices you hand us when we start; if stores haven&#39;t paid at least 25% of that total within 90 days, your first year is free. The guarantee requires all three of these: (1) Send mail as, so invoices and reminders go out from your own email address; (2) AI calling turned on; (3) all of your accounts receivable, every open invoice and every customer, running through ShelfSpace.</p>
         <div class="qd-print-foot"><b>ShelfSpace</b> · shelfspace.pro · chris@shelfspace.pro</div>
       </div>
       <div class="qd-actions no-print">
@@ -662,7 +675,12 @@
   }
   var SEG = [["#95d5b2", "Sales your reps add back"], ["#52b788", "Bad debt avoided + cash sooner"], ["#40916c", "AR desk run for you + setup"]];
 
-  var state = { product: "collect", name: "", g: "", n: 1, c: "", q: "", dn: "", dp: 0, s: 500000 };
+  var state = { product: "collect", name: "", g: "", n: 1, c: "", q: "", dn: "", dp: 0, s: 500000, pm: "rate", pp: 20 };
+  // Pricing model (11/10/2026, Chris): "rate" = the monthly rate below; "pct" = a contingency quote,
+  // pp% of each payment on the past-due invoices the brand hands us, no subscription. No range needed.
+  var PCT_EXAMPLE = 100000;
+  function isPct() { return state.pm === "pct"; }
+  function ppText() { return (Math.round(state.pp * 10) / 10) + "%"; }
 
   function $(id) { return document.getElementById(id); }
   function usd(n) { return "$" + Math.round(n).toLocaleString("en-US"); }
@@ -690,6 +708,8 @@
       if (typeof s.q === "string") state.q = s.q.slice(0, 12);
       if (typeof s.dn === "string") state.dn = s.dn.slice(0, 60);
       if (typeof s.dp === "number" && isFinite(s.dp)) state.dp = Math.min(100, Math.max(0, s.dp));
+      if (s.pm === "pct") state.pm = "pct";
+      if (typeof s.pp === "number" && isFinite(s.pp)) state.pp = Math.min(50, Math.max(1, s.pp));
       var r = range(state.c);
       if (typeof s.s === "number" && isFinite(s.s) && s.s > 0 && (!r || rangeForSales(STEPS[nearestStep(s.s)]) === r.id)) state.s = STEPS[nearestStep(s.s)];
       else if (r) state.s = r.s;
@@ -708,6 +728,8 @@
     $("disc-name").value = state.dn;
     $("disc-pct").value = state.dp ? String(state.dp) : "";
     $("pv-sales").value = nearestStep(state.s);
+    document.querySelectorAll('input[name="pm"]').forEach(function (r) { r.checked = r.value === state.pm; });
+    $("pm-pct").value = String(state.pp);
   }
   function syncChips() { document.querySelectorAll('input[name="collect-sales"]').forEach(function (r) { r.checked = r.value === state.c; }); }
 
@@ -726,7 +748,12 @@
     $("pv-sales").setAttribute("aria-valuetext", short(state.s) + " a month");
 
     var r = range(state.c), fee = yearlyFee();
-    if (r) {
+    if (isPct()) {
+      card.style.removeProperty("--pw");
+      $("pv-pay").textContent = ppText() + " of what we collect";
+      $("q-pay-line").innerHTML = "You pay <b>" + ppText() + "</b> of what we collect.";
+      $("pv-mult").hidden = true;
+    } else if (r) {
       var pw = Math.max(1.5, Math.min(60, fee / v.total * 100));
       card.style.setProperty("--pw", pw.toFixed(2) + "%");
       $("pv-pay").textContent = (r.custom ? "From " : "") + usd(fee) + " a year";
@@ -758,7 +785,49 @@
     return rows;
   }
 
+  function renderPctQuote() {
+    var today = new Date(), valid = new Date(today.getTime() + VALID_DAYS * 864e5);
+    var name = state.name.trim(), fee = Math.round(PCT_EXAMPLE * state.pp / 100), keep = PCT_EXAMPLE - fee;
+    $("qd-eyebrow").textContent = "ShelfSpace collections quote";
+    $("qd-meta").textContent = state.q + " · " + mdy(today);
+    $("qd-name").textContent = name || "Your brand";
+    $("qd-price").innerHTML = esc(ppText()) + "<small>of what we collect</small>";
+    $("qd-terms").textContent = "On the past-due invoices you hand us. No subscription.";
+    $("qd-guar-b").textContent = "Nothing collected, nothing owed.";
+    $("qd-guar-s").textContent = "You pay only when a store pays.";
+    $("qd-gfine").hidden = true;
+    var v = '<div class="qd-vhead"><span>Example</span><span>stores pay ' + usd(PCT_EXAMPLE) + " of past-due invoices</span></div>";
+    v += '<div class="qd-vbar"><i style="width:' + (keep / PCT_EXAMPLE * 100).toFixed(2) + '%;background:#52b788"></i><i style="width:' + (fee / PCT_EXAMPLE * 100).toFixed(2) + '%;background:#2d6a4f"></i></div>';
+    v += '<div class="qd-vrow"><span class="dot" style="background:#52b788"></span><span>You keep</span><b>' + usd(keep) + "</b></div>";
+    v += '<div class="qd-vrow"><span class="dot" style="background:#2d6a4f"></span><span>Our fee (' + esc(ppText()) + ")</span><b>" + usd(fee) + "</b></div>";
+    v += '<div class="qd-vtot"><span>Our fee on invoices that stay unpaid</span><b>$0</b></div>';
+    $("qd-value").innerHTML = v;
+    var rows = [
+      ["Fee", ppText() + " of each payment on an invoice you hand us", ppText()],
+      ["Which invoices", "Your pick, case by case. Add more any time", "Yours"],
+      ["Subscription, setup, minimum", "None", "$0"],
+      ["Partial payments", ppText() + " of what the store actually pays", ppText()]
+    ];
+    $("qd-list").innerHTML = rows.map(function (x) { return '<div class="qd-row"><div class="n">' + esc(x[0]) + "<span>" + esc(x[1]) + '</span></div><div class="a">' + esc(x[2]) + "</div></div>"; }).join("");
+    var fine = [
+      "What we do on every invoice: resend it in your company's name with a Pay Now link, follow up on a set schedule until it's paid, and update QuickBooks when the money lands. You get a weekly list of who has paid and who hasn't.",
+      "We bill our fee once a month on what stores paid that month. A payment counts if it comes in on an invoice we're working, including one a store pays outside the link.",
+      "No contract. Stop any time. Valid through " + mdy(valid) + "."
+    ];
+    $("qd-fine").innerHTML = fine.map(function (f) { return "<p>" + esc(f) + "</p>"; }).join("");
+    summaryText = ["ShelfSpace collections quote " + state.q + " · " + mdy(today),
+      (name ? name + " · " : "") + ppText() + " of what we collect on the past-due invoices you hand us",
+      "No subscription, no setup fee, no minimum. Nothing collected, nothing owed.",
+      "Example: stores pay " + usd(PCT_EXAMPLE) + ", you keep " + usd(keep) + ", our fee is " + usd(fee) + ".",
+      "Partial payments: " + ppText() + " of what the store actually pays. Billed monthly on what stores paid that month.",
+      "No contract. Valid through " + mdy(valid)].join("\n");
+  }
+
   function renderQuote() {
+    if (isPct()) return renderPctQuote();
+    $("qd-guar-b").innerHTML = "If we don&#39;t reduce your outstanding AR by 25%, it&#39;s free.";
+    $("qd-guar-s").textContent = "Our guarantee. Terms below.";
+    $("qd-gfine").hidden = false;
     var r = range(state.c), v = valueAt(state.s), fee = yearlyFee();
     var today = new Date(), valid = new Date(today.getTime() + VALID_DAYS * 864e5);
     var name = state.name.trim();
@@ -801,7 +870,8 @@
   }
 
   function update(animate) {
-    var ok = !!range(state.c);
+    var ok = isPct() || !!range(state.c);
+    $("pm-pct-row").hidden = !isPct(); $("disc-set").hidden = isPct();
     if (ok && !state.q) state.q = newQuoteNum();
     saveHash();
     $("quote").hidden = !ok; $("q-empty").hidden = ok;
@@ -816,6 +886,8 @@
   $("bizname").addEventListener("input", function () { state.name = $("bizname").value; update(); });
   $("disc-name").addEventListener("input", function () { state.dn = $("disc-name").value.slice(0, 60); update(); });
   $("disc-pct").addEventListener("input", function () { var n = parseFloat($("disc-pct").value); state.dp = isFinite(n) ? Math.min(100, Math.max(0, n)) : 0; update(); });
+  document.querySelectorAll('input[name="pm"]').forEach(function (r) { r.addEventListener("change", function () { state.pm = r.value === "pct" ? "pct" : "rate"; update(); }); });
+  $("pm-pct").addEventListener("input", function () { var n = parseFloat($("pm-pct").value); if (isFinite(n)) { state.pp = Math.min(50, Math.max(1, n)); update(); } });
   $("form").addEventListener("submit", function (e) { e.preventDefault(); });
   function toast(msg) { var t = $("toast"); t.textContent = msg; t.classList.add("show"); setTimeout(function () { t.classList.remove("show"); }, 1800); }
   function copy(text, msg) {
